@@ -19,5 +19,7 @@ services:
     App\:
         resource: '../src/'
 
+    App\Contract\UserByEmailFinderInterface: '@App\Repository\UserEntityRepository'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

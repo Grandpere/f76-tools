@@ -10,6 +10,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - Si un commit est utile pour fiabiliser un lot de changements, le faire (workflow explicite).
 - A chaque nouvelle fonctionnalite, ajouter des tests dans le meme lot (ne pas repousser).
 - A la fin de chaque lot, indiquer explicitement si l'utilisateur a des commandes a lancer (et lesquelles).
+- Ne plus lancer `make phpunit-functional` automatiquement: proposer son execution a la fin pour que l'utilisateur decide (cout tokens).
 
 ## Decisions techniques prises
 - `Item` stocke des cles de traduction (`nameKey`, `descKey`) et non les textes EN/DE en base.
@@ -60,6 +61,11 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - recherche texte `q` connectee UI -> API, filtre sur texte traduit + fallback sur les cles.
 - PHPStan (array shapes):
   - eviter `??` sur des offsets declares non-nullables dans un shape strict.
+- Testabilite commande user:
+  - `CreateUserCommand` depend d'une interface (`UserByEmailFinderInterface`) et non du repository final direct.
+  - evite les mocks de classes `final` dans les tests unitaires.
+- Sortie console Symfony:
+  - les messages d erreur peuvent etre wraps sur plusieurs lignes; assertions unitaires a faire sur fragments stables.
 
 ## Commandes utiles
 - Import dry-run:

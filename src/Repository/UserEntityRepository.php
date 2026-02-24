@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Contract\UserByEmailFinderInterface;
 use App\Entity\UserEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,7 +21,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<UserEntity>
  */
-final class UserEntityRepository extends ServiceEntityRepository
+final class UserEntityRepository extends ServiceEntityRepository implements UserByEmailFinderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -34,4 +35,3 @@ final class UserEntityRepository extends ServiceEntityRepository
         ]);
     }
 }
-

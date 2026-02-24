@@ -20,7 +20,7 @@ Permettre a un utilisateur authentifie de:
   - [x] `GET /logout`
 - [x] Creer commande console:
   - [x] `app:user:create <email> --password=... [--role=ROLE_USER]`
-  - [ ] Option potentielle `--update-password`.
+  - [x] Option `--update-password`.
 
 ## Phase 2 - Players
 - [x] Creer `PlayerEntity`:

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Command;
 
+use App\Contract\UserByEmailFinderInterface;
 use App\Entity\UserEntity;
-use App\Repository\UserEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -33,7 +33,7 @@ final class CreateUserCommand extends Command
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly UserEntityRepository $userRepository,
+        private readonly UserByEmailFinderInterface $userRepository,
         private readonly UserPasswordHasherInterface $passwordHasher,
     ) {
         parent::__construct();
@@ -44,7 +44,8 @@ final class CreateUserCommand extends Command
         $this
             ->addArgument('email', InputArgument::REQUIRED, 'Email utilisateur.')
             ->addOption('password', null, InputOption::VALUE_REQUIRED, 'Mot de passe en clair.')
-            ->addOption('role', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Roles supplementaires (ex: ROLE_ADMIN).');
+            ->addOption('role', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Roles supplementaires (ex: ROLE_ADMIN).')
+            ->addOption('update-password', null, InputOption::VALUE_NONE, 'Met a jour le mot de passe si l utilisateur existe deja.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -79,12 +80,6 @@ final class CreateUserCommand extends Command
             return Command::INVALID;
         }
 
-        if (null !== $this->userRepository->findOneByEmail($email)) {
-            $io->error(sprintf('Un utilisateur existe deja pour "%s".', $email));
-
-            return Command::FAILURE;
-        }
-
         $rolesRaw = $input->getOption('role');
         $roles = [];
         if (is_array($rolesRaw)) {
@@ -101,19 +96,35 @@ final class CreateUserCommand extends Command
         }
         /** @var list<string> $roles */
         $roles = array_values(array_unique($roles));
+        $allowUpdatePassword = (bool) $input->getOption('update-password');
 
-        $user = (new UserEntity())
-            ->setEmail($email)
-            ->setRoles($roles);
+        $existingUser = $this->userRepository->findOneByEmail($email);
+        $updatedExistingUser = false;
+        if ($existingUser instanceof UserEntity) {
+            if (!$allowUpdatePassword) {
+                $io->error(sprintf('Un utilisateur existe deja pour "%s". Utilise --update-password pour modifier son mot de passe.', $email));
+
+                return Command::FAILURE;
+            }
+            $user = $existingUser;
+            $updatedExistingUser = true;
+        } else {
+            $user = (new UserEntity())
+                ->setEmail($email)
+                ->setRoles($roles);
+            $this->entityManager->persist($user);
+        }
+
         $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
         $user->setPassword($hashedPassword);
-
-        $this->entityManager->persist($user);
         $this->entityManager->flush();
 
-        $io->success(sprintf('Utilisateur cree: %s', $email));
+        if ($updatedExistingUser) {
+            $io->success(sprintf('Mot de passe mis a jour pour: %s', $email));
+        } else {
+            $io->success(sprintf('Utilisateur cree: %s', $email));
+        }
 
         return Command::SUCCESS;
     }
 }
-
