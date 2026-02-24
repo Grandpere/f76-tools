@@ -134,6 +134,29 @@ body {
     color: var(--muted);
 }
 
+.source-filters {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.45rem 0.75rem 0.65rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    max-width: 100%;
+}
+
+.source-filters legend {
+    font-size: 0.8rem;
+    color: var(--muted);
+    padding: 0 0.3rem;
+}
+
+.source-filters label {
+    display: inline-flex;
+    gap: 0.35rem;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
 .catalog-subgroup {
     margin-top: 0.8rem;
     border: 1px solid var(--border);
@@ -188,6 +211,47 @@ body {
     margin: 0.5rem 0 0;
     font-size: 0.9rem;
     color: #2e403d;
+}
+
+.item-extra-line {
+    margin-top: 0.45rem;
+    font-size: 0.84rem;
+    color: var(--muted);
+}
+
+.item-info-html {
+    margin-top: 0.45rem;
+    font-size: 0.85rem;
+}
+
+.item-info-html p {
+    margin: 0;
+}
+
+.item-source-badges {
+    margin: 0.45rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.item-source-badges span {
+    display: inline-flex;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    padding: 0.15rem 0.45rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+    background: #faf8f1;
+}
+
+.item-drop-sources {
+    margin-top: 0.35rem;
+}
+
+.item-drop-sources img {
+    max-height: 20px;
+    width: auto;
 }
 
 .item-prices {

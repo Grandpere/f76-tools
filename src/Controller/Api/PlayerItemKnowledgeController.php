@@ -181,6 +181,14 @@ final class PlayerItemKnowledgeController extends AbstractController
      *     isNew: bool,
      *     price: int|null,
      *     priceMinerva: int|null,
+     *     dropRaid: bool,
+     *     dropBurningSprings: bool,
+     *     dropDailyOps: bool,
+     *     vendorRegs: bool,
+     *     vendorSamuel: bool,
+     *     vendorMortimer: bool,
+     *     infoHtml: string|null,
+     *     dropSourcesHtml: string|null,
      *     rank: int|null,
      *     listNumbers: list<int>,
      *     isInSpecialList: bool,
@@ -210,6 +218,15 @@ final class PlayerItemKnowledgeController extends AbstractController
             $isNew = 1 === $rawNew || '1' === $rawNew || true === $rawNew;
         }
 
+        $dropRaid = $this->readBoolFromPayload($payload, 'drop_raid');
+        $dropBurningSprings = $this->readBoolFromPayload($payload, 'drop_burningsprings');
+        $dropDailyOps = $this->readBoolFromPayload($payload, 'drop_dailyops');
+        $vendorRegs = $this->readBoolFromPayload($payload, 'vendor_regs');
+        $vendorSamuel = $this->readBoolFromPayload($payload, 'vendor_samuel');
+        $vendorMortimer = $this->readBoolFromPayload($payload, 'vendor_mortimer');
+        $infoHtml = $this->readStringFromPayload($payload, 'info');
+        $dropSourcesHtml = $this->readStringFromPayload($payload, 'drop_sources');
+
         return [
             'id' => $item->getId(),
             'sourceId' => $item->getSourceId(),
@@ -221,10 +238,51 @@ final class PlayerItemKnowledgeController extends AbstractController
             'isNew' => $isNew,
             'price' => $item->getPrice(),
             'priceMinerva' => $item->getPriceMinerva(),
+            'dropRaid' => $dropRaid,
+            'dropBurningSprings' => $dropBurningSprings,
+            'dropDailyOps' => $dropDailyOps,
+            'vendorRegs' => $vendorRegs,
+            'vendorSamuel' => $vendorSamuel,
+            'vendorMortimer' => $vendorMortimer,
+            'infoHtml' => $infoHtml,
+            'dropSourcesHtml' => $dropSourcesHtml,
             'rank' => $item->getRank(),
             'listNumbers' => array_values(array_unique($listNumbers)),
             'isInSpecialList' => $isInSpecialList,
             'learned' => $learned,
         ];
+    }
+
+    /**
+     * @param array<string, mixed>|null $payload
+     */
+    private function readBoolFromPayload(?array $payload, string $key): bool
+    {
+        if (!is_array($payload) || !array_key_exists($key, $payload)) {
+            return false;
+        }
+
+        $value = $payload[$key];
+
+        return 1 === $value || '1' === $value || true === $value;
+    }
+
+    /**
+     * @param array<string, mixed>|null $payload
+     */
+    private function readStringFromPayload(?array $payload, string $key): ?string
+    {
+        if (!is_array($payload) || !array_key_exists($key, $payload)) {
+            return null;
+        }
+
+        $value = $payload[$key];
+        if (!is_string($value)) {
+            return null;
+        }
+
+        $value = trim($value);
+
+        return '' === $value ? null : $value;
     }
 }

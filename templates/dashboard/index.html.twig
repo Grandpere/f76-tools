@@ -34,6 +34,15 @@
                     <span>Recherche</span>
                     <input type="search" placeholder="Nom, description, cle..." data-item-catalog-target="searchInput">
                 </label>
+                <fieldset class="source-filters">
+                    <legend>Filtres sources</legend>
+                    <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropRaid"> Raid</label>
+                    <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropBurningSprings"> Burning Springs</label>
+                    <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropDailyOps"> Daily Ops</label>
+                    <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="vendorRegs"> Regs</label>
+                    <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="vendorSamuel"> Samuel</label>
+                    <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="vendorMortimer"> Mortimer</label>
+                </fieldset>
             </div>
 
             <p class="catalog-state" data-item-catalog-target="state">Chargement...</p>

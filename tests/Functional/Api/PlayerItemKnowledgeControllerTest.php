@@ -146,6 +146,35 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         self::assertTrue($this->readBool($first, 'isNew'));
         self::assertSame(250, $this->readInt($first, 'price'));
         self::assertSame(188, $this->readInt($first, 'priceMinerva'));
+
+        $this->entityManager?->clear();
+        $item = $this->findItemBySourceIdAndType(501, ItemTypeEnum::BOOK);
+        self::assertNotNull($item);
+        $item->setPayload([
+            'new' => 1,
+            'drop_raid' => 1,
+            'drop_burningssprings' => 1,
+            'drop_dailyops' => 1,
+            'vendor_regs' => 1,
+            'vendor_samuel' => 1,
+            'vendor_mortimer' => 0,
+            'info' => '<p>Also available at <strong>Samuel</strong>.</p>',
+            'drop_sources' => '<img src="/img/x.png" title="Burning Springs" />',
+        ]);
+        $this->entityManager?->flush();
+
+        $this->browser()->request('GET', sprintf('/api/players/%d/items?q=catalog.new.name', $player->getId()));
+        $payload2 = $this->decodeListResponse($this->browser()->getResponse()->getContent() ?: '[]');
+        self::assertCount(1, $payload2);
+        $second = $payload2[0] ?? [];
+        self::assertTrue($this->readBool($second, 'dropRaid'));
+        self::assertTrue($this->readBool($second, 'dropBurningSprings'));
+        self::assertTrue($this->readBool($second, 'dropDailyOps'));
+        self::assertTrue($this->readBool($second, 'vendorRegs'));
+        self::assertTrue($this->readBool($second, 'vendorSamuel'));
+        self::assertFalse($this->readBool($second, 'vendorMortimer'));
+        self::assertSame('<p>Also available at <strong>Samuel</strong>.</p>', $this->readString($second, 'infoHtml'));
+        self::assertSame('<img src="/img/x.png" title="Burning Springs" />', $this->readString($second, 'dropSourcesHtml'));
     }
 
     private function createUser(string $email): UserEntity
@@ -210,6 +239,20 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         }
 
         return $this->client;
+    }
+
+    private function findItemBySourceIdAndType(int $sourceId, ItemTypeEnum $type): ?ItemEntity
+    {
+        if (null === $this->entityManager) {
+            return null;
+        }
+
+        $result = $this->entityManager->getRepository(ItemEntity::class)->findOneBy([
+            'sourceId' => $sourceId,
+            'type' => $type,
+        ]);
+
+        return $result instanceof ItemEntity ? $result : null;
     }
 
     /**
@@ -279,5 +322,15 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         }
 
         return (int) $value;
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     */
+    private function readString(array $data, string $key): string
+    {
+        $value = $data[$key] ?? '';
+
+        return is_string($value) ? $value : '';
     }
 }

@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    static targets = ['playerSelect', 'createNameInput', 'createButton', 'searchInput', 'state', 'miscList', 'bookList'];
+    static targets = ['playerSelect', 'createNameInput', 'createButton', 'searchInput', 'sourceFilter', 'state', 'miscList', 'bookList'];
     static values = {
         playersUrl: String,
         playersBaseUrl: String,
@@ -14,6 +14,7 @@ export default class extends Controller {
         this.activePlayerId = null;
         this.searchQuery = '';
         this.searchDebounceId = null;
+        this.activeSourceFilters = [];
         this.openMiscGroup = null;
         this.openBookGroup = null;
         this.bindEvents();
@@ -48,6 +49,16 @@ export default class extends Controller {
                 this.searchQuery = this.searchInputTarget.value.trim();
                 await this.loadItems();
             }, 250);
+        });
+
+        this.sourceFilterTargets.forEach((checkbox) => {
+            checkbox.addEventListener('change', () => {
+                this.activeSourceFilters = this.sourceFilterTargets
+                    .filter((node) => node.checked)
+                    .map((node) => node.value);
+                this.renderItems();
+                this.updateStateCounter();
+            });
         });
     }
 
@@ -168,8 +179,7 @@ export default class extends Controller {
         const payload = await response.json();
         this.items = Array.isArray(payload) ? payload : [];
         this.renderItems();
-        const searchSuffix = this.searchQuery !== '' ? `, filtre: "${this.searchQuery}"` : '';
-        this.setState(`${this.items.length} items pour ce player${searchSuffix}.`);
+        this.updateStateCounter();
     }
 
     async toggleLearned(itemId, shouldBeLearned) {
@@ -198,21 +208,22 @@ export default class extends Controller {
     }
 
     renderItems() {
-        if (this.items.length === 0) {
+        const visibleItems = this.getVisibleItems();
+        if (visibleItems.length === 0) {
             this.miscListTarget.innerHTML = '<p>Aucun legendary mod trouve.</p>';
             this.bookListTarget.innerHTML = '<p>Aucun plan Minerva trouve.</p>';
             return;
         }
-        this.miscListTarget.innerHTML = this.renderMiscBlock();
-        this.bookListTarget.innerHTML = this.renderBookBlock();
+        this.miscListTarget.innerHTML = this.renderMiscBlock(visibleItems);
+        this.bookListTarget.innerHTML = this.renderBookBlock(visibleItems);
         this.bindToggleButtons(this.miscListTarget);
         this.bindToggleButtons(this.bookListTarget);
         this.bindAccordionBehavior(this.miscListTarget, 'misc');
         this.bindAccordionBehavior(this.bookListTarget, 'book');
     }
 
-    renderMiscBlock() {
-        const miscItems = this.items.filter((item) => item.type === 'MISC');
+    renderMiscBlock(items) {
+        const miscItems = items.filter((item) => item.type === 'MISC');
         if (miscItems.length === 0) {
             return '<p>Aucun legendary mod trouve.</p>';
         }
@@ -241,8 +252,8 @@ export default class extends Controller {
         `).join('');
     }
 
-    renderBookBlock() {
-        const books = this.items.filter((item) => item.type === 'BOOK');
+    renderBookBlock(items) {
+        const books = items.filter((item) => item.type === 'BOOK');
         if (books.length === 0) {
             return '<p>Aucun plan Minerva trouve.</p>';
         }
@@ -294,6 +305,12 @@ export default class extends Controller {
     renderItemCard(item) {
         const label = this.escape(item.name || item.nameKey);
         const description = item.description ? `<p>${this.escape(item.description)}</p>` : '';
+        const infoBlock = this.renderInfoBlock(item);
+        const sourceBadges = this.renderSourceBadges(item);
+        const sourceIcons = this.renderDropSources(item);
+        const dailyOpsLine = item.type === 'BOOK' && item.dropDailyOps
+            ? '<p class="item-extra-line">Also available as reward from a successful finished daily operation.</p>'
+            : '';
         const priceBlock = this.renderPriceBlock(item);
         const learnedClass = item.learned ? 'is-learned' : 'is-unlearned';
         const checkedAttr = item.learned ? 'checked' : '';
@@ -306,6 +323,10 @@ export default class extends Controller {
                     ${newBadge}
                 </div>
                 ${description}
+                ${infoBlock}
+                ${dailyOpsLine}
+                ${sourceBadges}
+                ${sourceIcons}
                 ${priceBlock}
                 <label class="item-learned-toggle">
                     <input type="checkbox" data-item-checkbox="1" data-item-id="${item.id}" ${checkedAttr}>
@@ -340,6 +361,72 @@ export default class extends Controller {
 
             return aName.localeCompare(bName, 'fr');
         });
+    }
+
+    getVisibleItems() {
+        if (this.activeSourceFilters.length === 0) {
+            return this.items;
+        }
+
+        return this.items.filter((item) => this.activeSourceFilters.every((filterKey) => item[filterKey] === true));
+    }
+
+    updateStateCounter() {
+        const visibleCount = this.getVisibleItems().length;
+        const searchSuffix = this.searchQuery !== '' ? `, filtre texte: "${this.searchQuery}"` : '';
+        const sourceSuffix = this.activeSourceFilters.length > 0
+            ? `, filtres sources: ${this.activeSourceFilters.join(', ')}`
+            : '';
+
+        this.setState(`${visibleCount} items visibles${searchSuffix}${sourceSuffix}.`);
+    }
+
+    renderInfoBlock(item) {
+        if (!item.infoHtml) {
+            return '';
+        }
+
+        return `<div class="item-info-html">${this.sanitizeHtml(item.infoHtml)}</div>`;
+    }
+
+    renderDropSources(item) {
+        if (!item.dropSourcesHtml) {
+            return '';
+        }
+
+        return `<div class="item-drop-sources">${this.sanitizeHtml(item.dropSourcesHtml)}</div>`;
+    }
+
+    renderSourceBadges(item) {
+        const badges = [];
+        if (item.dropRaid) {
+            badges.push('Raid');
+        }
+        if (item.dropBurningSprings) {
+            badges.push('Burning Springs');
+        }
+        if (item.dropDailyOps) {
+            badges.push('Daily Ops');
+        }
+        if (item.vendorRegs) {
+            badges.push('Regs');
+        }
+        if (item.vendorSamuel) {
+            badges.push('Samuel');
+        }
+        if (item.vendorMortimer) {
+            badges.push('Mortimer');
+        }
+
+        if (badges.length === 0) {
+            return '';
+        }
+
+        return `
+            <p class="item-source-badges">
+                ${badges.map((badge) => `<span>${this.escape(badge)}</span>`).join('')}
+            </p>
+        `;
     }
 
     bindToggleButtons(container) {
@@ -401,5 +488,34 @@ export default class extends Controller {
             .replaceAll('>', '&gt;')
             .replaceAll('"', '&quot;')
             .replaceAll("'", '&#039;');
+    }
+
+    sanitizeHtml(html) {
+        const template = document.createElement('template');
+        template.innerHTML = String(html);
+
+        const allowedTags = new Set(['P', 'STRONG', 'EM', 'SPAN', 'BR', 'IMG']);
+        const allowedAttrs = new Set(['class', 'src', 'title', 'alt']);
+
+        template.content.querySelectorAll('*').forEach((node) => {
+            if (!allowedTags.has(node.tagName)) {
+                node.replaceWith(...node.childNodes);
+                return;
+            }
+
+            Array.from(node.attributes).forEach((attr) => {
+                const name = attr.name.toLowerCase();
+                const value = attr.value;
+                if (!allowedAttrs.has(name)) {
+                    node.removeAttribute(attr.name);
+                    return;
+                }
+                if (name === 'src' && (value.startsWith('javascript:') || value.startsWith('data:'))) {
+                    node.removeAttribute(attr.name);
+                }
+            });
+        });
+
+        return template.innerHTML;
     }
 }
