@@ -69,6 +69,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - pour les items `BOOK`, afficher `Cout base` (`price`) et `Cout Minerva` (`priceMinerva`) dans la carte.
   - exposer/afficher `drop_raid`, `drop_burningssprings`, `drop_dailyops`, `vendor_regs`, `vendor_samuel`, `vendor_mortimer`, `info`, `drop_sources`.
   - filtres UI par sources bases sur les booleens des colonnes dediees (checkboxes dans la toolbar).
+  - pour `drop_sources`, convertir les `src` `/cms/.../file.png` vers `/assets/icons/file.png` (assets locaux dans `public/assets/icons`).
 - API players:
   - doublon de nom par user retourne `409` (`Player name already exists.`) au create/update au lieu d'une 500 SQL.
 - PHPStan (array shapes):

@@ -525,7 +525,12 @@ export default class extends Controller {
                     return;
                 }
                 if (name === 'src' && value.startsWith('/cms/')) {
-                    node.setAttribute('src', `https://fed76.info${value}`);
+                    const filename = value.split('/').pop() || '';
+                    if (filename !== '') {
+                        node.setAttribute('src', `/assets/icons/${filename}`);
+                    } else {
+                        node.removeAttribute(attr.name);
+                    }
                 }
             });
         });
