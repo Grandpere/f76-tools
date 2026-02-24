@@ -219,7 +219,7 @@ final class PlayerItemKnowledgeController extends AbstractController
         }
 
         $dropRaid = $this->readBoolFromPayload($payload, 'drop_raid');
-        $dropBurningSprings = $this->readBoolFromPayload($payload, 'drop_burningsprings');
+        $dropBurningSprings = $this->readBoolFromPayloadAny($payload, ['drop_burningsprings', 'drop_burningssprings', 'drop_burning_springs']);
         $dropDailyOps = $this->readBoolFromPayload($payload, 'drop_dailyops');
         $vendorRegs = $this->readBoolFromPayload($payload, 'vendor_regs');
         $vendorSamuel = $this->readBoolFromPayload($payload, 'vendor_samuel');
@@ -273,6 +273,21 @@ final class PlayerItemKnowledgeController extends AbstractController
             $normalized = strtolower(trim($value));
 
             return '1' === $normalized || 'true' === $normalized || 'yes' === $normalized;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param array<string, mixed>|null $payload
+     * @param list<string> $keys
+     */
+    private function readBoolFromPayloadAny(?array $payload, array $keys): bool
+    {
+        foreach ($keys as $key) {
+            if ($this->readBoolFromPayload($payload, $key)) {
+                return true;
+            }
         }
 
         return false;
