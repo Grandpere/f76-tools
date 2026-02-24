@@ -225,6 +225,9 @@ export default class extends Controller {
             }
             rankMap.get(rank).push(item);
         });
+        rankMap.forEach((items, rank) => {
+            rankMap.set(rank, this.sortItemsByName(items));
+        });
 
         const ranks = Array.from(rankMap.keys()).sort((a, b) => a - b);
         if (this.openMiscGroup === null || !ranks.includes(this.openMiscGroup)) {
@@ -308,6 +311,15 @@ export default class extends Controller {
                 </label>
             </li>
         `;
+    }
+
+    sortItemsByName(items) {
+        return [...items].sort((a, b) => {
+            const aName = String(a.name || a.nameKey || '').toLocaleLowerCase();
+            const bName = String(b.name || b.nameKey || '').toLocaleLowerCase();
+
+            return aName.localeCompare(bName, 'fr');
+        });
     }
 
     bindToggleButtons(container) {
