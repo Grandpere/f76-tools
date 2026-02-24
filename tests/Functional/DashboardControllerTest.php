@@ -65,6 +65,8 @@ final class DashboardControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter('[data-item-catalog-players-url-value="/api/players"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-players-base-url-value="/api/players"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-initial-player-id-value="1"]'));
+        self::assertCount(1, $crawler->filter('[data-item-catalog-target="miscList"]'));
+        self::assertCount(1, $crawler->filter('[data-item-catalog-target="bookList"]'));
     }
 
     private function createUser(string $email): UserEntity
@@ -111,4 +113,3 @@ final class DashboardControllerTest extends WebTestCase
         return $this->client;
     }
 }
-

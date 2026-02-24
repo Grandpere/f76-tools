@@ -60,6 +60,8 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - API knowledge renvoie aussi les textes traduits (`name`, `description`) en plus des cles (`nameKey`, `descKey`).
   - recherche texte `q` connectee UI -> API, filtre sur texte traduit + fallback sur les cles.
   - creation player directement depuis le dashboard (POST `/api/players`) avec auto-selection apres creation.
+  - affichage en 2 blocs: `MISC` groupe par rank et `BOOK` groupe par liste.
+  - un toggle learned sur un item `BOOK` doit refleter toutes ses occurrences multi-listes (meme `itemId`).
 - API players:
   - doublon de nom par user retourne `409` (`Player name already exists.`) au create/update au lieu d'une 500 SQL.
 - PHPStan (array shapes):

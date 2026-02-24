@@ -1,19 +1,16 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    static targets = ['playerSelect', 'createNameInput', 'createButton', 'searchInput', 'typeInput', 'state', 'list'];
+    static targets = ['playerSelect', 'createNameInput', 'createButton', 'searchInput', 'state', 'miscList', 'bookList'];
     static values = {
         playersUrl: String,
         playersBaseUrl: String,
         initialPlayerId: String,
-        initialType: String,
     };
 
     async connect() {
-        this.loading = false;
         this.players = [];
         this.items = [];
-        this.activeType = this.initialTypeValue || 'BOOK';
         this.activePlayerId = null;
         this.searchQuery = '';
         this.searchDebounceId = null;
@@ -40,16 +37,6 @@ export default class extends Controller {
             await this.createPlayerFromInput();
         });
 
-        this.typeInputTargets.forEach((radio) => {
-            radio.addEventListener('change', async () => {
-                if (!radio.checked) {
-                    return;
-                }
-                this.activeType = radio.value;
-                await this.loadItems();
-            });
-        });
-
         this.searchInputTarget.addEventListener('input', async () => {
             if (this.searchDebounceId) {
                 window.clearTimeout(this.searchDebounceId);
@@ -64,7 +51,8 @@ export default class extends Controller {
 
     async loadPlayers() {
         this.setState('Chargement des players...');
-        this.listTarget.innerHTML = '';
+        this.miscListTarget.innerHTML = '';
+        this.bookListTarget.innerHTML = '';
 
         const response = await fetch(this.playersUrlValue, {
             headers: { Accept: 'application/json' },
@@ -84,7 +72,6 @@ export default class extends Controller {
 
         this.renderPlayerSelect();
         this.applyInitialPlayer();
-        this.applyInitialType();
         await this.loadItems();
     }
 
@@ -153,25 +140,16 @@ export default class extends Controller {
         this.syncPlayerQueryParam();
     }
 
-    applyInitialType() {
-        const initial = this.activeType || 'BOOK';
-        this.typeInputTargets.forEach((radio) => {
-            radio.checked = radio.value === initial;
-        });
-    }
-
     async loadItems() {
         if (!this.activePlayerId) {
             this.setState('Aucun player selectionne.');
             return;
         }
 
-        this.loading = true;
         this.renderItems();
         this.setState('Chargement des items...');
 
         const params = new URLSearchParams();
-        params.set('type', this.activeType);
         if (this.searchQuery !== '') {
             params.set('q', this.searchQuery);
         }
@@ -182,16 +160,14 @@ export default class extends Controller {
         });
         if (!response.ok) {
             this.setState(`Erreur de chargement des items (${response.status}).`);
-            this.loading = false;
             return;
         }
 
         const payload = await response.json();
         this.items = Array.isArray(payload) ? payload : [];
-        this.loading = false;
         this.renderItems();
         const searchSuffix = this.searchQuery !== '' ? `, filtre: "${this.searchQuery}"` : '';
-        this.setState(`${this.items.length} items (${this.activeType}) pour ce player${searchSuffix}.`);
+        this.setState(`${this.items.length} items pour ce player${searchSuffix}.`);
     }
 
     async toggleLearned(itemId, learned) {
@@ -213,52 +189,111 @@ export default class extends Controller {
             return;
         }
 
-        const index = this.items.findIndex((item) => Number(item.id) === Number(itemId));
-        if (index !== -1) {
-            this.items[index].learned = !learned;
-        }
+        this.items = this.items.map((item) => (Number(item.id) === Number(itemId)
+            ? { ...item, learned: !learned }
+            : item));
         this.renderItems();
     }
 
     renderItems() {
-        if (this.loading) {
-            this.listTarget.innerHTML = '';
-            return;
-        }
-
         if (this.items.length === 0) {
-            this.listTarget.innerHTML = '';
+            this.miscListTarget.innerHTML = '<p>Aucun legendary mod trouve.</p>';
+            this.bookListTarget.innerHTML = '<p>Aucun plan Minerva trouve.</p>';
             return;
         }
+        this.miscListTarget.innerHTML = this.renderMiscBlock();
+        this.bookListTarget.innerHTML = this.renderBookBlock();
+        this.bindToggleButtons(this.miscListTarget);
+        this.bindToggleButtons(this.bookListTarget);
+    }
 
-        this.listTarget.innerHTML = this.items
-            .map((item) => {
-                const metadata = item.type === 'MISC'
-                    ? `Rank ${item.rank ?? '-'}`
-                    : this.formatBookMeta(item);
-                const label = this.escape(item.name || item.nameKey);
-                const description = item.description ? `<p>${this.escape(item.description)}</p>` : '';
-                const learnedClass = item.learned ? 'is-learned' : 'is-unlearned';
-                const buttonText = item.learned ? 'Marquer non appris' : 'Marquer appris';
-                const dataLearned = item.learned ? '1' : '0';
+    renderMiscBlock() {
+        const miscItems = this.items.filter((item) => item.type === 'MISC');
+        if (miscItems.length === 0) {
+            return '<p>Aucun legendary mod trouve.</p>';
+        }
 
-                return `
-                    <li class="item-card ${learnedClass}">
-                        <div class="item-card-head">
-                            <strong>${label}</strong>
-                            <span>${this.escape(item.type)}</span>
-                        </div>
-                        <p>${this.escape(metadata)}</p>
-                        ${description}
-                        <button type="button" data-item-id="${item.id}" data-learned="${dataLearned}">
-                            ${this.escape(buttonText)}
-                        </button>
-                    </li>
-                `;
-            })
+        const rankMap = new Map();
+        miscItems.forEach((item) => {
+            const rank = Number.isInteger(item.rank) ? Number(item.rank) : 0;
+            if (!rankMap.has(rank)) {
+                rankMap.set(rank, []);
+            }
+            rankMap.get(rank).push(item);
+        });
+
+        const ranks = Array.from(rankMap.keys()).sort((a, b) => a - b);
+        return ranks.map((rank) => `
+            <section class="catalog-subgroup">
+                <h3>Rank ${this.escape(rank)}</h3>
+                <ul class="item-grid">${rankMap.get(rank).map((item) => this.renderItemCard(item)).join('')}</ul>
+            </section>
+        `).join('');
+    }
+
+    renderBookBlock() {
+        const books = this.items.filter((item) => item.type === 'BOOK');
+        if (books.length === 0) {
+            return '<p>Aucun plan Minerva trouve.</p>';
+        }
+
+        const listMap = new Map([
+            [1, []],
+            [2, []],
+            [3, []],
+            [4, []],
+        ]);
+
+        books.forEach((item) => {
+            const listNumbers = Array.isArray(item.listNumbers) ? item.listNumbers : [];
+            if (listNumbers.length === 0) {
+                listMap.get(1).push(item);
+                return;
+            }
+            listNumbers.forEach((listNumber) => {
+                const numericList = Number(listNumber);
+                if (!listMap.has(numericList)) {
+                    listMap.set(numericList, []);
+                }
+                listMap.get(numericList).push(item);
+            });
+        });
+
+        return Array.from(listMap.entries())
+            .sort((a, b) => a[0] - b[0])
+            .map(([listNumber, items]) => `
+                <section class="catalog-subgroup">
+                    <h3>Liste ${this.escape(listNumber)}</h3>
+                    <ul class="item-grid">${items.map((item) => this.renderItemCard(item, `Liste ${listNumber}`)).join('')}</ul>
+                </section>
+            `)
             .join('');
+    }
 
-        this.listTarget.querySelectorAll('button[data-item-id]').forEach((button) => {
+    renderItemCard(item, subtitle = null) {
+        const label = this.escape(item.name || item.nameKey);
+        const description = item.description ? `<p>${this.escape(item.description)}</p>` : '';
+        const learnedClass = item.learned ? 'is-learned' : 'is-unlearned';
+        const buttonText = item.learned ? 'Marquer non appris' : 'Marquer appris';
+        const dataLearned = item.learned ? '1' : '0';
+        const subtitleText = subtitle || this.escape(item.type);
+
+        return `
+            <li class="item-card ${learnedClass}">
+                <div class="item-card-head">
+                    <strong>${label}</strong>
+                    <span>${subtitleText}</span>
+                </div>
+                ${description}
+                <button type="button" data-item-id="${item.id}" data-learned="${dataLearned}">
+                    ${this.escape(buttonText)}
+                </button>
+            </li>
+        `;
+    }
+
+    bindToggleButtons(container) {
+        container.querySelectorAll('button[data-item-id]').forEach((button) => {
             button.addEventListener('click', async () => {
                 const itemId = button.getAttribute('data-item-id');
                 const learned = button.getAttribute('data-learned') === '1';
@@ -268,17 +303,6 @@ export default class extends Controller {
                 await this.toggleLearned(itemId, learned);
             });
         });
-    }
-
-    formatBookMeta(item) {
-        if (!Array.isArray(item.listNumbers) || item.listNumbers.length === 0) {
-            return 'Liste inconnue';
-        }
-
-        const lists = item.listNumbers.join(', ');
-        const suffix = item.isInSpecialList ? ' (inclut liste speciale)' : '';
-
-        return `Listes ${lists}${suffix}`;
     }
 
     syncPlayerQueryParam() {

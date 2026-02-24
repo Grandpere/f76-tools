@@ -56,11 +56,13 @@ Permettre a un utilisateur authentifie de:
 ## Phase 4 - Front Twig + UX
 - [x] Ecran catalogue items:
   - [x] filtres type (`MISC`/`BOOK`) + recherche texte (`q`)
+  - [x] affichage split en 2 blocs: `Legendary Mods` (par rank) et `Minerva` (par liste)
   - [x] badge/rank/lists selon type
   - [x] statut appris pour player courant
 - [x] Actions front:
   - [x] toggle learned via Stimulus + fetch API
   - [x] creation player via formulaire dashboard
+  - [x] sync learned inter-listes pour un meme item Minerva (meme id)
   - [x] retour visuel (loading, succes, erreur)
 - [x] Selection du player actif (query param).
 

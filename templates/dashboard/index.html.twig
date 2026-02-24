@@ -17,7 +17,6 @@
             data-item-catalog-players-url-value="{{ apiPlayersUrl }}"
             data-item-catalog-players-base-url-value="{{ apiPlayersBaseUrl }}"
             data-item-catalog-initial-player-id-value="{{ activePlayerId ?? '' }}"
-            data-item-catalog-initial-type-value="BOOK"
         >
             <div class="catalog-toolbar">
                 <label class="field">
@@ -35,21 +34,17 @@
                     <span>Recherche</span>
                     <input type="search" placeholder="Nom, description, cle..." data-item-catalog-target="searchInput">
                 </label>
-                <fieldset class="type-switch">
-                    <legend>Type</legend>
-                    <label>
-                        <input type="radio" name="item-type" value="BOOK" checked data-item-catalog-target="typeInput">
-                        BOOK
-                    </label>
-                    <label>
-                        <input type="radio" name="item-type" value="MISC" data-item-catalog-target="typeInput">
-                        MISC
-                    </label>
-                </fieldset>
             </div>
 
             <p class="catalog-state" data-item-catalog-target="state">Chargement...</p>
-            <ul class="item-grid" data-item-catalog-target="list"></ul>
+            <section class="catalog-block">
+                <h2>Legendary Mods (par rank)</h2>
+                <div data-item-catalog-target="miscList"></div>
+            </section>
+            <section class="catalog-block">
+                <h2>Minerva Plans (par liste)</h2>
+                <div data-item-catalog-target="bookList"></div>
+            </section>
         </section>
     </main>
 {% endblock %}

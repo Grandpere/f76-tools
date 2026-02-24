@@ -114,22 +114,27 @@ body {
     cursor: not-allowed;
 }
 
-.type-switch {
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.45rem 0.75rem 0.65rem;
-    display: flex;
-    gap: 0.8rem;
-}
-
-.type-switch legend {
-    font-size: 0.8rem;
-    color: var(--muted);
-    padding: 0 0.3rem;
-}
-
 .catalog-state {
     margin: 0.9rem 0 0;
+    color: var(--muted);
+}
+
+.catalog-block {
+    margin-top: 1.3rem;
+}
+
+.catalog-block h2 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.catalog-subgroup {
+    margin-top: 0.8rem;
+}
+
+.catalog-subgroup h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.95rem;
     color: var(--muted);
 }
 
