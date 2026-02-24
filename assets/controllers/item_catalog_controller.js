@@ -294,6 +294,7 @@ export default class extends Controller {
     renderItemCard(item) {
         const label = this.escape(item.name || item.nameKey);
         const description = item.description ? `<p>${this.escape(item.description)}</p>` : '';
+        const priceBlock = this.renderPriceBlock(item);
         const learnedClass = item.learned ? 'is-learned' : 'is-unlearned';
         const checkedAttr = item.learned ? 'checked' : '';
         const newBadge = item.isNew ? '<span class="item-badge-new">NEW</span>' : '';
@@ -305,11 +306,30 @@ export default class extends Controller {
                     ${newBadge}
                 </div>
                 ${description}
+                ${priceBlock}
                 <label class="item-learned-toggle">
                     <input type="checkbox" data-item-checkbox="1" data-item-id="${item.id}" ${checkedAttr}>
                     <span>Appris</span>
                 </label>
             </li>
+        `;
+    }
+
+    renderPriceBlock(item) {
+        if (item.type !== 'BOOK') {
+            return '';
+        }
+
+        const basePrice = Number.isInteger(item.price) ? item.price : null;
+        const minervaPrice = Number.isInteger(item.priceMinerva) ? item.priceMinerva : null;
+        const baseLabel = basePrice === null ? '-' : this.escape(basePrice);
+        const minervaLabel = minervaPrice === null ? '-' : this.escape(minervaPrice);
+
+        return `
+            <p class="item-prices">
+                <span>Cout base: <strong>${baseLabel}</strong></span>
+                <span>Cout Minerva: <strong>${minervaLabel}</strong></span>
+            </p>
         `;
     }
 

@@ -190,6 +190,18 @@ body {
     color: #2e403d;
 }
 
+.item-prices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+}
+
+.item-prices strong {
+    color: #2e403d;
+}
+
 .item-learned-toggle {
     margin-top: 0.75rem;
     display: inline-flex;

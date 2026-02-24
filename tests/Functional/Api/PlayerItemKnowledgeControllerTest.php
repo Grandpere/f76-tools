@@ -134,7 +134,7 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
     {
         $owner = $this->createUser('owner-new-flag@example.com');
         $player = $this->createPlayer($owner, 'Owner');
-        $this->createItem(501, ItemTypeEnum::BOOK, null, 'catalog.new.name', ['new' => 1]);
+        $this->createItem(501, ItemTypeEnum::BOOK, null, 'catalog.new.name', ['new' => 1], 250, 188);
 
         $this->browser()->loginUser($owner);
         $this->browser()->request('GET', sprintf('/api/players/%d/items?q=catalog.new.name', $player->getId()));
@@ -142,7 +142,10 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $payload = $this->decodeListResponse($this->browser()->getResponse()->getContent() ?: '[]');
         self::assertCount(1, $payload);
-        self::assertTrue($this->readBool($payload[0] ?? [], 'isNew'));
+        $first = $payload[0] ?? [];
+        self::assertTrue($this->readBool($first, 'isNew'));
+        self::assertSame(250, $this->readInt($first, 'price'));
+        self::assertSame(188, $this->readInt($first, 'priceMinerva'));
     }
 
     private function createUser(string $email): UserEntity
@@ -173,14 +176,16 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
     /**
      * @param array<string, mixed>|null $payload
      */
-    private function createItem(int $sourceId, ItemTypeEnum $type, ?int $rank, string $nameKey, ?array $payload = null): ItemEntity
+    private function createItem(int $sourceId, ItemTypeEnum $type, ?int $rank, string $nameKey, ?array $payload = null, ?int $price = null, ?int $priceMinerva = null): ItemEntity
     {
         $item = (new ItemEntity())
             ->setSourceId($sourceId)
             ->setType($type)
             ->setNameKey($nameKey)
             ->setRank($rank)
-            ->setPayload($payload);
+            ->setPayload($payload)
+            ->setPrice($price)
+            ->setPriceMinerva($priceMinerva);
 
         $this->entityManager?->persist($item);
         $this->entityManager?->flush();
@@ -261,5 +266,18 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         }
 
         return $value;
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     */
+    private function readInt(array $data, string $key): int
+    {
+        $value = $data[$key] ?? null;
+        if (!is_int($value) && !is_numeric($value)) {
+            return 0;
+        }
+
+        return (int) $value;
     }
 }
