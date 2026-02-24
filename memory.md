@@ -59,6 +59,9 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - selection du player actif stockee dans query param `?player=<id>` (pas en session pour l'instant).
   - API knowledge renvoie aussi les textes traduits (`name`, `description`) en plus des cles (`nameKey`, `descKey`).
   - recherche texte `q` connectee UI -> API, filtre sur texte traduit + fallback sur les cles.
+  - creation player directement depuis le dashboard (POST `/api/players`) avec auto-selection apres creation.
+- API players:
+  - doublon de nom par user retourne `409` (`Player name already exists.`) au create/update au lieu d'une 500 SQL.
 - PHPStan (array shapes):
   - eviter `??` sur des offsets declares non-nullables dans un shape strict.
 - Testabilite commande user:

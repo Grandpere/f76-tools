@@ -109,6 +109,44 @@ final class PlayerControllerTest extends WebTestCase
         self::assertSame(404, $client->getResponse()->getStatusCode());
     }
 
+    public function testCreateReturnsConflictForDuplicateName(): void
+    {
+        $client = $this->browser();
+        $user = $this->createUser('duplicate-create@example.com');
+        $client->loginUser($user);
+
+        $client->jsonRequest('POST', '/api/players', ['name' => 'Duplicate Name']);
+        self::assertSame(201, $client->getResponse()->getStatusCode());
+
+        $client->jsonRequest('POST', '/api/players', ['name' => 'Duplicate Name']);
+        self::assertSame(409, $client->getResponse()->getStatusCode());
+        $payload = $this->decodeArrayResponse($client->getResponse()->getContent() ?: '{}');
+        self::assertSame('Player name already exists.', $payload['error'] ?? null);
+    }
+
+    public function testUpdateReturnsConflictForDuplicateName(): void
+    {
+        $client = $this->browser();
+        $user = $this->createUser('duplicate-update@example.com');
+        $client->loginUser($user);
+
+        $client->jsonRequest('POST', '/api/players', ['name' => 'Alpha']);
+        $first = $this->decodeArrayResponse($client->getResponse()->getContent() ?: '{}');
+        $firstId = $this->readInt($first, 'id');
+
+        $client->jsonRequest('POST', '/api/players', ['name' => 'Bravo']);
+        $second = $this->decodeArrayResponse($client->getResponse()->getContent() ?: '{}');
+        $secondId = $this->readInt($second, 'id');
+
+        $client->jsonRequest('PATCH', sprintf('/api/players/%d', $secondId), ['name' => 'Alpha']);
+        self::assertSame(409, $client->getResponse()->getStatusCode());
+        $payload = $this->decodeArrayResponse($client->getResponse()->getContent() ?: '{}');
+        self::assertSame('Player name already exists.', $payload['error'] ?? null);
+
+        $client->request('GET', sprintf('/api/players/%d', $firstId));
+        self::assertSame(200, $client->getResponse()->getStatusCode());
+    }
+
     private function createUser(string $email): UserEntity
     {
         $user = (new UserEntity())

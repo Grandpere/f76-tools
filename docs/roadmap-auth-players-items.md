@@ -60,6 +60,7 @@ Permettre a un utilisateur authentifie de:
   - [x] statut appris pour player courant
 - [x] Actions front:
   - [x] toggle learned via Stimulus + fetch API
+  - [x] creation player via formulaire dashboard
   - [x] retour visuel (loading, succes, erreur)
 - [x] Selection du player actif (query param).
 

@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    static targets = ['playerSelect', 'searchInput', 'typeInput', 'state', 'list'];
+    static targets = ['playerSelect', 'createNameInput', 'createButton', 'searchInput', 'typeInput', 'state', 'list'];
     static values = {
         playersUrl: String,
         playersBaseUrl: String,
@@ -26,6 +26,18 @@ export default class extends Controller {
             this.activePlayerId = this.playerSelectTarget.value;
             this.syncPlayerQueryParam();
             await this.loadItems();
+        });
+
+        this.createButtonTarget.addEventListener('click', async () => {
+            await this.createPlayerFromInput();
+        });
+
+        this.createNameInputTarget.addEventListener('keydown', async (event) => {
+            if (event.key !== 'Enter') {
+                return;
+            }
+            event.preventDefault();
+            await this.createPlayerFromInput();
         });
 
         this.typeInputTargets.forEach((radio) => {
@@ -74,6 +86,53 @@ export default class extends Controller {
         this.applyInitialPlayer();
         this.applyInitialType();
         await this.loadItems();
+    }
+
+    async createPlayerFromInput() {
+        const name = this.createNameInputTarget.value.trim();
+        if (name === '') {
+            this.setState('Le nom du player est requis.');
+            return;
+        }
+
+        this.createButtonTarget.disabled = true;
+        this.setState('Creation du player...');
+
+        const response = await fetch(this.playersUrlValue, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify({ name }),
+        });
+
+        this.createButtonTarget.disabled = false;
+
+        if (!response.ok) {
+            if (response.status === 409) {
+                this.setState('Un player avec ce nom existe deja.');
+                return;
+            }
+            this.setState(`Echec creation player (${response.status}).`);
+            return;
+        }
+
+        const created = await response.json();
+        const createdId = String(created.id ?? '');
+        this.createNameInputTarget.value = '';
+        await this.loadPlayers();
+        if (createdId !== '') {
+            const found = this.players.find((player) => String(player.id) === createdId);
+            if (found) {
+                this.activePlayerId = createdId;
+                this.playerSelectTarget.value = createdId;
+                this.syncPlayerQueryParam();
+                await this.loadItems();
+            }
+        }
+        this.setState(`Player cree: ${name}.`);
     }
 
     renderPlayerSelect() {

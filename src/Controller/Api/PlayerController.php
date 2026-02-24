@@ -16,6 +16,7 @@ namespace App\Controller\Api;
 use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
 use App\Repository\PlayerEntityRepository;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use JsonException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -64,8 +65,12 @@ final class PlayerController extends AbstractController
             ->setUser($user)
             ->setName($name);
 
-        $this->entityManager->persist($player);
-        $this->entityManager->flush();
+        try {
+            $this->entityManager->persist($player);
+            $this->entityManager->flush();
+        } catch (UniqueConstraintViolationException) {
+            return $this->json(['error' => 'Player name already exists.'], JsonResponse::HTTP_CONFLICT);
+        }
 
         return $this->json([
             'id' => $player->getId(),
@@ -108,7 +113,11 @@ final class PlayerController extends AbstractController
         }
 
         $player->setName($name);
-        $this->entityManager->flush();
+        try {
+            $this->entityManager->flush();
+        } catch (UniqueConstraintViolationException) {
+            return $this->json(['error' => 'Player name already exists.'], JsonResponse::HTTP_CONFLICT);
+        }
 
         return $this->json([
             'id' => $player->getId(),
@@ -176,4 +185,3 @@ final class PlayerController extends AbstractController
         return '' === $value ? null : $value;
     }
 }
-

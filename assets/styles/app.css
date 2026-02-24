@@ -90,6 +90,30 @@ body {
     color: var(--ink);
 }
 
+.field-inline {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.field-inline input {
+    flex: 1;
+}
+
+.field-inline button {
+    border: 0;
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    cursor: pointer;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+}
+
+.field-inline button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 .type-switch {
     border: 1px solid var(--border);
     border-radius: 10px;
