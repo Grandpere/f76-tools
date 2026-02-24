@@ -303,12 +303,20 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
      */
     private function readBool(array $data, string $key): bool
     {
-        $value = $data[$key] ?? false;
-        if (!is_bool($value)) {
-            return false;
+        $value = $data[$key] ?? null;
+        if (is_bool($value)) {
+            return $value;
+        }
+        if (is_int($value) || is_float($value)) {
+            return (int) $value === 1;
+        }
+        if (is_string($value)) {
+            $normalized = strtolower(trim($value));
+
+            return '1' === $normalized || 'true' === $normalized || 'yes' === $normalized;
         }
 
-        return $value;
+        return false;
     }
 
     /**

@@ -263,8 +263,19 @@ final class PlayerItemKnowledgeController extends AbstractController
         }
 
         $value = $payload[$key];
+        if (is_bool($value)) {
+            return $value;
+        }
+        if (is_int($value) || is_float($value)) {
+            return (int) $value === 1;
+        }
+        if (is_string($value)) {
+            $normalized = strtolower(trim($value));
 
-        return 1 === $value || '1' === $value || true === $value;
+            return '1' === $normalized || 'true' === $normalized || 'yes' === $normalized;
+        }
+
+        return false;
     }
 
     /**
