@@ -277,7 +277,7 @@ export default class extends Controller {
             .map(([listNumber, items]) => `
                 <details class="catalog-subgroup" data-accordion-kind="book" data-accordion-id="${listNumber}" ${listNumber === this.openBookGroup ? 'open' : ''}>
                     <summary>Liste ${this.escape(listNumber)}</summary>
-                    <ul class="item-grid">${items.map((item) => this.renderItemCard(item, `Liste ${listNumber}`)).join('')}</ul>
+                    <ul class="item-grid">${items.map((item) => this.renderItemCard(item)).join('')}</ul>
                 </details>
             `)
             .join('');
@@ -288,18 +288,18 @@ export default class extends Controller {
         `;
     }
 
-    renderItemCard(item, subtitle = null) {
+    renderItemCard(item) {
         const label = this.escape(item.name || item.nameKey);
         const description = item.description ? `<p>${this.escape(item.description)}</p>` : '';
         const learnedClass = item.learned ? 'is-learned' : 'is-unlearned';
         const checkedAttr = item.learned ? 'checked' : '';
-        const subtitleText = subtitle || this.escape(item.type);
+        const newBadge = item.isNew ? '<span class="item-badge-new">NEW</span>' : '';
 
         return `
             <li class="item-card ${learnedClass}">
                 <div class="item-card-head">
                     <strong>${label}</strong>
-                    <span>${subtitleText}</span>
+                    ${newBadge}
                 </div>
                 ${description}
                 <label class="item-learned-toggle">

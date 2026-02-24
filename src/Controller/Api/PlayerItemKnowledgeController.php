@@ -178,6 +178,7 @@ final class PlayerItemKnowledgeController extends AbstractController
      *     name: string,
      *     descKey: string|null,
      *     description: string|null,
+     *     isNew: bool,
      *     rank: int|null,
      *     listNumbers: list<int>,
      *     isInSpecialList: bool,
@@ -200,6 +201,12 @@ final class PlayerItemKnowledgeController extends AbstractController
         if (null !== $item->getDescKey()) {
             $description = $this->translator->trans($item->getDescKey(), domain: 'items');
         }
+        $isNew = false;
+        $payload = $item->getPayload();
+        if (is_array($payload) && array_key_exists('new', $payload)) {
+            $rawNew = $payload['new'];
+            $isNew = 1 === $rawNew || '1' === $rawNew || true === $rawNew;
+        }
 
         return [
             'id' => $item->getId(),
@@ -209,6 +216,7 @@ final class PlayerItemKnowledgeController extends AbstractController
             'name' => $this->translator->trans($item->getNameKey(), domain: 'items'),
             'descKey' => $item->getDescKey(),
             'description' => $description,
+            'isNew' => $isNew,
             'rank' => $item->getRank(),
             'listNumbers' => array_values(array_unique($listNumbers)),
             'isInSpecialList' => $isInSpecialList,

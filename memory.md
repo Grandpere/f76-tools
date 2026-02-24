@@ -64,6 +64,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - un toggle learned sur un item `BOOK` doit refleter toutes ses occurrences multi-listes (meme `itemId`).
   - UX learned preferee avec checkbox `Appris` (pas bouton), + note d'aide avant les listes Minerva.
   - comportement accordéon par type: ouvrir un groupe replie les autres du meme type, et le groupe ouvert est conserve apres rerender.
+  - masquer le label secondaire de type/liste sur la carte; afficher une pastille `NEW` pres du nom quand `payload.new = 1`.
 - API players:
   - doublon de nom par user retourne `409` (`Player name already exists.`) au create/update au lieu d'une 500 SQL.
 - PHPStan (array shapes):

@@ -130,6 +130,21 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         self::assertSame('catalog.alpha.name', $nameKey);
     }
 
+    public function testNewFlagIsReturnedWhenPayloadContainsNewOne(): void
+    {
+        $owner = $this->createUser('owner-new-flag@example.com');
+        $player = $this->createPlayer($owner, 'Owner');
+        $this->createItem(501, ItemTypeEnum::BOOK, null, 'catalog.new.name', ['new' => 1]);
+
+        $this->browser()->loginUser($owner);
+        $this->browser()->request('GET', sprintf('/api/players/%d/items?q=catalog.new.name', $player->getId()));
+
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        $payload = $this->decodeListResponse($this->browser()->getResponse()->getContent() ?: '[]');
+        self::assertCount(1, $payload);
+        self::assertTrue($this->readBool($payload[0] ?? [], 'isNew'));
+    }
+
     private function createUser(string $email): UserEntity
     {
         $user = (new UserEntity())
@@ -155,13 +170,17 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         return $player;
     }
 
-    private function createItem(int $sourceId, ItemTypeEnum $type, ?int $rank, string $nameKey): ItemEntity
+    /**
+     * @param array<string, mixed>|null $payload
+     */
+    private function createItem(int $sourceId, ItemTypeEnum $type, ?int $rank, string $nameKey, ?array $payload = null): ItemEntity
     {
         $item = (new ItemEntity())
             ->setSourceId($sourceId)
             ->setType($type)
             ->setNameKey($nameKey)
-            ->setRank($rank);
+            ->setRank($rank)
+            ->setPayload($payload);
 
         $this->entityManager?->persist($item);
         $this->entityManager?->flush();
