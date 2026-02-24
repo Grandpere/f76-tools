@@ -14,6 +14,8 @@ export default class extends Controller {
         this.activePlayerId = null;
         this.searchQuery = '';
         this.searchDebounceId = null;
+        this.openMiscGroup = null;
+        this.openBookGroup = null;
         this.bindEvents();
         await this.loadPlayers();
     }
@@ -205,6 +207,8 @@ export default class extends Controller {
         this.bookListTarget.innerHTML = this.renderBookBlock();
         this.bindToggleButtons(this.miscListTarget);
         this.bindToggleButtons(this.bookListTarget);
+        this.bindAccordionBehavior(this.miscListTarget, 'misc');
+        this.bindAccordionBehavior(this.bookListTarget, 'book');
     }
 
     renderMiscBlock() {
@@ -223,8 +227,11 @@ export default class extends Controller {
         });
 
         const ranks = Array.from(rankMap.keys()).sort((a, b) => a - b);
+        if (this.openMiscGroup === null || !ranks.includes(this.openMiscGroup)) {
+            this.openMiscGroup = ranks[0] ?? null;
+        }
         return ranks.map((rank, index) => `
-            <details class="catalog-subgroup" ${index === 0 ? 'open' : ''}>
+            <details class="catalog-subgroup" data-accordion-kind="misc" data-accordion-id="${rank}" ${rank === this.openMiscGroup ? 'open' : ''}>
                 <summary>Rank ${this.escape(rank)}</summary>
                 <ul class="item-grid">${rankMap.get(rank).map((item) => this.renderItemCard(item)).join('')}</ul>
             </details>
@@ -259,10 +266,16 @@ export default class extends Controller {
             });
         });
 
-        const groupsHtml = Array.from(listMap.entries())
+        const groups = Array.from(listMap.entries()).sort((a, b) => a[0] - b[0]);
+        const listNumbers = groups.map(([listNumber]) => listNumber);
+        if (this.openBookGroup === null || !listNumbers.includes(this.openBookGroup)) {
+            this.openBookGroup = listNumbers[0] ?? null;
+        }
+
+        const groupsHtml = groups
             .sort((a, b) => a[0] - b[0])
-            .map(([listNumber, items], index) => `
-                <details class="catalog-subgroup" ${index === 0 ? 'open' : ''}>
+            .map(([listNumber, items]) => `
+                <details class="catalog-subgroup" data-accordion-kind="book" data-accordion-id="${listNumber}" ${listNumber === this.openBookGroup ? 'open' : ''}>
                     <summary>Liste ${this.escape(listNumber)}</summary>
                     <ul class="item-grid">${items.map((item) => this.renderItemCard(item, `Liste ${listNumber}`)).join('')}</ul>
                 </details>
@@ -306,6 +319,30 @@ export default class extends Controller {
                     return;
                 }
                 await this.toggleLearned(itemId, learned);
+            });
+        });
+    }
+
+    bindAccordionBehavior(container, kind) {
+        const detailsNodes = Array.from(container.querySelectorAll('details[data-accordion-kind]'));
+        detailsNodes.forEach((node) => {
+            node.addEventListener('toggle', () => {
+                if (!node.open) {
+                    return;
+                }
+
+                const openedId = Number(node.getAttribute('data-accordion-id'));
+                if (kind === 'misc') {
+                    this.openMiscGroup = openedId;
+                } else {
+                    this.openBookGroup = openedId;
+                }
+
+                detailsNodes.forEach((other) => {
+                    if (other !== node) {
+                        other.open = false;
+                    }
+                });
             });
         });
     }
