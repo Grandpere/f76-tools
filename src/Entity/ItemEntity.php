@@ -91,6 +91,9 @@ class ItemEntity implements ItemInterface
     #[ORM\Column(name: 'drop_sources_html', type: Types::TEXT, nullable: true)]
     private ?string $dropSourcesHtml = null;
 
+    #[ORM\Column(name: 'relations_html', type: Types::TEXT, nullable: true)]
+    private ?string $relationsHtml = null;
+
     #[ORM\Column(name: 'wiki_url', length: 1024, nullable: true)]
     private ?string $wikiUrl = null;
 
@@ -366,6 +369,18 @@ class ItemEntity implements ItemInterface
     public function setDropSourcesHtml(?string $dropSourcesHtml): self
     {
         $this->dropSourcesHtml = $dropSourcesHtml;
+
+        return $this;
+    }
+
+    public function getRelationsHtml(): ?string
+    {
+        return $this->relationsHtml;
+    }
+
+    public function setRelationsHtml(?string $relationsHtml): self
+    {
+        $this->relationsHtml = $relationsHtml;
 
         return $this;
     }

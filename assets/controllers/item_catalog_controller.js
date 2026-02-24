@@ -306,6 +306,7 @@ export default class extends Controller {
         const label = this.escape(item.name || item.nameKey);
         const description = item.description ? `<p>${this.escape(item.description)}</p>` : '';
         const infoBlock = this.renderInfoBlock(item);
+        const relationsBlock = this.renderRelationsBlock(item);
         const sourceBadges = this.renderSourceBadges(item);
         const sourceIcons = this.renderDropSources(item);
         const dailyOpsLine = item.type === 'BOOK' && item.dropDailyOps && !this.infoContainsDailyOps(item.infoHtml)
@@ -324,6 +325,7 @@ export default class extends Controller {
                 </div>
                 ${description}
                 ${infoBlock}
+                ${relationsBlock}
                 ${dailyOpsLine}
                 ${sourceBadges}
                 ${sourceIcons}
@@ -387,6 +389,14 @@ export default class extends Controller {
         }
 
         return `<div class="item-info-html">${this.sanitizeHtml(item.infoHtml)}</div>`;
+    }
+
+    renderRelationsBlock(item) {
+        if (item.type !== 'MISC' || !item.relationsHtml) {
+            return '';
+        }
+
+        return `<div class="item-relations-html">${this.sanitizeHtml(item.relationsHtml)}</div>`;
     }
 
     infoContainsDailyOps(infoHtml) {

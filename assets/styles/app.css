@@ -228,6 +228,16 @@ body {
     margin: 0;
 }
 
+.item-relations-html {
+    margin-top: 0.4rem;
+}
+
+.item-relations-html img {
+    max-height: 20px;
+    width: auto;
+    margin-right: 0.25rem;
+}
+
 .item-source-badges {
     margin: 0.45rem 0 0;
     display: flex;

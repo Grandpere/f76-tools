@@ -191,6 +191,7 @@ final class ImportItemsCommand extends Command
                 $item->setVendorMortimer($this->toBool($row['vendor_mortimer'] ?? null));
                 $item->setInfoHtml($this->toNullableString($row['info'] ?? null));
                 $item->setDropSourcesHtml($this->toNullableString($row['drop_sources'] ?? null));
+                $item->setRelationsHtml($this->toNullableString($row['relations'] ?? null));
                 $item->setPayload($this->normalizePayload($row));
 
                 $nameKey = sprintf('item.%s.%d.name', strtolower($type->value), $sourceId);

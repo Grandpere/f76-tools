@@ -174,6 +174,27 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         self::assertSame('<img src="/img/x.png" title="Burning Springs" />', $this->readString($second, 'dropSourcesHtml'));
     }
 
+    public function testRelationsHtmlIsReturnedForMiscItems(): void
+    {
+        $owner = $this->createUser('owner-relations@example.com');
+        $player = $this->createPlayer($owner, 'Owner');
+
+        $item = $this->createItem(777, ItemTypeEnum::MISC, 2, 'catalog.misc.relations.name');
+        $item->setRelationsHtml('<img src="/cms/modules/mod.fallout76rewards/img/FO76_iconwheel_armor_black.png" title="Armor" />');
+        $this->entityManager?->flush();
+
+        $this->browser()->loginUser($owner);
+        $this->browser()->request('GET', sprintf('/api/players/%d/items?q=catalog.misc.relations.name', $player->getId()));
+
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        $payload = $this->decodeListResponse($this->browser()->getResponse()->getContent() ?: '[]');
+        self::assertCount(1, $payload);
+        self::assertSame(
+            '<img src="/cms/modules/mod.fallout76rewards/img/FO76_iconwheel_armor_black.png" title="Armor" />',
+            $this->readString($payload[0] ?? [], 'relationsHtml'),
+        );
+    }
+
     private function createUser(string $email): UserEntity
     {
         $user = (new UserEntity())

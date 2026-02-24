@@ -15,6 +15,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 ## Decisions techniques prises
 - `Item` stocke des cles de traduction (`nameKey`, `descKey`) et non les textes EN/DE en base.
 - Metadonnees d'acquisition/sources item materialisees en colonnes SQL (`is_new`, `drop_*`, `vendor_*`, `info_html`, `drop_sources_html`) plutot qu'en lecture runtime de `payload`.
+- `relations` (legendary mods) materialise en colonne SQL `relations_html` et affiche en front avec icones locales.
 - Traductions generees/maj dans:
   - `translations/items.en.yaml`
   - `translations/items.de.yaml`
