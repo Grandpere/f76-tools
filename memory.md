@@ -38,6 +38,11 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - normalisation des types `mixed` dans la commande,
   - suppression des `assert()` inutiles,
   - typing explicite payload, adaptations Doctrine entity IDs.
+- Auth phase 1:
+  - ajout `UserEntity` + `form_login` + commande `app:user:create`.
+  - correction PHPStan `non-empty-string` sur `getUserIdentifier()`:
+    - `setEmail()` refuse les emails vides,
+    - garde-fou dans `getUserIdentifier()` avec `LogicException` si vide.
 
 ## Commandes utiles
 - Import dry-run:

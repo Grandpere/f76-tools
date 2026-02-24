@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    <main style="max-width: 420px; margin: 3rem auto; font-family: system-ui, sans-serif;">
+        <h1>Connexion</h1>
+
+        {% if error %}
+            <p style="color: #b91c1c; margin-bottom: 1rem;">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </p>
+        {% endif %}
+
+        <form method="post">
+            <label for="username">Email</label>
+            <input
+                id="username"
+                name="_username"
+                type="email"
+                value="{{ last_username }}"
+                required
+                autofocus
+                style="display:block; width:100%; margin:0.25rem 0 1rem; padding:0.5rem;"
+            >
+
+            <label for="password">Mot de passe</label>
+            <input
+                id="password"
+                name="_password"
+                type="password"
+                required
+                style="display:block; width:100%; margin:0.25rem 0 1rem; padding:0.5rem;"
+            >
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <button
+                type="submit"
+                style="padding: 0.6rem 1rem; border: 0; background: #111827; color: #fff; cursor: pointer;"
+            >
+                Se connecter
+            </button>
+        </form>
+    </main>
+{% endblock %}
+
