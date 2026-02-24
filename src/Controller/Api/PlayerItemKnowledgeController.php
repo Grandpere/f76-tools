@@ -56,12 +56,29 @@ final class PlayerItemKnowledgeController extends AbstractController
         }
 
         $items = $this->itemRepository->findAllOrdered($type);
+        $query = $this->normalizeSearchQuery($request->query->get('q'));
         $learnedMap = array_flip($this->knowledgeRepository->findLearnedItemIdsByPlayer($player));
 
         $payload = array_map(
             fn (ItemEntity $item): array => $this->toItemPayload($item, isset($learnedMap[$item->getId() ?? 0])),
             $items,
         );
+        if (null !== $query) {
+            $payload = array_values(array_filter(
+                $payload,
+                static function (array $row) use ($query): bool {
+                    $name = mb_strtolower($row['name']);
+                    $description = mb_strtolower((string) ($row['description'] ?? ''));
+                    $nameKey = mb_strtolower($row['nameKey']);
+                    $descKey = mb_strtolower((string) ($row['descKey'] ?? ''));
+
+                    return str_contains($name, $query)
+                        || str_contains($description, $query)
+                        || str_contains($nameKey, $query)
+                        || str_contains($descKey, $query);
+                },
+            ));
+        }
 
         return $this->json($payload);
     }
@@ -139,6 +156,17 @@ final class PlayerItemKnowledgeController extends AbstractController
         }
 
         return ItemTypeEnum::tryFrom(strtoupper(trim($value))) ?? false;
+    }
+
+    private function normalizeSearchQuery(mixed $value): ?string
+    {
+        if (!is_string($value)) {
+            return null;
+        }
+
+        $query = mb_strtolower(trim($value));
+
+        return '' === $query ? null : $query;
     }
 
     /**

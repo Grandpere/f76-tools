@@ -9,6 +9,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - A chaque correction utilisateur ou autocorrection technique, mettre a jour `memory.md`.
 - Si un commit est utile pour fiabiliser un lot de changements, le faire (workflow explicite).
 - A chaque nouvelle fonctionnalite, ajouter des tests dans le meme lot (ne pas repousser).
+- A la fin de chaque lot, indiquer explicitement si l'utilisateur a des commandes a lancer (et lesquelles).
 
 ## Decisions techniques prises
 - `Item` stocke des cles de traduction (`nameKey`, `descKey`) et non les textes EN/DE en base.
@@ -56,6 +57,9 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - Front catalogue:
   - selection du player actif stockee dans query param `?player=<id>` (pas en session pour l'instant).
   - API knowledge renvoie aussi les textes traduits (`name`, `description`) en plus des cles (`nameKey`, `descKey`).
+  - recherche texte `q` connectee UI -> API, filtre sur texte traduit + fallback sur les cles.
+- PHPStan (array shapes):
+  - eviter `??` sur des offsets declares non-nullables dans un shape strict.
 
 ## Commandes utiles
 - Import dry-run:

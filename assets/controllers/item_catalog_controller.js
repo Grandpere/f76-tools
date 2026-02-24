@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    static targets = ['playerSelect', 'typeInput', 'state', 'list'];
+    static targets = ['playerSelect', 'searchInput', 'typeInput', 'state', 'list'];
     static values = {
         playersUrl: String,
         playersBaseUrl: String,
@@ -15,6 +15,8 @@ export default class extends Controller {
         this.items = [];
         this.activeType = this.initialTypeValue || 'BOOK';
         this.activePlayerId = null;
+        this.searchQuery = '';
+        this.searchDebounceId = null;
         this.bindEvents();
         await this.loadPlayers();
     }
@@ -34,6 +36,17 @@ export default class extends Controller {
                 this.activeType = radio.value;
                 await this.loadItems();
             });
+        });
+
+        this.searchInputTarget.addEventListener('input', async () => {
+            if (this.searchDebounceId) {
+                window.clearTimeout(this.searchDebounceId);
+            }
+
+            this.searchDebounceId = window.setTimeout(async () => {
+                this.searchQuery = this.searchInputTarget.value.trim();
+                await this.loadItems();
+            }, 250);
         });
     }
 
@@ -98,7 +111,12 @@ export default class extends Controller {
         this.renderItems();
         this.setState('Chargement des items...');
 
-        const itemsUrl = `${this.playersBaseUrlValue}/${this.activePlayerId}/items?type=${encodeURIComponent(this.activeType)}`;
+        const params = new URLSearchParams();
+        params.set('type', this.activeType);
+        if (this.searchQuery !== '') {
+            params.set('q', this.searchQuery);
+        }
+        const itemsUrl = `${this.playersBaseUrlValue}/${this.activePlayerId}/items?${params.toString()}`;
         const response = await fetch(itemsUrl, {
             headers: { Accept: 'application/json' },
             credentials: 'same-origin',
@@ -113,7 +131,8 @@ export default class extends Controller {
         this.items = Array.isArray(payload) ? payload : [];
         this.loading = false;
         this.renderItems();
-        this.setState(`${this.items.length} items (${this.activeType}) pour ce player.`);
+        const searchSuffix = this.searchQuery !== '' ? `, filtre: "${this.searchQuery}"` : '';
+        this.setState(`${this.items.length} items (${this.activeType}) pour ce player${searchSuffix}.`);
     }
 
     async toggleLearned(itemId, learned) {
@@ -227,4 +246,3 @@ export default class extends Controller {
             .replaceAll("'", '&#039;');
     }
 }
-

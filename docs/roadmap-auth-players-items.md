@@ -55,7 +55,7 @@ Permettre a un utilisateur authentifie de:
 
 ## Phase 4 - Front Twig + UX
 - [x] Ecran catalogue items:
-  - [x] filtres type (`MISC`/`BOOK`)
+  - [x] filtres type (`MISC`/`BOOK`) + recherche texte (`q`)
   - [x] badge/rank/lists selon type
   - [x] statut appris pour player courant
 - [x] Actions front:

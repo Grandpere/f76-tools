@@ -112,6 +112,24 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         self::assertSame(400, $this->browser()->getResponse()->getStatusCode());
     }
 
+    public function testSearchQueryFiltersItems(): void
+    {
+        $owner = $this->createUser('owner-search@example.com');
+        $player = $this->createPlayer($owner, 'Owner');
+        $this->createItem(410, ItemTypeEnum::BOOK, null, 'catalog.alpha.name');
+        $this->createItem(411, ItemTypeEnum::BOOK, null, 'catalog.beta.name');
+
+        $this->browser()->loginUser($owner);
+        $this->browser()->request('GET', sprintf('/api/players/%d/items?type=BOOK&q=alpha', $player->getId()));
+
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        $payload = $this->decodeListResponse($this->browser()->getResponse()->getContent() ?: '[]');
+        self::assertCount(1, $payload);
+        $nameKey = $payload[0]['nameKey'] ?? null;
+        self::assertIsString($nameKey);
+        self::assertSame('catalog.alpha.name', $nameKey);
+    }
+
     private function createUser(string $email): UserEntity
     {
         $user = (new UserEntity())

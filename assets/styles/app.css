@@ -81,7 +81,8 @@ body {
     min-width: min(300px, 100%);
 }
 
-.field select {
+.field select,
+.field input {
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 0.6rem 0.8rem;
