@@ -15,7 +15,7 @@ Permettre a un utilisateur authentifie de:
 ## Phase 1 - Authentification
 - [x] Creer `UserEntity` (email unique, password hash, roles, isActive, createdAt/updatedAt).
 - [x] Configurer `security.yaml` (provider Doctrine, firewall main, login form, logout).
-- [ ] Ajouter pages/routes:
+- [x] Ajouter pages/routes:
   - [x] `GET/POST /login`
   - [x] `GET /logout`
 - [x] Creer commande console:
@@ -27,9 +27,9 @@ Permettre a un utilisateur authentifie de:
   - [x] relation `ManyToOne User`
   - [x] `name` (non vide)
   - [x] `createdAt`, `updatedAt`
-- [ ] Ajouter contrainte d'unicite (au choix):
+- [x] Ajouter contrainte d'unicite (au choix):
   - [x] unique `(user_id, name)` pour eviter doublons de nom par user.
-- [ ] Routes/controller:
+- [x] Routes/controller:
   - [x] `GET /api/players`
   - [x] `POST /api/players`
   - [x] `GET /api/players/{id}`
@@ -38,30 +38,30 @@ Permettre a un utilisateur authentifie de:
 - [x] Ajouter controle d'acces ownership (Voter ou check service).
 
 ## Phase 3 - Knowledge par Player
-- [ ] Creer `PlayerItemKnowledgeEntity`:
+- [x] Creer `PlayerItemKnowledgeEntity`:
   - [x] relation `ManyToOne Player`
   - [x] relation `ManyToOne Item`
   - [x] modele presence/absence (une ligne = learned)
   - [x] `learnedAt`
-  - [ ] timestamps
+  - [x] timestamps (`learnedAt`)
 - [x] Contrainte unique `(player_id, item_id)`.
-- [ ] Index de perf:
+- [x] Index de perf:
   - [x] `(player_id, item_id)`
   - [x] `(item_id)` si necessaire pour stats.
-- [ ] API JSON:
+- [x] API JSON:
   - [x] `PUT /api/players/{playerId}/items/{itemId}/learned` (set true)
   - [x] `DELETE /api/players/{playerId}/items/{itemId}/learned` (set false)
   - [x] `GET /api/players/{playerId}/items?type=...` (liste avec statut learned)
 
 ## Phase 4 - Front Twig + UX
-- [ ] Ecran catalogue items:
-  - [ ] filtres type (`MISC`/`BOOK`), recherche texte
-  - [ ] badge/rank/lists selon type
-  - [ ] statut appris pour player courant
-- [ ] Actions front:
-  - [ ] toggle learned via Stimulus + fetch API
-  - [ ] retour visuel (loading, succes, erreur)
-- [ ] Selection du player actif (session ou query param).
+- [x] Ecran catalogue items:
+  - [x] filtres type (`MISC`/`BOOK`)
+  - [x] badge/rank/lists selon type
+  - [x] statut appris pour player courant
+- [x] Actions front:
+  - [x] toggle learned via Stimulus + fetch API
+  - [x] retour visuel (loading, succes, erreur)
+- [x] Selection du player actif (query param).
 
 ## Phase 5 - Qualite et tests
 - [ ] Tests unitaires:
@@ -72,14 +72,15 @@ Permettre a un utilisateur authentifie de:
   - [x] creation player
   - [x] marquage learned/unlearned
   - [x] interdiction acces cross-user
+  - [x] rendu dashboard catalogue auth
 - [ ] Garder `make phpstan` et tests verts a chaque phase.
 
 ## Risques / Decisions a figer
-- [ ] Decider le modele exact learned:
+- [x] Decider le modele exact learned:
   - [ ] `isLearned` bool (historique simple),
-  - [ ] ou presence/absence en table pivot.
+  - [x] ou presence/absence en table pivot.
 - [ ] Politique de suppression:
-  - [ ] supprimer un player supprime son knowledge (`ON DELETE CASCADE`).
+  - [x] supprimer un player supprime son knowledge (`ON DELETE CASCADE`).
 - [ ] Pagination catalogue pour eviter surcharge front.
 
 ## Definition of Done (MVP)

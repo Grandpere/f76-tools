@@ -13,17 +13,39 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\UserEntity;
+use App\Repository\PlayerEntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 final class DashboardController extends AbstractController
 {
+    public function __construct(
+        private readonly PlayerEntityRepository $playerRepository,
+    ) {
+    }
+
     #[Route('/', name: 'app_dashboard', methods: ['GET'])]
     public function index(): Response
     {
+        $user = $this->getUser();
+        if (!$user instanceof UserEntity) {
+            throw new AccessDeniedException('User must be authenticated.');
+        }
+
+        $players = $this->playerRepository->findByUser($user);
+        $activePlayerId = null;
+        if ([] !== $players) {
+            $activePlayerId = $players[0]->getId();
+        }
+
         return $this->render('dashboard/index.html.twig', [
-            'apiEndpoint' => $this->generateUrl('app_api_dashboard'),
+            'apiPlayersUrl' => $this->generateUrl('api_players_index'),
+            'apiPlayersBaseUrl' => $this->generateUrl('api_players_index'),
+            'activePlayerId' => $activePlayerId,
+            'username' => $user->getEmail(),
         ]);
     }
 }

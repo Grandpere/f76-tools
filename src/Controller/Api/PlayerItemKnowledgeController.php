@@ -28,6 +28,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/api/players/{playerId<\d+>}/items')]
 final class PlayerItemKnowledgeController extends AbstractController
@@ -37,6 +38,7 @@ final class PlayerItemKnowledgeController extends AbstractController
         private readonly ItemEntityRepository $itemRepository,
         private readonly PlayerItemKnowledgeEntityRepository $knowledgeRepository,
         private readonly EntityManagerInterface $entityManager,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 
@@ -57,7 +59,7 @@ final class PlayerItemKnowledgeController extends AbstractController
         $learnedMap = array_flip($this->knowledgeRepository->findLearnedItemIdsByPlayer($player));
 
         $payload = array_map(
-            static fn (ItemEntity $item): array => self::toItemPayload($item, isset($learnedMap[$item->getId() ?? 0])),
+            fn (ItemEntity $item): array => $this->toItemPayload($item, isset($learnedMap[$item->getId() ?? 0])),
             $items,
         );
 
@@ -86,7 +88,7 @@ final class PlayerItemKnowledgeController extends AbstractController
             $this->entityManager->flush();
         }
 
-        return $this->json(self::toItemPayload($item, true));
+        return $this->json($this->toItemPayload($item, true));
     }
 
     #[Route('/{itemId<\d+>}/learned', name: 'api_player_items_learned_unset', methods: ['DELETE'])]
@@ -145,14 +147,16 @@ final class PlayerItemKnowledgeController extends AbstractController
      *     sourceId: int,
      *     type: string,
      *     nameKey: string,
+     *     name: string,
      *     descKey: string|null,
+     *     description: string|null,
      *     rank: int|null,
      *     listNumbers: list<int>,
      *     isInSpecialList: bool,
      *     learned: bool
      * }
      */
-    private static function toItemPayload(ItemEntity $item, bool $learned): array
+    private function toItemPayload(ItemEntity $item, bool $learned): array
     {
         $listNumbers = [];
         $isInSpecialList = false;
@@ -164,12 +168,19 @@ final class PlayerItemKnowledgeController extends AbstractController
 
         sort($listNumbers);
 
+        $description = null;
+        if (null !== $item->getDescKey()) {
+            $description = $this->translator->trans($item->getDescKey(), domain: 'items');
+        }
+
         return [
             'id' => $item->getId(),
             'sourceId' => $item->getSourceId(),
             'type' => $item->getType()->value,
             'nameKey' => $item->getNameKey(),
+            'name' => $this->translator->trans($item->getNameKey(), domain: 'items'),
             'descKey' => $item->getDescKey(),
+            'description' => $description,
             'rank' => $item->getRank(),
             'listNumbers' => array_values(array_unique($listNumbers)),
             'isInSpecialList' => $isInSpecialList,

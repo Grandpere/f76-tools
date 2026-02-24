@@ -53,6 +53,9 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - Knowledge player/item:
   - modele retenu = presence/absence dans `player_item_knowledge` (pas de bool persiste).
   - endpoints `PUT/DELETE learned` idempotents avec ownership strict sur le `Player`.
+- Front catalogue:
+  - selection du player actif stockee dans query param `?player=<id>` (pas en session pour l'instant).
+  - API knowledge renvoie aussi les textes traduits (`name`, `description`) en plus des cles (`nameKey`, `descKey`).
 
 ## Commandes utiles
 - Import dry-run:
