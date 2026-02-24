@@ -1,0 +1,10 @@
+{
+  "source_page": "https://nukaknights.com/articles/legendary-mods-all-descriptions-and-usages.html",
+  "generated_at_utc": "2026-02-23T21:41:44Z",
+  "calls": [
+    {"fetch":"/home.html","legendary_mods":1,"lang":"en","url":"https://nukaknights.com/ajax/home.html?legendary_mods=1&lang=en","file":"data/legendary_mods_pages/legendary_mods_1_en.json"},
+    {"fetch":"/home.html","legendary_mods":2,"lang":"en","url":"https://nukaknights.com/ajax/home.html?legendary_mods=2&lang=en","file":"data/legendary_mods_pages/legendary_mods_2_en.json"},
+    {"fetch":"/home.html","legendary_mods":3,"lang":"en","url":"https://nukaknights.com/ajax/home.html?legendary_mods=3&lang=en","file":"data/legendary_mods_pages/legendary_mods_3_en.json"},
+    {"fetch":"/home.html","legendary_mods":4,"lang":"en","url":"https://nukaknights.com/ajax/home.html?legendary_mods=4&lang=en","file":"data/legendary_mods_pages/legendary_mods_4_en.json"}
+  ]
+}

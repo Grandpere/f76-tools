@@ -1,0 +1,455 @@
+# misc (legendary mod)
+item.misc.10.desc: 'Damage Increases up to +50% as Damage Resistance Decreases. Currently <+MAG>%'
+item.misc.10.name: "Berserker's"
+item.misc.100.desc: 'Each Worn Armor Piece Reduces the Cost of Critical Hits by -10% (up to -50% on Full Stack)'
+item.misc.100.name: Limit-Breaking
+item.misc.101.desc: 'When Hit, a Poisonous DoT Cloud Harms Nearby Targets for 10s (DoT DMG Increases Per Equipped Piece)'
+item.misc.101.name: "Miasma's"
+item.misc.102.desc: 'Health Regenerates Slowly (+1 Health per second) (up to +5 Health per second on Full Stack)'
+item.misc.102.name: "Sawbones's"
+item.misc.103.desc: 'Ranged Weapons Deal +5% Bonus Damage (up to +25% on Full Stack)'
+item.misc.103.name: "Ranger's"
+item.misc.104.desc: 'Sprinting Action Point Cost Reduced by -20% (up to -100% on Full Stack)'
+item.misc.104.name: "Runner's"
+item.misc.105.desc: '+200 Damage Resist for 10s When Standing Still (20s Cooldown) (up to +1000 on Full Stack)'
+item.misc.105.name: "Tanky's"
+item.misc.106.desc: '10% Chance for 500 Damage & "Bloody Mess" When Sprinting Into Targets (up to 50% Chance on Full Stack)'
+item.misc.106.name: "Choo-Choo's"
+item.misc.107.desc: 'Movement & Sprint Speed Increased by +5% (up to +25% on Full Stack)'
+item.misc.107.name: Propelling
+item.misc.108.desc: 'Gain +2 AP Regeneration at the Cost of RADS (up to +10 AP on Full Stack)'
+item.misc.108.name: Radioactive-Powered
+item.misc.109.desc: 'Return 10% of Damage Received from an Enemy Target Back Towards Them (up to 50% on Full Stack)'
+item.misc.109.name: Reflective
+item.misc.11.desc: '[Armor] -15% Damage From Scorched<br />[Weapon] +50% Damage to Scorched'
+item.misc.11.name: "Zealot's"
+item.misc.110.desc: 'Action Point Cost of V.A.T.S. Attacks Reduced by -5% (up to -25% on Full Stack)'
+item.misc.110.name: "Scanner's"
+item.misc.111.desc: 'The Greater the Equipped Item Condition (+100%), the Greater the Weapon Damage (up to +60%)'
+item.misc.111.name: Polished
+item.misc.112.desc: 'When Crippling Limbs, They Explode and Deal up to 50 Explosion Damage to Nearby Targets'
+item.misc.112.name: "Fracturer's"
+item.misc.113.desc: '+25% damage per crippled limb the target has'
+item.misc.113.name: "Bully's"
+item.misc.114.desc: 'When Reloading, Emit a Shock Wave That Stuns Nearby Targets for 3s'
+item.misc.114.name: "Electrician's"
+item.misc.116.desc: 'Applies Cryo On Hit That Slow Targets When Dealing Damage in V.A.T.S.'
+item.misc.116.name: "Icemen's"
+item.misc.117.desc: 'When Dealing Damage, 50% Chance to Not Use AP (10% Chance for Auto Melee Weapons)'
+item.misc.117.name: "Combo-Breaker's"
+item.misc.118.desc: 'When a Combat Target is Burning, Deal +50% Bonus Damage'
+item.misc.118.name: "Pyromaniac's"
+item.misc.119.desc: 'When a Combat Target is Poisoned, Deal +50% Bonus Damage'
+item.misc.119.name: "Viper's"
+item.misc.12.desc: '[Armor] -15% Damage From Ghouls<br />[Weapon] +50% Damage to Ghouls'
+item.misc.12.name: "Ghoul Slayer's"
+item.misc.120.desc: 'Improves Weapon Recoil & Stability by 50%'
+item.misc.120.name: "Stabilizer's"
+item.misc.121.desc: '+20% Weak Spot Damage'
+item.misc.121.name: "Pin-Pointer's"
+item.misc.122.desc: 'Critical Hits Restore 10 Health & Action Points instantly and 100 more over 5 seconds for Player & Teammates Within a 100ft Radius'
+item.misc.122.name: "Conductor's"
+item.misc.123.desc: '+10% Damage per Onslaught stack, +10 max stacks'
+item.misc.123.name: "Pounder's"
+item.misc.124.desc: '+12.5% Melee Damage. Additional +12.5% for Each Nearby Teammate (up to +50% on Full Team)'
+item.misc.124.name: "Fencer's"
+item.misc.125.desc: '+10% Damage For Each Combat Target Around You (up to +50%)'
+item.misc.125.name: "Encircler's"
+item.misc.126.desc: "Gradually Restores Wearer's & Teammates Health & Action Points Within A 50ft Radius"
+item.misc.126.name: "Rejuvenator's"
+item.misc.127.desc: 'Fortifies Physical & Energy Resists by +50 and Poison, Cryo & Fire Resists by +20 for Wearer & Teammates Within a 50ft Radius'
+item.misc.127.name: Aegis
+item.misc.128.desc: 'Power Armor Breaks 5% Slower For Owner & All Teammates Within A 50ft Radius (up to 25% Slower on Full Stack)'
+item.misc.128.name: "Stalwart's"
+item.misc.13.desc: 'Damage Increases up to 40% as you Fill Your Hunger and Thirst Meters. Currently +24%'
+item.misc.13.name: "Gourmand's"
+item.misc.14.desc: '+50% More Damage when Your Target is Below 40% Health'
+item.misc.14.name: "Executioner's"
+item.misc.15.desc: '[Armor] -15% Damage From Animals<br />[Weapon] +50% Damage to Animals'
+item.misc.15.name: "Hunter's"
+item.misc.16.desc: 'Damage Increases per Addiction up to +100% Currently <+MAG>%'
+item.misc.16.name: "Junkie's"
+item.misc.17.desc: '[Armor] -15% Damage From Mirelurks and Insects<br />[Weapon] +50% Damage to Mirelurks and Insects'
+item.misc.17.name: "Exterminator's"
+item.misc.18.desc: '[Armor] +10 Damage Resistance and Energy Resistance While Mutated <br />[Weapon] Damage Increases up to 50% as you gain Mutations. Currently <+MAG>%'
+item.misc.18.name: "Mutant's"
+item.misc.19.desc: '[Armor] -15% Damage From Super Mutants<br />[Weapon] +50% Damage to Super Mutants'
+item.misc.19.name: "Mutant Slayer's"
+item.misc.2.desc: '+50% Damage Against Targets above 60% Health'
+item.misc.2.name: Instigating
+item.misc.20.desc: '+100% Sneak Attack Damage'
+item.misc.20.name: "Stalker's"
+item.misc.21.desc: '[Armor] -15% Damage From Robots<br />[Weapon] +50% Damage to Robots'
+item.misc.21.name: "Troubleshooter's"
+item.misc.22.desc: 'Damage Increases up to 100% as Health Increases. Currently <+MAG>% (1000HP = 100%)'
+item.misc.22.name: "Juggernaut's"
+item.misc.23.desc: "Reduce Your Target's Damage Output by 25% for 5 seconds"
+item.misc.23.name: "Suppressor's"
+item.misc.24.desc: 'Restore 2% Health over 2 seconds when you Hit a Target'
+item.misc.24.name: "Vampire's"
+item.misc.25.desc: 'Increases Damage Reduction up to 6% as you Fill Your Hunger and Thirst Meters. Currently <+MAG>%'
+item.misc.25.name: "Overeater's"
+item.misc.26.desc: '+1 Projectiles +75% Damage -150% Hip-Fire Accuracy +100% Recoil'
+item.misc.26.name: 'Two Shot'
+item.misc.27.desc: 'When Incapacitated, Gain a 50% Chance to Revive Yourself with a Stimpak, Once Every 60 seconds'
+item.misc.27.name: 'Life Saving'
+item.misc.28.desc: 'Attacks will Heal Friendly Targets by 5% Health'
+item.misc.28.name: "Medic's"
+item.misc.29.desc: '[Armor] 4 Perception and Agility while Cloaked <br />[Weapon] +50% Damage while Cloaked'
+item.misc.29.name: Nocturnal
+item.misc.3.desc: '+50% Armor Penetration'
+item.misc.3.name: Anti-armor
+item.misc.30.desc: 'Grants up to +35 Energy Resistance and Damage Resistance, the Lower Your Health. Currently <+MAG>'
+item.misc.30.name: Bolstering
+item.misc.31.desc: '+5% Damage per Onslaught stack, +9 max stacks'
+item.misc.31.name: Furious
+item.misc.32.desc: '+0.5% Heal Rate'
+item.misc.32.name: Regenerating
+item.misc.33.desc: '-90% Weight'
+item.misc.33.name: Weightless
+item.misc.34.desc: 'Being Hit in Melee causes the Player to become Invisible Once Every 30 Seconds'
+item.misc.34.name: Cloaking
+item.misc.35.desc: 'Gain up to +3 to All S.P.E.C.I.A.L. Stats (except END) when Health is Low. Currently <+MAG>'
+item.misc.35.name: Unyielding
+item.misc.36.desc: '+300% Ammo Capacity'
+item.misc.36.name: Quad
+item.misc.37.desc: '+5% Action Point Regen'
+item.misc.37.name: Powered
+item.misc.38.desc: '+25 Cryo Resistance'
+item.misc.38.name: Warming
+item.misc.39.desc: '+25% Reduced Disease Chance From Environmental Hazards'
+item.misc.39.name: Antiseptic
+item.misc.4.desc: 'Automatically use a Stimpak When Hit While Health is 25% or less, once every 60 seconds'
+item.misc.4.name: 'Auto Stim'
+item.misc.40.desc: '+25 Fire Resistance'
+item.misc.40.name: Fireproof
+item.misc.41.desc: 'Hunger and Thirst Grow 10% Slower'
+item.misc.41.name: Glutton
+item.misc.42.desc: '+25 Poison Resistance'
+item.misc.42.name: "Poisoner's"
+item.misc.43.desc: '+25 Radiation Resistance'
+item.misc.43.name: HazMat
+item.misc.44.desc: 'Receive 7% Less Explosion Damage'
+item.misc.44.name: Hardy
+item.misc.45.desc: '+2 Agility'
+item.misc.45.name: Agility
+item.misc.46.desc: '+2 Charisma'
+item.misc.46.name: Charisma
+item.misc.47.desc: '+2 Endurance'
+item.misc.47.name: Endurance
+item.misc.48.desc: '+2 Intelligence'
+item.misc.48.name: Intelligence
+item.misc.49.desc: '+2 Luck'
+item.misc.49.name: Luck
+item.misc.5.desc: 'Damage Increases up to +130% as Health Decreases. Currently <+MAG>%'
+item.misc.5.name: Bloodied
+item.misc.50.desc: '+2 Perception'
+item.misc.50.name: Perception
+item.misc.51.desc: '+2 Strength'
+item.misc.51.name: Strength
+item.misc.52.desc: 'Replenish 15 Action Points with Each Kill'
+item.misc.52.name: Inertial
+item.misc.53.desc: '+50% Critical Damage'
+item.misc.53.name: Vital
+item.misc.54.desc: '+50% Limb Damage'
+item.misc.54.name: Crippling
+item.misc.55.desc: '+50% Bash Damage'
+item.misc.55.name: "Basher's"
+item.misc.56.desc: '+25% Damage While Aiming'
+item.misc.56.name: "Hitman's"
+item.misc.57.desc: 'Projectiles explode for +20% weapon damage'
+item.misc.57.name: Explosive
+item.misc.58.desc: 'The last round in a magazine has a 25% chance to Deal +100% Damage'
+item.misc.58.name: 'Last Shot'
+item.misc.59.desc: '+50% Chance to Hit a Target in V.A.T.S.'
+item.misc.59.name: 'V.A.T.S. Enhanced'
+item.misc.6.desc: 'Become Invisible While Sneaking and Not Moving'
+item.misc.6.name: Chameleon
+item.misc.60.desc: '+50% Melee Damage Reflection While Blocking'
+item.misc.60.name: Riposting
+item.misc.61.desc: '+40% Power Attack Damage'
+item.misc.61.name: "Heavy Hitter's"
+item.misc.62.desc: '+25% Melee Damage While Not Moving'
+item.misc.62.name: Steady
+item.misc.63.desc: '[Ranged] +25% Weapon Speed<br />[Melee] +40% Weapon Speed'
+item.misc.63.name: Rapid
+item.misc.64.desc: '5% chance to deal 12 Fire damage per second for 3 to Melee Attackers.'
+item.misc.64.name: Burning
+item.misc.65.desc: 'Breaks 50% slower'
+item.misc.65.name: Durability
+item.misc.659.desc: 'Ghoul:<br />[Armor] Increases Damage Reduction up to 6% as you Fill Your Feral Meter. Currently <+MAG>%<br />[Weapon] Damage Increases up to 40% as you Fill Your Feral Meter. Currently <+MAG>%'
+item.misc.659.name: Lucid
+item.misc.66.desc: '5% chance to deal 12 Energy damage per second for 3 to Melee Attackers.'
+item.misc.66.name: Electrified
+item.misc.660.desc: '[Ghoul]: Target kills makes you go feral faster'
+item.misc.660.name: "Feral's"
+item.misc.661.desc: '100% Damage to distant Targets'
+item.misc.661.name: "Sniper's"
+item.misc.662.desc: '[Weapon] +10% damage per kill while on a Kill Streak.<br />[Armor] +10 Damage and Energy Resistance per kill while on a Kill Streak (Max 10).'
+item.misc.662.name: Adrenal
+item.misc.663.desc: 'Target Kills have 50% chance to grant a low amount of caps.<br />[50% Chance: 1-4 Caps]'
+item.misc.663.name: "Pick Pocketer's"
+item.misc.664.desc: 'Fortify Limb Resistance based on Kill Streak count.<br />[1% per Kill]'
+item.misc.664.name: Fierce
+item.misc.665.desc: 'Increase All Resistances by 5'
+item.misc.665.name: Elementalist
+item.misc.666.desc: 'Gain Action Points over time while on a Kill Streak. Effect becomes stronger the higher the Kill Streak.<br />[0,3 - 3 AP/s per Kill]'
+item.misc.666.name: Rushing
+item.misc.667.desc: 'Gain Health over time while on a Kill Streak. Effect becomes stronger the higher the Kill Streak.'
+item.misc.667.name: 'Pain Killer'
+item.misc.668.desc: '2% Evade'
+item.misc.668.name: Reflex
+item.misc.669.desc: '+1 STR per kill while on a Kill Streak (Max 10).'
+item.misc.669.name: Barbarian
+item.misc.67.desc: '5% chance to deal 12 Cryo damage per second for 4 to Melee Attackers.'
+item.misc.67.name: Frozen
+item.misc.670.desc: 'Max HP Increased by +20'
+item.misc.670.name: Healthy
+item.misc.671.desc: '[Ghoul]: Target Kills Increase Glow by a small amount<br />[Human]: Target Kills Increase Rads by a small amount., (20 RADs)'
+item.misc.671.name: Glowing
+item.misc.672.desc: 'Max AP increased by +20'
+item.misc.672.name: Active
+item.misc.68.desc: '+5% Effectiveness of Stimpaks, RadAway, and Rad-X'
+item.misc.68.name: "Doctor's"
+item.misc.69.desc: '-5% Damage Taken While Not Moving'
+item.misc.69.name: "Sentinel's"
+item.misc.7.desc: 'Grants up to +35 Energy Resistance and Damage Resistance, the higher Your Health. Currently <+MAG>'
+item.misc.7.name: "Vanguard's"
+item.misc.70.desc: '-50% Fall Damage'
+item.misc.70.name: "Acrobat's"
+item.misc.71.desc: '+1 Lockpicking Skill +1 Hacking Skill'
+item.misc.71.name: "Safecracker's"
+item.misc.72.desc: '+0.25% Radiation Damage Recovery'
+item.misc.72.name: Dissipating
+item.misc.73.desc: 'Receive 15% less Limb Damage'
+item.misc.73.name: Adamantium
+item.misc.74.desc: '+25% Less Noise While Sneaking +25% Reduce Detection Chance'
+item.misc.74.name: "Secret Agent's"
+item.misc.75.desc: '5% chance to deal 12 Poison damage per second for 7 to Melee Attackers.'
+item.misc.75.name: Toxic
+item.misc.76.desc: 'Breathe Underwater'
+item.misc.76.name: "Diver's"
+item.misc.77.desc: 'Ammo Weight Reduced by 20%'
+item.misc.77.name: Belted
+item.misc.78.desc: 'Food, Drink, and Chem Weights Reduced by 20%'
+item.misc.78.name: "Thru-hiker's"
+item.misc.79.desc: 'Junk Item Weights Reduced by 20%'
+item.misc.79.name: "Pack Rat's"
+item.misc.8.desc: '[Armor] Grants up to +20 Energy Resistance and Damage Resistance, the higher Your Caps. Currently <+MAG> <br />[Weapon] Up to +50% Damage based on Caps you have. Currently <+MAG>%'
+item.misc.8.name: "Aristocrat's"
+item.misc.80.desc: 'Weapon Weights Reduced by 20%'
+item.misc.80.name: "Arms Keeper's"
+item.misc.81.desc: '[Armor] -15% Damage Taken While Blocking <br />[Weapon Melee] -40% Damage Taken While Power Attacking'
+item.misc.81.name: "Defender's"
+item.misc.82.desc: '[Armor] -5% Damage Taken While Sprinting <br />[Weapon Melee] -15% Damage Taken While Blocking'
+item.misc.82.name: "Cavalier's"
+item.misc.83.desc: '+3 Agility'
+item.misc.83.name: Agility
+item.misc.84.desc: '+3 Charisma'
+item.misc.84.name: Charisma
+item.misc.85.desc: '+3 Endurance'
+item.misc.85.name: Endurance
+item.misc.86.desc: '+3 Intelligence'
+item.misc.86.name: Intelligence
+item.misc.87.desc: '+3 Luck'
+item.misc.87.name: Luck
+item.misc.88.desc: '+3 Perception'
+item.misc.88.name: Perception
+item.misc.888.desc: 'Light Attacks Build Up Charge That Is Released With A Heavy Attack (Max Charges 3)'
+item.misc.888.name: Charged
+item.misc.89.desc: '+3 Strength'
+item.misc.89.name: Strength
+item.misc.9.desc: '[Armor] -15% Damage From Humans<br />[Weapon] +50% Damage to Humans'
+item.misc.9.name: "Assassin's"
+item.misc.90.desc: '+15 Bonus V.A.T.S. Critical Charge'
+item.misc.90.name: Lucky
+item.misc.91.desc: '10% Chance to cause the Player to be Invisible for 2 seconds when Hitting a Target'
+item.misc.91.name: "Ghost's"
+item.misc.92.desc: '+100% Faster Movement Speed While Aiming'
+item.misc.92.name: Nimble
+item.misc.93.desc: '+15% Reload Speed'
+item.misc.93.name: Swift
+item.misc.94.desc: '+500 Damage Resistance While Reloading'
+item.misc.94.name: Resilient
+item.misc.95.desc: '+50 Damage Resistance While Aiming'
+item.misc.95.name: Steadfast
+item.misc.96.desc: '-90% weight'
+item.misc.96.name: Lightweight
+item.misc.97.desc: '-35% Action Point Cost'
+item.misc.97.name: 'V.A.T.S. Optimized'
+item.misc.98.desc: '15% Chance to Instantly Reload When Bashing Enemies (up to 75% Chance on Full Stack)'
+item.misc.98.name: "Battle-Loader's"
+item.misc.99.desc: 'Melee Weapons Deal +5% Bonus Damage (up to +25% on Full Stack)'
+item.misc.99.name: "Bruiser's"
+
+# book (minerva plan)
+item.book.1000.name: 'Plan: Plasma caster true long barrel'
+item.book.1001.name: 'Plan: Plasma caster true capacitor'
+item.book.1002.name: 'Plan: Floater freezer grenade'
+item.book.1003.name: 'Plan: Super mutant tube'
+item.book.1004.name: 'Plan: Science chalkboards'
+item.book.1005.name: 'Plan: Plasma cutter cryo blade'
+item.book.1006.name: 'Plan: Plasma cutter flaming blade'
+item.book.1007.name: 'Plan: Plasma cutter shock blade'
+item.book.1008.name: 'Plan: Floater Tubes'
+item.book.1009.name: 'Plan: Gauss pistol suppressed barrel'
+item.book.1010.name: 'Plan: Gauss pistol vicious receiver'
+item.book.1011.name: 'Plan: Gauss pistol hardened receiver'
+item.book.1012.name: 'Plan: Plasma cutter'
+item.book.1013.name: 'Plan: Emmett Mountain Disposal signs'
+item.book.1014.name: 'Plan: BoS medallion'
+item.book.1015.name: 'Plan: Brotherhood recon jet pack'
+item.book.1016.name: 'Plan: Steel Bust'
+item.book.1017.name: 'Plan: Foundry Smelter'
+item.book.1018.name: 'Plan: Caged Bulb Lights'
+item.book.1019.name: 'Plan: Burrows Signs'
+item.book.1020.name: 'Plan: Valley Galleria Signs'
+item.book.1021.name: 'Plan: Enclave medallion'
+item.book.1022.name: 'Plan: Hellstorm missile launcher cryo payload'
+item.book.1023.name: 'Plan: Hellstorm missile launcher napalm payload'
+item.book.1024.name: 'Plan: Hellstorm missile launcher plasma payload'
+item.book.1025.name: 'Plan: Medical Malpractice'
+item.book.1026.name: 'Plan: Wendigo tube'
+item.book.1027.name: 'Plan: Flatwoods Monster Tube'
+item.book.1028.name: 'Plan: Covert scout armor mask'
+item.book.1029.name: 'Plan: Covert scout armor chest piece'
+item.book.1030.name: 'Plan: Covert scout armor left arm'
+item.book.1031.name: 'Plan: Covert scout armor left leg'
+item.book.1032.name: 'Plan: Covert scout armor right arm'
+item.book.1033.name: 'Plan: Covert scout armor right leg'
+item.book.1034.name: 'Plan: Crusader pistol cryo receiver'
+item.book.1035.name: 'Plan: Crusader pistol fusion receiver'
+item.book.1036.name: 'Plan: Crusader pistol pyro receiver'
+item.book.1037.name: 'Plan: Open neon sign'
+item.book.1038.name: 'Plan: Sole Survivor'
+item.book.1039.name: 'Plan: X-01 Scorched Paint'
+item.book.1040.name: 'Plan: Mirelurk king tube'
+item.book.1041.name: 'Plan: Long Aquarium Signs'
+item.book.1042.name: 'Plan: Atlantic Emblem'
+item.book.1043.name: 'Plan: Aquarium Signs'
+item.book.1044.name: "Plan: Mechanic's Best Friend"
+item.book.1045.name: 'Plan: Medium supply crate'
+item.book.1046.name: 'Plan: Intergalactic Handmade Skin'
+item.book.1047.name: 'Plan: Hot Rod Flames Handmade Skin'
+item.book.1048.name: 'Plan: Arctic marine armor helmet'
+item.book.1049.name: 'Plan: Arctic marine left arm'
+item.book.1050.name: 'Plan: Arctic marine left leg'
+item.book.1051.name: 'Plan: Arctic marine right arm'
+item.book.1052.name: 'Plan: Arctic marine right leg'
+item.book.1053.name: 'Plan: Arctic marine torso'
+item.book.1054.name: 'Plan: Brotherhood of Steel minigun paint'
+item.book.1055.name: "Plan: Slocum Joe's power armor paint"
+item.book.1056.name: 'Plan: Alien Backpack'
+item.book.1057.name: 'Plan: Hello neon sign'
+item.book.575.name: 'Plan: Hellfire Prototype Power Armor Paint'
+item.book.889.name: 'Plan: Cattle prod'
+item.book.890.name: 'Plan: Farmable dirt tiles'
+item.book.891.name: 'Plan: Gauss minigun gunner sights'
+item.book.892.name: 'Plan: Gauss minigun Tesla capacitor'
+item.book.893.name: 'Plan: Gauss minigun Tesla dynamo'
+item.book.894.name: 'Plan: Secret Service chest piece'
+item.book.895.name: 'Plan: Secret Service helmet'
+item.book.896.name: 'Plan: Secret Service left arm'
+item.book.897.name: 'Plan: Secret Service left leg'
+item.book.898.name: 'Plan: Secret Service right arm'
+item.book.899.name: 'Plan: Secret Service right leg'
+item.book.900.name: 'Plan: Super reactor'
+item.book.901.name: 'Plan: Sympto-Matic'
+item.book.902.name: 'Plan: War glaive'
+item.book.903.name: "Plan: Chemist's Backpack Mod"
+item.book.904.name: 'Plan: Face Breaker'
+item.book.905.name: 'Plan: Dynamite'
+item.book.906.name: 'Plan: Gauss pistol'
+item.book.907.name: 'Plan: Floater gnasher grenade'
+item.book.908.name: 'Plan: Resistant lining Secret Service underarmor'
+item.book.909.name: 'Plan: Scavenged solar panel'
+item.book.910.name: 'Plan: Strangler heart chest piece'
+item.book.911.name: 'Plan: Strangler heart helmet'
+item.book.912.name: 'Plan: Strangler heart left arm'
+item.book.913.name: 'Plan: Strangler heart left leg'
+item.book.914.name: 'Plan: Strangler heart right arm'
+item.book.915.name: 'Plan: Strangler heart right leg'
+item.book.916.name: 'Plan: Treated lining Secret Service underarmor'
+item.book.917.name: "Plan: Grocer's Backpack Mod"
+item.book.918.name: 'Plan: Auto Grenade Launcher Blood Eagle Paint'
+item.book.919.name: 'Plan: Chinese stealth armor'
+item.book.920.name: 'Plan: Chinese stealth helmet'
+item.book.921.name: 'Plan: Gauntlet'
+item.book.922.name: 'Plan: Secret Service jet pack armor'
+item.book.923.name: 'Plan: Secret Service pocketed armor limb'
+item.book.924.name: 'Plan: Secret Service pocketed armor torso'
+item.book.925.name: 'Plan: T-65 medic pump'
+item.book.926.name: 'Plan: T-65 overdrive servos'
+item.book.927.name: 'Plan: T-65 Stealth Boy'
+item.book.928.name: 'Plan: War glaive cryo blade'
+item.book.929.name: 'Plan: War glaive plasma blade'
+item.book.930.name: 'Plan: Chicken coop'
+item.book.931.name: 'Plan: Gauss minigun'
+item.book.932.name: 'Plan: Gauss pistol aligned short barrel'
+item.book.933.name: 'Plan: Gauss Pistol Drum Magazine'
+item.book.934.name: 'Plan: Gauss pistol refined receiver'
+item.book.935.name: 'Plan: Protective lining Secret Service underarmor'
+item.book.936.name: 'Plan: Shielded lining Secret Service underarmor'
+item.book.937.name: 'Plan: Thorn armor chest piece'
+item.book.938.name: 'Plan: Thorn armor left arm'
+item.book.939.name: 'Plan: Thorn armor left leg'
+item.book.940.name: 'Plan: Thorn armor right arm'
+item.book.941.name: 'Plan: Thorn armor right leg'
+item.book.942.name: 'Plan: Lighter build Secret Service armor limbs'
+item.book.943.name: 'Plan: Plasma caster'
+item.book.944.name: 'Plan: Secret Service underarmor'
+item.book.945.name: 'Plan: T-65 calibrated shocks'
+item.book.946.name: 'Plan: T-65 rusty knuckles'
+item.book.947.name: 'Plan: T-65 jet pack'
+item.book.948.name: 'Plan: The Gutter'
+item.book.949.name: 'Plan: Ultra-light build Secret Service armor limbs'
+item.book.950.name: 'Plan: War glaive flaming blade'
+item.book.951.name: 'Plan: War glaive shock blade'
+item.book.952.name: 'Plan: Water well'
+item.book.953.name: 'Plan: Whistle in the Dark'
+item.book.954.name: 'Plan: Ammo Converter'
+item.book.955.name: 'Plan: Floater flamer grenade'
+item.book.956.name: 'Plan: Gauss shotgun'
+item.book.957.name: 'Plan: Gauss shotgun extended barrel'
+item.book.958.name: 'Plan: Gauss shotgun extended magazine'
+item.book.959.name: 'Plan: Gauss shotgun hardened receiver'
+item.book.960.name: 'Plan: Brotherhood recon chest piece'
+item.book.961.name: 'Plan: Brotherhood recon helmet'
+item.book.962.name: 'Plan: Brotherhood recon left arm'
+item.book.963.name: 'Plan: Brotherhood recon left leg'
+item.book.964.name: 'Plan: Brotherhood recon right arm'
+item.book.965.name: 'Plan: Brotherhood recon right leg'
+item.book.966.name: 'Plan: Kids truck bed'
+item.book.967.name: 'Plan: Umbrella hat'
+item.book.968.name: 'Plan: Asylum light'
+item.book.969.name: 'Plan: Crusader pistol'
+item.book.970.name: 'Plan: Dynamite bundle'
+item.book.971.name: 'Plan: Meat bag stash box'
+item.book.972.name: 'Plan: Plasma caster aligned sniper barrel'
+item.book.973.name: 'Plan: Plasma caster calibrated capacitor'
+item.book.974.name: 'Plan: Plasma caster pulse capacitor'
+item.book.975.name: 'Plan: T-65 helm'
+item.book.976.name: 'Plan: T-65 left arm'
+item.book.977.name: 'Plan: T-65 left leg'
+item.book.978.name: 'Plan: T-65 right arm'
+item.book.979.name: 'Plan: T-65 right leg'
+item.book.980.name: 'Plan: T-65 torso'
+item.book.981.name: 'Plan: Ghoul chair'
+item.book.982.name: 'Plan: Gorilla chair'
+item.book.983.name: 'Plan: Gauss shotgun precise stock'
+item.book.984.name: 'Plan: Gauss shotgun vicious receiver'
+item.book.985.name: 'Plan: Gauss minigun triple barrel'
+item.book.986.name: 'Plan: Flare'
+item.book.987.name: 'Plan: Brotherhood recon pocketed armor limb'
+item.book.988.name: 'Plan: Brotherhood recon pocketed armor torso'
+item.book.989.name: 'Plan: Turbo-Fert fertilizer'
+item.book.990.name: 'Plan: Hellstorm missile launcher'
+item.book.991.name: 'Plan: Unstoppable Monster'
+item.book.992.name: 'Bauplan: Cowboy Chaps'
+item.book.993.name: 'Plan: Cowboy Duster'
+item.book.994.name: 'Bauplan: Cowboy Hat'
+item.book.995.name: 'Plan: Solar armor left arm'
+item.book.996.name: 'Plan: Solar armor right arm'
+item.book.997.name: 'Plan: Solar armor left leg'
+item.book.998.name: 'Plan: Solar armor right leg'
+item.book.999.name: 'Plan: Solar armor chest piece'

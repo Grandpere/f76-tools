@@ -1,0 +1,6 @@
+.git
+.gitignore
+.idea
+var/
+vendor/
+node_modules/
