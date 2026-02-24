@@ -64,6 +64,33 @@ class ItemEntity implements ItemInterface
     #[ORM\Column(name: 'price_minerva', nullable: true)]
     private ?int $priceMinerva = null;
 
+    #[ORM\Column(name: 'is_new', options: ['default' => false])]
+    private bool $isNew = false;
+
+    #[ORM\Column(name: 'drop_raid', options: ['default' => false])]
+    private bool $dropRaid = false;
+
+    #[ORM\Column(name: 'drop_burningsprings', options: ['default' => false])]
+    private bool $dropBurningSprings = false;
+
+    #[ORM\Column(name: 'drop_dailyops', options: ['default' => false])]
+    private bool $dropDailyOps = false;
+
+    #[ORM\Column(name: 'vendor_regs', options: ['default' => false])]
+    private bool $vendorRegs = false;
+
+    #[ORM\Column(name: 'vendor_samuel', options: ['default' => false])]
+    private bool $vendorSamuel = false;
+
+    #[ORM\Column(name: 'vendor_mortimer', options: ['default' => false])]
+    private bool $vendorMortimer = false;
+
+    #[ORM\Column(name: 'info_html', type: Types::TEXT, nullable: true)]
+    private ?string $infoHtml = null;
+
+    #[ORM\Column(name: 'drop_sources_html', type: Types::TEXT, nullable: true)]
+    private ?string $dropSourcesHtml = null;
+
     #[ORM\Column(name: 'wiki_url', length: 1024, nullable: true)]
     private ?string $wikiUrl = null;
 
@@ -231,6 +258,114 @@ class ItemEntity implements ItemInterface
     public function setPriceMinerva(?int $priceMinerva): self
     {
         $this->priceMinerva = $priceMinerva;
+
+        return $this;
+    }
+
+    public function isNew(): bool
+    {
+        return $this->isNew;
+    }
+
+    public function setIsNew(bool $isNew): self
+    {
+        $this->isNew = $isNew;
+
+        return $this;
+    }
+
+    public function isDropRaid(): bool
+    {
+        return $this->dropRaid;
+    }
+
+    public function setDropRaid(bool $dropRaid): self
+    {
+        $this->dropRaid = $dropRaid;
+
+        return $this;
+    }
+
+    public function isDropBurningSprings(): bool
+    {
+        return $this->dropBurningSprings;
+    }
+
+    public function setDropBurningSprings(bool $dropBurningSprings): self
+    {
+        $this->dropBurningSprings = $dropBurningSprings;
+
+        return $this;
+    }
+
+    public function isDropDailyOps(): bool
+    {
+        return $this->dropDailyOps;
+    }
+
+    public function setDropDailyOps(bool $dropDailyOps): self
+    {
+        $this->dropDailyOps = $dropDailyOps;
+
+        return $this;
+    }
+
+    public function isVendorRegs(): bool
+    {
+        return $this->vendorRegs;
+    }
+
+    public function setVendorRegs(bool $vendorRegs): self
+    {
+        $this->vendorRegs = $vendorRegs;
+
+        return $this;
+    }
+
+    public function isVendorSamuel(): bool
+    {
+        return $this->vendorSamuel;
+    }
+
+    public function setVendorSamuel(bool $vendorSamuel): self
+    {
+        $this->vendorSamuel = $vendorSamuel;
+
+        return $this;
+    }
+
+    public function isVendorMortimer(): bool
+    {
+        return $this->vendorMortimer;
+    }
+
+    public function setVendorMortimer(bool $vendorMortimer): self
+    {
+        $this->vendorMortimer = $vendorMortimer;
+
+        return $this;
+    }
+
+    public function getInfoHtml(): ?string
+    {
+        return $this->infoHtml;
+    }
+
+    public function setInfoHtml(?string $infoHtml): self
+    {
+        $this->infoHtml = $infoHtml;
+
+        return $this;
+    }
+
+    public function getDropSourcesHtml(): ?string
+    {
+        return $this->dropSourcesHtml;
+    }
+
+    public function setDropSourcesHtml(?string $dropSourcesHtml): self
+    {
+        $this->dropSourcesHtml = $dropSourcesHtml;
 
         return $this;
     }

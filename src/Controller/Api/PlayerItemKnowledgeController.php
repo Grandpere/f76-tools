@@ -211,21 +211,6 @@ final class PlayerItemKnowledgeController extends AbstractController
         if (null !== $item->getDescKey()) {
             $description = $this->translator->trans($item->getDescKey(), domain: 'items');
         }
-        $isNew = false;
-        $payload = $item->getPayload();
-        if (is_array($payload) && array_key_exists('new', $payload)) {
-            $rawNew = $payload['new'];
-            $isNew = 1 === $rawNew || '1' === $rawNew || true === $rawNew;
-        }
-
-        $dropRaid = $this->readBoolFromPayload($payload, 'drop_raid');
-        $dropBurningSprings = $this->readBoolFromPayloadAny($payload, ['drop_burningsprings', 'drop_burningssprings', 'drop_burning_springs']);
-        $dropDailyOps = $this->readBoolFromPayload($payload, 'drop_dailyops');
-        $vendorRegs = $this->readBoolFromPayload($payload, 'vendor_regs');
-        $vendorSamuel = $this->readBoolFromPayload($payload, 'vendor_samuel');
-        $vendorMortimer = $this->readBoolFromPayload($payload, 'vendor_mortimer');
-        $infoHtml = $this->readStringFromPayload($payload, 'info');
-        $dropSourcesHtml = $this->readStringFromPayload($payload, 'drop_sources');
 
         return [
             'id' => $item->getId(),
@@ -235,80 +220,21 @@ final class PlayerItemKnowledgeController extends AbstractController
             'name' => $this->translator->trans($item->getNameKey(), domain: 'items'),
             'descKey' => $item->getDescKey(),
             'description' => $description,
-            'isNew' => $isNew,
+            'isNew' => $item->isNew(),
             'price' => $item->getPrice(),
             'priceMinerva' => $item->getPriceMinerva(),
-            'dropRaid' => $dropRaid,
-            'dropBurningSprings' => $dropBurningSprings,
-            'dropDailyOps' => $dropDailyOps,
-            'vendorRegs' => $vendorRegs,
-            'vendorSamuel' => $vendorSamuel,
-            'vendorMortimer' => $vendorMortimer,
-            'infoHtml' => $infoHtml,
-            'dropSourcesHtml' => $dropSourcesHtml,
+            'dropRaid' => $item->isDropRaid(),
+            'dropBurningSprings' => $item->isDropBurningSprings(),
+            'dropDailyOps' => $item->isDropDailyOps(),
+            'vendorRegs' => $item->isVendorRegs(),
+            'vendorSamuel' => $item->isVendorSamuel(),
+            'vendorMortimer' => $item->isVendorMortimer(),
+            'infoHtml' => $item->getInfoHtml(),
+            'dropSourcesHtml' => $item->getDropSourcesHtml(),
             'rank' => $item->getRank(),
             'listNumbers' => array_values(array_unique($listNumbers)),
             'isInSpecialList' => $isInSpecialList,
             'learned' => $learned,
         ];
-    }
-
-    /**
-     * @param array<string, mixed>|null $payload
-     */
-    private function readBoolFromPayload(?array $payload, string $key): bool
-    {
-        if (!is_array($payload) || !array_key_exists($key, $payload)) {
-            return false;
-        }
-
-        $value = $payload[$key];
-        if (is_bool($value)) {
-            return $value;
-        }
-        if (is_int($value) || is_float($value)) {
-            return (int) $value === 1;
-        }
-        if (is_string($value)) {
-            $normalized = strtolower(trim($value));
-
-            return '1' === $normalized || 'true' === $normalized || 'yes' === $normalized;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param array<string, mixed>|null $payload
-     * @param list<string> $keys
-     */
-    private function readBoolFromPayloadAny(?array $payload, array $keys): bool
-    {
-        foreach ($keys as $key) {
-            if ($this->readBoolFromPayload($payload, $key)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * @param array<string, mixed>|null $payload
-     */
-    private function readStringFromPayload(?array $payload, string $key): ?string
-    {
-        if (!is_array($payload) || !array_key_exists($key, $payload)) {
-            return null;
-        }
-
-        $value = $payload[$key];
-        if (!is_string($value)) {
-            return null;
-        }
-
-        $value = trim($value);
-
-        return '' === $value ? null : $value;
     }
 }

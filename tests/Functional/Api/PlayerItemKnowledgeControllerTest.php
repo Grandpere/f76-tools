@@ -134,7 +134,7 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
     {
         $owner = $this->createUser('owner-new-flag@example.com');
         $player = $this->createPlayer($owner, 'Owner');
-        $this->createItem(501, ItemTypeEnum::BOOK, null, 'catalog.new.name', ['new' => 1], 250, 188);
+        $this->createItem(501, ItemTypeEnum::BOOK, null, 'catalog.new.name', null, 250, 188, true);
 
         $this->browser()->loginUser($owner);
         $this->browser()->request('GET', sprintf('/api/players/%d/items?q=catalog.new.name', $player->getId()));
@@ -150,17 +150,14 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         $this->entityManager?->clear();
         $item = $this->findItemBySourceIdAndType(501, ItemTypeEnum::BOOK);
         self::assertNotNull($item);
-        $item->setPayload([
-            'new' => 1,
-            'drop_raid' => 1,
-            'drop_burningssprings' => 1,
-            'drop_dailyops' => 1,
-            'vendor_regs' => 1,
-            'vendor_samuel' => 1,
-            'vendor_mortimer' => 0,
-            'info' => '<p>Also available at <strong>Samuel</strong>.</p>',
-            'drop_sources' => '<img src="/img/x.png" title="Burning Springs" />',
-        ]);
+        $item->setDropRaid(true);
+        $item->setDropBurningSprings(true);
+        $item->setDropDailyOps(true);
+        $item->setVendorRegs(true);
+        $item->setVendorSamuel(true);
+        $item->setVendorMortimer(false);
+        $item->setInfoHtml('<p>Also available at <strong>Samuel</strong>.</p>');
+        $item->setDropSourcesHtml('<img src="/img/x.png" title="Burning Springs" />');
         $this->entityManager?->flush();
 
         $this->browser()->request('GET', sprintf('/api/players/%d/items?q=catalog.new.name', $player->getId()));
@@ -205,7 +202,16 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
     /**
      * @param array<string, mixed>|null $payload
      */
-    private function createItem(int $sourceId, ItemTypeEnum $type, ?int $rank, string $nameKey, ?array $payload = null, ?int $price = null, ?int $priceMinerva = null): ItemEntity
+    private function createItem(
+        int $sourceId,
+        ItemTypeEnum $type,
+        ?int $rank,
+        string $nameKey,
+        ?array $payload = null,
+        ?int $price = null,
+        ?int $priceMinerva = null,
+        bool $isNew = false,
+    ): ItemEntity
     {
         $item = (new ItemEntity())
             ->setSourceId($sourceId)
@@ -214,7 +220,8 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
             ->setRank($rank)
             ->setPayload($payload)
             ->setPrice($price)
-            ->setPriceMinerva($priceMinerva);
+            ->setPriceMinerva($priceMinerva)
+            ->setIsNew($isNew);
 
         $this->entityManager?->persist($item);
         $this->entityManager?->flush();

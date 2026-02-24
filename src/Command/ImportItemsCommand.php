@@ -178,6 +178,19 @@ final class ImportItemsCommand extends Command
                 $item->setPriceMinerva($this->toNullableInt($row['price_minerva'] ?? null));
                 $item->setWikiUrl($this->toNullableString($row['wiki_url'] ?? null));
                 $item->setTradeable($this->toNullableInt($row['tradeable'] ?? 0) === 1);
+                $item->setIsNew($this->toBool($row['new'] ?? null));
+                $item->setDropRaid($this->toBool($row['drop_raid'] ?? null));
+                $item->setDropBurningSprings($this->toBoolFromRowAny($row, [
+                    'drop_burningsprings',
+                    'drop_burningssprings',
+                    'drop_burning_springs',
+                ]));
+                $item->setDropDailyOps($this->toBool($row['drop_dailyops'] ?? null));
+                $item->setVendorRegs($this->toBool($row['vendor_regs'] ?? null));
+                $item->setVendorSamuel($this->toBool($row['vendor_samuel'] ?? null));
+                $item->setVendorMortimer($this->toBool($row['vendor_mortimer'] ?? null));
+                $item->setInfoHtml($this->toNullableString($row['info'] ?? null));
+                $item->setDropSourcesHtml($this->toNullableString($row['drop_sources'] ?? null));
                 $item->setPayload($this->normalizePayload($row));
 
                 $nameKey = sprintf('item.%s.%d.name', strtolower($type->value), $sourceId);
@@ -396,6 +409,41 @@ final class ImportItemsCommand extends Command
         }
 
         return (int) $value;
+    }
+
+    private function toBool(mixed $value): bool
+    {
+        if (is_bool($value)) {
+            return $value;
+        }
+        if (is_int($value) || is_float($value)) {
+            return (int) $value === 1;
+        }
+        if (is_string($value)) {
+            $normalized = strtolower(trim($value));
+
+            return '1' === $normalized || 'true' === $normalized || 'yes' === $normalized;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param array<mixed> $row
+     * @param list<string> $keys
+     */
+    private function toBoolFromRowAny(array $row, array $keys): bool
+    {
+        foreach ($keys as $key) {
+            if (!array_key_exists($key, $row)) {
+                continue;
+            }
+            if ($this->toBool($row[$key])) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
