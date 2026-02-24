@@ -308,7 +308,7 @@ export default class extends Controller {
         const infoBlock = this.renderInfoBlock(item);
         const sourceBadges = this.renderSourceBadges(item);
         const sourceIcons = this.renderDropSources(item);
-        const dailyOpsLine = item.type === 'BOOK' && item.dropDailyOps
+        const dailyOpsLine = item.type === 'BOOK' && item.dropDailyOps && !this.infoContainsDailyOps(item.infoHtml)
             ? '<p class="item-extra-line">Also available as reward from a successful finished daily operation.</p>'
             : '';
         const priceBlock = this.renderPriceBlock(item);
@@ -387,6 +387,16 @@ export default class extends Controller {
         }
 
         return `<div class="item-info-html">${this.sanitizeHtml(item.infoHtml)}</div>`;
+    }
+
+    infoContainsDailyOps(infoHtml) {
+        if (!infoHtml || typeof infoHtml !== 'string') {
+            return false;
+        }
+
+        const plain = infoHtml.replace(/<[^>]*>/g, ' ').toLowerCase();
+
+        return plain.includes('daily operation');
     }
 
     renderDropSources(item) {
