@@ -522,6 +522,10 @@ export default class extends Controller {
                 }
                 if (name === 'src' && (value.startsWith('javascript:') || value.startsWith('data:'))) {
                     node.removeAttribute(attr.name);
+                    return;
+                }
+                if (name === 'src' && value.startsWith('/cms/')) {
+                    node.setAttribute('src', `https://fed76.info${value}`);
                 }
             });
         });
