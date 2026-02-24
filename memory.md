@@ -8,6 +8,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - Besoin de docs internes de suivi (roadmap/todo) directement dans le repo.
 - A chaque correction utilisateur ou autocorrection technique, mettre a jour `memory.md`.
 - Si un commit est utile pour fiabiliser un lot de changements, le faire (workflow explicite).
+- A chaque nouvelle fonctionnalite, ajouter des tests dans le meme lot (ne pas repousser).
 
 ## Decisions techniques prises
 - `Item` stocke des cles de traduction (`nameKey`, `descKey`) et non les textes EN/DE en base.
@@ -43,6 +44,15 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - correction PHPStan `non-empty-string` sur `getUserIdentifier()`:
     - `setEmail()` refuse les emails vides,
     - garde-fou dans `getUserIdentifier()` avec `LogicException` si vide.
+- Tests fonctionnels `WebTestCase`:
+  - ne pas nommer un helper local `getClient()` (collision avec methode statique de `WebTestCase`).
+  - utiliser un nom dedie (`browser()`) pour retourner le `KernelBrowser` initialise en `setUp()`.
+- Tests fonctionnels + migrations:
+  - ne pas recreer le schema via `SchemaTool` si `make phpunit-functional` lance deja `db-test-init`.
+  - utiliser `TRUNCATE ... RESTART IDENTITY CASCADE` en `setUp()` pour isoler les cas.
+- Knowledge player/item:
+  - modele retenu = presence/absence dans `player_item_knowledge` (pas de bool persiste).
+  - endpoints `PUT/DELETE learned` idempotents avec ownership strict sur le `Player`.
 
 ## Commandes utiles
 - Import dry-run:
@@ -53,3 +63,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - `docker compose exec app php bin/console doctrine:migrations:migrate -n`
 - Analyse statique:
   - `make phpstan`
+- Tests:
+  - `make phpunit-unit`
+  - `make phpunit-functional`
+  - `make phpunit-integration`

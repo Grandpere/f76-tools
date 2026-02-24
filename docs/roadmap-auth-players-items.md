@@ -13,45 +13,45 @@ Permettre a un utilisateur authentifie de:
 - Regle `rank` enforcee pour `MISC` (et interdite pour `BOOK`).
 
 ## Phase 1 - Authentification
-- [ ] Creer `UserEntity` (email unique, password hash, roles, isActive, createdAt/updatedAt).
-- [ ] Configurer `security.yaml` (provider Doctrine, firewall main, login form, logout).
+- [x] Creer `UserEntity` (email unique, password hash, roles, isActive, createdAt/updatedAt).
+- [x] Configurer `security.yaml` (provider Doctrine, firewall main, login form, logout).
 - [ ] Ajouter pages/routes:
-  - [ ] `GET/POST /login`
-  - [ ] `GET /logout`
-- [ ] Creer commande console:
-  - [ ] `app:user:create <email> --password=... [--role=ROLE_USER]`
+  - [x] `GET/POST /login`
+  - [x] `GET /logout`
+- [x] Creer commande console:
+  - [x] `app:user:create <email> --password=... [--role=ROLE_USER]`
   - [ ] Option potentielle `--update-password`.
 
 ## Phase 2 - Players
-- [ ] Creer `PlayerEntity`:
-  - [ ] relation `ManyToOne User`
-  - [ ] `name` (non vide)
-  - [ ] `createdAt`, `updatedAt`
+- [x] Creer `PlayerEntity`:
+  - [x] relation `ManyToOne User`
+  - [x] `name` (non vide)
+  - [x] `createdAt`, `updatedAt`
 - [ ] Ajouter contrainte d'unicite (au choix):
-  - [ ] unique `(user_id, name)` pour eviter doublons de nom par user.
+  - [x] unique `(user_id, name)` pour eviter doublons de nom par user.
 - [ ] Routes/controller:
-  - [ ] `GET /players`
-  - [ ] `POST /players`
-  - [ ] `GET /players/{id}`
-  - [ ] `PATCH /players/{id}` (optionnel)
-  - [ ] `DELETE /players/{id}` (optionnel)
-- [ ] Ajouter controle d'acces ownership (Voter ou check service).
+  - [x] `GET /api/players`
+  - [x] `POST /api/players`
+  - [x] `GET /api/players/{id}`
+  - [x] `PATCH /api/players/{id}` (optionnel)
+  - [x] `DELETE /api/players/{id}` (optionnel)
+- [x] Ajouter controle d'acces ownership (Voter ou check service).
 
 ## Phase 3 - Knowledge par Player
 - [ ] Creer `PlayerItemKnowledgeEntity`:
-  - [ ] relation `ManyToOne Player`
-  - [ ] relation `ManyToOne Item`
-  - [ ] `isLearned` (bool) ou modele presence/absence
-  - [ ] `learnedAt` (nullable)
+  - [x] relation `ManyToOne Player`
+  - [x] relation `ManyToOne Item`
+  - [x] modele presence/absence (une ligne = learned)
+  - [x] `learnedAt`
   - [ ] timestamps
-- [ ] Contrainte unique `(player_id, item_id)`.
+- [x] Contrainte unique `(player_id, item_id)`.
 - [ ] Index de perf:
-  - [ ] `(player_id, item_id)`
-  - [ ] `(item_id)` si necessaire pour stats.
+  - [x] `(player_id, item_id)`
+  - [x] `(item_id)` si necessaire pour stats.
 - [ ] API JSON:
-  - [ ] `PUT /api/players/{playerId}/items/{itemId}/learned` (set true)
-  - [ ] `DELETE /api/players/{playerId}/items/{itemId}/learned` (set false)
-  - [ ] `GET /api/players/{playerId}/items?type=...` (liste avec statut learned)
+  - [x] `PUT /api/players/{playerId}/items/{itemId}/learned` (set true)
+  - [x] `DELETE /api/players/{playerId}/items/{itemId}/learned` (set false)
+  - [x] `GET /api/players/{playerId}/items?type=...` (liste avec statut learned)
 
 ## Phase 4 - Front Twig + UX
 - [ ] Ecran catalogue items:
@@ -69,9 +69,9 @@ Permettre a un utilisateur authentifie de:
   - [ ] regles ownership
 - [ ] Tests fonctionnels:
   - [ ] login/logout
-  - [ ] creation player
-  - [ ] marquage learned/unlearned
-  - [ ] interdiction acces cross-user
+  - [x] creation player
+  - [x] marquage learned/unlearned
+  - [x] interdiction acces cross-user
 - [ ] Garder `make phpstan` et tests verts a chaque phase.
 
 ## Risques / Decisions a figer

@@ -35,4 +35,31 @@ final class ItemEntityRepository extends ServiceEntityRepository
             'sourceId' => $sourceId,
         ]);
     }
+
+    public function findOneById(int $id): ?ItemEntity
+    {
+        $item = $this->find($id);
+
+        return $item instanceof ItemEntity ? $item : null;
+    }
+
+    /**
+     * @return list<ItemEntity>
+     */
+    public function findAllOrdered(?ItemTypeEnum $type = null): array
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->orderBy('i.type', 'ASC')
+            ->addOrderBy('i.sourceId', 'ASC');
+
+        if (null !== $type) {
+            $qb->andWhere('i.type = :type')
+                ->setParameter('type', $type);
+        }
+
+        $items = $qb->getQuery()->getResult();
+
+        /** @var list<ItemEntity> $items */
+        return $items;
+    }
 }
