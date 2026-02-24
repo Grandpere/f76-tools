@@ -128,14 +128,27 @@ body {
     font-size: 1.2rem;
 }
 
-.catalog-subgroup {
-    margin-top: 0.8rem;
+.catalog-note {
+    margin: 0.8rem 0 0;
+    font-size: 0.9rem;
+    color: var(--muted);
 }
 
-.catalog-subgroup h3 {
-    margin: 0 0 0.5rem;
+.catalog-subgroup {
+    margin-top: 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+    padding: 0.2rem 0.7rem 0.8rem;
+}
+
+.catalog-subgroup summary {
+    cursor: pointer;
+    user-select: none;
     font-size: 0.95rem;
+    font-weight: 700;
     color: var(--muted);
+    padding: 0.5rem 0;
 }
 
 .item-grid {
@@ -172,23 +185,31 @@ body {
     color: #2e403d;
 }
 
-.item-card button {
+.item-learned-toggle {
     margin-top: 0.75rem;
-    border: 0;
-    border-radius: 10px;
-    padding: 0.5rem 0.75rem;
-    cursor: pointer;
-    background: var(--accent-soft);
-    color: var(--warn);
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
     font-weight: 600;
+    color: #1f3530;
+    cursor: pointer;
+}
+
+.item-learned-toggle input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--ok);
+}
+
+.item-card.is-unlearned .item-learned-toggle {
+    color: var(--warn);
+}
+
+.item-card.is-learned .item-learned-toggle {
+    color: var(--ok);
 }
 
 .item-card.is-learned {
     border-color: #9bc9a6;
     background: #f2fbf2;
-}
-
-.item-card.is-learned button {
-    background: #d7efdb;
-    color: var(--ok);
 }

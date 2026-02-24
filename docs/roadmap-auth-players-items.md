@@ -60,7 +60,7 @@ Permettre a un utilisateur authentifie de:
   - [x] badge/rank/lists selon type
   - [x] statut appris pour player courant
 - [x] Actions front:
-  - [x] toggle learned via Stimulus + fetch API
+  - [x] toggle learned via checkbox Stimulus + fetch API
   - [x] creation player via formulaire dashboard
   - [x] sync learned inter-listes pour un meme item Minerva (meme id)
   - [x] retour visuel (loading, succes, erreur)

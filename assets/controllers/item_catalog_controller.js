@@ -170,12 +170,12 @@ export default class extends Controller {
         this.setState(`${this.items.length} items pour ce player${searchSuffix}.`);
     }
 
-    async toggleLearned(itemId, learned) {
+    async toggleLearned(itemId, shouldBeLearned) {
         if (!this.activePlayerId) {
             return;
         }
 
-        const method = learned ? 'DELETE' : 'PUT';
+        const method = shouldBeLearned ? 'PUT' : 'DELETE';
         const url = `${this.playersBaseUrlValue}/${this.activePlayerId}/items/${itemId}/learned`;
 
         const response = await fetch(url, {
@@ -190,7 +190,7 @@ export default class extends Controller {
         }
 
         this.items = this.items.map((item) => (Number(item.id) === Number(itemId)
-            ? { ...item, learned: !learned }
+            ? { ...item, learned: shouldBeLearned }
             : item));
         this.renderItems();
     }
@@ -223,11 +223,11 @@ export default class extends Controller {
         });
 
         const ranks = Array.from(rankMap.keys()).sort((a, b) => a - b);
-        return ranks.map((rank) => `
-            <section class="catalog-subgroup">
-                <h3>Rank ${this.escape(rank)}</h3>
+        return ranks.map((rank, index) => `
+            <details class="catalog-subgroup" ${index === 0 ? 'open' : ''}>
+                <summary>Rank ${this.escape(rank)}</summary>
                 <ul class="item-grid">${rankMap.get(rank).map((item) => this.renderItemCard(item)).join('')}</ul>
-            </section>
+            </details>
         `).join('');
     }
 
@@ -259,23 +259,27 @@ export default class extends Controller {
             });
         });
 
-        return Array.from(listMap.entries())
+        const groupsHtml = Array.from(listMap.entries())
             .sort((a, b) => a[0] - b[0])
-            .map(([listNumber, items]) => `
-                <section class="catalog-subgroup">
-                    <h3>Liste ${this.escape(listNumber)}</h3>
+            .map(([listNumber, items], index) => `
+                <details class="catalog-subgroup" ${index === 0 ? 'open' : ''}>
+                    <summary>Liste ${this.escape(listNumber)}</summary>
                     <ul class="item-grid">${items.map((item) => this.renderItemCard(item, `Liste ${listNumber}`)).join('')}</ul>
-                </section>
+                </details>
             `)
             .join('');
+
+        return `
+            <p class="catalog-note">Info: un plan present dans plusieurs listes partage le meme etat appris. Cocher une occurrence met a jour les autres.</p>
+            ${groupsHtml}
+        `;
     }
 
     renderItemCard(item, subtitle = null) {
         const label = this.escape(item.name || item.nameKey);
         const description = item.description ? `<p>${this.escape(item.description)}</p>` : '';
         const learnedClass = item.learned ? 'is-learned' : 'is-unlearned';
-        const buttonText = item.learned ? 'Marquer non appris' : 'Marquer appris';
-        const dataLearned = item.learned ? '1' : '0';
+        const checkedAttr = item.learned ? 'checked' : '';
         const subtitleText = subtitle || this.escape(item.type);
 
         return `
@@ -285,18 +289,19 @@ export default class extends Controller {
                     <span>${subtitleText}</span>
                 </div>
                 ${description}
-                <button type="button" data-item-id="${item.id}" data-learned="${dataLearned}">
-                    ${this.escape(buttonText)}
-                </button>
+                <label class="item-learned-toggle">
+                    <input type="checkbox" data-item-checkbox="1" data-item-id="${item.id}" ${checkedAttr}>
+                    <span>Appris</span>
+                </label>
             </li>
         `;
     }
 
     bindToggleButtons(container) {
-        container.querySelectorAll('button[data-item-id]').forEach((button) => {
-            button.addEventListener('click', async () => {
-                const itemId = button.getAttribute('data-item-id');
-                const learned = button.getAttribute('data-learned') === '1';
+        container.querySelectorAll('input[data-item-checkbox="1"]').forEach((checkbox) => {
+            checkbox.addEventListener('change', async () => {
+                const itemId = checkbox.getAttribute('data-item-id');
+                const learned = checkbox.checked;
                 if (!itemId) {
                     return;
                 }

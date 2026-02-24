@@ -62,6 +62,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - creation player directement depuis le dashboard (POST `/api/players`) avec auto-selection apres creation.
   - affichage en 2 blocs: `MISC` groupe par rank et `BOOK` groupe par liste.
   - un toggle learned sur un item `BOOK` doit refleter toutes ses occurrences multi-listes (meme `itemId`).
+  - UX learned preferee avec checkbox `Appris` (pas bouton), + note d'aide avant les listes Minerva.
 - API players:
   - doublon de nom par user retourne `409` (`Player name already exists.`) au create/update au lieu d'une 500 SQL.
 - PHPStan (array shapes):
