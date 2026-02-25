@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\AdminAuditLogEntity;
+use App\Entity\UserEntity;
+use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -92,5 +94,28 @@ final class AdminAuditLogEntityRepository extends ServiceEntityRepository
         $actions = array_values(array_filter($raw, static fn (mixed $value): bool => is_string($value) && '' !== trim($value)));
 
         return $actions;
+    }
+
+    /**
+     * @param list<string> $actions
+     */
+    public function countRecentActionsByActor(UserEntity $actor, array $actions, DateTimeImmutable $since): int
+    {
+        if ([] === $actions) {
+            return 0;
+        }
+
+        $count = $this->createQueryBuilder('a')
+            ->select('COUNT(a.id)')
+            ->where('a.actorUser = :actor')
+            ->andWhere('a.action IN (:actions)')
+            ->andWhere('a.occurredAt >= :since')
+            ->setParameter('actor', $actor)
+            ->setParameter('actions', $actions)
+            ->setParameter('since', $since)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return (int) $count;
     }
 }

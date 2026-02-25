@@ -145,6 +145,43 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertIsInt($rateLimitedAudit->getContext()['remainingSeconds'] ?? null);
     }
 
+    public function testAdminCannotGenerateTooManyResetLinksGloballyInShortWindow(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+
+        $targets = [];
+        for ($i = 1; $i <= 11; ++$i) {
+            $targets[] = $this->createUser(sprintf('managed-%d@example.com', $i), 'secret123', ['ROLE_USER']);
+        }
+
+        $crawler = $this->browser()->request('GET', '/admin/users');
+
+        foreach ($targets as $index => $target) {
+            $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/generate-reset-link"] input[name="_csrf_token"]', $target->getId()));
+            self::assertCount(1, $tokenNode);
+
+            $this->browser()->request('POST', sprintf('/admin/users/%d/generate-reset-link', $target->getId()), [
+                '_csrf_token' => (string) $tokenNode->attr('value'),
+            ]);
+            self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+            if ($index < 10) {
+                continue;
+            }
+
+            $this->entityManager?->clear();
+            $blocked = $this->findUserByEmail('managed-11@example.com');
+            self::assertInstanceOf(UserEntity::class, $blocked);
+            self::assertNull($blocked->getResetPasswordTokenHash());
+
+            $audit = $this->findAuditForTargetAction('managed-11@example.com', 'user_generate_reset_link_global_rate_limited');
+            self::assertInstanceOf(AdminAuditLogEntity::class, $audit);
+            self::assertIsArray($audit->getContext());
+            self::assertSame(10, $audit->getContext()['maxRequests'] ?? null);
+        }
+    }
+
     /**
      * @param list<string> $roles
      */

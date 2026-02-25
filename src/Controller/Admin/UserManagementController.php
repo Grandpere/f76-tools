@@ -15,6 +15,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\AdminAuditLogEntity;
 use App\Entity\UserEntity;
+use App\Repository\AdminAuditLogEntityRepository;
 use App\Repository\UserEntityRepository;
 use DateInterval;
 use DateTimeImmutable;
@@ -34,9 +35,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class UserManagementController extends AbstractController
 {
     private const RESET_LINK_COOLDOWN_SECONDS = 60;
+    private const RESET_LINK_GLOBAL_WINDOW_SECONDS = 60;
+    private const RESET_LINK_GLOBAL_MAX_REQUESTS = 10;
 
     public function __construct(
         private readonly UserEntityRepository $userRepository,
+        private readonly AdminAuditLogEntityRepository $auditLogRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly UrlGeneratorInterface $urlGenerator,
@@ -144,7 +148,28 @@ final class UserManagementController extends AbstractController
             return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
         }
 
+        $actor = $this->getUser();
+        if (!$actor instanceof UserEntity) {
+            throw new AccessDeniedException('User must be authenticated.');
+        }
+
         $now = new DateTimeImmutable();
+        $globalWindowStart = $now->sub(new DateInterval(sprintf('PT%dS', self::RESET_LINK_GLOBAL_WINDOW_SECONDS)));
+        $recentGenerations = $this->auditLogRepository->countRecentActionsByActor($actor, ['user_generate_reset_link'], $globalWindowStart);
+        if ($recentGenerations >= self::RESET_LINK_GLOBAL_MAX_REQUESTS) {
+            $this->addFlash('warning', $this->translator->trans('admin_users.flash.reset_link_global_rate_limited', [
+                '%seconds%' => (string) self::RESET_LINK_GLOBAL_WINDOW_SECONDS,
+                '%count%' => (string) self::RESET_LINK_GLOBAL_MAX_REQUESTS,
+            ]));
+            $this->persistAuditLog($request, 'user_generate_reset_link_global_rate_limited', $user, [
+                'windowSeconds' => self::RESET_LINK_GLOBAL_WINDOW_SECONDS,
+                'maxRequests' => self::RESET_LINK_GLOBAL_MAX_REQUESTS,
+            ]);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
+        }
+
         $requestedAt = $user->getResetPasswordRequestedAt();
         if ($requestedAt instanceof DateTimeImmutable) {
             $elapsedSeconds = $now->getTimestamp() - $requestedAt->getTimestamp();

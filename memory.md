@@ -111,6 +111,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - action admin = generation d un lien temporaire (token hash + expiration) vers une page publique `/reset-password/{token}`.
   - tests fonctionnels a maintenir pour les cas token valide, invalide et expire.
   - cooldown serveur en place sur la generation (`60s` par utilisateur cible), avec timestamp `reset_password_requested_at`.
+  - limite globale en plus: max `10` generations reussies par admin sur `60s`.
   - apres reset reussi, nettoyer `reset_password_requested_at` avec les champs token/expiration.
 - Audit admin:
   - table `admin_audit_log` pour tracer les actions sensibles de backoffice users.

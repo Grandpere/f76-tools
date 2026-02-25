@@ -129,6 +129,7 @@ admin_users.flash.active_updated: Active status updated.
 admin_users.flash.role_updated: Roles updated.
 admin_users.flash.reset_link_generated: Password reset link generated
 admin_users.flash.reset_link_rate_limited: Link already generated recently. Retry in %seconds% s.
+admin_users.flash.reset_link_global_rate_limited: Too many links generated (%count%) over %seconds% s. Retry later.
 
 admin_audit.page_title: Audit logs backoffice
 admin_audit.kicker: Backoffice

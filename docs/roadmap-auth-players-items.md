@@ -100,6 +100,7 @@ Permettre a un utilisateur authentifie de:
 - [x] Journal d audit minimal des actions admin sensibles (toggle actif, toggle admin, generation lien reset).
 - [x] Page admin de consultation des logs d audit (`GET /admin/audit-logs`) avec filtres/pagination.
 - [x] Cooldown serveur sur generation de lien reset (anti-spam).
+- [x] Limite globale de generation de liens reset par admin sur fenetre courte.
 
 ## Risques / Decisions a figer
 - [x] Decider le modele exact learned:
