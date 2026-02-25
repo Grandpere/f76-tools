@@ -24,8 +24,9 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ItemTranslationController extends AbstractController
 {
     private const DOMAIN = 'items';
-    private const LOCALE_FALLBACK = 'fr';
+    private const TARGET_LOCALE_FALLBACK = 'fr';
     private const LOCALE_PATTERN = '/^[a-z]{2}(?:_[A-Z]{2})?$/';
+    private const LOCKED_LOCALES = ['en', 'de'];
 
     public function __construct(
         private readonly TranslationCatalogReader $catalogReader,
@@ -36,35 +37,35 @@ final class ItemTranslationController extends AbstractController
     #[Route('', name: 'app_admin_item_translations', methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
-        $locale = $this->normalizeLocale($request->query->get('locale'));
+        $targetLocale = $this->sanitizeTargetLocale($request->query->get('target'));
         $query = $this->normalizeQuery($request->query->get('q'));
 
         if ($request->isMethod('POST')) {
-            $postedLocale = $this->normalizeLocale($request->request->get('locale'));
-            $locale = $postedLocale;
+            $targetLocale = $this->sanitizeTargetLocale($request->request->get('target'));
             /** @var array<string, mixed> $entries */
             $entries = $request->request->all('entries');
             $upserts = $this->normalizeEntries($entries);
             if ([] !== $upserts) {
-                $this->catalogWriter->upsert($locale, self::DOMAIN, $upserts);
-                $this->addFlash('success', sprintf('Traductions "%s" enregistrees (%d cles).', $locale, count($upserts)));
+                $this->catalogWriter->upsert($targetLocale, self::DOMAIN, $upserts);
+                $this->addFlash('success', sprintf('Traductions "%s" enregistrees (%d cles).', $targetLocale, count($upserts)));
             } else {
                 $this->addFlash('warning', 'Aucune traduction valide a enregistrer.');
             }
 
             return $this->redirectToRoute('app_admin_item_translations', [
-                'locale' => $locale,
+                'locale' => $request->getLocale(),
+                'target' => $targetLocale,
                 'q' => $query,
             ]);
         }
 
         $catalogEn = $this->catalogReader->load('en', self::DOMAIN);
         $catalogDe = $this->catalogReader->load('de', self::DOMAIN);
-        $catalogLocale = $this->catalogReader->load($locale, self::DOMAIN);
-        $rows = $this->buildRows($catalogEn, $catalogDe, $catalogLocale, $query);
+        $catalogTarget = $this->catalogReader->load($targetLocale, self::DOMAIN);
+        $rows = $this->buildRows($catalogEn, $catalogDe, $catalogTarget, $query);
 
         return $this->render('admin/item_translations.html.twig', [
-            'locale' => $locale,
+            'targetLocale' => $targetLocale,
             'query' => $query ?? '',
             'rows' => $rows,
             'totalRows' => count($rows),
@@ -101,15 +102,25 @@ final class ItemTranslationController extends AbstractController
     private function normalizeLocale(mixed $value): string
     {
         if (!is_string($value)) {
-            return self::LOCALE_FALLBACK;
+            return self::TARGET_LOCALE_FALLBACK;
         }
 
         $locale = trim($value);
         if ('' === $locale) {
-            return self::LOCALE_FALLBACK;
+            return self::TARGET_LOCALE_FALLBACK;
         }
         if (1 !== preg_match(self::LOCALE_PATTERN, $locale)) {
-            return self::LOCALE_FALLBACK;
+            return self::TARGET_LOCALE_FALLBACK;
+        }
+
+        return $locale;
+    }
+
+    private function sanitizeTargetLocale(mixed $value): string
+    {
+        $locale = strtolower($this->normalizeLocale($value));
+        if (in_array($locale, self::LOCKED_LOCALES, true)) {
+            return self::TARGET_LOCALE_FALLBACK;
         }
 
         return $locale;

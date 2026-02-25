@@ -62,7 +62,7 @@ final class ItemTranslationControllerTest extends WebTestCase
         $user = $this->createUser('translations-view@example.com');
         $this->browser()->loginUser($user);
 
-        $crawler = $this->browser()->request('GET', '/admin/translations/items?locale=zz&q=item.misc.10.name');
+        $crawler = $this->browser()->request('GET', '/admin/translations/items?locale=fr&target=zz&q=item.misc.10.name');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filter('h1:contains("Traductions des items")'));
@@ -74,8 +74,8 @@ final class ItemTranslationControllerTest extends WebTestCase
         $user = $this->createUser('translations-save@example.com');
         $this->browser()->loginUser($user);
 
-        $this->browser()->request('POST', '/admin/translations/items?locale=zz', [
-            'locale' => 'zz',
+        $this->browser()->request('POST', '/admin/translations/items?locale=fr&target=zz', [
+            'target' => 'zz',
             'entries' => [
                 'item.misc.10.name' => 'Nom FR test',
                 'item.book.250.name' => 'Plan FR test',

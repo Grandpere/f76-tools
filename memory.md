@@ -88,6 +88,8 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - edition cible uniquement les cles `item.misc.*` et `item.book.*`; source de reference = `items.en.yaml` + contexte `items.de.yaml`.
   - ecriture via `TranslationCatalogWriter` pour conserver la structure en sections.
   - UX edition: textarea agrandie + auto-resize, refs EN/DE affichees sous le champ cible.
+  - separer langue UI (`locale`) et fichier cible edite (`target`) pour ne pas ecraser les langues source.
+  - bloquer l edition directe de `en/de` (cibles fournies), fallback automatique sur `fr`.
 - Verification data JSON:
   - eviter les one-liners shell fragiles avec regex/globs; preferer heredoc PHP pour checks ponctuels fiables.
 
