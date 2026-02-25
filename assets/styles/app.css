@@ -833,6 +833,26 @@ body::before {
     width: 66%;
 }
 
+.admin-users-table th:first-child,
+.admin-users-table td:first-child {
+    width: 30%;
+}
+
+.admin-users-table th:nth-child(2),
+.admin-users-table td:nth-child(2) {
+    width: 26%;
+}
+
+.admin-users-table th:nth-child(3),
+.admin-users-table td:nth-child(3) {
+    width: 12%;
+}
+
+.admin-users-table th:last-child,
+.admin-users-table td:last-child {
+    width: 32%;
+}
+
 .translations-table th,
 .translations-table td {
     text-align: left;
@@ -865,6 +885,31 @@ body::before {
 .translations-table code {
     white-space: normal;
     overflow-wrap: anywhere;
+}
+
+.admin-users-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.admin-users-actions form {
+    margin: 0;
+}
+
+.admin-users-actions button {
+    border: 1px solid rgba(160, 119, 0, 0.38);
+    border-radius: 10px;
+    padding: 0.42rem 0.62rem;
+    cursor: pointer;
+    background: linear-gradient(180deg, #ffe27f, #f4c52b);
+    color: #2a2200;
+    font-weight: 700;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+}
+
+.admin-users-actions button:hover {
+    filter: brightness(1.03);
 }
 
 .translations-help {
