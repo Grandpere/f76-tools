@@ -71,6 +71,7 @@ final class DashboardControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="importFileInput"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="importMergeCheckbox"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="importButton"]'));
+        self::assertCount(1, $crawler->filter('[data-item-catalog-target="importUnknownPanel"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="miscList"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="bookList"]'));
     }

@@ -453,6 +453,35 @@ body::before {
     color: var(--text-1);
 }
 
+.transfer-unknown-panel {
+    margin-top: 0.55rem;
+    border: 1px dashed rgba(193, 76, 63, 0.45);
+    border-radius: 10px;
+    padding: 0.5rem 0.6rem;
+    background: rgba(193, 76, 63, 0.08);
+}
+
+.transfer-unknown-panel:empty {
+    display: none;
+}
+
+.transfer-unknown-title {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #7c2f2a;
+}
+
+.transfer-unknown-panel ul {
+    margin: 0.4rem 0 0;
+    padding-left: 1rem;
+}
+
+.transfer-unknown-panel li {
+    font-size: 0.78rem;
+    color: #6f2a25;
+}
+
 .stats-cards {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));

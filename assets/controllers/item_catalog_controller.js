@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    static targets = ['playerSelect', 'createNameInput', 'createButton', 'searchInput', 'sourceFilter', 'state', 'statsPanel', 'miscList', 'bookList', 'exportButton', 'importFileInput', 'importMergeCheckbox', 'importButton'];
+    static targets = ['playerSelect', 'createNameInput', 'createButton', 'searchInput', 'sourceFilter', 'state', 'statsPanel', 'miscList', 'bookList', 'exportButton', 'importFileInput', 'importMergeCheckbox', 'importButton', 'importUnknownPanel'];
     static values = {
         playersUrl: String,
         playersBaseUrl: String,
@@ -289,6 +289,7 @@ export default class extends Controller {
 
         const file = this.importFileInputTarget.files && this.importFileInputTarget.files[0];
         if (!file) {
+            this.clearImportUnknownPanel();
             this.setState(this.t('importNoFile'));
             return;
         }
@@ -298,6 +299,7 @@ export default class extends Controller {
             const text = await file.text();
             parsed = JSON.parse(text);
         } catch {
+            this.clearImportUnknownPanel();
             this.setState(this.t('importInvalidFile'));
             return;
         }
@@ -317,6 +319,7 @@ export default class extends Controller {
             }),
         });
         if (!previewResponse.ok) {
+            this.clearImportUnknownPanel();
             this.setState(`${this.t('importPreviewError')} (${previewResponse.status}).`);
             return;
         }
@@ -324,6 +327,7 @@ export default class extends Controller {
         const preview = await previewResponse.json();
         const unknownItems = Array.isArray(preview.unknownItems) ? preview.unknownItems : [];
         if (unknownItems.length > 0) {
+            this.renderImportUnknownPanel(unknownItems);
             const details = unknownItems
                 .slice(0, 8)
                 .map((entry) => {
@@ -339,6 +343,7 @@ export default class extends Controller {
             );
             return;
         }
+        this.clearImportUnknownPanel();
 
         const previewMessage = this.t('importConfirmPreview', {
             '%add%' : Number(preview.wouldAdd ?? 0),
@@ -372,8 +377,36 @@ export default class extends Controller {
         }
 
         this.importFileInputTarget.value = '';
+        this.clearImportUnknownPanel();
         await this.loadItems();
         this.setState(this.t('importDone'));
+    }
+
+    renderImportUnknownPanel(unknownItems) {
+        if (!this.hasImportUnknownPanelTarget) {
+            return;
+        }
+
+        const rows = unknownItems
+            .map((entry) => {
+                const type = typeof entry.type === 'string' ? entry.type : '?';
+                const sourceId = Number.isInteger(entry.sourceId) ? entry.sourceId : Number(entry.sourceId || 0);
+
+                return `<li><code>${this.escape(type)}:${this.escape(sourceId)}</code></li>`;
+            })
+            .join('');
+
+        this.importUnknownPanelTarget.innerHTML = `
+            <p class="transfer-unknown-title">${this.escape(this.t('importPreviewUnknownDetailsPrefix'))}</p>
+            <ul>${rows}</ul>
+        `;
+    }
+
+    clearImportUnknownPanel() {
+        if (!this.hasImportUnknownPanelTarget) {
+            return;
+        }
+        this.importUnknownPanelTarget.innerHTML = '';
     }
 
     renderItems() {
