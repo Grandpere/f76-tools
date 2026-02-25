@@ -104,12 +104,20 @@ body::before {
 
 .catalog-shell {
     margin-top: 1.2rem;
+    padding: 0;
+}
+
+.catalog-panel {
     border: 1px solid var(--line);
     border-radius: 20px;
     background: linear-gradient(150deg, #ffffff, #f4f2ec);
     padding: 1rem;
     box-shadow: var(--card-glow);
     backdrop-filter: blur(4px);
+}
+
+.catalog-panel + .catalog-panel {
+    margin-top: 1rem;
 }
 
 .catalog-toolbar {
@@ -477,7 +485,7 @@ body::before {
     }
 
     .catalog-header,
-    .catalog-shell {
+    .catalog-panel {
         border-radius: 14px;
         padding: 0.85rem;
     }
