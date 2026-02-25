@@ -324,13 +324,13 @@ export default class extends Controller {
                     <strong>${label}</strong>
                     ${newBadge}
                 </div>
+                ${priceBlock}
                 ${description}
                 ${infoBlock}
                 ${relationsBlock}
                 ${dailyOpsLine}
                 ${sourceIcons}
                 ${extraSourceIcons}
-                ${priceBlock}
             </li>
         `;
     }
