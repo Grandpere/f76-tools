@@ -6,6 +6,9 @@ Permettre a un utilisateur authentifie de:
 - creer ses personnages (`Player`),
 - marquer pour chaque `Player` si un `Item` est appris ou non (`BOOK` Minerva et `MISC` Legendary Mods).
 
+## Documentation ops
+- Runbook exploitation: `docs/ops-runbook.md`.
+
 ## Etat actuel (base)
 - Import `Item` en place via `app:items:import`.
 - Traductions generees en `translations/items.en.yaml` et `translations/items.de.yaml`.

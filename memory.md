@@ -6,6 +6,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - L'utilisateur prefere limiter les executions/outils couteux en tokens quand possible.
 - Quand c'est possible, fournir des commandes courtes a executer plutot que de longues sorties.
 - Besoin de docs internes de suivi (roadmap/todo) directement dans le repo.
+- Conserver une doc ops courte et actionnable (`docs/ops-runbook.md`) pour les commandes d exploitation.
 - A chaque correction utilisateur ou autocorrection technique, mettre a jour `memory.md`.
 - Si un commit est utile pour fiabiliser un lot de changements, le faire (workflow explicite).
 - A chaque nouvelle fonctionnalite, ajouter des tests dans le meme lot (ne pas repousser).
