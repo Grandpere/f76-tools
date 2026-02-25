@@ -307,7 +307,6 @@ export default class extends Controller {
         const description = item.description ? `<p>${this.escape(item.description)}</p>` : '';
         const infoBlock = this.renderInfoBlock(item);
         const relationsBlock = this.renderRelationsBlock(item);
-        const sourceBadges = this.renderSourceBadges(item);
         const sourceIcons = this.renderDropSources(item);
         const extraSourceIcons = this.renderExtraSourceIcons(item);
         const dailyOpsLine = item.type === 'BOOK' && item.dropDailyOps && !this.infoContainsDailyOps(item.infoHtml)
@@ -328,7 +327,6 @@ export default class extends Controller {
                 ${infoBlock}
                 ${relationsBlock}
                 ${dailyOpsLine}
-                ${sourceBadges}
                 ${sourceIcons}
                 ${extraSourceIcons}
                 ${priceBlock}
@@ -431,33 +429,19 @@ export default class extends Controller {
         return `<div class="item-drop-sources">${this.sanitizeHtml(item.dropSourcesHtml)}</div>`;
     }
 
-    renderSourceBadges(item) {
-        const badges = [];
-        if (item.vendorRegs) {
-            badges.push('Regs');
-        }
-        if (item.vendorSamuel) {
-            badges.push('Samuel');
-        }
-        if (item.vendorMortimer) {
-            badges.push('Mortimer');
-        }
-
-        if (badges.length === 0) {
-            return '';
-        }
-
-        return `
-            <p class="item-source-badges">
-                ${badges.map((badge) => `<span>${this.escape(badge)}</span>`).join('')}
-            </p>
-        `;
-    }
-
     renderExtraSourceIcons(item) {
         const icons = [];
         if (item.dropDailyOps) {
             icons.push('<img src="/assets/icons/FO76_dailyops_uplink.png" alt="Daily Ops" title="Daily Ops">');
+        }
+        if (item.vendorRegs) {
+            icons.push('<img src="/assets/icons/Vault79Marker.svg" alt="Regs" title="Regs">');
+        }
+        if (item.vendorSamuel) {
+            icons.push('<img src="/assets/icons/HammerWingMarker.svg" alt="Samuel" title="Samuel">');
+        }
+        if (item.vendorMortimer) {
+            icons.push('<img src="/assets/icons/SkullRingMarker.svg" alt="Mortimer" title="Mortimer">');
         }
 
         if (icons.length === 0) {

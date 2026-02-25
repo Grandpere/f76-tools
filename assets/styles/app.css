@@ -238,23 +238,6 @@ body {
     margin-right: 0.25rem;
 }
 
-.item-source-badges {
-    margin: 0.45rem 0 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-}
-
-.item-source-badges span {
-    display: inline-flex;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    padding: 0.15rem 0.45rem;
-    font-size: 0.72rem;
-    color: var(--muted);
-    background: #faf8f1;
-}
-
 .item-source-icons {
     margin: 0.35rem 0 0;
 }
