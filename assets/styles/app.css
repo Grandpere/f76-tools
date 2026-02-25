@@ -227,6 +227,12 @@ body::before {
     color: var(--text-0);
 }
 
+.source-filters label img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
 .source-filters input[type='checkbox'],
 .item-learned-checkbox {
     appearance: none;
