@@ -55,6 +55,8 @@ Permettre a un utilisateur authentifie de:
   - [x] `PUT /api/players/{playerId}/items/{itemId}/learned` (set true)
   - [x] `DELETE /api/players/{playerId}/items/{itemId}/learned` (set false)
   - [x] `GET /api/players/{playerId}/items?type=...` (liste avec statut learned)
+  - [x] `GET /api/players/{playerId}/knowledge/export` (export progression)
+  - [x] `POST /api/players/{playerId}/knowledge/import` (import progression, mode replace/merge)
 
 ## Phase 4 - Front Twig + UX
 - [x] Ecran catalogue items:

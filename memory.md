@@ -70,6 +70,9 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - modele retenu = presence/absence dans `player_item_knowledge` (pas de bool persiste).
   - endpoints `PUT/DELETE learned` idempotents avec ownership strict sur le `Player`.
   - ownership + toggle learned centralises dans `PlayerItemKnowledgeManager` (service teste en unit).
+  - transfert progression disponible via API:
+    - export `GET /api/players/{id}/knowledge/export` (type/sourceId),
+    - import `POST /api/players/{id}/knowledge/import` (`replace=true` par defaut, `replace=false` pour merge).
 - Front catalogue:
   - selection du player actif stockee dans query param `?player=<id>` (pas en session pour l'instant).
   - API knowledge renvoie aussi les textes traduits (`name`, `description`) en plus des cles (`nameKey`, `descKey`).

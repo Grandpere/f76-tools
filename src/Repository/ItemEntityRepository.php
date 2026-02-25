@@ -36,6 +36,30 @@ final class ItemEntityRepository extends ServiceEntityRepository
         ]);
     }
 
+    /**
+     * @param list<int> $sourceIds
+     *
+     * @return list<ItemEntity>
+     */
+    public function findByTypeAndSourceIds(ItemTypeEnum $type, array $sourceIds): array
+    {
+        if ([] === $sourceIds) {
+            return [];
+        }
+
+        $items = $this->createQueryBuilder('i')
+            ->andWhere('i.type = :type')
+            ->andWhere('i.sourceId IN (:sourceIds)')
+            ->setParameter('type', $type)
+            ->setParameter('sourceIds', $sourceIds)
+            ->orderBy('i.sourceId', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        /** @var list<ItemEntity> $items */
+        return $items;
+    }
+
     public function findOneById(int $id): ?ItemEntity
     {
         $item = $this->find($id);
