@@ -531,7 +531,10 @@ export default class extends Controller {
                 if (name === 'src' && value.startsWith('/cms/')) {
                     const filename = value.split('/').pop() || '';
                     if (filename !== '') {
-                        node.setAttribute('src', `/assets/icons/${filename}`);
+                        const mappedFilename = filename === 'raid_icon_black_128.png'
+                            ? 'GleamingDepthsMarker.svg'
+                            : filename;
+                        node.setAttribute('src', `/assets/icons/${mappedFilename}`);
                     } else {
                         node.removeAttribute(attr.name);
                     }
