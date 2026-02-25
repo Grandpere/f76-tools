@@ -17,7 +17,6 @@ use App\Entity\UserEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 final class RegistrationControllerTest extends WebTestCase
 {
@@ -53,7 +52,11 @@ final class RegistrationControllerTest extends WebTestCase
 
     public function testRegisterCreatesUserAndRedirectsToLogin(): void
     {
-        $token = $this->csrfToken('register');
+        $crawler = $this->browser()->request('GET', '/register');
+        $tokenNode = $crawler->filter('input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+        $token = (string) $tokenNode->attr('value');
+
         $this->browser()->request('POST', '/register', [
             '_csrf_token' => $token,
             'email' => 'new-user@example.com',
@@ -74,14 +77,6 @@ final class RegistrationControllerTest extends WebTestCase
             return;
         }
         $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
-    }
-
-    private function csrfToken(string $id): string
-    {
-        $tokenManager = $this->browser()->getContainer()->get(CsrfTokenManagerInterface::class);
-        \assert($tokenManager instanceof CsrfTokenManagerInterface);
-
-        return $tokenManager->getToken($id)->getValue();
     }
 
     private function browser(): KernelBrowser

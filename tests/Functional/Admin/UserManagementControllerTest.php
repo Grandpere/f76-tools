@@ -18,7 +18,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 final class UserManagementControllerTest extends WebTestCase
 {
@@ -59,8 +58,12 @@ final class UserManagementControllerTest extends WebTestCase
         $this->browser()->loginUser($admin);
 
         self::assertTrue($managed->isActive());
+        $crawler = $this->browser()->request('GET', '/admin/users');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+
         $this->browser()->request('POST', sprintf('/admin/users/%d/toggle-active', $managed->getId()), [
-            '_csrf_token' => $this->csrfToken('admin_users_toggle_active_'.$managed->getId()),
+            '_csrf_token' => (string) $tokenNode->attr('value'),
         ]);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
 
@@ -94,14 +97,6 @@ final class UserManagementControllerTest extends WebTestCase
         $result = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => $email]);
 
         return $result instanceof UserEntity ? $result : null;
-    }
-
-    private function csrfToken(string $id): string
-    {
-        $tokenManager = $this->browser()->getContainer()->get(CsrfTokenManagerInterface::class);
-        \assert($tokenManager instanceof CsrfTokenManagerInterface);
-
-        return $tokenManager->getToken($id)->getValue();
     }
 
     private function truncateTables(): void
