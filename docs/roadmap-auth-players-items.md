@@ -57,6 +57,7 @@ Permettre a un utilisateur authentifie de:
   - [x] `GET /api/players/{playerId}/items?type=...` (liste avec statut learned)
   - [x] `GET /api/players/{playerId}/knowledge/export` (export progression)
   - [x] `POST /api/players/{playerId}/knowledge/import` (import progression, mode replace/merge)
+  - [x] `POST /api/players/{playerId}/knowledge/preview-import` (dry-run import + unknown items)
 
 ## Phase 4 - Front Twig + UX
 - [x] Ecran catalogue items:

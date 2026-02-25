@@ -73,6 +73,9 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - transfert progression disponible via API:
     - export `GET /api/players/{id}/knowledge/export` (type/sourceId),
     - import `POST /api/players/{id}/knowledge/import` (`replace=true` par defaut, `replace=false` pour merge).
+  - preview import dispo `POST /api/players/{id}/knowledge/preview-import`:
+    - renvoie `wouldAdd`, `wouldRemove`, `unknownItems`.
+  - import valide strictement le payload (version, format, type, sourceId).
 - Front catalogue:
   - selection du player actif stockee dans query param `?player=<id>` (pas en session pour l'instant).
   - API knowledge renvoie aussi les textes traduits (`name`, `description`) en plus des cles (`nameKey`, `descKey`).

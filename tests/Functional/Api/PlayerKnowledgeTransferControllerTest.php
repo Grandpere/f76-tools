@@ -118,6 +118,45 @@ final class PlayerKnowledgeTransferControllerTest extends WebTestCase
         ], $this->mapLearnedBySourceId($rows));
     }
 
+    public function testPreviewImportReturnsDiffAndUnknownItems(): void
+    {
+        $user = $this->createUser('transfer-preview@example.com');
+        $player = $this->createPlayer($user, 'Main');
+        $bookKnown = $this->createItem(931, ItemTypeEnum::BOOK, null, 'item.book.931.name');
+        $this->browser()->loginUser($user);
+        $this->browser()->request('PUT', sprintf('/api/players/%d/items/%d/learned', $player->getId(), $bookKnown->getId()));
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+
+        $this->browser()->jsonRequest('POST', sprintf('/api/players/%d/knowledge/preview-import', $player->getId()), [
+            'version' => 1,
+            'replace' => true,
+            'learnedItems' => [
+                ['type' => 'BOOK', 'sourceId' => 999999], // unknown
+            ],
+        ]);
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        $payload = $this->decodeMap($this->browser()->getResponse()->getContent() ?: '{}');
+
+        self::assertSame(0, $this->readIntValue($payload, 'wouldAdd'));
+        self::assertSame(1, $this->readIntValue($payload, 'wouldRemove'));
+        $unknown = $this->readList($payload, 'unknownItems');
+        self::assertCount(1, $unknown);
+        self::assertTrue($this->containsEntry($unknown, 'BOOK', 999999));
+    }
+
+    public function testImportRejectsUnsupportedVersion(): void
+    {
+        $user = $this->createUser('transfer-version@example.com');
+        $player = $this->createPlayer($user, 'Main');
+        $this->browser()->loginUser($user);
+
+        $this->browser()->jsonRequest('POST', sprintf('/api/players/%d/knowledge/import', $player->getId()), [
+            'version' => 2,
+            'learnedItems' => [],
+        ]);
+        self::assertSame(400, $this->browser()->getResponse()->getStatusCode());
+    }
+
     public function testCannotExportOrImportForeignPlayer(): void
     {
         $owner = $this->createUser('transfer-owner@example.com');
@@ -276,6 +315,22 @@ final class PlayerKnowledgeTransferControllerTest extends WebTestCase
         }
 
         return false;
+    }
+
+    /**
+     * @param array<string, mixed> $payload
+     */
+    private function readIntValue(array $payload, string $key): int
+    {
+        $value = $payload[$key] ?? null;
+        if (is_int($value)) {
+            return $value;
+        }
+        if (is_numeric($value)) {
+            return (int) $value;
+        }
+
+        self::fail(sprintf('Expected int for key "%s".', $key));
     }
 
     /**

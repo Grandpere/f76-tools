@@ -302,10 +302,43 @@ export default class extends Controller {
             return;
         }
 
+        const replace = !this.importMergeCheckboxTarget.checked;
+        const previewResponse = await fetch(this.appendLocaleToUrl(`${this.playersBaseUrlValue}/${this.activePlayerId}/knowledge/preview-import`), {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify({
+                version: Number.isInteger(parsed.version) ? parsed.version : 1,
+                replace,
+                learnedItems: Array.isArray(parsed.learnedItems) ? parsed.learnedItems : [],
+            }),
+        });
+        if (!previewResponse.ok) {
+            this.setState(`${this.t('importPreviewError')} (${previewResponse.status}).`);
+            return;
+        }
+
+        const preview = await previewResponse.json();
+        const unknownItems = Array.isArray(preview.unknownItems) ? preview.unknownItems : [];
+        if (unknownItems.length > 0) {
+            this.setState(this.t('importPreviewUnknown', { '%count%': unknownItems.length }));
+            return;
+        }
+
+        const previewMessage = this.t('importConfirmPreview', {
+            '%add%' : Number(preview.wouldAdd ?? 0),
+            '%remove%': Number(preview.wouldRemove ?? 0),
+        });
+        if (!window.confirm(previewMessage)) {
+            return;
+        }
+
         this.importButtonTarget.disabled = true;
         this.setState(this.t('importingProgress'));
 
-        const replace = !this.importMergeCheckboxTarget.checked;
         const response = await fetch(this.appendLocaleToUrl(`${this.playersBaseUrlValue}/${this.activePlayerId}/knowledge/import`), {
             method: 'POST',
             headers: {
@@ -314,6 +347,7 @@ export default class extends Controller {
             },
             credentials: 'same-origin',
             body: JSON.stringify({
+                version: Number.isInteger(parsed.version) ? parsed.version : 1,
                 replace,
                 learnedItems: Array.isArray(parsed.learnedItems) ? parsed.learnedItems : [],
             }),
