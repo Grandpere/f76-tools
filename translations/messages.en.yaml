@@ -2,9 +2,12 @@ common.language: Language
 common.locale.fr: French
 common.locale.en: English
 common.locale.de: German
+common.yes: Yes
+common.no: No
 
 dashboard.page_title: 'F76 - Item Tracking'
 dashboard.header.translation_management: Translation management
+dashboard.header.user_management: User management
 dashboard.header.title: Learned items tracker
 dashboard.header.subtitle: Select a character, then mark learned Minerva plans and legendary mods.
 dashboard.header.greeting_prefix: Hello
@@ -72,3 +75,49 @@ security.login.title: Login
 security.login.email: Email
 security.login.password: Password
 security.login.submit: Sign in
+security.login.to_register: No account yet? Register
+
+security.register.page_title: Register
+security.register.title: Register
+security.register.email: Email
+security.register.password: Password
+security.register.password_confirm: Confirm password
+security.register.submit: Create account
+security.register.to_login: Already have an account? Sign in
+security.register.flash.invalid_csrf: Invalid session, please try again.
+security.register.flash.invalid_email: Invalid email address.
+security.register.flash.password_too_short: Password must be at least 8 characters long.
+security.register.flash.password_mismatch: Password confirmation does not match.
+security.register.flash.email_exists: An account already exists with this email.
+security.register.flash.success: Account created. You can now sign in.
+
+admin_users.page_title: Users backoffice
+admin_users.kicker: Backoffice
+admin_users.title: User management
+admin_users.back_to_dashboard: Back to dashboard
+admin_users.to_translations: Translation management
+admin_users.create_title: Create user
+admin_users.list_title: User list
+admin_users.email: Email
+admin_users.password: Password
+admin_users.new_password: New password
+admin_users.is_admin: Admin
+admin_users.create_submit: Create
+admin_users.roles: Roles
+admin_users.active: Active
+admin_users.actions: Actions
+admin_users.toggle_active: Toggle active
+admin_users.toggle_admin: Toggle admin
+admin_users.reset_password: Reset password
+admin_users.no_users: No users.
+admin_users.flash.invalid_csrf: Invalid action (CSRF).
+admin_users.flash.user_not_found: User not found.
+admin_users.flash.cannot_change_self_active: You cannot disable your own account.
+admin_users.flash.cannot_change_self_role: You cannot change your own admin role here.
+admin_users.flash.active_updated: Active status updated.
+admin_users.flash.role_updated: Roles updated.
+admin_users.flash.password_too_short: Password must be at least 8 characters long.
+admin_users.flash.password_updated: Password updated.
+admin_users.flash.invalid_email: Invalid email address.
+admin_users.flash.email_exists: An account already exists with this email.
+admin_users.flash.user_created: User created.

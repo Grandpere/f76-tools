@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'security.register.page_title'|trans }}{% endblock %}
+
+{% block body %}
+    <main style="max-width: 420px; margin: 3rem auto; font-family: system-ui, sans-serif;">
+        <h1>{{ 'security.register.title'|trans }}</h1>
+
+        {% for message in app.flashes('success') %}
+            <p style="color: #166534; margin-bottom: 1rem;">{{ message|trans }}</p>
+        {% endfor %}
+        {% for message in app.flashes('warning') %}
+            <p style="color: #b91c1c; margin-bottom: 1rem;">{{ message|trans }}</p>
+        {% endfor %}
+
+        <form method="post">
+            <label for="register-email">{{ 'security.register.email'|trans }}</label>
+            <input
+                id="register-email"
+                name="email"
+                type="email"
+                required
+                autocomplete="email"
+                style="display:block; width:100%; margin:0.25rem 0 1rem; padding:0.5rem;"
+            >
+
+            <label for="register-password">{{ 'security.register.password'|trans }}</label>
+            <input
+                id="register-password"
+                name="password"
+                type="password"
+                required
+                autocomplete="new-password"
+                style="display:block; width:100%; margin:0.25rem 0 1rem; padding:0.5rem;"
+            >
+
+            <label for="register-password-confirm">{{ 'security.register.password_confirm'|trans }}</label>
+            <input
+                id="register-password-confirm"
+                name="password_confirm"
+                type="password"
+                required
+                autocomplete="new-password"
+                style="display:block; width:100%; margin:0.25rem 0 1rem; padding:0.5rem;"
+            >
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
+
+            <button
+                type="submit"
+                style="padding: 0.6rem 1rem; border: 0; background: #111827; color: #fff; cursor: pointer;"
+            >
+                {{ 'security.register.submit'|trans }}
+            </button>
+        </form>
+
+        <p style="margin-top:1rem;">
+            <a href="{{ path('app_login', { locale: app.request.locale }) }}">{{ 'security.register.to_login'|trans }}</a>
+        </p>
+    </main>
+{% endblock %}

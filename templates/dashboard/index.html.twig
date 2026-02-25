@@ -36,7 +36,10 @@
     <main class="catalog-page">
         <header class="catalog-header">
             <div class="catalog-header-tools">
-                <a class="header-translations-link" href="{{ path('app_admin_item_translations', { locale: app.request.locale, target: 'fr' }) }}">{{ 'dashboard.header.translation_management'|trans }}</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="header-translations-link" href="{{ path('app_admin_item_translations', { locale: app.request.locale, target: 'fr' }) }}">{{ 'dashboard.header.translation_management'|trans }}</a>
+                    <a class="header-translations-link" href="{{ path('app_admin_users', { locale: app.request.locale }) }}">{{ 'dashboard.header.user_management'|trans }}</a>
+                {% endif %}
                 <form class="header-locale" method="get">
                     {% if app.request.query.get('player') %}
                         <input type="hidden" name="player" value="{{ app.request.query.get('player') }}">
@@ -44,9 +47,9 @@
                     <img class="header-locale-icon" src="/assets/icons/language.svg" alt="" aria-hidden="true">
                     <label for="header-locale-select">{{ 'common.language'|trans }}</label>
                     <select id="header-locale-select" name="locale" onchange="this.form.submit()">
-                        <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>{{ 'common.locale.fr'|trans }}</option>
-                        <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>{{ 'common.locale.en'|trans }}</option>
-                        <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>{{ 'common.locale.de'|trans }}</option>
+                        <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 {{ 'common.locale.fr'|trans }}</option>
+                        <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 {{ 'common.locale.en'|trans }}</option>
+                        <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>🇩🇪 {{ 'common.locale.de'|trans }}</option>
                     </select>
                 </form>
             </div>

@@ -2,9 +2,12 @@ common.language: Langue
 common.locale.fr: Francais
 common.locale.en: Anglais
 common.locale.de: Allemand
+common.yes: Oui
+common.no: Non
 
 dashboard.page_title: 'F76 - Suivi des objets'
 dashboard.header.translation_management: Gestion des traductions
+dashboard.header.user_management: Gestion des utilisateurs
 dashboard.header.title: Suivi des objets appris
 dashboard.header.subtitle: Selectionne un personnage puis marque ses plans Minerva et ses mods legendaires appris.
 dashboard.header.greeting_prefix: Bonjour
@@ -72,3 +75,49 @@ security.login.title: Connexion
 security.login.email: Email
 security.login.password: Mot de passe
 security.login.submit: Se connecter
+security.login.to_register: Pas encore de compte ? S inscrire
+
+security.register.page_title: Inscription
+security.register.title: Inscription
+security.register.email: Email
+security.register.password: Mot de passe
+security.register.password_confirm: Confirmer le mot de passe
+security.register.submit: Creer mon compte
+security.register.to_login: Deja un compte ? Se connecter
+security.register.flash.invalid_csrf: Session invalide, merci de reessayer.
+security.register.flash.invalid_email: Adresse email invalide.
+security.register.flash.password_too_short: Le mot de passe doit contenir au moins 8 caracteres.
+security.register.flash.password_mismatch: Les deux mots de passe sont differents.
+security.register.flash.email_exists: Un compte existe deja avec cet email.
+security.register.flash.success: Compte cree. Vous pouvez maintenant vous connecter.
+
+admin_users.page_title: Backoffice utilisateurs
+admin_users.kicker: Backoffice
+admin_users.title: Gestion des utilisateurs
+admin_users.back_to_dashboard: Retour au dashboard
+admin_users.to_translations: Gestion des traductions
+admin_users.create_title: Creer un utilisateur
+admin_users.list_title: Liste des utilisateurs
+admin_users.email: Email
+admin_users.password: Mot de passe
+admin_users.new_password: Nouveau mot de passe
+admin_users.is_admin: Admin
+admin_users.create_submit: Creer
+admin_users.roles: Roles
+admin_users.active: Actif
+admin_users.actions: Actions
+admin_users.toggle_active: Activer/Desactiver
+admin_users.toggle_admin: Basculer admin
+admin_users.reset_password: Reinitialiser mot de passe
+admin_users.no_users: Aucun utilisateur.
+admin_users.flash.invalid_csrf: Action invalide (CSRF).
+admin_users.flash.user_not_found: Utilisateur introuvable.
+admin_users.flash.cannot_change_self_active: Vous ne pouvez pas desactiver votre propre compte.
+admin_users.flash.cannot_change_self_role: Vous ne pouvez pas modifier votre propre role admin ici.
+admin_users.flash.active_updated: Statut actif mis a jour.
+admin_users.flash.role_updated: Roles mis a jour.
+admin_users.flash.password_too_short: Le mot de passe doit contenir au moins 8 caracteres.
+admin_users.flash.password_updated: Mot de passe mis a jour.
+admin_users.flash.invalid_email: Adresse email invalide.
+admin_users.flash.email_exists: Un compte existe deja avec cet email.
+admin_users.flash.user_created: Utilisateur cree.

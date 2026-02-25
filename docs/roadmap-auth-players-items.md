@@ -89,6 +89,15 @@ Permettre a un utilisateur authentifie de:
 - [x] Textes UI localises via `translations/messages.{fr,en,de}.yaml` (Twig + messages JS).
 - [ ] Ajouter pagination UI si la grille devient trop lourde.
 
+## Phase 7 - Comptes utilisateurs
+- [x] Inscription publique `GET/POST /register` (email + mot de passe + confirmation + CSRF).
+- [x] Backoffice utilisateurs `GET /admin/users` (ROLE_ADMIN):
+  - [x] creation user,
+  - [x] toggle actif,
+  - [x] toggle role admin,
+  - [x] reset mot de passe.
+- [x] Protection acces `/admin/*` reservee ROLE_ADMIN.
+
 ## Risques / Decisions a figer
 - [x] Decider le modele exact learned:
   - [ ] `isLearned` bool (historique simple),

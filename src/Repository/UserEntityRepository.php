@@ -34,4 +34,18 @@ final class UserEntityRepository extends ServiceEntityRepository implements User
             'email' => mb_strtolower(trim($email)),
         ]);
     }
+
+    /**
+     * @return list<UserEntity>
+     */
+    public function findAllOrdered(): array
+    {
+        $result = $this->createQueryBuilder('u')
+            ->orderBy('u.email', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        /** @var list<UserEntity> $result */
+        return $result;
+    }
 }

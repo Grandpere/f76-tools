@@ -20,6 +20,8 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - Textes UI (dashboard + backoffice) externalises dans `translations/messages.{fr,en,de}.yaml`.
 - Page de connexion localisee aussi via `messages.*.yaml`; tests fonctionnels login eviteront les libelles localises (selection formulaire CSS).
 - Header UI: emojis remplaces par SVG (`language.svg`, `logout.svg`) pour rendu cross-OS stable.
+- Inscription publique activee via `/register` (validation email/mdp + CSRF).
+- Backoffice utilisateurs ajoute via `/admin/users` (ROLE_ADMIN) avec actions create/toggle/reset password.
 - Metadonnees d'acquisition/sources item materialisees en colonnes SQL (`is_new`, `drop_*`, `vendor_*`, `info_html`, `drop_sources_html`) plutot qu'en lecture runtime de `payload`.
 - `relations` (legendary mods) materialise en colonne SQL `relations_html` et affiche en front avec icones locales.
 - Traductions generees/maj dans:
@@ -118,3 +120,4 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - `make phpunit-functional`
   - `make phpunit-integration`
   - ne pas executer `make phpunit-functional`/`make phpunit-integration` automatiquement sans demande explicite utilisateur.
+  - nouveaux tests fonctionnels: `Security/RegistrationControllerTest` et `Admin/UserManagementControllerTest`.

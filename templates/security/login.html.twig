@@ -44,5 +44,9 @@
                 {{ 'security.login.submit'|trans }}
             </button>
         </form>
+
+        <p style="margin-top:1rem;">
+            <a href="{{ path('app_register', { locale: app.request.locale }) }}">{{ 'security.login.to_register'|trans }}</a>
+        </p>
     </main>
 {% endblock %}
