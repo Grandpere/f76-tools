@@ -373,6 +373,14 @@ body::before {
     margin: 0;
 }
 
+.item-info-html p + p {
+    margin-top: 0.58rem;
+}
+
+.item-info-html + .item-extra-line {
+    margin-top: 0.72rem;
+}
+
 .item-relations-html img,
 .item-source-icons img,
 .item-drop-sources img {
@@ -402,7 +410,7 @@ body::before {
 }
 
 .item-prices .price-new {
-    color: #f3f7ff;
+    color: var(--ok);
     font-weight: 700;
 }
 
