@@ -589,6 +589,8 @@ body::before {
 
 .translations-header {
     position: relative;
+    display: flex;
+    flex-direction: column;
     padding: 1.2rem 1.25rem;
     border: 1px solid rgba(255, 210, 74, 0.35);
     border-radius: 18px;
@@ -608,7 +610,7 @@ body::before {
 }
 
 .translations-header .header-locale {
-    margin-left: auto;
+    align-self: flex-end;
     margin-bottom: 0.45rem;
     width: fit-content;
 }
@@ -794,7 +796,7 @@ body::before {
     }
 
     .translations-header .header-locale {
-        margin-left: 0;
+        align-self: flex-start;
     }
 
     .catalog-toolbar {

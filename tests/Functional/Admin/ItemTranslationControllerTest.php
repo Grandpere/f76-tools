@@ -95,7 +95,7 @@ final class ItemTranslationControllerTest extends WebTestCase
     {
         $user = (new UserEntity())
             ->setEmail($email)
-            ->setRoles(['ROLE_USER'])
+            ->setRoles(['ROLE_ADMIN'])
             ->setPassword('$2y$13$5QzWfXyM7FuU7f1w8rRZBupJrbj5gaMmkX6A8hA1z7f4h56yQW2mS');
 
         $this->entityManager?->persist($user);
