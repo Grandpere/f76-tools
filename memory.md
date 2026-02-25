@@ -15,6 +15,8 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 
 ## Decisions techniques prises
 - `Item` stocke des cles de traduction (`nameKey`, `descKey`) et non les textes EN/DE en base.
+- Locale activee via query param `?locale=` (en/de/fr) + persistance session via subscriber.
+- Fallback traduction configure vers `en` pour eviter les cles brutes si locale incomplète.
 - Metadonnees d'acquisition/sources item materialisees en colonnes SQL (`is_new`, `drop_*`, `vendor_*`, `info_html`, `drop_sources_html`) plutot qu'en lecture runtime de `payload`.
 - `relations` (legendary mods) materialise en colonne SQL `relations_html` et affiche en front avec icones locales.
 - Traductions generees/maj dans:
@@ -85,6 +87,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - route `GET/POST /admin/translations/items` (locale par query, defaut `fr`) pour editer `items.<locale>.yaml`.
   - edition cible uniquement les cles `item.misc.*` et `item.book.*`; source de reference = `items.en.yaml` + contexte `items.de.yaml`.
   - ecriture via `TranslationCatalogWriter` pour conserver la structure en sections.
+  - UX edition: textarea agrandie + auto-resize, refs EN/DE affichees sous le champ cible.
 - Verification data JSON:
   - eviter les one-liners shell fragiles avec regex/globs; preferer heredoc PHP pour checks ponctuels fiables.
 

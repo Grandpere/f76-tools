@@ -84,6 +84,8 @@ Permettre a un utilisateur authentifie de:
 - [x] Filtre par locale (defaut `fr`) et recherche texte.
 - [x] Edition des cles `item.misc.*` et `item.book.*` basee sur `items.en.yaml`.
 - [x] Sauvegarde dans `translations/items.<locale>.yaml` via `TranslationCatalogWriter`.
+- [x] Locale applicative activee via `?locale=` (en/de/fr), conservee en session.
+- [x] Fallback traducteur vers `en` quand la locale cible n'est pas complete.
 - [ ] Ajouter pagination UI si la grille devient trop lourde.
 
 ## Risques / Decisions a figer
