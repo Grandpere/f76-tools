@@ -134,6 +134,7 @@ security.reset.flash.success: Passwort aktualisiert. Sie konnen sich jetzt anmel
 admin_users.page_title: Benutzer-Backoffice
 admin_users.kicker: Backoffice
 admin_users.title: Benutzerverwaltung
+admin_users.description: Konten aktivieren/deaktivieren, Admin-Rechte verwalten und Reset-Links erzeugen.
 admin_users.back_to_dashboard: Zuruck zum Dashboard
 admin_users.to_translations: Ubersetzungsverwaltung
 admin_users.to_audit_logs: Audit-Logs
@@ -159,6 +160,7 @@ admin_users.flash.reset_link_global_rate_limited: Zu viele Links erstellt (%coun
 admin_audit.page_title: Audit-Logs Backoffice
 admin_audit.kicker: Backoffice
 admin_audit.title: Audit-Logs
+admin_audit.description: Verlauf sensibler Admin-Aktionen mit Filtern und CSV-Export einsehen.
 admin_audit.back_to_dashboard: Zuruck zum Dashboard
 admin_audit.search: Suche
 admin_audit.search_placeholder: E-Mail Akteur/Ziel oder Aktion

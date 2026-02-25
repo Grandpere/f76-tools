@@ -134,6 +134,7 @@ security.reset.flash.success: Mot de passe mis a jour. Vous pouvez vous connecte
 admin_users.page_title: Backoffice utilisateurs
 admin_users.kicker: Backoffice
 admin_users.title: Gestion des utilisateurs
+admin_users.description: Activez/desactivez les comptes, gerez les droits admin et generez des liens de reinitialisation.
 admin_users.back_to_dashboard: Retour au dashboard
 admin_users.to_translations: Gestion des traductions
 admin_users.to_audit_logs: Logs d audit
@@ -159,6 +160,7 @@ admin_users.flash.reset_link_global_rate_limited: Trop de liens generes (%count%
 admin_audit.page_title: Backoffice logs d audit
 admin_audit.kicker: Backoffice
 admin_audit.title: Logs d audit
+admin_audit.description: Consultez l historique des actions sensibles admin avec filtres et export CSV.
 admin_audit.back_to_dashboard: Retour au dashboard
 admin_audit.search: Recherche
 admin_audit.search_placeholder: Email acteur/cible ou action

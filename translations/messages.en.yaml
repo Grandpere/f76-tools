@@ -134,6 +134,7 @@ security.reset.flash.success: Password updated. You can now sign in.
 admin_users.page_title: Users backoffice
 admin_users.kicker: Backoffice
 admin_users.title: User management
+admin_users.description: Enable/disable accounts, manage admin rights, and generate reset links.
 admin_users.back_to_dashboard: Back to dashboard
 admin_users.to_translations: Translation management
 admin_users.to_audit_logs: Audit logs
@@ -159,6 +160,7 @@ admin_users.flash.reset_link_global_rate_limited: Too many links generated (%cou
 admin_audit.page_title: Audit logs backoffice
 admin_audit.kicker: Backoffice
 admin_audit.title: Audit logs
+admin_audit.description: Review sensitive admin actions with filters and CSV export.
 admin_audit.back_to_dashboard: Back to dashboard
 admin_audit.search: Search
 admin_audit.search_placeholder: Actor/target email or action
