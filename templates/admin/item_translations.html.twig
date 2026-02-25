@@ -12,9 +12,9 @@
                 {% endif %}
                 <label for="admin-header-locale-select">{{ 'common.language'|trans }}</label>
                 <select id="admin-header-locale-select" name="locale" onchange="this.form.submit()">
-                    <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 Francais</option>
-                    <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 English</option>
-                    <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>🇩🇪 Deutsch</option>
+                    <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 {{ 'common.locale.fr'|trans }}</option>
+                    <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 {{ 'common.locale.en'|trans }}</option>
+                    <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>🇩🇪 {{ 'common.locale.de'|trans }}</option>
                 </select>
             </form>
             <p class="catalog-kicker">{{ 'admin_translations.kicker'|trans }}</p>

@@ -1,4 +1,7 @@
 common.language: Language
+common.locale.fr: French
+common.locale.en: English
+common.locale.de: German
 
 dashboard.page_title: 'F76 - Item Tracking'
 dashboard.header.translation_management: Translation management

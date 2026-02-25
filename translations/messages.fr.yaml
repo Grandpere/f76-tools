@@ -1,4 +1,7 @@
 common.language: Langue
+common.locale.fr: Francais
+common.locale.en: Anglais
+common.locale.de: Allemand
 
 dashboard.page_title: 'F76 - Suivi des objets'
 dashboard.header.translation_management: Gestion des traductions

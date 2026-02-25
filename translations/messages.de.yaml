@@ -1,4 +1,7 @@
 common.language: Sprache
+common.locale.fr: Franzosisch
+common.locale.en: Englisch
+common.locale.de: Deutsch
 
 dashboard.page_title: 'F76 - Objektverfolgung'
 dashboard.header.translation_management: Ubersetzungsverwaltung
