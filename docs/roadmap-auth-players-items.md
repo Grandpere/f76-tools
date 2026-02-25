@@ -102,6 +102,7 @@ Permettre a un utilisateur authentifie de:
 - [x] Cooldown serveur sur generation de lien reset (anti-spam).
 - [x] Limite globale de generation de liens reset par admin sur fenetre courte.
 - [x] Export CSV des logs d audit avec filtres.
+- [x] Commande console de purge des logs d audit anciens.
 
 ## Risques / Decisions a figer
 - [x] Decider le modele exact learned:

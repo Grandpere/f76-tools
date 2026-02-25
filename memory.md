@@ -118,6 +118,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - actions tracees: `user_toggle_active`, `user_toggle_admin`, `user_generate_reset_link`.
   - vue admin read-only `GET /admin/audit-logs` avec recherche, filtre `action` et pagination.
   - export CSV disponible via `GET /admin/audit-logs/export.csv` (filtres `q`/`action`).
+  - commande de maintenance: `app:admin:audit:purge --days=<N> [--dry-run]`.
 - Verification data JSON:
   - eviter les one-liners shell fragiles avec regex/globs; preferer heredoc PHP pour checks ponctuels fiables.
 - Symfony controller translation:
@@ -130,6 +131,10 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - `docker compose exec app php bin/console app:items:import data`
 - Migration:
   - `docker compose exec app php bin/console doctrine:migrations:migrate -n`
+- Purge logs audit (dry-run):
+  - `docker compose exec app php bin/console app:admin:audit:purge --days=90 --dry-run`
+- Purge logs audit (reel):
+  - `docker compose exec app php bin/console app:admin:audit:purge --days=90`
 - Analyse statique:
   - `make phpstan`
 - Tests:

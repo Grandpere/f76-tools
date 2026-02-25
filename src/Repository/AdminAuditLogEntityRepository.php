@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Contract\AdminAuditLogPurgerInterface;
 use App\Entity\AdminAuditLogEntity;
 use App\Entity\UserEntity;
 use DateTimeImmutable;
@@ -23,6 +24,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @extends ServiceEntityRepository<AdminAuditLogEntity>
  */
 final class AdminAuditLogEntityRepository extends ServiceEntityRepository
+    implements AdminAuditLogPurgerInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -153,5 +155,33 @@ final class AdminAuditLogEntityRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
 
         return (int) $count;
+    }
+
+    public function countOlderThan(DateTimeImmutable $cutoff): int
+    {
+        $count = $this->createQueryBuilder('a')
+            ->select('COUNT(a.id)')
+            ->where('a.occurredAt < :cutoff')
+            ->setParameter('cutoff', $cutoff)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return (int) $count;
+    }
+
+    public function deleteOlderThan(DateTimeImmutable $cutoff): int
+    {
+        $result = $this->createQueryBuilder('a')
+            ->delete()
+            ->where('a.occurredAt < :cutoff')
+            ->setParameter('cutoff', $cutoff)
+            ->getQuery()
+            ->execute();
+
+        if (!is_int($result)) {
+            throw new \RuntimeException('Unexpected delete result type for admin audit log purge.');
+        }
+
+        return $result;
     }
 }
