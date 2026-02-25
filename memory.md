@@ -21,7 +21,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - Page de connexion localisee aussi via `messages.*.yaml`; tests fonctionnels login eviteront les libelles localises (selection formulaire CSS).
 - Header UI: emojis remplaces par SVG (`language.svg`, `logout.svg`) pour rendu cross-OS stable.
 - Inscription publique activee via `/register` (validation email/mdp + CSRF).
-- Backoffice utilisateurs ajoute via `/admin/users` (ROLE_ADMIN) avec actions create/toggle/reset password.
+- Backoffice utilisateurs ajoute via `/admin/users` (ROLE_ADMIN) avec actions de gestion seulement (toggle actif, toggle admin, reset password); pas de creation depuis admin pour eviter de choisir un mot de passe pour autrui.
 - Metadonnees d'acquisition/sources item materialisees en colonnes SQL (`is_new`, `drop_*`, `vendor_*`, `info_html`, `drop_sources_html`) plutot qu'en lecture runtime de `payload`.
 - `relations` (legendary mods) materialise en colonne SQL `relations_html` et affiche en front avec icones locales.
 - Traductions generees/maj dans:

@@ -92,10 +92,10 @@ Permettre a un utilisateur authentifie de:
 ## Phase 7 - Comptes utilisateurs
 - [x] Inscription publique `GET/POST /register` (email + mot de passe + confirmation + CSRF).
 - [x] Backoffice utilisateurs `GET /admin/users` (ROLE_ADMIN):
-  - [x] creation user,
   - [x] toggle actif,
   - [x] toggle role admin,
   - [x] reset mot de passe.
+- [x] Decision securite: pas de creation d utilisateur via backoffice admin (creation via inscription publique ou commandes console).
 - [x] Protection acces `/admin/*` reservee ROLE_ADMIN.
 
 ## Risques / Decisions a figer

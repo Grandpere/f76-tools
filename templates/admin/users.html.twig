@@ -30,26 +30,6 @@
         {% endfor %}
 
         <section class="translations-panel">
-            <h2>{{ 'admin_users.create_title'|trans }}</h2>
-            <form method="post" class="translations-filters">
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_create') }}">
-                <label class="field">
-                    <span>{{ 'admin_users.email'|trans }}</span>
-                    <input type="email" name="email" required autocomplete="email">
-                </label>
-                <label class="field">
-                    <span>{{ 'admin_users.password'|trans }}</span>
-                    <input type="password" name="password" required autocomplete="new-password">
-                </label>
-                <label class="field" style="justify-content:end;">
-                    <span>{{ 'admin_users.is_admin'|trans }}</span>
-                    <input type="checkbox" name="is_admin" value="1" style="width:auto; align-self:flex-start;">
-                </label>
-                <button type="submit">{{ 'admin_users.create_submit'|trans }}</button>
-            </form>
-        </section>
-
-        <section class="translations-panel">
             <h2>{{ 'admin_users.list_title'|trans }}</h2>
             <div class="translations-table-wrap">
                 <table class="translations-table">

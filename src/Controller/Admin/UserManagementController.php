@@ -37,14 +37,10 @@ final class UserManagementController extends AbstractController
     ) {
     }
 
-    #[Route('', name: 'app_admin_users', methods: ['GET', 'POST'])]
-    public function index(Request $request): Response
+    #[Route('', name: 'app_admin_users', methods: ['GET'])]
+    public function index(): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
-        if ($request->isMethod('POST')) {
-            return $this->handleCreate($request);
-        }
 
         return $this->render('admin/users.html.twig', [
             'users' => $this->userRepository->findAllOrdered(),
@@ -145,53 +141,6 @@ final class UserManagementController extends AbstractController
         $user->setPassword($this->passwordHasher->hashPassword($user, $newPassword));
         $this->entityManager->flush();
         $this->addFlash('success', 'admin_users.flash.password_updated');
-
-        return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
-    }
-
-    private function handleCreate(Request $request): RedirectResponse
-    {
-        if (!$this->isValidToken($request, 'admin_users_create')) {
-            $this->addFlash('warning', 'admin_users.flash.invalid_csrf');
-
-            return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
-        }
-
-        $email = mb_strtolower(trim((string) $request->request->get('email', '')));
-        $password = (string) $request->request->get('password', '');
-        $isAdmin = '1' === (string) $request->request->get('is_admin', '0');
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $this->addFlash('warning', 'admin_users.flash.invalid_email');
-
-            return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
-        }
-
-        if (strlen($password) < 8) {
-            $this->addFlash('warning', 'admin_users.flash.password_too_short');
-
-            return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
-        }
-
-        if ($this->userRepository->findOneByEmail($email) instanceof UserEntity) {
-            $this->addFlash('warning', 'admin_users.flash.email_exists');
-
-            return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
-        }
-
-        $roles = ['ROLE_USER'];
-        if ($isAdmin) {
-            $roles[] = 'ROLE_ADMIN';
-        }
-
-        $user = (new UserEntity())
-            ->setEmail($email)
-            ->setRoles($roles);
-        $user->setPassword($this->passwordHasher->hashPassword($user, $password));
-
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
-        $this->addFlash('success', 'admin_users.flash.user_created');
 
         return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
     }

@@ -96,13 +96,9 @@ admin_users.kicker: Backoffice
 admin_users.title: User management
 admin_users.back_to_dashboard: Back to dashboard
 admin_users.to_translations: Translation management
-admin_users.create_title: Create user
 admin_users.list_title: User list
 admin_users.email: Email
-admin_users.password: Password
 admin_users.new_password: New password
-admin_users.is_admin: Admin
-admin_users.create_submit: Create
 admin_users.roles: Roles
 admin_users.active: Active
 admin_users.actions: Actions
@@ -118,6 +114,3 @@ admin_users.flash.active_updated: Active status updated.
 admin_users.flash.role_updated: Roles updated.
 admin_users.flash.password_too_short: Password must be at least 8 characters long.
 admin_users.flash.password_updated: Password updated.
-admin_users.flash.invalid_email: Invalid email address.
-admin_users.flash.email_exists: An account already exists with this email.
-admin_users.flash.user_created: User created.

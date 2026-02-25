@@ -52,26 +52,15 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertSame(403, $this->browser()->getResponse()->getStatusCode());
     }
 
-    public function testAdminCanCreateAndToggleUser(): void
+    public function testAdminCanToggleExistingUser(): void
     {
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed@example.com', 'secret123', ['ROLE_USER']);
         $this->browser()->loginUser($admin);
 
-        $this->browser()->request('POST', '/admin/users', [
-            '_csrf_token' => $this->csrfToken('admin_users_create'),
-            'email' => 'managed@example.com',
-            'password' => 'secret123',
-            'is_admin' => '1',
-        ]);
-        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-
-        $created = $this->findUserByEmail('managed@example.com');
-        self::assertInstanceOf(UserEntity::class, $created);
-        self::assertTrue(in_array('ROLE_ADMIN', $created->getRoles(), true));
-        self::assertTrue($created->isActive());
-
-        $this->browser()->request('POST', sprintf('/admin/users/%d/toggle-active', $created->getId()), [
-            '_csrf_token' => $this->csrfToken('admin_users_toggle_active_'.$created->getId()),
+        self::assertTrue($managed->isActive());
+        $this->browser()->request('POST', sprintf('/admin/users/%d/toggle-active', $managed->getId()), [
+            '_csrf_token' => $this->csrfToken('admin_users_toggle_active_'.$managed->getId()),
         ]);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
 
