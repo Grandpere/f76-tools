@@ -41,11 +41,12 @@
                     {% if app.request.query.get('player') %}
                         <input type="hidden" name="player" value="{{ app.request.query.get('player') }}">
                     {% endif %}
+                    <img class="header-locale-icon" src="/assets/icons/language.svg" alt="" aria-hidden="true">
                     <label for="header-locale-select">{{ 'common.language'|trans }}</label>
                     <select id="header-locale-select" name="locale" onchange="this.form.submit()">
-                        <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 {{ 'common.locale.fr'|trans }}</option>
-                        <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 {{ 'common.locale.en'|trans }}</option>
-                        <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>🇩🇪 {{ 'common.locale.de'|trans }}</option>
+                        <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>{{ 'common.locale.fr'|trans }}</option>
+                        <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>{{ 'common.locale.en'|trans }}</option>
+                        <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>{{ 'common.locale.de'|trans }}</option>
                     </select>
                 </form>
             </div>
@@ -54,7 +55,7 @@
             <p class="catalog-subtitle">{{ 'dashboard.header.subtitle'|trans }}</p>
             <p class="catalog-user">
                 {{ 'dashboard.header.greeting_prefix'|trans }} <strong>{{ username }}</strong>
-                · <a href="{{ path('app_logout', { locale: app.request.locale }) }}"><span aria-hidden="true">🚪</span> {{ 'dashboard.header.logout'|trans }}</a>
+                · <a href="{{ path('app_logout', { locale: app.request.locale }) }}"><img class="logout-icon" src="/assets/icons/logout.svg" alt="" aria-hidden="true"> {{ 'dashboard.header.logout'|trans }}</a>
             </p>
         </header>
 

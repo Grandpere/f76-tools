@@ -109,6 +109,9 @@ body::before {
 .catalog-user a {
     color: var(--accent-2);
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28rem;
 }
 
 .catalog-user a:hover {
@@ -134,6 +137,12 @@ body::before {
     border: 1px solid rgba(255, 210, 74, 0.34);
     border-radius: 999px;
     padding: 0.22rem 0.45rem 0.22rem 0.62rem;
+}
+
+.header-locale-icon {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
 }
 
 .header-locale label {
@@ -169,6 +178,12 @@ body::before {
 .header-locale select:focus {
     outline: none;
     border-color: rgba(255, 221, 118, 0.95);
+}
+
+.logout-icon {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 auto;
 }
 
 .catalog-shell {
