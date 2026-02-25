@@ -8,7 +8,11 @@
             <p class="catalog-kicker">Fallout 76</p>
             <h1>Item Knowledge Tracker</h1>
             <p class="catalog-subtitle">Selectionne un player puis marque ses plans Minerva et legendary mods.</p>
-            <p class="catalog-user">Connecte: <strong>{{ username }}</strong> · <a href="{{ path('app_logout') }}">Logout</a></p>
+            <p class="catalog-user">
+                Connecte: <strong>{{ username }}</strong>
+                · <a href="{{ path('app_admin_item_translations') }}">Backoffice traductions</a>
+                · <a href="{{ path('app_logout') }}">Logout</a>
+            </p>
         </header>
 
         <section

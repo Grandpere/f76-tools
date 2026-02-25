@@ -76,7 +76,15 @@ Permettre a un utilisateur authentifie de:
   - [x] marquage learned/unlearned
   - [x] interdiction acces cross-user
   - [x] rendu dashboard catalogue auth
+  - [x] backoffice traductions items (acces + sauvegarde)
 - [ ] Garder `make phpstan` et tests verts a chaque phase.
+
+## Phase 6 - Backoffice traductions
+- [x] Route backoffice `GET/POST /admin/translations/items`.
+- [x] Filtre par locale (defaut `fr`) et recherche texte.
+- [x] Edition des cles `item.misc.*` et `item.book.*` basee sur `items.en.yaml`.
+- [x] Sauvegarde dans `translations/items.<locale>.yaml` via `TranslationCatalogWriter`.
+- [ ] Ajouter pagination UI si la grille devient trop lourde.
 
 ## Risques / Decisions a figer
 - [x] Decider le modele exact learned:
@@ -92,3 +100,4 @@ Permettre a un utilisateur authentifie de:
 - [ ] Le user cree au moins un player.
 - [ ] Le user marque learned/unlearned sur items.
 - [ ] Le statut est persiste et reaffiche correctement.
+- [x] Les traductions FR peuvent etre ajoutees/maj sans re-import JSON.

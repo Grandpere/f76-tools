@@ -11,6 +11,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - A chaque nouvelle fonctionnalite, ajouter des tests dans le meme lot (ne pas repousser).
 - A la fin de chaque lot, indiquer explicitement si l'utilisateur a des commandes a lancer (et lesquelles).
 - Ne plus lancer `make phpunit-functional` automatiquement: proposer son execution a la fin pour que l'utilisateur decide (cout tokens).
+- Continuer a rappeler en fin de lot les commandes manuelles a lancer (notamment tests fonctionnels/integration) avant de considerer la feature validee.
 
 ## Decisions techniques prises
 - `Item` stocke des cles de traduction (`nameKey`, `descKey`) et non les textes EN/DE en base.
@@ -80,6 +81,12 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - evite les mocks de classes `final` dans les tests unitaires.
 - Sortie console Symfony:
   - les messages d erreur peuvent etre wraps sur plusieurs lignes; assertions unitaires a faire sur fragments stables.
+- Backoffice traductions:
+  - route `GET/POST /admin/translations/items` (locale par query, defaut `fr`) pour editer `items.<locale>.yaml`.
+  - edition cible uniquement les cles `item.misc.*` et `item.book.*`; source de reference = `items.en.yaml` + contexte `items.de.yaml`.
+  - ecriture via `TranslationCatalogWriter` pour conserver la structure en sections.
+- Verification data JSON:
+  - eviter les one-liners shell fragiles avec regex/globs; preferer heredoc PHP pour checks ponctuels fiables.
 
 ## Commandes utiles
 - Import dry-run:
@@ -94,3 +101,4 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - `make phpunit-unit`
   - `make phpunit-functional`
   - `make phpunit-integration`
+  - ne pas executer `make phpunit-functional`/`make phpunit-integration` automatiquement sans demande explicite utilisateur.

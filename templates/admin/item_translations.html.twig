@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Backoffice Traductions Items{% endblock %}
+
+{% block body %}
+    <main class="translations-page">
+        <header class="translations-header">
+            <p class="catalog-kicker">Backoffice</p>
+            <h1>Traductions des items</h1>
+            <p>Edition du catalogue <code>translations/items.{{ locale }}.yaml</code></p>
+            <p><a href="{{ path('app_dashboard') }}">Retour au dashboard</a></p>
+        </header>
+
+        {% for message in app.flashes('success') %}
+            <p class="translations-flash success">{{ message }}</p>
+        {% endfor %}
+        {% for message in app.flashes('warning') %}
+            <p class="translations-flash warning">{{ message }}</p>
+        {% endfor %}
+
+        <section class="translations-panel">
+            <form method="get" class="translations-filters">
+                <label class="field">
+                    <span>Locale</span>
+                    <input type="text" name="locale" value="{{ locale }}" placeholder="fr">
+                </label>
+                <label class="field">
+                    <span>Recherche</span>
+                    <input type="search" name="q" value="{{ query }}" placeholder="key, EN, DE, cible">
+                </label>
+                <button type="submit">Filtrer</button>
+            </form>
+            <p class="catalog-state">{{ totalRows }} lignes visibles.</p>
+
+            <form method="post">
+                <input type="hidden" name="locale" value="{{ locale }}">
+                <div class="translations-table-wrap">
+                    <table class="translations-table">
+                        <thead>
+                        <tr>
+                            <th>Cle</th>
+                            <th>EN</th>
+                            <th>DE</th>
+                            <th>{{ locale|upper }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% set currentSection = '' %}
+                        {% for row in rows %}
+                            {% if currentSection != row.section %}
+                                {% set currentSection = row.section %}
+                                <tr class="translations-section-row">
+                                    <td colspan="4">
+                                        {% if row.section == 'misc' %}# misc (legendary mod){% else %}# book (minerva plan){% endif %}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            <tr>
+                                <td><code>{{ row.key }}</code></td>
+                                <td>{{ row.en }}</td>
+                                <td>{{ row.de }}</td>
+                                <td>
+                                    <textarea name="entries[{{ row.key }}]" rows="2">{{ row.target }}</textarea>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">Aucune entree.</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="translations-actions">
+                    <button type="submit">Enregistrer</button>
+                </div>
+            </form>
+        </section>
+    </main>
+{% endblock %}
