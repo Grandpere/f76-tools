@@ -116,15 +116,14 @@ body::before {
 }
 
 .catalog-header-tools {
-    position: absolute;
-    top: 0.9rem;
-    right: 1rem;
     display: flex;
     align-items: center;
     gap: 0.6rem;
     flex-wrap: wrap;
     justify-content: flex-end;
-    max-width: min(62vw, 600px);
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 0 0.55rem auto;
 }
 
 .header-locale {
@@ -593,6 +592,12 @@ body::before {
     color: #ced7e5;
 }
 
+.translations-header .header-locale {
+    margin-left: auto;
+    margin-bottom: 0.45rem;
+    width: fit-content;
+}
+
 .translations-header a {
     color: var(--accent-2);
     text-decoration: none;
@@ -763,15 +768,18 @@ body::before {
     }
 
     .catalog-header-tools {
-        position: static;
         max-width: none;
-        margin-bottom: 0.2rem;
+        width: 100%;
+        margin: 0 0 0.25rem 0;
         justify-content: flex-start;
     }
 
     .header-translations-link {
-        position: static;
         margin-bottom: 0.55rem;
+    }
+
+    .translations-header .header-locale {
+        margin-left: 0;
     }
 
     .catalog-toolbar {
