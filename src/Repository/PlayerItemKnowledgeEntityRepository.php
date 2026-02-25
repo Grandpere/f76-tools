@@ -86,7 +86,7 @@ final class PlayerItemKnowledgeEntityRepository extends ServiceEntityRepository
     public function findLearnedItemsByPlayer(PlayerEntity $player): array
     {
         $rows = $this->createQueryBuilder('k')
-            ->select('i')
+            ->addSelect('i')
             ->join('k.item', 'i')
             ->andWhere('k.player = :player')
             ->setParameter('player', $player)
@@ -94,9 +94,19 @@ final class PlayerItemKnowledgeEntityRepository extends ServiceEntityRepository
             ->addOrderBy('i.sourceId', 'ASC')
             ->getQuery()
             ->getResult();
+        if (!is_array($rows)) {
+            return [];
+        }
 
-        /** @var list<ItemEntity> $rows */
-        return $rows;
+        $items = [];
+        foreach ($rows as $row) {
+            if (!$row instanceof PlayerItemKnowledgeEntity) {
+                continue;
+            }
+            $items[] = $row->getItem();
+        }
+
+        return $items;
     }
 
     public function countLearnedByPlayerAndType(PlayerEntity $player, ItemTypeEnum $type): int
