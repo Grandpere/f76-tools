@@ -306,9 +306,7 @@ export default class extends Controller {
         const label = this.escape(item.name || item.nameKey);
         const description = item.description ? `<p>${this.escape(item.description)}</p>` : '';
         const infoBlock = this.renderInfoBlock(item);
-        const relationsBlock = this.renderRelationsBlock(item);
-        const sourceIcons = this.renderDropSources(item);
-        const extraSourceIcons = this.renderExtraSourceIcons(item);
+        const iconsFooter = this.renderIconsFooter(item);
         const dailyOpsLine = item.type === 'BOOK' && item.dropDailyOps && !this.infoContainsDailyOps(item.infoHtml)
             ? '<p class="item-extra-line">Also available as reward from a successful finished daily operation.</p>'
             : '';
@@ -327,12 +325,22 @@ export default class extends Controller {
                 ${priceBlock}
                 ${description}
                 ${infoBlock}
-                ${relationsBlock}
                 ${dailyOpsLine}
-                ${sourceIcons}
-                ${extraSourceIcons}
+                ${iconsFooter}
             </li>
         `;
+    }
+
+    renderIconsFooter(item) {
+        const relationsBlock = this.renderRelationsBlock(item);
+        const sourceIcons = this.renderDropSources(item);
+        const extraSourceIcons = this.renderExtraSourceIcons(item);
+
+        if (relationsBlock === '' && sourceIcons === '' && extraSourceIcons === '') {
+            return '';
+        }
+
+        return `<div class="item-icons-footer">${relationsBlock}${sourceIcons}${extraSourceIcons}</div>`;
     }
 
     renderPriceBlock(item) {
