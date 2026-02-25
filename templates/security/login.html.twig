@@ -3,50 +3,50 @@
 {% block title %}{{ 'security.login.page_title'|trans }}{% endblock %}
 
 {% block body %}
-    <main style="max-width: 420px; margin: 3rem auto; font-family: system-ui, sans-serif;">
-        <h1>{{ 'security.login.title'|trans }}</h1>
+    <main class="auth-page">
+        <section class="auth-card">
+            <p class="catalog-kicker">Fallout 76</p>
+            <h1 class="auth-title">{{ 'security.login.title'|trans }}</h1>
 
-        {% if error %}
-            <p style="color: #b91c1c; margin-bottom: 1rem;">
-                {{ error.messageKey|trans(error.messageData, 'security') }}
+            {% if error %}
+                <p class="auth-alert auth-alert-warning">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </p>
+            {% endif %}
+
+            <form method="post" class="auth-form">
+                <label class="auth-field" for="username">
+                    <span>{{ 'security.login.email'|trans }}</span>
+                    <input
+                        id="username"
+                        name="_username"
+                        type="email"
+                        value="{{ last_username }}"
+                        required
+                        autofocus
+                        autocomplete="username"
+                    >
+                </label>
+
+                <label class="auth-field" for="password">
+                    <span>{{ 'security.login.password'|trans }}</span>
+                    <input
+                        id="password"
+                        name="_password"
+                        type="password"
+                        required
+                        autocomplete="current-password"
+                    >
+                </label>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <button type="submit">{{ 'security.login.submit'|trans }}</button>
+            </form>
+
+            <p class="auth-links">
+                <a href="{{ path('app_register', { locale: app.request.locale }) }}">{{ 'security.login.to_register'|trans }}</a>
             </p>
-        {% endif %}
-
-        <form method="post">
-            <label for="username">{{ 'security.login.email'|trans }}</label>
-            <input
-                id="username"
-                name="_username"
-                type="email"
-                value="{{ last_username }}"
-                required
-                autofocus
-                autocomplete="username"
-                style="display:block; width:100%; margin:0.25rem 0 1rem; padding:0.5rem;"
-            >
-
-            <label for="password">{{ 'security.login.password'|trans }}</label>
-            <input
-                id="password"
-                name="_password"
-                type="password"
-                required
-                autocomplete="current-password"
-                style="display:block; width:100%; margin:0.25rem 0 1rem; padding:0.5rem;"
-            >
-
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-            <button
-                type="submit"
-                style="padding: 0.6rem 1rem; border: 0; background: #111827; color: #fff; cursor: pointer;"
-            >
-                {{ 'security.login.submit'|trans }}
-            </button>
-        </form>
-
-        <p style="margin-top:1rem;">
-            <a href="{{ path('app_register', { locale: app.request.locale }) }}">{{ 'security.login.to_register'|trans }}</a>
-        </p>
+        </section>
     </main>
 {% endblock %}

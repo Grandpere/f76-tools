@@ -186,6 +186,115 @@ body::before {
     flex: 0 0 auto;
 }
 
+.auth-page {
+    position: relative;
+    z-index: 1;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 2.4rem 1rem 2.6rem;
+}
+
+.auth-card {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: linear-gradient(150deg, #ffffff, #f4f2ec);
+    padding: 1rem;
+    box-shadow: var(--card-glow);
+}
+
+.auth-title {
+    margin: 0;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+    font-size: clamp(1.7rem, 3.4vw, 2.2rem);
+    color: var(--text-0);
+}
+
+.auth-form {
+    margin-top: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.72rem;
+}
+
+.auth-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.auth-field span {
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-2);
+    font-weight: 600;
+}
+
+.auth-field input {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 0.62rem 0.72rem;
+    background: #ffffff;
+    color: var(--text-0);
+    font: inherit;
+}
+
+.auth-field input:focus {
+    outline: none;
+    border-color: rgba(230, 185, 0, 0.82);
+    box-shadow: 0 0 0 1px rgba(230, 185, 0, 0.22);
+}
+
+.auth-form button {
+    border: 1px solid rgba(160, 119, 0, 0.38);
+    border-radius: 12px;
+    padding: 0.58rem 0.95rem;
+    cursor: pointer;
+    background: linear-gradient(180deg, #ffe27f, #f4c52b);
+    color: #2a2200;
+    font-weight: 700;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+    align-self: flex-start;
+}
+
+.auth-form button:hover {
+    filter: brightness(1.03);
+}
+
+.auth-alert {
+    margin: 0.75rem 0 0;
+    padding: 0.58rem 0.7rem;
+    border-radius: 10px;
+    font-size: 0.86rem;
+    border: 1px solid transparent;
+}
+
+.auth-alert-success {
+    background: rgba(47, 147, 85, 0.11);
+    color: #1f6840;
+    border-color: rgba(47, 147, 85, 0.38);
+}
+
+.auth-alert-warning {
+    background: rgba(193, 76, 63, 0.11);
+    color: #7b2f27;
+    border-color: rgba(193, 76, 63, 0.42);
+}
+
+.auth-links {
+    margin: 0.85rem 0 0;
+}
+
+.auth-links a {
+    color: #7b6200;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-links a:hover {
+    color: #5f4b00;
+}
+
 .catalog-shell {
     margin-top: 1.2rem;
     padding: 0;
