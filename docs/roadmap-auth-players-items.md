@@ -118,6 +118,26 @@ Permettre a un utilisateur authentifie de:
 - [x] Export CSV des logs d audit avec filtres.
 - [x] Commande console de purge des logs d audit anciens.
 
+## Phase 8 - Securite Auth (a planifier)
+- [ ] Verification d email obligatoire a l inscription:
+  - [ ] ajouter `isEmailVerified` sur `UserEntity`,
+  - [ ] generer un token de verification avec expiration (ex: 24h),
+  - [ ] bloquer la connexion tant que l email n est pas verifie,
+  - [ ] prevoir un endpoint "renvoyer l email de verification" (rate-limite).
+- [ ] Flow public "mot de passe oublie":
+  - [ ] page `GET/POST /forgot-password` (saisie email),
+  - [ ] reponse generique anti-enumeration (ne pas reveler si email existe),
+  - [ ] generation + envoi token reset avec expiration,
+  - [ ] conservation du flow final `GET/POST /reset-password/{token}`.
+- [ ] Anti-bot / anti-abus:
+  - [ ] rate limit sur `/register`, `/login`, `/forgot-password`,
+  - [ ] captcha (Turnstile/hCaptcha) sur register + forgot password,
+  - [ ] journalisation des tentatives sensibles.
+- [ ] Contact:
+  - [ ] page de contact (formulaire),
+  - [ ] anti-spam (honeypot/rate limit/captcha),
+  - [ ] option de livraison: email direct ou stockage DB + backoffice.
+
 ## Risques / Decisions a figer
 - [x] Decider le modele exact learned:
   - [ ] `isLearned` bool (historique simple, non retenu),
