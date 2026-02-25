@@ -419,9 +419,6 @@ export default class extends Controller {
 
     renderSourceBadges(item) {
         const badges = [];
-        if (item.dropRaid) {
-            badges.push('Raid');
-        }
         if (item.dropDailyOps) {
             badges.push('Daily Ops');
         }
