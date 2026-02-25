@@ -117,6 +117,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - table `admin_audit_log` pour tracer les actions sensibles de backoffice users.
   - actions tracees: `user_toggle_active`, `user_toggle_admin`, `user_generate_reset_link`.
   - vue admin read-only `GET /admin/audit-logs` avec recherche, filtre `action` et pagination.
+  - export CSV disponible via `GET /admin/audit-logs/export.csv` (filtres `q`/`action`).
 - Verification data JSON:
   - eviter les one-liners shell fragiles avec regex/globs; preferer heredoc PHP pour checks ponctuels fiables.
 - Symfony controller translation:

@@ -17,6 +17,7 @@ use App\Repository\AdminAuditLogEntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/admin/audit-logs')]
@@ -24,6 +25,7 @@ final class AuditLogController extends AbstractController
 {
     private const DEFAULT_PER_PAGE = 30;
     private const MAX_PER_PAGE = 200;
+    private const EXPORT_MAX_ROWS = 10000;
 
     public function __construct(
         private readonly AdminAuditLogEntityRepository $auditLogRepository,
@@ -59,6 +61,47 @@ final class AuditLogController extends AbstractController
             'perPage' => $perPage,
             'totalPages' => $totalPages,
         ]);
+    }
+
+    #[Route('/export.csv', name: 'app_admin_audit_logs_export', methods: ['GET'])]
+    public function export(Request $request): StreamedResponse
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $query = $this->sanitizeQuery($request->query->get('q'));
+        $action = $this->sanitizeAction($request->query->get('action'));
+        $rows = $this->auditLogRepository->findForExport($query, $action, self::EXPORT_MAX_ROWS);
+
+        $response = new StreamedResponse(function () use ($rows): void {
+            $output = fopen('php://output', 'wb');
+            if (false === $output) {
+                return;
+            }
+
+            fputcsv($output, ['occurred_at', 'action', 'actor_email', 'target_email', 'context_json']);
+            foreach ($rows as $row) {
+                $contextJson = '';
+                if (is_array($row->getContext())) {
+                    $contextJson = (string) json_encode($row->getContext(), JSON_UNESCAPED_SLASHES);
+                }
+
+                fputcsv($output, [
+                    $row->getOccurredAt()->format('Y-m-d H:i:s'),
+                    $row->getAction(),
+                    $row->getActorUser()->getEmail(),
+                    $row->getTargetUser()?->getEmail() ?? '',
+                    $contextJson,
+                ]);
+            }
+
+            fclose($output);
+        });
+
+        $filename = sprintf('admin_audit_logs_%s.csv', (new \DateTimeImmutable())->format('Ymd_His'));
+        $response->headers->set('Content-Type', 'text/csv; charset=UTF-8');
+        $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"', $filename));
+
+        return $response;
     }
 
     private function sanitizeQuery(mixed $value): string

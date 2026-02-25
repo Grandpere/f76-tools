@@ -51,6 +51,15 @@ final class AuditLogControllerTest extends WebTestCase
         self::assertSame(403, $this->browser()->getResponse()->getStatusCode());
     }
 
+    public function testNonAdminCannotExportAuditLogsCsv(): void
+    {
+        $user = $this->createUser('member@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($user);
+        $this->browser()->request('GET', '/admin/audit-logs/export.csv');
+
+        self::assertSame(403, $this->browser()->getResponse()->getStatusCode());
+    }
+
     public function testAdminCanSeeAuditLogsAndFilterByAction(): void
     {
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
@@ -69,6 +78,32 @@ final class AuditLogControllerTest extends WebTestCase
         $this->browser()->request('GET', '/admin/audit-logs?action=user_toggle_active');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $content = $this->browser()->getResponse()->getContent() ?: '';
+        self::assertStringContainsString('user_toggle_active', $content);
+        self::assertStringContainsString('admin@example.com', $content);
+        self::assertStringContainsString('managed@example.com', $content);
+    }
+
+    public function testAdminCanExportAuditLogsCsvWithFilters(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/toggle-active', $managed->getId()), [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $this->browser()->request('GET', '/admin/audit-logs/export.csv?action=user_toggle_active');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertStringContainsString('text/csv', (string) $this->browser()->getResponse()->headers->get('content-type'));
+
+        $content = $this->browser()->getResponse()->getContent() ?: '';
+        self::assertStringContainsString('occurred_at,action,actor_email,target_email,context_json', $content);
         self::assertStringContainsString('user_toggle_active', $content);
         self::assertStringContainsString('admin@example.com', $content);
         self::assertStringContainsString('managed@example.com', $content);

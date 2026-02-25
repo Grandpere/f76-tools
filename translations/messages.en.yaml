@@ -141,6 +141,7 @@ admin_audit.action: Action
 admin_audit.any_action: All actions
 admin_audit.per_page: Rows per page
 admin_audit.filter: Filter
+admin_audit.export_csv: Export CSV
 admin_audit.visible_rows: '%count% visible rows.'
 admin_audit.when: Date
 admin_audit.actor: Actor

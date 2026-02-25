@@ -637,7 +637,8 @@ body::before {
 }
 
 .translations-filters button,
-.translations-actions button {
+.translations-actions button,
+.translations-filters a {
     border: 1px solid rgba(160, 119, 0, 0.38);
     border-radius: 12px;
     padding: 0.56rem 0.95rem;
@@ -646,6 +647,9 @@ body::before {
     color: #2a2200;
     font-weight: 700;
     font-family: 'Rajdhani', 'Inter', sans-serif;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
 }
 
 .translations-table-wrap {

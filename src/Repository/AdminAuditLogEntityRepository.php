@@ -97,6 +97,42 @@ final class AdminAuditLogEntityRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return list<AdminAuditLogEntity>
+     */
+    public function findForExport(string $query, string $action, int $maxRows = 10000): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->leftJoin('a.actorUser', 'actor')
+            ->leftJoin('a.targetUser', 'target')
+            ->addSelect('actor')
+            ->addSelect('target')
+            ->orderBy('a.occurredAt', 'DESC')
+            ->addOrderBy('a.id', 'DESC')
+            ->setMaxResults(max(1, $maxRows));
+
+        if ('' !== $action) {
+            $qb->andWhere('a.action = :action')
+                ->setParameter('action', $action);
+        }
+
+        if ('' !== $query) {
+            $needle = '%'.mb_strtolower($query).'%';
+            $qb->andWhere('LOWER(actor.email) LIKE :needle OR LOWER(target.email) LIKE :needle OR LOWER(a.action) LIKE :needle')
+                ->setParameter('needle', $needle);
+        }
+
+        $result = $qb->getQuery()->getResult();
+        if (!is_array($result)) {
+            return [];
+        }
+
+        /** @var list<AdminAuditLogEntity> $rows */
+        $rows = array_values(array_filter($result, static fn (mixed $row): bool => $row instanceof AdminAuditLogEntity));
+
+        return $rows;
+    }
+
+    /**
      * @param list<string> $actions
      */
     public function countRecentActionsByActor(UserEntity $actor, array $actions, DateTimeImmutable $since): int

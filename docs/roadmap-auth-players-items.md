@@ -101,6 +101,7 @@ Permettre a un utilisateur authentifie de:
 - [x] Page admin de consultation des logs d audit (`GET /admin/audit-logs`) avec filtres/pagination.
 - [x] Cooldown serveur sur generation de lien reset (anti-spam).
 - [x] Limite globale de generation de liens reset par admin sur fenetre courte.
+- [x] Export CSV des logs d audit avec filtres.
 
 ## Risques / Decisions a figer
 - [x] Decider le modele exact learned:
