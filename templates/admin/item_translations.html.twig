@@ -32,15 +32,13 @@
             </form>
             <p class="catalog-state">{{ totalRows }} lignes visibles.</p>
 
-            <form method="post">
+            <form method="post" data-controller="textarea-autosize">
                 <input type="hidden" name="locale" value="{{ locale }}">
                 <div class="translations-table-wrap">
                     <table class="translations-table">
                         <thead>
                         <tr>
                             <th>Cle</th>
-                            <th>EN</th>
-                            <th>DE</th>
                             <th>{{ locale|upper }}</th>
                         </tr>
                         </thead>
@@ -50,22 +48,22 @@
                             {% if currentSection != row.section %}
                                 {% set currentSection = row.section %}
                                 <tr class="translations-section-row">
-                                    <td colspan="4">
+                                    <td colspan="2">
                                         {% if row.section == 'misc' %}# misc (legendary mod){% else %}# book (minerva plan){% endif %}
                                     </td>
                                 </tr>
                             {% endif %}
                             <tr>
                                 <td><code>{{ row.key }}</code></td>
-                                <td>{{ row.en }}</td>
-                                <td>{{ row.de }}</td>
                                 <td>
-                                    <textarea name="entries[{{ row.key }}]" rows="2">{{ row.target }}</textarea>
+                                    <textarea name="entries[{{ row.key }}]" rows="4" data-autosize="true">{{ row.target }}</textarea>
+                                    <p class="translations-help"><strong>EN:</strong> {{ row.en }}</p>
+                                    <p class="translations-help"><strong>DE:</strong> {{ row.de }}</p>
                                 </td>
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan="4">Aucune entree.</td>
+                                <td colspan="2">Aucune entree.</td>
                             </tr>
                         {% endfor %}
                         </tbody>

@@ -540,7 +540,17 @@ body::before {
 .translations-table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 980px;
+    min-width: 860px;
+}
+
+.translations-table th:first-child,
+.translations-table td:first-child {
+    width: 34%;
+}
+
+.translations-table th:last-child,
+.translations-table td:last-child {
+    width: 66%;
 }
 
 .translations-table th,
@@ -562,12 +572,28 @@ body::before {
 
 .translations-table textarea {
     width: 100%;
-    min-height: 56px;
+    min-height: 110px;
     border: 1px solid var(--line);
     border-radius: 8px;
     padding: 0.45rem 0.52rem;
     font: inherit;
     color: var(--text-0);
+    line-height: 1.35;
+    resize: vertical;
+}
+
+.translations-table code {
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.translations-help {
+    margin: 0.38rem 0 0;
+    font-size: 0.78rem;
+    color: var(--text-1);
+    line-height: 1.35;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 
 .translations-section-row td {

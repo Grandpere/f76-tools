@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}F76 Item Tracker{% endblock %}
+{% block title %}F76 - Suivi des objets{% endblock %}
 
 {% block body %}
     <main class="catalog-page">
         <header class="catalog-header">
             <p class="catalog-kicker">Fallout 76</p>
-            <h1>Item Knowledge Tracker</h1>
-            <p class="catalog-subtitle">Selectionne un player puis marque ses plans Minerva et legendary mods.</p>
+            <h1>Suivi des objets appris</h1>
+            <p class="catalog-subtitle">Selectionne un personnage puis marque ses plans Minerva et ses mods legendaires appris.</p>
             <p class="catalog-user">
-                Connecte: <strong>{{ username }}</strong>
-                · <a href="{{ path('app_admin_item_translations') }}">Backoffice traductions</a>
-                · <a href="{{ path('app_logout') }}">Logout</a>
+                Utilisateur connecte: <strong>{{ username }}</strong>
+                · <a href="{{ path('app_admin_item_translations') }}">Backoffice des traductions</a>
+                · <a href="{{ path('app_logout') }}">Se deconnecter</a>
             </p>
         </header>
 
@@ -26,11 +26,11 @@
                 <h2>Filtres</h2>
                 <div class="catalog-toolbar">
                     <label class="field">
-                        <span>Player</span>
+                        <span>Personnage</span>
                         <select data-item-catalog-target="playerSelect"></select>
                     </label>
                     <label class="field">
-                        <span>Nouveau player</span>
+                        <span>Nouveau personnage</span>
                         <div class="field-inline">
                             <input type="text" placeholder="Nom du personnage" data-item-catalog-target="createNameInput">
                             <button type="button" data-item-catalog-target="createButton">Creer</button>
@@ -44,7 +44,7 @@
                         <legend>Filtres sources</legend>
                         <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropRaid"><img src="/assets/icons/GleamingDepthsMarker.svg" alt="">Raid</label>
                         <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropBurningSprings"><img src="/assets/icons/bounty_hunter_ghoul_icon_128.png" alt="">Burning Springs</label>
-                        <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropDailyOps"><img src="/assets/icons/FO76_dailyops_uplink.png" alt="">Daily Ops</label>
+                        <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropDailyOps"><img src="/assets/icons/FO76_dailyops_uplink.png" alt="">Operations quotidiennes</label>
                         <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="vendorRegs"><img src="/assets/icons/Vault79Marker.svg" alt="">Regs</label>
                         <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="vendorSamuel"><img src="/assets/icons/HammerWingMarker.svg" alt="">Samuel</label>
                         <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="vendorMortimer"><img src="/assets/icons/SkullRingMarker.svg" alt="">Mortimer</label>
@@ -53,11 +53,11 @@
                 <p class="catalog-state" data-item-catalog-target="state">Chargement...</p>
             </section>
             <section class="catalog-panel catalog-block">
-                <h2>Legendary Mods (par rank)</h2>
+                <h2>Mods legendaires (par rang)</h2>
                 <div data-item-catalog-target="miscList"></div>
             </section>
             <section class="catalog-panel catalog-block">
-                <h2>Minerva Plans (par liste)</h2>
+                <h2>Plans Minerva (par liste)</h2>
                 <div data-item-catalog-target="bookList"></div>
             </section>
         </section>

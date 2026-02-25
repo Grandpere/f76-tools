@@ -63,7 +63,7 @@ export default class extends Controller {
     }
 
     async loadPlayers() {
-        this.setState('Chargement des players...');
+        this.setState('Chargement des personnages...');
         this.miscListTarget.innerHTML = '';
         this.bookListTarget.innerHTML = '';
 
@@ -72,14 +72,14 @@ export default class extends Controller {
             credentials: 'same-origin',
         });
         if (!response.ok) {
-            this.setState(`Impossible de charger les players (${response.status}).`);
+            this.setState(`Impossible de charger les personnages (${response.status}).`);
             return;
         }
 
         const payload = await response.json();
         this.players = Array.isArray(payload) ? payload : [];
         if (this.players.length === 0) {
-            this.setState('Aucun player. Cree ton premier personnage via l API /api/players.');
+            this.setState('Aucun personnage. Cree ton premier personnage via l API /api/players.');
             return;
         }
 
@@ -91,12 +91,12 @@ export default class extends Controller {
     async createPlayerFromInput() {
         const name = this.createNameInputTarget.value.trim();
         if (name === '') {
-            this.setState('Le nom du player est requis.');
+            this.setState('Le nom du personnage est requis.');
             return;
         }
 
         this.createButtonTarget.disabled = true;
-        this.setState('Creation du player...');
+        this.setState('Creation du personnage...');
 
         const response = await fetch(this.playersUrlValue, {
             method: 'POST',
@@ -112,10 +112,10 @@ export default class extends Controller {
 
         if (!response.ok) {
             if (response.status === 409) {
-                this.setState('Un player avec ce nom existe deja.');
+                this.setState('Un personnage avec ce nom existe deja.');
                 return;
             }
-            this.setState(`Echec creation player (${response.status}).`);
+            this.setState(`Echec de creation du personnage (${response.status}).`);
             return;
         }
 
@@ -132,7 +132,7 @@ export default class extends Controller {
                 await this.loadItems();
             }
         }
-        this.setState(`Player cree: ${name}.`);
+        this.setState(`Personnage cree: ${name}.`);
     }
 
     renderPlayerSelect() {
@@ -155,7 +155,7 @@ export default class extends Controller {
 
     async loadItems() {
         if (!this.activePlayerId) {
-            this.setState('Aucun player selectionne.');
+            this.setState('Aucun personnage selectionne.');
             return;
         }
 
@@ -210,7 +210,7 @@ export default class extends Controller {
     renderItems() {
         const visibleItems = this.getVisibleItems();
         if (visibleItems.length === 0) {
-            this.miscListTarget.innerHTML = '<p>Aucun legendary mod trouve.</p>';
+            this.miscListTarget.innerHTML = '<p>Aucun mod legendaire trouve.</p>';
             this.bookListTarget.innerHTML = '<p>Aucun plan Minerva trouve.</p>';
             return;
         }
@@ -225,7 +225,7 @@ export default class extends Controller {
     renderMiscBlock(items) {
         const miscItems = items.filter((item) => item.type === 'MISC');
         if (miscItems.length === 0) {
-            return '<p>Aucun legendary mod trouve.</p>';
+            return '<p>Aucun mod legendaire trouve.</p>';
         }
 
         const rankMap = new Map();
@@ -246,7 +246,7 @@ export default class extends Controller {
         }
         return ranks.map((rank, index) => `
             <details class="catalog-subgroup" data-accordion-kind="misc" data-accordion-id="${rank}" ${rank === this.openMiscGroup ? 'open' : ''}>
-                <summary>Rank ${this.escape(rank)}</summary>
+                <summary>Rang ${this.escape(rank)}</summary>
                 <ul class="item-grid">${rankMap.get(rank).map((item) => this.renderItemCard(item)).join('')}</ul>
             </details>
         `).join('');
@@ -297,7 +297,7 @@ export default class extends Controller {
             .join('');
 
         return `
-            <p class="catalog-note">Info: un plan present dans plusieurs listes partage le meme etat appris. Cocher une occurrence met a jour les autres.</p>
+            <p class="catalog-note">Info: un plan present dans plusieurs listes partage le meme etat appris. Cocher une occurrence met a jour toutes les autres.</p>
             ${groupsHtml}
         `;
     }
@@ -308,7 +308,7 @@ export default class extends Controller {
         const infoBlock = this.renderInfoBlock(item);
         const iconsFooter = this.renderIconsFooter(item);
         const dailyOpsLine = item.type === 'BOOK' && item.dropDailyOps && !this.infoContainsDailyOps(item.infoHtml)
-            ? '<p class="item-extra-line">Also available as reward from a successful finished daily operation.</p>'
+            ? '<p class="item-extra-line">Disponible aussi en recompense d une operation quotidienne reussie.</p>'
             : '';
         const priceBlock = this.renderPriceBlock(item);
         const learnedClass = item.learned ? 'is-learned' : 'is-unlearned';
@@ -317,7 +317,7 @@ export default class extends Controller {
 
         return `
             <li class="item-card ${learnedClass}">
-                <input class="item-learned-checkbox" type="checkbox" aria-label="Item learned" data-item-checkbox="1" data-item-id="${item.id}" ${checkedAttr}>
+                <input class="item-learned-checkbox" type="checkbox" aria-label="Objet appris" data-item-checkbox="1" data-item-id="${item.id}" ${checkedAttr}>
                 <div class="item-card-head">
                     <strong>${label}</strong>
                     ${newBadge}
@@ -358,7 +358,7 @@ export default class extends Controller {
         if (hasDiscount) {
             return `
                 <p class="item-prices item-prices-discount">
-                    <img src="/assets/icons/Fo76_Icon_Gold_Bullion.png" alt="Gold Bullion">
+                    <img src="/assets/icons/Fo76_Icon_Gold_Bullion.png" alt="Lingot d or">
                     <span class="price-old">${oldPriceLabel}</span>
                     <span class="price-new">${this.escape(minervaPrice)}</span>
                 </p>
@@ -367,7 +367,7 @@ export default class extends Controller {
 
         return `
             <p class="item-prices">
-                <img src="/assets/icons/Fo76_Icon_Gold_Bullion.png" alt="Gold Bullion">
+                <img src="/assets/icons/Fo76_Icon_Gold_Bullion.png" alt="Lingot d or">
                 <span class="price-new">${displayPriceLabel}</span>
             </p>
         `;
@@ -437,7 +437,7 @@ export default class extends Controller {
     renderExtraSourceIcons(item) {
         const icons = [];
         if (item.dropDailyOps) {
-            icons.push('<img src="/assets/icons/FO76_dailyops_uplink.png" alt="Daily Ops" title="Daily Ops">');
+            icons.push('<img src="/assets/icons/FO76_dailyops_uplink.png" alt="Operations quotidiennes" title="Operations quotidiennes">');
         }
         if (item.vendorRegs) {
             icons.push('<img src="/assets/icons/Vault79Marker.svg" alt="Regs" title="Regs">');
