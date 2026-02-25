@@ -73,6 +73,28 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertFalse($updated->isActive());
     }
 
+    public function testAdminCanGenerateResetLinkForExistingUser(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/generate-reset-link"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/generate-reset-link', $managed->getId()), [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $this->entityManager?->clear();
+        $updated = $this->findUserByEmail('managed@example.com');
+        self::assertInstanceOf(UserEntity::class, $updated);
+        self::assertNotNull($updated->getResetPasswordTokenHash());
+        self::assertNotNull($updated->getResetPasswordExpiresAt());
+    }
+
     /**
      * @param list<string> $roles
      */

@@ -90,6 +90,16 @@ security.register.flash.password_too_short: Le mot de passe doit contenir au moi
 security.register.flash.password_mismatch: Les deux mots de passe sont differents.
 security.register.flash.email_exists: Un compte existe deja avec cet email.
 security.register.flash.success: Compte cree. Vous pouvez maintenant vous connecter.
+security.reset.page_title: Reinitialisation du mot de passe
+security.reset.title: Reinitialisation du mot de passe
+security.reset.password: Nouveau mot de passe
+security.reset.password_confirm: Confirmer le mot de passe
+security.reset.submit: Mettre a jour le mot de passe
+security.reset.flash.invalid_or_expired: Lien invalide ou expire.
+security.reset.flash.invalid_csrf: Session invalide, merci de reessayer.
+security.reset.flash.password_too_short: Le mot de passe doit contenir au moins 8 caracteres.
+security.reset.flash.password_mismatch: Les deux mots de passe sont differents.
+security.reset.flash.success: Mot de passe mis a jour. Vous pouvez vous connecter.
 
 admin_users.page_title: Backoffice utilisateurs
 admin_users.kicker: Backoffice
@@ -98,13 +108,12 @@ admin_users.back_to_dashboard: Retour au dashboard
 admin_users.to_translations: Gestion des traductions
 admin_users.list_title: Liste des utilisateurs
 admin_users.email: Email
-admin_users.new_password: Nouveau mot de passe
 admin_users.roles: Roles
 admin_users.active: Actif
 admin_users.actions: Actions
 admin_users.toggle_active: Activer/Desactiver
 admin_users.toggle_admin: Basculer admin
-admin_users.reset_password: Reinitialiser mot de passe
+admin_users.generate_reset_link: Generer un lien de reinitialisation
 admin_users.no_users: Aucun utilisateur.
 admin_users.flash.invalid_csrf: Action invalide (CSRF).
 admin_users.flash.user_not_found: Utilisateur introuvable.
@@ -112,5 +121,4 @@ admin_users.flash.cannot_change_self_active: Vous ne pouvez pas desactiver votre
 admin_users.flash.cannot_change_self_role: Vous ne pouvez pas modifier votre propre role admin ici.
 admin_users.flash.active_updated: Statut actif mis a jour.
 admin_users.flash.role_updated: Roles mis a jour.
-admin_users.flash.password_too_short: Le mot de passe doit contenir au moins 8 caracteres.
-admin_users.flash.password_updated: Mot de passe mis a jour.
+admin_users.flash.reset_link_generated: Lien de reinitialisation genere

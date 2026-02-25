@@ -27,6 +27,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - Traductions generees/maj dans:
   - `translations/items.en.yaml`
   - `translations/items.de.yaml`
+  - `translations/items.fr.yaml` doit rester versionne meme vide (et restera versionne une fois rempli).
 - Structure de fichier traduction attendue:
   - section `# misc (legendary mod)`
   - section `# book (minerva plan)`
@@ -104,8 +105,13 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - UX edition: textarea agrandie + auto-resize, refs EN/DE affichees sous le champ cible.
   - separer langue UI (`locale`) et fichier cible edite (`target`) pour ne pas ecraser les langues source.
   - bloquer l edition directe de `en/de` (cibles fournies), fallback automatique sur `fr`.
+- Reset password:
+  - backoffice users ne doit pas changer directement le mot de passe d un tiers.
+  - action admin = generation d un lien temporaire (token hash + expiration) vers une page publique `/reset-password/{token}`.
 - Verification data JSON:
   - eviter les one-liners shell fragiles avec regex/globs; preferer heredoc PHP pour checks ponctuels fiables.
+- Symfony controller translation:
+  - `AbstractController::trans()` n est pas disponible ici; injecter `TranslatorInterface` explicitement pour garder `phpstan` vert.
 
 ## Commandes utiles
 - Import dry-run:

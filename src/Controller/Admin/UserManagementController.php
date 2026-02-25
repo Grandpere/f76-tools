@@ -15,16 +15,19 @@ namespace App\Controller\Admin;
 
 use App\Entity\UserEntity;
 use App\Repository\UserEntityRepository;
+use DateInterval;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/admin/users')]
 final class UserManagementController extends AbstractController
@@ -32,8 +35,9 @@ final class UserManagementController extends AbstractController
     public function __construct(
         private readonly UserEntityRepository $userRepository,
         private readonly EntityManagerInterface $entityManager,
-        private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
+        private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 
@@ -114,11 +118,11 @@ final class UserManagementController extends AbstractController
         return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
     }
 
-    #[Route('/{id<\d+>}/reset-password', name: 'app_admin_users_reset_password', methods: ['POST'])]
-    public function resetPassword(int $id, Request $request): RedirectResponse
+    #[Route('/{id<\d+>}/generate-reset-link', name: 'app_admin_users_generate_reset_link', methods: ['POST'])]
+    public function generateResetLink(int $id, Request $request): RedirectResponse
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        if (!$this->isValidToken($request, 'admin_users_reset_password_'.$id)) {
+        if (!$this->isValidToken($request, 'admin_users_generate_reset_link_'.$id)) {
             $this->addFlash('warning', 'admin_users.flash.invalid_csrf');
 
             return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
@@ -131,16 +135,20 @@ final class UserManagementController extends AbstractController
             return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
         }
 
-        $newPassword = (string) $request->request->get('new_password', '');
-        if (strlen($newPassword) < 8) {
-            $this->addFlash('warning', 'admin_users.flash.password_too_short');
-
-            return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
-        }
-
-        $user->setPassword($this->passwordHasher->hashPassword($user, $newPassword));
+        $token = bin2hex(random_bytes(32));
+        $tokenHash = hash('sha256', $token);
+        $expiresAt = (new DateTimeImmutable())->add(new DateInterval('PT2H'));
+        $user->setResetPasswordTokenHash($tokenHash);
+        $user->setResetPasswordExpiresAt($expiresAt);
         $this->entityManager->flush();
-        $this->addFlash('success', 'admin_users.flash.password_updated');
+
+        $resetUrl = $this->urlGenerator->generate('app_reset_password', [
+            'locale' => $request->getLocale(),
+            'token' => $token,
+        ], UrlGeneratorInterface::ABSOLUTE_URL);
+
+        $translated = $this->translator->trans('admin_users.flash.reset_link_generated');
+        $this->addFlash('success', sprintf('%s %s', $translated, $resetUrl));
 
         return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
     }

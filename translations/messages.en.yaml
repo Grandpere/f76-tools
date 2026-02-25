@@ -90,6 +90,16 @@ security.register.flash.password_too_short: Password must be at least 8 characte
 security.register.flash.password_mismatch: Password confirmation does not match.
 security.register.flash.email_exists: An account already exists with this email.
 security.register.flash.success: Account created. You can now sign in.
+security.reset.page_title: Reset password
+security.reset.title: Reset password
+security.reset.password: New password
+security.reset.password_confirm: Confirm password
+security.reset.submit: Update password
+security.reset.flash.invalid_or_expired: Invalid or expired link.
+security.reset.flash.invalid_csrf: Invalid session, please try again.
+security.reset.flash.password_too_short: Password must be at least 8 characters long.
+security.reset.flash.password_mismatch: Password confirmation does not match.
+security.reset.flash.success: Password updated. You can now sign in.
 
 admin_users.page_title: Users backoffice
 admin_users.kicker: Backoffice
@@ -98,13 +108,12 @@ admin_users.back_to_dashboard: Back to dashboard
 admin_users.to_translations: Translation management
 admin_users.list_title: User list
 admin_users.email: Email
-admin_users.new_password: New password
 admin_users.roles: Roles
 admin_users.active: Active
 admin_users.actions: Actions
 admin_users.toggle_active: Toggle active
 admin_users.toggle_admin: Toggle admin
-admin_users.reset_password: Reset password
+admin_users.generate_reset_link: Generate reset link
 admin_users.no_users: No users.
 admin_users.flash.invalid_csrf: Invalid action (CSRF).
 admin_users.flash.user_not_found: User not found.
@@ -112,5 +121,4 @@ admin_users.flash.cannot_change_self_active: You cannot disable your own account
 admin_users.flash.cannot_change_self_role: You cannot change your own admin role here.
 admin_users.flash.active_updated: Active status updated.
 admin_users.flash.role_updated: Roles updated.
-admin_users.flash.password_too_short: Password must be at least 8 characters long.
-admin_users.flash.password_updated: Password updated.
+admin_users.flash.reset_link_generated: Password reset link generated

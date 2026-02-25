@@ -57,10 +57,9 @@
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_toggle_admin_' ~ user.id) }}">
                                         <button type="submit">{{ 'admin_users.toggle_admin'|trans }}</button>
                                     </form>
-                                    <form method="post" action="{{ path('app_admin_users_reset_password', { id: user.id, locale: app.request.locale }) }}">
-                                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_reset_password_' ~ user.id) }}">
-                                        <input type="password" name="new_password" placeholder="{{ 'admin_users.new_password'|trans }}" required style="min-width:150px;">
-                                        <button type="submit">{{ 'admin_users.reset_password'|trans }}</button>
+                                    <form method="post" action="{{ path('app_admin_users_generate_reset_link', { id: user.id, locale: app.request.locale }) }}">
+                                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_generate_reset_link_' ~ user.id) }}">
+                                        <button type="submit">{{ 'admin_users.generate_reset_link'|trans }}</button>
                                     </form>
                                 </div>
                             </td>

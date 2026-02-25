@@ -35,6 +35,15 @@ final class UserEntityRepository extends ServiceEntityRepository implements User
         ]);
     }
 
+    public function findOneByResetPasswordTokenHash(string $tokenHash): ?UserEntity
+    {
+        $result = $this->findOneBy([
+            'resetPasswordTokenHash' => $tokenHash,
+        ]);
+
+        return $result instanceof UserEntity ? $result : null;
+    }
+
     /**
      * @return list<UserEntity>
      */
