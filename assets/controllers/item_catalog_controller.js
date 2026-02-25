@@ -305,7 +305,7 @@ export default class extends Controller {
 
     renderItemCard(item) {
         const label = this.escape(item.name || item.nameKey);
-        const description = item.description ? `<p>${this.escape(item.description)}</p>` : '';
+        const description = item.description ? `<p>${this.escapeWithBreaks(item.description)}</p>` : '';
         const infoBlock = this.renderInfoBlock(item);
         const iconsFooter = this.renderIconsFooter(item);
         const dailyOpsLine = item.type === 'BOOK' && item.dropDailyOps && !this.infoContainsDailyOps(item.infoHtml)
@@ -541,6 +541,14 @@ export default class extends Controller {
             .replaceAll('>', '&gt;')
             .replaceAll('"', '&quot;')
             .replaceAll("'", '&#039;');
+    }
+
+    escapeWithBreaks(value) {
+        const escaped = this.escape(value);
+
+        return escaped
+            .replace(/&lt;br\s*\/?&gt;/gi, '<br>')
+            .replace(/\r?\n/g, '<br>');
     }
 
     sanitizeHtml(html) {

@@ -5,19 +5,24 @@
 {% block body %}
     <main class="catalog-page">
         <header class="catalog-header">
+            <a class="header-translations-link" href="{{ path('app_admin_item_translations', { locale: app.request.locale, target: 'fr' }) }}">Gestion des traductions</a>
+            <form class="header-locale" method="get">
+                {% if app.request.query.get('player') %}
+                    <input type="hidden" name="player" value="{{ app.request.query.get('player') }}">
+                {% endif %}
+                <label for="header-locale-select">Langue</label>
+                <select id="header-locale-select" name="locale" onchange="this.form.submit()">
+                    <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 Francais</option>
+                    <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 English</option>
+                    <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>🇩🇪 Deutsch</option>
+                </select>
+            </form>
             <p class="catalog-kicker">Fallout 76</p>
             <h1>Suivi des objets appris</h1>
             <p class="catalog-subtitle">Selectionne un personnage puis marque ses plans Minerva et ses mods legendaires appris.</p>
             <p class="catalog-user">
-                Utilisateur connecte: <strong>{{ username }}</strong>
-                · <a href="{{ path('app_admin_item_translations', { locale: app.request.locale, target: 'fr' }) }}">Backoffice des traductions</a>
-                · <a href="{{ path('app_logout', { locale: app.request.locale }) }}">Se deconnecter</a>
-            </p>
-            <p class="catalog-user">
-                Langue:
-                <a href="{{ path('app_dashboard', { locale: 'fr' }) }}">FR</a>
-                · <a href="{{ path('app_dashboard', { locale: 'en' }) }}">EN</a>
-                · <a href="{{ path('app_dashboard', { locale: 'de' }) }}">DE</a>
+                Bonjour <strong>{{ username }}</strong>
+                · <a href="{{ path('app_logout', { locale: app.request.locale }) }}"><span aria-hidden="true">🚪</span> Deconnexion</a>
             </p>
         </header>
 
@@ -28,24 +33,19 @@
             data-item-catalog-players-base-url-value="{{ apiPlayersBaseUrl }}"
             data-item-catalog-initial-player-id-value="{{ activePlayerId ?? '' }}"
         >
-            <section class="catalog-panel">
-                <h2>Filtres</h2>
-                <div class="catalog-toolbar">
-                    <label class="field">
-                        <span>Personnage</span>
-                        <select data-item-catalog-target="playerSelect"></select>
-                    </label>
-                    <label class="field">
-                        <span>Nouveau personnage</span>
-                        <div class="field-inline">
-                            <input type="text" placeholder="Nom du personnage" data-item-catalog-target="createNameInput">
-                            <button type="button" data-item-catalog-target="createButton">Creer</button>
-                        </div>
-                    </label>
-                    <label class="field">
-                        <span>Recherche</span>
-                        <input type="search" placeholder="Nom, description, cle..." data-item-catalog-target="searchInput">
-                    </label>
+            <section class="catalog-top-row">
+                <section class="catalog-panel">
+                    <h2>Filtres</h2>
+                    <div class="catalog-toolbar">
+                        <label class="field">
+                            <span>Personnage</span>
+                            <select data-item-catalog-target="playerSelect"></select>
+                        </label>
+                        <label class="field">
+                            <span>Recherche</span>
+                            <input type="search" placeholder="Nom, description, cle..." data-item-catalog-target="searchInput">
+                        </label>
+                    </div>
                     <fieldset class="source-filters">
                         <legend>Filtres sources</legend>
                         <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropRaid"><img src="/assets/icons/GleamingDepthsMarker.svg" alt="">Raid</label>
@@ -55,8 +55,19 @@
                         <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="vendorSamuel"><img src="/assets/icons/HammerWingMarker.svg" alt="">Samuel</label>
                         <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="vendorMortimer"><img src="/assets/icons/SkullRingMarker.svg" alt="">Mortimer</label>
                     </fieldset>
-                </div>
-                <p class="catalog-state" data-item-catalog-target="state">Chargement...</p>
+                    <p class="catalog-state" data-item-catalog-target="state">Chargement...</p>
+                </section>
+                <section class="catalog-panel create-player-panel">
+                    <h2>Creer un personnage</h2>
+                    <label class="field create-player-field">
+                        <span>Nom du personnage</span>
+                        <div class="field-inline">
+                            <input type="text" placeholder="Ex: VaultDweller" data-item-catalog-target="createNameInput">
+                            <button type="button" data-item-catalog-target="createButton">Creer</button>
+                        </div>
+                    </label>
+                    <p class="catalog-note">Le nouveau personnage sera selectionne automatiquement.</p>
+                </section>
             </section>
             <section class="catalog-panel catalog-block">
                 <h2>Mods legendaires (par rang)</h2>

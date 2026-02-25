@@ -5,15 +5,23 @@
 {% block body %}
     <main class="translations-page">
         <header class="translations-header">
+            <form class="header-locale" method="get">
+                <input type="hidden" name="target" value="{{ targetLocale }}">
+                {% if query %}
+                    <input type="hidden" name="q" value="{{ query }}">
+                {% endif %}
+                <label for="admin-header-locale-select">Langue</label>
+                <select id="admin-header-locale-select" name="locale" onchange="this.form.submit()">
+                    <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 Francais</option>
+                    <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 English</option>
+                    <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>🇩🇪 Deutsch</option>
+                </select>
+            </form>
             <p class="catalog-kicker">Backoffice</p>
             <h1>Traductions des items</h1>
             <p>Edition du catalogue <code>translations/items.{{ targetLocale }}.yaml</code></p>
             <p>
                 <a href="{{ path('app_dashboard', { locale: app.request.locale }) }}">Retour au dashboard</a>
-                · Langue:
-                <a href="{{ path('app_admin_item_translations', { locale: 'fr', target: targetLocale }) }}">FR</a>
-                · <a href="{{ path('app_admin_item_translations', { locale: 'en', target: targetLocale }) }}">EN</a>
-                · <a href="{{ path('app_admin_item_translations', { locale: 'de', target: targetLocale }) }}">DE</a>
             </p>
         </header>
 

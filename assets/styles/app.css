@@ -57,6 +57,7 @@ body::before {
 }
 
 .catalog-header {
+    position: relative;
     padding: 1.25rem 1.25rem 1.1rem;
     border: 1px solid rgba(255, 210, 74, 0.35);
     border-radius: 18px;
@@ -102,9 +103,71 @@ body::before {
     color: var(--accent-2);
 }
 
+.header-locale {
+    position: absolute;
+    top: 0.9rem;
+    right: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: rgba(11, 15, 22, 0.38);
+    border: 1px solid rgba(255, 210, 74, 0.34);
+    border-radius: 999px;
+    padding: 0.22rem 0.45rem 0.22rem 0.62rem;
+}
+
+.header-locale label {
+    color: #d2deed;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+
+.header-translations-link {
+    position: absolute;
+    top: 0.95rem;
+    right: 14.2rem;
+    color: var(--accent-2);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.24rem 0;
+}
+
+.header-translations-link:hover {
+    color: #ffe38a;
+}
+
+.header-locale select {
+    border: 1px solid rgba(255, 210, 74, 0.42);
+    border-radius: 999px;
+    background: rgba(21, 28, 37, 0.92);
+    color: #f3f7ff;
+    font-size: 0.78rem;
+    padding: 0.25rem 0.54rem;
+    min-width: 122px;
+}
+
+.header-locale select:focus {
+    outline: none;
+    border-color: rgba(255, 221, 118, 0.95);
+}
+
 .catalog-shell {
     margin-top: 1.2rem;
     padding: 0;
+}
+
+.catalog-top-row {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(290px, 1fr);
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.catalog-top-row .catalog-panel + .catalog-panel {
+    margin-top: 0;
 }
 
 .catalog-panel {
@@ -118,6 +181,21 @@ body::before {
 
 .catalog-panel + .catalog-panel {
     margin-top: 1rem;
+}
+
+.create-player-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.create-player-panel h2 {
+    margin-top: 0;
+    margin-bottom: 0.7rem;
+}
+
+.create-player-field {
+    grid-column: auto;
 }
 
 .catalog-toolbar {
@@ -209,7 +287,7 @@ body::before {
 }
 
 .source-filters {
-    grid-column: span 6;
+    margin-top: 0.75rem;
     border: 1px solid var(--line);
     border-radius: 12px;
     padding: 0.42rem 0.7rem 0.64rem;
@@ -478,6 +556,7 @@ body::before {
 }
 
 .translations-header {
+    position: relative;
     padding: 1.2rem 1.25rem;
     border: 1px solid rgba(255, 210, 74, 0.35);
     border-radius: 18px;
@@ -629,6 +708,10 @@ body::before {
 }
 
 @media (max-width: 1100px) {
+    .catalog-top-row {
+        grid-template-columns: 1fr;
+    }
+
     .field {
         grid-column: span 4;
     }
@@ -653,6 +736,19 @@ body::before {
     .translations-panel {
         border-radius: 14px;
         padding: 0.85rem;
+    }
+
+    .header-locale {
+        position: static;
+        margin-bottom: 0.55rem;
+        width: fit-content;
+    }
+
+    .header-translations-link {
+        position: static;
+        display: inline-block;
+        margin-bottom: 0.55rem;
+        margin-right: 0.45rem;
     }
 
     .catalog-toolbar {
