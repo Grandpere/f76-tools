@@ -309,6 +309,7 @@ export default class extends Controller {
         const relationsBlock = this.renderRelationsBlock(item);
         const sourceBadges = this.renderSourceBadges(item);
         const sourceIcons = this.renderDropSources(item);
+        const extraSourceIcons = this.renderExtraSourceIcons(item);
         const dailyOpsLine = item.type === 'BOOK' && item.dropDailyOps && !this.infoContainsDailyOps(item.infoHtml)
             ? '<p class="item-extra-line">Also available as reward from a successful finished daily operation.</p>'
             : '';
@@ -329,6 +330,7 @@ export default class extends Controller {
                 ${dailyOpsLine}
                 ${sourceBadges}
                 ${sourceIcons}
+                ${extraSourceIcons}
                 ${priceBlock}
                 <label class="item-learned-toggle">
                     <input type="checkbox" data-item-checkbox="1" data-item-id="${item.id}" ${checkedAttr}>
@@ -345,13 +347,25 @@ export default class extends Controller {
 
         const basePrice = Number.isInteger(item.price) ? item.price : null;
         const minervaPrice = Number.isInteger(item.priceMinerva) ? item.priceMinerva : null;
-        const baseLabel = basePrice === null ? '-' : this.escape(basePrice);
-        const minervaLabel = minervaPrice === null ? '-' : this.escape(minervaPrice);
+        const hasDiscount = basePrice !== null && minervaPrice !== null && minervaPrice < basePrice;
+        const displayPrice = minervaPrice ?? basePrice;
+        const displayPriceLabel = displayPrice === null ? '-' : this.escape(displayPrice);
+        const oldPriceLabel = basePrice === null ? null : this.escape(basePrice);
+
+        if (hasDiscount) {
+            return `
+                <p class="item-prices item-prices-discount">
+                    <img src="/assets/icons/Fo76_Icon_Gold_Bullion.png" alt="Gold Bullion">
+                    <span class="price-old">${oldPriceLabel}</span>
+                    <span class="price-new">${this.escape(minervaPrice)}</span>
+                </p>
+            `;
+        }
 
         return `
             <p class="item-prices">
-                <span>Cout base: <strong>${baseLabel}</strong></span>
-                <span>Cout Minerva: <strong>${minervaLabel}</strong></span>
+                <img src="/assets/icons/Fo76_Icon_Gold_Bullion.png" alt="Gold Bullion">
+                <span class="price-new">${displayPriceLabel}</span>
             </p>
         `;
     }
@@ -419,9 +433,6 @@ export default class extends Controller {
 
     renderSourceBadges(item) {
         const badges = [];
-        if (item.dropDailyOps) {
-            badges.push('Daily Ops');
-        }
         if (item.vendorRegs) {
             badges.push('Regs');
         }
@@ -441,6 +452,19 @@ export default class extends Controller {
                 ${badges.map((badge) => `<span>${this.escape(badge)}</span>`).join('')}
             </p>
         `;
+    }
+
+    renderExtraSourceIcons(item) {
+        const icons = [];
+        if (item.dropDailyOps) {
+            icons.push('<img src="/assets/icons/FO76_dailyops_uplink.png" alt="Daily Ops" title="Daily Ops">');
+        }
+
+        if (icons.length === 0) {
+            return '';
+        }
+
+        return `<p class="item-source-icons">${icons.join('')}</p>`;
     }
 
     bindToggleButtons(container) {

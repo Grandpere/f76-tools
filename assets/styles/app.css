@@ -255,6 +255,16 @@ body {
     background: #faf8f1;
 }
 
+.item-source-icons {
+    margin: 0.35rem 0 0;
+}
+
+.item-source-icons img {
+    max-height: 20px;
+    width: auto;
+    margin-right: 0.25rem;
+}
+
 .item-drop-sources {
     margin-top: 0.35rem;
 }
@@ -266,14 +276,30 @@ body {
 
 .item-prices {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
+    align-items: center;
+    gap: 0.45rem;
     font-size: 0.82rem;
     color: var(--muted);
 }
 
-.item-prices strong {
+.item-prices img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.item-prices .price-old {
+    text-decoration: line-through;
+    color: #8b8b8b;
+}
+
+.item-prices .price-new {
     color: #2e403d;
+    font-weight: 700;
+}
+
+.item-prices-discount .price-new {
+    color: #1a7b40;
 }
 
 .item-learned-toggle {
