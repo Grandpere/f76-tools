@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Admin;
 
+use App\Entity\AdminAuditLogEntity;
 use App\Entity\UserEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -71,6 +72,11 @@ final class UserManagementControllerTest extends WebTestCase
         $updated = $this->findUserByEmail('managed@example.com');
         self::assertInstanceOf(UserEntity::class, $updated);
         self::assertFalse($updated->isActive());
+
+        $audit = $this->findAuditForTargetAction('managed@example.com', 'user_toggle_active');
+        self::assertInstanceOf(AdminAuditLogEntity::class, $audit);
+        self::assertIsArray($audit->getContext());
+        self::assertSame(false, $audit->getContext()['isActive'] ?? null);
     }
 
     public function testAdminCanGenerateResetLinkForExistingUser(): void
@@ -93,6 +99,11 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertInstanceOf(UserEntity::class, $updated);
         self::assertNotNull($updated->getResetPasswordTokenHash());
         self::assertNotNull($updated->getResetPasswordExpiresAt());
+
+        $audit = $this->findAuditForTargetAction('managed@example.com', 'user_generate_reset_link');
+        self::assertInstanceOf(AdminAuditLogEntity::class, $audit);
+        self::assertIsArray($audit->getContext());
+        self::assertIsString($audit->getContext()['expiresAt'] ?? null);
     }
 
     /**
@@ -119,6 +130,22 @@ final class UserManagementControllerTest extends WebTestCase
         $result = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => $email]);
 
         return $result instanceof UserEntity ? $result : null;
+    }
+
+    private function findAuditForTargetAction(string $targetEmail, string $action): ?AdminAuditLogEntity
+    {
+        $result = $this->entityManager?->getRepository(AdminAuditLogEntity::class)->createQueryBuilder('a')
+            ->join('a.targetUser', 'u')
+            ->where('u.email = :email')
+            ->andWhere('a.action = :action')
+            ->setParameter('email', $targetEmail)
+            ->setParameter('action', $action)
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $result instanceof AdminAuditLogEntity ? $result : null;
     }
 
     private function truncateTables(): void

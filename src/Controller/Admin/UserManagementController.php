@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\Entity\AdminAuditLogEntity;
 use App\Entity\UserEntity;
 use App\Repository\UserEntityRepository;
 use DateInterval;
@@ -75,6 +76,9 @@ final class UserManagementController extends AbstractController
         }
 
         $user->setIsActive(!$user->isActive());
+        $this->persistAuditLog($request, 'user_toggle_active', $user, [
+            'isActive' => $user->isActive(),
+        ]);
         $this->entityManager->flush();
         $this->addFlash('success', 'admin_users.flash.active_updated');
 
@@ -112,6 +116,9 @@ final class UserManagementController extends AbstractController
             $roles[] = 'ROLE_ADMIN';
             $user->setRoles(array_values(array_unique($roles)));
         }
+        $this->persistAuditLog($request, 'user_toggle_admin', $user, [
+            'isAdmin' => in_array('ROLE_ADMIN', $user->getRoles(), true),
+        ]);
         $this->entityManager->flush();
         $this->addFlash('success', 'admin_users.flash.role_updated');
 
@@ -140,6 +147,9 @@ final class UserManagementController extends AbstractController
         $expiresAt = (new DateTimeImmutable())->add(new DateInterval('PT2H'));
         $user->setResetPasswordTokenHash($tokenHash);
         $user->setResetPasswordExpiresAt($expiresAt);
+        $this->persistAuditLog($request, 'user_generate_reset_link', $user, [
+            'expiresAt' => $expiresAt->format(\DateTimeInterface::ATOM),
+        ]);
         $this->entityManager->flush();
 
         $resetUrl = $this->urlGenerator->generate('app_reset_password', [
@@ -168,5 +178,33 @@ final class UserManagementController extends AbstractController
         $token = (string) $request->request->get('_csrf_token', '');
 
         return $this->csrfTokenManager->isTokenValid(new CsrfToken($tokenId, $token));
+    }
+
+    /**
+     * @param array<string, mixed>|null $context
+     */
+    private function persistAuditLog(Request $request, string $action, ?UserEntity $targetUser, ?array $context = null): void
+    {
+        $actor = $this->getUser();
+        if (!$actor instanceof UserEntity) {
+            throw new AccessDeniedException('User must be authenticated.');
+        }
+
+        $payload = [
+            'ip' => $request->getClientIp(),
+            'locale' => $request->getLocale(),
+        ];
+
+        if (is_array($context)) {
+            $payload = array_merge($payload, $context);
+        }
+
+        $auditLog = (new AdminAuditLogEntity())
+            ->setActorUser($actor)
+            ->setTargetUser($targetUser)
+            ->setAction($action)
+            ->setContext($payload);
+
+        $this->entityManager->persist($auditLog);
     }
 }

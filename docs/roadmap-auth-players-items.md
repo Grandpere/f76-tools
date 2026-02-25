@@ -97,6 +97,7 @@ Permettre a un utilisateur authentifie de:
   - [x] generation lien de reset mot de passe (token temporaire).
 - [x] Decision securite: pas de creation d utilisateur via backoffice admin (creation via inscription publique ou commandes console).
 - [x] Protection acces `/admin/*` reservee ROLE_ADMIN.
+- [x] Journal d audit minimal des actions admin sensibles (toggle actif, toggle admin, generation lien reset).
 
 ## Risques / Decisions a figer
 - [x] Decider le modele exact learned:
