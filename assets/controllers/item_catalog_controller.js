@@ -324,7 +324,19 @@ export default class extends Controller {
         const preview = await previewResponse.json();
         const unknownItems = Array.isArray(preview.unknownItems) ? preview.unknownItems : [];
         if (unknownItems.length > 0) {
-            this.setState(this.t('importPreviewUnknown', { '%count%': unknownItems.length }));
+            const details = unknownItems
+                .slice(0, 8)
+                .map((entry) => {
+                    const type = typeof entry.type === 'string' ? entry.type : '?';
+                    const sourceId = Number.isInteger(entry.sourceId) ? entry.sourceId : Number(entry.sourceId || 0);
+
+                    return `${type}:${sourceId}`;
+                })
+                .join(', ');
+            const suffix = unknownItems.length > 8 ? ', ...' : '';
+            this.setState(
+                `${this.t('importPreviewUnknown', { '%count%': unknownItems.length })} ${this.t('importPreviewUnknownDetailsPrefix')}: ${details}${suffix}`,
+            );
             return;
         }
 

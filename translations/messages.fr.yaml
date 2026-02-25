@@ -58,6 +58,7 @@ dashboard.state.import_no_file: Choisis un fichier JSON a importer.
 dashboard.state.import_invalid_file: Fichier JSON invalide.
 dashboard.state.import_preview_error: Echec preview import progression
 dashboard.state.import_preview_unknown: Import impossible, %count% item(s) inconnus dans le fichier.
+dashboard.state.import_preview_unknown_details_prefix: 'Details'
 dashboard.state.import_confirm_preview: 'Importer maintenant ? Ajouts: %add%, suppressions: %remove%.'
 dashboard.state.importing_progress: Import de la progression...
 dashboard.state.import_done: Import termine.
