@@ -105,6 +105,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - UX edition: textarea agrandie + auto-resize, refs EN/DE affichees sous le champ cible.
   - separer langue UI (`locale`) et fichier cible edite (`target`) pour ne pas ecraser les langues source.
   - bloquer l edition directe de `en/de` (cibles fournies), fallback automatique sur `fr`.
+  - pagination ajoutee sur la grille (params `perPage` + `page`) pour eviter un rendu trop lourd.
 - Reset password:
   - backoffice users ne doit pas changer directement le mot de passe d un tiers.
   - action admin = generation d un lien temporaire (token hash + expiration) vers une page publique `/reset-password/{token}`.

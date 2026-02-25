@@ -10,6 +10,8 @@
                 {% if query %}
                     <input type="hidden" name="q" value="{{ query }}">
                 {% endif %}
+                <input type="hidden" name="perPage" value="{{ perPage }}">
+                <input type="hidden" name="page" value="{{ page }}">
                 <img class="header-locale-icon" src="/assets/icons/language.svg" alt="" aria-hidden="true">
                 <label for="admin-header-locale-select">{{ 'common.language'|trans }}</label>
                 <select id="admin-header-locale-select" name="locale" onchange="this.form.submit()">
@@ -44,13 +46,36 @@
                     <span>{{ 'admin_translations.search'|trans }}</span>
                     <input type="search" name="q" value="{{ query }}" placeholder="{{ 'admin_translations.search_placeholder'|trans }}">
                 </label>
+                <label class="field">
+                    <span>{{ 'admin_translations.per_page'|trans }}</span>
+                    <select name="perPage">
+                        <option value="20" {% if perPage == 20 %}selected{% endif %}>20</option>
+                        <option value="40" {% if perPage == 40 %}selected{% endif %}>40</option>
+                        <option value="80" {% if perPage == 80 %}selected{% endif %}>80</option>
+                        <option value="120" {% if perPage == 120 %}selected{% endif %}>120</option>
+                    </select>
+                </label>
                 <input type="hidden" name="locale" value="{{ app.request.locale }}">
+                <input type="hidden" name="page" value="1">
                 <button type="submit">{{ 'admin_translations.filter'|trans }}</button>
             </form>
             <p class="catalog-state">{{ 'admin_translations.visible_rows'|trans({'%count%': totalRows}) }}</p>
+            {% if totalPages > 1 %}
+                <div class="translations-pager">
+                    {% if page > 1 %}
+                        <a href="{{ path('app_admin_item_translations', { locale: app.request.locale, target: targetLocale, q: query ?: null, perPage: perPage, page: page - 1 }) }}">{{ 'admin_translations.pagination_prev'|trans }}</a>
+                    {% endif %}
+                    <span>{{ 'admin_translations.pagination_page'|trans({'%page%': page, '%total%': totalPages}) }}</span>
+                    {% if page < totalPages %}
+                        <a href="{{ path('app_admin_item_translations', { locale: app.request.locale, target: targetLocale, q: query ?: null, perPage: perPage, page: page + 1 }) }}">{{ 'admin_translations.pagination_next'|trans }}</a>
+                    {% endif %}
+                </div>
+            {% endif %}
 
             <form method="post" data-controller="textarea-autosize">
                 <input type="hidden" name="target" value="{{ targetLocale }}">
+                <input type="hidden" name="perPage" value="{{ perPage }}">
+                <input type="hidden" name="page" value="{{ page }}">
                 <div class="translations-table-wrap">
                     <table class="translations-table">
                         <caption class="visually-hidden">{{ 'admin_translations.table_caption'|trans({'%locale%': targetLocale}) }}</caption>
@@ -88,6 +113,7 @@
                     </table>
                 </div>
                 <div class="translations-actions">
+                    <span class="catalog-state">{{ 'admin_translations.visible_page_rows'|trans({'%count%': pageRows}) }}</span>
                     <button type="submit">{{ 'admin_translations.save'|trans }}</button>
                 </div>
             </form>

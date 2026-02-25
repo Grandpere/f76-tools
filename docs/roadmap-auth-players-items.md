@@ -2,7 +2,7 @@
 
 ## Objectif
 Permettre a un utilisateur authentifie de:
-- se connecter (sans inscription publique),
+- se connecter (avec inscription publique),
 - creer ses personnages (`Player`),
 - marquer pour chaque `Player` si un `Item` est appris ou non (`BOOK` Minerva et `MISC` Legendary Mods).
 
@@ -87,14 +87,14 @@ Permettre a un utilisateur authentifie de:
 - [x] Locale applicative activee via `?locale=` (en/de/fr), conservee en session.
 - [x] Fallback traducteur vers `en` quand la locale cible n'est pas complete.
 - [x] Textes UI localises via `translations/messages.{fr,en,de}.yaml` (Twig + messages JS).
-- [ ] Ajouter pagination UI si la grille devient trop lourde.
+- [x] Ajouter pagination UI si la grille devient trop lourde.
 
 ## Phase 7 - Comptes utilisateurs
 - [x] Inscription publique `GET/POST /register` (email + mot de passe + confirmation + CSRF).
 - [x] Backoffice utilisateurs `GET /admin/users` (ROLE_ADMIN):
   - [x] toggle actif,
   - [x] toggle role admin,
-  - [x] reset mot de passe.
+  - [x] generation lien de reset mot de passe (token temporaire).
 - [x] Decision securite: pas de creation d utilisateur via backoffice admin (creation via inscription publique ou commandes console).
 - [x] Protection acces `/admin/*` reservee ROLE_ADMIN.
 

@@ -91,6 +91,18 @@ final class ItemTranslationControllerTest extends WebTestCase
         self::assertSame('Plan FR test', $parsed['item.book.250.name'] ?? null);
     }
 
+    public function testPageSupportsPaginationParameters(): void
+    {
+        $user = $this->createUser('translations-pagination@example.com');
+        $this->browser()->loginUser($user);
+
+        $crawler = $this->browser()->request('GET', '/admin/translations/items?locale=fr&target=zz&q=item.misc.&perPage=2&page=2');
+
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(2, $crawler->filter('textarea[name^="entries["]'));
+        self::assertCount(1, $crawler->filter('div.translations-pager'));
+    }
+
     private function createUser(string $email): UserEntity
     {
         $user = (new UserEntity())

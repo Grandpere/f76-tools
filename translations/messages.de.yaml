@@ -61,8 +61,13 @@ admin_translations.back_to_dashboard: Zuruck zum Dashboard
 admin_translations.target_file: Zieldatei
 admin_translations.search: Suche
 admin_translations.search_placeholder: 'Schlussel, EN, DE, Ziel'
+admin_translations.per_page: Zeilen pro Seite
 admin_translations.filter: Filtern
 admin_translations.visible_rows: '%count% sichtbare Zeilen.'
+admin_translations.visible_page_rows: '%count% Zeilen auf dieser Seite'
+admin_translations.pagination_prev: Zuruck
+admin_translations.pagination_next: Weiter
+admin_translations.pagination_page: 'Seite %page% / %total%'
 admin_translations.key: Schlussel
 admin_translations.no_entries: Keine Eintrage.
 admin_translations.save: Speichern

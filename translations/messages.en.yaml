@@ -61,8 +61,13 @@ admin_translations.back_to_dashboard: Back to dashboard
 admin_translations.target_file: Target file
 admin_translations.search: Search
 admin_translations.search_placeholder: 'key, EN, DE, target'
+admin_translations.per_page: Rows per page
 admin_translations.filter: Filter
 admin_translations.visible_rows: '%count% visible rows.'
+admin_translations.visible_page_rows: '%count% rows on this page'
+admin_translations.pagination_prev: Previous
+admin_translations.pagination_next: Next
+admin_translations.pagination_page: 'Page %page% / %total%'
 admin_translations.key: Key
 admin_translations.no_entries: No entries.
 admin_translations.save: Save

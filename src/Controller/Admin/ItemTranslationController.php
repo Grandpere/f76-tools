@@ -28,6 +28,8 @@ final class ItemTranslationController extends AbstractController
     private const TARGET_LOCALE_FALLBACK = 'fr';
     private const LOCALE_PATTERN = '/^[a-z]{2}(?:_[A-Z]{2})?$/';
     private const LOCKED_LOCALES = ['en', 'de'];
+    private const DEFAULT_PER_PAGE = 40;
+    private const MAX_PER_PAGE = 200;
 
     public function __construct(
         private readonly TranslationCatalogReader $catalogReader,
@@ -41,9 +43,13 @@ final class ItemTranslationController extends AbstractController
     {
         $targetLocale = $this->sanitizeTargetLocale($request->query->get('target'));
         $query = $this->normalizeQuery($request->query->get('q'));
+        $perPage = $this->sanitizePositiveInt($request->query->get('perPage'), self::DEFAULT_PER_PAGE, self::MAX_PER_PAGE);
+        $page = $this->sanitizePositiveInt($request->query->get('page'), 1);
 
         if ($request->isMethod('POST')) {
             $targetLocale = $this->sanitizeTargetLocale($request->request->get('target'));
+            $perPage = $this->sanitizePositiveInt($request->request->get('perPage'), self::DEFAULT_PER_PAGE, self::MAX_PER_PAGE);
+            $page = $this->sanitizePositiveInt($request->request->get('page'), 1);
             /** @var array<string, mixed> $entries */
             $entries = $request->request->all('entries');
             $upserts = $this->normalizeEntries($entries);
@@ -61,6 +67,8 @@ final class ItemTranslationController extends AbstractController
                 'locale' => $request->getLocale(),
                 'target' => $targetLocale,
                 'q' => $query,
+                'page' => $page,
+                'perPage' => $perPage,
             ]);
         }
 
@@ -68,12 +76,21 @@ final class ItemTranslationController extends AbstractController
         $catalogDe = $this->catalogReader->load('de', self::DOMAIN);
         $catalogTarget = $this->catalogReader->load($targetLocale, self::DOMAIN);
         $rows = $this->buildRows($catalogEn, $catalogDe, $catalogTarget, $query);
+        $totalRows = count($rows);
+        $totalPages = max(1, (int) ceil($totalRows / $perPage));
+        $page = min($page, $totalPages);
+        $offset = ($page - 1) * $perPage;
+        $pageRows = array_slice($rows, $offset, $perPage);
 
         return $this->render('admin/item_translations.html.twig', [
             'targetLocale' => $targetLocale,
             'query' => $query ?? '',
-            'rows' => $rows,
-            'totalRows' => count($rows),
+            'rows' => $pageRows,
+            'totalRows' => $totalRows,
+            'pageRows' => count($pageRows),
+            'perPage' => $perPage,
+            'page' => $page,
+            'totalPages' => $totalPages,
         ]);
     }
 
@@ -140,6 +157,27 @@ final class ItemTranslationController extends AbstractController
         $query = mb_strtolower(trim($value));
 
         return '' === $query ? null : $query;
+    }
+
+    private function sanitizePositiveInt(mixed $value, int $default, ?int $max = null): int
+    {
+        if (is_int($value)) {
+            $number = $value;
+        } elseif (is_string($value) && '' !== trim($value) && ctype_digit(trim($value))) {
+            $number = (int) trim($value);
+        } else {
+            return $default;
+        }
+
+        if ($number < 1) {
+            return $default;
+        }
+
+        if (null !== $max && $number > $max) {
+            return $max;
+        }
+
+        return $number;
     }
 
     /**

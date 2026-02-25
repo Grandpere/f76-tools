@@ -725,7 +725,31 @@ body::before {
 .translations-actions {
     margin-top: 0.7rem;
     display: flex;
+    align-items: center;
+    gap: 0.7rem;
     justify-content: flex-end;
+}
+
+.translations-pager {
+    margin-top: 0.55rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fffdf5;
+    font-size: 0.83rem;
+}
+
+.translations-pager a {
+    color: #6b5200;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.translations-pager a:hover {
+    color: #8c6d00;
 }
 
 .translations-flash {
