@@ -319,6 +319,7 @@ export default class extends Controller {
 
         return `
             <li class="item-card ${learnedClass}">
+                <input class="item-learned-checkbox" type="checkbox" aria-label="Item learned" data-item-checkbox="1" data-item-id="${item.id}" ${checkedAttr}>
                 <div class="item-card-head">
                     <strong>${label}</strong>
                     ${newBadge}
@@ -330,10 +331,6 @@ export default class extends Controller {
                 ${sourceIcons}
                 ${extraSourceIcons}
                 ${priceBlock}
-                <label class="item-learned-toggle">
-                    <input type="checkbox" data-item-checkbox="1" data-item-id="${item.id}" ${checkedAttr}>
-                    <span>Appris</span>
-                </label>
             </li>
         `;
     }
