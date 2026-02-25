@@ -109,6 +109,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - Reset password:
   - backoffice users ne doit pas changer directement le mot de passe d un tiers.
   - action admin = generation d un lien temporaire (token hash + expiration) vers une page publique `/reset-password/{token}`.
+  - tests fonctionnels a maintenir pour les cas token valide, invalide et expire.
 - Verification data JSON:
   - eviter les one-liners shell fragiles avec regex/globs; preferer heredoc PHP pour checks ponctuels fiables.
 - Symfony controller translation:

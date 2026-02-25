@@ -76,6 +76,30 @@ final class ResetPasswordControllerTest extends WebTestCase
         self::assertTrue($this->passwordHasher()->isPasswordValid($updated, 'new-secret123'));
     }
 
+    public function testInvalidTokenRedirectsToLogin(): void
+    {
+        $this->createUser('reset-invalid@example.com', 'secret123');
+
+        $this->browser()->request('GET', '/reset-password/not-a-valid-token');
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+    }
+
+    public function testExpiredTokenRedirectsToLogin(): void
+    {
+        $rawToken = bin2hex(random_bytes(32));
+        $user = $this->createUser('reset-expired@example.com', 'secret123');
+        $user->setResetPasswordTokenHash(hash('sha256', $rawToken));
+        $user->setResetPasswordExpiresAt((new DateTimeImmutable())->sub(new DateInterval('PT1M')));
+        $this->entityManager?->flush();
+
+        $this->browser()->request('GET', '/reset-password/'.$rawToken);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+    }
+
     private function createUser(string $email, string $plainPassword): UserEntity
     {
         $hasher = $this->passwordHasher();
