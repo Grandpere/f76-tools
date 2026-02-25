@@ -78,7 +78,7 @@ final class AuditLogController extends AbstractController
                 return;
             }
 
-            fputcsv($output, ['occurred_at', 'action', 'actor_email', 'target_email', 'context_json']);
+            fputcsv($output, ['occurred_at', 'action', 'actor_email', 'target_email', 'context_json'], ',', '"', '\\');
             foreach ($rows as $row) {
                 $contextJson = '';
                 if (is_array($row->getContext())) {
@@ -91,7 +91,7 @@ final class AuditLogController extends AbstractController
                     $row->getActorUser()->getEmail(),
                     $row->getTargetUser()?->getEmail() ?? '',
                     $contextJson,
-                ]);
+                ], ',', '"', '\\');
             }
 
             fclose($output);
