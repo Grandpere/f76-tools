@@ -88,7 +88,7 @@
                         <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="vendorSamuel"><img src="/assets/icons/HammerWingMarker.svg" alt="">{{ 'dashboard.sources.samuel'|trans }}</label>
                         <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="vendorMortimer"><img src="/assets/icons/SkullRingMarker.svg" alt="">{{ 'dashboard.sources.mortimer'|trans }}</label>
                     </fieldset>
-                    <p class="catalog-state" data-item-catalog-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
+                    <p class="catalog-state" role="status" aria-live="polite" data-item-catalog-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
                 </section>
                 <section class="catalog-panel create-player-panel">
                     <h2>{{ 'dashboard.create_player.title'|trans }}</h2>

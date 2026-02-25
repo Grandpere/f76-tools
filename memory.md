@@ -79,6 +79,9 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - filtres UI par sources bases sur les booleens des colonnes dediees (checkboxes dans la toolbar).
   - pour `drop_sources`, convertir les `src` `/cms/.../file.png` vers `/assets/icons/file.png` (assets locaux dans `public/assets/icons`).
   - messages Stimulus localises via un dictionnaire JSON injecte par Twig (`data-item-catalog-ui-translations-value`).
+  - message d'etat catalogue en live region (`role=status`, `aria-live=polite`) pour retours d'action accessibles.
+- Formulaire login:
+  - utiliser `autocomplete=\"username\"` et `autocomplete=\"current-password\"` pour ergonomie/accessibilite.
 - API players:
   - doublon de nom par user retourne `409` (`Player name already exists.`) au create/update au lieu d'une 500 SQL.
 - PHPStan (array shapes):

@@ -51,6 +51,7 @@
                 <input type="hidden" name="target" value="{{ targetLocale }}">
                 <div class="translations-table-wrap">
                     <table class="translations-table">
+                        <caption class="visually-hidden">{{ 'admin_translations.table_caption'|trans({'%locale%': targetLocale}) }}</caption>
                         <thead>
                         <tr>
                             <th>{{ 'admin_translations.key'|trans }}</th>

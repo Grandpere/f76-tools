@@ -63,6 +63,7 @@ admin_translations.visible_rows: '%count% sichtbare Zeilen.'
 admin_translations.key: Schlussel
 admin_translations.no_entries: Keine Eintrage.
 admin_translations.save: Speichern
+admin_translations.table_caption: 'Ubersetzungstabelle fur Ziel %locale%'
 admin_translations.flash.saved: 'Ubersetzungen "%locale%" gespeichert (%count% Schlussel).'
 admin_translations.flash.nothing_to_save: Keine gultige Ubersetzung zum Speichern.
 
