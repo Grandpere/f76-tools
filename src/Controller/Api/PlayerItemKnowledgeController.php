@@ -16,13 +16,10 @@ namespace App\Controller\Api;
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
-use App\Entity\PlayerItemKnowledgeEntity;
 use App\Entity\UserEntity;
 use App\Repository\ItemEntityRepository;
-use App\Repository\PlayerEntityRepository;
 use App\Repository\PlayerItemKnowledgeEntityRepository;
-use DateTimeImmutable;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\PlayerItemKnowledgeManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,10 +31,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class PlayerItemKnowledgeController extends AbstractController
 {
     public function __construct(
-        private readonly PlayerEntityRepository $playerRepository,
         private readonly ItemEntityRepository $itemRepository,
         private readonly PlayerItemKnowledgeEntityRepository $knowledgeRepository,
-        private readonly EntityManagerInterface $entityManager,
+        private readonly PlayerItemKnowledgeManager $knowledgeManager,
         private readonly TranslatorInterface $translator,
     ) {
     }
@@ -95,15 +91,7 @@ final class PlayerItemKnowledgeController extends AbstractController
             return $this->json(['error' => 'Item not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
 
-        $knowledge = $this->knowledgeRepository->findOneByPlayerAndItem($player, $item);
-        if (null === $knowledge) {
-            $knowledge = (new PlayerItemKnowledgeEntity())
-                ->setPlayer($player)
-                ->setItem($item)
-                ->setLearnedAt(new DateTimeImmutable());
-            $this->entityManager->persist($knowledge);
-            $this->entityManager->flush();
-        }
+        $this->knowledgeManager->setLearned($player, $item);
 
         return $this->json($this->toItemPayload($item, true));
     }
@@ -120,11 +108,7 @@ final class PlayerItemKnowledgeController extends AbstractController
             return $this->json(['error' => 'Item not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
 
-        $knowledge = $this->knowledgeRepository->findOneByPlayerAndItem($player, $item);
-        if ($knowledge instanceof PlayerItemKnowledgeEntity) {
-            $this->entityManager->remove($knowledge);
-            $this->entityManager->flush();
-        }
+        $this->knowledgeManager->unsetLearned($player, $item);
 
         return new JsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
     }
@@ -143,7 +127,7 @@ final class PlayerItemKnowledgeController extends AbstractController
     {
         $user = $this->getAuthenticatedUser();
 
-        return $this->playerRepository->findOneByIdAndUser($playerId, $user);
+        return $this->knowledgeManager->resolveOwnedPlayer($playerId, $user);
     }
 
     private function parseType(mixed $value): ItemTypeEnum|false|null

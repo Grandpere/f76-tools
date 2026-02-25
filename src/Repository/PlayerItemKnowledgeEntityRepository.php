@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Contract\PlayerItemKnowledgeFinderInterface;
 use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
 use App\Entity\PlayerItemKnowledgeEntity;
@@ -23,6 +24,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @extends ServiceEntityRepository<PlayerItemKnowledgeEntity>
  */
 final class PlayerItemKnowledgeEntityRepository extends ServiceEntityRepository
+    implements PlayerItemKnowledgeFinderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -65,4 +67,3 @@ final class PlayerItemKnowledgeEntityRepository extends ServiceEntityRepository
         return $ids;
     }
 }
-

@@ -60,6 +60,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - Knowledge player/item:
   - modele retenu = presence/absence dans `player_item_knowledge` (pas de bool persiste).
   - endpoints `PUT/DELETE learned` idempotents avec ownership strict sur le `Player`.
+  - ownership + toggle learned centralises dans `PlayerItemKnowledgeManager` (service teste en unit).
 - Front catalogue:
   - selection du player actif stockee dans query param `?player=<id>` (pas en session pour l'instant).
   - API knowledge renvoie aussi les textes traduits (`name`, `description`) en plus des cles (`nameKey`, `descKey`).
@@ -83,6 +84,8 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - evite les mocks de classes `final` dans les tests unitaires.
 - Sortie console Symfony:
   - les messages d erreur peuvent etre wraps sur plusieurs lignes; assertions unitaires a faire sur fragments stables.
+- PHPUnit 13:
+  - eviter les mocks sans expectations dans les unit tests (notices); utiliser des stubs pour les dependances non verifiees.
 - Backoffice traductions:
   - route `GET/POST /admin/translations/items` (locale par query, defaut `fr`) pour editer `items.<locale>.yaml`.
   - edition cible uniquement les cles `item.misc.*` et `item.book.*`; source de reference = `items.en.yaml` + contexte `items.de.yaml`.

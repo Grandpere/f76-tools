@@ -67,11 +67,11 @@ Permettre a un utilisateur authentifie de:
 - [x] Selection du player actif (query param).
 
 ## Phase 5 - Qualite et tests
-- [ ] Tests unitaires:
-  - [ ] service de toggle learned
-  - [ ] regles ownership
-- [ ] Tests fonctionnels:
-  - [ ] login/logout
+- [x] Tests unitaires:
+  - [x] service de toggle learned
+  - [x] regles ownership
+- [x] Tests fonctionnels:
+  - [x] login/logout
   - [x] creation player
   - [x] marquage learned/unlearned
   - [x] interdiction acces cross-user
