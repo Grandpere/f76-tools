@@ -422,9 +422,6 @@ export default class extends Controller {
         if (item.dropRaid) {
             badges.push('Raid');
         }
-        if (item.dropBurningSprings) {
-            badges.push('Burning Springs');
-        }
         if (item.dropDailyOps) {
             badges.push('Daily Ops');
         }
