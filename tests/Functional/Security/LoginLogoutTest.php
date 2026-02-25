@@ -67,7 +67,7 @@ final class LoginLogoutTest extends WebTestCase
 
         $this->browser()->followRedirect();
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
-        self::assertStringContainsString('Bonjour', $this->browser()->getResponse()->getContent() ?: '');
+        self::assertStringContainsString($user->getEmail(), $this->browser()->getResponse()->getContent() ?: '');
 
         $this->browser()->request('GET', '/logout');
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());

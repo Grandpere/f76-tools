@@ -55,6 +55,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - Tests fonctionnels `WebTestCase`:
   - ne pas nommer un helper local `getClient()` (collision avec methode statique de `WebTestCase`).
   - utiliser un nom dedie (`browser()`) pour retourner le `KernelBrowser` initialise en `setUp()`.
+  - eviter les assertions fonctionnelles dependantes d'une locale explicite (`Bonjour`, etc.); preferer des signaux stables (email, routes, statut).
 - Tests fonctionnels + migrations:
   - ne pas recreer le schema via `SchemaTool` si `make phpunit-functional` lance deja `db-test-init`.
   - utiliser `TRUNCATE ... RESTART IDENTITY CASCADE` en `setUp()` pour isoler les cas.
