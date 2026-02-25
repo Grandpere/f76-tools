@@ -45,6 +45,7 @@ final class DashboardController extends AbstractController
             'apiPlayersUrl' => $this->generateUrl('api_players_index'),
             'apiPlayersBaseUrl' => $this->generateUrl('api_players_index'),
             'activePlayerId' => $activePlayerId,
+            'userId' => $user->getId(),
             'username' => $user->getEmail(),
         ]);
     }

@@ -78,6 +78,7 @@
             data-item-catalog-players-url-value="{{ apiPlayersUrl }}"
             data-item-catalog-players-base-url-value="{{ apiPlayersBaseUrl }}"
             data-item-catalog-initial-player-id-value="{{ activePlayerId ?? '' }}"
+            data-item-catalog-storage-key-value="f76:item-catalog:ui:{{ userId }}"
             data-item-catalog-ui-translations-value="{{ uiTranslations|json_encode|e('html_attr') }}"
         >
             <section class="catalog-top-row">

@@ -81,6 +81,10 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
     - par type (`MISC`/`BOOK`),
     - detail par rank et par liste.
   - stats rechargees apres chaque toggle learned pour rester synchronisees.
+  - etat UI persiste par player via `localStorage`:
+    - recherche (`searchQuery`),
+    - filtres source coches,
+    - accordion ouvert pour `MISC` et `BOOK`.
   - un toggle learned sur un item `BOOK` doit refleter toutes ses occurrences multi-listes (meme `itemId`).
   - UX learned preferee avec checkbox `Appris` (pas bouton), + note d'aide avant les listes Minerva.
   - comportement accordéon par type: ouvrir un groupe replie les autres du meme type, et le groupe ouvert est conserve apres rerender.

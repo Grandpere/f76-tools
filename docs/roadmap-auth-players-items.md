@@ -72,6 +72,7 @@ Permettre a un utilisateur authentifie de:
   - [x] endpoint `GET /api/players/{id}/stats`,
   - [x] KPI global/type + detail par rank/liste,
   - [x] rafraichissement live apres toggle learned.
+- [x] Persistance UX locale par player (recherche, filtres source, accordions ouverts).
 
 ## Phase 5 - Qualite et tests
 - [x] Tests unitaires:

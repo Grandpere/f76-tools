@@ -6,6 +6,7 @@ export default class extends Controller {
         playersUrl: String,
         playersBaseUrl: String,
         initialPlayerId: String,
+        storageKey: String,
         uiTranslations: String,
     };
 
@@ -21,13 +22,16 @@ export default class extends Controller {
         this.openMiscGroup = null;
         this.openBookGroup = null;
         this.stats = null;
+        this.playerUiState = this.readPersistedState();
         this.bindEvents();
         await this.loadPlayers();
     }
 
     bindEvents() {
         this.playerSelectTarget.addEventListener('change', async () => {
+            this.persistCurrentPlayerState();
             this.activePlayerId = this.playerSelectTarget.value;
+            this.restoreUiStateForPlayer(this.activePlayerId);
             this.syncPlayerQueryParam();
             await this.loadItems();
         });
@@ -51,6 +55,7 @@ export default class extends Controller {
 
             this.searchDebounceId = window.setTimeout(async () => {
                 this.searchQuery = this.searchInputTarget.value.trim();
+                this.persistCurrentPlayerState();
                 await this.loadItems();
             }, 250);
         });
@@ -62,6 +67,7 @@ export default class extends Controller {
                     .map((node) => node.value);
                 this.renderItems();
                 this.updateStateCounter();
+                this.persistCurrentPlayerState();
             });
         });
     }
@@ -154,6 +160,7 @@ export default class extends Controller {
         const selected = found || fallback;
 
         this.activePlayerId = String(selected.id);
+        this.restoreUiStateForPlayer(this.activePlayerId);
         this.playerSelectTarget.value = this.activePlayerId;
         this.syncPlayerQueryParam();
     }
@@ -236,6 +243,7 @@ export default class extends Controller {
         this.renderItems();
         await this.loadStats();
         this.updateStateCounter();
+        this.persistCurrentPlayerState();
     }
 
     renderItems() {
@@ -589,8 +597,89 @@ export default class extends Controller {
                         other.open = false;
                     }
                 });
+                this.persistCurrentPlayerState();
             });
         });
+    }
+
+    restoreUiStateForPlayer(playerId) {
+        const key = String(playerId || '').trim();
+        if (!key) {
+            return;
+        }
+        const state = this.playerUiState[key];
+        const hasState = state && typeof state === 'object';
+
+        this.searchQuery = hasState && typeof state.searchQuery === 'string'
+            ? state.searchQuery
+            : '';
+        this.searchInputTarget.value = this.searchQuery;
+
+        const sourceFilters = hasState && Array.isArray(state.sourceFilters)
+            ? state.sourceFilters.filter((value) => typeof value === 'string')
+            : [];
+        this.activeSourceFilters = [...sourceFilters];
+        this.sourceFilterTargets.forEach((checkbox) => {
+            checkbox.checked = sourceFilters.includes(checkbox.value);
+        });
+
+        this.openMiscGroup = hasState && Number.isInteger(state.openMiscGroup)
+            ? state.openMiscGroup
+            : null;
+        this.openBookGroup = hasState && Number.isInteger(state.openBookGroup)
+            ? state.openBookGroup
+            : null;
+    }
+
+    persistCurrentPlayerState() {
+        const key = String(this.activePlayerId || '').trim();
+        if (!key) {
+            return;
+        }
+
+        this.playerUiState[key] = {
+            searchQuery: this.searchQuery,
+            sourceFilters: [...this.activeSourceFilters],
+            openMiscGroup: Number.isInteger(this.openMiscGroup) ? this.openMiscGroup : null,
+            openBookGroup: Number.isInteger(this.openBookGroup) ? this.openBookGroup : null,
+            updatedAt: Date.now(),
+        };
+        this.persistAllState();
+    }
+
+    readPersistedState() {
+        try {
+            const raw = window.localStorage.getItem(this.storageBucketKey());
+            if (!raw) {
+                return {};
+            }
+
+            const parsed = JSON.parse(raw);
+            if (typeof parsed === 'object' && parsed !== null) {
+                return parsed;
+            }
+        } catch {
+            return {};
+        }
+
+        return {};
+    }
+
+    persistAllState() {
+        try {
+            window.localStorage.setItem(this.storageBucketKey(), JSON.stringify(this.playerUiState));
+        } catch {
+            // Ignore storage errors (private mode/full storage).
+        }
+    }
+
+    storageBucketKey() {
+        const key = String(this.storageKeyValue || '').trim();
+        if (key !== '') {
+            return key;
+        }
+
+        return 'f76:item-catalog:ui';
     }
 
     syncPlayerQueryParam() {

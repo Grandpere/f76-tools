@@ -65,6 +65,7 @@ final class DashboardControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter('[data-item-catalog-players-url-value="/api/players"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-players-base-url-value="/api/players"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-initial-player-id-value="1"]'));
+        self::assertCount(1, $crawler->filter('[data-item-catalog-storage-key-value="f76:item-catalog:ui:1"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="statsPanel"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="miscList"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="bookList"]'));
