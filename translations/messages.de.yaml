@@ -62,3 +62,9 @@ admin_translations.no_entries: Keine Eintrage.
 admin_translations.save: Speichern
 admin_translations.flash.saved: 'Ubersetzungen "%locale%" gespeichert (%count% Schlussel).'
 admin_translations.flash.nothing_to_save: Keine gultige Ubersetzung zum Speichern.
+
+security.login.page_title: Anmeldung
+security.login.title: Anmeldung
+security.login.email: E-Mail
+security.login.password: Passwort
+security.login.submit: Anmelden

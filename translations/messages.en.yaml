@@ -62,3 +62,9 @@ admin_translations.no_entries: No entries.
 admin_translations.save: Save
 admin_translations.flash.saved: 'Translations "%locale%" saved (%count% keys).'
 admin_translations.flash.nothing_to_save: No valid translation to save.
+
+security.login.page_title: Login
+security.login.title: Login
+security.login.email: Email
+security.login.password: Password
+security.login.submit: Sign in

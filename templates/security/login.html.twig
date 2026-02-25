@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion{% endblock %}
+{% block title %}{{ 'security.login.page_title'|trans }}{% endblock %}
 
 {% block body %}
     <main style="max-width: 420px; margin: 3rem auto; font-family: system-ui, sans-serif;">
-        <h1>Connexion</h1>
+        <h1>{{ 'security.login.title'|trans }}</h1>
 
         {% if error %}
             <p style="color: #b91c1c; margin-bottom: 1rem;">
@@ -13,7 +13,7 @@
         {% endif %}
 
         <form method="post">
-            <label for="username">Email</label>
+            <label for="username">{{ 'security.login.email'|trans }}</label>
             <input
                 id="username"
                 name="_username"
@@ -24,7 +24,7 @@
                 style="display:block; width:100%; margin:0.25rem 0 1rem; padding:0.5rem;"
             >
 
-            <label for="password">Mot de passe</label>
+            <label for="password">{{ 'security.login.password'|trans }}</label>
             <input
                 id="password"
                 name="_password"
@@ -39,9 +39,8 @@
                 type="submit"
                 style="padding: 0.6rem 1rem; border: 0; background: #111827; color: #fff; cursor: pointer;"
             >
-                Se connecter
+                {{ 'security.login.submit'|trans }}
             </button>
         </form>
     </main>
 {% endblock %}
-

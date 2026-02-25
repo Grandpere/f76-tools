@@ -62,3 +62,9 @@ admin_translations.no_entries: Aucune entree.
 admin_translations.save: Enregistrer
 admin_translations.flash.saved: 'Traductions "%locale%" enregistrees (%count% cles).'
 admin_translations.flash.nothing_to_save: Aucune traduction valide a enregistrer.
+
+security.login.page_title: Connexion
+security.login.title: Connexion
+security.login.email: Email
+security.login.password: Mot de passe
+security.login.submit: Se connecter

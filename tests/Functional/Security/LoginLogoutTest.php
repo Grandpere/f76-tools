@@ -45,10 +45,12 @@ final class LoginLogoutTest extends WebTestCase
 
     public function testLoginPageIsAccessibleWhenAnonymous(): void
     {
-        $this->browser()->request('GET', '/login');
+        $crawler = $this->browser()->request('GET', '/login');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
-        self::assertStringContainsString('Connexion', $this->browser()->getResponse()->getContent() ?: '');
+        self::assertCount(1, $crawler->filter('form'));
+        self::assertCount(1, $crawler->filter('input[name="_username"]'));
+        self::assertCount(1, $crawler->filter('input[name="_password"]'));
     }
 
     public function testCanLoginAndLogoutWithFormAuthentication(): void
@@ -56,7 +58,7 @@ final class LoginLogoutTest extends WebTestCase
         $user = $this->createUser('security-login@example.com', 'secret123');
 
         $crawler = $this->browser()->request('GET', '/login');
-        $form = $crawler->selectButton('Se connecter')->form([
+        $form = $crawler->filter('form')->form([
             '_username' => $user->getEmail(),
             '_password' => 'secret123',
         ]);
