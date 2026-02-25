@@ -12,6 +12,7 @@ export default class extends Controller {
         this.players = [];
         this.items = [];
         this.activePlayerId = null;
+        this.activeLocale = this.readActiveLocale();
         this.searchQuery = '';
         this.searchDebounceId = null;
         this.activeSourceFilters = [];
@@ -67,7 +68,7 @@ export default class extends Controller {
         this.miscListTarget.innerHTML = '';
         this.bookListTarget.innerHTML = '';
 
-        const response = await fetch(this.playersUrlValue, {
+        const response = await fetch(this.appendLocaleToUrl(this.playersUrlValue), {
             headers: { Accept: 'application/json' },
             credentials: 'same-origin',
         });
@@ -98,7 +99,7 @@ export default class extends Controller {
         this.createButtonTarget.disabled = true;
         this.setState('Creation du personnage...');
 
-        const response = await fetch(this.playersUrlValue, {
+        const response = await fetch(this.appendLocaleToUrl(this.playersUrlValue), {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -167,7 +168,7 @@ export default class extends Controller {
             params.set('q', this.searchQuery);
         }
         const itemsUrl = `${this.playersBaseUrlValue}/${this.activePlayerId}/items?${params.toString()}`;
-        const response = await fetch(itemsUrl, {
+        const response = await fetch(this.appendLocaleToUrl(itemsUrl), {
             headers: { Accept: 'application/json' },
             credentials: 'same-origin',
         });
@@ -190,7 +191,7 @@ export default class extends Controller {
         const method = shouldBeLearned ? 'PUT' : 'DELETE';
         const url = `${this.playersBaseUrlValue}/${this.activePlayerId}/items/${itemId}/learned`;
 
-        const response = await fetch(url, {
+        const response = await fetch(this.appendLocaleToUrl(url), {
             method,
             headers: { Accept: 'application/json' },
             credentials: 'same-origin',
@@ -498,8 +499,33 @@ export default class extends Controller {
             return;
         }
         const url = new URL(window.location.href);
+        if (this.activeLocale) {
+            url.searchParams.set('locale', this.activeLocale);
+        }
         url.searchParams.set('player', this.activePlayerId);
         window.history.replaceState({}, '', url.toString());
+    }
+
+    readActiveLocale() {
+        const locale = new URLSearchParams(window.location.search).get('locale');
+        if (!locale) {
+            return '';
+        }
+
+        return String(locale).trim().toLowerCase();
+    }
+
+    appendLocaleToUrl(rawUrl) {
+        if (!this.activeLocale) {
+            return rawUrl;
+        }
+
+        const url = new URL(rawUrl, window.location.origin);
+        if (!url.searchParams.get('locale')) {
+            url.searchParams.set('locale', this.activeLocale);
+        }
+
+        return `${url.pathname}${url.search}`;
     }
 
     setState(message) {

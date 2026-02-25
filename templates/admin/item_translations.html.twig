@@ -8,7 +8,13 @@
             <p class="catalog-kicker">Backoffice</p>
             <h1>Traductions des items</h1>
             <p>Edition du catalogue <code>translations/items.{{ locale }}.yaml</code></p>
-            <p><a href="{{ path('app_dashboard') }}">Retour au dashboard</a></p>
+            <p>
+                <a href="{{ path('app_dashboard', { locale: app.request.locale }) }}">Retour au dashboard</a>
+                · Langue:
+                <a href="{{ path('app_admin_item_translations', { locale: 'fr' }) }}">FR</a>
+                · <a href="{{ path('app_admin_item_translations', { locale: 'en' }) }}">EN</a>
+                · <a href="{{ path('app_admin_item_translations', { locale: 'de' }) }}">DE</a>
+            </p>
         </header>
 
         {% for message in app.flashes('success') %}

@@ -10,8 +10,14 @@
             <p class="catalog-subtitle">Selectionne un personnage puis marque ses plans Minerva et ses mods legendaires appris.</p>
             <p class="catalog-user">
                 Utilisateur connecte: <strong>{{ username }}</strong>
-                · <a href="{{ path('app_admin_item_translations') }}">Backoffice des traductions</a>
-                · <a href="{{ path('app_logout') }}">Se deconnecter</a>
+                · <a href="{{ path('app_admin_item_translations', { locale: app.request.locale }) }}">Backoffice des traductions</a>
+                · <a href="{{ path('app_logout', { locale: app.request.locale }) }}">Se deconnecter</a>
+            </p>
+            <p class="catalog-user">
+                Langue:
+                <a href="{{ path('app_dashboard', { locale: 'fr' }) }}">FR</a>
+                · <a href="{{ path('app_dashboard', { locale: 'en' }) }}">EN</a>
+                · <a href="{{ path('app_dashboard', { locale: 'de' }) }}">DE</a>
             </p>
         </header>
 
