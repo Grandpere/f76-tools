@@ -20,10 +20,7 @@
             <p class="catalog-kicker">{{ 'admin_users.kicker'|trans }}</p>
             <h1>{{ 'admin_users.title'|trans }}</h1>
             <p>{{ 'admin_users.description'|trans }}</p>
-            <p>
-                <a href="{{ path('app_admin_item_translations', { locale: app.request.locale, target: 'fr' }) }}">{{ 'admin_users.to_translations'|trans }}</a>
-                · <a href="{{ path('app_admin_audit_logs', { locale: app.request.locale }) }}">{{ 'admin_users.to_audit_logs'|trans }}</a>
-            </p>
+            {% include 'admin/_nav_links.html.twig' %}
         </header>
 
         {% for message in app.flashes('success') %}

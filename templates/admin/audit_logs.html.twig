@@ -28,9 +28,7 @@
             <p class="catalog-kicker">{{ 'admin_audit.kicker'|trans }}</p>
             <h1>{{ 'admin_audit.title'|trans }}</h1>
             <p>{{ 'admin_audit.description'|trans }}</p>
-            <p>
-                <a href="{{ path('app_admin_users', { locale: app.request.locale }) }}">{{ 'dashboard.header.user_management'|trans }}</a>
-            </p>
+            {% include 'admin/_nav_links.html.twig' %}
         </header>
 
         <section class="translations-panel">
