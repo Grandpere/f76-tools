@@ -26,6 +26,7 @@
             <p>
                 <a href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ 'admin_translations.back_to_dashboard'|trans }}</a>
                 · <a href="{{ path('app_admin_users', { locale: app.request.locale }) }}">{{ 'dashboard.header.user_management'|trans }}</a>
+                · <a href="{{ path('app_admin_audit_logs', { locale: app.request.locale }) }}">{{ 'admin_audit.title'|trans }}</a>
             </p>
         </header>
 

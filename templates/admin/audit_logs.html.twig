@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'admin_audit.page_title'|trans }}{% endblock %}
+
+{% block body %}
+    <main class="translations-page">
+        <header class="translations-header">
+            <form class="header-locale" method="get">
+                {% if query %}
+                    <input type="hidden" name="q" value="{{ query }}">
+                {% endif %}
+                {% if action %}
+                    <input type="hidden" name="action" value="{{ action }}">
+                {% endif %}
+                <input type="hidden" name="perPage" value="{{ perPage }}">
+                <input type="hidden" name="page" value="{{ page }}">
+                <img class="header-locale-icon" src="/assets/icons/language.svg" alt="" aria-hidden="true">
+                <label for="admin-audit-header-locale-select">{{ 'common.language'|trans }}</label>
+                <select id="admin-audit-header-locale-select" name="locale" onchange="this.form.submit()">
+                    <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 {{ 'common.locale.fr'|trans }}</option>
+                    <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 {{ 'common.locale.en'|trans }}</option>
+                    <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>🇩🇪 {{ 'common.locale.de'|trans }}</option>
+                </select>
+            </form>
+            <p class="catalog-kicker">{{ 'admin_audit.kicker'|trans }}</p>
+            <h1>{{ 'admin_audit.title'|trans }}</h1>
+            <p>
+                <a href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ 'admin_audit.back_to_dashboard'|trans }}</a>
+                · <a href="{{ path('app_admin_users', { locale: app.request.locale }) }}">{{ 'dashboard.header.user_management'|trans }}</a>
+            </p>
+        </header>
+
+        <section class="translations-panel">
+            <form method="get" class="translations-filters">
+                <label class="field">
+                    <span>{{ 'admin_audit.search'|trans }}</span>
+                    <input type="search" name="q" value="{{ query }}" placeholder="{{ 'admin_audit.search_placeholder'|trans }}">
+                </label>
+                <label class="field">
+                    <span>{{ 'admin_audit.action'|trans }}</span>
+                    <select name="action">
+                        <option value="">{{ 'admin_audit.any_action'|trans }}</option>
+                        {% for candidate in actions %}
+                            <option value="{{ candidate }}" {% if action == candidate %}selected{% endif %}>{{ candidate }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+                <label class="field">
+                    <span>{{ 'admin_audit.per_page'|trans }}</span>
+                    <select name="perPage">
+                        <option value="20" {% if perPage == 20 %}selected{% endif %}>20</option>
+                        <option value="30" {% if perPage == 30 %}selected{% endif %}>30</option>
+                        <option value="50" {% if perPage == 50 %}selected{% endif %}>50</option>
+                        <option value="100" {% if perPage == 100 %}selected{% endif %}>100</option>
+                    </select>
+                </label>
+                <input type="hidden" name="locale" value="{{ app.request.locale }}">
+                <input type="hidden" name="page" value="1">
+                <button type="submit">{{ 'admin_audit.filter'|trans }}</button>
+            </form>
+            <p class="catalog-state">{{ 'admin_audit.visible_rows'|trans({'%count%': totalRows}) }}</p>
+
+            {% if totalPages > 1 %}
+                <div class="translations-pager">
+                    {% if page > 1 %}
+                        <a href="{{ path('app_admin_audit_logs', { locale: app.request.locale, q: query ?: null, action: action ?: null, perPage: perPage, page: page - 1 }) }}">{{ 'admin_translations.pagination_prev'|trans }}</a>
+                    {% endif %}
+                    <span>{{ 'admin_translations.pagination_page'|trans({'%page%': page, '%total%': totalPages}) }}</span>
+                    {% if page < totalPages %}
+                        <a href="{{ path('app_admin_audit_logs', { locale: app.request.locale, q: query ?: null, action: action ?: null, perPage: perPage, page: page + 1 }) }}">{{ 'admin_translations.pagination_next'|trans }}</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            <div class="translations-table-wrap">
+                <table class="translations-table">
+                    <thead>
+                    <tr>
+                        <th>{{ 'admin_audit.when'|trans }}</th>
+                        <th>{{ 'admin_audit.action'|trans }}</th>
+                        <th>{{ 'admin_audit.actor'|trans }}</th>
+                        <th>{{ 'admin_audit.target'|trans }}</th>
+                        <th>{{ 'admin_audit.context'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            <td>{{ row.occurredAt|date('Y-m-d H:i:s') }}</td>
+                            <td><code>{{ row.action }}</code></td>
+                            <td>{{ row.actorUser.email }}</td>
+                            <td>{{ row.targetUser ? row.targetUser.email : '-' }}</td>
+                            <td>
+                                {% if row.context %}
+                                    <code>{{ row.context|json_encode(constant('JSON_UNESCAPED_SLASHES')) }}</code>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">{{ 'admin_audit.no_entries'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+{% endblock %}

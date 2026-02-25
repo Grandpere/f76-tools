@@ -111,6 +111,7 @@ admin_users.kicker: Backoffice
 admin_users.title: Benutzerverwaltung
 admin_users.back_to_dashboard: Zuruck zum Dashboard
 admin_users.to_translations: Ubersetzungsverwaltung
+admin_users.to_audit_logs: Audit-Logs
 admin_users.list_title: Benutzerliste
 admin_users.email: E-Mail
 admin_users.roles: Rollen
@@ -127,3 +128,20 @@ admin_users.flash.cannot_change_self_role: Sie konnen Ihre eigene Admin-Rolle hi
 admin_users.flash.active_updated: Aktiv-Status aktualisiert.
 admin_users.flash.role_updated: Rollen aktualisiert.
 admin_users.flash.reset_link_generated: Link zum Zurucksetzen generiert
+
+admin_audit.page_title: Audit-Logs Backoffice
+admin_audit.kicker: Backoffice
+admin_audit.title: Audit-Logs
+admin_audit.back_to_dashboard: Zuruck zum Dashboard
+admin_audit.search: Suche
+admin_audit.search_placeholder: E-Mail Akteur/Ziel oder Aktion
+admin_audit.action: Aktion
+admin_audit.any_action: Alle Aktionen
+admin_audit.per_page: Zeilen pro Seite
+admin_audit.filter: Filtern
+admin_audit.visible_rows: '%count% sichtbare Zeilen.'
+admin_audit.when: Datum
+admin_audit.actor: Akteur
+admin_audit.target: Ziel
+admin_audit.context: Kontext
+admin_audit.no_entries: Keine Eintrage.

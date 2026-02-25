@@ -98,6 +98,7 @@ Permettre a un utilisateur authentifie de:
 - [x] Decision securite: pas de creation d utilisateur via backoffice admin (creation via inscription publique ou commandes console).
 - [x] Protection acces `/admin/*` reservee ROLE_ADMIN.
 - [x] Journal d audit minimal des actions admin sensibles (toggle actif, toggle admin, generation lien reset).
+- [x] Page admin de consultation des logs d audit (`GET /admin/audit-logs`) avec filtres/pagination.
 
 ## Risques / Decisions a figer
 - [x] Decider le modele exact learned:

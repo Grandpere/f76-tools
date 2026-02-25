@@ -111,6 +111,7 @@ admin_users.kicker: Backoffice
 admin_users.title: Gestion des utilisateurs
 admin_users.back_to_dashboard: Retour au dashboard
 admin_users.to_translations: Gestion des traductions
+admin_users.to_audit_logs: Logs d audit
 admin_users.list_title: Liste des utilisateurs
 admin_users.email: Email
 admin_users.roles: Roles
@@ -127,3 +128,20 @@ admin_users.flash.cannot_change_self_role: Vous ne pouvez pas modifier votre pro
 admin_users.flash.active_updated: Statut actif mis a jour.
 admin_users.flash.role_updated: Roles mis a jour.
 admin_users.flash.reset_link_generated: Lien de reinitialisation genere
+
+admin_audit.page_title: Backoffice logs d audit
+admin_audit.kicker: Backoffice
+admin_audit.title: Logs d audit
+admin_audit.back_to_dashboard: Retour au dashboard
+admin_audit.search: Recherche
+admin_audit.search_placeholder: Email acteur/cible ou action
+admin_audit.action: Action
+admin_audit.any_action: Toutes les actions
+admin_audit.per_page: Lignes par page
+admin_audit.filter: Filtrer
+admin_audit.visible_rows: '%count% lignes visibles.'
+admin_audit.when: Date
+admin_audit.actor: Acteur
+admin_audit.target: Cible
+admin_audit.context: Contexte
+admin_audit.no_entries: Aucune entree.
