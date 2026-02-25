@@ -91,7 +91,7 @@ Permettre a un utilisateur authentifie de:
   - [x] interdiction acces cross-user
   - [x] rendu dashboard catalogue auth
   - [x] backoffice traductions items (acces + sauvegarde)
-- [ ] Garder `make phpstan` et tests verts a chaque phase.
+- [ ] Garder `make phpstan` et tests verts a chaque phase (discipline continue).
 
 ## Phase 6 - Backoffice traductions
 - [x] Route backoffice `GET/POST /admin/translations/items`.
@@ -120,16 +120,17 @@ Permettre a un utilisateur authentifie de:
 
 ## Risques / Decisions a figer
 - [x] Decider le modele exact learned:
-  - [ ] `isLearned` bool (historique simple),
+  - [ ] `isLearned` bool (historique simple, non retenu),
   - [x] ou presence/absence en table pivot.
-- [ ] Politique de suppression:
+- [x] Politique de suppression:
   - [x] supprimer un player supprime son knowledge (`ON DELETE CASCADE`).
-- [ ] Pagination catalogue pour eviter surcharge front.
+- [x] Pagination catalogue pour eviter surcharge front:
+  - [x] Decision actuelle: pas de pagination immediate (volume de donnees faible), a reevaluer si dataset augmente.
 
 ## Definition of Done (MVP)
-- [ ] Un admin/dev peut creer un user via commande.
-- [ ] Le user se connecte.
-- [ ] Le user cree au moins un player.
-- [ ] Le user marque learned/unlearned sur items.
-- [ ] Le statut est persiste et reaffiche correctement.
+- [x] Un admin/dev peut creer un user via commande.
+- [x] Le user se connecte.
+- [x] Le user cree au moins un player.
+- [x] Le user marque learned/unlearned sur items.
+- [x] Le statut est persiste et reaffiche correctement.
 - [x] Les traductions FR peuvent etre ajoutees/maj sans re-import JSON.
