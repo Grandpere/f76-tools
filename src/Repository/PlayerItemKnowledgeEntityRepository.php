@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Domain\Item\ItemTypeEnum;
 use App\Contract\PlayerItemKnowledgeFinderInterface;
 use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
@@ -65,5 +66,101 @@ final class PlayerItemKnowledgeEntityRepository extends ServiceEntityRepository
         }
 
         return $ids;
+    }
+
+    public function countLearnedByPlayer(PlayerEntity $player): int
+    {
+        $count = $this->createQueryBuilder('k')
+            ->select('COUNT(k.id)')
+            ->andWhere('k.player = :player')
+            ->setParameter('player', $player)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return (int) $count;
+    }
+
+    public function countLearnedByPlayerAndType(PlayerEntity $player, ItemTypeEnum $type): int
+    {
+        $count = $this->createQueryBuilder('k')
+            ->select('COUNT(k.id)')
+            ->join('k.item', 'i')
+            ->andWhere('k.player = :player')
+            ->andWhere('i.type = :type')
+            ->setParameter('player', $player)
+            ->setParameter('type', $type)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return (int) $count;
+    }
+
+    /**
+     * @return array<int, int>
+     */
+    public function findLearnedMiscCountsByRank(PlayerEntity $player): array
+    {
+        $rows = $this->createQueryBuilder('k')
+            ->select('i.rank AS rank')
+            ->addSelect('COUNT(k.id) AS learnedCount')
+            ->join('k.item', 'i')
+            ->andWhere('k.player = :player')
+            ->andWhere('i.type = :type')
+            ->setParameter('player', $player)
+            ->setParameter('type', ItemTypeEnum::MISC)
+            ->groupBy('i.rank')
+            ->orderBy('i.rank', 'ASC')
+            ->getQuery()
+            ->getScalarResult();
+
+        $counts = [];
+        foreach ($rows as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+            $rankRaw = $row['rank'] ?? null;
+            $countRaw = $row['learnedCount'] ?? null;
+            if ((!is_int($rankRaw) && !is_numeric($rankRaw)) || (!is_int($countRaw) && !is_numeric($countRaw))) {
+                continue;
+            }
+            $counts[(int) $rankRaw] = (int) $countRaw;
+        }
+
+        return $counts;
+    }
+
+    /**
+     * @return array<int, int>
+     */
+    public function findLearnedBookCountsByListNumber(PlayerEntity $player): array
+    {
+        $rows = $this->createQueryBuilder('k')
+            ->select('bl.listNumber AS listNumber')
+            ->addSelect('COUNT(DISTINCT i.id) AS learnedCount')
+            ->join('k.item', 'i')
+            ->join('i.bookLists', 'bl')
+            ->andWhere('k.player = :player')
+            ->andWhere('i.type = :type')
+            ->setParameter('player', $player)
+            ->setParameter('type', ItemTypeEnum::BOOK)
+            ->groupBy('bl.listNumber')
+            ->orderBy('bl.listNumber', 'ASC')
+            ->getQuery()
+            ->getScalarResult();
+
+        $counts = [];
+        foreach ($rows as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+            $listRaw = $row['listNumber'] ?? null;
+            $countRaw = $row['learnedCount'] ?? null;
+            if ((!is_int($listRaw) && !is_numeric($listRaw)) || (!is_int($countRaw) && !is_numeric($countRaw))) {
+                continue;
+            }
+            $counts[(int) $listRaw] = (int) $countRaw;
+        }
+
+        return $counts;
     }
 }

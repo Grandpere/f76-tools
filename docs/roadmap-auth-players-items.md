@@ -68,6 +68,10 @@ Permettre a un utilisateur authentifie de:
   - [x] sync learned inter-listes pour un meme item Minerva (meme id)
   - [x] retour visuel (loading, succes, erreur)
 - [x] Selection du player actif (query param).
+- [x] Bloc de statistiques dashboard:
+  - [x] endpoint `GET /api/players/{id}/stats`,
+  - [x] KPI global/type + detail par rank/liste,
+  - [x] rafraichissement live apres toggle learned.
 
 ## Phase 5 - Qualite et tests
 - [x] Tests unitaires:

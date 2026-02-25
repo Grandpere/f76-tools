@@ -76,6 +76,11 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - recherche texte `q` connectee UI -> API, filtre sur texte traduit + fallback sur les cles.
   - creation player directement depuis le dashboard (POST `/api/players`) avec auto-selection apres creation.
   - affichage en 2 blocs: `MISC` groupe par rank et `BOOK` groupe par liste.
+  - bloc stats dashboard alimente par `GET /api/players/{id}/stats`:
+    - global learned/total/%,
+    - par type (`MISC`/`BOOK`),
+    - detail par rank et par liste.
+  - stats rechargees apres chaque toggle learned pour rester synchronisees.
   - un toggle learned sur un item `BOOK` doit refleter toutes ses occurrences multi-listes (meme `itemId`).
   - UX learned preferee avec checkbox `Appris` (pas bouton), + note d'aide avant les listes Minerva.
   - comportement accordéon par type: ouvrir un groupe replie les autres du meme type, et le groupe ouvert est conserve apres rerender.

@@ -43,6 +43,91 @@ final class ItemEntityRepository extends ServiceEntityRepository
         return $item instanceof ItemEntity ? $item : null;
     }
 
+    public function countAll(): int
+    {
+        $count = $this->createQueryBuilder('i')
+            ->select('COUNT(i.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return (int) $count;
+    }
+
+    public function countByType(ItemTypeEnum $type): int
+    {
+        $count = $this->createQueryBuilder('i')
+            ->select('COUNT(i.id)')
+            ->andWhere('i.type = :type')
+            ->setParameter('type', $type)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return (int) $count;
+    }
+
+    /**
+     * @return array<int, int>
+     */
+    public function findMiscTotalsByRank(): array
+    {
+        $rows = $this->createQueryBuilder('i')
+            ->select('i.rank AS rank')
+            ->addSelect('COUNT(i.id) AS totalCount')
+            ->andWhere('i.type = :type')
+            ->setParameter('type', ItemTypeEnum::MISC)
+            ->groupBy('i.rank')
+            ->orderBy('i.rank', 'ASC')
+            ->getQuery()
+            ->getScalarResult();
+
+        $totals = [];
+        foreach ($rows as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+            $rankRaw = $row['rank'] ?? null;
+            $countRaw = $row['totalCount'] ?? null;
+            if ((!is_int($rankRaw) && !is_numeric($rankRaw)) || (!is_int($countRaw) && !is_numeric($countRaw))) {
+                continue;
+            }
+            $totals[(int) $rankRaw] = (int) $countRaw;
+        }
+
+        return $totals;
+    }
+
+    /**
+     * @return array<int, int>
+     */
+    public function findBookTotalsByListNumber(): array
+    {
+        $rows = $this->createQueryBuilder('i')
+            ->select('bl.listNumber AS listNumber')
+            ->addSelect('COUNT(DISTINCT i.id) AS totalCount')
+            ->join('i.bookLists', 'bl')
+            ->andWhere('i.type = :type')
+            ->setParameter('type', ItemTypeEnum::BOOK)
+            ->groupBy('bl.listNumber')
+            ->orderBy('bl.listNumber', 'ASC')
+            ->getQuery()
+            ->getScalarResult();
+
+        $totals = [];
+        foreach ($rows as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+            $listRaw = $row['listNumber'] ?? null;
+            $countRaw = $row['totalCount'] ?? null;
+            if ((!is_int($listRaw) && !is_numeric($listRaw)) || (!is_int($countRaw) && !is_numeric($countRaw))) {
+                continue;
+            }
+            $totals[(int) $listRaw] = (int) $countRaw;
+        }
+
+        return $totals;
+    }
+
     /**
      * @return list<ItemEntity>
      */

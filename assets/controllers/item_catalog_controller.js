@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    static targets = ['playerSelect', 'createNameInput', 'createButton', 'searchInput', 'sourceFilter', 'state', 'miscList', 'bookList'];
+    static targets = ['playerSelect', 'createNameInput', 'createButton', 'searchInput', 'sourceFilter', 'state', 'statsPanel', 'miscList', 'bookList'];
     static values = {
         playersUrl: String,
         playersBaseUrl: String,
@@ -20,6 +20,7 @@ export default class extends Controller {
         this.activeSourceFilters = [];
         this.openMiscGroup = null;
         this.openBookGroup = null;
+        this.stats = null;
         this.bindEvents();
         await this.loadPlayers();
     }
@@ -69,6 +70,7 @@ export default class extends Controller {
         this.setState(this.t('loadingPlayers'));
         this.miscListTarget.innerHTML = '';
         this.bookListTarget.innerHTML = '';
+        this.statsPanelTarget.innerHTML = '';
 
         const response = await fetch(this.appendLocaleToUrl(this.playersUrlValue), {
             headers: { Accept: 'application/json' },
@@ -182,7 +184,31 @@ export default class extends Controller {
         const payload = await response.json();
         this.items = Array.isArray(payload) ? payload : [];
         this.renderItems();
+        await this.loadStats();
         this.updateStateCounter();
+    }
+
+    async loadStats() {
+        if (!this.activePlayerId) {
+            this.stats = null;
+            this.renderStats();
+            return;
+        }
+
+        const url = `${this.playersBaseUrlValue}/${this.activePlayerId}/stats`;
+        const response = await fetch(this.appendLocaleToUrl(url), {
+            headers: { Accept: 'application/json' },
+            credentials: 'same-origin',
+        });
+        if (!response.ok) {
+            this.stats = null;
+            this.renderStats();
+            return;
+        }
+
+        const payload = await response.json();
+        this.stats = payload && typeof payload === 'object' ? payload : null;
+        this.renderStats();
     }
 
     async toggleLearned(itemId, shouldBeLearned) {
@@ -208,6 +234,8 @@ export default class extends Controller {
             ? { ...item, learned: shouldBeLearned }
             : item));
         this.renderItems();
+        await this.loadStats();
+        this.updateStateCounter();
     }
 
     renderItems() {
@@ -223,6 +251,74 @@ export default class extends Controller {
         this.bindToggleButtons(this.bookListTarget);
         this.bindAccordionBehavior(this.miscListTarget, 'misc');
         this.bindAccordionBehavior(this.bookListTarget, 'book');
+    }
+
+    renderStats() {
+        if (!this.stats || typeof this.stats !== 'object') {
+            this.statsPanelTarget.innerHTML = '';
+            return;
+        }
+
+        const overall = this.stats.overall || { learned: 0, total: 0, percent: 0 };
+        const byType = this.stats.byType || {};
+        const misc = byType.misc || { learned: 0, total: 0, percent: 0 };
+        const book = byType.book || { learned: 0, total: 0, percent: 0 };
+        const miscByRank = Array.isArray(this.stats.miscByRank) ? this.stats.miscByRank : [];
+        const bookByList = Array.isArray(this.stats.bookByList) ? this.stats.bookByList : [];
+
+        const cards = [
+            this.renderStatsCard(this.t('statsOverall'), overall),
+            this.renderStatsCard(this.t('statsMisc'), misc),
+            this.renderStatsCard(this.t('statsBook'), book),
+        ].join('');
+
+        const rankRows = miscByRank.map((row) => this.renderStatsRow(`${this.t('statsRankPrefix')} ${row.rank}`, row)).join('');
+        const listRows = bookByList.map((row) => this.renderStatsRow(`${this.t('statsListPrefix')} ${row.listNumber}`, row)).join('');
+
+        this.statsPanelTarget.innerHTML = `
+            <div class="stats-cards">${cards}</div>
+            <div class="stats-split">
+                <section class="stats-group">
+                    <h3>${this.escape(this.t('statsByRank'))}</h3>
+                    ${rankRows || '<p class="catalog-note">-</p>'}
+                </section>
+                <section class="stats-group">
+                    <h3>${this.escape(this.t('statsByList'))}</h3>
+                    ${listRows || '<p class="catalog-note">-</p>'}
+                </section>
+            </div>
+        `;
+    }
+
+    renderStatsCard(title, stat) {
+        const learned = Number.isInteger(stat.learned) ? stat.learned : 0;
+        const total = Number.isInteger(stat.total) ? stat.total : 0;
+        const percent = Number.isInteger(stat.percent) ? stat.percent : 0;
+
+        return `
+            <article class="stats-card">
+                <p class="stats-card-title">${this.escape(title)}</p>
+                <p class="stats-card-main">${this.escape(percent)}${this.escape(this.t('statsPercentSuffix'))}</p>
+                <p class="stats-card-sub">${this.escape(this.t('statsLearnedOnTotal', { '%learned%': learned, '%total%': total }))}</p>
+                <div class="stats-bar"><span style="width:${Math.max(0, Math.min(100, percent))}%"></span></div>
+            </article>
+        `;
+    }
+
+    renderStatsRow(label, stat) {
+        const learned = Number.isInteger(stat.learned) ? stat.learned : 0;
+        const total = Number.isInteger(stat.total) ? stat.total : 0;
+        const percent = Number.isInteger(stat.percent) ? stat.percent : 0;
+
+        return `
+            <div class="stats-row">
+                <p class="stats-row-head">
+                    <strong>${this.escape(label)}</strong>
+                    <span>${this.escape(this.t('statsLearnedOnTotal', { '%learned%': learned, '%total%': total }))}</span>
+                </p>
+                <div class="stats-bar"><span style="width:${Math.max(0, Math.min(100, percent))}%"></span></div>
+            </div>
+        `;
     }
 
     renderMiscBlock(items) {

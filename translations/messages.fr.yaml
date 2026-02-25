@@ -30,6 +30,16 @@ dashboard.create_player.submit: Creer
 dashboard.create_player.help: Le nouveau personnage sera selectionne automatiquement.
 dashboard.catalog.misc_title: Mods legendaires (par rang)
 dashboard.catalog.book_title: Plans Minerva (par liste)
+dashboard.stats.title: Progression du personnage
+dashboard.stats.overall: Global
+dashboard.stats.misc: Legendary mods
+dashboard.stats.book: Plans Minerva
+dashboard.stats.by_rank: Detail par rang
+dashboard.stats.by_list: Detail par liste
+dashboard.stats.learned_on_total: '%learned% / %total%'
+dashboard.stats.percent_suffix: '%'
+dashboard.stats.rank_prefix: Rang
+dashboard.stats.list_prefix: Liste
 dashboard.state.loading_players: Chargement des personnages...
 dashboard.state.cannot_load_players: Impossible de charger les personnages
 dashboard.state.no_players: Aucun personnage. Cree ton premier personnage via l API /api/players.
