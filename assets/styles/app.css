@@ -103,10 +103,19 @@ body::before {
     color: var(--accent-2);
 }
 
-.header-locale {
+.catalog-header-tools {
     position: absolute;
     top: 0.9rem;
     right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: min(62vw, 600px);
+}
+
+.header-locale {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
@@ -125,9 +134,6 @@ body::before {
 }
 
 .header-translations-link {
-    position: absolute;
-    top: 0.95rem;
-    right: 14.2rem;
     color: var(--accent-2);
     text-decoration: none;
     font-size: 0.78rem;
@@ -744,11 +750,16 @@ body::before {
         width: fit-content;
     }
 
+    .catalog-header-tools {
+        position: static;
+        max-width: none;
+        margin-bottom: 0.2rem;
+        justify-content: flex-start;
+    }
+
     .header-translations-link {
         position: static;
-        display: inline-block;
         margin-bottom: 0.55rem;
-        margin-right: 0.45rem;
     }
 
     .catalog-toolbar {

@@ -35,18 +35,20 @@
     } %}
     <main class="catalog-page">
         <header class="catalog-header">
-            <a class="header-translations-link" href="{{ path('app_admin_item_translations', { locale: app.request.locale, target: 'fr' }) }}">{{ 'dashboard.header.translation_management'|trans }}</a>
-            <form class="header-locale" method="get">
-                {% if app.request.query.get('player') %}
-                    <input type="hidden" name="player" value="{{ app.request.query.get('player') }}">
-                {% endif %}
-                <label for="header-locale-select">{{ 'common.language'|trans }}</label>
-                <select id="header-locale-select" name="locale" onchange="this.form.submit()">
-                    <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 {{ 'common.locale.fr'|trans }}</option>
-                    <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 {{ 'common.locale.en'|trans }}</option>
-                    <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>🇩🇪 {{ 'common.locale.de'|trans }}</option>
-                </select>
-            </form>
+            <div class="catalog-header-tools">
+                <a class="header-translations-link" href="{{ path('app_admin_item_translations', { locale: app.request.locale, target: 'fr' }) }}">{{ 'dashboard.header.translation_management'|trans }}</a>
+                <form class="header-locale" method="get">
+                    {% if app.request.query.get('player') %}
+                        <input type="hidden" name="player" value="{{ app.request.query.get('player') }}">
+                    {% endif %}
+                    <label for="header-locale-select">{{ 'common.language'|trans }}</label>
+                    <select id="header-locale-select" name="locale" onchange="this.form.submit()">
+                        <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 {{ 'common.locale.fr'|trans }}</option>
+                        <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 {{ 'common.locale.en'|trans }}</option>
+                        <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>🇩🇪 {{ 'common.locale.de'|trans }}</option>
+                    </select>
+                </form>
+            </div>
             <p class="catalog-kicker">Fallout 76</p>
             <h1>{{ 'dashboard.header.title'|trans }}</h1>
             <p class="catalog-subtitle">{{ 'dashboard.header.subtitle'|trans }}</p>
