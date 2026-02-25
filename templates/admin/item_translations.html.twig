@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Backoffice Traductions Items{% endblock %}
+{% block title %}{{ 'admin_translations.page_title'|trans }}{% endblock %}
 
 {% block body %}
     <main class="translations-page">
@@ -10,18 +10,18 @@
                 {% if query %}
                     <input type="hidden" name="q" value="{{ query }}">
                 {% endif %}
-                <label for="admin-header-locale-select">Langue</label>
+                <label for="admin-header-locale-select">{{ 'common.language'|trans }}</label>
                 <select id="admin-header-locale-select" name="locale" onchange="this.form.submit()">
                     <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 Francais</option>
                     <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 English</option>
                     <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>🇩🇪 Deutsch</option>
                 </select>
             </form>
-            <p class="catalog-kicker">Backoffice</p>
-            <h1>Traductions des items</h1>
-            <p>Edition du catalogue <code>translations/items.{{ targetLocale }}.yaml</code></p>
+            <p class="catalog-kicker">{{ 'admin_translations.kicker'|trans }}</p>
+            <h1>{{ 'admin_translations.title'|trans }}</h1>
+            <p>{{ 'admin_translations.editing_catalog'|trans({'%locale%': targetLocale}) }}</p>
             <p>
-                <a href="{{ path('app_dashboard', { locale: app.request.locale }) }}">Retour au dashboard</a>
+                <a href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ 'admin_translations.back_to_dashboard'|trans }}</a>
             </p>
         </header>
 
@@ -35,17 +35,17 @@
         <section class="translations-panel">
             <form method="get" class="translations-filters">
                 <label class="field">
-                    <span>Fichier cible</span>
+                    <span>{{ 'admin_translations.target_file'|trans }}</span>
                     <input type="text" name="target" value="{{ targetLocale }}" placeholder="fr">
                 </label>
                 <label class="field">
-                    <span>Recherche</span>
-                    <input type="search" name="q" value="{{ query }}" placeholder="key, EN, DE, cible">
+                    <span>{{ 'admin_translations.search'|trans }}</span>
+                    <input type="search" name="q" value="{{ query }}" placeholder="{{ 'admin_translations.search_placeholder'|trans }}">
                 </label>
                 <input type="hidden" name="locale" value="{{ app.request.locale }}">
-                <button type="submit">Filtrer</button>
+                <button type="submit">{{ 'admin_translations.filter'|trans }}</button>
             </form>
-            <p class="catalog-state">{{ totalRows }} lignes visibles.</p>
+            <p class="catalog-state">{{ 'admin_translations.visible_rows'|trans({'%count%': totalRows}) }}</p>
 
             <form method="post" data-controller="textarea-autosize">
                 <input type="hidden" name="target" value="{{ targetLocale }}">
@@ -53,7 +53,7 @@
                     <table class="translations-table">
                         <thead>
                         <tr>
-                            <th>Cle</th>
+                            <th>{{ 'admin_translations.key'|trans }}</th>
                             <th>{{ targetLocale|upper }}</th>
                         </tr>
                         </thead>
@@ -78,14 +78,14 @@
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan="2">Aucune entree.</td>
+                                <td colspan="2">{{ 'admin_translations.no_entries'|trans }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
                 </div>
                 <div class="translations-actions">
-                    <button type="submit">Enregistrer</button>
+                    <button type="submit">{{ 'admin_translations.save'|trans }}</button>
                 </div>
             </form>
         </section>

@@ -6,6 +6,7 @@ export default class extends Controller {
         playersUrl: String,
         playersBaseUrl: String,
         initialPlayerId: String,
+        uiTranslations: String,
     };
 
     async connect() {
@@ -13,6 +14,7 @@ export default class extends Controller {
         this.items = [];
         this.activePlayerId = null;
         this.activeLocale = this.readActiveLocale();
+        this.translations = this.readUiTranslations();
         this.searchQuery = '';
         this.searchDebounceId = null;
         this.activeSourceFilters = [];
@@ -64,7 +66,7 @@ export default class extends Controller {
     }
 
     async loadPlayers() {
-        this.setState('Chargement des personnages...');
+        this.setState(this.t('loadingPlayers'));
         this.miscListTarget.innerHTML = '';
         this.bookListTarget.innerHTML = '';
 
@@ -73,14 +75,14 @@ export default class extends Controller {
             credentials: 'same-origin',
         });
         if (!response.ok) {
-            this.setState(`Impossible de charger les personnages (${response.status}).`);
+            this.setState(`${this.t('cannotLoadPlayers')} (${response.status}).`);
             return;
         }
 
         const payload = await response.json();
         this.players = Array.isArray(payload) ? payload : [];
         if (this.players.length === 0) {
-            this.setState('Aucun personnage. Cree ton premier personnage via l API /api/players.');
+            this.setState(this.t('noPlayers'));
             return;
         }
 
@@ -92,12 +94,12 @@ export default class extends Controller {
     async createPlayerFromInput() {
         const name = this.createNameInputTarget.value.trim();
         if (name === '') {
-            this.setState('Le nom du personnage est requis.');
+            this.setState(this.t('playerNameRequired'));
             return;
         }
 
         this.createButtonTarget.disabled = true;
-        this.setState('Creation du personnage...');
+        this.setState(this.t('creatingPlayer'));
 
         const response = await fetch(this.appendLocaleToUrl(this.playersUrlValue), {
             method: 'POST',
@@ -113,10 +115,10 @@ export default class extends Controller {
 
         if (!response.ok) {
             if (response.status === 409) {
-                this.setState('Un personnage avec ce nom existe deja.');
+                this.setState(this.t('playerNameExists'));
                 return;
             }
-            this.setState(`Echec de creation du personnage (${response.status}).`);
+            this.setState(`${this.t('createPlayerFailed')} (${response.status}).`);
             return;
         }
 
@@ -133,7 +135,7 @@ export default class extends Controller {
                 await this.loadItems();
             }
         }
-        this.setState(`Personnage cree: ${name}.`);
+        this.setState(this.t('playerCreated', { '%name%': name }));
     }
 
     renderPlayerSelect() {
@@ -156,12 +158,12 @@ export default class extends Controller {
 
     async loadItems() {
         if (!this.activePlayerId) {
-            this.setState('Aucun personnage selectionne.');
+            this.setState(this.t('noSelectedPlayer'));
             return;
         }
 
         this.renderItems();
-        this.setState('Chargement des items...');
+        this.setState(this.t('loadingItems'));
 
         const params = new URLSearchParams();
         if (this.searchQuery !== '') {
@@ -173,7 +175,7 @@ export default class extends Controller {
             credentials: 'same-origin',
         });
         if (!response.ok) {
-            this.setState(`Erreur de chargement des items (${response.status}).`);
+            this.setState(`${this.t('loadItemsError')} (${response.status}).`);
             return;
         }
 
@@ -198,7 +200,7 @@ export default class extends Controller {
         });
 
         if (!response.ok) {
-            this.setState(`Echec de mise a jour (${response.status}).`);
+            this.setState(`${this.t('updateFailed')} (${response.status}).`);
             return;
         }
 
@@ -211,8 +213,8 @@ export default class extends Controller {
     renderItems() {
         const visibleItems = this.getVisibleItems();
         if (visibleItems.length === 0) {
-            this.miscListTarget.innerHTML = '<p>Aucun mod legendaire trouve.</p>';
-            this.bookListTarget.innerHTML = '<p>Aucun plan Minerva trouve.</p>';
+            this.miscListTarget.innerHTML = `<p>${this.escape(this.t('noMiscFound'))}</p>`;
+            this.bookListTarget.innerHTML = `<p>${this.escape(this.t('noBookFound'))}</p>`;
             return;
         }
         this.miscListTarget.innerHTML = this.renderMiscBlock(visibleItems);
@@ -226,7 +228,7 @@ export default class extends Controller {
     renderMiscBlock(items) {
         const miscItems = items.filter((item) => item.type === 'MISC');
         if (miscItems.length === 0) {
-            return '<p>Aucun mod legendaire trouve.</p>';
+            return `<p>${this.escape(this.t('noMiscFound'))}</p>`;
         }
 
         const rankMap = new Map();
@@ -247,7 +249,7 @@ export default class extends Controller {
         }
         return ranks.map((rank, index) => `
             <details class="catalog-subgroup" data-accordion-kind="misc" data-accordion-id="${rank}" ${rank === this.openMiscGroup ? 'open' : ''}>
-                <summary>Rang ${this.escape(rank)}</summary>
+                <summary>${this.escape(this.t('rankPrefix'))} ${this.escape(rank)}</summary>
                 <ul class="item-grid">${rankMap.get(rank).map((item) => this.renderItemCard(item)).join('')}</ul>
             </details>
         `).join('');
@@ -256,7 +258,7 @@ export default class extends Controller {
     renderBookBlock(items) {
         const books = items.filter((item) => item.type === 'BOOK');
         if (books.length === 0) {
-            return '<p>Aucun plan Minerva trouve.</p>';
+            return `<p>${this.escape(this.t('noBookFound'))}</p>`;
         }
 
         const listMap = new Map([
@@ -291,14 +293,14 @@ export default class extends Controller {
             .sort((a, b) => a[0] - b[0])
             .map(([listNumber, items]) => `
                 <details class="catalog-subgroup" data-accordion-kind="book" data-accordion-id="${listNumber}" ${listNumber === this.openBookGroup ? 'open' : ''}>
-                    <summary>Liste ${this.escape(listNumber)}</summary>
+                    <summary>${this.escape(this.t('listPrefix'))} ${this.escape(listNumber)}</summary>
                     <ul class="item-grid">${items.map((item) => this.renderItemCard(item)).join('')}</ul>
                 </details>
             `)
             .join('');
 
         return `
-            <p class="catalog-note">Info: un plan present dans plusieurs listes partage le meme etat appris. Cocher une occurrence met a jour toutes les autres.</p>
+            <p class="catalog-note">${this.escape(this.t('sharedInfo'))}</p>
             ${groupsHtml}
         `;
     }
@@ -309,7 +311,7 @@ export default class extends Controller {
         const infoBlock = this.renderInfoBlock(item);
         const iconsFooter = this.renderIconsFooter(item);
         const dailyOpsLine = item.type === 'BOOK' && item.dropDailyOps && !this.infoContainsDailyOps(item.infoHtml)
-            ? '<p class="item-extra-line">Disponible aussi en recompense d une operation quotidienne reussie.</p>'
+            ? `<p class="item-extra-line">${this.escape(this.t('dailyOpsReward'))}</p>`
             : '';
         const priceBlock = this.renderPriceBlock(item);
         const learnedClass = item.learned ? 'is-learned' : 'is-unlearned';
@@ -318,7 +320,7 @@ export default class extends Controller {
 
         return `
             <li class="item-card ${learnedClass}">
-                <input class="item-learned-checkbox" type="checkbox" aria-label="Objet appris" data-item-checkbox="1" data-item-id="${item.id}" ${checkedAttr}>
+                <input class="item-learned-checkbox" type="checkbox" aria-label="${this.escape(this.t('ariaItemLearned'))}" data-item-checkbox="1" data-item-id="${item.id}" ${checkedAttr}>
                 <div class="item-card-head">
                     <strong>${label}</strong>
                     ${newBadge}
@@ -393,12 +395,13 @@ export default class extends Controller {
 
     updateStateCounter() {
         const visibleCount = this.getVisibleItems().length;
-        const searchSuffix = this.searchQuery !== '' ? `, filtre texte: "${this.searchQuery}"` : '';
+        const searchSuffix = this.searchQuery !== '' ? `, ${this.t('searchFilterPrefix')}: "${this.searchQuery}"` : '';
+        const translatedFilters = this.activeSourceFilters.map((key) => this.t(`source_${key}`));
         const sourceSuffix = this.activeSourceFilters.length > 0
-            ? `, filtres sources: ${this.activeSourceFilters.join(', ')}`
+            ? `, ${this.t('sourceFiltersPrefix')}: ${translatedFilters.join(', ')}`
             : '';
 
-        this.setState(`${visibleCount} items visibles${searchSuffix}${sourceSuffix}.`);
+        this.setState(this.t('visibleItems', { '%count%': visibleCount }) + searchSuffix + sourceSuffix + '.');
     }
 
     renderInfoBlock(item) {
@@ -532,6 +535,15 @@ export default class extends Controller {
         this.stateTarget.textContent = message;
     }
 
+    t(key, params = {}) {
+        const raw = this.translations[key] ?? key;
+
+        return Object.entries(params).reduce(
+            (carry, [name, value]) => carry.replaceAll(name, String(value)),
+            String(raw),
+        );
+    }
+
     escape(value) {
         const normalized = String(value ?? '');
 
@@ -549,6 +561,17 @@ export default class extends Controller {
         return escaped
             .replace(/&lt;br\s*\/?&gt;/gi, '<br>')
             .replace(/\r?\n/g, '<br>');
+    }
+
+    readUiTranslations() {
+        try {
+            const raw = this.uiTranslationsValue ?? '{}';
+            const parsed = JSON.parse(raw);
+
+            return typeof parsed === 'object' && parsed !== null ? parsed : {};
+        } catch {
+            return {};
+        }
     }
 
     sanitizeHtml(html) {

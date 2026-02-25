@@ -17,6 +17,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - `Item` stocke des cles de traduction (`nameKey`, `descKey`) et non les textes EN/DE en base.
 - Locale activee via query param `?locale=` (en/de/fr) + persistance session via subscriber.
 - Fallback traduction configure vers `en` pour eviter les cles brutes si locale incomplète.
+- Textes UI (dashboard + backoffice) externalises dans `translations/messages.{fr,en,de}.yaml`.
 - Metadonnees d'acquisition/sources item materialisees en colonnes SQL (`is_new`, `drop_*`, `vendor_*`, `info_html`, `drop_sources_html`) plutot qu'en lecture runtime de `payload`.
 - `relations` (legendary mods) materialise en colonne SQL `relations_html` et affiche en front avec icones locales.
 - Traductions generees/maj dans:
@@ -75,6 +76,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - exposer/afficher `drop_raid`, `drop_burningssprings`, `drop_dailyops`, `vendor_regs`, `vendor_samuel`, `vendor_mortimer`, `info`, `drop_sources`.
   - filtres UI par sources bases sur les booleens des colonnes dediees (checkboxes dans la toolbar).
   - pour `drop_sources`, convertir les `src` `/cms/.../file.png` vers `/assets/icons/file.png` (assets locaux dans `public/assets/icons`).
+  - messages Stimulus localises via un dictionnaire JSON injecte par Twig (`data-item-catalog-ui-translations-value`).
 - API players:
   - doublon de nom par user retourne `409` (`Player name already exists.`) au create/update au lieu d'une 500 SQL.
 - PHPStan (array shapes):

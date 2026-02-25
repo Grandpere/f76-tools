@@ -1,16 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}F76 - Suivi des objets{% endblock %}
+{% block title %}{{ 'dashboard.page_title'|trans }}{% endblock %}
 
 {% block body %}
+    {% set uiTranslations = {
+        loadingPlayers: 'dashboard.state.loading_players'|trans,
+        cannotLoadPlayers: 'dashboard.state.cannot_load_players'|trans,
+        noPlayers: 'dashboard.state.no_players'|trans,
+        playerNameRequired: 'dashboard.state.player_name_required'|trans,
+        creatingPlayer: 'dashboard.state.creating_player'|trans,
+        playerNameExists: 'dashboard.state.player_name_exists'|trans,
+        createPlayerFailed: 'dashboard.state.create_player_failed'|trans,
+        playerCreated: 'dashboard.state.player_created'|trans,
+        noSelectedPlayer: 'dashboard.state.no_selected_player'|trans,
+        loadingItems: 'dashboard.state.loading_items'|trans,
+        loadItemsError: 'dashboard.state.load_items_error'|trans,
+        updateFailed: 'dashboard.state.update_failed'|trans,
+        noMiscFound: 'dashboard.empty.no_misc'|trans,
+        noBookFound: 'dashboard.empty.no_book'|trans,
+        rankPrefix: 'dashboard.labels.rank_prefix'|trans,
+        listPrefix: 'dashboard.labels.list_prefix'|trans,
+        sharedInfo: 'dashboard.help.shared_book_learning'|trans,
+        dailyOpsReward: 'dashboard.item.daily_ops_reward'|trans,
+        ariaItemLearned: 'dashboard.aria.item_learned'|trans,
+        sourceFiltersPrefix: 'dashboard.state.source_filters_prefix'|trans,
+        visibleItems: 'dashboard.state.visible_items'|trans,
+        searchFilterPrefix: 'dashboard.state.search_filter_prefix'|trans,
+        source_dropRaid: 'dashboard.sources.raid'|trans,
+        source_dropBurningSprings: 'dashboard.sources.burning_springs'|trans,
+        source_dropDailyOps: 'dashboard.sources.daily_ops'|trans,
+        source_vendorRegs: 'dashboard.sources.regs'|trans,
+        source_vendorSamuel: 'dashboard.sources.samuel'|trans,
+        source_vendorMortimer: 'dashboard.sources.mortimer'|trans
+    } %}
     <main class="catalog-page">
         <header class="catalog-header">
-            <a class="header-translations-link" href="{{ path('app_admin_item_translations', { locale: app.request.locale, target: 'fr' }) }}">Gestion des traductions</a>
+            <a class="header-translations-link" href="{{ path('app_admin_item_translations', { locale: app.request.locale, target: 'fr' }) }}">{{ 'dashboard.header.translation_management'|trans }}</a>
             <form class="header-locale" method="get">
                 {% if app.request.query.get('player') %}
                     <input type="hidden" name="player" value="{{ app.request.query.get('player') }}">
                 {% endif %}
-                <label for="header-locale-select">Langue</label>
+                <label for="header-locale-select">{{ 'common.language'|trans }}</label>
                 <select id="header-locale-select" name="locale" onchange="this.form.submit()">
                     <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 Francais</option>
                     <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 English</option>
@@ -18,11 +48,11 @@
                 </select>
             </form>
             <p class="catalog-kicker">Fallout 76</p>
-            <h1>Suivi des objets appris</h1>
-            <p class="catalog-subtitle">Selectionne un personnage puis marque ses plans Minerva et ses mods legendaires appris.</p>
+            <h1>{{ 'dashboard.header.title'|trans }}</h1>
+            <p class="catalog-subtitle">{{ 'dashboard.header.subtitle'|trans }}</p>
             <p class="catalog-user">
-                Bonjour <strong>{{ username }}</strong>
-                · <a href="{{ path('app_logout', { locale: app.request.locale }) }}"><span aria-hidden="true">🚪</span> Deconnexion</a>
+                {{ 'dashboard.header.greeting_prefix'|trans }} <strong>{{ username }}</strong>
+                · <a href="{{ path('app_logout', { locale: app.request.locale }) }}"><span aria-hidden="true">🚪</span> {{ 'dashboard.header.logout'|trans }}</a>
             </p>
         </header>
 
@@ -32,49 +62,50 @@
             data-item-catalog-players-url-value="{{ apiPlayersUrl }}"
             data-item-catalog-players-base-url-value="{{ apiPlayersBaseUrl }}"
             data-item-catalog-initial-player-id-value="{{ activePlayerId ?? '' }}"
+            data-item-catalog-ui-translations-value="{{ uiTranslations|json_encode|e('html_attr') }}"
         >
             <section class="catalog-top-row">
                 <section class="catalog-panel">
-                    <h2>Filtres</h2>
+                    <h2>{{ 'dashboard.filters.title'|trans }}</h2>
                     <div class="catalog-toolbar">
                         <label class="field">
-                            <span>Personnage</span>
+                            <span>{{ 'dashboard.filters.player'|trans }}</span>
                             <select data-item-catalog-target="playerSelect"></select>
                         </label>
                         <label class="field">
-                            <span>Recherche</span>
-                            <input type="search" placeholder="Nom, description, cle..." data-item-catalog-target="searchInput">
+                            <span>{{ 'dashboard.filters.search'|trans }}</span>
+                            <input type="search" placeholder="{{ 'dashboard.filters.search_placeholder'|trans }}" data-item-catalog-target="searchInput">
                         </label>
                     </div>
                     <fieldset class="source-filters">
-                        <legend>Filtres sources</legend>
-                        <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropRaid"><img src="/assets/icons/GleamingDepthsMarker.svg" alt="">Raid</label>
-                        <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropBurningSprings"><img src="/assets/icons/bounty_hunter_ghoul_icon_128.png" alt="">Burning Springs</label>
-                        <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropDailyOps"><img src="/assets/icons/FO76_dailyops_uplink.png" alt="">Operations quotidiennes</label>
-                        <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="vendorRegs"><img src="/assets/icons/Vault79Marker.svg" alt="">Regs</label>
-                        <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="vendorSamuel"><img src="/assets/icons/HammerWingMarker.svg" alt="">Samuel</label>
-                        <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="vendorMortimer"><img src="/assets/icons/SkullRingMarker.svg" alt="">Mortimer</label>
+                        <legend>{{ 'dashboard.filters.source_filters'|trans }}</legend>
+                        <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropRaid"><img src="/assets/icons/GleamingDepthsMarker.svg" alt="">{{ 'dashboard.sources.raid'|trans }}</label>
+                        <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropBurningSprings"><img src="/assets/icons/bounty_hunter_ghoul_icon_128.png" alt="">{{ 'dashboard.sources.burning_springs'|trans }}</label>
+                        <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropDailyOps"><img src="/assets/icons/FO76_dailyops_uplink.png" alt="">{{ 'dashboard.sources.daily_ops'|trans }}</label>
+                        <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="vendorRegs"><img src="/assets/icons/Vault79Marker.svg" alt="">{{ 'dashboard.sources.regs'|trans }}</label>
+                        <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="vendorSamuel"><img src="/assets/icons/HammerWingMarker.svg" alt="">{{ 'dashboard.sources.samuel'|trans }}</label>
+                        <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="vendorMortimer"><img src="/assets/icons/SkullRingMarker.svg" alt="">{{ 'dashboard.sources.mortimer'|trans }}</label>
                     </fieldset>
-                    <p class="catalog-state" data-item-catalog-target="state">Chargement...</p>
+                    <p class="catalog-state" data-item-catalog-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
                 </section>
                 <section class="catalog-panel create-player-panel">
-                    <h2>Creer un personnage</h2>
+                    <h2>{{ 'dashboard.create_player.title'|trans }}</h2>
                     <label class="field create-player-field">
-                        <span>Nom du personnage</span>
+                        <span>{{ 'dashboard.create_player.name'|trans }}</span>
                         <div class="field-inline">
-                            <input type="text" placeholder="Ex: VaultDweller" data-item-catalog-target="createNameInput">
-                            <button type="button" data-item-catalog-target="createButton">Creer</button>
+                            <input type="text" placeholder="{{ 'dashboard.create_player.placeholder'|trans }}" data-item-catalog-target="createNameInput">
+                            <button type="button" data-item-catalog-target="createButton">{{ 'dashboard.create_player.submit'|trans }}</button>
                         </div>
                     </label>
-                    <p class="catalog-note">Le nouveau personnage sera selectionne automatiquement.</p>
+                    <p class="catalog-note">{{ 'dashboard.create_player.help'|trans }}</p>
                 </section>
             </section>
             <section class="catalog-panel catalog-block">
-                <h2>Mods legendaires (par rang)</h2>
+                <h2>{{ 'dashboard.catalog.misc_title'|trans }}</h2>
                 <div data-item-catalog-target="miscList"></div>
             </section>
             <section class="catalog-panel catalog-block">
-                <h2>Plans Minerva (par liste)</h2>
+                <h2>{{ 'dashboard.catalog.book_title'|trans }}</h2>
                 <div data-item-catalog-target="bookList"></div>
             </section>
         </section>

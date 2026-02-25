@@ -19,6 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/admin/translations/items')]
 final class ItemTranslationController extends AbstractController
@@ -31,6 +32,7 @@ final class ItemTranslationController extends AbstractController
     public function __construct(
         private readonly TranslationCatalogReader $catalogReader,
         private readonly TranslationCatalogWriter $catalogWriter,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 
@@ -47,9 +49,12 @@ final class ItemTranslationController extends AbstractController
             $upserts = $this->normalizeEntries($entries);
             if ([] !== $upserts) {
                 $this->catalogWriter->upsert($targetLocale, self::DOMAIN, $upserts);
-                $this->addFlash('success', sprintf('Traductions "%s" enregistrees (%d cles).', $targetLocale, count($upserts)));
+                $this->addFlash('success', $this->translator->trans('admin_translations.flash.saved', [
+                    '%locale%' => $targetLocale,
+                    '%count%' => (string) count($upserts),
+                ]));
             } else {
-                $this->addFlash('warning', 'Aucune traduction valide a enregistrer.');
+                $this->addFlash('warning', $this->translator->trans('admin_translations.flash.nothing_to_save'));
             }
 
             return $this->redirectToRoute('app_admin_item_translations', [

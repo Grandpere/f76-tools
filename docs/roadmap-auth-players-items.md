@@ -86,6 +86,7 @@ Permettre a un utilisateur authentifie de:
 - [x] Sauvegarde dans `translations/items.<locale>.yaml` via `TranslationCatalogWriter`.
 - [x] Locale applicative activee via `?locale=` (en/de/fr), conservee en session.
 - [x] Fallback traducteur vers `en` quand la locale cible n'est pas complete.
+- [x] Textes UI localises via `translations/messages.{fr,en,de}.yaml` (Twig + messages JS).
 - [ ] Ajouter pagination UI si la grille devient trop lourde.
 
 ## Risques / Decisions a figer

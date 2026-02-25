@@ -1,0 +1,64 @@
+common.language: Sprache
+
+dashboard.page_title: 'F76 - Objektverfolgung'
+dashboard.header.translation_management: Ubersetzungsverwaltung
+dashboard.header.title: Verfolgung gelernter Objekte
+dashboard.header.subtitle: Wahlen Sie einen Charakter aus und markieren Sie gelernte Minerva-Plane und legendare Mods.
+dashboard.header.greeting_prefix: Hallo
+dashboard.header.logout: Abmelden
+dashboard.filters.title: Filter
+dashboard.filters.player: Charakter
+dashboard.filters.search: Suche
+dashboard.filters.search_placeholder: 'Name, Beschreibung, Schlussel...'
+dashboard.filters.source_filters: Quellenfilter
+dashboard.sources.raid: Raid
+dashboard.sources.burning_springs: Burning Springs
+dashboard.sources.daily_ops: Daily Ops
+dashboard.sources.regs: Regs
+dashboard.sources.samuel: Samuel
+dashboard.sources.mortimer: Mortimer
+dashboard.create_player.title: Charakter erstellen
+dashboard.create_player.name: Charaktername
+dashboard.create_player.placeholder: 'Z. B.: VaultDweller'
+dashboard.create_player.submit: Erstellen
+dashboard.create_player.help: Der neue Charakter wird automatisch ausgewahlt.
+dashboard.catalog.misc_title: Legendare Mods (nach Rang)
+dashboard.catalog.book_title: Minerva-Plane (nach Liste)
+dashboard.state.loading_players: Charaktere werden geladen...
+dashboard.state.cannot_load_players: Charaktere konnten nicht geladen werden
+dashboard.state.no_players: Noch kein Charakter. Erstellen Sie den ersten uber /api/players.
+dashboard.state.player_name_required: Der Charaktername ist erforderlich.
+dashboard.state.creating_player: Charakter wird erstellt...
+dashboard.state.player_name_exists: Ein Charakter mit diesem Namen existiert bereits.
+dashboard.state.create_player_failed: Erstellen des Charakters fehlgeschlagen
+dashboard.state.player_created: 'Charakter erstellt: %name%'
+dashboard.state.no_selected_player: Kein Charakter ausgewahlt.
+dashboard.state.loading_items: Objekte werden geladen...
+dashboard.state.load_items_error: Fehler beim Laden der Objekte
+dashboard.state.update_failed: Aktualisierung fehlgeschlagen
+dashboard.state.visible_items: '%count% sichtbare Objekte'
+dashboard.state.search_filter_prefix: Suchfilter
+dashboard.state.source_filters_prefix: Quellenfilter
+dashboard.empty.no_misc: Keine legendaren Mods gefunden.
+dashboard.empty.no_book: Kein Minerva-Plan gefunden.
+dashboard.labels.rank_prefix: Rang
+dashboard.labels.list_prefix: Liste
+dashboard.help.shared_book_learning: 'Info: Ein Plan in mehreren Listen teilt denselben Gelernt-Status. Das Aktivieren einer Vorkommnis aktualisiert alle anderen.'
+dashboard.item.daily_ops_reward: Auch als Belohnung fur eine erfolgreich abgeschlossene tagliche Operation verfugbar.
+dashboard.aria.item_learned: Objekt gelernt
+
+admin_translations.page_title: Backoffice fur Objektubersetzungen
+admin_translations.kicker: Backoffice
+admin_translations.title: Objektubersetzungen
+admin_translations.editing_catalog: 'Katalog bearbeiten translations/items.%locale%.yaml'
+admin_translations.back_to_dashboard: Zuruck zum Dashboard
+admin_translations.target_file: Zieldatei
+admin_translations.search: Suche
+admin_translations.search_placeholder: 'Schlussel, EN, DE, Ziel'
+admin_translations.filter: Filtern
+admin_translations.visible_rows: '%count% sichtbare Zeilen.'
+admin_translations.key: Schlussel
+admin_translations.no_entries: Keine Eintrage.
+admin_translations.save: Speichern
+admin_translations.flash.saved: 'Ubersetzungen "%locale%" gespeichert (%count% Schlussel).'
+admin_translations.flash.nothing_to_save: Keine gultige Ubersetzung zum Speichern.

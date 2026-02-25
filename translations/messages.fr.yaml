@@ -1,0 +1,64 @@
+common.language: Langue
+
+dashboard.page_title: 'F76 - Suivi des objets'
+dashboard.header.translation_management: Gestion des traductions
+dashboard.header.title: Suivi des objets appris
+dashboard.header.subtitle: Selectionne un personnage puis marque ses plans Minerva et ses mods legendaires appris.
+dashboard.header.greeting_prefix: Bonjour
+dashboard.header.logout: Deconnexion
+dashboard.filters.title: Filtres
+dashboard.filters.player: Personnage
+dashboard.filters.search: Recherche
+dashboard.filters.search_placeholder: 'Nom, description, cle...'
+dashboard.filters.source_filters: Filtres sources
+dashboard.sources.raid: Raid
+dashboard.sources.burning_springs: Burning Springs
+dashboard.sources.daily_ops: Operations quotidiennes
+dashboard.sources.regs: Regs
+dashboard.sources.samuel: Samuel
+dashboard.sources.mortimer: Mortimer
+dashboard.create_player.title: Creer un personnage
+dashboard.create_player.name: Nom du personnage
+dashboard.create_player.placeholder: 'Ex: VaultDweller'
+dashboard.create_player.submit: Creer
+dashboard.create_player.help: Le nouveau personnage sera selectionne automatiquement.
+dashboard.catalog.misc_title: Mods legendaires (par rang)
+dashboard.catalog.book_title: Plans Minerva (par liste)
+dashboard.state.loading_players: Chargement des personnages...
+dashboard.state.cannot_load_players: Impossible de charger les personnages
+dashboard.state.no_players: Aucun personnage. Cree ton premier personnage via l API /api/players.
+dashboard.state.player_name_required: Le nom du personnage est requis.
+dashboard.state.creating_player: Creation du personnage...
+dashboard.state.player_name_exists: Un personnage avec ce nom existe deja.
+dashboard.state.create_player_failed: Echec de creation du personnage
+dashboard.state.player_created: 'Personnage cree: %name%'
+dashboard.state.no_selected_player: Aucun personnage selectionne.
+dashboard.state.loading_items: Chargement des items...
+dashboard.state.load_items_error: Erreur de chargement des items
+dashboard.state.update_failed: Echec de mise a jour
+dashboard.state.visible_items: '%count% items visibles'
+dashboard.state.search_filter_prefix: filtre texte
+dashboard.state.source_filters_prefix: filtres sources
+dashboard.empty.no_misc: Aucun mod legendaire trouve.
+dashboard.empty.no_book: Aucun plan Minerva trouve.
+dashboard.labels.rank_prefix: Rang
+dashboard.labels.list_prefix: Liste
+dashboard.help.shared_book_learning: 'Info: un plan present dans plusieurs listes partage le meme etat appris. Cocher une occurrence met a jour toutes les autres.'
+dashboard.item.daily_ops_reward: Disponible aussi en recompense d une operation quotidienne reussie.
+dashboard.aria.item_learned: Objet appris
+
+admin_translations.page_title: Backoffice traductions items
+admin_translations.kicker: Backoffice
+admin_translations.title: Traductions des items
+admin_translations.editing_catalog: 'Edition du catalogue translations/items.%locale%.yaml'
+admin_translations.back_to_dashboard: Retour au dashboard
+admin_translations.target_file: Fichier cible
+admin_translations.search: Recherche
+admin_translations.search_placeholder: 'key, EN, DE, cible'
+admin_translations.filter: Filtrer
+admin_translations.visible_rows: '%count% lignes visibles.'
+admin_translations.key: Cle
+admin_translations.no_entries: Aucune entree.
+admin_translations.save: Enregistrer
+admin_translations.flash.saved: 'Traductions "%locale%" enregistrees (%count% cles).'
+admin_translations.flash.nothing_to_save: Aucune traduction valide a enregistrer.

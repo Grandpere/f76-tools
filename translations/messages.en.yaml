@@ -1,0 +1,64 @@
+common.language: Language
+
+dashboard.page_title: 'F76 - Item Tracking'
+dashboard.header.translation_management: Translation management
+dashboard.header.title: Learned items tracker
+dashboard.header.subtitle: Select a character, then mark learned Minerva plans and legendary mods.
+dashboard.header.greeting_prefix: Hello
+dashboard.header.logout: Logout
+dashboard.filters.title: Filters
+dashboard.filters.player: Character
+dashboard.filters.search: Search
+dashboard.filters.search_placeholder: 'Name, description, key...'
+dashboard.filters.source_filters: Source filters
+dashboard.sources.raid: Raid
+dashboard.sources.burning_springs: Burning Springs
+dashboard.sources.daily_ops: Daily Ops
+dashboard.sources.regs: Regs
+dashboard.sources.samuel: Samuel
+dashboard.sources.mortimer: Mortimer
+dashboard.create_player.title: Create character
+dashboard.create_player.name: Character name
+dashboard.create_player.placeholder: 'Ex: VaultDweller'
+dashboard.create_player.submit: Create
+dashboard.create_player.help: The new character will be selected automatically.
+dashboard.catalog.misc_title: Legendary mods (by rank)
+dashboard.catalog.book_title: Minerva plans (by list)
+dashboard.state.loading_players: Loading characters...
+dashboard.state.cannot_load_players: Unable to load characters
+dashboard.state.no_players: No character yet. Create your first one via /api/players.
+dashboard.state.player_name_required: Character name is required.
+dashboard.state.creating_player: Creating character...
+dashboard.state.player_name_exists: A character with this name already exists.
+dashboard.state.create_player_failed: Character creation failed
+dashboard.state.player_created: 'Character created: %name%'
+dashboard.state.no_selected_player: No character selected.
+dashboard.state.loading_items: Loading items...
+dashboard.state.load_items_error: Item loading error
+dashboard.state.update_failed: Update failed
+dashboard.state.visible_items: '%count% visible items'
+dashboard.state.search_filter_prefix: search filter
+dashboard.state.source_filters_prefix: source filters
+dashboard.empty.no_misc: No legendary mod found.
+dashboard.empty.no_book: No Minerva plan found.
+dashboard.labels.rank_prefix: Rank
+dashboard.labels.list_prefix: List
+dashboard.help.shared_book_learning: 'Info: a plan present in multiple lists shares the same learned state. Checking one occurrence updates all others.'
+dashboard.item.daily_ops_reward: Also available as a reward from a successful daily operation.
+dashboard.aria.item_learned: Item learned
+
+admin_translations.page_title: Item translations backoffice
+admin_translations.kicker: Backoffice
+admin_translations.title: Item translations
+admin_translations.editing_catalog: 'Editing catalog translations/items.%locale%.yaml'
+admin_translations.back_to_dashboard: Back to dashboard
+admin_translations.target_file: Target file
+admin_translations.search: Search
+admin_translations.search_placeholder: 'key, EN, DE, target'
+admin_translations.filter: Filter
+admin_translations.visible_rows: '%count% visible rows.'
+admin_translations.key: Key
+admin_translations.no_entries: No entries.
+admin_translations.save: Save
+admin_translations.flash.saved: 'Translations "%locale%" saved (%count% keys).'
+admin_translations.flash.nothing_to_save: No valid translation to save.
