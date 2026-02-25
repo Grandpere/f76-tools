@@ -8,6 +8,7 @@ common.no: Non
 dashboard.page_title: 'F76 - Suivi des objets'
 dashboard.header.translation_management: Gestion des traductions
 dashboard.header.user_management: Gestion des utilisateurs
+dashboard.header.admin: Administration
 dashboard.header.title: Suivi des objets appris
 dashboard.header.subtitle: Selectionne un personnage puis marque ses plans Minerva et ses mods legendaires appris.
 dashboard.header.greeting_prefix: Bonjour

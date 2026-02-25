@@ -8,6 +8,7 @@ common.no: No
 dashboard.page_title: 'F76 - Item Tracking'
 dashboard.header.translation_management: Translation management
 dashboard.header.user_management: User management
+dashboard.header.admin: Administration
 dashboard.header.title: Learned items tracker
 dashboard.header.subtitle: Select a character, then mark learned Minerva plans and legendary mods.
 dashboard.header.greeting_prefix: Hello

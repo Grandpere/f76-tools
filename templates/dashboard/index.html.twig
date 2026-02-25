@@ -58,8 +58,7 @@
         <header class="catalog-header">
             <div class="catalog-header-tools">
                 {% if is_granted('ROLE_ADMIN') %}
-                    <a class="header-translations-link" href="{{ path('app_admin_item_translations', { locale: app.request.locale, target: 'fr' }) }}">{{ 'dashboard.header.translation_management'|trans }}</a>
-                    <a class="header-translations-link" href="{{ path('app_admin_users', { locale: app.request.locale }) }}">{{ 'dashboard.header.user_management'|trans }}</a>
+                    <a class="header-translations-link" href="{{ path('app_admin_users', { locale: app.request.locale }) }}">{{ 'dashboard.header.admin'|trans }}</a>
                 {% endif %}
                 <form class="header-locale" method="get">
                     {% if app.request.query.get('player') %}

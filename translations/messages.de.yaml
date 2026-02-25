@@ -8,6 +8,7 @@ common.no: Nein
 dashboard.page_title: 'F76 - Objektverfolgung'
 dashboard.header.translation_management: Ubersetzungsverwaltung
 dashboard.header.user_management: Benutzerverwaltung
+dashboard.header.admin: Administration
 dashboard.header.title: Verfolgung gelernter Objekte
 dashboard.header.subtitle: Wahlen Sie einen Charakter aus und markieren Sie gelernte Minerva-Plane und legendare Mods.
 dashboard.header.greeting_prefix: Hallo
