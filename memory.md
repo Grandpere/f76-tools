@@ -53,6 +53,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - typing explicite payload, adaptations Doctrine entity IDs.
 - Auth phase 1:
   - ajout `UserEntity` + `form_login` + commande `app:user:create`.
+  - commande `app:user:promote-admin <email>` ajoutee pour promouvoir admin sans changer le mot de passe.
   - correction PHPStan `non-empty-string` sur `getUserIdentifier()`:
     - `setEmail()` refuse les emails vides,
     - garde-fou dans `getUserIdentifier()` avec `LogicException` si vide.
