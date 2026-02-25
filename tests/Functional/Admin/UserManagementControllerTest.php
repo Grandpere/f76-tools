@@ -99,11 +99,50 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertInstanceOf(UserEntity::class, $updated);
         self::assertNotNull($updated->getResetPasswordTokenHash());
         self::assertNotNull($updated->getResetPasswordExpiresAt());
+        self::assertNotNull($updated->getResetPasswordRequestedAt());
 
         $audit = $this->findAuditForTargetAction('managed@example.com', 'user_generate_reset_link');
         self::assertInstanceOf(AdminAuditLogEntity::class, $audit);
         self::assertIsArray($audit->getContext());
         self::assertIsString($audit->getContext()['expiresAt'] ?? null);
+    }
+
+    public function testAdminCannotGenerateResetLinkTooFrequently(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/generate-reset-link"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+        $csrfToken = (string) $tokenNode->attr('value');
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/generate-reset-link', $managed->getId()), [
+            '_csrf_token' => $csrfToken,
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $this->entityManager?->clear();
+        $first = $this->findUserByEmail('managed@example.com');
+        self::assertInstanceOf(UserEntity::class, $first);
+        self::assertNotNull($first->getResetPasswordTokenHash());
+        $firstHash = $first->getResetPasswordTokenHash();
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/generate-reset-link', $managed->getId()), [
+            '_csrf_token' => $csrfToken,
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $this->entityManager?->clear();
+        $second = $this->findUserByEmail('managed@example.com');
+        self::assertInstanceOf(UserEntity::class, $second);
+        self::assertSame($firstHash, $second->getResetPasswordTokenHash());
+
+        $rateLimitedAudit = $this->findAuditForTargetAction('managed@example.com', 'user_generate_reset_link_rate_limited');
+        self::assertInstanceOf(AdminAuditLogEntity::class, $rateLimitedAudit);
+        self::assertIsArray($rateLimitedAudit->getContext());
+        self::assertIsInt($rateLimitedAudit->getContext()['remainingSeconds'] ?? null);
     }
 
     /**

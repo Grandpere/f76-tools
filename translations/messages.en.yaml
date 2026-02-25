@@ -128,6 +128,7 @@ admin_users.flash.cannot_change_self_role: You cannot change your own admin role
 admin_users.flash.active_updated: Active status updated.
 admin_users.flash.role_updated: Roles updated.
 admin_users.flash.reset_link_generated: Password reset link generated
+admin_users.flash.reset_link_rate_limited: Link already generated recently. Retry in %seconds% s.
 
 admin_audit.page_title: Audit logs backoffice
 admin_audit.kicker: Backoffice

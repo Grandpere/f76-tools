@@ -50,6 +50,7 @@ final class ResetPasswordControllerTest extends WebTestCase
         $user = $this->createUser('reset-target@example.com', 'secret123');
         $user->setResetPasswordTokenHash(hash('sha256', $rawToken));
         $user->setResetPasswordExpiresAt((new DateTimeImmutable())->add(new DateInterval('PT2H')));
+        $user->setResetPasswordRequestedAt(new DateTimeImmutable());
         $this->entityManager?->flush();
 
         $crawler = $this->browser()->request('GET', '/reset-password/'.$rawToken);
@@ -73,6 +74,7 @@ final class ResetPasswordControllerTest extends WebTestCase
         self::assertInstanceOf(UserEntity::class, $updated);
         self::assertNull($updated->getResetPasswordTokenHash());
         self::assertNull($updated->getResetPasswordExpiresAt());
+        self::assertNull($updated->getResetPasswordRequestedAt());
         self::assertTrue($this->passwordHasher()->isPasswordValid($updated, 'new-secret123'));
     }
 

@@ -52,6 +52,9 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(name: 'reset_password_expires_at', type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeImmutable $resetPasswordExpiresAt = null;
 
+    #[ORM\Column(name: 'reset_password_requested_at', type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $resetPasswordRequestedAt = null;
+
     #[ORM\Column(name: 'created_at', type: Types::DATETIME_IMMUTABLE)]
     private DateTimeImmutable $createdAt;
 
@@ -175,6 +178,18 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     public function setResetPasswordExpiresAt(?DateTimeImmutable $resetPasswordExpiresAt): self
     {
         $this->resetPasswordExpiresAt = $resetPasswordExpiresAt;
+
+        return $this;
+    }
+
+    public function getResetPasswordRequestedAt(): ?DateTimeImmutable
+    {
+        return $this->resetPasswordRequestedAt;
+    }
+
+    public function setResetPasswordRequestedAt(?DateTimeImmutable $resetPasswordRequestedAt): self
+    {
+        $this->resetPasswordRequestedAt = $resetPasswordRequestedAt;
 
         return $this;
     }

@@ -33,6 +33,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[Route('/admin/users')]
 final class UserManagementController extends AbstractController
 {
+    private const RESET_LINK_COOLDOWN_SECONDS = 60;
+
     public function __construct(
         private readonly UserEntityRepository $userRepository,
         private readonly EntityManagerInterface $entityManager,
@@ -142,11 +144,30 @@ final class UserManagementController extends AbstractController
             return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
         }
 
+        $now = new DateTimeImmutable();
+        $requestedAt = $user->getResetPasswordRequestedAt();
+        if ($requestedAt instanceof DateTimeImmutable) {
+            $elapsedSeconds = $now->getTimestamp() - $requestedAt->getTimestamp();
+            if ($elapsedSeconds < self::RESET_LINK_COOLDOWN_SECONDS) {
+                $remaining = self::RESET_LINK_COOLDOWN_SECONDS - $elapsedSeconds;
+                $this->addFlash('warning', $this->translator->trans('admin_users.flash.reset_link_rate_limited', [
+                    '%seconds%' => (string) $remaining,
+                ]));
+                $this->persistAuditLog($request, 'user_generate_reset_link_rate_limited', $user, [
+                    'remainingSeconds' => $remaining,
+                ]);
+                $this->entityManager->flush();
+
+                return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
+            }
+        }
+
         $token = bin2hex(random_bytes(32));
         $tokenHash = hash('sha256', $token);
-        $expiresAt = (new DateTimeImmutable())->add(new DateInterval('PT2H'));
+        $expiresAt = $now->add(new DateInterval('PT2H'));
         $user->setResetPasswordTokenHash($tokenHash);
         $user->setResetPasswordExpiresAt($expiresAt);
+        $user->setResetPasswordRequestedAt($now);
         $this->persistAuditLog($request, 'user_generate_reset_link', $user, [
             'expiresAt' => $expiresAt->format(\DateTimeInterface::ATOM),
         ]);

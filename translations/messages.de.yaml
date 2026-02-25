@@ -128,6 +128,7 @@ admin_users.flash.cannot_change_self_role: Sie konnen Ihre eigene Admin-Rolle hi
 admin_users.flash.active_updated: Aktiv-Status aktualisiert.
 admin_users.flash.role_updated: Rollen aktualisiert.
 admin_users.flash.reset_link_generated: Link zum Zurucksetzen generiert
+admin_users.flash.reset_link_rate_limited: Link wurde kurzlich erstellt. In %seconds% s erneut versuchen.
 
 admin_audit.page_title: Audit-Logs Backoffice
 admin_audit.kicker: Backoffice

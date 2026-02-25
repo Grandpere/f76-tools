@@ -99,6 +99,7 @@ Permettre a un utilisateur authentifie de:
 - [x] Protection acces `/admin/*` reservee ROLE_ADMIN.
 - [x] Journal d audit minimal des actions admin sensibles (toggle actif, toggle admin, generation lien reset).
 - [x] Page admin de consultation des logs d audit (`GET /admin/audit-logs`) avec filtres/pagination.
+- [x] Cooldown serveur sur generation de lien reset (anti-spam).
 
 ## Risques / Decisions a figer
 - [x] Decider le modele exact learned:

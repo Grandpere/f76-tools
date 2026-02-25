@@ -128,6 +128,7 @@ admin_users.flash.cannot_change_self_role: Vous ne pouvez pas modifier votre pro
 admin_users.flash.active_updated: Statut actif mis a jour.
 admin_users.flash.role_updated: Roles mis a jour.
 admin_users.flash.reset_link_generated: Lien de reinitialisation genere
+admin_users.flash.reset_link_rate_limited: Lien deja genere recemment. Reessaie dans %seconds% s.
 
 admin_audit.page_title: Backoffice logs d audit
 admin_audit.kicker: Backoffice

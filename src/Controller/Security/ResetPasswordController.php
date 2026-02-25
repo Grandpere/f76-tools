@@ -79,6 +79,7 @@ final class ResetPasswordController extends AbstractController
             $user->setPassword($this->passwordHasher->hashPassword($user, $password));
             $user->setResetPasswordTokenHash(null);
             $user->setResetPasswordExpiresAt(null);
+            $user->setResetPasswordRequestedAt(null);
             $this->entityManager->flush();
 
             $this->addFlash('success', 'security.reset.flash.success');
