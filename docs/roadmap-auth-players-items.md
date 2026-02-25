@@ -75,6 +75,9 @@ Permettre a un utilisateur authentifie de:
   - [x] KPI global/type + detail par rank/liste,
   - [x] rafraichissement live apres toggle learned.
 - [x] Persistance UX locale par player (recherche, filtres source, accordions ouverts).
+- [x] UI backup progression player:
+  - [x] export JSON depuis dashboard,
+  - [x] import JSON depuis dashboard (replace/merge).
 
 ## Phase 5 - Qualite et tests
 - [x] Tests unitaires:

@@ -12,6 +12,13 @@
         playerNameExists: 'dashboard.state.player_name_exists'|trans,
         createPlayerFailed: 'dashboard.state.create_player_failed'|trans,
         playerCreated: 'dashboard.state.player_created'|trans,
+        exportDone: 'dashboard.state.export_done'|trans,
+        exportFailed: 'dashboard.state.export_failed'|trans,
+        importNoFile: 'dashboard.state.import_no_file'|trans,
+        importInvalidFile: 'dashboard.state.import_invalid_file'|trans,
+        importingProgress: 'dashboard.state.importing_progress'|trans,
+        importDone: 'dashboard.state.import_done'|trans,
+        importFailed: 'dashboard.state.import_failed'|trans,
         noSelectedPlayer: 'dashboard.state.no_selected_player'|trans,
         loadingItems: 'dashboard.state.loading_items'|trans,
         loadItemsError: 'dashboard.state.load_items_error'|trans,
@@ -115,6 +122,19 @@
                         </div>
                     </label>
                     <p class="catalog-note">{{ 'dashboard.create_player.help'|trans }}</p>
+                    <hr class="catalog-divider">
+                    <h2>{{ 'dashboard.transfer.title'|trans }}</h2>
+                    <div class="transfer-actions">
+                        <button type="button" data-item-catalog-target="exportButton">{{ 'dashboard.transfer.export'|trans }}</button>
+                        <label class="transfer-file">
+                            <input type="file" accept="application/json" data-item-catalog-target="importFileInput">
+                        </label>
+                        <label class="transfer-checkbox">
+                            <input type="checkbox" data-item-catalog-target="importMergeCheckbox">
+                            {{ 'dashboard.transfer.merge_mode'|trans }}
+                        </label>
+                        <button type="button" data-item-catalog-target="importButton">{{ 'dashboard.transfer.import'|trans }}</button>
+                    </div>
                 </section>
             </section>
             <section class="catalog-panel catalog-block">

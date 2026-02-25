@@ -411,6 +411,48 @@ body::before {
     color: var(--text-2);
 }
 
+.catalog-divider {
+    border: 0;
+    border-top: 1px solid var(--line);
+    margin: 0.9rem 0 0.75rem;
+}
+
+.transfer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.48rem;
+    align-items: center;
+}
+
+.transfer-actions button {
+    border: 1px solid rgba(160, 119, 0, 0.38);
+    border-radius: 12px;
+    padding: 0.45rem 0.7rem;
+    cursor: pointer;
+    background: linear-gradient(180deg, #ffe27f, #f4c52b);
+    color: #2a2200;
+    font-weight: 700;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+}
+
+.transfer-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.transfer-file input[type='file'] {
+    max-width: 220px;
+    font-size: 0.8rem;
+}
+
+.transfer-checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.82rem;
+    color: var(--text-1);
+}
+
 .stats-cards {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));

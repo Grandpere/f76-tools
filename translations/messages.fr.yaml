@@ -28,6 +28,10 @@ dashboard.create_player.name: Nom du personnage
 dashboard.create_player.placeholder: 'Ex: VaultDweller'
 dashboard.create_player.submit: Creer
 dashboard.create_player.help: Le nouveau personnage sera selectionne automatiquement.
+dashboard.transfer.title: Progression (backup)
+dashboard.transfer.export: Export JSON
+dashboard.transfer.import: Import JSON
+dashboard.transfer.merge_mode: Mode fusion (conserver existant)
 dashboard.catalog.misc_title: Mods legendaires (par rang)
 dashboard.catalog.book_title: Plans Minerva (par liste)
 dashboard.stats.title: Progression du personnage
@@ -48,6 +52,13 @@ dashboard.state.creating_player: Creation du personnage...
 dashboard.state.player_name_exists: Un personnage avec ce nom existe deja.
 dashboard.state.create_player_failed: Echec de creation du personnage
 dashboard.state.player_created: 'Personnage cree: %name%'
+dashboard.state.export_done: Export JSON telecharge.
+dashboard.state.export_failed: Echec export progression
+dashboard.state.import_no_file: Choisis un fichier JSON a importer.
+dashboard.state.import_invalid_file: Fichier JSON invalide.
+dashboard.state.importing_progress: Import de la progression...
+dashboard.state.import_done: Import termine.
+dashboard.state.import_failed: Echec import progression
 dashboard.state.no_selected_player: Aucun personnage selectionne.
 dashboard.state.loading_items: Chargement des items...
 dashboard.state.load_items_error: Erreur de chargement des items

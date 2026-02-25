@@ -88,6 +88,9 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
     - recherche (`searchQuery`),
     - filtres source coches,
     - accordion ouvert pour `MISC` et `BOOK`.
+  - transfert progression branche dans l UI dashboard:
+    - export JSON du player courant,
+    - import JSON avec option fusion (`replace=false`) ou remplacement complet (`replace=true`).
   - un toggle learned sur un item `BOOK` doit refleter toutes ses occurrences multi-listes (meme `itemId`).
   - UX learned preferee avec checkbox `Appris` (pas bouton), + note d'aide avant les listes Minerva.
   - comportement accordéon par type: ouvrir un groupe replie les autres du meme type, et le groupe ouvert est conserve apres rerender.

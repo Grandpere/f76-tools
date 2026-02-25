@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    static targets = ['playerSelect', 'createNameInput', 'createButton', 'searchInput', 'sourceFilter', 'state', 'statsPanel', 'miscList', 'bookList'];
+    static targets = ['playerSelect', 'createNameInput', 'createButton', 'searchInput', 'sourceFilter', 'state', 'statsPanel', 'miscList', 'bookList', 'exportButton', 'importFileInput', 'importMergeCheckbox', 'importButton'];
     static values = {
         playersUrl: String,
         playersBaseUrl: String,
@@ -38,6 +38,12 @@ export default class extends Controller {
 
         this.createButtonTarget.addEventListener('click', async () => {
             await this.createPlayerFromInput();
+        });
+        this.exportButtonTarget.addEventListener('click', async () => {
+            await this.exportKnowledge();
+        });
+        this.importButtonTarget.addEventListener('click', async () => {
+            await this.importKnowledge();
         });
 
         this.createNameInputTarget.addEventListener('keydown', async (event) => {
@@ -244,6 +250,84 @@ export default class extends Controller {
         await this.loadStats();
         this.updateStateCounter();
         this.persistCurrentPlayerState();
+    }
+
+    async exportKnowledge() {
+        if (!this.activePlayerId) {
+            this.setState(this.t('noSelectedPlayer'));
+            return;
+        }
+
+        const url = `${this.playersBaseUrlValue}/${this.activePlayerId}/knowledge/export`;
+        const response = await fetch(this.appendLocaleToUrl(url), {
+            headers: { Accept: 'application/json' },
+            credentials: 'same-origin',
+        });
+        if (!response.ok) {
+            this.setState(`${this.t('exportFailed')} (${response.status}).`);
+            return;
+        }
+
+        const payload = await response.json();
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+        const objectUrl = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = objectUrl;
+        link.download = `player_${this.activePlayerId}_knowledge.json`;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(objectUrl);
+        this.setState(this.t('exportDone'));
+    }
+
+    async importKnowledge() {
+        if (!this.activePlayerId) {
+            this.setState(this.t('noSelectedPlayer'));
+            return;
+        }
+
+        const file = this.importFileInputTarget.files && this.importFileInputTarget.files[0];
+        if (!file) {
+            this.setState(this.t('importNoFile'));
+            return;
+        }
+
+        let parsed;
+        try {
+            const text = await file.text();
+            parsed = JSON.parse(text);
+        } catch {
+            this.setState(this.t('importInvalidFile'));
+            return;
+        }
+
+        this.importButtonTarget.disabled = true;
+        this.setState(this.t('importingProgress'));
+
+        const replace = !this.importMergeCheckboxTarget.checked;
+        const response = await fetch(this.appendLocaleToUrl(`${this.playersBaseUrlValue}/${this.activePlayerId}/knowledge/import`), {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify({
+                replace,
+                learnedItems: Array.isArray(parsed.learnedItems) ? parsed.learnedItems : [],
+            }),
+        });
+        this.importButtonTarget.disabled = false;
+
+        if (!response.ok) {
+            this.setState(`${this.t('importFailed')} (${response.status}).`);
+            return;
+        }
+
+        this.importFileInputTarget.value = '';
+        await this.loadItems();
+        this.setState(this.t('importDone'));
     }
 
     renderItems() {

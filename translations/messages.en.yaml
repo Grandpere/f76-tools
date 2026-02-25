@@ -28,6 +28,10 @@ dashboard.create_player.name: Character name
 dashboard.create_player.placeholder: 'Ex: VaultDweller'
 dashboard.create_player.submit: Create
 dashboard.create_player.help: The new character will be selected automatically.
+dashboard.transfer.title: Progression (backup)
+dashboard.transfer.export: Export JSON
+dashboard.transfer.import: Import JSON
+dashboard.transfer.merge_mode: Merge mode (keep existing)
 dashboard.catalog.misc_title: Legendary mods (by rank)
 dashboard.catalog.book_title: Minerva plans (by list)
 dashboard.stats.title: Character progress
@@ -48,6 +52,13 @@ dashboard.state.creating_player: Creating character...
 dashboard.state.player_name_exists: A character with this name already exists.
 dashboard.state.create_player_failed: Character creation failed
 dashboard.state.player_created: 'Character created: %name%'
+dashboard.state.export_done: JSON export downloaded.
+dashboard.state.export_failed: Knowledge export failed
+dashboard.state.import_no_file: Pick a JSON file to import.
+dashboard.state.import_invalid_file: Invalid JSON file.
+dashboard.state.importing_progress: Importing progression...
+dashboard.state.import_done: Import completed.
+dashboard.state.import_failed: Knowledge import failed
 dashboard.state.no_selected_player: No character selected.
 dashboard.state.loading_items: Loading items...
 dashboard.state.load_items_error: Item loading error
