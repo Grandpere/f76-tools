@@ -121,7 +121,7 @@ security.register.flash.invalid_email: Invalid email address.
 security.register.flash.password_too_short: Password must be at least 8 characters long.
 security.register.flash.password_mismatch: Password confirmation does not match.
 security.register.flash.email_exists: An account already exists with this email.
-security.register.flash.success: Account created. You can now sign in.
+security.register.flash.success: Account created. Check your email and verify your account before signing in.
 security.verify.flash.invalid_or_expired: Invalid or expired email verification link.
 security.verify.flash.success: Email verified. You can now sign in.
 security.verify.email_subject: Confirm your email address

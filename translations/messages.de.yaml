@@ -121,7 +121,7 @@ security.register.flash.invalid_email: Ungultige E-Mail-Adresse.
 security.register.flash.password_too_short: Das Passwort muss mindestens 8 Zeichen lang sein.
 security.register.flash.password_mismatch: Die Passwortbestatigung stimmt nicht uberein.
 security.register.flash.email_exists: Ein Konto mit dieser E-Mail existiert bereits.
-security.register.flash.success: Konto erstellt. Sie konnen sich jetzt anmelden.
+security.register.flash.success: Konto erstellt. Prufen Sie Ihre E-Mail und verifizieren Sie Ihr Konto vor der Anmeldung.
 security.verify.flash.invalid_or_expired: Ungultiger oder abgelaufener E-Mail-Verifizierungslink.
 security.verify.flash.success: E-Mail verifiziert. Sie konnen sich jetzt anmelden.
 security.verify.email_subject: Bestatigen Sie Ihre E-Mail-Adresse

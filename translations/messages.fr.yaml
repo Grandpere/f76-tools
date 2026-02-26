@@ -121,7 +121,7 @@ security.register.flash.invalid_email: Adresse email invalide.
 security.register.flash.password_too_short: Le mot de passe doit contenir au moins 8 caracteres.
 security.register.flash.password_mismatch: Les deux mots de passe sont differents.
 security.register.flash.email_exists: Un compte existe deja avec cet email.
-security.register.flash.success: Compte cree. Vous pouvez maintenant vous connecter.
+security.register.flash.success: Compte cree. Verifiez votre email puis validez votre compte avant de vous connecter.
 security.verify.flash.invalid_or_expired: Lien de verification email invalide ou expire.
 security.verify.flash.success: Email verifie. Vous pouvez maintenant vous connecter.
 security.verify.email_subject: Confirmez votre adresse email
