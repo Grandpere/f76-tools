@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Identity\Application\ResetPassword\ResetPasswordApplicationService;
+use App\Identity\Application\Time\IdentityClockInterface;
 use App\Identity\UI\Security\IdentityFlashResponder;
 use App\Identity\UI\Security\IdentitySignedTokenFailureResolver;
 use App\Identity\UI\Security\ResetPasswordFeedbackMapper;
@@ -29,6 +30,7 @@ final class ResetPasswordController extends AbstractController
 {
     public function __construct(
         private readonly ResetPasswordApplicationService $resetPasswordApplicationService,
+        private readonly IdentityClockInterface $identityClock,
         private readonly ResetPasswordFeedbackMapper $resetPasswordFeedbackMapper,
         private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly IdentitySignedTokenFailureResolver $identitySignedTokenFailureResolver,
@@ -41,7 +43,7 @@ final class ResetPasswordController extends AbstractController
     {
         $validationFailureFlashMessage = $this->identitySignedTokenFailureResolver->resolve(
             $request,
-            fn (): bool => $this->resetPasswordApplicationService->canResetToken($token, new \DateTimeImmutable()),
+            fn (): bool => $this->resetPasswordApplicationService->canResetToken($token, $this->identityClock->now()),
             'security.reset.flash.invalid_or_expired',
         );
         if (null !== $validationFailureFlashMessage) {
@@ -61,7 +63,7 @@ final class ResetPasswordController extends AbstractController
                 $token,
                 $password,
                 $passwordConfirm,
-                new \DateTimeImmutable(),
+                $this->identityClock->now(),
             );
             $feedback = $this->resetPasswordFeedbackMapper->map($result);
 

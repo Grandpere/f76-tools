@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Identity\Application\ResendVerification\ResendVerificationRequestApplicationService;
+use App\Identity\Application\Time\IdentityClockInterface;
 use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Identity\UI\Security\IdentityFlashResponder;
@@ -28,6 +29,7 @@ final class ResendVerificationController extends AbstractController
 {
     public function __construct(
         private readonly ResendVerificationRequestApplicationService $resendVerificationRequestApplicationService,
+        private readonly IdentityClockInterface $identityClock,
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
         private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
@@ -46,7 +48,7 @@ final class ResendVerificationController extends AbstractController
             }
             $payload = $guardResult->payload;
 
-            $requestResult = $this->resendVerificationRequestApplicationService->request($payload->email, new \DateTimeImmutable());
+            $requestResult = $this->resendVerificationRequestApplicationService->request($payload->email, $this->identityClock->now());
             if ($requestResult->isTokenIssued()) {
                 $this->identityIssuedTokenNotifier->notifyVerification(
                     $requestResult->getEmail(),

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Identity\Application\Registration\RegisterUserApplicationService;
+use App\Identity\Application\Time\IdentityClockInterface;
 use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Identity\UI\Security\IdentityFlashResponder;
@@ -30,6 +31,7 @@ final class RegistrationController extends AbstractController
 {
     public function __construct(
         private readonly RegisterUserApplicationService $registerUserApplicationService,
+        private readonly IdentityClockInterface $identityClock,
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
         private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
@@ -61,7 +63,7 @@ final class RegistrationController extends AbstractController
                 $payload->email,
                 $password,
                 $passwordConfirm,
-                new \DateTimeImmutable(),
+                $this->identityClock->now(),
             );
 
             $warningMessage = $this->registrationFeedbackMapper->warningFlash($registerResult->getStatus());

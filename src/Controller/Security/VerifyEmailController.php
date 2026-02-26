@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Identity\Application\VerifyEmail\VerifyEmailApplicationService;
+use App\Identity\Application\Time\IdentityClockInterface;
 use App\Identity\UI\Security\IdentityFlashResponder;
 use App\Identity\UI\Security\IdentitySignedTokenFailureResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +26,7 @@ final class VerifyEmailController extends AbstractController
 {
     public function __construct(
         private readonly VerifyEmailApplicationService $verifyEmailApplicationService,
+        private readonly IdentityClockInterface $identityClock,
         private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly IdentitySignedTokenFailureResolver $identitySignedTokenFailureResolver,
     ) {
@@ -35,7 +37,7 @@ final class VerifyEmailController extends AbstractController
     {
         $validationFailureFlashMessage = $this->identitySignedTokenFailureResolver->resolve(
             $request,
-            fn (): bool => $this->verifyEmailApplicationService->verifyByPlainToken($token, new \DateTimeImmutable()),
+            fn (): bool => $this->verifyEmailApplicationService->verifyByPlainToken($token, $this->identityClock->now()),
             'security.verify.flash.invalid_or_expired',
         );
         if (null !== $validationFailureFlashMessage) {

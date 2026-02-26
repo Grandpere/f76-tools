@@ -39,6 +39,7 @@ services:
     App\Identity\Application\Guard\IdentityRequestGuardInterface: '@App\Identity\Infrastructure\Guard\IdentityRequestGuard'
     App\Identity\Application\Guard\IdentityCaptchaVerifierInterface: '@App\Identity\Infrastructure\Guard\TurnstileIdentityCaptchaVerifier'
     App\Identity\Application\Guard\IdentityRateLimiterInterface: '@App\Identity\Infrastructure\Guard\AuthRequestThrottlerRateLimiter'
+    App\Identity\Application\Time\IdentityClockInterface: '@App\Identity\Infrastructure\Time\SystemIdentityClock'
     App\Identity\Application\Common\IdentityWritePersistenceInterface: '@App\Identity\Infrastructure\Persistence\DoctrineIdentityWritePersistence'
     App\Identity\Application\Common\IdentityPasswordHasherInterface: '@App\Identity\Infrastructure\Security\SymfonyIdentityPasswordHasher'
 
