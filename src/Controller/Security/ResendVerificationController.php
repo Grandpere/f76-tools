@@ -13,15 +13,11 @@ declare(strict_types=1);
 
 namespace App\Controller\Security;
 
-use App\Entity\UserEntity;
-use App\Repository\UserEntityRepository;
+use App\Identity\Application\ResendVerification\ResendVerificationRequestApplicationService;
 use App\Security\SignedUrlGenerator;
-use App\Security\TemporaryLinkPolicy;
 use App\Service\AuthRequestThrottler;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
-use DateTimeImmutable;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,8 +34,7 @@ final class ResendVerificationController extends AbstractController
     private const RATE_LIMIT_WINDOW_SECONDS = 300;
 
     public function __construct(
-        private readonly UserEntityRepository $userRepository,
-        private readonly EntityManagerInterface $entityManager,
+        private readonly ResendVerificationRequestApplicationService $resendVerificationRequestApplicationService,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly SignedUrlGenerator $signedUrlGenerator,
         private readonly TranslatorInterface $translator,
@@ -47,7 +42,6 @@ final class ResendVerificationController extends AbstractController
         private readonly AuthRequestThrottler $requestThrottler,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
-        private readonly TemporaryLinkPolicy $temporaryLinkPolicy,
     ) {
     }
 
@@ -93,38 +87,21 @@ final class ResendVerificationController extends AbstractController
                 return $this->redirectToRoute('app_resend_verification', ['locale' => $request->getLocale()]);
             }
 
-            $user = null;
-            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $found = $this->userRepository->findOneByEmail($email);
-                if ($found instanceof UserEntity) {
-                    $user = $found;
-                }
-            }
-
-            if ($user instanceof UserEntity && !$user->isEmailVerified()) {
-                $now = new DateTimeImmutable();
-                $remaining = $this->temporaryLinkPolicy->cooldownRemainingSeconds(
-                    $user->getEmailVerificationRequestedAt(),
-                    $now,
-                    $this->temporaryLinkPolicy->getEmailVerificationResendCooldownSeconds(),
-                );
-                if ($remaining <= 0) {
-                    $token = bin2hex(random_bytes(32));
-                    $user->setEmailVerificationTokenHash(hash('sha256', $token));
-                    $user->setEmailVerificationExpiresAt($this->temporaryLinkPolicy->expiresAt($now, $this->temporaryLinkPolicy->getEmailVerificationTtl()));
-                    $user->setEmailVerificationRequestedAt($now);
-                    $this->entityManager->flush();
-
+            $requestResult = $this->resendVerificationRequestApplicationService->request($email, new \DateTimeImmutable());
+            if ($requestResult->isTokenIssued()) {
+                $plainToken = $requestResult->getPlainToken();
+                $targetEmail = $requestResult->getEmail();
+                if (is_string($plainToken) && is_string($targetEmail)) {
                     $verifyUrl = $this->signedUrlGenerator->generate('app_verify_email', [
                         'locale' => $request->getLocale(),
-                        'token' => $token,
+                        'token' => $plainToken,
                     ]);
 
                     try {
                         $this->mailer->send(
                             (new Email())
                                 ->from('no-reply@f76.local')
-                                ->to($email)
+                                ->to($targetEmail)
                                 ->subject($this->translator->trans('security.verify.email_subject'))
                                 ->text(sprintf("%s\n\n%s", $this->translator->trans('security.verify.email_intro'), $verifyUrl)),
                         );
@@ -132,7 +109,7 @@ final class ResendVerificationController extends AbstractController
                         // Keep same generic response to avoid exposing internals.
                     }
 
-                    $this->authEventLogger->info('security.auth.resend_verification.token_issued', $email, $request->getClientIp());
+                    $this->authEventLogger->info('security.auth.resend_verification.token_issued', $targetEmail, $request->getClientIp());
                 }
             }
 

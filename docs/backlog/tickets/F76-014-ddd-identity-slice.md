@@ -27,6 +27,10 @@ Il faut poursuivre la migration DDD en isolant les use-cases et les policies de 
 - [x] Port `RegistrationUserRepositoryInterface` ajoute.
 - [x] `RegistrationController` delegue creation utilisateur + token verification.
 - [x] Test unitaire `RegisterUserApplicationService` ajoute.
+- [x] Use-case `ResendVerificationRequestApplicationService` extrait.
+- [x] Port `ResendVerificationUserRepositoryInterface` ajoute.
+- [x] `ResendVerificationController` delegue la logique de cooldown + emission token verification.
+- [x] Test unitaire `ResendVerificationRequestApplicationService` ajoute.
 
 ## Criteres d acceptance
 - Controllers Identity deviennent thin (pas de logique metier).
