@@ -19,6 +19,9 @@ use App\Repository\AdminAuditLogEntityRepository;
 use App\Repository\UserEntityRepository;
 use App\Security\SignedUrlGenerator;
 use App\Security\TemporaryLinkPolicy;
+use App\Support\Application\AdminUser\ToggleUserActiveApplicationService;
+use App\Support\Application\AdminUser\ToggleUserActiveResult;
+use App\Support\UI\Admin\ToggleUserActiveFeedbackMapper;
 use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -43,6 +46,8 @@ final class UserManagementController extends AbstractController
         private readonly SignedUrlGenerator $signedUrlGenerator,
         private readonly TemporaryLinkPolicy $temporaryLinkPolicy,
         private readonly TranslatorInterface $translator,
+        private readonly ToggleUserActiveApplicationService $toggleUserActiveApplicationService,
+        private readonly ToggleUserActiveFeedbackMapper $toggleUserActiveFeedbackMapper,
     ) {
     }
 
@@ -66,25 +71,19 @@ final class UserManagementController extends AbstractController
             return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
         }
 
-        $user = $this->userRepository->find($id);
-        if (!$user instanceof UserEntity) {
-            $this->addFlash('warning', 'admin_users.flash.user_not_found');
+        $result = $this->toggleUserActiveApplicationService->toggle($id, $this->getUser());
+        $feedback = $this->toggleUserActiveFeedbackMapper->map($result);
+        $this->addFlash($feedback['flashType'], $feedback['flashMessage']);
 
-            return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
+        if (ToggleUserActiveResult::UPDATED === $result) {
+            $user = $this->userRepository->getById($id);
+            if ($user instanceof UserEntity) {
+                $this->persistAuditLog($request, 'user_toggle_active', $user, [
+                    'isActive' => $user->isActive(),
+                ]);
+            }
+            $this->entityManager->flush();
         }
-
-        if ($this->isCurrentUser($user)) {
-            $this->addFlash('warning', 'admin_users.flash.cannot_change_self_active');
-
-            return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
-        }
-
-        $user->setIsActive(!$user->isActive());
-        $this->persistAuditLog($request, 'user_toggle_active', $user, [
-            'isActive' => $user->isActive(),
-        ]);
-        $this->entityManager->flush();
-        $this->addFlash('success', 'admin_users.flash.active_updated');
 
         return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
     }

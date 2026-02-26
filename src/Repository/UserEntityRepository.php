@@ -20,13 +20,14 @@ use App\Identity\Application\Registration\RegistrationUserRepositoryInterface;
 use App\Identity\Application\ResendVerification\ResendVerificationUserRepositoryInterface;
 use App\Identity\Application\ResetPassword\ResetPasswordUserRepositoryInterface;
 use App\Identity\Application\VerifyEmail\VerifyEmailUserRepositoryInterface;
+use App\Support\Application\AdminUser\AdminUserManagementWriteRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<UserEntity>
  */
-final class UserEntityRepository extends ServiceEntityRepository implements UserByEmailFinderInterface, VerifyEmailUserRepositoryInterface, ResetPasswordUserRepositoryInterface, ForgotPasswordUserRepositoryInterface, RegistrationUserRepositoryInterface, ResendVerificationUserRepositoryInterface
+final class UserEntityRepository extends ServiceEntityRepository implements UserByEmailFinderInterface, VerifyEmailUserRepositoryInterface, ResetPasswordUserRepositoryInterface, ForgotPasswordUserRepositoryInterface, RegistrationUserRepositoryInterface, ResendVerificationUserRepositoryInterface, AdminUserManagementWriteRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -38,6 +39,13 @@ final class UserEntityRepository extends ServiceEntityRepository implements User
         return $this->findOneBy([
             'email' => mb_strtolower(trim($email)),
         ]);
+    }
+
+    public function getById(int $id): ?UserEntity
+    {
+        $result = $this->find($id);
+
+        return $result instanceof UserEntity ? $result : null;
     }
 
     public function findOneByResetPasswordTokenHash(string $tokenHash): ?UserEntity
@@ -70,5 +78,10 @@ final class UserEntityRepository extends ServiceEntityRepository implements User
 
         /** @var list<UserEntity> $result */
         return $result;
+    }
+
+    public function save(UserEntity $user): void
+    {
+        $this->getEntityManager()->persist($user);
     }
 }

@@ -1,9 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- F76-019: DDD Slice 9 - Support admin audit logs controller polish (in progress).
+- F76-020: DDD Slice 10 - Support admin user management controller polish (in progress).
 
 ## Termine recemment
+- F76-019: DDD Slice 9 - Support admin audit logs controller polish (done).
 - F76-018: DDD Slice 8 - Support admin contact status update (done).
 - F76-017: DDD Slice 7 - Support contact controller polish (done).
 - F76-016: DDD Slice 6 - Identity controller polish (done).

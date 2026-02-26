@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - Reflection setAccessible deprecated in PHP 8.5 tests
+- Symptom: unit suite failed with deprecations treated as errors on `ReflectionProperty::setAccessible()`.
+- Root cause: PHP 8.5 deprecates `setAccessible()` (no-op since PHP 8.1).
+- Fix: removed `setAccessible()` calls from tests and kept direct `setValue()` usage.
+- Prevention: when setting private IDs in tests, use `ReflectionProperty::setValue()` directly.
+
 ## 2026-02-26 - Final repositories blocked unit tests in application services
 - Symptom: unit tests for new application service failed (`Class ...Repository is declared final and cannot be doubled`), plus weak type guarantees in service result arrays.
 - Root cause: application service depended directly on Doctrine repositories (`final`) instead of contracts; result array shapes were too loose for static analysis.
