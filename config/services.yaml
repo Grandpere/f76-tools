@@ -25,6 +25,10 @@ services:
             $secret: '%kernel.secret%'
 
     App\Contract\UserByEmailFinderInterface: '@App\Repository\UserEntityRepository'
+    App\Contract\TranslationCatalogReaderInterface: '@App\Catalog\Infrastructure\Translation\TranslationCatalogReader'
+    App\Contract\TranslationCatalogWriterInterface: '@App\Catalog\Infrastructure\Translation\TranslationCatalogWriter'
+    App\Catalog\Application\Import\ItemImportSourceReaderInterface: '@App\Catalog\Infrastructure\Import\FilesystemItemImportSourceReader'
+    App\Catalog\Application\Import\ItemImportPersistenceInterface: '@App\Catalog\Infrastructure\Import\DoctrineItemImportPersistence'
 
     App\Service\TurnstileVerifier:
         arguments:
