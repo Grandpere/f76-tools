@@ -9,6 +9,15 @@ Un dernier polish peut encore reduire le bruit UI sans changer le comportement.
 - Garder les controllers concentres sur orchestration minimale.
 - Eviter toute rupture de routes/messages existants.
 
+## Avancement
+- [x] `RegistrationFeedbackMapper` ajoute (mapping `RegisterUserStatus -> flash warning`).
+- [x] `RegistrationController` utilise le mapper UI pour le feedback d echec register.
+- [x] `ResetPasswordFeedbackMapper` ajoute (mapping `ResetPasswordResult -> flash + policy redirect`).
+- [x] `ResetPasswordController` utilise le mapper UI pour centraliser le feedback reset.
+- [x] `IdentityGuardFailureResponder` ajoute pour centraliser feedback des refus de guards.
+- [x] `Registration/Forgot/Resend` reutilisent `IdentityGuardFailureResponder`.
+- [x] Tests unitaires des mappers UI ajoutes.
+
 ## Criteres d acceptance
 - Duplication de mapping reduite.
 - Messages flash existants conserves.

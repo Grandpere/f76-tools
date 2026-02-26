@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Identity\Application\Registration\RegisterUserApplicationService;
-use App\Identity\Application\Registration\RegisterUserStatus;
 use App\Identity\Application\Notification\IdentityLinkEmailSenderInterface;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
 use App\Identity\Application\Guard\IdentityRequestGuardInterface;
 use App\Identity\UI\Security\IdentityGuardFailureResponder;
+use App\Identity\UI\Security\RegistrationFeedbackMapper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,6 +35,7 @@ final class RegistrationController extends AbstractController
         private readonly IdentityLinkEmailSenderInterface $identityLinkEmailSender,
         private readonly IdentityRequestGuardInterface $identityRequestGuard,
         private readonly IdentityGuardFailureResponder $guardFailureResponder,
+        private readonly RegistrationFeedbackMapper $registrationFeedbackMapper,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
     ) {
@@ -85,23 +86,9 @@ final class RegistrationController extends AbstractController
                 new \DateTimeImmutable(),
             );
 
-            if (RegisterUserStatus::INVALID_EMAIL === $registerResult->getStatus()) {
-                $this->addFlash('warning', 'security.register.flash.invalid_email');
-
-                return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
-            }
-            if (RegisterUserStatus::PASSWORD_TOO_SHORT === $registerResult->getStatus()) {
-                $this->addFlash('warning', 'security.register.flash.password_too_short');
-
-                return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
-            }
-            if (RegisterUserStatus::PASSWORD_MISMATCH === $registerResult->getStatus()) {
-                $this->addFlash('warning', 'security.register.flash.password_mismatch');
-
-                return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
-            }
-            if (RegisterUserStatus::EMAIL_EXISTS === $registerResult->getStatus()) {
-                $this->addFlash('warning', 'security.register.flash.email_exists');
+            $warningMessage = $this->registrationFeedbackMapper->warningFlash($registerResult->getStatus());
+            if (null !== $warningMessage) {
+                $this->addFlash('warning', $warningMessage);
 
                 return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
             }

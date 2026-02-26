@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Identity\Application\ResetPassword\ResetPasswordApplicationService;
-use App\Identity\Application\ResetPassword\ResetPasswordResult;
+use App\Identity\UI\Security\ResetPasswordFeedbackMapper;
 use App\Security\SignedUrlGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -29,6 +29,7 @@ final class ResetPasswordController extends AbstractController
 {
     public function __construct(
         private readonly ResetPasswordApplicationService $resetPasswordApplicationService,
+        private readonly ResetPasswordFeedbackMapper $resetPasswordFeedbackMapper,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly SignedUrlGenerator $signedUrlGenerator,
     ) {
@@ -66,26 +67,14 @@ final class ResetPasswordController extends AbstractController
                 $passwordConfirm,
                 new \DateTimeImmutable(),
             );
+            $feedback = $this->resetPasswordFeedbackMapper->map($result);
+            $this->addFlash($feedback['flashType'], $feedback['flashMessage']);
 
-            if (ResetPasswordResult::PASSWORD_TOO_SHORT === $result) {
-                $this->addFlash('warning', 'security.reset.flash.password_too_short');
-
-                return new RedirectResponse($request->getUri());
-            }
-            if (ResetPasswordResult::PASSWORD_MISMATCH === $result) {
-                $this->addFlash('warning', 'security.reset.flash.password_mismatch');
-
-                return new RedirectResponse($request->getUri());
-            }
-            if (ResetPasswordResult::INVALID_OR_EXPIRED === $result) {
-                $this->addFlash('warning', 'security.reset.flash.invalid_or_expired');
-
+            if ($feedback['redirectToLogin']) {
                 return $this->redirectToRoute('app_login', ['locale' => $request->getLocale()]);
             }
 
-            $this->addFlash('success', 'security.reset.flash.success');
-
-            return $this->redirectToRoute('app_login', ['locale' => $request->getLocale()]);
+            return new RedirectResponse($request->getUri());
         }
 
         return $this->render('security/reset_password.html.twig');
