@@ -15,6 +15,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - Continuer a rappeler en fin de lot les commandes manuelles a lancer (notamment tests fonctionnels/integration) avant de considerer la feature validee.
 - Garder trace en doc des chantiers securite/auth a venir (verification email, forgot password public, anti-bot, contact) pour ne pas les oublier.
 - Ajouter aussi la hardening des URLs (moins de query params sensibles, IDs moins previsibles, URLs signees/temporaires) dans le backlog securite.
+- Ajouter au backlog une vue Minerva dediee (bloc ou page) avec logique temporelle de rotation (`startsAt`/`endsAt`) pour apparition/disparition.
 
 ## Decisions techniques prises
 - `Item` stocke des cles de traduction (`nameKey`, `descKey`) et non les textes EN/DE en base.

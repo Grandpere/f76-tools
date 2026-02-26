@@ -143,6 +143,22 @@ Permettre a un utilisateur authentifie de:
   - [ ] signer les URLs temporaires sensibles (verification email, reset, liens d action),
   - [ ] standardiser une politique de duree de vie et invalidation des liens temporaires.
 
+## Phase 9 - Minerva (rotation, localisation, listes)
+- [ ] Definir le scope UI:
+  - [ ] option A: bloc dedie sur le dashboard,
+  - [ ] option B: page dediee "Minerva" (plus lisible si le contenu grossit).
+- [ ] Definir le modele de donnees Minerva rotation:
+  - [ ] localisation courante (texte),
+  - [ ] fenetre de disponibilite (`startsAt`, `endsAt`) pour gerer apparition/disparition,
+  - [ ] association a une ou plusieurs listes Minerva (texte + selection).
+- [ ] Affichage front:
+  - [ ] etat "actif maintenant" base sur date courante,
+  - [ ] etat "a venir" / "termine" selon les dates,
+  - [ ] presentation des listes (textuelle ou cases a cocher, decision UX a trancher).
+- [ ] Source et mise a jour des donnees:
+  - [ ] commande/admin pour mettre a jour les rotations sans toucher au code,
+  - [ ] timezone explicite et regle de calcul centralisee.
+
 ## Risques / Decisions a figer
 - [x] Decider le modele exact learned:
   - [ ] `isLearned` bool (historique simple, non retenu),
