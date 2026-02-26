@@ -13,6 +13,13 @@ Premier chantier concret de migration DDD sur la partie la plus centrale: player
 - Basculer controllers API vers services applicatifs.
 - Conserver payloads et routes existants.
 
+## Avancement
+- [x] Player: list/create/update/delete via `PlayerApplicationService`.
+- [x] Knowledge: set/unset learned + ownership via `PlayerKnowledgeApplicationService`.
+- [x] Knowledge transfer: export/import/preview via `PlayerKnowledgeTransferApplicationService`.
+- [x] Knowledge stats: aggregation via `PlayerKnowledgeStatsApplicationService`.
+- [ ] Completer les tests d integration cibles sur les ports progression (ticket de stabilisation suivant si besoin).
+
 ## Criteres d acceptance
 - Controllers API minces (validation + mapping + delegation).
 - Regles metier progression dans Domain/Application.

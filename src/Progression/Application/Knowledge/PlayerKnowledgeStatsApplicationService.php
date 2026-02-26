@@ -11,18 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Service;
+namespace App\Progression\Application\Knowledge;
 
+use App\Contract\ItemStatsReadRepositoryInterface;
+use App\Contract\PlayerKnowledgeStatsReadRepositoryInterface;
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\PlayerEntity;
-use App\Repository\ItemEntityRepository;
-use App\Repository\PlayerItemKnowledgeEntityRepository;
 
-final class PlayerStatsProvider
+final class PlayerKnowledgeStatsApplicationService
 {
     public function __construct(
-        private readonly ItemEntityRepository $itemRepository,
-        private readonly PlayerItemKnowledgeEntityRepository $knowledgeRepository,
+        private readonly ItemStatsReadRepositoryInterface $itemRepository,
+        private readonly PlayerKnowledgeStatsReadRepositoryInterface $knowledgeRepository,
     ) {
     }
 

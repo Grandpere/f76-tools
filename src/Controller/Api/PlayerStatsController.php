@@ -15,7 +15,7 @@ namespace App\Controller\Api;
 
 use App\Entity\UserEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeApplicationService;
-use App\Service\PlayerStatsProvider;
+use App\Progression\Application\Knowledge\PlayerKnowledgeStatsApplicationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
@@ -26,7 +26,7 @@ final class PlayerStatsController extends AbstractController
 {
     public function __construct(
         private readonly PlayerKnowledgeApplicationService $playerKnowledgeApplicationService,
-        private readonly PlayerStatsProvider $statsProvider,
+        private readonly PlayerKnowledgeStatsApplicationService $playerKnowledgeStatsApplicationService,
     ) {
     }
 
@@ -43,6 +43,6 @@ final class PlayerStatsController extends AbstractController
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
 
-        return $this->json($this->statsProvider->getStats($player));
+        return $this->json($this->playerKnowledgeStatsApplicationService->getStats($player));
     }
 }
