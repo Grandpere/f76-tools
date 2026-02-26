@@ -17,6 +17,7 @@ use App\Entity\UserEntity;
 use App\Repository\UserEntityRepository;
 use App\Service\AuthRequestThrottler;
 use App\Service\TurnstileVerifier;
+use App\Security\AuthEventLogger;
 use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -46,6 +47,7 @@ final class ResendVerificationController extends AbstractController
         private readonly MailerInterface $mailer,
         private readonly AuthRequestThrottler $requestThrottler,
         private readonly TurnstileVerifier $turnstileVerifier,
+        private readonly AuthEventLogger $authEventLogger,
     ) {
     }
 
@@ -55,22 +57,24 @@ final class ResendVerificationController extends AbstractController
         if ($request->isMethod('POST')) {
             $csrfToken = (string) $request->request->get('_csrf_token', '');
             if (!$this->csrfTokenManager->isTokenValid(new CsrfToken('resend_verification', $csrfToken))) {
+                $this->authEventLogger->warning('security.auth.resend_verification.invalid_csrf', null, $request->getClientIp());
                 $this->addFlash('warning', 'security.resend.flash.invalid_csrf');
 
                 return $this->redirectToRoute('app_resend_verification', ['locale' => $request->getLocale()]);
             }
             if ('' !== trim((string) $request->request->get('website', ''))) {
+                $this->authEventLogger->warning('security.auth.resend_verification.honeypot_triggered', null, $request->getClientIp());
                 $this->addFlash('warning', 'security.auth.flash.rate_limited');
 
                 return $this->redirectToRoute('app_resend_verification', ['locale' => $request->getLocale()]);
             }
+            $email = mb_strtolower(trim((string) $request->request->get('email', '')));
             if (!$this->turnstileVerifier->verify((string) $request->request->get('cf-turnstile-response', ''), $request->getClientIp())) {
+                $this->authEventLogger->warning('security.auth.resend_verification.captcha_invalid', $email, $request->getClientIp());
                 $this->addFlash('warning', 'security.auth.flash.captcha_invalid');
 
                 return $this->redirectToRoute('app_resend_verification', ['locale' => $request->getLocale()]);
             }
-
-            $email = mb_strtolower(trim((string) $request->request->get('email', '')));
 
             if ($this->requestThrottler->hitAndIsLimited(
                 scope: 'resend_verification',
@@ -79,6 +83,11 @@ final class ResendVerificationController extends AbstractController
                 maxAttempts: self::RATE_LIMIT_MAX_ATTEMPTS,
                 windowSeconds: self::RATE_LIMIT_WINDOW_SECONDS,
             )) {
+                $this->authEventLogger->warning('security.auth.resend_verification.rate_limited', $email, $request->getClientIp(), [
+                    'scope' => 'resend_verification',
+                    'maxAttempts' => self::RATE_LIMIT_MAX_ATTEMPTS,
+                    'windowSeconds' => self::RATE_LIMIT_WINDOW_SECONDS,
+                ]);
                 $this->addFlash('warning', 'security.auth.flash.rate_limited');
 
                 return $this->redirectToRoute('app_resend_verification', ['locale' => $request->getLocale()]);
@@ -118,6 +127,8 @@ final class ResendVerificationController extends AbstractController
                     } catch (\Throwable) {
                         // Keep same generic response to avoid exposing internals.
                     }
+
+                    $this->authEventLogger->info('security.auth.resend_verification.token_issued', $email, $request->getClientIp());
                 }
             }
 

@@ -33,6 +33,7 @@ final class LoginRateLimitSubscriber implements EventSubscriberInterface
     public function __construct(
         private readonly AuthRequestThrottler $requestThrottler,
         private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly AuthEventLogger $authEventLogger,
     ) {
     }
 
@@ -61,6 +62,12 @@ final class LoginRateLimitSubscriber implements EventSubscriberInterface
             return;
         }
 
+        $this->authEventLogger->warning('security.auth.login.rate_limited', $email, $request->getClientIp(), [
+            'scope' => self::SCOPE,
+            'maxAttempts' => self::MAX_ATTEMPTS,
+            'windowSeconds' => self::WINDOW_SECONDS,
+        ]);
+
         if ($request->hasSession()) {
             $session = $request->getSession();
             if ($session instanceof FlashBagAwareSessionInterface) {
@@ -83,6 +90,9 @@ final class LoginRateLimitSubscriber implements EventSubscriberInterface
         $email = mb_strtolower(trim((string) $request->request->get('_username', '')));
 
         $this->requestThrottler->hit(self::SCOPE, $request->getClientIp(), $email, self::WINDOW_SECONDS);
+        $this->authEventLogger->warning('security.auth.login.failed', $email, $request->getClientIp(), [
+            'scope' => self::SCOPE,
+        ]);
     }
 
     public function onLoginSuccess(LoginSuccessEvent $event): void
@@ -96,5 +106,8 @@ final class LoginRateLimitSubscriber implements EventSubscriberInterface
         $email = $user instanceof UserEntity ? $user->getEmail() : $user->getUserIdentifier();
 
         $this->requestThrottler->clear(self::SCOPE, $request->getClientIp(), $email);
+        $this->authEventLogger->info('security.auth.login.success', $email, $request->getClientIp(), [
+            'scope' => self::SCOPE,
+        ]);
     }
 }

@@ -137,7 +137,7 @@ Permettre a un utilisateur authentifie de:
     - [x] `/resend-verification`,
   - [x] honeypot formulaire sur register/forgot/resend (protection basique anti-bot),
   - [x] captcha (Turnstile) sur register/forgot/resend (actif si cles configurees),
-  - [ ] journalisation des tentatives sensibles.
+  - [x] journalisation des tentatives sensibles.
 - [ ] Contact:
   - [ ] page de contact (formulaire),
   - [ ] anti-spam (honeypot/rate limit/captcha),

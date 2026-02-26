@@ -17,6 +17,7 @@ use App\Entity\UserEntity;
 use App\Repository\UserEntityRepository;
 use App\Service\AuthRequestThrottler;
 use App\Service\TurnstileVerifier;
+use App\Security\AuthEventLogger;
 use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -46,6 +47,7 @@ final class ForgotPasswordController extends AbstractController
         private readonly MailerInterface $mailer,
         private readonly AuthRequestThrottler $requestThrottler,
         private readonly TurnstileVerifier $turnstileVerifier,
+        private readonly AuthEventLogger $authEventLogger,
     ) {
     }
 
@@ -55,22 +57,24 @@ final class ForgotPasswordController extends AbstractController
         if ($request->isMethod('POST')) {
             $csrfToken = (string) $request->request->get('_csrf_token', '');
             if (!$this->csrfTokenManager->isTokenValid(new CsrfToken('forgot_password', $csrfToken))) {
+                $this->authEventLogger->warning('security.auth.forgot_password.invalid_csrf', null, $request->getClientIp());
                 $this->addFlash('warning', 'security.forgot.flash.invalid_csrf');
 
                 return $this->redirectToRoute('app_forgot_password', ['locale' => $request->getLocale()]);
             }
             if ('' !== trim((string) $request->request->get('website', ''))) {
+                $this->authEventLogger->warning('security.auth.forgot_password.honeypot_triggered', null, $request->getClientIp());
                 $this->addFlash('warning', 'security.auth.flash.rate_limited');
 
                 return $this->redirectToRoute('app_forgot_password', ['locale' => $request->getLocale()]);
             }
+            $email = mb_strtolower(trim((string) $request->request->get('email', '')));
             if (!$this->turnstileVerifier->verify((string) $request->request->get('cf-turnstile-response', ''), $request->getClientIp())) {
+                $this->authEventLogger->warning('security.auth.forgot_password.captcha_invalid', $email, $request->getClientIp());
                 $this->addFlash('warning', 'security.auth.flash.captcha_invalid');
 
                 return $this->redirectToRoute('app_forgot_password', ['locale' => $request->getLocale()]);
             }
-
-            $email = mb_strtolower(trim((string) $request->request->get('email', '')));
 
             if ($this->requestThrottler->hitAndIsLimited(
                 scope: 'forgot_password',
@@ -79,6 +83,11 @@ final class ForgotPasswordController extends AbstractController
                 maxAttempts: self::RATE_LIMIT_MAX_ATTEMPTS,
                 windowSeconds: self::RATE_LIMIT_WINDOW_SECONDS,
             )) {
+                $this->authEventLogger->warning('security.auth.forgot_password.rate_limited', $email, $request->getClientIp(), [
+                    'scope' => 'forgot_password',
+                    'maxAttempts' => self::RATE_LIMIT_MAX_ATTEMPTS,
+                    'windowSeconds' => self::RATE_LIMIT_WINDOW_SECONDS,
+                ]);
                 $this->addFlash('warning', 'security.auth.flash.rate_limited');
 
                 return $this->redirectToRoute('app_forgot_password', ['locale' => $request->getLocale()]);
@@ -117,6 +126,8 @@ final class ForgotPasswordController extends AbstractController
                     } catch (\Throwable) {
                         // Keep same user-facing response to avoid account enumeration.
                     }
+
+                    $this->authEventLogger->info('security.auth.forgot_password.reset_token_issued', $email, $request->getClientIp());
                 }
             }
 

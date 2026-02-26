@@ -148,6 +148,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - throttling login ajoute sur echec (subscriber security): increment sur `LoginFailureEvent`, reset sur `LoginSuccessEvent`, blocage pre-auth sur `POST /login` au-dela du seuil.
   - honeypot serveur ajoute sur formulaires `register` / `forgot-password` / `resend-verification` (champ cache `website`).
   - Turnstile integre sur `register` / `forgot-password` / `resend-verification` via `TurnstileVerifier`; actif seulement si `TURNSTILE_SITE_KEY` + `TURNSTILE_SECRET_KEY` renseignes.
+  - journalisation securite auth ajoutee via `AuthEventLogger` (email hash SHA-256 + IP, sans email brut) pour login/register/forgot/resend en cas d evenements sensibles.
 - Audit admin:
   - table `admin_audit_log` pour tracer les actions sensibles de backoffice users.
   - actions tracees: `user_toggle_active`, `user_toggle_admin`, `user_generate_reset_link`.
