@@ -22,6 +22,9 @@ Le contexte Catalog (items, import, traductions) est encore majoritairement port
 - [x] Normalisation des valeurs import (`string/int/bool/payload`) extraite dans `ItemImportValueNormalizer`.
 - [x] `ImportItemsCommand` delegue les conversions de donnees au service Catalog.
 - [x] Test unitaire `ItemImportValueNormalizer` ajoute.
+- [x] Construction du catalogue de traductions import extraite dans `ItemImportTranslationCatalogBuilder`.
+- [x] `ImportItemsCommand` delegue la generation des cles/valeurs de traduction au service Catalog.
+- [x] Test unitaire `ItemImportTranslationCatalogBuilder` ajoute.
 
 ## Criteres d acceptance
 - Controller admin traduction simplifie.

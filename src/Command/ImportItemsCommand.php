@@ -15,6 +15,7 @@ namespace App\Command;
 
 use App\Catalog\Application\Import\ItemImportFileContextResolver;
 use App\Catalog\Application\Import\ItemImportJsonFileReader;
+use App\Catalog\Application\Import\ItemImportTranslationCatalogBuilder;
 use App\Catalog\Application\Import\ItemImportValueNormalizer;
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemEntity;
@@ -43,6 +44,7 @@ final class ImportItemsCommand extends Command
         private readonly ItemImportFileContextResolver $fileContextResolver,
         private readonly ItemImportJsonFileReader $jsonFileReader,
         private readonly ItemImportValueNormalizer $valueNormalizer,
+        private readonly ItemImportTranslationCatalogBuilder $translationCatalogBuilder,
         private readonly KernelInterface $kernel,
     ) {
         parent::__construct();
@@ -197,45 +199,11 @@ final class ImportItemsCommand extends Command
                 $item->setRelationsHtml($this->valueNormalizer->toNullableString($row['relations'] ?? null));
                 $item->setPayload($this->valueNormalizer->normalizePayload($row));
 
-                $nameKey = sprintf('item.%s.%d.name', strtolower($type->value), $sourceId);
-                $descKey = sprintf('item.%s.%d.desc', strtolower($type->value), $sourceId);
-                $item->setNameKey($nameKey);
-
-                $nameEn = $this->valueNormalizer->toNullableString($row['name_en'] ?? null);
-                $nameDe = $this->valueNormalizer->toNullableString($row['name_de'] ?? null);
-                $descEn = $this->valueNormalizer->toNullableString($row['desc_en'] ?? null);
-                $descDe = $this->valueNormalizer->toNullableString($row['desc_de'] ?? null);
-
-                if (null !== $nameEn) {
-                    $catalogEn[$nameKey] = $nameEn;
-                } elseif (null !== $nameDe) {
-                    $catalogEn[$nameKey] = $nameDe;
-                } else {
-                    $catalogEn[$nameKey] = sprintf('item_%d', $sourceId);
-                }
-
-                if (null !== $nameDe) {
-                    $catalogDe[$nameKey] = $nameDe;
-                } elseif (null !== $nameEn) {
-                    $catalogDe[$nameKey] = $nameEn;
-                }
-
-                if (null !== $descEn || null !== $descDe) {
-                    $item->setDescKey($descKey);
-                    if (null !== $descEn) {
-                        $catalogEn[$descKey] = $descEn;
-                    } elseif (null !== $descDe) {
-                        $catalogEn[$descKey] = $descDe;
-                    }
-
-                    if (null !== $descDe) {
-                        $catalogDe[$descKey] = $descDe;
-                    } elseif (null !== $descEn) {
-                        $catalogDe[$descKey] = $descEn;
-                    }
-                } else {
-                    $item->setDescKey(null);
-                }
+                $translationData = $this->translationCatalogBuilder->build($type, $sourceId, $row);
+                $item->setNameKey($translationData['nameKey']);
+                $item->setDescKey($translationData['descKey']);
+                $catalogEn = array_merge($catalogEn, $translationData['catalogEn']);
+                $catalogDe = array_merge($catalogDe, $translationData['catalogDe']);
 
                 if (ItemTypeEnum::MISC === $type) {
                     $incomingRank = $context['rank'];
