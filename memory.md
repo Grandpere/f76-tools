@@ -137,6 +137,10 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - cooldown serveur en place sur la generation (`60s` par utilisateur cible), avec timestamp `reset_password_requested_at`.
   - limite globale en plus: max `10` generations reussies par admin sur `60s`.
   - apres reset reussi, nettoyer `reset_password_requested_at` avec les champs token/expiration.
+- Contact public:
+  - page `GET/POST /contact` ajoutee (email, sujet, message, CSRF).
+  - protections anti-abus alignees auth: honeypot, rate limit cache (5/5min), Turnstile optionnel.
+  - livraison actuelle: email direct via `MailerInterface` vers `CONTACT_RECIPIENT_EMAIL` (defaut `no-reply@f76.local`), pas de stockage DB pour l instant.
 - Verification email:
   - inscription met `isEmailVerified=false`, cree un token de verification (24h) et envoie un email avec lien.
   - route publique `GET /verify-email/{token}` valide le compte.

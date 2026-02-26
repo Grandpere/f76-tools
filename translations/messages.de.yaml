@@ -109,6 +109,7 @@ security.login.submit: Anmelden
 security.login.to_register: Noch kein Konto? Registrieren
 security.login.to_forgot: Passwort vergessen?
 security.login.to_resend: Verifizierungs-E-Mail erneut senden
+security.login.to_contact: Kontakt
 security.auth.flash.rate_limited: Zu viele Versuche. Bitte warten Sie einige Minuten und versuchen Sie es erneut.
 security.auth.flash.captcha_invalid: CAPTCHA-Validierung fehlgeschlagen. Bitte versuchen Sie es erneut.
 
@@ -145,6 +146,16 @@ security.resend.submit: Verifizierungs-E-Mail senden
 security.resend.to_login: Zuruck zur Anmeldung
 security.resend.flash.invalid_csrf: Ungultige Sitzung, bitte erneut versuchen.
 security.resend.flash.sent: Falls diese E-Mail existiert und nicht verifiziert ist, wurde eine Verifizierungs-E-Mail gesendet.
+security.contact.page_title: Kontakt
+security.contact.title: Kontakt
+security.contact.email: E-Mail
+security.contact.subject: Betreff
+security.contact.message: Nachricht
+security.contact.submit: Nachricht senden
+security.contact.to_login: Zuruck zur Anmeldung
+security.contact.flash.invalid_csrf: Ungultige Sitzung, bitte erneut versuchen.
+security.contact.flash.invalid_input: Bitte geben Sie eine gultige E-Mail, einen Betreff und eine Nachricht an.
+security.contact.flash.sent: Ihre Nachricht wurde gesendet.
 security.reset.page_title: Passwort zurucksetzen
 security.reset.title: Passwort zurucksetzen
 security.reset.password: Neues Passwort

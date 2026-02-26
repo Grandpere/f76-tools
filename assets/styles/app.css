@@ -230,7 +230,8 @@ body::before {
     font-weight: 600;
 }
 
-.auth-field input {
+.auth-field input,
+.auth-field textarea {
     border: 1px solid var(--line);
     border-radius: 12px;
     padding: 0.62rem 0.72rem;
@@ -239,7 +240,13 @@ body::before {
     font: inherit;
 }
 
-.auth-field input:focus {
+.auth-field textarea {
+    min-height: 8rem;
+    resize: vertical;
+}
+
+.auth-field input:focus,
+.auth-field textarea:focus {
     outline: none;
     border-color: rgba(230, 185, 0, 0.82);
     box-shadow: 0 0 0 1px rgba(230, 185, 0, 0.22);

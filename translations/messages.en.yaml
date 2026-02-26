@@ -109,6 +109,7 @@ security.login.submit: Sign in
 security.login.to_register: No account yet? Register
 security.login.to_forgot: Forgot password?
 security.login.to_resend: Resend verification email
+security.login.to_contact: Contact
 security.auth.flash.rate_limited: Too many attempts. Please wait a few minutes and try again.
 security.auth.flash.captcha_invalid: CAPTCHA validation failed. Please try again.
 
@@ -145,6 +146,16 @@ security.resend.submit: Send verification email
 security.resend.to_login: Back to login
 security.resend.flash.invalid_csrf: Invalid session, please try again.
 security.resend.flash.sent: If this email exists and is not verified, a verification email has been sent.
+security.contact.page_title: Contact
+security.contact.title: Contact
+security.contact.email: Email
+security.contact.subject: Subject
+security.contact.message: Message
+security.contact.submit: Send message
+security.contact.to_login: Back to login
+security.contact.flash.invalid_csrf: Invalid session, please try again.
+security.contact.flash.invalid_input: Please provide a valid email, subject, and message.
+security.contact.flash.sent: Your message has been sent.
 security.reset.page_title: Reset password
 security.reset.title: Reset password
 security.reset.password: New password

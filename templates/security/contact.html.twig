@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'security.contact.page_title'|trans }}{% endblock %}
+
+{% block body %}
+    <main class="auth-page">
+        <section class="auth-card">
+            <p class="catalog-kicker">Fallout 76</p>
+            <h1 class="auth-title">{{ 'security.contact.title'|trans }}</h1>
+
+            {% for message in app.flashes('success') %}
+                <p class="auth-alert auth-alert-success">{{ message|trans }}</p>
+            {% endfor %}
+            {% for message in app.flashes('warning') %}
+                <p class="auth-alert auth-alert-warning">{{ message|trans }}</p>
+            {% endfor %}
+
+            <form method="post" class="auth-form">
+                <div class="visually-hidden" aria-hidden="true">
+                    <label for="contact-website">Website</label>
+                    <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off">
+                </div>
+                <label class="auth-field" for="contact-email">
+                    <span>{{ 'security.contact.email'|trans }}</span>
+                    <input id="contact-email" name="email" type="email" required autocomplete="email">
+                </label>
+                <label class="auth-field" for="contact-subject">
+                    <span>{{ 'security.contact.subject'|trans }}</span>
+                    <input id="contact-subject" name="subject" type="text" required minlength="3">
+                </label>
+                <label class="auth-field" for="contact-message">
+                    <span>{{ 'security.contact.message'|trans }}</span>
+                    <textarea id="contact-message" name="message" rows="6" required minlength="10"></textarea>
+                </label>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('contact') }}">
+                {% if captchaSiteKey %}
+                    <div class="cf-turnstile" data-sitekey="{{ captchaSiteKey }}"></div>
+                {% endif %}
+
+                <button type="submit">{{ 'security.contact.submit'|trans }}</button>
+            </form>
+
+            <p class="auth-links">
+                <a href="{{ path('app_login', { locale: app.request.locale }) }}">{{ 'security.contact.to_login'|trans }}</a>
+            </p>
+        </section>
+    </main>
+    {% if captchaSiteKey %}
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    {% endif %}
+{% endblock %}

@@ -109,6 +109,7 @@ security.login.submit: Se connecter
 security.login.to_register: Pas encore de compte ? S inscrire
 security.login.to_forgot: Mot de passe oublie ?
 security.login.to_resend: Renvoyer l email de verification
+security.login.to_contact: Contact
 security.auth.flash.rate_limited: Trop de tentatives. Merci de patienter quelques minutes puis de reessayer.
 security.auth.flash.captcha_invalid: Echec de validation du CAPTCHA. Merci de reessayer.
 
@@ -145,6 +146,16 @@ security.resend.submit: Envoyer l email de verification
 security.resend.to_login: Retour a la connexion
 security.resend.flash.invalid_csrf: Session invalide, merci de reessayer.
 security.resend.flash.sent: Si cet email existe et n est pas encore verifie, un email de verification a ete envoye.
+security.contact.page_title: Contact
+security.contact.title: Contact
+security.contact.email: Email
+security.contact.subject: Sujet
+security.contact.message: Message
+security.contact.submit: Envoyer le message
+security.contact.to_login: Retour a la connexion
+security.contact.flash.invalid_csrf: Session invalide, merci de reessayer.
+security.contact.flash.invalid_input: Merci de renseigner un email, un sujet et un message valides.
+security.contact.flash.sent: Votre message a ete envoye.
 security.reset.page_title: Reinitialisation du mot de passe
 security.reset.title: Reinitialisation du mot de passe
 security.reset.password: Nouveau mot de passe
