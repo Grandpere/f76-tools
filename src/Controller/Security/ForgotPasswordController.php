@@ -13,15 +13,11 @@ declare(strict_types=1);
 
 namespace App\Controller\Security;
 
-use App\Entity\UserEntity;
-use App\Repository\UserEntityRepository;
+use App\Identity\Application\ForgotPassword\ForgotPasswordRequestApplicationService;
 use App\Security\SignedUrlGenerator;
-use App\Security\TemporaryLinkPolicy;
 use App\Service\AuthRequestThrottler;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
-use DateTimeImmutable;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,8 +34,7 @@ final class ForgotPasswordController extends AbstractController
     private const RATE_LIMIT_WINDOW_SECONDS = 300;
 
     public function __construct(
-        private readonly UserEntityRepository $userRepository,
-        private readonly EntityManagerInterface $entityManager,
+        private readonly ForgotPasswordRequestApplicationService $forgotPasswordRequestApplicationService,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly SignedUrlGenerator $signedUrlGenerator,
         private readonly TranslatorInterface $translator,
@@ -47,7 +42,6 @@ final class ForgotPasswordController extends AbstractController
         private readonly AuthRequestThrottler $requestThrottler,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
-        private readonly TemporaryLinkPolicy $temporaryLinkPolicy,
     ) {
     }
 
@@ -93,37 +87,20 @@ final class ForgotPasswordController extends AbstractController
                 return $this->redirectToRoute('app_forgot_password', ['locale' => $request->getLocale()]);
             }
 
-            $user = null;
-            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $found = $this->userRepository->findOneByEmail($email);
-                if ($found instanceof UserEntity) {
-                    $user = $found;
-                }
-            }
-
-            if ($user instanceof UserEntity) {
-                $now = new DateTimeImmutable();
-                $remaining = $this->temporaryLinkPolicy->cooldownRemainingSeconds(
-                    $user->getResetPasswordRequestedAt(),
-                    $now,
-                    $this->temporaryLinkPolicy->getResetLinkCooldownSeconds(),
-                );
-                if ($remaining <= 0) {
-                    $token = bin2hex(random_bytes(32));
-                    $user->setResetPasswordTokenHash(hash('sha256', $token));
-                    $user->setResetPasswordExpiresAt($this->temporaryLinkPolicy->expiresAt($now, $this->temporaryLinkPolicy->getResetPasswordTtl()));
-                    $user->setResetPasswordRequestedAt($now);
-                    $this->entityManager->flush();
-
+            $requestResult = $this->forgotPasswordRequestApplicationService->request($email, new \DateTimeImmutable());
+            if ($requestResult->isTokenIssued()) {
+                $plainToken = $requestResult->getPlainToken();
+                $targetEmail = $requestResult->getEmail();
+                if (is_string($plainToken) && is_string($targetEmail)) {
                     $resetUrl = $this->signedUrlGenerator->generate('app_reset_password', [
                         'locale' => $request->getLocale(),
-                        'token' => $token,
+                        'token' => $plainToken,
                     ]);
                     try {
                         $this->mailer->send(
                             (new Email())
                                 ->from('no-reply@f76.local')
-                                ->to($email)
+                                ->to($targetEmail)
                                 ->subject($this->translator->trans('security.forgot.email_subject'))
                                 ->text(sprintf("%s\n\n%s", $this->translator->trans('security.forgot.email_intro'), $resetUrl)),
                         );
@@ -131,7 +108,7 @@ final class ForgotPasswordController extends AbstractController
                         // Keep same user-facing response to avoid account enumeration.
                     }
 
-                    $this->authEventLogger->info('security.auth.forgot_password.reset_token_issued', $email, $request->getClientIp());
+                    $this->authEventLogger->info('security.auth.forgot_password.reset_token_issued', $targetEmail, $request->getClientIp());
                 }
             }
 
