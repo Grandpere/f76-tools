@@ -12,6 +12,7 @@ Besoin d afficher localisation, dates et listes Minerva avec etats temporels (ac
 - [x] Modele rotation (`minerva_rotation`) + migration.
 - [x] Service applicatif de calcul d etat temporel (`upcoming`, `active`, `ended`) avec timezone explicite `UTC`.
 - [x] Page dediee `/minerva-rotation` triee par date de debut.
+- [x] Commande de generation deterministe `app:minerva:generate-rotation` sur intervalle date.
 
 ## Criteres d acceptance
 - Les rotations sont visibles et ordonnees.

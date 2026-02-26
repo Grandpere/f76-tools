@@ -15,6 +15,7 @@ namespace App\Repository;
 
 use App\Contract\MinervaRotationReaderInterface;
 use App\Entity\MinervaRotationEntity;
+use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,5 +48,23 @@ final class MinervaRotationEntityRepository extends ServiceEntityRepository
         $rows = array_values(array_filter($result, static fn (mixed $row): bool => $row instanceof MinervaRotationEntity));
 
         return $rows;
+    }
+
+    public function deleteOverlappingRange(DateTimeImmutable $from, DateTimeImmutable $to): int
+    {
+        $deleted = $this->createQueryBuilder('r')
+            ->delete()
+            ->where('r.endsAt >= :from')
+            ->andWhere('r.startsAt <= :to')
+            ->setParameter('from', $from)
+            ->setParameter('to', $to)
+            ->getQuery()
+            ->execute();
+
+        if (is_int($deleted) || is_numeric($deleted)) {
+            return (int) $deleted;
+        }
+
+        return 0;
     }
 }
