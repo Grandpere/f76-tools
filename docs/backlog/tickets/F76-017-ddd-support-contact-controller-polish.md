@@ -14,6 +14,7 @@ Le but est d aligner le niveau de "thin controller" avec les slices Identity.
 - [x] Brancher `ContactController` sur `IdentityEmailFlowGuard` + `IdentityFlashResponder`.
 - [x] Retirer la logique guard inline (csrf/honeypot/captcha/rate-limit) du controller.
 - [x] Conserver les logs et messages flash existants.
+- [x] Extraire la sanitation/validation du payload dans `ContactSubmissionInput`.
 
 ## Criteres d acceptance
 - Aucun changement de routes ni de messages utilisateur.
