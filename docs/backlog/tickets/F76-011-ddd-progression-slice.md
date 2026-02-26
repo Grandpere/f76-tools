@@ -18,7 +18,7 @@ Premier chantier concret de migration DDD sur la partie la plus centrale: player
 - [x] Knowledge: set/unset learned + ownership via `PlayerKnowledgeApplicationService`.
 - [x] Knowledge transfer: export/import/preview via `PlayerKnowledgeTransferApplicationService`.
 - [x] Knowledge stats: aggregation via `PlayerKnowledgeStatsApplicationService`.
-- [ ] Completer les tests d integration cibles sur les ports progression (ticket de stabilisation suivant si besoin).
+- [x] Completer les tests d integration cibles sur les ports progression (`ProgressionRepositoriesIntegrationTest`).
 
 ## Criteres d acceptance
 - Controllers API minces (validation + mapping + delegation).
