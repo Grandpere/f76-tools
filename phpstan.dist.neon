@@ -1,5 +1,15 @@
 includes:
+    - vendor/phpat/phpat/extension.neon
     - phpstan-baseline.neon
+
+services:
+    - class: App\Tests\Architecture\CleanArchitectureTest
+      tags:
+          - phpat.test
+
+    - class: App\Tests\Architecture\ArchitectureTest
+      tags:
+          - phpat.test
 
 parameters:
     level: 10
@@ -12,3 +22,5 @@ parameters:
     excludePaths:
         - public/index.php
         - tests/bootstrap.php
+    phpat:
+        show_rule_names: true
