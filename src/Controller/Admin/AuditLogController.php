@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Repository\AdminAuditLogEntityRepository;
+use App\Support\Application\Audit\AuditLogListApplicationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,12 +23,11 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/audit-logs')]
 final class AuditLogController extends AbstractController
 {
-    private const DEFAULT_PER_PAGE = 30;
-    private const MAX_PER_PAGE = 200;
     private const EXPORT_MAX_ROWS = 10000;
 
     public function __construct(
         private readonly AdminAuditLogEntityRepository $auditLogRepository,
+        private readonly AuditLogListApplicationService $auditLogListApplicationService,
     ) {
     }
 
@@ -36,29 +36,22 @@ final class AuditLogController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $query = $this->sanitizeQuery($request->query->get('q'));
-        $action = $this->sanitizeAction($request->query->get('action'));
-        $perPage = $this->sanitizePositiveInt($request->query->get('perPage'), self::DEFAULT_PER_PAGE, self::MAX_PER_PAGE);
-        $page = $this->sanitizePositiveInt($request->query->get('page'), 1);
-
-        $result = $this->auditLogRepository->findPaginated($query, $action, $page, $perPage);
-        $totalRows = $result['total'];
-        $totalPages = max(1, (int) ceil($totalRows / $perPage));
-        $page = min($page, $totalPages);
-
-        if ($page !== $this->sanitizePositiveInt($request->query->get('page'), 1)) {
-            $result = $this->auditLogRepository->findPaginated($query, $action, $page, $perPage);
-        }
+        $listResult = $this->auditLogListApplicationService->list(
+            $request->query->get('q'),
+            $request->query->get('action'),
+            $request->query->get('page'),
+            $request->query->get('perPage'),
+        );
 
         return $this->render('admin/audit_logs.html.twig', [
-            'rows' => $result['rows'],
-            'totalRows' => $totalRows,
-            'query' => $query,
-            'action' => $action,
-            'actions' => $this->auditLogRepository->findDistinctActions(),
-            'page' => $page,
-            'perPage' => $perPage,
-            'totalPages' => $totalPages,
+            'rows' => $listResult->rows,
+            'totalRows' => $listResult->totalRows,
+            'query' => $listResult->query,
+            'action' => $listResult->action,
+            'actions' => $listResult->actions,
+            'page' => $listResult->page,
+            'perPage' => $listResult->perPage,
+            'totalPages' => $listResult->totalPages,
         ]);
     }
 
@@ -67,8 +60,8 @@ final class AuditLogController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $query = $this->sanitizeQuery($request->query->get('q'));
-        $action = $this->sanitizeAction($request->query->get('action'));
+        $query = $this->sanitizeString($request->query->get('q'));
+        $action = $this->sanitizeString($request->query->get('action'));
         $rows = $this->auditLogRepository->findForExport($query, $action, self::EXPORT_MAX_ROWS);
 
         $output = fopen('php://temp', 'wb+');
@@ -108,42 +101,12 @@ final class AuditLogController extends AbstractController
         return $response;
     }
 
-    private function sanitizeQuery(mixed $value): string
+    private function sanitizeString(mixed $value): string
     {
         if (!is_string($value)) {
             return '';
         }
 
         return trim($value);
-    }
-
-    private function sanitizeAction(mixed $value): string
-    {
-        if (!is_string($value)) {
-            return '';
-        }
-
-        return trim($value);
-    }
-
-    private function sanitizePositiveInt(mixed $value, int $default, ?int $max = null): int
-    {
-        if (is_int($value)) {
-            $number = $value;
-        } elseif (is_string($value) && '' !== trim($value) && ctype_digit(trim($value))) {
-            $number = (int) trim($value);
-        } else {
-            return $default;
-        }
-
-        if ($number < 1) {
-            return $default;
-        }
-
-        if (null !== $max && $number > $max) {
-            return $max;
-        }
-
-        return $number;
     }
 }
