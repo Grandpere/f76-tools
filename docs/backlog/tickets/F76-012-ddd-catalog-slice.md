@@ -16,6 +16,9 @@ Le contexte Catalog (items, import, traductions) est encore majoritairement port
 - [x] Resolution de contexte fichier import extraite dans `ItemImportFileContextResolver`.
 - [x] `ImportItemsCommand` delegue la resolution de contexte au service Catalog.
 - [x] Test unitaire `ItemImportFileContextResolver` ajoute.
+- [x] Decouverte/lecture JSON import extraite dans `ItemImportJsonFileReader`.
+- [x] `ImportItemsCommand` delegue lecture fichiers et parsing JSON au service Catalog.
+- [x] Test unitaire `ItemImportJsonFileReader` ajoute.
 
 ## Criteres d acceptance
 - Controller admin traduction simplifie.

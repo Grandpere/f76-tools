@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Catalog\Application\Import\ItemImportFileContextResolver;
+use App\Catalog\Application\Import\ItemImportJsonFileReader;
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemEntity;
 use App\Repository\ItemEntityRepository;
 use App\Translation\TranslationCatalogWriter;
 use Doctrine\ORM\EntityManagerInterface;
-use JsonException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -27,7 +27,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Stringable;
 
@@ -42,6 +41,7 @@ final class ImportItemsCommand extends Command
         private readonly ItemEntityRepository $itemRepository,
         private readonly TranslationCatalogWriter $translationCatalogWriter,
         private readonly ItemImportFileContextResolver $fileContextResolver,
+        private readonly ItemImportJsonFileReader $jsonFileReader,
         private readonly KernelInterface $kernel,
     ) {
         parent::__construct();
@@ -87,7 +87,7 @@ final class ImportItemsCommand extends Command
         }
         $batchSize = max(1, (int) $batchSizeRaw);
 
-        $files = $this->resolveJsonFiles($rootPath);
+        $files = $this->jsonFileReader->findImportFiles($rootPath);
         if ([] === $files) {
             $io->warning(sprintf('Aucun fichier JSON importable trouve dans %s', $rootPath));
 
@@ -127,7 +127,7 @@ final class ImportItemsCommand extends Command
                 continue;
             }
 
-            $payload = $this->decodeJsonFile($file);
+            $payload = $this->jsonFileReader->readRows($file);
             if (!is_array($payload)) {
                 $io->warning(sprintf('Fichier ignore (JSON invalide): %s', $file));
                 ++$stats['errors'];
@@ -311,47 +311,6 @@ final class ImportItemsCommand extends Command
         );
 
         return $stats['errors'] > 0 ? Command::FAILURE : Command::SUCCESS;
-    }
-
-    /**
-     * @return list<string>
-     */
-    private function resolveJsonFiles(string $rootPath): array
-    {
-        $finder = new Finder();
-        $finder
-            ->files()
-            ->in($rootPath)
-            ->name('*.json')
-            ->notName('manifest.json');
-
-        $files = [];
-        foreach ($finder as $file) {
-            $files[] = $file->getRealPath() ?: $file->getPathname();
-        }
-
-        sort($files);
-
-        return $files;
-    }
-
-    /**
-     * @return array<mixed>|null
-     */
-    private function decodeJsonFile(string $path): ?array
-    {
-        try {
-            $json = file_get_contents($path);
-            if (false === $json) {
-                return null;
-            }
-
-            $decoded = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
-
-            return is_array($decoded) ? $decoded : null;
-        } catch (JsonException) {
-            return null;
-        }
     }
 
     private function toNullableString(mixed $value): ?string
