@@ -16,11 +16,11 @@ namespace App\Controller\Security;
 use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Identity\UI\Security\IdentityFlashResponder;
-use App\Security\AuthEventLogger;
 use App\Service\TurnstileVerifier;
 use App\Support\Application\Contact\ContactSubmissionApplicationService;
 use App\Support\Application\Contact\ContactSubmissionInput;
 use App\Support\Application\Contact\ContactSubmissionStatus;
+use App\Support\UI\Contact\ContactSubmissionResponder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,8 +32,8 @@ final class ContactController extends AbstractController
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
         private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly TurnstileVerifier $turnstileVerifier,
-        private readonly AuthEventLogger $authEventLogger,
         private readonly ContactSubmissionApplicationService $contactSubmissionApplicationService,
+        private readonly ContactSubmissionResponder $contactSubmissionResponder,
     ) {
     }
 
@@ -53,9 +53,7 @@ final class ContactController extends AbstractController
             );
 
             if (!$submissionInput->isValid()) {
-                $this->authEventLogger->warning('security.auth.contact.invalid_payload', $submissionInput->email, $request->getClientIp());
-
-                return $this->identityFlashResponder->warningToRoute($request, $flow->failureRoute(), 'security.contact.flash.invalid_input');
+                return $this->contactSubmissionResponder->invalidPayload($request, $flow, $submissionInput->email);
             }
 
             $submissionStatus = $this->contactSubmissionApplicationService->submit(
@@ -63,18 +61,10 @@ final class ContactController extends AbstractController
                 $request->getClientIp(),
             );
             if (ContactSubmissionStatus::PERSISTENCE_FAILED === $submissionStatus) {
-                $this->authEventLogger->warning('security.auth.contact.persistence_failed', $submissionInput->email, $request->getClientIp());
-
-                return $this->identityFlashResponder->warningToRoute($request, $flow->failureRoute(), 'security.contact.flash.invalid_input');
+                return $this->contactSubmissionResponder->persistenceFailed($request, $flow, $submissionInput->email);
             }
 
-            if (ContactSubmissionStatus::SENT_WITH_DELIVERY_FAILURE === $submissionStatus) {
-                $this->authEventLogger->warning('security.auth.contact.delivery_failed', $submissionInput->email, $request->getClientIp());
-            }
-
-            $this->authEventLogger->info('security.auth.contact.sent', $submissionInput->email, $request->getClientIp());
-
-            return $this->identityFlashResponder->successToRoute($request, $flow->failureRoute(), 'security.contact.flash.sent');
+            return $this->contactSubmissionResponder->submitted($request, $flow, $submissionInput->email, $submissionStatus);
         }
 
         return $this->render('security/contact.html.twig', [
