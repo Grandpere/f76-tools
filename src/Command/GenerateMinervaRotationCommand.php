@@ -14,11 +14,9 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Catalog\Application\Minerva\MinervaRotationGenerationApplicationService;
-use App\Entity\MinervaRotationEntity;
-use App\Repository\MinervaRotationEntityRepository;
+use App\Catalog\Application\Minerva\MinervaRotationRegenerationApplicationService;
 use DateTimeImmutable;
 use DateTimeZone;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -34,8 +32,7 @@ final class GenerateMinervaRotationCommand extends Command
 {
     public function __construct(
         private readonly MinervaRotationGenerationApplicationService $generationService,
-        private readonly MinervaRotationEntityRepository $rotationRepository,
-        private readonly EntityManagerInterface $entityManager,
+        private readonly MinervaRotationRegenerationApplicationService $regenerationService,
     ) {
         parent::__construct();
     }
@@ -93,17 +90,9 @@ final class GenerateMinervaRotationCommand extends Command
             return Command::SUCCESS;
         }
 
-        $deleted = $this->rotationRepository->deleteOverlappingRange($from, $to);
-        foreach ($rows as $row) {
-            $this->entityManager->persist((new MinervaRotationEntity())
-                ->setLocation($row['location'])
-                ->setListCycle($row['listCycle'])
-                ->setStartsAt($row['startsAt'])
-                ->setEndsAt($row['endsAt']));
-        }
-        $this->entityManager->flush();
+        $result = $this->regenerationService->regenerate($from, $to);
 
-        $io->success(sprintf('Rotation regeneree. Supprimees=%d, inserees=%d.', $deleted, count($rows)));
+        $io->success(sprintf('Rotation regeneree. Supprimees=%d, inserees=%d.', $result['deleted'], $result['inserted']));
 
         return Command::SUCCESS;
     }

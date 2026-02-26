@@ -254,3 +254,18 @@ minerva.empty: Keine Rotation verfugbar.
 minerva.status_upcoming: Kommend
 minerva.status_active: Aktiv
 minerva.status_ended: Beendet
+
+admin_minerva.page_title: Minerva-Rotation Admin
+admin_minerva.kicker: Backoffice
+admin_minerva.title: Minerva-Rotation
+admin_minerva.description: Minerva-Fenster aus deterministischen Regeln neu generieren und einsehen.
+admin_minerva.back_to_dashboard: Zuruck zum Dashboard
+admin_minerva.regenerate_title: Zeitplan neu generieren
+admin_minerva.from: Von
+admin_minerva.to: Bis
+admin_minerva.regenerate: Neu generieren
+admin_minerva.timeline_title: Generierter Zeitplan
+admin_minerva.timezone: 'Generierungszeitzone: %timezone%'
+admin_minerva.flash.invalid_csrf: Ungultige Aktion (CSRF).
+admin_minerva.flash.invalid_range: Ungultiger Datumsbereich.
+admin_minerva.flash.regenerated: Minerva-Rotation neu generiert.

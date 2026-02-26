@@ -254,3 +254,18 @@ minerva.empty: Aucune rotation disponible.
 minerva.status_upcoming: A venir
 minerva.status_active: Active
 minerva.status_ended: Terminee
+
+admin_minerva.page_title: Admin rotation Minerva
+admin_minerva.kicker: Backoffice
+admin_minerva.title: Rotation Minerva
+admin_minerva.description: Regenere et consulte les fenetres Minerva depuis des regles deterministes.
+admin_minerva.back_to_dashboard: Retour au dashboard
+admin_minerva.regenerate_title: Regenerer la timeline
+admin_minerva.from: Du
+admin_minerva.to: Au
+admin_minerva.regenerate: Regenerer
+admin_minerva.timeline_title: Timeline generee
+admin_minerva.timezone: 'Timezone generation: %timezone%'
+admin_minerva.flash.invalid_csrf: Action invalide (CSRF).
+admin_minerva.flash.invalid_range: Intervalle de dates invalide.
+admin_minerva.flash.regenerated: Rotation Minerva regeneree.
