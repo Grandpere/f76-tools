@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Translation;
+namespace App\Catalog\Infrastructure\Translation;
 
 use App\Contract\TranslationCatalogReaderInterface;
 use Symfony\Component\HttpKernel\KernelInterface;

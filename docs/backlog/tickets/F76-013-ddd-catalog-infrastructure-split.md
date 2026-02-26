@@ -17,6 +17,7 @@ Il faut isoler les concerns infra (filesystem/import source, I/O externes) sous 
 - [x] Port `ItemImportPersistenceInterface` ajoute en Application.
 - [x] Adaptateur Doctrine `DoctrineItemImportPersistence` ajoute en Infrastructure.
 - [x] `ItemImportApplicationService` ne depend plus de `EntityManagerInterface`.
+- [x] Implementations YAML de catalogues de traduction deplacees vers `Catalog/Infrastructure/Translation`.
 
 ## Criteres d acceptance
 - Les interfaces Application ne dependent pas de classes techniques concretes.
