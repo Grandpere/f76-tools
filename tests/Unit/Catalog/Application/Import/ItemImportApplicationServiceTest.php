@@ -12,6 +12,7 @@ use App\Catalog\Application\Import\ItemImportItemRepositoryInterface;
 use App\Catalog\Application\Import\ItemImportJsonFileReader;
 use App\Catalog\Application\Import\ItemImportTranslationCatalogBuilder;
 use App\Catalog\Application\Import\ItemImportValueNormalizer;
+use App\Contract\TranslationCatalogWriterInterface;
 use App\Translation\TranslationCatalogWriter;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -75,7 +76,7 @@ final class ItemImportApplicationServiceTest extends TestCase
         self::assertFileExists($projectDir.'/translations/items.de.yaml');
     }
 
-    private function createService(TranslationCatalogWriter $translationCatalogWriter): ItemImportApplicationService
+    private function createService(TranslationCatalogWriterInterface $translationCatalogWriter): ItemImportApplicationService
     {
         $normalizer = new ItemImportValueNormalizer();
 
@@ -91,7 +92,7 @@ final class ItemImportApplicationServiceTest extends TestCase
         );
     }
 
-    private function createTranslationWriter(string $projectDir): TranslationCatalogWriter
+    private function createTranslationWriter(string $projectDir): TranslationCatalogWriterInterface
     {
         $kernel = $this->createMock(KernelInterface::class);
         $kernel->method('getProjectDir')->willReturn($projectDir);

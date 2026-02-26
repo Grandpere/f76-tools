@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Catalog\Application\Import;
 
+use App\Contract\TranslationCatalogWriterInterface;
 use App\Entity\ItemEntity;
-use App\Translation\TranslationCatalogWriter;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class ItemImportApplicationService
@@ -13,7 +13,7 @@ final class ItemImportApplicationService
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly ItemImportItemRepositoryInterface $itemRepository,
-        private readonly TranslationCatalogWriter $translationCatalogWriter,
+        private readonly TranslationCatalogWriterInterface $translationCatalogWriter,
         private readonly ItemImportFileContextResolver $fileContextResolver,
         private readonly ItemImportJsonFileReader $jsonFileReader,
         private readonly ItemImportItemHydrator $itemHydrator,
