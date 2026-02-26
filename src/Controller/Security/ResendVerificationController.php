@@ -15,8 +15,8 @@ namespace App\Controller\Security;
 
 use App\Identity\Application\ResendVerification\ResendVerificationRequestApplicationService;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
+use App\Identity\UI\Security\IdentityFlashResponder;
 use App\Identity\UI\Security\IdentityIssuedTokenNotifier;
-use App\Identity\UI\Security\IdentityLocaleRedirector;
 use App\Service\TurnstileVerifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,8 +31,8 @@ final class ResendVerificationController extends AbstractController
     public function __construct(
         private readonly ResendVerificationRequestApplicationService $resendVerificationRequestApplicationService,
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
+        private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
-        private readonly IdentityLocaleRedirector $identityLocaleRedirector,
         private readonly TurnstileVerifier $turnstileVerifier,
     ) {
     }
@@ -50,9 +50,7 @@ final class ResendVerificationController extends AbstractController
                 self::RATE_LIMIT_WINDOW_SECONDS,
             );
             if (null !== $guardResult->failureFlashMessage) {
-                $this->addFlash('warning', $guardResult->failureFlashMessage);
-
-                return $this->identityLocaleRedirector->toRouteWithRequestLocale($request, 'app_resend_verification');
+                return $this->identityFlashResponder->warningToRoute($request, 'app_resend_verification', $guardResult->failureFlashMessage);
             }
             $payload = $guardResult->payload;
 
@@ -67,9 +65,7 @@ final class ResendVerificationController extends AbstractController
                 );
             }
 
-            $this->addFlash('success', 'security.resend.flash.sent');
-
-            return $this->identityLocaleRedirector->toLogin($request);
+            return $this->identityFlashResponder->successToLogin($request, 'security.resend.flash.sent');
         }
 
         return $this->render('security/resend_verification.html.twig', [

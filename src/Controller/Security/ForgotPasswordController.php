@@ -15,8 +15,8 @@ namespace App\Controller\Security;
 
 use App\Identity\Application\ForgotPassword\ForgotPasswordRequestApplicationService;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
+use App\Identity\UI\Security\IdentityFlashResponder;
 use App\Identity\UI\Security\IdentityIssuedTokenNotifier;
-use App\Identity\UI\Security\IdentityLocaleRedirector;
 use App\Service\TurnstileVerifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,8 +31,8 @@ final class ForgotPasswordController extends AbstractController
     public function __construct(
         private readonly ForgotPasswordRequestApplicationService $forgotPasswordRequestApplicationService,
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
+        private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
-        private readonly IdentityLocaleRedirector $identityLocaleRedirector,
         private readonly TurnstileVerifier $turnstileVerifier,
     ) {
     }
@@ -50,9 +50,7 @@ final class ForgotPasswordController extends AbstractController
                 self::RATE_LIMIT_WINDOW_SECONDS,
             );
             if (null !== $guardResult->failureFlashMessage) {
-                $this->addFlash('warning', $guardResult->failureFlashMessage);
-
-                return $this->identityLocaleRedirector->toRouteWithRequestLocale($request, 'app_forgot_password');
+                return $this->identityFlashResponder->warningToRoute($request, 'app_forgot_password', $guardResult->failureFlashMessage);
             }
             $payload = $guardResult->payload;
 
@@ -66,9 +64,7 @@ final class ForgotPasswordController extends AbstractController
                 );
             }
 
-            $this->addFlash('success', 'security.forgot.flash.request_sent');
-
-            return $this->identityLocaleRedirector->toLogin($request);
+            return $this->identityFlashResponder->successToLogin($request, 'security.forgot.flash.request_sent');
         }
 
         return $this->render('security/forgot_password.html.twig', [

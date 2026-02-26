@@ -15,10 +15,10 @@ namespace App\Controller\Security;
 
 use App\Identity\Application\Registration\RegisterUserApplicationService;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
+use App\Identity\UI\Security\IdentityFlashResponder;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
 use App\Identity\UI\Security\IdentityIssuedTokenNotifier;
-use App\Identity\UI\Security\IdentityLocaleRedirector;
 use App\Identity\UI\Security\RegistrationFeedbackMapper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,8 +33,8 @@ final class RegistrationController extends AbstractController
     public function __construct(
         private readonly RegisterUserApplicationService $registerUserApplicationService,
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
+        private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
-        private readonly IdentityLocaleRedirector $identityLocaleRedirector,
         private readonly RegistrationFeedbackMapper $registrationFeedbackMapper,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
@@ -58,9 +58,7 @@ final class RegistrationController extends AbstractController
                 self::RATE_LIMIT_WINDOW_SECONDS,
             );
             if (null !== $guardResult->failureFlashMessage) {
-                $this->addFlash('warning', $guardResult->failureFlashMessage);
-
-                return $this->identityLocaleRedirector->toRouteWithRequestLocale($request, 'app_register');
+                return $this->identityFlashResponder->warningToRoute($request, 'app_register', $guardResult->failureFlashMessage);
             }
             $payload = $guardResult->payload;
 
@@ -76,9 +74,7 @@ final class RegistrationController extends AbstractController
 
             $warningMessage = $this->registrationFeedbackMapper->warningFlash($registerResult->getStatus());
             if (null !== $warningMessage) {
-                $this->addFlash('warning', $warningMessage);
-
-                return $this->identityLocaleRedirector->toRouteWithRequestLocale($request, 'app_register');
+                return $this->identityFlashResponder->warningToRoute($request, 'app_register', $warningMessage);
             }
 
             $targetEmail = $registerResult->getEmail();
@@ -92,12 +88,11 @@ final class RegistrationController extends AbstractController
                 'security.auth.register.verification_token_issued',
             );
 
-            $this->addFlash('success', 'security.register.flash.success');
             $this->authEventLogger->info('security.auth.register.user_created', is_string($targetEmail) ? $targetEmail : $payload->email, $request->getClientIp(), [
                 'emailVerificationRequired' => true,
             ]);
 
-            return $this->identityLocaleRedirector->toLogin($request);
+            return $this->identityFlashResponder->successToLogin($request, 'security.register.flash.success');
         }
 
         return $this->render('security/register.html.twig', [
