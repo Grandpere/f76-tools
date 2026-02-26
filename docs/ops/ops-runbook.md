@@ -41,6 +41,16 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
 - Export CSV via UI:
   - Backoffice > Logs d audit > `Export CSV`
 
+## Rotation Minerva
+- Generation dry-run:
+  - `docker compose -f compose.yaml exec -T app php bin/console app:minerva:generate-rotation --from=2026-01-01 --to=2026-12-31 --dry-run`
+- Generation reelle:
+  - `docker compose -f compose.yaml exec -T app php bin/console app:minerva:generate-rotation --from=2026-01-01 --to=2026-12-31`
+- Backoffice admin:
+  - `GET /admin/minerva-rotation` (formulaire de regeneration + visualisation timeline).
+- Page publique authentifiee:
+  - `GET /minerva-rotation`.
+
 ## Qualite
 - Analyse statique:
   - `make phpstan`

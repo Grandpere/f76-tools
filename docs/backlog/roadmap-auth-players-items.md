@@ -149,20 +149,20 @@ Permettre a un utilisateur authentifie de:
   - [x] standardiser une politique de duree de vie et invalidation des liens temporaires.
 
 ## Phase 9 - Minerva (rotation, localisation, listes)
-- [ ] Definir le scope UI:
-  - [ ] option A: bloc dedie sur le dashboard,
-  - [ ] option B: page dediee "Minerva" (plus lisible si le contenu grossit).
-- [ ] Definir le modele de donnees Minerva rotation:
-  - [ ] localisation courante (texte),
-  - [ ] fenetre de disponibilite (`startsAt`, `endsAt`) pour gerer apparition/disparition,
-  - [ ] association a une ou plusieurs listes Minerva (texte + selection).
-- [ ] Affichage front:
-  - [ ] etat "actif maintenant" base sur date courante,
-  - [ ] etat "a venir" / "termine" selon les dates,
-  - [ ] presentation des listes (textuelle ou cases a cocher, decision UX a trancher).
-- [ ] Source et mise a jour des donnees:
-  - [ ] commande/admin pour mettre a jour les rotations sans toucher au code,
-  - [ ] timezone explicite et regle de calcul centralisee.
+- [x] Definir le scope UI:
+  - [x] option B retenue: page dediee "Minerva" (`/minerva-rotation`).
+- [x] Definir le modele de donnees Minerva rotation:
+  - [x] localisation (`location`),
+  - [x] fenetre de disponibilite (`startsAt`, `endsAt`),
+  - [x] cycle liste (`listCycle`).
+- [x] Affichage front:
+  - [x] etat "actif maintenant" base sur date courante,
+  - [x] etat "a venir" / "termine" selon les dates,
+  - [x] timeline ordonnee par date de debut.
+- [x] Source et mise a jour des donnees:
+  - [x] commande `app:minerva:generate-rotation --from --to`,
+  - [x] backoffice admin de regeneration (`/admin/minerva-rotation`),
+  - [x] timezone explicite et regle de calcul centralisee.
 
 ## Risques / Decisions a figer
 - [x] Decider le modele exact learned:
