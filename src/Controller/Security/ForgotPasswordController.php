@@ -16,7 +16,7 @@ namespace App\Controller\Security;
 use App\Identity\Application\ForgotPassword\ForgotPasswordRequestApplicationService;
 use App\Identity\Application\Notification\IdentityLinkEmailSenderInterface;
 use App\Identity\Application\Guard\IdentityRequestGuardInterface;
-use App\Identity\Application\Guard\IdentityRequestGuardResult;
+use App\Identity\UI\Security\IdentityGuardFailureResponder;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,6 +33,7 @@ final class ForgotPasswordController extends AbstractController
         private readonly ForgotPasswordRequestApplicationService $forgotPasswordRequestApplicationService,
         private readonly IdentityLinkEmailSenderInterface $identityLinkEmailSender,
         private readonly IdentityRequestGuardInterface $identityRequestGuard,
+        private readonly IdentityGuardFailureResponder $guardFailureResponder,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
     ) {
@@ -54,31 +55,17 @@ final class ForgotPasswordController extends AbstractController
                 self::RATE_LIMIT_MAX_ATTEMPTS,
                 self::RATE_LIMIT_WINDOW_SECONDS,
             );
-            if (IdentityRequestGuardResult::INVALID_CSRF === $guardResult) {
-                $this->authEventLogger->warning('security.auth.forgot_password.invalid_csrf', null, $request->getClientIp());
-                $this->addFlash('warning', 'security.forgot.flash.invalid_csrf');
-
-                return $this->redirectToRoute('app_forgot_password', ['locale' => $request->getLocale()]);
-            }
-            if (IdentityRequestGuardResult::HONEYPOT === $guardResult) {
-                $this->authEventLogger->warning('security.auth.forgot_password.honeypot_triggered', null, $request->getClientIp());
-                $this->addFlash('warning', 'security.auth.flash.rate_limited');
-
-                return $this->redirectToRoute('app_forgot_password', ['locale' => $request->getLocale()]);
-            }
-            if (IdentityRequestGuardResult::CAPTCHA_INVALID === $guardResult) {
-                $this->authEventLogger->warning('security.auth.forgot_password.captcha_invalid', $email, $request->getClientIp());
-                $this->addFlash('warning', 'security.auth.flash.captcha_invalid');
-
-                return $this->redirectToRoute('app_forgot_password', ['locale' => $request->getLocale()]);
-            }
-            if (IdentityRequestGuardResult::RATE_LIMITED === $guardResult) {
-                $this->authEventLogger->warning('security.auth.forgot_password.rate_limited', $email, $request->getClientIp(), [
-                    'scope' => 'forgot_password',
-                    'maxAttempts' => self::RATE_LIMIT_MAX_ATTEMPTS,
-                    'windowSeconds' => self::RATE_LIMIT_WINDOW_SECONDS,
-                ]);
-                $this->addFlash('warning', 'security.auth.flash.rate_limited');
+            $guardFailureMessage = $this->guardFailureResponder->resolveFlashMessage(
+                $guardResult,
+                'forgot_password',
+                'security.forgot.flash.invalid_csrf',
+                $email,
+                $request,
+                self::RATE_LIMIT_MAX_ATTEMPTS,
+                self::RATE_LIMIT_WINDOW_SECONDS,
+            );
+            if (null !== $guardFailureMessage) {
+                $this->addFlash('warning', $guardFailureMessage);
 
                 return $this->redirectToRoute('app_forgot_password', ['locale' => $request->getLocale()]);
             }

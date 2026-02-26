@@ -19,7 +19,7 @@ use App\Identity\Application\Notification\IdentityLinkEmailSenderInterface;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
 use App\Identity\Application\Guard\IdentityRequestGuardInterface;
-use App\Identity\Application\Guard\IdentityRequestGuardResult;
+use App\Identity\UI\Security\IdentityGuardFailureResponder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,6 +34,7 @@ final class RegistrationController extends AbstractController
         private readonly RegisterUserApplicationService $registerUserApplicationService,
         private readonly IdentityLinkEmailSenderInterface $identityLinkEmailSender,
         private readonly IdentityRequestGuardInterface $identityRequestGuard,
+        private readonly IdentityGuardFailureResponder $guardFailureResponder,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
     ) {
@@ -59,31 +60,17 @@ final class RegistrationController extends AbstractController
                 self::RATE_LIMIT_MAX_ATTEMPTS,
                 self::RATE_LIMIT_WINDOW_SECONDS,
             );
-            if (IdentityRequestGuardResult::INVALID_CSRF === $guardResult) {
-                $this->authEventLogger->warning('security.auth.register.invalid_csrf', null, $request->getClientIp());
-                $this->addFlash('warning', 'security.register.flash.invalid_csrf');
-
-                return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
-            }
-            if (IdentityRequestGuardResult::HONEYPOT === $guardResult) {
-                $this->authEventLogger->warning('security.auth.register.honeypot_triggered', null, $request->getClientIp());
-                $this->addFlash('warning', 'security.auth.flash.rate_limited');
-
-                return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
-            }
-            if (IdentityRequestGuardResult::CAPTCHA_INVALID === $guardResult) {
-                $this->authEventLogger->warning('security.auth.register.captcha_invalid', $email, $request->getClientIp());
-                $this->addFlash('warning', 'security.auth.flash.captcha_invalid');
-
-                return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
-            }
-            if (IdentityRequestGuardResult::RATE_LIMITED === $guardResult) {
-                $this->authEventLogger->warning('security.auth.register.rate_limited', $email, $request->getClientIp(), [
-                    'scope' => 'register',
-                    'maxAttempts' => self::RATE_LIMIT_MAX_ATTEMPTS,
-                    'windowSeconds' => self::RATE_LIMIT_WINDOW_SECONDS,
-                ]);
-                $this->addFlash('warning', 'security.auth.flash.rate_limited');
+            $guardFailureMessage = $this->guardFailureResponder->resolveFlashMessage(
+                $guardResult,
+                'register',
+                'security.register.flash.invalid_csrf',
+                $email,
+                $request,
+                self::RATE_LIMIT_MAX_ATTEMPTS,
+                self::RATE_LIMIT_WINDOW_SECONDS,
+            );
+            if (null !== $guardFailureMessage) {
+                $this->addFlash('warning', $guardFailureMessage);
 
                 return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
             }
