@@ -32,6 +32,7 @@ services:
     App\Identity\Application\VerifyEmail\VerifyEmailUserRepositoryInterface: '@App\Repository\UserEntityRepository'
     App\Identity\Application\ResetPassword\ResetPasswordUserRepositoryInterface: '@App\Repository\UserEntityRepository'
     App\Identity\Application\ForgotPassword\ForgotPasswordUserRepositoryInterface: '@App\Repository\UserEntityRepository'
+    App\Identity\Application\Registration\RegistrationUserRepositoryInterface: '@App\Repository\UserEntityRepository'
     App\Identity\Application\Common\IdentityWritePersistenceInterface: '@App\Identity\Infrastructure\Persistence\DoctrineIdentityWritePersistence'
     App\Identity\Application\Common\IdentityPasswordHasherInterface: '@App\Identity\Infrastructure\Security\SymfonyIdentityPasswordHasher'
 

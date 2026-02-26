@@ -23,6 +23,10 @@ Il faut poursuivre la migration DDD en isolant les use-cases et les policies de 
 - [x] Port `ForgotPasswordUserRepositoryInterface` ajoute.
 - [x] `ForgotPasswordController` delegue la logique de cooldown + emission token.
 - [x] Test unitaire `ForgotPasswordRequestApplicationService` ajoute.
+- [x] Use-case `RegisterUserApplicationService` extrait (+ resultat metier).
+- [x] Port `RegistrationUserRepositoryInterface` ajoute.
+- [x] `RegistrationController` delegue creation utilisateur + token verification.
+- [x] Test unitaire `RegisterUserApplicationService` ajoute.
 
 ## Criteres d acceptance
 - Controllers Identity deviennent thin (pas de logique metier).

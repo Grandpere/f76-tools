@@ -13,21 +13,17 @@ declare(strict_types=1);
 
 namespace App\Controller\Security;
 
-use App\Entity\UserEntity;
-use App\Repository\UserEntityRepository;
+use App\Identity\Application\Registration\RegisterUserApplicationService;
+use App\Identity\Application\Registration\RegisterUserStatus;
 use App\Security\SignedUrlGenerator;
-use App\Security\TemporaryLinkPolicy;
 use App\Service\AuthRequestThrottler;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
-use DateTimeImmutable;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -39,9 +35,7 @@ final class RegistrationController extends AbstractController
     private const RATE_LIMIT_WINDOW_SECONDS = 300;
 
     public function __construct(
-        private readonly UserEntityRepository $userRepository,
-        private readonly EntityManagerInterface $entityManager,
-        private readonly UserPasswordHasherInterface $passwordHasher,
+        private readonly RegisterUserApplicationService $registerUserApplicationService,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly SignedUrlGenerator $signedUrlGenerator,
         private readonly TranslatorInterface $translator,
@@ -49,7 +43,6 @@ final class RegistrationController extends AbstractController
         private readonly AuthRequestThrottler $requestThrottler,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
-        private readonly TemporaryLinkPolicy $temporaryLinkPolicy,
     ) {
     }
 
@@ -102,63 +95,58 @@ final class RegistrationController extends AbstractController
                 return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
             }
 
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $registerResult = $this->registerUserApplicationService->register(
+                $email,
+                $password,
+                $passwordConfirm,
+                new \DateTimeImmutable(),
+            );
+
+            if (RegisterUserStatus::INVALID_EMAIL === $registerResult->getStatus()) {
                 $this->addFlash('warning', 'security.register.flash.invalid_email');
 
                 return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
             }
-
-            if (strlen($password) < 8) {
+            if (RegisterUserStatus::PASSWORD_TOO_SHORT === $registerResult->getStatus()) {
                 $this->addFlash('warning', 'security.register.flash.password_too_short');
 
                 return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
             }
-
-            if ($password !== $passwordConfirm) {
+            if (RegisterUserStatus::PASSWORD_MISMATCH === $registerResult->getStatus()) {
                 $this->addFlash('warning', 'security.register.flash.password_mismatch');
 
                 return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
             }
-
-            if ($this->userRepository->findOneByEmail($email) instanceof UserEntity) {
+            if (RegisterUserStatus::EMAIL_EXISTS === $registerResult->getStatus()) {
                 $this->addFlash('warning', 'security.register.flash.email_exists');
 
                 return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
             }
 
-            $user = (new UserEntity())
-                ->setEmail($email)
-                ->setRoles(['ROLE_USER'])
-                ->setIsEmailVerified(false);
-            $user->setPassword($this->passwordHasher->hashPassword($user, $password));
-            $token = bin2hex(random_bytes(32));
-            $now = new DateTimeImmutable();
-            $user->setEmailVerificationTokenHash(hash('sha256', $token));
-            $user->setEmailVerificationExpiresAt($this->temporaryLinkPolicy->expiresAt($now, $this->temporaryLinkPolicy->getEmailVerificationTtl()));
-            $user->setEmailVerificationRequestedAt($now);
+            $targetEmail = $registerResult->getEmail();
+            $plainToken = $registerResult->getPlainVerificationToken();
 
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
+            if (is_string($targetEmail) && is_string($plainToken)) {
+                $verifyUrl = $this->signedUrlGenerator->generate('app_verify_email', [
+                    'locale' => $request->getLocale(),
+                    'token' => $plainToken,
+                ]);
 
-            $verifyUrl = $this->signedUrlGenerator->generate('app_verify_email', [
-                'locale' => $request->getLocale(),
-                'token' => $token,
-            ]);
-
-            try {
-                $this->mailer->send(
-                    (new Email())
-                        ->from('no-reply@f76.local')
-                        ->to($email)
-                        ->subject($this->translator->trans('security.verify.email_subject'))
-                        ->text(sprintf("%s\n\n%s", $this->translator->trans('security.verify.email_intro'), $verifyUrl)),
-                );
-            } catch (\Throwable) {
-                // Avoid disclosing transport details during registration flow.
+                try {
+                    $this->mailer->send(
+                        (new Email())
+                            ->from('no-reply@f76.local')
+                            ->to($targetEmail)
+                            ->subject($this->translator->trans('security.verify.email_subject'))
+                            ->text(sprintf("%s\n\n%s", $this->translator->trans('security.verify.email_intro'), $verifyUrl)),
+                    );
+                } catch (\Throwable) {
+                    // Avoid disclosing transport details during registration flow.
+                }
             }
 
             $this->addFlash('success', 'security.register.flash.success');
-            $this->authEventLogger->info('security.auth.register.user_created', $email, $request->getClientIp(), [
+            $this->authEventLogger->info('security.auth.register.user_created', is_string($targetEmail) ? $targetEmail : $email, $request->getClientIp(), [
                 'emailVerificationRequired' => true,
             ]);
 
