@@ -14,7 +14,8 @@ Le backoffice utilisateurs fonctionne, mais `UserManagementController` porte enc
 - [x] Ajouter tests unitaires du service et du mapper.
 - [x] Extraire le use-case `toggle-admin` (service + resultat + mapper UI).
 - [x] Brancher `UserManagementController::toggleAdmin()` sur ce use-case.
-- [ ] Extraire la generation de reset link (service + resultat + mapper UI).
+- [x] Extraire la generation de reset link (service + resultat + mapper UI).
+- [ ] Validation fonctionnelle manuelle (`make phpunit-functional`) et ajustements si besoin.
 
 ## Criteres d acceptance
 - Aucun changement fonctionnel sur `/admin/users/{id}/toggle-active`.

@@ -17,6 +17,7 @@ use App\Contract\AdminAuditLogPurgerInterface;
 use App\Entity\AdminAuditLogEntity;
 use App\Entity\UserEntity;
 use App\Support\Application\Audit\AuditLogReadRepositoryInterface;
+use App\Support\Application\AdminUser\AdminUserAuditReadRepositoryInterface;
 use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -25,7 +26,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @extends ServiceEntityRepository<AdminAuditLogEntity>
  */
 final class AdminAuditLogEntityRepository extends ServiceEntityRepository
-    implements AdminAuditLogPurgerInterface, AuditLogReadRepositoryInterface
+    implements AdminAuditLogPurgerInterface, AuditLogReadRepositoryInterface, AdminUserAuditReadRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
