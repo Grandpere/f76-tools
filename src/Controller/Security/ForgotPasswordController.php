@@ -21,7 +21,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Attribute\Route;
@@ -86,7 +85,7 @@ final class ForgotPasswordController extends AbstractController
                                 ->subject($this->translator->trans('security.forgot.email_subject'))
                                 ->text(sprintf("%s\n\n%s", $this->translator->trans('security.forgot.email_intro'), $resetUrl)),
                         );
-                    } catch (TransportExceptionInterface) {
+                    } catch (\Throwable) {
                         // Keep same user-facing response to avoid account enumeration.
                     }
                 }

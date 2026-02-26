@@ -18,7 +18,6 @@ use App\Repository\UserEntityRepository;
 use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -112,7 +111,7 @@ final class RegistrationController extends AbstractController
                         ->subject($this->translator->trans('security.verify.email_subject'))
                         ->text(sprintf("%s\n\n%s", $this->translator->trans('security.verify.email_intro'), $verifyUrl)),
                 );
-            } catch (TransportExceptionInterface) {
+            } catch (\Throwable) {
                 // Avoid disclosing transport details during registration flow.
             }
 
