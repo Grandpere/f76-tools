@@ -135,6 +135,7 @@ Permettre a un utilisateur authentifie de:
     - [x] `/login`,
     - [x] `/forgot-password`,
     - [x] `/resend-verification`,
+  - [x] honeypot formulaire sur register/forgot/resend (protection basique anti-bot),
   - [ ] captcha (Turnstile/hCaptcha) sur register + forgot password,
   - [ ] journalisation des tentatives sensibles.
 - [ ] Contact:

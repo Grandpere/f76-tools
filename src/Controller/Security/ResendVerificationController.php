@@ -57,6 +57,11 @@ final class ResendVerificationController extends AbstractController
 
                 return $this->redirectToRoute('app_resend_verification', ['locale' => $request->getLocale()]);
             }
+            if ('' !== trim((string) $request->request->get('website', ''))) {
+                $this->addFlash('warning', 'security.auth.flash.rate_limited');
+
+                return $this->redirectToRoute('app_resend_verification', ['locale' => $request->getLocale()]);
+            }
 
             $email = mb_strtolower(trim((string) $request->request->get('email', '')));
 

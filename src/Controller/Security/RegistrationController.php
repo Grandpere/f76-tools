@@ -62,6 +62,11 @@ final class RegistrationController extends AbstractController
 
                 return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
             }
+            if ('' !== trim((string) $request->request->get('website', ''))) {
+                $this->addFlash('warning', 'security.auth.flash.rate_limited');
+
+                return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
+            }
 
             $email = mb_strtolower(trim((string) $request->request->get('email', '')));
             $password = (string) $request->request->get('password', '');

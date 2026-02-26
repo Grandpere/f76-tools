@@ -16,6 +16,10 @@
             {% endfor %}
 
             <form method="post" class="auth-form">
+                <div class="visually-hidden" aria-hidden="true">
+                    <label for="register-website">Website</label>
+                    <input id="register-website" name="website" type="text" tabindex="-1" autocomplete="off">
+                </div>
                 <label class="auth-field" for="register-email">
                     <span>{{ 'security.register.email'|trans }}</span>
                     <input

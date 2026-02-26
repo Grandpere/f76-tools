@@ -57,6 +57,11 @@ final class ForgotPasswordController extends AbstractController
 
                 return $this->redirectToRoute('app_forgot_password', ['locale' => $request->getLocale()]);
             }
+            if ('' !== trim((string) $request->request->get('website', ''))) {
+                $this->addFlash('warning', 'security.auth.flash.rate_limited');
+
+                return $this->redirectToRoute('app_forgot_password', ['locale' => $request->getLocale()]);
+            }
 
             $email = mb_strtolower(trim((string) $request->request->get('email', '')));
 
