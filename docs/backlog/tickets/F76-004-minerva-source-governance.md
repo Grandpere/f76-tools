@@ -9,6 +9,13 @@ La rotation Minerva est generee de maniere deterministe en interne. Il faut cadr
 - Definir la reponse operationnelle en cas d ecart constate (sans override runtime pour l instant).
 - Documenter le runbook de regeneration annuelle/mensuelle.
 
+## Avancement
+- [x] Procedure de verification periodique formalisee.
+- [x] Sources de reference listees pour verification manuelle.
+- [x] Procedure de gestion d ecart documentee.
+- [x] Runbook de regeneration (mensuel/annuel) documente.
+- [x] Decision explicite: pas d override runtime pour l instant.
+
 ## Criteres d acceptance
 - Procedure de verification documentee (qui, quand, comment).
 - Procedure de correction documentee (regeneration, validation manuelle).

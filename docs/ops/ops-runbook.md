@@ -50,6 +50,8 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
   - `GET /admin/minerva-rotation` (formulaire de regeneration + visualisation timeline).
 - Page publique authentifiee:
   - `GET /minerva-rotation`.
+- Gouvernance source:
+  - `docs/ops/minerva-governance.md`.
 
 ## Qualite
 - Analyse statique:

@@ -16,6 +16,7 @@ Ce dossier centralise la documentation de pilotage du projet.
   - docs dediees aux decisions de securite et hardening.
 - `ops/`
   - `ops-runbook.md`: commandes et procedures d exploitation.
+  - `minerva-governance.md`: procedure de verification/regeneration de la rotation Minerva.
 - `sprints/`
   - suivi d execution par sprint.
 
