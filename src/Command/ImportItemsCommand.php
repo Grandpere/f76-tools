@@ -15,9 +15,9 @@ namespace App\Command;
 
 use App\Catalog\Application\Import\ItemImportFileContextResolver;
 use App\Catalog\Application\Import\ItemImportJsonFileReader;
+use App\Catalog\Application\Import\ItemImportContextApplier;
 use App\Catalog\Application\Import\ItemImportTranslationCatalogBuilder;
 use App\Catalog\Application\Import\ItemImportValueNormalizer;
-use App\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemEntity;
 use App\Repository\ItemEntityRepository;
 use App\Translation\TranslationCatalogWriter;
@@ -45,6 +45,7 @@ final class ImportItemsCommand extends Command
         private readonly ItemImportJsonFileReader $jsonFileReader,
         private readonly ItemImportValueNormalizer $valueNormalizer,
         private readonly ItemImportTranslationCatalogBuilder $translationCatalogBuilder,
+        private readonly ItemImportContextApplier $contextApplier,
         private readonly KernelInterface $kernel,
     ) {
         parent::__construct();
@@ -205,35 +206,14 @@ final class ImportItemsCommand extends Command
                 $catalogEn = array_merge($catalogEn, $translationData['catalogEn']);
                 $catalogDe = array_merge($catalogDe, $translationData['catalogDe']);
 
-                if (ItemTypeEnum::MISC === $type) {
-                    $incomingRank = $context['rank'];
-                    if (null === $incomingRank) {
-                        ++$stats['errors'];
-                        continue;
-                    }
-
-                    if (null !== $item->getRank() && $item->getRank() !== $incomingRank) {
-                        $io->warning(sprintf(
-                            'Conflit rank pour MISC id=%d (%d -> %d), conservation=%d',
-                            $sourceId,
-                            $item->getRank(),
-                            $incomingRank,
-                            $item->getRank(),
-                        ));
-                        ++$stats['warnings'];
-                    } else {
-                        $item->setRank($incomingRank);
-                    }
-                } else {
-                    $incomingListNumber = $context['listNumber'];
-                    $incomingIsSpecial = $context['isSpecialList'];
-                    if (null === $incomingListNumber) {
-                        ++$stats['errors'];
-                        continue;
-                    }
-
-                    $item->setRank(null);
-                    $item->addBookList($incomingListNumber, $incomingIsSpecial);
+                $contextResult = $this->contextApplier->apply($item, $sourceId, $context);
+                if (!$contextResult['valid']) {
+                    ++$stats['errors'];
+                    continue;
+                }
+                if (null !== $contextResult['warning']) {
+                    $io->warning($contextResult['warning']);
+                    ++$stats['warnings'];
                 }
 
                 if ($isNew) {

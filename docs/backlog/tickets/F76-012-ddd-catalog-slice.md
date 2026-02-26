@@ -25,6 +25,9 @@ Le contexte Catalog (items, import, traductions) est encore majoritairement port
 - [x] Construction du catalogue de traductions import extraite dans `ItemImportTranslationCatalogBuilder`.
 - [x] `ImportItemsCommand` delegue la generation des cles/valeurs de traduction au service Catalog.
 - [x] Test unitaire `ItemImportTranslationCatalogBuilder` ajoute.
+- [x] Regles d application du contexte import (rank/list + conflits) extraites dans `ItemImportContextApplier`.
+- [x] `ImportItemsCommand` delegue la logique MISC/BOOK d assignation metier au service Catalog.
+- [x] Test unitaire `ItemImportContextApplier` ajoute.
 
 ## Criteres d acceptance
 - Controller admin traduction simplifie.
