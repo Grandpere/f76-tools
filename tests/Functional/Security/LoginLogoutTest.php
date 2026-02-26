@@ -115,7 +115,15 @@ final class LoginLogoutTest extends WebTestCase
             $this->browser()->followRedirect();
         }
 
-        self::assertStringContainsString('too many attempts', mb_strtolower($this->browser()->getResponse()->getContent() ?: ''));
+        $crawler = $this->browser()->request('GET', '/login?locale=en');
+        $form = $crawler->filter('form')->form([
+            '_username' => $user->getEmail(),
+            '_password' => 'secret123',
+        ]);
+        $this->browser()->submit($form);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
     }
 
     private function createUser(string $email, string $plainPassword, bool $isEmailVerified = true): UserEntity
