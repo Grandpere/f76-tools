@@ -18,9 +18,9 @@ use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Identity\UI\Security\IdentityFlashResponder;
 use App\Security\AuthEventLogger;
 use App\Service\TurnstileVerifier;
-use App\Support\Application\Contact\ContactMessageApplicationService;
-use App\Support\Application\Contact\ContactMessageEmailSenderInterface;
+use App\Support\Application\Contact\ContactSubmissionApplicationService;
 use App\Support\Application\Contact\ContactSubmissionInput;
+use App\Support\Application\Contact\ContactSubmissionStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,8 +33,7 @@ final class ContactController extends AbstractController
         private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
-        private readonly ContactMessageApplicationService $contactMessageApplicationService,
-        private readonly ContactMessageEmailSenderInterface $contactMessageEmailSender,
+        private readonly ContactSubmissionApplicationService $contactSubmissionApplicationService,
     ) {
     }
 
@@ -59,27 +58,17 @@ final class ContactController extends AbstractController
                 return $this->identityFlashResponder->warningToRoute($request, $flow->failureRoute(), 'security.contact.flash.invalid_input');
             }
 
-            try {
-                $this->contactMessageApplicationService->createMessage(
-                    email: $submissionInput->email,
-                    subject: $submissionInput->subject,
-                    message: $submissionInput->message,
-                    ip: $request->getClientIp(),
-                );
-            } catch (\Throwable) {
+            $submissionStatus = $this->contactSubmissionApplicationService->submit(
+                $submissionInput,
+                $request->getClientIp(),
+            );
+            if (ContactSubmissionStatus::PERSISTENCE_FAILED === $submissionStatus) {
                 $this->authEventLogger->warning('security.auth.contact.persistence_failed', $submissionInput->email, $request->getClientIp());
 
                 return $this->identityFlashResponder->warningToRoute($request, $flow->failureRoute(), 'security.contact.flash.invalid_input');
             }
 
-            try {
-                $this->contactMessageEmailSender->send(
-                    $submissionInput->email,
-                    $submissionInput->subject,
-                    $submissionInput->message,
-                    $request->getClientIp(),
-                );
-            } catch (\Throwable) {
+            if (ContactSubmissionStatus::SENT_WITH_DELIVERY_FAILURE === $submissionStatus) {
                 $this->authEventLogger->warning('security.auth.contact.delivery_failed', $submissionInput->email, $request->getClientIp());
             }
 

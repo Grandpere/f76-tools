@@ -16,6 +16,7 @@ Le but est d aligner le niveau de "thin controller" avec les slices Identity.
 - [x] Conserver les logs et messages flash existants.
 - [x] Extraire la sanitation/validation du payload dans `ContactSubmissionInput`.
 - [x] Extraire l envoi email contact via le port `ContactMessageEmailSenderInterface`.
+- [x] Extraire l orchestration soumission contact (`persist + delivery`) dans `ContactSubmissionApplicationService`.
 
 ## Criteres d acceptance
 - Aucun changement de routes ni de messages utilisateur.
