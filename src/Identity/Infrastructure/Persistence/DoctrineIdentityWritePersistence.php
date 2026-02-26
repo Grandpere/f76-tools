@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Identity\Infrastructure\Persistence;
 
-use App\Identity\Application\VerifyEmail\IdentityWritePersistenceInterface;
+use App\Identity\Application\Common\IdentityWritePersistenceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class DoctrineIdentityWritePersistence implements IdentityWritePersistenceInterface

@@ -15,6 +15,7 @@ namespace App\Repository;
 
 use App\Contract\UserByEmailFinderInterface;
 use App\Entity\UserEntity;
+use App\Identity\Application\ResetPassword\ResetPasswordUserRepositoryInterface;
 use App\Identity\Application\VerifyEmail\VerifyEmailUserRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -22,7 +23,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<UserEntity>
  */
-final class UserEntityRepository extends ServiceEntityRepository implements UserByEmailFinderInterface, VerifyEmailUserRepositoryInterface
+final class UserEntityRepository extends ServiceEntityRepository implements UserByEmailFinderInterface, VerifyEmailUserRepositoryInterface, ResetPasswordUserRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

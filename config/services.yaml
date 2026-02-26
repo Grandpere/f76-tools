@@ -30,7 +30,9 @@ services:
     App\Catalog\Application\Import\ItemImportSourceReaderInterface: '@App\Catalog\Infrastructure\Import\FilesystemItemImportSourceReader'
     App\Catalog\Application\Import\ItemImportPersistenceInterface: '@App\Catalog\Infrastructure\Import\DoctrineItemImportPersistence'
     App\Identity\Application\VerifyEmail\VerifyEmailUserRepositoryInterface: '@App\Repository\UserEntityRepository'
-    App\Identity\Application\VerifyEmail\IdentityWritePersistenceInterface: '@App\Identity\Infrastructure\Persistence\DoctrineIdentityWritePersistence'
+    App\Identity\Application\ResetPassword\ResetPasswordUserRepositoryInterface: '@App\Repository\UserEntityRepository'
+    App\Identity\Application\Common\IdentityWritePersistenceInterface: '@App\Identity\Infrastructure\Persistence\DoctrineIdentityWritePersistence'
+    App\Identity\Application\Common\IdentityPasswordHasherInterface: '@App\Identity\Infrastructure\Security\SymfonyIdentityPasswordHasher'
 
     App\Service\TurnstileVerifier:
         arguments:

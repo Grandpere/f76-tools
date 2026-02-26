@@ -14,6 +14,11 @@ Il faut poursuivre la migration DDD en isolant les use-cases et les policies de 
 - [x] Ports `VerifyEmailUserRepositoryInterface` et `IdentityWritePersistenceInterface` ajoutes.
 - [x] `VerifyEmailController` delegue la verification au service applicatif.
 - [x] Test unitaire `VerifyEmailApplicationService` ajoute.
+- [x] Use-case `ResetPasswordApplicationService` extrait (+ `ResetPasswordResult`).
+- [x] Ports `ResetPasswordUserRepositoryInterface` et `IdentityPasswordHasherInterface` ajoutes.
+- [x] `ResetPasswordController` delegue la logique metier au service applicatif.
+- [x] Ports Identity communs centralises dans `Identity/Application/Common`.
+- [x] Test unitaire `ResetPasswordApplicationService` ajoute.
 
 ## Criteres d acceptance
 - Controllers Identity deviennent thin (pas de logique metier).

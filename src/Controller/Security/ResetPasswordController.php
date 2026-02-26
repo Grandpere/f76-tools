@@ -13,15 +13,13 @@ declare(strict_types=1);
 
 namespace App\Controller\Security;
 
-use App\Entity\UserEntity;
-use App\Repository\UserEntityRepository;
+use App\Identity\Application\ResetPassword\ResetPasswordApplicationService;
+use App\Identity\Application\ResetPassword\ResetPasswordResult;
 use App\Security\SignedUrlGenerator;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -30,9 +28,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 final class ResetPasswordController extends AbstractController
 {
     public function __construct(
-        private readonly UserEntityRepository $userRepository,
-        private readonly EntityManagerInterface $entityManager,
-        private readonly UserPasswordHasherInterface $passwordHasher,
+        private readonly ResetPasswordApplicationService $resetPasswordApplicationService,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly SignedUrlGenerator $signedUrlGenerator,
     ) {
@@ -47,8 +43,7 @@ final class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('app_login', ['locale' => $request->getLocale()]);
         }
 
-        $user = $this->resolveValidUserByToken($token);
-        if (!$user instanceof UserEntity) {
+        if (!$this->resetPasswordApplicationService->canResetToken($token, new \DateTimeImmutable())) {
             $this->addFlash('warning', 'security.reset.flash.invalid_or_expired');
 
             return $this->redirectToRoute('app_login', ['locale' => $request->getLocale()]);
@@ -65,22 +60,28 @@ final class ResetPasswordController extends AbstractController
             $password = (string) $request->request->get('password', '');
             $passwordConfirm = (string) $request->request->get('password_confirm', '');
 
-            if (strlen($password) < 8) {
+            $result = $this->resetPasswordApplicationService->resetByPlainToken(
+                $token,
+                $password,
+                $passwordConfirm,
+                new \DateTimeImmutable(),
+            );
+
+            if (ResetPasswordResult::PASSWORD_TOO_SHORT === $result) {
                 $this->addFlash('warning', 'security.reset.flash.password_too_short');
 
                 return new RedirectResponse($request->getUri());
             }
-            if ($password !== $passwordConfirm) {
+            if (ResetPasswordResult::PASSWORD_MISMATCH === $result) {
                 $this->addFlash('warning', 'security.reset.flash.password_mismatch');
 
                 return new RedirectResponse($request->getUri());
             }
+            if (ResetPasswordResult::INVALID_OR_EXPIRED === $result) {
+                $this->addFlash('warning', 'security.reset.flash.invalid_or_expired');
 
-            $user->setPassword($this->passwordHasher->hashPassword($user, $password));
-            $user->setResetPasswordTokenHash(null);
-            $user->setResetPasswordExpiresAt(null);
-            $user->setResetPasswordRequestedAt(null);
-            $this->entityManager->flush();
+                return $this->redirectToRoute('app_login', ['locale' => $request->getLocale()]);
+            }
 
             $this->addFlash('success', 'security.reset.flash.success');
 
@@ -88,25 +89,5 @@ final class ResetPasswordController extends AbstractController
         }
 
         return $this->render('security/reset_password.html.twig');
-    }
-
-    private function resolveValidUserByToken(string $token): ?UserEntity
-    {
-        if ('' === trim($token)) {
-            return null;
-        }
-
-        $tokenHash = hash('sha256', $token);
-        $user = $this->userRepository->findOneByResetPasswordTokenHash($tokenHash);
-        if (!$user instanceof UserEntity) {
-            return null;
-        }
-
-        $expiresAt = $user->getResetPasswordExpiresAt();
-        if (null === $expiresAt || $expiresAt < new \DateTimeImmutable()) {
-            return null;
-        }
-
-        return $user;
     }
 }

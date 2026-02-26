@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Identity\Application\VerifyEmail;
+namespace App\Identity\Application\Common;
 
 interface IdentityWritePersistenceInterface
 {

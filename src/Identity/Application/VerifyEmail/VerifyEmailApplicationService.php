@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Identity\Application\VerifyEmail;
 
+use App\Identity\Application\Common\IdentityWritePersistenceInterface;
 use DateTimeImmutable;
 
 final class VerifyEmailApplicationService

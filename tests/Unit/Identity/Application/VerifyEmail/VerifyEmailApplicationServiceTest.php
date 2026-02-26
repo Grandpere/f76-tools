@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Identity\Application\VerifyEmail;
 
 use App\Entity\UserEntity;
-use App\Identity\Application\VerifyEmail\IdentityWritePersistenceInterface;
+use App\Identity\Application\Common\IdentityWritePersistenceInterface;
 use App\Identity\Application\VerifyEmail\VerifyEmailApplicationService;
 use App\Identity\Application\VerifyEmail\VerifyEmailUserRepositoryInterface;
 use PHPUnit\Framework\MockObject\MockObject;
