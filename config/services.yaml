@@ -36,6 +36,9 @@ services:
     App\Identity\Application\ResendVerification\ResendVerificationUserRepositoryInterface: '@App\Repository\UserEntityRepository'
     App\Identity\Application\Notification\IdentityLinkEmailSenderInterface: '@App\Identity\Infrastructure\Notification\IdentityLinkEmailSender'
     App\Identity\Application\Notification\IdentitySignedLinkGeneratorInterface: '@App\Identity\Infrastructure\Notification\IdentitySignedLinkGenerator'
+    App\Identity\Application\Guard\IdentityRequestGuardInterface: '@App\Identity\Infrastructure\Guard\IdentityRequestGuard'
+    App\Identity\Application\Guard\IdentityCaptchaVerifierInterface: '@App\Identity\Infrastructure\Guard\TurnstileIdentityCaptchaVerifier'
+    App\Identity\Application\Guard\IdentityRateLimiterInterface: '@App\Identity\Infrastructure\Guard\AuthRequestThrottlerRateLimiter'
     App\Identity\Application\Common\IdentityWritePersistenceInterface: '@App\Identity\Infrastructure\Persistence\DoctrineIdentityWritePersistence'
     App\Identity\Application\Common\IdentityPasswordHasherInterface: '@App\Identity\Infrastructure\Security\SymfonyIdentityPasswordHasher'
 

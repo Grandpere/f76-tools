@@ -9,6 +9,16 @@ Il faut factoriser ces gardes sans perdre la lisibilite ni la robustesse securit
 - Centraliser la decision `allow/deny` + raison metier securite.
 - Reducer la duplication dans `Registration`, `ForgotPassword`, `ResendVerification`.
 
+## Avancement
+- [x] Port `IdentityRequestGuardInterface` ajoute.
+- [x] Resultat metier `IdentityRequestGuardResult` ajoute.
+- [x] Adaptateur infra `IdentityRequestGuard` (csrf + honeypot + captcha + rate-limit) ajoute.
+- [x] Ports `IdentityCaptchaVerifierInterface` et `IdentityRateLimiterInterface` ajoutes pour eviter le couplage aux services finaux.
+- [x] Adaptateurs infra `TurnstileIdentityCaptchaVerifier` et `AuthRequestThrottlerRateLimiter` ajoutes.
+- [x] `RegistrationController`, `ForgotPasswordController`, `ResendVerificationController` deleguent les gardes au service.
+- [x] Port `IdentityRequestGuardInterface` lie dans `services.yaml`.
+- [x] Test unitaire `IdentityRequestGuard` ajoute.
+
 ## Criteres d acceptance
 - Duplication de gardes reduite de facon visible.
 - Messages flash et logs securite restent coherents avec le comportement actuel.
