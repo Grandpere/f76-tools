@@ -31,8 +31,8 @@ export default class extends Controller {
         this.playerSelectTarget.addEventListener('change', async () => {
             this.persistCurrentPlayerState();
             this.activePlayerId = this.playerSelectTarget.value;
+            this.saveActivePlayerId(this.activePlayerId);
             this.restoreUiStateForPlayer(this.activePlayerId);
-            this.syncPlayerQueryParam();
             await this.loadItems();
         });
 
@@ -145,7 +145,7 @@ export default class extends Controller {
             if (found) {
                 this.activePlayerId = createdId;
                 this.playerSelectTarget.value = createdId;
-                this.syncPlayerQueryParam();
+                this.saveActivePlayerId(this.activePlayerId);
                 await this.loadItems();
             }
         }
@@ -159,16 +159,16 @@ export default class extends Controller {
     }
 
     applyInitialPlayer() {
-        const fromQuery = new URLSearchParams(window.location.search).get('player');
-        const candidate = fromQuery || this.initialPlayerIdValue || String(this.players[0].id);
+        const fromStorage = this.getSavedActivePlayerId();
+        const candidate = fromStorage || this.initialPlayerIdValue || String(this.players[0].id);
         const found = this.players.find((player) => String(player.id) === String(candidate));
         const fallback = this.players[0];
         const selected = found || fallback;
 
         this.activePlayerId = String(selected.id);
+        this.saveActivePlayerId(this.activePlayerId);
         this.restoreUiStateForPlayer(this.activePlayerId);
         this.playerSelectTarget.value = this.activePlayerId;
-        this.syncPlayerQueryParam();
     }
 
     async loadItems() {
@@ -845,16 +845,33 @@ export default class extends Controller {
         return 'f76:item-catalog:ui';
     }
 
-    syncPlayerQueryParam() {
-        if (!this.activePlayerId) {
+    getSavedActivePlayerId() {
+        const root = this.playerUiState;
+        if (!root || typeof root !== 'object') {
             return;
         }
-        const url = new URL(window.location.href);
-        if (this.activeLocale) {
-            url.searchParams.set('locale', this.activeLocale);
+
+        const meta = root.__meta;
+        if (!meta || typeof meta !== 'object') {
+            return '';
         }
-        url.searchParams.set('player', this.activePlayerId);
-        window.history.replaceState({}, '', url.toString());
+
+        const value = meta.activePlayerId;
+
+        return typeof value === 'string' ? value : '';
+    }
+
+    saveActivePlayerId(playerId) {
+        const key = String(playerId || '').trim();
+        if (key === '') {
+            return;
+        }
+
+        if (!this.playerUiState.__meta || typeof this.playerUiState.__meta !== 'object') {
+            this.playerUiState.__meta = {};
+        }
+        this.playerUiState.__meta.activePlayerId = key;
+        this.persistAllState();
     }
 
     readActiveLocale() {

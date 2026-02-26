@@ -151,6 +151,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - `Player` et `Item` exposes via `publicId` opaque (26 chars) plutot que `id` incrementaux dans URLs/payloads front.
   - routes API migrees vers `/{playerId}` et `/{itemId}` opaques; lookup serveur par `public_id`.
   - migration SQL ajoute `public_id` (unique, non-null) sur `player` et `item` avec backfill pour existants.
+  - dashboard/front: suppression du query param `player` dans l URL; le player actif est persiste en localStorage (bucket utilisateur) via meta `activePlayerId`.
 - Verification email:
   - inscription met `isEmailVerified=false`, cree un token de verification (24h) et envoie un email avec lien.
   - route publique `GET /verify-email/{token}` valide le compte.

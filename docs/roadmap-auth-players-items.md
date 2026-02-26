@@ -143,7 +143,7 @@ Permettre a un utilisateur authentifie de:
   - [x] anti-spam (honeypot/rate limit/captcha),
   - [x] option de livraison: email direct ou stockage DB + backoffice.
 - [ ] Hygiene URL / exposition des identifiants:
-  - [ ] reduire l usage de query params pour les actions sensibles (preferer POST + CSRF quand possible),
+  - [x] reduire l usage de query params pour les actions sensibles (preferer POST + CSRF quand possible),
   - [x] eviter les identifiants previsibles dans les URLs publiques (envisager UUID/ULID ou slugs opaques selon contexte),
   - [x] signer les URLs temporaires sensibles (verification email, reset, liens d action),
   - [x] standardiser une politique de duree de vie et invalidation des liens temporaires.
