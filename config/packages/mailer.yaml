@@ -1,3 +1,13 @@
 framework:
     mailer:
         dsn: '%env(MAILER_DSN)%'
+
+when@dev:
+    framework:
+        mailer:
+            message_bus: false
+
+when@test:
+    framework:
+        mailer:
+            message_bus: false
