@@ -118,6 +118,24 @@ body::before {
     color: var(--accent-2);
 }
 
+.logout-form {
+    display: inline;
+}
+
+.logout-form button {
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    color: var(--accent-2);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28rem;
+    font: inherit;
+    cursor: pointer;
+}
+
 .catalog-header-tools {
     display: flex;
     align-items: center;

@@ -8,6 +8,15 @@ Une partie des actions est deja durcie (URLs signees, IDs opaques). Il reste a a
 - Basculer vers POST + CSRF quand pertinent.
 - Documenter les exceptions.
 
+## Avancement
+- [x] Audit des routes sensibles (admin/auth/API).
+- [x] `logout` bascule en `POST + CSRF` (plus de deconnexion via URL GET previsible).
+- [x] Documentation des exceptions justifiees (liens verifies/signes).
+
+## Exceptions documentees
+- `GET /verify-email/{token}`: action state-changing, mais protegee par token aleatoire + signature URL.
+- `GET /reset-password/{token}`: affichage de formulaire protege par token aleatoire + signature URL (modification effective en POST + CSRF).
+
 ## Criteres d acceptance
 - Aucune action sensible n est declenchable par URL previsible seule.
 - CSRF present sur toutes les actions state-changing.

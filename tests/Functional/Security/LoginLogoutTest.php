@@ -71,7 +71,8 @@ final class LoginLogoutTest extends WebTestCase
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString($user->getEmail(), $this->browser()->getResponse()->getContent() ?: '');
 
-        $this->browser()->request('GET', '/logout');
+        $logoutForm = $this->browser()->getCrawler()->filter('form[action*="/logout"]')->form();
+        $this->browser()->submit($logoutForm);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 

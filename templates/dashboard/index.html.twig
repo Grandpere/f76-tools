@@ -76,7 +76,11 @@
             <p class="catalog-subtitle">{{ 'dashboard.header.subtitle'|trans }}</p>
             <p class="catalog-user">
                 {{ 'dashboard.header.greeting_prefix'|trans }} <strong>{{ username }}</strong>
-                · <a href="{{ path('app_logout', { locale: app.request.locale }) }}"><img class="logout-icon" src="/assets/icons/logout.svg" alt="" aria-hidden="true"> {{ 'dashboard.header.logout'|trans }}</a>
+                ·
+                <form method="post" action="{{ path('app_logout', { locale: app.request.locale }) }}" class="logout-form">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+                    <button type="submit"><img class="logout-icon" src="/assets/icons/logout.svg" alt="" aria-hidden="true"> {{ 'dashboard.header.logout'|trans }}</button>
+                </form>
             </p>
         </header>
 
