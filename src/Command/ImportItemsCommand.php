@@ -15,6 +15,7 @@ namespace App\Command;
 
 use App\Catalog\Application\Import\ItemImportFileContextResolver;
 use App\Catalog\Application\Import\ItemImportJsonFileReader;
+use App\Catalog\Application\Import\ItemImportValueNormalizer;
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemEntity;
 use App\Repository\ItemEntityRepository;
@@ -28,7 +29,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Stringable;
 
 #[AsCommand(
     name: 'app:items:import',
@@ -42,6 +42,7 @@ final class ImportItemsCommand extends Command
         private readonly TranslationCatalogWriter $translationCatalogWriter,
         private readonly ItemImportFileContextResolver $fileContextResolver,
         private readonly ItemImportJsonFileReader $jsonFileReader,
+        private readonly ItemImportValueNormalizer $valueNormalizer,
         private readonly KernelInterface $kernel,
     ) {
         parent::__construct();
@@ -174,36 +175,36 @@ final class ImportItemsCommand extends Command
                     }
                 }
 
-                $item->setFormId($this->toNullableString($row['form_id'] ?? null));
-                $item->setEditorId($this->toNullableString($row['editor_id'] ?? null));
-                $item->setPrice($this->toNullableInt($row['price'] ?? null));
-                $item->setPriceMinerva($this->toNullableInt($row['price_minerva'] ?? null));
-                $item->setWikiUrl($this->toNullableString($row['wiki_url'] ?? null));
-                $item->setTradeable($this->toNullableInt($row['tradeable'] ?? 0) === 1);
-                $item->setIsNew($this->toBool($row['new'] ?? null));
-                $item->setDropRaid($this->toBool($row['drop_raid'] ?? null));
-                $item->setDropBurningSprings($this->toBoolFromRowAny($row, [
+                $item->setFormId($this->valueNormalizer->toNullableString($row['form_id'] ?? null));
+                $item->setEditorId($this->valueNormalizer->toNullableString($row['editor_id'] ?? null));
+                $item->setPrice($this->valueNormalizer->toNullableInt($row['price'] ?? null));
+                $item->setPriceMinerva($this->valueNormalizer->toNullableInt($row['price_minerva'] ?? null));
+                $item->setWikiUrl($this->valueNormalizer->toNullableString($row['wiki_url'] ?? null));
+                $item->setTradeable($this->valueNormalizer->toNullableInt($row['tradeable'] ?? 0) === 1);
+                $item->setIsNew($this->valueNormalizer->toBool($row['new'] ?? null));
+                $item->setDropRaid($this->valueNormalizer->toBool($row['drop_raid'] ?? null));
+                $item->setDropBurningSprings($this->valueNormalizer->toBoolFromRowAny($row, [
                     'drop_burningsprings',
                     'drop_burningssprings',
                     'drop_burning_springs',
                 ]));
-                $item->setDropDailyOps($this->toBool($row['drop_dailyops'] ?? null));
-                $item->setVendorRegs($this->toBool($row['vendor_regs'] ?? null));
-                $item->setVendorSamuel($this->toBool($row['vendor_samuel'] ?? null));
-                $item->setVendorMortimer($this->toBool($row['vendor_mortimer'] ?? null));
-                $item->setInfoHtml($this->toNullableString($row['info'] ?? null));
-                $item->setDropSourcesHtml($this->toNullableString($row['drop_sources'] ?? null));
-                $item->setRelationsHtml($this->toNullableString($row['relations'] ?? null));
-                $item->setPayload($this->normalizePayload($row));
+                $item->setDropDailyOps($this->valueNormalizer->toBool($row['drop_dailyops'] ?? null));
+                $item->setVendorRegs($this->valueNormalizer->toBool($row['vendor_regs'] ?? null));
+                $item->setVendorSamuel($this->valueNormalizer->toBool($row['vendor_samuel'] ?? null));
+                $item->setVendorMortimer($this->valueNormalizer->toBool($row['vendor_mortimer'] ?? null));
+                $item->setInfoHtml($this->valueNormalizer->toNullableString($row['info'] ?? null));
+                $item->setDropSourcesHtml($this->valueNormalizer->toNullableString($row['drop_sources'] ?? null));
+                $item->setRelationsHtml($this->valueNormalizer->toNullableString($row['relations'] ?? null));
+                $item->setPayload($this->valueNormalizer->normalizePayload($row));
 
                 $nameKey = sprintf('item.%s.%d.name', strtolower($type->value), $sourceId);
                 $descKey = sprintf('item.%s.%d.desc', strtolower($type->value), $sourceId);
                 $item->setNameKey($nameKey);
 
-                $nameEn = $this->toNullableString($row['name_en'] ?? null);
-                $nameDe = $this->toNullableString($row['name_de'] ?? null);
-                $descEn = $this->toNullableString($row['desc_en'] ?? null);
-                $descDe = $this->toNullableString($row['desc_de'] ?? null);
+                $nameEn = $this->valueNormalizer->toNullableString($row['name_en'] ?? null);
+                $nameDe = $this->valueNormalizer->toNullableString($row['name_de'] ?? null);
+                $descEn = $this->valueNormalizer->toNullableString($row['desc_en'] ?? null);
+                $descDe = $this->valueNormalizer->toNullableString($row['desc_de'] ?? null);
 
                 if (null !== $nameEn) {
                     $catalogEn[$nameKey] = $nameEn;
@@ -313,81 +314,4 @@ final class ImportItemsCommand extends Command
         return $stats['errors'] > 0 ? Command::FAILURE : Command::SUCCESS;
     }
 
-    private function toNullableString(mixed $value): ?string
-    {
-        if (null === $value) {
-            return null;
-        }
-
-        if (!is_string($value) && !is_numeric($value) && !$value instanceof Stringable) {
-            return null;
-        }
-
-        $value = trim((string) $value);
-
-        return '' === $value ? null : $value;
-    }
-
-    private function toNullableInt(mixed $value): ?int
-    {
-        if (null === $value || '' === $value) {
-            return null;
-        }
-
-        if (!is_numeric($value)) {
-            return null;
-        }
-
-        return (int) $value;
-    }
-
-    private function toBool(mixed $value): bool
-    {
-        if (is_bool($value)) {
-            return $value;
-        }
-        if (is_int($value) || is_float($value)) {
-            return (int) $value === 1;
-        }
-        if (is_string($value)) {
-            $normalized = strtolower(trim($value));
-
-            return '1' === $normalized || 'true' === $normalized || 'yes' === $normalized;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param array<mixed> $row
-     * @param list<string> $keys
-     */
-    private function toBoolFromRowAny(array $row, array $keys): bool
-    {
-        foreach ($keys as $key) {
-            if (!array_key_exists($key, $row)) {
-                continue;
-            }
-            if ($this->toBool($row[$key])) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * @param array<mixed> $row
-     *
-     * @return array<string, mixed>
-     */
-    private function normalizePayload(array $row): array
-    {
-        $normalized = [];
-        foreach ($row as $key => $value) {
-            $normalized[(string) $key] = $value;
-        }
-
-        return $normalized;
-    }
 }

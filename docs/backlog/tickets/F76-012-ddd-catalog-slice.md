@@ -19,6 +19,9 @@ Le contexte Catalog (items, import, traductions) est encore majoritairement port
 - [x] Decouverte/lecture JSON import extraite dans `ItemImportJsonFileReader`.
 - [x] `ImportItemsCommand` delegue lecture fichiers et parsing JSON au service Catalog.
 - [x] Test unitaire `ItemImportJsonFileReader` ajoute.
+- [x] Normalisation des valeurs import (`string/int/bool/payload`) extraite dans `ItemImportValueNormalizer`.
+- [x] `ImportItemsCommand` delegue les conversions de donnees au service Catalog.
+- [x] Test unitaire `ItemImportValueNormalizer` ajoute.
 
 ## Criteres d acceptance
 - Controller admin traduction simplifie.
