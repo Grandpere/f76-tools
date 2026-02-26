@@ -9,6 +9,12 @@ Le formulaire `/contact` envoie actuellement un email direct. Il faut une source
 - Ajouter vue admin liste + filtre statut.
 - Ajouter action de changement de statut (`new`, `in_progress`, `closed`).
 
+## Avancement
+- [x] Entite/table `contact_message` + migration Postgres.
+- [x] Persistance des soumissions `/contact` via service applicatif.
+- [ ] Vue admin liste + filtre statut.
+- [ ] Action changement de statut.
+
 ## Criteres d acceptance
 - Une soumission contact cree une ligne DB.
 - Un admin voit les messages et peut changer le statut.

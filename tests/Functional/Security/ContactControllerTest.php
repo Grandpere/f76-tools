@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Security;
 
+use App\Entity\ContactMessageEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -53,6 +54,8 @@ final class ContactControllerTest extends WebTestCase
 
     public function testContactPostRedirectsWithSuccessFlash(): void
     {
+        self::assertSame(0, $this->countContactMessages());
+
         $crawler = $this->browser()->request('GET', '/contact');
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
@@ -73,6 +76,12 @@ final class ContactControllerTest extends WebTestCase
             'Your message has been sent.',
             (string) $this->browser()->getResponse()->getContent(),
         );
+
+        self::assertSame(1, $this->countContactMessages());
+        $message = $this->entityManager?->getRepository(ContactMessageEntity::class)->findOneBy([]);
+        self::assertInstanceOf(ContactMessageEntity::class, $message);
+        self::assertSame('visitor@example.com', $message->getEmail());
+        self::assertSame('Need help', $message->getSubject());
     }
 
     public function testContactRateLimitTriggersAfterRepeatedPosts(): void
@@ -105,7 +114,7 @@ final class ContactControllerTest extends WebTestCase
         if (null === $this->entityManager) {
             return;
         }
-        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
+        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE contact_message, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
     }
 
     private function browser(): KernelBrowser
@@ -115,5 +124,21 @@ final class ContactControllerTest extends WebTestCase
         }
 
         return $this->client;
+    }
+
+    private function countContactMessages(): int
+    {
+        if (null === $this->entityManager) {
+            return 0;
+        }
+
+        $count = $this->entityManager
+            ->getRepository(ContactMessageEntity::class)
+            ->createQueryBuilder('c')
+            ->select('COUNT(c.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return (int) $count;
     }
 }

@@ -16,6 +16,7 @@ namespace App\Controller\Security;
 use App\Security\AuthEventLogger;
 use App\Service\AuthRequestThrottler;
 use App\Service\TurnstileVerifier;
+use App\Support\Application\Contact\ContactMessageApplicationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,6 +37,7 @@ final class ContactController extends AbstractController
         private readonly AuthRequestThrottler $requestThrottler,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
+        private readonly ContactMessageApplicationService $contactMessageApplicationService,
         private readonly string $contactRecipientEmail,
     ) {
     }
@@ -89,6 +91,20 @@ final class ContactController extends AbstractController
 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL) || mb_strlen($subject) < 3 || mb_strlen($message) < 10) {
                 $this->authEventLogger->warning('security.auth.contact.invalid_payload', $email, $request->getClientIp());
+                $this->addFlash('warning', 'security.contact.flash.invalid_input');
+
+                return $this->redirectToRoute('app_contact', ['locale' => $request->getLocale()]);
+            }
+
+            try {
+                $this->contactMessageApplicationService->createMessage(
+                    email: $email,
+                    subject: $subject,
+                    message: $message,
+                    ip: $request->getClientIp(),
+                );
+            } catch (\Throwable) {
+                $this->authEventLogger->warning('security.auth.contact.persistence_failed', $email, $request->getClientIp());
                 $this->addFlash('warning', 'security.contact.flash.invalid_input');
 
                 return $this->redirectToRoute('app_contact', ['locale' => $request->getLocale()]);
