@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Identity\Application\ResetPassword\ResetPasswordApplicationService;
+use App\Identity\UI\Security\IdentitySignedTokenFailureResolver;
 use App\Identity\UI\Security\ResetPasswordFeedbackMapper;
-use App\Security\SignedUrlGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,22 +30,21 @@ final class ResetPasswordController extends AbstractController
     public function __construct(
         private readonly ResetPasswordApplicationService $resetPasswordApplicationService,
         private readonly ResetPasswordFeedbackMapper $resetPasswordFeedbackMapper,
+        private readonly IdentitySignedTokenFailureResolver $identitySignedTokenFailureResolver,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
-        private readonly SignedUrlGenerator $signedUrlGenerator,
     ) {
     }
 
     #[Route('/{token}', name: 'app_reset_password', methods: ['GET', 'POST'])]
     public function __invoke(string $token, Request $request): Response
     {
-        if (!$this->signedUrlGenerator->isRequestSignatureValid($request)) {
-            $this->addFlash('warning', 'security.reset.flash.invalid_or_expired');
-
-            return $this->redirectToRoute('app_login', ['locale' => $request->getLocale()]);
-        }
-
-        if (!$this->resetPasswordApplicationService->canResetToken($token, new \DateTimeImmutable())) {
-            $this->addFlash('warning', 'security.reset.flash.invalid_or_expired');
+        $validationFailureFlashMessage = $this->identitySignedTokenFailureResolver->resolve(
+            $request,
+            fn (): bool => $this->resetPasswordApplicationService->canResetToken($token, new \DateTimeImmutable()),
+            'security.reset.flash.invalid_or_expired',
+        );
+        if (null !== $validationFailureFlashMessage) {
+            $this->addFlash('warning', $validationFailureFlashMessage);
 
             return $this->redirectToRoute('app_login', ['locale' => $request->getLocale()]);
         }

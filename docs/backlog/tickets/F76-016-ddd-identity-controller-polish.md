@@ -19,6 +19,8 @@ Un dernier polish peut encore reduire le bruit UI sans changer le comportement.
 - [x] Tests unitaires des mappers UI ajoutes.
 - [x] `IdentityIssuedTokenNotifier` ajoute pour mutualiser envoi email + audit log des tokens emis.
 - [x] `Registration/Forgot/Resend` reutilisent `IdentityIssuedTokenNotifier`.
+- [x] `IdentitySignedTokenFailureResolver` ajoute pour mutualiser la validation URL signee + token.
+- [x] `ResetPassword/VerifyEmail` reutilisent `IdentitySignedTokenFailureResolver`.
 
 ## Criteres d acceptance
 - Duplication de mapping reduite.
