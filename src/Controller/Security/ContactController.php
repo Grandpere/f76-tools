@@ -19,24 +19,22 @@ use App\Identity\UI\Security\IdentityFlashResponder;
 use App\Security\AuthEventLogger;
 use App\Service\TurnstileVerifier;
 use App\Support\Application\Contact\ContactMessageApplicationService;
+use App\Support\Application\Contact\ContactMessageEmailSenderInterface;
 use App\Support\Application\Contact\ContactSubmissionInput;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class ContactController extends AbstractController
 {
     public function __construct(
-        private readonly MailerInterface $mailer,
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
         private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
         private readonly ContactMessageApplicationService $contactMessageApplicationService,
-        private readonly string $contactRecipientEmail,
+        private readonly ContactMessageEmailSenderInterface $contactMessageEmailSender,
     ) {
     }
 
@@ -75,20 +73,11 @@ final class ContactController extends AbstractController
             }
 
             try {
-                $mailSubject = sprintf('[F76 Contact] %s', $submissionInput->subject);
-                $mailText = sprintf(
-                    "From: %s\nIP: %s\n\n%s",
+                $this->contactMessageEmailSender->send(
                     $submissionInput->email,
-                    $request->getClientIp() ?? 'unknown',
+                    $submissionInput->subject,
                     $submissionInput->message,
-                );
-                $this->mailer->send(
-                    (new Email())
-                        ->from('no-reply@f76.local')
-                        ->to($this->contactRecipientEmail)
-                        ->replyTo($submissionInput->email)
-                        ->subject($mailSubject)
-                        ->text($mailText),
+                    $request->getClientIp(),
                 );
             } catch (\Throwable) {
                 $this->authEventLogger->warning('security.auth.contact.delivery_failed', $submissionInput->email, $request->getClientIp());
