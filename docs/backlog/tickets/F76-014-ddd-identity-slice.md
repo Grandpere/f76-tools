@@ -31,6 +31,9 @@ Il faut poursuivre la migration DDD en isolant les use-cases et les policies de 
 - [x] Port `ResendVerificationUserRepositoryInterface` ajoute.
 - [x] `ResendVerificationController` delegue la logique de cooldown + emission token verification.
 - [x] Test unitaire `ResendVerificationRequestApplicationService` ajoute.
+- [x] Port `IdentityLinkEmailSenderInterface` ajoute pour les emails de liens Identity.
+- [x] Adaptateur infra `IdentityLinkEmailSender` (Signed URL + mailer + traduction) ajoute.
+- [x] Controllers `Registration/Forgot/Resend` deleguent l envoi mail au port applicatif.
 
 ## Criteres d acceptance
 - Controllers Identity deviennent thin (pas de logique metier).

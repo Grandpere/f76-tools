@@ -1,9 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- F76-014: DDD Slice 4 - Identity context (in progress).
+- F76-015: DDD Slice 5 - Identity request guards (in progress).
 
 ## Termine recemment
+- F76-014: DDD Slice 4 - Identity context (done).
 - F76-013: DDD Slice 3 - Catalog Infrastructure split (done).
 - F76-012: DDD Slice 2 - Catalog context (done).
 - F76-003: URL Hygiene POST + CSRF (done).

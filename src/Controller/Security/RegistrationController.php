@@ -15,19 +15,16 @@ namespace App\Controller\Security;
 
 use App\Identity\Application\Registration\RegisterUserApplicationService;
 use App\Identity\Application\Registration\RegisterUserStatus;
-use App\Security\SignedUrlGenerator;
+use App\Identity\Application\Notification\IdentityLinkEmailSenderInterface;
 use App\Service\AuthRequestThrottler;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class RegistrationController extends AbstractController
 {
@@ -36,10 +33,8 @@ final class RegistrationController extends AbstractController
 
     public function __construct(
         private readonly RegisterUserApplicationService $registerUserApplicationService,
+        private readonly IdentityLinkEmailSenderInterface $identityLinkEmailSender,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
-        private readonly SignedUrlGenerator $signedUrlGenerator,
-        private readonly TranslatorInterface $translator,
-        private readonly MailerInterface $mailer,
         private readonly AuthRequestThrottler $requestThrottler,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
@@ -127,22 +122,7 @@ final class RegistrationController extends AbstractController
             $plainToken = $registerResult->getPlainVerificationToken();
 
             if (is_string($targetEmail) && is_string($plainToken)) {
-                $verifyUrl = $this->signedUrlGenerator->generate('app_verify_email', [
-                    'locale' => $request->getLocale(),
-                    'token' => $plainToken,
-                ]);
-
-                try {
-                    $this->mailer->send(
-                        (new Email())
-                            ->from('no-reply@f76.local')
-                            ->to($targetEmail)
-                            ->subject($this->translator->trans('security.verify.email_subject'))
-                            ->text(sprintf("%s\n\n%s", $this->translator->trans('security.verify.email_intro'), $verifyUrl)),
-                    );
-                } catch (\Throwable) {
-                    // Avoid disclosing transport details during registration flow.
-                }
+                $this->identityLinkEmailSender->sendVerificationLink($targetEmail, $request->getLocale(), $plainToken);
             }
 
             $this->addFlash('success', 'security.register.flash.success');

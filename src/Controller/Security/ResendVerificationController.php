@@ -13,20 +13,17 @@ declare(strict_types=1);
 
 namespace App\Controller\Security;
 
+use App\Identity\Application\Notification\IdentityLinkEmailSenderInterface;
 use App\Identity\Application\ResendVerification\ResendVerificationRequestApplicationService;
-use App\Security\SignedUrlGenerator;
 use App\Service\AuthRequestThrottler;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ResendVerificationController extends AbstractController
 {
@@ -35,10 +32,8 @@ final class ResendVerificationController extends AbstractController
 
     public function __construct(
         private readonly ResendVerificationRequestApplicationService $resendVerificationRequestApplicationService,
+        private readonly IdentityLinkEmailSenderInterface $identityLinkEmailSender,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
-        private readonly SignedUrlGenerator $signedUrlGenerator,
-        private readonly TranslatorInterface $translator,
-        private readonly MailerInterface $mailer,
         private readonly AuthRequestThrottler $requestThrottler,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
@@ -92,22 +87,7 @@ final class ResendVerificationController extends AbstractController
                 $plainToken = $requestResult->getPlainToken();
                 $targetEmail = $requestResult->getEmail();
                 if (is_string($plainToken) && is_string($targetEmail)) {
-                    $verifyUrl = $this->signedUrlGenerator->generate('app_verify_email', [
-                        'locale' => $request->getLocale(),
-                        'token' => $plainToken,
-                    ]);
-
-                    try {
-                        $this->mailer->send(
-                            (new Email())
-                                ->from('no-reply@f76.local')
-                                ->to($targetEmail)
-                                ->subject($this->translator->trans('security.verify.email_subject'))
-                                ->text(sprintf("%s\n\n%s", $this->translator->trans('security.verify.email_intro'), $verifyUrl)),
-                        );
-                    } catch (\Throwable) {
-                        // Keep same generic response to avoid exposing internals.
-                    }
+                    $this->identityLinkEmailSender->sendVerificationLink($targetEmail, $request->getLocale(), $plainToken);
 
                     $this->authEventLogger->info('security.auth.resend_verification.token_issued', $targetEmail, $request->getClientIp());
                 }

@@ -14,19 +14,16 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Identity\Application\ForgotPassword\ForgotPasswordRequestApplicationService;
-use App\Security\SignedUrlGenerator;
+use App\Identity\Application\Notification\IdentityLinkEmailSenderInterface;
 use App\Service\AuthRequestThrottler;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ForgotPasswordController extends AbstractController
 {
@@ -35,10 +32,8 @@ final class ForgotPasswordController extends AbstractController
 
     public function __construct(
         private readonly ForgotPasswordRequestApplicationService $forgotPasswordRequestApplicationService,
+        private readonly IdentityLinkEmailSenderInterface $identityLinkEmailSender,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
-        private readonly SignedUrlGenerator $signedUrlGenerator,
-        private readonly TranslatorInterface $translator,
-        private readonly MailerInterface $mailer,
         private readonly AuthRequestThrottler $requestThrottler,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
@@ -92,21 +87,7 @@ final class ForgotPasswordController extends AbstractController
                 $plainToken = $requestResult->getPlainToken();
                 $targetEmail = $requestResult->getEmail();
                 if (is_string($plainToken) && is_string($targetEmail)) {
-                    $resetUrl = $this->signedUrlGenerator->generate('app_reset_password', [
-                        'locale' => $request->getLocale(),
-                        'token' => $plainToken,
-                    ]);
-                    try {
-                        $this->mailer->send(
-                            (new Email())
-                                ->from('no-reply@f76.local')
-                                ->to($targetEmail)
-                                ->subject($this->translator->trans('security.forgot.email_subject'))
-                                ->text(sprintf("%s\n\n%s", $this->translator->trans('security.forgot.email_intro'), $resetUrl)),
-                        );
-                    } catch (\Throwable) {
-                        // Keep same user-facing response to avoid account enumeration.
-                    }
+                    $this->identityLinkEmailSender->sendResetPasswordLink($targetEmail, $request->getLocale(), $plainToken);
 
                     $this->authEventLogger->info('security.auth.forgot_password.reset_token_issued', $targetEmail, $request->getClientIp());
                 }
