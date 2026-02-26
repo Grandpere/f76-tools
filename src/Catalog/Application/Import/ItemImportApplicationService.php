@@ -15,7 +15,7 @@ final class ItemImportApplicationService
         private readonly ItemImportItemRepositoryInterface $itemRepository,
         private readonly TranslationCatalogWriterInterface $translationCatalogWriter,
         private readonly ItemImportFileContextResolver $fileContextResolver,
-        private readonly ItemImportJsonFileReader $jsonFileReader,
+        private readonly ItemImportSourceReaderInterface $sourceReader,
         private readonly ItemImportItemHydrator $itemHydrator,
         private readonly ItemImportTranslationCatalogBuilder $translationCatalogBuilder,
         private readonly ItemImportContextApplier $contextApplier,
@@ -24,7 +24,7 @@ final class ItemImportApplicationService
 
     public function import(string $rootPath, bool $dryRun, int $batchSize): ItemImportResult
     {
-        $files = $this->jsonFileReader->findImportFiles($rootPath);
+        $files = $this->sourceReader->findImportFiles($rootPath);
 
         $stats = [
             'files' => count($files),
@@ -58,7 +58,7 @@ final class ItemImportApplicationService
                 continue;
             }
 
-            $payload = $this->jsonFileReader->readRows($file);
+            $payload = $this->sourceReader->readRows($file);
             if (!is_array($payload)) {
                 $warnings[] = sprintf('Fichier ignore (JSON invalide): %s', $file);
                 ++$stats['errors'];

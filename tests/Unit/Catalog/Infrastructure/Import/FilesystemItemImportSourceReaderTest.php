@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Unit\Catalog\Application\Import;
+namespace App\Tests\Unit\Catalog\Infrastructure\Import;
 
-use App\Catalog\Application\Import\ItemImportJsonFileReader;
+use App\Catalog\Infrastructure\Import\FilesystemItemImportSourceReader;
 use PHPUnit\Framework\TestCase;
 
-final class ItemImportJsonFileReaderTest extends TestCase
+final class FilesystemItemImportSourceReaderTest extends TestCase
 {
     public function testFindImportFilesReturnsSortedJsonWithoutManifest(): void
     {
@@ -16,7 +16,7 @@ final class ItemImportJsonFileReaderTest extends TestCase
         file_put_contents($root.'/minerva_61_beta.json', '[]');
         file_put_contents($root.'/manifest.json', '{}');
 
-        $reader = new ItemImportJsonFileReader();
+        $reader = new FilesystemItemImportSourceReader();
         $files = $reader->findImportFiles($root);
 
         self::assertCount(2, $files);
@@ -30,7 +30,7 @@ final class ItemImportJsonFileReaderTest extends TestCase
         $path = $root.'/items.json';
         file_put_contents($path, '[{"id":1}]');
 
-        $reader = new ItemImportJsonFileReader();
+        $reader = new FilesystemItemImportSourceReader();
         $rows = $reader->readRows($path);
 
         self::assertIsArray($rows);
@@ -45,7 +45,7 @@ final class ItemImportJsonFileReaderTest extends TestCase
         $path = $root.'/items.json';
         file_put_contents($path, '{invalid}');
 
-        $reader = new ItemImportJsonFileReader();
+        $reader = new FilesystemItemImportSourceReader();
 
         self::assertNull($reader->readRows($path));
     }
@@ -56,7 +56,7 @@ final class ItemImportJsonFileReaderTest extends TestCase
         $path = $root.'/items.json';
         file_put_contents($path, '"value"');
 
-        $reader = new ItemImportJsonFileReader();
+        $reader = new FilesystemItemImportSourceReader();
 
         self::assertNull($reader->readRows($path));
     }

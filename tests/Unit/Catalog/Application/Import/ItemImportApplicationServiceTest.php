@@ -9,9 +9,9 @@ use App\Catalog\Application\Import\ItemImportContextApplier;
 use App\Catalog\Application\Import\ItemImportFileContextResolver;
 use App\Catalog\Application\Import\ItemImportItemHydrator;
 use App\Catalog\Application\Import\ItemImportItemRepositoryInterface;
-use App\Catalog\Application\Import\ItemImportJsonFileReader;
 use App\Catalog\Application\Import\ItemImportTranslationCatalogBuilder;
 use App\Catalog\Application\Import\ItemImportValueNormalizer;
+use App\Catalog\Infrastructure\Import\FilesystemItemImportSourceReader;
 use App\Contract\TranslationCatalogWriterInterface;
 use App\Translation\TranslationCatalogWriter;
 use Doctrine\ORM\EntityManagerInterface;
@@ -85,7 +85,7 @@ final class ItemImportApplicationServiceTest extends TestCase
             $this->repository,
             $translationCatalogWriter,
             new ItemImportFileContextResolver(),
-            new ItemImportJsonFileReader(),
+            new FilesystemItemImportSourceReader(),
             new ItemImportItemHydrator($normalizer),
             new ItemImportTranslationCatalogBuilder($normalizer),
             new ItemImportContextApplier(),
