@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Controller\Api;
 
 use App\Entity\UserEntity;
-use App\Service\PlayerItemKnowledgeManager;
+use App\Progression\Application\Knowledge\PlayerKnowledgeApplicationService;
 use App\Service\PlayerStatsProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,7 +25,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 final class PlayerStatsController extends AbstractController
 {
     public function __construct(
-        private readonly PlayerItemKnowledgeManager $knowledgeManager,
+        private readonly PlayerKnowledgeApplicationService $playerKnowledgeApplicationService,
         private readonly PlayerStatsProvider $statsProvider,
     ) {
     }
@@ -38,7 +38,7 @@ final class PlayerStatsController extends AbstractController
             throw new AccessDeniedException('User must be authenticated.');
         }
 
-        $player = $this->knowledgeManager->resolveOwnedPlayer($playerId, $user);
+        $player = $this->playerKnowledgeApplicationService->resolveOwnedPlayer($user, $playerId);
         if (null === $player) {
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }

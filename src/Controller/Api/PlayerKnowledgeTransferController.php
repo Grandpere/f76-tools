@@ -20,6 +20,7 @@ use App\Entity\PlayerItemKnowledgeEntity;
 use App\Entity\UserEntity;
 use App\Repository\ItemEntityRepository;
 use App\Repository\PlayerItemKnowledgeEntityRepository;
+use App\Progression\Application\Knowledge\PlayerKnowledgeApplicationService;
 use App\Service\PlayerItemKnowledgeManager;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,7 +37,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
     private const IMPORT_VERSION = 1;
 
     public function __construct(
-        private readonly PlayerItemKnowledgeManager $knowledgeManager,
+        private readonly PlayerKnowledgeApplicationService $playerKnowledgeApplicationService,
         private readonly PlayerItemKnowledgeEntityRepository $knowledgeRepository,
         private readonly ItemEntityRepository $itemRepository,
         private readonly EntityManagerInterface $entityManager,
@@ -190,7 +191,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
             throw new AccessDeniedException('User must be authenticated.');
         }
 
-        return $this->knowledgeManager->resolveOwnedPlayer($playerId, $user);
+        return $this->playerKnowledgeApplicationService->resolveOwnedPlayer($user, $playerId);
     }
 
     /**

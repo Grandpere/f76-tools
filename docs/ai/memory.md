@@ -65,6 +65,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: prefer shell-native tools (`sed`, `rg`, `apply_patch`) for repo updates.
 - Prevention: do not assume Python availability for simple text edits.
 
+## 2026-02-26 - DDD extraction broke controller dependency wiring
+- Symptom: `phpstan` reported undefined property in API controller after refactor.
+- Root cause: moved item lookup to app service but forgot controller still needed repository for list query.
+- Fix: restored explicit `ItemEntityRepository` injection for list endpoint while keeping app service for use-cases.
+- Prevention: during incremental extraction, re-check constructor dependencies per endpoint path.
+
 ## 2026-02-25 - Functional tests brittle on localized strings
 - Symptom: functional tests failed when locale/text changed (e.g. expecting `Bonjour`).
 - Root cause: assertions coupled to translated UI labels.
@@ -112,4 +118,3 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: extension already present in base image.
 - Fix: removed redundant `docker-php-ext-install opcache`.
 - Prevention: verify base image capabilities before adding extension install steps.
-

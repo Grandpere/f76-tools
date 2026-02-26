@@ -19,7 +19,7 @@ use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
 use App\Repository\ItemEntityRepository;
 use App\Repository\PlayerItemKnowledgeEntityRepository;
-use App\Service\PlayerItemKnowledgeManager;
+use App\Progression\Application\Knowledge\PlayerKnowledgeApplicationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,7 +33,7 @@ final class PlayerItemKnowledgeController extends AbstractController
     public function __construct(
         private readonly ItemEntityRepository $itemRepository,
         private readonly PlayerItemKnowledgeEntityRepository $knowledgeRepository,
-        private readonly PlayerItemKnowledgeManager $knowledgeManager,
+        private readonly PlayerKnowledgeApplicationService $playerKnowledgeApplicationService,
         private readonly TranslatorInterface $translator,
     ) {
     }
@@ -86,12 +86,12 @@ final class PlayerItemKnowledgeController extends AbstractController
         if (null === $player) {
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
-        $item = $this->itemRepository->findOneByPublicId($itemId);
+        $item = $this->playerKnowledgeApplicationService->resolveItemByPublicId($itemId);
         if (null === $item) {
             return $this->json(['error' => 'Item not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
 
-        $this->knowledgeManager->setLearned($player, $item);
+        $this->playerKnowledgeApplicationService->markLearned($player, $item);
 
         return $this->json($this->toItemPayload($item, true));
     }
@@ -103,12 +103,12 @@ final class PlayerItemKnowledgeController extends AbstractController
         if (null === $player) {
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
-        $item = $this->itemRepository->findOneByPublicId($itemId);
+        $item = $this->playerKnowledgeApplicationService->resolveItemByPublicId($itemId);
         if (null === $item) {
             return $this->json(['error' => 'Item not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
 
-        $this->knowledgeManager->unsetLearned($player, $item);
+        $this->playerKnowledgeApplicationService->unmarkLearned($player, $item);
 
         return new JsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
     }
@@ -127,7 +127,7 @@ final class PlayerItemKnowledgeController extends AbstractController
     {
         $user = $this->getAuthenticatedUser();
 
-        return $this->knowledgeManager->resolveOwnedPlayer($playerId, $user);
+        return $this->playerKnowledgeApplicationService->resolveOwnedPlayer($user, $playerId);
     }
 
     private function parseType(mixed $value): ItemTypeEnum|false|null
