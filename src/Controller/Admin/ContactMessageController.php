@@ -16,7 +16,7 @@ namespace App\Controller\Admin;
 use App\Domain\Support\Contact\ContactMessageStatusEnum;
 use App\Support\Application\Contact\ContactMessageListApplicationService;
 use App\Support\Application\Contact\ContactMessageStatusUpdateApplicationService;
-use App\Support\Application\Contact\ContactMessageStatusUpdateResult;
+use App\Support\UI\Admin\ContactMessageStatusUpdateFeedbackMapper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +31,7 @@ final class ContactMessageController extends AbstractController
     public function __construct(
         private readonly ContactMessageListApplicationService $contactMessageListApplicationService,
         private readonly ContactMessageStatusUpdateApplicationService $contactMessageStatusUpdateApplicationService,
+        private readonly ContactMessageStatusUpdateFeedbackMapper $contactMessageStatusUpdateFeedbackMapper,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
     ) {
     }
@@ -71,13 +72,8 @@ final class ContactMessageController extends AbstractController
         }
 
         $result = $this->contactMessageStatusUpdateApplicationService->update($id, $request->request->get('status'));
-        if (ContactMessageStatusUpdateResult::INVALID_STATUS === $result) {
-            $this->addFlash('warning', 'admin_contact.flash.invalid_status');
-        } elseif (ContactMessageStatusUpdateResult::MESSAGE_NOT_FOUND === $result) {
-            $this->addFlash('warning', 'admin_contact.flash.message_not_found');
-        } else {
-            $this->addFlash('success', 'admin_contact.flash.status_updated');
-        }
+        $feedback = $this->contactMessageStatusUpdateFeedbackMapper->map($result);
+        $this->addFlash($feedback['flashType'], $feedback['flashMessage']);
 
         return $this->redirectToRoute('app_admin_contact_messages', ['locale' => $request->getLocale()]);
     }
