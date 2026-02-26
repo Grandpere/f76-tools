@@ -7,7 +7,7 @@ Permettre a un utilisateur authentifie de:
 - marquer pour chaque `Player` si un `Item` est appris ou non (`BOOK` Minerva et `MISC` Legendary Mods).
 
 ## Documentation ops
-- Runbook exploitation: `docs/ops-runbook.md`.
+- Runbook exploitation: `docs/ops/ops-runbook.md`.
 
 ## Etat actuel (base)
 - Import `Item` en place via `app:items:import`.
@@ -70,7 +70,7 @@ Permettre a un utilisateur authentifie de:
   - [x] creation player via formulaire dashboard
   - [x] sync learned inter-listes pour un meme item Minerva (meme id)
   - [x] retour visuel (loading, succes, erreur)
-- [x] Selection du player actif (query param).
+- [x] Selection du player actif (localStorage, sans query param dedie).
 - [x] Bloc de statistiques dashboard:
   - [x] endpoint `GET /api/players/{id}/stats`,
   - [x] KPI global/type + detail par rank/liste,
