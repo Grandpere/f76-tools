@@ -15,9 +15,8 @@ namespace App\Controller\Api;
 
 use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
-use App\Repository\PlayerEntityRepository;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Progression\Application\Player\Exception\PlayerNameConflictException;
+use App\Progression\Application\Player\PlayerApplicationService;
 use JsonException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -29,8 +28,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 final class PlayerController extends AbstractController
 {
     public function __construct(
-        private readonly PlayerEntityRepository $playerRepository,
-        private readonly EntityManagerInterface $entityManager,
+        private readonly PlayerApplicationService $playerApplicationService,
     ) {
     }
 
@@ -38,7 +36,7 @@ final class PlayerController extends AbstractController
     public function index(): JsonResponse
     {
         $user = $this->getAuthenticatedUser();
-        $players = $this->playerRepository->findByUser($user);
+        $players = $this->playerApplicationService->listForUser($user);
 
         $payload = array_map(static fn (PlayerEntity $player): array => [
             'id' => $player->getPublicId(),
@@ -61,14 +59,9 @@ final class PlayerController extends AbstractController
             return $this->json(['error' => 'Invalid player name.'], JsonResponse::HTTP_BAD_REQUEST);
         }
 
-        $player = (new PlayerEntity())
-            ->setUser($user)
-            ->setName($name);
-
         try {
-            $this->entityManager->persist($player);
-            $this->entityManager->flush();
-        } catch (UniqueConstraintViolationException) {
+            $player = $this->playerApplicationService->createForUser($user, $name);
+        } catch (PlayerNameConflictException) {
             return $this->json(['error' => 'Player name already exists.'], JsonResponse::HTTP_CONFLICT);
         }
 
@@ -84,7 +77,7 @@ final class PlayerController extends AbstractController
     public function show(string $id): JsonResponse
     {
         $user = $this->getAuthenticatedUser();
-        $player = $this->playerRepository->findOneByPublicIdAndUser($id, $user);
+        $player = $this->playerApplicationService->findOwnedByPublicId($user, $id);
         if (null === $player) {
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
@@ -101,7 +94,7 @@ final class PlayerController extends AbstractController
     public function update(string $id, Request $request): JsonResponse
     {
         $user = $this->getAuthenticatedUser();
-        $player = $this->playerRepository->findOneByPublicIdAndUser($id, $user);
+        $player = $this->playerApplicationService->findOwnedByPublicId($user, $id);
         if (null === $player) {
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
@@ -112,10 +105,9 @@ final class PlayerController extends AbstractController
             return $this->json(['error' => 'Invalid player name.'], JsonResponse::HTTP_BAD_REQUEST);
         }
 
-        $player->setName($name);
         try {
-            $this->entityManager->flush();
-        } catch (UniqueConstraintViolationException) {
+            $this->playerApplicationService->renameOwned($player, $name);
+        } catch (PlayerNameConflictException) {
             return $this->json(['error' => 'Player name already exists.'], JsonResponse::HTTP_CONFLICT);
         }
 
@@ -131,13 +123,12 @@ final class PlayerController extends AbstractController
     public function delete(string $id): JsonResponse
     {
         $user = $this->getAuthenticatedUser();
-        $player = $this->playerRepository->findOneByPublicIdAndUser($id, $user);
+        $player = $this->playerApplicationService->findOwnedByPublicId($user, $id);
         if (null === $player) {
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
 
-        $this->entityManager->remove($player);
-        $this->entityManager->flush();
+        $this->playerApplicationService->delete($player);
 
         return new JsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
     }
