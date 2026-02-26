@@ -17,4 +17,9 @@ interface AuditLogReadRepositoryInterface
      * @return list<string>
      */
     public function findDistinctActions(): array;
+
+    /**
+     * @return list<AdminAuditLogEntity>
+     */
+    public function findForExport(string $query, string $action, int $maxRows): array;
 }

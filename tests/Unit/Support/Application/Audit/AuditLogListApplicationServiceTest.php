@@ -108,4 +108,9 @@ final class InMemoryAuditLogReadRepository implements AuditLogReadRepositoryInte
     {
         return $this->actions;
     }
+
+    public function findForExport(string $query, string $action, int $maxRows): array
+    {
+        return [];
+    }
 }

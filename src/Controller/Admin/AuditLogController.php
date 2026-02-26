@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\Repository\AdminAuditLogEntityRepository;
+use App\Support\Application\Audit\AuditLogExportApplicationService;
 use App\Support\Application\Audit\AuditLogListApplicationService;
+use App\Support\UI\Admin\AuditLogCsvExporter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,11 +24,10 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/audit-logs')]
 final class AuditLogController extends AbstractController
 {
-    private const EXPORT_MAX_ROWS = 10000;
-
     public function __construct(
-        private readonly AdminAuditLogEntityRepository $auditLogRepository,
         private readonly AuditLogListApplicationService $auditLogListApplicationService,
+        private readonly AuditLogExportApplicationService $auditLogExportApplicationService,
+        private readonly AuditLogCsvExporter $auditLogCsvExporter,
     ) {
     }
 
@@ -60,53 +60,11 @@ final class AuditLogController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $query = $this->sanitizeString($request->query->get('q'));
-        $action = $this->sanitizeString($request->query->get('action'));
-        $rows = $this->auditLogRepository->findForExport($query, $action, self::EXPORT_MAX_ROWS);
+        $exportResult = $this->auditLogExportApplicationService->export(
+            $request->query->get('q'),
+            $request->query->get('action'),
+        );
 
-        $output = fopen('php://temp', 'wb+');
-        if (false === $output) {
-            throw new \RuntimeException('Unable to open temporary stream for CSV export.');
-        }
-
-        fputcsv($output, ['occurred_at', 'action', 'actor_email', 'target_email', 'context_json'], ',', '"', '\\');
-        foreach ($rows as $row) {
-            $contextJson = '';
-            if (is_array($row->getContext())) {
-                $contextJson = (string) json_encode($row->getContext(), JSON_UNESCAPED_SLASHES);
-            }
-
-            fputcsv($output, [
-                $row->getOccurredAt()->format('Y-m-d H:i:s'),
-                $row->getAction(),
-                $row->getActorUser()->getEmail(),
-                $row->getTargetUser()?->getEmail() ?? '',
-                $contextJson,
-            ], ',', '"', '\\');
-        }
-
-        rewind($output);
-        $csv = stream_get_contents($output);
-        fclose($output);
-        if (false === $csv) {
-            throw new \RuntimeException('Unable to build CSV payload.');
-        }
-
-        $response = new Response($csv);
-
-        $filename = sprintf('admin_audit_logs_%s.csv', (new \DateTimeImmutable())->format('Ymd_His'));
-        $response->headers->set('Content-Type', 'text/csv; charset=UTF-8');
-        $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"', $filename));
-
-        return $response;
-    }
-
-    private function sanitizeString(mixed $value): string
-    {
-        if (!is_string($value)) {
-            return '';
-        }
-
-        return trim($value);
+        return $this->auditLogCsvExporter->buildResponse($exportResult->rows);
     }
 }

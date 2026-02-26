@@ -13,6 +13,8 @@ Le backoffice des logs d audit fonctionne, mais le controller porte encore de la
 - [x] Introduire un port read repository pour lister les logs + actions distinctes.
 - [x] Brancher `AuditLogController::__invoke()` sur ce service.
 - [x] Ajouter tests unitaires du service de listing.
+- [x] Extraire le flux `export.csv` via `AuditLogExportApplicationService` + `AuditLogCsvExporter`.
+- [x] Ajouter tests unitaires pour export service et CSV exporter.
 
 ## Criteres d acceptance
 - Aucune regression fonctionnelle sur `/admin/audit-logs`.
