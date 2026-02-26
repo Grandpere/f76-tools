@@ -141,6 +141,9 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - route publique `GET /verify-email/{token}` valide le compte.
   - login bloque tant que l email n est pas verifie via `UserAccountChecker`.
   - renvoi verification ajoute via `GET/POST /resend-verification` avec cooldown (60s) + reponse generique.
+- Anti-abus auth:
+  - throttling applicatif (cache) ajoute sur `POST /register`, `POST /forgot-password`, `POST /resend-verification` (5 tentatives / 5 min / IP+email).
+  - message utilisateur generic en cas de limite atteinte.
 - Audit admin:
   - table `admin_audit_log` pour tracer les actions sensibles de backoffice users.
   - actions tracees: `user_toggle_active`, `user_toggle_admin`, `user_generate_reset_link`.

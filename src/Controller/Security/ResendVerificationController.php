@@ -15,6 +15,7 @@ namespace App\Controller\Security;
 
 use App\Entity\UserEntity;
 use App\Repository\UserEntityRepository;
+use App\Service\AuthRequestThrottler;
 use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,6 +33,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class ResendVerificationController extends AbstractController
 {
     private const RESEND_COOLDOWN_SECONDS = 60;
+    private const RATE_LIMIT_MAX_ATTEMPTS = 5;
+    private const RATE_LIMIT_WINDOW_SECONDS = 300;
 
     public function __construct(
         private readonly UserEntityRepository $userRepository,
@@ -40,6 +43,7 @@ final class ResendVerificationController extends AbstractController
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly TranslatorInterface $translator,
         private readonly MailerInterface $mailer,
+        private readonly AuthRequestThrottler $requestThrottler,
     ) {
     }
 
@@ -55,6 +59,19 @@ final class ResendVerificationController extends AbstractController
             }
 
             $email = mb_strtolower(trim((string) $request->request->get('email', '')));
+
+            if ($this->requestThrottler->hitAndIsLimited(
+                scope: 'resend_verification',
+                clientIp: $request->getClientIp(),
+                email: $email,
+                maxAttempts: self::RATE_LIMIT_MAX_ATTEMPTS,
+                windowSeconds: self::RATE_LIMIT_WINDOW_SECONDS,
+            )) {
+                $this->addFlash('warning', 'security.auth.flash.rate_limited');
+
+                return $this->redirectToRoute('app_resend_verification', ['locale' => $request->getLocale()]);
+            }
+
             $user = null;
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $found = $this->userRepository->findOneByEmail($email);

@@ -109,6 +109,7 @@ security.login.submit: Anmelden
 security.login.to_register: Noch kein Konto? Registrieren
 security.login.to_forgot: Passwort vergessen?
 security.login.to_resend: Verifizierungs-E-Mail erneut senden
+security.auth.flash.rate_limited: Zu viele Versuche. Bitte warten Sie einige Minuten und versuchen Sie es erneut.
 
 security.register.page_title: Registrierung
 security.register.title: Registrierung
