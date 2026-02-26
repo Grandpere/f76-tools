@@ -101,6 +101,26 @@ final class LoginLogoutTest extends WebTestCase
         self::assertCount(1, $this->browser()->getCrawler()->filter('input[name="_username"]'));
     }
 
+    public function testGetLogoutDoesNotTerminateSession(): void
+    {
+        $user = $this->createUser('security-get-logout@example.com', 'secret123');
+
+        $crawler = $this->browser()->request('GET', '/login');
+        $form = $crawler->filter('form')->form([
+            '_username' => $user->getEmail(),
+            '_password' => 'secret123',
+        ]);
+        $this->browser()->submit($form);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        $this->browser()->followRedirect();
+
+        $this->browser()->request('GET', '/logout');
+
+        $this->browser()->request('GET', '/');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertStringContainsString($user->getEmail(), $this->browser()->getResponse()->getContent() ?: '');
+    }
+
     public function testLoginIsRateLimitedAfterRepeatedFailures(): void
     {
         $user = $this->createUser('security-ratelimit@example.com', 'secret123');

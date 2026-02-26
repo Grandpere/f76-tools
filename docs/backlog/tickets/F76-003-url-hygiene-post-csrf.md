@@ -12,6 +12,7 @@ Une partie des actions est deja durcie (URLs signees, IDs opaques). Il reste a a
 - [x] Audit des routes sensibles (admin/auth/API).
 - [x] `logout` bascule en `POST + CSRF` (plus de deconnexion via URL GET previsible).
 - [x] Documentation des exceptions justifiees (liens verifies/signes).
+- [x] Test functional ajoute: un `GET /logout` ne doit plus invalider la session active.
 
 ## Exceptions documentees
 - `GET /verify-email/{token}`: action state-changing, mais protegee par token aleatoire + signature URL.
