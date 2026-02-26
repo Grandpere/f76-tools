@@ -9,6 +9,7 @@ enum IdentityEmailFlow: string
     case REGISTER = 'register';
     case FORGOT_PASSWORD = 'forgot_password';
     case RESEND_VERIFICATION = 'resend_verification';
+    case CONTACT = 'contact';
 
     public function csrfTokenId(): string
     {
@@ -21,6 +22,7 @@ enum IdentityEmailFlow: string
             self::REGISTER => 'security.register.flash.invalid_csrf',
             self::FORGOT_PASSWORD => 'security.forgot.flash.invalid_csrf',
             self::RESEND_VERIFICATION => 'security.resend.flash.invalid_csrf',
+            self::CONTACT => 'security.contact.flash.invalid_csrf',
         };
     }
 
@@ -30,6 +32,7 @@ enum IdentityEmailFlow: string
             self::REGISTER => 'app_register',
             self::FORGOT_PASSWORD => 'app_forgot_password',
             self::RESEND_VERIFICATION => 'app_resend_verification',
+            self::CONTACT => 'app_contact',
         };
     }
 

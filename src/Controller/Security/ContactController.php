@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Security;
 
+use App\Identity\UI\Security\IdentityEmailFlow;
+use App\Identity\UI\Security\IdentityEmailFlowGuard;
+use App\Identity\UI\Security\IdentityFlashResponder;
 use App\Security\AuthEventLogger;
-use App\Service\AuthRequestThrottler;
 use App\Service\TurnstileVerifier;
 use App\Support\Application\Contact\ContactMessageApplicationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,18 +25,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Csrf\CsrfToken;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 final class ContactController extends AbstractController
 {
-    private const RATE_LIMIT_MAX_ATTEMPTS = 5;
-    private const RATE_LIMIT_WINDOW_SECONDS = 300;
-
     public function __construct(
-        private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly MailerInterface $mailer,
-        private readonly AuthRequestThrottler $requestThrottler,
+        private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
+        private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
         private readonly ContactMessageApplicationService $contactMessageApplicationService,
@@ -46,54 +43,19 @@ final class ContactController extends AbstractController
     public function __invoke(Request $request): Response
     {
         if ($request->isMethod('POST')) {
-            $csrfToken = (string) $request->request->get('_csrf_token', '');
-            if (!$this->csrfTokenManager->isTokenValid(new CsrfToken('contact', $csrfToken))) {
-                $this->authEventLogger->warning('security.auth.contact.invalid_csrf', null, $request->getClientIp());
-                $this->addFlash('warning', 'security.contact.flash.invalid_csrf');
-
-                return $this->redirectToRoute('app_contact', ['locale' => $request->getLocale()]);
+            $flow = IdentityEmailFlow::CONTACT;
+            $guardResult = $this->identityEmailFlowGuard->guard($request, $flow);
+            if (null !== $guardResult->failureFlashMessage) {
+                return $this->identityFlashResponder->warningToRoute($request, $flow->failureRoute(), $guardResult->failureFlashMessage);
             }
-
-            if ('' !== trim((string) $request->request->get('website', ''))) {
-                $this->authEventLogger->warning('security.auth.contact.honeypot_triggered', null, $request->getClientIp());
-                $this->addFlash('warning', 'security.auth.flash.rate_limited');
-
-                return $this->redirectToRoute('app_contact', ['locale' => $request->getLocale()]);
-            }
-
-            $email = mb_strtolower(trim((string) $request->request->get('email', '')));
+            $email = $guardResult->payload->email;
             $subject = trim((string) $request->request->get('subject', ''));
             $message = trim((string) $request->request->get('message', ''));
 
-            if (!$this->turnstileVerifier->verify((string) $request->request->get('cf-turnstile-response', ''), $request->getClientIp())) {
-                $this->authEventLogger->warning('security.auth.contact.captcha_invalid', $email, $request->getClientIp());
-                $this->addFlash('warning', 'security.auth.flash.captcha_invalid');
-
-                return $this->redirectToRoute('app_contact', ['locale' => $request->getLocale()]);
-            }
-
-            if ($this->requestThrottler->hitAndIsLimited(
-                scope: 'contact',
-                clientIp: $request->getClientIp(),
-                email: $email,
-                maxAttempts: self::RATE_LIMIT_MAX_ATTEMPTS,
-                windowSeconds: self::RATE_LIMIT_WINDOW_SECONDS,
-            )) {
-                $this->authEventLogger->warning('security.auth.contact.rate_limited', $email, $request->getClientIp(), [
-                    'scope' => 'contact',
-                    'maxAttempts' => self::RATE_LIMIT_MAX_ATTEMPTS,
-                    'windowSeconds' => self::RATE_LIMIT_WINDOW_SECONDS,
-                ]);
-                $this->addFlash('warning', 'security.auth.flash.rate_limited');
-
-                return $this->redirectToRoute('app_contact', ['locale' => $request->getLocale()]);
-            }
-
             if (!filter_var($email, FILTER_VALIDATE_EMAIL) || mb_strlen($subject) < 3 || mb_strlen($message) < 10) {
                 $this->authEventLogger->warning('security.auth.contact.invalid_payload', $email, $request->getClientIp());
-                $this->addFlash('warning', 'security.contact.flash.invalid_input');
 
-                return $this->redirectToRoute('app_contact', ['locale' => $request->getLocale()]);
+                return $this->identityFlashResponder->warningToRoute($request, $flow->failureRoute(), 'security.contact.flash.invalid_input');
             }
 
             try {
@@ -105,9 +67,8 @@ final class ContactController extends AbstractController
                 );
             } catch (\Throwable) {
                 $this->authEventLogger->warning('security.auth.contact.persistence_failed', $email, $request->getClientIp());
-                $this->addFlash('warning', 'security.contact.flash.invalid_input');
 
-                return $this->redirectToRoute('app_contact', ['locale' => $request->getLocale()]);
+                return $this->identityFlashResponder->warningToRoute($request, $flow->failureRoute(), 'security.contact.flash.invalid_input');
             }
 
             try {
@@ -131,9 +92,8 @@ final class ContactController extends AbstractController
             }
 
             $this->authEventLogger->info('security.auth.contact.sent', $email, $request->getClientIp());
-            $this->addFlash('success', 'security.contact.flash.sent');
 
-            return $this->redirectToRoute('app_contact', ['locale' => $request->getLocale()]);
+            return $this->identityFlashResponder->successToRoute($request, $flow->failureRoute(), 'security.contact.flash.sent');
         }
 
         return $this->render('security/contact.html.twig', [
