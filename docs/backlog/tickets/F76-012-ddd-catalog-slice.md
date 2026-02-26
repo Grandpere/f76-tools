@@ -31,6 +31,11 @@ Le contexte Catalog (items, import, traductions) est encore majoritairement port
 - [x] Hydratation des champs `ItemEntity` depuis le JSON extraite dans `ItemImportItemHydrator`.
 - [x] `ImportItemsCommand` delegue le mapping champs import vers entite au service Catalog.
 - [x] Test unitaire `ItemImportItemHydrator` ajoute.
+- [x] Orchestration complete de l import extraite dans `ItemImportApplicationService`.
+- [x] `ImportItemsCommand` reduite au role d adaptateur CLI (validation/affichage).
+- [x] Resultat d import structure via `ItemImportResult`.
+- [x] Port repository import ajoute (`ItemImportItemRepositoryInterface`) + impl Doctrine branchee.
+- [x] Test unitaire `ItemImportApplicationService` ajoute.
 
 ## Criteres d acceptance
 - Controller admin traduction simplifie.

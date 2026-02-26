@@ -13,15 +13,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Catalog\Application\Import\ItemImportFileContextResolver;
-use App\Catalog\Application\Import\ItemImportJsonFileReader;
-use App\Catalog\Application\Import\ItemImportContextApplier;
-use App\Catalog\Application\Import\ItemImportItemHydrator;
-use App\Catalog\Application\Import\ItemImportTranslationCatalogBuilder;
-use App\Entity\ItemEntity;
-use App\Repository\ItemEntityRepository;
-use App\Translation\TranslationCatalogWriter;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Catalog\Application\Import\ItemImportApplicationService;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -38,14 +30,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 final class ImportItemsCommand extends Command
 {
     public function __construct(
-        private readonly EntityManagerInterface $entityManager,
-        private readonly ItemEntityRepository $itemRepository,
-        private readonly TranslationCatalogWriter $translationCatalogWriter,
-        private readonly ItemImportFileContextResolver $fileContextResolver,
-        private readonly ItemImportJsonFileReader $jsonFileReader,
-        private readonly ItemImportItemHydrator $itemHydrator,
-        private readonly ItemImportTranslationCatalogBuilder $translationCatalogBuilder,
-        private readonly ItemImportContextApplier $contextApplier,
+        private readonly ItemImportApplicationService $itemImportApplicationService,
         private readonly KernelInterface $kernel,
     ) {
         parent::__construct();
@@ -91,139 +76,21 @@ final class ImportItemsCommand extends Command
         }
         $batchSize = max(1, (int) $batchSizeRaw);
 
-        $files = $this->jsonFileReader->findImportFiles($rootPath);
-        if ([] === $files) {
+        $io->title('Import Items');
+        $io->text(sprintf('Dossier: %s', $rootPath));
+        $io->text(sprintf('Mode: %s', $dryRun ? 'DRY-RUN' : 'WRITE'));
+
+        $result = $this->itemImportApplicationService->import($rootPath, $dryRun, $batchSize);
+        $stats = $result->getStats();
+
+        if (0 === $stats['files']) {
             $io->warning(sprintf('Aucun fichier JSON importable trouve dans %s', $rootPath));
 
             return Command::SUCCESS;
         }
 
-        $stats = [
-            'files' => count($files),
-            'rows' => 0,
-            'created' => 0,
-            'updated' => 0,
-            'skipped' => 0,
-            'errors' => 0,
-            'warnings' => 0,
-            'translations_en' => 0,
-            'translations_de' => 0,
-        ];
-        /** @var array<string, ItemEntity> $dryRunMemory */
-        $dryRunMemory = [];
-        /** @var array<string, ItemEntity> $writeMemory */
-        $writeMemory = [];
-        /** @var array<string, string> $catalogEn */
-        $catalogEn = [];
-        /** @var array<string, string> $catalogDe */
-        $catalogDe = [];
-
-        $io->title('Import Items');
-        $io->text(sprintf('Dossier: %s', $rootPath));
-        $io->text(sprintf('Mode: %s', $dryRun ? 'DRY-RUN' : 'WRITE'));
-
-        $pendingFlush = 0;
-
-        foreach ($files as $file) {
-            $context = $this->fileContextResolver->resolve($file);
-            if (null === $context) {
-                ++$stats['skipped'];
-                continue;
-            }
-
-            $payload = $this->jsonFileReader->readRows($file);
-            if (!is_array($payload)) {
-                $io->warning(sprintf('Fichier ignore (JSON invalide): %s', $file));
-                ++$stats['errors'];
-                continue;
-            }
-
-            foreach ($payload as $row) {
-                ++$stats['rows'];
-
-                if (!is_array($row)) {
-                    ++$stats['errors'];
-                    continue;
-                }
-
-                if (!isset($row['id']) || !is_numeric($row['id'])) {
-                    ++$stats['errors'];
-                    continue;
-                }
-
-                $sourceId = (int) $row['id'];
-                $type = $context['type'];
-
-                if ($dryRun) {
-                    $memoryKey = sprintf('%s:%d', $type->value, $sourceId);
-                    $item = $dryRunMemory[$memoryKey] ?? null;
-                    $isNew = null === $item;
-                    $item ??= new ItemEntity()
-                        ->setType($type)
-                        ->setSourceId($sourceId);
-                    $dryRunMemory[$memoryKey] = $item;
-                } else {
-                    $memoryKey = sprintf('%s:%d', $type->value, $sourceId);
-                    $item = $writeMemory[$memoryKey] ?? null;
-
-                    if (null === $item) {
-                        $item = $this->itemRepository->findOneByTypeAndSourceId($type, $sourceId);
-                        $isNew = null === $item;
-                        $item ??= new ItemEntity()
-                            ->setType($type)
-                            ->setSourceId($sourceId);
-                        $writeMemory[$memoryKey] = $item;
-                    } else {
-                        $isNew = false;
-                    }
-                }
-
-                $this->itemHydrator->hydrate($item, $row);
-
-                $translationData = $this->translationCatalogBuilder->build($type, $sourceId, $row);
-                $item->setNameKey($translationData['nameKey']);
-                $item->setDescKey($translationData['descKey']);
-                $catalogEn = array_merge($catalogEn, $translationData['catalogEn']);
-                $catalogDe = array_merge($catalogDe, $translationData['catalogDe']);
-
-                $contextResult = $this->contextApplier->apply($item, $sourceId, $context);
-                if (!$contextResult['valid']) {
-                    ++$stats['errors'];
-                    continue;
-                }
-                if (null !== $contextResult['warning']) {
-                    $io->warning($contextResult['warning']);
-                    ++$stats['warnings'];
-                }
-
-                if ($isNew) {
-                    ++$stats['created'];
-                } else {
-                    ++$stats['updated'];
-                }
-
-                if (!$dryRun) {
-                    $this->entityManager->persist($item);
-                    ++$pendingFlush;
-                }
-
-                if (!$dryRun && $pendingFlush >= $batchSize) {
-                    $this->entityManager->flush();
-                    $pendingFlush = 0;
-                }
-            }
-        }
-
-        if (!$dryRun && $pendingFlush > 0) {
-            $this->entityManager->flush();
-        }
-
-        $stats['translations_en'] = count($catalogEn);
-        $stats['translations_de'] = count($catalogDe);
-
-        if (!$dryRun) {
-            $this->translationCatalogWriter->upsert('en', 'items', $catalogEn);
-            $this->translationCatalogWriter->upsert('de', 'items', $catalogDe);
+        foreach ($result->getWarnings() as $warning) {
+            $io->warning($warning);
         }
 
         $io->newLine();
@@ -239,7 +106,7 @@ final class ImportItemsCommand extends Command
             ['Trads DE' => (string) $stats['translations_de']],
         );
 
-        return $stats['errors'] > 0 ? Command::FAILURE : Command::SUCCESS;
+        return $result->hasErrors() ? Command::FAILURE : Command::SUCCESS;
     }
 
 }
