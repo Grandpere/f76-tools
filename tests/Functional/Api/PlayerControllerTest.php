@@ -78,11 +78,11 @@ final class PlayerControllerTest extends WebTestCase
         $client->loginUser($owner);
         $client->jsonRequest('POST', '/api/players', ['name' => 'Owner Player']);
         $created = $this->decodeArrayResponse($client->getResponse()->getContent() ?: '[]');
-        $playerId = $this->readInt($created, 'id');
-        self::assertGreaterThan(0, $playerId);
+        $playerId = $this->readString($created, 'id');
+        self::assertNotSame('', $playerId);
 
         $client->loginUser($other);
-        $client->request('GET', sprintf('/api/players/%d', $playerId));
+        $client->request('GET', sprintf('/api/players/%s', $playerId));
         self::assertSame(404, $client->getResponse()->getStatusCode());
     }
 
@@ -94,18 +94,18 @@ final class PlayerControllerTest extends WebTestCase
 
         $client->jsonRequest('POST', '/api/players', ['name' => 'Old Name']);
         $created = $this->decodeArrayResponse($client->getResponse()->getContent() ?: '[]');
-        $playerId = $this->readInt($created, 'id');
-        self::assertGreaterThan(0, $playerId);
+        $playerId = $this->readString($created, 'id');
+        self::assertNotSame('', $playerId);
 
-        $client->jsonRequest('PATCH', sprintf('/api/players/%d', $playerId), ['name' => 'New Name']);
+        $client->jsonRequest('PATCH', sprintf('/api/players/%s', $playerId), ['name' => 'New Name']);
         self::assertSame(200, $client->getResponse()->getStatusCode());
         $updated = $this->decodeArrayResponse($client->getResponse()->getContent() ?: '[]');
         self::assertSame('New Name', $updated['name'] ?? null);
 
-        $client->request('DELETE', sprintf('/api/players/%d', $playerId));
+        $client->request('DELETE', sprintf('/api/players/%s', $playerId));
         self::assertSame(204, $client->getResponse()->getStatusCode());
 
-        $client->request('GET', sprintf('/api/players/%d', $playerId));
+        $client->request('GET', sprintf('/api/players/%s', $playerId));
         self::assertSame(404, $client->getResponse()->getStatusCode());
     }
 
@@ -132,18 +132,18 @@ final class PlayerControllerTest extends WebTestCase
 
         $client->jsonRequest('POST', '/api/players', ['name' => 'Alpha']);
         $first = $this->decodeArrayResponse($client->getResponse()->getContent() ?: '{}');
-        $firstId = $this->readInt($first, 'id');
+        $firstId = $this->readString($first, 'id');
 
         $client->jsonRequest('POST', '/api/players', ['name' => 'Bravo']);
         $second = $this->decodeArrayResponse($client->getResponse()->getContent() ?: '{}');
-        $secondId = $this->readInt($second, 'id');
+        $secondId = $this->readString($second, 'id');
 
-        $client->jsonRequest('PATCH', sprintf('/api/players/%d', $secondId), ['name' => 'Alpha']);
+        $client->jsonRequest('PATCH', sprintf('/api/players/%s', $secondId), ['name' => 'Alpha']);
         self::assertSame(409, $client->getResponse()->getStatusCode());
         $payload = $this->decodeArrayResponse($client->getResponse()->getContent() ?: '{}');
         self::assertSame('Player name already exists.', $payload['error'] ?? null);
 
-        $client->request('GET', sprintf('/api/players/%d', $firstId));
+        $client->request('GET', sprintf('/api/players/%s', $firstId));
         self::assertSame(200, $client->getResponse()->getStatusCode());
     }
 
@@ -225,13 +225,13 @@ final class PlayerControllerTest extends WebTestCase
     /**
      * @param array<string, mixed> $data
      */
-    private function readInt(array $data, string $key): int
+    private function readString(array $data, string $key): string
     {
         $value = $data[$key] ?? null;
-        if (!is_int($value) && !is_numeric($value)) {
-            return 0;
+        if (!is_string($value)) {
+            return '';
         }
 
-        return (int) $value;
+        return $value;
     }
 }

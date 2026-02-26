@@ -28,7 +28,7 @@ final class PlayerStatsProvider
 
     /**
      * @return array{
-     *     playerId: int|null,
+     *     playerId: string,
      *     overall: array{learned: int, total: int, percent: int},
      *     byType: array{
      *         misc: array{learned: int, total: int, percent: int},
@@ -76,7 +76,7 @@ final class PlayerStatsProvider
         }
 
         return [
-            'playerId' => $player->getId(),
+            'playerId' => $player->getPublicId(),
             'overall' => [
                 'learned' => $learnedAll,
                 'total' => $totalAll,

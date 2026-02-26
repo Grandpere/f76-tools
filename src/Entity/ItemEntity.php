@@ -28,6 +28,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 #[ORM\Table(name: 'item')]
 #[ORM\UniqueConstraint(name: 'uniq_item_type_source_id', columns: ['type', 'source_id'])]
 #[ORM\UniqueConstraint(name: 'uniq_item_name_key', columns: ['name_key'])]
+#[ORM\UniqueConstraint(name: 'uniq_item_public_id', columns: ['public_id'])]
 #[ORM\Index(name: 'idx_item_type_rank', columns: ['type', 'rank'])]
 #[ORM\HasLifecycleCallbacks]
 class ItemEntity implements ItemInterface
@@ -39,6 +40,9 @@ class ItemEntity implements ItemInterface
 
     #[ORM\Column(name: 'source_id')]
     private int $sourceId;
+
+    #[ORM\Column(name: 'public_id', length: 26)]
+    private string $publicId;
 
     #[ORM\Column(length: 16, enumType: ItemTypeEnum::class)]
     private ItemTypeEnum $type;
@@ -138,6 +142,15 @@ class ItemEntity implements ItemInterface
         $this->sourceId = $sourceId;
 
         return $this;
+    }
+
+    public function getPublicId(): string
+    {
+        if (!isset($this->publicId) || '' === $this->publicId) {
+            throw new \LogicException('Item public ID is not initialized.');
+        }
+
+        return $this->publicId;
     }
 
     public function getType(): ItemTypeEnum
@@ -433,12 +446,20 @@ class ItemEntity implements ItemInterface
         $now = new DateTimeImmutable();
         $this->createdAt = $now;
         $this->updatedAt = $now;
+        if (!isset($this->publicId) || '' === $this->publicId) {
+            $this->publicId = self::generatePublicId();
+        }
     }
 
     #[ORM\PreUpdate]
     public function onPreUpdate(): void
     {
         $this->updatedAt = new DateTimeImmutable();
+    }
+
+    private static function generatePublicId(): string
+    {
+        return strtoupper(substr(bin2hex(random_bytes(16)), 0, 26));
     }
 
     public function getCreatedAt(): DateTimeImmutable

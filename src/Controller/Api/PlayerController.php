@@ -41,7 +41,7 @@ final class PlayerController extends AbstractController
         $players = $this->playerRepository->findByUser($user);
 
         $payload = array_map(static fn (PlayerEntity $player): array => [
-            'id' => $player->getId(),
+            'id' => $player->getPublicId(),
             'name' => $player->getName(),
             'createdAt' => $player->getCreatedAt()->format(DATE_ATOM),
             'updatedAt' => $player->getUpdatedAt()->format(DATE_ATOM),
@@ -73,35 +73,35 @@ final class PlayerController extends AbstractController
         }
 
         return $this->json([
-            'id' => $player->getId(),
+            'id' => $player->getPublicId(),
             'name' => $player->getName(),
             'createdAt' => $player->getCreatedAt()->format(DATE_ATOM),
             'updatedAt' => $player->getUpdatedAt()->format(DATE_ATOM),
         ], JsonResponse::HTTP_CREATED);
     }
 
-    #[Route('/{id<\d+>}', name: 'api_players_show', methods: ['GET'])]
-    public function show(int $id): JsonResponse
+    #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_show', methods: ['GET'])]
+    public function show(string $id): JsonResponse
     {
         $user = $this->getAuthenticatedUser();
-        $player = $this->playerRepository->findOneByIdAndUser($id, $user);
+        $player = $this->playerRepository->findOneByPublicIdAndUser($id, $user);
         if (null === $player) {
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
 
         return $this->json([
-            'id' => $player->getId(),
+            'id' => $player->getPublicId(),
             'name' => $player->getName(),
             'createdAt' => $player->getCreatedAt()->format(DATE_ATOM),
             'updatedAt' => $player->getUpdatedAt()->format(DATE_ATOM),
         ]);
     }
 
-    #[Route('/{id<\d+>}', name: 'api_players_update', methods: ['PATCH'])]
-    public function update(int $id, Request $request): JsonResponse
+    #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_update', methods: ['PATCH'])]
+    public function update(string $id, Request $request): JsonResponse
     {
         $user = $this->getAuthenticatedUser();
-        $player = $this->playerRepository->findOneByIdAndUser($id, $user);
+        $player = $this->playerRepository->findOneByPublicIdAndUser($id, $user);
         if (null === $player) {
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
@@ -120,18 +120,18 @@ final class PlayerController extends AbstractController
         }
 
         return $this->json([
-            'id' => $player->getId(),
+            'id' => $player->getPublicId(),
             'name' => $player->getName(),
             'createdAt' => $player->getCreatedAt()->format(DATE_ATOM),
             'updatedAt' => $player->getUpdatedAt()->format(DATE_ATOM),
         ]);
     }
 
-    #[Route('/{id<\d+>}', name: 'api_players_delete', methods: ['DELETE'])]
-    public function delete(int $id): JsonResponse
+    #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_delete', methods: ['DELETE'])]
+    public function delete(string $id): JsonResponse
     {
         $user = $this->getAuthenticatedUser();
-        $player = $this->playerRepository->findOneByIdAndUser($id, $user);
+        $player = $this->playerRepository->findOneByPublicIdAndUser($id, $user);
         if (null === $player) {
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }

@@ -31,9 +31,9 @@ final class PlayerItemKnowledgeManager
     ) {
     }
 
-    public function resolveOwnedPlayer(int $playerId, UserEntity $user): ?PlayerEntity
+    public function resolveOwnedPlayer(string $playerId, UserEntity $user): ?PlayerEntity
     {
-        return $this->playerFinder->findOneByIdAndUser($playerId, $user);
+        return $this->playerFinder->findOneByPublicIdAndUser($playerId, $user);
     }
 
     public function setLearned(PlayerEntity $player, ItemEntity $item): void

@@ -243,7 +243,7 @@ export default class extends Controller {
             return;
         }
 
-        this.items = this.items.map((item) => (Number(item.id) === Number(itemId)
+        this.items = this.items.map((item) => (String(item.id) === String(itemId)
             ? { ...item, learned: shouldBeLearned }
             : item));
         this.renderItems();

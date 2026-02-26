@@ -39,11 +39,11 @@ final class PlayerItemKnowledgeManagerTest extends TestCase
 
         $playerFinder
             ->expects(self::once())
-            ->method('findOneByIdAndUser')
-            ->with(42, $user)
+            ->method('findOneByPublicIdAndUser')
+            ->with('01ARZ3NDEKTSV4RRFFQ69G5FAV', $user)
             ->willReturn($player);
 
-        self::assertSame($player, $manager->resolveOwnedPlayer(42, $user));
+        self::assertSame($player, $manager->resolveOwnedPlayer('01ARZ3NDEKTSV4RRFFQ69G5FAV', $user));
     }
 
     public function testSetLearnedCreatesKnowledgeWhenMissing(): void

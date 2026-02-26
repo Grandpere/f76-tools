@@ -67,6 +67,13 @@ final class ItemEntityRepository extends ServiceEntityRepository
         return $item instanceof ItemEntity ? $item : null;
     }
 
+    public function findOneByPublicId(string $publicId): ?ItemEntity
+    {
+        $item = $this->findOneBy(['publicId' => $publicId]);
+
+        return $item instanceof ItemEntity ? $item : null;
+    }
+
     public function countAll(): int
     {
         $count = $this->createQueryBuilder('i')

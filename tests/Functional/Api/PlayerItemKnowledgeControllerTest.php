@@ -50,7 +50,7 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         $owner = $this->createUser('owner-auth@example.com');
         $player = $this->createPlayer($owner, 'Owner');
 
-        $this->browser()->request('GET', sprintf('/api/players/%d/items', $player->getId()));
+        $this->browser()->request('GET', sprintf('/api/players/%s/items', $player->getPublicId()));
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('/login', (string) $this->browser()->getResponse()->headers->get('location'));
@@ -65,25 +65,25 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
 
         $this->browser()->loginUser($user);
 
-        $this->browser()->request('GET', sprintf('/api/players/%d/items?type=BOOK', $player->getId()));
+        $this->browser()->request('GET', sprintf('/api/players/%s/items?type=BOOK', $player->getPublicId()));
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $before = $this->decodeListResponse($this->browser()->getResponse()->getContent() ?: '[]');
         self::assertCount(1, $before);
         self::assertFalse($this->readBool($before[0] ?? [], 'learned'));
 
-        $this->browser()->request('PUT', sprintf('/api/players/%d/items/%d/learned', $player->getId(), $book->getId()));
+        $this->browser()->request('PUT', sprintf('/api/players/%s/items/%s/learned', $player->getPublicId(), $book->getPublicId()));
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $setPayload = $this->decodeArrayResponse($this->browser()->getResponse()->getContent() ?: '[]');
         self::assertTrue($this->readBool($setPayload, 'learned'));
 
-        $this->browser()->request('GET', sprintf('/api/players/%d/items?type=BOOK', $player->getId()));
+        $this->browser()->request('GET', sprintf('/api/players/%s/items?type=BOOK', $player->getPublicId()));
         $afterLearn = $this->decodeListResponse($this->browser()->getResponse()->getContent() ?: '[]');
         self::assertTrue($this->readBool($afterLearn[0] ?? [], 'learned'));
 
-        $this->browser()->request('DELETE', sprintf('/api/players/%d/items/%d/learned', $player->getId(), $book->getId()));
+        $this->browser()->request('DELETE', sprintf('/api/players/%s/items/%s/learned', $player->getPublicId(), $book->getPublicId()));
         self::assertSame(204, $this->browser()->getResponse()->getStatusCode());
 
-        $this->browser()->request('GET', sprintf('/api/players/%d/items?type=BOOK', $player->getId()));
+        $this->browser()->request('GET', sprintf('/api/players/%s/items?type=BOOK', $player->getPublicId()));
         $afterUnlearn = $this->decodeListResponse($this->browser()->getResponse()->getContent() ?: '[]');
         self::assertFalse($this->readBool($afterUnlearn[0] ?? [], 'learned'));
     }
@@ -96,7 +96,7 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         $book = $this->createItem(202, ItemTypeEnum::BOOK, null, 'item.book.202.name');
 
         $this->browser()->loginUser($other);
-        $this->browser()->request('PUT', sprintf('/api/players/%d/items/%d/learned', $player->getId(), $book->getId()));
+        $this->browser()->request('PUT', sprintf('/api/players/%s/items/%s/learned', $player->getPublicId(), $book->getPublicId()));
 
         self::assertSame(404, $this->browser()->getResponse()->getStatusCode());
     }
@@ -107,7 +107,7 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         $player = $this->createPlayer($owner, 'Owner');
 
         $this->browser()->loginUser($owner);
-        $this->browser()->request('GET', sprintf('/api/players/%d/items?type=INVALID', $player->getId()));
+        $this->browser()->request('GET', sprintf('/api/players/%s/items?type=INVALID', $player->getPublicId()));
 
         self::assertSame(400, $this->browser()->getResponse()->getStatusCode());
     }
@@ -120,7 +120,7 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         $this->createItem(411, ItemTypeEnum::BOOK, null, 'catalog.beta.name');
 
         $this->browser()->loginUser($owner);
-        $this->browser()->request('GET', sprintf('/api/players/%d/items?type=BOOK&q=alpha', $player->getId()));
+        $this->browser()->request('GET', sprintf('/api/players/%s/items?type=BOOK&q=alpha', $player->getPublicId()));
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $payload = $this->decodeListResponse($this->browser()->getResponse()->getContent() ?: '[]');
@@ -137,7 +137,7 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         $this->createItem(501, ItemTypeEnum::BOOK, null, 'catalog.new.name', null, 250, 188, true);
 
         $this->browser()->loginUser($owner);
-        $this->browser()->request('GET', sprintf('/api/players/%d/items?q=catalog.new.name', $player->getId()));
+        $this->browser()->request('GET', sprintf('/api/players/%s/items?q=catalog.new.name', $player->getPublicId()));
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $payload = $this->decodeListResponse($this->browser()->getResponse()->getContent() ?: '[]');
@@ -160,7 +160,7 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         $item->setDropSourcesHtml('<img src="/img/x.png" title="Burning Springs" />');
         $this->entityManager?->flush();
 
-        $this->browser()->request('GET', sprintf('/api/players/%d/items?q=catalog.new.name', $player->getId()));
+        $this->browser()->request('GET', sprintf('/api/players/%s/items?q=catalog.new.name', $player->getPublicId()));
         $payload2 = $this->decodeListResponse($this->browser()->getResponse()->getContent() ?: '[]');
         self::assertCount(1, $payload2);
         $second = $payload2[0] ?? [];
@@ -184,7 +184,7 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         $this->entityManager?->flush();
 
         $this->browser()->loginUser($owner);
-        $this->browser()->request('GET', sprintf('/api/players/%d/items?q=catalog.misc.relations.name', $player->getId()));
+        $this->browser()->request('GET', sprintf('/api/players/%s/items?q=catalog.misc.relations.name', $player->getPublicId()));
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $payload = $this->decodeListResponse($this->browser()->getResponse()->getContent() ?: '[]');

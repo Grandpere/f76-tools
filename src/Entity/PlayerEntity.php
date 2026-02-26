@@ -21,6 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PlayerEntityRepository::class)]
 #[ORM\Table(name: 'player')]
 #[ORM\UniqueConstraint(name: 'uniq_player_user_name', columns: ['user_id', 'name'])]
+#[ORM\UniqueConstraint(name: 'uniq_player_public_id', columns: ['public_id'])]
 #[ORM\HasLifecycleCallbacks]
 class PlayerEntity
 {
@@ -35,6 +36,9 @@ class PlayerEntity
 
     #[ORM\Column(length: 120)]
     private string $name;
+
+    #[ORM\Column(name: 'public_id', length: 26)]
+    private string $publicId;
 
     #[ORM\Column(name: 'created_at', type: Types::DATETIME_IMMUTABLE)]
     private DateTimeImmutable $createdAt;
@@ -75,6 +79,15 @@ class PlayerEntity
         return $this;
     }
 
+    public function getPublicId(): string
+    {
+        if (!isset($this->publicId) || '' === $this->publicId) {
+            throw new \LogicException('Player public ID is not initialized.');
+        }
+
+        return $this->publicId;
+    }
+
     public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;
@@ -91,6 +104,9 @@ class PlayerEntity
         $now = new DateTimeImmutable();
         $this->createdAt = $now;
         $this->updatedAt = $now;
+        if (!isset($this->publicId) || '' === $this->publicId) {
+            $this->publicId = self::generatePublicId();
+        }
     }
 
     #[ORM\PreUpdate]
@@ -98,5 +114,9 @@ class PlayerEntity
     {
         $this->updatedAt = new DateTimeImmutable();
     }
-}
 
+    private static function generatePublicId(): string
+    {
+        return strtoupper(substr(bin2hex(random_bytes(16)), 0, 26));
+    }
+}

@@ -52,10 +52,10 @@ final class PlayerKnowledgeTransferControllerTest extends WebTestCase
         $misc = $this->createItem(902, ItemTypeEnum::MISC, 1, 'item.misc.902.name');
 
         $this->browser()->loginUser($user);
-        $this->browser()->request('PUT', sprintf('/api/players/%d/items/%d/learned', $player->getId(), $book->getId()));
-        $this->browser()->request('PUT', sprintf('/api/players/%d/items/%d/learned', $player->getId(), $misc->getId()));
+        $this->browser()->request('PUT', sprintf('/api/players/%s/items/%s/learned', $player->getPublicId(), $book->getPublicId()));
+        $this->browser()->request('PUT', sprintf('/api/players/%s/items/%s/learned', $player->getPublicId(), $misc->getPublicId()));
 
-        $this->browser()->request('GET', sprintf('/api/players/%d/knowledge/export', $player->getId()));
+        $this->browser()->request('GET', sprintf('/api/players/%s/knowledge/export', $player->getPublicId()));
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $payload = $this->decodeMap($this->browser()->getResponse()->getContent() ?: '{}');
         $learnedItems = $this->readList($payload, 'learnedItems');
@@ -73,17 +73,17 @@ final class PlayerKnowledgeTransferControllerTest extends WebTestCase
         $bookB = $this->createItem(912, ItemTypeEnum::BOOK, null, 'item.book.912.name');
 
         $this->browser()->loginUser($user);
-        $this->browser()->request('PUT', sprintf('/api/players/%d/items/%d/learned', $player->getId(), $bookA->getId()));
+        $this->browser()->request('PUT', sprintf('/api/players/%s/items/%s/learned', $player->getPublicId(), $bookA->getPublicId()));
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
 
-        $this->browser()->jsonRequest('POST', sprintf('/api/players/%d/knowledge/import', $player->getId()), [
+        $this->browser()->jsonRequest('POST', sprintf('/api/players/%s/knowledge/import', $player->getPublicId()), [
             'learnedItems' => [
                 ['type' => 'BOOK', 'sourceId' => 912],
             ],
         ]);
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
 
-        $this->browser()->request('GET', sprintf('/api/players/%d/items?type=BOOK', $player->getId()));
+        $this->browser()->request('GET', sprintf('/api/players/%s/items?type=BOOK', $player->getPublicId()));
         $rows = $this->decodeList($this->browser()->getResponse()->getContent() ?: '[]');
         self::assertSame([
             911 => false,
@@ -99,10 +99,10 @@ final class PlayerKnowledgeTransferControllerTest extends WebTestCase
         $miscB = $this->createItem(922, ItemTypeEnum::MISC, 1, 'item.misc.922.name');
 
         $this->browser()->loginUser($user);
-        $this->browser()->request('PUT', sprintf('/api/players/%d/items/%d/learned', $player->getId(), $miscA->getId()));
+        $this->browser()->request('PUT', sprintf('/api/players/%s/items/%s/learned', $player->getPublicId(), $miscA->getPublicId()));
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
 
-        $this->browser()->jsonRequest('POST', sprintf('/api/players/%d/knowledge/import', $player->getId()), [
+        $this->browser()->jsonRequest('POST', sprintf('/api/players/%s/knowledge/import', $player->getPublicId()), [
             'replace' => false,
             'learnedItems' => [
                 ['type' => 'MISC', 'sourceId' => 922],
@@ -110,7 +110,7 @@ final class PlayerKnowledgeTransferControllerTest extends WebTestCase
         ]);
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
 
-        $this->browser()->request('GET', sprintf('/api/players/%d/items?type=MISC', $player->getId()));
+        $this->browser()->request('GET', sprintf('/api/players/%s/items?type=MISC', $player->getPublicId()));
         $rows = $this->decodeList($this->browser()->getResponse()->getContent() ?: '[]');
         self::assertSame([
             921 => true,
@@ -124,10 +124,10 @@ final class PlayerKnowledgeTransferControllerTest extends WebTestCase
         $player = $this->createPlayer($user, 'Main');
         $bookKnown = $this->createItem(931, ItemTypeEnum::BOOK, null, 'item.book.931.name');
         $this->browser()->loginUser($user);
-        $this->browser()->request('PUT', sprintf('/api/players/%d/items/%d/learned', $player->getId(), $bookKnown->getId()));
+        $this->browser()->request('PUT', sprintf('/api/players/%s/items/%s/learned', $player->getPublicId(), $bookKnown->getPublicId()));
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
 
-        $this->browser()->jsonRequest('POST', sprintf('/api/players/%d/knowledge/preview-import', $player->getId()), [
+        $this->browser()->jsonRequest('POST', sprintf('/api/players/%s/knowledge/preview-import', $player->getPublicId()), [
             'version' => 1,
             'replace' => true,
             'learnedItems' => [
@@ -150,7 +150,7 @@ final class PlayerKnowledgeTransferControllerTest extends WebTestCase
         $player = $this->createPlayer($user, 'Main');
         $this->browser()->loginUser($user);
 
-        $this->browser()->jsonRequest('POST', sprintf('/api/players/%d/knowledge/import', $player->getId()), [
+        $this->browser()->jsonRequest('POST', sprintf('/api/players/%s/knowledge/import', $player->getPublicId()), [
             'version' => 2,
             'learnedItems' => [],
         ]);
@@ -164,10 +164,10 @@ final class PlayerKnowledgeTransferControllerTest extends WebTestCase
         $player = $this->createPlayer($owner, 'Owner');
 
         $this->browser()->loginUser($other);
-        $this->browser()->request('GET', sprintf('/api/players/%d/knowledge/export', $player->getId()));
+        $this->browser()->request('GET', sprintf('/api/players/%s/knowledge/export', $player->getPublicId()));
         self::assertSame(404, $this->browser()->getResponse()->getStatusCode());
 
-        $this->browser()->jsonRequest('POST', sprintf('/api/players/%d/knowledge/import', $player->getId()), [
+        $this->browser()->jsonRequest('POST', sprintf('/api/players/%s/knowledge/import', $player->getPublicId()), [
             'learnedItems' => [],
         ]);
         self::assertSame(404, $this->browser()->getResponse()->getStatusCode());

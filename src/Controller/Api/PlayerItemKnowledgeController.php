@@ -27,7 +27,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('/api/players/{playerId<\d+>}/items')]
+#[Route('/api/players/{playerId<[A-Za-z0-9]{26}>}/items')]
 final class PlayerItemKnowledgeController extends AbstractController
 {
     public function __construct(
@@ -39,7 +39,7 @@ final class PlayerItemKnowledgeController extends AbstractController
     }
 
     #[Route('', name: 'api_player_items_index', methods: ['GET'])]
-    public function index(int $playerId, Request $request): JsonResponse
+    public function index(string $playerId, Request $request): JsonResponse
     {
         $player = $this->resolveOwnedPlayer($playerId);
         if (null === $player) {
@@ -79,14 +79,14 @@ final class PlayerItemKnowledgeController extends AbstractController
         return $this->json($payload);
     }
 
-    #[Route('/{itemId<\d+>}/learned', name: 'api_player_items_learned_set', methods: ['PUT'])]
-    public function setLearned(int $playerId, int $itemId): JsonResponse
+    #[Route('/{itemId<[A-Za-z0-9]{26}>}/learned', name: 'api_player_items_learned_set', methods: ['PUT'])]
+    public function setLearned(string $playerId, string $itemId): JsonResponse
     {
         $player = $this->resolveOwnedPlayer($playerId);
         if (null === $player) {
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
-        $item = $this->itemRepository->findOneById($itemId);
+        $item = $this->itemRepository->findOneByPublicId($itemId);
         if (null === $item) {
             return $this->json(['error' => 'Item not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
@@ -96,14 +96,14 @@ final class PlayerItemKnowledgeController extends AbstractController
         return $this->json($this->toItemPayload($item, true));
     }
 
-    #[Route('/{itemId<\d+>}/learned', name: 'api_player_items_learned_unset', methods: ['DELETE'])]
-    public function unsetLearned(int $playerId, int $itemId): JsonResponse
+    #[Route('/{itemId<[A-Za-z0-9]{26}>}/learned', name: 'api_player_items_learned_unset', methods: ['DELETE'])]
+    public function unsetLearned(string $playerId, string $itemId): JsonResponse
     {
         $player = $this->resolveOwnedPlayer($playerId);
         if (null === $player) {
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
-        $item = $this->itemRepository->findOneById($itemId);
+        $item = $this->itemRepository->findOneByPublicId($itemId);
         if (null === $item) {
             return $this->json(['error' => 'Item not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
@@ -123,7 +123,7 @@ final class PlayerItemKnowledgeController extends AbstractController
         return $user;
     }
 
-    private function resolveOwnedPlayer(int $playerId): ?PlayerEntity
+    private function resolveOwnedPlayer(string $playerId): ?PlayerEntity
     {
         $user = $this->getAuthenticatedUser();
 
@@ -155,7 +155,7 @@ final class PlayerItemKnowledgeController extends AbstractController
 
     /**
      * @return array{
-     *     id: int|null,
+     *     id: string,
      *     sourceId: int,
      *     type: string,
      *     nameKey: string,
@@ -198,7 +198,7 @@ final class PlayerItemKnowledgeController extends AbstractController
         }
 
         return [
-            'id' => $item->getId(),
+            'id' => $item->getPublicId(),
             'sourceId' => $item->getSourceId(),
             'type' => $item->getType()->value,
             'nameKey' => $item->getNameKey(),

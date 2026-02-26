@@ -18,5 +18,5 @@ use App\Entity\UserEntity;
 
 interface PlayerByOwnerFinderInterface
 {
-    public function findOneByIdAndUser(int $id, UserEntity $user): ?PlayerEntity;
+    public function findOneByPublicIdAndUser(string $publicId, UserEntity $user): ?PlayerEntity;
 }

@@ -30,7 +30,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-#[Route('/api/players/{playerId<\d+>}/knowledge')]
+#[Route('/api/players/{playerId<[A-Za-z0-9]{26}>}/knowledge')]
 final class PlayerKnowledgeTransferController extends AbstractController
 {
     private const IMPORT_VERSION = 1;
@@ -44,7 +44,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
     }
 
     #[Route('/export', name: 'api_player_knowledge_export', methods: ['GET'])]
-    public function export(int $playerId): JsonResponse
+    public function export(string $playerId): JsonResponse
     {
         $player = $this->resolveOwnedPlayer($playerId);
         if (null === $player) {
@@ -62,14 +62,14 @@ final class PlayerKnowledgeTransferController extends AbstractController
 
         return $this->json([
             'version' => 1,
-            'playerId' => $player->getId(),
+            'playerId' => $player->getPublicId(),
             'exportedAt' => (new DateTimeImmutable())->format(DATE_ATOM),
             'learnedItems' => $payload,
         ]);
     }
 
     #[Route('/import', name: 'api_player_knowledge_import', methods: ['POST'])]
-    public function import(int $playerId, Request $request): JsonResponse
+    public function import(string $playerId, Request $request): JsonResponse
     {
         $player = $this->resolveOwnedPlayer($playerId);
         if (null === $player) {
@@ -142,7 +142,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
     }
 
     #[Route('/preview-import', name: 'api_player_knowledge_preview_import', methods: ['POST'])]
-    public function previewImport(int $playerId, Request $request): JsonResponse
+    public function previewImport(string $playerId, Request $request): JsonResponse
     {
         $player = $this->resolveOwnedPlayer($playerId);
         if (null === $player) {
@@ -183,7 +183,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
         ]);
     }
 
-    private function resolveOwnedPlayer(int $playerId): ?PlayerEntity
+    private function resolveOwnedPlayer(string $playerId): ?PlayerEntity
     {
         $user = $this->getUser();
         if (!$user instanceof UserEntity) {

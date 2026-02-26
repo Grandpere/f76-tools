@@ -64,7 +64,7 @@ final class PlayerStatsControllerTest extends WebTestCase
         $this->learn($player, $bookList1And4);
 
         $this->browser()->loginUser($user);
-        $this->browser()->request('GET', sprintf('/api/players/%d/stats', $player->getId()));
+        $this->browser()->request('GET', sprintf('/api/players/%s/stats', $player->getPublicId()));
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $payload = $this->decodeArray($this->browser()->getResponse()->getContent() ?: '{}');
@@ -116,7 +116,7 @@ final class PlayerStatsControllerTest extends WebTestCase
         $player = $this->createPlayer($owner, 'Owner');
 
         $this->browser()->loginUser($other);
-        $this->browser()->request('GET', sprintf('/api/players/%d/stats', $player->getId()));
+        $this->browser()->request('GET', sprintf('/api/players/%s/stats', $player->getPublicId()));
 
         self::assertSame(404, $this->browser()->getResponse()->getStatusCode());
     }

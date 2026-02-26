@@ -38,7 +38,7 @@ final class DashboardController extends AbstractController
         $players = $this->playerRepository->findByUser($user);
         $activePlayerId = null;
         if ([] !== $players) {
-            $activePlayerId = $players[0]->getId();
+            $activePlayerId = $players[0]->getPublicId();
         }
 
         return $this->render('dashboard/index.html.twig', [

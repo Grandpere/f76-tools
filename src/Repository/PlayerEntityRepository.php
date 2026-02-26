@@ -46,12 +46,12 @@ final class PlayerEntityRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function findOneByIdAndUser(int $id, UserEntity $user): ?PlayerEntity
+    public function findOneByPublicIdAndUser(string $publicId, UserEntity $user): ?PlayerEntity
     {
         $result = $this->createQueryBuilder('p')
-            ->andWhere('p.id = :id')
+            ->andWhere('p.publicId = :publicId')
             ->andWhere('p.user = :user')
-            ->setParameter('id', $id)
+            ->setParameter('publicId', $publicId)
             ->setParameter('user', $user)
             ->getQuery()
             ->getOneOrNullResult();

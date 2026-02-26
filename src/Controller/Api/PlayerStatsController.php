@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-#[Route('/api/players/{playerId<\d+>}/stats')]
+#[Route('/api/players/{playerId<[A-Za-z0-9]{26}>}/stats')]
 final class PlayerStatsController extends AbstractController
 {
     public function __construct(
@@ -31,7 +31,7 @@ final class PlayerStatsController extends AbstractController
     }
 
     #[Route('', name: 'api_player_stats_show', methods: ['GET'])]
-    public function __invoke(int $playerId): JsonResponse
+    public function __invoke(string $playerId): JsonResponse
     {
         $user = $this->getUser();
         if (!$user instanceof UserEntity) {

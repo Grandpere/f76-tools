@@ -142,6 +142,10 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - page `GET/POST /contact` ajoutee (email, sujet, message, CSRF).
   - protections anti-abus alignees auth: honeypot, rate limit cache (5/5min), Turnstile optionnel.
   - livraison actuelle: email direct via `MailerInterface` vers `CONTACT_RECIPIENT_EMAIL` (defaut `no-reply@f76.local`), pas de stockage DB pour l instant.
+- API publique:
+  - `Player` et `Item` exposes via `publicId` opaque (26 chars) plutot que `id` incrementaux dans URLs/payloads front.
+  - routes API migrees vers `/{playerId}` et `/{itemId}` opaques; lookup serveur par `public_id`.
+  - migration SQL ajoute `public_id` (unique, non-null) sur `player` et `item` avec backfill pour existants.
 - Verification email:
   - inscription met `isEmailVerified=false`, cree un token de verification (24h) et envoie un email avec lien.
   - route publique `GET /verify-email/{token}` valide le compte.
