@@ -21,5 +21,10 @@ services:
 
     App\Contract\UserByEmailFinderInterface: '@App\Repository\UserEntityRepository'
 
+    App\Service\TurnstileVerifier:
+        arguments:
+            $siteKey: '%env(string:TURNSTILE_SITE_KEY)%'
+            $secretKey: '%env(string:TURNSTILE_SECRET_KEY)%'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

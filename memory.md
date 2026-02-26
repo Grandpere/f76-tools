@@ -16,6 +16,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - Garder trace en doc des chantiers securite/auth a venir (verification email, forgot password public, anti-bot, contact) pour ne pas les oublier.
 - Ajouter aussi la hardening des URLs (moins de query params sensibles, IDs moins previsibles, URLs signees/temporaires) dans le backlog securite.
 - Ajouter au backlog une vue Minerva dediee (bloc ou page) avec logique temporelle de rotation (`startsAt`/`endsAt`) pour apparition/disparition.
+- Si une fonctionnalite necessite une nouvelle dependance, demander validation utilisateur avant ajout (ne pas contourner en reinventant la roue sans accord).
 
 ## Decisions techniques prises
 - `Item` stocke des cles de traduction (`nameKey`, `descKey`) et non les textes EN/DE en base.
@@ -146,6 +147,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - message utilisateur generic en cas de limite atteinte.
   - throttling login ajoute sur echec (subscriber security): increment sur `LoginFailureEvent`, reset sur `LoginSuccessEvent`, blocage pre-auth sur `POST /login` au-dela du seuil.
   - honeypot serveur ajoute sur formulaires `register` / `forgot-password` / `resend-verification` (champ cache `website`).
+  - Turnstile integre sur `register` / `forgot-password` / `resend-verification` via `TurnstileVerifier`; actif seulement si `TURNSTILE_SITE_KEY` + `TURNSTILE_SECRET_KEY` renseignes.
 - Audit admin:
   - table `admin_audit_log` pour tracer les actions sensibles de backoffice users.
   - actions tracees: `user_toggle_active`, `user_toggle_admin`, `user_generate_reset_link`.

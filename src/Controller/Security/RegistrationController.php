@@ -16,6 +16,7 @@ namespace App\Controller\Security;
 use App\Entity\UserEntity;
 use App\Repository\UserEntityRepository;
 use App\Service\AuthRequestThrottler;
+use App\Service\TurnstileVerifier;
 use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -45,6 +46,7 @@ final class RegistrationController extends AbstractController
         private readonly TranslatorInterface $translator,
         private readonly MailerInterface $mailer,
         private readonly AuthRequestThrottler $requestThrottler,
+        private readonly TurnstileVerifier $turnstileVerifier,
     ) {
     }
 
@@ -64,6 +66,11 @@ final class RegistrationController extends AbstractController
             }
             if ('' !== trim((string) $request->request->get('website', ''))) {
                 $this->addFlash('warning', 'security.auth.flash.rate_limited');
+
+                return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
+            }
+            if (!$this->turnstileVerifier->verify((string) $request->request->get('cf-turnstile-response', ''), $request->getClientIp())) {
+                $this->addFlash('warning', 'security.auth.flash.captcha_invalid');
 
                 return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
             }
@@ -144,6 +151,8 @@ final class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_login', ['locale' => $request->getLocale()]);
         }
 
-        return $this->render('security/register.html.twig');
+        return $this->render('security/register.html.twig', [
+            'captchaSiteKey' => $this->turnstileVerifier->getSiteKey(),
+        ]);
     }
 }

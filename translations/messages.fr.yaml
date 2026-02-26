@@ -110,6 +110,7 @@ security.login.to_register: Pas encore de compte ? S inscrire
 security.login.to_forgot: Mot de passe oublie ?
 security.login.to_resend: Renvoyer l email de verification
 security.auth.flash.rate_limited: Trop de tentatives. Merci de patienter quelques minutes puis de reessayer.
+security.auth.flash.captcha_invalid: Echec de validation du CAPTCHA. Merci de reessayer.
 
 security.register.page_title: Inscription
 security.register.title: Inscription

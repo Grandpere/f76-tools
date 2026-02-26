@@ -110,6 +110,7 @@ security.login.to_register: No account yet? Register
 security.login.to_forgot: Forgot password?
 security.login.to_resend: Resend verification email
 security.auth.flash.rate_limited: Too many attempts. Please wait a few minutes and try again.
+security.auth.flash.captcha_invalid: CAPTCHA validation failed. Please try again.
 
 security.register.page_title: Register
 security.register.title: Register

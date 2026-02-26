@@ -54,6 +54,9 @@
                 </label>
 
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
+                {% if captchaSiteKey %}
+                    <div class="cf-turnstile" data-sitekey="{{ captchaSiteKey }}"></div>
+                {% endif %}
 
                 <button type="submit">{{ 'security.register.submit'|trans }}</button>
             </form>
@@ -63,4 +66,7 @@
             </p>
         </section>
     </main>
+    {% if captchaSiteKey %}
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    {% endif %}
 {% endblock %}
