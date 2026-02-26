@@ -25,24 +25,22 @@ final class AuthRequestThrottler
 
     public function hitAndIsLimited(string $scope, ?string $clientIp, ?string $email, int $maxAttempts, int $windowSeconds): bool
     {
+        $this->hit($scope, $clientIp, $email, $windowSeconds);
+
+        return $this->isLimited($scope, $clientIp, $email, $maxAttempts);
+    }
+
+    public function hit(string $scope, ?string $clientIp, ?string $email, int $windowSeconds): void
+    {
         $normalizedScope = trim($scope);
         if ('' === $normalizedScope) {
             throw new \InvalidArgumentException('Scope must not be empty.');
-        }
-        if ($maxAttempts < 1) {
-            throw new \InvalidArgumentException('maxAttempts must be >= 1.');
         }
         if ($windowSeconds < 1) {
             throw new \InvalidArgumentException('windowSeconds must be >= 1.');
         }
 
-        $ipPart = trim((string) $clientIp);
-        if ('' === $ipPart) {
-            $ipPart = 'unknown';
-        }
-        $emailPart = mb_strtolower(trim((string) $email));
-
-        $key = sprintf('auth_throttle_%s_%s', $normalizedScope, hash('sha256', $ipPart.'|'.$emailPart));
+        $key = $this->buildKey($normalizedScope, $clientIp, $email);
         $now = time();
         $count = 1;
         $expiresAt = $now + $windowSeconds;
@@ -68,7 +66,56 @@ final class AuthRequestThrottler
         ]);
         $item->expiresAt((new DateTimeImmutable())->setTimestamp($expiresAt));
         $this->cachePool->save($item);
+    }
 
-        return $count > $maxAttempts;
+    public function isLimited(string $scope, ?string $clientIp, ?string $email, int $maxAttempts): bool
+    {
+        $normalizedScope = trim($scope);
+        if ('' === $normalizedScope) {
+            throw new \InvalidArgumentException('Scope must not be empty.');
+        }
+        if ($maxAttempts < 1) {
+            throw new \InvalidArgumentException('maxAttempts must be >= 1.');
+        }
+
+        $key = $this->buildKey($normalizedScope, $clientIp, $email);
+        $item = $this->cachePool->getItem($key);
+        if (!$item->isHit()) {
+            return false;
+        }
+
+        $value = $item->get();
+        if (!is_array($value)
+            || !array_key_exists('count', $value)
+            || !array_key_exists('expiresAt', $value)
+            || !is_int($value['count'])
+            || !is_int($value['expiresAt'])
+            || $value['expiresAt'] <= time()
+        ) {
+            return false;
+        }
+
+        return $value['count'] > $maxAttempts;
+    }
+
+    public function clear(string $scope, ?string $clientIp, ?string $email): void
+    {
+        $normalizedScope = trim($scope);
+        if ('' === $normalizedScope) {
+            throw new \InvalidArgumentException('Scope must not be empty.');
+        }
+
+        $this->cachePool->deleteItem($this->buildKey($normalizedScope, $clientIp, $email));
+    }
+
+    private function buildKey(string $scope, ?string $clientIp, ?string $email): string
+    {
+        $ipPart = trim((string) $clientIp);
+        if ('' === $ipPart) {
+            $ipPart = 'unknown';
+        }
+        $emailPart = mb_strtolower(trim((string) $email));
+
+        return sprintf('auth_throttle_%s_%s', $scope, hash('sha256', $ipPart.'|'.$emailPart));
     }
 }

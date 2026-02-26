@@ -100,6 +100,24 @@ final class LoginLogoutTest extends WebTestCase
         self::assertCount(1, $this->browser()->getCrawler()->filter('input[name="_username"]'));
     }
 
+    public function testLoginIsRateLimitedAfterRepeatedFailures(): void
+    {
+        $user = $this->createUser('security-ratelimit@example.com', 'secret123');
+
+        for ($attempt = 1; $attempt <= 6; ++$attempt) {
+            $crawler = $this->browser()->request('GET', '/login');
+            $form = $crawler->filter('form')->form([
+                '_username' => $user->getEmail(),
+                '_password' => 'wrong-password',
+            ]);
+            $this->browser()->submit($form);
+            self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+            $this->browser()->followRedirect();
+        }
+
+        self::assertStringContainsString('too many attempts', mb_strtolower($this->browser()->getResponse()->getContent() ?: ''));
+    }
+
     private function createUser(string $email, string $plainPassword, bool $isEmailVerified = true): UserEntity
     {
         $hasher = $this->browser()->getContainer()->get(UserPasswordHasherInterface::class);

@@ -130,9 +130,9 @@ Permettre a un utilisateur authentifie de:
   - [x] generation + envoi token reset avec expiration,
   - [x] conservation du flow final `GET/POST /reset-password/{token}`.
 - [ ] Anti-bot / anti-abus:
-  - [ ] rate limit sur `/register`, `/login`, `/forgot-password`:
+  - [x] rate limit sur `/register`, `/login`, `/forgot-password`:
     - [x] `/register`,
-    - [ ] `/login`,
+    - [x] `/login`,
     - [x] `/forgot-password`,
     - [x] `/resend-verification`,
   - [ ] captcha (Turnstile/hCaptcha) sur register + forgot password,
