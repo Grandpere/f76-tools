@@ -12,6 +12,7 @@ Le backoffice contact fonctionne, mais le controller admin porte encore la logiq
 - [x] Ajouter `ContactMessageStatusUpdateApplicationService` + `ContactMessageStatusUpdateResult`.
 - [x] Brancher `ContactMessageController::setStatus()` sur ce service.
 - [x] Ajouter tests unitaires du service.
+- [x] Extraire la sanitation/pagination de `index()` dans `ContactMessageListApplicationService` (+ tests unitaires).
 
 ## Criteres d acceptance
 - Aucune regression fonctionnelle sur `/admin/contact-messages`.

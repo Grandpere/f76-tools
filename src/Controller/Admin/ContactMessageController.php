@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Domain\Support\Contact\ContactMessageStatusEnum;
-use App\Repository\ContactMessageEntityRepository;
+use App\Support\Application\Contact\ContactMessageListApplicationService;
 use App\Support\Application\Contact\ContactMessageStatusUpdateApplicationService;
 use App\Support\Application\Contact\ContactMessageStatusUpdateResult;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,11 +28,8 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 #[Route('/admin/contact-messages')]
 final class ContactMessageController extends AbstractController
 {
-    private const DEFAULT_PER_PAGE = 30;
-    private const MAX_PER_PAGE = 200;
-
     public function __construct(
-        private readonly ContactMessageEntityRepository $contactMessageRepository,
+        private readonly ContactMessageListApplicationService $contactMessageListApplicationService,
         private readonly ContactMessageStatusUpdateApplicationService $contactMessageStatusUpdateApplicationService,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
     ) {
@@ -43,28 +40,22 @@ final class ContactMessageController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $query = $this->sanitizeQuery($request->query->get('q'));
-        $status = $this->sanitizeStatus($request->query->get('status'));
-        $perPage = $this->sanitizePositiveInt($request->query->get('perPage'), self::DEFAULT_PER_PAGE, self::MAX_PER_PAGE);
-        $page = $this->sanitizePositiveInt($request->query->get('page'), 1);
-
-        $result = $this->contactMessageRepository->findPaginated($query, $status, $page, $perPage);
-        $totalRows = $result['total'];
-        $totalPages = max(1, (int) ceil($totalRows / $perPage));
-        $page = min($page, $totalPages);
-        if ($page !== $this->sanitizePositiveInt($request->query->get('page'), 1)) {
-            $result = $this->contactMessageRepository->findPaginated($query, $status, $page, $perPage);
-        }
+        $listResult = $this->contactMessageListApplicationService->list(
+            $request->query->get('q'),
+            $request->query->get('status'),
+            $request->query->get('page'),
+            $request->query->get('perPage'),
+        );
 
         return $this->render('admin/contact_messages.html.twig', [
-            'rows' => $result['rows'],
-            'totalRows' => $totalRows,
-            'query' => $query,
-            'status' => $status instanceof ContactMessageStatusEnum ? $status->value : '',
+            'rows' => $listResult->rows,
+            'totalRows' => $listResult->totalRows,
+            'query' => $listResult->query,
+            'status' => $listResult->status instanceof ContactMessageStatusEnum ? $listResult->status->value : '',
             'statusOptions' => ContactMessageStatusEnum::cases(),
-            'page' => $page,
-            'perPage' => $perPage,
-            'totalPages' => $totalPages,
+            'page' => $listResult->page,
+            'perPage' => $listResult->perPage,
+            'totalPages' => $listResult->totalPages,
         ]);
     }
 
@@ -96,49 +87,5 @@ final class ContactMessageController extends AbstractController
         $token = (string) $request->request->get('_csrf_token', '');
 
         return $this->csrfTokenManager->isTokenValid(new CsrfToken($tokenId, $token));
-    }
-
-    private function sanitizeQuery(mixed $value): string
-    {
-        if (!is_string($value)) {
-            return '';
-        }
-
-        return trim($value);
-    }
-
-    private function sanitizeStatus(mixed $value): ?ContactMessageStatusEnum
-    {
-        if (!is_string($value)) {
-            return null;
-        }
-
-        $normalized = trim($value);
-        if ('' === $normalized) {
-            return null;
-        }
-
-        return ContactMessageStatusEnum::tryFrom($normalized);
-    }
-
-    private function sanitizePositiveInt(mixed $value, int $default, ?int $max = null): int
-    {
-        if (is_int($value)) {
-            $number = $value;
-        } elseif (is_string($value) && '' !== trim($value) && ctype_digit(trim($value))) {
-            $number = (int) trim($value);
-        } else {
-            return $default;
-        }
-
-        if ($number < 1) {
-            return $default;
-        }
-
-        if (null !== $max && $number > $max) {
-            return $max;
-        }
-
-        return $number;
     }
 }
