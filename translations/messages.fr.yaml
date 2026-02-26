@@ -107,6 +107,7 @@ security.login.email: Email
 security.login.password: Mot de passe
 security.login.submit: Se connecter
 security.login.to_register: Pas encore de compte ? S inscrire
+security.login.to_forgot: Mot de passe oublie ?
 
 security.register.page_title: Inscription
 security.register.title: Inscription
@@ -121,6 +122,19 @@ security.register.flash.password_too_short: Le mot de passe doit contenir au moi
 security.register.flash.password_mismatch: Les deux mots de passe sont differents.
 security.register.flash.email_exists: Un compte existe deja avec cet email.
 security.register.flash.success: Compte cree. Vous pouvez maintenant vous connecter.
+security.verify.flash.invalid_or_expired: Lien de verification email invalide ou expire.
+security.verify.flash.success: Email verifie. Vous pouvez maintenant vous connecter.
+security.verify.email_subject: Confirmez votre adresse email
+security.verify.email_intro: Cliquez sur ce lien pour verifier votre compte.
+security.forgot.page_title: Mot de passe oublie
+security.forgot.title: Mot de passe oublie
+security.forgot.email: Email
+security.forgot.submit: Envoyer le lien de reinitialisation
+security.forgot.to_login: Retour a la connexion
+security.forgot.flash.invalid_csrf: Session invalide, merci de reessayer.
+security.forgot.flash.request_sent: Si cet email existe, un lien de reinitialisation a ete envoye.
+security.forgot.email_subject: Reinitialisez votre mot de passe
+security.forgot.email_intro: Cliquez sur ce lien pour definir un nouveau mot de passe.
 security.reset.page_title: Reinitialisation du mot de passe
 security.reset.title: Reinitialisation du mot de passe
 security.reset.password: Nouveau mot de passe

@@ -13,6 +13,12 @@
                     {{ error.messageKey|trans(error.messageData, 'security') }}
                 </p>
             {% endif %}
+            {% for message in app.flashes('success') %}
+                <p class="auth-alert auth-alert-success">{{ message|trans }}</p>
+            {% endfor %}
+            {% for message in app.flashes('warning') %}
+                <p class="auth-alert auth-alert-warning">{{ message|trans }}</p>
+            {% endfor %}
 
             <form method="post" class="auth-form">
                 <label class="auth-field" for="username">
@@ -46,6 +52,7 @@
 
             <p class="auth-links">
                 <a href="{{ path('app_register', { locale: app.request.locale }) }}">{{ 'security.login.to_register'|trans }}</a>
+                · <a href="{{ path('app_forgot_password', { locale: app.request.locale }) }}">{{ 'security.login.to_forgot'|trans }}</a>
             </p>
         </section>
     </main>

@@ -15,14 +15,21 @@ namespace App\Controller\Security;
 
 use App\Entity\UserEntity;
 use App\Repository\UserEntityRepository;
+use DateInterval;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class RegistrationController extends AbstractController
 {
@@ -31,6 +38,9 @@ final class RegistrationController extends AbstractController
         private readonly EntityManagerInterface $entityManager,
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
+        private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly TranslatorInterface $translator,
+        private readonly MailerInterface $mailer,
     ) {
     }
 
@@ -79,11 +89,32 @@ final class RegistrationController extends AbstractController
 
             $user = (new UserEntity())
                 ->setEmail($email)
-                ->setRoles(['ROLE_USER']);
+                ->setRoles(['ROLE_USER'])
+                ->setIsEmailVerified(false);
             $user->setPassword($this->passwordHasher->hashPassword($user, $password));
+            $token = bin2hex(random_bytes(32));
+            $user->setEmailVerificationTokenHash(hash('sha256', $token));
+            $user->setEmailVerificationExpiresAt((new DateTimeImmutable())->add(new DateInterval('P1D')));
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();
+
+            $verifyUrl = $this->urlGenerator->generate('app_verify_email', [
+                'locale' => $request->getLocale(),
+                'token' => $token,
+            ], UrlGeneratorInterface::ABSOLUTE_URL);
+
+            try {
+                $this->mailer->send(
+                    (new Email())
+                        ->from('no-reply@f76.local')
+                        ->to($email)
+                        ->subject($this->translator->trans('security.verify.email_subject'))
+                        ->text(sprintf("%s\n\n%s", $this->translator->trans('security.verify.email_intro'), $verifyUrl)),
+                );
+            } catch (TransportExceptionInterface) {
+                // Avoid disclosing transport details during registration flow.
+            }
 
             $this->addFlash('success', 'security.register.flash.success');
 

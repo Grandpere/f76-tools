@@ -107,6 +107,7 @@ security.login.email: Email
 security.login.password: Password
 security.login.submit: Sign in
 security.login.to_register: No account yet? Register
+security.login.to_forgot: Forgot password?
 
 security.register.page_title: Register
 security.register.title: Register
@@ -121,6 +122,19 @@ security.register.flash.password_too_short: Password must be at least 8 characte
 security.register.flash.password_mismatch: Password confirmation does not match.
 security.register.flash.email_exists: An account already exists with this email.
 security.register.flash.success: Account created. You can now sign in.
+security.verify.flash.invalid_or_expired: Invalid or expired email verification link.
+security.verify.flash.success: Email verified. You can now sign in.
+security.verify.email_subject: Confirm your email address
+security.verify.email_intro: Click this link to verify your account.
+security.forgot.page_title: Forgot password
+security.forgot.title: Forgot password
+security.forgot.email: Email
+security.forgot.submit: Send reset link
+security.forgot.to_login: Back to login
+security.forgot.flash.invalid_csrf: Invalid session, please try again.
+security.forgot.flash.request_sent: If this email exists, a reset link has been sent.
+security.forgot.email_subject: Reset your password
+security.forgot.email_intro: Click this link to set a new password.
 security.reset.page_title: Reset password
 security.reset.title: Reset password
 security.reset.password: New password

@@ -119,16 +119,16 @@ Permettre a un utilisateur authentifie de:
 - [x] Commande console de purge des logs d audit anciens.
 
 ## Phase 8 - Securite Auth (a planifier)
-- [ ] Verification d email obligatoire a l inscription:
-  - [ ] ajouter `isEmailVerified` sur `UserEntity`,
-  - [ ] generer un token de verification avec expiration (ex: 24h),
-  - [ ] bloquer la connexion tant que l email n est pas verifie,
+- [x] Verification d email obligatoire a l inscription:
+  - [x] ajouter `isEmailVerified` sur `UserEntity`,
+  - [x] generer un token de verification avec expiration (24h),
+  - [x] bloquer la connexion tant que l email n est pas verifie,
   - [ ] prevoir un endpoint "renvoyer l email de verification" (rate-limite).
-- [ ] Flow public "mot de passe oublie":
-  - [ ] page `GET/POST /forgot-password` (saisie email),
-  - [ ] reponse generique anti-enumeration (ne pas reveler si email existe),
-  - [ ] generation + envoi token reset avec expiration,
-  - [ ] conservation du flow final `GET/POST /reset-password/{token}`.
+- [x] Flow public "mot de passe oublie":
+  - [x] page `GET/POST /forgot-password` (saisie email),
+  - [x] reponse generique anti-enumeration (ne pas reveler si email existe),
+  - [x] generation + envoi token reset avec expiration,
+  - [x] conservation du flow final `GET/POST /reset-password/{token}`.
 - [ ] Anti-bot / anti-abus:
   - [ ] rate limit sur `/register`, `/login`, `/forgot-password`,
   - [ ] captcha (Turnstile/hCaptcha) sur register + forgot password,

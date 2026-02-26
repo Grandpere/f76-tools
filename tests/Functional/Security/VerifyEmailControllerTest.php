@@ -14,11 +14,13 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Security;
 
 use App\Entity\UserEntity;
+use DateInterval;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-final class RegistrationControllerTest extends WebTestCase
+final class VerifyEmailControllerTest extends WebTestCase
 {
     private ?EntityManagerInterface $entityManager = null;
     private ?KernelBrowser $client = null;
@@ -41,37 +43,39 @@ final class RegistrationControllerTest extends WebTestCase
         $this->client = null;
     }
 
-    public function testRegisterPageIsAccessible(): void
+    public function testCanVerifyEmailWithValidToken(): void
     {
-        $crawler = $this->browser()->request('GET', '/register');
+        $rawToken = bin2hex(random_bytes(32));
+        $user = (new UserEntity())
+            ->setEmail('verify-target@example.com')
+            ->setRoles(['ROLE_USER'])
+            ->setPassword('$2y$13$5QzWfXyM7FuU7f1w8rRZBupJrbj5gaMmkX6A8hA1z7f4h56yQW2mS')
+            ->setIsEmailVerified(false)
+            ->setEmailVerificationTokenHash(hash('sha256', $rawToken))
+            ->setEmailVerificationExpiresAt((new DateTimeImmutable())->add(new DateInterval('P1D')));
 
-        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
-        self::assertCount(1, $crawler->filter('form'));
-        self::assertCount(1, $crawler->filter('input[name="email"]'));
-    }
+        $this->entityManager?->persist($user);
+        $this->entityManager?->flush();
 
-    public function testRegisterCreatesUserAndRedirectsToLogin(): void
-    {
-        $crawler = $this->browser()->request('GET', '/register');
-        $tokenNode = $crawler->filter('input[name="_csrf_token"]');
-        self::assertCount(1, $tokenNode);
-        $token = (string) $tokenNode->attr('value');
-
-        $this->browser()->request('POST', '/register', [
-            '_csrf_token' => $token,
-            'email' => 'new-user@example.com',
-            'password' => 'secret123',
-            'password_confirm' => 'secret123',
-        ]);
+        $this->browser()->request('GET', '/verify-email/'.$rawToken);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
-        $user = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => 'new-user@example.com']);
-        self::assertInstanceOf(UserEntity::class, $user);
-        self::assertFalse($user->isEmailVerified());
-        self::assertNotNull($user->getEmailVerificationTokenHash());
-        self::assertNotNull($user->getEmailVerificationExpiresAt());
+        $this->entityManager?->clear();
+        $updated = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => 'verify-target@example.com']);
+        self::assertInstanceOf(UserEntity::class, $updated);
+        self::assertTrue($updated->isEmailVerified());
+        self::assertNull($updated->getEmailVerificationTokenHash());
+        self::assertNull($updated->getEmailVerificationExpiresAt());
+    }
+
+    public function testInvalidTokenRedirectsToLogin(): void
+    {
+        $this->browser()->request('GET', '/verify-email/not-a-valid-token');
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
     }
 
     private function truncateTables(): void

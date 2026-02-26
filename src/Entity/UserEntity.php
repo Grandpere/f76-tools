@@ -46,6 +46,15 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(name: 'is_active', options: ['default' => true])]
     private bool $isActive = true;
 
+    #[ORM\Column(name: 'is_email_verified', options: ['default' => true])]
+    private bool $isEmailVerified = true;
+
+    #[ORM\Column(name: 'email_verification_token_hash', length: 64, nullable: true)]
+    private ?string $emailVerificationTokenHash = null;
+
+    #[ORM\Column(name: 'email_verification_expires_at', type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $emailVerificationExpiresAt = null;
+
     #[ORM\Column(name: 'reset_password_token_hash', length: 64, nullable: true)]
     private ?string $resetPasswordTokenHash = null;
 
@@ -154,6 +163,42 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function isEmailVerified(): bool
+    {
+        return $this->isEmailVerified;
+    }
+
+    public function setIsEmailVerified(bool $isEmailVerified): self
+    {
+        $this->isEmailVerified = $isEmailVerified;
+
+        return $this;
+    }
+
+    public function getEmailVerificationTokenHash(): ?string
+    {
+        return $this->emailVerificationTokenHash;
+    }
+
+    public function setEmailVerificationTokenHash(?string $emailVerificationTokenHash): self
+    {
+        $this->emailVerificationTokenHash = $emailVerificationTokenHash;
+
+        return $this;
+    }
+
+    public function getEmailVerificationExpiresAt(): ?DateTimeImmutable
+    {
+        return $this->emailVerificationExpiresAt;
+    }
+
+    public function setEmailVerificationExpiresAt(?DateTimeImmutable $emailVerificationExpiresAt): self
+    {
+        $this->emailVerificationExpiresAt = $emailVerificationExpiresAt;
 
         return $this;
     }

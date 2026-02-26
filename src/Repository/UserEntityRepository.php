@@ -44,6 +44,15 @@ final class UserEntityRepository extends ServiceEntityRepository implements User
         return $result instanceof UserEntity ? $result : null;
     }
 
+    public function findOneByEmailVerificationTokenHash(string $tokenHash): ?UserEntity
+    {
+        $result = $this->findOneBy([
+            'emailVerificationTokenHash' => $tokenHash,
+        ]);
+
+        return $result instanceof UserEntity ? $result : null;
+    }
+
     /**
      * @return list<UserEntity>
      */
