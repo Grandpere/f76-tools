@@ -13,6 +13,9 @@ Le contexte Catalog (items, import, traductions) est encore majoritairement port
 - [x] Ports `TranslationCatalogReaderInterface` / `TranslationCatalogWriterInterface` ajoutes.
 - [x] `ItemTranslationController` delegue la logique metier au service applicatif.
 - [x] Test unitaire service ajoute.
+- [x] Resolution de contexte fichier import extraite dans `ItemImportFileContextResolver`.
+- [x] `ImportItemsCommand` delegue la resolution de contexte au service Catalog.
+- [x] Test unitaire `ItemImportFileContextResolver` ajoute.
 
 ## Criteres d acceptance
 - Controller admin traduction simplifie.
