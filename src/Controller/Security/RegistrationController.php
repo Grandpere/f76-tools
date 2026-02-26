@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Identity\Application\Registration\RegisterUserApplicationService;
+use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Identity\UI\Security\IdentityFlashResponder;
 use App\Service\TurnstileVerifier;
@@ -27,9 +28,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class RegistrationController extends AbstractController
 {
-    private const RATE_LIMIT_MAX_ATTEMPTS = 5;
-    private const RATE_LIMIT_WINDOW_SECONDS = 300;
-
     public function __construct(
         private readonly RegisterUserApplicationService $registerUserApplicationService,
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
@@ -49,16 +47,10 @@ final class RegistrationController extends AbstractController
         }
 
         if ($request->isMethod('POST')) {
-            $guardResult = $this->identityEmailFlowGuard->guard(
-                $request,
-                'register',
-                'register',
-                'security.register.flash.invalid_csrf',
-                self::RATE_LIMIT_MAX_ATTEMPTS,
-                self::RATE_LIMIT_WINDOW_SECONDS,
-            );
+            $flow = IdentityEmailFlow::REGISTER;
+            $guardResult = $this->identityEmailFlowGuard->guard($request, $flow);
             if (null !== $guardResult->failureFlashMessage) {
-                return $this->identityFlashResponder->warningToRoute($request, 'app_register', $guardResult->failureFlashMessage);
+                return $this->identityFlashResponder->warningToRoute($request, $flow->failureRoute(), $guardResult->failureFlashMessage);
             }
             $payload = $guardResult->payload;
 

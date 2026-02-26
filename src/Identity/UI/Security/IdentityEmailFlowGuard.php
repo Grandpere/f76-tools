@@ -18,33 +18,29 @@ final class IdentityEmailFlowGuard
 
     public function guard(
         Request $request,
-        string $scope,
-        string $csrfTokenId,
-        string $invalidCsrfFlashKey,
-        int $maxAttempts,
-        int $windowSeconds,
+        IdentityEmailFlow $flow,
     ): IdentityEmailFlowGuardResult {
         $payload = $this->identityEmailFormPayloadExtractor->extract($request);
         $guardResult = $this->identityRequestGuard->guard(
-            $scope,
-            $csrfTokenId,
+            $flow->value,
+            $flow->csrfTokenId(),
             $payload->csrfToken,
             $payload->honeypotValue,
             $payload->captchaToken,
             $request->getClientIp(),
             $payload->email,
-            $maxAttempts,
-            $windowSeconds,
+            $flow->maxAttempts(),
+            $flow->windowSeconds(),
         );
 
         $failureFlashMessage = $this->guardFailureResponder->resolveFlashMessage(
             $guardResult,
-            $scope,
-            $invalidCsrfFlashKey,
+            $flow->value,
+            $flow->invalidCsrfFlashKey(),
             $payload->email,
             $request,
-            $maxAttempts,
-            $windowSeconds,
+            $flow->maxAttempts(),
+            $flow->windowSeconds(),
         );
 
         return new IdentityEmailFlowGuardResult($payload, $failureFlashMessage);

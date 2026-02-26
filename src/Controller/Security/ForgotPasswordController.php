@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Identity\Application\ForgotPassword\ForgotPasswordRequestApplicationService;
+use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Identity\UI\Security\IdentityFlashResponder;
 use App\Identity\UI\Security\IdentityIssuedTokenNotifier;
@@ -25,9 +26,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ForgotPasswordController extends AbstractController
 {
-    private const RATE_LIMIT_MAX_ATTEMPTS = 5;
-    private const RATE_LIMIT_WINDOW_SECONDS = 300;
-
     public function __construct(
         private readonly ForgotPasswordRequestApplicationService $forgotPasswordRequestApplicationService,
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
@@ -41,16 +39,10 @@ final class ForgotPasswordController extends AbstractController
     public function __invoke(Request $request): Response
     {
         if ($request->isMethod('POST')) {
-            $guardResult = $this->identityEmailFlowGuard->guard(
-                $request,
-                'forgot_password',
-                'forgot_password',
-                'security.forgot.flash.invalid_csrf',
-                self::RATE_LIMIT_MAX_ATTEMPTS,
-                self::RATE_LIMIT_WINDOW_SECONDS,
-            );
+            $flow = IdentityEmailFlow::FORGOT_PASSWORD;
+            $guardResult = $this->identityEmailFlowGuard->guard($request, $flow);
             if (null !== $guardResult->failureFlashMessage) {
-                return $this->identityFlashResponder->warningToRoute($request, 'app_forgot_password', $guardResult->failureFlashMessage);
+                return $this->identityFlashResponder->warningToRoute($request, $flow->failureRoute(), $guardResult->failureFlashMessage);
             }
             $payload = $guardResult->payload;
 

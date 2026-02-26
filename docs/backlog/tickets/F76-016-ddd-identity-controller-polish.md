@@ -29,6 +29,8 @@ Un dernier polish peut encore reduire le bruit UI sans changer le comportement.
 - [x] `Registration/Forgot/Resend/Reset/Verify` reutilisent `IdentityLocaleRedirector`.
 - [x] `IdentityFlashResponder` ajoute pour mutualiser le pattern `flash + redirect`.
 - [x] `Registration/Forgot/Resend/Reset/Verify` reutilisent `IdentityFlashResponder`.
+- [x] `IdentityEmailFlow` (enum) ajoute pour porter la config des flows email (scope/csrf/flash/rate-limit/route).
+- [x] `IdentityEmailFlowGuard` + `Registration/Forgot/Resend` reutilisent `IdentityEmailFlow`.
 
 ## Criteres d acceptance
 - Duplication de mapping reduite.
