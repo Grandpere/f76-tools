@@ -105,7 +105,7 @@ final class LoginLogoutTest extends WebTestCase
         $user = $this->createUser('security-ratelimit@example.com', 'secret123');
 
         for ($attempt = 1; $attempt <= 6; ++$attempt) {
-            $crawler = $this->browser()->request('GET', '/login');
+            $crawler = $this->browser()->request('GET', '/login?locale=en');
             $form = $crawler->filter('form')->form([
                 '_username' => $user->getEmail(),
                 '_password' => 'wrong-password',
