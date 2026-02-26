@@ -54,7 +54,7 @@ final class DashboardControllerTest extends WebTestCase
     public function testDashboardRendersCatalogDataForAuthenticatedUser(): void
     {
         $user = $this->createUser('dashboard@example.com');
-        $this->createPlayer($user, 'Alpha');
+        $alpha = $this->createPlayer($user, 'Alpha');
         $this->createPlayer($user, 'Bravo');
 
         $this->browser()->loginUser($user);
@@ -64,7 +64,7 @@ final class DashboardControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter('[data-controller="item-catalog"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-players-url-value="/api/players"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-players-base-url-value="/api/players"]'));
-        self::assertCount(1, $crawler->filter('[data-item-catalog-initial-player-id-value="1"]'));
+        self::assertCount(1, $crawler->filter(sprintf('[data-item-catalog-initial-player-id-value="%s"]', $alpha->getPublicId())));
         self::assertCount(1, $crawler->filter('[data-item-catalog-storage-key-value="f76:item-catalog:ui:1"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="statsPanel"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="exportButton"]'));
