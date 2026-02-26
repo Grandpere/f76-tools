@@ -16,6 +16,7 @@ namespace App\Controller\Security;
 use App\Identity\Application\ResendVerification\ResendVerificationRequestApplicationService;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Identity\UI\Security\IdentityIssuedTokenNotifier;
+use App\Identity\UI\Security\IdentityLocaleRedirector;
 use App\Service\TurnstileVerifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +32,7 @@ final class ResendVerificationController extends AbstractController
         private readonly ResendVerificationRequestApplicationService $resendVerificationRequestApplicationService,
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
         private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
+        private readonly IdentityLocaleRedirector $identityLocaleRedirector,
         private readonly TurnstileVerifier $turnstileVerifier,
     ) {
     }
@@ -50,7 +52,7 @@ final class ResendVerificationController extends AbstractController
             if (null !== $guardResult->failureFlashMessage) {
                 $this->addFlash('warning', $guardResult->failureFlashMessage);
 
-                return $this->redirectToRoute('app_resend_verification', ['locale' => $request->getLocale()]);
+                return $this->identityLocaleRedirector->toRouteWithRequestLocale($request, 'app_resend_verification');
             }
             $payload = $guardResult->payload;
 
@@ -67,7 +69,7 @@ final class ResendVerificationController extends AbstractController
 
             $this->addFlash('success', 'security.resend.flash.sent');
 
-            return $this->redirectToRoute('app_login', ['locale' => $request->getLocale()]);
+            return $this->identityLocaleRedirector->toLogin($request);
         }
 
         return $this->render('security/resend_verification.html.twig', [

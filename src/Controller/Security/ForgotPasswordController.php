@@ -16,6 +16,7 @@ namespace App\Controller\Security;
 use App\Identity\Application\ForgotPassword\ForgotPasswordRequestApplicationService;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Identity\UI\Security\IdentityIssuedTokenNotifier;
+use App\Identity\UI\Security\IdentityLocaleRedirector;
 use App\Service\TurnstileVerifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +32,7 @@ final class ForgotPasswordController extends AbstractController
         private readonly ForgotPasswordRequestApplicationService $forgotPasswordRequestApplicationService,
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
         private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
+        private readonly IdentityLocaleRedirector $identityLocaleRedirector,
         private readonly TurnstileVerifier $turnstileVerifier,
     ) {
     }
@@ -50,7 +52,7 @@ final class ForgotPasswordController extends AbstractController
             if (null !== $guardResult->failureFlashMessage) {
                 $this->addFlash('warning', $guardResult->failureFlashMessage);
 
-                return $this->redirectToRoute('app_forgot_password', ['locale' => $request->getLocale()]);
+                return $this->identityLocaleRedirector->toRouteWithRequestLocale($request, 'app_forgot_password');
             }
             $payload = $guardResult->payload;
 
@@ -66,7 +68,7 @@ final class ForgotPasswordController extends AbstractController
 
             $this->addFlash('success', 'security.forgot.flash.request_sent');
 
-            return $this->redirectToRoute('app_login', ['locale' => $request->getLocale()]);
+            return $this->identityLocaleRedirector->toLogin($request);
         }
 
         return $this->render('security/forgot_password.html.twig', [

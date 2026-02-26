@@ -18,6 +18,7 @@ use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
 use App\Identity\UI\Security\IdentityIssuedTokenNotifier;
+use App\Identity\UI\Security\IdentityLocaleRedirector;
 use App\Identity\UI\Security\RegistrationFeedbackMapper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,6 +34,7 @@ final class RegistrationController extends AbstractController
         private readonly RegisterUserApplicationService $registerUserApplicationService,
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
         private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
+        private readonly IdentityLocaleRedirector $identityLocaleRedirector,
         private readonly RegistrationFeedbackMapper $registrationFeedbackMapper,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
@@ -58,7 +60,7 @@ final class RegistrationController extends AbstractController
             if (null !== $guardResult->failureFlashMessage) {
                 $this->addFlash('warning', $guardResult->failureFlashMessage);
 
-                return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
+                return $this->identityLocaleRedirector->toRouteWithRequestLocale($request, 'app_register');
             }
             $payload = $guardResult->payload;
 
@@ -76,7 +78,7 @@ final class RegistrationController extends AbstractController
             if (null !== $warningMessage) {
                 $this->addFlash('warning', $warningMessage);
 
-                return $this->redirectToRoute('app_register', ['locale' => $request->getLocale()]);
+                return $this->identityLocaleRedirector->toRouteWithRequestLocale($request, 'app_register');
             }
 
             $targetEmail = $registerResult->getEmail();
@@ -95,7 +97,7 @@ final class RegistrationController extends AbstractController
                 'emailVerificationRequired' => true,
             ]);
 
-            return $this->redirectToRoute('app_login', ['locale' => $request->getLocale()]);
+            return $this->identityLocaleRedirector->toLogin($request);
         }
 
         return $this->render('security/register.html.twig', [

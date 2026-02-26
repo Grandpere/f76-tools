@@ -25,6 +25,8 @@ Un dernier polish peut encore reduire le bruit UI sans changer le comportement.
 - [x] `Registration/Forgot/Resend` reutilisent `IdentityEmailFormPayloadExtractor`.
 - [x] `IdentityEmailFlowGuard` ajoute pour mutualiser `extract payload + guard + resolve failure`.
 - [x] `Registration/Forgot/Resend` reutilisent `IdentityEmailFlowGuard`.
+- [x] `IdentityLocaleRedirector` ajoute pour centraliser les redirections security localisees.
+- [x] `Registration/Forgot/Resend/Reset/Verify` reutilisent `IdentityLocaleRedirector`.
 
 ## Criteres d acceptance
 - Duplication de mapping reduite.

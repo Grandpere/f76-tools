@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Identity\Application\VerifyEmail\VerifyEmailApplicationService;
+use App\Identity\UI\Security\IdentityLocaleRedirector;
 use App\Identity\UI\Security\IdentitySignedTokenFailureResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -24,6 +25,7 @@ final class VerifyEmailController extends AbstractController
 {
     public function __construct(
         private readonly VerifyEmailApplicationService $verifyEmailApplicationService,
+        private readonly IdentityLocaleRedirector $identityLocaleRedirector,
         private readonly IdentitySignedTokenFailureResolver $identitySignedTokenFailureResolver,
     ) {
     }
@@ -39,11 +41,11 @@ final class VerifyEmailController extends AbstractController
         if (null !== $validationFailureFlashMessage) {
             $this->addFlash('warning', $validationFailureFlashMessage);
 
-            return $this->redirectToRoute('app_login', ['locale' => $request->getLocale()]);
+            return $this->identityLocaleRedirector->toLogin($request);
         }
 
         $this->addFlash('success', 'security.verify.flash.success');
 
-        return $this->redirectToRoute('app_login', ['locale' => $request->getLocale()]);
+        return $this->identityLocaleRedirector->toLogin($request);
     }
 }
