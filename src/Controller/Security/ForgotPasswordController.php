@@ -15,6 +15,7 @@ namespace App\Controller\Security;
 
 use App\Identity\Application\ForgotPassword\ForgotPasswordRequestApplicationService;
 use App\Identity\Application\Guard\IdentityRequestGuardInterface;
+use App\Identity\UI\Security\IdentityEmailFormPayloadExtractor;
 use App\Identity\UI\Security\IdentityGuardFailureResponder;
 use App\Identity\UI\Security\IdentityIssuedTokenNotifier;
 use App\Service\TurnstileVerifier;
@@ -31,6 +32,7 @@ final class ForgotPasswordController extends AbstractController
     public function __construct(
         private readonly ForgotPasswordRequestApplicationService $forgotPasswordRequestApplicationService,
         private readonly IdentityRequestGuardInterface $identityRequestGuard,
+        private readonly IdentityEmailFormPayloadExtractor $identityEmailFormPayloadExtractor,
         private readonly IdentityGuardFailureResponder $guardFailureResponder,
         private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
         private readonly TurnstileVerifier $turnstileVerifier,
@@ -41,15 +43,15 @@ final class ForgotPasswordController extends AbstractController
     public function __invoke(Request $request): Response
     {
         if ($request->isMethod('POST')) {
-            $email = mb_strtolower(trim((string) $request->request->get('email', '')));
+            $payload = $this->identityEmailFormPayloadExtractor->extract($request);
             $guardResult = $this->identityRequestGuard->guard(
                 'forgot_password',
                 'forgot_password',
-                (string) $request->request->get('_csrf_token', ''),
-                (string) $request->request->get('website', ''),
-                (string) $request->request->get('cf-turnstile-response', ''),
+                $payload->csrfToken,
+                $payload->honeypotValue,
+                $payload->captchaToken,
                 $request->getClientIp(),
-                $email,
+                $payload->email,
                 self::RATE_LIMIT_MAX_ATTEMPTS,
                 self::RATE_LIMIT_WINDOW_SECONDS,
             );
@@ -57,7 +59,7 @@ final class ForgotPasswordController extends AbstractController
                 $guardResult,
                 'forgot_password',
                 'security.forgot.flash.invalid_csrf',
-                $email,
+                $payload->email,
                 $request,
                 self::RATE_LIMIT_MAX_ATTEMPTS,
                 self::RATE_LIMIT_WINDOW_SECONDS,
@@ -68,7 +70,7 @@ final class ForgotPasswordController extends AbstractController
                 return $this->redirectToRoute('app_forgot_password', ['locale' => $request->getLocale()]);
             }
 
-            $requestResult = $this->forgotPasswordRequestApplicationService->request($email, new \DateTimeImmutable());
+            $requestResult = $this->forgotPasswordRequestApplicationService->request($payload->email, new \DateTimeImmutable());
             if ($requestResult->isTokenIssued()) {
                 $this->identityIssuedTokenNotifier->notifyResetPassword(
                     $requestResult->getEmail(),

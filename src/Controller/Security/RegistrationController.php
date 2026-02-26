@@ -17,6 +17,7 @@ use App\Identity\Application\Registration\RegisterUserApplicationService;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
 use App\Identity\Application\Guard\IdentityRequestGuardInterface;
+use App\Identity\UI\Security\IdentityEmailFormPayloadExtractor;
 use App\Identity\UI\Security\IdentityGuardFailureResponder;
 use App\Identity\UI\Security\IdentityIssuedTokenNotifier;
 use App\Identity\UI\Security\RegistrationFeedbackMapper;
@@ -33,6 +34,7 @@ final class RegistrationController extends AbstractController
     public function __construct(
         private readonly RegisterUserApplicationService $registerUserApplicationService,
         private readonly IdentityRequestGuardInterface $identityRequestGuard,
+        private readonly IdentityEmailFormPayloadExtractor $identityEmailFormPayloadExtractor,
         private readonly IdentityGuardFailureResponder $guardFailureResponder,
         private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
         private readonly RegistrationFeedbackMapper $registrationFeedbackMapper,
@@ -49,15 +51,15 @@ final class RegistrationController extends AbstractController
         }
 
         if ($request->isMethod('POST')) {
-            $email = mb_strtolower(trim((string) $request->request->get('email', '')));
+            $payload = $this->identityEmailFormPayloadExtractor->extract($request);
             $guardResult = $this->identityRequestGuard->guard(
                 'register',
                 'register',
-                (string) $request->request->get('_csrf_token', ''),
-                (string) $request->request->get('website', ''),
-                (string) $request->request->get('cf-turnstile-response', ''),
+                $payload->csrfToken,
+                $payload->honeypotValue,
+                $payload->captchaToken,
                 $request->getClientIp(),
-                $email,
+                $payload->email,
                 self::RATE_LIMIT_MAX_ATTEMPTS,
                 self::RATE_LIMIT_WINDOW_SECONDS,
             );
@@ -65,7 +67,7 @@ final class RegistrationController extends AbstractController
                 $guardResult,
                 'register',
                 'security.register.flash.invalid_csrf',
-                $email,
+                $payload->email,
                 $request,
                 self::RATE_LIMIT_MAX_ATTEMPTS,
                 self::RATE_LIMIT_WINDOW_SECONDS,
@@ -80,7 +82,7 @@ final class RegistrationController extends AbstractController
             $passwordConfirm = (string) $request->request->get('password_confirm', '');
 
             $registerResult = $this->registerUserApplicationService->register(
-                $email,
+                $payload->email,
                 $password,
                 $passwordConfirm,
                 new \DateTimeImmutable(),
@@ -105,7 +107,7 @@ final class RegistrationController extends AbstractController
             );
 
             $this->addFlash('success', 'security.register.flash.success');
-            $this->authEventLogger->info('security.auth.register.user_created', is_string($targetEmail) ? $targetEmail : $email, $request->getClientIp(), [
+            $this->authEventLogger->info('security.auth.register.user_created', is_string($targetEmail) ? $targetEmail : $payload->email, $request->getClientIp(), [
                 'emailVerificationRequired' => true,
             ]);
 
