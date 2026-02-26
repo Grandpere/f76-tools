@@ -19,6 +19,11 @@ final class ContactSubmissionResponder
     ) {
     }
 
+    public function guardFailed(Request $request, IdentityEmailFlow $flow, string $failureFlashMessage): Response
+    {
+        return $this->identityFlashResponder->warningToRoute($request, $flow->failureRoute(), $failureFlashMessage);
+    }
+
     public function invalidPayload(Request $request, IdentityEmailFlow $flow, string $email): Response
     {
         $this->authEventLogger->warning('security.auth.contact.invalid_payload', $email, $request->getClientIp());

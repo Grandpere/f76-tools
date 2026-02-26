@@ -15,7 +15,6 @@ namespace App\Controller\Security;
 
 use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
-use App\Identity\UI\Security\IdentityFlashResponder;
 use App\Service\TurnstileVerifier;
 use App\Support\Application\Contact\ContactSubmissionApplicationService;
 use App\Support\Application\Contact\ContactSubmissionInput;
@@ -30,7 +29,6 @@ final class ContactController extends AbstractController
 {
     public function __construct(
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
-        private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly ContactSubmissionApplicationService $contactSubmissionApplicationService,
         private readonly ContactSubmissionResponder $contactSubmissionResponder,
@@ -44,7 +42,7 @@ final class ContactController extends AbstractController
             $flow = IdentityEmailFlow::CONTACT;
             $guardResult = $this->identityEmailFlowGuard->guard($request, $flow);
             if (null !== $guardResult->failureFlashMessage) {
-                return $this->identityFlashResponder->warningToRoute($request, $flow->failureRoute(), $guardResult->failureFlashMessage);
+                return $this->contactSubmissionResponder->guardFailed($request, $flow, $guardResult->failureFlashMessage);
             }
             $submissionInput = ContactSubmissionInput::create(
                 $guardResult->payload->email,

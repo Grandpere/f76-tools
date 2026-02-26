@@ -20,6 +20,33 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class ContactSubmissionResponderTest extends TestCase
 {
+    public function testGuardFailedReturnsWarningRedirect(): void
+    {
+        $logger = $this->createMock(LoggerInterface::class);
+        $logger->expects(self::never())->method('warning');
+        $logger->expects(self::never())->method('info');
+
+        $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
+        $urlGenerator->expects(self::once())
+            ->method('generate')
+            ->with('app_contact', ['locale' => 'fr'])
+            ->willReturn('/fr/contact');
+
+        $responder = new ContactSubmissionResponder(
+            new AuthEventLogger($logger),
+            new IdentityFlashResponder(new IdentityLocaleRedirector($urlGenerator)),
+        );
+
+        $request = Request::create('/fr/contact');
+        $request->setLocale('fr');
+        $request->setSession(new Session(new MockArraySessionStorage()));
+
+        $response = $responder->guardFailed($request, IdentityEmailFlow::CONTACT, 'security.auth.flash.rate_limited');
+
+        self::assertInstanceOf(RedirectResponse::class, $response);
+        self::assertSame('/fr/contact', $response->getTargetUrl());
+    }
+
     public function testInvalidPayloadReturnsWarningRedirectAndLogsWarning(): void
     {
         $logger = $this->createMock(LoggerInterface::class);
