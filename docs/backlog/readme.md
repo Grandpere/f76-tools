@@ -16,3 +16,7 @@ Centraliser les taches, priorites, et dependances de delivery.
 1. Securite et stabilite
 2. Flux utilisateur critiques
 3. Maintenabilite et productivite
+
+## Architecture track
+- Roadmap DDD: `docs/backlog/ddd-migration-roadmap.md`.
+- Decision explicite: pas d event sourcing pour ce projet (complexite > gain attendu).

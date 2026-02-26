@@ -10,6 +10,7 @@ Ce dossier centralise la documentation de pilotage du projet.
   - `readme.md`: vision backlog et conventions de tickets.
   - `current-focus.md`: priorite active (single source of truth court terme).
   - `roadmap-auth-players-items.md`: roadmap historique/detaillee.
+  - `ddd-migration-roadmap.md`: plan de migration DDD incremental.
   - `tickets/`: tickets unitaires au format markdown.
 - `security/`
   - docs dediees aux decisions de securite et hardening.
