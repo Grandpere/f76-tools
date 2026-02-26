@@ -29,6 +29,8 @@ services:
     App\Contract\TranslationCatalogWriterInterface: '@App\Catalog\Infrastructure\Translation\TranslationCatalogWriter'
     App\Catalog\Application\Import\ItemImportSourceReaderInterface: '@App\Catalog\Infrastructure\Import\FilesystemItemImportSourceReader'
     App\Catalog\Application\Import\ItemImportPersistenceInterface: '@App\Catalog\Infrastructure\Import\DoctrineItemImportPersistence'
+    App\Identity\Application\VerifyEmail\VerifyEmailUserRepositoryInterface: '@App\Repository\UserEntityRepository'
+    App\Identity\Application\VerifyEmail\IdentityWritePersistenceInterface: '@App\Identity\Infrastructure\Persistence\DoctrineIdentityWritePersistence'
 
     App\Service\TurnstileVerifier:
         arguments:

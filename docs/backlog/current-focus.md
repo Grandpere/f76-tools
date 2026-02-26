@@ -1,9 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- F76-013: DDD Slice 3 - Catalog Infrastructure split (in progress).
+- F76-014: DDD Slice 4 - Identity context (in progress).
 
 ## Termine recemment
+- F76-013: DDD Slice 3 - Catalog Infrastructure split (done).
 - F76-012: DDD Slice 2 - Catalog context (done).
 - F76-003: URL Hygiene POST + CSRF (done).
 - F76-004: Minerva Source Governance (done).
