@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Identity\Application\ResendVerification\ResendVerificationRequestApplicationService;
-use App\Identity\Application\Guard\IdentityRequestGuardInterface;
-use App\Identity\UI\Security\IdentityEmailFormPayloadExtractor;
-use App\Identity\UI\Security\IdentityGuardFailureResponder;
+use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Identity\UI\Security\IdentityIssuedTokenNotifier;
 use App\Service\TurnstileVerifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,9 +29,7 @@ final class ResendVerificationController extends AbstractController
 
     public function __construct(
         private readonly ResendVerificationRequestApplicationService $resendVerificationRequestApplicationService,
-        private readonly IdentityRequestGuardInterface $identityRequestGuard,
-        private readonly IdentityEmailFormPayloadExtractor $identityEmailFormPayloadExtractor,
-        private readonly IdentityGuardFailureResponder $guardFailureResponder,
+        private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
         private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
         private readonly TurnstileVerifier $turnstileVerifier,
     ) {
@@ -43,32 +39,20 @@ final class ResendVerificationController extends AbstractController
     public function __invoke(Request $request): Response
     {
         if ($request->isMethod('POST')) {
-            $payload = $this->identityEmailFormPayloadExtractor->extract($request);
-            $guardResult = $this->identityRequestGuard->guard(
+            $guardResult = $this->identityEmailFlowGuard->guard(
+                $request,
                 'resend_verification',
-                'resend_verification',
-                $payload->csrfToken,
-                $payload->honeypotValue,
-                $payload->captchaToken,
-                $request->getClientIp(),
-                $payload->email,
-                self::RATE_LIMIT_MAX_ATTEMPTS,
-                self::RATE_LIMIT_WINDOW_SECONDS,
-            );
-            $guardFailureMessage = $this->guardFailureResponder->resolveFlashMessage(
-                $guardResult,
                 'resend_verification',
                 'security.resend.flash.invalid_csrf',
-                $payload->email,
-                $request,
                 self::RATE_LIMIT_MAX_ATTEMPTS,
                 self::RATE_LIMIT_WINDOW_SECONDS,
             );
-            if (null !== $guardFailureMessage) {
-                $this->addFlash('warning', $guardFailureMessage);
+            if (null !== $guardResult->failureFlashMessage) {
+                $this->addFlash('warning', $guardResult->failureFlashMessage);
 
                 return $this->redirectToRoute('app_resend_verification', ['locale' => $request->getLocale()]);
             }
+            $payload = $guardResult->payload;
 
             $requestResult = $this->resendVerificationRequestApplicationService->request($payload->email, new \DateTimeImmutable());
             if ($requestResult->isTokenIssued()) {

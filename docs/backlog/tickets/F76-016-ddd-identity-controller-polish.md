@@ -23,6 +23,8 @@ Un dernier polish peut encore reduire le bruit UI sans changer le comportement.
 - [x] `ResetPassword/VerifyEmail` reutilisent `IdentitySignedTokenFailureResolver`.
 - [x] `IdentityEmailFormPayloadExtractor` ajoute pour normaliser le payload formulaire des flows email.
 - [x] `Registration/Forgot/Resend` reutilisent `IdentityEmailFormPayloadExtractor`.
+- [x] `IdentityEmailFlowGuard` ajoute pour mutualiser `extract payload + guard + resolve failure`.
+- [x] `Registration/Forgot/Resend` reutilisent `IdentityEmailFlowGuard`.
 
 ## Criteres d acceptance
 - Duplication de mapping reduite.
