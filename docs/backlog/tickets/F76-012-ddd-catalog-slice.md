@@ -28,6 +28,9 @@ Le contexte Catalog (items, import, traductions) est encore majoritairement port
 - [x] Regles d application du contexte import (rank/list + conflits) extraites dans `ItemImportContextApplier`.
 - [x] `ImportItemsCommand` delegue la logique MISC/BOOK d assignation metier au service Catalog.
 - [x] Test unitaire `ItemImportContextApplier` ajoute.
+- [x] Hydratation des champs `ItemEntity` depuis le JSON extraite dans `ItemImportItemHydrator`.
+- [x] `ImportItemsCommand` delegue le mapping champs import vers entite au service Catalog.
+- [x] Test unitaire `ItemImportItemHydrator` ajoute.
 
 ## Criteres d acceptance
 - Controller admin traduction simplifie.

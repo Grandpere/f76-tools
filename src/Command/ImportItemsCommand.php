@@ -16,8 +16,8 @@ namespace App\Command;
 use App\Catalog\Application\Import\ItemImportFileContextResolver;
 use App\Catalog\Application\Import\ItemImportJsonFileReader;
 use App\Catalog\Application\Import\ItemImportContextApplier;
+use App\Catalog\Application\Import\ItemImportItemHydrator;
 use App\Catalog\Application\Import\ItemImportTranslationCatalogBuilder;
-use App\Catalog\Application\Import\ItemImportValueNormalizer;
 use App\Entity\ItemEntity;
 use App\Repository\ItemEntityRepository;
 use App\Translation\TranslationCatalogWriter;
@@ -43,7 +43,7 @@ final class ImportItemsCommand extends Command
         private readonly TranslationCatalogWriter $translationCatalogWriter,
         private readonly ItemImportFileContextResolver $fileContextResolver,
         private readonly ItemImportJsonFileReader $jsonFileReader,
-        private readonly ItemImportValueNormalizer $valueNormalizer,
+        private readonly ItemImportItemHydrator $itemHydrator,
         private readonly ItemImportTranslationCatalogBuilder $translationCatalogBuilder,
         private readonly ItemImportContextApplier $contextApplier,
         private readonly KernelInterface $kernel,
@@ -178,27 +178,7 @@ final class ImportItemsCommand extends Command
                     }
                 }
 
-                $item->setFormId($this->valueNormalizer->toNullableString($row['form_id'] ?? null));
-                $item->setEditorId($this->valueNormalizer->toNullableString($row['editor_id'] ?? null));
-                $item->setPrice($this->valueNormalizer->toNullableInt($row['price'] ?? null));
-                $item->setPriceMinerva($this->valueNormalizer->toNullableInt($row['price_minerva'] ?? null));
-                $item->setWikiUrl($this->valueNormalizer->toNullableString($row['wiki_url'] ?? null));
-                $item->setTradeable($this->valueNormalizer->toNullableInt($row['tradeable'] ?? 0) === 1);
-                $item->setIsNew($this->valueNormalizer->toBool($row['new'] ?? null));
-                $item->setDropRaid($this->valueNormalizer->toBool($row['drop_raid'] ?? null));
-                $item->setDropBurningSprings($this->valueNormalizer->toBoolFromRowAny($row, [
-                    'drop_burningsprings',
-                    'drop_burningssprings',
-                    'drop_burning_springs',
-                ]));
-                $item->setDropDailyOps($this->valueNormalizer->toBool($row['drop_dailyops'] ?? null));
-                $item->setVendorRegs($this->valueNormalizer->toBool($row['vendor_regs'] ?? null));
-                $item->setVendorSamuel($this->valueNormalizer->toBool($row['vendor_samuel'] ?? null));
-                $item->setVendorMortimer($this->valueNormalizer->toBool($row['vendor_mortimer'] ?? null));
-                $item->setInfoHtml($this->valueNormalizer->toNullableString($row['info'] ?? null));
-                $item->setDropSourcesHtml($this->valueNormalizer->toNullableString($row['drop_sources'] ?? null));
-                $item->setRelationsHtml($this->valueNormalizer->toNullableString($row['relations'] ?? null));
-                $item->setPayload($this->valueNormalizer->normalizePayload($row));
+                $this->itemHydrator->hydrate($item, $row);
 
                 $translationData = $this->translationCatalogBuilder->build($type, $sourceId, $row);
                 $item->setNameKey($translationData['nameKey']);
