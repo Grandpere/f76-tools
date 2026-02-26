@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Contract\PlayerKnowledgeTransferRepositoryInterface;
 use App\Domain\Item\ItemTypeEnum;
 use App\Contract\PlayerItemKnowledgeFinderInterface;
 use App\Entity\ItemEntity;
@@ -25,7 +26,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @extends ServiceEntityRepository<PlayerItemKnowledgeEntity>
  */
 final class PlayerItemKnowledgeEntityRepository extends ServiceEntityRepository
-    implements PlayerItemKnowledgeFinderInterface
+    implements PlayerItemKnowledgeFinderInterface, PlayerKnowledgeTransferRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -78,6 +79,31 @@ final class PlayerItemKnowledgeEntityRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
 
         return (int) $count;
+    }
+
+    /**
+     * @param list<int> $itemIds
+     */
+    public function deleteByPlayerAndItemIds(PlayerEntity $player, array $itemIds): int
+    {
+        if ([] === $itemIds) {
+            return 0;
+        }
+
+        $deleted = $this->createQueryBuilder('k')
+            ->delete(PlayerItemKnowledgeEntity::class, 'k')
+            ->andWhere('k.player = :player')
+            ->andWhere('IDENTITY(k.item) IN (:itemIds)')
+            ->setParameter('player', $player)
+            ->setParameter('itemIds', $itemIds)
+            ->getQuery()
+            ->execute();
+
+        if (is_int($deleted) || is_numeric($deleted)) {
+            return (int) $deleted;
+        }
+
+        return 0;
     }
 
     /**

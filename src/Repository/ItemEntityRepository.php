@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Contract\ItemKnowledgeTransferRepositoryInterface;
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -22,6 +23,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @extends ServiceEntityRepository<ItemEntity>
  */
 final class ItemEntityRepository extends ServiceEntityRepository
+    implements ItemKnowledgeTransferRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -72,6 +74,23 @@ final class ItemEntityRepository extends ServiceEntityRepository
         $item = $this->findOneBy(['publicId' => $publicId]);
 
         return $item instanceof ItemEntity ? $item : null;
+    }
+
+    /**
+     * @param list<int> $ids
+     *
+     * @return list<ItemEntity>
+     */
+    public function findByIds(array $ids): array
+    {
+        if ([] === $ids) {
+            return [];
+        }
+
+        $items = $this->findBy(['id' => $ids]);
+
+        /** @var list<ItemEntity> $items */
+        return $items;
     }
 
     public function countAll(): int

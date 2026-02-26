@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-26 - Final repositories blocked unit tests in application services
+- Symptom: unit tests for new application service failed (`Class ...Repository is declared final and cannot be doubled`), plus weak type guarantees in service result arrays.
+- Root cause: application service depended directly on Doctrine repositories (`final`) instead of contracts; result array shapes were too loose for static analysis.
+- Fix: introduced dedicated transfer contracts in `src/Contract`, made repositories implement them, and tightened service return union shapes.
+- Prevention: new application services should depend on interfaces (ports), not concrete repositories, and use explicit success/error union return shapes.
+
 ## 2026-02-26 - Dependency approval must be explicit
 - Symptom: dependency discussions happened too late during implementation.
 - Root cause: approval/justification flow was not enforced early enough.
