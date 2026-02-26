@@ -21,6 +21,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\Ulid;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
@@ -447,7 +448,7 @@ class ItemEntity implements ItemInterface
         $this->createdAt = $now;
         $this->updatedAt = $now;
         if (!isset($this->publicId) || '' === $this->publicId) {
-            $this->publicId = self::generatePublicId();
+            $this->publicId = (string) new Ulid();
         }
     }
 
@@ -455,11 +456,6 @@ class ItemEntity implements ItemInterface
     public function onPreUpdate(): void
     {
         $this->updatedAt = new DateTimeImmutable();
-    }
-
-    private static function generatePublicId(): string
-    {
-        return strtoupper(substr(bin2hex(random_bytes(16)), 0, 26));
     }
 
     public function getCreatedAt(): DateTimeImmutable

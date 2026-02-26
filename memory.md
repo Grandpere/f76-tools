@@ -17,6 +17,10 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
 - Ajouter aussi la hardening des URLs (moins de query params sensibles, IDs moins previsibles, URLs signees/temporaires) dans le backlog securite.
 - Ajouter au backlog une vue Minerva dediee (bloc ou page) avec logique temporelle de rotation (`startsAt`/`endsAt`) pour apparition/disparition.
 - Si une fonctionnalite necessite une nouvelle dependance, demander validation utilisateur avant ajout (ne pas contourner en reinventant la roue sans accord).
+- Regle stricte dependances:
+  - toujours demander l accord utilisateur AVANT `composer require` / ajout de package.
+  - toujours expliquer: pourquoi la dependance est proposee, ce qu elle apporte, et ce que cela implique si on ne l ajoute pas (risques, dette, limitations).
+  - ne pas implementer une alternative "maison" par defaut pour eviter cette discussion: presenter d abord l option standard/eprouvee.
 
 ## Decisions techniques prises
 - `Item` stocke des cles de traduction (`nameKey`, `descKey`) et non les textes EN/DE en base.

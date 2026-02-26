@@ -17,6 +17,7 @@ use App\Repository\PlayerEntityRepository;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\Ulid;
 
 #[ORM\Entity(repositoryClass: PlayerEntityRepository::class)]
 #[ORM\Table(name: 'player')]
@@ -105,7 +106,7 @@ class PlayerEntity
         $this->createdAt = $now;
         $this->updatedAt = $now;
         if (!isset($this->publicId) || '' === $this->publicId) {
-            $this->publicId = self::generatePublicId();
+            $this->publicId = (string) new Ulid();
         }
     }
 
@@ -113,10 +114,5 @@ class PlayerEntity
     public function onPreUpdate(): void
     {
         $this->updatedAt = new DateTimeImmutable();
-    }
-
-    private static function generatePublicId(): string
-    {
-        return strtoupper(substr(bin2hex(random_bytes(16)), 0, 26));
     }
 }
