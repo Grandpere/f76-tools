@@ -8,25 +8,25 @@ use App\Catalog\Application\Import\ItemImportApplicationService;
 use App\Catalog\Application\Import\ItemImportContextApplier;
 use App\Catalog\Application\Import\ItemImportFileContextResolver;
 use App\Catalog\Application\Import\ItemImportItemHydrator;
+use App\Catalog\Application\Import\ItemImportPersistenceInterface;
 use App\Catalog\Application\Import\ItemImportItemRepositoryInterface;
 use App\Catalog\Application\Import\ItemImportTranslationCatalogBuilder;
 use App\Catalog\Application\Import\ItemImportValueNormalizer;
 use App\Catalog\Infrastructure\Import\FilesystemItemImportSourceReader;
 use App\Contract\TranslationCatalogWriterInterface;
 use App\Translation\TranslationCatalogWriter;
-use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 final class ItemImportApplicationServiceTest extends TestCase
 {
-    private EntityManagerInterface&MockObject $entityManager;
+    private ItemImportPersistenceInterface&MockObject $persistence;
     private ItemImportItemRepositoryInterface&MockObject $repository;
 
     protected function setUp(): void
     {
-        $this->entityManager = $this->createMock(EntityManagerInterface::class);
+        $this->persistence = $this->createMock(ItemImportPersistenceInterface::class);
         $this->repository = $this->createMock(ItemImportItemRepositoryInterface::class);
     }
 
@@ -36,8 +36,8 @@ final class ItemImportApplicationServiceTest extends TestCase
         file_put_contents($root.'/minerva_61_alpha.json', '[{"id":61,"name_en":"Plan A"}]');
         file_put_contents($root.'/legendary_mods_1_broken.json', '{invalid}');
 
-        $this->entityManager->expects(self::never())->method('persist');
-        $this->entityManager->expects(self::never())->method('flush');
+        $this->persistence->expects(self::never())->method('persist');
+        $this->persistence->expects(self::never())->method('flush');
         $this->repository->expects(self::never())->method('findOneByTypeAndSourceId');
 
         $service = $this->createService($this->createTranslationWriter($this->createTempDir()));
@@ -64,8 +64,8 @@ final class ItemImportApplicationServiceTest extends TestCase
             ->method('findOneByTypeAndSourceId')
             ->willReturn(null);
 
-        $this->entityManager->expects(self::once())->method('persist');
-        $this->entityManager->expects(self::once())->method('flush');
+        $this->persistence->expects(self::once())->method('persist');
+        $this->persistence->expects(self::once())->method('flush');
         $projectDir = $this->createTempDir();
         $service = $this->createService($this->createTranslationWriter($projectDir));
         $result = $service->import($root, false, 100);
@@ -81,7 +81,7 @@ final class ItemImportApplicationServiceTest extends TestCase
         $normalizer = new ItemImportValueNormalizer();
 
         return new ItemImportApplicationService(
-            $this->entityManager,
+            $this->persistence,
             $this->repository,
             $translationCatalogWriter,
             new ItemImportFileContextResolver(),

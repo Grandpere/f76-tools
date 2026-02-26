@@ -6,12 +6,11 @@ namespace App\Catalog\Application\Import;
 
 use App\Contract\TranslationCatalogWriterInterface;
 use App\Entity\ItemEntity;
-use Doctrine\ORM\EntityManagerInterface;
 
 final class ItemImportApplicationService
 {
     public function __construct(
-        private readonly EntityManagerInterface $entityManager,
+        private readonly ItemImportPersistenceInterface $persistence,
         private readonly ItemImportItemRepositoryInterface $itemRepository,
         private readonly TranslationCatalogWriterInterface $translationCatalogWriter,
         private readonly ItemImportFileContextResolver $fileContextResolver,
@@ -129,19 +128,19 @@ final class ItemImportApplicationService
                 }
 
                 if (!$dryRun) {
-                    $this->entityManager->persist($item);
+                    $this->persistence->persist($item);
                     ++$pendingFlush;
                 }
 
                 if (!$dryRun && $pendingFlush >= $batchSize) {
-                    $this->entityManager->flush();
+                    $this->persistence->flush();
                     $pendingFlush = 0;
                 }
             }
         }
 
         if (!$dryRun && $pendingFlush > 0) {
-            $this->entityManager->flush();
+            $this->persistence->flush();
         }
 
         $stats['translations_en'] = count($catalogEn);
