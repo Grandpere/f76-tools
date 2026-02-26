@@ -133,6 +133,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - backoffice users ne doit pas changer directement le mot de passe d un tiers.
   - action admin = generation d un lien temporaire (token hash + expiration) vers une page publique `/reset-password/{token}`.
   - flow public ajoute: `GET/POST /forgot-password` (reponse generique), generation token reset + envoi email, puis `GET/POST /reset-password/{token}`.
+  - liens temporaires sensibles (`verify-email` et `reset-password`) signes via `SignedUrlGenerator` (`UriSigner`); verification de signature cote controleurs.
   - tests fonctionnels a maintenir pour les cas token valide, invalide et expire.
   - cooldown serveur en place sur la generation (`60s` par utilisateur cible), avec timestamp `reset_password_requested_at`.
   - limite globale en plus: max `10` generations reussies par admin sur `60s`.

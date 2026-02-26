@@ -17,6 +17,7 @@ use App\Entity\AdminAuditLogEntity;
 use App\Entity\UserEntity;
 use App\Repository\AdminAuditLogEntityRepository;
 use App\Repository\UserEntityRepository;
+use App\Security\SignedUrlGenerator;
 use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,7 +26,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -43,7 +43,7 @@ final class UserManagementController extends AbstractController
         private readonly AdminAuditLogEntityRepository $auditLogRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
-        private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly SignedUrlGenerator $signedUrlGenerator,
         private readonly TranslatorInterface $translator,
     ) {
     }
@@ -198,10 +198,10 @@ final class UserManagementController extends AbstractController
         ]);
         $this->entityManager->flush();
 
-        $resetUrl = $this->urlGenerator->generate('app_reset_password', [
+        $resetUrl = $this->signedUrlGenerator->generate('app_reset_password', [
             'locale' => $request->getLocale(),
             'token' => $token,
-        ], UrlGeneratorInterface::ABSOLUTE_URL);
+        ]);
 
         $translated = $this->translator->trans('admin_users.flash.reset_link_generated');
         $this->addFlash('success', sprintf('%s %s', $translated, $resetUrl));

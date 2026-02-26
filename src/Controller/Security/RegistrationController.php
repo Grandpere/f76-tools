@@ -15,6 +15,7 @@ namespace App\Controller\Security;
 
 use App\Entity\UserEntity;
 use App\Repository\UserEntityRepository;
+use App\Security\SignedUrlGenerator;
 use App\Service\AuthRequestThrottler;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
@@ -28,7 +29,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -43,7 +43,7 @@ final class RegistrationController extends AbstractController
         private readonly EntityManagerInterface $entityManager,
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
-        private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly SignedUrlGenerator $signedUrlGenerator,
         private readonly TranslatorInterface $translator,
         private readonly MailerInterface $mailer,
         private readonly AuthRequestThrottler $requestThrottler,
@@ -139,10 +139,10 @@ final class RegistrationController extends AbstractController
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
-            $verifyUrl = $this->urlGenerator->generate('app_verify_email', [
+            $verifyUrl = $this->signedUrlGenerator->generate('app_verify_email', [
                 'locale' => $request->getLocale(),
                 'token' => $token,
-            ], UrlGeneratorInterface::ABSOLUTE_URL);
+            ]);
 
             try {
                 $this->mailer->send(

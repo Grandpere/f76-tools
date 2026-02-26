@@ -20,6 +20,10 @@ services:
     App\:
         resource: '../src/'
 
+    Symfony\Component\HttpFoundation\UriSigner:
+        arguments:
+            $secret: '%kernel.secret%'
+
     App\Contract\UserByEmailFinderInterface: '@App\Repository\UserEntityRepository'
 
     App\Service\TurnstileVerifier:

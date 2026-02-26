@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Security;
 
 use App\Entity\UserEntity;
+use App\Security\SignedUrlGenerator;
 use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -53,14 +54,15 @@ final class ResetPasswordControllerTest extends WebTestCase
         $user->setResetPasswordRequestedAt(new DateTimeImmutable());
         $this->entityManager?->flush();
 
-        $crawler = $this->browser()->request('GET', '/reset-password/'.$rawToken);
+        $signedUrl = $this->signedUrl('app_reset_password', ['token' => $rawToken]);
+        $crawler = $this->browser()->request('GET', $signedUrl);
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
 
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
         $csrfToken = (string) $tokenNode->attr('value');
 
-        $this->browser()->request('POST', '/reset-password/'.$rawToken, [
+        $this->browser()->request('POST', $signedUrl, [
             '_csrf_token' => $csrfToken,
             'password' => 'new-secret123',
             'password_confirm' => 'new-secret123',
@@ -82,7 +84,7 @@ final class ResetPasswordControllerTest extends WebTestCase
     {
         $this->createUser('reset-invalid@example.com', 'secret123');
 
-        $this->browser()->request('GET', '/reset-password/not-a-valid-token');
+        $this->browser()->request('GET', $this->signedUrl('app_reset_password', ['token' => 'not-a-valid-token']));
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
@@ -96,7 +98,7 @@ final class ResetPasswordControllerTest extends WebTestCase
         $user->setResetPasswordExpiresAt((new DateTimeImmutable())->sub(new DateInterval('PT1M')));
         $this->entityManager?->flush();
 
-        $this->browser()->request('GET', '/reset-password/'.$rawToken);
+        $this->browser()->request('GET', $this->signedUrl('app_reset_password', ['token' => $rawToken]));
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
@@ -147,5 +149,16 @@ final class ResetPasswordControllerTest extends WebTestCase
         \assert($hasher instanceof UserPasswordHasherInterface);
 
         return $hasher;
+    }
+
+    /**
+     * @param array<string, scalar> $parameters
+     */
+    private function signedUrl(string $routeName, array $parameters): string
+    {
+        $generator = $this->browser()->getContainer()->get(SignedUrlGenerator::class);
+        \assert($generator instanceof SignedUrlGenerator);
+
+        return $generator->generate($routeName, $parameters);
     }
 }

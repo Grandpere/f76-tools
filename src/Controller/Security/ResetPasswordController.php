@@ -15,8 +15,10 @@ namespace App\Controller\Security;
 
 use App\Entity\UserEntity;
 use App\Repository\UserEntityRepository;
+use App\Security\SignedUrlGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -32,12 +34,19 @@ final class ResetPasswordController extends AbstractController
         private readonly EntityManagerInterface $entityManager,
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
+        private readonly SignedUrlGenerator $signedUrlGenerator,
     ) {
     }
 
     #[Route('/{token}', name: 'app_reset_password', methods: ['GET', 'POST'])]
     public function __invoke(string $token, Request $request): Response
     {
+        if (!$this->signedUrlGenerator->isRequestSignatureValid($request)) {
+            $this->addFlash('warning', 'security.reset.flash.invalid_or_expired');
+
+            return $this->redirectToRoute('app_login', ['locale' => $request->getLocale()]);
+        }
+
         $user = $this->resolveValidUserByToken($token);
         if (!$user instanceof UserEntity) {
             $this->addFlash('warning', 'security.reset.flash.invalid_or_expired');
@@ -50,10 +59,7 @@ final class ResetPasswordController extends AbstractController
             if (!$this->csrfTokenManager->isTokenValid(new CsrfToken('reset_password', $csrfToken))) {
                 $this->addFlash('warning', 'security.reset.flash.invalid_csrf');
 
-                return $this->redirectToRoute('app_reset_password', [
-                    'locale' => $request->getLocale(),
-                    'token' => $token,
-                ]);
+                return new RedirectResponse($request->getUri());
             }
 
             $password = (string) $request->request->get('password', '');
@@ -62,18 +68,12 @@ final class ResetPasswordController extends AbstractController
             if (strlen($password) < 8) {
                 $this->addFlash('warning', 'security.reset.flash.password_too_short');
 
-                return $this->redirectToRoute('app_reset_password', [
-                    'locale' => $request->getLocale(),
-                    'token' => $token,
-                ]);
+                return new RedirectResponse($request->getUri());
             }
             if ($password !== $passwordConfirm) {
                 $this->addFlash('warning', 'security.reset.flash.password_mismatch');
 
-                return $this->redirectToRoute('app_reset_password', [
-                    'locale' => $request->getLocale(),
-                    'token' => $token,
-                ]);
+                return new RedirectResponse($request->getUri());
             }
 
             $user->setPassword($this->passwordHasher->hashPassword($user, $password));

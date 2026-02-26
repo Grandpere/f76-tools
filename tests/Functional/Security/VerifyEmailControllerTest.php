@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Security;
 
 use App\Entity\UserEntity;
+use App\Security\SignedUrlGenerator;
 use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -57,7 +58,9 @@ final class VerifyEmailControllerTest extends WebTestCase
         $this->entityManager?->persist($user);
         $this->entityManager?->flush();
 
-        $this->browser()->request('GET', '/verify-email/'.$rawToken);
+        $this->browser()->request('GET', $this->signedUrl('app_verify_email', [
+            'token' => $rawToken,
+        ]));
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
@@ -93,5 +96,16 @@ final class VerifyEmailControllerTest extends WebTestCase
         }
 
         return $this->client;
+    }
+
+    /**
+     * @param array<string, scalar> $parameters
+     */
+    private function signedUrl(string $routeName, array $parameters): string
+    {
+        $generator = $this->browser()->getContainer()->get(SignedUrlGenerator::class);
+        \assert($generator instanceof SignedUrlGenerator);
+
+        return $generator->generate($routeName, $parameters);
     }
 }

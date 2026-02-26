@@ -15,6 +15,7 @@ namespace App\Controller\Security;
 
 use App\Entity\UserEntity;
 use App\Repository\UserEntityRepository;
+use App\Security\SignedUrlGenerator;
 use App\Service\AuthRequestThrottler;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
@@ -27,7 +28,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -42,7 +42,7 @@ final class ForgotPasswordController extends AbstractController
         private readonly UserEntityRepository $userRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
-        private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly SignedUrlGenerator $signedUrlGenerator,
         private readonly TranslatorInterface $translator,
         private readonly MailerInterface $mailer,
         private readonly AuthRequestThrottler $requestThrottler,
@@ -111,10 +111,10 @@ final class ForgotPasswordController extends AbstractController
                     $user->setResetPasswordRequestedAt($now);
                     $this->entityManager->flush();
 
-                    $resetUrl = $this->urlGenerator->generate('app_reset_password', [
+                    $resetUrl = $this->signedUrlGenerator->generate('app_reset_password', [
                         'locale' => $request->getLocale(),
                         'token' => $token,
-                    ], UrlGeneratorInterface::ABSOLUTE_URL);
+                    ]);
                     try {
                         $this->mailer->send(
                             (new Email())
