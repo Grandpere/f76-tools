@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Domain\Support\Contact\ContactMessageStatusEnum;
-use App\Entity\ContactMessageEntity;
 use App\Repository\ContactMessageEntityRepository;
+use App\Support\Application\Contact\ContactMessageStatusUpdateApplicationService;
+use App\Support\Application\Contact\ContactMessageStatusUpdateResult;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,6 +33,7 @@ final class ContactMessageController extends AbstractController
 
     public function __construct(
         private readonly ContactMessageEntityRepository $contactMessageRepository,
+        private readonly ContactMessageStatusUpdateApplicationService $contactMessageStatusUpdateApplicationService,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
     ) {
     }
@@ -77,23 +79,14 @@ final class ContactMessageController extends AbstractController
             return $this->redirectToRoute('app_admin_contact_messages', ['locale' => $request->getLocale()]);
         }
 
-        $message = $this->contactMessageRepository->find($id);
-        if (!$message instanceof ContactMessageEntity) {
-            $this->addFlash('warning', 'admin_contact.flash.message_not_found');
-
-            return $this->redirectToRoute('app_admin_contact_messages', ['locale' => $request->getLocale()]);
-        }
-
-        $status = $this->sanitizeStatus($request->request->get('status'));
-        if (!$status instanceof ContactMessageStatusEnum) {
+        $result = $this->contactMessageStatusUpdateApplicationService->update($id, $request->request->get('status'));
+        if (ContactMessageStatusUpdateResult::INVALID_STATUS === $result) {
             $this->addFlash('warning', 'admin_contact.flash.invalid_status');
-
-            return $this->redirectToRoute('app_admin_contact_messages', ['locale' => $request->getLocale()]);
+        } elseif (ContactMessageStatusUpdateResult::MESSAGE_NOT_FOUND === $result) {
+            $this->addFlash('warning', 'admin_contact.flash.message_not_found');
+        } else {
+            $this->addFlash('success', 'admin_contact.flash.status_updated');
         }
-
-        $message->setStatus($status);
-        $this->contactMessageRepository->save($message);
-        $this->addFlash('success', 'admin_contact.flash.status_updated');
 
         return $this->redirectToRoute('app_admin_contact_messages', ['locale' => $request->getLocale()]);
     }

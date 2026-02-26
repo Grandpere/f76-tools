@@ -15,6 +15,7 @@ namespace App\Repository;
 
 use App\Domain\Support\Contact\ContactMessageStatusEnum;
 use App\Contract\ContactMessageWriterInterface;
+use App\Support\Application\Contact\ContactMessageStatusWriteRepositoryInterface;
 use App\Entity\ContactMessageEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -23,7 +24,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @extends ServiceEntityRepository<ContactMessageEntity>
  */
 final class ContactMessageEntityRepository extends ServiceEntityRepository
-    implements ContactMessageWriterInterface
+    implements ContactMessageWriterInterface, ContactMessageStatusWriteRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -35,6 +36,13 @@ final class ContactMessageEntityRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
         $entityManager->persist($message);
         $entityManager->flush();
+    }
+
+    public function getById(int $id): ?ContactMessageEntity
+    {
+        $message = $this->find($id);
+
+        return $message instanceof ContactMessageEntity ? $message : null;
     }
 
     /**
