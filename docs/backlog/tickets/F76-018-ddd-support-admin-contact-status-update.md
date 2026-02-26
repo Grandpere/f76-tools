@@ -14,6 +14,7 @@ Le backoffice contact fonctionne, mais le controller admin porte encore la logiq
 - [x] Ajouter tests unitaires du service.
 - [x] Extraire la sanitation/pagination de `index()` dans `ContactMessageListApplicationService` (+ tests unitaires).
 - [x] Extraire le mapping `status update result -> flash` dans `ContactMessageStatusUpdateFeedbackMapper`.
+- [x] Extraire la reponse UI complete de `setStatus()` dans `ContactMessageStatusUpdateResponder`.
 
 ## Criteres d acceptance
 - Aucune regression fonctionnelle sur `/admin/contact-messages`.

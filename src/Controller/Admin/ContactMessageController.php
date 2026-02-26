@@ -16,7 +16,7 @@ namespace App\Controller\Admin;
 use App\Domain\Support\Contact\ContactMessageStatusEnum;
 use App\Support\Application\Contact\ContactMessageListApplicationService;
 use App\Support\Application\Contact\ContactMessageStatusUpdateApplicationService;
-use App\Support\UI\Admin\ContactMessageStatusUpdateFeedbackMapper;
+use App\Support\UI\Admin\ContactMessageStatusUpdateResponder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ final class ContactMessageController extends AbstractController
     public function __construct(
         private readonly ContactMessageListApplicationService $contactMessageListApplicationService,
         private readonly ContactMessageStatusUpdateApplicationService $contactMessageStatusUpdateApplicationService,
-        private readonly ContactMessageStatusUpdateFeedbackMapper $contactMessageStatusUpdateFeedbackMapper,
+        private readonly ContactMessageStatusUpdateResponder $contactMessageStatusUpdateResponder,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
     ) {
     }
@@ -66,16 +66,12 @@ final class ContactMessageController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         if (!$this->isValidToken($request, 'admin_contact_messages_set_status_'.$id)) {
-            $this->addFlash('warning', 'admin_contact.flash.invalid_csrf');
-
-            return $this->redirectToRoute('app_admin_contact_messages', ['locale' => $request->getLocale()]);
+            return $this->contactMessageStatusUpdateResponder->invalidCsrf($request);
         }
 
         $result = $this->contactMessageStatusUpdateApplicationService->update($id, $request->request->get('status'));
-        $feedback = $this->contactMessageStatusUpdateFeedbackMapper->map($result);
-        $this->addFlash($feedback['flashType'], $feedback['flashMessage']);
 
-        return $this->redirectToRoute('app_admin_contact_messages', ['locale' => $request->getLocale()]);
+        return $this->contactMessageStatusUpdateResponder->fromResult($request, $result);
     }
 
     private function isValidToken(Request $request, string $tokenId): bool
