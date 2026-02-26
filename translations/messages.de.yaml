@@ -108,6 +108,7 @@ security.login.password: Passwort
 security.login.submit: Anmelden
 security.login.to_register: Noch kein Konto? Registrieren
 security.login.to_forgot: Passwort vergessen?
+security.login.to_resend: Verifizierungs-E-Mail erneut senden
 
 security.register.page_title: Registrierung
 security.register.title: Registrierung
@@ -135,6 +136,13 @@ security.forgot.flash.invalid_csrf: Ungultige Sitzung, bitte erneut versuchen.
 security.forgot.flash.request_sent: Falls diese E-Mail existiert, wurde ein Zurucksetzungslink gesendet.
 security.forgot.email_subject: Setzen Sie Ihr Passwort zuruck
 security.forgot.email_intro: Klicken Sie auf diesen Link, um ein neues Passwort festzulegen.
+security.resend.page_title: Verifizierungs-E-Mail erneut senden
+security.resend.title: Verifizierungs-E-Mail erneut senden
+security.resend.email: E-Mail
+security.resend.submit: Verifizierungs-E-Mail senden
+security.resend.to_login: Zuruck zur Anmeldung
+security.resend.flash.invalid_csrf: Ungultige Sitzung, bitte erneut versuchen.
+security.resend.flash.sent: Falls diese E-Mail existiert und nicht verifiziert ist, wurde eine Verifizierungs-E-Mail gesendet.
 security.reset.page_title: Passwort zurucksetzen
 security.reset.title: Passwort zurucksetzen
 security.reset.password: Neues Passwort

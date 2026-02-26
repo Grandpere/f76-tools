@@ -108,6 +108,7 @@ security.login.password: Mot de passe
 security.login.submit: Se connecter
 security.login.to_register: Pas encore de compte ? S inscrire
 security.login.to_forgot: Mot de passe oublie ?
+security.login.to_resend: Renvoyer l email de verification
 
 security.register.page_title: Inscription
 security.register.title: Inscription
@@ -135,6 +136,13 @@ security.forgot.flash.invalid_csrf: Session invalide, merci de reessayer.
 security.forgot.flash.request_sent: Si cet email existe, un lien de reinitialisation a ete envoye.
 security.forgot.email_subject: Reinitialisez votre mot de passe
 security.forgot.email_intro: Cliquez sur ce lien pour definir un nouveau mot de passe.
+security.resend.page_title: Renvoyer l email de verification
+security.resend.title: Renvoyer l email de verification
+security.resend.email: Email
+security.resend.submit: Envoyer l email de verification
+security.resend.to_login: Retour a la connexion
+security.resend.flash.invalid_csrf: Session invalide, merci de reessayer.
+security.resend.flash.sent: Si cet email existe et n est pas encore verifie, un email de verification a ete envoye.
 security.reset.page_title: Reinitialisation du mot de passe
 security.reset.title: Reinitialisation du mot de passe
 security.reset.password: Nouveau mot de passe

@@ -108,6 +108,7 @@ security.login.password: Password
 security.login.submit: Sign in
 security.login.to_register: No account yet? Register
 security.login.to_forgot: Forgot password?
+security.login.to_resend: Resend verification email
 
 security.register.page_title: Register
 security.register.title: Register
@@ -135,6 +136,13 @@ security.forgot.flash.invalid_csrf: Invalid session, please try again.
 security.forgot.flash.request_sent: If this email exists, a reset link has been sent.
 security.forgot.email_subject: Reset your password
 security.forgot.email_intro: Click this link to set a new password.
+security.resend.page_title: Resend verification email
+security.resend.title: Resend verification email
+security.resend.email: Email
+security.resend.submit: Send verification email
+security.resend.to_login: Back to login
+security.resend.flash.invalid_csrf: Invalid session, please try again.
+security.resend.flash.sent: If this email exists and is not verified, a verification email has been sent.
 security.reset.page_title: Reset password
 security.reset.title: Reset password
 security.reset.password: New password

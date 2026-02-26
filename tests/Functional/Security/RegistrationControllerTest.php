@@ -72,6 +72,7 @@ final class RegistrationControllerTest extends WebTestCase
         self::assertFalse($user->isEmailVerified());
         self::assertNotNull($user->getEmailVerificationTokenHash());
         self::assertNotNull($user->getEmailVerificationExpiresAt());
+        self::assertNotNull($user->getEmailVerificationRequestedAt());
     }
 
     private function truncateTables(): void

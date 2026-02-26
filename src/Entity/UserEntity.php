@@ -55,6 +55,9 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(name: 'email_verification_expires_at', type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeImmutable $emailVerificationExpiresAt = null;
 
+    #[ORM\Column(name: 'email_verification_requested_at', type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $emailVerificationRequestedAt = null;
+
     #[ORM\Column(name: 'reset_password_token_hash', length: 64, nullable: true)]
     private ?string $resetPasswordTokenHash = null;
 
@@ -199,6 +202,18 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmailVerificationExpiresAt(?DateTimeImmutable $emailVerificationExpiresAt): self
     {
         $this->emailVerificationExpiresAt = $emailVerificationExpiresAt;
+
+        return $this;
+    }
+
+    public function getEmailVerificationRequestedAt(): ?DateTimeImmutable
+    {
+        return $this->emailVerificationRequestedAt;
+    }
+
+    public function setEmailVerificationRequestedAt(?DateTimeImmutable $emailVerificationRequestedAt): self
+    {
+        $this->emailVerificationRequestedAt = $emailVerificationRequestedAt;
 
         return $this;
     }

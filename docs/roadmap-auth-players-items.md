@@ -123,7 +123,7 @@ Permettre a un utilisateur authentifie de:
   - [x] ajouter `isEmailVerified` sur `UserEntity`,
   - [x] generer un token de verification avec expiration (24h),
   - [x] bloquer la connexion tant que l email n est pas verifie,
-  - [ ] prevoir un endpoint "renvoyer l email de verification" (rate-limite).
+  - [x] endpoint "renvoyer l email de verification" (rate-limite).
 - [x] Flow public "mot de passe oublie":
   - [x] page `GET/POST /forgot-password` (saisie email),
   - [x] reponse generique anti-enumeration (ne pas reveler si email existe),

@@ -92,8 +92,10 @@ final class RegistrationController extends AbstractController
                 ->setIsEmailVerified(false);
             $user->setPassword($this->passwordHasher->hashPassword($user, $password));
             $token = bin2hex(random_bytes(32));
+            $now = new DateTimeImmutable();
             $user->setEmailVerificationTokenHash(hash('sha256', $token));
-            $user->setEmailVerificationExpiresAt((new DateTimeImmutable())->add(new DateInterval('P1D')));
+            $user->setEmailVerificationExpiresAt($now->add(new DateInterval('P1D')));
+            $user->setEmailVerificationRequestedAt($now);
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();

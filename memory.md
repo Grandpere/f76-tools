@@ -140,6 +140,7 @@ Ce fichier sert de memo de travail pour eviter de reproduire les memes erreurs.
   - inscription met `isEmailVerified=false`, cree un token de verification (24h) et envoie un email avec lien.
   - route publique `GET /verify-email/{token}` valide le compte.
   - login bloque tant que l email n est pas verifie via `UserAccountChecker`.
+  - renvoi verification ajoute via `GET/POST /resend-verification` avec cooldown (60s) + reponse generique.
 - Audit admin:
   - table `admin_audit_log` pour tracer les actions sensibles de backoffice users.
   - actions tracees: `user_toggle_active`, `user_toggle_admin`, `user_generate_reset_link`.

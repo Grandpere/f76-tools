@@ -42,6 +42,7 @@ final class VerifyEmailController extends AbstractController
         $user->setIsEmailVerified(true);
         $user->setEmailVerificationTokenHash(null);
         $user->setEmailVerificationExpiresAt(null);
+        $user->setEmailVerificationRequestedAt(null);
         $this->entityManager->flush();
 
         $this->addFlash('success', 'security.verify.flash.success');
