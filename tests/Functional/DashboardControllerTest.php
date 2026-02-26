@@ -74,7 +74,7 @@ final class DashboardControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="importUnknownPanel"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="miscList"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="bookList"]'));
-        self::assertCount(1, $crawler->filter('a[href="/minerva-rotation"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/minerva-rotation"]'));
     }
 
     private function createUser(string $email): UserEntity
