@@ -8,6 +8,7 @@ common.no: Nein
 dashboard.page_title: 'F76 - Objektverfolgung'
 dashboard.header.translation_management: Ubersetzungsverwaltung
 dashboard.header.user_management: Benutzerverwaltung
+dashboard.header.minerva_rotation: Minerva-Rotation
 dashboard.header.admin: Administration
 dashboard.header.title: Verfolgung gelernter Objekte
 dashboard.header.subtitle: Wahlen Sie einen Charakter aus und markieren Sie gelernte Minerva-Plane und legendare Mods.
@@ -238,3 +239,18 @@ admin_contact.flash.invalid_csrf: Ungultige Aktion (CSRF).
 admin_contact.flash.message_not_found: Kontaktanfrage nicht gefunden.
 admin_contact.flash.invalid_status: Ungultiger Status.
 admin_contact.flash.status_updated: Status aktualisiert.
+
+minerva.page_title: Minerva-Rotation
+minerva.title: Minerva-Rotationsplan
+minerva.description: Aktive, kommende und vergangene Minerva-Zeitfenster nach Startdatum sortiert.
+minerva.back_to_dashboard: Zuruck zum Dashboard
+minerva.timezone: 'Zeitzone: %timezone%'
+minerva.status: Status
+minerva.location: Ort
+minerva.list_cycle: Liste
+minerva.starts_at: Start
+minerva.ends_at: Ende
+minerva.empty: Keine Rotation verfugbar.
+minerva.status_upcoming: Kommend
+minerva.status_active: Aktiv
+minerva.status_ended: Beendet

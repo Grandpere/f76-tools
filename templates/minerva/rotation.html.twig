@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'minerva.page_title'|trans }}{% endblock %}
+
+{% block body %}
+    <main class="translations-page">
+        <header class="translations-header">
+            <div class="catalog-header-tools">
+                <a class="header-translations-link" href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ 'minerva.back_to_dashboard'|trans }}</a>
+                <form class="header-locale" method="get">
+                    <img class="header-locale-icon" src="/assets/icons/language.svg" alt="" aria-hidden="true">
+                    <label for="minerva-header-locale-select">{{ 'common.language'|trans }}</label>
+                    <select id="minerva-header-locale-select" name="locale" onchange="this.form.submit()">
+                        <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 {{ 'common.locale.fr'|trans }}</option>
+                        <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 {{ 'common.locale.en'|trans }}</option>
+                        <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>🇩🇪 {{ 'common.locale.de'|trans }}</option>
+                    </select>
+                </form>
+            </div>
+            <p class="catalog-kicker">Fallout 76</p>
+            <h1>{{ 'minerva.title'|trans }}</h1>
+            <p>{{ 'minerva.description'|trans }}</p>
+            <p class="catalog-state">{{ 'minerva.timezone'|trans({'%timezone%': timeline.timezone}) }}</p>
+        </header>
+
+        <section class="translations-panel">
+            <div class="translations-table-wrap">
+                <table class="translations-table">
+                    <thead>
+                    <tr>
+                        <th>{{ 'minerva.status'|trans }}</th>
+                        <th>{{ 'minerva.location'|trans }}</th>
+                        <th>{{ 'minerva.list_cycle'|trans }}</th>
+                        <th>{{ 'minerva.starts_at'|trans }}</th>
+                        <th>{{ 'minerva.ends_at'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in timeline.rows %}
+                        <tr>
+                            <td><span class="item-pill">{{ ('minerva.status_' ~ row.status)|trans }}</span></td>
+                            <td>{{ row.location }}</td>
+                            <td>{{ row.listCycle }}</td>
+                            <td>{{ row.startsAt|date('Y-m-d H:i') }}</td>
+                            <td>{{ row.endsAt|date('Y-m-d H:i') }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">{{ 'minerva.empty'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+{% endblock %}

@@ -8,6 +8,7 @@ common.no: Non
 dashboard.page_title: 'F76 - Suivi des objets'
 dashboard.header.translation_management: Gestion des traductions
 dashboard.header.user_management: Gestion des utilisateurs
+dashboard.header.minerva_rotation: Rotation Minerva
 dashboard.header.admin: Administration
 dashboard.header.title: Suivi des objets appris
 dashboard.header.subtitle: Selectionne un personnage puis marque ses plans Minerva et ses mods legendaires appris.
@@ -238,3 +239,18 @@ admin_contact.flash.invalid_csrf: Action invalide (CSRF).
 admin_contact.flash.message_not_found: Message de contact introuvable.
 admin_contact.flash.invalid_status: Statut invalide.
 admin_contact.flash.status_updated: Statut mis a jour.
+
+minerva.page_title: Rotation Minerva
+minerva.title: Timeline rotation Minerva
+minerva.description: Fenetres Minerva actives, a venir et terminees, triees par date de debut.
+minerva.back_to_dashboard: Retour au dashboard
+minerva.timezone: 'Timezone: %timezone%'
+minerva.status: Statut
+minerva.location: Localisation
+minerva.list_cycle: Liste
+minerva.starts_at: Debut
+minerva.ends_at: Fin
+minerva.empty: Aucune rotation disponible.
+minerva.status_upcoming: A venir
+minerva.status_active: Active
+minerva.status_ended: Terminee

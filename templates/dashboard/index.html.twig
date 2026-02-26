@@ -57,6 +57,7 @@
     <main class="catalog-page">
         <header class="catalog-header">
             <div class="catalog-header-tools">
+                <a class="header-translations-link" href="{{ path('app_minerva_rotation', { locale: app.request.locale }) }}">{{ 'dashboard.header.minerva_rotation'|trans }}</a>
                 {% if is_granted('ROLE_ADMIN') %}
                     <a class="header-translations-link" href="{{ path('app_admin_users', { locale: app.request.locale }) }}">{{ 'dashboard.header.admin'|trans }}</a>
                 {% endif %}

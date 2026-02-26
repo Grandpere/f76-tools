@@ -8,6 +8,7 @@ common.no: No
 dashboard.page_title: 'F76 - Item Tracking'
 dashboard.header.translation_management: Translation management
 dashboard.header.user_management: User management
+dashboard.header.minerva_rotation: Minerva rotation
 dashboard.header.admin: Administration
 dashboard.header.title: Learned items tracker
 dashboard.header.subtitle: Select a character, then mark learned Minerva plans and legendary mods.
@@ -238,3 +239,18 @@ admin_contact.flash.invalid_csrf: Invalid action (CSRF).
 admin_contact.flash.message_not_found: Contact message not found.
 admin_contact.flash.invalid_status: Invalid status.
 admin_contact.flash.status_updated: Status updated.
+
+minerva.page_title: Minerva rotation
+minerva.title: Minerva rotation timeline
+minerva.description: Current, upcoming, and past Minerva windows ordered by start date.
+minerva.back_to_dashboard: Back to dashboard
+minerva.timezone: 'Timezone: %timezone%'
+minerva.status: Status
+minerva.location: Location
+minerva.list_cycle: List
+minerva.starts_at: Starts at
+minerva.ends_at: Ends at
+minerva.empty: No rotation available.
+minerva.status_upcoming: Upcoming
+minerva.status_active: Active
+minerva.status_ended: Ended

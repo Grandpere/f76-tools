@@ -74,6 +74,7 @@ final class DashboardControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="importUnknownPanel"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="miscList"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="bookList"]'));
+        self::assertCount(1, $crawler->filter('a[href="/minerva-rotation"]'));
     }
 
     private function createUser(string $email): UserEntity
@@ -108,7 +109,7 @@ final class DashboardControllerTest extends WebTestCase
         }
 
         $connection = $this->entityManager->getConnection();
-        $connection->executeStatement('TRUNCATE TABLE player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
+        $connection->executeStatement('TRUNCATE TABLE minerva_rotation, contact_message, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
     }
 
     private function browser(): KernelBrowser
