@@ -46,6 +46,11 @@ services:
     volumes:
       - database_data:/var/lib/postgresql/data:rw
 
+  mailpit:
+    image: axllent/mailpit:v1.21
+    ports:
+      - "8025:8025"
+
 volumes:
   database_data:
   symfony_var:
