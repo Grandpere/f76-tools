@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Identity\Application\Registration\RegisterUserApplicationService;
-use App\Identity\Application\Notification\IdentityLinkEmailSenderInterface;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
 use App\Identity\Application\Guard\IdentityRequestGuardInterface;
 use App\Identity\UI\Security\IdentityGuardFailureResponder;
+use App\Identity\UI\Security\IdentityIssuedTokenNotifier;
 use App\Identity\UI\Security\RegistrationFeedbackMapper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,9 +32,9 @@ final class RegistrationController extends AbstractController
 
     public function __construct(
         private readonly RegisterUserApplicationService $registerUserApplicationService,
-        private readonly IdentityLinkEmailSenderInterface $identityLinkEmailSender,
         private readonly IdentityRequestGuardInterface $identityRequestGuard,
         private readonly IdentityGuardFailureResponder $guardFailureResponder,
+        private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
         private readonly RegistrationFeedbackMapper $registrationFeedbackMapper,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
@@ -96,9 +96,13 @@ final class RegistrationController extends AbstractController
             $targetEmail = $registerResult->getEmail();
             $plainToken = $registerResult->getPlainVerificationToken();
 
-            if (is_string($targetEmail) && is_string($plainToken)) {
-                $this->identityLinkEmailSender->sendVerificationLink($targetEmail, $request->getLocale(), $plainToken);
-            }
+            $this->identityIssuedTokenNotifier->notifyVerification(
+                $targetEmail,
+                $plainToken,
+                $request->getLocale(),
+                $request->getClientIp(),
+                'security.auth.register.verification_token_issued',
+            );
 
             $this->addFlash('success', 'security.register.flash.success');
             $this->authEventLogger->info('security.auth.register.user_created', is_string($targetEmail) ? $targetEmail : $email, $request->getClientIp(), [

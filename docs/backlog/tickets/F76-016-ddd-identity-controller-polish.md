@@ -17,6 +17,8 @@ Un dernier polish peut encore reduire le bruit UI sans changer le comportement.
 - [x] `IdentityGuardFailureResponder` ajoute pour centraliser feedback des refus de guards.
 - [x] `Registration/Forgot/Resend` reutilisent `IdentityGuardFailureResponder`.
 - [x] Tests unitaires des mappers UI ajoutes.
+- [x] `IdentityIssuedTokenNotifier` ajoute pour mutualiser envoi email + audit log des tokens emis.
+- [x] `Registration/Forgot/Resend` reutilisent `IdentityIssuedTokenNotifier`.
 
 ## Criteres d acceptance
 - Duplication de mapping reduite.

@@ -14,11 +14,10 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Identity\Application\ForgotPassword\ForgotPasswordRequestApplicationService;
-use App\Identity\Application\Notification\IdentityLinkEmailSenderInterface;
 use App\Identity\Application\Guard\IdentityRequestGuardInterface;
 use App\Identity\UI\Security\IdentityGuardFailureResponder;
+use App\Identity\UI\Security\IdentityIssuedTokenNotifier;
 use App\Service\TurnstileVerifier;
-use App\Security\AuthEventLogger;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,11 +30,10 @@ final class ForgotPasswordController extends AbstractController
 
     public function __construct(
         private readonly ForgotPasswordRequestApplicationService $forgotPasswordRequestApplicationService,
-        private readonly IdentityLinkEmailSenderInterface $identityLinkEmailSender,
         private readonly IdentityRequestGuardInterface $identityRequestGuard,
         private readonly IdentityGuardFailureResponder $guardFailureResponder,
+        private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
         private readonly TurnstileVerifier $turnstileVerifier,
-        private readonly AuthEventLogger $authEventLogger,
     ) {
     }
 
@@ -72,13 +70,12 @@ final class ForgotPasswordController extends AbstractController
 
             $requestResult = $this->forgotPasswordRequestApplicationService->request($email, new \DateTimeImmutable());
             if ($requestResult->isTokenIssued()) {
-                $plainToken = $requestResult->getPlainToken();
-                $targetEmail = $requestResult->getEmail();
-                if (is_string($plainToken) && is_string($targetEmail)) {
-                    $this->identityLinkEmailSender->sendResetPasswordLink($targetEmail, $request->getLocale(), $plainToken);
-
-                    $this->authEventLogger->info('security.auth.forgot_password.reset_token_issued', $targetEmail, $request->getClientIp());
-                }
+                $this->identityIssuedTokenNotifier->notifyResetPassword(
+                    $requestResult->getEmail(),
+                    $requestResult->getPlainToken(),
+                    $request->getLocale(),
+                    $request->getClientIp(),
+                );
             }
 
             $this->addFlash('success', 'security.forgot.flash.request_sent');
