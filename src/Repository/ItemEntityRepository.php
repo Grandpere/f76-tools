@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Catalog\Application\Import\ItemImportItemRepositoryInterface;
+use App\Contract\ItemKnowledgeCatalogReadRepositoryInterface;
 use App\Contract\ItemKnowledgeTransferRepositoryInterface;
 use App\Contract\ItemStatsReadRepositoryInterface;
 use App\Domain\Item\ItemTypeEnum;
@@ -25,7 +26,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @extends ServiceEntityRepository<ItemEntity>
  */
 final class ItemEntityRepository extends ServiceEntityRepository
-    implements ItemKnowledgeTransferRepositoryInterface, ItemStatsReadRepositoryInterface, ItemImportItemRepositoryInterface
+    implements ItemKnowledgeTransferRepositoryInterface, ItemStatsReadRepositoryInterface, ItemImportItemRepositoryInterface, ItemKnowledgeCatalogReadRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

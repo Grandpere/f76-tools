@@ -15,6 +15,7 @@ namespace App\Repository;
 
 use App\Contract\PlayerKnowledgeTransferRepositoryInterface;
 use App\Contract\PlayerKnowledgeStatsReadRepositoryInterface;
+use App\Contract\PlayerKnowledgeCatalogReadRepositoryInterface;
 use App\Domain\Item\ItemTypeEnum;
 use App\Contract\PlayerItemKnowledgeFinderInterface;
 use App\Entity\ItemEntity;
@@ -27,7 +28,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @extends ServiceEntityRepository<PlayerItemKnowledgeEntity>
  */
 final class PlayerItemKnowledgeEntityRepository extends ServiceEntityRepository
-    implements PlayerItemKnowledgeFinderInterface, PlayerKnowledgeTransferRepositoryInterface, PlayerKnowledgeStatsReadRepositoryInterface
+    implements PlayerItemKnowledgeFinderInterface, PlayerKnowledgeTransferRepositoryInterface, PlayerKnowledgeStatsReadRepositoryInterface, PlayerKnowledgeCatalogReadRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

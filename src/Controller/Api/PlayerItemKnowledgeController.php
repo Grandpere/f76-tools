@@ -17,8 +17,7 @@ use App\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
-use App\Repository\ItemEntityRepository;
-use App\Repository\PlayerItemKnowledgeEntityRepository;
+use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeApplicationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -31,8 +30,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class PlayerItemKnowledgeController extends AbstractController
 {
     public function __construct(
-        private readonly ItemEntityRepository $itemRepository,
-        private readonly PlayerItemKnowledgeEntityRepository $knowledgeRepository,
+        private readonly PlayerKnowledgeCatalogApplicationService $playerKnowledgeCatalogApplicationService,
         private readonly PlayerKnowledgeApplicationService $playerKnowledgeApplicationService,
         private readonly TranslatorInterface $translator,
     ) {
@@ -51,14 +49,13 @@ final class PlayerItemKnowledgeController extends AbstractController
             return $this->json(['error' => 'Invalid item type.'], JsonResponse::HTTP_BAD_REQUEST);
         }
 
-        $items = $this->itemRepository->findAllOrdered($type);
         $query = $this->normalizeSearchQuery($request->query->get('q'));
-        $learnedMap = array_flip($this->knowledgeRepository->findLearnedItemIdsByPlayer($player));
+        $catalogRows = $this->playerKnowledgeCatalogApplicationService->listForPlayer($player, $type);
 
-        $payload = array_map(
-            fn (ItemEntity $item): array => $this->toItemPayload($item, isset($learnedMap[$item->getId() ?? 0])),
-            $items,
-        );
+        $payload = [];
+        foreach ($catalogRows as $row) {
+            $payload[] = $this->toItemPayload($row['item'], $row['learned']);
+        }
         if (null !== $query) {
             $payload = array_values(array_filter(
                 $payload,
