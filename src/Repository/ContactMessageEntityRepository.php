@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Domain\Support\Contact\ContactMessageStatusEnum;
 use App\Contract\ContactMessageWriterInterface;
 use App\Entity\ContactMessageEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -34,5 +35,51 @@ final class ContactMessageEntityRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
         $entityManager->persist($message);
         $entityManager->flush();
+    }
+
+    /**
+     * @return array{rows: list<ContactMessageEntity>, total: int}
+     */
+    public function findPaginated(string $query, ?ContactMessageStatusEnum $status, int $page, int $perPage): array
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->orderBy('c.createdAt', 'DESC')
+            ->addOrderBy('c.id', 'DESC');
+
+        if ($status instanceof ContactMessageStatusEnum) {
+            $qb->andWhere('c.status = :status')
+                ->setParameter('status', $status);
+        }
+
+        if ('' !== $query) {
+            $needle = '%'.mb_strtolower($query).'%';
+            $qb->andWhere('LOWER(c.email) LIKE :needle OR LOWER(c.subject) LIKE :needle OR LOWER(c.message) LIKE :needle')
+                ->setParameter('needle', $needle);
+        }
+
+        $total = (int) (clone $qb)
+            ->select('COUNT(c.id)')
+            ->resetDQLPart('orderBy')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $offset = max(0, ($page - 1) * $perPage);
+        $result = $qb
+            ->setFirstResult($offset)
+            ->setMaxResults($perPage)
+            ->getQuery()
+            ->getResult();
+
+        if (!is_array($result)) {
+            $result = [];
+        }
+
+        /** @var list<ContactMessageEntity> $rows */
+        $rows = array_values(array_filter($result, static fn (mixed $row): bool => $row instanceof ContactMessageEntity));
+
+        return [
+            'rows' => $rows,
+            'total' => $total,
+        ];
     }
 }

@@ -211,3 +211,30 @@ admin_audit.actor: Acteur
 admin_audit.target: Cible
 admin_audit.context: Contexte
 admin_audit.no_entries: Aucune entree.
+
+admin_contact.page_title: Backoffice messages de contact
+admin_contact.kicker: Backoffice
+admin_contact.title: Messages de contact
+admin_contact.description: Consulte et traite les demandes envoyees via le formulaire public.
+admin_contact.back_to_dashboard: Retour au dashboard
+admin_contact.search: Recherche
+admin_contact.search_placeholder: Email, sujet ou message
+admin_contact.status: Statut
+admin_contact.any_status: Tous les statuts
+admin_contact.per_page: Lignes par page
+admin_contact.filter: Filtrer
+admin_contact.visible_rows: '%count% lignes visibles.'
+admin_contact.created_at: Date
+admin_contact.email: Email
+admin_contact.subject: Sujet
+admin_contact.message: Message
+admin_contact.actions: Actions
+admin_contact.update_status: Mettre a jour
+admin_contact.no_entries: Aucune entree.
+admin_contact.status_new: Nouveau
+admin_contact.status_in_progress: En cours
+admin_contact.status_closed: Ferme
+admin_contact.flash.invalid_csrf: Action invalide (CSRF).
+admin_contact.flash.message_not_found: Message de contact introuvable.
+admin_contact.flash.invalid_status: Statut invalide.
+admin_contact.flash.status_updated: Statut mis a jour.

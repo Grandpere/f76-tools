@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'admin_contact.page_title'|trans }}{% endblock %}
+
+{% block body %}
+    <main class="translations-page">
+        <header class="translations-header">
+            <div class="catalog-header-tools">
+                <a class="header-translations-link" href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ 'admin_contact.back_to_dashboard'|trans }}</a>
+                <form class="header-locale" method="get">
+                    {% if query %}
+                        <input type="hidden" name="q" value="{{ query }}">
+                    {% endif %}
+                    {% if status %}
+                        <input type="hidden" name="status" value="{{ status }}">
+                    {% endif %}
+                    <input type="hidden" name="perPage" value="{{ perPage }}">
+                    <input type="hidden" name="page" value="{{ page }}">
+                    <img class="header-locale-icon" src="/assets/icons/language.svg" alt="" aria-hidden="true">
+                    <label for="admin-contact-header-locale-select">{{ 'common.language'|trans }}</label>
+                    <select id="admin-contact-header-locale-select" name="locale" onchange="this.form.submit()">
+                        <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 {{ 'common.locale.fr'|trans }}</option>
+                        <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 {{ 'common.locale.en'|trans }}</option>
+                        <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>🇩🇪 {{ 'common.locale.de'|trans }}</option>
+                    </select>
+                </form>
+            </div>
+            <p class="catalog-kicker">{{ 'admin_contact.kicker'|trans }}</p>
+            <h1>{{ 'admin_contact.title'|trans }}</h1>
+            <p>{{ 'admin_contact.description'|trans }}</p>
+            {% include 'admin/_nav_links.html.twig' %}
+        </header>
+
+        {% for message in app.flashes('success') %}
+            <p class="translations-flash success">{{ message|trans }}</p>
+        {% endfor %}
+        {% for message in app.flashes('warning') %}
+            <p class="translations-flash warning">{{ message|trans }}</p>
+        {% endfor %}
+
+        <section class="translations-panel">
+            <form method="get" class="translations-filters">
+                <label class="field">
+                    <span>{{ 'admin_contact.search'|trans }}</span>
+                    <input type="search" name="q" value="{{ query }}" placeholder="{{ 'admin_contact.search_placeholder'|trans }}">
+                </label>
+                <label class="field">
+                    <span>{{ 'admin_contact.status'|trans }}</span>
+                    <select name="status">
+                        <option value="">{{ 'admin_contact.any_status'|trans }}</option>
+                        {% for candidate in statusOptions %}
+                            <option value="{{ candidate.value }}" {% if status == candidate.value %}selected{% endif %}>
+                                {{ ('admin_contact.status_' ~ candidate.value)|trans }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </label>
+                <label class="field">
+                    <span>{{ 'admin_contact.per_page'|trans }}</span>
+                    <select name="perPage">
+                        <option value="20" {% if perPage == 20 %}selected{% endif %}>20</option>
+                        <option value="30" {% if perPage == 30 %}selected{% endif %}>30</option>
+                        <option value="50" {% if perPage == 50 %}selected{% endif %}>50</option>
+                        <option value="100" {% if perPage == 100 %}selected{% endif %}>100</option>
+                    </select>
+                </label>
+                <input type="hidden" name="locale" value="{{ app.request.locale }}">
+                <input type="hidden" name="page" value="1">
+                <button type="submit">{{ 'admin_contact.filter'|trans }}</button>
+            </form>
+            <p class="catalog-state">{{ 'admin_contact.visible_rows'|trans({'%count%': totalRows}) }}</p>
+
+            {% if totalPages > 1 %}
+                <div class="translations-pager">
+                    {% if page > 1 %}
+                        <a href="{{ path('app_admin_contact_messages', { locale: app.request.locale, q: query ?: null, status: status ?: null, perPage: perPage, page: page - 1 }) }}">{{ 'admin_translations.pagination_prev'|trans }}</a>
+                    {% endif %}
+                    <span>{{ 'admin_translations.pagination_page'|trans({'%page%': page, '%total%': totalPages}) }}</span>
+                    {% if page < totalPages %}
+                        <a href="{{ path('app_admin_contact_messages', { locale: app.request.locale, q: query ?: null, status: status ?: null, perPage: perPage, page: page + 1 }) }}">{{ 'admin_translations.pagination_next'|trans }}</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            <div class="translations-table-wrap">
+                <table class="translations-table admin-users-table">
+                    <thead>
+                    <tr>
+                        <th>{{ 'admin_contact.created_at'|trans }}</th>
+                        <th>{{ 'admin_contact.email'|trans }}</th>
+                        <th>{{ 'admin_contact.subject'|trans }}</th>
+                        <th>{{ 'admin_contact.message'|trans }}</th>
+                        <th>{{ 'admin_contact.status'|trans }}</th>
+                        <th>{{ 'admin_contact.actions'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            <td>{{ row.createdAt|date('Y-m-d H:i:s') }}</td>
+                            <td>{{ row.email }}</td>
+                            <td>{{ row.subject }}</td>
+                            <td>{{ row.message }}</td>
+                            <td>{{ ('admin_contact.status_' ~ row.status.value)|trans }}</td>
+                            <td>
+                                <form method="post" action="{{ path('app_admin_contact_messages_set_status', { id: row.id, locale: app.request.locale }) }}">
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_contact_messages_set_status_' ~ row.id) }}">
+                                    <select name="status">
+                                        {% for candidate in statusOptions %}
+                                            <option value="{{ candidate.value }}" {% if row.status.value == candidate.value %}selected{% endif %}>
+                                                {{ ('admin_contact.status_' ~ candidate.value)|trans }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                    <button type="submit">{{ 'admin_contact.update_status'|trans }}</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">{{ 'admin_contact.no_entries'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+{% endblock %}

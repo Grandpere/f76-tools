@@ -211,3 +211,30 @@ admin_audit.actor: Actor
 admin_audit.target: Target
 admin_audit.context: Context
 admin_audit.no_entries: No entries.
+
+admin_contact.page_title: Contact messages backoffice
+admin_contact.kicker: Backoffice
+admin_contact.title: Contact messages
+admin_contact.description: Review and process incoming contact requests from users.
+admin_contact.back_to_dashboard: Back to dashboard
+admin_contact.search: Search
+admin_contact.search_placeholder: Email, subject or message
+admin_contact.status: Status
+admin_contact.any_status: All statuses
+admin_contact.per_page: Rows per page
+admin_contact.filter: Filter
+admin_contact.visible_rows: '%count% visible rows.'
+admin_contact.created_at: Date
+admin_contact.email: Email
+admin_contact.subject: Subject
+admin_contact.message: Message
+admin_contact.actions: Actions
+admin_contact.update_status: Update
+admin_contact.no_entries: No entries.
+admin_contact.status_new: New
+admin_contact.status_in_progress: In progress
+admin_contact.status_closed: Closed
+admin_contact.flash.invalid_csrf: Invalid action (CSRF).
+admin_contact.flash.message_not_found: Contact message not found.
+admin_contact.flash.invalid_status: Invalid status.
+admin_contact.flash.status_updated: Status updated.

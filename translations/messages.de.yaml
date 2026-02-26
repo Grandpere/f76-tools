@@ -211,3 +211,30 @@ admin_audit.actor: Akteur
 admin_audit.target: Ziel
 admin_audit.context: Kontext
 admin_audit.no_entries: Keine Eintrage.
+
+admin_contact.page_title: Kontaktanfragen-Backoffice
+admin_contact.kicker: Backoffice
+admin_contact.title: Kontaktanfragen
+admin_contact.description: Eingehende Anfragen aus dem offentlichen Kontaktformular einsehen und bearbeiten.
+admin_contact.back_to_dashboard: Zuruck zum Dashboard
+admin_contact.search: Suche
+admin_contact.search_placeholder: E-Mail, Betreff oder Nachricht
+admin_contact.status: Status
+admin_contact.any_status: Alle Status
+admin_contact.per_page: Zeilen pro Seite
+admin_contact.filter: Filtern
+admin_contact.visible_rows: '%count% sichtbare Zeilen.'
+admin_contact.created_at: Datum
+admin_contact.email: E-Mail
+admin_contact.subject: Betreff
+admin_contact.message: Nachricht
+admin_contact.actions: Aktionen
+admin_contact.update_status: Aktualisieren
+admin_contact.no_entries: Keine Eintrage.
+admin_contact.status_new: Neu
+admin_contact.status_in_progress: In Bearbeitung
+admin_contact.status_closed: Geschlossen
+admin_contact.flash.invalid_csrf: Ungultige Aktion (CSRF).
+admin_contact.flash.message_not_found: Kontaktanfrage nicht gefunden.
+admin_contact.flash.invalid_status: Ungultiger Status.
+admin_contact.flash.status_updated: Status aktualisiert.
