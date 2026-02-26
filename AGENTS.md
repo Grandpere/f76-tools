@@ -91,10 +91,6 @@ If JS packages are added to importmap:
 - At the end of each task, explicitly state whether the user has commands to run.
 - If commands are required, list them clearly and in execution order.
 - If no command is required, explicitly say: "No action needed on your side."
-- Explicitly state `make restart-app` status using one of:
-  - `Required` (must be run),
-  - `Recommended` (safe refresh after infra/runtime/config changes),
-  - `Not needed` (pure code/template changes hot-reload safely).
 
 ## 12) Admin Coverage Decision For New Features
 - For every new feature, systematically evaluate whether an admin/back-office exposure is needed.
