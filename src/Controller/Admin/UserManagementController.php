@@ -18,6 +18,7 @@ use App\Entity\UserEntity;
 use App\Repository\AdminAuditLogEntityRepository;
 use App\Repository\UserEntityRepository;
 use App\Security\SignedUrlGenerator;
+use App\Security\TemporaryLinkPolicy;
 use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,16 +35,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[Route('/admin/users')]
 final class UserManagementController extends AbstractController
 {
-    private const RESET_LINK_COOLDOWN_SECONDS = 60;
-    private const RESET_LINK_GLOBAL_WINDOW_SECONDS = 60;
-    private const RESET_LINK_GLOBAL_MAX_REQUESTS = 10;
-
     public function __construct(
         private readonly UserEntityRepository $userRepository,
         private readonly AdminAuditLogEntityRepository $auditLogRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly SignedUrlGenerator $signedUrlGenerator,
+        private readonly TemporaryLinkPolicy $temporaryLinkPolicy,
         private readonly TranslatorInterface $translator,
     ) {
     }
@@ -154,42 +152,44 @@ final class UserManagementController extends AbstractController
         }
 
         $now = new DateTimeImmutable();
-        $globalWindowStart = $now->sub(new DateInterval(sprintf('PT%dS', self::RESET_LINK_GLOBAL_WINDOW_SECONDS)));
+        $globalWindowSeconds = $this->temporaryLinkPolicy->getResetLinkGlobalWindowSeconds();
+        $globalMaxRequests = $this->temporaryLinkPolicy->getResetLinkGlobalMaxRequests();
+        $globalWindowStart = $now->sub(new DateInterval(sprintf('PT%dS', $globalWindowSeconds)));
         $recentGenerations = $this->auditLogRepository->countRecentActionsByActor($actor, ['user_generate_reset_link'], $globalWindowStart);
-        if ($recentGenerations >= self::RESET_LINK_GLOBAL_MAX_REQUESTS) {
+        if ($recentGenerations >= $globalMaxRequests) {
             $this->addFlash('warning', $this->translator->trans('admin_users.flash.reset_link_global_rate_limited', [
-                '%seconds%' => (string) self::RESET_LINK_GLOBAL_WINDOW_SECONDS,
-                '%count%' => (string) self::RESET_LINK_GLOBAL_MAX_REQUESTS,
+                '%seconds%' => (string) $globalWindowSeconds,
+                '%count%' => (string) $globalMaxRequests,
             ]));
             $this->persistAuditLog($request, 'user_generate_reset_link_global_rate_limited', $user, [
-                'windowSeconds' => self::RESET_LINK_GLOBAL_WINDOW_SECONDS,
-                'maxRequests' => self::RESET_LINK_GLOBAL_MAX_REQUESTS,
+                'windowSeconds' => $globalWindowSeconds,
+                'maxRequests' => $globalMaxRequests,
             ]);
             $this->entityManager->flush();
 
             return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
         }
 
-        $requestedAt = $user->getResetPasswordRequestedAt();
-        if ($requestedAt instanceof DateTimeImmutable) {
-            $elapsedSeconds = $now->getTimestamp() - $requestedAt->getTimestamp();
-            if ($elapsedSeconds < self::RESET_LINK_COOLDOWN_SECONDS) {
-                $remaining = self::RESET_LINK_COOLDOWN_SECONDS - $elapsedSeconds;
-                $this->addFlash('warning', $this->translator->trans('admin_users.flash.reset_link_rate_limited', [
-                    '%seconds%' => (string) $remaining,
-                ]));
-                $this->persistAuditLog($request, 'user_generate_reset_link_rate_limited', $user, [
-                    'remainingSeconds' => $remaining,
-                ]);
-                $this->entityManager->flush();
+        $remaining = $this->temporaryLinkPolicy->cooldownRemainingSeconds(
+            $user->getResetPasswordRequestedAt(),
+            $now,
+            $this->temporaryLinkPolicy->getResetLinkCooldownSeconds(),
+        );
+        if ($remaining > 0) {
+            $this->addFlash('warning', $this->translator->trans('admin_users.flash.reset_link_rate_limited', [
+                '%seconds%' => (string) $remaining,
+            ]));
+            $this->persistAuditLog($request, 'user_generate_reset_link_rate_limited', $user, [
+                'remainingSeconds' => $remaining,
+            ]);
+            $this->entityManager->flush();
 
-                return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
-            }
+            return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
         }
 
         $token = bin2hex(random_bytes(32));
         $tokenHash = hash('sha256', $token);
-        $expiresAt = $now->add(new DateInterval('PT2H'));
+        $expiresAt = $this->temporaryLinkPolicy->expiresAt($now, $this->temporaryLinkPolicy->getResetPasswordTtl());
         $user->setResetPasswordTokenHash($tokenHash);
         $user->setResetPasswordExpiresAt($expiresAt);
         $user->setResetPasswordRequestedAt($now);

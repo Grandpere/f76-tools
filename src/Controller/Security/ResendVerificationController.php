@@ -16,10 +16,10 @@ namespace App\Controller\Security;
 use App\Entity\UserEntity;
 use App\Repository\UserEntityRepository;
 use App\Security\SignedUrlGenerator;
+use App\Security\TemporaryLinkPolicy;
 use App\Service\AuthRequestThrottler;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
-use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,7 +34,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ResendVerificationController extends AbstractController
 {
-    private const RESEND_COOLDOWN_SECONDS = 60;
     private const RATE_LIMIT_MAX_ATTEMPTS = 5;
     private const RATE_LIMIT_WINDOW_SECONDS = 300;
 
@@ -48,6 +47,7 @@ final class ResendVerificationController extends AbstractController
         private readonly AuthRequestThrottler $requestThrottler,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
+        private readonly TemporaryLinkPolicy $temporaryLinkPolicy,
     ) {
     }
 
@@ -103,11 +103,15 @@ final class ResendVerificationController extends AbstractController
 
             if ($user instanceof UserEntity && !$user->isEmailVerified()) {
                 $now = new DateTimeImmutable();
-                $requestedAt = $user->getEmailVerificationRequestedAt();
-                if (!$requestedAt instanceof DateTimeImmutable || ($now->getTimestamp() - $requestedAt->getTimestamp()) >= self::RESEND_COOLDOWN_SECONDS) {
+                $remaining = $this->temporaryLinkPolicy->cooldownRemainingSeconds(
+                    $user->getEmailVerificationRequestedAt(),
+                    $now,
+                    $this->temporaryLinkPolicy->getEmailVerificationResendCooldownSeconds(),
+                );
+                if ($remaining <= 0) {
                     $token = bin2hex(random_bytes(32));
                     $user->setEmailVerificationTokenHash(hash('sha256', $token));
-                    $user->setEmailVerificationExpiresAt($now->add(new DateInterval('P1D')));
+                    $user->setEmailVerificationExpiresAt($this->temporaryLinkPolicy->expiresAt($now, $this->temporaryLinkPolicy->getEmailVerificationTtl()));
                     $user->setEmailVerificationRequestedAt($now);
                     $this->entityManager->flush();
 

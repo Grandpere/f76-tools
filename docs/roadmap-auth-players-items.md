@@ -146,7 +146,7 @@ Permettre a un utilisateur authentifie de:
   - [ ] reduire l usage de query params pour les actions sensibles (preferer POST + CSRF quand possible),
   - [x] eviter les identifiants previsibles dans les URLs publiques (envisager UUID/ULID ou slugs opaques selon contexte),
   - [x] signer les URLs temporaires sensibles (verification email, reset, liens d action),
-  - [ ] standardiser une politique de duree de vie et invalidation des liens temporaires.
+  - [x] standardiser une politique de duree de vie et invalidation des liens temporaires.
 
 ## Phase 9 - Minerva (rotation, localisation, listes)
 - [ ] Definir le scope UI:

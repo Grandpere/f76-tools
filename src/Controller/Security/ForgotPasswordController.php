@@ -16,10 +16,10 @@ namespace App\Controller\Security;
 use App\Entity\UserEntity;
 use App\Repository\UserEntityRepository;
 use App\Security\SignedUrlGenerator;
+use App\Security\TemporaryLinkPolicy;
 use App\Service\AuthRequestThrottler;
 use App\Service\TurnstileVerifier;
 use App\Security\AuthEventLogger;
-use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,7 +34,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ForgotPasswordController extends AbstractController
 {
-    private const RESET_LINK_COOLDOWN_SECONDS = 60;
     private const RATE_LIMIT_MAX_ATTEMPTS = 5;
     private const RATE_LIMIT_WINDOW_SECONDS = 300;
 
@@ -48,6 +47,7 @@ final class ForgotPasswordController extends AbstractController
         private readonly AuthRequestThrottler $requestThrottler,
         private readonly TurnstileVerifier $turnstileVerifier,
         private readonly AuthEventLogger $authEventLogger,
+        private readonly TemporaryLinkPolicy $temporaryLinkPolicy,
     ) {
     }
 
@@ -103,11 +103,15 @@ final class ForgotPasswordController extends AbstractController
 
             if ($user instanceof UserEntity) {
                 $now = new DateTimeImmutable();
-                $requestedAt = $user->getResetPasswordRequestedAt();
-                if (!$requestedAt instanceof DateTimeImmutable || ($now->getTimestamp() - $requestedAt->getTimestamp()) >= self::RESET_LINK_COOLDOWN_SECONDS) {
+                $remaining = $this->temporaryLinkPolicy->cooldownRemainingSeconds(
+                    $user->getResetPasswordRequestedAt(),
+                    $now,
+                    $this->temporaryLinkPolicy->getResetLinkCooldownSeconds(),
+                );
+                if ($remaining <= 0) {
                     $token = bin2hex(random_bytes(32));
                     $user->setResetPasswordTokenHash(hash('sha256', $token));
-                    $user->setResetPasswordExpiresAt($now->add(new DateInterval('PT2H')));
+                    $user->setResetPasswordExpiresAt($this->temporaryLinkPolicy->expiresAt($now, $this->temporaryLinkPolicy->getResetPasswordTtl()));
                     $user->setResetPasswordRequestedAt($now);
                     $this->entityManager->flush();
 
