@@ -12,8 +12,8 @@ Le backoffice utilisateurs fonctionne, mais `UserManagementController` porte enc
 - [x] Extraire le use-case `toggle-active` (service + resultat + mapper UI).
 - [x] Brancher `UserManagementController::toggleActive()` sur ce use-case.
 - [x] Ajouter tests unitaires du service et du mapper.
-- [ ] Extraire le use-case `toggle-admin` (service + resultat + mapper UI).
-- [ ] Brancher `UserManagementController::toggleAdmin()` sur ce use-case.
+- [x] Extraire le use-case `toggle-admin` (service + resultat + mapper UI).
+- [x] Brancher `UserManagementController::toggleAdmin()` sur ce use-case.
 - [ ] Extraire la generation de reset link (service + resultat + mapper UI).
 
 ## Criteres d acceptance

@@ -79,6 +79,33 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertSame(false, $audit->getContext()['isActive'] ?? null);
     }
 
+    public function testAdminCanToggleManagedUserRole(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        self::assertNotContains('ROLE_ADMIN', $managed->getRoles());
+        $crawler = $this->browser()->request('GET', '/admin/users');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-admin"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/toggle-admin', $managed->getId()), [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $this->entityManager?->clear();
+        $updated = $this->findUserByEmail('managed@example.com');
+        self::assertInstanceOf(UserEntity::class, $updated);
+        self::assertContains('ROLE_ADMIN', $updated->getRoles());
+
+        $audit = $this->findAuditForTargetAction('managed@example.com', 'user_toggle_admin');
+        self::assertInstanceOf(AdminAuditLogEntity::class, $audit);
+        self::assertIsArray($audit->getContext());
+        self::assertSame(true, $audit->getContext()['isAdmin'] ?? null);
+    }
+
     public function testAdminCanGenerateResetLinkForExistingUser(): void
     {
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);

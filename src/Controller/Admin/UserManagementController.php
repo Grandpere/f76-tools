@@ -21,6 +21,9 @@ use App\Security\SignedUrlGenerator;
 use App\Security\TemporaryLinkPolicy;
 use App\Support\Application\AdminUser\ToggleUserActiveApplicationService;
 use App\Support\Application\AdminUser\ToggleUserActiveResult;
+use App\Support\Application\AdminUser\ToggleUserAdminApplicationService;
+use App\Support\Application\AdminUser\ToggleUserAdminResult;
+use App\Support\UI\Admin\ToggleUserAdminFeedbackMapper;
 use App\Support\UI\Admin\ToggleUserActiveFeedbackMapper;
 use DateInterval;
 use DateTimeImmutable;
@@ -48,6 +51,8 @@ final class UserManagementController extends AbstractController
         private readonly TranslatorInterface $translator,
         private readonly ToggleUserActiveApplicationService $toggleUserActiveApplicationService,
         private readonly ToggleUserActiveFeedbackMapper $toggleUserActiveFeedbackMapper,
+        private readonly ToggleUserAdminApplicationService $toggleUserAdminApplicationService,
+        private readonly ToggleUserAdminFeedbackMapper $toggleUserAdminFeedbackMapper,
     ) {
     }
 
@@ -98,32 +103,19 @@ final class UserManagementController extends AbstractController
             return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
         }
 
-        $user = $this->userRepository->find($id);
-        if (!$user instanceof UserEntity) {
-            $this->addFlash('warning', 'admin_users.flash.user_not_found');
+        $result = $this->toggleUserAdminApplicationService->toggle($id, $this->getUser());
+        $feedback = $this->toggleUserAdminFeedbackMapper->map($result);
+        $this->addFlash($feedback['flashType'], $feedback['flashMessage']);
 
-            return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
+        if (ToggleUserAdminResult::UPDATED === $result) {
+            $user = $this->userRepository->getById($id);
+            if ($user instanceof UserEntity) {
+                $this->persistAuditLog($request, 'user_toggle_admin', $user, [
+                    'isAdmin' => in_array('ROLE_ADMIN', $user->getRoles(), true),
+                ]);
+            }
+            $this->entityManager->flush();
         }
-
-        if ($this->isCurrentUser($user)) {
-            $this->addFlash('warning', 'admin_users.flash.cannot_change_self_role');
-
-            return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
-        }
-
-        $roles = $user->getRoles();
-        $isAdmin = in_array('ROLE_ADMIN', $roles, true);
-        if ($isAdmin) {
-            $user->setRoles(array_values(array_filter($roles, static fn (string $role): bool => $role !== 'ROLE_ADMIN')));
-        } else {
-            $roles[] = 'ROLE_ADMIN';
-            $user->setRoles(array_values(array_unique($roles)));
-        }
-        $this->persistAuditLog($request, 'user_toggle_admin', $user, [
-            'isAdmin' => in_array('ROLE_ADMIN', $user->getRoles(), true),
-        ]);
-        $this->entityManager->flush();
-        $this->addFlash('success', 'admin_users.flash.role_updated');
 
         return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
     }
@@ -206,16 +198,6 @@ final class UserManagementController extends AbstractController
         $this->addFlash('success', sprintf('%s %s', $translated, $resetUrl));
 
         return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
-    }
-
-    private function isCurrentUser(UserEntity $candidate): bool
-    {
-        $current = $this->getUser();
-        if (!$current instanceof UserEntity) {
-            throw new AccessDeniedException('User must be authenticated.');
-        }
-
-        return $current->getId() === $candidate->getId();
     }
 
     private function isValidToken(Request $request, string $tokenId): bool
