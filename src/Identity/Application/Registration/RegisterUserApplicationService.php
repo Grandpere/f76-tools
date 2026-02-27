@@ -16,7 +16,7 @@ namespace App\Identity\Application\Registration;
 use App\Entity\UserEntity;
 use App\Identity\Application\Common\IdentityPasswordHasherInterface;
 use App\Identity\Application\Common\IdentityWritePersistenceInterface;
-use App\Security\TemporaryLinkPolicy;
+use App\Identity\Application\Security\TemporaryLinkPolicy;
 use DateTimeImmutable;
 
 final class RegisterUserApplicationService

@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - PHPat boundary guard when relocating shared services
+- Symptom: after moving security helpers into `Identity/Infrastructure`, `phpstan` failed on PHPat rule (`UI` layer depending on `Infrastructure`).
+- Root cause: `Identity/UI` and `Support/UI` classes injected concrete services (`AuthEventLogger`, `SignedUrlGenerator`) relocated too low in architecture.
+- Fix: moved these shared services to `Identity/Application/Security` and kept infra classes depending on application layer.
+- Prevention: when reorganizing namespaces for DDD, check PHPat boundaries first; `UI -> Application` is acceptable, `UI -> Infrastructure` is not.
+
 ## 2026-02-27 - Backoffice translations POST missed CSRF protection
 - Symptom: admin translation save endpoint accepted POST without CSRF token.
 - Root cause: controller was protected by role guard but lacked `AdminCsrfTokenValidatorTrait` wiring.

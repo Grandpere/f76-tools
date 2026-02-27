@@ -15,7 +15,6 @@ namespace App\Progression\Application\Knowledge;
 
 use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
-use App\Service\PlayerItemKnowledgeManager;
 
 final class PlayerKnowledgeWriteApplicationService
 {

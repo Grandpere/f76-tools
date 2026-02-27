@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Support\Application\AdminUser;
 
 use App\Entity\UserEntity;
-use App\Security\TemporaryLinkPolicy;
+use App\Identity\Application\Security\TemporaryLinkPolicy;
 use DateInterval;
 use DateTimeImmutable;
 

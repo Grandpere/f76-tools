@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Security;
 
+use App\Identity\Infrastructure\Guard\TurnstileVerifier;
 use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
-use App\Service\TurnstileVerifier;
 use App\Support\Application\Contact\ContactSubmissionApplicationService;
 use App\Support\Application\Contact\ContactSubmissionInput;
 use App\Support\Application\Contact\ContactSubmissionStatus;

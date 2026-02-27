@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Identity\Infrastructure\Guard;
 
 use App\Identity\Application\Guard\IdentityCaptchaVerifierInterface;
-use App\Service\TurnstileVerifier;
 
 final class TurnstileIdentityCaptchaVerifier implements IdentityCaptchaVerifierInterface
 {

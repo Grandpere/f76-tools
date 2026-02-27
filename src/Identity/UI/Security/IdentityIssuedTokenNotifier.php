@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Identity\UI\Security;
 
 use App\Identity\Application\Notification\IdentityLinkEmailSenderInterface;
-use App\Security\AuthEventLogger;
+use App\Identity\Application\Security\AuthEventLogger;
 
 final class IdentityIssuedTokenNotifier
 {

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Identity\UI\Security;
 
-use App\Security\SignedUrlGenerator;
+use App\Identity\Application\Security\SignedUrlGenerator;
 use Symfony\Component\HttpFoundation\Request;
 
 final class IdentitySignedTokenFailureResolver

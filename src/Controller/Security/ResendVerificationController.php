@@ -15,11 +15,11 @@ namespace App\Controller\Security;
 
 use App\Identity\Application\ResendVerification\ResendVerificationRequestApplicationService;
 use App\Identity\Application\Time\IdentityClockInterface;
+use App\Identity\Infrastructure\Guard\TurnstileVerifier;
 use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Identity\UI\Security\IdentityFlashResponder;
 use App\Identity\UI\Security\IdentityIssuedTokenNotifier;
-use App\Service\TurnstileVerifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

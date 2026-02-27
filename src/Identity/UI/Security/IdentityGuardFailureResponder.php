@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Identity\UI\Security;
 
 use App\Identity\Application\Guard\IdentityRequestGuardResult;
-use App\Security\AuthEventLogger;
+use App\Identity\Application\Security\AuthEventLogger;
 use Symfony\Component\HttpFoundation\Request;
 
 final class IdentityGuardFailureResponder

@@ -47,7 +47,7 @@ services:
     App\Support\Application\Contact\ContactMessageReadRepositoryInterface: '@App\Repository\ContactMessageEntityRepository'
     App\Support\Application\Contact\ContactMessageStatusWriteRepositoryInterface: '@App\Repository\ContactMessageEntityRepository'
 
-    App\Service\TurnstileVerifier:
+    App\Identity\Infrastructure\Guard\TurnstileVerifier:
         arguments:
             $siteKey: '%env(string:TURNSTILE_SITE_KEY)%'
             $secretKey: '%env(string:TURNSTILE_SECRET_KEY)%'

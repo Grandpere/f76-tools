@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Support\UI\Contact;
 
+use App\Identity\Application\Security\AuthEventLogger;
 use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityFlashResponder;
-use App\Security\AuthEventLogger;
 use App\Support\Application\Contact\ContactSubmissionStatus;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

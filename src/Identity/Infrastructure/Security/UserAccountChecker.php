@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Security;
+namespace App\Identity\Infrastructure\Security;
 
 use App\Entity\UserEntity;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

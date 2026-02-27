@@ -11,10 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Security;
+namespace App\Identity\Infrastructure\Security;
 
 use App\Entity\UserEntity;
-use App\Service\AuthRequestThrottler;
+use App\Identity\Application\Security\AuthEventLogger;
+use App\Identity\Infrastructure\Guard\AuthRequestThrottler;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\FlashBagAwareSessionInterface;

@@ -17,7 +17,7 @@ use App\Entity\UserEntity;
 use App\Identity\Application\Common\IdentityWritePersistenceInterface;
 use App\Identity\Application\ResendVerification\ResendVerificationRequestApplicationService;
 use App\Identity\Application\ResendVerification\ResendVerificationUserRepositoryInterface;
-use App\Security\TemporaryLinkPolicy;
+use App\Identity\Application\Security\TemporaryLinkPolicy;
 use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

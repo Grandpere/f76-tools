@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Security;
 
-use App\Service\TurnstileVerifier;
+use App\Identity\Infrastructure\Guard\TurnstileVerifier;
 use Symfony\Component\HttpFoundation\Response;
 
 trait IdentityCaptchaRenderControllerTrait

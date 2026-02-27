@@ -19,7 +19,7 @@ use App\Identity\Application\Common\IdentityWritePersistenceInterface;
 use App\Identity\Application\Registration\RegisterUserApplicationService;
 use App\Identity\Application\Registration\RegisterUserStatus;
 use App\Identity\Application\Registration\RegistrationUserRepositoryInterface;
-use App\Security\TemporaryLinkPolicy;
+use App\Identity\Application\Security\TemporaryLinkPolicy;
 use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

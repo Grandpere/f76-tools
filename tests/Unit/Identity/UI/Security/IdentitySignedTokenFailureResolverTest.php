@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Identity\UI\Security;
 
+use App\Identity\Application\Security\SignedUrlGenerator;
 use App\Identity\UI\Security\IdentitySignedTokenFailureResolver;
-use App\Security\SignedUrlGenerator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\UriSigner;

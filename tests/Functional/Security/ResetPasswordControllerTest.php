@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Security;
 
 use App\Entity\UserEntity;
-use App\Security\SignedUrlGenerator;
+use App\Identity\Application\Security\SignedUrlGenerator;
 use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;

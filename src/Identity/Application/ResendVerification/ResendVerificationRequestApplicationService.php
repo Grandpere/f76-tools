@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Identity\Application\ResendVerification;
 
 use App\Identity\Application\Common\IdentityWritePersistenceInterface;
-use App\Security\TemporaryLinkPolicy;
+use App\Identity\Application\Security\TemporaryLinkPolicy;
 use DateTimeImmutable;
 
 final class ResendVerificationRequestApplicationService

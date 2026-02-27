@@ -14,14 +14,14 @@ declare(strict_types=1);
 namespace App\Controller\Security;
 
 use App\Identity\Application\Registration\RegisterUserApplicationService;
+use App\Identity\Application\Security\AuthEventLogger;
 use App\Identity\Application\Time\IdentityClockInterface;
+use App\Identity\Infrastructure\Guard\TurnstileVerifier;
 use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Identity\UI\Security\IdentityFlashResponder;
 use App\Identity\UI\Security\IdentityIssuedTokenNotifier;
 use App\Identity\UI\Security\RegistrationFeedbackMapper;
-use App\Security\AuthEventLogger;
-use App\Service\TurnstileVerifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Support\UI\Contact;
 
+use App\Identity\Application\Security\AuthEventLogger;
 use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityFlashResponder;
 use App\Identity\UI\Security\IdentityLocaleRedirector;
-use App\Security\AuthEventLogger;
 use App\Support\Application\Contact\ContactSubmissionStatus;
 use App\Support\UI\Contact\ContactSubmissionResponder;
 use PHPUnit\Framework\TestCase;

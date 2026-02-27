@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Identity\Infrastructure\Notification;
 
 use App\Identity\Application\Notification\IdentitySignedLinkGeneratorInterface;
-use App\Security\SignedUrlGenerator;
+use App\Identity\Application\Security\SignedUrlGenerator;
 
 final class IdentitySignedLinkGenerator implements IdentitySignedLinkGeneratorInterface
 {

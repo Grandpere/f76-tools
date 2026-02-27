@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Security;
 
-use App\Security\AuthEventLogger;
+use App\Identity\Application\Security\AuthEventLogger;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 

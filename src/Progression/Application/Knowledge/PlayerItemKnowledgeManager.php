@@ -11,13 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Service;
+namespace App\Progression\Application\Knowledge;
 
 use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
 use App\Entity\PlayerItemKnowledgeEntity;
 use App\Entity\UserEntity;
-use App\Progression\Application\Knowledge\PlayerItemKnowledgeFinder;
 use App\Progression\Application\Player\PlayerByOwnerFinder;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;

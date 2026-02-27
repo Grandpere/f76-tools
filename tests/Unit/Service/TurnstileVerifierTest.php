@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Service;
 
-use App\Service\TurnstileVerifier;
+use App\Identity\Infrastructure\Guard\TurnstileVerifier;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;

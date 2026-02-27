@@ -15,11 +15,11 @@ namespace App\Tests\Unit\Identity\UI\Security;
 
 use App\Identity\Application\Guard\IdentityRequestGuardInterface;
 use App\Identity\Application\Guard\IdentityRequestGuardResult;
+use App\Identity\Application\Security\AuthEventLogger;
 use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Identity\UI\Security\IdentityEmailFormPayloadExtractor;
 use App\Identity\UI\Security\IdentityGuardFailureResponder;
-use App\Security\AuthEventLogger;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;

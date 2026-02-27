@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Support\Application\AdminUser;
 
 use App\Entity\UserEntity;
-use App\Security\TemporaryLinkPolicy;
+use App\Identity\Application\Security\TemporaryLinkPolicy;
 use App\Support\Application\AdminUser\AdminUserAuditReadRepositoryInterface;
 use App\Support\Application\AdminUser\AdminUserManagementWriteRepositoryInterface;
 use App\Support\Application\AdminUser\GenerateResetLinkApplicationService;

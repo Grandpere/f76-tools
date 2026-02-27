@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Service;
 
-use App\Service\AuthRequestThrottler;
+use App\Identity\Infrastructure\Guard\AuthRequestThrottler;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 

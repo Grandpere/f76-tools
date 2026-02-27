@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Identity\UI\Security;
 
 use App\Identity\Application\Guard\IdentityRequestGuardResult;
+use App\Identity\Application\Security\AuthEventLogger;
 use App\Identity\UI\Security\IdentityGuardFailureResponder;
-use App\Security\AuthEventLogger;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;

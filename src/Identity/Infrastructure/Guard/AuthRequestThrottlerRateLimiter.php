@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Identity\Infrastructure\Guard;
 
 use App\Identity\Application\Guard\IdentityRateLimiterInterface;
-use App\Service\AuthRequestThrottler;
 
 final class AuthRequestThrottlerRateLimiter implements IdentityRateLimiterInterface
 {
