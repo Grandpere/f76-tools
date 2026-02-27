@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
-use App\Entity\UserEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeTransferApplicationService;
 use App\Progression\UI\Api\PlayerKnowledgeImportMode;
 use App\Progression\UI\Api\PlayerKnowledgeImportContextResolver;
@@ -28,6 +27,8 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/api/players/{playerId<[A-Za-z0-9]{26}>}/knowledge')]
 final class PlayerKnowledgeTransferController extends AbstractController
 {
+    use ProgressionAuthenticatedUserControllerTrait;
+
     public function __construct(
         private readonly PlayerKnowledgeTransferApplicationService $playerKnowledgeTransferApplicationService,
         private readonly PlayerOwnedContextResolver $playerOwnedContextResolver,
@@ -76,8 +77,8 @@ final class PlayerKnowledgeTransferController extends AbstractController
         return $this->playerKnowledgeTransferResultResponder->respond($result);
     }
 
-    private function getAuthenticatedUser(): UserEntity
+    protected function progressionApiUserContext(): ProgressionApiUserContext
     {
-        return $this->progressionApiUserContext->requireAuthenticatedUser($this->getUser());
+        return $this->progressionApiUserContext;
     }
 }

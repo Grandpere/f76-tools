@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
-use App\Entity\UserEntity;
 use App\Progression\Application\Player\PlayerApplicationService;
 use App\Progression\Application\Player\PlayerReadApplicationService;
 use App\Progression\Application\Player\PlayerRenameResult;
@@ -31,6 +30,8 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/api/players')]
 final class PlayerController extends AbstractController
 {
+    use ProgressionAuthenticatedUserControllerTrait;
+
     public function __construct(
         private readonly PlayerApplicationService $playerApplicationService,
         private readonly PlayerReadApplicationService $playerReadApplicationService,
@@ -113,8 +114,8 @@ final class PlayerController extends AbstractController
         return $this->playerControllerWriteResponder->deleted();
     }
 
-    private function getAuthenticatedUser(): UserEntity
+    protected function progressionApiUserContext(): ProgressionApiUserContext
     {
-        return $this->progressionApiUserContext->requireAuthenticatedUser($this->getUser());
+        return $this->progressionApiUserContext;
     }
 }

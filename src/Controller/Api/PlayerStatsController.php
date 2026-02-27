@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
-use App\Entity\UserEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeStatsApplicationService;
 use App\Progression\UI\Api\PlayerOwnedContextResolver;
 use App\Progression\UI\Api\ProgressionApiUserContext;
@@ -24,6 +23,8 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/api/players/{playerId<[A-Za-z0-9]{26}>}/stats')]
 final class PlayerStatsController extends AbstractController
 {
+    use ProgressionAuthenticatedUserControllerTrait;
+
     public function __construct(
         private readonly PlayerKnowledgeStatsApplicationService $playerKnowledgeStatsApplicationService,
         private readonly PlayerOwnedContextResolver $playerOwnedContextResolver,
@@ -42,8 +43,8 @@ final class PlayerStatsController extends AbstractController
         return $this->json($this->playerKnowledgeStatsApplicationService->getStats($player));
     }
 
-    private function getAuthenticatedUser(): UserEntity
+    protected function progressionApiUserContext(): ProgressionApiUserContext
     {
-        return $this->progressionApiUserContext->requireAuthenticatedUser($this->getUser());
+        return $this->progressionApiUserContext;
     }
 }

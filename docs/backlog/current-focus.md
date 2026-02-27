@@ -4,6 +4,7 @@
 - Campagne de slices DDD progression (en cours).
 
 ## Termine recemment
+- F76-069: DDD Slice 59 - Progression API authenticated user controller trait (done).
 - F76-068: DDD Slice 58 - Player item controller action context helper (done).
 - F76-067: DDD Slice 57 - Typed user flow in progression API contexts (done).
 - F76-066: DDD Slice 56 - Owned player read resolver user typing (done).

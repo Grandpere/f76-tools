@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
-use App\Entity\UserEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeWriteApplicationService;
 use App\Progression\UI\Api\PlayerItemActionContext;
@@ -33,6 +32,8 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/api/players/{playerId<[A-Za-z0-9]{26}>}/items')]
 final class PlayerItemKnowledgeController extends AbstractController
 {
+    use ProgressionAuthenticatedUserControllerTrait;
+
     public function __construct(
         private readonly PlayerKnowledgeCatalogApplicationService $playerKnowledgeCatalogApplicationService,
         private readonly PlayerKnowledgeWriteApplicationService $playerKnowledgeWriteApplicationService,
@@ -97,13 +98,13 @@ final class PlayerItemKnowledgeController extends AbstractController
         return new Response(status: Response::HTTP_NO_CONTENT);
     }
 
-    private function getAuthenticatedUser(): UserEntity
-    {
-        return $this->progressionApiUserContext->requireAuthenticatedUser($this->getUser());
-    }
-
     private function resolveActionContextOrResponse(string $playerId, string $itemId): PlayerItemActionContext|JsonResponse
     {
         return $this->playerItemActionContextResolver->resolveOrNotFound($playerId, $itemId, $this->getAuthenticatedUser());
+    }
+
+    protected function progressionApiUserContext(): ProgressionApiUserContext
+    {
+        return $this->progressionApiUserContext;
     }
 }
