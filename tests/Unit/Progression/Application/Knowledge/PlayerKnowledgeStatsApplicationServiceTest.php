@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Progression\Application\Knowledge;
 
-use App\Contract\ItemStatsReadRepositoryInterface;
-use App\Contract\PlayerKnowledgeStatsReadRepositoryInterface;
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
+use App\Progression\Application\Knowledge\ItemStatsReadRepository;
 use App\Progression\Application\Knowledge\PlayerKnowledgeStatsApplicationService;
+use App\Progression\Application\Knowledge\PlayerKnowledgeStatsReadRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -27,10 +27,10 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
 {
     public function testGetStatsBuildsExpectedPayload(): void
     {
-        /** @var ItemStatsReadRepositoryInterface&MockObject $itemRepository */
-        $itemRepository = $this->createMock(ItemStatsReadRepositoryInterface::class);
-        /** @var PlayerKnowledgeStatsReadRepositoryInterface&MockObject $knowledgeRepository */
-        $knowledgeRepository = $this->createMock(PlayerKnowledgeStatsReadRepositoryInterface::class);
+        /** @var ItemStatsReadRepository&MockObject $itemRepository */
+        $itemRepository = $this->createMock(ItemStatsReadRepository::class);
+        /** @var PlayerKnowledgeStatsReadRepository&MockObject $knowledgeRepository */
+        $knowledgeRepository = $this->createMock(PlayerKnowledgeStatsReadRepository::class);
 
         $player = $this->createPlayer('01ARZ3NDEKTSV4RRFFQ69G5FAV');
         $service = new PlayerKnowledgeStatsApplicationService($itemRepository, $knowledgeRepository);

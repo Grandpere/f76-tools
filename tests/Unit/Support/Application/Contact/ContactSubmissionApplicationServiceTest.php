@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Support\Application\Contact;
 
-use App\Contract\ContactMessageWriterInterface;
 use App\Support\Application\Contact\ContactMessageApplicationService;
 use App\Support\Application\Contact\ContactMessageEmailSenderInterface;
+use App\Support\Application\Contact\ContactMessageWriter;
 use App\Support\Application\Contact\ContactSubmissionApplicationService;
 use App\Support\Application\Contact\ContactSubmissionInput;
 use App\Support\Application\Contact\ContactSubmissionStatus;
@@ -27,8 +27,8 @@ final class ContactSubmissionApplicationServiceTest extends TestCase
 {
     public function testSubmitReturnsSentWhenPersistenceAndDeliverySucceed(): void
     {
-        /** @var ContactMessageWriterInterface&MockObject $writer */
-        $writer = $this->createMock(ContactMessageWriterInterface::class);
+        /** @var ContactMessageWriter&MockObject $writer */
+        $writer = $this->createMock(ContactMessageWriter::class);
         $writer->expects(self::once())->method('save');
         $messageService = new ContactMessageApplicationService($writer);
 
@@ -48,8 +48,8 @@ final class ContactSubmissionApplicationServiceTest extends TestCase
 
     public function testSubmitReturnsPersistenceFailedWhenPersistenceThrows(): void
     {
-        /** @var ContactMessageWriterInterface&MockObject $writer */
-        $writer = $this->createMock(ContactMessageWriterInterface::class);
+        /** @var ContactMessageWriter&MockObject $writer */
+        $writer = $this->createMock(ContactMessageWriter::class);
         $writer->method('save')->willThrowException(new RuntimeException('db'));
         $messageService = new ContactMessageApplicationService($writer);
 
@@ -69,8 +69,8 @@ final class ContactSubmissionApplicationServiceTest extends TestCase
 
     public function testSubmitReturnsSentWithDeliveryFailureWhenDeliveryThrows(): void
     {
-        /** @var ContactMessageWriterInterface&MockObject $writer */
-        $writer = $this->createMock(ContactMessageWriterInterface::class);
+        /** @var ContactMessageWriter&MockObject $writer */
+        $writer = $this->createMock(ContactMessageWriter::class);
         $writer->expects(self::once())->method('save');
         $messageService = new ContactMessageApplicationService($writer);
 

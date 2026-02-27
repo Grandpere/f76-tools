@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Command;
+namespace App\Support\UI\Console;
 
-use App\Contract\AdminAuditLogPurgerInterface;
+use App\Support\Application\Admin\Audit\AdminAuditLogPurger;
 use DateInterval;
 use DateTimeImmutable;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -32,7 +32,7 @@ final class PurgeAdminAuditLogsCommand extends Command
     private const DEFAULT_RETENTION_DAYS = 90;
 
     public function __construct(
-        private readonly AdminAuditLogPurgerInterface $auditLogRepository,
+        private readonly AdminAuditLogPurger $auditLogRepository,
     ) {
         parent::__construct();
     }

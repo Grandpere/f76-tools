@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Command;
 
-use App\Command\CreateUserCommand;
-use App\Contract\UserByEmailFinderInterface;
 use App\Entity\UserEntity;
+use App\Identity\Application\User\UserByEmailFinder;
+use App\Identity\UI\Console\CreateUserCommand;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -26,13 +26,13 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 final class CreateUserCommandTest extends TestCase
 {
     private EntityManagerInterface&MockObject $entityManager;
-    private UserByEmailFinderInterface&MockObject $userRepository;
+    private UserByEmailFinder&MockObject $userRepository;
     private UserPasswordHasherInterface&MockObject $passwordHasher;
 
     protected function setUp(): void
     {
         $this->entityManager = $this->createMock(EntityManagerInterface::class);
-        $this->userRepository = $this->createMock(UserByEmailFinderInterface::class);
+        $this->userRepository = $this->createMock(UserByEmailFinder::class);
         $this->passwordHasher = $this->createMock(UserPasswordHasherInterface::class);
     }
 

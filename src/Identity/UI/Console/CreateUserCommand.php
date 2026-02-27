@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Command;
+namespace App\Identity\UI\Console;
 
-use App\Contract\UserByEmailFinderInterface;
 use App\Entity\UserEntity;
+use App\Identity\Application\User\UserByEmailFinder;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -33,7 +33,7 @@ final class CreateUserCommand extends Command
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly UserByEmailFinderInterface $userRepository,
+        private readonly UserByEmailFinder $userRepository,
         private readonly UserPasswordHasherInterface $passwordHasher,
     ) {
         parent::__construct();

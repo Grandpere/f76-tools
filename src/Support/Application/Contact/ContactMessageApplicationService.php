@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace App\Support\Application\Contact;
 
-use App\Contract\ContactMessageWriterInterface;
 use App\Entity\ContactMessageEntity;
 
 final class ContactMessageApplicationService
 {
     public function __construct(
-        private readonly ContactMessageWriterInterface $messageWriter,
+        private readonly ContactMessageWriter $messageWriter,
     ) {
     }
 

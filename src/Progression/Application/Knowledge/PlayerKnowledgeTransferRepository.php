@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Contract;
+namespace App\Progression\Application\Knowledge;
 
 use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
 
-interface PlayerKnowledgeTransferRepositoryInterface
+interface PlayerKnowledgeTransferRepository
 {
     /**
      * @return list<ItemEntity>

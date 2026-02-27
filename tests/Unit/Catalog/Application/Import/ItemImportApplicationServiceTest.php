@@ -21,9 +21,9 @@ use App\Catalog\Application\Import\ItemImportItemRepositoryInterface;
 use App\Catalog\Application\Import\ItemImportPersistenceInterface;
 use App\Catalog\Application\Import\ItemImportTranslationCatalogBuilder;
 use App\Catalog\Application\Import\ItemImportValueNormalizer;
+use App\Catalog\Application\Translation\TranslationCatalogWriter;
 use App\Catalog\Infrastructure\Import\FilesystemItemImportSourceReader;
-use App\Catalog\Infrastructure\Translation\TranslationCatalogWriter;
-use App\Contract\TranslationCatalogWriterInterface;
+use App\Catalog\Infrastructure\Translation\TranslationCatalogWriter as YamlTranslationCatalogWriter;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -85,7 +85,7 @@ final class ItemImportApplicationServiceTest extends TestCase
         self::assertFileExists($projectDir.'/translations/items.de.yaml');
     }
 
-    private function createService(TranslationCatalogWriterInterface $translationCatalogWriter): ItemImportApplicationService
+    private function createService(TranslationCatalogWriter $translationCatalogWriter): ItemImportApplicationService
     {
         $normalizer = new ItemImportValueNormalizer();
 
@@ -101,12 +101,12 @@ final class ItemImportApplicationServiceTest extends TestCase
         );
     }
 
-    private function createTranslationWriter(string $projectDir): TranslationCatalogWriterInterface
+    private function createTranslationWriter(string $projectDir): TranslationCatalogWriter
     {
         $kernel = $this->createMock(KernelInterface::class);
         $kernel->method('getProjectDir')->willReturn($projectDir);
 
-        return new TranslationCatalogWriter($kernel);
+        return new YamlTranslationCatalogWriter($kernel);
     }
 
     private function createTempDir(): string

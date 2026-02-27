@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Command;
+namespace App\Catalog\UI\Console;
 
 use App\Catalog\Application\Minerva\MinervaRotationGenerationApplicationService;
 use App\Catalog\Application\Minerva\MinervaRotationRegenerationApplicationService;

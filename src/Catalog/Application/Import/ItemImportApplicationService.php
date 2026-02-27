@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Catalog\Application\Import;
 
-use App\Contract\TranslationCatalogWriterInterface;
+use App\Catalog\Application\Translation\TranslationCatalogWriter;
 use App\Entity\ItemEntity;
 
 final class ItemImportApplicationService
@@ -21,7 +21,7 @@ final class ItemImportApplicationService
     public function __construct(
         private readonly ItemImportPersistenceInterface $persistence,
         private readonly ItemImportItemRepositoryInterface $itemRepository,
-        private readonly TranslationCatalogWriterInterface $translationCatalogWriter,
+        private readonly TranslationCatalogWriter $translationCatalogWriter,
         private readonly ItemImportFileContextResolver $fileContextResolver,
         private readonly ItemImportSourceReaderInterface $sourceReader,
         private readonly ItemImportItemHydrator $itemHydrator,

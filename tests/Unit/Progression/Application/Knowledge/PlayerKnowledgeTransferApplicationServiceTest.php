@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Progression\Application\Knowledge;
 
-use App\Contract\ItemKnowledgeTransferRepositoryInterface;
-use App\Contract\PlayerKnowledgeTransferRepositoryInterface;
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
+use App\Progression\Application\Knowledge\ItemKnowledgeTransferRepository;
 use App\Progression\Application\Knowledge\PlayerKnowledgeTransferApplicationService;
+use App\Progression\Application\Knowledge\PlayerKnowledgeTransferRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -28,10 +28,10 @@ final class PlayerKnowledgeTransferApplicationServiceTest extends TestCase
     public function testPreviewImportComputesDiffAndUnknownItems(): void
     {
         $player = $this->createPlayer();
-        /** @var PlayerKnowledgeTransferRepositoryInterface&MockObject $knowledgeRepository */
-        $knowledgeRepository = $this->createMock(PlayerKnowledgeTransferRepositoryInterface::class);
-        /** @var ItemKnowledgeTransferRepositoryInterface&MockObject $itemRepository */
-        $itemRepository = $this->createMock(ItemKnowledgeTransferRepositoryInterface::class);
+        /** @var PlayerKnowledgeTransferRepository&MockObject $knowledgeRepository */
+        $knowledgeRepository = $this->createMock(PlayerKnowledgeTransferRepository::class);
+        /** @var ItemKnowledgeTransferRepository&MockObject $itemRepository */
+        $itemRepository = $this->createMock(ItemKnowledgeTransferRepository::class);
         $entityManager = self::createStub(EntityManagerInterface::class);
 
         $service = new PlayerKnowledgeTransferApplicationService($knowledgeRepository, $itemRepository, $entityManager);
@@ -68,10 +68,10 @@ final class PlayerKnowledgeTransferApplicationServiceTest extends TestCase
     public function testImportFailsWhenUnknownItemsArePresent(): void
     {
         $player = $this->createPlayer();
-        /** @var PlayerKnowledgeTransferRepositoryInterface&MockObject $knowledgeRepository */
-        $knowledgeRepository = $this->createMock(PlayerKnowledgeTransferRepositoryInterface::class);
-        /** @var ItemKnowledgeTransferRepositoryInterface&MockObject $itemRepository */
-        $itemRepository = $this->createMock(ItemKnowledgeTransferRepositoryInterface::class);
+        /** @var PlayerKnowledgeTransferRepository&MockObject $knowledgeRepository */
+        $knowledgeRepository = $this->createMock(PlayerKnowledgeTransferRepository::class);
+        /** @var ItemKnowledgeTransferRepository&MockObject $itemRepository */
+        $itemRepository = $this->createMock(ItemKnowledgeTransferRepository::class);
         $entityManager = $this->createMock(EntityManagerInterface::class);
 
         $service = new PlayerKnowledgeTransferApplicationService($knowledgeRepository, $itemRepository, $entityManager);

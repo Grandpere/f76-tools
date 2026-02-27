@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Progression\Application\Knowledge;
 
-use App\Contract\ItemKnowledgeCatalogReadRepositoryInterface;
-use App\Contract\PlayerKnowledgeCatalogReadRepositoryInterface;
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
+use App\Progression\Application\Knowledge\ItemKnowledgeCatalogReadRepository;
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
+use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogReadRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
@@ -31,16 +31,16 @@ final class PlayerKnowledgeCatalogApplicationServiceTest extends TestCase
         $bookA = $this->createItemWithId(101, ItemTypeEnum::BOOK, 10, 'catalog.book.a');
         $bookB = $this->createItemWithId(102, ItemTypeEnum::BOOK, 11, 'catalog.book.b');
 
-        /** @var ItemKnowledgeCatalogReadRepositoryInterface&MockObject $itemRepository */
-        $itemRepository = $this->createMock(ItemKnowledgeCatalogReadRepositoryInterface::class);
+        /** @var ItemKnowledgeCatalogReadRepository&MockObject $itemRepository */
+        $itemRepository = $this->createMock(ItemKnowledgeCatalogReadRepository::class);
         $itemRepository
             ->expects(self::once())
             ->method('findAllOrdered')
             ->with(ItemTypeEnum::BOOK)
             ->willReturn([$bookA, $bookB]);
 
-        /** @var PlayerKnowledgeCatalogReadRepositoryInterface&MockObject $knowledgeRepository */
-        $knowledgeRepository = $this->createMock(PlayerKnowledgeCatalogReadRepositoryInterface::class);
+        /** @var PlayerKnowledgeCatalogReadRepository&MockObject $knowledgeRepository */
+        $knowledgeRepository = $this->createMock(PlayerKnowledgeCatalogReadRepository::class);
         $knowledgeRepository
             ->expects(self::once())
             ->method('findLearnedItemIdsByPlayer')
@@ -62,16 +62,16 @@ final class PlayerKnowledgeCatalogApplicationServiceTest extends TestCase
         $player = new PlayerEntity();
         $misc = $this->createItemWithId(201, ItemTypeEnum::MISC, 20, 'catalog.misc');
 
-        /** @var ItemKnowledgeCatalogReadRepositoryInterface&MockObject $itemRepository */
-        $itemRepository = $this->createMock(ItemKnowledgeCatalogReadRepositoryInterface::class);
+        /** @var ItemKnowledgeCatalogReadRepository&MockObject $itemRepository */
+        $itemRepository = $this->createMock(ItemKnowledgeCatalogReadRepository::class);
         $itemRepository
             ->expects(self::once())
             ->method('findAllOrdered')
             ->with(null)
             ->willReturn([$misc]);
 
-        /** @var PlayerKnowledgeCatalogReadRepositoryInterface&MockObject $knowledgeRepository */
-        $knowledgeRepository = $this->createMock(PlayerKnowledgeCatalogReadRepositoryInterface::class);
+        /** @var PlayerKnowledgeCatalogReadRepository&MockObject $knowledgeRepository */
+        $knowledgeRepository = $this->createMock(PlayerKnowledgeCatalogReadRepository::class);
         $knowledgeRepository
             ->expects(self::once())
             ->method('findLearnedItemIdsByPlayer')

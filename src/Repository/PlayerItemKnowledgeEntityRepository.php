@@ -13,21 +13,21 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Contract\PlayerItemKnowledgeFinderInterface;
-use App\Contract\PlayerKnowledgeCatalogReadRepositoryInterface;
-use App\Contract\PlayerKnowledgeStatsReadRepositoryInterface;
-use App\Contract\PlayerKnowledgeTransferRepositoryInterface;
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
 use App\Entity\PlayerItemKnowledgeEntity;
+use App\Progression\Application\Knowledge\PlayerItemKnowledgeFinder;
+use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogReadRepository;
+use App\Progression\Application\Knowledge\PlayerKnowledgeStatsReadRepository;
+use App\Progression\Application\Knowledge\PlayerKnowledgeTransferRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<PlayerItemKnowledgeEntity>
  */
-final class PlayerItemKnowledgeEntityRepository extends ServiceEntityRepository implements PlayerItemKnowledgeFinderInterface, PlayerKnowledgeTransferRepositoryInterface, PlayerKnowledgeStatsReadRepositoryInterface, PlayerKnowledgeCatalogReadRepositoryInterface
+final class PlayerItemKnowledgeEntityRepository extends ServiceEntityRepository implements PlayerItemKnowledgeFinder, PlayerKnowledgeTransferRepository, PlayerKnowledgeStatsReadRepository, PlayerKnowledgeCatalogReadRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

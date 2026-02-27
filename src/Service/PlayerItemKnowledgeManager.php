@@ -13,20 +13,20 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Contract\PlayerByOwnerFinderInterface;
-use App\Contract\PlayerItemKnowledgeFinderInterface;
 use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
 use App\Entity\PlayerItemKnowledgeEntity;
 use App\Entity\UserEntity;
+use App\Progression\Application\Knowledge\PlayerItemKnowledgeFinder;
+use App\Progression\Application\Player\PlayerByOwnerFinder;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class PlayerItemKnowledgeManager
 {
     public function __construct(
-        private readonly PlayerByOwnerFinderInterface $playerFinder,
-        private readonly PlayerItemKnowledgeFinderInterface $knowledgeFinder,
+        private readonly PlayerByOwnerFinder $playerFinder,
+        private readonly PlayerItemKnowledgeFinder $knowledgeFinder,
         private readonly EntityManagerInterface $entityManager,
     ) {
     }

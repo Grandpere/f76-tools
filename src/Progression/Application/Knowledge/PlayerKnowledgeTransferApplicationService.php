@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace App\Progression\Application\Knowledge;
 
-use App\Contract\ItemKnowledgeTransferRepositoryInterface;
-use App\Contract\PlayerKnowledgeTransferRepositoryInterface;
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\PlayerEntity;
 use App\Entity\PlayerItemKnowledgeEntity;
@@ -26,8 +24,8 @@ final class PlayerKnowledgeTransferApplicationService
     private const IMPORT_VERSION = 1;
 
     public function __construct(
-        private readonly PlayerKnowledgeTransferRepositoryInterface $knowledgeRepository,
-        private readonly ItemKnowledgeTransferRepositoryInterface $itemRepository,
+        private readonly PlayerKnowledgeTransferRepository $knowledgeRepository,
+        private readonly ItemKnowledgeTransferRepository $itemRepository,
         private readonly EntityManagerInterface $entityManager,
     ) {
     }

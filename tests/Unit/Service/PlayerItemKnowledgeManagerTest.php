@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Service;
 
-use App\Contract\PlayerByOwnerFinderInterface;
-use App\Contract\PlayerItemKnowledgeFinderInterface;
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
 use App\Entity\PlayerItemKnowledgeEntity;
 use App\Entity\UserEntity;
+use App\Progression\Application\Knowledge\PlayerItemKnowledgeFinder;
+use App\Progression\Application\Player\PlayerByOwnerFinder;
 use App\Service\PlayerItemKnowledgeManager;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -31,8 +31,8 @@ final class PlayerItemKnowledgeManagerTest extends TestCase
     {
         $user = $this->createUser('owner@example.com');
         $player = $this->createPlayer($user, 'Main');
-        $playerFinder = $this->createMock(PlayerByOwnerFinderInterface::class);
-        $knowledgeFinder = self::createStub(PlayerItemKnowledgeFinderInterface::class);
+        $playerFinder = $this->createMock(PlayerByOwnerFinder::class);
+        $knowledgeFinder = self::createStub(PlayerItemKnowledgeFinder::class);
         $entityManager = self::createStub(EntityManagerInterface::class);
 
         $manager = new PlayerItemKnowledgeManager($playerFinder, $knowledgeFinder, $entityManager);
@@ -50,8 +50,8 @@ final class PlayerItemKnowledgeManagerTest extends TestCase
     {
         $player = $this->createPlayer($this->createUser('owner2@example.com'), 'Main');
         $item = $this->createItem(1201);
-        $playerFinder = self::createStub(PlayerByOwnerFinderInterface::class);
-        $knowledgeFinder = $this->createMock(PlayerItemKnowledgeFinderInterface::class);
+        $playerFinder = self::createStub(PlayerByOwnerFinder::class);
+        $knowledgeFinder = $this->createMock(PlayerItemKnowledgeFinder::class);
         $entityManager = $this->createMock(EntityManagerInterface::class);
 
         $manager = new PlayerItemKnowledgeManager($playerFinder, $knowledgeFinder, $entityManager);
@@ -83,8 +83,8 @@ final class PlayerItemKnowledgeManagerTest extends TestCase
     {
         $player = $this->createPlayer($this->createUser('owner3@example.com'), 'Main');
         $item = $this->createItem(1301);
-        $playerFinder = self::createStub(PlayerByOwnerFinderInterface::class);
-        $knowledgeFinder = $this->createMock(PlayerItemKnowledgeFinderInterface::class);
+        $playerFinder = self::createStub(PlayerByOwnerFinder::class);
+        $knowledgeFinder = $this->createMock(PlayerItemKnowledgeFinder::class);
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $manager = new PlayerItemKnowledgeManager($playerFinder, $knowledgeFinder, $entityManager);
 
@@ -109,8 +109,8 @@ final class PlayerItemKnowledgeManagerTest extends TestCase
     {
         $player = $this->createPlayer($this->createUser('owner4@example.com'), 'Main');
         $item = $this->createItem(1401);
-        $playerFinder = self::createStub(PlayerByOwnerFinderInterface::class);
-        $knowledgeFinder = $this->createMock(PlayerItemKnowledgeFinderInterface::class);
+        $playerFinder = self::createStub(PlayerByOwnerFinder::class);
+        $knowledgeFinder = $this->createMock(PlayerItemKnowledgeFinder::class);
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $manager = new PlayerItemKnowledgeManager($playerFinder, $knowledgeFinder, $entityManager);
 
@@ -135,8 +135,8 @@ final class PlayerItemKnowledgeManagerTest extends TestCase
     {
         $player = $this->createPlayer($this->createUser('owner5@example.com'), 'Main');
         $item = $this->createItem(1501);
-        $playerFinder = self::createStub(PlayerByOwnerFinderInterface::class);
-        $knowledgeFinder = $this->createMock(PlayerItemKnowledgeFinderInterface::class);
+        $playerFinder = self::createStub(PlayerByOwnerFinder::class);
+        $knowledgeFinder = $this->createMock(PlayerItemKnowledgeFinder::class);
         $entityManager = $this->createMock(EntityManagerInterface::class);
 
         $manager = new PlayerItemKnowledgeManager($playerFinder, $knowledgeFinder, $entityManager);

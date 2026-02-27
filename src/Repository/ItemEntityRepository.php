@@ -14,19 +14,19 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Catalog\Application\Import\ItemImportItemRepositoryInterface;
-use App\Contract\ItemKnowledgeCatalogReadRepositoryInterface;
-use App\Contract\ItemKnowledgeTransferRepositoryInterface;
-use App\Contract\ItemStatsReadRepositoryInterface;
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemEntity;
+use App\Progression\Application\Knowledge\ItemKnowledgeCatalogReadRepository;
+use App\Progression\Application\Knowledge\ItemKnowledgeTransferRepository;
 use App\Progression\Application\Knowledge\ItemReadRepositoryInterface;
+use App\Progression\Application\Knowledge\ItemStatsReadRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<ItemEntity>
  */
-final class ItemEntityRepository extends ServiceEntityRepository implements ItemKnowledgeTransferRepositoryInterface, ItemStatsReadRepositoryInterface, ItemImportItemRepositoryInterface, ItemKnowledgeCatalogReadRepositoryInterface, ItemReadRepositoryInterface
+final class ItemEntityRepository extends ServiceEntityRepository implements ItemKnowledgeTransferRepository, ItemStatsReadRepository, ItemImportItemRepositoryInterface, ItemKnowledgeCatalogReadRepository, ItemReadRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

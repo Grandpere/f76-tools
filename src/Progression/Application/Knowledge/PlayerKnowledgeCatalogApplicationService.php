@@ -13,16 +13,14 @@ declare(strict_types=1);
 
 namespace App\Progression\Application\Knowledge;
 
-use App\Contract\ItemKnowledgeCatalogReadRepositoryInterface;
-use App\Contract\PlayerKnowledgeCatalogReadRepositoryInterface;
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\PlayerEntity;
 
 final class PlayerKnowledgeCatalogApplicationService
 {
     public function __construct(
-        private readonly ItemKnowledgeCatalogReadRepositoryInterface $itemRepository,
-        private readonly PlayerKnowledgeCatalogReadRepositoryInterface $knowledgeRepository,
+        private readonly ItemKnowledgeCatalogReadRepository $itemRepository,
+        private readonly PlayerKnowledgeCatalogReadRepository $knowledgeRepository,
     ) {
     }
 

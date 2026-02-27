@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Contract;
+namespace App\Identity\Application\User;
 
-use App\Entity\ContactMessageEntity;
+use App\Entity\UserEntity;
 
-interface ContactMessageWriterInterface
+interface UserByEmailFinder
 {
-    public function save(ContactMessageEntity $message): void;
+    public function findOneByEmail(string $email): ?UserEntity;
 }

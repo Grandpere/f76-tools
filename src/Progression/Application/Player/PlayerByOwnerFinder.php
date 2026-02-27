@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Contract;
+namespace App\Progression\Application\Player;
 
 use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
 
-interface PlayerByOwnerFinderInterface
+interface PlayerByOwnerFinder
 {
     public function findOneByPublicIdAndUser(string $publicId, UserEntity $user): ?PlayerEntity;
 }

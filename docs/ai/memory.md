@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - Port and adapter with same short class name need alias in tests/adapters
+- Symptom: `phpstan` failed with `Cannot use ... as ... because the name is already in use`.
+- Root cause: after removing `Interface` suffix, a file imported both the port and adapter class sharing the same short name (`TranslationCatalogWriter`).
+- Fix: keep same naming convention but alias one import (`... as YamlTranslationCatalogWriter` / `... as ...Port`) where both are needed.
+- Prevention: when suffix-free ports mirror adapter names, check each file for short-name collisions after refactors.
+
 ## 2026-02-27 - DDD inventory: legacy root folders explicitly tracked
 - Symptom: several legacy root folders remained in `src` during the DDD migration (`Controller`, `Domain`, `Entity`, `EventSubscriber`, `Repository`, `Security`, `Service`) plus empty `src/Translation`.
 - Root cause: migration slices prioritized behavior and safety before final namespace placement cleanup.

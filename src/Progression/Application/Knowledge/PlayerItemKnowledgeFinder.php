@@ -11,14 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Contract;
+namespace App\Progression\Application\Knowledge;
 
+use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
+use App\Entity\PlayerItemKnowledgeEntity;
 
-interface PlayerKnowledgeCatalogReadRepositoryInterface
+interface PlayerItemKnowledgeFinder
 {
-    /**
-     * @return list<int>
-     */
-    public function findLearnedItemIdsByPlayer(PlayerEntity $player): array;
+    public function findOneByPlayerAndItem(PlayerEntity $player, ItemEntity $item): ?PlayerItemKnowledgeEntity;
 }

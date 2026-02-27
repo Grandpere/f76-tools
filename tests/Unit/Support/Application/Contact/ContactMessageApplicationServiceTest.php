@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Support\Application\Contact;
 
-use App\Contract\ContactMessageWriterInterface;
 use App\Domain\Support\Contact\ContactMessageStatusEnum;
 use App\Entity\ContactMessageEntity;
 use App\Support\Application\Contact\ContactMessageApplicationService;
+use App\Support\Application\Contact\ContactMessageWriter;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -24,8 +24,8 @@ final class ContactMessageApplicationServiceTest extends TestCase
 {
     public function testCreateMessageBuildsAndPersistsContactMessage(): void
     {
-        /** @var ContactMessageWriterInterface&MockObject $writer */
-        $writer = $this->createMock(ContactMessageWriterInterface::class);
+        /** @var ContactMessageWriter&MockObject $writer */
+        $writer = $this->createMock(ContactMessageWriter::class);
         $service = new ContactMessageApplicationService($writer);
 
         $writer

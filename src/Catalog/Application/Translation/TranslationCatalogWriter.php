@@ -11,11 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Contract;
+namespace App\Catalog\Application\Translation;
 
-use App\Entity\UserEntity;
-
-interface UserByEmailFinderInterface
+interface TranslationCatalogWriter
 {
-    public function findOneByEmail(string $email): ?UserEntity;
+    /**
+     * @param array<string, string> $entries
+     */
+    public function upsert(string $locale, string $domain, array $entries): void;
 }

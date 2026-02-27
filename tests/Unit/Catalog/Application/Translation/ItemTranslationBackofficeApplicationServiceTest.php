@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Catalog\Application\Translation;
 
 use App\Catalog\Application\Translation\ItemTranslationBackofficeApplicationService;
-use App\Contract\TranslationCatalogReaderInterface;
-use App\Contract\TranslationCatalogWriterInterface;
+use App\Catalog\Application\Translation\TranslationCatalogReader;
+use App\Catalog\Application\Translation\TranslationCatalogWriter;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -23,10 +23,10 @@ final class ItemTranslationBackofficeApplicationServiceTest extends TestCase
 {
     public function testSaveTargetEntriesNormalizesAndPersistsValues(): void
     {
-        /** @var TranslationCatalogReaderInterface&MockObject $reader */
-        $reader = $this->createMock(TranslationCatalogReaderInterface::class);
-        /** @var TranslationCatalogWriterInterface&MockObject $writer */
-        $writer = $this->createMock(TranslationCatalogWriterInterface::class);
+        /** @var TranslationCatalogReader&MockObject $reader */
+        $reader = $this->createMock(TranslationCatalogReader::class);
+        /** @var TranslationCatalogWriter&MockObject $writer */
+        $writer = $this->createMock(TranslationCatalogWriter::class);
         $service = new ItemTranslationBackofficeApplicationService($reader, $writer);
 
         $writer
@@ -49,10 +49,10 @@ final class ItemTranslationBackofficeApplicationServiceTest extends TestCase
 
     public function testBuildRowsFiltersByQueryAndSection(): void
     {
-        /** @var TranslationCatalogReaderInterface&MockObject $reader */
-        $reader = $this->createMock(TranslationCatalogReaderInterface::class);
-        /** @var TranslationCatalogWriterInterface&MockObject $writer */
-        $writer = $this->createMock(TranslationCatalogWriterInterface::class);
+        /** @var TranslationCatalogReader&MockObject $reader */
+        $reader = $this->createMock(TranslationCatalogReader::class);
+        /** @var TranslationCatalogWriter&MockObject $writer */
+        $writer = $this->createMock(TranslationCatalogWriter::class);
         $service = new ItemTranslationBackofficeApplicationService($reader, $writer);
 
         $reader
@@ -82,10 +82,10 @@ final class ItemTranslationBackofficeApplicationServiceTest extends TestCase
 
     public function testSanitizeTargetLocalePreventsLockedLocales(): void
     {
-        /** @var TranslationCatalogReaderInterface&MockObject $reader */
-        $reader = $this->createMock(TranslationCatalogReaderInterface::class);
-        /** @var TranslationCatalogWriterInterface&MockObject $writer */
-        $writer = $this->createMock(TranslationCatalogWriterInterface::class);
+        /** @var TranslationCatalogReader&MockObject $reader */
+        $reader = $this->createMock(TranslationCatalogReader::class);
+        /** @var TranslationCatalogWriter&MockObject $writer */
+        $writer = $this->createMock(TranslationCatalogWriter::class);
         $service = new ItemTranslationBackofficeApplicationService($reader, $writer);
 
         self::assertSame('fr', $service->sanitizeTargetLocale('en'));

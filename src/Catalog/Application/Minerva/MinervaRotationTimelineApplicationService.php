@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Catalog\Application\Minerva;
 
-use App\Contract\MinervaRotationReaderInterface;
 use App\Domain\Minerva\MinervaRotationStatusEnum;
 use DateTimeImmutable;
 use DateTimeZone;
@@ -23,7 +22,7 @@ final class MinervaRotationTimelineApplicationService
     private const TIMELINE_TIMEZONE = 'UTC';
 
     public function __construct(
-        private readonly MinervaRotationReaderInterface $rotationReader,
+        private readonly MinervaRotationReader $rotationReader,
     ) {
     }
 

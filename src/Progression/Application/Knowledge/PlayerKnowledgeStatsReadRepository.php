@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Contract;
+namespace App\Progression\Application\Knowledge;
 
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\PlayerEntity;
 
-interface PlayerKnowledgeStatsReadRepositoryInterface
+interface PlayerKnowledgeStatsReadRepository
 {
     public function countLearnedByPlayer(PlayerEntity $player): int;
 

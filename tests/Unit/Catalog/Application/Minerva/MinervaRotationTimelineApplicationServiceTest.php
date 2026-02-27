@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Catalog\Application\Minerva;
 
+use App\Catalog\Application\Minerva\MinervaRotationReader;
 use App\Catalog\Application\Minerva\MinervaRotationTimelineApplicationService;
-use App\Contract\MinervaRotationReaderInterface;
 use App\Entity\MinervaRotationEntity;
 use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -25,8 +25,8 @@ final class MinervaRotationTimelineApplicationServiceTest extends TestCase
 {
     public function testBuildTimelineResolvesUpcomingActiveAndEndedStatuses(): void
     {
-        /** @var MinervaRotationReaderInterface&MockObject $reader */
-        $reader = $this->createMock(MinervaRotationReaderInterface::class);
+        /** @var MinervaRotationReader&MockObject $reader */
+        $reader = $this->createMock(MinervaRotationReader::class);
         $service = new MinervaRotationTimelineApplicationService($reader);
 
         $reader

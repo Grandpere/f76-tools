@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace App\Catalog\Application\Translation;
 
-use App\Contract\TranslationCatalogReaderInterface;
-use App\Contract\TranslationCatalogWriterInterface;
-
 final class ItemTranslationBackofficeApplicationService
 {
     private const DOMAIN = 'items';
@@ -24,8 +21,8 @@ final class ItemTranslationBackofficeApplicationService
     private const LOCKED_LOCALES = ['en', 'de'];
 
     public function __construct(
-        private readonly TranslationCatalogReaderInterface $catalogReader,
-        private readonly TranslationCatalogWriterInterface $catalogWriter,
+        private readonly TranslationCatalogReader $catalogReader,
+        private readonly TranslationCatalogWriter $catalogWriter,
     ) {
     }
 

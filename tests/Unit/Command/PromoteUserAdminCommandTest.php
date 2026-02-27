@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Command;
 
-use App\Command\PromoteUserAdminCommand;
-use App\Contract\UserByEmailFinderInterface;
 use App\Entity\UserEntity;
+use App\Identity\Application\User\UserByEmailFinder;
+use App\Identity\UI\Console\PromoteUserAdminCommand;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -25,12 +25,12 @@ use Symfony\Component\Console\Tester\CommandTester;
 final class PromoteUserAdminCommandTest extends TestCase
 {
     private EntityManagerInterface&MockObject $entityManager;
-    private UserByEmailFinderInterface&MockObject $userRepository;
+    private UserByEmailFinder&MockObject $userRepository;
 
     protected function setUp(): void
     {
         $this->entityManager = $this->createMock(EntityManagerInterface::class);
-        $this->userRepository = $this->createMock(UserByEmailFinderInterface::class);
+        $this->userRepository = $this->createMock(UserByEmailFinder::class);
     }
 
     public function testFailsWhenUserDoesNotExist(): void

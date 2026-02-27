@@ -11,14 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Contract;
+namespace App\Catalog\Application\Translation;
 
-use App\Entity\MinervaRotationEntity;
-
-interface MinervaRotationReaderInterface
+interface TranslationCatalogReader
 {
     /**
-     * @return list<MinervaRotationEntity>
+     * @return array<string, string>
      */
-    public function findAllOrdered(): array;
+    public function load(string $locale, string $domain): array;
 }

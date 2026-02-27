@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Contract\PlayerByOwnerFinderInterface;
 use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
+use App\Progression\Application\Player\PlayerByOwnerFinder;
 use App\Progression\Application\Player\PlayerReadRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -23,7 +23,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<PlayerEntity>
  */
-final class PlayerEntityRepository extends ServiceEntityRepository implements PlayerByOwnerFinderInterface, PlayerReadRepositoryInterface
+final class PlayerEntityRepository extends ServiceEntityRepository implements PlayerByOwnerFinder, PlayerReadRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

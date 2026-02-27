@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Contract\AdminAuditLogPurgerInterface;
 use App\Entity\AdminAuditLogEntity;
 use App\Entity\UserEntity;
+use App\Support\Application\Admin\Audit\AdminAuditLogPurger;
 use App\Support\Application\AdminUser\AdminUserAuditReadRepositoryInterface;
 use App\Support\Application\Audit\AuditLogReadRepositoryInterface;
 use DateTimeImmutable;
@@ -26,7 +26,7 @@ use RuntimeException;
 /**
  * @extends ServiceEntityRepository<AdminAuditLogEntity>
  */
-final class AdminAuditLogEntityRepository extends ServiceEntityRepository implements AdminAuditLogPurgerInterface, AuditLogReadRepositoryInterface, AdminUserAuditReadRepositoryInterface
+final class AdminAuditLogEntityRepository extends ServiceEntityRepository implements AdminAuditLogPurger, AuditLogReadRepositoryInterface, AdminUserAuditReadRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

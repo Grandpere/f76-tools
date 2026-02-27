@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Command;
 
-use App\Command\PurgeAdminAuditLogsCommand;
-use App\Contract\AdminAuditLogPurgerInterface;
+use App\Support\Application\Admin\Audit\AdminAuditLogPurger;
+use App\Support\UI\Console\PurgeAdminAuditLogsCommand;
 use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -23,12 +23,12 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 final class PurgeAdminAuditLogsCommandTest extends TestCase
 {
-    /** @var AdminAuditLogPurgerInterface&MockObject */
-    private AdminAuditLogPurgerInterface $repository;
+    /** @var AdminAuditLogPurger&MockObject */
+    private AdminAuditLogPurger $repository;
 
     protected function setUp(): void
     {
-        $this->repository = $this->createMock(AdminAuditLogPurgerInterface::class);
+        $this->repository = $this->createMock(AdminAuditLogPurger::class);
     }
 
     public function testDryRunCountsWithoutDeleting(): void

@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Contract;
+namespace App\Progression\Application\Knowledge;
 
 use App\Domain\Item\ItemTypeEnum;
 
-interface ItemStatsReadRepositoryInterface
+interface ItemStatsReadRepository
 {
     public function countAll(): int;
 

@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Catalog\Infrastructure\Translation;
 
-use App\Contract\TranslationCatalogWriterInterface;
+use App\Catalog\Application\Translation\TranslationCatalogWriter as TranslationCatalogWriterPort;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Yaml\Yaml;
 
-final class TranslationCatalogWriter implements TranslationCatalogWriterInterface
+final class TranslationCatalogWriter implements TranslationCatalogWriterPort
 {
     private readonly Filesystem $filesystem;
 

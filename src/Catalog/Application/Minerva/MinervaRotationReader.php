@@ -11,12 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Contract;
+namespace App\Catalog\Application\Minerva;
 
-interface TranslationCatalogWriterInterface
+use App\Entity\MinervaRotationEntity;
+
+interface MinervaRotationReader
 {
     /**
-     * @param array<string, string> $entries
+     * @return list<MinervaRotationEntity>
      */
-    public function upsert(string $locale, string $domain, array $entries): void;
+    public function findAllOrdered(): array;
 }

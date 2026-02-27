@@ -11,12 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Contract;
+namespace App\Support\Application\Contact;
 
-interface TranslationCatalogReaderInterface
+use App\Entity\ContactMessageEntity;
+
+interface ContactMessageWriter
 {
-    /**
-     * @return array<string, string>
-     */
-    public function load(string $locale, string $domain): array;
+    public function save(ContactMessageEntity $message): void;
 }
