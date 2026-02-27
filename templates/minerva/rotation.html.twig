@@ -3,6 +3,24 @@
 {% block title %}{{ 'minerva.page_title'|trans }}{% endblock %}
 
 {% block body %}
+    {% set uiTranslations = {
+        loadingPlayers: 'dashboard.state.loading_players'|trans,
+        cannotLoadPlayers: 'dashboard.state.cannot_load_players'|trans,
+        noPlayers: 'dashboard.state.no_players'|trans,
+        noSelectedPlayer: 'dashboard.state.no_selected_player'|trans,
+        loadingItems: 'dashboard.state.loading_items'|trans,
+        loadItemsError: 'dashboard.state.load_items_error'|trans,
+        updateFailed: 'dashboard.state.update_failed'|trans,
+        noBookFound: 'dashboard.empty.no_book'|trans,
+        listPrefix: 'dashboard.labels.list_prefix'|trans,
+        sharedInfo: 'dashboard.help.shared_book_learning'|trans,
+        dailyOpsReward: 'dashboard.item.daily_ops_reward'|trans,
+        ariaItemLearned: 'dashboard.aria.item_learned'|trans,
+        source_dropDailyOps: 'dashboard.sources.daily_ops'|trans,
+        source_vendorRegs: 'dashboard.sources.regs'|trans,
+        source_vendorSamuel: 'dashboard.sources.samuel'|trans,
+        source_vendorMortimer: 'dashboard.sources.mortimer'|trans
+    } %}
     <main class="catalog-page translations-page">
         <header class="catalog-header">
             <div class="catalog-header-tools">
@@ -28,12 +46,48 @@
             <p class="catalog-subtitle">{{ 'minerva.description'|trans }}</p>
             <p class="catalog-user">
                 {{ 'dashboard.header.greeting_prefix'|trans }} <strong>{{ username }}</strong> ·
-                <a href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ 'dashboard.header.title'|trans }}</a>
-                ·
-                <span>{{ 'dashboard.header.minerva_rotation'|trans }}</span>
+                {% include '_app_primary_nav.html.twig' with { active: 'minerva' } %}
             </p>
             <p class="catalog-state">{{ 'minerva.timezone'|trans({'%timezone%': timeline.timezone}) }}</p>
         </header>
+
+        <section class="translations-panel">
+            <h2>{{ 'dashboard.catalog.book_title'|trans }}</h2>
+            <section
+                class="catalog-shell"
+                data-controller="minerva-knowledge"
+                data-minerva-knowledge-players-url-value="{{ apiPlayersUrl }}"
+                data-minerva-knowledge-players-base-url-value="{{ apiPlayersBaseUrl }}"
+                data-minerva-knowledge-initial-player-id-value="{{ activePlayerId ?? '' }}"
+                data-minerva-knowledge-storage-key-value="{{ storageKey }}"
+                data-minerva-knowledge-locale-value="{{ app.request.locale }}"
+                data-minerva-knowledge-ui-translations-value="{{ uiTranslations|json_encode|e('html_attr') }}"
+            >
+                <section class="catalog-panel">
+                    <div class="catalog-toolbar">
+                        <label class="field">
+                            <span>{{ 'dashboard.filters.player'|trans }}</span>
+                            <select data-minerva-knowledge-target="playerSelect"></select>
+                        </label>
+                        <label class="field">
+                            <span>{{ 'dashboard.filters.search'|trans }}</span>
+                            <input type="search" placeholder="{{ 'dashboard.filters.search_placeholder'|trans }}" data-minerva-knowledge-target="searchInput">
+                        </label>
+                    </div>
+                    <fieldset class="source-filters">
+                        <legend>{{ 'dashboard.filters.source_filters'|trans }}</legend>
+                        <label><input type="checkbox" data-minerva-knowledge-target="sourceFilter" value="dropDailyOps"><img src="/assets/icons/FO76_dailyops_uplink.png" alt="">{{ 'dashboard.sources.daily_ops'|trans }}</label>
+                        <label><input type="checkbox" data-minerva-knowledge-target="sourceFilter" value="vendorRegs"><img src="/assets/icons/Vault79Marker.svg" alt="">{{ 'dashboard.sources.regs'|trans }}</label>
+                        <label><input type="checkbox" data-minerva-knowledge-target="sourceFilter" value="vendorSamuel"><img src="/assets/icons/HammerWingMarker.svg" alt="">{{ 'dashboard.sources.samuel'|trans }}</label>
+                        <label><input type="checkbox" data-minerva-knowledge-target="sourceFilter" value="vendorMortimer"><img src="/assets/icons/SkullRingMarker.svg" alt="">{{ 'dashboard.sources.mortimer'|trans }}</label>
+                    </fieldset>
+                    <p class="catalog-state" role="status" aria-live="polite" data-minerva-knowledge-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
+                </section>
+                <section class="catalog-panel catalog-block">
+                    <div data-minerva-knowledge-target="bookList"></div>
+                </section>
+            </section>
+        </section>
 
         <section class="translations-panel">
             {% set nextWindow = timeline.upcoming|first %}

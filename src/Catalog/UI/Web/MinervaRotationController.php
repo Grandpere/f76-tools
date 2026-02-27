@@ -46,6 +46,7 @@ final class MinervaRotationController extends AbstractController
         return $this->render('minerva/rotation.html.twig', [
             'timeline' => $this->timelineApplicationService->buildTimeline(),
             'username' => $user->getEmail(),
+            'apiPlayersUrl' => $this->generateUrl('api_players_index'),
             'apiPlayersBaseUrl' => $this->generateUrl('api_players_index'),
             'activePlayerId' => $activePlayerId,
             'storageKey' => sprintf('f76:item-catalog:ui:%d', (int) ($user->getId() ?? 0)),

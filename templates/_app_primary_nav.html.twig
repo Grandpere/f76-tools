@@ -1,0 +1,15 @@
+{% set current = active|default('dashboard') %}
+<span class="app-primary-nav">
+    {% if current == 'dashboard' %}
+        <span class="app-primary-nav-link is-active">{{ 'dashboard.header.title'|trans }}</span>
+    {% else %}
+        <a class="app-primary-nav-link" href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ 'dashboard.header.title'|trans }}</a>
+    {% endif %}
+    ·
+    {% if current == 'minerva' %}
+        <span class="app-primary-nav-link is-active">{{ 'dashboard.header.minerva_rotation'|trans }}</span>
+    {% else %}
+        <a class="app-primary-nav-link" href="{{ path('app_minerva_rotation', { locale: app.request.locale }) }}">{{ 'dashboard.header.minerva_rotation'|trans }}</a>
+    {% endif %}
+</span>
+

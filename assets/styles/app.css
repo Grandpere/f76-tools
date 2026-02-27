@@ -118,6 +118,18 @@ body::before {
     color: var(--accent-2);
 }
 
+.app-primary-nav-link {
+    color: var(--accent-2);
+    text-decoration: none;
+}
+
+.app-primary-nav-link.is-active {
+    color: #ffffff;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+}
+
 .logout-form {
     display: inline;
 }
