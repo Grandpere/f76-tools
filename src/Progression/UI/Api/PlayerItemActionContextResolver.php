@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Progression\UI\Api;
 
+use App\Entity\UserEntity;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class PlayerItemActionContextResolver
@@ -23,7 +24,7 @@ final class PlayerItemActionContextResolver
     ) {
     }
 
-    public function resolveOrNotFound(string $playerId, string $itemId, mixed $user): PlayerItemActionContext|JsonResponse
+    public function resolveOrNotFound(string $playerId, string $itemId, UserEntity $user): PlayerItemActionContext|JsonResponse
     {
         $player = $this->playerOwnedContextResolver->resolveOrNotFound($playerId, $user);
         if ($player instanceof JsonResponse) {

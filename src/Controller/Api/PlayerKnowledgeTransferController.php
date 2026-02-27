@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
-use App\Entity\PlayerEntity;
+use App\Entity\UserEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeTransferApplicationService;
 use App\Progression\UI\Api\PlayerKnowledgeImportMode;
 use App\Progression\UI\Api\PlayerKnowledgeImportContextResolver;
 use App\Progression\UI\Api\PlayerOwnedContextResolver;
 use App\Progression\UI\Api\PlayerKnowledgeTransferResultResponder;
+use App\Progression\UI\Api\ProgressionApiUserContext;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,13 +33,14 @@ final class PlayerKnowledgeTransferController extends AbstractController
         private readonly PlayerOwnedContextResolver $playerOwnedContextResolver,
         private readonly PlayerKnowledgeImportContextResolver $playerKnowledgeImportContextResolver,
         private readonly PlayerKnowledgeTransferResultResponder $playerKnowledgeTransferResultResponder,
+        private readonly ProgressionApiUserContext $progressionApiUserContext,
     ) {
     }
 
     #[Route('/export', name: 'api_player_knowledge_export', methods: ['GET'])]
     public function export(string $playerId): JsonResponse
     {
-        $player = $this->playerOwnedContextResolver->resolveOrNotFound($playerId, $this->getUser());
+        $player = $this->playerOwnedContextResolver->resolveOrNotFound($playerId, $this->getAuthenticatedUser());
         if ($player instanceof JsonResponse) {
             return $player;
         }
@@ -60,7 +62,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
 
     private function importLike(string $playerId, Request $request, PlayerKnowledgeImportMode $mode): JsonResponse
     {
-        $context = $this->playerKnowledgeImportContextResolver->resolveOrNotFound($playerId, $request, $this->getUser());
+        $context = $this->playerKnowledgeImportContextResolver->resolveOrNotFound($playerId, $request, $this->getAuthenticatedUser());
         if ($context instanceof JsonResponse) {
             return $context;
         }
@@ -72,5 +74,10 @@ final class PlayerKnowledgeTransferController extends AbstractController
             : $this->playerKnowledgeTransferApplicationService->import($player, $payload);
 
         return $this->playerKnowledgeTransferResultResponder->respond($result);
+    }
+
+    private function getAuthenticatedUser(): UserEntity
+    {
+        return $this->progressionApiUserContext->requireAuthenticatedUser($this->getUser());
     }
 }

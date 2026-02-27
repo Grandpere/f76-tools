@@ -14,21 +14,20 @@ declare(strict_types=1);
 namespace App\Progression\UI\Api;
 
 use App\Entity\PlayerEntity;
+use App\Entity\UserEntity;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class PlayerOwnedContextResolver
 {
     public function __construct(
-        private readonly ProgressionApiUserContext $progressionApiUserContext,
         private readonly ProgressionOwnedPlayerReadResolverInterface $progressionOwnedPlayerReadResolver,
         private readonly ProgressionApiErrorResponder $progressionApiErrorResponder,
     ) {
     }
 
-    public function resolveOrNotFound(string $playerId, mixed $user): PlayerEntity|JsonResponse
+    public function resolveOrNotFound(string $playerId, UserEntity $user): PlayerEntity|JsonResponse
     {
-        $authenticatedUser = $this->progressionApiUserContext->requireAuthenticatedUser($user);
-        $player = $this->progressionOwnedPlayerReadResolver->resolve($playerId, $authenticatedUser);
+        $player = $this->progressionOwnedPlayerReadResolver->resolve($playerId, $user);
         if (null === $player) {
             return $this->progressionApiErrorResponder->playerNotFound();
         }

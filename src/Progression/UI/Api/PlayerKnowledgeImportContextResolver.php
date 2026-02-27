@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Progression\UI\Api;
 
+use App\Entity\UserEntity;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,7 +25,7 @@ final class PlayerKnowledgeImportContextResolver
     ) {
     }
 
-    public function resolveOrNotFound(string $playerId, Request $request, mixed $user): PlayerKnowledgeImportContext|JsonResponse
+    public function resolveOrNotFound(string $playerId, Request $request, UserEntity $user): PlayerKnowledgeImportContext|JsonResponse
     {
         $player = $this->playerOwnedContextResolver->resolveOrNotFound($playerId, $user);
         if ($player instanceof JsonResponse) {

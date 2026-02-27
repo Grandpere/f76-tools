@@ -71,7 +71,7 @@ final class PlayerController extends AbstractController
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_show', methods: ['GET'])]
     public function show(string $id): JsonResponse
     {
-        $player = $this->playerOwnedContextResolver->resolveOrNotFound($id, $this->getUser());
+        $player = $this->playerOwnedContextResolver->resolveOrNotFound($id, $this->getAuthenticatedUser());
         if ($player instanceof JsonResponse) {
             return $player;
         }
@@ -82,7 +82,7 @@ final class PlayerController extends AbstractController
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_update', methods: ['PATCH'])]
     public function update(string $id, Request $request): JsonResponse
     {
-        $player = $this->playerOwnedContextResolver->resolveOrNotFound($id, $this->getUser());
+        $player = $this->playerOwnedContextResolver->resolveOrNotFound($id, $this->getAuthenticatedUser());
         if ($player instanceof JsonResponse) {
             return $player;
         }
@@ -103,7 +103,7 @@ final class PlayerController extends AbstractController
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_delete', methods: ['DELETE'])]
     public function delete(string $id): Response
     {
-        $player = $this->playerOwnedContextResolver->resolveOrNotFound($id, $this->getUser());
+        $player = $this->playerOwnedContextResolver->resolveOrNotFound($id, $this->getAuthenticatedUser());
         if ($player instanceof JsonResponse) {
             return $player;
         }
