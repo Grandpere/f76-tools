@@ -14,13 +14,14 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Api;
 
 use App\Domain\Item\ItemTypeEnum;
-use App\Entity\ItemEntity;
 use App\Entity\ItemBookListEntity;
+use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
 use App\Entity\PlayerItemKnowledgeEntity;
 use App\Entity\UserEntity;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -123,7 +124,7 @@ final class PlayerStatsControllerTest extends WebTestCase
 
     private function createUser(string $email): UserEntity
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail($email)
             ->setRoles(['ROLE_USER'])
             ->setPassword('$2y$13$5QzWfXyM7FuU7f1w8rRZBupJrbj5gaMmkX6A8hA1z7f4h56yQW2mS');
@@ -136,7 +137,7 @@ final class PlayerStatsControllerTest extends WebTestCase
 
     private function createPlayer(UserEntity $user, string $name): PlayerEntity
     {
-        $player = (new PlayerEntity())
+        $player = new PlayerEntity()
             ->setUser($user)
             ->setName($name);
 
@@ -148,7 +149,7 @@ final class PlayerStatsControllerTest extends WebTestCase
 
     private function createItem(int $sourceId, ItemTypeEnum $type, ?int $rank, string $nameKey): ItemEntity
     {
-        $item = (new ItemEntity())
+        $item = new ItemEntity()
             ->setSourceId($sourceId)
             ->setType($type)
             ->setRank($rank)
@@ -167,10 +168,10 @@ final class PlayerStatsControllerTest extends WebTestCase
     {
         $item = $this->createItem($sourceId, ItemTypeEnum::BOOK, null, $nameKey);
         foreach ($listNumbers as $listNumber) {
-            $this->entityManager?->persist((new ItemBookListEntity())
+            $this->entityManager?->persist(new ItemBookListEntity()
                 ->setItem($item)
                 ->setListNumber($listNumber)
-                ->setIsSpecialList($listNumber % 4 === 0));
+                ->setIsSpecialList(0 === $listNumber % 4));
         }
         $this->entityManager?->flush();
 
@@ -179,7 +180,7 @@ final class PlayerStatsControllerTest extends WebTestCase
 
     private function learn(PlayerEntity $player, ItemEntity $item): void
     {
-        $this->entityManager?->persist((new PlayerItemKnowledgeEntity())
+        $this->entityManager?->persist(new PlayerItemKnowledgeEntity()
             ->setPlayer($player)
             ->setItem($item)
             ->setLearnedAt(new DateTimeImmutable()));
@@ -197,7 +198,7 @@ final class PlayerStatsControllerTest extends WebTestCase
     private function browser(): KernelBrowser
     {
         if (null === $this->client) {
-            throw new \LogicException('Client is not initialized.');
+            throw new LogicException('Client is not initialized.');
         }
 
         return $this->client;

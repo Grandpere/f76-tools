@@ -27,7 +27,7 @@ final class PlayerApplicationService
 
     public function createForUser(UserEntity $user, string $name): PlayerCreateResult
     {
-        $player = (new PlayerEntity())
+        $player = new PlayerEntity()
             ->setUser($user)
             ->setName($name);
 

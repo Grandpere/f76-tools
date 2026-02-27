@@ -42,4 +42,3 @@ final class ProgressionApiErrorResponder
         return new JsonResponse(['error' => 'Player name already exists.'], JsonResponse::HTTP_CONFLICT);
     }
 }
-

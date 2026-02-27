@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Catalog\Application\Import;
 
 use App\Catalog\Application\Import\ItemImportContextApplier;
@@ -20,7 +29,7 @@ final class ItemImportContextApplierTest extends TestCase
 
     public function testApplyMiscRankSetsRank(): void
     {
-        $item = (new ItemEntity())
+        $item = new ItemEntity()
             ->setType(ItemTypeEnum::MISC)
             ->setSourceId(1);
 
@@ -38,7 +47,7 @@ final class ItemImportContextApplierTest extends TestCase
 
     public function testApplyMiscRankConflictReturnsWarning(): void
     {
-        $item = (new ItemEntity())
+        $item = new ItemEntity()
             ->setType(ItemTypeEnum::MISC)
             ->setSourceId(1)
             ->setRank(1);
@@ -57,7 +66,7 @@ final class ItemImportContextApplierTest extends TestCase
 
     public function testApplyBookAddsListAndClearsRank(): void
     {
-        $item = (new ItemEntity())
+        $item = new ItemEntity()
             ->setType(ItemTypeEnum::BOOK)
             ->setSourceId(61)
             ->setRank(4);
@@ -77,7 +86,7 @@ final class ItemImportContextApplierTest extends TestCase
 
     public function testApplyFailsWhenRequiredContextMissing(): void
     {
-        $item = (new ItemEntity())
+        $item = new ItemEntity()
             ->setType(ItemTypeEnum::MISC)
             ->setSourceId(1);
 

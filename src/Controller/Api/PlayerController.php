@@ -15,14 +15,14 @@ namespace App\Controller\Api;
 
 use App\Entity\UserEntity;
 use App\Progression\Application\Player\PlayerApplicationService;
-use App\Progression\Application\Player\PlayerRenameResult;
 use App\Progression\Application\Player\PlayerReadApplicationService;
+use App\Progression\Application\Player\PlayerRenameResult;
 use App\Progression\UI\Api\PlayerControllerWriteResponder;
 use App\Progression\UI\Api\PlayerNameRequestExtractor;
 use App\Progression\UI\Api\PlayerPayloadMapper;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
-use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolver;
 use App\Progression\UI\Api\ProgressionApiUserContext;
+use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

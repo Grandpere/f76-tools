@@ -17,6 +17,7 @@ use App\Repository\MinervaRotationEntityRepository;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use InvalidArgumentException;
 
 #[ORM\Entity(repositoryClass: MinervaRotationEntityRepository::class)]
 #[ORM\Table(name: 'minerva_rotation')]
@@ -51,7 +52,7 @@ class MinervaRotationEntity
 
     public function getId(): ?int
     {
-        return isset($this->id) ? $this->id : null;
+        return $this->id ?? null;
     }
 
     public function getLocation(): string
@@ -63,7 +64,7 @@ class MinervaRotationEntity
     {
         $normalized = trim($location);
         if ('' === $normalized) {
-            throw new \InvalidArgumentException('Location cannot be empty.');
+            throw new InvalidArgumentException('Location cannot be empty.');
         }
         $this->location = $normalized;
 
@@ -78,7 +79,7 @@ class MinervaRotationEntity
     public function setListCycle(int $listCycle): self
     {
         if ($listCycle < 1) {
-            throw new \InvalidArgumentException('List cycle must be greater than zero.');
+            throw new InvalidArgumentException('List cycle must be greater than zero.');
         }
         $this->listCycle = $listCycle;
 

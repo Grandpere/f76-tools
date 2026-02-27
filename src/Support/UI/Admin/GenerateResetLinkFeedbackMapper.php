@@ -2,10 +2,20 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Support\UI\Admin;
 
 use App\Support\Application\AdminUser\GenerateResetLinkResult;
 use App\Support\Application\AdminUser\GenerateResetLinkStatus;
+use DateTimeInterface;
 
 final class GenerateResetLinkFeedbackMapper
 {
@@ -65,10 +75,9 @@ final class GenerateResetLinkFeedbackMapper
                 'flashParams' => [],
                 'auditAction' => 'user_generate_reset_link',
                 'auditContext' => [
-                    'expiresAt' => $result->getExpiresAt()?->format(\DateTimeInterface::ATOM),
+                    'expiresAt' => $result->getExpiresAt()?->format(DateTimeInterface::ATOM),
                 ],
             ],
         };
     }
 }
-

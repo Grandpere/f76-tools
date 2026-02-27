@@ -15,6 +15,7 @@ namespace App\Tests\Functional\Security;
 
 use App\Entity\UserEntity;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -97,7 +98,7 @@ final class ForgotPasswordControllerTest extends WebTestCase
         $hasher = $this->browser()->getContainer()->get(UserPasswordHasherInterface::class);
         \assert($hasher instanceof UserPasswordHasherInterface);
 
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail($email)
             ->setRoles(['ROLE_USER']);
         $user->setPassword($hasher->hashPassword($user, $plainPassword));
@@ -119,7 +120,7 @@ final class ForgotPasswordControllerTest extends WebTestCase
     private function browser(): KernelBrowser
     {
         if (null === $this->client) {
-            throw new \LogicException('Client is not initialized.');
+            throw new LogicException('Client is not initialized.');
         }
 
         return $this->client;

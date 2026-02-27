@@ -23,8 +23,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<PlayerEntity>
  */
-final class PlayerEntityRepository extends ServiceEntityRepository
-    implements PlayerByOwnerFinderInterface, PlayerReadRepositoryInterface
+final class PlayerEntityRepository extends ServiceEntityRepository implements PlayerByOwnerFinderInterface, PlayerReadRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

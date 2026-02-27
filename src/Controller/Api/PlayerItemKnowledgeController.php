@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
-use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
 use App\Progression\Application\Knowledge\ItemReadApplicationService;
+use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeWriteApplicationService;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadSearchFilter;
@@ -94,5 +94,4 @@ final class PlayerItemKnowledgeController extends AbstractController
 
         return new JsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
     }
-
 }

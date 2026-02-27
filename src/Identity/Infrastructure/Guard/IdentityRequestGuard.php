@@ -2,12 +2,21 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Identity\Infrastructure\Guard;
 
-use App\Identity\Application\Guard\IdentityRequestGuardInterface;
-use App\Identity\Application\Guard\IdentityRequestGuardResult;
 use App\Identity\Application\Guard\IdentityCaptchaVerifierInterface;
 use App\Identity\Application\Guard\IdentityRateLimiterInterface;
+use App\Identity\Application\Guard\IdentityRequestGuardInterface;
+use App\Identity\Application\Guard\IdentityRequestGuardResult;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 

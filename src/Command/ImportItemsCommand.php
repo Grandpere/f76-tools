@@ -108,5 +108,4 @@ final class ImportItemsCommand extends Command
 
         return $result->hasErrors() ? Command::FAILURE : Command::SUCCESS;
     }
-
 }

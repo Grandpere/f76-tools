@@ -2,13 +2,24 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Progression\UI\Api;
 
 use App\Entity\PlayerEntity;
 use App\Progression\UI\Api\PlayerControllerWriteResponder;
 use App\Progression\UI\Api\PlayerPayloadMapper;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
+use ReflectionProperty;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class PlayerControllerWriteResponderTest extends TestCase
@@ -30,12 +41,12 @@ final class PlayerControllerWriteResponderTest extends TestCase
     {
         $responder = new PlayerControllerWriteResponder(new PlayerPayloadMapper(), new ProgressionApiErrorResponder());
 
-        $player = (new PlayerEntity())->setName('Main');
+        $player = new PlayerEntity()->setName('Main');
         $this->setPlayerPublicId($player, '01J5A6B7C8D9E0F1G2H3J4K5L6');
         $this->setPlayerDates(
             $player,
-            new \DateTimeImmutable('2026-02-27T10:00:00+00:00'),
-            new \DateTimeImmutable('2026-02-27T10:05:00+00:00'),
+            new DateTimeImmutable('2026-02-27T10:00:00+00:00'),
+            new DateTimeImmutable('2026-02-27T10:05:00+00:00'),
         );
 
         $created = $responder->created($player);
@@ -58,16 +69,16 @@ final class PlayerControllerWriteResponderTest extends TestCase
 
     private function setPlayerPublicId(PlayerEntity $player, string $publicId): void
     {
-        $reflection = new \ReflectionProperty(PlayerEntity::class, 'publicId');
+        $reflection = new ReflectionProperty(PlayerEntity::class, 'publicId');
         $reflection->setValue($player, $publicId);
     }
 
-    private function setPlayerDates(PlayerEntity $player, \DateTimeImmutable $createdAt, \DateTimeImmutable $updatedAt): void
+    private function setPlayerDates(PlayerEntity $player, DateTimeImmutable $createdAt, DateTimeImmutable $updatedAt): void
     {
-        $createdReflection = new \ReflectionProperty(PlayerEntity::class, 'createdAt');
+        $createdReflection = new ReflectionProperty(PlayerEntity::class, 'createdAt');
         $createdReflection->setValue($player, $createdAt);
 
-        $updatedReflection = new \ReflectionProperty(PlayerEntity::class, 'updatedAt');
+        $updatedReflection = new ReflectionProperty(PlayerEntity::class, 'updatedAt');
         $updatedReflection->setValue($player, $updatedAt);
     }
 }

@@ -17,6 +17,7 @@ use App\Entity\UserEntity;
 use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -55,14 +56,14 @@ final class ResendVerificationControllerTest extends WebTestCase
     public function testResendUpdatesTokenForUnverifiedUser(): void
     {
         $oldToken = hash('sha256', 'old-token');
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('resend-target@example.com')
             ->setRoles(['ROLE_USER'])
             ->setPassword('$2y$13$5QzWfXyM7FuU7f1w8rRZBupJrbj5gaMmkX6A8hA1z7f4h56yQW2mS')
             ->setIsEmailVerified(false)
             ->setEmailVerificationTokenHash($oldToken)
-            ->setEmailVerificationExpiresAt((new DateTimeImmutable())->add(new DateInterval('PT10M')))
-            ->setEmailVerificationRequestedAt((new DateTimeImmutable())->sub(new DateInterval('PT2M')));
+            ->setEmailVerificationExpiresAt(new DateTimeImmutable()->add(new DateInterval('PT10M')))
+            ->setEmailVerificationRequestedAt(new DateTimeImmutable()->sub(new DateInterval('PT2M')));
 
         $this->entityManager?->persist($user);
         $this->entityManager?->flush();
@@ -92,13 +93,13 @@ final class ResendVerificationControllerTest extends WebTestCase
     {
         $oldToken = hash('sha256', 'same-token');
         $requestedAt = new DateTimeImmutable();
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('resend-cooldown@example.com')
             ->setRoles(['ROLE_USER'])
             ->setPassword('$2y$13$5QzWfXyM7FuU7f1w8rRZBupJrbj5gaMmkX6A8hA1z7f4h56yQW2mS')
             ->setIsEmailVerified(false)
             ->setEmailVerificationTokenHash($oldToken)
-            ->setEmailVerificationExpiresAt((new DateTimeImmutable())->add(new DateInterval('PT10M')))
+            ->setEmailVerificationExpiresAt(new DateTimeImmutable()->add(new DateInterval('PT10M')))
             ->setEmailVerificationRequestedAt($requestedAt);
 
         $this->entityManager?->persist($user);
@@ -135,7 +136,7 @@ final class ResendVerificationControllerTest extends WebTestCase
     private function browser(): KernelBrowser
     {
         if (null === $this->client) {
-            throw new \LogicException('Client is not initialized.');
+            throw new LogicException('Client is not initialized.');
         }
 
         return $this->client;

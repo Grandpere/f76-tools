@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Catalog\Application\Import;
 
 use App\Contract\TranslationCatalogWriterInterface;
@@ -84,7 +93,7 @@ final class ItemImportApplicationService
                 if ($dryRun) {
                     $item = $dryRunMemory[$memoryKey] ?? null;
                     $isNew = null === $item;
-                    $item ??= (new ItemEntity())
+                    $item ??= new ItemEntity()
                         ->setType($type)
                         ->setSourceId($sourceId);
                     $dryRunMemory[$memoryKey] = $item;
@@ -94,7 +103,7 @@ final class ItemImportApplicationService
                     if (null === $item) {
                         $item = $this->itemRepository->findOneByTypeAndSourceId($type, $sourceId);
                         $isNew = null === $item;
-                        $item ??= (new ItemEntity())
+                        $item ??= new ItemEntity()
                             ->setType($type)
                             ->setSourceId($sourceId);
                         $writeMemory[$memoryKey] = $item;

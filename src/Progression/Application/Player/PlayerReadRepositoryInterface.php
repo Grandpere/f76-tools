@@ -25,4 +25,3 @@ interface PlayerReadRepositoryInterface
 
     public function findOneByPublicIdAndUser(string $publicId, UserEntity $user): ?PlayerEntity;
 }
-

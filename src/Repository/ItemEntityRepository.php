@@ -26,8 +26,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<ItemEntity>
  */
-final class ItemEntityRepository extends ServiceEntityRepository
-    implements ItemKnowledgeTransferRepositoryInterface, ItemStatsReadRepositoryInterface, ItemImportItemRepositoryInterface, ItemKnowledgeCatalogReadRepositoryInterface, ItemReadRepositoryInterface
+final class ItemEntityRepository extends ServiceEntityRepository implements ItemKnowledgeTransferRepositoryInterface, ItemStatsReadRepositoryInterface, ItemImportItemRepositoryInterface, ItemKnowledgeCatalogReadRepositoryInterface, ItemReadRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

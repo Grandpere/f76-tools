@@ -62,7 +62,7 @@ final class PurgeAdminAuditLogsCommand extends Command
             return Command::INVALID;
         }
 
-        $cutoff = (new DateTimeImmutable())->sub(new DateInterval(sprintf('P%dD', $days)));
+        $cutoff = new DateTimeImmutable()->sub(new DateInterval(sprintf('P%dD', $days)));
         $isDryRun = (bool) $input->getOption('dry-run');
 
         if ($isDryRun) {

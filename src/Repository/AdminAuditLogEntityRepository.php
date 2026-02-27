@@ -16,17 +16,17 @@ namespace App\Repository;
 use App\Contract\AdminAuditLogPurgerInterface;
 use App\Entity\AdminAuditLogEntity;
 use App\Entity\UserEntity;
-use App\Support\Application\Audit\AuditLogReadRepositoryInterface;
 use App\Support\Application\AdminUser\AdminUserAuditReadRepositoryInterface;
+use App\Support\Application\Audit\AuditLogReadRepositoryInterface;
 use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use RuntimeException;
 
 /**
  * @extends ServiceEntityRepository<AdminAuditLogEntity>
  */
-final class AdminAuditLogEntityRepository extends ServiceEntityRepository
-    implements AdminAuditLogPurgerInterface, AuditLogReadRepositoryInterface, AdminUserAuditReadRepositoryInterface
+final class AdminAuditLogEntityRepository extends ServiceEntityRepository implements AdminAuditLogPurgerInterface, AuditLogReadRepositoryInterface, AdminUserAuditReadRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -181,7 +181,7 @@ final class AdminAuditLogEntityRepository extends ServiceEntityRepository
             ->execute();
 
         if (!is_int($result)) {
-            throw new \RuntimeException('Unexpected delete result type for admin audit log purge.');
+            throw new RuntimeException('Unexpected delete result type for admin audit log purge.');
         }
 
         return $result;

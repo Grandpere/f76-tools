@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of a FuelApp project.
+ * This file is part of a F76 project.
  *
  * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
  *

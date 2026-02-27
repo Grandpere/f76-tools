@@ -32,7 +32,7 @@ final class PlayerKnowledgeTransferApplicationServiceTest extends TestCase
         $knowledgeRepository = $this->createMock(PlayerKnowledgeTransferRepositoryInterface::class);
         /** @var ItemKnowledgeTransferRepositoryInterface&MockObject $itemRepository */
         $itemRepository = $this->createMock(ItemKnowledgeTransferRepositoryInterface::class);
-        $entityManager = $this->createStub(EntityManagerInterface::class);
+        $entityManager = self::createStub(EntityManagerInterface::class);
 
         $service = new PlayerKnowledgeTransferApplicationService($knowledgeRepository, $itemRepository, $entityManager);
 
@@ -112,11 +112,11 @@ final class PlayerKnowledgeTransferApplicationServiceTest extends TestCase
 
     private function createPlayer(): PlayerEntity
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('owner@example.com')
             ->setPassword('hashed');
 
-        return (new PlayerEntity())
+        return new PlayerEntity()
             ->setUser($user)
             ->setName('Main');
     }

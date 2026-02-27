@@ -43,7 +43,7 @@ final class PlayerItemKnowledgeManager
             return;
         }
 
-        $knowledge = (new PlayerItemKnowledgeEntity())
+        $knowledge = new PlayerItemKnowledgeEntity()
             ->setPlayer($player)
             ->setItem($item)
             ->setLearnedAt(new DateTimeImmutable());

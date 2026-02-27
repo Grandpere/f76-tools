@@ -18,4 +18,3 @@ enum PlayerRenameResult
     case RENAMED;
     case NAME_CONFLICT;
 }
-

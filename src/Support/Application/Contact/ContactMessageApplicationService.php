@@ -25,7 +25,7 @@ final class ContactMessageApplicationService
 
     public function createMessage(string $email, string $subject, string $message, ?string $ip): ContactMessageEntity
     {
-        $contactMessage = (new ContactMessageEntity())
+        $contactMessage = new ContactMessageEntity()
             ->setEmail($email)
             ->setSubject($subject)
             ->setMessage($message)

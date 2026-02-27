@@ -42,40 +42,40 @@ final class Version20260224233000 extends AbstractMigration
         $this->addSql('ALTER TABLE item ADD drop_sources_html TEXT DEFAULT NULL');
 
         $this->addSql(<<<'SQL'
-UPDATE item
-SET
-    is_new = CASE
-        WHEN lower(coalesce(payload::jsonb ->> 'new', '')) IN ('1', 'true', 'yes') THEN TRUE
-        ELSE FALSE
-    END,
-    drop_raid = CASE
-        WHEN lower(coalesce(payload::jsonb ->> 'drop_raid', '')) IN ('1', 'true', 'yes') THEN TRUE
-        ELSE FALSE
-    END,
-    drop_burningsprings = CASE
-        WHEN lower(coalesce(payload::jsonb ->> 'drop_burningsprings', payload::jsonb ->> 'drop_burningsprings', payload::jsonb ->> 'drop_burning_springs', '')) IN ('1', 'true', 'yes') THEN TRUE
-        ELSE FALSE
-    END,
-    drop_dailyops = CASE
-        WHEN lower(coalesce(payload::jsonb ->> 'drop_dailyops', '')) IN ('1', 'true', 'yes') THEN TRUE
-        ELSE FALSE
-    END,
-    vendor_regs = CASE
-        WHEN lower(coalesce(payload::jsonb ->> 'vendor_regs', '')) IN ('1', 'true', 'yes') THEN TRUE
-        ELSE FALSE
-    END,
-    vendor_samuel = CASE
-        WHEN lower(coalesce(payload::jsonb ->> 'vendor_samuel', '')) IN ('1', 'true', 'yes') THEN TRUE
-        ELSE FALSE
-    END,
-    vendor_mortimer = CASE
-        WHEN lower(coalesce(payload::jsonb ->> 'vendor_mortimer', '')) IN ('1', 'true', 'yes') THEN TRUE
-        ELSE FALSE
-    END,
-    info_html = nullif(payload::jsonb ->> 'info', ''),
-    drop_sources_html = nullif(payload::jsonb ->> 'drop_sources', '')
-WHERE payload IS NOT NULL
-SQL);
+            UPDATE item
+            SET
+                is_new = CASE
+                    WHEN lower(coalesce(payload::jsonb ->> 'new', '')) IN ('1', 'true', 'yes') THEN TRUE
+                    ELSE FALSE
+                END,
+                drop_raid = CASE
+                    WHEN lower(coalesce(payload::jsonb ->> 'drop_raid', '')) IN ('1', 'true', 'yes') THEN TRUE
+                    ELSE FALSE
+                END,
+                drop_burningsprings = CASE
+                    WHEN lower(coalesce(payload::jsonb ->> 'drop_burningsprings', payload::jsonb ->> 'drop_burningsprings', payload::jsonb ->> 'drop_burning_springs', '')) IN ('1', 'true', 'yes') THEN TRUE
+                    ELSE FALSE
+                END,
+                drop_dailyops = CASE
+                    WHEN lower(coalesce(payload::jsonb ->> 'drop_dailyops', '')) IN ('1', 'true', 'yes') THEN TRUE
+                    ELSE FALSE
+                END,
+                vendor_regs = CASE
+                    WHEN lower(coalesce(payload::jsonb ->> 'vendor_regs', '')) IN ('1', 'true', 'yes') THEN TRUE
+                    ELSE FALSE
+                END,
+                vendor_samuel = CASE
+                    WHEN lower(coalesce(payload::jsonb ->> 'vendor_samuel', '')) IN ('1', 'true', 'yes') THEN TRUE
+                    ELSE FALSE
+                END,
+                vendor_mortimer = CASE
+                    WHEN lower(coalesce(payload::jsonb ->> 'vendor_mortimer', '')) IN ('1', 'true', 'yes') THEN TRUE
+                    ELSE FALSE
+                END,
+                info_html = nullif(payload::jsonb ->> 'info', ''),
+                drop_sources_html = nullif(payload::jsonb ->> 'drop_sources', '')
+            WHERE payload IS NOT NULL
+            SQL);
     }
 
     public function down(Schema $schema): void
@@ -96,4 +96,3 @@ SQL);
         $this->addSql('ALTER TABLE item DROP drop_sources_html');
     }
 }
-

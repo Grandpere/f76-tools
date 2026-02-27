@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Progression\Application\Knowledge;
 
 use App\Contract\ItemKnowledgeCatalogReadRepositoryInterface;
@@ -12,6 +21,7 @@ use App\Entity\PlayerEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use ReflectionProperty;
 
 final class PlayerKnowledgeCatalogApplicationServiceTest extends TestCase
 {
@@ -78,15 +88,14 @@ final class PlayerKnowledgeCatalogApplicationServiceTest extends TestCase
 
     private function createItemWithId(int $id, ItemTypeEnum $type, int $sourceId, string $nameKey): ItemEntity
     {
-        $item = (new ItemEntity())
+        $item = new ItemEntity()
             ->setType($type)
             ->setSourceId($sourceId)
             ->setNameKey($nameKey);
 
-        $reflection = new \ReflectionProperty(ItemEntity::class, 'id');
+        $reflection = new ReflectionProperty(ItemEntity::class, 'id');
         $reflection->setValue($item, $id);
 
         return $item;
     }
 }
-

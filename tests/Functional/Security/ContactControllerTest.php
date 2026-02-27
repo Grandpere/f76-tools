@@ -15,6 +15,7 @@ namespace App\Tests\Functional\Security;
 
 use App\Entity\ContactMessageEntity;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -120,7 +121,7 @@ final class ContactControllerTest extends WebTestCase
     private function browser(): KernelBrowser
     {
         if (null === $this->client) {
-            throw new \LogicException('Client is not initialized.');
+            throw new LogicException('Client is not initialized.');
         }
 
         return $this->client;

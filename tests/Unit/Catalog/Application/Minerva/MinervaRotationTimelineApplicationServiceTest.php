@@ -16,8 +16,10 @@ namespace App\Tests\Unit\Catalog\Application\Minerva;
 use App\Catalog\Application\Minerva\MinervaRotationTimelineApplicationService;
 use App\Contract\MinervaRotationReaderInterface;
 use App\Entity\MinervaRotationEntity;
+use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 
 final class MinervaRotationTimelineApplicationServiceTest extends TestCase
 {
@@ -36,7 +38,7 @@ final class MinervaRotationTimelineApplicationServiceTest extends TestCase
                 $this->createRotation(3, 'Fort Atlas', 4, '2026-02-20T10:00:00+00:00', '2026-02-21T10:00:00+00:00'),
             ]);
 
-        $timeline = $service->buildTimeline(new \DateTimeImmutable('2026-02-26T12:00:00+00:00'));
+        $timeline = $service->buildTimeline(new DateTimeImmutable('2026-02-26T12:00:00+00:00'));
 
         self::assertSame('UTC', $timeline['timezone']);
         self::assertCount(3, $timeline['rows']);
@@ -52,13 +54,13 @@ final class MinervaRotationTimelineApplicationServiceTest extends TestCase
         string $startsAt,
         string $endsAt,
     ): MinervaRotationEntity {
-        $rotation = (new MinervaRotationEntity())
+        $rotation = new MinervaRotationEntity()
             ->setLocation($location)
             ->setListCycle($listCycle)
-            ->setStartsAt(new \DateTimeImmutable($startsAt))
-            ->setEndsAt(new \DateTimeImmutable($endsAt));
+            ->setStartsAt(new DateTimeImmutable($startsAt))
+            ->setEndsAt(new DateTimeImmutable($endsAt));
 
-        $reflection = new \ReflectionClass($rotation);
+        $reflection = new ReflectionClass($rotation);
         $property = $reflection->getProperty('id');
         $property->setValue($rotation, $id);
 

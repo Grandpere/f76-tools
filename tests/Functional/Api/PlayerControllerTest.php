@@ -15,6 +15,7 @@ namespace App\Tests\Functional\Api;
 
 use App\Entity\UserEntity;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -149,7 +150,7 @@ final class PlayerControllerTest extends WebTestCase
 
     private function createUser(string $email): UserEntity
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail($email)
             ->setRoles(['ROLE_USER'])
             ->setPassword('$2y$13$5QzWfXyM7FuU7f1w8rRZBupJrbj5gaMmkX6A8hA1z7f4h56yQW2mS');
@@ -173,7 +174,7 @@ final class PlayerControllerTest extends WebTestCase
     private function browser(): KernelBrowser
     {
         if (null === $this->client) {
-            throw new \LogicException('Client is not initialized.');
+            throw new LogicException('Client is not initialized.');
         }
 
         return $this->client;

@@ -21,6 +21,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use LogicException;
 use Symfony\Component\Uid\Ulid;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -130,7 +131,7 @@ class ItemEntity implements ItemInterface
 
     public function getId(): ?int
     {
-        return isset($this->id) ? $this->id : null;
+        return $this->id ?? null;
     }
 
     public function getSourceId(): int
@@ -148,7 +149,7 @@ class ItemEntity implements ItemInterface
     public function getPublicId(): string
     {
         if (!isset($this->publicId) || '' === $this->publicId) {
-            throw new \LogicException('Item public ID is not initialized.');
+            throw new LogicException('Item public ID is not initialized.');
         }
 
         return $this->publicId;

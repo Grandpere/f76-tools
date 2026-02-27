@@ -18,6 +18,7 @@ use App\Repository\ContactMessageEntityRepository;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use InvalidArgumentException;
 
 #[ORM\Entity(repositoryClass: ContactMessageEntityRepository::class)]
 #[ORM\Table(name: 'contact_message')]
@@ -54,7 +55,7 @@ class ContactMessageEntity
 
     public function getId(): ?int
     {
-        return isset($this->id) ? $this->id : null;
+        return $this->id ?? null;
     }
 
     public function getEmail(): string
@@ -66,7 +67,7 @@ class ContactMessageEntity
     {
         $normalized = mb_strtolower(trim($email));
         if ('' === $normalized) {
-            throw new \InvalidArgumentException('Contact email cannot be empty.');
+            throw new InvalidArgumentException('Contact email cannot be empty.');
         }
         $this->email = $normalized;
 
@@ -82,7 +83,7 @@ class ContactMessageEntity
     {
         $normalized = trim($subject);
         if ('' === $normalized) {
-            throw new \InvalidArgumentException('Contact subject cannot be empty.');
+            throw new InvalidArgumentException('Contact subject cannot be empty.');
         }
         $this->subject = $normalized;
 
@@ -98,7 +99,7 @@ class ContactMessageEntity
     {
         $normalized = trim($message);
         if ('' === $normalized) {
-            throw new \InvalidArgumentException('Contact message cannot be empty.');
+            throw new InvalidArgumentException('Contact message cannot be empty.');
         }
         $this->message = $normalized;
 

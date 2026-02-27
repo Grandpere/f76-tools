@@ -38,7 +38,7 @@ class ItemBookListEntity
 
     public function getId(): ?int
     {
-        return isset($this->id) ? $this->id : null;
+        return $this->id ?? null;
     }
 
     public function getItem(): ItemEntity

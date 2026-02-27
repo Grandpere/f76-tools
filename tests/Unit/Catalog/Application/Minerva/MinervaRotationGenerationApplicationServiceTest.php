@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Catalog\Application\Minerva;
 
 use App\Catalog\Application\Minerva\MinervaRotationGenerationApplicationService;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
 final class MinervaRotationGenerationApplicationServiceTest extends TestCase
@@ -21,8 +22,8 @@ final class MinervaRotationGenerationApplicationServiceTest extends TestCase
     public function testGenerateBuildsDeterministicWindowsForKnownPeriod(): void
     {
         $service = new MinervaRotationGenerationApplicationService();
-        $from = new \DateTimeImmutable('2026-03-01T00:00:00-05:00');
-        $to = new \DateTimeImmutable('2026-03-20T23:59:59-04:00');
+        $from = new DateTimeImmutable('2026-03-01T00:00:00-05:00');
+        $to = new DateTimeImmutable('2026-03-20T23:59:59-04:00');
 
         $rows = $service->generate($from, $to);
 
@@ -44,8 +45,8 @@ final class MinervaRotationGenerationApplicationServiceTest extends TestCase
     public function testGenerateHandlesReverseRangeAsEmpty(): void
     {
         $service = new MinervaRotationGenerationApplicationService();
-        $from = new \DateTimeImmutable('2026-03-10T00:00:00-04:00');
-        $to = new \DateTimeImmutable('2026-03-01T00:00:00-05:00');
+        $from = new DateTimeImmutable('2026-03-10T00:00:00-04:00');
+        $to = new DateTimeImmutable('2026-03-01T00:00:00-05:00');
 
         self::assertSame([], $service->generate($from, $to));
     }

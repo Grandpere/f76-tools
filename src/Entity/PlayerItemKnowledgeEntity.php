@@ -43,7 +43,7 @@ class PlayerItemKnowledgeEntity
 
     public function getId(): ?int
     {
-        return isset($this->id) ? $this->id : null;
+        return $this->id ?? null;
     }
 
     public function getPlayer(): PlayerEntity
@@ -82,4 +82,3 @@ class PlayerItemKnowledgeEntity
         return $this;
     }
 }
-

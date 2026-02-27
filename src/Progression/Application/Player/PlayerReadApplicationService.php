@@ -36,4 +36,3 @@ final class PlayerReadApplicationService
         return $this->playerRepository->findOneByPublicIdAndUser($publicId, $user);
     }
 }
-

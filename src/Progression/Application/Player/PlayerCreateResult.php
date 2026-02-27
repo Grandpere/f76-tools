@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Progression\Application\Player;
 
 use App\Entity\PlayerEntity;
+use LogicException;
 
 final class PlayerCreateResult
 {
@@ -41,7 +42,7 @@ final class PlayerCreateResult
     public function getPlayer(): PlayerEntity
     {
         if (!$this->player instanceof PlayerEntity) {
-            throw new \LogicException('Player is not available for a failed create result.');
+            throw new LogicException('Player is not available for a failed create result.');
         }
 
         return $this->player;

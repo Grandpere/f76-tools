@@ -21,8 +21,8 @@ use App\Entity\PlayerEntity;
 use App\Entity\PlayerItemKnowledgeEntity;
 use App\Entity\UserEntity;
 use App\Service\PlayerItemKnowledgeManager;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 final class PlayerItemKnowledgeManagerTest extends TestCase
@@ -32,8 +32,8 @@ final class PlayerItemKnowledgeManagerTest extends TestCase
         $user = $this->createUser('owner@example.com');
         $player = $this->createPlayer($user, 'Main');
         $playerFinder = $this->createMock(PlayerByOwnerFinderInterface::class);
-        $knowledgeFinder = $this->createStub(PlayerItemKnowledgeFinderInterface::class);
-        $entityManager = $this->createStub(EntityManagerInterface::class);
+        $knowledgeFinder = self::createStub(PlayerItemKnowledgeFinderInterface::class);
+        $entityManager = self::createStub(EntityManagerInterface::class);
 
         $manager = new PlayerItemKnowledgeManager($playerFinder, $knowledgeFinder, $entityManager);
 
@@ -50,7 +50,7 @@ final class PlayerItemKnowledgeManagerTest extends TestCase
     {
         $player = $this->createPlayer($this->createUser('owner2@example.com'), 'Main');
         $item = $this->createItem(1201);
-        $playerFinder = $this->createStub(PlayerByOwnerFinderInterface::class);
+        $playerFinder = self::createStub(PlayerByOwnerFinderInterface::class);
         $knowledgeFinder = $this->createMock(PlayerItemKnowledgeFinderInterface::class);
         $entityManager = $this->createMock(EntityManagerInterface::class);
 
@@ -83,15 +83,15 @@ final class PlayerItemKnowledgeManagerTest extends TestCase
     {
         $player = $this->createPlayer($this->createUser('owner3@example.com'), 'Main');
         $item = $this->createItem(1301);
-        $playerFinder = $this->createStub(PlayerByOwnerFinderInterface::class);
+        $playerFinder = self::createStub(PlayerByOwnerFinderInterface::class);
         $knowledgeFinder = $this->createMock(PlayerItemKnowledgeFinderInterface::class);
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $manager = new PlayerItemKnowledgeManager($playerFinder, $knowledgeFinder, $entityManager);
 
-        $existing = (new PlayerItemKnowledgeEntity())
+        $existing = new PlayerItemKnowledgeEntity()
             ->setPlayer($player)
             ->setItem($item)
-            ->setLearnedAt(new \DateTimeImmutable('-1 day'));
+            ->setLearnedAt(new DateTimeImmutable('-1 day'));
 
         $knowledgeFinder
             ->expects(self::once())
@@ -109,15 +109,15 @@ final class PlayerItemKnowledgeManagerTest extends TestCase
     {
         $player = $this->createPlayer($this->createUser('owner4@example.com'), 'Main');
         $item = $this->createItem(1401);
-        $playerFinder = $this->createStub(PlayerByOwnerFinderInterface::class);
+        $playerFinder = self::createStub(PlayerByOwnerFinderInterface::class);
         $knowledgeFinder = $this->createMock(PlayerItemKnowledgeFinderInterface::class);
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $manager = new PlayerItemKnowledgeManager($playerFinder, $knowledgeFinder, $entityManager);
 
-        $existing = (new PlayerItemKnowledgeEntity())
+        $existing = new PlayerItemKnowledgeEntity()
             ->setPlayer($player)
             ->setItem($item)
-            ->setLearnedAt(new \DateTimeImmutable('-1 day'));
+            ->setLearnedAt(new DateTimeImmutable('-1 day'));
 
         $knowledgeFinder
             ->expects(self::once())
@@ -135,7 +135,7 @@ final class PlayerItemKnowledgeManagerTest extends TestCase
     {
         $player = $this->createPlayer($this->createUser('owner5@example.com'), 'Main');
         $item = $this->createItem(1501);
-        $playerFinder = $this->createStub(PlayerByOwnerFinderInterface::class);
+        $playerFinder = self::createStub(PlayerByOwnerFinderInterface::class);
         $knowledgeFinder = $this->createMock(PlayerItemKnowledgeFinderInterface::class);
         $entityManager = $this->createMock(EntityManagerInterface::class);
 
@@ -155,21 +155,21 @@ final class PlayerItemKnowledgeManagerTest extends TestCase
 
     private function createUser(string $email): UserEntity
     {
-        return (new UserEntity())
+        return new UserEntity()
             ->setEmail($email)
             ->setPassword('hashed');
     }
 
     private function createPlayer(UserEntity $user, string $name): PlayerEntity
     {
-        return (new PlayerEntity())
+        return new PlayerEntity()
             ->setUser($user)
             ->setName($name);
     }
 
     private function createItem(int $sourceId): ItemEntity
     {
-        return (new ItemEntity())
+        return new ItemEntity()
             ->setSourceId($sourceId)
             ->setType(ItemTypeEnum::BOOK)
             ->setNameKey(sprintf('item.book.%d.name', $sourceId));

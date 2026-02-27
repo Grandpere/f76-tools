@@ -36,7 +36,7 @@ final class MinervaRotationRegenerationApplicationService
         $deleted = $this->rotationRepository->deleteOverlappingRange($from, $to);
 
         foreach ($rows as $row) {
-            $this->entityManager->persist((new MinervaRotationEntity())
+            $this->entityManager->persist(new MinervaRotationEntity()
                 ->setLocation($row['location'])
                 ->setListCycle($row['listCycle'])
                 ->setStartsAt($row['startsAt'])

@@ -109,7 +109,7 @@ final class CreateUserCommand extends Command
             $user = $existingUser;
             $updatedExistingUser = true;
         } else {
-            $user = (new UserEntity())
+            $user = new UserEntity()
                 ->setEmail($email)
                 ->setRoles($roles);
             $this->entityManager->persist($user);

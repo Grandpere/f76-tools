@@ -22,4 +22,3 @@ interface PlayerKnowledgeCatalogReadRepositoryInterface
      */
     public function findLearnedItemIdsByPlayer(PlayerEntity $player): array;
 }
-

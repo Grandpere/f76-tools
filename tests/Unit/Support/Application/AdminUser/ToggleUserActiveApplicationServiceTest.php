@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Support\Application\AdminUser;
 
 use App\Entity\UserEntity;
@@ -10,6 +19,7 @@ use App\Support\Application\AdminUser\ToggleUserActiveApplicationService;
 use App\Support\Application\AdminUser\ToggleUserActiveResult;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use ReflectionProperty;
 
 final class ToggleUserActiveApplicationServiceTest extends TestCase
 {
@@ -29,7 +39,7 @@ final class ToggleUserActiveApplicationServiceTest extends TestCase
 
     public function testToggleReturnsUserNotFoundWhenTargetDoesNotExist(): void
     {
-        $actor = (new UserEntity())
+        $actor = new UserEntity()
             ->setEmail('admin@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_ADMIN']);
@@ -48,16 +58,16 @@ final class ToggleUserActiveApplicationServiceTest extends TestCase
 
     public function testToggleReturnsCannotChangeSelfWhenActorAndTargetAreSameUser(): void
     {
-        $actor = (new UserEntity())
+        $actor = new UserEntity()
             ->setEmail('admin@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_ADMIN']);
-        $target = (new UserEntity())
+        $target = new UserEntity()
             ->setEmail('admin@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_ADMIN']);
 
-        $reflection = new \ReflectionProperty(UserEntity::class, 'id');
+        $reflection = new ReflectionProperty(UserEntity::class, 'id');
         $reflection->setValue($actor, 42);
         $reflection->setValue($target, 42);
 
@@ -75,20 +85,20 @@ final class ToggleUserActiveApplicationServiceTest extends TestCase
 
     public function testToggleReturnsUpdatedAndPersistsEntity(): void
     {
-        $actor = (new UserEntity())
+        $actor = new UserEntity()
             ->setEmail('admin@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_ADMIN']);
-        $target = (new UserEntity())
+        $target = new UserEntity()
             ->setEmail('user@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_USER'])
             ->setIsActive(true);
 
-        $actorId = new \ReflectionProperty(UserEntity::class, 'id');
+        $actorId = new ReflectionProperty(UserEntity::class, 'id');
         $actorId->setValue($actor, 1);
 
-        $targetId = new \ReflectionProperty(UserEntity::class, 'id');
+        $targetId = new ReflectionProperty(UserEntity::class, 'id');
         $targetId->setValue($target, 2);
 
         /** @var AdminUserManagementWriteRepositoryInterface&MockObject $repository */

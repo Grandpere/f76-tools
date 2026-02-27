@@ -18,6 +18,7 @@ use App\Security\SignedUrlGenerator;
 use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -47,13 +48,13 @@ final class VerifyEmailControllerTest extends WebTestCase
     public function testCanVerifyEmailWithValidToken(): void
     {
         $rawToken = bin2hex(random_bytes(32));
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('verify-target@example.com')
             ->setRoles(['ROLE_USER'])
             ->setPassword('$2y$13$5QzWfXyM7FuU7f1w8rRZBupJrbj5gaMmkX6A8hA1z7f4h56yQW2mS')
             ->setIsEmailVerified(false)
             ->setEmailVerificationTokenHash(hash('sha256', $rawToken))
-            ->setEmailVerificationExpiresAt((new DateTimeImmutable())->add(new DateInterval('P1D')));
+            ->setEmailVerificationExpiresAt(new DateTimeImmutable()->add(new DateInterval('P1D')));
 
         $this->entityManager?->persist($user);
         $this->entityManager?->flush();
@@ -92,7 +93,7 @@ final class VerifyEmailControllerTest extends WebTestCase
     private function browser(): KernelBrowser
     {
         if (null === $this->client) {
-            throw new \LogicException('Client is not initialized.');
+            throw new LogicException('Client is not initialized.');
         }
 
         return $this->client;

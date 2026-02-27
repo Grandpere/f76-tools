@@ -19,4 +19,3 @@ interface UserByEmailFinderInterface
 {
     public function findOneByEmail(string $email): ?UserEntity;
 }
-

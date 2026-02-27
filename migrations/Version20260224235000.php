@@ -33,10 +33,10 @@ final class Version20260224235000 extends AbstractMigration
 
         $this->addSql('ALTER TABLE item ADD relations_html TEXT DEFAULT NULL');
         $this->addSql(<<<'SQL'
-UPDATE item
-SET relations_html = nullif(payload::jsonb ->> 'relations', '')
-WHERE payload IS NOT NULL
-SQL);
+            UPDATE item
+            SET relations_html = nullif(payload::jsonb ->> 'relations', '')
+            WHERE payload IS NOT NULL
+            SQL);
     }
 
     public function down(Schema $schema): void
@@ -49,4 +49,3 @@ SQL);
         $this->addSql('ALTER TABLE item DROP relations_html');
     }
 }
-

@@ -23,6 +23,7 @@ use App\Repository\ItemEntityRepository;
 use App\Repository\PlayerItemKnowledgeEntityRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class ProgressionRepositoriesIntegrationTest extends KernelTestCase
@@ -123,7 +124,7 @@ final class ProgressionRepositoriesIntegrationTest extends KernelTestCase
 
     private function createUser(string $email): UserEntity
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail($email)
             ->setRoles(['ROLE_USER'])
             ->setPassword('$2y$13$5QzWfXyM7FuU7f1w8rRZBupJrbj5gaMmkX6A8hA1z7f4h56yQW2mS');
@@ -136,7 +137,7 @@ final class ProgressionRepositoriesIntegrationTest extends KernelTestCase
 
     private function createPlayer(UserEntity $user, string $name): PlayerEntity
     {
-        $player = (new PlayerEntity())
+        $player = new PlayerEntity()
             ->setUser($user)
             ->setName($name);
 
@@ -148,7 +149,7 @@ final class ProgressionRepositoriesIntegrationTest extends KernelTestCase
 
     private function createItem(int $sourceId, ItemTypeEnum $type, ?int $rank, string $nameKey): ItemEntity
     {
-        $item = (new ItemEntity())
+        $item = new ItemEntity()
             ->setSourceId($sourceId)
             ->setType($type)
             ->setRank($rank)
@@ -162,15 +163,15 @@ final class ProgressionRepositoriesIntegrationTest extends KernelTestCase
 
     private function attachBookList(ItemEntity $item, int $listNumber): void
     {
-        $this->entityManager()?->persist((new ItemBookListEntity())
+        $this->entityManager()?->persist(new ItemBookListEntity()
             ->setItem($item)
             ->setListNumber($listNumber)
-            ->setIsSpecialList($listNumber % 4 === 0));
+            ->setIsSpecialList(0 === $listNumber % 4));
     }
 
     private function learn(PlayerEntity $player, ItemEntity $item): void
     {
-        $this->entityManager()?->persist((new PlayerItemKnowledgeEntity())
+        $this->entityManager()?->persist(new PlayerItemKnowledgeEntity()
             ->setPlayer($player)
             ->setItem($item)
             ->setLearnedAt(new DateTimeImmutable()));
@@ -189,7 +190,7 @@ final class ProgressionRepositoriesIntegrationTest extends KernelTestCase
     private function itemRepository(): ItemEntityRepository
     {
         if (null === $this->itemRepository) {
-            throw new \LogicException('Item repository is not initialized.');
+            throw new LogicException('Item repository is not initialized.');
         }
 
         return $this->itemRepository;
@@ -198,7 +199,7 @@ final class ProgressionRepositoriesIntegrationTest extends KernelTestCase
     private function knowledgeRepository(): PlayerItemKnowledgeEntityRepository
     {
         if (null === $this->knowledgeRepository) {
-            throw new \LogicException('Knowledge repository is not initialized.');
+            throw new LogicException('Knowledge repository is not initialized.');
         }
 
         return $this->knowledgeRepository;

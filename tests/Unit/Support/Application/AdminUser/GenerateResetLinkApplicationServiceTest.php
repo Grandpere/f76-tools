@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Support\Application\AdminUser;
 
 use App\Entity\UserEntity;
@@ -10,6 +19,7 @@ use App\Support\Application\AdminUser\AdminUserAuditReadRepositoryInterface;
 use App\Support\Application\AdminUser\AdminUserManagementWriteRepositoryInterface;
 use App\Support\Application\AdminUser\GenerateResetLinkApplicationService;
 use App\Support\Application\AdminUser\GenerateResetLinkStatus;
+use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -78,7 +88,7 @@ final class GenerateResetLinkApplicationServiceTest extends TestCase
     {
         $actor = $this->createUser('admin@example.com', ['ROLE_ADMIN']);
         $target = $this->createUser('managed@example.com', ['ROLE_USER'])
-            ->setResetPasswordRequestedAt(new \DateTimeImmutable());
+            ->setResetPasswordRequestedAt(new DateTimeImmutable());
 
         /** @var AdminUserManagementWriteRepositoryInterface&MockObject $userRepository */
         $userRepository = $this->createMock(AdminUserManagementWriteRepositoryInterface::class);
@@ -127,10 +137,9 @@ final class GenerateResetLinkApplicationServiceTest extends TestCase
      */
     private function createUser(string $email, array $roles): UserEntity
     {
-        return (new UserEntity())
+        return new UserEntity()
             ->setEmail($email)
             ->setPassword('hash')
             ->setRoles($roles);
     }
 }
-

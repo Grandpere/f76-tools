@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Identity\UI\Security;
 
 use App\Identity\UI\Security\IdentityFlashResponder;
@@ -38,7 +47,7 @@ final class IdentityFlashResponderTest extends TestCase
 
     public function testFlashToCurrentUriRedirectsToCurrentUri(): void
     {
-        $responder = new IdentityFlashResponder(new IdentityLocaleRedirector($this->createStub(UrlGeneratorInterface::class)));
+        $responder = new IdentityFlashResponder(new IdentityLocaleRedirector(self::createStub(UrlGeneratorInterface::class)));
         $request = Request::create('https://example.test/reset-password/token');
         $request->setSession(new Session(new MockArraySessionStorage()));
 

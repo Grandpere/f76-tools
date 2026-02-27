@@ -32,12 +32,12 @@ final class Version20260226200000 extends AbstractMigration
         );
 
         $this->addSql('ALTER TABLE player ADD public_id VARCHAR(26) DEFAULT NULL');
-        $this->addSql("UPDATE player SET public_id = upper(substr(md5(random()::text || clock_timestamp()::text || id::text), 1, 26)) WHERE public_id IS NULL");
+        $this->addSql('UPDATE player SET public_id = upper(substr(md5(random()::text || clock_timestamp()::text || id::text), 1, 26)) WHERE public_id IS NULL');
         $this->addSql('ALTER TABLE player ALTER COLUMN public_id SET NOT NULL');
         $this->addSql('CREATE UNIQUE INDEX uniq_player_public_id ON player (public_id)');
 
         $this->addSql('ALTER TABLE item ADD public_id VARCHAR(26) DEFAULT NULL');
-        $this->addSql("UPDATE item SET public_id = upper(substr(md5(random()::text || clock_timestamp()::text || id::text), 1, 26)) WHERE public_id IS NULL");
+        $this->addSql('UPDATE item SET public_id = upper(substr(md5(random()::text || clock_timestamp()::text || id::text), 1, 26)) WHERE public_id IS NULL');
         $this->addSql('ALTER TABLE item ALTER COLUMN public_id SET NOT NULL');
         $this->addSql('CREATE UNIQUE INDEX uniq_item_public_id ON item (public_id)');
     }

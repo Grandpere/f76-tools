@@ -17,6 +17,7 @@ use App\Domain\Support\Contact\ContactMessageStatusEnum;
 use App\Entity\ContactMessageEntity;
 use App\Entity\UserEntity;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -98,7 +99,7 @@ final class ContactMessageControllerTest extends WebTestCase
         $hasher = $this->browser()->getContainer()->get(UserPasswordHasherInterface::class);
         \assert($hasher instanceof UserPasswordHasherInterface);
 
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail($email)
             ->setRoles($roles);
         $user->setPassword($hasher->hashPassword($user, $plainPassword));
@@ -115,7 +116,7 @@ final class ContactMessageControllerTest extends WebTestCase
         string $message,
         ContactMessageStatusEnum $status = ContactMessageStatusEnum::NEW,
     ): ContactMessageEntity {
-        $contact = (new ContactMessageEntity())
+        $contact = new ContactMessageEntity()
             ->setEmail($email)
             ->setSubject($subject)
             ->setMessage($message)
@@ -139,7 +140,7 @@ final class ContactMessageControllerTest extends WebTestCase
     private function browser(): KernelBrowser
     {
         if (null === $this->client) {
-            throw new \LogicException('Client is not initialized.');
+            throw new LogicException('Client is not initialized.');
         }
 
         return $this->client;

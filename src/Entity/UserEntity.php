@@ -17,6 +17,8 @@ use App\Repository\UserEntityRepository;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use InvalidArgumentException;
+use LogicException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -75,7 +77,7 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getId(): ?int
     {
-        return isset($this->id) ? $this->id : null;
+        return $this->id ?? null;
     }
 
     public function getEmail(): string
@@ -87,7 +89,7 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $normalized = mb_strtolower(trim($email));
         if ('' === $normalized) {
-            throw new \InvalidArgumentException('Email cannot be empty.');
+            throw new InvalidArgumentException('Email cannot be empty.');
         }
 
         $this->email = $normalized;
@@ -101,7 +103,7 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         if ('' === $this->email) {
-            throw new \LogicException('User email must not be empty.');
+            throw new LogicException('User email must not be empty.');
         }
 
         return $this->email;

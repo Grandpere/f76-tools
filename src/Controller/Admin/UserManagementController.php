@@ -24,8 +24,8 @@ use App\Support\Application\AdminUser\ToggleUserActiveResult;
 use App\Support\Application\AdminUser\ToggleUserAdminApplicationService;
 use App\Support\Application\AdminUser\ToggleUserAdminResult;
 use App\Support\UI\Admin\GenerateResetLinkFeedbackMapper;
-use App\Support\UI\Admin\ToggleUserAdminFeedbackMapper;
 use App\Support\UI\Admin\ToggleUserActiveFeedbackMapper;
+use App\Support\UI\Admin\ToggleUserAdminFeedbackMapper;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -183,7 +183,7 @@ final class UserManagementController extends AbstractController
             $payload = array_merge($payload, $context);
         }
 
-        $auditLog = (new AdminAuditLogEntity())
+        $auditLog = new AdminAuditLogEntity()
             ->setActorUser($actor)
             ->setTargetUser($targetUser)
             ->setAction($action)

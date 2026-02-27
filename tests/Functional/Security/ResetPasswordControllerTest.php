@@ -18,6 +18,7 @@ use App\Security\SignedUrlGenerator;
 use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -50,7 +51,7 @@ final class ResetPasswordControllerTest extends WebTestCase
         $rawToken = bin2hex(random_bytes(32));
         $user = $this->createUser('reset-target@example.com', 'secret123');
         $user->setResetPasswordTokenHash(hash('sha256', $rawToken));
-        $user->setResetPasswordExpiresAt((new DateTimeImmutable())->add(new DateInterval('PT2H')));
+        $user->setResetPasswordExpiresAt(new DateTimeImmutable()->add(new DateInterval('PT2H')));
         $user->setResetPasswordRequestedAt(new DateTimeImmutable());
         $this->entityManager?->flush();
 
@@ -95,7 +96,7 @@ final class ResetPasswordControllerTest extends WebTestCase
         $rawToken = bin2hex(random_bytes(32));
         $user = $this->createUser('reset-expired@example.com', 'secret123');
         $user->setResetPasswordTokenHash(hash('sha256', $rawToken));
-        $user->setResetPasswordExpiresAt((new DateTimeImmutable())->sub(new DateInterval('PT1M')));
+        $user->setResetPasswordExpiresAt(new DateTimeImmutable()->sub(new DateInterval('PT1M')));
         $this->entityManager?->flush();
 
         $this->browser()->request('GET', $this->signedUrl('app_reset_password', ['token' => $rawToken]));
@@ -108,7 +109,7 @@ final class ResetPasswordControllerTest extends WebTestCase
     {
         $hasher = $this->passwordHasher();
 
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail($email)
             ->setRoles(['ROLE_USER']);
         $user->setPassword($hasher->hashPassword($user, $plainPassword));
@@ -137,7 +138,7 @@ final class ResetPasswordControllerTest extends WebTestCase
     private function browser(): KernelBrowser
     {
         if (null === $this->client) {
-            throw new \LogicException('Client is not initialized.');
+            throw new LogicException('Client is not initialized.');
         }
 
         return $this->client;

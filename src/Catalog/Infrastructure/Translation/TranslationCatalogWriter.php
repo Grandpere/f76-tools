@@ -18,8 +18,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Yaml\Yaml;
 
-final class TranslationCatalogWriter
-    implements TranslationCatalogWriterInterface
+final class TranslationCatalogWriter implements TranslationCatalogWriterInterface
 {
     private readonly Filesystem $filesystem;
 

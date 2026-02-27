@@ -22,8 +22,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<MinervaRotationEntity>
  */
-final class MinervaRotationEntityRepository extends ServiceEntityRepository
-    implements MinervaRotationReaderInterface
+final class MinervaRotationEntityRepository extends ServiceEntityRepository implements MinervaRotationReaderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Identity\Application\ResetPassword;
 
 use App\Entity\UserEntity;
@@ -10,6 +19,7 @@ use App\Identity\Application\Common\IdentityWritePersistenceInterface;
 use App\Identity\Application\ResetPassword\ResetPasswordApplicationService;
 use App\Identity\Application\ResetPassword\ResetPasswordResult;
 use App\Identity\Application\ResetPassword\ResetPasswordUserRepositoryInterface;
+use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -30,7 +40,7 @@ final class ResetPasswordApplicationServiceTest extends TestCase
     {
         $service = $this->createService();
 
-        self::assertFalse($service->canResetToken(' ', new \DateTimeImmutable()));
+        self::assertFalse($service->canResetToken(' ', new DateTimeImmutable()));
     }
 
     public function testResetReturnsInvalidWhenTokenNotFound(): void
@@ -41,7 +51,7 @@ final class ResetPasswordApplicationServiceTest extends TestCase
 
         self::assertSame(
             ResetPasswordResult::INVALID_OR_EXPIRED,
-            $service->resetByPlainToken('token', 'password123', 'password123', new \DateTimeImmutable()),
+            $service->resetByPlainToken('token', 'password123', 'password123', new DateTimeImmutable()),
         );
     }
 
@@ -53,7 +63,7 @@ final class ResetPasswordApplicationServiceTest extends TestCase
 
         self::assertSame(
             ResetPasswordResult::PASSWORD_TOO_SHORT,
-            $service->resetByPlainToken('token', 'short', 'short', new \DateTimeImmutable()),
+            $service->resetByPlainToken('token', 'short', 'short', new DateTimeImmutable()),
         );
     }
 
@@ -65,7 +75,7 @@ final class ResetPasswordApplicationServiceTest extends TestCase
 
         self::assertSame(
             ResetPasswordResult::PASSWORD_MISMATCH,
-            $service->resetByPlainToken('token', 'password123', 'password321', new \DateTimeImmutable()),
+            $service->resetByPlainToken('token', 'password123', 'password321', new DateTimeImmutable()),
         );
     }
 
@@ -85,7 +95,7 @@ final class ResetPasswordApplicationServiceTest extends TestCase
 
         self::assertSame(
             ResetPasswordResult::SUCCESS,
-            $service->resetByPlainToken('token', 'password123', 'password123', new \DateTimeImmutable()),
+            $service->resetByPlainToken('token', 'password123', 'password123', new DateTimeImmutable()),
         );
         self::assertSame('hashed_password', $user->getPassword());
         self::assertNull($user->getResetPasswordTokenHash());
@@ -104,11 +114,11 @@ final class ResetPasswordApplicationServiceTest extends TestCase
 
     private function validUser(): UserEntity
     {
-        return (new UserEntity())
+        return new UserEntity()
             ->setEmail('a@b.c')
             ->setPassword('existing')
             ->setResetPasswordTokenHash('hash')
-            ->setResetPasswordExpiresAt(new \DateTimeImmutable('+1 hour'))
-            ->setResetPasswordRequestedAt(new \DateTimeImmutable('-1 hour'));
+            ->setResetPasswordExpiresAt(new DateTimeImmutable('+1 hour'))
+            ->setResetPasswordRequestedAt(new DateTimeImmutable('-1 hour'));
     }
 }

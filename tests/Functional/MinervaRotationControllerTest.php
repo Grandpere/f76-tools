@@ -15,7 +15,9 @@ namespace App\Tests\Functional;
 
 use App\Entity\MinervaRotationEntity;
 use App\Entity\UserEntity;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -67,7 +69,7 @@ final class MinervaRotationControllerTest extends WebTestCase
 
     private function createUser(string $email): UserEntity
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail($email)
             ->setRoles(['ROLE_USER'])
             ->setPassword('$2y$13$5QzWfXyM7FuU7f1w8rRZBupJrbj5gaMmkX6A8hA1z7f4h56yQW2mS');
@@ -80,11 +82,11 @@ final class MinervaRotationControllerTest extends WebTestCase
 
     private function createRotation(string $location, int $listCycle, string $startsAt, string $endsAt): void
     {
-        $rotation = (new MinervaRotationEntity())
+        $rotation = new MinervaRotationEntity()
             ->setLocation($location)
             ->setListCycle($listCycle)
-            ->setStartsAt(new \DateTimeImmutable($startsAt))
-            ->setEndsAt(new \DateTimeImmutable($endsAt));
+            ->setStartsAt(new DateTimeImmutable($startsAt))
+            ->setEndsAt(new DateTimeImmutable($endsAt));
 
         $this->entityManager?->persist($rotation);
         $this->entityManager?->flush();
@@ -102,7 +104,7 @@ final class MinervaRotationControllerTest extends WebTestCase
     private function browser(): KernelBrowser
     {
         if (null === $this->client) {
-            throw new \LogicException('Client is not initialized.');
+            throw new LogicException('Client is not initialized.');
         }
 
         return $this->client;

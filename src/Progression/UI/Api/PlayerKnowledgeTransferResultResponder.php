@@ -30,4 +30,3 @@ final class PlayerKnowledgeTransferResultResponder
         return new JsonResponse($result);
     }
 }
-

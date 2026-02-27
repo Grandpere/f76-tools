@@ -17,6 +17,8 @@ use App\Repository\PlayerEntityRepository;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use InvalidArgumentException;
+use LogicException;
 use Symfony\Component\Uid\Ulid;
 
 #[ORM\Entity(repositoryClass: PlayerEntityRepository::class)]
@@ -49,7 +51,7 @@ class PlayerEntity
 
     public function getId(): ?int
     {
-        return isset($this->id) ? $this->id : null;
+        return $this->id ?? null;
     }
 
     public function getUser(): UserEntity
@@ -73,7 +75,7 @@ class PlayerEntity
     {
         $normalized = trim($name);
         if ('' === $normalized) {
-            throw new \InvalidArgumentException('Player name cannot be empty.');
+            throw new InvalidArgumentException('Player name cannot be empty.');
         }
         $this->name = $normalized;
 
@@ -83,7 +85,7 @@ class PlayerEntity
     public function getPublicId(): string
     {
         if (!isset($this->publicId) || '' === $this->publicId) {
-            throw new \LogicException('Player public ID is not initialized.');
+            throw new LogicException('Player public ID is not initialized.');
         }
 
         return $this->publicId;

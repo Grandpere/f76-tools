@@ -54,7 +54,7 @@ final class PlayerKnowledgeTransferApplicationService
         return [
             'version' => self::IMPORT_VERSION,
             'playerId' => $player->getPublicId(),
-            'exportedAt' => (new DateTimeImmutable())->format(DATE_ATOM),
+            'exportedAt' => new DateTimeImmutable()->format(DATE_ATOM),
             'learnedItems' => $payload,
         ];
     }
@@ -119,7 +119,7 @@ final class PlayerKnowledgeTransferApplicationService
         if ([] !== $plan['toAdd']) {
             $itemsToAdd = $this->itemRepository->findByIds($plan['toAdd']);
             foreach ($itemsToAdd as $item) {
-                $this->entityManager->persist((new PlayerItemKnowledgeEntity())
+                $this->entityManager->persist(new PlayerItemKnowledgeEntity()
                     ->setPlayer($player)
                     ->setItem($item)
                     ->setLearnedAt(new DateTimeImmutable()));
@@ -202,7 +202,7 @@ final class PlayerKnowledgeTransferApplicationService
         if (!is_int($raw) && !is_numeric($raw)) {
             return 'Invalid version.';
         }
-        if ((int) $raw !== self::IMPORT_VERSION) {
+        if (self::IMPORT_VERSION !== (int) $raw) {
             return sprintf('Unsupported version. Expected %d.', self::IMPORT_VERSION);
         }
 
@@ -210,8 +210,6 @@ final class PlayerKnowledgeTransferApplicationService
     }
 
     /**
-     * @param mixed $raw
-     *
      * @return array{ok: bool, error: string, targets: array<string, list<int>>}
      */
     private function normalizeTargetsWithValidation(mixed $raw): array

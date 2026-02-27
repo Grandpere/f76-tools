@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Identity\Infrastructure\Notification;
 
 use App\Identity\Application\Notification\IdentityLinkEmailSenderInterface;
@@ -9,6 +18,7 @@ use App\Identity\Application\Notification\IdentitySignedLinkGeneratorInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Throwable;
 
 final class IdentityLinkEmailSender implements IdentityLinkEmailSenderInterface
 {
@@ -47,13 +57,13 @@ final class IdentityLinkEmailSender implements IdentityLinkEmailSenderInterface
     {
         try {
             $this->mailer->send(
-                (new Email())
+                new Email()
                     ->from('no-reply@f76.local')
                     ->to($email)
                     ->subject($subject)
                     ->text(sprintf("%s\n\n%s", $intro, $url)),
             );
-        } catch (\Throwable) {
+        } catch (Throwable) {
             // Intentionally silent to preserve generic security responses.
         }
     }

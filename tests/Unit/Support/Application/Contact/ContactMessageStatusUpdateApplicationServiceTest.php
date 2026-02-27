@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Support\Application\Contact;
 
 use App\Domain\Support\Contact\ContactMessageStatusEnum;
@@ -44,7 +53,7 @@ final class ContactMessageStatusUpdateApplicationServiceTest extends TestCase
 
     public function testUpdateReturnsUpdatedWhenStatusCanBeChanged(): void
     {
-        $entity = (new ContactMessageEntity())
+        $entity = new ContactMessageEntity()
             ->setEmail('visitor@example.com')
             ->setSubject('Need help')
             ->setMessage('Long enough message for test.')

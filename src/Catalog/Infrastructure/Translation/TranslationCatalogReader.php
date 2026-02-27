@@ -17,8 +17,7 @@ use App\Contract\TranslationCatalogReaderInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Yaml\Yaml;
 
-final class TranslationCatalogReader
-    implements TranslationCatalogReaderInterface
+final class TranslationCatalogReader implements TranslationCatalogReaderInterface
 {
     public function __construct(
         private readonly KernelInterface $kernel,

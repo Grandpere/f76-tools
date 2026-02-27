@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Catalog\Application\Import;
 
 use App\Entity\ItemEntity;
@@ -23,7 +32,7 @@ final class ItemImportItemHydrator
         $item->setPrice($this->valueNormalizer->toNullableInt($row['price'] ?? null));
         $item->setPriceMinerva($this->valueNormalizer->toNullableInt($row['price_minerva'] ?? null));
         $item->setWikiUrl($this->valueNormalizer->toNullableString($row['wiki_url'] ?? null));
-        $item->setTradeable($this->valueNormalizer->toNullableInt($row['tradeable'] ?? 0) === 1);
+        $item->setTradeable(1 === $this->valueNormalizer->toNullableInt($row['tradeable'] ?? 0));
         $item->setIsNew($this->valueNormalizer->toBool($row['new'] ?? null));
         $item->setDropRaid($this->valueNormalizer->toBool($row['drop_raid'] ?? null));
         $item->setDropBurningSprings($this->valueNormalizer->toBoolFromRowAny($row, [

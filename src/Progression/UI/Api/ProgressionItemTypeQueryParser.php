@@ -29,4 +29,3 @@ final class ProgressionItemTypeQueryParser
         return ItemTypeEnum::tryFrom(strtoupper(trim($value))) ?? false;
     }
 }
-

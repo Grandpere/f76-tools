@@ -18,6 +18,7 @@ use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -197,7 +198,7 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
 
     private function createUser(string $email): UserEntity
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail($email)
             ->setRoles(['ROLE_USER'])
             ->setPassword('$2y$13$5QzWfXyM7FuU7f1w8rRZBupJrbj5gaMmkX6A8hA1z7f4h56yQW2mS');
@@ -210,7 +211,7 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
 
     private function createPlayer(UserEntity $user, string $name): PlayerEntity
     {
-        $player = (new PlayerEntity())
+        $player = new PlayerEntity()
             ->setUser($user)
             ->setName($name);
 
@@ -232,9 +233,8 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         ?int $price = null,
         ?int $priceMinerva = null,
         bool $isNew = false,
-    ): ItemEntity
-    {
-        $item = (new ItemEntity())
+    ): ItemEntity {
+        $item = new ItemEntity()
             ->setSourceId($sourceId)
             ->setType($type)
             ->setNameKey($nameKey)
@@ -263,7 +263,7 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
     private function browser(): KernelBrowser
     {
         if (null === $this->client) {
-            throw new \LogicException('Client is not initialized.');
+            throw new LogicException('Client is not initialized.');
         }
 
         return $this->client;
@@ -336,7 +336,7 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
             return $value;
         }
         if (is_int($value) || is_float($value)) {
-            return (int) $value === 1;
+            return 1 === (int) $value;
         }
         if (is_string($value)) {
             $normalized = strtolower(trim($value));

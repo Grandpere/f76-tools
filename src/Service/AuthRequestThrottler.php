@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use DateTimeImmutable;
+use InvalidArgumentException;
 use Psr\Cache\CacheItemPoolInterface;
 
 final class AuthRequestThrottler
@@ -34,10 +35,10 @@ final class AuthRequestThrottler
     {
         $normalizedScope = trim($scope);
         if ('' === $normalizedScope) {
-            throw new \InvalidArgumentException('Scope must not be empty.');
+            throw new InvalidArgumentException('Scope must not be empty.');
         }
         if ($windowSeconds < 1) {
-            throw new \InvalidArgumentException('windowSeconds must be >= 1.');
+            throw new InvalidArgumentException('windowSeconds must be >= 1.');
         }
 
         $key = $this->buildKey($normalizedScope, $clientIp, $email);
@@ -64,7 +65,7 @@ final class AuthRequestThrottler
             'count' => $count,
             'expiresAt' => $expiresAt,
         ]);
-        $item->expiresAt((new DateTimeImmutable())->setTimestamp($expiresAt));
+        $item->expiresAt(new DateTimeImmutable()->setTimestamp($expiresAt));
         $this->cachePool->save($item);
     }
 
@@ -72,10 +73,10 @@ final class AuthRequestThrottler
     {
         $normalizedScope = trim($scope);
         if ('' === $normalizedScope) {
-            throw new \InvalidArgumentException('Scope must not be empty.');
+            throw new InvalidArgumentException('Scope must not be empty.');
         }
         if ($maxAttempts < 1) {
-            throw new \InvalidArgumentException('maxAttempts must be >= 1.');
+            throw new InvalidArgumentException('maxAttempts must be >= 1.');
         }
 
         $key = $this->buildKey($normalizedScope, $clientIp, $email);
@@ -102,7 +103,7 @@ final class AuthRequestThrottler
     {
         $normalizedScope = trim($scope);
         if ('' === $normalizedScope) {
-            throw new \InvalidArgumentException('Scope must not be empty.');
+            throw new InvalidArgumentException('Scope must not be empty.');
         }
 
         $this->cachePool->deleteItem($this->buildKey($normalizedScope, $clientIp, $email));

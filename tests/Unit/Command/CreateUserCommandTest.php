@@ -71,7 +71,7 @@ final class CreateUserCommandTest extends TestCase
 
     public function testFailsIfUserAlreadyExistsWithoutUpdateOption(): void
     {
-        $existing = (new UserEntity())
+        $existing = new UserEntity()
             ->setEmail('existing@example.com')
             ->setPassword('old-hash')
             ->setRoles(['ROLE_USER']);
@@ -105,7 +105,7 @@ final class CreateUserCommandTest extends TestCase
 
     public function testUpdatesPasswordForExistingUserWhenOptionIsEnabled(): void
     {
-        $existing = (new UserEntity())
+        $existing = new UserEntity()
             ->setEmail('existing@example.com')
             ->setPassword('old-hash')
             ->setRoles(['ROLE_USER']);

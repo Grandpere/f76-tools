@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Catalog\Application\Import;
 
 use App\Catalog\Application\Import\ItemImportItemHydrator;
@@ -14,7 +23,7 @@ final class ItemImportItemHydratorTest extends TestCase
 {
     public function testHydrateMapsFieldsIntoItemEntity(): void
     {
-        $item = (new ItemEntity())
+        $item = new ItemEntity()
             ->setType(ItemTypeEnum::BOOK)
             ->setSourceId(61);
 

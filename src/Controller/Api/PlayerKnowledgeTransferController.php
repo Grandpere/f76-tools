@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace App\Controller\Api;
 
 use App\Progression\Application\Knowledge\PlayerKnowledgeTransferApplicationService;
+use App\Progression\UI\Api\PlayerKnowledgeTransferResultResponder;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
 use App\Progression\UI\Api\ProgressionApiJsonPayloadDecoder;
-use App\Progression\UI\Api\PlayerKnowledgeTransferResultResponder;
 use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -55,6 +55,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
         }
 
         $result = $this->playerKnowledgeTransferApplicationService->import($player, $this->progressionApiJsonPayloadDecoder->decode($request));
+
         return $this->playerKnowledgeTransferResultResponder->respond($result);
     }
 
@@ -67,7 +68,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
         }
 
         $result = $this->playerKnowledgeTransferApplicationService->previewImport($player, $this->progressionApiJsonPayloadDecoder->decode($request));
+
         return $this->playerKnowledgeTransferResultResponder->respond($result);
     }
-
 }

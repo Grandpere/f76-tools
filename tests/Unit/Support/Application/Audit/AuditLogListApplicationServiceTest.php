@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Support\Application\Audit;
 
 use App\Support\Application\Audit\AuditLogListApplicationService;
@@ -84,7 +93,7 @@ final class InMemoryAuditLogReadRepository implements AuditLogReadRepositoryInte
 
     /**
      * @param list<array{rows: list<\App\Entity\AdminAuditLogEntity>, total: int}> $results
-     * @param list<string> $actions
+     * @param list<string>                                                         $actions
      */
     public function __construct(array $results, array $actions)
     {

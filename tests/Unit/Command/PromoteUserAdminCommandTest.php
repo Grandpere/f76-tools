@@ -52,7 +52,7 @@ final class PromoteUserAdminCommandTest extends TestCase
 
     public function testPromotesExistingUserToAdmin(): void
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('member@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_USER']);
@@ -75,7 +75,7 @@ final class PromoteUserAdminCommandTest extends TestCase
 
     public function testReturnsSuccessWhenUserAlreadyAdmin(): void
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('admin@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_ADMIN']);

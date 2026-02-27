@@ -21,6 +21,7 @@ use App\Entity\UserEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeStatsApplicationService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 
 final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
 {
@@ -79,15 +80,15 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
 
     private function createPlayer(string $publicId): PlayerEntity
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('owner@example.com')
             ->setPassword('hashed');
 
-        $player = (new PlayerEntity())
+        $player = new PlayerEntity()
             ->setUser($user)
             ->setName('Main');
 
-        $reflection = new \ReflectionClass($player);
+        $reflection = new ReflectionClass($player);
         $property = $reflection->getProperty('publicId');
         $property->setValue($player, $publicId);
 

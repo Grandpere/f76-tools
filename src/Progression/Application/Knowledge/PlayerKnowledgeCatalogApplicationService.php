@@ -45,4 +45,3 @@ final class PlayerKnowledgeCatalogApplicationService
         return $rows;
     }
 }
-

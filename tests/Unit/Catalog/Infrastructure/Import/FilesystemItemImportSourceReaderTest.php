@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Catalog\Infrastructure\Import;
 
 use App\Catalog\Infrastructure\Import\FilesystemItemImportSourceReader;
@@ -64,7 +73,7 @@ final class FilesystemItemImportSourceReaderTest extends TestCase
     private function createTempDir(): string
     {
         $path = sys_get_temp_dir().'/item-import-reader-'.bin2hex(random_bytes(8));
-        mkdir($path, 0777, true);
+        mkdir($path, 0o777, true);
 
         return $path;
     }

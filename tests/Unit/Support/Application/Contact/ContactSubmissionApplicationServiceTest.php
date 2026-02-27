@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Support\Application\Contact;
 
 use App\Contract\ContactMessageWriterInterface;
@@ -12,6 +21,7 @@ use App\Support\Application\Contact\ContactSubmissionInput;
 use App\Support\Application\Contact\ContactSubmissionStatus;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 final class ContactSubmissionApplicationServiceTest extends TestCase
 {
@@ -40,7 +50,7 @@ final class ContactSubmissionApplicationServiceTest extends TestCase
     {
         /** @var ContactMessageWriterInterface&MockObject $writer */
         $writer = $this->createMock(ContactMessageWriterInterface::class);
-        $writer->method('save')->willThrowException(new \RuntimeException('db'));
+        $writer->method('save')->willThrowException(new RuntimeException('db'));
         $messageService = new ContactMessageApplicationService($writer);
 
         /** @var ContactMessageEmailSenderInterface&MockObject $emailSender */
@@ -66,7 +76,7 @@ final class ContactSubmissionApplicationServiceTest extends TestCase
 
         /** @var ContactMessageEmailSenderInterface&MockObject $emailSender */
         $emailSender = $this->createMock(ContactMessageEmailSenderInterface::class);
-        $emailSender->method('send')->willThrowException(new \RuntimeException('smtp'));
+        $emailSender->method('send')->willThrowException(new RuntimeException('smtp'));
 
         $service = new ContactSubmissionApplicationService($messageService, $emailSender);
 

@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Identity\Application\Registration;
 
 use App\Entity\UserEntity;
@@ -11,6 +20,7 @@ use App\Identity\Application\Registration\RegisterUserApplicationService;
 use App\Identity\Application\Registration\RegisterUserStatus;
 use App\Identity\Application\Registration\RegistrationUserRepositoryInterface;
 use App\Security\TemporaryLinkPolicy;
+use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -31,34 +41,34 @@ final class RegisterUserApplicationServiceTest extends TestCase
 
     public function testInvalidEmailReturnsInvalidStatus(): void
     {
-        $result = $this->service()->register('invalid', 'password123', 'password123', new \DateTimeImmutable());
+        $result = $this->service()->register('invalid', 'password123', 'password123', new DateTimeImmutable());
 
         self::assertSame(RegisterUserStatus::INVALID_EMAIL, $result->getStatus());
     }
 
     public function testShortPasswordReturnsPasswordTooShortStatus(): void
     {
-        $result = $this->service()->register('user@example.com', 'short', 'short', new \DateTimeImmutable());
+        $result = $this->service()->register('user@example.com', 'short', 'short', new DateTimeImmutable());
 
         self::assertSame(RegisterUserStatus::PASSWORD_TOO_SHORT, $result->getStatus());
     }
 
     public function testPasswordMismatchReturnsMismatchStatus(): void
     {
-        $result = $this->service()->register('user@example.com', 'password123', 'password321', new \DateTimeImmutable());
+        $result = $this->service()->register('user@example.com', 'password123', 'password321', new DateTimeImmutable());
 
         self::assertSame(RegisterUserStatus::PASSWORD_MISMATCH, $result->getStatus());
     }
 
     public function testExistingEmailReturnsEmailExistsStatus(): void
     {
-        $existing = (new UserEntity())
+        $existing = new UserEntity()
             ->setEmail('user@example.com')
             ->setPassword('hash');
 
         $this->repository->method('findOneByEmail')->willReturn($existing);
 
-        $result = $this->service()->register('user@example.com', 'password123', 'password123', new \DateTimeImmutable());
+        $result = $this->service()->register('user@example.com', 'password123', 'password123', new DateTimeImmutable());
 
         self::assertSame(RegisterUserStatus::EMAIL_EXISTS, $result->getStatus());
     }
@@ -70,7 +80,7 @@ final class RegisterUserApplicationServiceTest extends TestCase
         $this->persistence->expects(self::once())->method('persist');
         $this->persistence->expects(self::once())->method('flush');
 
-        $result = $this->service()->register('user@example.com', 'password123', 'password123', new \DateTimeImmutable());
+        $result = $this->service()->register('user@example.com', 'password123', 'password123', new DateTimeImmutable());
 
         self::assertSame(RegisterUserStatus::SUCCESS, $result->getStatus());
         self::assertSame('user@example.com', $result->getEmail());

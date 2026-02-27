@@ -31,4 +31,3 @@ final class ProgressionOwnedPlayerReadResolver
         return $this->playerReadApplicationService->findOwnedByPublicId($authenticatedUser, $playerId);
     }
 }
-

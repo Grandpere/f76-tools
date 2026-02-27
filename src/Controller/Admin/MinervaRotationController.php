@@ -15,6 +15,7 @@ namespace App\Controller\Admin;
 
 use App\Catalog\Application\Minerva\MinervaRotationRegenerationApplicationService;
 use App\Catalog\Application\Minerva\MinervaRotationTimelineApplicationService;
+use DateInterval;
 use DateTimeImmutable;
 use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,7 +43,7 @@ final class MinervaRotationController extends AbstractController
 
         $now = new DateTimeImmutable('now', new DateTimeZone('America/New_York'));
         $defaultFrom = $now->format('Y-m-01');
-        $defaultTo = $now->add(new \DateInterval('P12M'))->format('Y-m-t');
+        $defaultTo = $now->add(new DateInterval('P12M'))->format('Y-m-t');
 
         return $this->render('admin/minerva_rotation.html.twig', [
             'timeline' => $this->timelineService->buildTimeline(),

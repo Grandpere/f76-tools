@@ -49,4 +49,3 @@ final class PlayerControllerWriteResponder
         return new JsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
     }
 }
-

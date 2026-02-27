@@ -2,19 +2,29 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Progression\UI\Api;
 
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemEntity;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
 use PHPUnit\Framework\TestCase;
+use ReflectionProperty;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class PlayerKnowledgeItemPayloadMapperTest extends TestCase
 {
     public function testMapBuildsExpectedPayloadWithTranslationsAndLists(): void
     {
-        $item = (new ItemEntity())
+        $item = new ItemEntity()
             ->setSourceId(777)
             ->setType(ItemTypeEnum::BOOK)
             ->setNameKey('catalog.book.name')
@@ -66,7 +76,7 @@ final class PlayerKnowledgeItemPayloadMapperTest extends TestCase
 
     public function testMapSkipsDescriptionTranslationWhenDescKeyIsMissing(): void
     {
-        $item = (new ItemEntity())
+        $item = new ItemEntity()
             ->setSourceId(888)
             ->setType(ItemTypeEnum::MISC)
             ->setNameKey('catalog.misc.name')
@@ -94,7 +104,7 @@ final class PlayerKnowledgeItemPayloadMapperTest extends TestCase
 
     public function testMapCatalogRowsMapsEachRow(): void
     {
-        $first = (new ItemEntity())
+        $first = new ItemEntity()
             ->setSourceId(1)
             ->setType(ItemTypeEnum::MISC)
             ->setNameKey('catalog.first.name')
@@ -102,7 +112,7 @@ final class PlayerKnowledgeItemPayloadMapperTest extends TestCase
             ->setRank(1);
         $this->setItemPublicId($first, '01J4D0Y7QH2K9P5V3M1N8B6R4A');
 
-        $second = (new ItemEntity())
+        $second = new ItemEntity()
             ->setSourceId(2)
             ->setType(ItemTypeEnum::BOOK)
             ->setNameKey('catalog.second.name')
@@ -134,7 +144,7 @@ final class PlayerKnowledgeItemPayloadMapperTest extends TestCase
 
     private function setItemPublicId(ItemEntity $item, string $publicId): void
     {
-        $reflection = new \ReflectionProperty(ItemEntity::class, 'publicId');
+        $reflection = new ReflectionProperty(ItemEntity::class, 'publicId');
         $reflection->setValue($item, $publicId);
     }
 }
