@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - Route import path must follow DDD controller moves
+- Symptom: full functional suite returned HTTP 500 on nearly all pages/endpoints after controller namespace migration.
+- Root cause: `config/routes.yaml` still imported `../src/Controller/` while that directory had been removed.
+- Fix: switched route attribute import to `path: ../src/` and `namespace: App`.
+- Prevention: after any controller relocation/removal, verify routing imports in `config/routes.yaml` before running functional tests.
+
 ## 2026-02-27 - Doctrine entities in Infrastructure namespace break PHPat boundaries
 - Symptom: after moving entities out of `src/Entity`, PHPat raised many `Application/UI -> Infrastructure` violations and doctrine test bootstrap failed on missing `src/Entity` mapping path.
 - Root cause: entities were first moved under `*/Infrastructure/...`, which made every entity type-hint count as an infra dependency; Doctrine config still pointed to `src/Entity`.
