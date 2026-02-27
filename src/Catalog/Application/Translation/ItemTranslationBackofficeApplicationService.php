@@ -29,7 +29,7 @@ final class ItemTranslationBackofficeApplicationService
     ) {
     }
 
-    public function sanitizeTargetLocale(mixed $value): string
+    public function sanitizeTargetLocale(?string $value): string
     {
         $locale = strtolower($this->normalizeLocale($value));
         if (in_array($locale, self::LOCKED_LOCALES, true)) {
@@ -39,9 +39,9 @@ final class ItemTranslationBackofficeApplicationService
         return $locale;
     }
 
-    public function normalizeQuery(mixed $value): ?string
+    public function normalizeQuery(?string $value): ?string
     {
-        if (!is_string($value)) {
+        if (null === $value) {
             return null;
         }
 
@@ -107,9 +107,9 @@ final class ItemTranslationBackofficeApplicationService
         return $rows;
     }
 
-    private function normalizeLocale(mixed $value): string
+    private function normalizeLocale(?string $value): string
     {
-        if (!is_string($value)) {
+        if (null === $value) {
             return self::TARGET_LOCALE_FALLBACK;
         }
 

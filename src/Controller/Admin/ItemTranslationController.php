@@ -39,13 +39,13 @@ final class ItemTranslationController extends AbstractController
     {
         $this->ensureAdminAccess();
 
-        $targetLocale = $this->itemTranslationBackofficeApplicationService->sanitizeTargetLocale($request->query->get('target'));
-        $query = $this->itemTranslationBackofficeApplicationService->normalizeQuery($request->query->get('q'));
+        $targetLocale = $this->itemTranslationBackofficeApplicationService->sanitizeTargetLocale($this->optionalString($request->query->get('target')));
+        $query = $this->itemTranslationBackofficeApplicationService->normalizeQuery($this->optionalString($request->query->get('q')));
         $perPage = $this->sanitizePositiveInt($request->query->get('perPage'), self::DEFAULT_PER_PAGE, self::MAX_PER_PAGE);
         $page = $this->sanitizePositiveInt($request->query->get('page'), 1);
 
         if ($request->isMethod('POST')) {
-            $targetLocale = $this->itemTranslationBackofficeApplicationService->sanitizeTargetLocale($request->request->get('target'));
+            $targetLocale = $this->itemTranslationBackofficeApplicationService->sanitizeTargetLocale($this->optionalString($request->request->get('target')));
             $perPage = $this->sanitizePositiveInt($request->request->get('perPage'), self::DEFAULT_PER_PAGE, self::MAX_PER_PAGE);
             $page = $this->sanitizePositiveInt($request->request->get('page'), 1);
             /** @var array<string, mixed> $entries */
@@ -107,5 +107,10 @@ final class ItemTranslationController extends AbstractController
         }
 
         return $number;
+    }
+
+    private function optionalString(mixed $value): ?string
+    {
+        return is_string($value) ? $value : null;
     }
 }
