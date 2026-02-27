@@ -7,22 +7,6 @@
         loadingPlayers: 'dashboard.state.loading_players'|trans,
         cannotLoadPlayers: 'dashboard.state.cannot_load_players'|trans,
         noPlayers: 'dashboard.state.no_players'|trans,
-        playerNameRequired: 'dashboard.state.player_name_required'|trans,
-        creatingPlayer: 'dashboard.state.creating_player'|trans,
-        playerNameExists: 'dashboard.state.player_name_exists'|trans,
-        createPlayerFailed: 'dashboard.state.create_player_failed'|trans,
-        playerCreated: 'dashboard.state.player_created'|trans,
-        exportDone: 'dashboard.state.export_done'|trans,
-        exportFailed: 'dashboard.state.export_failed'|trans,
-        importNoFile: 'dashboard.state.import_no_file'|trans,
-        importInvalidFile: 'dashboard.state.import_invalid_file'|trans,
-        importPreviewError: 'dashboard.state.import_preview_error'|trans,
-        importPreviewUnknown: 'dashboard.state.import_preview_unknown'|trans,
-        importPreviewUnknownDetailsPrefix: 'dashboard.state.import_preview_unknown_details_prefix'|trans,
-        importConfirmPreview: 'dashboard.state.import_confirm_preview'|trans,
-        importingProgress: 'dashboard.state.importing_progress'|trans,
-        importDone: 'dashboard.state.import_done'|trans,
-        importFailed: 'dashboard.state.import_failed'|trans,
         noSelectedPlayer: 'dashboard.state.no_selected_player'|trans,
         loadingItems: 'dashboard.state.loading_items'|trans,
         loadItemsError: 'dashboard.state.load_items_error'|trans,
@@ -83,51 +67,24 @@
             data-item-catalog-storage-key-value="f76:item-catalog:ui:{{ userId }}"
             data-item-catalog-ui-translations-value="{{ uiTranslations|json_encode|e('html_attr') }}"
         >
-            <section class="catalog-top-row">
-                <section class="catalog-panel">
-                    <h2>{{ 'dashboard.filters.title'|trans }}</h2>
-                    <div class="catalog-toolbar">
-                        <label class="field">
-                            <span>{{ 'dashboard.filters.player'|trans }}</span>
-                            <select data-item-catalog-target="playerSelect"></select>
-                        </label>
-                        <label class="field">
-                            <span>{{ 'dashboard.filters.search'|trans }}</span>
-                            <input type="search" placeholder="{{ 'dashboard.filters.search_placeholder'|trans }}" data-item-catalog-target="searchInput">
-                        </label>
-                    </div>
-                    <fieldset class="source-filters">
-                        <legend>{{ 'dashboard.filters.source_filters'|trans }}</legend>
-                        <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropRaid"><img src="/assets/icons/GleamingDepthsMarker.svg" alt="">{{ 'dashboard.sources.raid'|trans }}</label>
-                        <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropBurningSprings"><img src="/assets/icons/bounty_hunter_ghoul_icon_128.png" alt="">{{ 'dashboard.sources.burning_springs'|trans }}</label>
-                    </fieldset>
-                    <p class="catalog-state" role="status" aria-live="polite" data-item-catalog-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
-                </section>
-                <section class="catalog-panel create-player-panel">
-                    <h2>{{ 'dashboard.create_player.title'|trans }}</h2>
-                    <label class="field create-player-field">
-                        <span>{{ 'dashboard.create_player.name'|trans }}</span>
-                        <div class="field-inline">
-                            <input type="text" placeholder="{{ 'dashboard.create_player.placeholder'|trans }}" data-item-catalog-target="createNameInput">
-                            <button type="button" data-item-catalog-target="createButton">{{ 'dashboard.create_player.submit'|trans }}</button>
-                        </div>
+            <section class="catalog-panel">
+                <h2>{{ 'dashboard.filters.title'|trans }}</h2>
+                <div class="catalog-toolbar">
+                    <label class="field">
+                        <span>{{ 'dashboard.filters.player'|trans }}</span>
+                        <select data-item-catalog-target="playerSelect"></select>
                     </label>
-                    <p class="catalog-note">{{ 'dashboard.create_player.help'|trans }}</p>
-                    <hr class="catalog-divider">
-                    <h2>{{ 'dashboard.transfer.title'|trans }}</h2>
-                    <div class="transfer-actions">
-                        <button type="button" data-item-catalog-target="exportButton">{{ 'dashboard.transfer.export'|trans }}</button>
-                        <label class="transfer-file">
-                            <input type="file" accept="application/json" data-item-catalog-target="importFileInput">
-                        </label>
-                        <label class="transfer-checkbox">
-                            <input type="checkbox" data-item-catalog-target="importMergeCheckbox">
-                            {{ 'dashboard.transfer.merge_mode'|trans }}
-                        </label>
-                        <button type="button" data-item-catalog-target="importButton">{{ 'dashboard.transfer.import'|trans }}</button>
-                    </div>
-                    <div class="transfer-unknown-panel" data-item-catalog-target="importUnknownPanel"></div>
-                </section>
+                    <label class="field">
+                        <span>{{ 'dashboard.filters.search'|trans }}</span>
+                        <input type="search" placeholder="{{ 'dashboard.filters.search_placeholder'|trans }}" data-item-catalog-target="searchInput">
+                    </label>
+                </div>
+                <fieldset class="source-filters">
+                    <legend>{{ 'dashboard.filters.source_filters'|trans }}</legend>
+                    <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropRaid"><img src="/assets/icons/GleamingDepthsMarker.svg" alt="">{{ 'dashboard.sources.raid'|trans }}</label>
+                    <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropBurningSprings"><img src="/assets/icons/bounty_hunter_ghoul_icon_128.png" alt="">{{ 'dashboard.sources.burning_springs'|trans }}</label>
+                </fieldset>
+                <p class="catalog-state" role="status" aria-live="polite" data-item-catalog-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
             </section>
             <section class="catalog-panel catalog-block">
                 <h2>{{ 'dashboard.catalog.misc_title'|trans }}</h2>

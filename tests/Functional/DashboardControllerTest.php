@@ -68,11 +68,11 @@ final class DashboardControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter(sprintf('[data-item-catalog-initial-player-id-value="%s"]', $alpha->getPublicId())));
         self::assertCount(1, $crawler->filter('[data-item-catalog-storage-key-value="f76:item-catalog:ui:1"]'));
         self::assertCount(0, $crawler->filter('[data-item-catalog-target="statsPanel"]'));
-        self::assertCount(1, $crawler->filter('[data-item-catalog-target="exportButton"]'));
-        self::assertCount(1, $crawler->filter('[data-item-catalog-target="importFileInput"]'));
-        self::assertCount(1, $crawler->filter('[data-item-catalog-target="importMergeCheckbox"]'));
-        self::assertCount(1, $crawler->filter('[data-item-catalog-target="importButton"]'));
-        self::assertCount(1, $crawler->filter('[data-item-catalog-target="importUnknownPanel"]'));
+        self::assertCount(0, $crawler->filter('[data-item-catalog-target="exportButton"]'));
+        self::assertCount(0, $crawler->filter('[data-item-catalog-target="importFileInput"]'));
+        self::assertCount(0, $crawler->filter('[data-item-catalog-target="importMergeCheckbox"]'));
+        self::assertCount(0, $crawler->filter('[data-item-catalog-target="importButton"]'));
+        self::assertCount(0, $crawler->filter('[data-item-catalog-target="importUnknownPanel"]'));
         self::assertCount(1, $crawler->filter('[data-item-catalog-target="miscList"]'));
         self::assertCount(0, $crawler->filter('[data-item-catalog-target="bookList"]'));
         self::assertCount(1, $crawler->filter('a[href^="/minerva-rotation"]'));

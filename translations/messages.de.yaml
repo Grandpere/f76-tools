@@ -5,14 +5,14 @@ common.locale.de: Deutsch
 common.yes: Ja
 common.no: Nein
 
-dashboard.page_title: 'F76 - Objektverfolgung'
+dashboard.page_title: 'F76 - Legendare Mods'
 dashboard.header.translation_management: Ubersetzungsverwaltung
 dashboard.header.user_management: Benutzerverwaltung
-dashboard.header.minerva_rotation: Legendare Mods und Minerva
+dashboard.header.minerva_rotation: Minerva
 dashboard.header.progression: Fortschritt
 dashboard.header.admin: Administration
-dashboard.header.title: Verfolgung gelernter Objekte
-dashboard.header.subtitle: Wahlen Sie einen Charakter aus und markieren Sie gelernte Minerva-Plane und legendare Mods.
+dashboard.header.title: Legendare Mods
+dashboard.header.subtitle: Wahlen Sie einen Charakter aus und markieren Sie gelernte legendare Mods.
 dashboard.header.greeting_prefix: Hallo
 dashboard.header.logout: Abmelden
 dashboard.filters.title: Filter

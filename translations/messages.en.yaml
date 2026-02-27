@@ -5,14 +5,14 @@ common.locale.de: German
 common.yes: Yes
 common.no: No
 
-dashboard.page_title: 'F76 - Item Tracking'
+dashboard.page_title: 'F76 - Legendary mods'
 dashboard.header.translation_management: Translation management
 dashboard.header.user_management: User management
-dashboard.header.minerva_rotation: Legendary mods and Minerva
+dashboard.header.minerva_rotation: Minerva
 dashboard.header.progression: Progress
 dashboard.header.admin: Administration
-dashboard.header.title: Learned items tracker
-dashboard.header.subtitle: Select a character, then mark learned Minerva plans and legendary mods.
+dashboard.header.title: Legendary mods
+dashboard.header.subtitle: Select a character, then mark learned legendary mods.
 dashboard.header.greeting_prefix: Hello
 dashboard.header.logout: Logout
 dashboard.filters.title: Filters
