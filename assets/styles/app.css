@@ -377,6 +377,10 @@ body::before {
     margin-top: 1rem;
 }
 
+.minerva-knowledge-stack {
+    margin-top: 1rem;
+}
+
 .create-player-panel {
     display: flex;
     flex-direction: column;
