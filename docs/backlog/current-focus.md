@@ -1,12 +1,12 @@
 # Current Focus
 
 ## Priorite active
-- Campagne fonctionnelle lot F76-040 a F76-042 (pending user run).
+- F76-043: DDD Slice 33 - Progression API resolver helpers trait (in progress).
 
 ## Termine recemment
-- F76-042: DDD Slice 32 - Player knowledge transfer import flow cleanup (code done, functional pending).
-- F76-041: DDD Slice 31 - Player item controller item-helper cleanup (code done, functional pending).
-- F76-040: DDD Slice 30 - Player item controller helper consistency (code done, functional pending).
+- F76-042: DDD Slice 32 - Player knowledge transfer import flow cleanup (done).
+- F76-041: DDD Slice 31 - Player item controller item-helper cleanup (done).
+- F76-040: DDD Slice 30 - Player item controller helper consistency (done).
 - F76-039: DDD Slice 29 - Progression controller read-helper cleanup (code done, functional pending).
 - F76-038: DDD Slice 28 - Progression item API resolver (code done, functional pending).
 - F76-037: DDD Slice 27 - Progression owned player API resolver (done).

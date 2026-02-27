@@ -19,6 +19,7 @@ use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationServi
 use App\Progression\Application\Knowledge\PlayerKnowledgeWriteApplicationService;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadSearchFilter;
+use App\Progression\UI\Api\ProgressionApiResolverHelpersTrait;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
 use App\Progression\UI\Api\ProgressionItemApiResolver;
 use App\Progression\UI\Api\ProgressionItemTypeQueryParser;
@@ -32,6 +33,8 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/api/players/{playerId<[A-Za-z0-9]{26}>}/items')]
 final class PlayerItemKnowledgeController extends AbstractController
 {
+    use ProgressionApiResolverHelpersTrait;
+
     public function __construct(
         private readonly PlayerKnowledgeCatalogApplicationService $playerKnowledgeCatalogApplicationService,
         private readonly PlayerKnowledgeWriteApplicationService $playerKnowledgeWriteApplicationService,
@@ -47,7 +50,7 @@ final class PlayerItemKnowledgeController extends AbstractController
     #[Route('', name: 'api_player_items_index', methods: ['GET'])]
     public function index(string $playerId, Request $request): JsonResponse
     {
-        $player = $this->resolvePlayerOrNotFound($playerId);
+        $player = $this->resolveOwnedPlayerOrNotFound($this->progressionOwnedPlayerApiResolver, $playerId);
         if ($player instanceof JsonResponse) {
             return $player;
         }
@@ -67,11 +70,11 @@ final class PlayerItemKnowledgeController extends AbstractController
     #[Route('/{itemId<[A-Za-z0-9]{26}>}/learned', name: 'api_player_items_learned_set', methods: ['PUT'])]
     public function setLearned(string $playerId, string $itemId): JsonResponse
     {
-        $player = $this->resolvePlayerOrNotFound($playerId);
+        $player = $this->resolveOwnedPlayerOrNotFound($this->progressionOwnedPlayerApiResolver, $playerId);
         if ($player instanceof JsonResponse) {
             return $player;
         }
-        $item = $this->resolveItemOrNotFound($itemId);
+        $item = $this->resolveItemOrNotFound($this->progressionItemApiResolver, $itemId);
         if ($item instanceof JsonResponse) {
             return $item;
         }
@@ -84,11 +87,11 @@ final class PlayerItemKnowledgeController extends AbstractController
     #[Route('/{itemId<[A-Za-z0-9]{26}>}/learned', name: 'api_player_items_learned_unset', methods: ['DELETE'])]
     public function unsetLearned(string $playerId, string $itemId): Response
     {
-        $player = $this->resolvePlayerOrNotFound($playerId);
+        $player = $this->resolveOwnedPlayerOrNotFound($this->progressionOwnedPlayerApiResolver, $playerId);
         if ($player instanceof JsonResponse) {
             return $player;
         }
-        $item = $this->resolveItemOrNotFound($itemId);
+        $item = $this->resolveItemOrNotFound($this->progressionItemApiResolver, $itemId);
         if ($item instanceof JsonResponse) {
             return $item;
         }
@@ -96,15 +99,5 @@ final class PlayerItemKnowledgeController extends AbstractController
         $this->playerKnowledgeWriteApplicationService->unmarkLearned($player, $item);
 
         return new Response(status: Response::HTTP_NO_CONTENT);
-    }
-
-    private function resolvePlayerOrNotFound(string $playerId): PlayerEntity|JsonResponse
-    {
-        return $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($playerId, $this->getUser());
-    }
-
-    private function resolveItemOrNotFound(string $itemId): ItemEntity|JsonResponse
-    {
-        return $this->progressionItemApiResolver->resolveOrNotFound($itemId);
     }
 }
