@@ -3,10 +3,13 @@
 {% block title %}{{ 'minerva.page_title'|trans }}{% endblock %}
 
 {% block body %}
-    <main class="translations-page">
-        <header class="translations-header">
+    <main class="catalog-page translations-page">
+        <header class="catalog-header">
             <div class="catalog-header-tools">
                 <a class="header-translations-link" href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ 'minerva.back_to_dashboard'|trans }}</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="header-translations-link" href="{{ path('app_admin_users', { locale: app.request.locale }) }}">{{ 'dashboard.header.admin'|trans }}</a>
+                {% endif %}
                 <form class="header-locale" method="get">
                     <img class="header-locale-icon" src="/assets/icons/language.svg" alt="" aria-hidden="true">
                     <label for="minerva-header-locale-select">{{ 'common.language'|trans }}</label>
@@ -19,7 +22,15 @@
             </div>
             <p class="catalog-kicker">Fallout 76</p>
             <h1>{{ 'minerva.title'|trans }}</h1>
-            <p>{{ 'minerva.description'|trans }}</p>
+            <p class="catalog-subtitle">{{ 'minerva.description'|trans }}</p>
+            <p class="catalog-user">
+                {{ 'dashboard.header.greeting_prefix'|trans }} <strong>{{ username }}</strong>
+                ·
+                <form method="post" action="{{ path('app_logout', { locale: app.request.locale }) }}" class="logout-form">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+                    <button type="submit"><img class="logout-icon" src="/assets/icons/logout.svg" alt="" aria-hidden="true"> {{ 'dashboard.header.logout'|trans }}</button>
+                </form>
+            </p>
             <p class="catalog-state">{{ 'minerva.timezone'|trans({'%timezone%': timeline.timezone}) }}</p>
         </header>
 
