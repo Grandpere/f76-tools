@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Progression\UI\Api;
 
 use App\Entity\PlayerEntity;
@@ -17,11 +26,11 @@ final class ProgressionOwnedPlayerApiResolverTest extends TestCase
 {
     public function testResolveOrNotFoundReturnsPlayerWhenOwnedPlayerExists(): void
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('user@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_USER']);
-        $player = (new PlayerEntity())->setName('Main');
+        $player = new PlayerEntity()->setName('Main');
 
         /** @var ProgressionOwnedPlayerReadResolverInterface&MockObject $readResolver */
         $readResolver = $this->createMock(ProgressionOwnedPlayerReadResolverInterface::class);
@@ -39,7 +48,7 @@ final class ProgressionOwnedPlayerApiResolverTest extends TestCase
 
     public function testResolveOrNotFoundReturnsJson404WhenPlayerIsMissing(): void
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('user@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_USER']);

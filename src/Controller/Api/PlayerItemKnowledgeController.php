@@ -20,8 +20,8 @@ use App\Progression\Application\Knowledge\PlayerKnowledgeWriteApplicationService
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadSearchFilter;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
-use App\Progression\UI\Api\ProgressionItemApiResolverTrait;
 use App\Progression\UI\Api\ProgressionItemApiResolver;
+use App\Progression\UI\Api\ProgressionItemApiResolverTrait;
 use App\Progression\UI\Api\ProgressionItemTypeQueryParser;
 use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolver;
 use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolverTrait;
