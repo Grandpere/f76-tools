@@ -182,6 +182,12 @@ export default class extends Controller {
     renderItemCard(item) {
         const label = this.escape(item.name || item.nameKey);
         const description = item.description ? `<p>${this.escapeWithBreaks(item.description)}</p>` : '';
+        const infoBlock = this.renderInfoBlock(item);
+        const iconsFooter = this.renderIconsFooter(item);
+        const dailyOpsLine = item.dropDailyOps && !this.infoContainsDailyOps(item.infoHtml)
+            ? `<p class="item-extra-line">${this.escape(this.t('dailyOpsReward'))}</p>`
+            : '';
+        const priceBlock = this.renderPriceBlock(item);
         const learnedClass = item.learned ? 'is-learned' : 'is-unlearned';
         const checkedAttr = item.learned ? 'checked' : '';
         const newBadge = item.isNew ? '<span class="item-badge-new">NEW</span>' : '';
@@ -193,8 +199,49 @@ export default class extends Controller {
                     <strong>${label}</strong>
                     ${newBadge}
                 </div>
+                ${priceBlock}
                 ${description}
+                ${infoBlock}
+                ${dailyOpsLine}
+                ${iconsFooter}
             </li>
+        `;
+    }
+
+    renderIconsFooter(item) {
+        const sourceIcons = this.renderDropSources(item);
+        const extraSourceIcons = this.renderExtraSourceIcons(item);
+
+        if (sourceIcons === '' && extraSourceIcons === '') {
+            return '';
+        }
+
+        return `<div class="item-icons-footer">${sourceIcons}${extraSourceIcons}</div>`;
+    }
+
+    renderPriceBlock(item) {
+        const basePrice = Number.isInteger(item.price) ? item.price : null;
+        const minervaPrice = Number.isInteger(item.priceMinerva) ? item.priceMinerva : null;
+        const hasDiscount = basePrice !== null && minervaPrice !== null && minervaPrice < basePrice;
+        const displayPrice = minervaPrice ?? basePrice;
+        const displayPriceLabel = displayPrice === null ? '-' : this.escape(displayPrice);
+        const oldPriceLabel = basePrice === null ? null : this.escape(basePrice);
+
+        if (hasDiscount) {
+            return `
+                <p class="item-prices item-prices-discount">
+                    <img src="/assets/icons/Fo76_Icon_Gold_Bullion.png" alt="Gold Bullion">
+                    <span class="price-old">${oldPriceLabel}</span>
+                    <span class="price-new">${this.escape(minervaPrice)}</span>
+                </p>
+            `;
+        }
+
+        return `
+            <p class="item-prices">
+                <img src="/assets/icons/Fo76_Icon_Gold_Bullion.png" alt="Gold Bullion">
+                <span class="price-new">${displayPriceLabel}</span>
+            </p>
         `;
     }
 
@@ -233,6 +280,54 @@ export default class extends Controller {
                 });
             });
         });
+    }
+
+    renderInfoBlock(item) {
+        if (!item.infoHtml) {
+            return '';
+        }
+
+        return `<div class="item-info-html">${this.sanitizeHtml(item.infoHtml)}</div>`;
+    }
+
+    infoContainsDailyOps(infoHtml) {
+        if (!infoHtml || typeof infoHtml !== 'string') {
+            return false;
+        }
+
+        const plain = infoHtml.replace(/<[^>]*>/g, ' ').toLowerCase();
+
+        return plain.includes('daily operation');
+    }
+
+    renderDropSources(item) {
+        if (!item.dropSourcesHtml) {
+            return '';
+        }
+
+        return `<div class="item-drop-sources">${this.sanitizeHtml(item.dropSourcesHtml)}</div>`;
+    }
+
+    renderExtraSourceIcons(item) {
+        const icons = [];
+        if (item.dropDailyOps) {
+            icons.push('<img src="/assets/icons/FO76_dailyops_uplink.png" alt="Daily Ops" title="Daily Ops">');
+        }
+        if (item.vendorRegs) {
+            icons.push('<img src="/assets/icons/Vault79Marker.svg" alt="Regs" title="Regs">');
+        }
+        if (item.vendorSamuel) {
+            icons.push('<img src="/assets/icons/HammerWingMarker.svg" alt="Samuel" title="Samuel">');
+        }
+        if (item.vendorMortimer) {
+            icons.push('<img src="/assets/icons/SkullRingMarker.svg" alt="Mortimer" title="Mortimer">');
+        }
+
+        if (icons.length === 0) {
+            return '';
+        }
+
+        return `<p class="item-source-icons">${icons.join('')}</p>`;
     }
 
     async toggleLearned(itemId, shouldBeLearned) {
@@ -386,5 +481,45 @@ export default class extends Controller {
             .replace(/&lt;br\s*\/?&gt;/gi, '<br>')
             .replace(/\r?\n/g, '<br>');
     }
-}
 
+    sanitizeHtml(html) {
+        const template = document.createElement('template');
+        template.innerHTML = String(html);
+
+        const allowedTags = new Set(['P', 'STRONG', 'EM', 'SPAN', 'BR', 'IMG']);
+        const allowedAttrs = new Set(['class', 'src', 'title', 'alt']);
+
+        template.content.querySelectorAll('*').forEach((node) => {
+            if (!allowedTags.has(node.tagName)) {
+                node.replaceWith(...node.childNodes);
+                return;
+            }
+
+            Array.from(node.attributes).forEach((attr) => {
+                const name = attr.name.toLowerCase();
+                const value = attr.value;
+                if (!allowedAttrs.has(name)) {
+                    node.removeAttribute(attr.name);
+                    return;
+                }
+                if (name === 'src' && (value.startsWith('javascript:') || value.startsWith('data:'))) {
+                    node.removeAttribute(attr.name);
+                    return;
+                }
+                if (name === 'src' && value.startsWith('/cms/')) {
+                    const filename = value.split('/').pop() || '';
+                    if (filename !== '') {
+                        const mappedFilename = filename === 'raid_icon_black_128.png'
+                            ? 'GleamingDepthsMarker.svg'
+                            : filename;
+                        node.setAttribute('src', `/assets/icons/${mappedFilename}`);
+                    } else {
+                        node.removeAttribute(attr.name);
+                    }
+                }
+            });
+        });
+
+        return template.innerHTML;
+    }
+}

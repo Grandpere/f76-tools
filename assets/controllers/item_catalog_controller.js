@@ -81,7 +81,9 @@ export default class extends Controller {
     async loadPlayers() {
         this.setState(this.t('loadingPlayers'));
         this.miscListTarget.innerHTML = '';
-        this.bookListTarget.innerHTML = '';
+        if (this.hasBookListTarget) {
+            this.bookListTarget.innerHTML = '';
+        }
         this.statsPanelTarget.innerHTML = '';
 
         const response = await fetch(this.appendLocaleToUrl(this.playersUrlValue), {
@@ -413,15 +415,19 @@ export default class extends Controller {
         const visibleItems = this.getVisibleItems();
         if (visibleItems.length === 0) {
             this.miscListTarget.innerHTML = `<p>${this.escape(this.t('noMiscFound'))}</p>`;
-            this.bookListTarget.innerHTML = `<p>${this.escape(this.t('noBookFound'))}</p>`;
+            if (this.hasBookListTarget) {
+                this.bookListTarget.innerHTML = `<p>${this.escape(this.t('noBookFound'))}</p>`;
+            }
             return;
         }
         this.miscListTarget.innerHTML = this.renderMiscBlock(visibleItems);
-        this.bookListTarget.innerHTML = this.renderBookBlock(visibleItems);
         this.bindToggleButtons(this.miscListTarget);
-        this.bindToggleButtons(this.bookListTarget);
         this.bindAccordionBehavior(this.miscListTarget, 'misc');
-        this.bindAccordionBehavior(this.bookListTarget, 'book');
+        if (this.hasBookListTarget) {
+            this.bookListTarget.innerHTML = this.renderBookBlock(visibleItems);
+            this.bindToggleButtons(this.bookListTarget);
+            this.bindAccordionBehavior(this.bookListTarget, 'book');
+        }
     }
 
     renderStats() {

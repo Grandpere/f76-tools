@@ -261,6 +261,8 @@ minerva.source_manual: Manuelle
 minerva.current_window_title: Fenetre Minerva actuelle
 minerva.current_window_empty: Aucune fenetre Minerva active actuellement.
 minerva.next_windows_title: Prochaines fenetres
+minerva.active_windows_title: Fenetres a venir
+minerva.timeline_title: Timeline complete
 minerva.list_label: 'Liste %list%'
 minerva.list_progress: Progression
 minerva.countdown_title_active: Ou est Minerva aujourd hui ?
