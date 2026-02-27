@@ -64,7 +64,7 @@ final class PlayerControllerWriteResponderTest extends TestCase
         $response = $responder->deleted();
 
         self::assertSame(JsonResponse::HTTP_NO_CONTENT, $response->getStatusCode());
-        self::assertSame('{}', $response->getContent());
+        self::assertSame('', $response->getContent());
     }
 
     private function setPlayerPublicId(PlayerEntity $player, string $publicId): void

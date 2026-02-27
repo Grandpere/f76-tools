@@ -1,9 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- F76-034: DDD Slice 24 - Progression knowledge write service naming (in progress).
+- F76-035: DDD Slice 25 - API 204 empty body consistency (in progress).
 
 ## Termine recemment
+- F76-034: DDD Slice 24 - Progression knowledge write service naming (done).
 - F76-033: DDD Slice 23 - Progression owned player resolver unification (code done, functional pending).
 - F76-032: DDD Slice 22 - Progression catalog rows payload mapper (code done, functional pending).
 - F76-031: DDD Slice 21 - Progression item read application service (code done, functional pending).

@@ -26,6 +26,7 @@ use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/api/players')]
@@ -102,7 +103,7 @@ final class PlayerController extends AbstractController
     }
 
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_delete', methods: ['DELETE'])]
-    public function delete(string $id): JsonResponse
+    public function delete(string $id): Response
     {
         $player = $this->progressionOwnedPlayerReadResolver->resolve($id, $this->getUser());
         if (null === $player) {

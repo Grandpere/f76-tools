@@ -15,6 +15,7 @@ namespace App\Progression\UI\Api;
 
 use App\Entity\PlayerEntity;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 final class PlayerControllerWriteResponder
 {
@@ -44,8 +45,8 @@ final class PlayerControllerWriteResponder
         return new JsonResponse($this->playerPayloadMapper->map($player));
     }
 
-    public function deleted(): JsonResponse
+    public function deleted(): Response
     {
-        return new JsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
+        return new Response(status: Response::HTTP_NO_CONTENT);
     }
 }

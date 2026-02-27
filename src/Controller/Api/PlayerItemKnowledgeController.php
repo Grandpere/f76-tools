@@ -24,6 +24,7 @@ use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/api/players/{playerId<[A-Za-z0-9]{26}>}/items')]
@@ -79,7 +80,7 @@ final class PlayerItemKnowledgeController extends AbstractController
     }
 
     #[Route('/{itemId<[A-Za-z0-9]{26}>}/learned', name: 'api_player_items_learned_unset', methods: ['DELETE'])]
-    public function unsetLearned(string $playerId, string $itemId): JsonResponse
+    public function unsetLearned(string $playerId, string $itemId): Response
     {
         $player = $this->progressionOwnedPlayerReadResolver->resolve($playerId, $this->getUser());
         if (null === $player) {
@@ -92,6 +93,6 @@ final class PlayerItemKnowledgeController extends AbstractController
 
         $this->playerKnowledgeWriteApplicationService->unmarkLearned($player, $item);
 
-        return new JsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
+        return new Response(status: Response::HTTP_NO_CONTENT);
     }
 }
