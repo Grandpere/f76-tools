@@ -146,56 +146,58 @@
                     {% endif %}
                 </article>
             </div>
-            <h2>{{ 'minerva.active_windows_title'|trans }}</h2>
-            <div class="translations-table-wrap">
-                <table
-                    class="translations-table minerva-timeline-table"
-                    data-controller="minerva-progression"
-                    data-minerva-progression-players-base-url-value="{{ apiPlayersBaseUrl }}"
-                    data-minerva-progression-storage-key-value="{{ storageKey }}"
-                    data-minerva-progression-locale-value="{{ app.request.locale }}"
-                    data-minerva-progression-fallback-player-id-value="{{ activePlayerId ?? '' }}"
-                >
-                    <thead>
-                    <tr>
-                        <th>{{ 'minerva.list_cycle'|trans }}</th>
-                        <th>{{ 'minerva.location'|trans }}</th>
-                        <th>{{ 'minerva.starts_at'|trans }}</th>
-                        <th>{{ 'minerva.ends_at'|trans }}</th>
-                        <th>{{ 'minerva.status'|trans }}</th>
-                        <th>{{ 'minerva.list_progress'|trans }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% set hasActiveOrUpcoming = false %}
-                    {% for row in timeline.rows %}
-                        {% if row.status != 'ended' %}
-                            {% set hasActiveOrUpcoming = true %}
-                            <tr>
-                                <td>{{ row.listCycle }}</td>
-                                <td>{{ row.location }}</td>
-                                <td>{{ row.startsAt|date('Y-m-d H:i') }}</td>
-                                <td>{{ row.endsAt|date('Y-m-d H:i') }}</td>
-                                <td><span class="item-pill">{{ ('minerva.status_' ~ row.status)|trans }}</span></td>
-                                <td data-minerva-progression-target="cell" data-list-cycle="{{ row.listCycle }}">
-                                    <div class="minerva-progress-cell">
-                                        <div class="minerva-progress-meta" data-minerva-progress-meta>-</div>
-                                        <div class="minerva-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                                            <span class="minerva-progress-fill" data-minerva-progress-fill style="width: 0%;"></span>
+            <section class="catalog-panel catalog-block">
+                <h2>{{ 'minerva.active_windows_title'|trans }}</h2>
+                <div class="translations-table-wrap">
+                    <table
+                        class="translations-table minerva-timeline-table"
+                        data-controller="minerva-progression"
+                        data-minerva-progression-players-base-url-value="{{ apiPlayersBaseUrl }}"
+                        data-minerva-progression-storage-key-value="{{ storageKey }}"
+                        data-minerva-progression-locale-value="{{ app.request.locale }}"
+                        data-minerva-progression-fallback-player-id-value="{{ activePlayerId ?? '' }}"
+                    >
+                        <thead>
+                        <tr>
+                            <th>{{ 'minerva.list_cycle'|trans }}</th>
+                            <th>{{ 'minerva.location'|trans }}</th>
+                            <th>{{ 'minerva.starts_at'|trans }}</th>
+                            <th>{{ 'minerva.ends_at'|trans }}</th>
+                            <th>{{ 'minerva.status'|trans }}</th>
+                            <th>{{ 'minerva.list_progress'|trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% set hasActiveOrUpcoming = false %}
+                        {% for row in timeline.rows %}
+                            {% if row.status != 'ended' %}
+                                {% set hasActiveOrUpcoming = true %}
+                                <tr>
+                                    <td>{{ row.listCycle }}</td>
+                                    <td>{{ row.location }}</td>
+                                    <td>{{ row.startsAt|date('Y-m-d H:i') }}</td>
+                                    <td>{{ row.endsAt|date('Y-m-d H:i') }}</td>
+                                    <td><span class="item-pill">{{ ('minerva.status_' ~ row.status)|trans }}</span></td>
+                                    <td data-minerva-progression-target="cell" data-list-cycle="{{ row.listCycle }}">
+                                        <div class="minerva-progress-cell">
+                                            <div class="minerva-progress-meta" data-minerva-progress-meta>-</div>
+                                            <div class="minerva-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                                <span class="minerva-progress-fill" data-minerva-progress-fill style="width: 0%;"></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        {% if not hasActiveOrUpcoming %}
+                            <tr>
+                                <td colspan="6">{{ 'minerva.empty'|trans }}</td>
                             </tr>
                         {% endif %}
-                    {% endfor %}
-                    {% if not hasActiveOrUpcoming %}
-                        <tr>
-                            <td colspan="6">{{ 'minerva.empty'|trans }}</td>
-                        </tr>
-                    {% endif %}
-                    </tbody>
-                </table>
-            </div>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </section>
 
         <section
