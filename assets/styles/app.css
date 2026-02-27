@@ -418,6 +418,15 @@ body::before {
     grid-column: span 12;
 }
 
+.progression-character-toolbar .field:first-child {
+    padding-right: 0.8rem;
+    border-right: 1px solid var(--line);
+}
+
+.progression-character-toolbar .field:last-child {
+    padding-left: 0.8rem;
+}
+
 .field span {
     font-size: 0.74rem;
     text-transform: uppercase;
@@ -1401,6 +1410,15 @@ body::before {
 
     .stats-split {
         grid-template-columns: 1fr;
+    }
+
+    .progression-character-toolbar .field:first-child {
+        padding-right: 0;
+        border-right: 0;
+    }
+
+    .progression-character-toolbar .field:last-child {
+        padding-left: 0;
     }
 }
 
