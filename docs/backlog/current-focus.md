@@ -1,9 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- F76-040: DDD Slice 30 - Player item controller helper consistency (in progress).
+- F76-041: DDD Slice 31 - Player item controller item-helper cleanup (in progress).
 
 ## Termine recemment
+- F76-040: DDD Slice 30 - Player item controller helper consistency (code done, functional pending).
 - F76-039: DDD Slice 29 - Progression controller read-helper cleanup (code done, functional pending).
 - F76-038: DDD Slice 28 - Progression item API resolver (code done, functional pending).
 - F76-037: DDD Slice 27 - Progression owned player API resolver (done).

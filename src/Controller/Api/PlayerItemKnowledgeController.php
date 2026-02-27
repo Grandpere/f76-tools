@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
+use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeWriteApplicationService;
@@ -70,7 +71,7 @@ final class PlayerItemKnowledgeController extends AbstractController
         if ($player instanceof JsonResponse) {
             return $player;
         }
-        $item = $this->progressionItemApiResolver->resolveOrNotFound($itemId);
+        $item = $this->resolveItemOrNotFound($itemId);
         if ($item instanceof JsonResponse) {
             return $item;
         }
@@ -87,7 +88,7 @@ final class PlayerItemKnowledgeController extends AbstractController
         if ($player instanceof JsonResponse) {
             return $player;
         }
-        $item = $this->progressionItemApiResolver->resolveOrNotFound($itemId);
+        $item = $this->resolveItemOrNotFound($itemId);
         if ($item instanceof JsonResponse) {
             return $item;
         }
@@ -100,5 +101,10 @@ final class PlayerItemKnowledgeController extends AbstractController
     private function resolvePlayerOrNotFound(string $playerId): PlayerEntity|JsonResponse
     {
         return $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($playerId, $this->getUser());
+    }
+
+    private function resolveItemOrNotFound(string $itemId): ItemEntity|JsonResponse
+    {
+        return $this->progressionItemApiResolver->resolveOrNotFound($itemId);
     }
 }
