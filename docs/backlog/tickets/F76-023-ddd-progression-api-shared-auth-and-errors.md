@@ -17,7 +17,7 @@ Les controllers API progression dupliquent encore la resolution de l utilisateur
 - [x] Extraire `ProgressionOwnedPlayerResolver`.
 - [x] Brancher les controllers progression cibles.
 - [x] Ajouter tests unitaires des nouveaux composants.
-- [ ] Validation fonctionnelle manuelle (`make phpunit-functional`) et ajustements si besoin.
+- [x] Validation fonctionnelle manuelle (`make phpunit-functional`) et ajustements si besoin.
 
 ## Criteres d acceptance
 - Aucune regression fonctionnelle sur les endpoints progression.

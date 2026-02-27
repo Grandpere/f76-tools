@@ -12,7 +12,7 @@
 - [x] Extraire `ProgressionOwnedPlayerReadResolver`.
 - [x] Brancher `PlayerController` sur ce resolver.
 - [x] Ajouter test unitaire du resolver.
-- [ ] Validation fonctionnelle manuelle (sera faite en lot final).
+- [x] Validation fonctionnelle manuelle (faite).
 
 ## Criteres d acceptance
 - Aucune regression fonctionnelle sur `show/update/delete`.

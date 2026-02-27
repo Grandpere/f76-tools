@@ -12,7 +12,7 @@
 - [x] Extraire `PlayerControllerWriteResponder`.
 - [x] Brancher `PlayerController`.
 - [x] Ajouter tests unitaires du responder.
-- [ ] Validation fonctionnelle manuelle (sera faite en lot final).
+- [x] Validation fonctionnelle manuelle (faite).
 
 ## Criteres d acceptance
 - Aucun changement fonctionnel sur `POST/PATCH/DELETE /api/players`.

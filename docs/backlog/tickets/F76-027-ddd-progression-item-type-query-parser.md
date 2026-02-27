@@ -12,7 +12,7 @@
 - [x] Extraire `ProgressionItemTypeQueryParser`.
 - [x] Brancher `PlayerItemKnowledgeController`.
 - [x] Ajouter tests unitaires.
-- [ ] Validation fonctionnelle manuelle (sera faite en lot final).
+- [x] Validation fonctionnelle manuelle (faite).
 
 ## Criteres d acceptance
 - Comportement identique (`null` sans type, `false` sur type invalide, `ItemTypeEnum` valide).

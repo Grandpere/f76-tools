@@ -66,12 +66,7 @@ final class PlayerController extends AbstractController
             return $this->playerControllerWriteResponder->playerNameAlreadyExists();
         }
 
-        $player = $result->getPlayer();
-        if (null === $player) {
-            return $this->playerControllerWriteResponder->playerNameAlreadyExists();
-        }
-
-        return $this->playerControllerWriteResponder->created($player);
+        return $this->playerControllerWriteResponder->created($result->getPlayer());
     }
 
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_show', methods: ['GET'])]

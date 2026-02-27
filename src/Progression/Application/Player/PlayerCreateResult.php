@@ -38,9 +38,12 @@ final class PlayerCreateResult
         return $this->ok;
     }
 
-    public function getPlayer(): ?PlayerEntity
+    public function getPlayer(): PlayerEntity
     {
+        if (!$this->player instanceof PlayerEntity) {
+            throw new \LogicException('Player is not available for a failed create result.');
+        }
+
         return $this->player;
     }
 }
-

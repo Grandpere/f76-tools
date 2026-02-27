@@ -13,7 +13,7 @@
 - [x] Adapter `PlayerApplicationService`.
 - [x] Adapter `PlayerController`.
 - [x] Ajouter tests unitaires `PlayerApplicationService`.
-- [ ] Validation fonctionnelle manuelle (sera faite en lot final).
+- [x] Validation fonctionnelle manuelle (faite).
 
 ## Criteres d acceptance
 - Comportement HTTP identique (`409` sur conflit, payload inchange).

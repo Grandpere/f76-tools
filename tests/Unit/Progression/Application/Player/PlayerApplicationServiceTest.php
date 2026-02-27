@@ -50,8 +50,11 @@ final class PlayerApplicationServiceTest extends TestCase
         $result = $service->createForUser($user, 'Main');
 
         self::assertFalse($result->isOk());
-        self::assertNull($result->getPlayer());
         self::assertEquals(PlayerCreateResult::nameConflict(), $result);
+
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('Player is not available for a failed create result.');
+        $result->getPlayer();
     }
 
     public function testRenameOwnedReturnsRenamedWhenFlushSucceeds(): void

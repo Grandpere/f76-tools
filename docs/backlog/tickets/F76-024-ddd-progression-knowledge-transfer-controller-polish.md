@@ -12,7 +12,7 @@
 - [x] Extraire `PlayerKnowledgeTransferResultResponder`.
 - [x] Brancher `PlayerKnowledgeTransferController` sur ce responder.
 - [x] Ajouter tests unitaires du responder.
-- [ ] Validation fonctionnelle manuelle (sera faite en lot final).
+- [x] Validation fonctionnelle manuelle (faite).
 
 ## Criteres d acceptance
 - Aucun changement fonctionnel sur les endpoints `/knowledge/import` et `/knowledge/preview-import`.
