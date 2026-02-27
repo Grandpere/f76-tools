@@ -19,6 +19,7 @@ use App\Entity\UserEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeApplicationService;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
+use App\Progression\UI\Api\PlayerKnowledgeItemPayloadSearchFilter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,6 +33,7 @@ final class PlayerItemKnowledgeController extends AbstractController
         private readonly PlayerKnowledgeCatalogApplicationService $playerKnowledgeCatalogApplicationService,
         private readonly PlayerKnowledgeApplicationService $playerKnowledgeApplicationService,
         private readonly PlayerKnowledgeItemPayloadMapper $playerKnowledgeItemPayloadMapper,
+        private readonly PlayerKnowledgeItemPayloadSearchFilter $playerKnowledgeItemPayloadSearchFilter,
     ) {
     }
 
@@ -48,29 +50,13 @@ final class PlayerItemKnowledgeController extends AbstractController
             return $this->json(['error' => 'Invalid item type.'], JsonResponse::HTTP_BAD_REQUEST);
         }
 
-        $query = $this->normalizeSearchQuery($request->query->get('q'));
         $catalogRows = $this->playerKnowledgeCatalogApplicationService->listForPlayer($player, $type);
 
         $payload = [];
         foreach ($catalogRows as $row) {
             $payload[] = $this->playerKnowledgeItemPayloadMapper->map($row['item'], $row['learned']);
         }
-        if (null !== $query) {
-            $payload = array_values(array_filter(
-                $payload,
-                static function (array $row) use ($query): bool {
-                    $name = mb_strtolower($row['name']);
-                    $description = mb_strtolower((string) ($row['description'] ?? ''));
-                    $nameKey = mb_strtolower($row['nameKey']);
-                    $descKey = mb_strtolower((string) ($row['descKey'] ?? ''));
-
-                    return str_contains($name, $query)
-                        || str_contains($description, $query)
-                        || str_contains($nameKey, $query)
-                        || str_contains($descKey, $query);
-                },
-            ));
-        }
+        $payload = $this->playerKnowledgeItemPayloadSearchFilter->filter($payload, $request->query->get('q'));
 
         return $this->json($payload);
     }
@@ -136,17 +122,6 @@ final class PlayerItemKnowledgeController extends AbstractController
         }
 
         return ItemTypeEnum::tryFrom(strtoupper(trim($value))) ?? false;
-    }
-
-    private function normalizeSearchQuery(mixed $value): ?string
-    {
-        if (!is_string($value)) {
-            return null;
-        }
-
-        $query = mb_strtolower(trim($value));
-
-        return '' === $query ? null : $query;
     }
 
 }
