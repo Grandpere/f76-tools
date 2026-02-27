@@ -17,8 +17,8 @@ use App\Entity\PlayerEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeTransferApplicationService;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
+use App\Progression\UI\Api\ProgressionApiJsonPayloadDecoder;
 use App\Progression\UI\Api\ProgressionApiUserContext;
-use JsonException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,6 +32,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
         private readonly PlayerKnowledgeTransferApplicationService $playerKnowledgeTransferApplicationService,
         private readonly ProgressionApiUserContext $progressionApiUserContext,
         private readonly ProgressionApiErrorResponder $progressionApiErrorResponder,
+        private readonly ProgressionApiJsonPayloadDecoder $progressionApiJsonPayloadDecoder,
     ) {
     }
 
@@ -54,7 +55,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
             return $this->progressionApiErrorResponder->playerNotFound();
         }
 
-        $result = $this->playerKnowledgeTransferApplicationService->import($player, $this->decodeJson($request));
+        $result = $this->playerKnowledgeTransferApplicationService->import($player, $this->progressionApiJsonPayloadDecoder->decode($request));
         if (!$result['ok']) {
             return $this->json($result, JsonResponse::HTTP_BAD_REQUEST);
         }
@@ -70,7 +71,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
             return $this->progressionApiErrorResponder->playerNotFound();
         }
 
-        $result = $this->playerKnowledgeTransferApplicationService->previewImport($player, $this->decodeJson($request));
+        $result = $this->playerKnowledgeTransferApplicationService->previewImport($player, $this->progressionApiJsonPayloadDecoder->decode($request));
         if (!$result['ok']) {
             return $this->json($result, JsonResponse::HTTP_BAD_REQUEST);
         }
@@ -83,29 +84,6 @@ final class PlayerKnowledgeTransferController extends AbstractController
         $user = $this->progressionApiUserContext->requireAuthenticatedUser($this->getUser());
 
         return $this->playerKnowledgeApplicationService->resolveOwnedPlayer($user, $playerId);
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    private function decodeJson(Request $request): array
-    {
-        try {
-            $payload = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
-        } catch (JsonException) {
-            return [];
-        }
-
-        if (!is_array($payload)) {
-            return [];
-        }
-
-        $normalized = [];
-        foreach ($payload as $key => $value) {
-            $normalized[(string) $key] = $value;
-        }
-
-        return $normalized;
     }
 
 }

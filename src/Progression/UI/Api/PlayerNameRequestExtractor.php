@@ -13,14 +13,18 @@ declare(strict_types=1);
 
 namespace App\Progression\UI\Api;
 
-use JsonException;
 use Symfony\Component\HttpFoundation\Request;
 
 final class PlayerNameRequestExtractor
 {
+    public function __construct(
+        private readonly ProgressionApiJsonPayloadDecoder $jsonPayloadDecoder,
+    ) {
+    }
+
     public function extract(Request $request): ?string
     {
-        $payload = $this->decodeJson($request);
+        $payload = $this->jsonPayloadDecoder->decode($request);
         $value = $payload['name'] ?? null;
         if (!is_string($value)) {
             return null;
@@ -30,28 +34,4 @@ final class PlayerNameRequestExtractor
 
         return '' === $value ? null : $value;
     }
-
-    /**
-     * @return array<string, mixed>
-     */
-    private function decodeJson(Request $request): array
-    {
-        try {
-            $payload = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
-        } catch (JsonException) {
-            return [];
-        }
-
-        if (!is_array($payload)) {
-            return [];
-        }
-
-        $normalized = [];
-        foreach ($payload as $key => $value) {
-            $normalized[(string) $key] = $value;
-        }
-
-        return $normalized;
-    }
 }
-

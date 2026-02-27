@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Progression\UI\Api;
 
 use App\Progression\UI\Api\PlayerNameRequestExtractor;
+use App\Progression\UI\Api\ProgressionApiJsonPayloadDecoder;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,7 +13,7 @@ final class PlayerNameRequestExtractorTest extends TestCase
 {
     public function testExtractReturnsTrimmedNameFromValidJsonPayload(): void
     {
-        $extractor = new PlayerNameRequestExtractor();
+        $extractor = new PlayerNameRequestExtractor(new ProgressionApiJsonPayloadDecoder());
         $request = new Request(content: json_encode(['name' => '  Main Character  '], JSON_THROW_ON_ERROR));
 
         $result = $extractor->extract($request);
@@ -22,7 +23,7 @@ final class PlayerNameRequestExtractorTest extends TestCase
 
     public function testExtractReturnsNullForInvalidPayloads(): void
     {
-        $extractor = new PlayerNameRequestExtractor();
+        $extractor = new PlayerNameRequestExtractor(new ProgressionApiJsonPayloadDecoder());
 
         $invalidJson = new Request(content: '{invalid');
         self::assertNull($extractor->extract($invalidJson));
@@ -37,4 +38,3 @@ final class PlayerNameRequestExtractorTest extends TestCase
         self::assertNull($extractor->extract($blankName));
     }
 }
-

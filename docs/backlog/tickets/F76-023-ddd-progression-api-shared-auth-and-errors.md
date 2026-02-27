@@ -6,12 +6,14 @@ Les controllers API progression dupliquent encore la resolution de l utilisateur
 ## Scope
 - Introduire un composant partage de contexte utilisateur API progression.
 - Introduire un responder JSON partage pour les erreurs API progression recurrentes.
+- Introduire un decodeur JSON partage pour payloads API progression.
 - Brancher au minimum `PlayerController`, `PlayerItemKnowledgeController`, `PlayerKnowledgeTransferController`, `PlayerStatsController`.
 - Conserver routes, status codes et messages existants.
 
 ## Avancement
 - [x] Extraire `ProgressionApiUserContext`.
 - [x] Extraire `ProgressionApiErrorResponder`.
+- [x] Extraire `ProgressionApiJsonPayloadDecoder`.
 - [x] Brancher les controllers progression cibles.
 - [x] Ajouter tests unitaires des nouveaux composants.
 - [ ] Validation fonctionnelle manuelle (`make phpunit-functional`) et ajustements si besoin.
