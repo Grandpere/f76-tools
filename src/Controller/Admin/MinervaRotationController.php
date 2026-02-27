@@ -29,6 +29,8 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 #[Route('/admin/minerva-rotation')]
 final class MinervaRotationController extends AbstractController
 {
+    use AdminRoleGuardControllerTrait;
+
     public function __construct(
         private readonly MinervaRotationTimelineApplicationService $timelineService,
         private readonly MinervaRotationRegenerationApplicationService $regenerationService,
@@ -39,7 +41,7 @@ final class MinervaRotationController extends AbstractController
     #[Route('', name: 'app_admin_minerva_rotation', methods: ['GET'])]
     public function index(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->ensureAdminAccess();
 
         $now = new DateTimeImmutable('now', new DateTimeZone('America/New_York'));
         $defaultFrom = $now->format('Y-m-01');
@@ -55,7 +57,7 @@ final class MinervaRotationController extends AbstractController
     #[Route('/regenerate', name: 'app_admin_minerva_rotation_regenerate', methods: ['POST'])]
     public function regenerate(Request $request): RedirectResponse
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->ensureAdminAccess();
 
         $token = (string) $request->request->get('_csrf_token', '');
         if (!$this->csrfTokenManager->isTokenValid(new CsrfToken('admin_minerva_rotation_regenerate', $token))) {

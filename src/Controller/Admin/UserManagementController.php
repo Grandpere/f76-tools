@@ -40,6 +40,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[Route('/admin/users')]
 final class UserManagementController extends AbstractController
 {
+    use AdminRoleGuardControllerTrait;
+
     public function __construct(
         private readonly UserEntityRepository $userRepository,
         private readonly EntityManagerInterface $entityManager,
@@ -58,7 +60,7 @@ final class UserManagementController extends AbstractController
     #[Route('', name: 'app_admin_users', methods: ['GET'])]
     public function index(): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->ensureAdminAccess();
 
         return $this->render('admin/users.html.twig', [
             'users' => $this->userRepository->findAllOrdered(),
@@ -160,7 +162,7 @@ final class UserManagementController extends AbstractController
 
     private function guardAdminPostOrFailure(Request $request, string $tokenId): ?RedirectResponse
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->ensureAdminAccess();
         if ($this->isValidToken($request, $tokenId)) {
             return null;
         }

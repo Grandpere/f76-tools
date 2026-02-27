@@ -28,6 +28,8 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 #[Route('/admin/contact-messages')]
 final class ContactMessageController extends AbstractController
 {
+    use AdminRoleGuardControllerTrait;
+
     public function __construct(
         private readonly ContactMessageListApplicationService $contactMessageListApplicationService,
         private readonly ContactMessageStatusUpdateApplicationService $contactMessageStatusUpdateApplicationService,
@@ -39,7 +41,7 @@ final class ContactMessageController extends AbstractController
     #[Route('', name: 'app_admin_contact_messages', methods: ['GET'])]
     public function index(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->ensureAdminAccess();
 
         $listResult = $this->contactMessageListApplicationService->list(
             $request->query->get('q'),
@@ -63,7 +65,7 @@ final class ContactMessageController extends AbstractController
     #[Route('/{id<\d+>}/status', name: 'app_admin_contact_messages_set_status', methods: ['POST'])]
     public function setStatus(int $id, Request $request): RedirectResponse
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->ensureAdminAccess();
 
         if (!$this->isValidToken($request, 'admin_contact_messages_set_status_'.$id)) {
             return $this->contactMessageStatusUpdateResponder->invalidCsrf($request);

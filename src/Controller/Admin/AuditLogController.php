@@ -24,6 +24,8 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/audit-logs')]
 final class AuditLogController extends AbstractController
 {
+    use AdminRoleGuardControllerTrait;
+
     public function __construct(
         private readonly AuditLogListApplicationService $auditLogListApplicationService,
         private readonly AuditLogExportApplicationService $auditLogExportApplicationService,
@@ -34,7 +36,7 @@ final class AuditLogController extends AbstractController
     #[Route('', name: 'app_admin_audit_logs', methods: ['GET'])]
     public function __invoke(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->ensureAdminAccess();
 
         $listResult = $this->auditLogListApplicationService->list(
             $request->query->get('q'),
@@ -58,7 +60,7 @@ final class AuditLogController extends AbstractController
     #[Route('/export.csv', name: 'app_admin_audit_logs_export', methods: ['GET'])]
     public function export(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->ensureAdminAccess();
 
         $exportResult = $this->auditLogExportApplicationService->export(
             $request->query->get('q'),
