@@ -2,7 +2,7 @@
 
 ## Priorite active
 - F76-082: Inventaire des changements DDD restants (utile + optionnel).
-- F76-082: Inventory structure `src` confirme avec l'utilisateur (dossiers legacy a migrer: `Controller`, `Domain`, `Entity`, `EventSubscriber`, `Repository`, `Security`, `Service`; dossier vide `Translation` a supprimer).
+- F76-082: Finaliser les slices optionnels restants (DTO HTTP admin, durcissement import catalog, docblocks payloads).
 
 ## Termine recemment
 - F76-081: DDD Slice 71 - Admin boundary typing hardening (done).
@@ -79,7 +79,7 @@
 - F76-004: Minerva Source Governance (done).
 
 ## Ensuite
-- F76-082: Executer le bloc "utile" de l'inventaire (commands par contexte + harmonisation helper/entrees admin).
+- F76-082: Cloturer les slices optionnels et valider par campagne fonctionnelle complete.
 - F76-010: DDD Foundations (done, keep as reference).
 - F76-011: DDD Slice 1 - Progression context (done, keep as reference).
 - F76-001: Contact messages en base + backoffice admin (done).
