@@ -161,7 +161,6 @@
                             <th>{{ 'minerva.location'|trans }}</th>
                             <th>{{ 'minerva.starts_at'|trans }}</th>
                             <th>{{ 'minerva.ends_at'|trans }}</th>
-                            <th>{{ 'minerva.status'|trans }}</th>
                             <th>{{ 'minerva.list_progress'|trans }}</th>
                         </tr>
                         </thead>
@@ -175,7 +174,6 @@
                                     <td>{{ row.location }}</td>
                                     <td>{{ row.startsAt|date('Y-m-d H:i') }}</td>
                                     <td>{{ row.endsAt|date('Y-m-d H:i') }}</td>
-                                    <td><span class="item-pill">{{ ('minerva.status_' ~ row.status)|trans }}</span></td>
                                     <td data-minerva-progression-target="cell" data-list-cycle="{{ row.listCycle }}">
                                         <div class="minerva-progress-cell">
                                             <div class="minerva-progress-meta" data-minerva-progress-meta>-</div>
@@ -189,7 +187,7 @@
                         {% endfor %}
                         {% if not hasActiveOrUpcoming %}
                             <tr>
-                                <td colspan="6">{{ 'minerva.empty'|trans }}</td>
+                                <td colspan="5">{{ 'minerva.empty'|trans }}</td>
                             </tr>
                         {% endif %}
                         </tbody>
