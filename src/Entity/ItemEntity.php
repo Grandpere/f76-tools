@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Domain\Item\ItemInterface;
-use App\Domain\Item\ItemTypeEnum;
+use App\Catalog\Domain\Item\ItemInterface;
+use App\Catalog\Domain\Item\ItemTypeEnum;
 use App\Repository\ItemEntityRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;

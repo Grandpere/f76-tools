@@ -11,17 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Domain\Item;
+namespace App\Catalog\Domain\Minerva;
 
-interface ItemInterface
+enum MinervaRotationStatusEnum: string
 {
-    public function getSourceId(): int;
-
-    public function getType(): ItemTypeEnum;
-
-    public function getNameKey(): string;
-
-    public function getDescKey(): ?string;
-
-    public function getRank(): ?int;
+    case UPCOMING = 'upcoming';
+    case ACTIVE = 'active';
+    case ENDED = 'ended';
 }

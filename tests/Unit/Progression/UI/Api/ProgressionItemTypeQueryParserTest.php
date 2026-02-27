@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Progression\UI\Api;
 
-use App\Domain\Item\ItemTypeEnum;
+use App\Catalog\Domain\Item\ItemTypeEnum;
 use App\Progression\UI\Api\ProgressionItemTypeQueryParser;
 use PHPUnit\Framework\TestCase;
 

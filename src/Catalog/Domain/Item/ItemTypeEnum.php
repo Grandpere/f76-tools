@@ -11,11 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Domain\Minerva;
+namespace App\Catalog\Domain\Item;
 
-enum MinervaRotationStatusEnum: string
+enum ItemTypeEnum: string
 {
-    case UPCOMING = 'upcoming';
-    case ACTIVE = 'active';
-    case ENDED = 'ended';
+    case MISC = 'MISC';
+    case BOOK = 'BOOK';
 }

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Catalog\Application\Minerva;
 
-use App\Domain\Minerva\MinervaRotationStatusEnum;
+use App\Catalog\Domain\Minerva\MinervaRotationStatusEnum;
 use DateTimeImmutable;
 use DateTimeZone;
 

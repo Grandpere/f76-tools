@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Domain\Support\Contact\ContactMessageStatusEnum;
 use App\Repository\ContactMessageEntityRepository;
+use App\Support\Domain\Contact\ContactMessageStatusEnum;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;

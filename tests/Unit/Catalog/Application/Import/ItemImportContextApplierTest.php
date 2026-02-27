@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Catalog\Application\Import;
 
 use App\Catalog\Application\Import\ItemImportContextApplier;
-use App\Domain\Item\ItemTypeEnum;
+use App\Catalog\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemEntity;
 use PHPUnit\Framework\TestCase;
 

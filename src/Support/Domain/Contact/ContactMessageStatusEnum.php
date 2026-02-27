@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Domain\Support\Contact;
+namespace App\Support\Domain\Contact;
 
 enum ContactMessageStatusEnum: string
 {

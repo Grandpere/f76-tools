@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Catalog\Application\Import;
 
 use App\Catalog\Application\Import\ItemImportFileContextResolver;
-use App\Domain\Item\ItemTypeEnum;
+use App\Catalog\Domain\Item\ItemTypeEnum;
 use PHPUnit\Framework\TestCase;
 
 final class ItemImportFileContextResolverTest extends TestCase

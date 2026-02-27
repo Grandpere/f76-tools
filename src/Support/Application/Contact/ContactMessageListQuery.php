@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Support\Application\Contact;
 
-use App\Domain\Support\Contact\ContactMessageStatusEnum;
+use App\Support\Domain\Contact\ContactMessageStatusEnum;
 
 final readonly class ContactMessageListQuery
 {

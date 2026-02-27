@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Domain\Item\ItemTypeEnum;
+use App\Catalog\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
 use App\Entity\PlayerItemKnowledgeEntity;

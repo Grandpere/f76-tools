@@ -24,9 +24,9 @@ services:
         arguments:
             $secret: '%kernel.secret%'
 
-    App\Contract\UserByEmailFinderInterface: '@App\Repository\UserEntityRepository'
-    App\Contract\TranslationCatalogReaderInterface: '@App\Catalog\Infrastructure\Translation\TranslationCatalogReader'
-    App\Contract\TranslationCatalogWriterInterface: '@App\Catalog\Infrastructure\Translation\TranslationCatalogWriter'
+    App\Identity\Application\User\UserByEmailFinder: '@App\Repository\UserEntityRepository'
+    App\Catalog\Application\Translation\TranslationCatalogReader: '@App\Catalog\Infrastructure\Translation\TranslationCatalogReader'
+    App\Catalog\Application\Translation\TranslationCatalogWriter: '@App\Catalog\Infrastructure\Translation\TranslationCatalogWriter'
     App\Catalog\Application\Import\ItemImportSourceReaderInterface: '@App\Catalog\Infrastructure\Import\FilesystemItemImportSourceReader'
     App\Catalog\Application\Import\ItemImportPersistenceInterface: '@App\Catalog\Infrastructure\Import\DoctrineItemImportPersistence'
     App\Identity\Application\VerifyEmail\VerifyEmailUserRepositoryInterface: '@App\Repository\UserEntityRepository'

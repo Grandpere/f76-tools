@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Support\Application\Contact;
 
-use App\Domain\Support\Contact\ContactMessageStatusEnum;
 use App\Support\Application\Contact\ContactMessageListApplicationService;
 use App\Support\Application\Contact\ContactMessageListQuery;
 use App\Support\Application\Contact\ContactMessageReadRepositoryInterface;
+use App\Support\Domain\Contact\ContactMessageStatusEnum;
 use PHPUnit\Framework\TestCase;
 
 final class ContactMessageListApplicationServiceTest extends TestCase

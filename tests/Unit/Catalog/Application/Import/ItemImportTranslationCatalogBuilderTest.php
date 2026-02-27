@@ -15,7 +15,7 @@ namespace App\Tests\Unit\Catalog\Application\Import;
 
 use App\Catalog\Application\Import\ItemImportTranslationCatalogBuilder;
 use App\Catalog\Application\Import\ItemImportValueNormalizer;
-use App\Domain\Item\ItemTypeEnum;
+use App\Catalog\Domain\Item\ItemTypeEnum;
 use PHPUnit\Framework\TestCase;
 
 final class ItemImportTranslationCatalogBuilderTest extends TestCase

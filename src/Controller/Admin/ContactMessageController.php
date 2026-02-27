@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\Domain\Support\Contact\ContactMessageStatusEnum;
 use App\Support\Application\Contact\ContactMessageListApplicationService;
 use App\Support\Application\Contact\ContactMessageListQuery;
 use App\Support\Application\Contact\ContactMessageStatusUpdateApplicationService;
 use App\Support\Application\Contact\ContactMessageStatusUpdateRequest;
+use App\Support\Domain\Contact\ContactMessageStatusEnum;
 use App\Support\UI\Admin\ContactMessageStatusUpdateResponder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;

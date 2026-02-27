@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - CSRF field name consistency across admin forms
+- Symptom: admin translation functional test passed token but save endpoint behaved like invalid CSRF.
+- Root cause: template/test used `_token` while shared admin validator reads `_csrf_token`.
+- Fix: aligned translation form and functional test to `_csrf_token`.
+- Prevention: for admin POST actions using `AdminCsrfTokenValidatorTrait`, always use `_csrf_token` in forms/tests.
+
 ## 2026-02-27 - PHPat boundary guard when relocating shared services
 - Symptom: after moving security helpers into `Identity/Infrastructure`, `phpstan` failed on PHPat rule (`UI` layer depending on `Infrastructure`).
 - Root cause: `Identity/UI` and `Support/UI` classes injected concrete services (`AuthEventLogger`, `SignedUrlGenerator`) relocated too low in architecture.

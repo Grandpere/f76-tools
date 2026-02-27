@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Progression\Application\Knowledge;
 
-use App\Domain\Item\ItemTypeEnum;
+use App\Catalog\Domain\Item\ItemTypeEnum;
 use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
 use App\Progression\Application\Knowledge\ItemKnowledgeTransferRepository;

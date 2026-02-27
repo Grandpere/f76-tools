@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Integration\Progression\Knowledge;
 
-use App\Domain\Item\ItemTypeEnum;
+use App\Catalog\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemBookListEntity;
 use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
