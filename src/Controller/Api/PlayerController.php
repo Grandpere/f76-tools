@@ -59,9 +59,9 @@ final class PlayerController extends AbstractController
     public function create(Request $request): JsonResponse
     {
         $user = $this->getAuthenticatedUser();
-        $name = $this->playerNameRequestExtractor->extract($request);
-        if (null === $name) {
-            return $this->playerControllerWriteResponder->invalidPlayerName();
+        $name = $this->extractPlayerNameOrInvalid($request);
+        if ($name instanceof JsonResponse) {
+            return $name;
         }
 
         $result = $this->playerApplicationService->createForUser($user, $name);
@@ -91,9 +91,9 @@ final class PlayerController extends AbstractController
             return $player;
         }
 
-        $name = $this->playerNameRequestExtractor->extract($request);
-        if (null === $name) {
-            return $this->playerControllerWriteResponder->invalidPlayerName();
+        $name = $this->extractPlayerNameOrInvalid($request);
+        if ($name instanceof JsonResponse) {
+            return $name;
         }
 
         $renameResult = $this->playerApplicationService->renameOwned($player, $name);
@@ -125,5 +125,15 @@ final class PlayerController extends AbstractController
     protected function progressionOwnedPlayerApiResolver(): ProgressionOwnedPlayerApiResolver
     {
         return $this->progressionOwnedPlayerApiResolver;
+    }
+
+    private function extractPlayerNameOrInvalid(Request $request): string|JsonResponse
+    {
+        $name = $this->playerNameRequestExtractor->extract($request);
+        if (null === $name) {
+            return $this->playerControllerWriteResponder->invalidPlayerName();
+        }
+
+        return $name;
     }
 }

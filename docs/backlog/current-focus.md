@@ -1,9 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- F76-046: DDD Slice 36 - Progression resolver traits ergonomics (in progress).
+- F76-047: DDD Slice 37 - Player controller name extraction cleanup (in progress).
 
 ## Termine recemment
+- F76-046: DDD Slice 36 - Progression resolver traits ergonomics (code done, functional pending).
 - F76-045: DDD Slice 35 - Progression resolver trait unit coverage (code done, functional pending).
 - F76-044: DDD Slice 34 - Knowledge transfer import mode enum (code done, functional pending).
 - F76-043: DDD Slice 33 - Progression API resolver helpers trait (code done, functional pending).
