@@ -27,6 +27,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ForgotPasswordController extends AbstractController
 {
+    use IdentityEmailFlowControllerTrait;
     use IdentityCaptchaRenderControllerTrait;
 
     public function __construct(
@@ -44,11 +45,10 @@ final class ForgotPasswordController extends AbstractController
     {
         if ($request->isMethod('POST')) {
             $flow = IdentityEmailFlow::FORGOT_PASSWORD;
-            $guardResult = $this->identityEmailFlowGuard->guard($request, $flow);
-            if (null !== $guardResult->failureFlashMessage) {
-                return $this->identityFlashResponder->warningToRoute($request, $flow->failureRoute(), $guardResult->failureFlashMessage);
+            $payload = $this->resolveEmailFlowPayloadOrFailureResponse($request, $flow);
+            if ($payload instanceof Response) {
+                return $payload;
             }
-            $payload = $guardResult->payload;
 
             $requestResult = $this->forgotPasswordRequestApplicationService->request($payload->email, $this->identityClock->now());
             if ($requestResult->isTokenIssued()) {
@@ -69,5 +69,15 @@ final class ForgotPasswordController extends AbstractController
     protected function turnstileVerifier(): TurnstileVerifier
     {
         return $this->turnstileVerifier;
+    }
+
+    protected function identityEmailFlowGuard(): IdentityEmailFlowGuard
+    {
+        return $this->identityEmailFlowGuard;
+    }
+
+    protected function identityFlashResponder(): IdentityFlashResponder
+    {
+        return $this->identityFlashResponder;
     }
 }
