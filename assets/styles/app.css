@@ -620,6 +620,25 @@ body::before {
     align-items: center;
 }
 
+.backup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+}
+
+.backup-header .transfer-actions {
+    justify-content: flex-end;
+}
+
+.transfer-controls {
+    margin-top: 0.65rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+}
+
 .transfer-actions button {
     border: 1px solid rgba(160, 119, 0, 0.38);
     border-radius: 12px;
@@ -639,10 +658,10 @@ body::before {
 .transfer-file input[type='file'] {
     max-width: 260px;
     font-size: 0.8rem;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 0.24rem 0.4rem;
-    background: #fff;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
     color: var(--text-1);
 }
 

@@ -92,8 +92,14 @@
                 <p class="catalog-state" role="status" aria-live="polite" data-player-progression-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
             </section>
             <section class="catalog-panel catalog-block">
-                <h2>{{ 'progression.backup_title'|trans }}</h2>
-                <div class="transfer-actions">
+                <div class="backup-header">
+                    <h2>{{ 'progression.backup_title'|trans }}</h2>
+                    <div class="transfer-actions">
+                        <button type="button" data-player-progression-target="importButton">{{ 'dashboard.transfer.import'|trans }}</button>
+                        <button type="button" data-player-progression-target="exportButton">{{ 'dashboard.transfer.export'|trans }}</button>
+                    </div>
+                </div>
+                <div class="transfer-controls">
                     <label class="transfer-file">
                         <input type="file" accept="application/json" data-player-progression-target="importFileInput">
                     </label>
@@ -101,8 +107,6 @@
                         <input type="checkbox" data-player-progression-target="importMergeCheckbox">
                         {{ 'dashboard.transfer.merge_mode'|trans }}
                     </label>
-                    <button type="button" data-player-progression-target="importButton">{{ 'dashboard.transfer.import'|trans }}</button>
-                    <button type="button" data-player-progression-target="exportButton">{{ 'dashboard.transfer.export'|trans }}</button>
                 </div>
                 <div class="transfer-unknown-panel" data-player-progression-target="importUnknownPanel"></div>
             </section>
