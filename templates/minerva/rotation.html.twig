@@ -54,7 +54,7 @@
             <p class="catalog-state">{{ 'minerva.timezone'|trans({'%timezone%': timeline.timezone}) }}</p>
         </header>
 
-        <section class="translations-panel">
+        <section class="catalog-block">
             {% set nextWindow = timeline.upcoming|first %}
             {% if timeline.current %}
                 {% set countdownTitle = 'minerva.countdown_title_active'|trans %}
@@ -111,7 +111,7 @@
             </article>
         </section>
 
-        <section class="translations-panel">
+        <section class="catalog-block">
             <div class="minerva-window-grid">
                 <article class="minerva-window-card">
                     <h2>{{ 'minerva.current_window_title'|trans }}</h2>
