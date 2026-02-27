@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    static targets = ['playerSelect', 'state', 'statsPanel'];
+    static targets = ['playerSelect', 'createNameInput', 'createButton', 'state', 'statsPanel', 'exportButton', 'importFileInput', 'importMergeCheckbox', 'importButton', 'importUnknownPanel'];
     static values = {
         playersUrl: String,
         playersBaseUrl: String,
@@ -26,6 +26,26 @@ export default class extends Controller {
             this.activePlayerId = this.playerSelectTarget.value;
             this.saveActivePlayerId(this.activePlayerId);
             await this.loadStats();
+        });
+
+        this.createButtonTarget.addEventListener('click', async () => {
+            await this.createPlayerFromInput();
+        });
+
+        this.createNameInputTarget.addEventListener('keydown', async (event) => {
+            if (event.key !== 'Enter') {
+                return;
+            }
+            event.preventDefault();
+            await this.createPlayerFromInput();
+        });
+
+        this.exportButtonTarget.addEventListener('click', async () => {
+            await this.exportKnowledge();
+        });
+
+        this.importButtonTarget.addEventListener('click', async () => {
+            await this.importKnowledge();
         });
     }
 
@@ -54,6 +74,53 @@ export default class extends Controller {
         await this.loadStats();
     }
 
+    async createPlayerFromInput() {
+        const name = this.createNameInputTarget.value.trim();
+        if (name === '') {
+            this.setState(this.t('playerNameRequired'));
+            return;
+        }
+
+        this.createButtonTarget.disabled = true;
+        this.setState(this.t('creatingPlayer'));
+
+        const response = await fetch(this.appendLocaleToUrl(this.playersUrlValue), {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify({ name }),
+        });
+
+        this.createButtonTarget.disabled = false;
+
+        if (!response.ok) {
+            if (response.status === 409) {
+                this.setState(this.t('playerNameExists'));
+                return;
+            }
+            this.setState(`${this.t('createPlayerFailed')} (${response.status}).`);
+            return;
+        }
+
+        const created = await response.json();
+        const createdId = String(created.id ?? '');
+        this.createNameInputTarget.value = '';
+        await this.loadPlayers();
+        if (createdId !== '') {
+            const found = this.players.find((player) => String(player.id) === createdId);
+            if (found) {
+                this.activePlayerId = createdId;
+                this.playerSelectTarget.value = createdId;
+                this.saveActivePlayerId(this.activePlayerId);
+                await this.loadStats();
+            }
+        }
+        this.setState(this.t('playerCreated', { '%name%': name }));
+    }
+
     async loadStats() {
         if (!this.activePlayerId) {
             this.setState(this.t('noSelectedPlayer'));
@@ -77,6 +144,163 @@ export default class extends Controller {
         const payload = await response.json();
         this.stats = payload && typeof payload === 'object' ? payload : null;
         this.renderStats();
+    }
+
+    async exportKnowledge() {
+        if (!this.activePlayerId) {
+            this.setState(this.t('noSelectedPlayer'));
+            return;
+        }
+
+        const url = `${this.playersBaseUrlValue}/${this.activePlayerId}/knowledge/export`;
+        const response = await fetch(this.appendLocaleToUrl(url), {
+            headers: { Accept: 'application/json' },
+            credentials: 'same-origin',
+        });
+        if (!response.ok) {
+            this.setState(`${this.t('exportFailed')} (${response.status}).`);
+            return;
+        }
+
+        const payload = await response.json();
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+        const objectUrl = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = objectUrl;
+        link.download = `player_${this.activePlayerId}_knowledge.json`;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(objectUrl);
+        this.setState(this.t('exportDone'));
+    }
+
+    async importKnowledge() {
+        if (!this.activePlayerId) {
+            this.setState(this.t('noSelectedPlayer'));
+            return;
+        }
+
+        const file = this.importFileInputTarget.files && this.importFileInputTarget.files[0];
+        if (!file) {
+            this.clearImportUnknownPanel();
+            this.setState(this.t('importNoFile'));
+            return;
+        }
+
+        let parsed;
+        try {
+            const text = await file.text();
+            parsed = JSON.parse(text);
+        } catch {
+            this.clearImportUnknownPanel();
+            this.setState(this.t('importInvalidFile'));
+            return;
+        }
+
+        const replace = !this.importMergeCheckboxTarget.checked;
+        const previewResponse = await fetch(this.appendLocaleToUrl(`${this.playersBaseUrlValue}/${this.activePlayerId}/knowledge/preview-import`), {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify({
+                version: Number.isInteger(parsed.version) ? parsed.version : 1,
+                replace,
+                learnedItems: Array.isArray(parsed.learnedItems) ? parsed.learnedItems : [],
+            }),
+        });
+        if (!previewResponse.ok) {
+            this.clearImportUnknownPanel();
+            this.setState(`${this.t('importPreviewError')} (${previewResponse.status}).`);
+            return;
+        }
+
+        const preview = await previewResponse.json();
+        const unknownItems = Array.isArray(preview.unknownItems) ? preview.unknownItems : [];
+        if (unknownItems.length > 0) {
+            this.renderImportUnknownPanel(unknownItems);
+            const details = unknownItems
+                .slice(0, 8)
+                .map((entry) => {
+                    const type = typeof entry.type === 'string' ? entry.type : '?';
+                    const sourceId = Number.isInteger(entry.sourceId) ? entry.sourceId : Number(entry.sourceId || 0);
+
+                    return `${type}:${sourceId}`;
+                })
+                .join(', ');
+            const suffix = unknownItems.length > 8 ? ', ...' : '';
+            this.setState(
+                `${this.t('importPreviewUnknown', { '%count%': unknownItems.length })} ${this.t('importPreviewUnknownDetailsPrefix')}: ${details}${suffix}`,
+            );
+            return;
+        }
+        this.clearImportUnknownPanel();
+
+        const previewMessage = this.t('importConfirmPreview', {
+            '%add%': Number(preview.wouldAdd ?? 0),
+            '%remove%': Number(preview.wouldRemove ?? 0),
+        });
+        if (!window.confirm(previewMessage)) {
+            return;
+        }
+
+        this.importButtonTarget.disabled = true;
+        this.setState(this.t('importingProgress'));
+
+        const response = await fetch(this.appendLocaleToUrl(`${this.playersBaseUrlValue}/${this.activePlayerId}/knowledge/import`), {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify({
+                version: Number.isInteger(parsed.version) ? parsed.version : 1,
+                replace,
+                learnedItems: Array.isArray(parsed.learnedItems) ? parsed.learnedItems : [],
+            }),
+        });
+        this.importButtonTarget.disabled = false;
+
+        if (!response.ok) {
+            this.setState(`${this.t('importFailed')} (${response.status}).`);
+            return;
+        }
+
+        this.importFileInputTarget.value = '';
+        this.clearImportUnknownPanel();
+        await this.loadStats();
+        this.setState(this.t('importDone'));
+    }
+
+    renderImportUnknownPanel(unknownItems) {
+        if (!this.hasImportUnknownPanelTarget) {
+            return;
+        }
+
+        const rows = unknownItems
+            .map((entry) => {
+                const type = typeof entry.type === 'string' ? entry.type : '?';
+                const sourceId = Number.isInteger(entry.sourceId) ? entry.sourceId : Number(entry.sourceId || 0);
+
+                return `<li><code>${this.escape(type)}:${this.escape(sourceId)}</code></li>`;
+            })
+            .join('');
+
+        this.importUnknownPanelTarget.innerHTML = `
+            <p class="transfer-unknown-title">${this.escape(this.t('importPreviewUnknownDetailsPrefix'))}</p>
+            <ul>${rows}</ul>
+        `;
+    }
+
+    clearImportUnknownPanel() {
+        if (!this.hasImportUnknownPanelTarget) {
+            return;
+        }
+        this.importUnknownPanelTarget.innerHTML = '';
     }
 
     renderPlayerSelect() {
@@ -268,4 +492,3 @@ export default class extends Controller {
             .replaceAll("'", '&#039;');
     }
 }
-

@@ -8,7 +8,7 @@ common.no: No
 dashboard.page_title: 'F76 - Item Tracking'
 dashboard.header.translation_management: Translation management
 dashboard.header.user_management: User management
-dashboard.header.minerva_rotation: Minerva rotation
+dashboard.header.minerva_rotation: Legendary mods and Minerva
 dashboard.header.progression: Progress
 dashboard.header.admin: Administration
 dashboard.header.title: Learned items tracker

@@ -181,6 +181,7 @@ export default class extends Controller {
         this.setState(this.t('loadingItems'));
 
         const params = new URLSearchParams();
+        params.set('type', 'MISC');
         if (this.searchQuery !== '') {
             params.set('q', this.searchQuery);
         }

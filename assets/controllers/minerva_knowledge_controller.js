@@ -49,6 +49,7 @@ export default class extends Controller {
                     .filter((node) => node.checked)
                     .map((node) => node.value);
                 this.renderItems();
+                this.updateStateCounter();
             });
         });
     }
@@ -104,7 +105,7 @@ export default class extends Controller {
         const payload = await response.json();
         this.items = Array.isArray(payload) ? payload : [];
         this.renderItems();
-        this.setState('');
+        this.updateStateCounter();
     }
 
     renderItems() {
@@ -353,6 +354,7 @@ export default class extends Controller {
             ? { ...item, learned: shouldBeLearned }
             : item));
         this.renderItems();
+        this.updateStateCounter();
     }
 
     renderPlayerSelect() {
@@ -457,12 +459,28 @@ export default class extends Controller {
         return [...items].sort((a, b) => String(a.name || a.nameKey || '').localeCompare(String(b.name || b.nameKey || ''), undefined, { sensitivity: 'base' }));
     }
 
+    updateStateCounter() {
+        const visibleCount = this.getVisibleItems().length;
+        const searchSuffix = this.searchQuery !== '' ? `, ${this.t('searchFilterPrefix')}: "${this.searchQuery}"` : '';
+        const translatedFilters = this.activeSourceFilters.map((key) => this.t(`source_${key}`));
+        const sourceSuffix = this.activeSourceFilters.length > 0
+            ? `, ${this.t('sourceFiltersPrefix')}: ${translatedFilters.join(', ')}`
+            : '';
+
+        this.setState(this.t('visibleItems', { '%count%': visibleCount }) + searchSuffix + sourceSuffix + '.');
+    }
+
     setState(message) {
         this.stateTarget.textContent = message;
     }
 
-    t(key) {
-        return String(this.translations[key] ?? key);
+    t(key, params = {}) {
+        const raw = this.translations[key] ?? key;
+
+        return Object.entries(params).reduce(
+            (carry, [name, value]) => carry.replaceAll(name, String(value)),
+            String(raw),
+        );
     }
 
     escape(value) {

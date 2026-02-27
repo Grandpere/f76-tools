@@ -8,7 +8,7 @@ common.no: Non
 dashboard.page_title: 'F76 - Suivi des objets'
 dashboard.header.translation_management: Gestion des traductions
 dashboard.header.user_management: Gestion des utilisateurs
-dashboard.header.minerva_rotation: Rotation Minerva
+dashboard.header.minerva_rotation: Mods legendaires et Minerva
 dashboard.header.progression: Progression
 dashboard.header.admin: Administration
 dashboard.header.title: Suivi des objets appris

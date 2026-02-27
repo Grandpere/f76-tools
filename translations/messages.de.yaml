@@ -8,7 +8,7 @@ common.no: Nein
 dashboard.page_title: 'F76 - Objektverfolgung'
 dashboard.header.translation_management: Ubersetzungsverwaltung
 dashboard.header.user_management: Benutzerverwaltung
-dashboard.header.minerva_rotation: Minerva-Rotation
+dashboard.header.minerva_rotation: Legendare Mods und Minerva
 dashboard.header.progression: Fortschritt
 dashboard.header.admin: Administration
 dashboard.header.title: Verfolgung gelernter Objekte

@@ -7,6 +7,22 @@
         loadingPlayers: 'dashboard.state.loading_players'|trans,
         cannotLoadPlayers: 'dashboard.state.cannot_load_players'|trans,
         noPlayers: 'dashboard.state.no_players'|trans,
+        playerNameRequired: 'dashboard.state.player_name_required'|trans,
+        creatingPlayer: 'dashboard.state.creating_player'|trans,
+        playerNameExists: 'dashboard.state.player_name_exists'|trans,
+        createPlayerFailed: 'dashboard.state.create_player_failed'|trans,
+        playerCreated: 'dashboard.state.player_created'|trans,
+        exportDone: 'dashboard.state.export_done'|trans,
+        exportFailed: 'dashboard.state.export_failed'|trans,
+        importNoFile: 'dashboard.state.import_no_file'|trans,
+        importInvalidFile: 'dashboard.state.import_invalid_file'|trans,
+        importPreviewError: 'dashboard.state.import_preview_error'|trans,
+        importPreviewUnknown: 'dashboard.state.import_preview_unknown'|trans,
+        importPreviewUnknownDetailsPrefix: 'dashboard.state.import_preview_unknown_details_prefix'|trans,
+        importConfirmPreview: 'dashboard.state.import_confirm_preview'|trans,
+        importingProgress: 'dashboard.state.importing_progress'|trans,
+        importDone: 'dashboard.state.import_done'|trans,
+        importFailed: 'dashboard.state.import_failed'|trans,
         noSelectedPlayer: 'dashboard.state.no_selected_player'|trans,
         statsOverall: 'dashboard.stats.overall'|trans,
         statsMisc: 'dashboard.stats.misc'|trans,
@@ -57,15 +73,42 @@
             data-player-progression-locale-value="{{ app.request.locale }}"
             data-player-progression-ui-translations-value="{{ uiTranslations|json_encode|e('html_attr') }}"
         >
-            <section class="catalog-panel">
-                <h2>{{ 'dashboard.stats.title'|trans }}</h2>
-                <div class="catalog-toolbar">
-                    <label class="field">
-                        <span>{{ 'dashboard.filters.player'|trans }}</span>
-                        <select data-player-progression-target="playerSelect"></select>
+            <section class="catalog-top-row">
+                <section class="catalog-panel">
+                    <h2>{{ 'dashboard.stats.title'|trans }}</h2>
+                    <div class="catalog-toolbar">
+                        <label class="field">
+                            <span>{{ 'dashboard.filters.player'|trans }}</span>
+                            <select data-player-progression-target="playerSelect"></select>
+                        </label>
+                    </div>
+                    <p class="catalog-state" role="status" aria-live="polite" data-player-progression-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
+                </section>
+                <section class="catalog-panel create-player-panel">
+                    <h2>{{ 'dashboard.create_player.title'|trans }}</h2>
+                    <label class="field create-player-field">
+                        <span>{{ 'dashboard.create_player.name'|trans }}</span>
+                        <div class="field-inline">
+                            <input type="text" placeholder="{{ 'dashboard.create_player.placeholder'|trans }}" data-player-progression-target="createNameInput">
+                            <button type="button" data-player-progression-target="createButton">{{ 'dashboard.create_player.submit'|trans }}</button>
+                        </div>
                     </label>
-                </div>
-                <p class="catalog-state" role="status" aria-live="polite" data-player-progression-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
+                    <p class="catalog-note">{{ 'dashboard.create_player.help'|trans }}</p>
+                    <hr class="catalog-divider">
+                    <h2>{{ 'dashboard.transfer.title'|trans }}</h2>
+                    <div class="transfer-actions">
+                        <button type="button" data-player-progression-target="exportButton">{{ 'dashboard.transfer.export'|trans }}</button>
+                        <label class="transfer-file">
+                            <input type="file" accept="application/json" data-player-progression-target="importFileInput">
+                        </label>
+                        <label class="transfer-checkbox">
+                            <input type="checkbox" data-player-progression-target="importMergeCheckbox">
+                            {{ 'dashboard.transfer.merge_mode'|trans }}
+                        </label>
+                        <button type="button" data-player-progression-target="importButton">{{ 'dashboard.transfer.import'|trans }}</button>
+                    </div>
+                    <div class="transfer-unknown-panel" data-player-progression-target="importUnknownPanel"></div>
+                </section>
             </section>
             <section class="catalog-panel catalog-block">
                 <div data-player-progression-target="statsPanel"></div>
@@ -73,4 +116,3 @@
         </section>
     </main>
 {% endblock %}
-
