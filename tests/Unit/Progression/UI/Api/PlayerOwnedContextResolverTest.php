@@ -6,7 +6,7 @@ namespace App\Tests\Unit\Progression\UI\Api;
 
 use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
-use App\Progression\UI\Api\PlayerStatsContextResolver;
+use App\Progression\UI\Api\PlayerOwnedContextResolver;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
 use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolver;
 use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolverInterface;
@@ -14,7 +14,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-final class PlayerStatsContextResolverTest extends TestCase
+final class PlayerOwnedContextResolverTest extends TestCase
 {
     public function testResolveOrNotFoundReturnsPlayerWhenFound(): void
     {
@@ -32,7 +32,7 @@ final class PlayerStatsContextResolverTest extends TestCase
             ->with('01J5A6B7C8D9E0F1G2H3J4K5L6', $user)
             ->willReturn($player);
 
-        $resolver = new PlayerStatsContextResolver(
+        $resolver = new PlayerOwnedContextResolver(
             new ProgressionOwnedPlayerApiResolver($readResolver, new ProgressionApiErrorResponder()),
         );
 
@@ -55,7 +55,7 @@ final class PlayerStatsContextResolverTest extends TestCase
             ->with('missing-player', $user)
             ->willReturn(null);
 
-        $resolver = new PlayerStatsContextResolver(
+        $resolver = new PlayerOwnedContextResolver(
             new ProgressionOwnedPlayerApiResolver($readResolver, new ProgressionApiErrorResponder()),
         );
 

@@ -16,7 +16,7 @@ namespace App\Progression\UI\Api;
 use App\Entity\PlayerEntity;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-final class PlayerStatsContextResolver
+final class PlayerOwnedContextResolver
 {
     public function __construct(
         private readonly ProgressionOwnedPlayerApiResolver $progressionOwnedPlayerApiResolver,
