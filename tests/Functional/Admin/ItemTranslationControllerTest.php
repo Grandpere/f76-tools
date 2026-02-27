@@ -75,19 +75,13 @@ final class ItemTranslationControllerTest extends WebTestCase
         $user = $this->createUser('translations-save@example.com');
         $this->browser()->loginUser($user);
         $crawler = $this->browser()->request('GET', '/admin/translations/items?locale=fr&target=zz');
-        $tokenNode = $crawler->filter('input[name="_token"]');
-        self::assertCount(1, $tokenNode);
-        $token = (string) $tokenNode->attr('value');
-        self::assertNotSame('', $token);
-
-        $this->browser()->request('POST', '/admin/translations/items?locale=fr&target=zz', [
-            '_token' => $token,
-            'target' => 'zz',
-            'entries' => [
-                'item.misc.10.name' => 'Nom FR test',
-                'item.book.250.name' => 'Plan FR test',
-            ],
+        $formNode = $crawler->filter('form[method="post"]');
+        self::assertCount(1, $formNode);
+        $form = $formNode->form([
+            'entries[item.misc.10.name]' => 'Nom FR test',
+            'entries[item.book.250.name]' => 'Plan FR test',
         ]);
+        $this->browser()->submit($form);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
 
