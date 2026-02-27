@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Catalog\Domain\Entity;
 
+use App\Catalog\Domain\Minerva\MinervaRotationSourceEnum;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -23,6 +24,7 @@ use InvalidArgumentException;
 #[ORM\Index(name: 'idx_minerva_rotation_starts_at', columns: ['starts_at'])]
 #[ORM\Index(name: 'idx_minerva_rotation_ends_at', columns: ['ends_at'])]
 #[ORM\Index(name: 'idx_minerva_rotation_list_cycle', columns: ['list_cycle'])]
+#[ORM\Index(name: 'idx_minerva_rotation_source', columns: ['source'])]
 #[ORM\HasLifecycleCallbacks]
 class MinervaRotationEntity
 {
@@ -42,6 +44,9 @@ class MinervaRotationEntity
 
     #[ORM\Column(name: 'ends_at', type: Types::DATETIME_IMMUTABLE)]
     private DateTimeImmutable $endsAt;
+
+    #[ORM\Column(length: 16, options: ['default' => MinervaRotationSourceEnum::GENERATED->value])]
+    private string $source = MinervaRotationSourceEnum::GENERATED->value;
 
     #[ORM\Column(name: 'created_at', type: Types::DATETIME_IMMUTABLE)]
     private DateTimeImmutable $createdAt;
@@ -112,6 +117,18 @@ class MinervaRotationEntity
     public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;
+    }
+
+    public function getSource(): MinervaRotationSourceEnum
+    {
+        return MinervaRotationSourceEnum::from($this->source);
+    }
+
+    public function setSource(MinervaRotationSourceEnum $source): self
+    {
+        $this->source = $source->value;
+
+        return $this;
     }
 
     public function getUpdatedAt(): DateTimeImmutable

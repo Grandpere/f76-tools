@@ -36,6 +36,7 @@ final class MinervaRotationTimelineApplicationService
      *         listCycle: int,
      *         startsAt: string,
      *         endsAt: string,
+     *         source: string,
      *         status: string
      *     }|null,
      *     upcoming: list<array{
@@ -44,6 +45,7 @@ final class MinervaRotationTimelineApplicationService
      *         listCycle: int,
      *         startsAt: string,
      *         endsAt: string,
+     *         source: string,
      *         status: string
      *     }>,
      *     rows: list<array{
@@ -52,6 +54,7 @@ final class MinervaRotationTimelineApplicationService
      *         listCycle: int,
      *         startsAt: string,
      *         endsAt: string,
+     *         source: string,
      *         status: string
      *     }>
      * }
@@ -63,7 +66,7 @@ final class MinervaRotationTimelineApplicationService
             ? $now->setTimezone($timezone)
             : new DateTimeImmutable('now', $timezone);
 
-        /** @var list<array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string,status:string}> $typedRows */
+        /** @var list<array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string,source:string,status:string}> $typedRows */
         $typedRows = [];
         $rows = [];
         foreach ($this->rotationReader->findAllOrdered() as $rotation) {
@@ -81,6 +84,7 @@ final class MinervaRotationTimelineApplicationService
                 'listCycle' => $rotation->getListCycle(),
                 'startsAt' => $startsAt->format(DATE_ATOM),
                 'endsAt' => $endsAt->format(DATE_ATOM),
+                'source' => $rotation->getSource()->value,
                 'status' => $status->value,
             ];
             $rows[] = $row;
@@ -99,9 +103,9 @@ final class MinervaRotationTimelineApplicationService
     }
 
     /**
-     * @param list<array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string,status:string}> $rows
+     * @param list<array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string,source:string,status:string}> $rows
      *
-     * @return array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string,status:string}|null
+     * @return array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string,source:string,status:string}|null
      */
     private function resolveCurrentWindow(array $rows): ?array
     {
@@ -115,9 +119,9 @@ final class MinervaRotationTimelineApplicationService
     }
 
     /**
-     * @param list<array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string,status:string}> $rows
+     * @param list<array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string,source:string,status:string}> $rows
      *
-     * @return list<array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string,status:string}>
+     * @return list<array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string,source:string,status:string}>
      */
     private function resolveUpcomingWindows(array $rows, int $limit): array
     {

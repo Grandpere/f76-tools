@@ -13,9 +13,22 @@ declare(strict_types=1);
 
 namespace App\Catalog\Application\Minerva;
 
+use App\Catalog\Domain\Entity\MinervaRotationEntity;
 use DateTimeImmutable;
 
 interface MinervaRotationRegenerationRepository
 {
-    public function deleteOverlappingRange(DateTimeImmutable $from, DateTimeImmutable $to): int;
+    public function deleteOverlappingGeneratedRange(DateTimeImmutable $from, DateTimeImmutable $to): int;
+
+    /**
+     * @return list<MinervaRotationEntity>
+     */
+    public function findManualOverlappingRange(DateTimeImmutable $from, DateTimeImmutable $to): array;
+
+    /**
+     * @return list<MinervaRotationEntity>
+     */
+    public function findManualOrdered(): array;
+
+    public function findManualById(int $id): ?MinervaRotationEntity;
 }

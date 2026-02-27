@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace App\Support\UI\Admin\Controller;
 
+use App\Catalog\Application\Minerva\MinervaRotationOverrideApplicationService;
 use App\Catalog\Application\Minerva\MinervaRotationRegenerationApplicationService;
 use App\Catalog\Application\Minerva\MinervaRotationTimelineApplicationService;
 use DateInterval;
 use DateTimeImmutable;
 use DateTimeZone;
+use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,6 +36,7 @@ final class MinervaRotationController extends AbstractController
     public function __construct(
         private readonly MinervaRotationTimelineApplicationService $timelineService,
         private readonly MinervaRotationRegenerationApplicationService $regenerationService,
+        private readonly MinervaRotationOverrideApplicationService $overrideService,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
     ) {
     }
@@ -51,6 +54,7 @@ final class MinervaRotationController extends AbstractController
             'timeline' => $this->timelineService->buildTimeline(),
             'defaultFrom' => $defaultFrom,
             'defaultTo' => $defaultTo,
+            'manualOverrides' => $this->buildManualRows(),
         ]);
     }
 
@@ -76,10 +80,67 @@ final class MinervaRotationController extends AbstractController
         $result = $this->regenerationService->regenerate($from, $to);
         $this->addFlash('success', 'admin_minerva.flash.regenerated');
         $this->addFlash('success', sprintf(
-            'Deleted: %d · Inserted: %d',
+            'Deleted: %d · Inserted: %d · Skipped: %d',
             $result['deleted'],
             $result['inserted'],
+            $result['skipped'],
         ));
+
+        return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+    }
+
+    #[Route('/override/create', name: 'app_admin_minerva_rotation_override_create', methods: ['POST'])]
+    public function createOverride(Request $request): RedirectResponse
+    {
+        $this->ensureAdminAccess();
+        if (!$this->isValidToken($request, 'admin_minerva_rotation_override_create')) {
+            $this->addFlash('warning', 'admin_minerva.flash.invalid_csrf');
+
+            return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+        }
+
+        $timezone = new DateTimeZone('America/New_York');
+        $location = trim((string) $request->request->get('location', ''));
+        $listCycle = $this->parsePositiveInt($request->request->get('listCycle'));
+        $startsAt = $this->parseDateTime((string) $request->request->get('startsAt', ''), $timezone);
+        $endsAt = $this->parseDateTime((string) $request->request->get('endsAt', ''), $timezone);
+
+        if ('' === $location || null === $listCycle || null === $startsAt || null === $endsAt || $endsAt < $startsAt) {
+            $this->addFlash('warning', 'admin_minerva.flash.invalid_override');
+
+            return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+        }
+
+        try {
+            $this->overrideService->createManualOverride($location, $listCycle, $startsAt, $endsAt);
+        } catch (InvalidArgumentException) {
+            $this->addFlash('warning', 'admin_minerva.flash.invalid_override');
+
+            return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+        }
+
+        $this->addFlash('success', 'admin_minerva.flash.override_created');
+
+        return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+    }
+
+    #[Route('/override/{id}/delete', name: 'app_admin_minerva_rotation_override_delete', methods: ['POST'])]
+    public function deleteOverride(Request $request, int $id): RedirectResponse
+    {
+        $this->ensureAdminAccess();
+        if (!$this->isValidToken($request, 'admin_minerva_rotation_override_delete_'.$id)) {
+            $this->addFlash('warning', 'admin_minerva.flash.invalid_csrf');
+
+            return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+        }
+
+        if (!$this->overrideService->deleteManualOverride($id)) {
+            $this->addFlash('warning', 'admin_minerva.flash.override_not_found');
+
+            return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+        }
+
+        $this->addFlash('success', 'admin_minerva.flash.override_deleted');
 
         return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
     }
@@ -93,6 +154,53 @@ final class MinervaRotationController extends AbstractController
         $suffix = $isStart ? '00:00:00' : '23:59:59';
 
         return DateTimeImmutable::createFromFormat('Y-m-d H:i:s', sprintf('%s %s', $trimmed, $suffix), $timezone) ?: null;
+    }
+
+    private function parseDateTime(string $value, DateTimeZone $timezone): ?DateTimeImmutable
+    {
+        $trimmed = trim($value);
+        if ('' === $trimmed) {
+            return null;
+        }
+
+        return DateTimeImmutable::createFromFormat('Y-m-d\TH:i', $trimmed, $timezone) ?: null;
+    }
+
+    private function parsePositiveInt(mixed $value): ?int
+    {
+        if (!is_scalar($value)) {
+            return null;
+        }
+        $normalized = trim((string) $value);
+        if ('' === $normalized || !ctype_digit($normalized)) {
+            return null;
+        }
+        $int = (int) $normalized;
+
+        return $int > 0 ? $int : null;
+    }
+
+    /**
+     * @return list<array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string}>
+     */
+    private function buildManualRows(): array
+    {
+        $rows = [];
+        foreach ($this->overrideService->listManualOverrides() as $override) {
+            $id = $override->getId();
+            if (!is_int($id)) {
+                continue;
+            }
+            $rows[] = [
+                'id' => $id,
+                'location' => $override->getLocation(),
+                'listCycle' => $override->getListCycle(),
+                'startsAt' => $override->getStartsAt()->format(DATE_ATOM),
+                'endsAt' => $override->getEndsAt()->format(DATE_ATOM),
+            ];
+        }
+
+        return $rows;
     }
 
     protected function csrfTokenManager(): CsrfTokenManagerInterface

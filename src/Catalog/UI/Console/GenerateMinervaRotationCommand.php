@@ -92,7 +92,12 @@ final class GenerateMinervaRotationCommand extends Command
 
         $result = $this->regenerationService->regenerate($from, $to);
 
-        $io->success(sprintf('Rotation regeneree. Supprimees=%d, inserees=%d.', $result['deleted'], $result['inserted']));
+        $io->success(sprintf(
+            'Rotation regeneree. Supprimees=%d, inserees=%d, ignorees (override manuel)=%d.',
+            $result['deleted'],
+            $result['inserted'],
+            $result['skipped'],
+        ));
 
         return Command::SUCCESS;
     }

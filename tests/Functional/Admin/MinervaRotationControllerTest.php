@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Admin;
 
 use App\Catalog\Domain\Entity\MinervaRotationEntity;
+use App\Catalog\Domain\Minerva\MinervaRotationSourceEnum;
 use App\Identity\Domain\Entity\UserEntity;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -89,6 +91,95 @@ final class MinervaRotationControllerTest extends WebTestCase
         self::assertGreaterThan(0, (int) $count);
     }
 
+    public function testAdminCanCreateAndDeleteManualOverride(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/minerva-rotation');
+        $tokenNode = $crawler->filter('form[action*="/admin/minerva-rotation/override/create"] input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', '/admin/minerva-rotation/override/create', [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'location' => 'Foundation',
+            'listCycle' => '9',
+            'startsAt' => '2026-04-01T12:00',
+            'endsAt' => '2026-04-03T12:00',
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $manual = $this->entityManager?->getRepository(MinervaRotationEntity::class)
+            ->findOneBy(['source' => MinervaRotationSourceEnum::MANUAL->value]);
+        self::assertInstanceOf(MinervaRotationEntity::class, $manual);
+        $manualId = $manual->getId();
+        self::assertIsInt($manualId);
+
+        $crawler = $this->browser()->request('GET', '/admin/minerva-rotation');
+        $deleteTokenNode = $crawler->filter(sprintf(
+            'form[action*="/admin/minerva-rotation/override/%d/delete"] input[name="_csrf_token"]',
+            $manualId,
+        ));
+        self::assertCount(1, $deleteTokenNode);
+
+        $this->browser()->request('POST', sprintf('/admin/minerva-rotation/override/%d/delete', $manualId), [
+            '_csrf_token' => (string) $deleteTokenNode->attr('value'),
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $deleted = $this->entityManager?->getRepository(MinervaRotationEntity::class)
+            ->findOneBy(['id' => $manualId]);
+        self::assertNull($deleted);
+    }
+
+    public function testRegenerationKeepsManualOverrideAndSkipsOverlappingGeneratedWindow(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+
+        $this->persistRotation(
+            source: MinervaRotationSourceEnum::MANUAL,
+            location: 'Foundation',
+            listCycle: 8,
+            startsAt: '2026-03-12T12:00:00+00:00',
+            endsAt: '2026-03-16T12:00:00+00:00',
+        );
+
+        $crawler = $this->browser()->request('GET', '/admin/minerva-rotation');
+        $tokenNode = $crawler->filter('form[action*="/admin/minerva-rotation/regenerate"] input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', '/admin/minerva-rotation/regenerate', [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'from' => '2026-03-01',
+            'to' => '2026-03-20',
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $rows = $this->entityManager?->getRepository(MinervaRotationEntity::class)
+            ->findBy([], ['startsAt' => 'ASC']);
+        self::assertIsArray($rows);
+        /** @var list<MinervaRotationEntity> $rows */
+        $manualCount = 0;
+        $generatedCount = 0;
+        foreach ($rows as $row) {
+            if (MinervaRotationSourceEnum::MANUAL === $row->getSource()) {
+                ++$manualCount;
+                continue;
+            }
+            if (
+                $row->getStartsAt() <= new DateTimeImmutable('2026-03-16T12:00:00+00:00')
+                && $row->getEndsAt() >= new DateTimeImmutable('2026-03-12T12:00:00+00:00')
+            ) {
+                self::fail('Generated row should be skipped when overlapped by manual override.');
+            }
+            ++$generatedCount;
+        }
+
+        self::assertSame(1, $manualCount);
+        self::assertGreaterThan(0, $generatedCount);
+    }
+
     /**
      * @param list<string> $roles
      */
@@ -114,6 +205,24 @@ final class MinervaRotationControllerTest extends WebTestCase
             return;
         }
         $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE minerva_rotation, contact_message, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
+    }
+
+    private function persistRotation(
+        MinervaRotationSourceEnum $source,
+        string $location,
+        int $listCycle,
+        string $startsAt,
+        string $endsAt,
+    ): void {
+        $rotation = new MinervaRotationEntity()
+            ->setSource($source)
+            ->setLocation($location)
+            ->setListCycle($listCycle)
+            ->setStartsAt(new DateTimeImmutable($startsAt))
+            ->setEndsAt(new DateTimeImmutable($endsAt));
+
+        $this->entityManager?->persist($rotation);
+        $this->entityManager?->flush();
     }
 
     private function browser(): KernelBrowser

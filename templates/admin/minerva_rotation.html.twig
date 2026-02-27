@@ -48,12 +48,70 @@
         </section>
 
         <section class="translations-panel">
+            <h2>{{ 'admin_minerva.override_title'|trans }}</h2>
+            <form method="post" action="{{ path('app_admin_minerva_rotation_override_create', { locale: app.request.locale }) }}" class="translations-filters">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_override_create') }}">
+                <label class="field">
+                    <span>{{ 'admin_minerva.override_location'|trans }}</span>
+                    <input type="text" name="location" required maxlength="120" placeholder="Foundation">
+                </label>
+                <label class="field">
+                    <span>{{ 'admin_minerva.override_list'|trans }}</span>
+                    <input type="number" min="1" max="24" name="listCycle" required>
+                </label>
+                <label class="field">
+                    <span>{{ 'admin_minerva.override_starts_at'|trans }}</span>
+                    <input type="datetime-local" name="startsAt" required>
+                </label>
+                <label class="field">
+                    <span>{{ 'admin_minerva.override_ends_at'|trans }}</span>
+                    <input type="datetime-local" name="endsAt" required>
+                </label>
+                <button type="submit">{{ 'admin_minerva.override_create'|trans }}</button>
+            </form>
+            <div class="translations-table-wrap">
+                <table class="translations-table">
+                    <thead>
+                    <tr>
+                        <th>{{ 'minerva.location'|trans }}</th>
+                        <th>{{ 'minerva.list_cycle'|trans }}</th>
+                        <th>{{ 'minerva.starts_at'|trans }}</th>
+                        <th>{{ 'minerva.ends_at'|trans }}</th>
+                        <th>{{ 'admin_minerva.override_actions'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in manualOverrides %}
+                        <tr>
+                            <td>{{ row.location }}</td>
+                            <td>{{ row.listCycle }}</td>
+                            <td>{{ row.startsAt|date('Y-m-d H:i') }}</td>
+                            <td>{{ row.endsAt|date('Y-m-d H:i') }}</td>
+                            <td>
+                                <form method="post" action="{{ path('app_admin_minerva_rotation_override_delete', { locale: app.request.locale, id: row.id }) }}">
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_override_delete_' ~ row.id) }}">
+                                    <button type="submit">{{ 'admin_minerva.override_delete'|trans }}</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">{{ 'admin_minerva.override_empty'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="translations-panel">
             <h2>{{ 'admin_minerva.timeline_title'|trans }}</h2>
             <div class="translations-table-wrap">
                 <table class="translations-table">
                     <thead>
                     <tr>
                         <th>{{ 'minerva.status'|trans }}</th>
+                        <th>{{ 'admin_minerva.source'|trans }}</th>
                         <th>{{ 'minerva.location'|trans }}</th>
                         <th>{{ 'minerva.list_cycle'|trans }}</th>
                         <th>{{ 'minerva.starts_at'|trans }}</th>
@@ -64,6 +122,7 @@
                     {% for row in timeline.rows %}
                         <tr>
                             <td><span class="item-pill">{{ ('minerva.status_' ~ row.status)|trans }}</span></td>
+                            <td><span class="item-pill">{{ ('admin_minerva.source_' ~ row.source)|trans }}</span></td>
                             <td>{{ row.location }}</td>
                             <td>{{ row.listCycle }}</td>
                             <td>{{ row.startsAt|date('Y-m-d H:i') }}</td>
@@ -71,7 +130,7 @@
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="5">{{ 'minerva.empty'|trans }}</td>
+                            <td colspan="6">{{ 'minerva.empty'|trans }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

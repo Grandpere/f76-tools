@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - PHPUnit mock typing on final class can break phpstan
+- Symptom: `phpstan` reported `createMock()` as unresolvable/mixed in Minerva unit tests.
+- Root cause: unit test mocked a concrete final service (`MinervaRotationGenerationApplicationService`) and relied on mock-specific typing.
+- Fix: switched test to real deterministic generation service + mocked repository/entity manager only.
+- Prevention: prefer mocking ports/interfaces; when a deterministic final service has no side effects, instantiate it directly in tests.
+
 ## 2026-02-27 - Catalog import stability improves with explicit value objects
 - Symptom: import flow used multiple implicit array-shape contracts (`context`, `contextResult`, `translationData`) that were easy to misuse during refactors.
 - Root cause: permissive array plumbing across `ItemImport*` services without explicit typed contracts.

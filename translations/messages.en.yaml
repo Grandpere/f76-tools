@@ -271,6 +271,22 @@ admin_minerva.to: To
 admin_minerva.regenerate: Regenerate
 admin_minerva.timeline_title: Generated timeline
 admin_minerva.timezone: 'Generation timezone: %timezone%'
+admin_minerva.override_title: Manual overrides
+admin_minerva.override_location: Location
+admin_minerva.override_list: List
+admin_minerva.override_starts_at: Starts at
+admin_minerva.override_ends_at: Ends at
+admin_minerva.override_create: Add override
+admin_minerva.override_actions: Actions
+admin_minerva.override_delete: Delete
+admin_minerva.override_empty: No manual override.
+admin_minerva.source: Source
+admin_minerva.source_generated: Generated
+admin_minerva.source_manual: Manual
 admin_minerva.flash.invalid_csrf: Invalid action (CSRF).
 admin_minerva.flash.invalid_range: Invalid date range.
+admin_minerva.flash.invalid_override: Invalid manual override data.
 admin_minerva.flash.regenerated: Minerva rotation regenerated.
+admin_minerva.flash.override_created: Manual override created.
+admin_minerva.flash.override_deleted: Manual override deleted.
+admin_minerva.flash.override_not_found: Manual override not found.
