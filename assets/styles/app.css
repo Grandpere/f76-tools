@@ -1012,6 +1012,43 @@ body::before {
     margin-top: 0.35rem;
 }
 
+.minerva-upcoming-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.minerva-upcoming-item {
+    border: 1px solid rgba(31, 41, 54, 0.14);
+    border-radius: 10px;
+    padding: 0.55rem 0.6rem;
+    background: #fff;
+}
+
+.minerva-upcoming-main {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+}
+
+.minerva-upcoming-main strong {
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+    font-size: 1.03rem;
+}
+
+.minerva-upcoming-dates {
+    margin-top: 0.32rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.16rem;
+    color: var(--text-1);
+    font-size: 0.85rem;
+}
+
 .translations-filters {
     display: flex;
     gap: 0.7rem;
