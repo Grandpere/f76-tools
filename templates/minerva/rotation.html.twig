@@ -114,7 +114,14 @@
                 </article>
             </div>
             <div class="translations-table-wrap">
-                <table class="translations-table minerva-timeline-table">
+                <table
+                    class="translations-table minerva-timeline-table"
+                    data-controller="minerva-progression"
+                    data-minerva-progression-players-base-url-value="{{ apiPlayersBaseUrl }}"
+                    data-minerva-progression-storage-key-value="{{ storageKey }}"
+                    data-minerva-progression-locale-value="{{ app.request.locale }}"
+                    data-minerva-progression-fallback-player-id-value="{{ activePlayerId ?? '' }}"
+                >
                     <thead>
                     <tr>
                         <th>{{ 'minerva.list_cycle'|trans }}</th>
@@ -127,18 +134,17 @@
                     </thead>
                     <tbody>
                     {% for row in timeline.rows %}
-                        {% set listPercent = ((row.listCycle / 24) * 100)|round %}
                         <tr>
                             <td>{{ row.listCycle }}</td>
                             <td>{{ row.location }}</td>
                             <td>{{ row.startsAt|date('Y-m-d H:i') }}</td>
                             <td>{{ row.endsAt|date('Y-m-d H:i') }}</td>
                             <td><span class="item-pill">{{ ('minerva.status_' ~ row.status)|trans }}</span></td>
-                            <td>
+                            <td data-minerva-progression-target="cell" data-list-cycle="{{ row.listCycle }}">
                                 <div class="minerva-progress-cell">
-                                    <div class="minerva-progress-meta">{{ row.listCycle }}/24</div>
-                                    <div class="minerva-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ listPercent }}">
-                                        <span class="minerva-progress-fill" style="width: {{ listPercent }}%;"></span>
+                                    <div class="minerva-progress-meta" data-minerva-progress-meta>-</div>
+                                    <div class="minerva-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                        <span class="minerva-progress-fill" data-minerva-progress-fill style="width: 0%;"></span>
                                     </div>
                                 </div>
                             </td>

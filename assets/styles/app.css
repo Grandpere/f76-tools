@@ -1049,36 +1049,38 @@ body::before {
     font-size: 0.85rem;
 }
 
-.minerva-timeline-table th:first-child,
-.minerva-timeline-table td:first-child {
+.translations-table.minerva-timeline-table th:first-child,
+.translations-table.minerva-timeline-table td:first-child {
     width: 1%;
     white-space: nowrap;
     text-align: center;
+    padding-left: 0.35rem;
+    padding-right: 0.35rem;
 }
 
-.minerva-timeline-table th:nth-child(2),
-.minerva-timeline-table td:nth-child(2) {
+.translations-table.minerva-timeline-table th:nth-child(2),
+.translations-table.minerva-timeline-table td:nth-child(2) {
     width: auto;
 }
 
-.minerva-timeline-table th:nth-child(3),
-.minerva-timeline-table td:nth-child(3),
-.minerva-timeline-table th:nth-child(4),
-.minerva-timeline-table td:nth-child(4) {
+.translations-table.minerva-timeline-table th:nth-child(3),
+.translations-table.minerva-timeline-table td:nth-child(3),
+.translations-table.minerva-timeline-table th:nth-child(4),
+.translations-table.minerva-timeline-table td:nth-child(4) {
     width: 1%;
     white-space: nowrap;
 }
 
-.minerva-timeline-table th:nth-child(5),
-.minerva-timeline-table td:nth-child(5) {
+.translations-table.minerva-timeline-table th:nth-child(5),
+.translations-table.minerva-timeline-table td:nth-child(5) {
     width: 1%;
     white-space: nowrap;
 }
 
-.minerva-timeline-table th:nth-child(6),
-.minerva-timeline-table td:nth-child(6) {
+.translations-table.minerva-timeline-table th:nth-child(6),
+.translations-table.minerva-timeline-table td:nth-child(6) {
     width: 18%;
-    white-space: nowrap;
+    white-space: normal;
 }
 
 .minerva-progress-cell {
