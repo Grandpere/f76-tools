@@ -16,7 +16,6 @@ namespace App\Progression\Application\Knowledge;
 use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
-use App\Repository\ItemEntityRepository;
 use App\Service\PlayerItemKnowledgeManager;
 
 final class PlayerKnowledgeApplicationService
@@ -24,18 +23,12 @@ final class PlayerKnowledgeApplicationService
 {
     public function __construct(
         private readonly PlayerItemKnowledgeManager $knowledgeManager,
-        private readonly ItemEntityRepository $itemRepository,
     ) {
     }
 
     public function resolveOwnedPlayer(UserEntity $user, string $playerPublicId): ?PlayerEntity
     {
         return $this->knowledgeManager->resolveOwnedPlayer($playerPublicId, $user);
-    }
-
-    public function resolveItemByPublicId(string $itemPublicId): ?ItemEntity
-    {
-        return $this->itemRepository->findOneByPublicId($itemPublicId);
     }
 
     public function markLearned(PlayerEntity $player, ItemEntity $item): void

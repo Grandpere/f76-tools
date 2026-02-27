@@ -15,6 +15,7 @@ namespace App\Controller\Api;
 
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeApplicationService;
+use App\Progression\Application\Knowledge\ItemReadApplicationService;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadSearchFilter;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
@@ -31,6 +32,7 @@ final class PlayerItemKnowledgeController extends AbstractController
     public function __construct(
         private readonly PlayerKnowledgeCatalogApplicationService $playerKnowledgeCatalogApplicationService,
         private readonly PlayerKnowledgeApplicationService $playerKnowledgeApplicationService,
+        private readonly ItemReadApplicationService $itemReadApplicationService,
         private readonly PlayerKnowledgeItemPayloadMapper $playerKnowledgeItemPayloadMapper,
         private readonly PlayerKnowledgeItemPayloadSearchFilter $playerKnowledgeItemPayloadSearchFilter,
         private readonly ProgressionItemTypeQueryParser $progressionItemTypeQueryParser,
@@ -70,7 +72,7 @@ final class PlayerItemKnowledgeController extends AbstractController
         if (null === $player) {
             return $this->progressionApiErrorResponder->playerNotFound();
         }
-        $item = $this->playerKnowledgeApplicationService->resolveItemByPublicId($itemId);
+        $item = $this->itemReadApplicationService->findByPublicId($itemId);
         if (null === $item) {
             return $this->progressionApiErrorResponder->itemNotFound();
         }
@@ -87,7 +89,7 @@ final class PlayerItemKnowledgeController extends AbstractController
         if (null === $player) {
             return $this->progressionApiErrorResponder->playerNotFound();
         }
-        $item = $this->playerKnowledgeApplicationService->resolveItemByPublicId($itemId);
+        $item = $this->itemReadApplicationService->findByPublicId($itemId);
         if (null === $item) {
             return $this->progressionApiErrorResponder->itemNotFound();
         }

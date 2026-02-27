@@ -19,6 +19,7 @@ use App\Contract\ItemKnowledgeTransferRepositoryInterface;
 use App\Contract\ItemStatsReadRepositoryInterface;
 use App\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemEntity;
+use App\Progression\Application\Knowledge\ItemReadRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -26,7 +27,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @extends ServiceEntityRepository<ItemEntity>
  */
 final class ItemEntityRepository extends ServiceEntityRepository
-    implements ItemKnowledgeTransferRepositoryInterface, ItemStatsReadRepositoryInterface, ItemImportItemRepositoryInterface, ItemKnowledgeCatalogReadRepositoryInterface
+    implements ItemKnowledgeTransferRepositoryInterface, ItemStatsReadRepositoryInterface, ItemImportItemRepositoryInterface, ItemKnowledgeCatalogReadRepositoryInterface, ItemReadRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
