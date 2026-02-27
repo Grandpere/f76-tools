@@ -55,6 +55,7 @@ Reusable, update-friendly checklists for delivery quality.
 
 ## 8) Final local gate checklist
 - [ ] `make phpstan`
+- [ ] `make architecture`
 - [ ] `make phpunit-unit`
 - [ ] `make phpunit-integration`
 - [ ] `make php-cs-fixer-check`
