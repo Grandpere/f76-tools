@@ -198,17 +198,16 @@
             </div>
         </section>
 
-        <section class="translations-panel">
-            <section
-                class="catalog-shell"
-                data-controller="minerva-knowledge"
-                data-minerva-knowledge-players-url-value="{{ apiPlayersUrl }}"
-                data-minerva-knowledge-players-base-url-value="{{ apiPlayersBaseUrl }}"
-                data-minerva-knowledge-initial-player-id-value="{{ activePlayerId ?? '' }}"
-                data-minerva-knowledge-storage-key-value="{{ storageKey }}"
-                data-minerva-knowledge-locale-value="{{ app.request.locale }}"
-                data-minerva-knowledge-ui-translations-value="{{ uiTranslations|json_encode|e('html_attr') }}"
-            >
+        <section
+            data-controller="minerva-knowledge"
+            data-minerva-knowledge-players-url-value="{{ apiPlayersUrl }}"
+            data-minerva-knowledge-players-base-url-value="{{ apiPlayersBaseUrl }}"
+            data-minerva-knowledge-initial-player-id-value="{{ activePlayerId ?? '' }}"
+            data-minerva-knowledge-storage-key-value="{{ storageKey }}"
+            data-minerva-knowledge-locale-value="{{ app.request.locale }}"
+            data-minerva-knowledge-ui-translations-value="{{ uiTranslations|json_encode|e('html_attr') }}"
+        >
+            <section class="translations-panel">
                 <section class="catalog-panel filters-panel">
                     <h2>{{ 'dashboard.filters.title'|trans }}</h2>
                     <div class="catalog-toolbar">
@@ -230,6 +229,9 @@
                     </fieldset>
                     <p class="catalog-state" role="status" aria-live="polite" data-minerva-knowledge-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
                 </section>
+            </section>
+
+            <section class="translations-panel">
                 <section class="catalog-panel catalog-block">
                     <h2>{{ 'dashboard.catalog.book_title'|trans }}</h2>
                     <div data-minerva-knowledge-target="bookList"></div>
