@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - Minerva countdown offset by 5h due to wall-time timezone handling
+- Symptom: front countdown showed ~5h less than external Minerva trackers for the same next window.
+- Root cause: `minerva_rotation` uses `timestamp without time zone` wall times, but timeline service converted DateTime timezone directly (`setTimezone`) instead of reinterpreting stored wall time as `America/New_York`.
+- Fix: normalize stored wall times by reparsing them in `America/New_York` (`normalizeStoredWallTime`) and keep timeline timezone explicit to `America/New_York`.
+- Prevention: for DB columns storing wall-time schedules (`timestamp without time zone`), never apply direct timezone conversion as if absolute instant; first reinterpret in business timezone.
+
 ## 2026-02-27 - PHPUnit mock typing on final class can break phpstan
 - Symptom: `phpstan` reported `createMock()` as unresolvable/mixed in Minerva unit tests.
 - Root cause: unit test mocked a concrete final service (`MinervaRotationGenerationApplicationService`) and relied on mock-specific typing.

@@ -39,9 +39,9 @@ final class MinervaRotationTimelineApplicationServiceTest extends TestCase
                 $this->createRotation(3, 'Fort Atlas', 4, '2026-02-20T10:00:00+00:00', '2026-02-21T10:00:00+00:00'),
             ]);
 
-        $timeline = $service->buildTimeline(new DateTimeImmutable('2026-02-26T12:00:00+00:00'));
+        $timeline = $service->buildTimeline(new DateTimeImmutable('2026-02-26T16:00:00+00:00'));
 
-        self::assertSame('UTC', $timeline['timezone']);
+        self::assertSame('America/New_York', $timeline['timezone']);
         self::assertCount(3, $timeline['rows']);
         self::assertSame('upcoming', $timeline['rows'][0]['status']);
         self::assertSame('generated', $timeline['rows'][0]['source']);

@@ -19,7 +19,7 @@ use DateTimeZone;
 
 final class MinervaRotationTimelineApplicationService
 {
-    private const TIMELINE_TIMEZONE = 'UTC';
+    private const TIMELINE_TIMEZONE = 'America/New_York';
 
     public function __construct(
         private readonly MinervaRotationReader $rotationReader,
@@ -70,8 +70,8 @@ final class MinervaRotationTimelineApplicationService
         $typedRows = [];
         $rows = [];
         foreach ($this->rotationReader->findAllOrdered() as $rotation) {
-            $startsAt = $rotation->getStartsAt()->setTimezone($timezone);
-            $endsAt = $rotation->getEndsAt()->setTimezone($timezone);
+            $startsAt = $this->normalizeStoredWallTime($rotation->getStartsAt(), $timezone);
+            $endsAt = $this->normalizeStoredWallTime($rotation->getEndsAt(), $timezone);
             $status = $this->resolveStatus($reference, $startsAt, $endsAt);
             $id = $rotation->getId();
             if (null === $id) {
@@ -137,6 +137,16 @@ final class MinervaRotationTimelineApplicationService
         }
 
         return $upcoming;
+    }
+
+    private function normalizeStoredWallTime(DateTimeImmutable $value, DateTimeZone $timezone): DateTimeImmutable
+    {
+        $reparsed = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $value->format('Y-m-d H:i:s'), $timezone);
+        if ($reparsed instanceof DateTimeImmutable) {
+            return $reparsed;
+        }
+
+        return $value->setTimezone($timezone);
     }
 
     private function resolveStatus(
