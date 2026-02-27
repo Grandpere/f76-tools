@@ -15,10 +15,9 @@ namespace App\Controller\Api;
 
 use App\Entity\PlayerEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeTransferApplicationService;
-use App\Progression\UI\Api\PlayerKnowledgeImportContext;
 use App\Progression\UI\Api\PlayerKnowledgeImportMode;
+use App\Progression\UI\Api\PlayerKnowledgeImportContextResolver;
 use App\Progression\UI\Api\PlayerKnowledgeTransferResultResponder;
-use App\Progression\UI\Api\ProgressionApiJsonPayloadDecoder;
 use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolver;
 use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolverTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,7 +33,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
     public function __construct(
         private readonly PlayerKnowledgeTransferApplicationService $playerKnowledgeTransferApplicationService,
         private readonly ProgressionOwnedPlayerApiResolver $progressionOwnedPlayerApiResolver,
-        private readonly ProgressionApiJsonPayloadDecoder $progressionApiJsonPayloadDecoder,
+        private readonly PlayerKnowledgeImportContextResolver $playerKnowledgeImportContextResolver,
         private readonly PlayerKnowledgeTransferResultResponder $playerKnowledgeTransferResultResponder,
     ) {
     }
@@ -64,7 +63,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
 
     private function importLike(string $playerId, Request $request, PlayerKnowledgeImportMode $mode): JsonResponse
     {
-        $context = $this->resolveImportContextOrNotFound($playerId, $request);
+        $context = $this->playerKnowledgeImportContextResolver->resolveOrNotFound($playerId, $request, $this->getUser());
         if ($context instanceof JsonResponse) {
             return $context;
         }
@@ -81,15 +80,5 @@ final class PlayerKnowledgeTransferController extends AbstractController
     protected function progressionOwnedPlayerApiResolver(): ProgressionOwnedPlayerApiResolver
     {
         return $this->progressionOwnedPlayerApiResolver;
-    }
-
-    private function resolveImportContextOrNotFound(string $playerId, Request $request): PlayerKnowledgeImportContext|JsonResponse
-    {
-        $player = $this->resolveOwnedPlayerOrNotFound($playerId);
-        if ($player instanceof JsonResponse) {
-            return $player;
-        }
-
-        return new PlayerKnowledgeImportContext($player, $this->progressionApiJsonPayloadDecoder->decode($request));
     }
 }

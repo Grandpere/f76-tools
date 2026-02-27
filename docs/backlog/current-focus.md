@@ -1,9 +1,11 @@
 # Current Focus
 
 ## Priorite active
-- F76-055: DDD Slice 45 - Backlog pending-status normalization (in progress).
+- Campagne fonctionnelle lot F76-054 a F76-056 (pending user run).
 
 ## Termine recemment
+- F76-056: DDD Slice 46 - Progression API context resolvers extraction (code done, functional pending).
+- F76-055: DDD Slice 45 - Backlog pending-status normalization (done).
 - F76-054: DDD Slice 44 - Architecture make target and quality workflow (done).
 - F76-053: DDD Slice 43 - Player name API resolver extraction (done).
 - F76-052: DDD Slice 42 - Knowledge transfer import context object (done).
