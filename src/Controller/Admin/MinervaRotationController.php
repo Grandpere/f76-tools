@@ -23,13 +23,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 #[Route('/admin/minerva-rotation')]
 final class MinervaRotationController extends AbstractController
 {
     use AdminRoleGuardControllerTrait;
+    use AdminCsrfTokenValidatorTrait;
 
     public function __construct(
         private readonly MinervaRotationTimelineApplicationService $timelineService,
@@ -58,9 +58,7 @@ final class MinervaRotationController extends AbstractController
     public function regenerate(Request $request): RedirectResponse
     {
         $this->ensureAdminAccess();
-
-        $token = (string) $request->request->get('_csrf_token', '');
-        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken('admin_minerva_rotation_regenerate', $token))) {
+        if (!$this->isValidToken($request, 'admin_minerva_rotation_regenerate')) {
             $this->addFlash('warning', 'admin_minerva.flash.invalid_csrf');
 
             return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
@@ -95,5 +93,10 @@ final class MinervaRotationController extends AbstractController
         $suffix = $isStart ? '00:00:00' : '23:59:59';
 
         return DateTimeImmutable::createFromFormat('Y-m-d H:i:s', sprintf('%s %s', $trimmed, $suffix), $timezone) ?: null;
+    }
+
+    protected function csrfTokenManager(): CsrfTokenManagerInterface
+    {
+        return $this->csrfTokenManager;
     }
 }

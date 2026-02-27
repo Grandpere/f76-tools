@@ -33,7 +33,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -41,6 +40,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class UserManagementController extends AbstractController
 {
     use AdminRoleGuardControllerTrait;
+    use AdminCsrfTokenValidatorTrait;
 
     public function __construct(
         private readonly UserEntityRepository $userRepository,
@@ -157,13 +157,6 @@ final class UserManagementController extends AbstractController
         return $this->redirectToUsers($request);
     }
 
-    private function isValidToken(Request $request, string $tokenId): bool
-    {
-        $token = (string) $request->request->get('_csrf_token', '');
-
-        return $this->csrfTokenManager->isTokenValid(new CsrfToken($tokenId, $token));
-    }
-
     private function guardAdminPostOrFailure(Request $request, string $tokenId): ?RedirectResponse
     {
         $this->ensureAdminAccess();
@@ -207,5 +200,10 @@ final class UserManagementController extends AbstractController
     private function getAuthenticatedUser(): UserEntity
     {
         return $this->adminAuthenticatedUserContext->requireAuthenticatedUser($this->getUser());
+    }
+
+    protected function csrfTokenManager(): CsrfTokenManagerInterface
+    {
+        return $this->csrfTokenManager;
     }
 }

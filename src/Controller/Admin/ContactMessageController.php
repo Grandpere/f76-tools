@@ -24,13 +24,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 #[Route('/admin/contact-messages')]
 final class ContactMessageController extends AbstractController
 {
     use AdminRoleGuardControllerTrait;
+    use AdminCsrfTokenValidatorTrait;
 
     public function __construct(
         private readonly ContactMessageListApplicationService $contactMessageListApplicationService,
@@ -81,10 +81,8 @@ final class ContactMessageController extends AbstractController
         return $this->contactMessageStatusUpdateResponder->fromResult($request, $result);
     }
 
-    private function isValidToken(Request $request, string $tokenId): bool
+    protected function csrfTokenManager(): CsrfTokenManagerInterface
     {
-        $token = (string) $request->request->get('_csrf_token', '');
-
-        return $this->csrfTokenManager->isTokenValid(new CsrfToken($tokenId, $token));
+        return $this->csrfTokenManager;
     }
 }
