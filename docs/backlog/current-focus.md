@@ -4,6 +4,7 @@
 - Campagne de slices DDD progression (en cours).
 
 ## Termine recemment
+- F76-061: DDD Slice 51 - Remove unused owned-player resolver trait (done).
 - F76-060: DDD Slice 50 - Player knowledge transfer controller trait removal (done).
 - F76-059: DDD Slice 49 - Player item knowledge controller trait removal (done).
 - F76-058: DDD Slice 48 - Player controller trait removal (done).
