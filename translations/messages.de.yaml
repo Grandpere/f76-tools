@@ -37,9 +37,9 @@ progression.description: Ubersicht des Fortschritts nach legendarem Rang und Min
 progression.character_block_title: Charakter
 progression.backup_title: Backup
 progression.player_list_label: Charakterliste
-progression.quick_links_help: Offne die detailierte Verfolgung gelernter Objekte je Kategorie.
 progression.quick_link_mods: Legendare Mods offnen
 progression.quick_link_minerva: Minerva offnen
+progression.character_help_extended: ', der Fortschritt wird aktualisiert, indem Objekte auf den dedizierten Seiten als gelernt markiert werden: %modsLink% und %minervaLink%.'
 dashboard.transfer.title: Fortschritt (Backup)
 dashboard.transfer.export: JSON-Export
 dashboard.transfer.import: JSON-Import

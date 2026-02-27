@@ -71,13 +71,6 @@
             data-player-progression-locale-value="{{ app.request.locale }}"
             data-player-progression-ui-translations-value="{{ uiTranslations|json_encode|e('html_attr') }}"
         >
-            <section class="catalog-panel">
-                <p class="catalog-note">{{ 'progression.quick_links_help'|trans }}</p>
-                <div class="progression-entry-actions">
-                    <a class="progression-entry-button" href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ 'progression.quick_link_mods'|trans }}</a>
-                    <a class="progression-entry-button" href="{{ path('app_minerva_rotation', { locale: app.request.locale }) }}">{{ 'progression.quick_link_minerva'|trans }}</a>
-                </div>
-            </section>
             <section class="catalog-panel create-player-panel filters-panel">
                 <h2>{{ 'progression.character_block_title'|trans }}</h2>
                 <div class="catalog-toolbar progression-character-toolbar">
@@ -93,7 +86,12 @@
                         <select data-player-progression-target="playerSelect"></select>
                     </label>
                 </div>
-                <p class="catalog-note">{{ 'dashboard.create_player.help'|trans }}</p>
+                {% set modsLink %}<a href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ 'progression.quick_link_mods'|trans }}</a>{% endset %}
+                {% set minervaLink %}<a href="{{ path('app_minerva_rotation', { locale: app.request.locale }) }}">{{ 'progression.quick_link_minerva'|trans }}</a>{% endset %}
+                <p class="catalog-note info-note">
+                    {{ 'dashboard.create_player.help'|trans }}
+                    {{ 'progression.character_help_extended'|trans({'%modsLink%': modsLink, '%minervaLink%': minervaLink})|raw }}
+                </p>
                 <p class="catalog-state" role="status" aria-live="polite" data-player-progression-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
             </section>
             <section class="catalog-panel catalog-block">
