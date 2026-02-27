@@ -1,9 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- F76-025: DDD Slice 15 - Progression player write results (in progress).
+- F76-026: DDD Slice 16 - Progression player controller owned read resolver (in progress).
 
 ## Termine recemment
+- F76-025: DDD Slice 15 - Progression player write results (code done, functional pending).
 - F76-024: DDD Slice 14 - Progression knowledge transfer controller polish (code done, functional pending).
 - F76-023: DDD Slice 13 - Progression API shared auth and error responders (code done, functional pending).
 - F76-022: DDD Slice 12 - Progression player controller polish (done).
