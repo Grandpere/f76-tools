@@ -1060,7 +1060,7 @@ body::before {
 
 .translations-table.minerva-timeline-table th:nth-child(2),
 .translations-table.minerva-timeline-table td:nth-child(2) {
-    width: auto;
+    width: 20%;
 }
 
 .translations-table.minerva-timeline-table th:nth-child(3),
@@ -1079,7 +1079,7 @@ body::before {
 
 .translations-table.minerva-timeline-table th:nth-child(6),
 .translations-table.minerva-timeline-table td:nth-child(6) {
-    width: 18%;
+    width: auto;
     white-space: normal;
 }
 
