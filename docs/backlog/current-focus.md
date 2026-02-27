@@ -2,6 +2,7 @@
 
 ## Priorite active
 - F76-082: Inventaire des changements DDD restants (utile + optionnel).
+- F76-082: Inventory structure `src` confirme avec l'utilisateur (dossiers legacy a migrer: `Controller`, `Domain`, `Entity`, `EventSubscriber`, `Repository`, `Security`, `Service`; dossier vide `Translation` a supprimer).
 
 ## Termine recemment
 - F76-081: DDD Slice 71 - Admin boundary typing hardening (done).

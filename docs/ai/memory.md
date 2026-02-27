@@ -21,6 +21,18 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - DDD inventory: legacy root folders explicitly tracked
+- Symptom: several legacy root folders remained in `src` during the DDD migration (`Controller`, `Domain`, `Entity`, `EventSubscriber`, `Repository`, `Security`, `Service`) plus empty `src/Translation`.
+- Root cause: migration slices prioritized behavior and safety before final namespace placement cleanup.
+- Fix: explicit inventory item tracked in backlog/current focus to migrate remaining files into context namespaces and remove empty `src/Translation`.
+- Prevention: after each DDD slice batch, run a structural inventory pass on `src` and track leftovers immediately.
+
+## 2026-02-27 - Interface naming and location convention aligned with DDD target
+- Symptom: interfaces remained split between `src/Contract` and context namespaces, with inconsistent naming (`*Interface` suffix).
+- Root cause: transition refactors prioritized behavior safety over final architectural placement/convention.
+- Fix: decision recorded: move ports into context namespaces and use interface names without `Interface` suffix.
+- Prevention: new ports should be created directly in context namespaces and follow suffix-free naming.
+
 ## 2026-02-27 - Constructor signature changes require synchronized test fixture updates
 - Symptom: `phpstan` and unit tests failed after resolver constructor/signature refactor.
 - Root cause: test fixtures still instantiated old constructor argument order/count and outdated null-user case.
