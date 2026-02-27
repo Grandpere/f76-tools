@@ -75,7 +75,7 @@ final class ItemTranslationControllerTest extends WebTestCase
         $user = $this->createUser('translations-save@example.com');
         $this->browser()->loginUser($user);
         $crawler = $this->browser()->request('GET', '/admin/translations/items?locale=fr&target=zz');
-        $tokenNode = $crawler->filter('input[name="_token"]');
+        $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
         $token = (string) $tokenNode->attr('value');
         self::assertNotSame('', $token);
@@ -88,7 +88,7 @@ final class ItemTranslationControllerTest extends WebTestCase
         $entryKey = $matches[1];
 
         $this->browser()->request('POST', '/admin/translations/items?locale=fr&target=zz', [
-            '_token' => $token,
+            '_csrf_token' => $token,
             'target' => 'zz',
             'entries' => [
                 $entryKey => 'Valeur FR test',
@@ -109,7 +109,7 @@ final class ItemTranslationControllerTest extends WebTestCase
         $this->browser()->loginUser($user);
 
         $this->browser()->request('POST', '/admin/translations/items?locale=fr&target=zz', [
-            '_token' => 'invalid-token',
+            '_csrf_token' => 'invalid-token',
             'target' => 'zz',
             'entries' => [
                 'item.misc.10.name' => 'Should not be saved',
