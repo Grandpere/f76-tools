@@ -23,6 +23,7 @@ use App\Support\Application\AdminUser\ToggleUserActiveApplicationService;
 use App\Support\Application\AdminUser\ToggleUserActiveResult;
 use App\Support\Application\AdminUser\ToggleUserAdminApplicationService;
 use App\Support\Application\AdminUser\ToggleUserAdminResult;
+use App\Support\UI\Admin\AdminAuthenticatedUserContext;
 use App\Support\UI\Admin\GenerateResetLinkFeedbackMapper;
 use App\Support\UI\Admin\ToggleUserActiveFeedbackMapper;
 use App\Support\UI\Admin\ToggleUserAdminFeedbackMapper;
@@ -32,7 +33,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -54,6 +54,7 @@ final class UserManagementController extends AbstractController
         private readonly ToggleUserAdminFeedbackMapper $toggleUserAdminFeedbackMapper,
         private readonly GenerateResetLinkApplicationService $generateResetLinkApplicationService,
         private readonly GenerateResetLinkFeedbackMapper $generateResetLinkFeedbackMapper,
+        private readonly AdminAuthenticatedUserContext $adminAuthenticatedUserContext,
     ) {
     }
 
@@ -74,15 +75,16 @@ final class UserManagementController extends AbstractController
         if ($failureResponse instanceof RedirectResponse) {
             return $failureResponse;
         }
+        $actor = $this->getAuthenticatedUser();
 
-        $result = $this->toggleUserActiveApplicationService->toggle($id, $this->getUser());
+        $result = $this->toggleUserActiveApplicationService->toggle($id, $actor);
         $feedback = $this->toggleUserActiveFeedbackMapper->map($result);
         $this->addFlash($feedback['flashType'], $feedback['flashMessage']);
 
         if (ToggleUserActiveResult::UPDATED === $result) {
             $user = $this->userRepository->getById($id);
             if ($user instanceof UserEntity) {
-                $this->persistAuditLog($request, 'user_toggle_active', $user, [
+                $this->persistAuditLog($request, $actor, 'user_toggle_active', $user, [
                     'isActive' => $user->isActive(),
                 ]);
             }
@@ -99,15 +101,16 @@ final class UserManagementController extends AbstractController
         if ($failureResponse instanceof RedirectResponse) {
             return $failureResponse;
         }
+        $actor = $this->getAuthenticatedUser();
 
-        $result = $this->toggleUserAdminApplicationService->toggle($id, $this->getUser());
+        $result = $this->toggleUserAdminApplicationService->toggle($id, $actor);
         $feedback = $this->toggleUserAdminFeedbackMapper->map($result);
         $this->addFlash($feedback['flashType'], $feedback['flashMessage']);
 
         if (ToggleUserAdminResult::UPDATED === $result) {
             $user = $this->userRepository->getById($id);
             if ($user instanceof UserEntity) {
-                $this->persistAuditLog($request, 'user_toggle_admin', $user, [
+                $this->persistAuditLog($request, $actor, 'user_toggle_admin', $user, [
                     'isAdmin' => in_array('ROLE_ADMIN', $user->getRoles(), true),
                 ]);
             }
@@ -124,12 +127,13 @@ final class UserManagementController extends AbstractController
         if ($failureResponse instanceof RedirectResponse) {
             return $failureResponse;
         }
+        $actor = $this->getAuthenticatedUser();
 
-        $result = $this->generateResetLinkApplicationService->generate($id, $this->getUser());
+        $result = $this->generateResetLinkApplicationService->generate($id, $actor);
         $feedback = $this->generateResetLinkFeedbackMapper->map($result);
 
         if (is_string($feedback['auditAction'])) {
-            $this->persistAuditLog($request, $feedback['auditAction'], $result->getTargetUser(), $feedback['auditContext']);
+            $this->persistAuditLog($request, $actor, $feedback['auditAction'], $result->getTargetUser(), $feedback['auditContext']);
             $this->entityManager->flush();
         }
 
@@ -180,13 +184,8 @@ final class UserManagementController extends AbstractController
     /**
      * @param array<string, mixed>|null $context
      */
-    private function persistAuditLog(Request $request, string $action, ?UserEntity $targetUser, ?array $context = null): void
+    private function persistAuditLog(Request $request, UserEntity $actor, string $action, ?UserEntity $targetUser, ?array $context = null): void
     {
-        $actor = $this->getUser();
-        if (!$actor instanceof UserEntity) {
-            throw new AccessDeniedException('User must be authenticated.');
-        }
-
         $payload = [
             'ip' => $request->getClientIp(),
             'locale' => $request->getLocale(),
@@ -203,5 +202,10 @@ final class UserManagementController extends AbstractController
             ->setContext($payload);
 
         $this->entityManager->persist($auditLog);
+    }
+
+    private function getAuthenticatedUser(): UserEntity
+    {
+        return $this->adminAuthenticatedUserContext->requireAuthenticatedUser($this->getUser());
     }
 }

@@ -35,14 +35,6 @@ final class GenerateResetLinkFeedbackMapperTest extends TestCase
             'flashParams' => [],
             'auditAction' => null,
             'auditContext' => null,
-        ], $mapper->map(GenerateResetLinkResult::actorRequired()));
-
-        self::assertSame([
-            'flashType' => 'warning',
-            'flashMessage' => 'admin_users.flash.user_not_found',
-            'flashParams' => [],
-            'auditAction' => null,
-            'auditContext' => null,
         ], $mapper->map(GenerateResetLinkResult::userNotFound()));
 
         self::assertSame([

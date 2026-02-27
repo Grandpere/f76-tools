@@ -25,23 +25,6 @@ use PHPUnit\Framework\TestCase;
 
 final class GenerateResetLinkApplicationServiceTest extends TestCase
 {
-    public function testGenerateReturnsActorRequiredWhenActorIsInvalid(): void
-    {
-        /** @var AdminUserManagementWriteRepositoryInterface&MockObject $userRepository */
-        $userRepository = $this->createMock(AdminUserManagementWriteRepositoryInterface::class);
-        $userRepository->expects(self::never())->method('getById');
-        $userRepository->expects(self::never())->method('save');
-
-        /** @var AdminUserAuditReadRepositoryInterface&MockObject $auditRepository */
-        $auditRepository = $this->createMock(AdminUserAuditReadRepositoryInterface::class);
-        $auditRepository->expects(self::never())->method('countRecentActionsByActor');
-
-        $service = new GenerateResetLinkApplicationService($userRepository, $auditRepository, new TemporaryLinkPolicy());
-        $result = $service->generate(10, null);
-
-        self::assertSame(GenerateResetLinkStatus::ACTOR_REQUIRED, $result->getStatus());
-    }
-
     public function testGenerateReturnsUserNotFoundWhenTargetDoesNotExist(): void
     {
         $actor = $this->createUser('admin@example.com', ['ROLE_ADMIN']);

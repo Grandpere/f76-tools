@@ -22,12 +22,8 @@ final class ToggleUserActiveApplicationService
     ) {
     }
 
-    public function toggle(int $targetUserId, mixed $actor): ToggleUserActiveResult
+    public function toggle(int $targetUserId, UserEntity $actor): ToggleUserActiveResult
     {
-        if (!$actor instanceof UserEntity) {
-            return ToggleUserActiveResult::ACTOR_REQUIRED;
-        }
-
         $target = $this->userRepository->getById($targetUserId);
         if (!$target instanceof UserEntity) {
             return ToggleUserActiveResult::USER_NOT_FOUND;

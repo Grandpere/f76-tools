@@ -26,11 +26,6 @@ final class ToggleUserActiveFeedbackMapperTest extends TestCase
         self::assertSame([
             'flashType' => 'warning',
             'flashMessage' => 'admin_users.flash.user_not_found',
-        ], $mapper->map(ToggleUserActiveResult::ACTOR_REQUIRED));
-
-        self::assertSame([
-            'flashType' => 'warning',
-            'flashMessage' => 'admin_users.flash.user_not_found',
         ], $mapper->map(ToggleUserActiveResult::USER_NOT_FOUND));
 
         self::assertSame([

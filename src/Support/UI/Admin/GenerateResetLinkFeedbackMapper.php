@@ -31,13 +31,6 @@ final class GenerateResetLinkFeedbackMapper
     public function map(GenerateResetLinkResult $result): array
     {
         return match ($result->getStatus()) {
-            GenerateResetLinkStatus::ACTOR_REQUIRED => [
-                'flashType' => 'warning',
-                'flashMessage' => 'admin_users.flash.user_not_found',
-                'flashParams' => [],
-                'auditAction' => null,
-                'auditContext' => null,
-            ],
             GenerateResetLinkStatus::USER_NOT_FOUND => [
                 'flashType' => 'warning',
                 'flashMessage' => 'admin_users.flash.user_not_found',

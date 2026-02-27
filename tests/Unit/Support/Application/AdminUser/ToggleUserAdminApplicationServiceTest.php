@@ -23,20 +23,6 @@ use ReflectionProperty;
 
 final class ToggleUserAdminApplicationServiceTest extends TestCase
 {
-    public function testToggleReturnsActorRequiredWhenActorIsNotUserEntity(): void
-    {
-        /** @var AdminUserManagementWriteRepositoryInterface&MockObject $repository */
-        $repository = $this->createMock(AdminUserManagementWriteRepositoryInterface::class);
-        $repository->expects(self::never())->method('getById');
-        $repository->expects(self::never())->method('save');
-
-        $service = new ToggleUserAdminApplicationService($repository);
-
-        $result = $service->toggle(10, null);
-
-        self::assertSame(ToggleUserAdminResult::ACTOR_REQUIRED, $result);
-    }
-
     public function testToggleReturnsUserNotFoundWhenTargetDoesNotExist(): void
     {
         $actor = new UserEntity()

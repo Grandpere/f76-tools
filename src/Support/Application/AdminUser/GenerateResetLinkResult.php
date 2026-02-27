@@ -29,11 +29,6 @@ final class GenerateResetLinkResult
     ) {
     }
 
-    public static function actorRequired(): self
-    {
-        return new self(GenerateResetLinkStatus::ACTOR_REQUIRED);
-    }
-
     public static function userNotFound(): self
     {
         return new self(GenerateResetLinkStatus::USER_NOT_FOUND);

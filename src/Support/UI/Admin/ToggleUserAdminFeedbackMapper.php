@@ -23,10 +23,6 @@ final class ToggleUserAdminFeedbackMapper
     public function map(ToggleUserAdminResult $result): array
     {
         return match ($result) {
-            ToggleUserAdminResult::ACTOR_REQUIRED => [
-                'flashType' => 'warning',
-                'flashMessage' => 'admin_users.flash.user_not_found',
-            ],
             ToggleUserAdminResult::USER_NOT_FOUND => [
                 'flashType' => 'warning',
                 'flashMessage' => 'admin_users.flash.user_not_found',

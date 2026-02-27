@@ -22,12 +22,8 @@ final class ToggleUserAdminApplicationService
     ) {
     }
 
-    public function toggle(int $targetUserId, mixed $actor): ToggleUserAdminResult
+    public function toggle(int $targetUserId, UserEntity $actor): ToggleUserAdminResult
     {
-        if (!$actor instanceof UserEntity) {
-            return ToggleUserAdminResult::ACTOR_REQUIRED;
-        }
-
         $target = $this->userRepository->getById($targetUserId);
         if (!$target instanceof UserEntity) {
             return ToggleUserAdminResult::USER_NOT_FOUND;

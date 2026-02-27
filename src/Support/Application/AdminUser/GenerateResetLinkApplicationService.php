@@ -27,12 +27,8 @@ final class GenerateResetLinkApplicationService
     ) {
     }
 
-    public function generate(int $targetUserId, mixed $actor): GenerateResetLinkResult
+    public function generate(int $targetUserId, UserEntity $actor): GenerateResetLinkResult
     {
-        if (!$actor instanceof UserEntity) {
-            return GenerateResetLinkResult::actorRequired();
-        }
-
         $target = $this->userRepository->getById($targetUserId);
         if (!$target instanceof UserEntity) {
             return GenerateResetLinkResult::userNotFound();

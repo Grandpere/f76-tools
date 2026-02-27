@@ -4,6 +4,7 @@
 - Campagne de slices DDD progression (en cours).
 
 ## Termine recemment
+- F76-076: DDD Slice 66 - Admin user typed actor and auth context (done).
 - F76-075: DDD Slice 65 - Item translation explicit admin guard (done).
 - F76-074: DDD Slice 64 - Admin role guard controller trait (done).
 - F76-073: DDD Slice 63 - User management controller POST guard helper (done).
