@@ -17,6 +17,7 @@ use App\Domain\Support\Contact\ContactMessageStatusEnum;
 use App\Support\Application\Contact\ContactMessageListApplicationService;
 use App\Support\Application\Contact\ContactMessageListQuery;
 use App\Support\Application\Contact\ContactMessageStatusUpdateApplicationService;
+use App\Support\Application\Contact\ContactMessageStatusUpdateRequest;
 use App\Support\UI\Admin\ContactMessageStatusUpdateResponder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -72,7 +73,10 @@ final class ContactMessageController extends AbstractController
             return $this->contactMessageStatusUpdateResponder->invalidCsrf($request);
         }
 
-        $result = $this->contactMessageStatusUpdateApplicationService->update($id, $request->request->get('status'));
+        $result = $this->contactMessageStatusUpdateApplicationService->update(
+            $id,
+            ContactMessageStatusUpdateRequest::fromRaw($request->request->get('status')),
+        );
 
         return $this->contactMessageStatusUpdateResponder->fromResult($request, $result);
     }

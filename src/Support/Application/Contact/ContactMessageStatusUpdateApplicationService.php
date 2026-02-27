@@ -23,9 +23,9 @@ final class ContactMessageStatusUpdateApplicationService
     ) {
     }
 
-    public function update(int $id, mixed $rawStatus): ContactMessageStatusUpdateResult
+    public function update(int $id, ContactMessageStatusUpdateRequest $request): ContactMessageStatusUpdateResult
     {
-        $status = $this->sanitizeStatus($rawStatus);
+        $status = $request->status;
         if (!$status instanceof ContactMessageStatusEnum) {
             return ContactMessageStatusUpdateResult::INVALID_STATUS;
         }
@@ -39,19 +39,5 @@ final class ContactMessageStatusUpdateApplicationService
         $this->contactMessageRepository->save($message);
 
         return ContactMessageStatusUpdateResult::UPDATED;
-    }
-
-    private function sanitizeStatus(mixed $value): ?ContactMessageStatusEnum
-    {
-        if (!is_string($value)) {
-            return null;
-        }
-
-        $normalized = trim($value);
-        if ('' === $normalized) {
-            return null;
-        }
-
-        return ContactMessageStatusEnum::tryFrom($normalized);
     }
 }

@@ -16,6 +16,7 @@ namespace App\Tests\Unit\Support\Application\Contact;
 use App\Domain\Support\Contact\ContactMessageStatusEnum;
 use App\Entity\ContactMessageEntity;
 use App\Support\Application\Contact\ContactMessageStatusUpdateApplicationService;
+use App\Support\Application\Contact\ContactMessageStatusUpdateRequest;
 use App\Support\Application\Contact\ContactMessageStatusUpdateResult;
 use App\Support\Application\Contact\ContactMessageStatusWriteRepositoryInterface;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -32,7 +33,7 @@ final class ContactMessageStatusUpdateApplicationServiceTest extends TestCase
 
         $service = new ContactMessageStatusUpdateApplicationService($repository);
 
-        $result = $service->update(10, 'unknown-status');
+        $result = $service->update(10, ContactMessageStatusUpdateRequest::fromRaw('unknown-status'));
 
         self::assertSame(ContactMessageStatusUpdateResult::INVALID_STATUS, $result);
     }
@@ -46,7 +47,7 @@ final class ContactMessageStatusUpdateApplicationServiceTest extends TestCase
 
         $service = new ContactMessageStatusUpdateApplicationService($repository);
 
-        $result = $service->update(10, ContactMessageStatusEnum::IN_PROGRESS->value);
+        $result = $service->update(10, ContactMessageStatusUpdateRequest::fromRaw(ContactMessageStatusEnum::IN_PROGRESS->value));
 
         self::assertSame(ContactMessageStatusUpdateResult::MESSAGE_NOT_FOUND, $result);
     }
@@ -66,7 +67,7 @@ final class ContactMessageStatusUpdateApplicationServiceTest extends TestCase
 
         $service = new ContactMessageStatusUpdateApplicationService($repository);
 
-        $result = $service->update(10, ContactMessageStatusEnum::IN_PROGRESS->value);
+        $result = $service->update(10, ContactMessageStatusUpdateRequest::fromRaw(ContactMessageStatusEnum::IN_PROGRESS->value));
 
         self::assertSame(ContactMessageStatusUpdateResult::UPDATED, $result);
         self::assertSame(ContactMessageStatusEnum::IN_PROGRESS, $entity->getStatus());

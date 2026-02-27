@@ -4,6 +4,7 @@
 - Campagne de slices DDD progression (en cours).
 
 ## Termine recemment
+- F76-078: DDD Slice 68 - Contact status update typed request (done).
 - F76-077: DDD Slice 67 - Admin audit and contact query objects (done).
 - F76-076: DDD Slice 66 - Admin user typed actor and auth context (done).
 - F76-075: DDD Slice 65 - Item translation explicit admin guard (done).
