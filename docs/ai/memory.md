@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - public/assets may be ignored for new icon files
+- Symptom: `git add` failed with `The following paths are ignored ... public/assets`.
+- Root cause: `.gitignore` rules ignore parts of `public/assets`, while existing files can still be tracked.
+- Fix: add new icon files explicitly with force (`git add -f public/assets/icons/<file>`).
+- Prevention: when creating new assets under ignored paths, check tracking with `git ls-files` and use forced add only for intended files.
+
 ## 2026-02-27 - Minerva BOOK list model 1..4 caused semantic drift
 - Symptom: UI/stats showed progression only for 4 "listes" while Minerva rotation uses 24 real lists.
 - Root cause: import collapsed `minerva_61..84` into modulo-4 list numbers (`1..4`) instead of absolute list numbers (`1..24`).

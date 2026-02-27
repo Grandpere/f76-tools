@@ -1,16 +1,17 @@
 # Current Focus
 
 ## Priorite active
-- F76-088: Nav applicative unifiee + suivi Minerva (BOOK) directement sur la page rotation.
+- Stabilisation front post-refacto (headers/nav/blocs front) + corrections UX mineures.
 - F76-087: BOOK lists absolues 1..24 (modele/import/stats/UI coherents metier).
 - F76-086: Minerva front countdown dynamique (arrivee/depart sans rechargement).
-- F76-085: Minerva front source visibility (generated/manual badges sur la timeline publique).
+- F76-085: Minerva front source visibility (decision produit: non expose en front, conserve en admin).
 - F76-084: Minerva admin manual overrides (source generated/manual + preservation lors des regenerations).
 - F76-083: Minerva front and schedule (bloc de synthese current + prochaines rotations).
 - F76-002: Evolutions produit Minerva (localisation/date/listes) selon la roadmap metier.
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-088: Nav applicative unifiee + separation front en 3 pages (`Mods legendaires`, `Minerva`, `Progression`) + suivi BOOK sur page Minerva (done).
 - F76-081: DDD Slice 71 - Admin boundary typing hardening (done).
 - F76-080: DDD Slice 70 - Item translation typed string inputs (done).
 - F76-079: DDD Slice 69 - Admin CSRF token validator trait (done).
@@ -85,7 +86,7 @@
 - F76-004: Minerva Source Governance (done).
 
 ## Ensuite
-- Formaliser le prochain ticket produit (Minerva front + gouvernance des sources).
+- Formaliser le prochain ticket produit prioritaire (auth UX finale ou bloc Minerva enrichi localisation/dates).
 - F76-010: DDD Foundations (done, keep as reference).
 - F76-011: DDD Slice 1 - Progression context (done, keep as reference).
 - F76-001: Contact messages en base + backoffice admin (done).
