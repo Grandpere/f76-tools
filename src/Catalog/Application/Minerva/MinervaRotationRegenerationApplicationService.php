@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Catalog\Application\Minerva;
 
 use App\Entity\MinervaRotationEntity;
-use App\Catalog\Infrastructure\Persistence\MinervaRotationEntityRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -22,7 +21,7 @@ final class MinervaRotationRegenerationApplicationService
 {
     public function __construct(
         private readonly MinervaRotationGenerationApplicationService $generationService,
-        private readonly MinervaRotationEntityRepository $rotationRepository,
+        private readonly MinervaRotationRegenerationRepository $rotationRepository,
         private readonly EntityManagerInterface $entityManager,
     ) {
     }

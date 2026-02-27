@@ -11,12 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Controller\Admin;
+namespace App\Catalog\Application\Minerva;
 
-trait AdminRoleGuardControllerTrait
+use DateTimeImmutable;
+
+interface MinervaRotationRegenerationRepository
 {
-    protected function ensureAdminAccess(): void
-    {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-    }
+    public function deleteOverlappingRange(DateTimeImmutable $from, DateTimeImmutable $to): int;
 }

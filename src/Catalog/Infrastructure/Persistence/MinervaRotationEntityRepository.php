@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Catalog\Infrastructure\Persistence;
 
 use App\Catalog\Application\Minerva\MinervaRotationReader;
+use App\Catalog\Application\Minerva\MinervaRotationRegenerationRepository;
 use App\Entity\MinervaRotationEntity;
 use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -22,7 +23,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<MinervaRotationEntity>
  */
-final class MinervaRotationEntityRepository extends ServiceEntityRepository implements MinervaRotationReader
+final class MinervaRotationEntityRepository extends ServiceEntityRepository implements MinervaRotationReader, MinervaRotationRegenerationRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

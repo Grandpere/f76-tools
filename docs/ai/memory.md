@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - Moving controllers/repositories can trigger PHPat layer violations
+- Symptom: after namespace moves, PHPat reported `Application -> Infrastructure` and `UI -> Infrastructure` violations.
+- Root cause: some classes injected concrete repositories (`MinervaRotationEntityRepository`, `UserEntityRepository`) instead of application ports.
+- Fix: introduced ports (`MinervaRotationRegenerationRepository`, `AdminUserManagementReadRepositoryInterface`) and rewired dependencies to interfaces.
+- Prevention: after structural moves, run phpstan/PHPat early and immediately replace concrete infra dependencies with application-level contracts.
+
 ## 2026-02-27 - Repository namespace moves require entity metadata updates
 - Symptom: moving Doctrine repositories between namespaces can silently break runtime if entity `repositoryClass` attributes still point to old FQCNs.
 - Root cause: repository migration impacts both service wiring and ORM metadata references.

@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace App\Tests\Integration\Progression\Knowledge;
 
 use App\Catalog\Domain\Item\ItemTypeEnum;
+use App\Catalog\Infrastructure\Persistence\ItemEntityRepository;
 use App\Entity\ItemBookListEntity;
 use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
 use App\Entity\PlayerItemKnowledgeEntity;
 use App\Entity\UserEntity;
-use App\Catalog\Infrastructure\Persistence\ItemEntityRepository;
 use App\Progression\Infrastructure\Persistence\PlayerItemKnowledgeEntityRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;

@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Controller\Admin;
+namespace App\Support\UI\Admin\Controller;
 
 use App\Entity\AdminAuditLogEntity;
 use App\Entity\UserEntity;
 use App\Identity\Application\Security\SignedUrlGenerator;
-use App\Identity\Infrastructure\Persistence\UserEntityRepository;
+use App\Support\Application\AdminUser\AdminUserManagementReadRepositoryInterface;
 use App\Support\Application\AdminUser\GenerateResetLinkApplicationService;
 use App\Support\Application\AdminUser\GenerateResetLinkStatus;
 use App\Support\Application\AdminUser\ToggleUserActiveApplicationService;
@@ -43,7 +43,7 @@ final class UserManagementController extends AbstractController
     use AdminCsrfTokenValidatorTrait;
 
     public function __construct(
-        private readonly UserEntityRepository $userRepository,
+        private readonly AdminUserManagementReadRepositoryInterface $userRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly SignedUrlGenerator $signedUrlGenerator,

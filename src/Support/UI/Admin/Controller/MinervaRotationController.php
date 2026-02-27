@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Controller\Admin;
+namespace App\Support\UI\Admin\Controller;
 
 use App\Catalog\Application\Minerva\MinervaRotationRegenerationApplicationService;
 use App\Catalog\Application\Minerva\MinervaRotationTimelineApplicationService;
