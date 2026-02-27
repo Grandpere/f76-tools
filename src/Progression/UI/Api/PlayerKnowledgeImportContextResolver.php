@@ -19,14 +19,14 @@ use Symfony\Component\HttpFoundation\Request;
 final class PlayerKnowledgeImportContextResolver
 {
     public function __construct(
-        private readonly ProgressionOwnedPlayerApiResolver $progressionOwnedPlayerApiResolver,
+        private readonly PlayerOwnedContextResolver $playerOwnedContextResolver,
         private readonly ProgressionApiJsonPayloadDecoder $progressionApiJsonPayloadDecoder,
     ) {
     }
 
     public function resolveOrNotFound(string $playerId, Request $request, mixed $user): PlayerKnowledgeImportContext|JsonResponse
     {
-        $player = $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($playerId, $user);
+        $player = $this->playerOwnedContextResolver->resolveOrNotFound($playerId, $user);
         if ($player instanceof JsonResponse) {
             return $player;
         }

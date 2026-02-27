@@ -8,6 +8,7 @@ use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
 use App\Progression\UI\Api\PlayerKnowledgeImportContext;
 use App\Progression\UI\Api\PlayerKnowledgeImportContextResolver;
+use App\Progression\UI\Api\PlayerOwnedContextResolver;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
 use App\Progression\UI\Api\ProgressionApiJsonPayloadDecoder;
 use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolver;
@@ -37,7 +38,7 @@ final class PlayerKnowledgeImportContextResolverTest extends TestCase
             ->willReturn($player);
 
         $resolver = new PlayerKnowledgeImportContextResolver(
-            new ProgressionOwnedPlayerApiResolver($readResolver, new ProgressionApiErrorResponder()),
+            new PlayerOwnedContextResolver(new ProgressionOwnedPlayerApiResolver($readResolver, new ProgressionApiErrorResponder())),
             new ProgressionApiJsonPayloadDecoder(),
         );
 
@@ -64,7 +65,7 @@ final class PlayerKnowledgeImportContextResolverTest extends TestCase
             ->willReturn(null);
 
         $resolver = new PlayerKnowledgeImportContextResolver(
-            new ProgressionOwnedPlayerApiResolver($readResolver, new ProgressionApiErrorResponder()),
+            new PlayerOwnedContextResolver(new ProgressionOwnedPlayerApiResolver($readResolver, new ProgressionApiErrorResponder())),
             new ProgressionApiJsonPayloadDecoder(),
         );
 

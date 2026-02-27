@@ -18,14 +18,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 final class PlayerItemActionContextResolver
 {
     public function __construct(
-        private readonly ProgressionOwnedPlayerApiResolver $progressionOwnedPlayerApiResolver,
+        private readonly PlayerOwnedContextResolver $playerOwnedContextResolver,
         private readonly ProgressionItemApiResolver $progressionItemApiResolver,
     ) {
     }
 
     public function resolveOrNotFound(string $playerId, string $itemId, mixed $user): PlayerItemActionContext|JsonResponse
     {
-        $player = $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($playerId, $user);
+        $player = $this->playerOwnedContextResolver->resolveOrNotFound($playerId, $user);
         if ($player instanceof JsonResponse) {
             return $player;
         }

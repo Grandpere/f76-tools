@@ -4,6 +4,7 @@
 - Campagne de slices DDD progression (en cours).
 
 ## Termine recemment
+- F76-064: DDD Slice 54 - Context resolvers use PlayerOwnedContextResolver (done).
 - F76-063: DDD Slice 53 - Owned player context resolver reuse (done).
 - F76-062: DDD Slice 52 - Remove unused item resolver trait (done).
 - F76-061: DDD Slice 51 - Remove unused owned-player resolver trait (done).

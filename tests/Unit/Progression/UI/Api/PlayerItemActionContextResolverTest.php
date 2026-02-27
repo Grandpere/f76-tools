@@ -11,6 +11,7 @@ use App\Progression\Application\Knowledge\ItemReadApplicationService;
 use App\Progression\Application\Knowledge\ItemReadRepositoryInterface;
 use App\Progression\UI\Api\PlayerItemActionContext;
 use App\Progression\UI\Api\PlayerItemActionContextResolver;
+use App\Progression\UI\Api\PlayerOwnedContextResolver;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
 use App\Progression\UI\Api\ProgressionItemApiResolver;
 use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolver;
@@ -47,7 +48,7 @@ final class PlayerItemActionContextResolverTest extends TestCase
             ->willReturn($item);
 
         $resolver = new PlayerItemActionContextResolver(
-            new ProgressionOwnedPlayerApiResolver($readResolver, new ProgressionApiErrorResponder()),
+            new PlayerOwnedContextResolver(new ProgressionOwnedPlayerApiResolver($readResolver, new ProgressionApiErrorResponder())),
             new ProgressionItemApiResolver(new ItemReadApplicationService($itemRepository), new ProgressionApiErrorResponder()),
         );
 
@@ -78,7 +79,7 @@ final class PlayerItemActionContextResolverTest extends TestCase
             ->method('findOneByPublicId');
 
         $resolver = new PlayerItemActionContextResolver(
-            new ProgressionOwnedPlayerApiResolver($readResolver, new ProgressionApiErrorResponder()),
+            new PlayerOwnedContextResolver(new ProgressionOwnedPlayerApiResolver($readResolver, new ProgressionApiErrorResponder())),
             new ProgressionItemApiResolver(new ItemReadApplicationService($itemRepository), new ProgressionApiErrorResponder()),
         );
 
@@ -111,7 +112,7 @@ final class PlayerItemActionContextResolverTest extends TestCase
             ->willReturn(null);
 
         $resolver = new PlayerItemActionContextResolver(
-            new ProgressionOwnedPlayerApiResolver($readResolver, new ProgressionApiErrorResponder()),
+            new PlayerOwnedContextResolver(new ProgressionOwnedPlayerApiResolver($readResolver, new ProgressionApiErrorResponder())),
             new ProgressionItemApiResolver(new ItemReadApplicationService($itemRepository), new ProgressionApiErrorResponder()),
         );
 
