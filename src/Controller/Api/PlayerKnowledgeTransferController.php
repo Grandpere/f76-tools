@@ -15,6 +15,7 @@ namespace App\Controller\Api;
 
 use App\Entity\PlayerEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeTransferApplicationService;
+use App\Progression\UI\Api\PlayerKnowledgeImportContext;
 use App\Progression\UI\Api\PlayerKnowledgeImportMode;
 use App\Progression\UI\Api\PlayerKnowledgeTransferResultResponder;
 use App\Progression\UI\Api\ProgressionApiJsonPayloadDecoder;
@@ -67,8 +68,8 @@ final class PlayerKnowledgeTransferController extends AbstractController
         if ($context instanceof JsonResponse) {
             return $context;
         }
-        $player = $context['player'];
-        $payload = $context['payload'];
+        $player = $context->player;
+        $payload = $context->payload;
 
         $result = PlayerKnowledgeImportMode::PREVIEW === $mode
             ? $this->playerKnowledgeTransferApplicationService->previewImport($player, $payload)
@@ -82,19 +83,13 @@ final class PlayerKnowledgeTransferController extends AbstractController
         return $this->progressionOwnedPlayerApiResolver;
     }
 
-    /**
-     * @return array{player: PlayerEntity, payload: array<string, mixed>}|JsonResponse
-     */
-    private function resolveImportContextOrNotFound(string $playerId, Request $request): array|JsonResponse
+    private function resolveImportContextOrNotFound(string $playerId, Request $request): PlayerKnowledgeImportContext|JsonResponse
     {
         $player = $this->resolveOwnedPlayerOrNotFound($playerId);
         if ($player instanceof JsonResponse) {
             return $player;
         }
 
-        return [
-            'player' => $player,
-            'payload' => $this->progressionApiJsonPayloadDecoder->decode($request),
-        ];
+        return new PlayerKnowledgeImportContext($player, $this->progressionApiJsonPayloadDecoder->decode($request));
     }
 }
