@@ -23,6 +23,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[Route('/admin/translations/items')]
 final class ItemTranslationController extends AbstractController
 {
+    use AdminRoleGuardControllerTrait;
+
     private const DEFAULT_PER_PAGE = 40;
     private const MAX_PER_PAGE = 200;
 
@@ -35,6 +37,8 @@ final class ItemTranslationController extends AbstractController
     #[Route('', name: 'app_admin_item_translations', methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
+        $this->ensureAdminAccess();
+
         $targetLocale = $this->itemTranslationBackofficeApplicationService->sanitizeTargetLocale($request->query->get('target'));
         $query = $this->itemTranslationBackofficeApplicationService->normalizeQuery($request->query->get('q'));
         $perPage = $this->sanitizePositiveInt($request->query->get('perPage'), self::DEFAULT_PER_PAGE, self::MAX_PER_PAGE);
