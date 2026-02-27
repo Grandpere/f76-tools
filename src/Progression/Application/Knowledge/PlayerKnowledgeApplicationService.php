@@ -20,6 +20,7 @@ use App\Repository\ItemEntityRepository;
 use App\Service\PlayerItemKnowledgeManager;
 
 final class PlayerKnowledgeApplicationService
+    implements OwnedPlayerResolverInterface
 {
     public function __construct(
         private readonly PlayerItemKnowledgeManager $knowledgeManager,

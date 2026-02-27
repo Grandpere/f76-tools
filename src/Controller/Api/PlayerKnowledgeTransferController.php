@@ -13,12 +13,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
-use App\Entity\PlayerEntity;
-use App\Progression\Application\Knowledge\PlayerKnowledgeApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeTransferApplicationService;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
 use App\Progression\UI\Api\ProgressionApiJsonPayloadDecoder;
-use App\Progression\UI\Api\ProgressionApiUserContext;
+use App\Progression\UI\Api\ProgressionOwnedPlayerResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,9 +26,8 @@ use Symfony\Component\Routing\Attribute\Route;
 final class PlayerKnowledgeTransferController extends AbstractController
 {
     public function __construct(
-        private readonly PlayerKnowledgeApplicationService $playerKnowledgeApplicationService,
         private readonly PlayerKnowledgeTransferApplicationService $playerKnowledgeTransferApplicationService,
-        private readonly ProgressionApiUserContext $progressionApiUserContext,
+        private readonly ProgressionOwnedPlayerResolver $progressionOwnedPlayerResolver,
         private readonly ProgressionApiErrorResponder $progressionApiErrorResponder,
         private readonly ProgressionApiJsonPayloadDecoder $progressionApiJsonPayloadDecoder,
     ) {
@@ -39,7 +36,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
     #[Route('/export', name: 'api_player_knowledge_export', methods: ['GET'])]
     public function export(string $playerId): JsonResponse
     {
-        $player = $this->resolveOwnedPlayer($playerId);
+        $player = $this->progressionOwnedPlayerResolver->resolve($playerId, $this->getUser());
         if (null === $player) {
             return $this->progressionApiErrorResponder->playerNotFound();
         }
@@ -50,7 +47,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
     #[Route('/import', name: 'api_player_knowledge_import', methods: ['POST'])]
     public function import(string $playerId, Request $request): JsonResponse
     {
-        $player = $this->resolveOwnedPlayer($playerId);
+        $player = $this->progressionOwnedPlayerResolver->resolve($playerId, $this->getUser());
         if (null === $player) {
             return $this->progressionApiErrorResponder->playerNotFound();
         }
@@ -66,7 +63,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
     #[Route('/preview-import', name: 'api_player_knowledge_preview_import', methods: ['POST'])]
     public function previewImport(string $playerId, Request $request): JsonResponse
     {
-        $player = $this->resolveOwnedPlayer($playerId);
+        $player = $this->progressionOwnedPlayerResolver->resolve($playerId, $this->getUser());
         if (null === $player) {
             return $this->progressionApiErrorResponder->playerNotFound();
         }
@@ -77,13 +74,6 @@ final class PlayerKnowledgeTransferController extends AbstractController
         }
 
         return $this->json($result);
-    }
-
-    private function resolveOwnedPlayer(string $playerId): ?PlayerEntity
-    {
-        $user = $this->progressionApiUserContext->requireAuthenticatedUser($this->getUser());
-
-        return $this->playerKnowledgeApplicationService->resolveOwnedPlayer($user, $playerId);
     }
 
 }

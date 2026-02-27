@@ -13,10 +13,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
-use App\Progression\Application\Knowledge\PlayerKnowledgeApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeStatsApplicationService;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
-use App\Progression\UI\Api\ProgressionApiUserContext;
+use App\Progression\UI\Api\ProgressionOwnedPlayerResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
@@ -25,9 +24,8 @@ use Symfony\Component\Routing\Attribute\Route;
 final class PlayerStatsController extends AbstractController
 {
     public function __construct(
-        private readonly PlayerKnowledgeApplicationService $playerKnowledgeApplicationService,
         private readonly PlayerKnowledgeStatsApplicationService $playerKnowledgeStatsApplicationService,
-        private readonly ProgressionApiUserContext $progressionApiUserContext,
+        private readonly ProgressionOwnedPlayerResolver $progressionOwnedPlayerResolver,
         private readonly ProgressionApiErrorResponder $progressionApiErrorResponder,
     ) {
     }
@@ -35,9 +33,7 @@ final class PlayerStatsController extends AbstractController
     #[Route('', name: 'api_player_stats_show', methods: ['GET'])]
     public function __invoke(string $playerId): JsonResponse
     {
-        $user = $this->progressionApiUserContext->requireAuthenticatedUser($this->getUser());
-
-        $player = $this->playerKnowledgeApplicationService->resolveOwnedPlayer($user, $playerId);
+        $player = $this->progressionOwnedPlayerResolver->resolve($playerId, $this->getUser());
         if (null === $player) {
             return $this->progressionApiErrorResponder->playerNotFound();
         }
