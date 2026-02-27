@@ -418,13 +418,26 @@ body::before {
     grid-column: span 12;
 }
 
+.progression-character-toolbar {
+    position: relative;
+}
+
+.progression-character-toolbar::after {
+    content: '';
+    position: absolute;
+    top: 0.2rem;
+    bottom: 0.2rem;
+    left: 50%;
+    width: 1px;
+    background: var(--line);
+}
+
 .progression-character-toolbar .field:first-child {
-    padding-right: 0.8rem;
-    border-right: 1px solid var(--line);
+    padding-right: 1rem;
 }
 
 .progression-character-toolbar .field:last-child {
-    padding-left: 0.8rem;
+    padding-left: 1rem;
 }
 
 .field span {
@@ -1414,11 +1427,14 @@ body::before {
 
     .progression-character-toolbar .field:first-child {
         padding-right: 0;
-        border-right: 0;
     }
 
     .progression-character-toolbar .field:last-child {
         padding-left: 0;
+    }
+
+    .progression-character-toolbar::after {
+        display: none;
     }
 }
 
