@@ -1,11 +1,11 @@
 # Current Focus
 
 ## Priorite active
-- Campagne fonctionnelle lot F76-049 a F76-050 (pending user run).
+- F76-051: DDD Slice 41 - Player item action context object (in progress).
 
 ## Termine recemment
-- F76-050: DDD Slice 40 - Knowledge transfer context resolver cleanup (code done, functional pending).
-- F76-049: DDD Slice 39 - Player item controller context resolver cleanup (code done, functional pending).
+- F76-050: DDD Slice 40 - Knowledge transfer context resolver cleanup (done).
+- F76-049: DDD Slice 39 - Player item controller context resolver cleanup (done).
 - F76-048: DDD Slice 38 - Resolver traits not-found unit coverage (done).
 - F76-047: DDD Slice 37 - Player controller name extraction cleanup (done).
 - F76-046: DDD Slice 36 - Progression resolver traits ergonomics (done).

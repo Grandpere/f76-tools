@@ -17,6 +17,7 @@ use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeWriteApplicationService;
+use App\Progression\UI\Api\PlayerItemActionContext;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadSearchFilter;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
@@ -76,8 +77,8 @@ final class PlayerItemKnowledgeController extends AbstractController
         if ($context instanceof JsonResponse) {
             return $context;
         }
-        $player = $context['player'];
-        $item = $context['item'];
+        $player = $context->player;
+        $item = $context->item;
 
         $this->playerKnowledgeWriteApplicationService->markLearned($player, $item);
 
@@ -91,8 +92,8 @@ final class PlayerItemKnowledgeController extends AbstractController
         if ($context instanceof JsonResponse) {
             return $context;
         }
-        $player = $context['player'];
-        $item = $context['item'];
+        $player = $context->player;
+        $item = $context->item;
 
         $this->playerKnowledgeWriteApplicationService->unmarkLearned($player, $item);
 
@@ -109,10 +110,7 @@ final class PlayerItemKnowledgeController extends AbstractController
         return $this->progressionItemApiResolver;
     }
 
-    /**
-     * @return array{player: PlayerEntity, item: ItemEntity}|JsonResponse
-     */
-    private function resolveContextOrNotFound(string $playerId, string $itemId): array|JsonResponse
+    private function resolveContextOrNotFound(string $playerId, string $itemId): PlayerItemActionContext|JsonResponse
     {
         $player = $this->resolveOwnedPlayerOrNotFound($playerId);
         if ($player instanceof JsonResponse) {
@@ -124,9 +122,6 @@ final class PlayerItemKnowledgeController extends AbstractController
             return $item;
         }
 
-        return [
-            'player' => $player,
-            'item' => $item,
-        ];
+        return new PlayerItemActionContext($player, $item);
     }
 }
