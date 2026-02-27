@@ -21,6 +21,18 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - Unit test on 204 JsonResponse content expected empty string
+- Symptom: unit test failed asserting `''` for a `JsonResponse` with HTTP 204.
+- Root cause: Symfony `JsonResponse(null, 204)` serializes as `{}` content, not empty string.
+- Fix: adjusted assertion to expect `'{}'`.
+- Prevention: when asserting raw response body, verify Symfony serializer behavior for each response class/status.
+
+## 2026-02-27 - Mock configured on wrong repository method name
+- Symptom: PHPUnit error `MethodCannotBeConfiguredException` while testing owned player read resolver.
+- Root cause: test mocked `findOwnedByPublicId` but repository contract method is `findOneByPublicIdAndUser`.
+- Fix: updated mock to correct method name and argument order.
+- Prevention: always align mocks with interface signatures (not service convenience names).
+
 ## 2026-02-27 - Reflection setAccessible deprecated in PHP 8.5 tests
 - Symptom: unit suite failed with deprecations treated as errors on `ReflectionProperty::setAccessible()`.
 - Root cause: PHP 8.5 deprecates `setAccessible()` (no-op since PHP 8.1).
