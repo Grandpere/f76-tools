@@ -123,10 +123,6 @@ phpunit-functional: db-test-init ## Run PHPUnit Functional suite
 phpstan: ## Run PHPStan
 	$(DC_EXEC) vendor/bin/phpstan analyse -c phpstan.dist.neon --memory-limit 2G
 
-.PHONY: architecture
-architecture: ## Run architecture rules (PHPat via PHPStan extension)
-	$(DC_EXEC) vendor/bin/phpstan analyse -c phpstan.dist.neon --memory-limit 2G
-
 .PHONY: phpstan-baseline
 phpstan-baseline: ## Generate PHPStan baseline
 	$(DC_EXEC) vendor/bin/phpstan analyse -c phpstan.dist.neon --generate-baseline --memory-limit 2G
