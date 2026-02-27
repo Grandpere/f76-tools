@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
+use App\Entity\ItemEntity;
+use App\Entity\PlayerEntity;
 use App\Progression\Application\Knowledge\ItemReadApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeWriteApplicationService;
@@ -65,13 +67,13 @@ final class PlayerItemKnowledgeController extends AbstractController
     #[Route('/{itemId<[A-Za-z0-9]{26}>}/learned', name: 'api_player_items_learned_set', methods: ['PUT'])]
     public function setLearned(string $playerId, string $itemId): JsonResponse
     {
-        $player = $this->progressionOwnedPlayerReadResolver->resolve($playerId, $this->getUser());
-        if (null === $player) {
-            return $this->progressionApiErrorResponder->playerNotFound();
+        $player = $this->resolvePlayerOrNotFound($playerId);
+        if ($player instanceof JsonResponse) {
+            return $player;
         }
-        $item = $this->itemReadApplicationService->findByPublicId($itemId);
-        if (null === $item) {
-            return $this->progressionApiErrorResponder->itemNotFound();
+        $item = $this->resolveItemOrNotFound($itemId);
+        if ($item instanceof JsonResponse) {
+            return $item;
         }
 
         $this->playerKnowledgeWriteApplicationService->markLearned($player, $item);
@@ -82,17 +84,37 @@ final class PlayerItemKnowledgeController extends AbstractController
     #[Route('/{itemId<[A-Za-z0-9]{26}>}/learned', name: 'api_player_items_learned_unset', methods: ['DELETE'])]
     public function unsetLearned(string $playerId, string $itemId): Response
     {
-        $player = $this->progressionOwnedPlayerReadResolver->resolve($playerId, $this->getUser());
-        if (null === $player) {
-            return $this->progressionApiErrorResponder->playerNotFound();
+        $player = $this->resolvePlayerOrNotFound($playerId);
+        if ($player instanceof JsonResponse) {
+            return $player;
         }
-        $item = $this->itemReadApplicationService->findByPublicId($itemId);
-        if (null === $item) {
-            return $this->progressionApiErrorResponder->itemNotFound();
+        $item = $this->resolveItemOrNotFound($itemId);
+        if ($item instanceof JsonResponse) {
+            return $item;
         }
 
         $this->playerKnowledgeWriteApplicationService->unmarkLearned($player, $item);
 
         return new Response(status: Response::HTTP_NO_CONTENT);
+    }
+
+    private function resolvePlayerOrNotFound(string $playerId): PlayerEntity|JsonResponse
+    {
+        $player = $this->progressionOwnedPlayerReadResolver->resolve($playerId, $this->getUser());
+        if (null === $player) {
+            return $this->progressionApiErrorResponder->playerNotFound();
+        }
+
+        return $player;
+    }
+
+    private function resolveItemOrNotFound(string $itemId): ItemEntity|JsonResponse
+    {
+        $item = $this->itemReadApplicationService->findByPublicId($itemId);
+        if (null === $item) {
+            return $this->progressionApiErrorResponder->itemNotFound();
+        }
+
+        return $item;
     }
 }
