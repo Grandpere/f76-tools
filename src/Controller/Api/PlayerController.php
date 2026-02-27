@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
-use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
 use App\Progression\Application\Player\Exception\PlayerNameConflictException;
 use App\Progression\Application\Player\PlayerApplicationService;
-use JsonException;
+use App\Progression\UI\Api\PlayerNameRequestExtractor;
+use App\Progression\UI\Api\PlayerPayloadMapper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,6 +29,8 @@ final class PlayerController extends AbstractController
 {
     public function __construct(
         private readonly PlayerApplicationService $playerApplicationService,
+        private readonly PlayerPayloadMapper $playerPayloadMapper,
+        private readonly PlayerNameRequestExtractor $playerNameRequestExtractor,
     ) {
     }
 
@@ -38,23 +40,14 @@ final class PlayerController extends AbstractController
         $user = $this->getAuthenticatedUser();
         $players = $this->playerApplicationService->listForUser($user);
 
-        $payload = array_map(static fn (PlayerEntity $player): array => [
-            'id' => $player->getPublicId(),
-            'name' => $player->getName(),
-            'createdAt' => $player->getCreatedAt()->format(DATE_ATOM),
-            'updatedAt' => $player->getUpdatedAt()->format(DATE_ATOM),
-        ], $players);
-
-        return $this->json($payload);
+        return $this->json($this->playerPayloadMapper->mapList($players));
     }
 
     #[Route('', name: 'api_players_create', methods: ['POST'])]
     public function create(Request $request): JsonResponse
     {
         $user = $this->getAuthenticatedUser();
-        $data = $this->decodeJson($request);
-
-        $name = $this->normalizeName($data['name'] ?? null);
+        $name = $this->playerNameRequestExtractor->extract($request);
         if (null === $name) {
             return $this->json(['error' => 'Invalid player name.'], JsonResponse::HTTP_BAD_REQUEST);
         }
@@ -65,12 +58,7 @@ final class PlayerController extends AbstractController
             return $this->json(['error' => 'Player name already exists.'], JsonResponse::HTTP_CONFLICT);
         }
 
-        return $this->json([
-            'id' => $player->getPublicId(),
-            'name' => $player->getName(),
-            'createdAt' => $player->getCreatedAt()->format(DATE_ATOM),
-            'updatedAt' => $player->getUpdatedAt()->format(DATE_ATOM),
-        ], JsonResponse::HTTP_CREATED);
+        return $this->json($this->playerPayloadMapper->map($player), JsonResponse::HTTP_CREATED);
     }
 
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_show', methods: ['GET'])]
@@ -82,12 +70,7 @@ final class PlayerController extends AbstractController
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
 
-        return $this->json([
-            'id' => $player->getPublicId(),
-            'name' => $player->getName(),
-            'createdAt' => $player->getCreatedAt()->format(DATE_ATOM),
-            'updatedAt' => $player->getUpdatedAt()->format(DATE_ATOM),
-        ]);
+        return $this->json($this->playerPayloadMapper->map($player));
     }
 
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_update', methods: ['PATCH'])]
@@ -99,8 +82,7 @@ final class PlayerController extends AbstractController
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
 
-        $data = $this->decodeJson($request);
-        $name = $this->normalizeName($data['name'] ?? null);
+        $name = $this->playerNameRequestExtractor->extract($request);
         if (null === $name) {
             return $this->json(['error' => 'Invalid player name.'], JsonResponse::HTTP_BAD_REQUEST);
         }
@@ -111,12 +93,7 @@ final class PlayerController extends AbstractController
             return $this->json(['error' => 'Player name already exists.'], JsonResponse::HTTP_CONFLICT);
         }
 
-        return $this->json([
-            'id' => $player->getPublicId(),
-            'name' => $player->getName(),
-            'createdAt' => $player->getCreatedAt()->format(DATE_ATOM),
-            'updatedAt' => $player->getUpdatedAt()->format(DATE_ATOM),
-        ]);
+        return $this->json($this->playerPayloadMapper->map($player));
     }
 
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_delete', methods: ['DELETE'])]
@@ -141,38 +118,5 @@ final class PlayerController extends AbstractController
         }
 
         return $user;
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    private function decodeJson(Request $request): array
-    {
-        try {
-            $payload = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
-        } catch (JsonException) {
-            return [];
-        }
-
-        if (!is_array($payload)) {
-            return [];
-        }
-
-        $normalized = [];
-        foreach ($payload as $key => $value) {
-            $normalized[(string) $key] = $value;
-        }
-
-        return $normalized;
-    }
-
-    private function normalizeName(mixed $value): ?string
-    {
-        if (!is_string($value)) {
-            return null;
-        }
-        $value = trim($value);
-
-        return '' === $value ? null : $value;
     }
 }
