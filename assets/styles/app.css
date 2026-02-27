@@ -1049,6 +1049,31 @@ body::before {
     font-size: 0.85rem;
 }
 
+.minerva-timeline-table th:first-child,
+.minerva-timeline-table td:first-child {
+    width: 8%;
+    white-space: nowrap;
+}
+
+.minerva-timeline-table th:nth-child(2),
+.minerva-timeline-table td:nth-child(2) {
+    width: 30%;
+}
+
+.minerva-timeline-table th:nth-child(3),
+.minerva-timeline-table td:nth-child(3),
+.minerva-timeline-table th:nth-child(4),
+.minerva-timeline-table td:nth-child(4) {
+    width: 25%;
+    white-space: nowrap;
+}
+
+.minerva-timeline-table th:nth-child(5),
+.minerva-timeline-table td:nth-child(5) {
+    width: 12%;
+    white-space: nowrap;
+}
+
 .translations-filters {
     display: flex;
     gap: 0.7rem;
