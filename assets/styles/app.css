@@ -147,6 +147,18 @@ body::before {
     margin: 0 0 0.55rem auto;
 }
 
+.header-logout-form button {
+    color: var(--accent-2);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.24rem 0;
+}
+
+.header-logout-form button:hover {
+    color: #ffe38a;
+}
+
 .header-locale {
     display: inline-flex;
     align-items: center;
