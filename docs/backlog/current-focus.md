@@ -1,9 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- F76-052: DDD Slice 42 - Knowledge transfer import context object (in progress).
+- Campagne fonctionnelle lot F76-051 a F76-052 (pending user run).
 
 ## Termine recemment
+- F76-052: DDD Slice 42 - Knowledge transfer import context object (code done, functional pending).
 - F76-051: DDD Slice 41 - Player item action context object (code done, functional pending).
 - F76-050: DDD Slice 40 - Knowledge transfer context resolver cleanup (done).
 - F76-049: DDD Slice 39 - Player item controller context resolver cleanup (done).
