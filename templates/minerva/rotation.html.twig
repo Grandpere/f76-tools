@@ -196,38 +196,6 @@
         </section>
 
         <section class="translations-panel">
-            <h2>{{ 'minerva.timeline_title'|trans }}</h2>
-            <div class="translations-table-wrap">
-                <table class="translations-table minerva-timeline-table">
-                    <thead>
-                    <tr>
-                        <th>{{ 'minerva.list_cycle'|trans }}</th>
-                        <th>{{ 'minerva.location'|trans }}</th>
-                        <th>{{ 'minerva.starts_at'|trans }}</th>
-                        <th>{{ 'minerva.ends_at'|trans }}</th>
-                        <th>{{ 'minerva.status'|trans }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for row in timeline.rows %}
-                        <tr>
-                            <td>{{ row.listCycle }}</td>
-                            <td>{{ row.location }}</td>
-                            <td>{{ row.startsAt|date('Y-m-d H:i') }}</td>
-                            <td>{{ row.endsAt|date('Y-m-d H:i') }}</td>
-                            <td><span class="item-pill">{{ ('minerva.status_' ~ row.status)|trans }}</span></td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="5">{{ 'minerva.empty'|trans }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section class="translations-panel">
             <h2>{{ 'dashboard.catalog.book_title'|trans }}</h2>
             <section
                 class="catalog-shell"
