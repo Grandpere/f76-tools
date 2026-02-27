@@ -41,10 +41,10 @@ final class AuditLogController extends AbstractController
         $this->ensureAdminAccess();
 
         $listResult = $this->auditLogListApplicationService->list(AuditLogListQuery::fromRaw(
-            $request->query->get('q'),
-            $request->query->get('action'),
-            $request->query->get('page'),
-            $request->query->get('perPage'),
+            $this->optionalString($request->query->get('q')),
+            $this->optionalString($request->query->get('action')),
+            $this->optionalIntOrString($request->query->get('page')),
+            $this->optionalIntOrString($request->query->get('perPage')),
         ));
 
         return $this->render('admin/audit_logs.html.twig', [
@@ -65,10 +65,20 @@ final class AuditLogController extends AbstractController
         $this->ensureAdminAccess();
 
         $exportResult = $this->auditLogExportApplicationService->export(AuditLogExportQuery::fromRaw(
-            $request->query->get('q'),
-            $request->query->get('action'),
+            $this->optionalString($request->query->get('q')),
+            $this->optionalString($request->query->get('action')),
         ));
 
         return $this->auditLogCsvExporter->buildResponse($exportResult->rows);
+    }
+
+    private function optionalString(mixed $value): ?string
+    {
+        return is_string($value) ? $value : null;
+    }
+
+    private function optionalIntOrString(mixed $value): int|string|null
+    {
+        return is_int($value) || is_string($value) ? $value : null;
     }
 }

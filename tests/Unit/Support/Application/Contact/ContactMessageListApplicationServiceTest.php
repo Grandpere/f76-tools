@@ -64,7 +64,7 @@ final class ContactMessageListApplicationServiceTest extends TestCase
         ]);
 
         $service = new ContactMessageListApplicationService($repository);
-        $result = $service->list(ContactMessageListQuery::fromRaw([], 'invalid', 'abc', '-5'));
+        $result = $service->list(ContactMessageListQuery::fromRaw(null, 'invalid', 'abc', '-5'));
 
         self::assertSame('', $result->query);
         self::assertNull($result->status);

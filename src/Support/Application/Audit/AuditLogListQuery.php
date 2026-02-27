@@ -26,7 +26,7 @@ final readonly class AuditLogListQuery
     ) {
     }
 
-    public static function fromRaw(mixed $rawQuery, mixed $rawAction, mixed $rawPage, mixed $rawPerPage): self
+    public static function fromRaw(?string $rawQuery, ?string $rawAction, int|string|null $rawPage, int|string|null $rawPerPage): self
     {
         return new self(
             query: self::sanitizeString($rawQuery),
@@ -36,16 +36,16 @@ final readonly class AuditLogListQuery
         );
     }
 
-    private static function sanitizeString(mixed $value): string
+    private static function sanitizeString(?string $value): string
     {
-        if (!is_string($value)) {
+        if (null === $value) {
             return '';
         }
 
         return trim($value);
     }
 
-    private static function sanitizePositiveInt(mixed $value, int $default, ?int $max = null): int
+    private static function sanitizePositiveInt(int|string|null $value, int $default, ?int $max = null): int
     {
         if (is_int($value)) {
             $number = $value;

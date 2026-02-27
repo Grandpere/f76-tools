@@ -15,10 +15,11 @@ namespace App\Progression\UI\Api;
 
 use App\Entity\UserEntity;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 final class ProgressionApiUserContext
 {
-    public function requireAuthenticatedUser(mixed $user): UserEntity
+    public function requireAuthenticatedUser(?UserInterface $user): UserEntity
     {
         if (!$user instanceof UserEntity) {
             throw new AccessDeniedException('User must be authenticated.');

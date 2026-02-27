@@ -46,10 +46,10 @@ final class ContactMessageController extends AbstractController
         $this->ensureAdminAccess();
 
         $listResult = $this->contactMessageListApplicationService->list(ContactMessageListQuery::fromRaw(
-            $request->query->get('q'),
-            $request->query->get('status'),
-            $request->query->get('page'),
-            $request->query->get('perPage'),
+            $this->optionalString($request->query->get('q')),
+            $this->optionalString($request->query->get('status')),
+            $this->optionalIntOrString($request->query->get('page')),
+            $this->optionalIntOrString($request->query->get('perPage')),
         ));
 
         return $this->render('admin/contact_messages.html.twig', [
@@ -75,10 +75,20 @@ final class ContactMessageController extends AbstractController
 
         $result = $this->contactMessageStatusUpdateApplicationService->update(
             $id,
-            ContactMessageStatusUpdateRequest::fromRaw($request->request->get('status')),
+            ContactMessageStatusUpdateRequest::fromRaw($this->optionalString($request->request->get('status'))),
         );
 
         return $this->contactMessageStatusUpdateResponder->fromResult($request, $result);
+    }
+
+    private function optionalString(mixed $value): ?string
+    {
+        return is_string($value) ? $value : null;
+    }
+
+    private function optionalIntOrString(mixed $value): int|string|null
+    {
+        return is_int($value) || is_string($value) ? $value : null;
     }
 
     protected function csrfTokenManager(): CsrfTokenManagerInterface

@@ -62,7 +62,7 @@ final class AuditLogListApplicationServiceTest extends TestCase
         ], []);
 
         $service = new AuditLogListApplicationService($repository);
-        $result = $service->list(AuditLogListQuery::fromRaw([], [], 'abc', '-1'));
+        $result = $service->list(AuditLogListQuery::fromRaw(null, null, 'abc', '-1'));
 
         self::assertSame('', $result->query);
         self::assertSame('', $result->action);

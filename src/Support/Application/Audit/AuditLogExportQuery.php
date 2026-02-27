@@ -21,7 +21,7 @@ final readonly class AuditLogExportQuery
     ) {
     }
 
-    public static function fromRaw(mixed $rawQuery, mixed $rawAction): self
+    public static function fromRaw(?string $rawQuery, ?string $rawAction): self
     {
         return new self(
             query: self::sanitizeString($rawQuery),
@@ -29,9 +29,9 @@ final readonly class AuditLogExportQuery
         );
     }
 
-    private static function sanitizeString(mixed $value): string
+    private static function sanitizeString(?string $value): string
     {
-        if (!is_string($value)) {
+        if (null === $value) {
             return '';
         }
 

@@ -4,6 +4,7 @@
 - Campagne de slices DDD progression (en cours).
 
 ## Termine recemment
+- F76-081: DDD Slice 71 - Admin boundary typing hardening (done).
 - F76-080: DDD Slice 70 - Item translation typed string inputs (done).
 - F76-079: DDD Slice 69 - Admin CSRF token validator trait (done).
 - F76-078: DDD Slice 68 - Contact status update typed request (done).

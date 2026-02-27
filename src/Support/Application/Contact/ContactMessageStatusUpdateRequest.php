@@ -22,9 +22,9 @@ final readonly class ContactMessageStatusUpdateRequest
     ) {
     }
 
-    public static function fromRaw(mixed $rawStatus): self
+    public static function fromRaw(?string $rawStatus): self
     {
-        if (!is_string($rawStatus)) {
+        if (null === $rawStatus) {
             return new self(null);
         }
 
