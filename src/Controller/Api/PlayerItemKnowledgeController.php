@@ -20,11 +20,12 @@ use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationServi
 use App\Progression\Application\Knowledge\PlayerKnowledgeApplicationService;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadSearchFilter;
+use App\Progression\UI\Api\ProgressionApiErrorResponder;
+use App\Progression\UI\Api\ProgressionApiUserContext;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[Route('/api/players/{playerId<[A-Za-z0-9]{26}>}/items')]
 final class PlayerItemKnowledgeController extends AbstractController
@@ -34,6 +35,8 @@ final class PlayerItemKnowledgeController extends AbstractController
         private readonly PlayerKnowledgeApplicationService $playerKnowledgeApplicationService,
         private readonly PlayerKnowledgeItemPayloadMapper $playerKnowledgeItemPayloadMapper,
         private readonly PlayerKnowledgeItemPayloadSearchFilter $playerKnowledgeItemPayloadSearchFilter,
+        private readonly ProgressionApiUserContext $progressionApiUserContext,
+        private readonly ProgressionApiErrorResponder $progressionApiErrorResponder,
     ) {
     }
 
@@ -42,12 +45,12 @@ final class PlayerItemKnowledgeController extends AbstractController
     {
         $player = $this->resolveOwnedPlayer($playerId);
         if (null === $player) {
-            return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
+            return $this->progressionApiErrorResponder->playerNotFound();
         }
 
         $type = $this->parseType($request->query->get('type'));
         if (false === $type) {
-            return $this->json(['error' => 'Invalid item type.'], JsonResponse::HTTP_BAD_REQUEST);
+            return $this->progressionApiErrorResponder->invalidItemType();
         }
 
         $catalogRows = $this->playerKnowledgeCatalogApplicationService->listForPlayer($player, $type);
@@ -66,11 +69,11 @@ final class PlayerItemKnowledgeController extends AbstractController
     {
         $player = $this->resolveOwnedPlayer($playerId);
         if (null === $player) {
-            return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
+            return $this->progressionApiErrorResponder->playerNotFound();
         }
         $item = $this->playerKnowledgeApplicationService->resolveItemByPublicId($itemId);
         if (null === $item) {
-            return $this->json(['error' => 'Item not found.'], JsonResponse::HTTP_NOT_FOUND);
+            return $this->progressionApiErrorResponder->itemNotFound();
         }
 
         $this->playerKnowledgeApplicationService->markLearned($player, $item);
@@ -83,11 +86,11 @@ final class PlayerItemKnowledgeController extends AbstractController
     {
         $player = $this->resolveOwnedPlayer($playerId);
         if (null === $player) {
-            return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
+            return $this->progressionApiErrorResponder->playerNotFound();
         }
         $item = $this->playerKnowledgeApplicationService->resolveItemByPublicId($itemId);
         if (null === $item) {
-            return $this->json(['error' => 'Item not found.'], JsonResponse::HTTP_NOT_FOUND);
+            return $this->progressionApiErrorResponder->itemNotFound();
         }
 
         $this->playerKnowledgeApplicationService->unmarkLearned($player, $item);
@@ -97,12 +100,7 @@ final class PlayerItemKnowledgeController extends AbstractController
 
     private function getAuthenticatedUser(): UserEntity
     {
-        $user = $this->getUser();
-        if (!$user instanceof UserEntity) {
-            throw new AccessDeniedException('User must be authenticated.');
-        }
-
-        return $user;
+        return $this->progressionApiUserContext->requireAuthenticatedUser($this->getUser());
     }
 
     private function resolveOwnedPlayer(string $playerId): ?PlayerEntity

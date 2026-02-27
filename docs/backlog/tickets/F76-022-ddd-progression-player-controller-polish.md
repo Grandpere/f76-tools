@@ -17,7 +17,7 @@
 - [x] Extraire `PlayerReadApplicationService` + port repository.
 - [x] Brancher `PlayerController` sur le service de lecture dedie.
 - [x] Ajouter tests unitaires du service de lecture.
-- [ ] Validation fonctionnelle manuelle (`make phpunit-functional`) et ajustements si besoin.
+- [x] Validation fonctionnelle manuelle (`make phpunit-functional`) et ajustements si besoin.
 
 ## Criteres d acceptance
 - Aucune regression fonctionnelle sur les endpoints `/api/players`.

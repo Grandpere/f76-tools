@@ -19,11 +19,12 @@ use App\Progression\Application\Player\PlayerApplicationService;
 use App\Progression\Application\Player\PlayerReadApplicationService;
 use App\Progression\UI\Api\PlayerNameRequestExtractor;
 use App\Progression\UI\Api\PlayerPayloadMapper;
+use App\Progression\UI\Api\ProgressionApiErrorResponder;
+use App\Progression\UI\Api\ProgressionApiUserContext;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[Route('/api/players')]
 final class PlayerController extends AbstractController
@@ -33,6 +34,8 @@ final class PlayerController extends AbstractController
         private readonly PlayerReadApplicationService $playerReadApplicationService,
         private readonly PlayerPayloadMapper $playerPayloadMapper,
         private readonly PlayerNameRequestExtractor $playerNameRequestExtractor,
+        private readonly ProgressionApiUserContext $progressionApiUserContext,
+        private readonly ProgressionApiErrorResponder $progressionApiErrorResponder,
     ) {
     }
 
@@ -51,13 +54,13 @@ final class PlayerController extends AbstractController
         $user = $this->getAuthenticatedUser();
         $name = $this->playerNameRequestExtractor->extract($request);
         if (null === $name) {
-            return $this->json(['error' => 'Invalid player name.'], JsonResponse::HTTP_BAD_REQUEST);
+            return $this->progressionApiErrorResponder->invalidPlayerName();
         }
 
         try {
             $player = $this->playerApplicationService->createForUser($user, $name);
         } catch (PlayerNameConflictException) {
-            return $this->json(['error' => 'Player name already exists.'], JsonResponse::HTTP_CONFLICT);
+            return $this->progressionApiErrorResponder->playerNameAlreadyExists();
         }
 
         return $this->json($this->playerPayloadMapper->map($player), JsonResponse::HTTP_CREATED);
@@ -69,7 +72,7 @@ final class PlayerController extends AbstractController
         $user = $this->getAuthenticatedUser();
         $player = $this->playerReadApplicationService->findOwnedByPublicId($user, $id);
         if (null === $player) {
-            return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
+            return $this->progressionApiErrorResponder->playerNotFound();
         }
 
         return $this->json($this->playerPayloadMapper->map($player));
@@ -81,18 +84,18 @@ final class PlayerController extends AbstractController
         $user = $this->getAuthenticatedUser();
         $player = $this->playerReadApplicationService->findOwnedByPublicId($user, $id);
         if (null === $player) {
-            return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
+            return $this->progressionApiErrorResponder->playerNotFound();
         }
 
         $name = $this->playerNameRequestExtractor->extract($request);
         if (null === $name) {
-            return $this->json(['error' => 'Invalid player name.'], JsonResponse::HTTP_BAD_REQUEST);
+            return $this->progressionApiErrorResponder->invalidPlayerName();
         }
 
         try {
             $this->playerApplicationService->renameOwned($player, $name);
         } catch (PlayerNameConflictException) {
-            return $this->json(['error' => 'Player name already exists.'], JsonResponse::HTTP_CONFLICT);
+            return $this->progressionApiErrorResponder->playerNameAlreadyExists();
         }
 
         return $this->json($this->playerPayloadMapper->map($player));
@@ -104,7 +107,7 @@ final class PlayerController extends AbstractController
         $user = $this->getAuthenticatedUser();
         $player = $this->playerReadApplicationService->findOwnedByPublicId($user, $id);
         if (null === $player) {
-            return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
+            return $this->progressionApiErrorResponder->playerNotFound();
         }
 
         $this->playerApplicationService->delete($player);
@@ -114,11 +117,6 @@ final class PlayerController extends AbstractController
 
     private function getAuthenticatedUser(): UserEntity
     {
-        $user = $this->getUser();
-        if (!$user instanceof UserEntity) {
-            throw new AccessDeniedException('User must be authenticated.');
-        }
-
-        return $user;
+        return $this->progressionApiUserContext->requireAuthenticatedUser($this->getUser());
     }
 }

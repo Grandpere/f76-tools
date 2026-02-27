@@ -14,15 +14,15 @@ declare(strict_types=1);
 namespace App\Controller\Api;
 
 use App\Entity\PlayerEntity;
-use App\Entity\UserEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeTransferApplicationService;
+use App\Progression\UI\Api\ProgressionApiErrorResponder;
+use App\Progression\UI\Api\ProgressionApiUserContext;
 use JsonException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[Route('/api/players/{playerId<[A-Za-z0-9]{26}>}/knowledge')]
 final class PlayerKnowledgeTransferController extends AbstractController
@@ -30,6 +30,8 @@ final class PlayerKnowledgeTransferController extends AbstractController
     public function __construct(
         private readonly PlayerKnowledgeApplicationService $playerKnowledgeApplicationService,
         private readonly PlayerKnowledgeTransferApplicationService $playerKnowledgeTransferApplicationService,
+        private readonly ProgressionApiUserContext $progressionApiUserContext,
+        private readonly ProgressionApiErrorResponder $progressionApiErrorResponder,
     ) {
     }
 
@@ -38,7 +40,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
     {
         $player = $this->resolveOwnedPlayer($playerId);
         if (null === $player) {
-            return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
+            return $this->progressionApiErrorResponder->playerNotFound();
         }
 
         return $this->json($this->playerKnowledgeTransferApplicationService->export($player));
@@ -49,7 +51,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
     {
         $player = $this->resolveOwnedPlayer($playerId);
         if (null === $player) {
-            return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
+            return $this->progressionApiErrorResponder->playerNotFound();
         }
 
         $result = $this->playerKnowledgeTransferApplicationService->import($player, $this->decodeJson($request));
@@ -65,7 +67,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
     {
         $player = $this->resolveOwnedPlayer($playerId);
         if (null === $player) {
-            return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
+            return $this->progressionApiErrorResponder->playerNotFound();
         }
 
         $result = $this->playerKnowledgeTransferApplicationService->previewImport($player, $this->decodeJson($request));
@@ -78,10 +80,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
 
     private function resolveOwnedPlayer(string $playerId): ?PlayerEntity
     {
-        $user = $this->getUser();
-        if (!$user instanceof UserEntity) {
-            throw new AccessDeniedException('User must be authenticated.');
-        }
+        $user = $this->progressionApiUserContext->requireAuthenticatedUser($this->getUser());
 
         return $this->playerKnowledgeApplicationService->resolveOwnedPlayer($user, $playerId);
     }
