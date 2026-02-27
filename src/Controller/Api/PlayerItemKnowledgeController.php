@@ -14,17 +14,16 @@ declare(strict_types=1);
 namespace App\Controller\Api;
 
 use App\Domain\Item\ItemTypeEnum;
-use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeApplicationService;
+use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/api/players/{playerId<[A-Za-z0-9]{26}>}/items')]
 final class PlayerItemKnowledgeController extends AbstractController
@@ -32,7 +31,7 @@ final class PlayerItemKnowledgeController extends AbstractController
     public function __construct(
         private readonly PlayerKnowledgeCatalogApplicationService $playerKnowledgeCatalogApplicationService,
         private readonly PlayerKnowledgeApplicationService $playerKnowledgeApplicationService,
-        private readonly TranslatorInterface $translator,
+        private readonly PlayerKnowledgeItemPayloadMapper $playerKnowledgeItemPayloadMapper,
     ) {
     }
 
@@ -54,7 +53,7 @@ final class PlayerItemKnowledgeController extends AbstractController
 
         $payload = [];
         foreach ($catalogRows as $row) {
-            $payload[] = $this->toItemPayload($row['item'], $row['learned']);
+            $payload[] = $this->playerKnowledgeItemPayloadMapper->map($row['item'], $row['learned']);
         }
         if (null !== $query) {
             $payload = array_values(array_filter(
@@ -90,7 +89,7 @@ final class PlayerItemKnowledgeController extends AbstractController
 
         $this->playerKnowledgeApplicationService->markLearned($player, $item);
 
-        return $this->json($this->toItemPayload($item, true));
+        return $this->json($this->playerKnowledgeItemPayloadMapper->map($item, true));
     }
 
     #[Route('/{itemId<[A-Za-z0-9]{26}>}/learned', name: 'api_player_items_learned_unset', methods: ['DELETE'])]
@@ -150,74 +149,4 @@ final class PlayerItemKnowledgeController extends AbstractController
         return '' === $query ? null : $query;
     }
 
-    /**
-     * @return array{
-     *     id: string,
-     *     sourceId: int,
-     *     type: string,
-     *     nameKey: string,
-     *     name: string,
-     *     descKey: string|null,
-     *     description: string|null,
-     *     isNew: bool,
-     *     price: int|null,
-     *     priceMinerva: int|null,
-     *     dropRaid: bool,
-     *     dropBurningSprings: bool,
-     *     dropDailyOps: bool,
-     *     vendorRegs: bool,
-     *     vendorSamuel: bool,
-     *     vendorMortimer: bool,
-     *     infoHtml: string|null,
-     *     dropSourcesHtml: string|null,
-     *     relationsHtml: string|null,
-     *     rank: int|null,
-     *     listNumbers: list<int>,
-     *     isInSpecialList: bool,
-     *     learned: bool
-     * }
-     */
-    private function toItemPayload(ItemEntity $item, bool $learned): array
-    {
-        $listNumbers = [];
-        $isInSpecialList = false;
-
-        foreach ($item->getBookLists() as $bookList) {
-            $listNumbers[] = $bookList->getListNumber();
-            $isInSpecialList = $isInSpecialList || $bookList->isSpecialList();
-        }
-
-        sort($listNumbers);
-
-        $description = null;
-        if (null !== $item->getDescKey()) {
-            $description = $this->translator->trans($item->getDescKey(), domain: 'items');
-        }
-
-        return [
-            'id' => $item->getPublicId(),
-            'sourceId' => $item->getSourceId(),
-            'type' => $item->getType()->value,
-            'nameKey' => $item->getNameKey(),
-            'name' => $this->translator->trans($item->getNameKey(), domain: 'items'),
-            'descKey' => $item->getDescKey(),
-            'description' => $description,
-            'isNew' => $item->isNew(),
-            'price' => $item->getPrice(),
-            'priceMinerva' => $item->getPriceMinerva(),
-            'dropRaid' => $item->isDropRaid(),
-            'dropBurningSprings' => $item->isDropBurningSprings(),
-            'dropDailyOps' => $item->isDropDailyOps(),
-            'vendorRegs' => $item->isVendorRegs(),
-            'vendorSamuel' => $item->isVendorSamuel(),
-            'vendorMortimer' => $item->isVendorMortimer(),
-            'infoHtml' => $item->getInfoHtml(),
-            'dropSourcesHtml' => $item->getDropSourcesHtml(),
-            'relationsHtml' => $item->getRelationsHtml(),
-            'rank' => $item->getRank(),
-            'listNumbers' => array_values(array_unique($listNumbers)),
-            'isInSpecialList' => $isInSpecialList,
-            'learned' => $learned,
-        ];
-    }
 }

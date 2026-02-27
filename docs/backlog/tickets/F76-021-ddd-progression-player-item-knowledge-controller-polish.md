@@ -13,6 +13,8 @@
 - [x] Extraire `PlayerKnowledgeCatalogApplicationService`.
 - [x] Brancher `PlayerItemKnowledgeController::index()` sur ce service.
 - [x] Ajouter tests unitaires du service.
+- [x] Extraire le mapping payload item vers `PlayerKnowledgeItemPayloadMapper`.
+- [x] Brancher `index` et `setLearned` sur ce mapper dedie.
 - [ ] Validation fonctionnelle manuelle (`make phpunit-functional`) et ajustements si besoin.
 
 ## Criteres d acceptance
