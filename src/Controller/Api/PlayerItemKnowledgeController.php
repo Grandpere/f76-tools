@@ -16,6 +16,7 @@ namespace App\Controller\Api;
 use App\Entity\UserEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeWriteApplicationService;
+use App\Progression\UI\Api\PlayerItemActionContext;
 use App\Progression\UI\Api\PlayerItemActionContextResolver;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadSearchFilter;
@@ -69,7 +70,7 @@ final class PlayerItemKnowledgeController extends AbstractController
     #[Route('/{itemId<[A-Za-z0-9]{26}>}/learned', name: 'api_player_items_learned_set', methods: ['PUT'])]
     public function setLearned(string $playerId, string $itemId): JsonResponse
     {
-        $context = $this->playerItemActionContextResolver->resolveOrNotFound($playerId, $itemId, $this->getAuthenticatedUser());
+        $context = $this->resolveActionContextOrResponse($playerId, $itemId);
         if ($context instanceof JsonResponse) {
             return $context;
         }
@@ -84,7 +85,7 @@ final class PlayerItemKnowledgeController extends AbstractController
     #[Route('/{itemId<[A-Za-z0-9]{26}>}/learned', name: 'api_player_items_learned_unset', methods: ['DELETE'])]
     public function unsetLearned(string $playerId, string $itemId): Response
     {
-        $context = $this->playerItemActionContextResolver->resolveOrNotFound($playerId, $itemId, $this->getAuthenticatedUser());
+        $context = $this->resolveActionContextOrResponse($playerId, $itemId);
         if ($context instanceof JsonResponse) {
             return $context;
         }
@@ -99,5 +100,10 @@ final class PlayerItemKnowledgeController extends AbstractController
     private function getAuthenticatedUser(): UserEntity
     {
         return $this->progressionApiUserContext->requireAuthenticatedUser($this->getUser());
+    }
+
+    private function resolveActionContextOrResponse(string $playerId, string $itemId): PlayerItemActionContext|JsonResponse
+    {
+        return $this->playerItemActionContextResolver->resolveOrNotFound($playerId, $itemId, $this->getAuthenticatedUser());
     }
 }
