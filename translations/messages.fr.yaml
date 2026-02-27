@@ -247,6 +247,7 @@ minerva.description: Fenetres Minerva actives, a venir et terminees, triees par 
 minerva.back_to_dashboard: Retour au dashboard
 minerva.timezone: 'Timezone: %timezone%'
 minerva.status: Statut
+minerva.source: Source
 minerva.location: Localisation
 minerva.list_cycle: Liste
 minerva.starts_at: Debut
@@ -255,6 +256,8 @@ minerva.empty: Aucune rotation disponible.
 minerva.status_upcoming: A venir
 minerva.status_active: Active
 minerva.status_ended: Terminee
+minerva.source_generated: Generee
+minerva.source_manual: Manuelle
 minerva.current_window_title: Fenetre Minerva actuelle
 minerva.current_window_empty: Aucune fenetre Minerva active actuellement.
 minerva.next_windows_title: Prochaines fenetres

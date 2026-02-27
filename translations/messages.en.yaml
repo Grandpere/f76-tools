@@ -247,6 +247,7 @@ minerva.description: Current, upcoming, and past Minerva windows ordered by star
 minerva.back_to_dashboard: Back to dashboard
 minerva.timezone: 'Timezone: %timezone%'
 minerva.status: Status
+minerva.source: Source
 minerva.location: Location
 minerva.list_cycle: List
 minerva.starts_at: Starts at
@@ -255,6 +256,8 @@ minerva.empty: No rotation available.
 minerva.status_upcoming: Upcoming
 minerva.status_active: Active
 minerva.status_ended: Ended
+minerva.source_generated: Generated
+minerva.source_manual: Manual
 minerva.current_window_title: Current Minerva window
 minerva.current_window_empty: No active Minerva window right now.
 minerva.next_windows_title: Next windows

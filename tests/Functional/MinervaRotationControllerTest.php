@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional;
 
 use App\Catalog\Domain\Entity\MinervaRotationEntity;
+use App\Catalog\Domain\Minerva\MinervaRotationSourceEnum;
 use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
 use DateTimeZone;
@@ -62,12 +63,14 @@ final class MinervaRotationControllerTest extends WebTestCase
             7,
             $now->modify('-1 day')->format(DATE_ATOM),
             $now->modify('+1 day')->format(DATE_ATOM),
+            MinervaRotationSourceEnum::MANUAL,
         );
         $this->createRotation(
             'Crater',
             8,
             $now->modify('+2 days')->format(DATE_ATOM),
             $now->modify('+4 days')->format(DATE_ATOM),
+            MinervaRotationSourceEnum::GENERATED,
         );
 
         $this->browser()->loginUser($user);
@@ -78,6 +81,8 @@ final class MinervaRotationControllerTest extends WebTestCase
         self::assertStringContainsString('Foundation', (string) $this->browser()->getResponse()->getContent());
         self::assertCount(1, $crawler->filter('table.translations-table'));
         self::assertStringContainsString('Crater', (string) $this->browser()->getResponse()->getContent());
+        self::assertGreaterThanOrEqual(1, $crawler->filter('[data-minerva-source="manual"]')->count());
+        self::assertGreaterThanOrEqual(1, $crawler->filter('[data-minerva-source="generated"]')->count());
     }
 
     private function createUser(string $email): UserEntity
@@ -93,13 +98,19 @@ final class MinervaRotationControllerTest extends WebTestCase
         return $user;
     }
 
-    private function createRotation(string $location, int $listCycle, string $startsAt, string $endsAt): void
-    {
+    private function createRotation(
+        string $location,
+        int $listCycle,
+        string $startsAt,
+        string $endsAt,
+        MinervaRotationSourceEnum $source,
+    ): void {
         $rotation = new MinervaRotationEntity()
             ->setLocation($location)
             ->setListCycle($listCycle)
             ->setStartsAt(new DateTimeImmutable($startsAt))
-            ->setEndsAt(new DateTimeImmutable($endsAt));
+            ->setEndsAt(new DateTimeImmutable($endsAt))
+            ->setSource($source);
 
         $this->entityManager?->persist($rotation);
         $this->entityManager?->flush();

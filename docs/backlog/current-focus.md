@@ -1,6 +1,7 @@
 # Current Focus
 
 ## Priorite active
+- F76-085: Minerva front source visibility (generated/manual badges sur la timeline publique).
 - F76-084: Minerva admin manual overrides (source generated/manual + preservation lors des regenerations).
 - F76-083: Minerva front and schedule (bloc de synthese current + prochaines rotations).
 - F76-002: Evolutions produit Minerva (localisation/date/listes) selon la roadmap metier.

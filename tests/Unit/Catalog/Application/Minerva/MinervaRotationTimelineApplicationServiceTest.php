@@ -16,6 +16,7 @@ namespace App\Tests\Unit\Catalog\Application\Minerva;
 use App\Catalog\Application\Minerva\MinervaRotationReader;
 use App\Catalog\Application\Minerva\MinervaRotationTimelineApplicationService;
 use App\Catalog\Domain\Entity\MinervaRotationEntity;
+use App\Catalog\Domain\Minerva\MinervaRotationSourceEnum;
 use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -43,6 +44,7 @@ final class MinervaRotationTimelineApplicationServiceTest extends TestCase
         self::assertSame('UTC', $timeline['timezone']);
         self::assertCount(3, $timeline['rows']);
         self::assertSame('upcoming', $timeline['rows'][0]['status']);
+        self::assertSame('generated', $timeline['rows'][0]['source']);
         self::assertSame('active', $timeline['rows'][1]['status']);
         self::assertSame('ended', $timeline['rows'][2]['status']);
         self::assertIsArray($timeline['current']);
@@ -62,7 +64,8 @@ final class MinervaRotationTimelineApplicationServiceTest extends TestCase
             ->setLocation($location)
             ->setListCycle($listCycle)
             ->setStartsAt(new DateTimeImmutable($startsAt))
-            ->setEndsAt(new DateTimeImmutable($endsAt));
+            ->setEndsAt(new DateTimeImmutable($endsAt))
+            ->setSource(MinervaRotationSourceEnum::GENERATED);
 
         $reflection = new ReflectionClass($rotation);
         $property = $reflection->getProperty('id');

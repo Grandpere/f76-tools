@@ -31,7 +31,10 @@
                         <p><strong>{{ timeline.current.location }}</strong></p>
                         <p>{{ 'minerva.list_label'|trans({'%list%': timeline.current.listCycle}) }}</p>
                         <p>{{ timeline.current.startsAt|date('Y-m-d H:i') }} → {{ timeline.current.endsAt|date('Y-m-d H:i') }}</p>
-                        <p><span class="item-pill">{{ ('minerva.status_' ~ timeline.current.status)|trans }}</span></p>
+                        <p>
+                            <span class="item-pill">{{ ('minerva.status_' ~ timeline.current.status)|trans }}</span>
+                            <span class="item-pill minerva-source-badge minerva-source-{{ timeline.current.source }}" data-minerva-source="{{ timeline.current.source }}">{{ ('minerva.source_' ~ timeline.current.source)|trans }}</span>
+                        </p>
                     {% else %}
                         <p>{{ 'minerva.current_window_empty'|trans }}</p>
                     {% endif %}
@@ -45,6 +48,7 @@
                                     <strong>{{ row.location }}</strong>
                                     · {{ 'minerva.list_label'|trans({'%list%': row.listCycle}) }}
                                     · {{ row.startsAt|date('Y-m-d H:i') }} → {{ row.endsAt|date('Y-m-d H:i') }}
+                                    · <span class="minerva-source-badge minerva-source-{{ row.source }}" data-minerva-source="{{ row.source }}">{{ ('minerva.source_' ~ row.source)|trans }}</span>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -58,6 +62,7 @@
                     <thead>
                     <tr>
                         <th>{{ 'minerva.status'|trans }}</th>
+                        <th>{{ 'minerva.source'|trans }}</th>
                         <th>{{ 'minerva.location'|trans }}</th>
                         <th>{{ 'minerva.list_cycle'|trans }}</th>
                         <th>{{ 'minerva.starts_at'|trans }}</th>
@@ -68,6 +73,7 @@
                     {% for row in timeline.rows %}
                         <tr>
                             <td><span class="item-pill">{{ ('minerva.status_' ~ row.status)|trans }}</span></td>
+                            <td><span class="item-pill minerva-source-badge minerva-source-{{ row.source }}" data-minerva-source="{{ row.source }}">{{ ('minerva.source_' ~ row.source)|trans }}</span></td>
                             <td>{{ row.location }}</td>
                             <td>{{ row.listCycle }}</td>
                             <td>{{ row.startsAt|date('Y-m-d H:i') }}</td>
@@ -75,7 +81,7 @@
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="5">{{ 'minerva.empty'|trans }}</td>
+                            <td colspan="6">{{ 'minerva.empty'|trans }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
