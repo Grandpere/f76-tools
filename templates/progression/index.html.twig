@@ -89,8 +89,10 @@
                     </label>
                 </div>
                 <p class="catalog-note">{{ 'dashboard.create_player.help'|trans }}</p>
-                <hr class="catalog-divider">
-                <h2>{{ 'dashboard.transfer.title'|trans }}</h2>
+                <p class="catalog-state" role="status" aria-live="polite" data-player-progression-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
+            </section>
+            <section class="catalog-panel catalog-block">
+                <h2>{{ 'progression.backup_title'|trans }}</h2>
                 <div class="transfer-actions">
                     <label class="transfer-file">
                         <input type="file" accept="application/json" data-player-progression-target="importFileInput">
@@ -103,7 +105,6 @@
                     <button type="button" data-player-progression-target="exportButton">{{ 'dashboard.transfer.export'|trans }}</button>
                 </div>
                 <div class="transfer-unknown-panel" data-player-progression-target="importUnknownPanel"></div>
-                <p class="catalog-state" role="status" aria-live="polite" data-player-progression-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
             </section>
             <section class="catalog-panel catalog-block">
                 <div data-player-progression-target="statsPanel"></div>

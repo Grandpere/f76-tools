@@ -35,6 +35,7 @@ progression.page_title: 'F76 - Progression du personnage'
 progression.title: Progression du personnage
 progression.description: Vue d ensemble de la progression par rang legendary et liste Minerva.
 progression.character_block_title: Personnage
+progression.backup_title: Backup
 dashboard.transfer.title: Progression (backup)
 dashboard.transfer.export: Export JSON
 dashboard.transfer.import: Import JSON
