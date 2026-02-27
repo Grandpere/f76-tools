@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - Constructor signature changes require synchronized test fixture updates
+- Symptom: `phpstan` and unit tests failed after resolver constructor/signature refactor.
+- Root cause: test fixtures still instantiated old constructor argument order/count and outdated null-user case.
+- Fix: updated all impacted unit tests to new constructor contracts and removed obsolete unauthenticated-path test where typing made it impossible.
+- Prevention: after any constructor/signature change, run a targeted search on `new <ClassName>(` and update every fixture before running full quality gates.
+
 ## 2026-02-27 - Final classes block PHPUnit doubles in unit tests
 - Symptom: unit tests failed with `ClassIsFinalException` while trying to mock a `final` resolver.
 - Root cause: test targeted a concrete `final` class instead of a contract.
