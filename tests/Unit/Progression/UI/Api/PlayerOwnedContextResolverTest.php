@@ -8,7 +8,6 @@ use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
 use App\Progression\UI\Api\PlayerOwnedContextResolver;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
-use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolver;
 use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolverInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -33,7 +32,8 @@ final class PlayerOwnedContextResolverTest extends TestCase
             ->willReturn($player);
 
         $resolver = new PlayerOwnedContextResolver(
-            new ProgressionOwnedPlayerApiResolver($readResolver, new ProgressionApiErrorResponder()),
+            $readResolver,
+            new ProgressionApiErrorResponder(),
         );
 
         $result = $resolver->resolveOrNotFound('01J5A6B7C8D9E0F1G2H3J4K5L6', $user);
@@ -56,7 +56,8 @@ final class PlayerOwnedContextResolverTest extends TestCase
             ->willReturn(null);
 
         $resolver = new PlayerOwnedContextResolver(
-            new ProgressionOwnedPlayerApiResolver($readResolver, new ProgressionApiErrorResponder()),
+            $readResolver,
+            new ProgressionApiErrorResponder(),
         );
 
         $result = $resolver->resolveOrNotFound('missing-player', $user);
