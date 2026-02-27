@@ -8,10 +8,12 @@ use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
 use App\Progression\UI\Api\PlayerOwnedContextResolver;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
+use App\Progression\UI\Api\ProgressionApiUserContext;
 use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolverInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 final class PlayerOwnedContextResolverTest extends TestCase
 {
@@ -32,6 +34,7 @@ final class PlayerOwnedContextResolverTest extends TestCase
             ->willReturn($player);
 
         $resolver = new PlayerOwnedContextResolver(
+            new ProgressionApiUserContext(),
             $readResolver,
             new ProgressionApiErrorResponder(),
         );
@@ -56,6 +59,7 @@ final class PlayerOwnedContextResolverTest extends TestCase
             ->willReturn(null);
 
         $resolver = new PlayerOwnedContextResolver(
+            new ProgressionApiUserContext(),
             $readResolver,
             new ProgressionApiErrorResponder(),
         );
@@ -64,5 +68,24 @@ final class PlayerOwnedContextResolverTest extends TestCase
         self::assertInstanceOf(JsonResponse::class, $result);
         self::assertSame(JsonResponse::HTTP_NOT_FOUND, $result->getStatusCode());
         self::assertSame('{"error":"Player not found."}', $result->getContent());
+    }
+
+    public function testResolveOrNotFoundThrowsWhenUserIsNotAuthenticated(): void
+    {
+        /** @var ProgressionOwnedPlayerReadResolverInterface&MockObject $readResolver */
+        $readResolver = $this->createMock(ProgressionOwnedPlayerReadResolverInterface::class);
+        $readResolver
+            ->expects(self::never())
+            ->method('resolve');
+
+        $resolver = new PlayerOwnedContextResolver(
+            new ProgressionApiUserContext(),
+            $readResolver,
+            new ProgressionApiErrorResponder(),
+        );
+
+        $this->expectException(AccessDeniedException::class);
+        $this->expectExceptionMessage('User must be authenticated.');
+        $resolver->resolveOrNotFound('01J5A6B7C8D9E0F1G2H3J4K5L6', null);
     }
 }

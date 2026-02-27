@@ -14,20 +14,18 @@ declare(strict_types=1);
 namespace App\Progression\UI\Api;
 
 use App\Entity\PlayerEntity;
+use App\Entity\UserEntity;
 use App\Progression\Application\Player\PlayerReadApplicationService;
 
 final class ProgressionOwnedPlayerReadResolver implements ProgressionOwnedPlayerReadResolverInterface
 {
     public function __construct(
-        private readonly ProgressionApiUserContext $progressionApiUserContext,
         private readonly PlayerReadApplicationService $playerReadApplicationService,
     ) {
     }
 
-    public function resolve(string $playerId, mixed $user): ?PlayerEntity
+    public function resolve(string $playerId, UserEntity $user): ?PlayerEntity
     {
-        $authenticatedUser = $this->progressionApiUserContext->requireAuthenticatedUser($user);
-
-        return $this->playerReadApplicationService->findOwnedByPublicId($authenticatedUser, $playerId);
+        return $this->playerReadApplicationService->findOwnedByPublicId($user, $playerId);
     }
 }

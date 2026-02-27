@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 final class PlayerOwnedContextResolver
 {
     public function __construct(
+        private readonly ProgressionApiUserContext $progressionApiUserContext,
         private readonly ProgressionOwnedPlayerReadResolverInterface $progressionOwnedPlayerReadResolver,
         private readonly ProgressionApiErrorResponder $progressionApiErrorResponder,
     ) {
@@ -26,7 +27,8 @@ final class PlayerOwnedContextResolver
 
     public function resolveOrNotFound(string $playerId, mixed $user): PlayerEntity|JsonResponse
     {
-        $player = $this->progressionOwnedPlayerReadResolver->resolve($playerId, $user);
+        $authenticatedUser = $this->progressionApiUserContext->requireAuthenticatedUser($user);
+        $player = $this->progressionOwnedPlayerReadResolver->resolve($playerId, $authenticatedUser);
         if (null === $player) {
             return $this->progressionApiErrorResponder->playerNotFound();
         }

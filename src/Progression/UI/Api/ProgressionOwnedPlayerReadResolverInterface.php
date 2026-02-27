@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace App\Progression\UI\Api;
 
 use App\Entity\PlayerEntity;
+use App\Entity\UserEntity;
 
 interface ProgressionOwnedPlayerReadResolverInterface
 {
-    public function resolve(string $playerId, mixed $user): ?PlayerEntity;
+    public function resolve(string $playerId, UserEntity $user): ?PlayerEntity;
 }

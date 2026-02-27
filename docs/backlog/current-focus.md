@@ -4,6 +4,7 @@
 - Campagne de slices DDD progression (en cours).
 
 ## Termine recemment
+- F76-066: DDD Slice 56 - Owned player read resolver user typing (done).
 - F76-065: DDD Slice 55 - Remove redundant owned-player API resolver (done).
 - F76-064: DDD Slice 54 - Context resolvers use PlayerOwnedContextResolver (done).
 - F76-063: DDD Slice 53 - Owned player context resolver reuse (done).

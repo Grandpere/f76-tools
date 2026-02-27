@@ -13,6 +13,7 @@ use App\Progression\UI\Api\PlayerItemActionContext;
 use App\Progression\UI\Api\PlayerItemActionContextResolver;
 use App\Progression\UI\Api\PlayerOwnedContextResolver;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
+use App\Progression\UI\Api\ProgressionApiUserContext;
 use App\Progression\UI\Api\ProgressionItemApiResolver;
 use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolverInterface;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -47,7 +48,7 @@ final class PlayerItemActionContextResolverTest extends TestCase
             ->willReturn($item);
 
         $resolver = new PlayerItemActionContextResolver(
-            new PlayerOwnedContextResolver($readResolver, new ProgressionApiErrorResponder()),
+            new PlayerOwnedContextResolver(new ProgressionApiUserContext(), $readResolver, new ProgressionApiErrorResponder()),
             new ProgressionItemApiResolver(new ItemReadApplicationService($itemRepository), new ProgressionApiErrorResponder()),
         );
 
@@ -78,7 +79,7 @@ final class PlayerItemActionContextResolverTest extends TestCase
             ->method('findOneByPublicId');
 
         $resolver = new PlayerItemActionContextResolver(
-            new PlayerOwnedContextResolver($readResolver, new ProgressionApiErrorResponder()),
+            new PlayerOwnedContextResolver(new ProgressionApiUserContext(), $readResolver, new ProgressionApiErrorResponder()),
             new ProgressionItemApiResolver(new ItemReadApplicationService($itemRepository), new ProgressionApiErrorResponder()),
         );
 
@@ -111,7 +112,7 @@ final class PlayerItemActionContextResolverTest extends TestCase
             ->willReturn(null);
 
         $resolver = new PlayerItemActionContextResolver(
-            new PlayerOwnedContextResolver($readResolver, new ProgressionApiErrorResponder()),
+            new PlayerOwnedContextResolver(new ProgressionApiUserContext(), $readResolver, new ProgressionApiErrorResponder()),
             new ProgressionItemApiResolver(new ItemReadApplicationService($itemRepository), new ProgressionApiErrorResponder()),
         );
 
