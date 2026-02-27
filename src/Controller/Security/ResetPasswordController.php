@@ -28,6 +28,8 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 #[Route('/reset-password')]
 final class ResetPasswordController extends AbstractController
 {
+    use IdentitySignedTokenValidationControllerTrait;
+
     public function __construct(
         private readonly ResetPasswordApplicationService $resetPasswordApplicationService,
         private readonly IdentityClockInterface $identityClock,
@@ -41,7 +43,7 @@ final class ResetPasswordController extends AbstractController
     #[Route('/{token}', name: 'app_reset_password', methods: ['GET', 'POST'])]
     public function __invoke(string $token, Request $request): Response
     {
-        $validationFailureFlashMessage = $this->identitySignedTokenFailureResolver->resolve(
+        $validationFailureFlashMessage = $this->resolveSignedTokenFailureFlashMessage(
             $request,
             fn (): bool => $this->resetPasswordApplicationService->canResetToken($token, $this->identityClock->now()),
             'security.reset.flash.invalid_or_expired',
@@ -75,5 +77,10 @@ final class ResetPasswordController extends AbstractController
         }
 
         return $this->render('security/reset_password.html.twig');
+    }
+
+    protected function identitySignedTokenFailureResolver(): IdentitySignedTokenFailureResolver
+    {
+        return $this->identitySignedTokenFailureResolver;
     }
 }

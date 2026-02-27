@@ -24,6 +24,8 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class VerifyEmailController extends AbstractController
 {
+    use IdentitySignedTokenValidationControllerTrait;
+
     public function __construct(
         private readonly VerifyEmailApplicationService $verifyEmailApplicationService,
         private readonly IdentityClockInterface $identityClock,
@@ -35,7 +37,7 @@ final class VerifyEmailController extends AbstractController
     #[Route('/verify-email/{token}', name: 'app_verify_email', methods: ['GET'])]
     public function __invoke(string $token, Request $request): RedirectResponse
     {
-        $validationFailureFlashMessage = $this->identitySignedTokenFailureResolver->resolve(
+        $validationFailureFlashMessage = $this->resolveSignedTokenFailureFlashMessage(
             $request,
             fn (): bool => $this->verifyEmailApplicationService->verifyByPlainToken($token, $this->identityClock->now()),
             'security.verify.flash.invalid_or_expired',
@@ -45,5 +47,10 @@ final class VerifyEmailController extends AbstractController
         }
 
         return $this->identityFlashResponder->successToLogin($request, 'security.verify.flash.success');
+    }
+
+    protected function identitySignedTokenFailureResolver(): IdentitySignedTokenFailureResolver
+    {
+        return $this->identitySignedTokenFailureResolver;
     }
 }
