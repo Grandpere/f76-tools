@@ -13,14 +13,13 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
-use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
-use App\Progression\Application\Knowledge\ItemReadApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeWriteApplicationService;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadSearchFilter;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
+use App\Progression\UI\Api\ProgressionItemApiResolver;
 use App\Progression\UI\Api\ProgressionItemTypeQueryParser;
 use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,7 +34,7 @@ final class PlayerItemKnowledgeController extends AbstractController
     public function __construct(
         private readonly PlayerKnowledgeCatalogApplicationService $playerKnowledgeCatalogApplicationService,
         private readonly PlayerKnowledgeWriteApplicationService $playerKnowledgeWriteApplicationService,
-        private readonly ItemReadApplicationService $itemReadApplicationService,
+        private readonly ProgressionItemApiResolver $progressionItemApiResolver,
         private readonly PlayerKnowledgeItemPayloadMapper $playerKnowledgeItemPayloadMapper,
         private readonly PlayerKnowledgeItemPayloadSearchFilter $playerKnowledgeItemPayloadSearchFilter,
         private readonly ProgressionItemTypeQueryParser $progressionItemTypeQueryParser,
@@ -71,7 +70,7 @@ final class PlayerItemKnowledgeController extends AbstractController
         if ($player instanceof JsonResponse) {
             return $player;
         }
-        $item = $this->resolveItemOrNotFound($itemId);
+        $item = $this->progressionItemApiResolver->resolveOrNotFound($itemId);
         if ($item instanceof JsonResponse) {
             return $item;
         }
@@ -88,7 +87,7 @@ final class PlayerItemKnowledgeController extends AbstractController
         if ($player instanceof JsonResponse) {
             return $player;
         }
-        $item = $this->resolveItemOrNotFound($itemId);
+        $item = $this->progressionItemApiResolver->resolveOrNotFound($itemId);
         if ($item instanceof JsonResponse) {
             return $item;
         }
@@ -101,15 +100,5 @@ final class PlayerItemKnowledgeController extends AbstractController
     private function resolvePlayerOrNotFound(string $playerId): PlayerEntity|JsonResponse
     {
         return $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($playerId, $this->getUser());
-    }
-
-    private function resolveItemOrNotFound(string $itemId): ItemEntity|JsonResponse
-    {
-        $item = $this->itemReadApplicationService->findByPublicId($itemId);
-        if (null === $item) {
-            return $this->progressionApiErrorResponder->itemNotFound();
-        }
-
-        return $item;
     }
 }

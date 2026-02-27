@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - Final classes block PHPUnit doubles in unit tests
+- Symptom: unit tests failed with `ClassIsFinalException` while trying to mock a `final` resolver.
+- Root cause: test targeted a concrete `final` class instead of a contract.
+- Fix: introduced an interface port and wired consumers to it (`ProgressionOwnedPlayerReadResolverInterface`).
+- Prevention: when a service is expected to be doubled in unit tests, depend on an interface in collaborators.
+
 ## 2026-02-27 - Unit test on 204 JsonResponse content expected empty string
 - Symptom: unit test failed asserting `''` for a `JsonResponse` with HTTP 204.
 - Root cause: Symfony `JsonResponse(null, 204)` serializes as `{}` content, not empty string.
