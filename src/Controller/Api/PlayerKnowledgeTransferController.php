@@ -48,25 +48,26 @@ final class PlayerKnowledgeTransferController extends AbstractController
     #[Route('/import', name: 'api_player_knowledge_import', methods: ['POST'])]
     public function import(string $playerId, Request $request): JsonResponse
     {
-        $player = $this->resolvePlayerOrNotFound($playerId);
-        if ($player instanceof JsonResponse) {
-            return $player;
-        }
-
-        $result = $this->playerKnowledgeTransferApplicationService->import($player, $this->progressionApiJsonPayloadDecoder->decode($request));
-
-        return $this->playerKnowledgeTransferResultResponder->respond($result);
+        return $this->importLike($playerId, $request, false);
     }
 
     #[Route('/preview-import', name: 'api_player_knowledge_preview_import', methods: ['POST'])]
     public function previewImport(string $playerId, Request $request): JsonResponse
+    {
+        return $this->importLike($playerId, $request, true);
+    }
+
+    private function importLike(string $playerId, Request $request, bool $preview): JsonResponse
     {
         $player = $this->resolvePlayerOrNotFound($playerId);
         if ($player instanceof JsonResponse) {
             return $player;
         }
 
-        $result = $this->playerKnowledgeTransferApplicationService->previewImport($player, $this->progressionApiJsonPayloadDecoder->decode($request));
+        $payload = $this->progressionApiJsonPayloadDecoder->decode($request);
+        $result = $preview
+            ? $this->playerKnowledgeTransferApplicationService->previewImport($player, $payload)
+            : $this->playerKnowledgeTransferApplicationService->import($player, $payload);
 
         return $this->playerKnowledgeTransferResultResponder->respond($result);
     }
