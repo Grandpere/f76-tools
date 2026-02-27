@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
+use App\Entity\PlayerEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeStatsApplicationService;
 use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,11 +32,16 @@ final class PlayerStatsController extends AbstractController
     #[Route('', name: 'api_player_stats_show', methods: ['GET'])]
     public function __invoke(string $playerId): JsonResponse
     {
-        $player = $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($playerId, $this->getUser());
+        $player = $this->resolvePlayerOrNotFound($playerId);
         if ($player instanceof JsonResponse) {
             return $player;
         }
 
         return $this->json($this->playerKnowledgeStatsApplicationService->getStats($player));
+    }
+
+    private function resolvePlayerOrNotFound(string $playerId): PlayerEntity|JsonResponse
+    {
+        return $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($playerId, $this->getUser());
     }
 }

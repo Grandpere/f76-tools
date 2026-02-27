@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
+use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
 use App\Progression\Application\Player\PlayerApplicationService;
 use App\Progression\Application\Player\PlayerReadApplicationService;
@@ -71,7 +72,7 @@ final class PlayerController extends AbstractController
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_show', methods: ['GET'])]
     public function show(string $id): JsonResponse
     {
-        $player = $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($id, $this->getUser());
+        $player = $this->resolvePlayerOrNotFound($id);
         if ($player instanceof JsonResponse) {
             return $player;
         }
@@ -82,7 +83,7 @@ final class PlayerController extends AbstractController
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_update', methods: ['PATCH'])]
     public function update(string $id, Request $request): JsonResponse
     {
-        $player = $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($id, $this->getUser());
+        $player = $this->resolvePlayerOrNotFound($id);
         if ($player instanceof JsonResponse) {
             return $player;
         }
@@ -103,7 +104,7 @@ final class PlayerController extends AbstractController
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_delete', methods: ['DELETE'])]
     public function delete(string $id): Response
     {
-        $player = $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($id, $this->getUser());
+        $player = $this->resolvePlayerOrNotFound($id);
         if ($player instanceof JsonResponse) {
             return $player;
         }
@@ -116,5 +117,10 @@ final class PlayerController extends AbstractController
     private function getAuthenticatedUser(): UserEntity
     {
         return $this->progressionApiUserContext->requireAuthenticatedUser($this->getUser());
+    }
+
+    private function resolvePlayerOrNotFound(string $id): PlayerEntity|JsonResponse
+    {
+        return $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($id, $this->getUser());
     }
 }

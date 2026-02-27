@@ -1,9 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- F76-038: DDD Slice 28 - Progression item API resolver (in progress).
+- F76-039: DDD Slice 29 - Progression controller read-helper cleanup (in progress).
 
 ## Termine recemment
+- F76-038: DDD Slice 28 - Progression item API resolver (code done, functional pending).
 - F76-037: DDD Slice 27 - Progression owned player API resolver (done).
 - F76-036: DDD Slice 26 - Player item controller duplication cleanup (done).
 - F76-035: DDD Slice 25 - API 204 empty body consistency (done).
