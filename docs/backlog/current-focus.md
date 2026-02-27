@@ -1,7 +1,7 @@
 # Current Focus
 
 ## Priorite active
-- Campagne de slices DDD progression (en cours).
+- F76-082: Inventaire des changements DDD restants (utile + optionnel).
 
 ## Termine recemment
 - F76-081: DDD Slice 71 - Admin boundary typing hardening (done).
@@ -78,6 +78,7 @@
 - F76-004: Minerva Source Governance (done).
 
 ## Ensuite
+- F76-082: Executer le bloc "utile" de l'inventaire (commands par contexte + harmonisation helper/entrees admin).
 - F76-010: DDD Foundations (done, keep as reference).
 - F76-011: DDD Slice 1 - Progression context (done, keep as reference).
 - F76-001: Contact messages en base + backoffice admin (done).
