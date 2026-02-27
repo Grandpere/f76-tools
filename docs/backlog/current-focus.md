@@ -1,9 +1,11 @@
 # Current Focus
 
 ## Priorite active
-- F76-047: DDD Slice 37 - Player controller name extraction cleanup (in progress).
+- Campagne fonctionnelle lot F76-043 a F76-048 (pending user run).
 
 ## Termine recemment
+- F76-048: DDD Slice 38 - Resolver traits not-found unit coverage (code done, functional pending).
+- F76-047: DDD Slice 37 - Player controller name extraction cleanup (code done, functional pending).
 - F76-046: DDD Slice 36 - Progression resolver traits ergonomics (code done, functional pending).
 - F76-045: DDD Slice 35 - Progression resolver trait unit coverage (code done, functional pending).
 - F76-044: DDD Slice 34 - Knowledge transfer import mode enum (code done, functional pending).
