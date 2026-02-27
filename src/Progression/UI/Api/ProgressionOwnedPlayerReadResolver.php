@@ -16,7 +16,7 @@ namespace App\Progression\UI\Api;
 use App\Entity\PlayerEntity;
 use App\Progression\Application\Player\PlayerReadApplicationService;
 
-final class ProgressionOwnedPlayerReadResolver
+final class ProgressionOwnedPlayerReadResolver implements ProgressionOwnedPlayerReadResolverInterface
 {
     public function __construct(
         private readonly ProgressionApiUserContext $progressionApiUserContext,

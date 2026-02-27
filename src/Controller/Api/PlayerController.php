@@ -20,9 +20,8 @@ use App\Progression\Application\Player\PlayerRenameResult;
 use App\Progression\UI\Api\PlayerControllerWriteResponder;
 use App\Progression\UI\Api\PlayerNameRequestExtractor;
 use App\Progression\UI\Api\PlayerPayloadMapper;
-use App\Progression\UI\Api\ProgressionApiErrorResponder;
 use App\Progression\UI\Api\ProgressionApiUserContext;
-use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolver;
+use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,8 +38,7 @@ final class PlayerController extends AbstractController
         private readonly PlayerControllerWriteResponder $playerControllerWriteResponder,
         private readonly PlayerNameRequestExtractor $playerNameRequestExtractor,
         private readonly ProgressionApiUserContext $progressionApiUserContext,
-        private readonly ProgressionApiErrorResponder $progressionApiErrorResponder,
-        private readonly ProgressionOwnedPlayerReadResolver $progressionOwnedPlayerReadResolver,
+        private readonly ProgressionOwnedPlayerApiResolver $progressionOwnedPlayerApiResolver,
     ) {
     }
 
@@ -73,9 +71,9 @@ final class PlayerController extends AbstractController
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_show', methods: ['GET'])]
     public function show(string $id): JsonResponse
     {
-        $player = $this->progressionOwnedPlayerReadResolver->resolve($id, $this->getUser());
-        if (null === $player) {
-            return $this->progressionApiErrorResponder->playerNotFound();
+        $player = $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($id, $this->getUser());
+        if ($player instanceof JsonResponse) {
+            return $player;
         }
 
         return $this->json($this->playerPayloadMapper->map($player));
@@ -84,9 +82,9 @@ final class PlayerController extends AbstractController
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_update', methods: ['PATCH'])]
     public function update(string $id, Request $request): JsonResponse
     {
-        $player = $this->progressionOwnedPlayerReadResolver->resolve($id, $this->getUser());
-        if (null === $player) {
-            return $this->progressionApiErrorResponder->playerNotFound();
+        $player = $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($id, $this->getUser());
+        if ($player instanceof JsonResponse) {
+            return $player;
         }
 
         $name = $this->playerNameRequestExtractor->extract($request);
@@ -105,9 +103,9 @@ final class PlayerController extends AbstractController
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_delete', methods: ['DELETE'])]
     public function delete(string $id): Response
     {
-        $player = $this->progressionOwnedPlayerReadResolver->resolve($id, $this->getUser());
-        if (null === $player) {
-            return $this->progressionApiErrorResponder->playerNotFound();
+        $player = $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($id, $this->getUser());
+        if ($player instanceof JsonResponse) {
+            return $player;
         }
 
         $this->playerApplicationService->delete($player);
