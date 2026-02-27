@@ -55,11 +55,7 @@ final class PlayerItemKnowledgeController extends AbstractController
         }
 
         $catalogRows = $this->playerKnowledgeCatalogApplicationService->listForPlayer($player, $type);
-
-        $payload = [];
-        foreach ($catalogRows as $row) {
-            $payload[] = $this->playerKnowledgeItemPayloadMapper->map($row['item'], $row['learned']);
-        }
+        $payload = $this->playerKnowledgeItemPayloadMapper->mapCatalogRows($catalogRows);
         $payload = $this->playerKnowledgeItemPayloadSearchFilter->filter($payload, $request->query->get('q'));
 
         return $this->json($payload);

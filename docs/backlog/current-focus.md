@@ -1,9 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- F76-031: DDD Slice 21 - Progression item read application service (in progress).
+- F76-032: DDD Slice 22 - Progression catalog rows payload mapper (in progress).
 
 ## Termine recemment
+- F76-031: DDD Slice 21 - Progression item read application service (code done, functional pending).
 - F76-030: DDD Slice 20 - Progression test hardening (code done, functional pending).
 - F76-029: DDD Slice 19 - Progression player create result contract hardening (code done, functional pending).
 - F76-028: DDD Slice 18 - Progression player controller write responder (done).

@@ -92,10 +92,49 @@ final class PlayerKnowledgeItemPayloadMapperTest extends TestCase
         self::assertFalse($payload['learned']);
     }
 
+    public function testMapCatalogRowsMapsEachRow(): void
+    {
+        $first = (new ItemEntity())
+            ->setSourceId(1)
+            ->setType(ItemTypeEnum::MISC)
+            ->setNameKey('catalog.first.name')
+            ->setDescKey(null)
+            ->setRank(1);
+        $this->setItemPublicId($first, '01J4D0Y7QH2K9P5V3M1N8B6R4A');
+
+        $second = (new ItemEntity())
+            ->setSourceId(2)
+            ->setType(ItemTypeEnum::BOOK)
+            ->setNameKey('catalog.second.name')
+            ->setDescKey(null)
+            ->setRank(null);
+        $this->setItemPublicId($second, '01J4D0Y7QH2K9P5V3M1N8B6R4B');
+
+        $translator = $this->createMock(TranslatorInterface::class);
+        $translator
+            ->expects(self::exactly(2))
+            ->method('trans')
+            ->willReturnMap([
+                ['catalog.first.name', [], 'items', null, 'First'],
+                ['catalog.second.name', [], 'items', null, 'Second'],
+            ]);
+
+        $mapper = new PlayerKnowledgeItemPayloadMapper($translator);
+        $payload = $mapper->mapCatalogRows([
+            ['item' => $first, 'learned' => true],
+            ['item' => $second, 'learned' => false],
+        ]);
+
+        self::assertCount(2, $payload);
+        self::assertSame('01J4D0Y7QH2K9P5V3M1N8B6R4A', $payload[0]['id']);
+        self::assertTrue($payload[0]['learned']);
+        self::assertSame('01J4D0Y7QH2K9P5V3M1N8B6R4B', $payload[1]['id']);
+        self::assertFalse($payload[1]['learned']);
+    }
+
     private function setItemPublicId(ItemEntity $item, string $publicId): void
     {
         $reflection = new \ReflectionProperty(ItemEntity::class, 'publicId');
         $reflection->setValue($item, $publicId);
     }
 }
-

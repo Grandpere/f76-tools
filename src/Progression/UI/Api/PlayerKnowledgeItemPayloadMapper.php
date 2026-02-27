@@ -24,6 +24,45 @@ final class PlayerKnowledgeItemPayloadMapper
     }
 
     /**
+     * @param list<array{item: ItemEntity, learned: bool}> $catalogRows
+     *
+     * @return list<array{
+     *     id: string,
+     *     sourceId: int,
+     *     type: string,
+     *     nameKey: string,
+     *     name: string,
+     *     descKey: string|null,
+     *     description: string|null,
+     *     isNew: bool,
+     *     price: int|null,
+     *     priceMinerva: int|null,
+     *     dropRaid: bool,
+     *     dropBurningSprings: bool,
+     *     dropDailyOps: bool,
+     *     vendorRegs: bool,
+     *     vendorSamuel: bool,
+     *     vendorMortimer: bool,
+     *     infoHtml: string|null,
+     *     dropSourcesHtml: string|null,
+     *     relationsHtml: string|null,
+     *     rank: int|null,
+     *     listNumbers: list<int>,
+     *     isInSpecialList: bool,
+     *     learned: bool
+     * }>
+     */
+    public function mapCatalogRows(array $catalogRows): array
+    {
+        $payload = [];
+        foreach ($catalogRows as $row) {
+            $payload[] = $this->map($row['item'], $row['learned']);
+        }
+
+        return $payload;
+    }
+
+    /**
      * @return array{
      *     id: string,
      *     sourceId: int,
@@ -94,4 +133,3 @@ final class PlayerKnowledgeItemPayloadMapper
         ];
     }
 }
-
