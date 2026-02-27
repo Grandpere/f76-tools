@@ -1,9 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- F76-023: DDD Slice 13 - Progression API shared auth and error responders (in progress).
+- F76-024: DDD Slice 14 - Progression knowledge transfer controller polish (in progress).
 
 ## Termine recemment
+- F76-023: DDD Slice 13 - Progression API shared auth and error responders (code done, functional pending).
 - F76-022: DDD Slice 12 - Progression player controller polish (done).
 - F76-021: DDD Slice 11 - Progression player item knowledge controller polish (done).
 - F76-020: DDD Slice 10 - Support admin user management controller polish (done).

@@ -17,6 +17,7 @@ use App\Progression\Application\Knowledge\PlayerKnowledgeTransferApplicationServ
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
 use App\Progression\UI\Api\ProgressionApiJsonPayloadDecoder;
 use App\Progression\UI\Api\ProgressionOwnedPlayerResolver;
+use App\Progression\UI\Api\PlayerKnowledgeTransferResultResponder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,6 +31,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
         private readonly ProgressionOwnedPlayerResolver $progressionOwnedPlayerResolver,
         private readonly ProgressionApiErrorResponder $progressionApiErrorResponder,
         private readonly ProgressionApiJsonPayloadDecoder $progressionApiJsonPayloadDecoder,
+        private readonly PlayerKnowledgeTransferResultResponder $playerKnowledgeTransferResultResponder,
     ) {
     }
 
@@ -53,11 +55,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
         }
 
         $result = $this->playerKnowledgeTransferApplicationService->import($player, $this->progressionApiJsonPayloadDecoder->decode($request));
-        if (!$result['ok']) {
-            return $this->json($result, JsonResponse::HTTP_BAD_REQUEST);
-        }
-
-        return $this->json($result);
+        return $this->playerKnowledgeTransferResultResponder->respond($result);
     }
 
     #[Route('/preview-import', name: 'api_player_knowledge_preview_import', methods: ['POST'])]
@@ -69,11 +67,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
         }
 
         $result = $this->playerKnowledgeTransferApplicationService->previewImport($player, $this->progressionApiJsonPayloadDecoder->decode($request));
-        if (!$result['ok']) {
-            return $this->json($result, JsonResponse::HTTP_BAD_REQUEST);
-        }
-
-        return $this->json($result);
+        return $this->playerKnowledgeTransferResultResponder->respond($result);
     }
 
 }
