@@ -72,14 +72,12 @@ final class PlayerItemKnowledgeController extends AbstractController
     #[Route('/{itemId<[A-Za-z0-9]{26}>}/learned', name: 'api_player_items_learned_set', methods: ['PUT'])]
     public function setLearned(string $playerId, string $itemId): JsonResponse
     {
-        $player = $this->resolveOwnedPlayerOrNotFound($playerId);
-        if ($player instanceof JsonResponse) {
-            return $player;
+        $context = $this->resolveContextOrNotFound($playerId, $itemId);
+        if ($context instanceof JsonResponse) {
+            return $context;
         }
-        $item = $this->resolveItemOrNotFound($itemId);
-        if ($item instanceof JsonResponse) {
-            return $item;
-        }
+        $player = $context['player'];
+        $item = $context['item'];
 
         $this->playerKnowledgeWriteApplicationService->markLearned($player, $item);
 
@@ -89,14 +87,12 @@ final class PlayerItemKnowledgeController extends AbstractController
     #[Route('/{itemId<[A-Za-z0-9]{26}>}/learned', name: 'api_player_items_learned_unset', methods: ['DELETE'])]
     public function unsetLearned(string $playerId, string $itemId): Response
     {
-        $player = $this->resolveOwnedPlayerOrNotFound($playerId);
-        if ($player instanceof JsonResponse) {
-            return $player;
+        $context = $this->resolveContextOrNotFound($playerId, $itemId);
+        if ($context instanceof JsonResponse) {
+            return $context;
         }
-        $item = $this->resolveItemOrNotFound($itemId);
-        if ($item instanceof JsonResponse) {
-            return $item;
-        }
+        $player = $context['player'];
+        $item = $context['item'];
 
         $this->playerKnowledgeWriteApplicationService->unmarkLearned($player, $item);
 
@@ -111,5 +107,26 @@ final class PlayerItemKnowledgeController extends AbstractController
     protected function progressionItemApiResolver(): ProgressionItemApiResolver
     {
         return $this->progressionItemApiResolver;
+    }
+
+    /**
+     * @return array{player: PlayerEntity, item: ItemEntity}|JsonResponse
+     */
+    private function resolveContextOrNotFound(string $playerId, string $itemId): array|JsonResponse
+    {
+        $player = $this->resolveOwnedPlayerOrNotFound($playerId);
+        if ($player instanceof JsonResponse) {
+            return $player;
+        }
+
+        $item = $this->resolveItemOrNotFound($itemId);
+        if ($item instanceof JsonResponse) {
+            return $item;
+        }
+
+        return [
+            'player' => $player,
+            'item' => $item,
+        ];
     }
 }
