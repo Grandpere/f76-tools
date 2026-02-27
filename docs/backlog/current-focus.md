@@ -1,9 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- F76-050: DDD Slice 40 - Knowledge transfer context resolver cleanup (in progress).
+- Campagne fonctionnelle lot F76-049 a F76-050 (pending user run).
 
 ## Termine recemment
+- F76-050: DDD Slice 40 - Knowledge transfer context resolver cleanup (code done, functional pending).
 - F76-049: DDD Slice 39 - Player item controller context resolver cleanup (code done, functional pending).
 - F76-048: DDD Slice 38 - Resolver traits not-found unit coverage (done).
 - F76-047: DDD Slice 37 - Player controller name extraction cleanup (done).
