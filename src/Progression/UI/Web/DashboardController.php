@@ -27,7 +27,7 @@ final class DashboardController extends AbstractController
     ) {
     }
 
-    #[Route('/', name: 'app_dashboard', methods: ['GET'])]
+    #[Route('/mods-legendaires', name: 'app_dashboard', methods: ['GET'])]
     public function index(): Response
     {
         $user = $this->getUser();

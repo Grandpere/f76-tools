@@ -46,7 +46,7 @@ final class DashboardControllerTest extends WebTestCase
 
     public function testDashboardRedirectsWhenNotAuthenticated(): void
     {
-        $this->browser()->request('GET', '/');
+        $this->browser()->request('GET', '/mods-legendaires');
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('/login', (string) $this->browser()->getResponse()->headers->get('location'));
@@ -59,7 +59,7 @@ final class DashboardControllerTest extends WebTestCase
         $this->createPlayer($user, 'Bravo');
 
         $this->browser()->loginUser($user);
-        $crawler = $this->browser()->request('GET', '/');
+        $crawler = $this->browser()->request('GET', '/mods-legendaires');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filter('[data-controller="item-catalog"]'));

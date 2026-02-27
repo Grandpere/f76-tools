@@ -71,19 +71,26 @@
             data-player-progression-locale-value="{{ app.request.locale }}"
             data-player-progression-ui-translations-value="{{ uiTranslations|json_encode|e('html_attr') }}"
         >
+            <section class="catalog-panel">
+                <p class="catalog-note">{{ 'progression.quick_links_help'|trans }}</p>
+                <div class="progression-entry-actions">
+                    <a class="progression-entry-button" href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ 'progression.quick_link_mods'|trans }}</a>
+                    <a class="progression-entry-button" href="{{ path('app_minerva_rotation', { locale: app.request.locale }) }}">{{ 'progression.quick_link_minerva'|trans }}</a>
+                </div>
+            </section>
             <section class="catalog-panel create-player-panel filters-panel">
                 <h2>{{ 'progression.character_block_title'|trans }}</h2>
                 <div class="catalog-toolbar progression-character-toolbar">
-                    <label class="field">
-                        <span>{{ 'progression.player_list_label'|trans }}</span>
-                        <select data-player-progression-target="playerSelect"></select>
-                    </label>
                     <label class="field create-player-field">
                         <span>{{ 'dashboard.create_player.name'|trans }}</span>
                         <div class="field-inline">
                             <input type="text" placeholder="{{ 'dashboard.create_player.placeholder'|trans }}" data-player-progression-target="createNameInput">
                             <button type="button" data-player-progression-target="createButton">{{ 'dashboard.create_player.submit'|trans }}</button>
                         </div>
+                    </label>
+                    <label class="field">
+                        <span>{{ 'progression.player_list_label'|trans }}</span>
+                        <select data-player-progression-target="playerSelect"></select>
                     </label>
                 </div>
                 <p class="catalog-note">{{ 'dashboard.create_player.help'|trans }}</p>

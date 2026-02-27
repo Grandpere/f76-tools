@@ -45,7 +45,7 @@ final class ProgressionControllerTest extends WebTestCase
 
     public function testPageRedirectsWhenNotAuthenticated(): void
     {
-        $this->browser()->request('GET', '/progression');
+        $this->browser()->request('GET', '/');
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('/login', (string) $this->browser()->getResponse()->headers->get('location'));
@@ -58,7 +58,7 @@ final class ProgressionControllerTest extends WebTestCase
         $this->createPlayer($user, 'Bravo');
 
         $this->browser()->loginUser($user);
-        $crawler = $this->browser()->request('GET', '/progression');
+        $crawler = $this->browser()->request('GET', '/');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filter('[data-controller="player-progression"]'));

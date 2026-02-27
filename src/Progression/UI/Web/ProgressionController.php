@@ -27,6 +27,7 @@ final class ProgressionController extends AbstractController
     ) {
     }
 
+    #[Route('/', name: 'app_home', methods: ['GET'])]
     #[Route('/progression', name: 'app_progression', methods: ['GET'])]
     public function __invoke(): Response
     {
