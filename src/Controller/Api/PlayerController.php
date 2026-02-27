@@ -22,7 +22,6 @@ use App\Progression\UI\Api\PlayerNameApiResolver;
 use App\Progression\UI\Api\PlayerPayloadMapper;
 use App\Progression\UI\Api\ProgressionApiUserContext;
 use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolver;
-use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolverTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,8 +31,6 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/api/players')]
 final class PlayerController extends AbstractController
 {
-    use ProgressionOwnedPlayerApiResolverTrait;
-
     public function __construct(
         private readonly PlayerApplicationService $playerApplicationService,
         private readonly PlayerReadApplicationService $playerReadApplicationService,
@@ -74,7 +71,7 @@ final class PlayerController extends AbstractController
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_show', methods: ['GET'])]
     public function show(string $id): JsonResponse
     {
-        $player = $this->resolveOwnedPlayerOrNotFound($id);
+        $player = $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($id, $this->getUser());
         if ($player instanceof JsonResponse) {
             return $player;
         }
@@ -85,7 +82,7 @@ final class PlayerController extends AbstractController
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_update', methods: ['PATCH'])]
     public function update(string $id, Request $request): JsonResponse
     {
-        $player = $this->resolveOwnedPlayerOrNotFound($id);
+        $player = $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($id, $this->getUser());
         if ($player instanceof JsonResponse) {
             return $player;
         }
@@ -106,7 +103,7 @@ final class PlayerController extends AbstractController
     #[Route('/{id<[A-Za-z0-9]{26}>}', name: 'api_players_delete', methods: ['DELETE'])]
     public function delete(string $id): Response
     {
-        $player = $this->resolveOwnedPlayerOrNotFound($id);
+        $player = $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($id, $this->getUser());
         if ($player instanceof JsonResponse) {
             return $player;
         }
@@ -120,10 +117,4 @@ final class PlayerController extends AbstractController
     {
         return $this->progressionApiUserContext->requireAuthenticatedUser($this->getUser());
     }
-
-    protected function progressionOwnedPlayerApiResolver(): ProgressionOwnedPlayerApiResolver
-    {
-        return $this->progressionOwnedPlayerApiResolver;
-    }
-
 }

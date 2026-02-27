@@ -19,7 +19,6 @@ use App\Progression\UI\Api\PlayerKnowledgeImportMode;
 use App\Progression\UI\Api\PlayerKnowledgeImportContextResolver;
 use App\Progression\UI\Api\PlayerKnowledgeTransferResultResponder;
 use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolver;
-use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolverTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,8 +27,6 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/api/players/{playerId<[A-Za-z0-9]{26}>}/knowledge')]
 final class PlayerKnowledgeTransferController extends AbstractController
 {
-    use ProgressionOwnedPlayerApiResolverTrait;
-
     public function __construct(
         private readonly PlayerKnowledgeTransferApplicationService $playerKnowledgeTransferApplicationService,
         private readonly ProgressionOwnedPlayerApiResolver $progressionOwnedPlayerApiResolver,
@@ -41,7 +38,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
     #[Route('/export', name: 'api_player_knowledge_export', methods: ['GET'])]
     public function export(string $playerId): JsonResponse
     {
-        $player = $this->resolveOwnedPlayerOrNotFound($playerId);
+        $player = $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($playerId, $this->getUser());
         if ($player instanceof JsonResponse) {
             return $player;
         }
@@ -75,10 +72,5 @@ final class PlayerKnowledgeTransferController extends AbstractController
             : $this->playerKnowledgeTransferApplicationService->import($player, $payload);
 
         return $this->playerKnowledgeTransferResultResponder->respond($result);
-    }
-
-    protected function progressionOwnedPlayerApiResolver(): ProgressionOwnedPlayerApiResolver
-    {
-        return $this->progressionOwnedPlayerApiResolver;
     }
 }

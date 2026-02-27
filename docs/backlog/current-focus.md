@@ -4,6 +4,9 @@
 - Campagne de slices DDD progression (en cours).
 
 ## Termine recemment
+- F76-060: DDD Slice 50 - Player knowledge transfer controller trait removal (done).
+- F76-059: DDD Slice 49 - Player item knowledge controller trait removal (done).
+- F76-058: DDD Slice 48 - Player controller trait removal (done).
 - F76-057: DDD Slice 47 - Player stats context resolver extraction (done).
 - F76-056: DDD Slice 46 - Progression API context resolvers extraction (done).
 - F76-055: DDD Slice 45 - Backlog pending-status normalization (done).
