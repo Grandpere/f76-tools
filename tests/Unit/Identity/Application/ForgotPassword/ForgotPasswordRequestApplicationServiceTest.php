@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Identity\Application\ForgotPassword;
 
 use App\Identity\Application\Common\IdentityWritePersistenceInterface;
+use App\Identity\Application\ForgotPassword\ForgotPasswordRequest;
 use App\Identity\Application\ForgotPassword\ForgotPasswordRequestApplicationService;
 use App\Identity\Application\ForgotPassword\ForgotPasswordUserRepositoryInterface;
 use App\Identity\Application\Security\TemporaryLinkPolicy;
@@ -40,7 +41,7 @@ final class ForgotPasswordRequestApplicationServiceTest extends TestCase
         $this->repository->expects(self::never())->method('findOneByEmail');
         $this->persistence->expects(self::never())->method('flush');
 
-        $result = $this->service()->request('invalid-email', new DateTimeImmutable());
+        $result = $this->service()->request(ForgotPasswordRequest::fromRaw('invalid-email', new DateTimeImmutable()));
 
         self::assertFalse($result->isTokenIssued());
     }
@@ -50,7 +51,7 @@ final class ForgotPasswordRequestApplicationServiceTest extends TestCase
         $this->repository->method('findOneByEmail')->willReturn(null);
         $this->persistence->expects(self::never())->method('flush');
 
-        $result = $this->service()->request('unknown@example.com', new DateTimeImmutable());
+        $result = $this->service()->request(ForgotPasswordRequest::fromRaw('unknown@example.com', new DateTimeImmutable()));
 
         self::assertFalse($result->isTokenIssued());
     }
@@ -65,7 +66,7 @@ final class ForgotPasswordRequestApplicationServiceTest extends TestCase
         $this->repository->method('findOneByEmail')->willReturn($user);
         $this->persistence->expects(self::never())->method('flush');
 
-        $result = $this->service()->request('test@example.com', new DateTimeImmutable());
+        $result = $this->service()->request(ForgotPasswordRequest::fromRaw('test@example.com', new DateTimeImmutable()));
 
         self::assertFalse($result->isTokenIssued());
     }
@@ -80,7 +81,7 @@ final class ForgotPasswordRequestApplicationServiceTest extends TestCase
         $this->repository->method('findOneByEmail')->willReturn($user);
         $this->persistence->expects(self::once())->method('flush');
 
-        $result = $this->service()->request('test@example.com', new DateTimeImmutable());
+        $result = $this->service()->request(ForgotPasswordRequest::fromRaw('test@example.com', new DateTimeImmutable()));
 
         self::assertTrue($result->isTokenIssued());
         self::assertSame('test@example.com', $result->getEmail());

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Identity\Application\ResendVerification;
 
 use App\Identity\Application\Common\IdentityWritePersistenceInterface;
+use App\Identity\Application\ResendVerification\ResendVerificationRequest;
 use App\Identity\Application\ResendVerification\ResendVerificationRequestApplicationService;
 use App\Identity\Application\ResendVerification\ResendVerificationUserRepositoryInterface;
 use App\Identity\Application\Security\TemporaryLinkPolicy;
@@ -40,7 +41,7 @@ final class ResendVerificationRequestApplicationServiceTest extends TestCase
         $this->repository->expects(self::never())->method('findOneByEmail');
         $this->persistence->expects(self::never())->method('flush');
 
-        $result = $this->service()->request('invalid', new DateTimeImmutable());
+        $result = $this->service()->request(ResendVerificationRequest::fromRaw('invalid', new DateTimeImmutable()));
 
         self::assertFalse($result->isTokenIssued());
     }
@@ -50,7 +51,7 @@ final class ResendVerificationRequestApplicationServiceTest extends TestCase
         $this->repository->method('findOneByEmail')->willReturn(null);
         $this->persistence->expects(self::never())->method('flush');
 
-        $result = $this->service()->request('unknown@example.com', new DateTimeImmutable());
+        $result = $this->service()->request(ResendVerificationRequest::fromRaw('unknown@example.com', new DateTimeImmutable()));
 
         self::assertFalse($result->isTokenIssued());
     }
@@ -65,7 +66,7 @@ final class ResendVerificationRequestApplicationServiceTest extends TestCase
         $this->repository->method('findOneByEmail')->willReturn($user);
         $this->persistence->expects(self::never())->method('flush');
 
-        $result = $this->service()->request('verified@example.com', new DateTimeImmutable());
+        $result = $this->service()->request(ResendVerificationRequest::fromRaw('verified@example.com', new DateTimeImmutable()));
 
         self::assertFalse($result->isTokenIssued());
     }
@@ -81,7 +82,7 @@ final class ResendVerificationRequestApplicationServiceTest extends TestCase
         $this->repository->method('findOneByEmail')->willReturn($user);
         $this->persistence->expects(self::never())->method('flush');
 
-        $result = $this->service()->request('cooldown@example.com', new DateTimeImmutable());
+        $result = $this->service()->request(ResendVerificationRequest::fromRaw('cooldown@example.com', new DateTimeImmutable()));
 
         self::assertFalse($result->isTokenIssued());
     }
@@ -97,7 +98,7 @@ final class ResendVerificationRequestApplicationServiceTest extends TestCase
         $this->repository->method('findOneByEmail')->willReturn($user);
         $this->persistence->expects(self::once())->method('flush');
 
-        $result = $this->service()->request('resend@example.com', new DateTimeImmutable());
+        $result = $this->service()->request(ResendVerificationRequest::fromRaw('resend@example.com', new DateTimeImmutable()));
 
         self::assertTrue($result->isTokenIssued());
         self::assertSame('resend@example.com', $result->getEmail());

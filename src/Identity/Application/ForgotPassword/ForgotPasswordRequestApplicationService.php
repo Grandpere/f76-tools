@@ -15,7 +15,6 @@ namespace App\Identity\Application\ForgotPassword;
 
 use App\Identity\Application\Common\IdentityWritePersistenceInterface;
 use App\Identity\Application\Security\TemporaryLinkPolicy;
-use DateTimeImmutable;
 
 final class ForgotPasswordRequestApplicationService
 {
@@ -26,20 +25,20 @@ final class ForgotPasswordRequestApplicationService
     ) {
     }
 
-    public function request(string $email, DateTimeImmutable $now): ForgotPasswordRequestResult
+    public function request(ForgotPasswordRequest $request): ForgotPasswordRequestResult
     {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
             return ForgotPasswordRequestResult::noAction();
         }
 
-        $user = $this->userRepository->findOneByEmail($email);
+        $user = $this->userRepository->findOneByEmail($request->email);
         if (null === $user) {
             return ForgotPasswordRequestResult::noAction();
         }
 
         $remaining = $this->temporaryLinkPolicy->cooldownRemainingSeconds(
             $user->getResetPasswordRequestedAt(),
-            $now,
+            $request->requestedAt,
             $this->temporaryLinkPolicy->getResetLinkCooldownSeconds(),
         );
         if ($remaining > 0) {
@@ -48,8 +47,8 @@ final class ForgotPasswordRequestApplicationService
 
         $token = bin2hex(random_bytes(32));
         $user->setResetPasswordTokenHash(hash('sha256', $token));
-        $user->setResetPasswordExpiresAt($this->temporaryLinkPolicy->expiresAt($now, $this->temporaryLinkPolicy->getResetPasswordTtl()));
-        $user->setResetPasswordRequestedAt($now);
+        $user->setResetPasswordExpiresAt($this->temporaryLinkPolicy->expiresAt($request->requestedAt, $this->temporaryLinkPolicy->getResetPasswordTtl()));
+        $user->setResetPasswordRequestedAt($request->requestedAt);
         $this->persistence->flush();
 
         return ForgotPasswordRequestResult::tokenIssued($user->getEmail(), $token);

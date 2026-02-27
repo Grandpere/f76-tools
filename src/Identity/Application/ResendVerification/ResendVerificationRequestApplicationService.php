@@ -15,7 +15,6 @@ namespace App\Identity\Application\ResendVerification;
 
 use App\Identity\Application\Common\IdentityWritePersistenceInterface;
 use App\Identity\Application\Security\TemporaryLinkPolicy;
-use DateTimeImmutable;
 
 final class ResendVerificationRequestApplicationService
 {
@@ -26,20 +25,20 @@ final class ResendVerificationRequestApplicationService
     ) {
     }
 
-    public function request(string $email, DateTimeImmutable $now): ResendVerificationRequestResult
+    public function request(ResendVerificationRequest $request): ResendVerificationRequestResult
     {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
             return ResendVerificationRequestResult::noAction();
         }
 
-        $user = $this->userRepository->findOneByEmail($email);
+        $user = $this->userRepository->findOneByEmail($request->email);
         if (null === $user || $user->isEmailVerified()) {
             return ResendVerificationRequestResult::noAction();
         }
 
         $remaining = $this->temporaryLinkPolicy->cooldownRemainingSeconds(
             $user->getEmailVerificationRequestedAt(),
-            $now,
+            $request->requestedAt,
             $this->temporaryLinkPolicy->getEmailVerificationResendCooldownSeconds(),
         );
         if ($remaining > 0) {
@@ -48,8 +47,8 @@ final class ResendVerificationRequestApplicationService
 
         $token = bin2hex(random_bytes(32));
         $user->setEmailVerificationTokenHash(hash('sha256', $token));
-        $user->setEmailVerificationExpiresAt($this->temporaryLinkPolicy->expiresAt($now, $this->temporaryLinkPolicy->getEmailVerificationTtl()));
-        $user->setEmailVerificationRequestedAt($now);
+        $user->setEmailVerificationExpiresAt($this->temporaryLinkPolicy->expiresAt($request->requestedAt, $this->temporaryLinkPolicy->getEmailVerificationTtl()));
+        $user->setEmailVerificationRequestedAt($request->requestedAt);
         $this->persistence->flush();
 
         return ResendVerificationRequestResult::tokenIssued($user->getEmail(), $token);

@@ -23,7 +23,7 @@ Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inven
 
 ## Inventaire - Slices optionnels (a faire ensuite)
 - [ ] Pousser le nettoyage `mixed` residuel dans les query objects (`fromRaw`) vers des DTO HTTP explicites en amont.
-- [ ] Introduire des request objects equivalents pour les flows Identity (`register/forgot/resend`) pour uniformiser les contrats.
+- [x] Introduire des request objects equivalents pour les flows Identity (`register/forgot/resend`) pour uniformiser les contrats.
 - [ ] Revoir les docblocks `array<string, mixed>` quand un type structure plus strict est possible (payloads admin/audit).
 - [ ] Etendre la meme logique DDD de typage et d'isolation aux zones import Catalog (`ItemImport*`) qui restent tres permissives.
 - [ ] Ajouter/renforcer des tests d'architecture (PHPat/PHPStan rules) pour figer les frontieres `UI -> Application -> Domain`.
@@ -45,3 +45,4 @@ Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inven
 - [x] Slice effectuee: controllers API progression migres hors `src/Controller/Api` vers `src/Progression/UI/Api` (incluant `ProgressionAuthenticatedUserControllerTrait`) et suppression du dossier legacy `src/Controller`.
 - [x] Slice effectuee: dossier legacy `src/Entity` supprime; entites migrees vers `*/Domain/Entity` par contexte et mapping Doctrine aligne (`prefix: App`, `dir: src`).
 - [x] Verification effectuee: controllers admin sensibles alignes sur garde admin partagee + CSRF partage + contexte user explicite (`ContactMessageController`, `ItemTranslationController`, `MinervaRotationController`, `UserManagementController`).
+- [x] Slice effectuee: request objects applicatifs Identity ajoutes (`RegisterUserRequest`, `ForgotPasswordRequest`, `ResendVerificationRequest`) et usages controllers/services/tests alignes.

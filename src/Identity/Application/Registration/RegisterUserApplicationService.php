@@ -17,7 +17,6 @@ use App\Identity\Application\Common\IdentityPasswordHasherInterface;
 use App\Identity\Application\Common\IdentityWritePersistenceInterface;
 use App\Identity\Application\Security\TemporaryLinkPolicy;
 use App\Identity\Domain\Entity\UserEntity;
-use DateTimeImmutable;
 
 final class RegisterUserApplicationService
 {
@@ -29,22 +28,18 @@ final class RegisterUserApplicationService
     ) {
     }
 
-    public function register(
-        string $email,
-        string $password,
-        string $passwordConfirm,
-        DateTimeImmutable $now,
-    ): RegisterUserResult {
-        $normalizedEmail = mb_strtolower(trim($email));
+    public function register(RegisterUserRequest $request): RegisterUserResult
+    {
+        $normalizedEmail = $request->email;
         if (!filter_var($normalizedEmail, FILTER_VALIDATE_EMAIL)) {
             return RegisterUserResult::ofStatus(RegisterUserStatus::INVALID_EMAIL);
         }
 
-        if (strlen($password) < 8) {
+        if (strlen($request->password) < 8) {
             return RegisterUserResult::ofStatus(RegisterUserStatus::PASSWORD_TOO_SHORT);
         }
 
-        if ($password !== $passwordConfirm) {
+        if ($request->password !== $request->passwordConfirm) {
             return RegisterUserResult::ofStatus(RegisterUserStatus::PASSWORD_MISMATCH);
         }
 
@@ -56,12 +51,12 @@ final class RegisterUserApplicationService
             ->setEmail($normalizedEmail)
             ->setRoles(['ROLE_USER'])
             ->setIsEmailVerified(false);
-        $user->setPassword($this->passwordHasher->hash($user, $password));
+        $user->setPassword($this->passwordHasher->hash($user, $request->password));
 
         $token = bin2hex(random_bytes(32));
         $user->setEmailVerificationTokenHash(hash('sha256', $token));
-        $user->setEmailVerificationExpiresAt($this->temporaryLinkPolicy->expiresAt($now, $this->temporaryLinkPolicy->getEmailVerificationTtl()));
-        $user->setEmailVerificationRequestedAt($now);
+        $user->setEmailVerificationExpiresAt($this->temporaryLinkPolicy->expiresAt($request->requestedAt, $this->temporaryLinkPolicy->getEmailVerificationTtl()));
+        $user->setEmailVerificationRequestedAt($request->requestedAt);
 
         $this->persistence->persist($user);
         $this->persistence->flush();

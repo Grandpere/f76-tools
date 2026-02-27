@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Identity\UI\Security\Controller;
 
+use App\Identity\Application\ForgotPassword\ForgotPasswordRequest;
 use App\Identity\Application\ForgotPassword\ForgotPasswordRequestApplicationService;
 use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProviderInterface;
 use App\Identity\Application\Time\IdentityClockInterface;
@@ -50,7 +51,10 @@ final class ForgotPasswordController extends AbstractController
                 return $payload;
             }
 
-            $requestResult = $this->forgotPasswordRequestApplicationService->request($payload->email, $this->identityClock->now());
+            $requestResult = $this->forgotPasswordRequestApplicationService->request(ForgotPasswordRequest::fromRaw(
+                $payload->email,
+                $this->identityClock->now(),
+            ));
             if ($requestResult->isTokenIssued()) {
                 $this->identityIssuedTokenNotifier->notifyResetPassword(
                     $requestResult->getEmail(),

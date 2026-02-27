@@ -16,6 +16,7 @@ namespace App\Tests\Unit\Identity\Application\Registration;
 use App\Identity\Application\Common\IdentityPasswordHasherInterface;
 use App\Identity\Application\Common\IdentityWritePersistenceInterface;
 use App\Identity\Application\Registration\RegisterUserApplicationService;
+use App\Identity\Application\Registration\RegisterUserRequest;
 use App\Identity\Application\Registration\RegisterUserStatus;
 use App\Identity\Application\Registration\RegistrationUserRepositoryInterface;
 use App\Identity\Application\Security\TemporaryLinkPolicy;
@@ -41,21 +42,21 @@ final class RegisterUserApplicationServiceTest extends TestCase
 
     public function testInvalidEmailReturnsInvalidStatus(): void
     {
-        $result = $this->service()->register('invalid', 'password123', 'password123', new DateTimeImmutable());
+        $result = $this->service()->register(RegisterUserRequest::fromRaw('invalid', 'password123', 'password123', new DateTimeImmutable()));
 
         self::assertSame(RegisterUserStatus::INVALID_EMAIL, $result->getStatus());
     }
 
     public function testShortPasswordReturnsPasswordTooShortStatus(): void
     {
-        $result = $this->service()->register('user@example.com', 'short', 'short', new DateTimeImmutable());
+        $result = $this->service()->register(RegisterUserRequest::fromRaw('user@example.com', 'short', 'short', new DateTimeImmutable()));
 
         self::assertSame(RegisterUserStatus::PASSWORD_TOO_SHORT, $result->getStatus());
     }
 
     public function testPasswordMismatchReturnsMismatchStatus(): void
     {
-        $result = $this->service()->register('user@example.com', 'password123', 'password321', new DateTimeImmutable());
+        $result = $this->service()->register(RegisterUserRequest::fromRaw('user@example.com', 'password123', 'password321', new DateTimeImmutable()));
 
         self::assertSame(RegisterUserStatus::PASSWORD_MISMATCH, $result->getStatus());
     }
@@ -68,7 +69,7 @@ final class RegisterUserApplicationServiceTest extends TestCase
 
         $this->repository->method('findOneByEmail')->willReturn($existing);
 
-        $result = $this->service()->register('user@example.com', 'password123', 'password123', new DateTimeImmutable());
+        $result = $this->service()->register(RegisterUserRequest::fromRaw('user@example.com', 'password123', 'password123', new DateTimeImmutable()));
 
         self::assertSame(RegisterUserStatus::EMAIL_EXISTS, $result->getStatus());
     }
@@ -80,7 +81,7 @@ final class RegisterUserApplicationServiceTest extends TestCase
         $this->persistence->expects(self::once())->method('persist');
         $this->persistence->expects(self::once())->method('flush');
 
-        $result = $this->service()->register('user@example.com', 'password123', 'password123', new DateTimeImmutable());
+        $result = $this->service()->register(RegisterUserRequest::fromRaw('user@example.com', 'password123', 'password123', new DateTimeImmutable()));
 
         self::assertSame(RegisterUserStatus::SUCCESS, $result->getStatus());
         self::assertSame('user@example.com', $result->getEmail());

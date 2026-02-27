@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Identity\UI\Security\Controller;
 
 use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProviderInterface;
+use App\Identity\Application\ResendVerification\ResendVerificationRequest;
 use App\Identity\Application\ResendVerification\ResendVerificationRequestApplicationService;
 use App\Identity\Application\Time\IdentityClockInterface;
 use App\Identity\UI\Security\IdentityEmailFlow;
@@ -50,7 +51,10 @@ final class ResendVerificationController extends AbstractController
                 return $payload;
             }
 
-            $requestResult = $this->resendVerificationRequestApplicationService->request($payload->email, $this->identityClock->now());
+            $requestResult = $this->resendVerificationRequestApplicationService->request(ResendVerificationRequest::fromRaw(
+                $payload->email,
+                $this->identityClock->now(),
+            ));
             if ($requestResult->isTokenIssued()) {
                 $this->identityIssuedTokenNotifier->notifyVerification(
                     $requestResult->getEmail(),

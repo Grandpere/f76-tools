@@ -15,6 +15,7 @@ namespace App\Identity\UI\Security\Controller;
 
 use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProviderInterface;
 use App\Identity\Application\Registration\RegisterUserApplicationService;
+use App\Identity\Application\Registration\RegisterUserRequest;
 use App\Identity\Application\Security\AuthEventLogger;
 use App\Identity\Application\Time\IdentityClockInterface;
 use App\Identity\UI\Security\IdentityEmailFlow;
@@ -61,12 +62,12 @@ final class RegistrationController extends AbstractController
             $password = (string) $request->request->get('password', '');
             $passwordConfirm = (string) $request->request->get('password_confirm', '');
 
-            $registerResult = $this->registerUserApplicationService->register(
+            $registerResult = $this->registerUserApplicationService->register(RegisterUserRequest::fromRaw(
                 $payload->email,
                 $password,
                 $passwordConfirm,
                 $this->identityClock->now(),
-            );
+            ));
 
             $warningMessage = $this->registrationFeedbackMapper->warningFlash($registerResult->getStatus());
             if (null !== $warningMessage) {
