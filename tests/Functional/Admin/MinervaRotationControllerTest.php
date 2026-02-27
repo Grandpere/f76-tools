@@ -168,8 +168,8 @@ final class MinervaRotationControllerTest extends WebTestCase
                 continue;
             }
             if (
-                $row->getStartsAt() <= new DateTimeImmutable('2026-03-16T12:00:00+00:00')
-                && $row->getEndsAt() >= new DateTimeImmutable('2026-03-12T12:00:00+00:00')
+                $row->getStartsAt() < new DateTimeImmutable('2026-03-16T12:00:00+00:00')
+                && $row->getEndsAt() > new DateTimeImmutable('2026-03-12T12:00:00+00:00')
             ) {
                 self::fail('Generated row should be skipped when overlapped by manual override.');
             }

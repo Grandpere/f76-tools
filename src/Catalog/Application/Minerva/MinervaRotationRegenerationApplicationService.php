@@ -67,10 +67,11 @@ final class MinervaRotationRegenerationApplicationService
     private function hasManualOverlap(DateTimeImmutable $startsAt, DateTimeImmutable $endsAt, array $manualRows): bool
     {
         foreach ($manualRows as $manualRow) {
-            if ($manualRow->getEndsAt() < $startsAt) {
+            // Use [start, end) semantics: touching boundaries are not overlaps.
+            if ($manualRow->getEndsAt() <= $startsAt) {
                 continue;
             }
-            if ($manualRow->getStartsAt() > $endsAt) {
+            if ($manualRow->getStartsAt() >= $endsAt) {
                 continue;
             }
 
