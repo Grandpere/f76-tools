@@ -16,6 +16,7 @@ namespace App\Controller\Api;
 use App\Entity\UserEntity;
 use App\Progression\Application\Player\Exception\PlayerNameConflictException;
 use App\Progression\Application\Player\PlayerApplicationService;
+use App\Progression\Application\Player\PlayerReadApplicationService;
 use App\Progression\UI\Api\PlayerNameRequestExtractor;
 use App\Progression\UI\Api\PlayerPayloadMapper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,6 +30,7 @@ final class PlayerController extends AbstractController
 {
     public function __construct(
         private readonly PlayerApplicationService $playerApplicationService,
+        private readonly PlayerReadApplicationService $playerReadApplicationService,
         private readonly PlayerPayloadMapper $playerPayloadMapper,
         private readonly PlayerNameRequestExtractor $playerNameRequestExtractor,
     ) {
@@ -38,7 +40,7 @@ final class PlayerController extends AbstractController
     public function index(): JsonResponse
     {
         $user = $this->getAuthenticatedUser();
-        $players = $this->playerApplicationService->listForUser($user);
+        $players = $this->playerReadApplicationService->listForUser($user);
 
         return $this->json($this->playerPayloadMapper->mapList($players));
     }
@@ -65,7 +67,7 @@ final class PlayerController extends AbstractController
     public function show(string $id): JsonResponse
     {
         $user = $this->getAuthenticatedUser();
-        $player = $this->playerApplicationService->findOwnedByPublicId($user, $id);
+        $player = $this->playerReadApplicationService->findOwnedByPublicId($user, $id);
         if (null === $player) {
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
@@ -77,7 +79,7 @@ final class PlayerController extends AbstractController
     public function update(string $id, Request $request): JsonResponse
     {
         $user = $this->getAuthenticatedUser();
-        $player = $this->playerApplicationService->findOwnedByPublicId($user, $id);
+        $player = $this->playerReadApplicationService->findOwnedByPublicId($user, $id);
         if (null === $player) {
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }
@@ -100,7 +102,7 @@ final class PlayerController extends AbstractController
     public function delete(string $id): JsonResponse
     {
         $user = $this->getAuthenticatedUser();
-        $player = $this->playerApplicationService->findOwnedByPublicId($user, $id);
+        $player = $this->playerReadApplicationService->findOwnedByPublicId($user, $id);
         if (null === $player) {
             return $this->json(['error' => 'Player not found.'], JsonResponse::HTTP_NOT_FOUND);
         }

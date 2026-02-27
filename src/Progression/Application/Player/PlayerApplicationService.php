@@ -16,24 +16,14 @@ namespace App\Progression\Application\Player;
 use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
 use App\Progression\Application\Player\Exception\PlayerNameConflictException;
-use App\Repository\PlayerEntityRepository;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class PlayerApplicationService
 {
     public function __construct(
-        private readonly PlayerEntityRepository $playerRepository,
         private readonly EntityManagerInterface $entityManager,
     ) {
-    }
-
-    /**
-     * @return list<PlayerEntity>
-     */
-    public function listForUser(UserEntity $user): array
-    {
-        return $this->playerRepository->findByUser($user);
     }
 
     public function createForUser(UserEntity $user, string $name): PlayerEntity
@@ -50,11 +40,6 @@ final class PlayerApplicationService
         }
 
         return $player;
-    }
-
-    public function findOwnedByPublicId(UserEntity $user, string $publicId): ?PlayerEntity
-    {
-        return $this->playerRepository->findOneByPublicIdAndUser($publicId, $user);
     }
 
     public function renameOwned(PlayerEntity $player, string $name): void

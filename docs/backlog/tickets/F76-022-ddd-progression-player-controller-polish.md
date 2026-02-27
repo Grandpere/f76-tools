@@ -6,6 +6,7 @@
 ## Scope
 - Extraire le mapping JSON du `PlayerEntity` vers un mapper UI dedie.
 - Extraire le parsing/validation du champ `name` depuis la requete JSON vers un composant dedie.
+- Scinder les lectures player dans un service applicatif dedie (`read`) pour separer lecture/ecriture.
 - Conserver strictement les routes, codes HTTP et messages existants.
 
 ## Avancement
@@ -13,6 +14,9 @@
 - [x] Extraire `PlayerNameRequestExtractor`.
 - [x] Brancher `PlayerController` sur ces composants.
 - [x] Ajouter tests unitaires des composants.
+- [x] Extraire `PlayerReadApplicationService` + port repository.
+- [x] Brancher `PlayerController` sur le service de lecture dedie.
+- [x] Ajouter tests unitaires du service de lecture.
 - [ ] Validation fonctionnelle manuelle (`make phpunit-functional`) et ajustements si besoin.
 
 ## Criteres d acceptance

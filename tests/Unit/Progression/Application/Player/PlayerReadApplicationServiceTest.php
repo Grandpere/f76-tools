@@ -1,0 +1,60 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Tests\Unit\Progression\Application\Player;
+
+use App\Entity\PlayerEntity;
+use App\Entity\UserEntity;
+use App\Progression\Application\Player\PlayerReadApplicationService;
+use App\Progression\Application\Player\PlayerReadRepositoryInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+
+final class PlayerReadApplicationServiceTest extends TestCase
+{
+    public function testListForUserDelegatesToRepository(): void
+    {
+        $user = (new UserEntity())
+            ->setEmail('user@example.com')
+            ->setPassword('hash')
+            ->setRoles(['ROLE_USER']);
+        $player = (new PlayerEntity())->setName('Main');
+
+        /** @var PlayerReadRepositoryInterface&MockObject $repository */
+        $repository = $this->createMock(PlayerReadRepositoryInterface::class);
+        $repository
+            ->expects(self::once())
+            ->method('findByUser')
+            ->with($user)
+            ->willReturn([$player]);
+
+        $service = new PlayerReadApplicationService($repository);
+        $result = $service->listForUser($user);
+
+        self::assertSame([$player], $result);
+    }
+
+    public function testFindOwnedByPublicIdDelegatesToRepository(): void
+    {
+        $user = (new UserEntity())
+            ->setEmail('user@example.com')
+            ->setPassword('hash')
+            ->setRoles(['ROLE_USER']);
+        $player = (new PlayerEntity())->setName('Main');
+
+        /** @var PlayerReadRepositoryInterface&MockObject $repository */
+        $repository = $this->createMock(PlayerReadRepositoryInterface::class);
+        $repository
+            ->expects(self::once())
+            ->method('findOneByPublicIdAndUser')
+            ->with('01J5A6B7C8D9E0F1G2H3J4K5L6', $user)
+            ->willReturn($player);
+
+        $service = new PlayerReadApplicationService($repository);
+        $result = $service->findOwnedByPublicId($user, '01J5A6B7C8D9E0F1G2H3J4K5L6');
+
+        self::assertSame($player, $result);
+    }
+}
+
