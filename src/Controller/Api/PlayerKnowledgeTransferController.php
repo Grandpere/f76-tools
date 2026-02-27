@@ -63,12 +63,13 @@ final class PlayerKnowledgeTransferController extends AbstractController
 
     private function importLike(string $playerId, Request $request, PlayerKnowledgeImportMode $mode): JsonResponse
     {
-        $player = $this->resolveOwnedPlayerOrNotFound($playerId);
-        if ($player instanceof JsonResponse) {
-            return $player;
+        $context = $this->resolveImportContextOrNotFound($playerId, $request);
+        if ($context instanceof JsonResponse) {
+            return $context;
         }
+        $player = $context['player'];
+        $payload = $context['payload'];
 
-        $payload = $this->progressionApiJsonPayloadDecoder->decode($request);
         $result = PlayerKnowledgeImportMode::PREVIEW === $mode
             ? $this->playerKnowledgeTransferApplicationService->previewImport($player, $payload)
             : $this->playerKnowledgeTransferApplicationService->import($player, $payload);
@@ -79,5 +80,21 @@ final class PlayerKnowledgeTransferController extends AbstractController
     protected function progressionOwnedPlayerApiResolver(): ProgressionOwnedPlayerApiResolver
     {
         return $this->progressionOwnedPlayerApiResolver;
+    }
+
+    /**
+     * @return array{player: PlayerEntity, payload: array<string, mixed>}|JsonResponse
+     */
+    private function resolveImportContextOrNotFound(string $playerId, Request $request): array|JsonResponse
+    {
+        $player = $this->resolveOwnedPlayerOrNotFound($playerId);
+        if ($player instanceof JsonResponse) {
+            return $player;
+        }
+
+        return [
+            'player' => $player,
+            'payload' => $this->progressionApiJsonPayloadDecoder->decode($request),
+        ];
     }
 }
