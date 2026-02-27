@@ -29,6 +29,8 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class RegistrationController extends AbstractController
 {
+    use IdentityCaptchaRenderControllerTrait;
+
     public function __construct(
         private readonly RegisterUserApplicationService $registerUserApplicationService,
         private readonly IdentityClockInterface $identityClock,
@@ -89,8 +91,11 @@ final class RegistrationController extends AbstractController
             return $this->identityFlashResponder->successToLogin($request, 'security.register.flash.success');
         }
 
-        return $this->render('security/register.html.twig', [
-            'captchaSiteKey' => $this->turnstileVerifier->getSiteKey(),
-        ]);
+        return $this->renderWithCaptchaSiteKey('security/register.html.twig');
+    }
+
+    protected function turnstileVerifier(): TurnstileVerifier
+    {
+        return $this->turnstileVerifier;
     }
 }

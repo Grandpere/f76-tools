@@ -4,6 +4,7 @@
 - Campagne de slices DDD progression (en cours).
 
 ## Termine recemment
+- F76-071: DDD Slice 61 - Security captcha render controller trait (done).
 - F76-070: DDD Slice 60 - Security signed token validation controller trait (done).
 - F76-069: DDD Slice 59 - Progression API authenticated user controller trait (done).
 - F76-068: DDD Slice 58 - Player item controller action context helper (done).

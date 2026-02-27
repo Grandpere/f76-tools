@@ -27,6 +27,8 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ResendVerificationController extends AbstractController
 {
+    use IdentityCaptchaRenderControllerTrait;
+
     public function __construct(
         private readonly ResendVerificationRequestApplicationService $resendVerificationRequestApplicationService,
         private readonly IdentityClockInterface $identityClock,
@@ -62,8 +64,11 @@ final class ResendVerificationController extends AbstractController
             return $this->identityFlashResponder->successToLogin($request, 'security.resend.flash.sent');
         }
 
-        return $this->render('security/resend_verification.html.twig', [
-            'captchaSiteKey' => $this->turnstileVerifier->getSiteKey(),
-        ]);
+        return $this->renderWithCaptchaSiteKey('security/resend_verification.html.twig');
+    }
+
+    protected function turnstileVerifier(): TurnstileVerifier
+    {
+        return $this->turnstileVerifier;
     }
 }

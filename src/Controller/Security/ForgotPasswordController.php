@@ -27,6 +27,8 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ForgotPasswordController extends AbstractController
 {
+    use IdentityCaptchaRenderControllerTrait;
+
     public function __construct(
         private readonly ForgotPasswordRequestApplicationService $forgotPasswordRequestApplicationService,
         private readonly IdentityClockInterface $identityClock,
@@ -61,8 +63,11 @@ final class ForgotPasswordController extends AbstractController
             return $this->identityFlashResponder->successToLogin($request, 'security.forgot.flash.request_sent');
         }
 
-        return $this->render('security/forgot_password.html.twig', [
-            'captchaSiteKey' => $this->turnstileVerifier->getSiteKey(),
-        ]);
+        return $this->renderWithCaptchaSiteKey('security/forgot_password.html.twig');
+    }
+
+    protected function turnstileVerifier(): TurnstileVerifier
+    {
+        return $this->turnstileVerifier;
     }
 }
