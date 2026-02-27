@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
-use App\Domain\Item\ItemTypeEnum;
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeApplicationService;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadSearchFilter;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
+use App\Progression\UI\Api\ProgressionItemTypeQueryParser;
 use App\Progression\UI\Api\ProgressionOwnedPlayerResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -33,6 +33,7 @@ final class PlayerItemKnowledgeController extends AbstractController
         private readonly PlayerKnowledgeApplicationService $playerKnowledgeApplicationService,
         private readonly PlayerKnowledgeItemPayloadMapper $playerKnowledgeItemPayloadMapper,
         private readonly PlayerKnowledgeItemPayloadSearchFilter $playerKnowledgeItemPayloadSearchFilter,
+        private readonly ProgressionItemTypeQueryParser $progressionItemTypeQueryParser,
         private readonly ProgressionOwnedPlayerResolver $progressionOwnedPlayerResolver,
         private readonly ProgressionApiErrorResponder $progressionApiErrorResponder,
     ) {
@@ -46,7 +47,7 @@ final class PlayerItemKnowledgeController extends AbstractController
             return $this->progressionApiErrorResponder->playerNotFound();
         }
 
-        $type = $this->parseType($request->query->get('type'));
+        $type = $this->progressionItemTypeQueryParser->parse($request->query->get('type'));
         if (false === $type) {
             return $this->progressionApiErrorResponder->invalidItemType();
         }
@@ -94,18 +95,6 @@ final class PlayerItemKnowledgeController extends AbstractController
         $this->playerKnowledgeApplicationService->unmarkLearned($player, $item);
 
         return new JsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
-    }
-
-    private function parseType(mixed $value): ItemTypeEnum|false|null
-    {
-        if (null === $value || '' === $value) {
-            return null;
-        }
-        if (!is_string($value)) {
-            return false;
-        }
-
-        return ItemTypeEnum::tryFrom(strtoupper(trim($value))) ?? false;
     }
 
 }
