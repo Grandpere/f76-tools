@@ -31,6 +31,7 @@ final class ContactMessageController extends AbstractController
 {
     use AdminRoleGuardControllerTrait;
     use AdminCsrfTokenValidatorTrait;
+    use AdminInputSanitizerTrait;
 
     public function __construct(
         private readonly ContactMessageListApplicationService $contactMessageListApplicationService,
@@ -79,16 +80,6 @@ final class ContactMessageController extends AbstractController
         );
 
         return $this->contactMessageStatusUpdateResponder->fromResult($request, $result);
-    }
-
-    private function optionalString(mixed $value): ?string
-    {
-        return is_string($value) ? $value : null;
-    }
-
-    private function optionalIntOrString(mixed $value): int|string|null
-    {
-        return is_int($value) || is_string($value) ? $value : null;
     }
 
     protected function csrfTokenManager(): CsrfTokenManagerInterface

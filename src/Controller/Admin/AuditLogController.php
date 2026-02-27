@@ -27,6 +27,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class AuditLogController extends AbstractController
 {
     use AdminRoleGuardControllerTrait;
+    use AdminInputSanitizerTrait;
 
     public function __construct(
         private readonly AuditLogListApplicationService $auditLogListApplicationService,
@@ -70,15 +71,5 @@ final class AuditLogController extends AbstractController
         ));
 
         return $this->auditLogCsvExporter->buildResponse($exportResult->rows);
-    }
-
-    private function optionalString(mixed $value): ?string
-    {
-        return is_string($value) ? $value : null;
-    }
-
-    private function optionalIntOrString(mixed $value): int|string|null
-    {
-        return is_int($value) || is_string($value) ? $value : null;
     }
 }

@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - Admin input sanitization drift across controllers
+- Symptom: duplicated `optionalString` / `optionalIntOrString` / pagination sanitation logic in multiple admin controllers.
+- Root cause: sanitation helpers were added incrementally per controller instead of a shared component.
+- Fix: extracted `AdminInputSanitizerTrait` and reused it in `AuditLogController`, `ContactMessageController`, `ItemTranslationController`.
+- Prevention: for new admin endpoints, reuse the shared sanitizer trait and avoid local helper duplication.
+
 ## 2026-02-27 - Port and adapter with same short class name need alias in tests/adapters
 - Symptom: `phpstan` failed with `Cannot use ... as ... because the name is already in use`.
 - Root cause: after removing `Interface` suffix, a file imported both the port and adapter class sharing the same short name (`TranslationCatalogWriter`).

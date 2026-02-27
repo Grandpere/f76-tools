@@ -79,18 +79,4 @@ final class ItemTranslationBackofficeApplicationServiceTest extends TestCase
         self::assertSame('book', $rows[0]['section']);
         self::assertSame('Plan FR', $rows[0]['target']);
     }
-
-    public function testSanitizeTargetLocalePreventsLockedLocales(): void
-    {
-        /** @var TranslationCatalogReader&MockObject $reader */
-        $reader = $this->createMock(TranslationCatalogReader::class);
-        /** @var TranslationCatalogWriter&MockObject $writer */
-        $writer = $this->createMock(TranslationCatalogWriter::class);
-        $service = new ItemTranslationBackofficeApplicationService($reader, $writer);
-
-        self::assertSame('fr', $service->sanitizeTargetLocale('en'));
-        self::assertSame('fr', $service->sanitizeTargetLocale('de'));
-        self::assertSame('fr', $service->sanitizeTargetLocale('invalid-locale'));
-        self::assertSame('it', $service->sanitizeTargetLocale('it'));
-    }
 }

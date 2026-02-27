@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Catalog\Application\Translation\ItemTranslationBackofficeApplicationService;
+use App\Catalog\Application\Translation\ItemTranslationListQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,9 +25,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class ItemTranslationController extends AbstractController
 {
     use AdminRoleGuardControllerTrait;
-
-    private const DEFAULT_PER_PAGE = 40;
-    private const MAX_PER_PAGE = 200;
+    use AdminInputSanitizerTrait;
 
     public function __construct(
         private readonly ItemTranslationBackofficeApplicationService $itemTranslationBackofficeApplicationService,
@@ -39,15 +38,27 @@ final class ItemTranslationController extends AbstractController
     {
         $this->ensureAdminAccess();
 
-        $targetLocale = $this->itemTranslationBackofficeApplicationService->sanitizeTargetLocale($this->optionalString($request->query->get('target')));
-        $query = $this->itemTranslationBackofficeApplicationService->normalizeQuery($this->optionalString($request->query->get('q')));
-        $perPage = $this->sanitizePositiveInt($request->query->get('perPage'), self::DEFAULT_PER_PAGE, self::MAX_PER_PAGE);
-        $page = $this->sanitizePositiveInt($request->query->get('page'), 1);
+        $listQuery = ItemTranslationListQuery::fromRaw(
+            $this->optionalString($request->query->get('target')),
+            $this->optionalString($request->query->get('q')),
+            $this->optionalIntOrString($request->query->get('page')),
+            $this->optionalIntOrString($request->query->get('perPage')),
+        );
+        $targetLocale = $listQuery->targetLocale;
+        $query = $listQuery->query;
+        $perPage = $listQuery->perPage;
+        $page = $listQuery->page;
 
         if ($request->isMethod('POST')) {
-            $targetLocale = $this->itemTranslationBackofficeApplicationService->sanitizeTargetLocale($this->optionalString($request->request->get('target')));
-            $perPage = $this->sanitizePositiveInt($request->request->get('perPage'), self::DEFAULT_PER_PAGE, self::MAX_PER_PAGE);
-            $page = $this->sanitizePositiveInt($request->request->get('page'), 1);
+            $postListQuery = ItemTranslationListQuery::fromRaw(
+                $this->optionalString($request->request->get('target')),
+                $query,
+                $this->optionalIntOrString($request->request->get('page')),
+                $this->optionalIntOrString($request->request->get('perPage')),
+            );
+            $targetLocale = $postListQuery->targetLocale;
+            $perPage = $postListQuery->perPage;
+            $page = $postListQuery->page;
             /** @var array<string, mixed> $entries */
             $entries = $request->request->all('entries');
             $savedCount = $this->itemTranslationBackofficeApplicationService->saveTargetEntries($targetLocale, $entries);
@@ -86,31 +97,5 @@ final class ItemTranslationController extends AbstractController
             'page' => $page,
             'totalPages' => $totalPages,
         ]);
-    }
-
-    private function sanitizePositiveInt(mixed $value, int $default, ?int $max = null): int
-    {
-        if (is_int($value)) {
-            $number = $value;
-        } elseif (is_string($value) && '' !== trim($value) && ctype_digit(trim($value))) {
-            $number = (int) trim($value);
-        } else {
-            return $default;
-        }
-
-        if ($number < 1) {
-            return $default;
-        }
-
-        if (null !== $max && $number > $max) {
-            return $max;
-        }
-
-        return $number;
-    }
-
-    private function optionalString(mixed $value): ?string
-    {
-        return is_string($value) ? $value : null;
     }
 }

@@ -16,35 +16,11 @@ namespace App\Catalog\Application\Translation;
 final class ItemTranslationBackofficeApplicationService
 {
     private const DOMAIN = 'items';
-    private const TARGET_LOCALE_FALLBACK = 'fr';
-    private const LOCALE_PATTERN = '/^[a-z]{2}(?:_[A-Z]{2})?$/';
-    private const LOCKED_LOCALES = ['en', 'de'];
 
     public function __construct(
         private readonly TranslationCatalogReader $catalogReader,
         private readonly TranslationCatalogWriter $catalogWriter,
     ) {
-    }
-
-    public function sanitizeTargetLocale(?string $value): string
-    {
-        $locale = strtolower($this->normalizeLocale($value));
-        if (in_array($locale, self::LOCKED_LOCALES, true)) {
-            return self::TARGET_LOCALE_FALLBACK;
-        }
-
-        return $locale;
-    }
-
-    public function normalizeQuery(?string $value): ?string
-    {
-        if (null === $value) {
-            return null;
-        }
-
-        $query = mb_strtolower(trim($value));
-
-        return '' === $query ? null : $query;
     }
 
     /**
@@ -102,23 +78,6 @@ final class ItemTranslationBackofficeApplicationService
         }
 
         return $rows;
-    }
-
-    private function normalizeLocale(?string $value): string
-    {
-        if (null === $value) {
-            return self::TARGET_LOCALE_FALLBACK;
-        }
-
-        $locale = trim($value);
-        if ('' === $locale) {
-            return self::TARGET_LOCALE_FALLBACK;
-        }
-        if (1 !== preg_match(self::LOCALE_PATTERN, $locale)) {
-            return self::TARGET_LOCALE_FALLBACK;
-        }
-
-        return $locale;
     }
 
     /**
