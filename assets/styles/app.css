@@ -175,10 +175,10 @@ body::before {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    background: rgba(11, 15, 22, 0.38);
-    border: 1px solid rgba(255, 210, 74, 0.34);
-    border-radius: 999px;
-    padding: 0.22rem 0.45rem 0.22rem 0.62rem;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
 }
 
 .header-locale-icon {
@@ -201,6 +201,9 @@ body::before {
     font-size: 0.78rem;
     font-weight: 600;
     padding: 0.24rem 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
 }
 
 .header-translations-link:hover {
@@ -208,7 +211,7 @@ body::before {
 }
 
 .header-locale select {
-    border: 1px solid rgba(255, 210, 74, 0.42);
+    border: 0;
     border-radius: 999px;
     background: rgba(21, 28, 37, 0.92);
     color: #f3f7ff;
@@ -219,13 +222,27 @@ body::before {
 
 .header-locale select:focus {
     outline: none;
-    border-color: rgba(255, 221, 118, 0.95);
+    box-shadow: 0 0 0 2px rgba(255, 221, 118, 0.45);
 }
 
 .logout-icon {
     width: 14px;
     height: 14px;
     flex: 0 0 auto;
+}
+
+.header-action-icon {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 auto;
+}
+
+.header-account {
+    color: #dce6f3;
+    font-size: 0.78rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.32rem;
 }
 
 .auth-page {
