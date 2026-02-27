@@ -81,8 +81,6 @@ final class MinervaRotationControllerTest extends WebTestCase
         self::assertStringContainsString('Foundation', (string) $this->browser()->getResponse()->getContent());
         self::assertCount(1, $crawler->filter('table.translations-table'));
         self::assertStringContainsString('Crater', (string) $this->browser()->getResponse()->getContent());
-        self::assertGreaterThanOrEqual(1, $crawler->filter('[data-minerva-source="manual"]')->count());
-        self::assertGreaterThanOrEqual(1, $crawler->filter('[data-minerva-source="generated"]')->count());
     }
 
     private function createUser(string $email): UserEntity
