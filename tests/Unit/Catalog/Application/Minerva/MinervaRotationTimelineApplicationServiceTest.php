@@ -45,6 +45,10 @@ final class MinervaRotationTimelineApplicationServiceTest extends TestCase
         self::assertSame('upcoming', $timeline['rows'][0]['status']);
         self::assertSame('active', $timeline['rows'][1]['status']);
         self::assertSame('ended', $timeline['rows'][2]['status']);
+        self::assertIsArray($timeline['current']);
+        self::assertSame('Crater', $timeline['current']['location']);
+        self::assertCount(1, $timeline['upcoming']);
+        self::assertSame('Foundation', $timeline['upcoming'][0]['location']);
     }
 
     private function createRotation(

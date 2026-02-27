@@ -920,6 +920,38 @@ body::before {
     box-shadow: var(--card-glow);
 }
 
+.minerva-window-grid {
+    display: grid;
+    gap: 0.8rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.minerva-window-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    padding: 0.8rem;
+}
+
+.minerva-window-card h2 {
+    margin: 0 0 0.45rem;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+    font-size: 1.05rem;
+}
+
+.minerva-window-card p {
+    margin: 0.32rem 0;
+}
+
+.minerva-window-card ul {
+    margin: 0;
+    padding-left: 1rem;
+}
+
+.minerva-window-card li + li {
+    margin-top: 0.35rem;
+}
+
 .translations-filters {
     display: flex;
     gap: 0.7rem;

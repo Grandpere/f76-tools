@@ -24,6 +24,35 @@
         </header>
 
         <section class="translations-panel">
+            <div class="minerva-window-grid">
+                <article class="minerva-window-card">
+                    <h2>{{ 'minerva.current_window_title'|trans }}</h2>
+                    {% if timeline.current %}
+                        <p><strong>{{ timeline.current.location }}</strong></p>
+                        <p>{{ 'minerva.list_label'|trans({'%list%': timeline.current.listCycle}) }}</p>
+                        <p>{{ timeline.current.startsAt|date('Y-m-d H:i') }} → {{ timeline.current.endsAt|date('Y-m-d H:i') }}</p>
+                        <p><span class="item-pill">{{ ('minerva.status_' ~ timeline.current.status)|trans }}</span></p>
+                    {% else %}
+                        <p>{{ 'minerva.current_window_empty'|trans }}</p>
+                    {% endif %}
+                </article>
+                <article class="minerva-window-card">
+                    <h2>{{ 'minerva.next_windows_title'|trans }}</h2>
+                    {% if timeline.upcoming %}
+                        <ul>
+                            {% for row in timeline.upcoming %}
+                                <li>
+                                    <strong>{{ row.location }}</strong>
+                                    · {{ 'minerva.list_label'|trans({'%list%': row.listCycle}) }}
+                                    · {{ row.startsAt|date('Y-m-d H:i') }} → {{ row.endsAt|date('Y-m-d H:i') }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>{{ 'minerva.empty'|trans }}</p>
+                    {% endif %}
+                </article>
+            </div>
             <div class="translations-table-wrap">
                 <table class="translations-table">
                     <thead>

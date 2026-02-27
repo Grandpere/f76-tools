@@ -1,6 +1,7 @@
 # Current Focus
 
 ## Priorite active
+- F76-083: Minerva front and schedule (bloc de synthese current + prochaines rotations).
 - F76-002: Evolutions produit Minerva (localisation/date/listes) selon la roadmap metier.
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 

@@ -255,6 +255,10 @@ minerva.empty: Aucune rotation disponible.
 minerva.status_upcoming: A venir
 minerva.status_active: Active
 minerva.status_ended: Terminee
+minerva.current_window_title: Fenetre Minerva actuelle
+minerva.current_window_empty: Aucune fenetre Minerva active actuellement.
+minerva.next_windows_title: Prochaines fenetres
+minerva.list_label: 'Liste %list%'
 
 admin_minerva.page_title: Admin rotation Minerva
 admin_minerva.kicker: Backoffice

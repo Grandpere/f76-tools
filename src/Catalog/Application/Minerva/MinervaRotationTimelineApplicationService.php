@@ -30,6 +30,22 @@ final class MinervaRotationTimelineApplicationService
      * @return array{
      *     timezone: string,
      *     generatedAt: string,
+     *     current: array{
+     *         id: int,
+     *         location: string,
+     *         listCycle: int,
+     *         startsAt: string,
+     *         endsAt: string,
+     *         status: string
+     *     }|null,
+     *     upcoming: list<array{
+     *         id: int,
+     *         location: string,
+     *         listCycle: int,
+     *         startsAt: string,
+     *         endsAt: string,
+     *         status: string
+     *     }>,
      *     rows: list<array{
      *         id: int,
      *         location: string,
@@ -47,6 +63,8 @@ final class MinervaRotationTimelineApplicationService
             ? $now->setTimezone($timezone)
             : new DateTimeImmutable('now', $timezone);
 
+        /** @var list<array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string,status:string}> $typedRows */
+        $typedRows = [];
         $rows = [];
         foreach ($this->rotationReader->findAllOrdered() as $rotation) {
             $startsAt = $rotation->getStartsAt()->setTimezone($timezone);
@@ -57,7 +75,7 @@ final class MinervaRotationTimelineApplicationService
                 continue;
             }
 
-            $rows[] = [
+            $row = [
                 'id' => $id,
                 'location' => $rotation->getLocation(),
                 'listCycle' => $rotation->getListCycle(),
@@ -65,13 +83,56 @@ final class MinervaRotationTimelineApplicationService
                 'endsAt' => $endsAt->format(DATE_ATOM),
                 'status' => $status->value,
             ];
+            $rows[] = $row;
+            $typedRows[] = $row;
         }
+        $current = $this->resolveCurrentWindow($typedRows);
+        $upcoming = $this->resolveUpcomingWindows($typedRows, 3);
 
         return [
             'timezone' => self::TIMELINE_TIMEZONE,
             'generatedAt' => $reference->format(DATE_ATOM),
+            'current' => $current,
+            'upcoming' => $upcoming,
             'rows' => $rows,
         ];
+    }
+
+    /**
+     * @param list<array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string,status:string}> $rows
+     *
+     * @return array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string,status:string}|null
+     */
+    private function resolveCurrentWindow(array $rows): ?array
+    {
+        foreach ($rows as $row) {
+            if (MinervaRotationStatusEnum::ACTIVE->value === $row['status']) {
+                return $row;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param list<array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string,status:string}> $rows
+     *
+     * @return list<array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string,status:string}>
+     */
+    private function resolveUpcomingWindows(array $rows, int $limit): array
+    {
+        $upcoming = [];
+        foreach ($rows as $row) {
+            if (MinervaRotationStatusEnum::UPCOMING->value !== $row['status']) {
+                continue;
+            }
+            $upcoming[] = $row;
+            if (count($upcoming) >= $limit) {
+                break;
+            }
+        }
+
+        return $upcoming;
     }
 
     private function resolveStatus(

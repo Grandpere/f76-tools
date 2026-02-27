@@ -16,6 +16,7 @@ namespace App\Tests\Functional;
 use App\Catalog\Domain\Entity\MinervaRotationEntity;
 use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
+use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -55,15 +56,27 @@ final class MinervaRotationControllerTest extends WebTestCase
     public function testPageRendersRotationRowsForAuthenticatedUser(): void
     {
         $user = $this->createUser('minerva@example.com');
-        $this->createRotation('Foundation', 7, '2026-03-02T10:00:00+00:00', '2026-03-04T10:00:00+00:00');
-        $this->createRotation('Crater', 8, '2026-03-06T10:00:00+00:00', '2026-03-08T10:00:00+00:00');
+        $now = new DateTimeImmutable('now', new DateTimeZone('UTC'));
+        $this->createRotation(
+            'Foundation',
+            7,
+            $now->modify('-1 day')->format(DATE_ATOM),
+            $now->modify('+1 day')->format(DATE_ATOM),
+        );
+        $this->createRotation(
+            'Crater',
+            8,
+            $now->modify('+2 days')->format(DATE_ATOM),
+            $now->modify('+4 days')->format(DATE_ATOM),
+        );
 
         $this->browser()->loginUser($user);
         $crawler = $this->browser()->request('GET', '/minerva-rotation');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
-        self::assertCount(1, $crawler->filter('table.translations-table'));
+        self::assertCount(1, $crawler->filter('.minerva-window-grid'));
         self::assertStringContainsString('Foundation', (string) $this->browser()->getResponse()->getContent());
+        self::assertCount(1, $crawler->filter('table.translations-table'));
         self::assertStringContainsString('Crater', (string) $this->browser()->getResponse()->getContent());
     }
 
