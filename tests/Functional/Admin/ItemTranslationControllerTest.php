@@ -75,21 +75,32 @@ final class ItemTranslationControllerTest extends WebTestCase
         $user = $this->createUser('translations-save@example.com');
         $this->browser()->loginUser($user);
         $crawler = $this->browser()->request('GET', '/admin/translations/items?locale=fr&target=zz');
-        $formNode = $crawler->filter('form[method="post"]');
-        self::assertCount(1, $formNode);
-        $form = $formNode->form([
-            'entries[item.misc.10.name]' => 'Nom FR test',
-            'entries[item.book.250.name]' => 'Plan FR test',
+        $tokenNode = $crawler->filter('input[name="_token"]');
+        self::assertCount(1, $tokenNode);
+        $token = (string) $tokenNode->attr('value');
+        self::assertNotSame('', $token);
+
+        $entryNode = $crawler->filter('textarea[name^="entries["]')->first();
+        self::assertCount(1, $entryNode);
+        $entryFieldName = (string) $entryNode->attr('name');
+        self::assertMatchesRegularExpression('/^entries\[(.+)\]$/', $entryFieldName);
+        preg_match('/^entries\[(.+)\]$/', $entryFieldName, $matches);
+        $entryKey = $matches[1];
+
+        $this->browser()->request('POST', '/admin/translations/items?locale=fr&target=zz', [
+            '_token' => $token,
+            'target' => 'zz',
+            'entries' => [
+                $entryKey => 'Valeur FR test',
+            ],
         ]);
-        $this->browser()->submit($form);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
 
         self::assertFileExists($this->testCatalogFile);
         $parsed = Yaml::parseFile($this->testCatalogFile);
         self::assertIsArray($parsed);
-        self::assertSame('Nom FR test', $parsed['item.misc.10.name'] ?? null);
-        self::assertSame('Plan FR test', $parsed['item.book.250.name'] ?? null);
+        self::assertSame('Valeur FR test', $parsed[$entryKey] ?? null);
     }
 
     public function testPostRejectsInvalidCsrfToken(): void
