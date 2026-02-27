@@ -1,9 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- F76-053: DDD Slice 43 - Player name API resolver extraction (in progress).
+- Campagne fonctionnelle lot F76-053 (pending user run).
 
 ## Termine recemment
+- F76-053: DDD Slice 43 - Player name API resolver extraction (code done, functional pending).
 - F76-052: DDD Slice 42 - Knowledge transfer import context object (done).
 - F76-051: DDD Slice 41 - Player item action context object (done).
 - F76-050: DDD Slice 40 - Knowledge transfer context resolver cleanup (done).
