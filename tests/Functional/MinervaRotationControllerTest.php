@@ -78,6 +78,9 @@ final class MinervaRotationControllerTest extends WebTestCase
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filter('.minerva-window-grid'));
+        self::assertCount(1, $crawler->filter('[data-controller="minerva-countdown"]'));
+        self::assertCount(1, $crawler->filter('[data-minerva-countdown-target-date-value]'));
+        self::assertCount(4, $crawler->filter('.minerva-countdown-value'));
         self::assertStringContainsString('Foundation', (string) $this->browser()->getResponse()->getContent());
         self::assertCount(1, $crawler->filter('table.translations-table'));
         self::assertStringContainsString('Crater', (string) $this->browser()->getResponse()->getContent());

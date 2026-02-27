@@ -24,6 +24,61 @@
         </header>
 
         <section class="translations-panel">
+            {% set nextWindow = timeline.upcoming|first %}
+            {% if timeline.current %}
+                {% set countdownTitle = 'minerva.countdown_title_active'|trans %}
+                {% set countdownText = 'minerva.countdown_active_intro'|trans({
+                    '%location%': timeline.current.location,
+                    '%list%': timeline.current.listCycle
+                }) %}
+                {% set countdownTargetDate = timeline.current.endsAt %}
+                {% set countdownLabel = 'minerva.countdown_leaves_in'|trans %}
+            {% elseif nextWindow %}
+                {% set countdownTitle = 'minerva.countdown_title_upcoming'|trans %}
+                {% set countdownText = 'minerva.countdown_upcoming_intro'|trans({
+                    '%location%': nextWindow.location,
+                    '%list%': nextWindow.listCycle
+                }) %}
+                {% set countdownTargetDate = nextWindow.startsAt %}
+                {% set countdownLabel = 'minerva.countdown_arrives_in'|trans %}
+            {% else %}
+                {% set countdownTitle = 'minerva.countdown_title_empty'|trans %}
+                {% set countdownText = 'minerva.countdown_empty_intro'|trans %}
+                {% set countdownTargetDate = null %}
+                {% set countdownLabel = '' %}
+            {% endif %}
+
+            <article class="minerva-countdown-card"
+                     {% if countdownTargetDate %}
+                         data-controller="minerva-countdown"
+                         data-minerva-countdown-target-date-value="{{ countdownTargetDate }}"
+                     {% endif %}
+            >
+                <h2>{{ countdownTitle }}</h2>
+                <p>{{ countdownText }}</p>
+                {% if countdownTargetDate %}
+                    <p class="minerva-countdown-label">{{ countdownLabel }}</p>
+                    <div class="minerva-countdown-grid" aria-live="polite">
+                        <div class="minerva-countdown-box">
+                            <span class="minerva-countdown-value" data-minerva-countdown-target="days">00</span>
+                            <small>{{ 'minerva.countdown_days'|trans }}</small>
+                        </div>
+                        <div class="minerva-countdown-box">
+                            <span class="minerva-countdown-value" data-minerva-countdown-target="hours">00</span>
+                            <small>{{ 'minerva.countdown_hours'|trans }}</small>
+                        </div>
+                        <div class="minerva-countdown-box">
+                            <span class="minerva-countdown-value" data-minerva-countdown-target="minutes">00</span>
+                            <small>{{ 'minerva.countdown_minutes'|trans }}</small>
+                        </div>
+                        <div class="minerva-countdown-box">
+                            <span class="minerva-countdown-value" data-minerva-countdown-target="seconds">00</span>
+                            <small>{{ 'minerva.countdown_seconds'|trans }}</small>
+                        </div>
+                    </div>
+                {% endif %}
+            </article>
+
             <div class="minerva-window-grid">
                 <article class="minerva-window-card">
                     <h2>{{ 'minerva.current_window_title'|trans }}</h2>

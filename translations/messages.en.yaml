@@ -262,6 +262,18 @@ minerva.current_window_title: Current Minerva window
 minerva.current_window_empty: No active Minerva window right now.
 minerva.next_windows_title: Next windows
 minerva.list_label: 'List %list%'
+minerva.countdown_title_active: Where is Minerva today?
+minerva.countdown_title_upcoming: Where is Minerva today?
+minerva.countdown_title_empty: Where is Minerva today?
+minerva.countdown_active_intro: Minerva is currently at %location% with List %list%.
+minerva.countdown_upcoming_intro: Minerva is not available right now. She will be at %location% with List %list%.
+minerva.countdown_empty_intro: No Minerva window is scheduled right now.
+minerva.countdown_leaves_in: She leaves in
+minerva.countdown_arrives_in: She arrives in
+minerva.countdown_days: days
+minerva.countdown_hours: hours
+minerva.countdown_minutes: minutes
+minerva.countdown_seconds: seconds
 
 admin_minerva.page_title: Minerva rotation admin
 admin_minerva.kicker: Backoffice

@@ -262,6 +262,18 @@ minerva.current_window_title: Fenetre Minerva actuelle
 minerva.current_window_empty: Aucune fenetre Minerva active actuellement.
 minerva.next_windows_title: Prochaines fenetres
 minerva.list_label: 'Liste %list%'
+minerva.countdown_title_active: Ou est Minerva aujourd hui ?
+minerva.countdown_title_upcoming: Ou est Minerva aujourd hui ?
+minerva.countdown_title_empty: Ou est Minerva aujourd hui ?
+minerva.countdown_active_intro: Minerva est actuellement a %location% avec la liste %list%.
+minerva.countdown_upcoming_intro: Minerva n est pas disponible actuellement. Elle sera a %location% avec la liste %list%.
+minerva.countdown_empty_intro: Aucune fenetre Minerva planifiee pour le moment.
+minerva.countdown_leaves_in: Elle repart dans
+minerva.countdown_arrives_in: Elle arrive dans
+minerva.countdown_days: jours
+minerva.countdown_hours: heures
+minerva.countdown_minutes: minutes
+minerva.countdown_seconds: secondes
 
 admin_minerva.page_title: Admin rotation Minerva
 admin_minerva.kicker: Backoffice

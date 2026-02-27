@@ -926,6 +926,66 @@ body::before {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
+.minerva-countdown-card {
+    border: 1px solid rgba(255, 210, 74, 0.45);
+    border-radius: 14px;
+    background: linear-gradient(160deg, #fffef8, #f9f4df);
+    padding: 0.95rem;
+    margin-bottom: 0.8rem;
+}
+
+.minerva-countdown-card h2 {
+    margin: 0;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+    font-size: 1.2rem;
+}
+
+.minerva-countdown-card p {
+    margin: 0.4rem 0 0;
+}
+
+.minerva-countdown-label {
+    color: var(--text-1);
+    font-weight: 600;
+}
+
+.minerva-countdown-grid {
+    margin-top: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(72px, 1fr));
+    gap: 0.45rem;
+}
+
+.minerva-countdown-box {
+    border: 1px solid rgba(31, 41, 54, 0.16);
+    border-radius: 10px;
+    background: #fff;
+    padding: 0.4rem;
+    text-align: center;
+}
+
+.minerva-countdown-value {
+    display: block;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+    font-size: 1.55rem;
+    line-height: 1;
+    font-weight: 700;
+    color: #2b3646;
+}
+
+.minerva-countdown-box small {
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.66rem;
+}
+
+@media (max-width: 640px) {
+    .minerva-countdown-grid {
+        grid-template-columns: repeat(2, minmax(72px, 1fr));
+    }
+}
+
 .minerva-window-card {
     border: 1px solid var(--line);
     border-radius: 12px;
