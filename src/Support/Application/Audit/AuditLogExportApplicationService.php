@@ -22,24 +22,12 @@ final class AuditLogExportApplicationService
     ) {
     }
 
-    public function export(mixed $rawQuery, mixed $rawAction): AuditLogExportResult
+    public function export(AuditLogExportQuery $query): AuditLogExportResult
     {
-        $query = $this->sanitizeString($rawQuery);
-        $action = $this->sanitizeString($rawAction);
-
         return new AuditLogExportResult(
-            rows: $this->auditLogRepository->findForExport($query, $action, self::EXPORT_MAX_ROWS),
-            query: $query,
-            action: $action,
+            rows: $this->auditLogRepository->findForExport($query->query, $query->action, self::EXPORT_MAX_ROWS),
+            query: $query->query,
+            action: $query->action,
         );
-    }
-
-    private function sanitizeString(mixed $value): string
-    {
-        if (!is_string($value)) {
-            return '';
-        }
-
-        return trim($value);
     }
 }

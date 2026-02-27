@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Support\Application\Audit\AuditLogExportApplicationService;
+use App\Support\Application\Audit\AuditLogExportQuery;
 use App\Support\Application\Audit\AuditLogListApplicationService;
+use App\Support\Application\Audit\AuditLogListQuery;
 use App\Support\UI\Admin\AuditLogCsvExporter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,12 +40,12 @@ final class AuditLogController extends AbstractController
     {
         $this->ensureAdminAccess();
 
-        $listResult = $this->auditLogListApplicationService->list(
+        $listResult = $this->auditLogListApplicationService->list(AuditLogListQuery::fromRaw(
             $request->query->get('q'),
             $request->query->get('action'),
             $request->query->get('page'),
             $request->query->get('perPage'),
-        );
+        ));
 
         return $this->render('admin/audit_logs.html.twig', [
             'rows' => $listResult->rows,
@@ -62,10 +64,10 @@ final class AuditLogController extends AbstractController
     {
         $this->ensureAdminAccess();
 
-        $exportResult = $this->auditLogExportApplicationService->export(
+        $exportResult = $this->auditLogExportApplicationService->export(AuditLogExportQuery::fromRaw(
             $request->query->get('q'),
             $request->query->get('action'),
-        );
+        ));
 
         return $this->auditLogCsvExporter->buildResponse($exportResult->rows);
     }

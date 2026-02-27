@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Support\Application\Audit;
 
 use App\Support\Application\Audit\AuditLogListApplicationService;
+use App\Support\Application\Audit\AuditLogListQuery;
 use App\Support\Application\Audit\AuditLogReadRepositoryInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -26,7 +27,7 @@ final class AuditLogListApplicationServiceTest extends TestCase
         ], ['a1', 'a2']);
 
         $service = new AuditLogListApplicationService($repository);
-        $result = $service->list('  login ', ' user_toggle_active ', '1', '40');
+        $result = $service->list(AuditLogListQuery::fromRaw('  login ', ' user_toggle_active ', '1', '40'));
 
         self::assertSame('login', $result->query);
         self::assertSame('user_toggle_active', $result->action);
@@ -45,7 +46,7 @@ final class AuditLogListApplicationServiceTest extends TestCase
         ], []);
 
         $service = new AuditLogListApplicationService($repository);
-        $result = $service->list('', '', '99', '10');
+        $result = $service->list(AuditLogListQuery::fromRaw('', '', '99', '10'));
 
         self::assertSame(4, $result->page);
         self::assertSame(4, $result->totalPages);
@@ -61,7 +62,7 @@ final class AuditLogListApplicationServiceTest extends TestCase
         ], []);
 
         $service = new AuditLogListApplicationService($repository);
-        $result = $service->list([], [], 'abc', '-1');
+        $result = $service->list(AuditLogListQuery::fromRaw([], [], 'abc', '-1'));
 
         self::assertSame('', $result->query);
         self::assertSame('', $result->action);

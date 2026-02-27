@@ -15,6 +15,7 @@ namespace App\Controller\Admin;
 
 use App\Domain\Support\Contact\ContactMessageStatusEnum;
 use App\Support\Application\Contact\ContactMessageListApplicationService;
+use App\Support\Application\Contact\ContactMessageListQuery;
 use App\Support\Application\Contact\ContactMessageStatusUpdateApplicationService;
 use App\Support\UI\Admin\ContactMessageStatusUpdateResponder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,12 +44,12 @@ final class ContactMessageController extends AbstractController
     {
         $this->ensureAdminAccess();
 
-        $listResult = $this->contactMessageListApplicationService->list(
+        $listResult = $this->contactMessageListApplicationService->list(ContactMessageListQuery::fromRaw(
             $request->query->get('q'),
             $request->query->get('status'),
             $request->query->get('page'),
             $request->query->get('perPage'),
-        );
+        ));
 
         return $this->render('admin/contact_messages.html.twig', [
             'rows' => $listResult->rows,

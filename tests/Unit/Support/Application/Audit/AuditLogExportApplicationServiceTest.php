@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Support\Application\Audit;
 
 use App\Support\Application\Audit\AuditLogExportApplicationService;
+use App\Support\Application\Audit\AuditLogExportQuery;
 use App\Support\Application\Audit\AuditLogReadRepositoryInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -24,7 +25,7 @@ final class AuditLogExportApplicationServiceTest extends TestCase
         $repository = new InMemoryAuditLogExportRepository();
         $service = new AuditLogExportApplicationService($repository);
 
-        $result = $service->export('  login ', ' user_toggle_active ');
+        $result = $service->export(AuditLogExportQuery::fromRaw('  login ', ' user_toggle_active '));
 
         self::assertSame('login', $result->query);
         self::assertSame('user_toggle_active', $result->action);
