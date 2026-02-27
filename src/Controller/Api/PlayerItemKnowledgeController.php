@@ -46,7 +46,7 @@ final class PlayerItemKnowledgeController extends AbstractController
     #[Route('', name: 'api_player_items_index', methods: ['GET'])]
     public function index(string $playerId, Request $request): JsonResponse
     {
-        $player = $this->progressionOwnedPlayerApiResolver->resolveOrNotFound($playerId, $this->getUser());
+        $player = $this->resolvePlayerOrNotFound($playerId);
         if ($player instanceof JsonResponse) {
             return $player;
         }
