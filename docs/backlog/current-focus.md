@@ -1,9 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- F76-027: DDD Slice 17 - Progression item type query parser (in progress).
+- F76-028: DDD Slice 18 - Progression player controller write responder (in progress).
 
 ## Termine recemment
+- F76-027: DDD Slice 17 - Progression item type query parser (code done, functional pending).
 - F76-026: DDD Slice 16 - Progression player controller owned read resolver (code done, functional pending).
 - F76-025: DDD Slice 15 - Progression player write results (code done, functional pending).
 - F76-024: DDD Slice 14 - Progression knowledge transfer controller polish (code done, functional pending).
