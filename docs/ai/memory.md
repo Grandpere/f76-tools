@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - Lock architecture against legacy root namespace regressions
+- Symptom: after DDD migration, accidental reintroduction of `App\\Controller`/`App\\Entity` style dependencies was still possible.
+- Root cause: architecture tests did not explicitly forbid dependencies toward legacy root namespaces.
+- Fix: added PHPat rule `testAppDoesNotDependOnLegacyRootNamespaces` in `tests/Architecture/ArchitectureTest.php`.
+- Prevention: when removing legacy roots, add an explicit architecture guard so future refactors cannot silently depend on them again.
+
 ## 2026-02-27 - Query object signature hardening requires aligned unit fixtures
 - Symptom: unit/phpstan failures after changing admin query `fromRaw(...)` signatures from `int|string|null` to `?int`.
 - Root cause: unit tests still passed string pagination values to application query objects.

@@ -26,7 +26,7 @@ Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inven
 - [x] Introduire des request objects equivalents pour les flows Identity (`register/forgot/resend`) pour uniformiser les contrats.
 - [ ] Revoir les docblocks `array<string, mixed>` quand un type structure plus strict est possible (payloads admin/audit).
 - [ ] Etendre la meme logique DDD de typage et d'isolation aux zones import Catalog (`ItemImport*`) qui restent tres permissives.
-- [ ] Ajouter/renforcer des tests d'architecture (PHPat/PHPStan rules) pour figer les frontieres `UI -> Application -> Domain`.
+- [x] Ajouter/renforcer des tests d'architecture (PHPat/PHPStan rules) pour figer les frontieres `UI -> Application -> Domain`.
 
 ## Avancement
 - [x] Inventaire initial redige et versionne.
@@ -47,3 +47,4 @@ Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inven
 - [x] Verification effectuee: controllers admin sensibles alignes sur garde admin partagee + CSRF partage + contexte user explicite (`ContactMessageController`, `ItemTranslationController`, `MinervaRotationController`, `UserManagementController`).
 - [x] Slice effectuee: request objects applicatifs Identity ajoutes (`RegisterUserRequest`, `ForgotPasswordRequest`, `ResendVerificationRequest`) et usages controllers/services/tests alignes.
 - [x] Slice effectuee: durcissement des query inputs admin (pagination `?int` cote `fromRaw`) avec sanitization explicite en UI (`optionalPositiveInt`) et suppression du flux `int|string|null` pour les pages/perPage.
+- [x] Slice effectuee: renforcement PHPat avec une regle explicite interdisant les dependances vers les namespaces legacy racine (`App\\Controller`, `App\\Entity`, `App\\Service`, etc.).

@@ -2,7 +2,7 @@
 
 ## Priorite active
 - F76-082: Inventaire des changements DDD restants (utile + optionnel).
-- F76-082: Finaliser les slices optionnels restants (DTO HTTP admin, durcissement import catalog, docblocks payloads).
+- F76-082: Finaliser les slices optionnels restants (durcissement import catalog, docblocks payloads).
 
 ## Termine recemment
 - F76-081: DDD Slice 71 - Admin boundary typing hardening (done).

@@ -27,4 +27,23 @@ final class ArchitectureTest
             ->classes(Selector::inNamespace('App\\Tests'))
             ->because('production code should not depend on test code');
     }
+
+    public function testAppDoesNotDependOnLegacyRootNamespaces(): Rule
+    {
+        return PHPat::rule()
+            ->classes(Selector::inNamespace('/^App\\\\(?!Tests\\\\)/', true))
+            ->shouldNotDependOn()
+            ->classes(
+                Selector::inNamespace('/^App\\\\Command\\\\/', true),
+                Selector::inNamespace('/^App\\\\Contract\\\\/', true),
+                Selector::inNamespace('/^App\\\\Controller\\\\/', true),
+                Selector::inNamespace('/^App\\\\Domain\\\\/', true),
+                Selector::inNamespace('/^App\\\\Entity\\\\/', true),
+                Selector::inNamespace('/^App\\\\EventSubscriber\\\\/', true),
+                Selector::inNamespace('/^App\\\\Repository\\\\/', true),
+                Selector::inNamespace('/^App\\\\Security\\\\/', true),
+                Selector::inNamespace('/^App\\\\Service\\\\/', true),
+            )
+            ->because('legacy root namespaces are forbidden after DDD migration');
+    }
 }
