@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Controller\Security;
+namespace App\Identity\UI\Security\Controller;
 
-use App\Identity\Infrastructure\Guard\TurnstileVerifier;
+use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProviderInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 trait IdentityCaptchaRenderControllerTrait
@@ -21,9 +21,9 @@ trait IdentityCaptchaRenderControllerTrait
     protected function renderWithCaptchaSiteKey(string $template): Response
     {
         return $this->render($template, [
-            'captchaSiteKey' => $this->turnstileVerifier()->getSiteKey(),
+            'captchaSiteKey' => $this->captchaSiteKeyProvider()->getSiteKey(),
         ]);
     }
 
-    abstract protected function turnstileVerifier(): TurnstileVerifier;
+    abstract protected function captchaSiteKeyProvider(): IdentityCaptchaSiteKeyProviderInterface;
 }

@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Controller\Security;
+namespace App\Identity\UI\Security\Controller;
 
 use App\Identity\Application\ResetPassword\ResetPasswordApplicationService;
 use App\Identity\Application\Time\IdentityClockInterface;

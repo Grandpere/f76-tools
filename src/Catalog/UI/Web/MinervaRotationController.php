@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Controller;
+namespace App\Catalog\UI\Web;
 
 use App\Catalog\Application\Minerva\MinervaRotationTimelineApplicationService;
 use App\Entity\UserEntity;

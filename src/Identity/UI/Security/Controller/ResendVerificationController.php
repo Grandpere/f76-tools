@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Controller\Security;
+namespace App\Identity\UI\Security\Controller;
 
+use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProviderInterface;
 use App\Identity\Application\ResendVerification\ResendVerificationRequestApplicationService;
 use App\Identity\Application\Time\IdentityClockInterface;
-use App\Identity\Infrastructure\Guard\TurnstileVerifier;
 use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Identity\UI\Security\IdentityFlashResponder;
@@ -36,7 +36,7 @@ final class ResendVerificationController extends AbstractController
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
         private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
-        private readonly TurnstileVerifier $turnstileVerifier,
+        private readonly IdentityCaptchaSiteKeyProviderInterface $captchaSiteKeyProvider,
     ) {
     }
 
@@ -67,9 +67,9 @@ final class ResendVerificationController extends AbstractController
         return $this->renderWithCaptchaSiteKey('security/resend_verification.html.twig');
     }
 
-    protected function turnstileVerifier(): TurnstileVerifier
+    protected function captchaSiteKeyProvider(): IdentityCaptchaSiteKeyProviderInterface
     {
-        return $this->turnstileVerifier;
+        return $this->captchaSiteKeyProvider;
     }
 
     protected function identityEmailFlowGuard(): IdentityEmailFlowGuard

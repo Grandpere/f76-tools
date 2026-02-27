@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Controller\Security;
+namespace App\Identity\UI\Security\Controller;
 
-use App\Identity\Infrastructure\Guard\TurnstileVerifier;
+use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProviderInterface;
 use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Support\Application\Contact\ContactSubmissionApplicationService;
@@ -29,7 +29,7 @@ final class ContactController extends AbstractController
 {
     public function __construct(
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
-        private readonly TurnstileVerifier $turnstileVerifier,
+        private readonly IdentityCaptchaSiteKeyProviderInterface $captchaSiteKeyProvider,
         private readonly ContactSubmissionApplicationService $contactSubmissionApplicationService,
         private readonly ContactSubmissionResponder $contactSubmissionResponder,
     ) {
@@ -66,7 +66,7 @@ final class ContactController extends AbstractController
         }
 
         return $this->render('security/contact.html.twig', [
-            'captchaSiteKey' => $this->turnstileVerifier->getSiteKey(),
+            'captchaSiteKey' => $this->captchaSiteKeyProvider->getSiteKey(),
         ]);
     }
 }

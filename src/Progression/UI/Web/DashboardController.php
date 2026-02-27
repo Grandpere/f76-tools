@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Controller;
+namespace App\Progression\UI\Web;
 
 use App\Entity\UserEntity;
-use App\Progression\Infrastructure\Persistence\PlayerEntityRepository;
+use App\Progression\Application\Player\PlayerReadApplicationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 final class DashboardController extends AbstractController
 {
     public function __construct(
-        private readonly PlayerEntityRepository $playerRepository,
+        private readonly PlayerReadApplicationService $playerReadApplicationService,
     ) {
     }
 
@@ -35,7 +35,7 @@ final class DashboardController extends AbstractController
             throw new AccessDeniedException('User must be authenticated.');
         }
 
-        $players = $this->playerRepository->findByUser($user);
+        $players = $this->playerReadApplicationService->listForUser($user);
         $activePlayerId = null;
         if ([] !== $players) {
             $activePlayerId = $players[0]->getPublicId();

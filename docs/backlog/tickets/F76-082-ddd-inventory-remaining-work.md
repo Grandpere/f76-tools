@@ -41,3 +41,4 @@ Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inven
 - [x] Slice effectuee: migration des repositories Doctrine hors `src/Repository` vers les contexts d'infrastructure (`Catalog/Identity/Progression/Support`) + mise a jour des `repositoryClass` d'entites et aliases DI.
 - [x] Slice effectuee: controllers admin migres de `src/Controller/Admin` vers `src/Support/UI/Admin/Controller`.
 - [x] Slice effectuee: ports additionnels pour respecter PHPat (`MinervaRotationRegenerationRepository`, `AdminUserManagementReadRepositoryInterface`) et eliminer les dependances `Application/UI -> Infrastructure`.
+- [x] Slice effectuee: controllers web migres hors `src/Controller` vers contexts (`Identity/UI/Security/Controller`, `Progression/UI/Web`, `Catalog/UI/Web`) avec remplacement des dependances infra directes via ports applicatifs (`IdentityCaptchaSiteKeyProviderInterface`, `PlayerReadApplicationService`).
