@@ -17,7 +17,7 @@ use App\Entity\ItemEntity;
 use App\Entity\PlayerEntity;
 use App\Service\PlayerItemKnowledgeManager;
 
-final class PlayerKnowledgeApplicationService
+final class PlayerKnowledgeWriteApplicationService
 {
     public function __construct(
         private readonly PlayerItemKnowledgeManager $knowledgeManager,

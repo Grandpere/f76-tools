@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Controller\Api;
 
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
-use App\Progression\Application\Knowledge\PlayerKnowledgeApplicationService;
 use App\Progression\Application\Knowledge\ItemReadApplicationService;
+use App\Progression\Application\Knowledge\PlayerKnowledgeWriteApplicationService;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadSearchFilter;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
@@ -31,7 +31,7 @@ final class PlayerItemKnowledgeController extends AbstractController
 {
     public function __construct(
         private readonly PlayerKnowledgeCatalogApplicationService $playerKnowledgeCatalogApplicationService,
-        private readonly PlayerKnowledgeApplicationService $playerKnowledgeApplicationService,
+        private readonly PlayerKnowledgeWriteApplicationService $playerKnowledgeWriteApplicationService,
         private readonly ItemReadApplicationService $itemReadApplicationService,
         private readonly PlayerKnowledgeItemPayloadMapper $playerKnowledgeItemPayloadMapper,
         private readonly PlayerKnowledgeItemPayloadSearchFilter $playerKnowledgeItemPayloadSearchFilter,
@@ -73,7 +73,7 @@ final class PlayerItemKnowledgeController extends AbstractController
             return $this->progressionApiErrorResponder->itemNotFound();
         }
 
-        $this->playerKnowledgeApplicationService->markLearned($player, $item);
+        $this->playerKnowledgeWriteApplicationService->markLearned($player, $item);
 
         return $this->json($this->playerKnowledgeItemPayloadMapper->map($item, true));
     }
@@ -90,7 +90,7 @@ final class PlayerItemKnowledgeController extends AbstractController
             return $this->progressionApiErrorResponder->itemNotFound();
         }
 
-        $this->playerKnowledgeApplicationService->unmarkLearned($player, $item);
+        $this->playerKnowledgeWriteApplicationService->unmarkLearned($player, $item);
 
         return new JsonResponse(null, JsonResponse::HTTP_NO_CONTENT);
     }
