@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Controller\Api;
 
 use App\Entity\UserEntity;
-use App\Progression\Application\Player\Exception\PlayerNameConflictException;
 use App\Progression\Application\Player\PlayerApplicationService;
+use App\Progression\Application\Player\PlayerRenameResult;
 use App\Progression\Application\Player\PlayerReadApplicationService;
 use App\Progression\UI\Api\PlayerNameRequestExtractor;
 use App\Progression\UI\Api\PlayerPayloadMapper;
@@ -57,9 +57,13 @@ final class PlayerController extends AbstractController
             return $this->progressionApiErrorResponder->invalidPlayerName();
         }
 
-        try {
-            $player = $this->playerApplicationService->createForUser($user, $name);
-        } catch (PlayerNameConflictException) {
+        $result = $this->playerApplicationService->createForUser($user, $name);
+        if (!$result->isOk()) {
+            return $this->progressionApiErrorResponder->playerNameAlreadyExists();
+        }
+
+        $player = $result->getPlayer();
+        if (null === $player) {
             return $this->progressionApiErrorResponder->playerNameAlreadyExists();
         }
 
@@ -92,9 +96,8 @@ final class PlayerController extends AbstractController
             return $this->progressionApiErrorResponder->invalidPlayerName();
         }
 
-        try {
-            $this->playerApplicationService->renameOwned($player, $name);
-        } catch (PlayerNameConflictException) {
+        $renameResult = $this->playerApplicationService->renameOwned($player, $name);
+        if (PlayerRenameResult::NAME_CONFLICT === $renameResult) {
             return $this->progressionApiErrorResponder->playerNameAlreadyExists();
         }
 

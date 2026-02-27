@@ -15,7 +15,6 @@ namespace App\Progression\Application\Player;
 
 use App\Entity\PlayerEntity;
 use App\Entity\UserEntity;
-use App\Progression\Application\Player\Exception\PlayerNameConflictException;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -26,7 +25,7 @@ final class PlayerApplicationService
     ) {
     }
 
-    public function createForUser(UserEntity $user, string $name): PlayerEntity
+    public function createForUser(UserEntity $user, string $name): PlayerCreateResult
     {
         $player = (new PlayerEntity())
             ->setUser($user)
@@ -36,21 +35,23 @@ final class PlayerApplicationService
             $this->entityManager->persist($player);
             $this->entityManager->flush();
         } catch (UniqueConstraintViolationException $exception) {
-            throw new PlayerNameConflictException('Player name already exists.', 0, $exception);
+            return PlayerCreateResult::nameConflict();
         }
 
-        return $player;
+        return PlayerCreateResult::success($player);
     }
 
-    public function renameOwned(PlayerEntity $player, string $name): void
+    public function renameOwned(PlayerEntity $player, string $name): PlayerRenameResult
     {
         $player->setName($name);
 
         try {
             $this->entityManager->flush();
         } catch (UniqueConstraintViolationException $exception) {
-            throw new PlayerNameConflictException('Player name already exists.', 0, $exception);
+            return PlayerRenameResult::NAME_CONFLICT;
         }
+
+        return PlayerRenameResult::RENAMED;
     }
 
     public function delete(PlayerEntity $player): void

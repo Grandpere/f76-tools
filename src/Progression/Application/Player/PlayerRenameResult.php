@@ -11,8 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Progression\Application\Player\Exception;
+namespace App\Progression\Application\Player;
 
-final class PlayerNameConflictException extends \RuntimeException
+enum PlayerRenameResult
 {
+    case RENAMED;
+    case NAME_CONFLICT;
 }
+
