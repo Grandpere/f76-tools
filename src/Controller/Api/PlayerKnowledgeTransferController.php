@@ -17,7 +17,7 @@ use App\Entity\PlayerEntity;
 use App\Progression\Application\Knowledge\PlayerKnowledgeTransferApplicationService;
 use App\Progression\UI\Api\PlayerKnowledgeImportMode;
 use App\Progression\UI\Api\PlayerKnowledgeTransferResultResponder;
-use App\Progression\UI\Api\ProgressionApiResolverHelpersTrait;
+use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolverTrait;
 use App\Progression\UI\Api\ProgressionApiJsonPayloadDecoder;
 use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +28,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/api/players/{playerId<[A-Za-z0-9]{26}>}/knowledge')]
 final class PlayerKnowledgeTransferController extends AbstractController
 {
-    use ProgressionApiResolverHelpersTrait;
+    use ProgressionOwnedPlayerApiResolverTrait;
 
     public function __construct(
         private readonly PlayerKnowledgeTransferApplicationService $playerKnowledgeTransferApplicationService,
@@ -41,7 +41,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
     #[Route('/export', name: 'api_player_knowledge_export', methods: ['GET'])]
     public function export(string $playerId): JsonResponse
     {
-        $player = $this->resolveOwnedPlayerOrNotFound($this->progressionOwnedPlayerApiResolver, $playerId);
+        $player = $this->resolveOwnedPlayerOrNotFound($playerId);
         if ($player instanceof JsonResponse) {
             return $player;
         }
@@ -63,7 +63,7 @@ final class PlayerKnowledgeTransferController extends AbstractController
 
     private function importLike(string $playerId, Request $request, PlayerKnowledgeImportMode $mode): JsonResponse
     {
-        $player = $this->resolveOwnedPlayerOrNotFound($this->progressionOwnedPlayerApiResolver, $playerId);
+        $player = $this->resolveOwnedPlayerOrNotFound($playerId);
         if ($player instanceof JsonResponse) {
             return $player;
         }
@@ -74,5 +74,10 @@ final class PlayerKnowledgeTransferController extends AbstractController
             : $this->playerKnowledgeTransferApplicationService->import($player, $payload);
 
         return $this->playerKnowledgeTransferResultResponder->respond($result);
+    }
+
+    protected function progressionOwnedPlayerApiResolver(): ProgressionOwnedPlayerApiResolver
+    {
+        return $this->progressionOwnedPlayerApiResolver;
     }
 }

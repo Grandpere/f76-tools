@@ -1,9 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- F76-045: DDD Slice 35 - Progression resolver trait unit coverage (in progress).
+- F76-046: DDD Slice 36 - Progression resolver traits ergonomics (in progress).
 
 ## Termine recemment
+- F76-045: DDD Slice 35 - Progression resolver trait unit coverage (code done, functional pending).
 - F76-044: DDD Slice 34 - Knowledge transfer import mode enum (code done, functional pending).
 - F76-043: DDD Slice 33 - Progression API resolver helpers trait (code done, functional pending).
 - F76-042: DDD Slice 32 - Player knowledge transfer import flow cleanup (done).
