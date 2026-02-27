@@ -12,6 +12,7 @@ use App\Progression\UI\Api\ProgressionApiUserContext;
 use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolver;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 final class ProgressionOwnedPlayerReadResolverTest extends TestCase
 {
@@ -36,5 +37,23 @@ final class ProgressionOwnedPlayerReadResolverTest extends TestCase
         $resolved = $resolver->resolve('01J5A6B7C8D9E0F1G2H3J4K5L6', $user);
 
         self::assertSame($player, $resolved);
+    }
+
+    public function testResolveThrowsWhenUserIsNotAuthenticated(): void
+    {
+        /** @var PlayerReadRepositoryInterface&MockObject $repository */
+        $repository = $this->createMock(PlayerReadRepositoryInterface::class);
+        $repository
+            ->expects(self::never())
+            ->method('findOneByPublicIdAndUser');
+
+        $resolver = new ProgressionOwnedPlayerReadResolver(
+            new ProgressionApiUserContext(),
+            new PlayerReadApplicationService($repository),
+        );
+
+        $this->expectException(AccessDeniedException::class);
+        $this->expectExceptionMessage('User must be authenticated.');
+        $resolver->resolve('01J5A6B7C8D9E0F1G2H3J4K5L6', null);
     }
 }

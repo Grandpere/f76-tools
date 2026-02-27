@@ -23,6 +23,7 @@ final class ProgressionItemTypeQueryParserTest extends TestCase
         $parser = new ProgressionItemTypeQueryParser();
 
         self::assertFalse($parser->parse('invalid'));
+        self::assertFalse($parser->parse('   '));
         self::assertFalse($parser->parse(123));
     }
 
@@ -34,4 +35,3 @@ final class ProgressionItemTypeQueryParserTest extends TestCase
         self::assertSame(ItemTypeEnum::MISC, $parser->parse('  mIsC  '));
     }
 }
-
