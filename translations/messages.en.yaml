@@ -34,6 +34,7 @@ dashboard.create_player.help: The new character will be selected automatically.
 progression.page_title: Character progression
 progression.title: Character progression
 progression.description: Overview of progression by legendary rank and Minerva list.
+progression.character_block_title: Character
 dashboard.transfer.title: Progression (backup)
 dashboard.transfer.export: Export JSON
 dashboard.transfer.import: Import JSON
@@ -245,8 +246,8 @@ admin_contact.flash.message_not_found: Contact message not found.
 admin_contact.flash.invalid_status: Invalid status.
 admin_contact.flash.status_updated: Status updated.
 
-minerva.page_title: Minerva rotation
-minerva.title: Minerva rotation timeline
+minerva.page_title: Minerva
+minerva.title: Minerva
 minerva.description: Current, upcoming, and past Minerva windows ordered by start date.
 minerva.back_to_dashboard: Back to dashboard
 minerva.timezone: 'Timezone: %timezone%'

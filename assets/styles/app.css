@@ -402,6 +402,14 @@ body::before {
     grid-column: span 3;
 }
 
+.filters-panel .field {
+    grid-column: span 6;
+}
+
+.filters-panel .catalog-toolbar .field:only-child {
+    grid-column: span 12;
+}
+
 .field span {
     font-size: 0.74rem;
     text-transform: uppercase;
