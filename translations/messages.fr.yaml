@@ -9,6 +9,7 @@ dashboard.page_title: 'F76 - Suivi des objets'
 dashboard.header.translation_management: Gestion des traductions
 dashboard.header.user_management: Gestion des utilisateurs
 dashboard.header.minerva_rotation: Rotation Minerva
+dashboard.header.progression: Progression
 dashboard.header.admin: Administration
 dashboard.header.title: Suivi des objets appris
 dashboard.header.subtitle: Selectionne un personnage puis marque ses plans Minerva et ses mods legendaires appris.
@@ -30,6 +31,9 @@ dashboard.create_player.name: Nom du personnage
 dashboard.create_player.placeholder: 'Ex: VaultDweller'
 dashboard.create_player.submit: Creer
 dashboard.create_player.help: Le nouveau personnage sera selectionne automatiquement.
+progression.page_title: Progression du personnage
+progression.title: Progression du personnage
+progression.description: Vue d ensemble de la progression par rang legendary et liste Minerva.
 dashboard.transfer.title: Progression (backup)
 dashboard.transfer.export: Export JSON
 dashboard.transfer.import: Import JSON

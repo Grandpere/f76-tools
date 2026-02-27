@@ -20,7 +20,7 @@ use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-final class DashboardControllerTest extends WebTestCase
+final class ProgressionControllerTest extends WebTestCase
 {
     private ?EntityManagerInterface $entityManager = null;
     private ?KernelBrowser $client = null;
@@ -32,7 +32,6 @@ final class DashboardControllerTest extends WebTestCase
         $entityManager = $this->client->getContainer()->get(EntityManagerInterface::class);
         \assert($entityManager instanceof EntityManagerInterface);
         $this->entityManager = $entityManager;
-
         $this->truncateTables();
     }
 
@@ -44,38 +43,30 @@ final class DashboardControllerTest extends WebTestCase
         $this->client = null;
     }
 
-    public function testDashboardRedirectsWhenNotAuthenticated(): void
+    public function testPageRedirectsWhenNotAuthenticated(): void
     {
-        $this->browser()->request('GET', '/');
+        $this->browser()->request('GET', '/progression');
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('/login', (string) $this->browser()->getResponse()->headers->get('location'));
     }
 
-    public function testDashboardRendersCatalogDataForAuthenticatedUser(): void
+    public function testPageRendersProgressionForAuthenticatedUser(): void
     {
-        $user = $this->createUser('dashboard@example.com');
+        $user = $this->createUser('progression@example.com');
         $alpha = $this->createPlayer($user, 'Alpha');
         $this->createPlayer($user, 'Bravo');
 
         $this->browser()->loginUser($user);
-        $crawler = $this->browser()->request('GET', '/');
+        $crawler = $this->browser()->request('GET', '/progression');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
-        self::assertCount(1, $crawler->filter('[data-controller="item-catalog"]'));
-        self::assertCount(1, $crawler->filter('[data-item-catalog-players-url-value="/api/players"]'));
-        self::assertCount(1, $crawler->filter('[data-item-catalog-players-base-url-value="/api/players"]'));
-        self::assertCount(1, $crawler->filter(sprintf('[data-item-catalog-initial-player-id-value="%s"]', $alpha->getPublicId())));
-        self::assertCount(1, $crawler->filter('[data-item-catalog-storage-key-value="f76:item-catalog:ui:1"]'));
-        self::assertCount(0, $crawler->filter('[data-item-catalog-target="statsPanel"]'));
-        self::assertCount(1, $crawler->filter('[data-item-catalog-target="exportButton"]'));
-        self::assertCount(1, $crawler->filter('[data-item-catalog-target="importFileInput"]'));
-        self::assertCount(1, $crawler->filter('[data-item-catalog-target="importMergeCheckbox"]'));
-        self::assertCount(1, $crawler->filter('[data-item-catalog-target="importButton"]'));
-        self::assertCount(1, $crawler->filter('[data-item-catalog-target="importUnknownPanel"]'));
-        self::assertCount(1, $crawler->filter('[data-item-catalog-target="miscList"]'));
-        self::assertCount(0, $crawler->filter('[data-item-catalog-target="bookList"]'));
-        self::assertCount(1, $crawler->filter('a[href^="/minerva-rotation"]'));
+        self::assertCount(1, $crawler->filter('[data-controller="player-progression"]'));
+        self::assertCount(1, $crawler->filter('[data-player-progression-players-url-value="/api/players"]'));
+        self::assertCount(1, $crawler->filter('[data-player-progression-players-base-url-value="/api/players"]'));
+        self::assertCount(1, $crawler->filter(sprintf('[data-player-progression-initial-player-id-value="%s"]', $alpha->getPublicId())));
+        self::assertCount(1, $crawler->filter('[data-player-progression-target="statsPanel"]'));
+        self::assertCount(1, $crawler->filter('.app-primary-nav-link.is-active'));
     }
 
     private function createUser(string $email): UserEntity
@@ -109,8 +100,7 @@ final class DashboardControllerTest extends WebTestCase
             return;
         }
 
-        $connection = $this->entityManager->getConnection();
-        $connection->executeStatement('TRUNCATE TABLE minerva_rotation, contact_message, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
+        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE minerva_rotation, contact_message, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
     }
 
     private function browser(): KernelBrowser
