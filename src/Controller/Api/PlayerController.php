@@ -18,7 +18,7 @@ use App\Progression\Application\Player\PlayerApplicationService;
 use App\Progression\Application\Player\PlayerReadApplicationService;
 use App\Progression\Application\Player\PlayerRenameResult;
 use App\Progression\UI\Api\PlayerControllerWriteResponder;
-use App\Progression\UI\Api\PlayerNameRequestExtractor;
+use App\Progression\UI\Api\PlayerNameApiResolver;
 use App\Progression\UI\Api\PlayerPayloadMapper;
 use App\Progression\UI\Api\ProgressionApiUserContext;
 use App\Progression\UI\Api\ProgressionOwnedPlayerApiResolver;
@@ -39,7 +39,7 @@ final class PlayerController extends AbstractController
         private readonly PlayerReadApplicationService $playerReadApplicationService,
         private readonly PlayerPayloadMapper $playerPayloadMapper,
         private readonly PlayerControllerWriteResponder $playerControllerWriteResponder,
-        private readonly PlayerNameRequestExtractor $playerNameRequestExtractor,
+        private readonly PlayerNameApiResolver $playerNameApiResolver,
         private readonly ProgressionApiUserContext $progressionApiUserContext,
         private readonly ProgressionOwnedPlayerApiResolver $progressionOwnedPlayerApiResolver,
     ) {
@@ -58,7 +58,7 @@ final class PlayerController extends AbstractController
     public function create(Request $request): JsonResponse
     {
         $user = $this->getAuthenticatedUser();
-        $name = $this->extractPlayerNameOrInvalid($request);
+        $name = $this->playerNameApiResolver->resolveOrInvalid($request);
         if ($name instanceof JsonResponse) {
             return $name;
         }
@@ -90,7 +90,7 @@ final class PlayerController extends AbstractController
             return $player;
         }
 
-        $name = $this->extractPlayerNameOrInvalid($request);
+        $name = $this->playerNameApiResolver->resolveOrInvalid($request);
         if ($name instanceof JsonResponse) {
             return $name;
         }
@@ -126,13 +126,4 @@ final class PlayerController extends AbstractController
         return $this->progressionOwnedPlayerApiResolver;
     }
 
-    private function extractPlayerNameOrInvalid(Request $request): string|JsonResponse
-    {
-        $name = $this->playerNameRequestExtractor->extract($request);
-        if (null === $name) {
-            return $this->playerControllerWriteResponder->invalidPlayerName();
-        }
-
-        return $name;
-    }
 }
