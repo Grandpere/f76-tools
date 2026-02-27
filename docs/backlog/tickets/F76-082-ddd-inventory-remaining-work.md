@@ -22,7 +22,7 @@ Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inven
   - contexte user explicite.
 
 ## Inventaire - Slices optionnels (a faire ensuite)
-- [ ] Pousser le nettoyage `mixed` residuel dans les query objects (`fromRaw`) vers des DTO HTTP explicites en amont.
+- [x] Pousser le nettoyage `mixed` residuel dans les query objects (`fromRaw`) vers des DTO HTTP explicites en amont.
 - [x] Introduire des request objects equivalents pour les flows Identity (`register/forgot/resend`) pour uniformiser les contrats.
 - [ ] Revoir les docblocks `array<string, mixed>` quand un type structure plus strict est possible (payloads admin/audit).
 - [ ] Etendre la meme logique DDD de typage et d'isolation aux zones import Catalog (`ItemImport*`) qui restent tres permissives.
@@ -46,3 +46,4 @@ Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inven
 - [x] Slice effectuee: dossier legacy `src/Entity` supprime; entites migrees vers `*/Domain/Entity` par contexte et mapping Doctrine aligne (`prefix: App`, `dir: src`).
 - [x] Verification effectuee: controllers admin sensibles alignes sur garde admin partagee + CSRF partage + contexte user explicite (`ContactMessageController`, `ItemTranslationController`, `MinervaRotationController`, `UserManagementController`).
 - [x] Slice effectuee: request objects applicatifs Identity ajoutes (`RegisterUserRequest`, `ForgotPasswordRequest`, `ResendVerificationRequest`) et usages controllers/services/tests alignes.
+- [x] Slice effectuee: durcissement des query inputs admin (pagination `?int` cote `fromRaw`) avec sanitization explicite en UI (`optionalPositiveInt`) et suppression du flux `int|string|null` pour les pages/perPage.

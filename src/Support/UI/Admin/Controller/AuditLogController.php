@@ -44,8 +44,8 @@ final class AuditLogController extends AbstractController
         $listResult = $this->auditLogListApplicationService->list(AuditLogListQuery::fromRaw(
             $this->optionalString($request->query->get('q')),
             $this->optionalString($request->query->get('action')),
-            $this->optionalIntOrString($request->query->get('page')),
-            $this->optionalIntOrString($request->query->get('perPage')),
+            $this->optionalPositiveInt($request->query->get('page')),
+            $this->optionalPositiveInt($request->query->get('perPage')),
         ));
 
         return $this->render('admin/audit_logs.html.twig', [

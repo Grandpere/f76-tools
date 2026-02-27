@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - Query object signature hardening requires aligned unit fixtures
+- Symptom: unit/phpstan failures after changing admin query `fromRaw(...)` signatures from `int|string|null` to `?int`.
+- Root cause: unit tests still passed string pagination values to application query objects.
+- Fix: keep string-to-int parsing in UI sanitizers and update query-object unit fixtures to pass already-sanitized ints/null.
+- Prevention: when moving sanitization upstream to UI, update application-level tests to reflect typed contracts.
+
 ## 2026-02-27 - Route import path must follow DDD controller moves
 - Symptom: full functional suite returned HTTP 500 on nearly all pages/endpoints after controller namespace migration.
 - Root cause: `config/routes.yaml` still imported `../src/Controller/` while that directory had been removed.

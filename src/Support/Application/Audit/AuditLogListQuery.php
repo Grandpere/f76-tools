@@ -26,7 +26,7 @@ final readonly class AuditLogListQuery
     ) {
     }
 
-    public static function fromRaw(?string $rawQuery, ?string $rawAction, int|string|null $rawPage, int|string|null $rawPerPage): self
+    public static function fromRaw(?string $rawQuery, ?string $rawAction, ?int $rawPage, ?int $rawPerPage): self
     {
         return new self(
             query: self::sanitizeString($rawQuery),
@@ -45,15 +45,12 @@ final readonly class AuditLogListQuery
         return trim($value);
     }
 
-    private static function sanitizePositiveInt(int|string|null $value, int $default, ?int $max = null): int
+    private static function sanitizePositiveInt(?int $value, int $default, ?int $max = null): int
     {
-        if (is_int($value)) {
-            $number = $value;
-        } elseif (is_string($value) && '' !== trim($value) && ctype_digit(trim($value))) {
-            $number = (int) trim($value);
-        } else {
+        if (!is_int($value)) {
             return $default;
         }
+        $number = $value;
 
         if ($number < 1) {
             return $default;

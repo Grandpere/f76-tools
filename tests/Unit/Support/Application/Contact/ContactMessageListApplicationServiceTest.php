@@ -28,7 +28,7 @@ final class ContactMessageListApplicationServiceTest extends TestCase
         ]);
 
         $service = new ContactMessageListApplicationService($repository);
-        $result = $service->list(ContactMessageListQuery::fromRaw('  hello ', ContactMessageStatusEnum::NEW->value, '2', '40'));
+        $result = $service->list(ContactMessageListQuery::fromRaw('  hello ', ContactMessageStatusEnum::NEW->value, 2, 40));
 
         self::assertSame('hello', $result->query);
         self::assertSame(ContactMessageStatusEnum::NEW, $result->status);
@@ -48,7 +48,7 @@ final class ContactMessageListApplicationServiceTest extends TestCase
         ]);
 
         $service = new ContactMessageListApplicationService($repository);
-        $result = $service->list(ContactMessageListQuery::fromRaw('', '', '99', '10'));
+        $result = $service->list(ContactMessageListQuery::fromRaw('', '', 99, 10));
 
         self::assertSame(4, $result->page);
         self::assertSame(4, $result->totalPages);
@@ -64,7 +64,7 @@ final class ContactMessageListApplicationServiceTest extends TestCase
         ]);
 
         $service = new ContactMessageListApplicationService($repository);
-        $result = $service->list(ContactMessageListQuery::fromRaw(null, 'invalid', 'abc', '-5'));
+        $result = $service->list(ContactMessageListQuery::fromRaw(null, 'invalid', null, null));
 
         self::assertSame('', $result->query);
         self::assertNull($result->status);

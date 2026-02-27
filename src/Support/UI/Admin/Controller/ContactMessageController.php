@@ -49,8 +49,8 @@ final class ContactMessageController extends AbstractController
         $listResult = $this->contactMessageListApplicationService->list(ContactMessageListQuery::fromRaw(
             $this->optionalString($request->query->get('q')),
             $this->optionalString($request->query->get('status')),
-            $this->optionalIntOrString($request->query->get('page')),
-            $this->optionalIntOrString($request->query->get('perPage')),
+            $this->optionalPositiveInt($request->query->get('page')),
+            $this->optionalPositiveInt($request->query->get('perPage')),
         ));
 
         return $this->render('admin/contact_messages.html.twig', [

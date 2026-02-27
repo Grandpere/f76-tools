@@ -20,9 +20,22 @@ trait AdminInputSanitizerTrait
         return is_string($value) ? $value : null;
     }
 
-    private function optionalIntOrString(mixed $value): int|string|null
+    private function optionalPositiveInt(mixed $value): ?int
     {
-        return is_int($value) || is_string($value) ? $value : null;
+        if (is_int($value)) {
+            return $value > 0 ? $value : null;
+        }
+
+        if (is_string($value)) {
+            $trimmed = trim($value);
+            if ('' !== $trimmed && ctype_digit($trimmed)) {
+                $number = (int) $trimmed;
+
+                return $number > 0 ? $number : null;
+            }
+        }
+
+        return null;
     }
 
     private function sanitizePositiveInt(mixed $value, int $default, ?int $max = null): int

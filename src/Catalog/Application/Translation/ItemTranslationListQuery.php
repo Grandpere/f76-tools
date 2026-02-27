@@ -29,7 +29,7 @@ final readonly class ItemTranslationListQuery
     ) {
     }
 
-    public static function fromRaw(?string $rawTargetLocale, ?string $rawQuery, int|string|null $rawPage, int|string|null $rawPerPage): self
+    public static function fromRaw(?string $rawTargetLocale, ?string $rawQuery, ?int $rawPage, ?int $rawPerPage): self
     {
         return new self(
             targetLocale: self::sanitizeTargetLocale($rawTargetLocale),
@@ -77,15 +77,12 @@ final readonly class ItemTranslationListQuery
         return '' === $query ? null : $query;
     }
 
-    private static function sanitizePositiveInt(int|string|null $value, int $default, ?int $max = null): int
+    private static function sanitizePositiveInt(?int $value, int $default, ?int $max = null): int
     {
-        if (is_int($value)) {
-            $number = $value;
-        } elseif (is_string($value) && '' !== trim($value) && ctype_digit(trim($value))) {
-            $number = (int) trim($value);
-        } else {
+        if (!is_int($value)) {
             return $default;
         }
+        $number = $value;
 
         if ($number < 1) {
             return $default;

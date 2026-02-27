@@ -28,7 +28,7 @@ final readonly class ContactMessageListQuery
     ) {
     }
 
-    public static function fromRaw(?string $rawQuery, ?string $rawStatus, int|string|null $rawPage, int|string|null $rawPerPage): self
+    public static function fromRaw(?string $rawQuery, ?string $rawStatus, ?int $rawPage, ?int $rawPerPage): self
     {
         return new self(
             query: self::sanitizeString($rawQuery),
@@ -61,15 +61,12 @@ final readonly class ContactMessageListQuery
         return ContactMessageStatusEnum::tryFrom($normalized);
     }
 
-    private static function sanitizePositiveInt(int|string|null $value, int $default, ?int $max = null): int
+    private static function sanitizePositiveInt(?int $value, int $default, ?int $max = null): int
     {
-        if (is_int($value)) {
-            $number = $value;
-        } elseif (is_string($value) && '' !== trim($value) && ctype_digit(trim($value))) {
-            $number = (int) trim($value);
-        } else {
+        if (!is_int($value)) {
             return $default;
         }
+        $number = $value;
 
         if ($number < 1) {
             return $default;

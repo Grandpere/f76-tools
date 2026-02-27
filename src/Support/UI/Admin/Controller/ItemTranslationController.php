@@ -44,8 +44,8 @@ final class ItemTranslationController extends AbstractController
         $listQuery = ItemTranslationListQuery::fromRaw(
             $this->optionalString($request->query->get('target')),
             $this->optionalString($request->query->get('q')),
-            $this->optionalIntOrString($request->query->get('page')),
-            $this->optionalIntOrString($request->query->get('perPage')),
+            $this->optionalPositiveInt($request->query->get('page')),
+            $this->optionalPositiveInt($request->query->get('perPage')),
         );
         $targetLocale = $listQuery->targetLocale;
         $query = $listQuery->query;
@@ -68,8 +68,8 @@ final class ItemTranslationController extends AbstractController
             $postListQuery = ItemTranslationListQuery::fromRaw(
                 $this->optionalString($request->request->get('target')),
                 $query,
-                $this->optionalIntOrString($request->request->get('page')),
-                $this->optionalIntOrString($request->request->get('perPage')),
+                $this->optionalPositiveInt($request->request->get('page')),
+                $this->optionalPositiveInt($request->request->get('perPage')),
             );
             $targetLocale = $postListQuery->targetLocale;
             $perPage = $postListQuery->perPage;

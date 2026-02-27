@@ -23,8 +23,8 @@ final class ItemTranslationListQueryTest extends TestCase
         $query = ItemTranslationListQuery::fromRaw(
             'en',
             '  Plan FR  ',
-            '0',
-            '9999',
+            0,
+            9999,
         );
 
         self::assertSame('fr', $query->targetLocale);
