@@ -18,7 +18,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Yaml\Yaml;
 
 final class ItemTranslationControllerTest extends WebTestCase
@@ -75,11 +74,14 @@ final class ItemTranslationControllerTest extends WebTestCase
     {
         $user = $this->createUser('translations-save@example.com');
         $this->browser()->loginUser($user);
-        $csrfTokenManager = self::getContainer()->get(CsrfTokenManagerInterface::class);
-        \assert($csrfTokenManager instanceof CsrfTokenManagerInterface);
+        $crawler = $this->browser()->request('GET', '/admin/translations/items?locale=fr&target=zz');
+        $tokenNode = $crawler->filter('input[name="_token"]');
+        self::assertCount(1, $tokenNode);
+        $token = (string) $tokenNode->attr('value');
+        self::assertNotSame('', $token);
 
         $this->browser()->request('POST', '/admin/translations/items?locale=fr&target=zz', [
-            '_token' => $csrfTokenManager->getToken('admin_item_translations_save')->getValue(),
+            '_token' => $token,
             'target' => 'zz',
             'entries' => [
                 'item.misc.10.name' => 'Nom FR test',
