@@ -262,6 +262,7 @@ minerva.current_window_title: Aktuelles Minerva-Fenster
 minerva.current_window_empty: Derzeit ist kein Minerva-Fenster aktiv.
 minerva.next_windows_title: Nachste Fenster
 minerva.list_label: 'Liste %list%'
+minerva.list_progress: Fortschritt
 minerva.countdown_title_active: Wo ist Minerva heute?
 minerva.countdown_title_upcoming: Wo ist Minerva heute?
 minerva.countdown_title_empty: Wo ist Minerva heute?

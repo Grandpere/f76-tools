@@ -1051,27 +1051,57 @@ body::before {
 
 .minerva-timeline-table th:first-child,
 .minerva-timeline-table td:first-child {
-    width: 8%;
+    width: 1%;
     white-space: nowrap;
+    text-align: center;
 }
 
 .minerva-timeline-table th:nth-child(2),
 .minerva-timeline-table td:nth-child(2) {
-    width: 30%;
+    width: auto;
 }
 
 .minerva-timeline-table th:nth-child(3),
 .minerva-timeline-table td:nth-child(3),
 .minerva-timeline-table th:nth-child(4),
 .minerva-timeline-table td:nth-child(4) {
-    width: 25%;
+    width: 1%;
     white-space: nowrap;
 }
 
 .minerva-timeline-table th:nth-child(5),
 .minerva-timeline-table td:nth-child(5) {
-    width: 12%;
+    width: 1%;
     white-space: nowrap;
+}
+
+.minerva-timeline-table th:nth-child(6),
+.minerva-timeline-table td:nth-child(6) {
+    width: 18%;
+    white-space: nowrap;
+}
+
+.minerva-progress-cell {
+    min-width: 130px;
+}
+
+.minerva-progress-meta {
+    margin-bottom: 0.2rem;
+    font-size: 0.76rem;
+    color: var(--text-2);
+}
+
+.minerva-progress-track {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(31, 41, 54, 0.14);
+    overflow: hidden;
+}
+
+.minerva-progress-fill {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, #f4c52b, #e6b900);
 }
 
 .translations-filters {
