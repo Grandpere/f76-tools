@@ -607,8 +607,25 @@ body::before {
 }
 
 .transfer-file input[type='file'] {
-    max-width: 220px;
+    max-width: 260px;
     font-size: 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0.24rem 0.4rem;
+    background: #fff;
+    color: var(--text-1);
+}
+
+.transfer-file input[type='file']::file-selector-button {
+    border: 1px solid rgba(160, 119, 0, 0.38);
+    border-radius: 8px;
+    padding: 0.32rem 0.55rem;
+    margin-right: 0.45rem;
+    cursor: pointer;
+    background: linear-gradient(180deg, #ffe27f, #f4c52b);
+    color: #2a2200;
+    font-weight: 700;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
 }
 
 .transfer-checkbox {
@@ -617,6 +634,34 @@ body::before {
     gap: 0.3rem;
     font-size: 0.82rem;
     color: var(--text-1);
+}
+
+.transfer-checkbox input[type='checkbox'] {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 4px;
+    border: 1.5px solid rgba(107, 122, 141, 0.85);
+    background: #fff;
+    position: relative;
+    margin: 0;
+}
+
+.transfer-checkbox input[type='checkbox']:checked {
+    border-color: rgba(205, 160, 20, 0.95);
+    background: linear-gradient(180deg, #ffe387, #f4c52b);
+}
+
+.transfer-checkbox input[type='checkbox']:checked::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 0;
+    width: 4px;
+    height: 8px;
+    border: solid #2b2200;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
 }
 
 .transfer-unknown-panel {

@@ -31,7 +31,7 @@ dashboard.create_player.name: Charaktername
 dashboard.create_player.placeholder: 'Z. B.: VaultDweller'
 dashboard.create_player.submit: Erstellen
 dashboard.create_player.help: Der neue Charakter wird automatisch ausgewahlt.
-progression.page_title: Charakterfortschritt
+progression.page_title: 'F76 - Charakterfortschritt'
 progression.title: Charakterfortschritt
 progression.description: Ubersicht des Fortschritts nach legendarem Rang und Minerva-Liste.
 progression.character_block_title: Charakter
@@ -246,7 +246,7 @@ admin_contact.flash.message_not_found: Kontaktanfrage nicht gefunden.
 admin_contact.flash.invalid_status: Ungultiger Status.
 admin_contact.flash.status_updated: Status aktualisiert.
 
-minerva.page_title: Minerva
+minerva.page_title: 'F76 - Minerva'
 minerva.title: Minerva
 minerva.description: Aktive, kommende und vergangene Minerva-Zeitfenster nach Startdatum sortiert.
 minerva.back_to_dashboard: Zuruck zum Dashboard

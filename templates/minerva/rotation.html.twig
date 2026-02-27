@@ -199,7 +199,6 @@
         </section>
 
         <section class="translations-panel">
-            <h2>{{ 'dashboard.catalog.book_title'|trans }}</h2>
             <section
                 class="catalog-shell"
                 data-controller="minerva-knowledge"
@@ -211,6 +210,7 @@
                 data-minerva-knowledge-ui-translations-value="{{ uiTranslations|json_encode|e('html_attr') }}"
             >
                 <section class="catalog-panel filters-panel">
+                    <h2>{{ 'dashboard.filters.title'|trans }}</h2>
                     <div class="catalog-toolbar">
                         <label class="field">
                             <span>{{ 'dashboard.filters.player'|trans }}</span>
@@ -231,6 +231,7 @@
                     <p class="catalog-state" role="status" aria-live="polite" data-minerva-knowledge-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
                 </section>
                 <section class="catalog-panel catalog-block">
+                    <h2>{{ 'dashboard.catalog.book_title'|trans }}</h2>
                     <div data-minerva-knowledge-target="bookList"></div>
                 </section>
             </section>
