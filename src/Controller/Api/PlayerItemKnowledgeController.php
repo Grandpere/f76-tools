@@ -20,7 +20,7 @@ use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadSearchFilter;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
 use App\Progression\UI\Api\ProgressionItemTypeQueryParser;
-use App\Progression\UI\Api\ProgressionOwnedPlayerResolver;
+use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,7 +36,7 @@ final class PlayerItemKnowledgeController extends AbstractController
         private readonly PlayerKnowledgeItemPayloadMapper $playerKnowledgeItemPayloadMapper,
         private readonly PlayerKnowledgeItemPayloadSearchFilter $playerKnowledgeItemPayloadSearchFilter,
         private readonly ProgressionItemTypeQueryParser $progressionItemTypeQueryParser,
-        private readonly ProgressionOwnedPlayerResolver $progressionOwnedPlayerResolver,
+        private readonly ProgressionOwnedPlayerReadResolver $progressionOwnedPlayerReadResolver,
         private readonly ProgressionApiErrorResponder $progressionApiErrorResponder,
     ) {
     }
@@ -44,7 +44,7 @@ final class PlayerItemKnowledgeController extends AbstractController
     #[Route('', name: 'api_player_items_index', methods: ['GET'])]
     public function index(string $playerId, Request $request): JsonResponse
     {
-        $player = $this->progressionOwnedPlayerResolver->resolve($playerId, $this->getUser());
+        $player = $this->progressionOwnedPlayerReadResolver->resolve($playerId, $this->getUser());
         if (null === $player) {
             return $this->progressionApiErrorResponder->playerNotFound();
         }
@@ -64,7 +64,7 @@ final class PlayerItemKnowledgeController extends AbstractController
     #[Route('/{itemId<[A-Za-z0-9]{26}>}/learned', name: 'api_player_items_learned_set', methods: ['PUT'])]
     public function setLearned(string $playerId, string $itemId): JsonResponse
     {
-        $player = $this->progressionOwnedPlayerResolver->resolve($playerId, $this->getUser());
+        $player = $this->progressionOwnedPlayerReadResolver->resolve($playerId, $this->getUser());
         if (null === $player) {
             return $this->progressionApiErrorResponder->playerNotFound();
         }
@@ -81,7 +81,7 @@ final class PlayerItemKnowledgeController extends AbstractController
     #[Route('/{itemId<[A-Za-z0-9]{26}>}/learned', name: 'api_player_items_learned_unset', methods: ['DELETE'])]
     public function unsetLearned(string $playerId, string $itemId): JsonResponse
     {
-        $player = $this->progressionOwnedPlayerResolver->resolve($playerId, $this->getUser());
+        $player = $this->progressionOwnedPlayerReadResolver->resolve($playerId, $this->getUser());
         if (null === $player) {
             return $this->progressionApiErrorResponder->playerNotFound();
         }
