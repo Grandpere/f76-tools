@@ -18,6 +18,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Yaml\Yaml;
 
 final class ItemTranslationControllerTest extends WebTestCase
@@ -74,8 +75,11 @@ final class ItemTranslationControllerTest extends WebTestCase
     {
         $user = $this->createUser('translations-save@example.com');
         $this->browser()->loginUser($user);
+        $csrfTokenManager = self::getContainer()->get(CsrfTokenManagerInterface::class);
+        \assert($csrfTokenManager instanceof CsrfTokenManagerInterface);
 
         $this->browser()->request('POST', '/admin/translations/items?locale=fr&target=zz', [
+            '_token' => $csrfTokenManager->getToken('admin_item_translations_save')->getValue(),
             'target' => 'zz',
             'entries' => [
                 'item.misc.10.name' => 'Nom FR test',
@@ -90,6 +94,23 @@ final class ItemTranslationControllerTest extends WebTestCase
         self::assertIsArray($parsed);
         self::assertSame('Nom FR test', $parsed['item.misc.10.name'] ?? null);
         self::assertSame('Plan FR test', $parsed['item.book.250.name'] ?? null);
+    }
+
+    public function testPostRejectsInvalidCsrfToken(): void
+    {
+        $user = $this->createUser('translations-invalid-csrf@example.com');
+        $this->browser()->loginUser($user);
+
+        $this->browser()->request('POST', '/admin/translations/items?locale=fr&target=zz', [
+            '_token' => 'invalid-token',
+            'target' => 'zz',
+            'entries' => [
+                'item.misc.10.name' => 'Should not be saved',
+            ],
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        self::assertFileDoesNotExist($this->testCatalogFile);
     }
 
     public function testPageSupportsPaginationParameters(): void

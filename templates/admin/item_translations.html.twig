@@ -73,6 +73,7 @@
             {% endif %}
 
             <form method="post" data-controller="textarea-autosize">
+                <input type="hidden" name="_token" value="{{ csrf_token('admin_item_translations_save') }}">
                 <input type="hidden" name="target" value="{{ targetLocale }}">
                 <input type="hidden" name="perPage" value="{{ perPage }}">
                 <input type="hidden" name="page" value="{{ page }}">

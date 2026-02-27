@@ -101,6 +101,7 @@ admin_translations.save: Enregistrer
 admin_translations.table_caption: 'Table de traduction cible %locale%'
 admin_translations.flash.saved: 'Traductions "%locale%" enregistrees (%count% cles).'
 admin_translations.flash.nothing_to_save: Aucune traduction valide a enregistrer.
+admin_translations.flash.invalid_csrf: Jeton CSRF invalide, action refusee.
 
 security.login.page_title: Connexion
 security.login.title: Connexion

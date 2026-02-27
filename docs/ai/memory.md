@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - Backoffice translations POST missed CSRF protection
+- Symptom: admin translation save endpoint accepted POST without CSRF token.
+- Root cause: controller was protected by role guard but lacked `AdminCsrfTokenValidatorTrait` wiring.
+- Fix: added CSRF validation in `ItemTranslationController`, `_token` in Twig form, and functional coverage for invalid token rejection.
+- Prevention: every admin POST/PUT/DELETE endpoint must include shared CSRF trait + template token + at least one functional assertion.
+
 ## 2026-02-27 - Admin input sanitization drift across controllers
 - Symptom: duplicated `optionalString` / `optionalIntOrString` / pagination sanitation logic in multiple admin controllers.
 - Root cause: sanitation helpers were added incrementally per controller instead of a shared component.

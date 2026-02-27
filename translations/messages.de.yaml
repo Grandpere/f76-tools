@@ -101,6 +101,7 @@ admin_translations.save: Speichern
 admin_translations.table_caption: 'Ubersetzungstabelle fur Ziel %locale%'
 admin_translations.flash.saved: 'Ubersetzungen "%locale%" gespeichert (%count% Schlussel).'
 admin_translations.flash.nothing_to_save: Keine gultige Ubersetzung zum Speichern.
+admin_translations.flash.invalid_csrf: Ungultiges CSRF-Token, Aktion abgelehnt.
 
 security.login.page_title: Anmeldung
 security.login.title: Anmeldung

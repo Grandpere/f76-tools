@@ -101,6 +101,7 @@ admin_translations.save: Save
 admin_translations.table_caption: 'Translation table for target %locale%'
 admin_translations.flash.saved: 'Translations "%locale%" saved (%count% keys).'
 admin_translations.flash.nothing_to_save: No valid translation to save.
+admin_translations.flash.invalid_csrf: Invalid CSRF token, action rejected.
 
 security.login.page_title: Login
 security.login.title: Login

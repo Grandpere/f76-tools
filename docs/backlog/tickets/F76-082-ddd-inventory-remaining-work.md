@@ -35,3 +35,4 @@ Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inven
 - [x] Migration effectuee: interfaces `src/Contract` -> contexts applicatifs + renommage sans suffixe `Interface`.
 - [x] Slice effectuee: trait admin partage pour sanitization des inputs (`optionalString`, `optionalIntOrString`, `sanitizePositiveInt`).
 - [x] Slice effectuee: `ItemTranslationListQuery::fromRaw(...)` pour unifier et durcir les entrees `target/q/page/perPage`.
+- [x] Slice effectuee: validation CSRF ajoutee au POST `ItemTranslationController` + champ `_token` template + couverture fonctionnelle.

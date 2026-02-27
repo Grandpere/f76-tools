@@ -19,17 +19,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/admin/translations/items')]
 final class ItemTranslationController extends AbstractController
 {
     use AdminRoleGuardControllerTrait;
+    use AdminCsrfTokenValidatorTrait;
     use AdminInputSanitizerTrait;
 
     public function __construct(
         private readonly ItemTranslationBackofficeApplicationService $itemTranslationBackofficeApplicationService,
         private readonly TranslatorInterface $translator,
+        private readonly CsrfTokenManagerInterface $csrfTokenManager,
     ) {
     }
 
@@ -50,6 +53,18 @@ final class ItemTranslationController extends AbstractController
         $page = $listQuery->page;
 
         if ($request->isMethod('POST')) {
+            if (!$this->isValidToken($request, 'admin_item_translations_save')) {
+                $this->addFlash('warning', $this->translator->trans('admin_translations.flash.invalid_csrf'));
+
+                return $this->redirectToRoute('app_admin_item_translations', [
+                    'locale' => $request->getLocale(),
+                    'target' => $targetLocale,
+                    'q' => $query,
+                    'page' => $page,
+                    'perPage' => $perPage,
+                ]);
+            }
+
             $postListQuery = ItemTranslationListQuery::fromRaw(
                 $this->optionalString($request->request->get('target')),
                 $query,
@@ -97,5 +112,10 @@ final class ItemTranslationController extends AbstractController
             'page' => $page,
             'totalPages' => $totalPages,
         ]);
+    }
+
+    protected function csrfTokenManager(): CsrfTokenManagerInterface
+    {
+        return $this->csrfTokenManager;
     }
 }
