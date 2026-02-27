@@ -42,7 +42,7 @@ final class FilesystemItemImportSourceReader implements ItemImportSourceReaderIn
     }
 
     /**
-     * @return array<mixed>|null
+     * @return list<mixed>|null
      */
     public function readRows(string $path): ?array
     {
@@ -53,8 +53,11 @@ final class FilesystemItemImportSourceReader implements ItemImportSourceReaderIn
             }
 
             $decoded = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+            if (!is_array($decoded) || !array_is_list($decoded)) {
+                return null;
+            }
 
-            return is_array($decoded) ? $decoded : null;
+            return $decoded;
         } catch (JsonException) {
             return null;
         }

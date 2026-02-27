@@ -25,7 +25,7 @@ final class GenerateResetLinkFeedbackMapper
      *     flashMessage: string,
      *     flashParams: array<string, string>,
      *     auditAction: string|null,
-     *     auditContext: array<string, mixed>|null
+     *     auditContext: array<string, bool|int|string|null>|null
      * }
      */
     public function map(GenerateResetLinkResult $result): array

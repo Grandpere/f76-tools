@@ -80,6 +80,7 @@ final class ItemImportApplicationService
                     ++$stats['errors'];
                     continue;
                 }
+                $row = $this->normalizeImportRow($row);
 
                 if (!isset($row['id']) || !is_numeric($row['id'])) {
                     ++$stats['errors'];
@@ -87,7 +88,7 @@ final class ItemImportApplicationService
                 }
 
                 $sourceId = (int) $row['id'];
-                $type = $context['type'];
+                $type = $context->type;
                 $memoryKey = sprintf('%s:%d', $type->value, $sourceId);
 
                 if ($dryRun) {
@@ -115,18 +116,18 @@ final class ItemImportApplicationService
                 $this->itemHydrator->hydrate($item, $row);
 
                 $translationData = $this->translationCatalogBuilder->build($type, $sourceId, $row);
-                $item->setNameKey($translationData['nameKey']);
-                $item->setDescKey($translationData['descKey']);
-                $catalogEn = array_merge($catalogEn, $translationData['catalogEn']);
-                $catalogDe = array_merge($catalogDe, $translationData['catalogDe']);
+                $item->setNameKey($translationData->nameKey);
+                $item->setDescKey($translationData->descKey);
+                $catalogEn = array_merge($catalogEn, $translationData->catalogEn);
+                $catalogDe = array_merge($catalogDe, $translationData->catalogDe);
 
                 $contextResult = $this->contextApplier->apply($item, $sourceId, $context);
-                if (!$contextResult['valid']) {
+                if (!$contextResult->valid) {
                     ++$stats['errors'];
                     continue;
                 }
-                if (null !== $contextResult['warning']) {
-                    $warnings[] = $contextResult['warning'];
+                if (null !== $contextResult->warning) {
+                    $warnings[] = $contextResult->warning;
                     ++$stats['warnings'];
                 }
 
@@ -161,5 +162,15 @@ final class ItemImportApplicationService
         }
 
         return new ItemImportResult($stats, $warnings);
+    }
+
+    /**
+     * @param array<mixed> $row
+     *
+     * @return array<string, mixed>
+     */
+    private function normalizeImportRow(array $row): array
+    {
+        return $this->itemHydrator->normalizeRow($row);
     }
 }

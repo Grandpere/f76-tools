@@ -23,7 +23,7 @@ final class ItemImportItemHydrator
     }
 
     /**
-     * @param array<mixed> $row
+     * @param array<string, mixed> $row
      */
     public function hydrate(ItemEntity $item, array $row): void
     {
@@ -48,5 +48,15 @@ final class ItemImportItemHydrator
         $item->setDropSourcesHtml($this->valueNormalizer->toNullableString($row['drop_sources'] ?? null));
         $item->setRelationsHtml($this->valueNormalizer->toNullableString($row['relations'] ?? null));
         $item->setPayload($this->valueNormalizer->normalizePayload($row));
+    }
+
+    /**
+     * @param array<mixed> $row
+     *
+     * @return array<string, mixed>
+     */
+    public function normalizeRow(array $row): array
+    {
+        return $this->valueNormalizer->normalizePayload($row);
     }
 }

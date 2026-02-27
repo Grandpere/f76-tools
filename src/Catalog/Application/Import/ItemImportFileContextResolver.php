@@ -13,24 +13,14 @@ declare(strict_types=1);
 
 namespace App\Catalog\Application\Import;
 
-use App\Catalog\Domain\Item\ItemTypeEnum;
-
 final class ItemImportFileContextResolver
 {
-    /**
-     * @return array{type: ItemTypeEnum, rank: int|null, listNumber: int|null, isSpecialList: bool}|null
-     */
-    public function resolve(string $filePath): ?array
+    public function resolve(string $filePath): ?ItemImportFileContext
     {
         $filename = basename($filePath);
 
         if (1 === preg_match('/^legendary_mods_(\d+)_\w+\.json$/', $filename, $matches)) {
-            return [
-                'type' => ItemTypeEnum::MISC,
-                'rank' => (int) $matches[1],
-                'listNumber' => null,
-                'isSpecialList' => false,
-            ];
+            return ItemImportFileContext::misc((int) $matches[1]);
         }
 
         if (1 === preg_match('/^minerva_(\d+)_\w+\.json$/', $filename, $matches)) {
@@ -38,12 +28,7 @@ final class ItemImportFileContextResolver
             $listNumber = (($minervaNumber - 61) % 4) + 1;
             $isSpecialList = 4 === $listNumber;
 
-            return [
-                'type' => ItemTypeEnum::BOOK,
-                'rank' => null,
-                'listNumber' => $listNumber,
-                'isSpecialList' => $isSpecialList,
-            ];
+            return ItemImportFileContext::book($listNumber, $isSpecialList);
         }
 
         return null;

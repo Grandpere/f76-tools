@@ -63,8 +63,8 @@ final class ItemImportValueNormalizer
     }
 
     /**
-     * @param array<mixed> $row
-     * @param list<string> $keys
+     * @param array<string, mixed> $row
+     * @param list<string>         $keys
      */
     public function toBoolFromRowAny(array $row, array $keys): bool
     {

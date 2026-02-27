@@ -13,15 +13,17 @@ declare(strict_types=1);
 
 namespace App\Catalog\Application\Import;
 
-interface ItemImportSourceReaderInterface
+final readonly class ItemImportTranslationCatalog
 {
     /**
-     * @return list<string>
+     * @param array<string, string> $catalogEn
+     * @param array<string, string> $catalogDe
      */
-    public function findImportFiles(string $rootPath): array;
-
-    /**
-     * @return list<mixed>|null
-     */
-    public function readRows(string $path): ?array;
+    public function __construct(
+        public string $nameKey,
+        public ?string $descKey,
+        public array $catalogEn,
+        public array $catalogDe,
+    ) {
+    }
 }

@@ -25,11 +25,11 @@ final class ItemImportFileContextResolverTest extends TestCase
 
         $context = $resolver->resolve('/tmp/legendary_mods_3_en.json');
 
-        self::assertIsArray($context);
-        self::assertSame(ItemTypeEnum::MISC, $context['type']);
-        self::assertSame(3, $context['rank']);
-        self::assertNull($context['listNumber']);
-        self::assertFalse($context['isSpecialList']);
+        self::assertNotNull($context);
+        self::assertSame(ItemTypeEnum::MISC, $context->type);
+        self::assertSame(3, $context->rank);
+        self::assertNull($context->listNumber);
+        self::assertFalse($context->isSpecialList);
     }
 
     public function testResolveReturnsBookContextForMinervaRegularAndSpecialFiles(): void
@@ -37,16 +37,16 @@ final class ItemImportFileContextResolverTest extends TestCase
         $resolver = new ItemImportFileContextResolver();
 
         $regular = $resolver->resolve('/tmp/minerva_61_en.json');
-        self::assertIsArray($regular);
-        self::assertSame(ItemTypeEnum::BOOK, $regular['type']);
-        self::assertNull($regular['rank']);
-        self::assertSame(1, $regular['listNumber']);
-        self::assertFalse($regular['isSpecialList']);
+        self::assertNotNull($regular);
+        self::assertSame(ItemTypeEnum::BOOK, $regular->type);
+        self::assertNull($regular->rank);
+        self::assertSame(1, $regular->listNumber);
+        self::assertFalse($regular->isSpecialList);
 
         $special = $resolver->resolve('/tmp/minerva_64_en.json');
-        self::assertIsArray($special);
-        self::assertSame(4, $special['listNumber']);
-        self::assertTrue($special['isSpecialList']);
+        self::assertNotNull($special);
+        self::assertSame(4, $special->listNumber);
+        self::assertTrue($special->isSpecialList);
     }
 
     public function testResolveReturnsNullForUnsupportedFileNames(): void

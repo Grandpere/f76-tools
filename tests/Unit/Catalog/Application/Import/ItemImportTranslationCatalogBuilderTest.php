@@ -34,12 +34,12 @@ final class ItemImportTranslationCatalogBuilderTest extends TestCase
             'desc_de' => 'Deutsch Desc',
         ]);
 
-        self::assertSame('item.book.61.name', $result['nameKey']);
-        self::assertSame('item.book.61.desc', $result['descKey']);
-        self::assertSame('Deutsch Name', $result['catalogEn']['item.book.61.name']);
-        self::assertSame('Deutsch Name', $result['catalogDe']['item.book.61.name']);
-        self::assertSame('Deutsch Desc', $result['catalogEn']['item.book.61.desc']);
-        self::assertSame('Deutsch Desc', $result['catalogDe']['item.book.61.desc']);
+        self::assertSame('item.book.61.name', $result->nameKey);
+        self::assertSame('item.book.61.desc', $result->descKey);
+        self::assertSame('Deutsch Name', $result->catalogEn['item.book.61.name']);
+        self::assertSame('Deutsch Name', $result->catalogDe['item.book.61.name']);
+        self::assertSame('Deutsch Desc', $result->catalogEn['item.book.61.desc']);
+        self::assertSame('Deutsch Desc', $result->catalogDe['item.book.61.desc']);
     }
 
     public function testBuildWithoutDescriptionReturnsNullDescKey(): void
@@ -48,17 +48,17 @@ final class ItemImportTranslationCatalogBuilderTest extends TestCase
             'name_en' => 'Name EN',
         ]);
 
-        self::assertSame('item.misc.3.name', $result['nameKey']);
-        self::assertNull($result['descKey']);
-        self::assertArrayHasKey('item.misc.3.name', $result['catalogEn']);
-        self::assertArrayNotHasKey('item.misc.3.desc', $result['catalogEn']);
+        self::assertSame('item.misc.3.name', $result->nameKey);
+        self::assertNull($result->descKey);
+        self::assertArrayHasKey('item.misc.3.name', $result->catalogEn);
+        self::assertArrayNotHasKey('item.misc.3.desc', $result->catalogEn);
     }
 
     public function testBuildUsesDefaultNameWhenNoTranslationExists(): void
     {
         $result = $this->builder->build(ItemTypeEnum::BOOK, 999, []);
 
-        self::assertSame('item_999', $result['catalogEn']['item.book.999.name']);
-        self::assertSame([], $result['catalogDe']);
+        self::assertSame('item_999', $result->catalogEn['item.book.999.name']);
+        self::assertSame([], $result->catalogDe);
     }
 }

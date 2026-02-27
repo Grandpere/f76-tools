@@ -24,8 +24,8 @@ Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inven
 ## Inventaire - Slices optionnels (a faire ensuite)
 - [x] Pousser le nettoyage `mixed` residuel dans les query objects (`fromRaw`) vers des DTO HTTP explicites en amont.
 - [x] Introduire des request objects equivalents pour les flows Identity (`register/forgot/resend`) pour uniformiser les contrats.
-- [ ] Revoir les docblocks `array<string, mixed>` quand un type structure plus strict est possible (payloads admin/audit).
-- [ ] Etendre la meme logique DDD de typage et d'isolation aux zones import Catalog (`ItemImport*`) qui restent tres permissives.
+- [x] Revoir les docblocks `array<string, mixed>` quand un type structure plus strict est possible (payloads admin/audit).
+- [x] Etendre la meme logique DDD de typage et d'isolation aux zones import Catalog (`ItemImport*`) qui restent tres permissives.
 - [x] Ajouter/renforcer des tests d'architecture (PHPat/PHPStan rules) pour figer les frontieres `UI -> Application -> Domain`.
 
 ## Avancement
@@ -48,3 +48,5 @@ Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inven
 - [x] Slice effectuee: request objects applicatifs Identity ajoutes (`RegisterUserRequest`, `ForgotPasswordRequest`, `ResendVerificationRequest`) et usages controllers/services/tests alignes.
 - [x] Slice effectuee: durcissement des query inputs admin (pagination `?int` cote `fromRaw`) avec sanitization explicite en UI (`optionalPositiveInt`) et suppression du flux `int|string|null` pour les pages/perPage.
 - [x] Slice effectuee: renforcement PHPat avec une regle explicite interdisant les dependances vers les namespaces legacy racine (`App\\Controller`, `App\\Entity`, `App\\Service`, etc.).
+- [x] Slice effectuee: import Catalog durci avec value objects dedies (`ItemImportFileContext`, `ItemImportContextApplyResult`, `ItemImportTranslationCatalog`) pour remplacer les tableaux de shape implicite.
+- [x] Slice effectuee: docblocks payloads resserres sur admin/audit et import (`list<mixed>` pour les lignes JSON de source reader, context audit explicite `bool|int|string|null`).

@@ -23,16 +23,9 @@ final class ItemImportTranslationCatalogBuilder
     }
 
     /**
-     * @param array<mixed> $row
-     *
-     * @return array{
-     *   nameKey: string,
-     *   descKey: string|null,
-     *   catalogEn: array<string, string>,
-     *   catalogDe: array<string, string>
-     * }
+     * @param array<string, mixed> $row
      */
-    public function build(ItemTypeEnum $type, int $sourceId, array $row): array
+    public function build(ItemTypeEnum $type, int $sourceId, array $row): ItemImportTranslationCatalog
     {
         $nameKey = sprintf('item.%s.%d.name', strtolower($type->value), $sourceId);
         $descKey = sprintf('item.%s.%d.desc', strtolower($type->value), $sourceId);
@@ -75,11 +68,11 @@ final class ItemImportTranslationCatalogBuilder
             }
         }
 
-        return [
-            'nameKey' => $nameKey,
-            'descKey' => $resolvedDescKey,
-            'catalogEn' => $catalogEn,
-            'catalogDe' => $catalogDe,
-        ];
+        return new ItemImportTranslationCatalog(
+            $nameKey,
+            $resolvedDescKey,
+            $catalogEn,
+            $catalogDe,
+        );
     }
 }

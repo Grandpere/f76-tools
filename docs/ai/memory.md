@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - Catalog import stability improves with explicit value objects
+- Symptom: import flow used multiple implicit array-shape contracts (`context`, `contextResult`, `translationData`) that were easy to misuse during refactors.
+- Root cause: permissive array plumbing across `ItemImport*` services without explicit typed contracts.
+- Fix: introduced dedicated value objects (`ItemImportFileContext`, `ItemImportContextApplyResult`, `ItemImportTranslationCatalog`) and aligned service/tests.
+- Prevention: in import pipelines, prefer small readonly value objects over associative arrays for cross-class contracts.
+
 ## 2026-02-27 - Lock architecture against legacy root namespace regressions
 - Symptom: after DDD migration, accidental reintroduction of `App\\Controller`/`App\\Entity` style dependencies was still possible.
 - Root cause: architecture tests did not explicitly forbid dependencies toward legacy root namespaces.

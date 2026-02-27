@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Catalog\Application\Import;
 
 use App\Catalog\Application\Import\ItemImportContextApplier;
+use App\Catalog\Application\Import\ItemImportFileContext;
 use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
 use PHPUnit\Framework\TestCase;
@@ -33,15 +34,10 @@ final class ItemImportContextApplierTest extends TestCase
             ->setType(ItemTypeEnum::MISC)
             ->setSourceId(1);
 
-        $result = $this->applier->apply($item, 1, [
-            'type' => ItemTypeEnum::MISC,
-            'rank' => 2,
-            'listNumber' => null,
-            'isSpecialList' => false,
-        ]);
+        $result = $this->applier->apply($item, 1, ItemImportFileContext::misc(2));
 
-        self::assertTrue($result['valid']);
-        self::assertNull($result['warning']);
+        self::assertTrue($result->valid);
+        self::assertNull($result->warning);
         self::assertSame(2, $item->getRank());
     }
 
@@ -52,15 +48,10 @@ final class ItemImportContextApplierTest extends TestCase
             ->setSourceId(1)
             ->setRank(1);
 
-        $result = $this->applier->apply($item, 1, [
-            'type' => ItemTypeEnum::MISC,
-            'rank' => 3,
-            'listNumber' => null,
-            'isSpecialList' => false,
-        ]);
+        $result = $this->applier->apply($item, 1, ItemImportFileContext::misc(3));
 
-        self::assertTrue($result['valid']);
-        self::assertNotNull($result['warning']);
+        self::assertTrue($result->valid);
+        self::assertNotNull($result->warning);
         self::assertSame(1, $item->getRank());
     }
 
@@ -71,15 +62,10 @@ final class ItemImportContextApplierTest extends TestCase
             ->setSourceId(61)
             ->setRank(4);
 
-        $result = $this->applier->apply($item, 61, [
-            'type' => ItemTypeEnum::BOOK,
-            'rank' => null,
-            'listNumber' => 4,
-            'isSpecialList' => true,
-        ]);
+        $result = $this->applier->apply($item, 61, ItemImportFileContext::book(4, true));
 
-        self::assertTrue($result['valid']);
-        self::assertNull($result['warning']);
+        self::assertTrue($result->valid);
+        self::assertNull($result->warning);
         self::assertNull($item->getRank());
         self::assertCount(1, $item->getBookLists());
     }
@@ -90,22 +76,24 @@ final class ItemImportContextApplierTest extends TestCase
             ->setType(ItemTypeEnum::MISC)
             ->setSourceId(1);
 
-        $miscResult = $this->applier->apply($item, 1, [
-            'type' => ItemTypeEnum::MISC,
-            'rank' => null,
-            'listNumber' => null,
-            'isSpecialList' => false,
-        ]);
+        $invalidMiscContext = new ItemImportFileContext(
+            ItemTypeEnum::MISC,
+            null,
+            null,
+            false,
+        );
+        $miscResult = $this->applier->apply($item, 1, $invalidMiscContext);
 
-        self::assertFalse($miscResult['valid']);
+        self::assertFalse($miscResult->valid);
 
-        $bookResult = $this->applier->apply($item, 1, [
-            'type' => ItemTypeEnum::BOOK,
-            'rank' => null,
-            'listNumber' => null,
-            'isSpecialList' => false,
-        ]);
+        $invalidBookContext = new ItemImportFileContext(
+            ItemTypeEnum::BOOK,
+            null,
+            null,
+            false,
+        );
+        $bookResult = $this->applier->apply($item, 1, $invalidBookContext);
 
-        self::assertFalse($bookResult['valid']);
+        self::assertFalse($bookResult->valid);
     }
 }

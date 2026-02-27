@@ -175,10 +175,11 @@ final class UserManagementController extends AbstractController
     }
 
     /**
-     * @param array<string, mixed>|null $context
+     * @param array<string, bool|int|string|null>|null $context
      */
     private function persistAuditLog(Request $request, UserEntity $actor, string $action, ?UserEntity $targetUser, ?array $context = null): void
     {
+        /** @var array<string, bool|int|string|null> $payload */
         $payload = [
             'ip' => $request->getClientIp(),
             'locale' => $request->getLocale(),
