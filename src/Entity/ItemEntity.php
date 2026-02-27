@@ -15,7 +15,7 @@ namespace App\Entity;
 
 use App\Catalog\Domain\Item\ItemInterface;
 use App\Catalog\Domain\Item\ItemTypeEnum;
-use App\Repository\ItemEntityRepository;
+use App\Catalog\Infrastructure\Persistence\ItemEntityRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

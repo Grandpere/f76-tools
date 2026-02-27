@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\MinervaRotationEntityRepository;
+use App\Catalog\Infrastructure\Persistence\MinervaRotationEntityRepository;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;

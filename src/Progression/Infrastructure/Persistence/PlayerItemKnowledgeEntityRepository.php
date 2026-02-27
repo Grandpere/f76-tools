@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Repository;
+namespace App\Progression\Infrastructure\Persistence;
 
 use App\Catalog\Domain\Item\ItemTypeEnum;
 use App\Entity\ItemEntity;

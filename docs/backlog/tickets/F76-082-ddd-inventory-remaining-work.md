@@ -38,3 +38,4 @@ Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inven
 - [x] Slice effectuee: validation CSRF ajoutee au POST `ItemTranslationController` + champ `_token` template + couverture fonctionnelle.
 - [x] Slice effectuee: dossiers legacy `src/Security` et `src/Service` migres vers contexts (`Identity/*`, `Progression/*`) avec mise a jour des usages/tests.
 - [x] Slice effectuee: migration des elements `src/Domain` et `src/EventSubscriber` vers contexts (`Catalog/Domain`, `Support/Domain`, `Support/Infrastructure/Http`) + nettoyage des aliases `App\\Contract\\*` restants dans `services.yaml`.
+- [x] Slice effectuee: migration des repositories Doctrine hors `src/Repository` vers les contexts d'infrastructure (`Catalog/Identity/Progression/Support`) + mise a jour des `repositoryClass` d'entites et aliases DI.

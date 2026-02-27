@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Repository;
+namespace App\Support\Infrastructure\Persistence;
 
 use App\Entity\ContactMessageEntity;
 use App\Support\Application\Contact\ContactMessageReadRepositoryInterface;

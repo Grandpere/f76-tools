@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - Repository namespace moves require entity metadata updates
+- Symptom: moving Doctrine repositories between namespaces can silently break runtime if entity `repositoryClass` attributes still point to old FQCNs.
+- Root cause: repository migration impacts both service wiring and ORM metadata references.
+- Fix: updated repository imports in all entities (`repositoryClass`) and adjusted DI aliases/config usages in the same slice.
+- Prevention: after each repository move, run a grep on `repositoryClass:` and `App\\Repository\\` to ensure zero stale references.
+
 ## 2026-02-27 - CSRF field name consistency across admin forms
 - Symptom: admin translation functional test passed token but save endpoint behaved like invalid CSRF.
 - Root cause: template/test used `_token` while shared admin validator reads `_csrf_token`.

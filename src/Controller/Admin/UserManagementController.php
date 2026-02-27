@@ -16,7 +16,7 @@ namespace App\Controller\Admin;
 use App\Entity\AdminAuditLogEntity;
 use App\Entity\UserEntity;
 use App\Identity\Application\Security\SignedUrlGenerator;
-use App\Repository\UserEntityRepository;
+use App\Identity\Infrastructure\Persistence\UserEntityRepository;
 use App\Support\Application\AdminUser\GenerateResetLinkApplicationService;
 use App\Support\Application\AdminUser\GenerateResetLinkStatus;
 use App\Support\Application\AdminUser\ToggleUserActiveApplicationService;
