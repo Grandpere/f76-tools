@@ -41,6 +41,13 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
         ]);
     }
 
+    public function deleteAllBookLists(): int
+    {
+        $deleted = $this->getEntityManager()->getConnection()->executeStatement('DELETE FROM item_book_list');
+
+        return is_int($deleted) ? $deleted : 0;
+    }
+
     /**
      * @param list<int> $sourceIds
      *

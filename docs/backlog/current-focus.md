@@ -1,6 +1,7 @@
 # Current Focus
 
 ## Priorite active
+- F76-087: BOOK lists absolues 1..24 (modele/import/stats/UI coherents metier).
 - F76-086: Minerva front countdown dynamique (arrivee/depart sans rechargement).
 - F76-085: Minerva front source visibility (generated/manual badges sur la timeline publique).
 - F76-084: Minerva admin manual overrides (source generated/manual + preservation lors des regenerations).

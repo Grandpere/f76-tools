@@ -30,7 +30,7 @@ final class ItemImportApplicationService
     ) {
     }
 
-    public function import(string $rootPath, bool $dryRun, int $batchSize): ItemImportResult
+    public function import(string $rootPath, bool $dryRun, int $batchSize, bool $resetBookLists): ItemImportResult
     {
         $files = $this->sourceReader->findImportFiles($rootPath);
 
@@ -58,6 +58,10 @@ final class ItemImportApplicationService
         $catalogDe = [];
 
         $pendingFlush = 0;
+
+        if (!$dryRun && $resetBookLists) {
+            $this->itemRepository->deleteAllBookLists();
+        }
 
         foreach ($files as $file) {
             $context = $this->fileContextResolver->resolve($file);

@@ -528,26 +528,30 @@ export default class extends Controller {
             return `<p>${this.escape(this.t('noBookFound'))}</p>`;
         }
 
-        const listMap = new Map([
-            [1, []],
-            [2, []],
-            [3, []],
-            [4, []],
-        ]);
+        const listMap = new Map();
 
         books.forEach((item) => {
             const listNumbers = Array.isArray(item.listNumbers) ? item.listNumbers : [];
             if (listNumbers.length === 0) {
+                if (!listMap.has(1)) {
+                    listMap.set(1, []);
+                }
                 listMap.get(1).push(item);
                 return;
             }
             listNumbers.forEach((listNumber) => {
                 const numericList = Number(listNumber);
+                if (!Number.isInteger(numericList) || numericList < 1) {
+                    return;
+                }
                 if (!listMap.has(numericList)) {
                     listMap.set(numericList, []);
                 }
                 listMap.get(numericList).push(item);
             });
+        });
+        listMap.forEach((groupItems, listNumber) => {
+            listMap.set(listNumber, this.sortItemsByName(groupItems));
         });
 
         const groups = Array.from(listMap.entries()).sort((a, b) => a[0] - b[0]);

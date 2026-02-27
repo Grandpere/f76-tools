@@ -41,7 +41,8 @@ final class ImportItemsCommand extends Command
         $this
             ->addArgument('path', InputArgument::OPTIONAL, 'Dossier contenant les JSON.', 'data')
             ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Analyse et affiche sans ecrire en base.')
-            ->addOption('batch-size', null, InputOption::VALUE_OPTIONAL, 'Taille de lot Doctrine.', '200');
+            ->addOption('batch-size', null, InputOption::VALUE_OPTIONAL, 'Taille de lot Doctrine.', '200')
+            ->addOption('reset-book-lists', null, InputOption::VALUE_NEGATABLE, 'Reconstruit les liaisons BOOK->liste avant import.', true);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -67,6 +68,7 @@ final class ImportItemsCommand extends Command
         }
 
         $dryRun = (bool) $input->getOption('dry-run');
+        $resetBookLists = (bool) $input->getOption('reset-book-lists');
 
         $batchSizeRaw = $input->getOption('batch-size');
         if (!is_scalar($batchSizeRaw) || !is_numeric((string) $batchSizeRaw)) {
@@ -79,8 +81,9 @@ final class ImportItemsCommand extends Command
         $io->title('Import Items');
         $io->text(sprintf('Dossier: %s', $rootPath));
         $io->text(sprintf('Mode: %s', $dryRun ? 'DRY-RUN' : 'WRITE'));
+        $io->text(sprintf('Reset BOOK lists: %s', $resetBookLists ? 'YES' : 'NO'));
 
-        $result = $this->itemImportApplicationService->import($rootPath, $dryRun, $batchSize);
+        $result = $this->itemImportApplicationService->import($rootPath, $dryRun, $batchSize, $resetBookLists);
         $stats = $result->getStats();
 
         if (0 === $stats['files']) {

@@ -47,6 +47,11 @@ final class ItemImportFileContextResolverTest extends TestCase
         self::assertNotNull($special);
         self::assertSame(4, $special->listNumber);
         self::assertTrue($special->isSpecialList);
+
+        $last = $resolver->resolve('/tmp/minerva_84_en.json');
+        self::assertNotNull($last);
+        self::assertSame(24, $last->listNumber);
+        self::assertTrue($last->isSpecialList);
     }
 
     public function testResolveReturnsNullForUnsupportedFileNames(): void

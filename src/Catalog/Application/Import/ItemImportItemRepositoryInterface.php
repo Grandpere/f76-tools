@@ -19,4 +19,6 @@ use App\Catalog\Domain\Item\ItemTypeEnum;
 interface ItemImportItemRepositoryInterface
 {
     public function findOneByTypeAndSourceId(ItemTypeEnum $type, int $sourceId): ?ItemEntity;
+
+    public function deleteAllBookLists(): int;
 }

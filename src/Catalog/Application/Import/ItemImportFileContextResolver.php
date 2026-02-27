@@ -25,8 +25,11 @@ final class ItemImportFileContextResolver
 
         if (1 === preg_match('/^minerva_(\d+)_\w+\.json$/', $filename, $matches)) {
             $minervaNumber = (int) $matches[1];
-            $listNumber = (($minervaNumber - 61) % 4) + 1;
-            $isSpecialList = 4 === $listNumber;
+            $listNumber = $minervaNumber - 60;
+            if ($listNumber < 1) {
+                return null;
+            }
+            $isSpecialList = 0 === $listNumber % 4;
 
             return ItemImportFileContext::book($listNumber, $isSpecialList);
         }

@@ -48,9 +48,10 @@ final class ItemImportApplicationServiceTest extends TestCase
         $this->persistence->expects(self::never())->method('persist');
         $this->persistence->expects(self::never())->method('flush');
         $this->repository->expects(self::never())->method('findOneByTypeAndSourceId');
+        $this->repository->expects(self::never())->method('deleteAllBookLists');
 
         $service = $this->createService($this->createTranslationWriter($this->createTempDir()));
-        $result = $service->import($root, true, 100);
+        $result = $service->import($root, true, 100, true);
         $stats = $result->getStats();
 
         self::assertSame(2, $stats['files']);
@@ -72,12 +73,16 @@ final class ItemImportApplicationServiceTest extends TestCase
             ->expects(self::once())
             ->method('findOneByTypeAndSourceId')
             ->willReturn(null);
+        $this->repository
+            ->expects(self::once())
+            ->method('deleteAllBookLists')
+            ->willReturn(0);
 
         $this->persistence->expects(self::once())->method('persist');
         $this->persistence->expects(self::once())->method('flush');
         $projectDir = $this->createTempDir();
         $service = $this->createService($this->createTranslationWriter($projectDir));
-        $result = $service->import($root, false, 100);
+        $result = $service->import($root, false, 100, true);
 
         self::assertFalse($result->hasErrors());
         self::assertSame(1, $result->getStats()['created']);

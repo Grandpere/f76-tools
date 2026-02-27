@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - Minerva BOOK list model 1..4 caused semantic drift
+- Symptom: UI/stats showed progression only for 4 "listes" while Minerva rotation uses 24 real lists.
+- Root cause: import collapsed `minerva_61..84` into modulo-4 list numbers (`1..4`) instead of absolute list numbers (`1..24`).
+- Fix: switched import mapping to absolute lists (`list_number = minervaNumber - 60`), expanded DB constraint to `1..24`, and reset/rebuilt BOOK list relations on import.
+- Prevention: when filenames encode absolute business identifiers, store them as-is in persistence; avoid modulo compression unless explicitly required by product semantics.
+
 ## 2026-02-27 - Minerva countdown offset by 5h due to wall-time timezone handling
 - Symptom: front countdown showed ~5h less than external Minerva trackers for the same next window.
 - Root cause: `minerva_rotation` uses `timestamp without time zone` wall times, but timeline service converted DateTime timezone directly (`setTimezone`) instead of reinterpreting stored wall time as `America/New_York`.

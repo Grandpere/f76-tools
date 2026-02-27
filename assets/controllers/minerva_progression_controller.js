@@ -83,8 +83,7 @@ export default class extends Controller {
 
             const metaNode = cell.querySelector('[data-minerva-progress-meta]');
             const fillNode = cell.querySelector('[data-minerva-progress-fill]');
-            const mappedList = this.resolveListMapping(listCycle);
-            const stat = byList.get(mappedList);
+            const stat = byList.get(listCycle) ?? byList.get(this.resolveLegacyListMapping(listCycle));
 
             if (!metaNode || !fillNode) {
                 return;
@@ -106,7 +105,7 @@ export default class extends Controller {
         });
     }
 
-    resolveListMapping(listCycle) {
+    resolveLegacyListMapping(listCycle) {
         if (listCycle >= 1 && listCycle <= 4) {
             return listCycle;
         }
