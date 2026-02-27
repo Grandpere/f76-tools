@@ -1,9 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- F76-043: DDD Slice 33 - Progression API resolver helpers trait (in progress).
+- F76-044: DDD Slice 34 - Knowledge transfer import mode enum (in progress).
 
 ## Termine recemment
+- F76-043: DDD Slice 33 - Progression API resolver helpers trait (code done, functional pending).
 - F76-042: DDD Slice 32 - Player knowledge transfer import flow cleanup (done).
 - F76-041: DDD Slice 31 - Player item controller item-helper cleanup (done).
 - F76-040: DDD Slice 30 - Player item controller helper consistency (done).
