@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Progression\UI\Api;
 
+use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
-use App\Entity\ItemEntity;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;

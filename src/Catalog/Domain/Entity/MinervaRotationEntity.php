@@ -11,15 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Catalog\Domain\Entity;
 
-use App\Catalog\Infrastructure\Persistence\MinervaRotationEntityRepository;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use InvalidArgumentException;
 
-#[ORM\Entity(repositoryClass: MinervaRotationEntityRepository::class)]
+#[ORM\Entity]
 #[ORM\Table(name: 'minerva_rotation')]
 #[ORM\Index(name: 'idx_minerva_rotation_starts_at', columns: ['starts_at'])]
 #[ORM\Index(name: 'idx_minerva_rotation_ends_at', columns: ['ends_at'])]

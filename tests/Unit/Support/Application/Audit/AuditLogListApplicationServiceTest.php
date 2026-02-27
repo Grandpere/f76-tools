@@ -78,7 +78,7 @@ final class AuditLogListApplicationServiceTest extends TestCase
 final class InMemoryAuditLogReadRepository implements AuditLogReadRepositoryInterface
 {
     /**
-     * @var list<array{rows: list<\App\Entity\AdminAuditLogEntity>, total: int}>
+     * @var list<array{rows: list<\App\Support\Domain\Entity\AdminAuditLogEntity>, total: int}>
      */
     private array $results;
 
@@ -93,8 +93,8 @@ final class InMemoryAuditLogReadRepository implements AuditLogReadRepositoryInte
     public array $calls = [];
 
     /**
-     * @param list<array{rows: list<\App\Entity\AdminAuditLogEntity>, total: int}> $results
-     * @param list<string>                                                         $actions
+     * @param list<array{rows: list<\App\Support\Domain\Entity\AdminAuditLogEntity>, total: int}> $results
+     * @param list<string>                                                                        $actions
      */
     public function __construct(array $results, array $actions)
     {

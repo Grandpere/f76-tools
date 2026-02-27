@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Support\Infrastructure\Persistence;
 
-use App\Entity\ContactMessageEntity;
 use App\Support\Application\Contact\ContactMessageReadRepositoryInterface;
 use App\Support\Application\Contact\ContactMessageStatusWriteRepositoryInterface;
 use App\Support\Application\Contact\ContactMessageWriter;
 use App\Support\Domain\Contact\ContactMessageStatusEnum;
+use App\Support\Domain\Entity\ContactMessageEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

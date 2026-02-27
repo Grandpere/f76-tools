@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Support\Application\Contact;
 
-use App\Entity\ContactMessageEntity;
 use App\Support\Application\Contact\ContactMessageApplicationService;
 use App\Support\Application\Contact\ContactMessageWriter;
 use App\Support\Domain\Contact\ContactMessageStatusEnum;
+use App\Support\Domain\Entity\ContactMessageEntity;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Catalog\Infrastructure\Import;
 
 use App\Catalog\Application\Import\ItemImportPersistenceInterface;
-use App\Entity\ItemEntity;
+use App\Catalog\Domain\Entity\ItemEntity;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class DoctrineItemImportPersistence implements ItemImportPersistenceInterface

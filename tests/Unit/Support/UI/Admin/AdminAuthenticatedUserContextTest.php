@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Support\UI\Admin;
 
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
 use App\Support\UI\Admin\AdminAuthenticatedUserContext;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -22,7 +22,7 @@ final class AdminAuthenticatedUserContextTest extends TestCase
 {
     public function testRequireAuthenticatedUserReturnsUserEntity(): void
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('admin@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_ADMIN']);

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Catalog\UI\Web;
 
 use App\Catalog\Application\Minerva\MinervaRotationTimelineApplicationService;
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;

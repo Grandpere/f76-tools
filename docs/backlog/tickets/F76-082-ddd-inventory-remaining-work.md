@@ -4,7 +4,7 @@
 Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inventaire explicite des changements restants est necessaire pour prioriser proprement.
 
 ## Inventaire - Reste utile (a faire en priorite)
-- [ ] Reorganiser la racine `src` vers les namespaces de contexte et supprimer les dossiers legacy globaux encore presents:
+- [x] Reorganiser la racine `src` vers les namespaces de contexte et supprimer les dossiers legacy globaux encore presents:
   - `Controller`, `Domain`, `Entity`, `EventSubscriber`, `Repository`, `Security`, `Service`
   - deplacer leur contenu dans les contexts associes (`Catalog`, `Identity`, `Progression`, `Support`, etc.)
   - supprimer `src/Translation` (vide). ✅ fait
@@ -16,7 +16,7 @@ Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inven
 - [x] Standardiser le nommage des interfaces sans suffixe `Interface` (alignement avec l'autre projet).
 - [x] Harmoniser les petits helpers `optionalString` / `optionalIntOrString` dupliques dans les controllers admin (`AuditLogController`, `ContactMessageController`, `ItemTranslationController`) via un composant partage.
 - [x] Finaliser le durcissement d'entrees admin pour pagination/query dans `ItemTranslationController` (alignement avec le pattern query object deja applique a Audit/Contact).
-- [ ] Verifier que tous les controllers admin exposant des actions sensibles utilisent:
+- [x] Verifier que tous les controllers admin exposant des actions sensibles utilisent:
   - garde admin partagee,
   - validation CSRF partagee,
   - contexte user explicite.
@@ -43,3 +43,5 @@ Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inven
 - [x] Slice effectuee: ports additionnels pour respecter PHPat (`MinervaRotationRegenerationRepository`, `AdminUserManagementReadRepositoryInterface`) et eliminer les dependances `Application/UI -> Infrastructure`.
 - [x] Slice effectuee: controllers web migres hors `src/Controller` vers contexts (`Identity/UI/Security/Controller`, `Progression/UI/Web`, `Catalog/UI/Web`) avec remplacement des dependances infra directes via ports applicatifs (`IdentityCaptchaSiteKeyProviderInterface`, `PlayerReadApplicationService`).
 - [x] Slice effectuee: controllers API progression migres hors `src/Controller/Api` vers `src/Progression/UI/Api` (incluant `ProgressionAuthenticatedUserControllerTrait`) et suppression du dossier legacy `src/Controller`.
+- [x] Slice effectuee: dossier legacy `src/Entity` supprime; entites migrees vers `*/Domain/Entity` par contexte et mapping Doctrine aligne (`prefix: App`, `dir: src`).
+- [x] Verification effectuee: controllers admin sensibles alignes sur garde admin partagee + CSRF partage + contexte user explicite (`ContactMessageController`, `ItemTranslationController`, `MinervaRotationController`, `UserManagementController`).

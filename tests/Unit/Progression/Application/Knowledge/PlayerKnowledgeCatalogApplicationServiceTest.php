@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Progression\Application\Knowledge;
 
+use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
-use App\Entity\ItemEntity;
-use App\Entity\PlayerEntity;
 use App\Progression\Application\Knowledge\ItemKnowledgeCatalogReadRepository;
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogReadRepository;
+use App\Progression\Domain\Entity\PlayerEntity;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;

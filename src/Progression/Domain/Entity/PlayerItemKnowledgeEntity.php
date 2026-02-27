@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Progression\Domain\Entity;
 
-use App\Progression\Infrastructure\Persistence\PlayerItemKnowledgeEntityRepository;
+use App\Catalog\Domain\Entity\ItemEntity;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PlayerItemKnowledgeEntityRepository::class)]
+#[ORM\Entity]
 #[ORM\Table(name: 'player_item_knowledge')]
 #[ORM\UniqueConstraint(name: 'uniq_player_item_knowledge', columns: ['player_id', 'item_id'])]
 #[ORM\Index(name: 'idx_player_item_knowledge_player', columns: ['player_id'])]

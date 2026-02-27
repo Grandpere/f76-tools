@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Identity\Infrastructure\Security;
 
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;

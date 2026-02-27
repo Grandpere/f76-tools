@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Support\Application\Audit;
 
-use App\Entity\AdminAuditLogEntity;
+use App\Support\Domain\Entity\AdminAuditLogEntity;
 
 interface AuditLogReadRepositoryInterface
 {

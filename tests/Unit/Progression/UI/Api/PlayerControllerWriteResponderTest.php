@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Progression\UI\Api;
 
-use App\Entity\PlayerEntity;
+use App\Progression\Domain\Entity\PlayerEntity;
 use App\Progression\UI\Api\PlayerControllerWriteResponder;
 use App\Progression\UI\Api\PlayerPayloadMapper;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;

@@ -11,11 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Catalog\Domain\Entity;
 
 use App\Catalog\Domain\Item\ItemInterface;
 use App\Catalog\Domain\Item\ItemTypeEnum;
-use App\Catalog\Infrastructure\Persistence\ItemEntityRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -26,7 +25,7 @@ use Symfony\Component\Uid\Ulid;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-#[ORM\Entity(repositoryClass: ItemEntityRepository::class)]
+#[ORM\Entity]
 #[ORM\Table(name: 'item')]
 #[ORM\UniqueConstraint(name: 'uniq_item_type_source_id', columns: ['type', 'source_id'])]
 #[ORM\UniqueConstraint(name: 'uniq_item_name_key', columns: ['name_key'])]

@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Progression\Application\Knowledge;
 
 use App\Catalog\Domain\Item\ItemTypeEnum;
-use App\Entity\PlayerEntity;
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
 use App\Progression\Application\Knowledge\ItemKnowledgeTransferRepository;
 use App\Progression\Application\Knowledge\PlayerKnowledgeTransferApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeTransferRepository;
+use App\Progression\Domain\Entity\PlayerEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

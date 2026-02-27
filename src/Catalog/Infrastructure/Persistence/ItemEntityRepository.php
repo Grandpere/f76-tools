@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Catalog\Infrastructure\Persistence;
 
 use App\Catalog\Application\Import\ItemImportItemRepositoryInterface;
+use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
-use App\Entity\ItemEntity;
 use App\Progression\Application\Knowledge\ItemKnowledgeCatalogReadRepository;
 use App\Progression\Application\Knowledge\ItemKnowledgeTransferRepository;
 use App\Progression\Application\Knowledge\ItemReadRepositoryInterface;

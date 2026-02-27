@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Identity\Application\Registration;
 
-use App\Entity\UserEntity;
 use App\Identity\Application\Common\IdentityPasswordHasherInterface;
 use App\Identity\Application\Common\IdentityWritePersistenceInterface;
 use App\Identity\Application\Registration\RegisterUserApplicationService;
 use App\Identity\Application\Registration\RegisterUserStatus;
 use App\Identity\Application\Registration\RegistrationUserRepositoryInterface;
 use App\Identity\Application\Security\TemporaryLinkPolicy;
+use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

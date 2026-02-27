@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Admin;
 
-use App\Entity\ContactMessageEntity;
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
 use App\Support\Domain\Contact\ContactMessageStatusEnum;
+use App\Support\Domain\Entity\ContactMessageEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;

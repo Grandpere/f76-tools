@@ -15,7 +15,7 @@ namespace App\Catalog\Infrastructure\Persistence;
 
 use App\Catalog\Application\Minerva\MinervaRotationReader;
 use App\Catalog\Application\Minerva\MinervaRotationRegenerationRepository;
-use App\Entity\MinervaRotationEntity;
+use App\Catalog\Domain\Entity\MinervaRotationEntity;
 use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;

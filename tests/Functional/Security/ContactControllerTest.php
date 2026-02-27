@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Security;
 
-use App\Entity\ContactMessageEntity;
+use App\Support\Domain\Entity\ContactMessageEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;

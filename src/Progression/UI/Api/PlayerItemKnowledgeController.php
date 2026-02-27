@@ -15,14 +15,6 @@ namespace App\Progression\UI\Api;
 
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeWriteApplicationService;
-use App\Progression\UI\Api\PlayerItemActionContext;
-use App\Progression\UI\Api\PlayerItemActionContextResolver;
-use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
-use App\Progression\UI\Api\PlayerKnowledgeItemPayloadSearchFilter;
-use App\Progression\UI\Api\PlayerOwnedContextResolver;
-use App\Progression\UI\Api\ProgressionApiErrorResponder;
-use App\Progression\UI\Api\ProgressionApiUserContext;
-use App\Progression\UI\Api\ProgressionItemTypeQueryParser;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

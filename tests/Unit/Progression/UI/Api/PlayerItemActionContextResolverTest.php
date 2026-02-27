@@ -2,13 +2,22 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Progression\UI\Api;
 
-use App\Entity\ItemEntity;
-use App\Entity\PlayerEntity;
-use App\Entity\UserEntity;
+use App\Catalog\Domain\Entity\ItemEntity;
+use App\Identity\Domain\Entity\UserEntity;
 use App\Progression\Application\Knowledge\ItemReadApplicationService;
 use App\Progression\Application\Knowledge\ItemReadRepositoryInterface;
+use App\Progression\Domain\Entity\PlayerEntity;
 use App\Progression\UI\Api\PlayerItemActionContext;
 use App\Progression\UI\Api\PlayerItemActionContextResolver;
 use App\Progression\UI\Api\PlayerOwnedContextResolver;
@@ -23,11 +32,11 @@ final class PlayerItemActionContextResolverTest extends TestCase
 {
     public function testResolveOrNotFoundReturnsContextWhenPlayerAndItemExist(): void
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('user@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_USER']);
-        $player = (new PlayerEntity())->setName('Main');
+        $player = new PlayerEntity()->setName('Main');
         $item = new ItemEntity();
 
         /** @var ProgressionOwnedPlayerReadResolverInterface&MockObject $readResolver */
@@ -59,7 +68,7 @@ final class PlayerItemActionContextResolverTest extends TestCase
 
     public function testResolveOrNotFoundReturns404WhenPlayerMissing(): void
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('user@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_USER']);
@@ -90,11 +99,11 @@ final class PlayerItemActionContextResolverTest extends TestCase
 
     public function testResolveOrNotFoundReturns404WhenItemMissing(): void
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('user@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_USER']);
-        $player = (new PlayerEntity())->setName('Main');
+        $player = new PlayerEntity()->setName('Main');
 
         /** @var ProgressionOwnedPlayerReadResolverInterface&MockObject $readResolver */
         $readResolver = $this->createMock(ProgressionOwnedPlayerReadResolverInterface::class);

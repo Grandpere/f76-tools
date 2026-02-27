@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Support\Infrastructure\Persistence;
 
-use App\Entity\AdminAuditLogEntity;
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
 use App\Support\Application\Admin\Audit\AdminAuditLogPurger;
 use App\Support\Application\AdminUser\AdminUserAuditReadRepositoryInterface;
 use App\Support\Application\Audit\AuditLogReadRepositoryInterface;
+use App\Support\Domain\Entity\AdminAuditLogEntity;
 use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;

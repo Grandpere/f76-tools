@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Identity\Infrastructure\Security;
 
-use App\Entity\UserEntity;
 use App\Identity\Application\Security\AuthEventLogger;
+use App\Identity\Domain\Entity\UserEntity;
 use App\Identity\Infrastructure\Guard\AuthRequestThrottler;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;

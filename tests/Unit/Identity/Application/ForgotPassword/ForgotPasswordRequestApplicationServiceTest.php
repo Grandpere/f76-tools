@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Identity\Application\ForgotPassword;
 
-use App\Entity\UserEntity;
 use App\Identity\Application\Common\IdentityWritePersistenceInterface;
 use App\Identity\Application\ForgotPassword\ForgotPasswordRequestApplicationService;
 use App\Identity\Application\ForgotPassword\ForgotPasswordUserRepositoryInterface;
 use App\Identity\Application\Security\TemporaryLinkPolicy;
+use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

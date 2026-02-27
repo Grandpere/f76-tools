@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Progression\UI\Api;
 
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
 use App\Progression\UI\Api\ProgressionApiUserContext;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;

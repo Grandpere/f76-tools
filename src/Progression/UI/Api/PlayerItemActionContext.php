@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Progression\UI\Api;
 
-use App\Entity\ItemEntity;
-use App\Entity\PlayerEntity;
+use App\Catalog\Domain\Entity\ItemEntity;
+use App\Progression\Domain\Entity\PlayerEntity;
 
 final readonly class PlayerItemActionContext
 {

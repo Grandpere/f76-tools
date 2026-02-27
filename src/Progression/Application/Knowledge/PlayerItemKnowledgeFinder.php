@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Progression\Application\Knowledge;
 
-use App\Entity\ItemEntity;
-use App\Entity\PlayerEntity;
-use App\Entity\PlayerItemKnowledgeEntity;
+use App\Catalog\Domain\Entity\ItemEntity;
+use App\Progression\Domain\Entity\PlayerEntity;
+use App\Progression\Domain\Entity\PlayerItemKnowledgeEntity;
 
 interface PlayerItemKnowledgeFinder
 {

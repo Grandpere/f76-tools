@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Progression\Application\Knowledge;
 
-use App\Entity\ItemEntity;
+use App\Catalog\Domain\Entity\ItemEntity;
 
 interface ItemReadRepositoryInterface
 {

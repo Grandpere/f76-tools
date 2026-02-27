@@ -14,8 +14,6 @@ declare(strict_types=1);
 namespace App\Progression\UI\Api;
 
 use App\Progression\Application\Knowledge\PlayerKnowledgeStatsApplicationService;
-use App\Progression\UI\Api\PlayerOwnedContextResolver;
-use App\Progression\UI\Api\ProgressionApiUserContext;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;

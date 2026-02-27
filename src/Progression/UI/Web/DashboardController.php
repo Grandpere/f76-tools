@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Progression\UI\Web;
 
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
 use App\Progression\Application\Player\PlayerReadApplicationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

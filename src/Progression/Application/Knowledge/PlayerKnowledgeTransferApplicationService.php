@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Progression\Application\Knowledge;
 
 use App\Catalog\Domain\Item\ItemTypeEnum;
-use App\Entity\PlayerEntity;
-use App\Entity\PlayerItemKnowledgeEntity;
+use App\Progression\Domain\Entity\PlayerEntity;
+use App\Progression\Domain\Entity\PlayerItemKnowledgeEntity;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 

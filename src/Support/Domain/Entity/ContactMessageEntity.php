@@ -11,16 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Support\Domain\Entity;
 
 use App\Support\Domain\Contact\ContactMessageStatusEnum;
-use App\Support\Infrastructure\Persistence\ContactMessageEntityRepository;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use InvalidArgumentException;
 
-#[ORM\Entity(repositoryClass: ContactMessageEntityRepository::class)]
+#[ORM\Entity]
 #[ORM\Table(name: 'contact_message')]
 #[ORM\Index(name: 'idx_contact_message_status', columns: ['status'])]
 #[ORM\Index(name: 'idx_contact_message_created_at', columns: ['created_at'])]

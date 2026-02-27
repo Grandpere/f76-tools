@@ -81,7 +81,7 @@ final class ContactMessageListApplicationServiceTest extends TestCase
 final class InMemoryContactMessageReadRepository implements ContactMessageReadRepositoryInterface
 {
     /**
-     * @var list<array{rows: list<\App\Entity\ContactMessageEntity>, total: int}>
+     * @var list<array{rows: list<\App\Support\Domain\Entity\ContactMessageEntity>, total: int}>
      */
     private array $results;
 
@@ -91,7 +91,7 @@ final class InMemoryContactMessageReadRepository implements ContactMessageReadRe
     public array $calls = [];
 
     /**
-     * @param list<array{rows: list<\App\Entity\ContactMessageEntity>, total: int}> $results
+     * @param list<array{rows: list<\App\Support\Domain\Entity\ContactMessageEntity>, total: int}> $results
      */
     public function __construct(array $results)
     {

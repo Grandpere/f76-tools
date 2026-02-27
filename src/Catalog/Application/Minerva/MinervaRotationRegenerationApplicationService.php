@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Catalog\Application\Minerva;
 
-use App\Entity\MinervaRotationEntity;
+use App\Catalog\Domain\Entity\MinervaRotationEntity;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 

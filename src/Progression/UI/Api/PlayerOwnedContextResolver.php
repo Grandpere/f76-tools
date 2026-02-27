@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Progression\UI\Api;
 
-use App\Entity\PlayerEntity;
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
+use App\Progression\Domain\Entity\PlayerEntity;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class PlayerOwnedContextResolver

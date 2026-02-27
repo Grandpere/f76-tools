@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace App\Identity\Infrastructure\Persistence;
 
-use App\Entity\UserEntity;
 use App\Identity\Application\ForgotPassword\ForgotPasswordUserRepositoryInterface;
 use App\Identity\Application\Registration\RegistrationUserRepositoryInterface;
 use App\Identity\Application\ResendVerification\ResendVerificationUserRepositoryInterface;
 use App\Identity\Application\ResetPassword\ResetPasswordUserRepositoryInterface;
 use App\Identity\Application\User\UserByEmailFinder;
 use App\Identity\Application\VerifyEmail\VerifyEmailUserRepositoryInterface;
+use App\Identity\Domain\Entity\UserEntity;
 use App\Support\Application\AdminUser\AdminUserManagementReadRepositoryInterface;
 use App\Support\Application\AdminUser\AdminUserManagementWriteRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;

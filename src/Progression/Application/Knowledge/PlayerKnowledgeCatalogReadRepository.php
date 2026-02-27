@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Progression\Application\Knowledge;
 
-use App\Entity\PlayerEntity;
+use App\Progression\Domain\Entity\PlayerEntity;
 
 interface PlayerKnowledgeCatalogReadRepository
 {

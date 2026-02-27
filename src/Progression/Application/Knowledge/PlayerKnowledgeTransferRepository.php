@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Progression\Application\Knowledge;
 
-use App\Entity\ItemEntity;
-use App\Entity\PlayerEntity;
+use App\Catalog\Domain\Entity\ItemEntity;
+use App\Progression\Domain\Entity\PlayerEntity;
 
 interface PlayerKnowledgeTransferRepository
 {

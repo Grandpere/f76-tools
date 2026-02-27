@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Progression\Application\Knowledge;
 
-use App\Entity\ItemEntity;
-use App\Entity\PlayerEntity;
-use App\Entity\PlayerItemKnowledgeEntity;
-use App\Entity\UserEntity;
+use App\Catalog\Domain\Entity\ItemEntity;
+use App\Identity\Domain\Entity\UserEntity;
 use App\Progression\Application\Player\PlayerByOwnerFinder;
+use App\Progression\Domain\Entity\PlayerEntity;
+use App\Progression\Domain\Entity\PlayerItemKnowledgeEntity;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Catalog\Application\Import;
 
 use App\Catalog\Application\Translation\TranslationCatalogWriter;
-use App\Entity\ItemEntity;
+use App\Catalog\Domain\Entity\ItemEntity;
 
 final class ItemImportApplicationService
 {

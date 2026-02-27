@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Security;
 
-use App\Entity\UserEntity;
 use App\Identity\Application\Security\SignedUrlGenerator;
+use App\Identity\Domain\Entity\UserEntity;
 use DateInterval;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;

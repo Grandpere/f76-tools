@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Admin;
 
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;

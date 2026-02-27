@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace App\Support\UI\Admin\Controller;
 
-use App\Entity\AdminAuditLogEntity;
-use App\Entity\UserEntity;
 use App\Identity\Application\Security\SignedUrlGenerator;
+use App\Identity\Domain\Entity\UserEntity;
 use App\Support\Application\AdminUser\AdminUserManagementReadRepositoryInterface;
 use App\Support\Application\AdminUser\GenerateResetLinkApplicationService;
 use App\Support\Application\AdminUser\GenerateResetLinkStatus;
@@ -23,6 +22,7 @@ use App\Support\Application\AdminUser\ToggleUserActiveApplicationService;
 use App\Support\Application\AdminUser\ToggleUserActiveResult;
 use App\Support\Application\AdminUser\ToggleUserAdminApplicationService;
 use App\Support\Application\AdminUser\ToggleUserAdminResult;
+use App\Support\Domain\Entity\AdminAuditLogEntity;
 use App\Support\UI\Admin\AdminAuthenticatedUserContext;
 use App\Support\UI\Admin\GenerateResetLinkFeedbackMapper;
 use App\Support\UI\Admin\ToggleUserActiveFeedbackMapper;

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Identity\UI\Console;
 
-use App\Entity\UserEntity;
 use App\Identity\Application\User\UserByEmailFinder;
+use App\Identity\Domain\Entity\UserEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;

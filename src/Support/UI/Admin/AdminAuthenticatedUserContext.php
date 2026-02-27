@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Support\UI\Admin;
 
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\User\UserInterface;
 

@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Progression\Domain\Entity;
 
-use App\Progression\Infrastructure\Persistence\PlayerEntityRepository;
+use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -21,7 +21,7 @@ use InvalidArgumentException;
 use LogicException;
 use Symfony\Component\Uid\Ulid;
 
-#[ORM\Entity(repositoryClass: PlayerEntityRepository::class)]
+#[ORM\Entity]
 #[ORM\Table(name: 'player')]
 #[ORM\UniqueConstraint(name: 'uniq_player_user_name', columns: ['user_id', 'name'])]
 #[ORM\UniqueConstraint(name: 'uniq_player_public_id', columns: ['public_id'])]

@@ -15,8 +15,8 @@ namespace App\Tests\Unit\Catalog\Application\Import;
 
 use App\Catalog\Application\Import\ItemImportItemHydrator;
 use App\Catalog\Application\Import\ItemImportValueNormalizer;
+use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
-use App\Entity\ItemEntity;
 use PHPUnit\Framework\TestCase;
 
 final class ItemImportItemHydratorTest extends TestCase

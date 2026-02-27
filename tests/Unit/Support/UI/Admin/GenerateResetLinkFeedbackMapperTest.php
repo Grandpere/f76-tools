@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Support\UI\Admin;
 
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
 use App\Support\Application\AdminUser\GenerateResetLinkResult;
 use App\Support\UI\Admin\GenerateResetLinkFeedbackMapper;
 use DateTimeImmutable;

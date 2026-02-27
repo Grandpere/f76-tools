@@ -2,10 +2,19 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Progression\UI\Api;
 
-use App\Entity\PlayerEntity;
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
+use App\Progression\Domain\Entity\PlayerEntity;
 use App\Progression\UI\Api\PlayerOwnedContextResolver;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
 use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolverInterface;
@@ -17,11 +26,11 @@ final class PlayerOwnedContextResolverTest extends TestCase
 {
     public function testResolveOrNotFoundReturnsPlayerWhenFound(): void
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('user@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_USER']);
-        $player = (new PlayerEntity())->setName('Main');
+        $player = new PlayerEntity()->setName('Main');
 
         /** @var ProgressionOwnedPlayerReadResolverInterface&MockObject $readResolver */
         $readResolver = $this->createMock(ProgressionOwnedPlayerReadResolverInterface::class);
@@ -42,7 +51,7 @@ final class PlayerOwnedContextResolverTest extends TestCase
 
     public function testResolveOrNotFoundReturns404WhenMissing(): void
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('user@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_USER']);
@@ -65,5 +74,4 @@ final class PlayerOwnedContextResolverTest extends TestCase
         self::assertSame(JsonResponse::HTTP_NOT_FOUND, $result->getStatusCode());
         self::assertSame('{"error":"Player not found."}', $result->getContent());
     }
-
 }

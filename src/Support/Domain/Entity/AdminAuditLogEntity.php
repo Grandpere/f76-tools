@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Entity;
+namespace App\Support\Domain\Entity;
 
-use App\Support\Infrastructure\Persistence\AdminAuditLogEntityRepository;
+use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AdminAuditLogEntityRepository::class)]
+#[ORM\Entity]
 #[ORM\Table(name: 'admin_audit_log')]
 #[ORM\Index(name: 'idx_admin_audit_log_actor_user', columns: ['actor_user_id'])]
 #[ORM\Index(name: 'idx_admin_audit_log_target_user', columns: ['target_user_id'])]

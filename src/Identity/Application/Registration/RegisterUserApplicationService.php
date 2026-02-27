@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Identity\Application\Registration;
 
-use App\Entity\UserEntity;
 use App\Identity\Application\Common\IdentityPasswordHasherInterface;
 use App\Identity\Application\Common\IdentityWritePersistenceInterface;
 use App\Identity\Application\Security\TemporaryLinkPolicy;
+use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
 
 final class RegisterUserApplicationService

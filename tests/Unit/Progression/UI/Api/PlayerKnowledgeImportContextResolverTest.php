@@ -2,10 +2,19 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Progression\UI\Api;
 
-use App\Entity\PlayerEntity;
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
+use App\Progression\Domain\Entity\PlayerEntity;
 use App\Progression\UI\Api\PlayerKnowledgeImportContext;
 use App\Progression\UI\Api\PlayerKnowledgeImportContextResolver;
 use App\Progression\UI\Api\PlayerOwnedContextResolver;
@@ -21,11 +30,11 @@ final class PlayerKnowledgeImportContextResolverTest extends TestCase
 {
     public function testResolveOrNotFoundReturnsContextWhenPlayerExists(): void
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('user@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_USER']);
-        $player = (new PlayerEntity())->setName('Main');
+        $player = new PlayerEntity()->setName('Main');
         $request = new Request(content: '{"replace":false,"learnedItems":[{"type":"BOOK","sourceId":901}]}');
 
         /** @var ProgressionOwnedPlayerReadResolverInterface&MockObject $readResolver */
@@ -49,7 +58,7 @@ final class PlayerKnowledgeImportContextResolverTest extends TestCase
 
     public function testResolveOrNotFoundReturns404WhenPlayerMissing(): void
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail('user@example.com')
             ->setPassword('hash')
             ->setRoles(['ROLE_USER']);

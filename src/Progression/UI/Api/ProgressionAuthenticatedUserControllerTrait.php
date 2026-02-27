@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace App\Progression\UI\Api;
 
-use App\Entity\UserEntity;
-use App\Progression\UI\Api\ProgressionApiUserContext;
+use App\Identity\Domain\Entity\UserEntity;
 
 trait ProgressionAuthenticatedUserControllerTrait
 {

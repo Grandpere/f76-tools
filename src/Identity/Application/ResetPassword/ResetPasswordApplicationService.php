@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Identity\Application\ResetPassword;
 
-use App\Entity\UserEntity;
 use App\Identity\Application\Common\IdentityPasswordHasherInterface;
 use App\Identity\Application\Common\IdentityWritePersistenceInterface;
+use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
 
 final class ResetPasswordApplicationService

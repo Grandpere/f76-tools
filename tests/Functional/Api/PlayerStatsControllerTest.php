@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Api;
 
+use App\Catalog\Domain\Entity\ItemBookListEntity;
+use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
-use App\Entity\ItemBookListEntity;
-use App\Entity\ItemEntity;
-use App\Entity\PlayerEntity;
-use App\Entity\PlayerItemKnowledgeEntity;
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
+use App\Progression\Domain\Entity\PlayerEntity;
+use App\Progression\Domain\Entity\PlayerItemKnowledgeEntity;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;

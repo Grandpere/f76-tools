@@ -15,7 +15,7 @@ namespace App\Tests\Unit\Catalog\Application\Minerva;
 
 use App\Catalog\Application\Minerva\MinervaRotationReader;
 use App\Catalog\Application\Minerva\MinervaRotationTimelineApplicationService;
-use App\Entity\MinervaRotationEntity;
+use App\Catalog\Domain\Entity\MinervaRotationEntity;
 use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

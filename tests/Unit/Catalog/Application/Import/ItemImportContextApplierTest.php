@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Catalog\Application\Import;
 
 use App\Catalog\Application\Import\ItemImportContextApplier;
+use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
-use App\Entity\ItemEntity;
 use PHPUnit\Framework\TestCase;
 
 final class ItemImportContextApplierTest extends TestCase

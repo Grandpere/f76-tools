@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Catalog\Application\Import;
 
+use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
-use App\Entity\ItemEntity;
 
 final class ItemImportContextApplier
 {

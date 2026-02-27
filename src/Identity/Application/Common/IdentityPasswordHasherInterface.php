@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Identity\Application\Common;
 
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
 
 interface IdentityPasswordHasherInterface
 {

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Support\Application\Contact;
 
-use App\Entity\ContactMessageEntity;
+use App\Support\Domain\Entity\ContactMessageEntity;
 
 final class ContactMessageApplicationService
 {

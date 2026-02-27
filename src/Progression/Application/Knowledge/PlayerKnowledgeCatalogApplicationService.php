@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Progression\Application\Knowledge;
 
 use App\Catalog\Domain\Item\ItemTypeEnum;
-use App\Entity\PlayerEntity;
+use App\Progression\Domain\Entity\PlayerEntity;
 
 final class PlayerKnowledgeCatalogApplicationService
 {
@@ -25,7 +25,7 @@ final class PlayerKnowledgeCatalogApplicationService
     }
 
     /**
-     * @return list<array{item: \App\Entity\ItemEntity, learned: bool}>
+     * @return list<array{item: \App\Catalog\Domain\Entity\ItemEntity, learned: bool}>
      */
     public function listForPlayer(PlayerEntity $player, ?ItemTypeEnum $type = null): array
     {

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Progression\Application\Knowledge;
 
-use App\Entity\ItemEntity;
+use App\Catalog\Domain\Entity\ItemEntity;
 use App\Progression\Application\Knowledge\ItemReadApplicationService;
 use App\Progression\Application\Knowledge\ItemReadRepositoryInterface;
 use PHPUnit\Framework\MockObject\MockObject;

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
-use App\Entity\PlayerEntity;
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
+use App\Progression\Domain\Entity\PlayerEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Command;
 
-use App\Entity\UserEntity;
 use App\Identity\Application\User\UserByEmailFinder;
+use App\Identity\Domain\Entity\UserEntity;
 use App\Identity\UI\Console\PromoteUserAdminCommand;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;

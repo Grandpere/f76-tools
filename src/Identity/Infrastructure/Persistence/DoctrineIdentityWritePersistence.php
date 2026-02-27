@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Identity\Infrastructure\Persistence;
 
-use App\Entity\UserEntity;
 use App\Identity\Application\Common\IdentityWritePersistenceInterface;
+use App\Identity\Domain\Entity\UserEntity;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class DoctrineIdentityWritePersistence implements IdentityWritePersistenceInterface

@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Progression\Application\Knowledge;
 
 use App\Catalog\Domain\Item\ItemTypeEnum;
-use App\Entity\PlayerEntity;
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
 use App\Progression\Application\Knowledge\ItemStatsReadRepository;
 use App\Progression\Application\Knowledge\PlayerKnowledgeStatsApplicationService;
 use App\Progression\Application\Knowledge\PlayerKnowledgeStatsReadRepository;
+use App\Progression\Domain\Entity\PlayerEntity;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;

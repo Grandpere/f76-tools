@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Progression\UI\Api;
 
-use App\Entity\ItemEntity;
+use App\Catalog\Domain\Entity\ItemEntity;
 use App\Progression\Application\Knowledge\ItemReadApplicationService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 

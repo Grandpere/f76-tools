@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Identity\Application\ResetPassword;
 
-use App\Entity\UserEntity;
 use App\Identity\Application\Common\IdentityPasswordHasherInterface;
 use App\Identity\Application\Common\IdentityWritePersistenceInterface;
 use App\Identity\Application\ResetPassword\ResetPasswordApplicationService;
 use App\Identity\Application\ResetPassword\ResetPasswordResult;
 use App\Identity\Application\ResetPassword\ResetPasswordUserRepositoryInterface;
+use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

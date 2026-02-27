@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Progression\UI\Api;
 
-use App\Entity\ItemEntity;
+use App\Catalog\Domain\Entity\ItemEntity;
 use App\Progression\Application\Knowledge\ItemReadApplicationService;
 use App\Progression\Application\Knowledge\ItemReadRepositoryInterface;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;

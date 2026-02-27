@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Progression\UI\Api;
 
-use App\Entity\PlayerEntity;
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
 use App\Progression\Application\Player\PlayerReadApplicationService;
 use App\Progression\Application\Player\PlayerReadRepositoryInterface;
+use App\Progression\Domain\Entity\PlayerEntity;
 use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolver;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

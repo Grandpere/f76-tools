@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Support\Application\AdminUser;
 
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
 
 interface AdminUserManagementReadRepositoryInterface
 {

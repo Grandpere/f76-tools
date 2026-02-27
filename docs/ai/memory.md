@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-27 - Doctrine entities in Infrastructure namespace break PHPat boundaries
+- Symptom: after moving entities out of `src/Entity`, PHPat raised many `Application/UI -> Infrastructure` violations and doctrine test bootstrap failed on missing `src/Entity` mapping path.
+- Root cause: entities were first moved under `*/Infrastructure/...`, which made every entity type-hint count as an infra dependency; Doctrine config still pointed to `src/Entity`.
+- Fix: moved entities to `*/Domain/Entity`, removed `repositoryClass` attributes from domain entities to avoid `Domain -> Infrastructure`, and switched Doctrine mapping to `dir: src` + `prefix: App`.
+- Prevention: when removing `src/Entity`, place entities in domain context namespaces and update Doctrine mapping in the same slice.
+
 ## 2026-02-27 - UI namespace migration exposes hidden infrastructure coupling
 - Symptom: after moving web/security controllers into `.../UI/...`, PHPat started failing on direct infra injections that previously went unnoticed.
 - Root cause: legacy `src/Controller/*` classes were outside strict layer checks; once moved under UI namespaces, architectural rules applied.

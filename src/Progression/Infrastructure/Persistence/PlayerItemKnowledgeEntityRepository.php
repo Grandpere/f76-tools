@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace App\Progression\Infrastructure\Persistence;
 
+use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
-use App\Entity\ItemEntity;
-use App\Entity\PlayerEntity;
-use App\Entity\PlayerItemKnowledgeEntity;
 use App\Progression\Application\Knowledge\PlayerItemKnowledgeFinder;
 use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogReadRepository;
 use App\Progression\Application\Knowledge\PlayerKnowledgeStatsReadRepository;
 use App\Progression\Application\Knowledge\PlayerKnowledgeTransferRepository;
+use App\Progression\Domain\Entity\PlayerEntity;
+use App\Progression\Domain\Entity\PlayerItemKnowledgeEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

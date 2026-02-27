@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Support\UI\Admin;
 
-use App\Entity\AdminAuditLogEntity;
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
+use App\Support\Domain\Entity\AdminAuditLogEntity;
 use App\Support\UI\Admin\AuditLogCsvExporter;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;

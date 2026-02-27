@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Progression\Application\Player;
 
-use App\Entity\PlayerEntity;
-use App\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserEntity;
+use App\Progression\Domain\Entity\PlayerEntity;
 
 interface PlayerReadRepositoryInterface
 {
