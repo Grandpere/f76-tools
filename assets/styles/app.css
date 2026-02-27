@@ -1014,7 +1014,7 @@ body::before {
 .minerva-countdown-card {
     border: 1px solid rgba(255, 210, 74, 0.45);
     border-radius: 14px;
-    background: linear-gradient(160deg, #fffef8, #f9f4df);
+    background: #fff;
     padding: 0.95rem;
     margin-bottom: 0.8rem;
 }
@@ -1044,7 +1044,7 @@ body::before {
 .minerva-countdown-box {
     border: 1px solid rgba(31, 41, 54, 0.16);
     border-radius: 10px;
-    background: #fff;
+    background: linear-gradient(160deg, #fffef8, #f9f4df);
     padding: 0.4rem;
     text-align: center;
 }
