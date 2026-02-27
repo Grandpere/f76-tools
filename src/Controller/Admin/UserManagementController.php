@@ -68,11 +68,9 @@ final class UserManagementController extends AbstractController
     #[Route('/{id<\d+>}/toggle-active', name: 'app_admin_users_toggle_active', methods: ['POST'])]
     public function toggleActive(int $id, Request $request): RedirectResponse
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        if (!$this->isValidToken($request, 'admin_users_toggle_active_'.$id)) {
-            $this->addFlash('warning', 'admin_users.flash.invalid_csrf');
-
-            return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
+        $failureResponse = $this->guardAdminPostOrFailure($request, 'admin_users_toggle_active_'.$id);
+        if ($failureResponse instanceof RedirectResponse) {
+            return $failureResponse;
         }
 
         $result = $this->toggleUserActiveApplicationService->toggle($id, $this->getUser());
@@ -89,17 +87,15 @@ final class UserManagementController extends AbstractController
             $this->entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
+        return $this->redirectToUsers($request);
     }
 
     #[Route('/{id<\d+>}/toggle-admin', name: 'app_admin_users_toggle_admin', methods: ['POST'])]
     public function toggleAdmin(int $id, Request $request): RedirectResponse
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        if (!$this->isValidToken($request, 'admin_users_toggle_admin_'.$id)) {
-            $this->addFlash('warning', 'admin_users.flash.invalid_csrf');
-
-            return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
+        $failureResponse = $this->guardAdminPostOrFailure($request, 'admin_users_toggle_admin_'.$id);
+        if ($failureResponse instanceof RedirectResponse) {
+            return $failureResponse;
         }
 
         $result = $this->toggleUserAdminApplicationService->toggle($id, $this->getUser());
@@ -116,17 +112,15 @@ final class UserManagementController extends AbstractController
             $this->entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
+        return $this->redirectToUsers($request);
     }
 
     #[Route('/{id<\d+>}/generate-reset-link', name: 'app_admin_users_generate_reset_link', methods: ['POST'])]
     public function generateResetLink(int $id, Request $request): RedirectResponse
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        if (!$this->isValidToken($request, 'admin_users_generate_reset_link_'.$id)) {
-            $this->addFlash('warning', 'admin_users.flash.invalid_csrf');
-
-            return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
+        $failureResponse = $this->guardAdminPostOrFailure($request, 'admin_users_generate_reset_link_'.$id);
+        if ($failureResponse instanceof RedirectResponse) {
+            return $failureResponse;
         }
 
         $result = $this->generateResetLinkApplicationService->generate($id, $this->getUser());
@@ -146,7 +140,7 @@ final class UserManagementController extends AbstractController
             $translated = $this->translator->trans($feedback['flashMessage'], $feedback['flashParams']);
             $this->addFlash($feedback['flashType'], sprintf('%s %s', $translated, $resetUrl));
 
-            return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
+            return $this->redirectToUsers($request);
         }
 
         $this->addFlash(
@@ -154,7 +148,7 @@ final class UserManagementController extends AbstractController
             $this->translator->trans($feedback['flashMessage'], $feedback['flashParams']),
         );
 
-        return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
+        return $this->redirectToUsers($request);
     }
 
     private function isValidToken(Request $request, string $tokenId): bool
@@ -162,6 +156,23 @@ final class UserManagementController extends AbstractController
         $token = (string) $request->request->get('_csrf_token', '');
 
         return $this->csrfTokenManager->isTokenValid(new CsrfToken($tokenId, $token));
+    }
+
+    private function guardAdminPostOrFailure(Request $request, string $tokenId): ?RedirectResponse
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        if ($this->isValidToken($request, $tokenId)) {
+            return null;
+        }
+
+        $this->addFlash('warning', 'admin_users.flash.invalid_csrf');
+
+        return $this->redirectToUsers($request);
+    }
+
+    private function redirectToUsers(Request $request): RedirectResponse
+    {
+        return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
     }
 
     /**

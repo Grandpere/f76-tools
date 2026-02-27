@@ -4,6 +4,7 @@
 - Campagne de slices DDD progression (en cours).
 
 ## Termine recemment
+- F76-073: DDD Slice 63 - User management controller POST guard helper (done).
 - F76-072: DDD Slice 62 - Security email flow controller trait (done).
 - F76-071: DDD Slice 61 - Security captcha render controller trait (done).
 - F76-070: DDD Slice 60 - Security signed token validation controller trait (done).
