@@ -42,3 +42,4 @@ Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inven
 - [x] Slice effectuee: controllers admin migres de `src/Controller/Admin` vers `src/Support/UI/Admin/Controller`.
 - [x] Slice effectuee: ports additionnels pour respecter PHPat (`MinervaRotationRegenerationRepository`, `AdminUserManagementReadRepositoryInterface`) et eliminer les dependances `Application/UI -> Infrastructure`.
 - [x] Slice effectuee: controllers web migres hors `src/Controller` vers contexts (`Identity/UI/Security/Controller`, `Progression/UI/Web`, `Catalog/UI/Web`) avec remplacement des dependances infra directes via ports applicatifs (`IdentityCaptchaSiteKeyProviderInterface`, `PlayerReadApplicationService`).
+- [x] Slice effectuee: controllers API progression migres hors `src/Controller/Api` vers `src/Progression/UI/Api` (incluant `ProgressionAuthenticatedUserControllerTrait`) et suppression du dossier legacy `src/Controller`.
