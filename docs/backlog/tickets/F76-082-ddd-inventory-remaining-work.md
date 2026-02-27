@@ -1,5 +1,9 @@
 # F76-082 - DDD Inventory Remaining Work (Useful + Optional)
 
+## Statut
+- Closed - 2026-02-27
+- Tous les items utiles et optionnels planifies ont ete traites et verifies.
+
 ## Contexte
 Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inventaire explicite des changements restants est necessaire pour prioriser proprement.
 
@@ -50,3 +54,4 @@ Le projet a fortement progresse sur les slices DDD. Avant de continuer, un inven
 - [x] Slice effectuee: renforcement PHPat avec une regle explicite interdisant les dependances vers les namespaces legacy racine (`App\\Controller`, `App\\Entity`, `App\\Service`, etc.).
 - [x] Slice effectuee: import Catalog durci avec value objects dedies (`ItemImportFileContext`, `ItemImportContextApplyResult`, `ItemImportTranslationCatalog`) pour remplacer les tableaux de shape implicite.
 - [x] Slice effectuee: docblocks payloads resserres sur admin/audit et import (`list<mixed>` pour les lignes JSON de source reader, context audit explicite `bool|int|string|null`).
+- [x] Validation fonctionnelle finale executee par l'utilisateur: verte.

@@ -80,6 +80,19 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertSame(false, $audit->getContext()['isActive'] ?? null);
     }
 
+    public function testAdminUsersPageRendersManagementActionsForManagedUser(): void
+    {
+        $admin = $this->createUser('admin-actions@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed-actions@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(1, $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-active"]', $managed->getId())));
+        self::assertCount(1, $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-admin"]', $managed->getId())));
+        self::assertCount(1, $crawler->filter(sprintf('form[action*="/admin/users/%d/generate-reset-link"]', $managed->getId())));
+    }
+
     public function testAdminCanToggleManagedUserRole(): void
     {
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);

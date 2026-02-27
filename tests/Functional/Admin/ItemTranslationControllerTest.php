@@ -103,6 +103,38 @@ final class ItemTranslationControllerTest extends WebTestCase
         self::assertSame('Valeur FR test', $parsed[$entryKey] ?? null);
     }
 
+    public function testSavedTranslationIsVisibleAfterReload(): void
+    {
+        $user = $this->createUser('translations-visible@example.com');
+        $this->browser()->loginUser($user);
+
+        $crawler = $this->browser()->request('GET', '/admin/translations/items?locale=fr&target=zz');
+        $tokenNode = $crawler->filter('input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+        $token = (string) $tokenNode->attr('value');
+
+        $entryNode = $crawler->filter('textarea[name^="entries["]')->first();
+        self::assertCount(1, $entryNode);
+        $entryFieldName = (string) $entryNode->attr('name');
+        self::assertMatchesRegularExpression('/^entries\[(.+)\]$/', $entryFieldName);
+        preg_match('/^entries\[(.+)\]$/', $entryFieldName, $matches);
+        $entryKey = $matches[1];
+
+        $this->browser()->request('POST', '/admin/translations/items?locale=fr&target=zz', [
+            '_csrf_token' => $token,
+            'target' => 'zz',
+            'entries' => [
+                $entryKey => 'Valeur visible',
+            ],
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $reload = $this->browser()->request('GET', '/admin/translations/items?locale=fr&target=zz&q='.$entryKey);
+        $textarea = $reload->filter(sprintf('textarea[name="entries[%s]"]', $entryKey));
+        self::assertCount(1, $textarea);
+        self::assertSame('Valeur visible', trim((string) $textarea->text('')));
+    }
+
     public function testPostRejectsInvalidCsrfToken(): void
     {
         $user = $this->createUser('translations-invalid-csrf@example.com');

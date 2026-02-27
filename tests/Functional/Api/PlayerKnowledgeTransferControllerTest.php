@@ -145,6 +145,34 @@ final class PlayerKnowledgeTransferControllerTest extends WebTestCase
         self::assertTrue($this->containsEntry($unknown, 'BOOK', 999999));
     }
 
+    public function testPreviewImportDoesNotMutateKnowledgeState(): void
+    {
+        $user = $this->createUser('transfer-preview-no-mutation@example.com');
+        $player = $this->createPlayer($user, 'Main');
+        $known = $this->createItem(941, ItemTypeEnum::BOOK, null, 'item.book.941.name');
+        $new = $this->createItem(942, ItemTypeEnum::BOOK, null, 'item.book.942.name');
+
+        $this->browser()->loginUser($user);
+        $this->browser()->request('PUT', sprintf('/api/players/%s/items/%s/learned', $player->getPublicId(), $known->getPublicId()));
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+
+        $this->browser()->jsonRequest('POST', sprintf('/api/players/%s/knowledge/preview-import', $player->getPublicId()), [
+            'replace' => false,
+            'learnedItems' => [
+                ['type' => 'BOOK', 'sourceId' => 942],
+            ],
+        ]);
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+
+        $this->browser()->request('GET', sprintf('/api/players/%s/items?type=BOOK', $player->getPublicId()));
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        $rows = $this->decodeList($this->browser()->getResponse()->getContent() ?: '[]');
+        self::assertSame([
+            941 => true,
+            942 => false,
+        ], $this->mapLearnedBySourceId($rows));
+    }
+
     public function testImportRejectsUnsupportedVersion(): void
     {
         $user = $this->createUser('transfer-version@example.com');

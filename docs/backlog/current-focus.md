@@ -1,8 +1,8 @@
 # Current Focus
 
 ## Priorite active
-- F76-082: Inventaire des changements DDD restants (utile + optionnel).
-- F76-082: Lancer campagne fonctionnelle finale et cloturer le ticket.
+- F76-002: Evolutions produit Minerva (localisation/date/listes) selon la roadmap metier.
+- Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
 - F76-081: DDD Slice 71 - Admin boundary typing hardening (done).
@@ -79,7 +79,7 @@
 - F76-004: Minerva Source Governance (done).
 
 ## Ensuite
-- F76-082: Cloture ticket et hygiene documentaire post-validation fonctionnelle.
+- Formaliser le prochain ticket produit (Minerva front + gouvernance des sources).
 - F76-010: DDD Foundations (done, keep as reference).
 - F76-011: DDD Slice 1 - Progression context (done, keep as reference).
 - F76-001: Contact messages en base + backoffice admin (done).
