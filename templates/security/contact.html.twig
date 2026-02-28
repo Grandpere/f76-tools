@@ -5,8 +5,7 @@
 {% block body %}
     <main class="auth-page">
         <section class="auth-card">
-            <p class="catalog-kicker">Fallout 76</p>
-            <h1 class="auth-title">{{ 'security.contact.title'|trans }}</h1>
+            {% include 'security/_card_header.html.twig' with { title: 'security.contact.title' } %}
 
             {% include 'security/_flashes.html.twig' %}
 
