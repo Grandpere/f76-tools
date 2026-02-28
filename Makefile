@@ -69,6 +69,14 @@ composer-install: ## Install composer dependencies
 cache-clear: ## Clear Symfony cache (dev)
 	$(DC_EXEC) php bin/console cache:clear
 
+.PHONY: audit-retention-dry-run
+audit-retention-dry-run: ## Dry-run purge for auth/admin audit logs
+	$(DC_EXEC) php bin/console app:audit:retention:run --days=90 --dry-run
+
+.PHONY: audit-retention-run
+audit-retention-run: ## Purge auth/admin audit logs
+	$(DC_EXEC) php bin/console app:audit:retention:run --days=90
+
 ##
 ## Database
 ##---------------------------------------------------------------------------

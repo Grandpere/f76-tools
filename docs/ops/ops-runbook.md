@@ -34,12 +34,24 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
   - `docker compose -f compose.yaml exec -T app php bin/console app:user:promote-admin user@example.com`
 
 ## Audit logs
-- Purge dry-run (aucune suppression):
+- Purge unifiee dry-run (auth + admin):
+  - `make audit-retention-dry-run`
+- Purge unifiee reelle (auth + admin):
+  - `make audit-retention-run`
+- Purge dediee admin audit dry-run:
   - `docker compose -f compose.yaml exec -T app php bin/console app:admin:audit:purge --days=90 --dry-run`
-- Purge reelle:
-  - `docker compose -f compose.yaml exec -T app php bin/console app:admin:audit:purge --days=90`
+- Purge dediee auth audit dry-run:
+  - `docker compose -f compose.yaml exec -T app php bin/console app:auth:audit:purge --days=90 --dry-run`
 - Export CSV via UI:
   - Backoffice > Logs d audit > `Export CSV`
+- Export CSV auth par utilisateur via UI:
+  - Backoffice > Utilisateurs > Activite securite > `Export CSV`
+
+## Planification cron
+- Exemple de cron quotidien (02:15) depuis l hote Docker:
+  - `15 2 * * * cd /chemin/vers/f76 && make audit-retention-run >> var/log/audit-retention.log 2>&1`
+- Recommandation:
+  - lancer d abord quelques jours en `audit-retention-dry-run` pour verifier les volumes.
 
 ## Rotation Minerva
 - Generation dry-run:
