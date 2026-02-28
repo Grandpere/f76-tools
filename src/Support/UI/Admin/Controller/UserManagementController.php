@@ -66,15 +66,18 @@ final class UserManagementController extends AbstractController
     }
 
     #[Route('', name: 'app_admin_users', methods: ['GET'])]
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $this->ensureAdminAccess();
         $users = $this->userRepository->findAllOrdered();
         $googleIdentitiesByUserId = $this->adminUserGoogleIdentityReadService->getGoogleIdentityByUserId($users);
+        $googleFilter = $this->normalizeGoogleFilter($request->query->getString('google', ''));
+        $filteredUsers = $this->filterUsersByGoogleIdentity($users, $googleIdentitiesByUserId, $googleFilter);
 
         return $this->render('admin/users.html.twig', [
-            'users' => $users,
+            'users' => $filteredUsers,
             'googleIdentitiesByUserId' => $googleIdentitiesByUserId,
+            'googleFilter' => $googleFilter,
         ]);
     }
 
@@ -247,5 +250,45 @@ final class UserManagementController extends AbstractController
     protected function csrfTokenManager(): CsrfTokenManagerInterface
     {
         return $this->csrfTokenManager;
+    }
+
+    /**
+     * @param list<UserEntity>                                           $users
+     * @param array<int, \App\Identity\Domain\Entity\UserIdentityEntity> $googleIdentitiesByUserId
+     *
+     * @return list<UserEntity>
+     */
+    private function filterUsersByGoogleIdentity(array $users, array $googleIdentitiesByUserId, string $googleFilter): array
+    {
+        if ('linked' !== $googleFilter && 'unlinked' !== $googleFilter) {
+            return $users;
+        }
+
+        $filtered = [];
+        foreach ($users as $user) {
+            $userId = $user->getId();
+            if (!is_int($userId)) {
+                continue;
+            }
+
+            $isLinked = array_key_exists($userId, $googleIdentitiesByUserId);
+            if ('linked' === $googleFilter && !$isLinked) {
+                continue;
+            }
+            if ('unlinked' === $googleFilter && $isLinked) {
+                continue;
+            }
+
+            $filtered[] = $user;
+        }
+
+        return $filtered;
+    }
+
+    private function normalizeGoogleFilter(string $googleFilter): string
+    {
+        $normalized = mb_strtolower(trim($googleFilter));
+
+        return in_array($normalized, ['linked', 'unlinked'], true) ? $normalized : '';
     }
 }

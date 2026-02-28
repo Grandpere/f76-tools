@@ -194,6 +194,12 @@ admin_users.description: Enable/disable accounts, manage admin rights, and gener
 admin_users.back_to_dashboard: Back to dashboard
 admin_users.to_translations: Translation management
 admin_users.to_audit_logs: Audit logs
+admin_users.google_filter_label: Google identity
+admin_users.google_filter_all: All users
+admin_users.google_filter_linked: Google linked
+admin_users.google_filter_unlinked: Google not linked
+admin_users.filter: Filter
+admin_users.visible_rows: '%count% visible users.'
 admin_users.list_title: User list
 admin_users.email: Email
 admin_users.roles: Roles

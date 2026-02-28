@@ -7,6 +7,9 @@
         {% include 'admin/_page_header.html.twig' with {
             backLabel: 'admin_users.back_to_dashboard',
             localeSelectId: 'admin-users-header-locale-select',
+            localeHiddenFields: {
+                google: googleFilter
+            },
             kicker: 'admin_users.kicker',
             title: 'admin_users.title',
             description: 'admin_users.description'|trans
@@ -15,6 +18,21 @@
         {% include 'admin/_flashes.html.twig' %}
 
         <section class="translations-panel">
+            <form method="get" class="translations-filters">
+                {% include 'admin/_select_filter_field.html.twig' with {
+                    label: 'admin_users.google_filter_label',
+                    name: 'google',
+                    selectedValue: googleFilter,
+                    emptyOptionLabel: 'admin_users.google_filter_all',
+                    options: [
+                        { value: 'linked', label: 'admin_users.google_filter_linked' },
+                        { value: 'unlinked', label: 'admin_users.google_filter_unlinked' }
+                    ]
+                } %}
+                {% include 'admin/_filters_common_hidden_fields.html.twig' %}
+                <button type="submit">{{ 'admin_users.filter'|trans }}</button>
+            </form>
+            <p class="catalog-state">{{ 'admin_users.visible_rows'|trans({'%count%': users|length}) }}</p>
             <h2>{{ 'admin_users.list_title'|trans }}</h2>
             <div class="translations-table-wrap">
                 <table class="translations-table admin-users-table">

@@ -127,6 +127,27 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertSame('google', $audit->getContext()['provider'] ?? null);
     }
 
+    public function testAdminCanFilterUsersByGoogleIdentityStatus(): void
+    {
+        $admin = $this->createUser('admin-filter@example.com', 'secret123', ['ROLE_ADMIN']);
+        $linked = $this->createUser('linked-filter@example.com', 'secret123', ['ROLE_USER']);
+        $unlinked = $this->createUser('unlinked-filter@example.com', 'secret123', ['ROLE_USER']);
+        $this->linkGoogleIdentity($linked, 'google-sub-filter');
+        $this->browser()->loginUser($admin);
+
+        $this->browser()->request('GET', '/admin/users?google=linked');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        $linkedContent = $this->browser()->getResponse()->getContent() ?: '';
+        self::assertStringContainsString('linked-filter@example.com', $linkedContent);
+        self::assertStringNotContainsString('unlinked-filter@example.com', $linkedContent);
+
+        $this->browser()->request('GET', '/admin/users?google=unlinked');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        $unlinkedContent = $this->browser()->getResponse()->getContent() ?: '';
+        self::assertStringContainsString('unlinked-filter@example.com', $unlinkedContent);
+        self::assertStringNotContainsString('linked-filter@example.com', $unlinkedContent);
+    }
+
     public function testAdminCanToggleManagedUserRole(): void
     {
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);

@@ -194,6 +194,12 @@ admin_users.description: Konten aktivieren/deaktivieren, Admin-Rechte verwalten 
 admin_users.back_to_dashboard: Zuruck zum Dashboard
 admin_users.to_translations: Ubersetzungsverwaltung
 admin_users.to_audit_logs: Audit-Logs
+admin_users.google_filter_label: Google-Identitat
+admin_users.google_filter_all: Alle Benutzer
+admin_users.google_filter_linked: Google verknupft
+admin_users.google_filter_unlinked: Google nicht verknupft
+admin_users.filter: Filtern
+admin_users.visible_rows: '%count% sichtbare Benutzer.'
 admin_users.list_title: Benutzerliste
 admin_users.email: E-Mail
 admin_users.roles: Rollen
