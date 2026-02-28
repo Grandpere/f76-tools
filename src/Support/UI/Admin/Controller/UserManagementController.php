@@ -72,8 +72,10 @@ final class UserManagementController extends AbstractController
         $users = $this->userRepository->findAllOrdered();
         $googleIdentitiesByUserId = $this->adminUserGoogleIdentityReadService->getGoogleIdentityByUserId($users);
         $googleFilter = $this->normalizeGoogleFilter($request->query->getString('google', ''));
+        $activeFilter = $this->normalizeActiveFilter($request->query->getString('active', ''));
         $query = trim($request->query->getString('q', ''));
-        $filteredUsers = $this->filterUsersByGoogleIdentity($users, $googleIdentitiesByUserId, $googleFilter);
+        $filteredUsers = $this->filterUsersByActiveStatus($users, $activeFilter);
+        $filteredUsers = $this->filterUsersByGoogleIdentity($filteredUsers, $googleIdentitiesByUserId, $googleFilter);
         $filteredUsers = $this->filterUsersBySearchQuery($filteredUsers, $query);
         $totalUsers = count($users);
         $googleLinkedCount = count($googleIdentitiesByUserId);
@@ -84,6 +86,7 @@ final class UserManagementController extends AbstractController
             'users' => $filteredUsers,
             'googleIdentitiesByUserId' => $googleIdentitiesByUserId,
             'googleFilter' => $googleFilter,
+            'activeFilter' => $activeFilter,
             'query' => $query,
             'totalUsers' => $totalUsers,
             'googleLinkedCount' => $googleLinkedCount,
@@ -229,6 +232,7 @@ final class UserManagementController extends AbstractController
         return $this->redirectToRoute('app_admin_users', [
             'locale' => $request->getLocale(),
             'google' => $this->normalizeGoogleFilter((string) $request->request->get('google', '')),
+            'active' => $this->normalizeActiveFilter((string) $request->request->get('active', '')),
             'q' => trim((string) $request->request->get('q', '')),
         ]);
     }
@@ -305,6 +309,38 @@ final class UserManagementController extends AbstractController
         $normalized = mb_strtolower(trim($googleFilter));
 
         return in_array($normalized, ['linked', 'unlinked'], true) ? $normalized : '';
+    }
+
+    private function normalizeActiveFilter(string $activeFilter): string
+    {
+        $normalized = mb_strtolower(trim($activeFilter));
+
+        return in_array($normalized, ['active', 'inactive'], true) ? $normalized : '';
+    }
+
+    /**
+     * @param list<UserEntity> $users
+     *
+     * @return list<UserEntity>
+     */
+    private function filterUsersByActiveStatus(array $users, string $activeFilter): array
+    {
+        if ('active' !== $activeFilter && 'inactive' !== $activeFilter) {
+            return $users;
+        }
+
+        $filtered = [];
+        foreach ($users as $user) {
+            if ('active' === $activeFilter && !$user->isActive()) {
+                continue;
+            }
+            if ('inactive' === $activeFilter && $user->isActive()) {
+                continue;
+            }
+            $filtered[] = $user;
+        }
+
+        return $filtered;
     }
 
     /**

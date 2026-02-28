@@ -198,6 +198,10 @@ admin_users.google_filter_label: Google-Identitat
 admin_users.google_filter_all: Alle Benutzer
 admin_users.google_filter_linked: Google verknupft
 admin_users.google_filter_unlinked: Google nicht verknupft
+admin_users.active_filter_label: Kontostatus
+admin_users.active_filter_all: Alle Status
+admin_users.active_filter_active: Nur aktiv
+admin_users.active_filter_inactive: Nur inaktiv
 admin_users.search: Suche
 admin_users.search_placeholder: E-Mail
 admin_users.filter: Filtern

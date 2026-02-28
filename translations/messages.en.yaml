@@ -198,6 +198,10 @@ admin_users.google_filter_label: Google identity
 admin_users.google_filter_all: All users
 admin_users.google_filter_linked: Google linked
 admin_users.google_filter_unlinked: Google not linked
+admin_users.active_filter_label: Account status
+admin_users.active_filter_all: All statuses
+admin_users.active_filter_active: Active only
+admin_users.active_filter_inactive: Inactive only
 admin_users.search: Search
 admin_users.search_placeholder: Email
 admin_users.filter: Filter

@@ -186,6 +186,26 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='beta.search@example.com']"));
     }
 
+    public function testAdminCanFilterUsersByActiveStatus(): void
+    {
+        $admin = $this->createUser('admin-active-filter@example.com', 'secret123', ['ROLE_ADMIN']);
+        $active = $this->createUser('active.filter@example.com', 'secret123', ['ROLE_USER']);
+        $inactive = $this->createUser('inactive.filter@example.com', 'secret123', ['ROLE_USER']);
+        $inactive->setIsActive(false);
+        $this->entityManager?->flush();
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?active=active');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='active.filter@example.com']"));
+        self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='inactive.filter@example.com']"));
+
+        $crawler = $this->browser()->request('GET', '/admin/users?active=inactive');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='inactive.filter@example.com']"));
+        self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='active.filter@example.com']"));
+    }
+
     public function testAdminActionRedirectPreservesSearchQuery(): void
     {
         $admin = $this->createUser('admin-preserve-q@example.com', 'secret123', ['ROLE_ADMIN']);
@@ -203,6 +223,27 @@ final class UserManagementControllerTest extends WebTestCase
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('q=managed-preserve-q', (string) $this->browser()->getResponse()->headers->get('location'));
+    }
+
+    public function testAdminActionRedirectPreservesActiveFilter(): void
+    {
+        $admin = $this->createUser('admin-preserve-active@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed-preserve-active@example.com', 'secret123', ['ROLE_USER']);
+        $managed->setIsActive(false);
+        $this->entityManager?->flush();
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?active=inactive');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/toggle-active', $managed->getId()), [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'active' => 'inactive',
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        self::assertStringContainsString('active=inactive', (string) $this->browser()->getResponse()->headers->get('location'));
     }
 
     public function testAdminCanToggleManagedUserRole(): void
