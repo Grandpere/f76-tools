@@ -11,6 +11,7 @@ dashboard.header.user_management: User management
 dashboard.header.minerva_rotation: Minerva
 dashboard.header.progression: Progress
 dashboard.header.admin: Administration
+dashboard.header.change_password: Change password
 dashboard.header.title: Legendary mods
 dashboard.header.subtitle: Select a character, then mark learned legendary mods.
 dashboard.header.greeting_prefix: Hello
@@ -186,6 +187,18 @@ security.reset.flash.invalid_csrf: Invalid session, please try again.
 security.reset.flash.password_too_short: Password must be at least 8 characters long.
 security.reset.flash.password_mismatch: Password confirmation does not match.
 security.reset.flash.success: Password updated. You can now sign in.
+security.change_password.page_title: 'F76 - Change password'
+security.change_password.title: Change password
+security.change_password.current_password: Current password
+security.change_password.new_password: New password
+security.change_password.new_password_confirm: Confirm new password
+security.change_password.submit: Save new password
+security.change_password.to_home: Back to progression
+security.change_password.flash.invalid_csrf: Invalid session, please try again.
+security.change_password.flash.current_password_invalid: Current password is invalid.
+security.change_password.flash.password_too_short: Password must be at least 8 characters long.
+security.change_password.flash.password_mismatch: Password confirmation does not match.
+security.change_password.flash.success: Password updated successfully.
 
 admin_users.page_title: Users backoffice
 admin_users.kicker: Backoffice

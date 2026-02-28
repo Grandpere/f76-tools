@@ -11,6 +11,7 @@ dashboard.header.user_management: Benutzerverwaltung
 dashboard.header.minerva_rotation: Minerva
 dashboard.header.progression: Fortschritt
 dashboard.header.admin: Administration
+dashboard.header.change_password: Passwort andern
 dashboard.header.title: Legendare Mods
 dashboard.header.subtitle: Wahlen Sie einen Charakter aus und markieren Sie gelernte legendare Mods.
 dashboard.header.greeting_prefix: Hallo
@@ -186,6 +187,18 @@ security.reset.flash.invalid_csrf: Ungultige Sitzung, bitte erneut versuchen.
 security.reset.flash.password_too_short: Das Passwort muss mindestens 8 Zeichen lang sein.
 security.reset.flash.password_mismatch: Die Passwortbestatigung stimmt nicht uberein.
 security.reset.flash.success: Passwort aktualisiert. Sie konnen sich jetzt anmelden.
+security.change_password.page_title: 'F76 - Passwort andern'
+security.change_password.title: Passwort andern
+security.change_password.current_password: Aktuelles Passwort
+security.change_password.new_password: Neues Passwort
+security.change_password.new_password_confirm: Neues Passwort bestatigen
+security.change_password.submit: Neues Passwort speichern
+security.change_password.to_home: Zuruck zum Fortschritt
+security.change_password.flash.invalid_csrf: Ungultige Sitzung, bitte erneut versuchen.
+security.change_password.flash.current_password_invalid: Das aktuelle Passwort ist ungultig.
+security.change_password.flash.password_too_short: Das Passwort muss mindestens 8 Zeichen lang sein.
+security.change_password.flash.password_mismatch: Die Passwortbestatigung stimmt nicht uberein.
+security.change_password.flash.success: Passwort erfolgreich aktualisiert.
 
 admin_users.page_title: Benutzer-Backoffice
 admin_users.kicker: Backoffice

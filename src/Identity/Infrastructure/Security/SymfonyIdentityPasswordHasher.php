@@ -14,10 +14,11 @@ declare(strict_types=1);
 namespace App\Identity\Infrastructure\Security;
 
 use App\Identity\Application\Common\IdentityPasswordHasherInterface;
+use App\Identity\Application\Common\IdentityPasswordVerifierInterface;
 use App\Identity\Domain\Entity\UserEntity;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-final class SymfonyIdentityPasswordHasher implements IdentityPasswordHasherInterface
+final class SymfonyIdentityPasswordHasher implements IdentityPasswordHasherInterface, IdentityPasswordVerifierInterface
 {
     public function __construct(
         private readonly UserPasswordHasherInterface $passwordHasher,
@@ -27,5 +28,10 @@ final class SymfonyIdentityPasswordHasher implements IdentityPasswordHasherInter
     public function hash(UserEntity $user, string $plainPassword): string
     {
         return $this->passwordHasher->hashPassword($user, $plainPassword);
+    }
+
+    public function isValid(UserEntity $user, string $plainPassword): bool
+    {
+        return $this->passwordHasher->isPasswordValid($user, $plainPassword);
     }
 }

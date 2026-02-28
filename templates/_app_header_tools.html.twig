@@ -3,6 +3,7 @@
     {% if is_granted('ROLE_ADMIN') %}
         <a class="header-translations-link" href="{{ path('app_admin_users', { locale: app.request.locale }) }}"><img class="header-action-icon" src="/assets/icons/admin.svg" alt="" aria-hidden="true"> {{ 'dashboard.header.admin'|trans }}</a>
     {% endif %}
+    <a class="header-translations-link" href="{{ path('app_change_password', { locale: app.request.locale }) }}">{{ 'dashboard.header.change_password'|trans }}</a>
     <span class="header-account"><img class="header-action-icon" src="/assets/icons/account.svg" alt="" aria-hidden="true"> <strong>{{ username }}</strong></span>
     <form method="post" action="{{ path('app_logout', { locale: app.request.locale }) }}" class="logout-form header-logout-form">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">

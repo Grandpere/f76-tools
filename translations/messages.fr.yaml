@@ -11,6 +11,7 @@ dashboard.header.user_management: Gestion des utilisateurs
 dashboard.header.minerva_rotation: Minerva
 dashboard.header.progression: Progression
 dashboard.header.admin: Administration
+dashboard.header.change_password: Changer le mot de passe
 dashboard.header.title: Mods legendaires
 dashboard.header.subtitle: Selectionne un personnage puis marque ses mods legendaires appris.
 dashboard.header.greeting_prefix: Bonjour
@@ -186,6 +187,18 @@ security.reset.flash.invalid_csrf: Session invalide, merci de reessayer.
 security.reset.flash.password_too_short: Le mot de passe doit contenir au moins 8 caracteres.
 security.reset.flash.password_mismatch: Les deux mots de passe sont differents.
 security.reset.flash.success: Mot de passe mis a jour. Vous pouvez vous connecter.
+security.change_password.page_title: 'F76 - Changer le mot de passe'
+security.change_password.title: Changer le mot de passe
+security.change_password.current_password: Mot de passe actuel
+security.change_password.new_password: Nouveau mot de passe
+security.change_password.new_password_confirm: Confirmer le nouveau mot de passe
+security.change_password.submit: Enregistrer le nouveau mot de passe
+security.change_password.to_home: Retour a la progression
+security.change_password.flash.invalid_csrf: Session invalide, merci de reessayer.
+security.change_password.flash.current_password_invalid: Le mot de passe actuel est invalide.
+security.change_password.flash.password_too_short: Le mot de passe doit contenir au moins 8 caracteres.
+security.change_password.flash.password_mismatch: Les deux mots de passe sont differents.
+security.change_password.flash.success: Mot de passe mis a jour avec succes.
 
 admin_users.page_title: Backoffice utilisateurs
 admin_users.kicker: Backoffice
