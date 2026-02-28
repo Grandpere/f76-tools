@@ -59,6 +59,8 @@ final class ResetPasswordControllerTest extends WebTestCase
         $crawler = $this->browser()->request('GET', $signedUrl);
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filter('a[href="/login"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/forgot-password"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/contact"]'));
 
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);

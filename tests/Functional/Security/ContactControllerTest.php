@@ -51,6 +51,7 @@ final class ContactControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter('input[name="email"]'));
         self::assertCount(1, $crawler->filter('input[name="subject"]'));
         self::assertCount(1, $crawler->filter('textarea[name="message"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/register"]'));
     }
 
     public function testContactPostRedirectsWithSuccessFlash(): void

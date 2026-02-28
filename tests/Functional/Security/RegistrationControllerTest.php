@@ -49,6 +49,8 @@ final class RegistrationControllerTest extends WebTestCase
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filter('form'));
         self::assertCount(1, $crawler->filter('input[name="email"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/forgot-password"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/contact"]'));
     }
 
     public function testRegisterCreatesUserAndRedirectsToLogin(): void

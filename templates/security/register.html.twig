@@ -63,6 +63,8 @@
 
             <p class="auth-links">
                 <a href="{{ path('app_login', { locale: app.request.locale }) }}">{{ 'security.register.to_login'|trans }}</a>
+                · <a href="{{ path('app_forgot_password', { locale: app.request.locale }) }}">{{ 'security.login.to_forgot'|trans }}</a>
+                · <a href="{{ path('app_contact', { locale: app.request.locale }) }}">{{ 'security.login.to_contact'|trans }}</a>
             </p>
         </section>
     </main>
