@@ -19,7 +19,7 @@ use App\Identity\Application\Time\IdentityClockInterface;
 final class ResendVerificationEmailApplicationService
 {
     public function __construct(
-        private readonly AdminUserManagementWriteRepositoryInterface $userRepository,
+        private readonly AdminUserManagementWriteRepository $userRepository,
         private readonly TemporaryLinkPolicy $temporaryLinkPolicy,
         private readonly IdentityClockInterface $identityClock,
     ) {

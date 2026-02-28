@@ -15,7 +15,7 @@ namespace App\Tests\Unit\Support\Application\Audit;
 
 use App\Support\Application\Audit\AuditLogListApplicationService;
 use App\Support\Application\Audit\AuditLogListQuery;
-use App\Support\Application\Audit\AuditLogReadRepositoryInterface;
+use App\Support\Application\Audit\AuditLogReadRepository;
 use PHPUnit\Framework\TestCase;
 
 final class AuditLogListApplicationServiceTest extends TestCase
@@ -75,7 +75,7 @@ final class AuditLogListApplicationServiceTest extends TestCase
 /**
  * @internal
  */
-final class InMemoryAuditLogReadRepository implements AuditLogReadRepositoryInterface
+final class InMemoryAuditLogReadRepository implements AuditLogReadRepository
 {
     /**
      * @var list<array{rows: list<\App\Support\Domain\Entity\AdminAuditLogEntity>, total: int}>

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Support\Application\Contact;
 
 use App\Support\Application\Contact\ContactMessageApplicationService;
-use App\Support\Application\Contact\ContactMessageEmailSenderInterface;
+use App\Support\Application\Contact\ContactMessageEmailSender;
 use App\Support\Application\Contact\ContactMessageWriter;
 use App\Support\Application\Contact\ContactSubmissionApplicationService;
 use App\Support\Application\Contact\ContactSubmissionInput;
@@ -32,8 +32,8 @@ final class ContactSubmissionApplicationServiceTest extends TestCase
         $writer->expects(self::once())->method('save');
         $messageService = new ContactMessageApplicationService($writer);
 
-        /** @var ContactMessageEmailSenderInterface&MockObject $emailSender */
-        $emailSender = $this->createMock(ContactMessageEmailSenderInterface::class);
+        /** @var ContactMessageEmailSender&MockObject $emailSender */
+        $emailSender = $this->createMock(ContactMessageEmailSender::class);
         $emailSender->expects(self::once())->method('send');
 
         $service = new ContactSubmissionApplicationService($messageService, $emailSender);
@@ -53,8 +53,8 @@ final class ContactSubmissionApplicationServiceTest extends TestCase
         $writer->method('save')->willThrowException(new RuntimeException('db'));
         $messageService = new ContactMessageApplicationService($writer);
 
-        /** @var ContactMessageEmailSenderInterface&MockObject $emailSender */
-        $emailSender = $this->createMock(ContactMessageEmailSenderInterface::class);
+        /** @var ContactMessageEmailSender&MockObject $emailSender */
+        $emailSender = $this->createMock(ContactMessageEmailSender::class);
         $emailSender->expects(self::never())->method('send');
 
         $service = new ContactSubmissionApplicationService($messageService, $emailSender);
@@ -74,8 +74,8 @@ final class ContactSubmissionApplicationServiceTest extends TestCase
         $writer->expects(self::once())->method('save');
         $messageService = new ContactMessageApplicationService($writer);
 
-        /** @var ContactMessageEmailSenderInterface&MockObject $emailSender */
-        $emailSender = $this->createMock(ContactMessageEmailSenderInterface::class);
+        /** @var ContactMessageEmailSender&MockObject $emailSender */
+        $emailSender = $this->createMock(ContactMessageEmailSender::class);
         $emailSender->method('send')->willThrowException(new RuntimeException('smtp'));
 
         $service = new ContactSubmissionApplicationService($messageService, $emailSender);

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Support\Application\AdminUser;
 
 use App\Identity\Domain\Entity\UserEntity;
-use App\Support\Application\AdminUser\AdminUserManagementWriteRepositoryInterface;
+use App\Support\Application\AdminUser\AdminUserManagementWriteRepository;
 use App\Support\Application\AdminUser\ToggleUserAdminApplicationService;
 use App\Support\Application\AdminUser\ToggleUserAdminResult;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -30,8 +30,8 @@ final class ToggleUserAdminApplicationServiceTest extends TestCase
             ->setPassword('hash')
             ->setRoles(['ROLE_ADMIN']);
 
-        /** @var AdminUserManagementWriteRepositoryInterface&MockObject $repository */
-        $repository = $this->createMock(AdminUserManagementWriteRepositoryInterface::class);
+        /** @var AdminUserManagementWriteRepository&MockObject $repository */
+        $repository = $this->createMock(AdminUserManagementWriteRepository::class);
         $repository->expects(self::once())->method('getById')->with(10)->willReturn(null);
         $repository->expects(self::never())->method('save');
 
@@ -57,8 +57,8 @@ final class ToggleUserAdminApplicationServiceTest extends TestCase
         $reflection->setValue($actor, 42);
         $reflection->setValue($target, 42);
 
-        /** @var AdminUserManagementWriteRepositoryInterface&MockObject $repository */
-        $repository = $this->createMock(AdminUserManagementWriteRepositoryInterface::class);
+        /** @var AdminUserManagementWriteRepository&MockObject $repository */
+        $repository = $this->createMock(AdminUserManagementWriteRepository::class);
         $repository->expects(self::once())->method('getById')->with(42)->willReturn($target);
         $repository->expects(self::never())->method('save');
 
@@ -86,8 +86,8 @@ final class ToggleUserAdminApplicationServiceTest extends TestCase
         $targetId = new ReflectionProperty(UserEntity::class, 'id');
         $targetId->setValue($target, 2);
 
-        /** @var AdminUserManagementWriteRepositoryInterface&MockObject $repository */
-        $repository = $this->createMock(AdminUserManagementWriteRepositoryInterface::class);
+        /** @var AdminUserManagementWriteRepository&MockObject $repository */
+        $repository = $this->createMock(AdminUserManagementWriteRepository::class);
         $repository->expects(self::once())->method('getById')->with(2)->willReturn($target);
         $repository->expects(self::once())->method('save')->with($target);
 
@@ -116,8 +116,8 @@ final class ToggleUserAdminApplicationServiceTest extends TestCase
         $targetId = new ReflectionProperty(UserEntity::class, 'id');
         $targetId->setValue($target, 2);
 
-        /** @var AdminUserManagementWriteRepositoryInterface&MockObject $repository */
-        $repository = $this->createMock(AdminUserManagementWriteRepositoryInterface::class);
+        /** @var AdminUserManagementWriteRepository&MockObject $repository */
+        $repository = $this->createMock(AdminUserManagementWriteRepository::class);
         $repository->expects(self::once())->method('getById')->with(2)->willReturn($target);
         $repository->expects(self::once())->method('save')->with($target);
 

@@ -14,10 +14,12 @@ declare(strict_types=1);
 namespace App\Support\Application\AdminUser;
 
 use App\Identity\Domain\Entity\UserEntity;
+use DateTimeImmutable;
 
-interface AdminUserManagementWriteRepositoryInterface
+interface AdminUserAuditReadRepository
 {
-    public function getById(int $id): ?UserEntity;
-
-    public function save(UserEntity $user): void;
+    /**
+     * @param list<string> $actions
+     */
+    public function countRecentActionsByActor(UserEntity $actor, array $actions, DateTimeImmutable $since): int;
 }

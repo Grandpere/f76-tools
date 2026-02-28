@@ -21,8 +21,8 @@ use DateTimeImmutable;
 final class GenerateResetLinkApplicationService
 {
     public function __construct(
-        private readonly AdminUserManagementWriteRepositoryInterface $userRepository,
-        private readonly AdminUserAuditReadRepositoryInterface $auditRepository,
+        private readonly AdminUserManagementWriteRepository $userRepository,
+        private readonly AdminUserAuditReadRepository $auditRepository,
         private readonly TemporaryLinkPolicy $temporaryLinkPolicy,
     ) {
     }

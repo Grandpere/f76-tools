@@ -17,7 +17,7 @@ use App\Identity\Application\Security\AuthAuditLogReader;
 use App\Identity\Application\Security\SignedUrlGenerator;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Support\Application\AdminUser\AdminUserGoogleIdentityReadService;
-use App\Support\Application\AdminUser\AdminUserManagementReadRepositoryInterface;
+use App\Support\Application\AdminUser\AdminUserManagementReadRepository;
 use App\Support\Application\AdminUser\ForceVerifyEmailApplicationService;
 use App\Support\Application\AdminUser\ForceVerifyEmailResult;
 use App\Support\Application\AdminUser\GenerateResetLinkApplicationService;
@@ -55,7 +55,7 @@ final class UserManagementController extends AbstractController
     use AdminCsrfTokenValidatorTrait;
 
     public function __construct(
-        private readonly AdminUserManagementReadRepositoryInterface $userRepository,
+        private readonly AdminUserManagementReadRepository $userRepository,
         private readonly AdminUserGoogleIdentityReadService $adminUserGoogleIdentityReadService,
         private readonly EntityManagerInterface $entityManager,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,

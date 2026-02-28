@@ -15,7 +15,7 @@ namespace App\Support\Application\Audit;
 
 use App\Support\Domain\Entity\AdminAuditLogEntity;
 
-interface AuditLogReadRepositoryInterface
+interface AuditLogReadRepository
 {
     /**
      * @return array{rows: list<AdminAuditLogEntity>, total: int}

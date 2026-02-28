@@ -15,7 +15,7 @@ namespace App\Support\Application\Contact;
 
 use App\Support\Domain\Entity\ContactMessageEntity;
 
-interface ContactMessageStatusWriteRepositoryInterface
+interface ContactMessageStatusWriteRepository
 {
     public function getById(int $id): ?ContactMessageEntity;
 

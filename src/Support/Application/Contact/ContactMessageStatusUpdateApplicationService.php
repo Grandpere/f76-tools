@@ -19,7 +19,7 @@ use App\Support\Domain\Entity\ContactMessageEntity;
 final class ContactMessageStatusUpdateApplicationService
 {
     public function __construct(
-        private readonly ContactMessageStatusWriteRepositoryInterface $contactMessageRepository,
+        private readonly ContactMessageStatusWriteRepository $contactMessageRepository,
     ) {
     }
 

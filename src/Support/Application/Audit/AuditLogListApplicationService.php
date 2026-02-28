@@ -16,7 +16,7 @@ namespace App\Support\Application\Audit;
 final class AuditLogListApplicationService
 {
     public function __construct(
-        private readonly AuditLogReadRepositoryInterface $auditLogRepository,
+        private readonly AuditLogReadRepository $auditLogRepository,
     ) {
     }
 

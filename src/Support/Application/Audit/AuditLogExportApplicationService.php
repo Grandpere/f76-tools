@@ -18,7 +18,7 @@ final class AuditLogExportApplicationService
     private const EXPORT_MAX_ROWS = 10000;
 
     public function __construct(
-        private readonly AuditLogReadRepositoryInterface $auditLogRepository,
+        private readonly AuditLogReadRepository $auditLogRepository,
     ) {
     }
 

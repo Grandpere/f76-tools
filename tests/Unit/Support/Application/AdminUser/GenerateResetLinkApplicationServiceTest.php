@@ -15,8 +15,8 @@ namespace App\Tests\Unit\Support\Application\AdminUser;
 
 use App\Identity\Application\Security\TemporaryLinkPolicy;
 use App\Identity\Domain\Entity\UserEntity;
-use App\Support\Application\AdminUser\AdminUserAuditReadRepositoryInterface;
-use App\Support\Application\AdminUser\AdminUserManagementWriteRepositoryInterface;
+use App\Support\Application\AdminUser\AdminUserAuditReadRepository;
+use App\Support\Application\AdminUser\AdminUserManagementWriteRepository;
 use App\Support\Application\AdminUser\GenerateResetLinkApplicationService;
 use App\Support\Application\AdminUser\GenerateResetLinkStatus;
 use DateTimeImmutable;
@@ -29,13 +29,13 @@ final class GenerateResetLinkApplicationServiceTest extends TestCase
     {
         $actor = $this->createUser('admin@example.com', ['ROLE_ADMIN']);
 
-        /** @var AdminUserManagementWriteRepositoryInterface&MockObject $userRepository */
-        $userRepository = $this->createMock(AdminUserManagementWriteRepositoryInterface::class);
+        /** @var AdminUserManagementWriteRepository&MockObject $userRepository */
+        $userRepository = $this->createMock(AdminUserManagementWriteRepository::class);
         $userRepository->expects(self::once())->method('getById')->with(10)->willReturn(null);
         $userRepository->expects(self::never())->method('save');
 
-        /** @var AdminUserAuditReadRepositoryInterface&MockObject $auditRepository */
-        $auditRepository = $this->createMock(AdminUserAuditReadRepositoryInterface::class);
+        /** @var AdminUserAuditReadRepository&MockObject $auditRepository */
+        $auditRepository = $this->createMock(AdminUserAuditReadRepository::class);
         $auditRepository->expects(self::never())->method('countRecentActionsByActor');
 
         $service = new GenerateResetLinkApplicationService($userRepository, $auditRepository, new TemporaryLinkPolicy());
@@ -49,13 +49,13 @@ final class GenerateResetLinkApplicationServiceTest extends TestCase
         $actor = $this->createUser('admin@example.com', ['ROLE_ADMIN']);
         $target = $this->createUser('managed@example.com', ['ROLE_USER']);
 
-        /** @var AdminUserManagementWriteRepositoryInterface&MockObject $userRepository */
-        $userRepository = $this->createMock(AdminUserManagementWriteRepositoryInterface::class);
+        /** @var AdminUserManagementWriteRepository&MockObject $userRepository */
+        $userRepository = $this->createMock(AdminUserManagementWriteRepository::class);
         $userRepository->expects(self::once())->method('getById')->with(10)->willReturn($target);
         $userRepository->expects(self::never())->method('save');
 
-        /** @var AdminUserAuditReadRepositoryInterface&MockObject $auditRepository */
-        $auditRepository = $this->createMock(AdminUserAuditReadRepositoryInterface::class);
+        /** @var AdminUserAuditReadRepository&MockObject $auditRepository */
+        $auditRepository = $this->createMock(AdminUserAuditReadRepository::class);
         $auditRepository->expects(self::once())->method('countRecentActionsByActor')->willReturn(10);
 
         $service = new GenerateResetLinkApplicationService($userRepository, $auditRepository, new TemporaryLinkPolicy());
@@ -73,13 +73,13 @@ final class GenerateResetLinkApplicationServiceTest extends TestCase
         $target = $this->createUser('managed@example.com', ['ROLE_USER'])
             ->setResetPasswordRequestedAt(new DateTimeImmutable());
 
-        /** @var AdminUserManagementWriteRepositoryInterface&MockObject $userRepository */
-        $userRepository = $this->createMock(AdminUserManagementWriteRepositoryInterface::class);
+        /** @var AdminUserManagementWriteRepository&MockObject $userRepository */
+        $userRepository = $this->createMock(AdminUserManagementWriteRepository::class);
         $userRepository->expects(self::once())->method('getById')->with(10)->willReturn($target);
         $userRepository->expects(self::never())->method('save');
 
-        /** @var AdminUserAuditReadRepositoryInterface&MockObject $auditRepository */
-        $auditRepository = $this->createMock(AdminUserAuditReadRepositoryInterface::class);
+        /** @var AdminUserAuditReadRepository&MockObject $auditRepository */
+        $auditRepository = $this->createMock(AdminUserAuditReadRepository::class);
         $auditRepository->expects(self::once())->method('countRecentActionsByActor')->willReturn(0);
 
         $service = new GenerateResetLinkApplicationService($userRepository, $auditRepository, new TemporaryLinkPolicy());
@@ -95,13 +95,13 @@ final class GenerateResetLinkApplicationServiceTest extends TestCase
         $actor = $this->createUser('admin@example.com', ['ROLE_ADMIN']);
         $target = $this->createUser('managed@example.com', ['ROLE_USER']);
 
-        /** @var AdminUserManagementWriteRepositoryInterface&MockObject $userRepository */
-        $userRepository = $this->createMock(AdminUserManagementWriteRepositoryInterface::class);
+        /** @var AdminUserManagementWriteRepository&MockObject $userRepository */
+        $userRepository = $this->createMock(AdminUserManagementWriteRepository::class);
         $userRepository->expects(self::once())->method('getById')->with(10)->willReturn($target);
         $userRepository->expects(self::once())->method('save')->with($target);
 
-        /** @var AdminUserAuditReadRepositoryInterface&MockObject $auditRepository */
-        $auditRepository = $this->createMock(AdminUserAuditReadRepositoryInterface::class);
+        /** @var AdminUserAuditReadRepository&MockObject $auditRepository */
+        $auditRepository = $this->createMock(AdminUserAuditReadRepository::class);
         $auditRepository->expects(self::once())->method('countRecentActionsByActor')->willReturn(0);
 
         $service = new GenerateResetLinkApplicationService($userRepository, $auditRepository, new TemporaryLinkPolicy());

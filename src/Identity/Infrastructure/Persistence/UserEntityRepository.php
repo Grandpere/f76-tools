@@ -20,15 +20,15 @@ use App\Identity\Application\ResetPassword\ResetPasswordUserRepositoryInterface;
 use App\Identity\Application\User\UserByEmailFinder;
 use App\Identity\Application\VerifyEmail\VerifyEmailUserRepositoryInterface;
 use App\Identity\Domain\Entity\UserEntity;
-use App\Support\Application\AdminUser\AdminUserManagementReadRepositoryInterface;
-use App\Support\Application\AdminUser\AdminUserManagementWriteRepositoryInterface;
+use App\Support\Application\AdminUser\AdminUserManagementReadRepository;
+use App\Support\Application\AdminUser\AdminUserManagementWriteRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<UserEntity>
  */
-final class UserEntityRepository extends ServiceEntityRepository implements UserByEmailFinder, VerifyEmailUserRepositoryInterface, ResetPasswordUserRepositoryInterface, ForgotPasswordUserRepositoryInterface, RegistrationUserRepositoryInterface, ResendVerificationUserRepositoryInterface, AdminUserManagementReadRepositoryInterface, AdminUserManagementWriteRepositoryInterface
+final class UserEntityRepository extends ServiceEntityRepository implements UserByEmailFinder, VerifyEmailUserRepositoryInterface, ResetPasswordUserRepositoryInterface, ForgotPasswordUserRepositoryInterface, RegistrationUserRepositoryInterface, ResendVerificationUserRepositoryInterface, AdminUserManagementReadRepository, AdminUserManagementWriteRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

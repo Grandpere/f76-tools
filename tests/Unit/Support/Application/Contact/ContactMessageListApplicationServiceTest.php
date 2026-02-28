@@ -15,7 +15,7 @@ namespace App\Tests\Unit\Support\Application\Contact;
 
 use App\Support\Application\Contact\ContactMessageListApplicationService;
 use App\Support\Application\Contact\ContactMessageListQuery;
-use App\Support\Application\Contact\ContactMessageReadRepositoryInterface;
+use App\Support\Application\Contact\ContactMessageReadRepository;
 use App\Support\Domain\Contact\ContactMessageStatusEnum;
 use PHPUnit\Framework\TestCase;
 
@@ -78,7 +78,7 @@ final class ContactMessageListApplicationServiceTest extends TestCase
 /**
  * @internal
  */
-final class InMemoryContactMessageReadRepository implements ContactMessageReadRepositoryInterface
+final class InMemoryContactMessageReadRepository implements ContactMessageReadRepository
 {
     /**
      * @var list<array{rows: list<\App\Support\Domain\Entity\ContactMessageEntity>, total: int}>

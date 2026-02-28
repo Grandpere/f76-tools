@@ -15,7 +15,7 @@ namespace App\Tests\Unit\Support\Application\Audit;
 
 use App\Support\Application\Audit\AuditLogExportApplicationService;
 use App\Support\Application\Audit\AuditLogExportQuery;
-use App\Support\Application\Audit\AuditLogReadRepositoryInterface;
+use App\Support\Application\Audit\AuditLogReadRepository;
 use PHPUnit\Framework\TestCase;
 
 final class AuditLogExportApplicationServiceTest extends TestCase
@@ -36,7 +36,7 @@ final class AuditLogExportApplicationServiceTest extends TestCase
 /**
  * @internal
  */
-final class InMemoryAuditLogExportRepository implements AuditLogReadRepositoryInterface
+final class InMemoryAuditLogExportRepository implements AuditLogReadRepository
 {
     /**
      * @var array{0: string, 1: string, 2: int}|null

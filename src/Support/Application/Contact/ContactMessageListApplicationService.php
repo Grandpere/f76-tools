@@ -16,7 +16,7 @@ namespace App\Support\Application\Contact;
 final class ContactMessageListApplicationService
 {
     public function __construct(
-        private readonly ContactMessageReadRepositoryInterface $contactMessageRepository,
+        private readonly ContactMessageReadRepository $contactMessageRepository,
     ) {
     }
 

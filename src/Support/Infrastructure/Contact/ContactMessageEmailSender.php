@@ -13,11 +13,10 @@ declare(strict_types=1);
 
 namespace App\Support\Infrastructure\Contact;
 
-use App\Support\Application\Contact\ContactMessageEmailSenderInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
-final class ContactMessageEmailSender implements ContactMessageEmailSenderInterface
+final class ContactMessageEmailSender implements \App\Support\Application\Contact\ContactMessageEmailSender
 {
     public function __construct(
         private readonly MailerInterface $mailer,

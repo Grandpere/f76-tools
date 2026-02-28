@@ -16,7 +16,7 @@ namespace App\Tests\Unit\Support\Application\AdminUser;
 use App\Identity\Application\Security\TemporaryLinkPolicy;
 use App\Identity\Application\Time\IdentityClockInterface;
 use App\Identity\Domain\Entity\UserEntity;
-use App\Support\Application\AdminUser\AdminUserManagementWriteRepositoryInterface;
+use App\Support\Application\AdminUser\AdminUserManagementWriteRepository;
 use App\Support\Application\AdminUser\ResendVerificationEmailApplicationService;
 use App\Support\Application\AdminUser\ResendVerificationEmailStatus;
 use DateTimeImmutable;
@@ -25,13 +25,13 @@ use PHPUnit\Framework\TestCase;
 
 final class ResendVerificationEmailApplicationServiceTest extends TestCase
 {
-    private AdminUserManagementWriteRepositoryInterface&MockObject $userRepository;
+    private AdminUserManagementWriteRepository&MockObject $userRepository;
     private IdentityClockInterface&MockObject $clock;
     private TemporaryLinkPolicy $temporaryLinkPolicy;
 
     protected function setUp(): void
     {
-        $this->userRepository = $this->createMock(AdminUserManagementWriteRepositoryInterface::class);
+        $this->userRepository = $this->createMock(AdminUserManagementWriteRepository::class);
         $this->clock = $this->createMock(IdentityClockInterface::class);
         $this->temporaryLinkPolicy = new TemporaryLinkPolicy();
     }

@@ -114,8 +114,14 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 ## 2026-02-27 - Moving controllers/repositories can trigger PHPat layer violations
 - Symptom: after namespace moves, PHPat reported `Application -> Infrastructure` and `UI -> Infrastructure` violations.
 - Root cause: some classes injected concrete repositories (`MinervaRotationEntityRepository`, `UserEntityRepository`) instead of application ports.
-- Fix: introduced ports (`MinervaRotationRegenerationRepository`, `AdminUserManagementReadRepositoryInterface`) and rewired dependencies to interfaces.
+- Fix: introduced ports (`MinervaRotationRegenerationRepository`, `AdminUserManagementReadRepository`) and rewired dependencies to interfaces.
 - Prevention: after structural moves, run phpstan/PHPat early and immediately replace concrete infra dependencies with application-level contracts.
+
+## 2026-03-01 - Port/class same-name collision after Interface suffix removal
+- Symptom: `phpstan`/PHPUnit fatal error `Cannot redeclare class ...ContactMessageEmailSender`.
+- Root cause: after renaming the port to `ContactMessageEmailSender`, the infrastructure class kept `use App\...\ContactMessageEmailSender` and had the same class basename in the same file.
+- Fix: removed ambiguous import and implemented the port with fully-qualified name.
+- Prevention: when removing `Interface` suffixes, check files where implementation class basename equals the new port basename and avoid conflicting `use` imports.
 
 ## 2026-02-27 - Repository namespace moves require entity metadata updates
 - Symptom: moving Doctrine repositories between namespaces can silently break runtime if entity `repositoryClass` attributes still point to old FQCNs.

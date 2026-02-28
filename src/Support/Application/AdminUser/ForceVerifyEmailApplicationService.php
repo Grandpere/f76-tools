@@ -16,7 +16,7 @@ namespace App\Support\Application\AdminUser;
 final class ForceVerifyEmailApplicationService
 {
     public function __construct(
-        private readonly AdminUserManagementWriteRepositoryInterface $userRepository,
+        private readonly AdminUserManagementWriteRepository $userRepository,
     ) {
     }
 

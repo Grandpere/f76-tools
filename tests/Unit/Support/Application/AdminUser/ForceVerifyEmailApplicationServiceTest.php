@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Support\Application\AdminUser;
 
 use App\Identity\Domain\Entity\UserEntity;
-use App\Support\Application\AdminUser\AdminUserManagementWriteRepositoryInterface;
+use App\Support\Application\AdminUser\AdminUserManagementWriteRepository;
 use App\Support\Application\AdminUser\ForceVerifyEmailApplicationService;
 use App\Support\Application\AdminUser\ForceVerifyEmailResult;
 use DateTimeImmutable;
@@ -23,11 +23,11 @@ use PHPUnit\Framework\TestCase;
 
 final class ForceVerifyEmailApplicationServiceTest extends TestCase
 {
-    private AdminUserManagementWriteRepositoryInterface&MockObject $userRepository;
+    private AdminUserManagementWriteRepository&MockObject $userRepository;
 
     protected function setUp(): void
     {
-        $this->userRepository = $this->createMock(AdminUserManagementWriteRepositoryInterface::class);
+        $this->userRepository = $this->createMock(AdminUserManagementWriteRepository::class);
     }
 
     public function testVerifyReturnsUserNotFoundWhenTargetDoesNotExist(): void

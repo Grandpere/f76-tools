@@ -15,7 +15,7 @@ namespace App\Support\Application\AdminUser;
 
 use App\Identity\Domain\Entity\UserEntity;
 
-interface AdminUserManagementReadRepositoryInterface
+interface AdminUserManagementReadRepository
 {
     /**
      * @return list<UserEntity>

@@ -17,7 +17,7 @@ use App\Identity\Application\Oidc\GoogleOidcIdentityReadRepository;
 use App\Identity\Application\Oidc\GoogleOidcIdentityWriteRepository;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Identity\Domain\Entity\UserIdentityEntity;
-use App\Support\Application\AdminUser\AdminUserManagementWriteRepositoryInterface;
+use App\Support\Application\AdminUser\AdminUserManagementWriteRepository;
 use App\Support\Application\AdminUser\UnlinkGoogleIdentityApplicationService;
 use App\Support\Application\AdminUser\UnlinkGoogleIdentityResult;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -25,13 +25,13 @@ use PHPUnit\Framework\TestCase;
 
 final class UnlinkGoogleIdentityApplicationServiceTest extends TestCase
 {
-    private AdminUserManagementWriteRepositoryInterface&MockObject $userRepository;
+    private AdminUserManagementWriteRepository&MockObject $userRepository;
     private GoogleOidcIdentityReadRepository&MockObject $identityReadRepository;
     private GoogleOidcIdentityWriteRepository&MockObject $identityWriteRepository;
 
     protected function setUp(): void
     {
-        $this->userRepository = $this->createMock(AdminUserManagementWriteRepositoryInterface::class);
+        $this->userRepository = $this->createMock(AdminUserManagementWriteRepository::class);
         $this->identityReadRepository = $this->createMock(GoogleOidcIdentityReadRepository::class);
         $this->identityWriteRepository = $this->createMock(GoogleOidcIdentityWriteRepository::class);
     }

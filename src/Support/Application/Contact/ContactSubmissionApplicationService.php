@@ -19,7 +19,7 @@ final class ContactSubmissionApplicationService
 {
     public function __construct(
         private readonly ContactMessageApplicationService $contactMessageApplicationService,
-        private readonly ContactMessageEmailSenderInterface $contactMessageEmailSender,
+        private readonly ContactMessageEmailSender $contactMessageEmailSender,
     ) {
     }
 

@@ -16,7 +16,7 @@ namespace App\Support\Application\Contact;
 use App\Support\Domain\Contact\ContactMessageStatusEnum;
 use App\Support\Domain\Entity\ContactMessageEntity;
 
-interface ContactMessageReadRepositoryInterface
+interface ContactMessageReadRepository
 {
     /**
      * @return array{rows: list<ContactMessageEntity>, total: int}

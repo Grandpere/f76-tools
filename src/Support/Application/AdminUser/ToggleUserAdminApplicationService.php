@@ -18,7 +18,7 @@ use App\Identity\Domain\Entity\UserEntity;
 final class ToggleUserAdminApplicationService
 {
     public function __construct(
-        private readonly AdminUserManagementWriteRepositoryInterface $userRepository,
+        private readonly AdminUserManagementWriteRepository $userRepository,
     ) {
     }
 

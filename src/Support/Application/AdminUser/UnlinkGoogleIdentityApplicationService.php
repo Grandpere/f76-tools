@@ -19,7 +19,7 @@ use App\Identity\Application\Oidc\GoogleOidcIdentityWriteRepository;
 final class UnlinkGoogleIdentityApplicationService
 {
     public function __construct(
-        private readonly AdminUserManagementWriteRepositoryInterface $userRepository,
+        private readonly AdminUserManagementWriteRepository $userRepository,
         private readonly GoogleOidcIdentityReadRepository $googleOidcIdentityReadRepository,
         private readonly GoogleOidcIdentityWriteRepository $googleOidcIdentityWriteRepository,
     ) {
