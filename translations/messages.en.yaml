@@ -227,6 +227,8 @@ admin_users.local_password_filter_label: Local password
 admin_users.local_password_filter_all: All local password states
 admin_users.local_password_filter_enabled: Local password enabled
 admin_users.local_password_filter_disabled: Local password disabled
+admin_users.created_from_label: Created from
+admin_users.created_to_label: Created to
 admin_users.search: Search
 admin_users.search_placeholder: Email
 admin_users.per_page: Rows per page
@@ -255,6 +257,7 @@ admin_users.security_local_login_no: Local login unavailable
 admin_users.toggle_active: Toggle active
 admin_users.toggle_admin: Toggle admin
 admin_users.generate_reset_link: Generate reset link
+admin_users.force_verify_email: Force verify email
 admin_users.resend_verification: Resend verification email
 admin_users.unlink_google: Unlink Google
 admin_users.unlink_google_disabled_reason: Set a local password first before unlinking Google.
@@ -272,6 +275,7 @@ admin_users.flash.reset_link_generated: Password reset link generated
 admin_users.flash.reset_link_rate_limited: Link already generated recently. Retry in %seconds% s.
 admin_users.flash.reset_link_global_rate_limited: Too many links generated (%count%) over %seconds% s. Retry later.
 admin_users.flash.verification_email_sent: Verification email sent.
+admin_users.flash.verification_email_forced: Email marked as verified.
 admin_users.flash.verification_email_already_verified: This user email is already verified.
 admin_users.flash.verification_email_rate_limited: Verification email already sent recently. Retry in %seconds% s.
 

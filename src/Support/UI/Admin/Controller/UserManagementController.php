@@ -17,6 +17,8 @@ use App\Identity\Application\Security\SignedUrlGenerator;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Support\Application\AdminUser\AdminUserGoogleIdentityReadService;
 use App\Support\Application\AdminUser\AdminUserManagementReadRepositoryInterface;
+use App\Support\Application\AdminUser\ForceVerifyEmailApplicationService;
+use App\Support\Application\AdminUser\ForceVerifyEmailResult;
 use App\Support\Application\AdminUser\GenerateResetLinkApplicationService;
 use App\Support\Application\AdminUser\GenerateResetLinkStatus;
 use App\Support\Application\AdminUser\ResendVerificationEmailApplicationService;
@@ -29,6 +31,7 @@ use App\Support\Application\AdminUser\UnlinkGoogleIdentityApplicationService;
 use App\Support\Application\AdminUser\UnlinkGoogleIdentityResult;
 use App\Support\Domain\Entity\AdminAuditLogEntity;
 use App\Support\UI\Admin\AdminAuthenticatedUserContext;
+use App\Support\UI\Admin\ForceVerifyEmailFeedbackMapper;
 use App\Support\UI\Admin\GenerateResetLinkFeedbackMapper;
 use App\Support\UI\Admin\ResendVerificationEmailFeedbackMapper;
 use App\Support\UI\Admin\ToggleUserActiveFeedbackMapper;
@@ -63,6 +66,8 @@ final class UserManagementController extends AbstractController
         private readonly ToggleUserAdminFeedbackMapper $toggleUserAdminFeedbackMapper,
         private readonly GenerateResetLinkApplicationService $generateResetLinkApplicationService,
         private readonly GenerateResetLinkFeedbackMapper $generateResetLinkFeedbackMapper,
+        private readonly ForceVerifyEmailApplicationService $forceVerifyEmailApplicationService,
+        private readonly ForceVerifyEmailFeedbackMapper $forceVerifyEmailFeedbackMapper,
         private readonly ResendVerificationEmailApplicationService $resendVerificationEmailApplicationService,
         private readonly ResendVerificationEmailFeedbackMapper $resendVerificationEmailFeedbackMapper,
         private readonly UnlinkGoogleIdentityApplicationService $unlinkGoogleIdentityApplicationService,
@@ -83,6 +88,8 @@ final class UserManagementController extends AbstractController
         $roleFilter = $this->normalizeRoleFilter($request->query->getString('role', ''));
         $verifiedFilter = $this->normalizeVerifiedFilter($request->query->getString('verified', ''));
         $localPasswordFilter = $this->normalizeLocalPasswordFilter($request->query->getString('localPassword', ''));
+        $createdFrom = $this->normalizeDateFilter($request->query->getString('createdFrom', ''));
+        $createdTo = $this->normalizeDateFilter($request->query->getString('createdTo', ''));
         $query = trim($request->query->getString('q', ''));
         $sort = $this->normalizeSort($request->query->getString('sort', ''));
         $dir = $this->normalizeSortDirection($request->query->getString('dir', ''));
@@ -93,6 +100,11 @@ final class UserManagementController extends AbstractController
         $filteredUsers = $this->filterUsersByRole($filteredUsers, $roleFilter);
         $filteredUsers = $this->filterUsersByVerificationStatus($filteredUsers, $verifiedFilter);
         $filteredUsers = $this->filterUsersByLocalPasswordStatus($filteredUsers, $localPasswordFilter);
+        $filteredUsers = $this->filterUsersByCreatedAtRange(
+            $filteredUsers,
+            $this->parseDateStartOfDay($createdFrom),
+            $this->parseDateEndOfDay($createdTo),
+        );
         $filteredUsers = $this->filterUsersBySearchQuery($filteredUsers, $query);
         $filteredUsers = $this->sortUsers($filteredUsers, $sort, $dir);
         $totalUsers = count($users);
@@ -112,6 +124,8 @@ final class UserManagementController extends AbstractController
             'roleFilter' => $roleFilter,
             'verifiedFilter' => $verifiedFilter,
             'localPasswordFilter' => $localPasswordFilter,
+            'createdFrom' => $createdFrom,
+            'createdTo' => $createdTo,
             'query' => $query,
             'sort' => $sort,
             'dir' => $dir,
@@ -136,6 +150,8 @@ final class UserManagementController extends AbstractController
         $roleFilter = $this->normalizeRoleFilter($request->query->getString('role', ''));
         $verifiedFilter = $this->normalizeVerifiedFilter($request->query->getString('verified', ''));
         $localPasswordFilter = $this->normalizeLocalPasswordFilter($request->query->getString('localPassword', ''));
+        $createdFrom = $this->normalizeDateFilter($request->query->getString('createdFrom', ''));
+        $createdTo = $this->normalizeDateFilter($request->query->getString('createdTo', ''));
         $query = trim($request->query->getString('q', ''));
         $sort = $this->normalizeSort($request->query->getString('sort', ''));
         $dir = $this->normalizeSortDirection($request->query->getString('dir', ''));
@@ -145,6 +161,11 @@ final class UserManagementController extends AbstractController
         $filteredUsers = $this->filterUsersByRole($filteredUsers, $roleFilter);
         $filteredUsers = $this->filterUsersByVerificationStatus($filteredUsers, $verifiedFilter);
         $filteredUsers = $this->filterUsersByLocalPasswordStatus($filteredUsers, $localPasswordFilter);
+        $filteredUsers = $this->filterUsersByCreatedAtRange(
+            $filteredUsers,
+            $this->parseDateStartOfDay($createdFrom),
+            $this->parseDateEndOfDay($createdTo),
+        );
         $filteredUsers = $this->filterUsersBySearchQuery($filteredUsers, $query);
         $filteredUsers = $this->sortUsers($filteredUsers, $sort, $dir);
 
@@ -347,6 +368,30 @@ final class UserManagementController extends AbstractController
         return $this->redirectToUsers($request);
     }
 
+    #[Route('/{id<\d+>}/force-verify-email', name: 'app_admin_users_force_verify_email', methods: ['POST'])]
+    public function forceVerifyEmail(int $id, Request $request): RedirectResponse
+    {
+        $failureResponse = $this->guardAdminPostOrFailure($request, 'admin_users_force_verify_email_'.$id);
+        if ($failureResponse instanceof RedirectResponse) {
+            return $failureResponse;
+        }
+        $actor = $this->getAuthenticatedUser();
+
+        $result = $this->forceVerifyEmailApplicationService->verify($id);
+        $feedback = $this->forceVerifyEmailFeedbackMapper->map($result);
+        $this->addFlash($feedback['flashType'], $feedback['flashMessage']);
+
+        if (is_string($feedback['auditAction'])) {
+            $targetUser = $this->userRepository->getById($id);
+            $this->persistAuditLog($request, $actor, $feedback['auditAction'], $targetUser, null);
+            $this->entityManager->flush();
+        } elseif (ForceVerifyEmailResult::VERIFIED === $result) {
+            $this->entityManager->flush();
+        }
+
+        return $this->redirectToUsers($request);
+    }
+
     private function guardAdminPostOrFailure(Request $request, string $tokenId): ?RedirectResponse
     {
         $this->ensureAdminAccess();
@@ -368,6 +413,8 @@ final class UserManagementController extends AbstractController
             'role' => $this->normalizeRoleFilter((string) $request->request->get('role', '')),
             'verified' => $this->normalizeVerifiedFilter((string) $request->request->get('verified', '')),
             'localPassword' => $this->normalizeLocalPasswordFilter((string) $request->request->get('localPassword', '')),
+            'createdFrom' => $this->normalizeDateFilter((string) $request->request->get('createdFrom', '')),
+            'createdTo' => $this->normalizeDateFilter((string) $request->request->get('createdTo', '')),
             'q' => trim((string) $request->request->get('q', '')),
             'sort' => $this->normalizeSort((string) $request->request->get('sort', '')),
             'dir' => $this->normalizeSortDirection((string) $request->request->get('dir', '')),
@@ -478,6 +525,16 @@ final class UserManagementController extends AbstractController
         return in_array($normalized, ['enabled', 'disabled'], true) ? $normalized : '';
     }
 
+    private function normalizeDateFilter(string $date): string
+    {
+        $normalized = trim($date);
+        if ('' === $normalized) {
+            return '';
+        }
+
+        return null !== $this->parseDate($normalized) ? $normalized : '';
+    }
+
     /**
      * @param list<UserEntity> $users
      *
@@ -584,6 +641,32 @@ final class UserManagementController extends AbstractController
      *
      * @return list<UserEntity>
      */
+    private function filterUsersByCreatedAtRange(array $users, ?DateTimeImmutable $from, ?DateTimeImmutable $to): array
+    {
+        if (!$from instanceof DateTimeImmutable && !$to instanceof DateTimeImmutable) {
+            return $users;
+        }
+
+        $filtered = [];
+        foreach ($users as $user) {
+            $createdAt = $user->getCreatedAt();
+            if ($from instanceof DateTimeImmutable && $createdAt < $from) {
+                continue;
+            }
+            if ($to instanceof DateTimeImmutable && $createdAt > $to) {
+                continue;
+            }
+            $filtered[] = $user;
+        }
+
+        return $filtered;
+    }
+
+    /**
+     * @param list<UserEntity> $users
+     *
+     * @return list<UserEntity>
+     */
     private function filterUsersBySearchQuery(array $users, string $query): array
     {
         if ('' === $query) {
@@ -625,6 +708,33 @@ final class UserManagementController extends AbstractController
         $normalized = mb_strtolower(trim($dir));
 
         return in_array($normalized, ['asc', 'desc'], true) ? $normalized : 'asc';
+    }
+
+    private function parseDate(string $date): ?DateTimeImmutable
+    {
+        $parsed = DateTimeImmutable::createFromFormat('Y-m-d', $date);
+
+        return false === $parsed ? null : $parsed;
+    }
+
+    private function parseDateStartOfDay(string $date): ?DateTimeImmutable
+    {
+        $parsed = $this->parseDate($date);
+        if (!$parsed instanceof DateTimeImmutable) {
+            return null;
+        }
+
+        return $parsed->setTime(0, 0, 0);
+    }
+
+    private function parseDateEndOfDay(string $date): ?DateTimeImmutable
+    {
+        $parsed = $this->parseDate($date);
+        if (!$parsed instanceof DateTimeImmutable) {
+            return null;
+        }
+
+        return $parsed->setTime(23, 59, 59);
     }
 
     /**

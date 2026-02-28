@@ -227,6 +227,8 @@ admin_users.local_password_filter_label: Mot de passe local
 admin_users.local_password_filter_all: Tous les etats du mot de passe local
 admin_users.local_password_filter_enabled: Mot de passe local active
 admin_users.local_password_filter_disabled: Mot de passe local desactive
+admin_users.created_from_label: Cree a partir du
+admin_users.created_to_label: Cree jusqu au
 admin_users.search: Recherche
 admin_users.search_placeholder: Email
 admin_users.per_page: Lignes par page
@@ -255,6 +257,7 @@ admin_users.security_local_login_no: Login local indisponible
 admin_users.toggle_active: Activer/Desactiver
 admin_users.toggle_admin: Basculer admin
 admin_users.generate_reset_link: Generer un lien de reinitialisation
+admin_users.force_verify_email: Forcer la verification email
 admin_users.resend_verification: Renvoyer l email de verification
 admin_users.unlink_google: Delier Google
 admin_users.unlink_google_disabled_reason: Definir d abord un mot de passe local avant de delier Google.
@@ -272,6 +275,7 @@ admin_users.flash.reset_link_generated: Lien de reinitialisation genere
 admin_users.flash.reset_link_rate_limited: Lien deja genere recemment. Reessaie dans %seconds% s.
 admin_users.flash.reset_link_global_rate_limited: Trop de liens generes (%count%) sur %seconds% s. Reessaie plus tard.
 admin_users.flash.verification_email_sent: Email de verification envoye.
+admin_users.flash.verification_email_forced: Email marque comme verifie.
 admin_users.flash.verification_email_already_verified: L email de cet utilisateur est deja verifie.
 admin_users.flash.verification_email_rate_limited: Email de verification deja envoye recemment. Reessaie dans %seconds% s.
 

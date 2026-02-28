@@ -16,6 +16,7 @@ namespace App\Tests\Functional\Admin;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Identity\Domain\Entity\UserIdentityEntity;
 use App\Support\Domain\Entity\AdminAuditLogEntity;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -60,6 +61,19 @@ final class UserManagementControllerTest extends WebTestCase
         $this->browser()->loginUser($user);
         $this->browser()->request('GET', '/admin/users/export');
 
+        self::assertSame(403, $this->browser()->getResponse()->getStatusCode());
+    }
+
+    public function testNonAdminCannotForceVerifyEmail(): void
+    {
+        $managed = $this->createUser('managed-force-non-admin@example.com', 'secret123', ['ROLE_USER']);
+        $managed->setIsEmailVerified(false);
+        $this->entityManager?->flush();
+        $this->browser()->loginUser($managed);
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/force-verify-email', $managed->getId()), [
+            '_csrf_token' => 'invalid',
+        ]);
         self::assertSame(403, $this->browser()->getResponse()->getStatusCode());
     }
 
@@ -291,6 +305,22 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='enabled.local-password@example.com']"));
     }
 
+    public function testAdminCanFilterUsersByCreatedAtRange(): void
+    {
+        $admin = $this->createUser('admin-created-filter@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->createUser('older-created-filter@example.com', 'secret123', ['ROLE_USER']);
+        $this->createUser('newer-created-filter@example.com', 'secret123', ['ROLE_USER']);
+        $this->setCreatedAtByEmail('older-created-filter@example.com', '2026-02-01 10:00:00');
+        $this->setCreatedAtByEmail('newer-created-filter@example.com', '2026-02-25 10:00:00');
+        $this->setCreatedAtByEmail('admin-created-filter@example.com', '2026-01-15 10:00:00');
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?createdFrom=2026-02-20&createdTo=2026-02-28');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='newer-created-filter@example.com']"));
+        self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='older-created-filter@example.com']"));
+    }
+
     public function testAdminUsersPageSupportsPaginationParameters(): void
     {
         $admin = $this->createUser('zzz-admin-page@example.com', 'secret123', ['ROLE_ADMIN']);
@@ -464,6 +494,28 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertStringContainsString('role=user', (string) $this->browser()->getResponse()->headers->get('location'));
     }
 
+    public function testAdminActionRedirectPreservesCreatedRangeFilters(): void
+    {
+        $admin = $this->createUser('admin-preserve-created-range@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed-preserve-created-range@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?createdFrom=2026-02-01&createdTo=2026-02-28');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/toggle-active', $managed->getId()), [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'createdFrom' => '2026-02-01',
+            'createdTo' => '2026-02-28',
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        $location = (string) $this->browser()->getResponse()->headers->get('location');
+        self::assertStringContainsString('createdFrom=2026-02-01', $location);
+        self::assertStringContainsString('createdTo=2026-02-28', $location);
+    }
+
     public function testAdminCanResendVerificationEmailForUnverifiedUser(): void
     {
         $admin = $this->createUser('admin-resend@example.com', 'secret123', ['ROLE_ADMIN']);
@@ -489,6 +541,39 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertNotNull($updated->getEmailVerificationExpiresAt());
 
         $audit = $this->findAuditForTargetAction('managed-resend@example.com', 'user_resend_verification_email');
+        self::assertInstanceOf(AdminAuditLogEntity::class, $audit);
+    }
+
+    public function testAdminCanForceVerifyEmailForUnverifiedUser(): void
+    {
+        $admin = $this->createUser('admin-force@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed-force@example.com', 'secret123', ['ROLE_USER']);
+        $managed
+            ->setIsEmailVerified(false)
+            ->setEmailVerificationTokenHash(hash('sha256', 'token'))
+            ->setEmailVerificationRequestedAt(new DateTimeImmutable('-1 minute'))
+            ->setEmailVerificationExpiresAt(new DateTimeImmutable('+1 hour'));
+        $this->entityManager?->flush();
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/force-verify-email"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/force-verify-email', $managed->getId()), [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $this->entityManager?->clear();
+        $updated = $this->findUserByEmail('managed-force@example.com');
+        self::assertInstanceOf(UserEntity::class, $updated);
+        self::assertTrue($updated->isEmailVerified());
+        self::assertNull($updated->getEmailVerificationTokenHash());
+        self::assertNull($updated->getEmailVerificationRequestedAt());
+        self::assertNull($updated->getEmailVerificationExpiresAt());
+
+        $audit = $this->findAuditForTargetAction('managed-force@example.com', 'user_force_verify_email');
         self::assertInstanceOf(AdminAuditLogEntity::class, $audit);
     }
 
@@ -700,6 +785,22 @@ final class UserManagementControllerTest extends WebTestCase
             return;
         }
         $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
+    }
+
+    private function setCreatedAtByEmail(string $email, string $createdAt): void
+    {
+        if (null === $this->entityManager) {
+            return;
+        }
+
+        $this->entityManager->getConnection()->executeStatement(
+            'UPDATE app_user SET created_at = :createdAt, updated_at = :createdAt WHERE email = :email',
+            [
+                'createdAt' => $createdAt,
+                'email' => $email,
+            ],
+        );
+        $this->entityManager->clear();
     }
 
     private function browser(): KernelBrowser

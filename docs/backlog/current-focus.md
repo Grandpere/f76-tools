@@ -6,6 +6,8 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-120: Admin users created-at range filter (`createdFrom`/`createdTo`) aligne liste + export CSV + preservation params (done).
+- F76-119: Admin users force email verification (action support manuelle + audit + tests cibles) (done).
 - F76-118: User self-service change password (page securisee + service applicatif + lien header + tests unit/functional cibles) (done).
 - F76-117: Admin users export CSV (vue filtree + tri courant) avec route protegee et tests cibles (done).
 - F76-116: Admin users role filter (`admin|user`) + preservation des params en actions/header + tests cibles (done).
