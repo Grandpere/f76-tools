@@ -31,6 +31,10 @@ final class UnlinkGoogleIdentityFeedbackMapper
                 'flashType' => 'warning',
                 'flashMessage' => 'admin_users.flash.google_identity_not_found',
             ],
+            UnlinkGoogleIdentityResult::LOCAL_PASSWORD_REQUIRED => [
+                'flashType' => 'warning',
+                'flashMessage' => 'admin_users.flash.google_identity_local_password_required',
+            ],
             UnlinkGoogleIdentityResult::UNLINKED => [
                 'flashType' => 'success',
                 'flashMessage' => 'admin_users.flash.google_identity_unlinked',

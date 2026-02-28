@@ -17,5 +17,6 @@ enum UnlinkGoogleIdentityResult: string
 {
     case USER_NOT_FOUND = 'user_not_found';
     case GOOGLE_IDENTITY_NOT_FOUND = 'google_identity_not_found';
+    case LOCAL_PASSWORD_REQUIRED = 'local_password_required';
     case UNLINKED = 'unlinked';
 }

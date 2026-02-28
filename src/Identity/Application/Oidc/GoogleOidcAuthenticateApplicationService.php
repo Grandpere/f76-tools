@@ -74,7 +74,8 @@ final class GoogleOidcAuthenticateApplicationService
         $user = new UserEntity()
             ->setEmail($email)
             ->setRoles(['ROLE_USER'])
-            ->setIsEmailVerified(true);
+            ->setIsEmailVerified(true)
+            ->setHasLocalPassword(false);
         $user->setPassword($this->passwordHasher->hash($user, bin2hex(random_bytes(32))));
         $this->markEmailVerified($user);
 

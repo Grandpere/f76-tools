@@ -216,11 +216,16 @@ admin_users.email: E-Mail
 admin_users.created_at: Erstellt am
 admin_users.roles: Rollen
 admin_users.active: Aktiv
+admin_users.security: Sicherheit
 admin_users.identities: Identitaten
 admin_users.actions: Aktionen
 admin_users.google_linked_yes: Google verknupft
 admin_users.google_linked_no: Google nicht verknupft
 admin_users.google_linked_since: 'Verknupft seit %date%'
+admin_users.security_email_verified_yes: E-Mail verifiziert
+admin_users.security_email_verified_no: E-Mail nicht verifiziert
+admin_users.security_local_login_yes: Lokaler Login verfugbar
+admin_users.security_local_login_no: Lokaler Login nicht verfugbar
 admin_users.toggle_active: Aktiv umschalten
 admin_users.toggle_admin: Admin umschalten
 admin_users.generate_reset_link: Link zum Zurucksetzen generieren
@@ -231,6 +236,7 @@ admin_users.flash.invalid_csrf: Ungultige Aktion (CSRF).
 admin_users.flash.user_not_found: Benutzer nicht gefunden.
 admin_users.flash.google_identity_not_found: Keine Google-Identitat fur diesen Benutzer gefunden.
 admin_users.flash.google_identity_unlinked: Google-Identitat getrennt.
+admin_users.flash.google_identity_local_password_required: Google-Verknupfung kann ohne lokalen Passwortzugang nicht gelost werden.
 admin_users.flash.cannot_change_self_active: Sie konnen Ihr eigenes Konto nicht deaktivieren.
 admin_users.flash.cannot_change_self_role: Sie konnen Ihre eigene Admin-Rolle hier nicht andern.
 admin_users.flash.active_updated: Aktiv-Status aktualisiert.

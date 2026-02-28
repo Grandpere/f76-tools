@@ -91,6 +91,29 @@ final class UnlinkGoogleIdentityApplicationServiceTest extends TestCase
         self::assertSame(UnlinkGoogleIdentityResult::UNLINKED, $result);
     }
 
+    public function testUnlinkRequiresLocalPasswordBeforeRemovingGoogleIdentity(): void
+    {
+        $user = new UserEntity()
+            ->setEmail('test@example.com')
+            ->setPassword('hash')
+            ->setHasLocalPassword(false);
+        $identity = new UserIdentityEntity()
+            ->setUser($user)
+            ->setProvider('google')
+            ->setProviderUserId('sub-2');
+
+        $this->userRepository->expects(self::once())->method('getById')->willReturn($user);
+        $this->identityReadRepository->expects(self::once())
+            ->method('findOneByUserAndProvider')
+            ->with($user, 'google')
+            ->willReturn($identity);
+        $this->identityWriteRepository->expects(self::never())->method('delete');
+
+        $result = $this->service()->unlink(10);
+
+        self::assertSame(UnlinkGoogleIdentityResult::LOCAL_PASSWORD_REQUIRED, $result);
+    }
+
     private function service(): UnlinkGoogleIdentityApplicationService
     {
         return new UnlinkGoogleIdentityApplicationService(

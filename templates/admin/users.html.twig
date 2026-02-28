@@ -98,6 +98,7 @@
                         <th><a href="{{ path('app_admin_users', commonParams|merge({ sort: 'createdat', dir: createdAtDir, page: 1 })) }}">{{ 'admin_users.created_at'|trans }}</a></th>
                         <th>{{ 'admin_users.roles'|trans }}</th>
                         <th><a href="{{ path('app_admin_users', commonParams|merge({ sort: 'active', dir: activeDir, page: 1 })) }}">{{ 'admin_users.active'|trans }}</a></th>
+                        <th>{{ 'admin_users.security'|trans }}</th>
                         <th>{{ 'admin_users.identities'|trans }}</th>
                         <th>{{ 'admin_users.actions'|trans }}</th>
                     </tr>
@@ -109,6 +110,18 @@
                             <td>{{ user.createdAt|date('Y-m-d H:i') }}</td>
                             <td>{{ user.roles|join(', ') }}</td>
                             <td>{% if user.isActive %}{{ 'common.yes'|trans }}{% else %}{{ 'common.no'|trans }}{% endif %}</td>
+                            <td>
+                                {% if user.isEmailVerified %}
+                                    <span class="admin-security-badge admin-security-badge-ok">{{ 'admin_users.security_email_verified_yes'|trans }}</span>
+                                {% else %}
+                                    <span class="admin-security-badge admin-security-badge-warn">{{ 'admin_users.security_email_verified_no'|trans }}</span>
+                                {% endif %}
+                                {% if user.hasLocalPassword %}
+                                    <span class="admin-security-badge admin-security-badge-ok">{{ 'admin_users.security_local_login_yes'|trans }}</span>
+                                {% else %}
+                                    <span class="admin-security-badge admin-security-badge-warn">{{ 'admin_users.security_local_login_no'|trans }}</span>
+                                {% endif %}
+                            </td>
                             <td>
                                 {% set googleIdentity = googleIdentitiesByUserId[user.id]|default(null) %}
                                 {% set isGoogleLinked = googleIdentity is not null %}
@@ -182,7 +195,7 @@
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="6">{{ 'admin_users.no_users'|trans }}</td>
+                            <td colspan="7">{{ 'admin_users.no_users'|trans }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

@@ -37,6 +37,10 @@ final class UnlinkGoogleIdentityApplicationService
             return UnlinkGoogleIdentityResult::GOOGLE_IDENTITY_NOT_FOUND;
         }
 
+        if (!$target->hasLocalPassword()) {
+            return UnlinkGoogleIdentityResult::LOCAL_PASSWORD_REQUIRED;
+        }
+
         $this->googleOidcIdentityWriteRepository->delete($identity);
 
         return UnlinkGoogleIdentityResult::UNLINKED;

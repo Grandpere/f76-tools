@@ -117,6 +117,7 @@ final class CreateUserCommand extends Command
 
         $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
         $user->setPassword($hashedPassword);
+        $user->setHasLocalPassword(true);
         $this->entityManager->flush();
 
         if ($updatedExistingUser) {

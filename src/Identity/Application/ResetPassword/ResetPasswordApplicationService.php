@@ -52,6 +52,7 @@ final class ResetPasswordApplicationService
         }
 
         $user->setPassword($this->passwordHasher->hash($user, $password));
+        $user->setHasLocalPassword(true);
         $user->setResetPasswordTokenHash(null);
         $user->setResetPasswordExpiresAt(null);
         $user->setResetPasswordRequestedAt(null);

@@ -50,7 +50,8 @@ final class RegisterUserApplicationService
         $user = new UserEntity()
             ->setEmail($normalizedEmail)
             ->setRoles(['ROLE_USER'])
-            ->setIsEmailVerified(false);
+            ->setIsEmailVerified(false)
+            ->setHasLocalPassword(true);
         $user->setPassword($this->passwordHasher->hash($user, $request->password));
 
         $token = bin2hex(random_bytes(32));

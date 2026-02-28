@@ -44,6 +44,9 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private string $password;
 
+    #[ORM\Column(name: 'has_local_password', options: ['default' => true])]
+    private bool $hasLocalPassword = true;
+
     #[ORM\Column(name: 'is_active', options: ['default' => true])]
     private bool $isActive = true;
 
@@ -151,6 +154,18 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function hasLocalPassword(): bool
+    {
+        return $this->hasLocalPassword;
+    }
+
+    public function setHasLocalPassword(bool $hasLocalPassword): self
+    {
+        $this->hasLocalPassword = $hasLocalPassword;
 
         return $this;
     }
