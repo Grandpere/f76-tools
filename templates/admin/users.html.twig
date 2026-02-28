@@ -25,8 +25,8 @@
                     selectedValue: googleFilter,
                     emptyOptionLabel: 'admin_users.google_filter_all',
                     options: [
-                        { value: 'linked', label: 'admin_users.google_filter_linked' },
-                        { value: 'unlinked', label: 'admin_users.google_filter_unlinked' }
+                        { value: 'linked', label: 'admin_users.google_filter_linked'|trans },
+                        { value: 'unlinked', label: 'admin_users.google_filter_unlinked'|trans }
                     ]
                 } %}
                 {% include 'admin/_filters_common_hidden_fields.html.twig' %}
@@ -67,19 +67,23 @@
                                 <div class="admin-users-actions">
                                     <form method="post" action="{{ path('app_admin_users_toggle_active', { id: user.id, locale: app.request.locale }) }}">
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_toggle_active_' ~ user.id) }}">
+                                        <input type="hidden" name="google" value="{{ googleFilter }}">
                                         <button type="submit">{{ 'admin_users.toggle_active'|trans }}</button>
                                     </form>
                                     <form method="post" action="{{ path('app_admin_users_toggle_admin', { id: user.id, locale: app.request.locale }) }}">
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_toggle_admin_' ~ user.id) }}">
+                                        <input type="hidden" name="google" value="{{ googleFilter }}">
                                         <button type="submit">{{ 'admin_users.toggle_admin'|trans }}</button>
                                     </form>
                                     <form method="post" action="{{ path('app_admin_users_generate_reset_link', { id: user.id, locale: app.request.locale }) }}">
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_generate_reset_link_' ~ user.id) }}">
+                                        <input type="hidden" name="google" value="{{ googleFilter }}">
                                         <button type="submit">{{ 'admin_users.generate_reset_link'|trans }}</button>
                                     </form>
                                     {% if isGoogleLinked %}
                                         <form method="post" action="{{ path('app_admin_users_unlink_google', { id: user.id, locale: app.request.locale }) }}">
                                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_unlink_google_' ~ user.id) }}">
+                                            <input type="hidden" name="google" value="{{ googleFilter }}">
                                             <button type="submit">{{ 'admin_users.unlink_google'|trans }}</button>
                                         </form>
                                     {% endif %}

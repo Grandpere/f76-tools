@@ -81,6 +81,25 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertSame(false, $audit->getContext()['isActive'] ?? null);
     }
 
+    public function testAdminActionRedirectPreservesGoogleFilter(): void
+    {
+        $admin = $this->createUser('admin-preserve@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed-preserve@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?google=linked');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/toggle-active', $managed->getId()), [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'google' => 'linked',
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        self::assertStringContainsString('google=linked', (string) $this->browser()->getResponse()->headers->get('location'));
+    }
+
     public function testAdminUsersPageRendersManagementActionsForManagedUser(): void
     {
         $admin = $this->createUser('admin-actions@example.com', 'secret123', ['ROLE_ADMIN']);
@@ -135,17 +154,15 @@ final class UserManagementControllerTest extends WebTestCase
         $this->linkGoogleIdentity($linked, 'google-sub-filter');
         $this->browser()->loginUser($admin);
 
-        $this->browser()->request('GET', '/admin/users?google=linked');
+        $crawler = $this->browser()->request('GET', '/admin/users?google=linked');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
-        $linkedContent = $this->browser()->getResponse()->getContent() ?: '';
-        self::assertStringContainsString('linked-filter@example.com', $linkedContent);
-        self::assertStringNotContainsString('unlinked-filter@example.com', $linkedContent);
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='linked-filter@example.com']"));
+        self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='unlinked-filter@example.com']"));
 
-        $this->browser()->request('GET', '/admin/users?google=unlinked');
+        $crawler = $this->browser()->request('GET', '/admin/users?google=unlinked');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
-        $unlinkedContent = $this->browser()->getResponse()->getContent() ?: '';
-        self::assertStringContainsString('unlinked-filter@example.com', $unlinkedContent);
-        self::assertStringNotContainsString('linked-filter@example.com', $unlinkedContent);
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='unlinked-filter@example.com']"));
+        self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='linked-filter@example.com']"));
     }
 
     public function testAdminCanToggleManagedUserRole(): void

@@ -215,7 +215,10 @@ final class UserManagementController extends AbstractController
 
     private function redirectToUsers(Request $request): RedirectResponse
     {
-        return $this->redirectToRoute('app_admin_users', ['locale' => $request->getLocale()]);
+        return $this->redirectToRoute('app_admin_users', [
+            'locale' => $request->getLocale(),
+            'google' => $this->normalizeGoogleFilter((string) $request->request->get('google', '')),
+        ]);
     }
 
     /**
