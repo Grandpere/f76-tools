@@ -1,0 +1,11 @@
+{% if totalPages > 1 %}
+    <div class="translations-pager">
+        {% if previousUrl %}
+            <a href="{{ previousUrl }}">{{ 'admin_translations.pagination_prev'|trans }}</a>
+        {% endif %}
+        <span>{{ 'admin_translations.pagination_page'|trans({'%page%': page, '%total%': totalPages}) }}</span>
+        {% if nextUrl %}
+            <a href="{{ nextUrl }}">{{ 'admin_translations.pagination_next'|trans }}</a>
+        {% endif %}
+    </div>
+{% endif %}

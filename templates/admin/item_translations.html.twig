@@ -44,17 +44,14 @@
                 <button type="submit">{{ 'admin_translations.filter'|trans }}</button>
             </form>
             <p class="catalog-state">{{ 'admin_translations.visible_rows'|trans({'%count%': totalRows}) }}</p>
-            {% if totalPages > 1 %}
-                <div class="translations-pager">
-                    {% if page > 1 %}
-                        <a href="{{ path('app_admin_item_translations', { locale: app.request.locale, target: targetLocale, q: query ?: null, perPage: perPage, page: page - 1 }) }}">{{ 'admin_translations.pagination_prev'|trans }}</a>
-                    {% endif %}
-                    <span>{{ 'admin_translations.pagination_page'|trans({'%page%': page, '%total%': totalPages}) }}</span>
-                    {% if page < totalPages %}
-                        <a href="{{ path('app_admin_item_translations', { locale: app.request.locale, target: targetLocale, q: query ?: null, perPage: perPage, page: page + 1 }) }}">{{ 'admin_translations.pagination_next'|trans }}</a>
-                    {% endif %}
-                </div>
-            {% endif %}
+            {% set previousUrl = page > 1 ? path('app_admin_item_translations', { locale: app.request.locale, target: targetLocale, q: query ?: null, perPage: perPage, page: page - 1 }) : null %}
+            {% set nextUrl = page < totalPages ? path('app_admin_item_translations', { locale: app.request.locale, target: targetLocale, q: query ?: null, perPage: perPage, page: page + 1 }) : null %}
+            {% include 'admin/_pager.html.twig' with {
+                page: page,
+                totalPages: totalPages,
+                previousUrl: previousUrl,
+                nextUrl: nextUrl
+            } %}
 
             <form method="post" data-controller="textarea-autosize">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_item_translations_save') }}">

@@ -49,17 +49,14 @@
             </form>
             <p class="catalog-state">{{ 'admin_audit.visible_rows'|trans({'%count%': totalRows}) }}</p>
 
-            {% if totalPages > 1 %}
-                <div class="translations-pager">
-                    {% if page > 1 %}
-                        <a href="{{ path('app_admin_audit_logs', { locale: app.request.locale, q: query ?: null, action: action ?: null, perPage: perPage, page: page - 1 }) }}">{{ 'admin_translations.pagination_prev'|trans }}</a>
-                    {% endif %}
-                    <span>{{ 'admin_translations.pagination_page'|trans({'%page%': page, '%total%': totalPages}) }}</span>
-                    {% if page < totalPages %}
-                        <a href="{{ path('app_admin_audit_logs', { locale: app.request.locale, q: query ?: null, action: action ?: null, perPage: perPage, page: page + 1 }) }}">{{ 'admin_translations.pagination_next'|trans }}</a>
-                    {% endif %}
-                </div>
-            {% endif %}
+            {% set previousUrl = page > 1 ? path('app_admin_audit_logs', { locale: app.request.locale, q: query ?: null, action: action ?: null, perPage: perPage, page: page - 1 }) : null %}
+            {% set nextUrl = page < totalPages ? path('app_admin_audit_logs', { locale: app.request.locale, q: query ?: null, action: action ?: null, perPage: perPage, page: page + 1 }) : null %}
+            {% include 'admin/_pager.html.twig' with {
+                page: page,
+                totalPages: totalPages,
+                previousUrl: previousUrl,
+                nextUrl: nextUrl
+            } %}
 
             <div class="translations-table-wrap">
                 <table class="translations-table">
