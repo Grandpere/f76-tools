@@ -60,4 +60,43 @@ class CleanArchitectureTest
             )
             ->because('UI does not depend on Infrastructure layer.');
     }
+
+    public function testAppPortsMustNotUseInterfaceSuffix(): Rule
+    {
+        return PHPat::rule()
+            ->classes(
+                Selector::AllOf(
+                    Selector::inNamespace('/^App\\\\[a-zA-Z]+\\\\(Application|Domain|UI)\\\\/', true),
+                    Selector::classname('/Interface$/', true),
+                ),
+            )
+            ->shouldNotExist()
+            ->because('Application/Domain/UI ports must not use the Interface suffix.');
+    }
+
+    public function testUIPortsMustUsePortSuffixAndStayInterfaces(): Rule
+    {
+        return PHPat::rule()
+            ->classes(
+                Selector::AllOf(
+                    Selector::inNamespace('/^App\\\\[a-zA-Z]+\\\\UI\\\\/', true),
+                    Selector::classname('/Port$/', true),
+                ),
+            )
+            ->shouldBeInterface()
+            ->because('In UI layer, contracts should be named *Port and remain interfaces.');
+    }
+
+    public function testUILegacyInterfaceSuffixMustNotExist(): Rule
+    {
+        return PHPat::rule()
+            ->classes(
+                Selector::AllOf(
+                    Selector::inNamespace('/^App\\\\[a-zA-Z]+\\\\UI\\\\/', true),
+                    Selector::classname('/Interface$/', true),
+                ),
+            )
+            ->shouldNotExist()
+            ->because('In UI layer, legacy *Interface names are forbidden.');
+    }
 }
