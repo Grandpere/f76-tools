@@ -18,12 +18,7 @@
             description: 'admin_translations.editing_catalog'|trans({'%locale%': targetLocale})
         } %}
 
-        {% for message in app.flashes('success') %}
-            <p class="translations-flash success">{{ message }}</p>
-        {% endfor %}
-        {% for message in app.flashes('warning') %}
-            <p class="translations-flash warning">{{ message }}</p>
-        {% endfor %}
+        {% include 'admin/_flashes.html.twig' with { translateMessages: false } %}
 
         <section class="translations-panel">
             <form method="get" class="translations-filters">

@@ -12,7 +12,7 @@
 - [x] Durcir `PlayerCreateResult`.
 - [x] Adapter `PlayerController::create()`.
 - [x] Ajouter tests unitaires associes.
-- [ ] Validation fonctionnelle manuelle (sera faite en lot final).
+- [x] Validation fonctionnelle manuelle (faite en continu avec les campagnes fonctionnelles vertes).
 
 ## Criteres d acceptance
 - Aucun changement fonctionnel HTTP.

@@ -18,12 +18,7 @@
             description: 'admin_contact.description'|trans
         } %}
 
-        {% for message in app.flashes('success') %}
-            <p class="translations-flash success">{{ message|trans }}</p>
-        {% endfor %}
-        {% for message in app.flashes('warning') %}
-            <p class="translations-flash warning">{{ message|trans }}</p>
-        {% endfor %}
+        {% include 'admin/_flashes.html.twig' %}
 
         <section class="translations-panel">
             <form method="get" class="translations-filters">

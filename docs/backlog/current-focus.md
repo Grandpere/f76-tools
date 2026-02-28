@@ -6,6 +6,7 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-100: Admin flashes componentization + sync des cases validation fonctionnelle manuelle (done).
 - F76-099: Admin page header componentization (header complet factorise sur les vues admin) (done).
 - F76-098: Front page header componentization (header unifie dashboard/minerva/progression) (done).
 - F76-097: Current focus priority hygiene (suppression des priorites deja livrees) (done).

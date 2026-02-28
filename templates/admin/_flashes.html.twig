@@ -1,0 +1,7 @@
+{% set translateMessages = translateMessages|default(true) %}
+{% for message in app.flashes('success') %}
+    <p class="translations-flash success">{% if translateMessages %}{{ message|trans }}{% else %}{{ message }}{% endif %}</p>
+{% endfor %}
+{% for message in app.flashes('warning') %}
+    <p class="translations-flash warning">{% if translateMessages %}{{ message|trans }}{% else %}{{ message }}{% endif %}</p>
+{% endfor %}

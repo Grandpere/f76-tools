@@ -17,7 +17,7 @@
 - [x] Brancher `index` et `setLearned` sur ce mapper dedie.
 - [x] Extraire le filtrage de recherche vers `PlayerKnowledgeItemPayloadSearchFilter`.
 - [x] Supprimer la logique inline de recherche depuis le controller.
-- [ ] Validation fonctionnelle manuelle (`make phpunit-functional`) et ajustements si besoin.
+- [x] Validation fonctionnelle manuelle (`make phpunit-functional`) et ajustements si besoin.
 
 ## Criteres d acceptance
 - Pas de changement fonctionnel observable sur l’endpoint index.

@@ -12,12 +12,7 @@
             description: 'admin_users.description'|trans
         } %}
 
-        {% for message in app.flashes('success') %}
-            <p class="translations-flash success">{{ message|trans }}</p>
-        {% endfor %}
-        {% for message in app.flashes('warning') %}
-            <p class="translations-flash warning">{{ message|trans }}</p>
-        {% endfor %}
+        {% include 'admin/_flashes.html.twig' %}
 
         <section class="translations-panel">
             <h2>{{ 'admin_users.list_title'|trans }}</h2>
