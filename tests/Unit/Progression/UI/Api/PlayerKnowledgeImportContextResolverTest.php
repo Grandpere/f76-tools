@@ -20,7 +20,7 @@ use App\Progression\UI\Api\PlayerKnowledgeImportContextResolver;
 use App\Progression\UI\Api\PlayerOwnedContextResolver;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
 use App\Progression\UI\Api\ProgressionApiJsonPayloadDecoder;
-use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolverInterface;
+use App\Progression\UI\Api\ProgressionOwnedPlayerReadPort;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -37,8 +37,8 @@ final class PlayerKnowledgeImportContextResolverTest extends TestCase
         $player = new PlayerEntity()->setName('Main');
         $request = new Request(content: '{"replace":false,"learnedItems":[{"type":"BOOK","sourceId":901}]}');
 
-        /** @var ProgressionOwnedPlayerReadResolverInterface&MockObject $readResolver */
-        $readResolver = $this->createMock(ProgressionOwnedPlayerReadResolverInterface::class);
+        /** @var ProgressionOwnedPlayerReadPort&MockObject $readResolver */
+        $readResolver = $this->createMock(ProgressionOwnedPlayerReadPort::class);
         $readResolver
             ->expects(self::once())
             ->method('resolve')
@@ -64,8 +64,8 @@ final class PlayerKnowledgeImportContextResolverTest extends TestCase
             ->setRoles(['ROLE_USER']);
         $request = new Request(content: '{"learnedItems":[]}');
 
-        /** @var ProgressionOwnedPlayerReadResolverInterface&MockObject $readResolver */
-        $readResolver = $this->createMock(ProgressionOwnedPlayerReadResolverInterface::class);
+        /** @var ProgressionOwnedPlayerReadPort&MockObject $readResolver */
+        $readResolver = $this->createMock(ProgressionOwnedPlayerReadPort::class);
         $readResolver
             ->expects(self::once())
             ->method('resolve')

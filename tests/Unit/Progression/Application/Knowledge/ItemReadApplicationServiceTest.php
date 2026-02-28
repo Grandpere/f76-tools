@@ -15,7 +15,7 @@ namespace App\Tests\Unit\Progression\Application\Knowledge;
 
 use App\Catalog\Domain\Entity\ItemEntity;
 use App\Progression\Application\Knowledge\ItemReadApplicationService;
-use App\Progression\Application\Knowledge\ItemReadRepositoryInterface;
+use App\Progression\Application\Knowledge\ItemReadRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -25,8 +25,8 @@ final class ItemReadApplicationServiceTest extends TestCase
     {
         $item = new ItemEntity();
 
-        /** @var ItemReadRepositoryInterface&MockObject $repository */
-        $repository = $this->createMock(ItemReadRepositoryInterface::class);
+        /** @var ItemReadRepository&MockObject $repository */
+        $repository = $this->createMock(ItemReadRepository::class);
         $repository
             ->expects(self::once())
             ->method('findOneByPublicId')

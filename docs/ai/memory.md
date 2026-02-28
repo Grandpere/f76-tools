@@ -123,6 +123,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: removed ambiguous import and implemented the port with fully-qualified name.
 - Prevention: when removing `Interface` suffixes, check files where implementation class basename equals the new port basename and avoid conflicting `use` imports.
 
+## 2026-03-01 - Same-namespace port naming collision in UI layer
+- Symptom: renaming `ProgressionOwnedPlayerReadResolverInterface` directly caused a filename/class collision with existing `ProgressionOwnedPlayerReadResolver`.
+- Root cause: port and implementation lived in the same `App\Progression\UI\Api` namespace with identical basename after suffix removal.
+- Fix: renamed the port to `ProgressionOwnedPlayerReadPort` and kept the implementation class name unchanged.
+- Prevention: when removing `Interface` suffixes, if port and implementation share namespace, pick a distinct port suffix (`Port`/`Contract`) before applying global replacements.
+
 ## 2026-02-27 - Repository namespace moves require entity metadata updates
 - Symptom: moving Doctrine repositories between namespaces can silently break runtime if entity `repositoryClass` attributes still point to old FQCNs.
 - Root cause: repository migration impacts both service wiring and ORM metadata references.
@@ -180,7 +186,7 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 ## 2026-02-27 - Final classes block PHPUnit doubles in unit tests
 - Symptom: unit tests failed with `ClassIsFinalException` while trying to mock a `final` resolver.
 - Root cause: test targeted a concrete `final` class instead of a contract.
-- Fix: introduced an interface port and wired consumers to it (`ProgressionOwnedPlayerReadResolverInterface`).
+- Fix: introduced an interface port and wired consumers to it (`ProgressionOwnedPlayerReadPort`).
 - Prevention: when a service is expected to be doubled in unit tests, depend on an interface in collaborators.
 
 ## 2026-02-27 - Unit test on 204 JsonResponse content expected empty string

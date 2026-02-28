@@ -15,14 +15,7 @@ namespace App\Progression\Application\Knowledge;
 
 use App\Catalog\Domain\Entity\ItemEntity;
 
-final class ItemReadApplicationService
+interface ItemReadRepository
 {
-    public function __construct(private readonly ItemReadRepository $itemReadRepository)
-    {
-    }
-
-    public function findByPublicId(string $itemPublicId): ?ItemEntity
-    {
-        return $this->itemReadRepository->findOneByPublicId($itemPublicId);
-    }
+    public function findOneByPublicId(string $publicId): ?ItemEntity;
 }

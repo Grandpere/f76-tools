@@ -16,14 +16,14 @@ namespace App\Tests\Unit\Progression\UI\Api;
 use App\Catalog\Domain\Entity\ItemEntity;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Progression\Application\Knowledge\ItemReadApplicationService;
-use App\Progression\Application\Knowledge\ItemReadRepositoryInterface;
+use App\Progression\Application\Knowledge\ItemReadRepository;
 use App\Progression\Domain\Entity\PlayerEntity;
 use App\Progression\UI\Api\PlayerItemActionContext;
 use App\Progression\UI\Api\PlayerItemActionContextResolver;
 use App\Progression\UI\Api\PlayerOwnedContextResolver;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
 use App\Progression\UI\Api\ProgressionItemApiResolver;
-use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolverInterface;
+use App\Progression\UI\Api\ProgressionOwnedPlayerReadPort;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -39,16 +39,16 @@ final class PlayerItemActionContextResolverTest extends TestCase
         $player = new PlayerEntity()->setName('Main');
         $item = new ItemEntity();
 
-        /** @var ProgressionOwnedPlayerReadResolverInterface&MockObject $readResolver */
-        $readResolver = $this->createMock(ProgressionOwnedPlayerReadResolverInterface::class);
+        /** @var ProgressionOwnedPlayerReadPort&MockObject $readResolver */
+        $readResolver = $this->createMock(ProgressionOwnedPlayerReadPort::class);
         $readResolver
             ->expects(self::once())
             ->method('resolve')
             ->with('01J5A6B7C8D9E0F1G2H3J4K5L6', $user)
             ->willReturn($player);
 
-        /** @var ItemReadRepositoryInterface&MockObject $itemRepository */
-        $itemRepository = $this->createMock(ItemReadRepositoryInterface::class);
+        /** @var ItemReadRepository&MockObject $itemRepository */
+        $itemRepository = $this->createMock(ItemReadRepository::class);
         $itemRepository
             ->expects(self::once())
             ->method('findOneByPublicId')
@@ -73,15 +73,15 @@ final class PlayerItemActionContextResolverTest extends TestCase
             ->setPassword('hash')
             ->setRoles(['ROLE_USER']);
 
-        /** @var ProgressionOwnedPlayerReadResolverInterface&MockObject $readResolver */
-        $readResolver = $this->createMock(ProgressionOwnedPlayerReadResolverInterface::class);
+        /** @var ProgressionOwnedPlayerReadPort&MockObject $readResolver */
+        $readResolver = $this->createMock(ProgressionOwnedPlayerReadPort::class);
         $readResolver
             ->expects(self::once())
             ->method('resolve')
             ->willReturn(null);
 
-        /** @var ItemReadRepositoryInterface&MockObject $itemRepository */
-        $itemRepository = $this->createMock(ItemReadRepositoryInterface::class);
+        /** @var ItemReadRepository&MockObject $itemRepository */
+        $itemRepository = $this->createMock(ItemReadRepository::class);
         $itemRepository
             ->expects(self::never())
             ->method('findOneByPublicId');
@@ -105,15 +105,15 @@ final class PlayerItemActionContextResolverTest extends TestCase
             ->setRoles(['ROLE_USER']);
         $player = new PlayerEntity()->setName('Main');
 
-        /** @var ProgressionOwnedPlayerReadResolverInterface&MockObject $readResolver */
-        $readResolver = $this->createMock(ProgressionOwnedPlayerReadResolverInterface::class);
+        /** @var ProgressionOwnedPlayerReadPort&MockObject $readResolver */
+        $readResolver = $this->createMock(ProgressionOwnedPlayerReadPort::class);
         $readResolver
             ->expects(self::once())
             ->method('resolve')
             ->willReturn($player);
 
-        /** @var ItemReadRepositoryInterface&MockObject $itemRepository */
-        $itemRepository = $this->createMock(ItemReadRepositoryInterface::class);
+        /** @var ItemReadRepository&MockObject $itemRepository */
+        $itemRepository = $this->createMock(ItemReadRepository::class);
         $itemRepository
             ->expects(self::once())
             ->method('findOneByPublicId')

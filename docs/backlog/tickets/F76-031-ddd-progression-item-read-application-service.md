@@ -10,7 +10,7 @@ La lecture d'item par `publicId` est encore exposee via `PlayerKnowledgeApplicat
 - Retirer la lecture d'item de `PlayerKnowledgeApplicationService`.
 
 ## Avancement
-- [x] Ajouter contrat `ItemReadRepositoryInterface`.
+- [x] Ajouter contrat `ItemReadRepository`.
 - [x] Ajouter `ItemReadApplicationService`.
 - [x] Mettre a jour repository + wiring controller.
 - [x] Ajouter/adapter tests unitaires.

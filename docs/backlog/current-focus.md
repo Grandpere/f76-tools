@@ -6,6 +6,7 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-136: Progression ports sans suffixe `Interface` (ItemReadRepository, PlayerReadRepository, owned-player read port) (done).
 - F76-135: Catalog import ports sans suffixe `Interface` (ItemImport*) + propagation complete (done).
 - F76-134: Identity ports sans suffixe `Interface` + corrections collisions de noms implementation/port (done).
 - F76-133: Support ports sans suffixe `Interface` (admin user/audit/contact) + propagation complete (done).

@@ -17,7 +17,7 @@ use App\Identity\Domain\Entity\UserEntity;
 use App\Progression\Application\Player\PlayerReadApplicationService;
 use App\Progression\Domain\Entity\PlayerEntity;
 
-final class ProgressionOwnedPlayerReadResolver implements ProgressionOwnedPlayerReadResolverInterface
+final class ProgressionOwnedPlayerReadResolver implements ProgressionOwnedPlayerReadPort
 {
     public function __construct(
         private readonly PlayerReadApplicationService $playerReadApplicationService,

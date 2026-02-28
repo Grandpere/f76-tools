@@ -19,7 +19,7 @@ use App\Progression\Domain\Entity\PlayerEntity;
 final class PlayerReadApplicationService
 {
     public function __construct(
-        private readonly PlayerReadRepositoryInterface $playerRepository,
+        private readonly PlayerReadRepository $playerRepository,
     ) {
     }
 

@@ -16,7 +16,7 @@ namespace App\Progression\Application\Player;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Progression\Domain\Entity\PlayerEntity;
 
-interface PlayerReadRepositoryInterface
+interface PlayerReadRepository
 {
     /**
      * @return list<PlayerEntity>

@@ -15,7 +15,7 @@ namespace App\Tests\Unit\Progression\UI\Api;
 
 use App\Identity\Domain\Entity\UserEntity;
 use App\Progression\Application\Player\PlayerReadApplicationService;
-use App\Progression\Application\Player\PlayerReadRepositoryInterface;
+use App\Progression\Application\Player\PlayerReadRepository;
 use App\Progression\Domain\Entity\PlayerEntity;
 use App\Progression\UI\Api\ProgressionOwnedPlayerReadResolver;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -31,8 +31,8 @@ final class ProgressionOwnedPlayerReadResolverTest extends TestCase
             ->setRoles(['ROLE_USER']);
         $player = new PlayerEntity()->setName('Main');
 
-        /** @var PlayerReadRepositoryInterface&MockObject $repository */
-        $repository = $this->createMock(PlayerReadRepositoryInterface::class);
+        /** @var PlayerReadRepository&MockObject $repository */
+        $repository = $this->createMock(PlayerReadRepository::class);
         $repository
             ->expects(self::once())
             ->method('findOneByPublicIdAndUser')

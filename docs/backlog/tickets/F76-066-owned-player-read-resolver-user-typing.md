@@ -4,7 +4,7 @@
 Le resolver de lecture utilisait encore `mixed $user`, alors que la validation d'authentification peut etre centralisee au niveau `PlayerOwnedContextResolver`.
 
 ## Scope
-- Typer `ProgressionOwnedPlayerReadResolverInterface::resolve` avec `UserEntity`.
+- Typer `ProgressionOwnedPlayerReadPort::resolve` avec `UserEntity`.
 - Deplacer la validation d'authentification dans `PlayerOwnedContextResolver`.
 - Adapter les tests unitaires associes.
 - Verifier phpstan/unit/integration.

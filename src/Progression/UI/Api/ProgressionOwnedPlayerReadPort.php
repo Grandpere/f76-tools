@@ -11,11 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Progression\Application\Knowledge;
+namespace App\Progression\UI\Api;
 
-use App\Catalog\Domain\Entity\ItemEntity;
+use App\Identity\Domain\Entity\UserEntity;
+use App\Progression\Domain\Entity\PlayerEntity;
 
-interface ItemReadRepositoryInterface
+interface ProgressionOwnedPlayerReadPort
 {
-    public function findOneByPublicId(string $publicId): ?ItemEntity;
+    public function resolve(string $playerId, UserEntity $user): ?PlayerEntity;
 }

@@ -15,7 +15,7 @@ namespace App\Tests\Unit\Progression\UI\Api;
 
 use App\Catalog\Domain\Entity\ItemEntity;
 use App\Progression\Application\Knowledge\ItemReadApplicationService;
-use App\Progression\Application\Knowledge\ItemReadRepositoryInterface;
+use App\Progression\Application\Knowledge\ItemReadRepository;
 use App\Progression\UI\Api\ProgressionApiErrorResponder;
 use App\Progression\UI\Api\ProgressionItemApiResolver;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -28,8 +28,8 @@ final class ProgressionItemApiResolverTest extends TestCase
     {
         $item = new ItemEntity();
 
-        /** @var ItemReadRepositoryInterface&MockObject $repository */
-        $repository = $this->createMock(ItemReadRepositoryInterface::class);
+        /** @var ItemReadRepository&MockObject $repository */
+        $repository = $this->createMock(ItemReadRepository::class);
         $repository
             ->expects(self::once())
             ->method('findOneByPublicId')
@@ -47,8 +47,8 @@ final class ProgressionItemApiResolverTest extends TestCase
 
     public function testResolveOrNotFoundReturnsJson404WhenItemMissing(): void
     {
-        /** @var ItemReadRepositoryInterface&MockObject $repository */
-        $repository = $this->createMock(ItemReadRepositoryInterface::class);
+        /** @var ItemReadRepository&MockObject $repository */
+        $repository = $this->createMock(ItemReadRepository::class);
         $repository
             ->expects(self::once())
             ->method('findOneByPublicId')

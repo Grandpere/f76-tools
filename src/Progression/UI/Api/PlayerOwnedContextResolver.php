@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 final class PlayerOwnedContextResolver
 {
     public function __construct(
-        private readonly ProgressionOwnedPlayerReadResolverInterface $progressionOwnedPlayerReadResolver,
+        private readonly ProgressionOwnedPlayerReadPort $progressionOwnedPlayerReadResolver,
         private readonly ProgressionApiErrorResponder $progressionApiErrorResponder,
     ) {
     }
