@@ -112,6 +112,7 @@
                 <input type="hidden" name="sort" value="{{ sort }}">
                 <input type="hidden" name="dir" value="{{ dir }}">
                 <button type="submit">{{ 'admin_users.filter'|trans }}</button>
+                <a class="admin-export-link" href="{{ path('app_admin_users_export_csv', commonParams|merge({ page: 1 })) }}">{{ 'admin_users.export_csv'|trans }}</a>
             </form>
             <p class="catalog-state">{{ 'admin_users.visible_rows'|trans({'%count%': visibleUsers}) }}</p>
             {% set previousUrl = page > 1 ? path('app_admin_users', commonParams|merge({ page: page - 1 })) : null %}

@@ -54,6 +54,15 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertSame(403, $this->browser()->getResponse()->getStatusCode());
     }
 
+    public function testNonAdminCannotExportUsersCsv(): void
+    {
+        $user = $this->createUser('member-export@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($user);
+        $this->browser()->request('GET', '/admin/users/export');
+
+        self::assertSame(403, $this->browser()->getResponse()->getStatusCode());
+    }
+
     public function testAdminCanToggleExistingUser(): void
     {
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
@@ -481,6 +490,24 @@ final class UserManagementControllerTest extends WebTestCase
 
         $audit = $this->findAuditForTargetAction('managed-resend@example.com', 'user_resend_verification_email');
         self::assertInstanceOf(AdminAuditLogEntity::class, $audit);
+    }
+
+    public function testAdminCanExportUsersCsvWithFilters(): void
+    {
+        $admin = $this->createUser('admin-export@example.com', 'secret123', ['ROLE_ADMIN']);
+        $linkedUser = $this->createUser('linked-export@example.com', 'secret123', ['ROLE_USER']);
+        $this->linkGoogleIdentity($linkedUser, 'google-sub-export');
+        $this->createUser('plain-export@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $this->browser()->request('GET', '/admin/users/export?google=linked&role=user&sort=email&dir=asc');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertStringContainsString('text/csv', (string) $this->browser()->getResponse()->headers->get('content-type'));
+
+        $content = (string) $this->browser()->getResponse()->getContent();
+        self::assertStringContainsString('email,created_at,is_active,is_email_verified,has_local_password,roles,google_linked,google_linked_since', $content);
+        self::assertStringContainsString('linked-export@example.com', $content);
+        self::assertStringNotContainsString('plain-export@example.com', $content);
     }
 
     public function testAdminCanToggleManagedUserRole(): void

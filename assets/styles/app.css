@@ -1714,6 +1714,24 @@ span.flatpickr-weekday {
     line-height: 1;
 }
 
+.admin-export-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(160, 119, 0, 0.38);
+    border-radius: 10px;
+    padding: 0.42rem 0.62rem;
+    background: #fff;
+    color: #5f4a00;
+    font-weight: 700;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+    text-decoration: none;
+}
+
+.admin-export-link:hover {
+    background: #fff6d2;
+}
+
 .admin-identity-badge {
     display: inline-flex;
     align-items: center;

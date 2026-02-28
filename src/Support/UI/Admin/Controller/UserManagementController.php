@@ -34,6 +34,7 @@ use App\Support\UI\Admin\ResendVerificationEmailFeedbackMapper;
 use App\Support\UI\Admin\ToggleUserActiveFeedbackMapper;
 use App\Support\UI\Admin\ToggleUserAdminFeedbackMapper;
 use App\Support\UI\Admin\UnlinkGoogleIdentityFeedbackMapper;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -122,6 +123,74 @@ final class UserManagementController extends AbstractController
             'googleUnlinkedCount' => $googleUnlinkedCount,
             'visibleUsers' => $visibleUsers,
         ]);
+    }
+
+    #[Route('/export', name: 'app_admin_users_export_csv', methods: ['GET'])]
+    public function exportCsv(Request $request): Response
+    {
+        $this->ensureAdminAccess();
+        $users = $this->userRepository->findAllOrdered();
+        $googleIdentitiesByUserId = $this->adminUserGoogleIdentityReadService->getGoogleIdentityByUserId($users);
+        $googleFilter = $this->normalizeGoogleFilter($request->query->getString('google', ''));
+        $activeFilter = $this->normalizeActiveFilter($request->query->getString('active', ''));
+        $roleFilter = $this->normalizeRoleFilter($request->query->getString('role', ''));
+        $verifiedFilter = $this->normalizeVerifiedFilter($request->query->getString('verified', ''));
+        $localPasswordFilter = $this->normalizeLocalPasswordFilter($request->query->getString('localPassword', ''));
+        $query = trim($request->query->getString('q', ''));
+        $sort = $this->normalizeSort($request->query->getString('sort', ''));
+        $dir = $this->normalizeSortDirection($request->query->getString('dir', ''));
+
+        $filteredUsers = $this->filterUsersByActiveStatus($users, $activeFilter);
+        $filteredUsers = $this->filterUsersByGoogleIdentity($filteredUsers, $googleIdentitiesByUserId, $googleFilter);
+        $filteredUsers = $this->filterUsersByRole($filteredUsers, $roleFilter);
+        $filteredUsers = $this->filterUsersByVerificationStatus($filteredUsers, $verifiedFilter);
+        $filteredUsers = $this->filterUsersByLocalPasswordStatus($filteredUsers, $localPasswordFilter);
+        $filteredUsers = $this->filterUsersBySearchQuery($filteredUsers, $query);
+        $filteredUsers = $this->sortUsers($filteredUsers, $sort, $dir);
+
+        $filename = sprintf('admin-users-%s.csv', new DateTimeImmutable()->format('Ymd-His'));
+        $handle = fopen('php://temp', 'r+');
+        if (false === $handle) {
+            return new Response('', Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        fputcsv($handle, [
+            'email',
+            'created_at',
+            'is_active',
+            'is_email_verified',
+            'has_local_password',
+            'roles',
+            'google_linked',
+            'google_linked_since',
+        ], ',', '"', '');
+
+        foreach ($filteredUsers as $user) {
+            $userId = $user->getId();
+            $googleIdentity = is_int($userId) ? ($googleIdentitiesByUserId[$userId] ?? null) : null;
+            $googleLinked = null !== $googleIdentity;
+
+            fputcsv($handle, [
+                $user->getEmail(),
+                $user->getCreatedAt()->format('Y-m-d H:i:s'),
+                $user->isActive() ? '1' : '0',
+                $user->isEmailVerified() ? '1' : '0',
+                $user->hasLocalPassword() ? '1' : '0',
+                implode('|', $user->getRoles()),
+                $googleLinked ? '1' : '0',
+                $googleLinked ? $googleIdentity->getCreatedAt()->format('Y-m-d H:i:s') : '',
+            ], ',', '"', '');
+        }
+
+        rewind($handle);
+        $csvContent = stream_get_contents($handle);
+        fclose($handle);
+
+        $response = new Response(is_string($csvContent) ? $csvContent : '');
+        $response->headers->set('Content-Type', 'text/csv; charset=UTF-8');
+        $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"', $filename));
+
+        return $response;
     }
 
     #[Route('/{id<\d+>}/toggle-active', name: 'app_admin_users_toggle_active', methods: ['POST'])]
