@@ -29,13 +29,12 @@
         source_vendorMortimer: 'dashboard.sources.mortimer'|trans
     } %}
     <main class="catalog-page">
-        <header class="catalog-header">
-            {% include '_app_header_tools.html.twig' with { localeSelectId: 'dashboard-header-locale-select' } %}
-            <p class="catalog-kicker">Fallout 76</p>
-            <h1>{{ 'dashboard.header.title'|trans }}</h1>
-            <p class="catalog-subtitle">{{ 'dashboard.header.subtitle'|trans }}</p>
-            <p class="catalog-user">{% include '_app_primary_nav.html.twig' with { active: 'dashboard' } %}</p>
-        </header>
+        {% include '_app_page_header.html.twig' with {
+            localeSelectId: 'dashboard-header-locale-select',
+            title: 'dashboard.header.title',
+            subtitle: 'dashboard.header.subtitle',
+            activeNav: 'dashboard'
+        } %}
 
         <section
             class="catalog-shell"

@@ -35,13 +35,12 @@
         statsListPrefix: 'dashboard.stats.list_prefix'|trans
     } %}
     <main class="catalog-page">
-        <header class="catalog-header">
-            {% include '_app_header_tools.html.twig' with { localeSelectId: 'progression-header-locale-select' } %}
-            <p class="catalog-kicker">Fallout 76</p>
-            <h1>{{ 'progression.title'|trans }}</h1>
-            <p class="catalog-subtitle">{{ 'progression.description'|trans }}</p>
-            <p class="catalog-user">{% include '_app_primary_nav.html.twig' with { active: 'progression' } %}</p>
-        </header>
+        {% include '_app_page_header.html.twig' with {
+            localeSelectId: 'progression-header-locale-select',
+            title: 'progression.title',
+            subtitle: 'progression.description',
+            activeNav: 'progression'
+        } %}
 
         <section
             class="catalog-shell"

@@ -1,0 +1,12 @@
+<header class="catalog-header">
+    {% include '_app_header_tools.html.twig' with { localeSelectId: localeSelectId } %}
+    <p class="catalog-kicker">Fallout 76</p>
+    <h1>{{ title|trans }}</h1>
+    {% if subtitle is defined and subtitle %}
+        <p class="catalog-subtitle">{{ subtitle|trans }}</p>
+    {% endif %}
+    <p class="catalog-user">{% include '_app_primary_nav.html.twig' with { active: activeNav } %}</p>
+    {% if extraState is defined and extraState %}
+        <p class="catalog-state">{{ extraState }}</p>
+    {% endif %}
+</header>

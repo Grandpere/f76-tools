@@ -6,6 +6,7 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-098: Front page header componentization (header unifie dashboard/minerva/progression) (done).
 - F76-097: Current focus priority hygiene (suppression des priorites deja livrees) (done).
 - F76-096: Security links componentization (bloc auth-links factorise) (done).
 - F76-095: Security card header componentization (kicker + title factorises) (done).

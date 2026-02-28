@@ -25,14 +25,13 @@
         source_vendorMortimer: 'dashboard.sources.mortimer'|trans
     } %}
     <main class="catalog-page">
-        <header class="catalog-header">
-            {% include '_app_header_tools.html.twig' with { localeSelectId: 'minerva-header-locale-select' } %}
-            <p class="catalog-kicker">Fallout 76</p>
-            <h1>{{ 'minerva.title'|trans }}</h1>
-            <p class="catalog-subtitle">{{ 'minerva.description'|trans }}</p>
-            <p class="catalog-user">{% include '_app_primary_nav.html.twig' with { active: 'minerva' } %}</p>
-            <p class="catalog-state">{{ 'minerva.timezone'|trans({'%timezone%': timeline.timezone}) }}</p>
-        </header>
+        {% include '_app_page_header.html.twig' with {
+            localeSelectId: 'minerva-header-locale-select',
+            title: 'minerva.title',
+            subtitle: 'minerva.description',
+            activeNav: 'minerva',
+            extraState: 'minerva.timezone'|trans({'%timezone%': timeline.timezone})
+        } %}
 
         <section class="catalog-block">
             {% set nextWindow = timeline.upcoming|first %}
