@@ -18,7 +18,7 @@ Le parcours d'authentification est fonctionnel (inscription, verification email,
 - [x] Prefix `F76 -` sur les titles des pages auth (`login/register/forgot/resend/contact/reset`).
 - [x] Ajout du lien `retour connexion` sur la page reset password.
 - [x] Test fonctionnel reset: presence du lien retour connexion.
-- [ ] Revue finale de coherence des liens secondaires sur tout le flow auth.
+- [x] Revue finale de coherence des liens secondaires sur tout le flow auth.
 
 ## Statut
-- In progress
+- Done - 2026-02-28

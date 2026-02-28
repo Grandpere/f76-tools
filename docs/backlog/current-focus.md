@@ -1,7 +1,6 @@
 # Current Focus
 
 ## Priorite active
-- F76-090: Auth UX finalization (coherence titres/liens auth + couverture fonctionnelle).
 - Stabilisation front post-refacto (headers/nav/blocs front) + corrections UX mineures.
 - F76-087: BOOK lists absolues 1..24 (modele/import/stats/UI coherents metier).
 - F76-086: Minerva front countdown dynamique (arrivee/depart sans rechargement).
@@ -12,6 +11,7 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-090: Auth UX finalization (coherence titres/liens auth + couverture fonctionnelle) (done).
 - F76-089: Minerva admin datepicker + timeline polish (colonnes/largeurs/synchronisation progression) (done).
 - F76-088: Nav applicative unifiee + separation front en 3 pages (`Mods legendaires`, `Minerva`, `Progression`) + suivi BOOK sur page Minerva (done).
 - F76-081: DDD Slice 71 - Admin boundary typing hardening (done).
