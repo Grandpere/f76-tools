@@ -1700,6 +1700,25 @@ span.flatpickr-weekday {
     color: #5a6473;
 }
 
+.admin-users-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.42rem;
+    margin-bottom: 0.78rem;
+}
+
+.admin-users-summary-item {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--text-1);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.22rem 0.52rem;
+}
+
 .translations-help {
     margin: 0.38rem 0 0;
     font-size: 0.78rem;

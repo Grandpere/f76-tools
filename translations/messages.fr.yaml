@@ -202,6 +202,10 @@ admin_users.search: Recherche
 admin_users.search_placeholder: Email
 admin_users.filter: Filtrer
 admin_users.visible_rows: '%count% utilisateurs visibles.'
+admin_users.summary_total: 'Total: %count%'
+admin_users.summary_google_linked: 'Google lie: %count%'
+admin_users.summary_google_unlinked: 'Google non lie: %count%'
+admin_users.summary_visible: 'Visibles: %count%'
 admin_users.list_title: Liste des utilisateurs
 admin_users.email: Email
 admin_users.roles: Roles

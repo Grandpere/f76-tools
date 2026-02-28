@@ -75,12 +75,20 @@ final class UserManagementController extends AbstractController
         $query = trim($request->query->getString('q', ''));
         $filteredUsers = $this->filterUsersByGoogleIdentity($users, $googleIdentitiesByUserId, $googleFilter);
         $filteredUsers = $this->filterUsersBySearchQuery($filteredUsers, $query);
+        $totalUsers = count($users);
+        $googleLinkedCount = count($googleIdentitiesByUserId);
+        $googleUnlinkedCount = max(0, $totalUsers - $googleLinkedCount);
+        $visibleUsers = count($filteredUsers);
 
         return $this->render('admin/users.html.twig', [
             'users' => $filteredUsers,
             'googleIdentitiesByUserId' => $googleIdentitiesByUserId,
             'googleFilter' => $googleFilter,
             'query' => $query,
+            'totalUsers' => $totalUsers,
+            'googleLinkedCount' => $googleLinkedCount,
+            'googleUnlinkedCount' => $googleUnlinkedCount,
+            'visibleUsers' => $visibleUsers,
         ]);
     }
 
