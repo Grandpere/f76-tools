@@ -46,8 +46,7 @@
                         <option value="100" {% if perPage == 100 %}selected{% endif %}>100</option>
                     </select>
                 </label>
-                <input type="hidden" name="locale" value="{{ app.request.locale }}">
-                <input type="hidden" name="page" value="1">
+                {% include 'admin/_filters_common_hidden_fields.html.twig' %}
                 <button type="submit">{{ 'admin_contact.filter'|trans }}</button>
             </form>
             <p class="catalog-state">{{ 'admin_contact.visible_rows'|trans({'%count%': totalRows}) }}</p>
