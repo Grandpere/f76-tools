@@ -124,6 +124,13 @@ security.login.to_resend: Verifizierungs-E-Mail erneut senden
 security.login.to_contact: Kontakt
 security.auth.flash.rate_limited: Zu viele Versuche. Bitte warten Sie einige Minuten und versuchen Sie es erneut.
 security.auth.flash.captcha_invalid: CAPTCHA-Validierung fehlgeschlagen. Bitte versuchen Sie es erneut.
+security.oidc.google_cta: Mit Google fortfahren
+security.oidc.flash.provider_disabled: Die Google-Anmeldung ist derzeit nicht verfugbar.
+security.oidc.flash.provider_unavailable: Google fur die Anmeldung ist aktuell nicht erreichbar.
+security.oidc.flash.state_invalid: Ungultiger oder abgelaufener Google-Anmeldestatus. Bitte erneut versuchen.
+security.oidc.flash.email_not_verified: Die E-Mail Ihres Google-Kontos muss verifiziert sein.
+security.oidc.flash.account_link_conflict: Dieses Konto ist bereits mit einer anderen Google-Identitat verknupft.
+security.oidc.flash.callback_failed: Google-Anmeldung fehlgeschlagen. Bitte erneut versuchen.
 
 security.register.page_title: 'F76 - Registrierung'
 security.register.title: Registrierung

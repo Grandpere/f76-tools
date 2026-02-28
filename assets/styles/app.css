@@ -359,6 +359,27 @@ body::before {
     background: #fffdf6;
 }
 
+.auth-google-button {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.auth-google-icon {
+    width: 1.15rem;
+    height: 1.15rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    background: #4285f4;
+}
+
 .auth-alert {
     margin: 0.75rem 0 0;
     padding: 0.58rem 0.7rem;

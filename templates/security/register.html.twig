@@ -48,6 +48,7 @@
                 {% include 'security/_turnstile.html.twig' %}
 
                 <button type="submit">{{ 'security.register.submit'|trans }}</button>
+                {% include 'security/_google_oidc_button.html.twig' %}
             </form>
 
             {% include 'security/_links.html.twig' with {

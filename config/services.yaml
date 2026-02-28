@@ -35,6 +35,10 @@ services:
     App\Identity\Application\ForgotPassword\ForgotPasswordUserRepositoryInterface: '@App\Identity\Infrastructure\Persistence\UserEntityRepository'
     App\Identity\Application\Registration\RegistrationUserRepositoryInterface: '@App\Identity\Infrastructure\Persistence\UserEntityRepository'
     App\Identity\Application\ResendVerification\ResendVerificationUserRepositoryInterface: '@App\Identity\Infrastructure\Persistence\UserEntityRepository'
+    App\Identity\Application\Oidc\GoogleOidcIdentityReadRepository: '@App\Identity\Infrastructure\Persistence\UserIdentityEntityRepository'
+    App\Identity\Application\Oidc\GoogleOidcIdentityWriteRepository: '@App\Identity\Infrastructure\Persistence\UserIdentityEntityRepository'
+    App\Identity\Application\Oidc\GoogleOidcConfig: '@App\Identity\Infrastructure\Oidc\GoogleOidcConfigProvider'
+    App\Identity\Application\Oidc\GoogleOidcClient: '@App\Identity\Infrastructure\Oidc\GoogleOidcHttpClient'
     App\Identity\Application\Notification\IdentityLinkEmailSenderInterface: '@App\Identity\Infrastructure\Notification\IdentityLinkEmailSender'
     App\Identity\Application\Notification\IdentitySignedLinkGeneratorInterface: '@App\Identity\Infrastructure\Notification\IdentitySignedLinkGenerator'
     App\Identity\Application\Guard\IdentityRequestGuardInterface: '@App\Identity\Infrastructure\Guard\IdentityRequestGuard'
@@ -54,6 +58,13 @@ services:
         arguments:
             $siteKey: '%env(string:TURNSTILE_SITE_KEY)%'
             $secretKey: '%env(string:TURNSTILE_SECRET_KEY)%'
+
+    App\Identity\Infrastructure\Oidc\GoogleOidcConfigProvider:
+        arguments:
+            $enabled: '%env(bool:OIDC_GOOGLE_ENABLED)%'
+            $issuer: '%env(string:OIDC_GOOGLE_ISSUER)%'
+            $clientId: '%env(string:OIDC_GOOGLE_CLIENT_ID)%'
+            $clientSecret: '%env(string:OIDC_GOOGLE_CLIENT_SECRET)%'
 
     App\Support\Infrastructure\Contact\ContactMessageEmailSender:
         arguments:

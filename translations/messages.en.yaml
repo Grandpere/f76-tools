@@ -124,6 +124,13 @@ security.login.to_resend: Resend verification email
 security.login.to_contact: Contact
 security.auth.flash.rate_limited: Too many attempts. Please wait a few minutes and try again.
 security.auth.flash.captcha_invalid: CAPTCHA validation failed. Please try again.
+security.oidc.google_cta: Continue with Google
+security.oidc.flash.provider_disabled: Google sign-in is currently unavailable.
+security.oidc.flash.provider_unavailable: Unable to reach Google sign-in provider right now.
+security.oidc.flash.state_invalid: Invalid or expired Google sign-in state. Please try again.
+security.oidc.flash.email_not_verified: Your Google account email must be verified before sign-in.
+security.oidc.flash.account_link_conflict: This account is already linked to another Google identity.
+security.oidc.flash.callback_failed: Google sign-in failed. Please try again.
 
 security.register.page_title: 'F76 - Register'
 security.register.title: Register

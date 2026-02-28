@@ -37,6 +37,7 @@
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                 {% include 'security/_primary_actions.html.twig' with { submitLabel: 'security.login.submit' } %}
+                {% include 'security/_google_oidc_button.html.twig' %}
             </form>
 
             {% include 'security/_links.html.twig' with {

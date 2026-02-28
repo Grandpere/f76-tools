@@ -52,6 +52,7 @@ final class LoginLogoutTest extends WebTestCase
         self::assertCount(1, $crawler->filter('form'));
         self::assertCount(1, $crawler->filter('input[name="_username"]'));
         self::assertCount(1, $crawler->filter('input[name="_password"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/auth/google/start"]'));
     }
 
     public function testCanLoginAndLogoutWithFormAuthentication(): void

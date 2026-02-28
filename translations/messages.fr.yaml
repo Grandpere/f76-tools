@@ -124,6 +124,13 @@ security.login.to_resend: Renvoyer l email de verification
 security.login.to_contact: Contact
 security.auth.flash.rate_limited: Trop de tentatives. Merci de patienter quelques minutes puis de reessayer.
 security.auth.flash.captcha_invalid: Echec de validation du CAPTCHA. Merci de reessayer.
+security.oidc.google_cta: Continuer avec Google
+security.oidc.flash.provider_disabled: La connexion Google est indisponible pour le moment.
+security.oidc.flash.provider_unavailable: Impossible de joindre Google pour la connexion actuellement.
+security.oidc.flash.state_invalid: Etat de connexion Google invalide ou expire. Merci de reessayer.
+security.oidc.flash.email_not_verified: L email de votre compte Google doit etre verifie avant connexion.
+security.oidc.flash.account_link_conflict: Ce compte est deja lie a une autre identite Google.
+security.oidc.flash.callback_failed: Echec de la connexion Google. Merci de reessayer.
 
 security.register.page_title: 'F76 - Inscription'
 security.register.title: Inscription
