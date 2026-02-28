@@ -56,7 +56,8 @@ final class ForgotPasswordControllerTest extends WebTestCase
 
     public function testForgotPasswordCreatesResetTokenForExistingUser(): void
     {
-        $this->createUser('forgot-target@example.com', 'secret123');
+        $email = sprintf('forgot-target-%s@example.com', uniqid('', true));
+        $this->createUser($email, 'secret123');
 
         $crawler = $this->browser()->request('GET', '/forgot-password');
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
@@ -65,14 +66,14 @@ final class ForgotPasswordControllerTest extends WebTestCase
 
         $this->browser()->request('POST', '/forgot-password', [
             '_csrf_token' => $csrfToken,
-            'email' => 'forgot-target@example.com',
+            'email' => $email,
         ]);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
         $this->entityManager?->clear();
-        $updated = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => 'forgot-target@example.com']);
+        $updated = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => $email]);
         self::assertInstanceOf(UserEntity::class, $updated);
         self::assertNotNull($updated->getResetPasswordTokenHash());
         self::assertNotNull($updated->getResetPasswordExpiresAt());
@@ -81,6 +82,7 @@ final class ForgotPasswordControllerTest extends WebTestCase
 
     public function testForgotPasswordReturnsGenericResponseForUnknownEmail(): void
     {
+        $email = sprintf('unknown-%s@example.com', uniqid('', true));
         $crawler = $this->browser()->request('GET', '/forgot-password');
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
@@ -88,7 +90,7 @@ final class ForgotPasswordControllerTest extends WebTestCase
 
         $this->browser()->request('POST', '/forgot-password', [
             '_csrf_token' => $csrfToken,
-            'email' => 'unknown@example.com',
+            'email' => $email,
         ]);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());

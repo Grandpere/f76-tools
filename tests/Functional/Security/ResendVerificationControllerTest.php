@@ -57,9 +57,10 @@ final class ResendVerificationControllerTest extends WebTestCase
 
     public function testResendUpdatesTokenForUnverifiedUser(): void
     {
+        $email = sprintf('resend-target-%s@example.com', uniqid('', true));
         $oldToken = hash('sha256', 'old-token');
         $user = new UserEntity()
-            ->setEmail('resend-target@example.com')
+            ->setEmail($email)
             ->setRoles(['ROLE_USER'])
             ->setPassword('$2y$13$5QzWfXyM7FuU7f1w8rRZBupJrbj5gaMmkX6A8hA1z7f4h56yQW2mS')
             ->setIsEmailVerified(false)
@@ -77,14 +78,14 @@ final class ResendVerificationControllerTest extends WebTestCase
 
         $this->browser()->request('POST', '/resend-verification', [
             '_csrf_token' => $csrfToken,
-            'email' => 'resend-target@example.com',
+            'email' => $email,
         ]);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
         $this->entityManager?->clear();
-        $updated = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => 'resend-target@example.com']);
+        $updated = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => $email]);
         self::assertInstanceOf(UserEntity::class, $updated);
         self::assertNotSame($oldToken, $updated->getEmailVerificationTokenHash());
         self::assertNotNull($updated->getEmailVerificationExpiresAt());
@@ -93,10 +94,11 @@ final class ResendVerificationControllerTest extends WebTestCase
 
     public function testResendDoesNotUpdateTokenWhenCooldownIsActive(): void
     {
+        $email = sprintf('resend-cooldown-%s@example.com', uniqid('', true));
         $oldToken = hash('sha256', 'same-token');
         $requestedAt = new DateTimeImmutable();
         $user = new UserEntity()
-            ->setEmail('resend-cooldown@example.com')
+            ->setEmail($email)
             ->setRoles(['ROLE_USER'])
             ->setPassword('$2y$13$5QzWfXyM7FuU7f1w8rRZBupJrbj5gaMmkX6A8hA1z7f4h56yQW2mS')
             ->setIsEmailVerified(false)
@@ -114,14 +116,14 @@ final class ResendVerificationControllerTest extends WebTestCase
 
         $this->browser()->request('POST', '/resend-verification', [
             '_csrf_token' => $csrfToken,
-            'email' => 'resend-cooldown@example.com',
+            'email' => $email,
         ]);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
         $this->entityManager?->clear();
-        $updated = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => 'resend-cooldown@example.com']);
+        $updated = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => $email]);
         self::assertInstanceOf(UserEntity::class, $updated);
         self::assertSame($oldToken, $updated->getEmailVerificationTokenHash());
         self::assertEquals($requestedAt->getTimestamp(), $updated->getEmailVerificationRequestedAt()?->getTimestamp());
