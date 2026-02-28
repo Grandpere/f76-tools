@@ -29,6 +29,8 @@ use Symfony\Component\Security\Http\Event\LogoutEvent;
 
 final class ActiveSessionSubscriber implements EventSubscriberInterface
 {
+    private const SESSION_GUARD_INITIALIZED_KEY = 'identity.active_session_guard_initialized';
+
     public function __construct(
         private readonly ActiveUserSessionRegistry $activeUserSessionRegistry,
         private readonly Security $security,
@@ -78,8 +80,11 @@ final class ActiveSessionSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (!$this->activeUserSessionRegistry->hasAnySession($userId)) {
+        // First authenticated request for this PHP session: initialize guard state.
+        // This avoids false positive revocations in test/runtime environments where user IDs can be recycled.
+        if (!$session->has(self::SESSION_GUARD_INITIALIZED_KEY)) {
             $this->activeUserSessionRegistry->registerOrTouch($userId, $sessionId, $request->getClientIp(), (string) $request->headers->get('User-Agent', ''), new DateTimeImmutable());
+            $session->set(self::SESSION_GUARD_INITIALIZED_KEY, true);
 
             return;
         }
