@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Identity\Application\ResendVerification;
+namespace App\Identity\Application\Common;
 
 use App\Identity\Domain\Entity\UserEntity;
 
-interface ResendVerificationUserRepositoryInterface
+interface IdentityPasswordVerifier
 {
-    public function findOneByEmail(string $email): ?UserEntity;
+    public function isValid(UserEntity $user, string $plainPassword): bool;
 }

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Identity\UI\Security\Controller;
 
 use App\Identity\Application\ResetPassword\ResetPasswordApplicationService;
-use App\Identity\Application\Time\IdentityClockInterface;
+use App\Identity\Application\Time\IdentityClock;
 use App\Identity\UI\Security\IdentityFlashResponder;
 use App\Identity\UI\Security\IdentitySignedTokenFailureResolver;
 use App\Identity\UI\Security\ResetPasswordFeedbackMapper;
@@ -32,7 +32,7 @@ final class ResetPasswordController extends AbstractController
 
     public function __construct(
         private readonly ResetPasswordApplicationService $resetPasswordApplicationService,
-        private readonly IdentityClockInterface $identityClock,
+        private readonly IdentityClock $identityClock,
         private readonly ResetPasswordFeedbackMapper $resetPasswordFeedbackMapper,
         private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly IdentitySignedTokenFailureResolver $identitySignedTokenFailureResolver,

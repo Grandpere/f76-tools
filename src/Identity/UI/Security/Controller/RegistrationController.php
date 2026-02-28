@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Identity\UI\Security\Controller;
 
-use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProviderInterface;
+use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProvider;
 use App\Identity\Application\Registration\RegisterUserApplicationService;
 use App\Identity\Application\Registration\RegisterUserRequest;
 use App\Identity\Application\Security\AuthEventLogger;
-use App\Identity\Application\Time\IdentityClockInterface;
+use App\Identity\Application\Time\IdentityClock;
 use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Identity\UI\Security\IdentityFlashResponder;
@@ -35,12 +35,12 @@ final class RegistrationController extends AbstractController
 
     public function __construct(
         private readonly RegisterUserApplicationService $registerUserApplicationService,
-        private readonly IdentityClockInterface $identityClock,
+        private readonly IdentityClock $identityClock,
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
         private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
         private readonly RegistrationFeedbackMapper $registrationFeedbackMapper,
-        private readonly IdentityCaptchaSiteKeyProviderInterface $captchaSiteKeyProvider,
+        private readonly IdentityCaptchaSiteKeyProvider $captchaSiteKeyProvider,
         private readonly AuthEventLogger $authEventLogger,
     ) {
     }
@@ -95,7 +95,7 @@ final class RegistrationController extends AbstractController
         return $this->renderWithCaptchaSiteKey('security/register.html.twig');
     }
 
-    protected function captchaSiteKeyProvider(): IdentityCaptchaSiteKeyProviderInterface
+    protected function captchaSiteKeyProvider(): IdentityCaptchaSiteKeyProvider
     {
         return $this->captchaSiteKeyProvider;
     }

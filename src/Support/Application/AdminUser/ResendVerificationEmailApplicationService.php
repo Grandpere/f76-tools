@@ -14,14 +14,14 @@ declare(strict_types=1);
 namespace App\Support\Application\AdminUser;
 
 use App\Identity\Application\Security\TemporaryLinkPolicy;
-use App\Identity\Application\Time\IdentityClockInterface;
+use App\Identity\Application\Time\IdentityClock;
 
 final class ResendVerificationEmailApplicationService
 {
     public function __construct(
         private readonly AdminUserManagementWriteRepository $userRepository,
         private readonly TemporaryLinkPolicy $temporaryLinkPolicy,
-        private readonly IdentityClockInterface $identityClock,
+        private readonly IdentityClock $identityClock,
     ) {
     }
 

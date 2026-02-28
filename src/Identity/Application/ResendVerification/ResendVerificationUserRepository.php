@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Identity\Application\VerifyEmail;
+namespace App\Identity\Application\ResendVerification;
 
 use App\Identity\Domain\Entity\UserEntity;
 
-interface VerifyEmailUserRepositoryInterface
+interface ResendVerificationUserRepository
 {
-    public function findOneByEmailVerificationTokenHash(string $tokenHash): ?UserEntity;
+    public function findOneByEmail(string $email): ?UserEntity;
 }

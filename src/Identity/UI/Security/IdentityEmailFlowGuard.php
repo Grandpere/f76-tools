@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace App\Identity\UI\Security;
 
-use App\Identity\Application\Guard\IdentityRequestGuardInterface;
+use App\Identity\Application\Guard\IdentityRequestGuard;
 use Symfony\Component\HttpFoundation\Request;
 
 final class IdentityEmailFlowGuard
 {
     public function __construct(
         private readonly IdentityEmailFormPayloadExtractor $identityEmailFormPayloadExtractor,
-        private readonly IdentityRequestGuardInterface $identityRequestGuard,
+        private readonly IdentityRequestGuard $identityRequestGuard,
         private readonly IdentityGuardFailureResponder $guardFailureResponder,
     ) {
     }

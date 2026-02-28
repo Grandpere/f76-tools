@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Identity\Infrastructure\Security;
 
-use App\Identity\Application\Common\IdentityPasswordHasherInterface;
-use App\Identity\Application\Common\IdentityPasswordVerifierInterface;
+use App\Identity\Application\Common\IdentityPasswordHasher;
+use App\Identity\Application\Common\IdentityPasswordVerifier;
 use App\Identity\Domain\Entity\UserEntity;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-final class SymfonyIdentityPasswordHasher implements IdentityPasswordHasherInterface, IdentityPasswordVerifierInterface
+final class SymfonyIdentityPasswordHasher implements IdentityPasswordHasher, IdentityPasswordVerifier
 {
     public function __construct(
         private readonly UserPasswordHasherInterface $passwordHasher,

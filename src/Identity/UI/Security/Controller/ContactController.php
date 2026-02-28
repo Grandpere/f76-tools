@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Identity\UI\Security\Controller;
 
-use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProviderInterface;
+use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProvider;
 use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Support\Application\Contact\ContactSubmissionApplicationService;
@@ -29,7 +29,7 @@ final class ContactController extends AbstractController
 {
     public function __construct(
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
-        private readonly IdentityCaptchaSiteKeyProviderInterface $captchaSiteKeyProvider,
+        private readonly IdentityCaptchaSiteKeyProvider $captchaSiteKeyProvider,
         private readonly ContactSubmissionApplicationService $contactSubmissionApplicationService,
         private readonly ContactSubmissionResponder $contactSubmissionResponder,
     ) {

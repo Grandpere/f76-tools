@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace App\Identity\Application\ResendVerification;
 
-use App\Identity\Application\Common\IdentityWritePersistenceInterface;
+use App\Identity\Application\Common\IdentityWritePersistence;
 use App\Identity\Application\Security\TemporaryLinkPolicy;
 
 final class ResendVerificationRequestApplicationService
 {
     public function __construct(
-        private readonly ResendVerificationUserRepositoryInterface $userRepository,
-        private readonly IdentityWritePersistenceInterface $persistence,
+        private readonly ResendVerificationUserRepository $userRepository,
+        private readonly IdentityWritePersistence $persistence,
         private readonly TemporaryLinkPolicy $temporaryLinkPolicy,
     ) {
     }

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Identity\Infrastructure\Guard;
 
-use App\Identity\Application\Guard\IdentityRateLimiterInterface;
+use App\Identity\Application\Guard\IdentityRateLimiter;
 
-final class AuthRequestThrottlerRateLimiter implements IdentityRateLimiterInterface
+final class AuthRequestThrottlerRateLimiter implements IdentityRateLimiter
 {
     public function __construct(
         private readonly AuthRequestThrottler $authRequestThrottler,

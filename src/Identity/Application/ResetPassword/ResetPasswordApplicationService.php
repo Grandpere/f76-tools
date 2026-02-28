@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace App\Identity\Application\ResetPassword;
 
-use App\Identity\Application\Common\IdentityPasswordHasherInterface;
-use App\Identity\Application\Common\IdentityWritePersistenceInterface;
+use App\Identity\Application\Common\IdentityPasswordHasher;
+use App\Identity\Application\Common\IdentityWritePersistence;
 use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
 
 final class ResetPasswordApplicationService
 {
     public function __construct(
-        private readonly ResetPasswordUserRepositoryInterface $userRepository,
-        private readonly IdentityPasswordHasherInterface $passwordHasher,
-        private readonly IdentityWritePersistenceInterface $persistence,
+        private readonly ResetPasswordUserRepository $userRepository,
+        private readonly IdentityPasswordHasher $passwordHasher,
+        private readonly IdentityWritePersistence $persistence,
     ) {
     }
 

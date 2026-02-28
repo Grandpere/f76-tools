@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Identity\Application\Registration;
 
-use App\Identity\Application\Common\IdentityPasswordHasherInterface;
-use App\Identity\Application\Common\IdentityWritePersistenceInterface;
+use App\Identity\Application\Common\IdentityPasswordHasher;
+use App\Identity\Application\Common\IdentityWritePersistence;
 use App\Identity\Application\Registration\RegisterUserApplicationService;
 use App\Identity\Application\Registration\RegisterUserRequest;
 use App\Identity\Application\Registration\RegisterUserStatus;
-use App\Identity\Application\Registration\RegistrationUserRepositoryInterface;
+use App\Identity\Application\Registration\RegistrationUserRepository;
 use App\Identity\Application\Security\TemporaryLinkPolicy;
 use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
@@ -27,16 +27,16 @@ use PHPUnit\Framework\TestCase;
 
 final class RegisterUserApplicationServiceTest extends TestCase
 {
-    private RegistrationUserRepositoryInterface&MockObject $repository;
-    private IdentityPasswordHasherInterface&MockObject $passwordHasher;
-    private IdentityWritePersistenceInterface&MockObject $persistence;
+    private RegistrationUserRepository&MockObject $repository;
+    private IdentityPasswordHasher&MockObject $passwordHasher;
+    private IdentityWritePersistence&MockObject $persistence;
     private TemporaryLinkPolicy $temporaryLinkPolicy;
 
     protected function setUp(): void
     {
-        $this->repository = $this->createMock(RegistrationUserRepositoryInterface::class);
-        $this->passwordHasher = $this->createMock(IdentityPasswordHasherInterface::class);
-        $this->persistence = $this->createMock(IdentityWritePersistenceInterface::class);
+        $this->repository = $this->createMock(RegistrationUserRepository::class);
+        $this->passwordHasher = $this->createMock(IdentityPasswordHasher::class);
+        $this->persistence = $this->createMock(IdentityWritePersistence::class);
         $this->temporaryLinkPolicy = new TemporaryLinkPolicy();
     }
 

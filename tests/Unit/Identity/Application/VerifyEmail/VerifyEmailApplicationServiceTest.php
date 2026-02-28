@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Identity\Application\VerifyEmail;
 
-use App\Identity\Application\Common\IdentityWritePersistenceInterface;
+use App\Identity\Application\Common\IdentityWritePersistence;
 use App\Identity\Application\VerifyEmail\VerifyEmailApplicationService;
-use App\Identity\Application\VerifyEmail\VerifyEmailUserRepositoryInterface;
+use App\Identity\Application\VerifyEmail\VerifyEmailUserRepository;
 use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -23,13 +23,13 @@ use PHPUnit\Framework\TestCase;
 
 final class VerifyEmailApplicationServiceTest extends TestCase
 {
-    private VerifyEmailUserRepositoryInterface&MockObject $repository;
-    private IdentityWritePersistenceInterface&MockObject $persistence;
+    private VerifyEmailUserRepository&MockObject $repository;
+    private IdentityWritePersistence&MockObject $persistence;
 
     protected function setUp(): void
     {
-        $this->repository = $this->createMock(VerifyEmailUserRepositoryInterface::class);
-        $this->persistence = $this->createMock(IdentityWritePersistenceInterface::class);
+        $this->repository = $this->createMock(VerifyEmailUserRepository::class);
+        $this->persistence = $this->createMock(IdentityWritePersistence::class);
     }
 
     public function testVerifyReturnsFalseWhenTokenIsBlank(): void

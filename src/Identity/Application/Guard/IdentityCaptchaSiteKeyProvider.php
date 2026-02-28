@@ -11,11 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Identity\Application\Notification;
+namespace App\Identity\Application\Guard;
 
-interface IdentitySignedLinkGeneratorInterface
+interface IdentityCaptchaSiteKeyProvider
 {
-    public function generateVerificationUrl(string $locale, string $token): string;
-
-    public function generateResetPasswordUrl(string $locale, string $token): string;
+    public function getSiteKey(): ?string;
 }

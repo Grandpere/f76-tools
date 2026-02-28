@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace App\Identity\Application\ForgotPassword;
 
-use App\Identity\Application\Common\IdentityWritePersistenceInterface;
+use App\Identity\Application\Common\IdentityWritePersistence;
 use App\Identity\Application\Security\TemporaryLinkPolicy;
 
 final class ForgotPasswordRequestApplicationService
 {
     public function __construct(
-        private readonly ForgotPasswordUserRepositoryInterface $userRepository,
-        private readonly IdentityWritePersistenceInterface $persistence,
+        private readonly ForgotPasswordUserRepository $userRepository,
+        private readonly IdentityWritePersistence $persistence,
         private readonly TemporaryLinkPolicy $temporaryLinkPolicy,
     ) {
     }

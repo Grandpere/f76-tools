@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Identity\Application\Notification;
 
-interface IdentityLinkEmailSenderInterface
+interface IdentityLinkEmailSender
 {
     public function sendVerificationLink(string $email, string $locale, string $token): void;
 

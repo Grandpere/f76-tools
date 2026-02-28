@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Identity\Application\ResendVerification;
 
-use App\Identity\Application\Common\IdentityWritePersistenceInterface;
+use App\Identity\Application\Common\IdentityWritePersistence;
 use App\Identity\Application\ResendVerification\ResendVerificationRequest;
 use App\Identity\Application\ResendVerification\ResendVerificationRequestApplicationService;
-use App\Identity\Application\ResendVerification\ResendVerificationUserRepositoryInterface;
+use App\Identity\Application\ResendVerification\ResendVerificationUserRepository;
 use App\Identity\Application\Security\TemporaryLinkPolicy;
 use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
@@ -25,14 +25,14 @@ use PHPUnit\Framework\TestCase;
 
 final class ResendVerificationRequestApplicationServiceTest extends TestCase
 {
-    private ResendVerificationUserRepositoryInterface&MockObject $repository;
-    private IdentityWritePersistenceInterface&MockObject $persistence;
+    private ResendVerificationUserRepository&MockObject $repository;
+    private IdentityWritePersistence&MockObject $persistence;
     private TemporaryLinkPolicy $temporaryLinkPolicy;
 
     protected function setUp(): void
     {
-        $this->repository = $this->createMock(ResendVerificationUserRepositoryInterface::class);
-        $this->persistence = $this->createMock(IdentityWritePersistenceInterface::class);
+        $this->repository = $this->createMock(ResendVerificationUserRepository::class);
+        $this->persistence = $this->createMock(IdentityWritePersistence::class);
         $this->temporaryLinkPolicy = new TemporaryLinkPolicy();
     }
 

@@ -15,7 +15,7 @@ namespace App\Identity\Application\Registration;
 
 use App\Identity\Domain\Entity\UserEntity;
 
-interface RegistrationUserRepositoryInterface
+interface RegistrationUserRepository
 {
     public function findOneByEmail(string $email): ?UserEntity;
 }

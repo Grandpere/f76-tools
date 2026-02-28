@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Identity\Application\ResetPassword;
 
-use App\Identity\Application\Common\IdentityPasswordHasherInterface;
-use App\Identity\Application\Common\IdentityWritePersistenceInterface;
+use App\Identity\Application\Common\IdentityPasswordHasher;
+use App\Identity\Application\Common\IdentityWritePersistence;
 use App\Identity\Application\ResetPassword\ResetPasswordApplicationService;
 use App\Identity\Application\ResetPassword\ResetPasswordResult;
-use App\Identity\Application\ResetPassword\ResetPasswordUserRepositoryInterface;
+use App\Identity\Application\ResetPassword\ResetPasswordUserRepository;
 use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -25,15 +25,15 @@ use PHPUnit\Framework\TestCase;
 
 final class ResetPasswordApplicationServiceTest extends TestCase
 {
-    private ResetPasswordUserRepositoryInterface&MockObject $repository;
-    private IdentityPasswordHasherInterface&MockObject $passwordHasher;
-    private IdentityWritePersistenceInterface&MockObject $persistence;
+    private ResetPasswordUserRepository&MockObject $repository;
+    private IdentityPasswordHasher&MockObject $passwordHasher;
+    private IdentityWritePersistence&MockObject $persistence;
 
     protected function setUp(): void
     {
-        $this->repository = $this->createMock(ResetPasswordUserRepositoryInterface::class);
-        $this->passwordHasher = $this->createMock(IdentityPasswordHasherInterface::class);
-        $this->persistence = $this->createMock(IdentityWritePersistenceInterface::class);
+        $this->repository = $this->createMock(ResetPasswordUserRepository::class);
+        $this->passwordHasher = $this->createMock(IdentityPasswordHasher::class);
+        $this->persistence = $this->createMock(IdentityWritePersistence::class);
     }
 
     public function testCanResetTokenReturnsFalseForBlankToken(): void

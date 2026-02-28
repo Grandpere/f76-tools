@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Identity\Infrastructure\Persistence;
 
-use App\Identity\Application\ForgotPassword\ForgotPasswordUserRepositoryInterface;
-use App\Identity\Application\Registration\RegistrationUserRepositoryInterface;
-use App\Identity\Application\ResendVerification\ResendVerificationUserRepositoryInterface;
-use App\Identity\Application\ResetPassword\ResetPasswordUserRepositoryInterface;
+use App\Identity\Application\ForgotPassword\ForgotPasswordUserRepository;
+use App\Identity\Application\Registration\RegistrationUserRepository;
+use App\Identity\Application\ResendVerification\ResendVerificationUserRepository;
+use App\Identity\Application\ResetPassword\ResetPasswordUserRepository;
 use App\Identity\Application\User\UserByEmailFinder;
-use App\Identity\Application\VerifyEmail\VerifyEmailUserRepositoryInterface;
+use App\Identity\Application\VerifyEmail\VerifyEmailUserRepository;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Support\Application\AdminUser\AdminUserManagementReadRepository;
 use App\Support\Application\AdminUser\AdminUserManagementWriteRepository;
@@ -28,7 +28,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<UserEntity>
  */
-final class UserEntityRepository extends ServiceEntityRepository implements UserByEmailFinder, VerifyEmailUserRepositoryInterface, ResetPasswordUserRepositoryInterface, ForgotPasswordUserRepositoryInterface, RegistrationUserRepositoryInterface, ResendVerificationUserRepositoryInterface, AdminUserManagementReadRepository, AdminUserManagementWriteRepository
+final class UserEntityRepository extends ServiceEntityRepository implements UserByEmailFinder, VerifyEmailUserRepository, ResetPasswordUserRepository, ForgotPasswordUserRepository, RegistrationUserRepository, ResendVerificationUserRepository, AdminUserManagementReadRepository, AdminUserManagementWriteRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

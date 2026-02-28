@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Identity\Application\ForgotPassword;
 
-use App\Identity\Application\Common\IdentityWritePersistenceInterface;
+use App\Identity\Application\Common\IdentityWritePersistence;
 use App\Identity\Application\ForgotPassword\ForgotPasswordRequest;
 use App\Identity\Application\ForgotPassword\ForgotPasswordRequestApplicationService;
-use App\Identity\Application\ForgotPassword\ForgotPasswordUserRepositoryInterface;
+use App\Identity\Application\ForgotPassword\ForgotPasswordUserRepository;
 use App\Identity\Application\Security\TemporaryLinkPolicy;
 use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
@@ -25,14 +25,14 @@ use PHPUnit\Framework\TestCase;
 
 final class ForgotPasswordRequestApplicationServiceTest extends TestCase
 {
-    private ForgotPasswordUserRepositoryInterface&MockObject $repository;
-    private IdentityWritePersistenceInterface&MockObject $persistence;
+    private ForgotPasswordUserRepository&MockObject $repository;
+    private IdentityWritePersistence&MockObject $persistence;
     private TemporaryLinkPolicy $temporaryLinkPolicy;
 
     protected function setUp(): void
     {
-        $this->repository = $this->createMock(ForgotPasswordUserRepositoryInterface::class);
-        $this->persistence = $this->createMock(IdentityWritePersistenceInterface::class);
+        $this->repository = $this->createMock(ForgotPasswordUserRepository::class);
+        $this->persistence = $this->createMock(IdentityWritePersistence::class);
         $this->temporaryLinkPolicy = new TemporaryLinkPolicy();
     }
 

@@ -15,7 +15,9 @@ namespace App\Identity\Application\Common;
 
 use App\Identity\Domain\Entity\UserEntity;
 
-interface IdentityPasswordVerifierInterface
+interface IdentityWritePersistence
 {
-    public function isValid(UserEntity $user, string $plainPassword): bool;
+    public function persist(UserEntity $user): void;
+
+    public function flush(): void;
 }

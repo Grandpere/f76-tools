@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace App\Identity\Application\Registration;
 
-use App\Identity\Application\Common\IdentityPasswordHasherInterface;
-use App\Identity\Application\Common\IdentityWritePersistenceInterface;
+use App\Identity\Application\Common\IdentityPasswordHasher;
+use App\Identity\Application\Common\IdentityWritePersistence;
 use App\Identity\Application\Security\TemporaryLinkPolicy;
 use App\Identity\Domain\Entity\UserEntity;
 
 final class RegisterUserApplicationService
 {
     public function __construct(
-        private readonly RegistrationUserRepositoryInterface $userRepository,
-        private readonly IdentityPasswordHasherInterface $passwordHasher,
-        private readonly IdentityWritePersistenceInterface $persistence,
+        private readonly RegistrationUserRepository $userRepository,
+        private readonly IdentityPasswordHasher $passwordHasher,
+        private readonly IdentityWritePersistence $persistence,
         private readonly TemporaryLinkPolicy $temporaryLinkPolicy,
     ) {
     }

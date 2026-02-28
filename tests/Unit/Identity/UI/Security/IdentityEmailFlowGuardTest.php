@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Identity\UI\Security;
 
-use App\Identity\Application\Guard\IdentityRequestGuardInterface;
+use App\Identity\Application\Guard\IdentityRequestGuard;
 use App\Identity\Application\Guard\IdentityRequestGuardResult;
 use App\Identity\Application\Security\AuthEventLogger;
 use App\Identity\UI\Security\IdentityEmailFlow;
@@ -28,7 +28,7 @@ final class IdentityEmailFlowGuardTest extends TestCase
 {
     public function testGuardReturnsPayloadWhenAllowed(): void
     {
-        $requestGuard = $this->createMock(IdentityRequestGuardInterface::class);
+        $requestGuard = $this->createMock(IdentityRequestGuard::class);
         $requestGuard->expects(self::once())->method('guard')
             ->with(
                 'register',
@@ -65,7 +65,7 @@ final class IdentityEmailFlowGuardTest extends TestCase
 
     public function testGuardReturnsFailureMessageWhenRateLimited(): void
     {
-        $requestGuard = $this->createMock(IdentityRequestGuardInterface::class);
+        $requestGuard = $this->createMock(IdentityRequestGuard::class);
         $requestGuard->method('guard')->willReturn(IdentityRequestGuardResult::RATE_LIMITED);
 
         $logger = $this->createMock(LoggerInterface::class);

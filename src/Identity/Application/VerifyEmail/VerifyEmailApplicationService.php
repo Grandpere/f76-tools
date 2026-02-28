@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace App\Identity\Application\VerifyEmail;
 
-use App\Identity\Application\Common\IdentityWritePersistenceInterface;
+use App\Identity\Application\Common\IdentityWritePersistence;
 use DateTimeImmutable;
 
 final class VerifyEmailApplicationService
 {
     public function __construct(
-        private readonly VerifyEmailUserRepositoryInterface $userRepository,
-        private readonly IdentityWritePersistenceInterface $persistence,
+        private readonly VerifyEmailUserRepository $userRepository,
+        private readonly IdentityWritePersistence $persistence,
     ) {
     }
 

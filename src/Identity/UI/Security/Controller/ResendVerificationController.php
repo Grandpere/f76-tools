@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Identity\UI\Security\Controller;
 
-use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProviderInterface;
+use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProvider;
 use App\Identity\Application\ResendVerification\ResendVerificationRequest;
 use App\Identity\Application\ResendVerification\ResendVerificationRequestApplicationService;
-use App\Identity\Application\Time\IdentityClockInterface;
+use App\Identity\Application\Time\IdentityClock;
 use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Identity\UI\Security\IdentityFlashResponder;
@@ -33,11 +33,11 @@ final class ResendVerificationController extends AbstractController
 
     public function __construct(
         private readonly ResendVerificationRequestApplicationService $resendVerificationRequestApplicationService,
-        private readonly IdentityClockInterface $identityClock,
+        private readonly IdentityClock $identityClock,
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
         private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
-        private readonly IdentityCaptchaSiteKeyProviderInterface $captchaSiteKeyProvider,
+        private readonly IdentityCaptchaSiteKeyProvider $captchaSiteKeyProvider,
     ) {
     }
 
@@ -71,7 +71,7 @@ final class ResendVerificationController extends AbstractController
         return $this->renderWithCaptchaSiteKey('security/resend_verification.html.twig');
     }
 
-    protected function captchaSiteKeyProvider(): IdentityCaptchaSiteKeyProviderInterface
+    protected function captchaSiteKeyProvider(): IdentityCaptchaSiteKeyProvider
     {
         return $this->captchaSiteKeyProvider;
     }

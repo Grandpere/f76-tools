@@ -13,19 +13,18 @@ declare(strict_types=1);
 
 namespace App\Identity\Infrastructure\Guard;
 
-use App\Identity\Application\Guard\IdentityCaptchaVerifierInterface;
-use App\Identity\Application\Guard\IdentityRateLimiterInterface;
-use App\Identity\Application\Guard\IdentityRequestGuardInterface;
+use App\Identity\Application\Guard\IdentityCaptchaVerifier;
+use App\Identity\Application\Guard\IdentityRateLimiter;
 use App\Identity\Application\Guard\IdentityRequestGuardResult;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-final class IdentityRequestGuard implements IdentityRequestGuardInterface
+final class IdentityRequestGuard implements \App\Identity\Application\Guard\IdentityRequestGuard
 {
     public function __construct(
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
-        private readonly IdentityCaptchaVerifierInterface $captchaVerifier,
-        private readonly IdentityRateLimiterInterface $rateLimiter,
+        private readonly IdentityCaptchaVerifier $captchaVerifier,
+        private readonly IdentityRateLimiter $rateLimiter,
     ) {
     }
 

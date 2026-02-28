@@ -13,10 +13,9 @@ declare(strict_types=1);
 
 namespace App\Identity\Infrastructure\Notification;
 
-use App\Identity\Application\Notification\IdentitySignedLinkGeneratorInterface;
 use App\Identity\Application\Security\SignedUrlGenerator;
 
-final class IdentitySignedLinkGenerator implements IdentitySignedLinkGeneratorInterface
+final class IdentitySignedLinkGenerator implements \App\Identity\Application\Notification\IdentitySignedLinkGenerator
 {
     public function __construct(
         private readonly SignedUrlGenerator $signedUrlGenerator,

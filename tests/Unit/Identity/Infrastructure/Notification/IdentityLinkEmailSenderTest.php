@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Identity\Infrastructure\Notification;
 
-use App\Identity\Application\Notification\IdentitySignedLinkGeneratorInterface;
+use App\Identity\Application\Notification\IdentitySignedLinkGenerator;
 use App\Identity\Infrastructure\Notification\IdentityLinkEmailSender;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -23,13 +23,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class IdentityLinkEmailSenderTest extends TestCase
 {
-    private IdentitySignedLinkGeneratorInterface&MockObject $signedUrlGenerator;
+    private IdentitySignedLinkGenerator&MockObject $signedUrlGenerator;
     private TranslatorInterface&MockObject $translator;
     private MailerInterface&MockObject $mailer;
 
     protected function setUp(): void
     {
-        $this->signedUrlGenerator = $this->createMock(IdentitySignedLinkGeneratorInterface::class);
+        $this->signedUrlGenerator = $this->createMock(IdentitySignedLinkGenerator::class);
         $this->translator = $this->createMock(TranslatorInterface::class);
         $this->mailer = $this->createMock(MailerInterface::class);
     }

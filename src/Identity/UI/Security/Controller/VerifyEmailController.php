@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Identity\UI\Security\Controller;
 
-use App\Identity\Application\Time\IdentityClockInterface;
+use App\Identity\Application\Time\IdentityClock;
 use App\Identity\Application\VerifyEmail\VerifyEmailApplicationService;
 use App\Identity\UI\Security\IdentityFlashResponder;
 use App\Identity\UI\Security\IdentitySignedTokenFailureResolver;
@@ -28,7 +28,7 @@ final class VerifyEmailController extends AbstractController
 
     public function __construct(
         private readonly VerifyEmailApplicationService $verifyEmailApplicationService,
-        private readonly IdentityClockInterface $identityClock,
+        private readonly IdentityClock $identityClock,
         private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly IdentitySignedTokenFailureResolver $identitySignedTokenFailureResolver,
     ) {

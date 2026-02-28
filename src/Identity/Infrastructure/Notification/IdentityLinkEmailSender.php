@@ -13,17 +13,16 @@ declare(strict_types=1);
 
 namespace App\Identity\Infrastructure\Notification;
 
-use App\Identity\Application\Notification\IdentityLinkEmailSenderInterface;
-use App\Identity\Application\Notification\IdentitySignedLinkGeneratorInterface;
+use App\Identity\Application\Notification\IdentitySignedLinkGenerator;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Throwable;
 
-final class IdentityLinkEmailSender implements IdentityLinkEmailSenderInterface
+final class IdentityLinkEmailSender implements \App\Identity\Application\Notification\IdentityLinkEmailSender
 {
     public function __construct(
-        private readonly IdentitySignedLinkGeneratorInterface $signedLinkGenerator,
+        private readonly IdentitySignedLinkGenerator $signedLinkGenerator,
         private readonly TranslatorInterface $translator,
         private readonly MailerInterface $mailer,
     ) {

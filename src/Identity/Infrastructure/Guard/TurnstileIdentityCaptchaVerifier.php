@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Identity\Infrastructure\Guard;
 
-use App\Identity\Application\Guard\IdentityCaptchaVerifierInterface;
+use App\Identity\Application\Guard\IdentityCaptchaVerifier;
 
-final class TurnstileIdentityCaptchaVerifier implements IdentityCaptchaVerifierInterface
+final class TurnstileIdentityCaptchaVerifier implements IdentityCaptchaVerifier
 {
     public function __construct(
         private readonly TurnstileVerifier $turnstileVerifier,

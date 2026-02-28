@@ -11,15 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Identity\Infrastructure\Time;
+namespace App\Identity\Application\Time;
 
-use App\Identity\Application\Time\IdentityClock;
 use DateTimeImmutable;
 
-final class SystemIdentityClock implements IdentityClock
+interface IdentityClock
 {
-    public function now(): DateTimeImmutable
-    {
-        return new DateTimeImmutable();
-    }
+    public function now(): DateTimeImmutable;
 }

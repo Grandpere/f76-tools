@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Identity\UI\Security;
 
-use App\Identity\Application\Notification\IdentityLinkEmailSenderInterface;
+use App\Identity\Application\Notification\IdentityLinkEmailSender;
 use App\Identity\Application\Security\AuthEventLogger;
 use App\Identity\UI\Security\IdentityIssuedTokenNotifier;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -24,8 +24,8 @@ final class IdentityIssuedTokenNotifierTest extends TestCase
 {
     public function testNotifyVerificationSkipsWhenTokenMissing(): void
     {
-        /** @var IdentityLinkEmailSenderInterface&MockObject $sender */
-        $sender = $this->createMock(IdentityLinkEmailSenderInterface::class);
+        /** @var IdentityLinkEmailSender&MockObject $sender */
+        $sender = $this->createMock(IdentityLinkEmailSender::class);
         /** @var LoggerInterface&MockObject $logger */
         $logger = $this->createMock(LoggerInterface::class);
         $authLogger = new AuthEventLogger($logger);
@@ -39,8 +39,8 @@ final class IdentityIssuedTokenNotifierTest extends TestCase
 
     public function testNotifyResetPasswordSendsAndLogs(): void
     {
-        /** @var IdentityLinkEmailSenderInterface&MockObject $sender */
-        $sender = $this->createMock(IdentityLinkEmailSenderInterface::class);
+        /** @var IdentityLinkEmailSender&MockObject $sender */
+        $sender = $this->createMock(IdentityLinkEmailSender::class);
         /** @var LoggerInterface&MockObject $logger */
         $logger = $this->createMock(LoggerInterface::class);
         $authLogger = new AuthEventLogger($logger);

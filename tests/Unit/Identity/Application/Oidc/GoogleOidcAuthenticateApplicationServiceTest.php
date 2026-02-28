@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Identity\Application\Oidc;
 
-use App\Identity\Application\Common\IdentityPasswordHasherInterface;
-use App\Identity\Application\Common\IdentityWritePersistenceInterface;
+use App\Identity\Application\Common\IdentityPasswordHasher;
+use App\Identity\Application\Common\IdentityWritePersistence;
 use App\Identity\Application\Oidc\GoogleOidcAuthenticateApplicationService;
 use App\Identity\Application\Oidc\GoogleOidcAuthenticationAction;
 use App\Identity\Application\Oidc\GoogleOidcAuthenticationException;
@@ -33,16 +33,16 @@ final class GoogleOidcAuthenticateApplicationServiceTest extends TestCase
     private GoogleOidcIdentityReadRepository&MockObject $identityReadRepository;
     private GoogleOidcIdentityWriteRepository&MockObject $identityWriteRepository;
     private UserByEmailFinder&MockObject $userByEmailFinder;
-    private IdentityPasswordHasherInterface&MockObject $passwordHasher;
-    private IdentityWritePersistenceInterface&MockObject $persistence;
+    private IdentityPasswordHasher&MockObject $passwordHasher;
+    private IdentityWritePersistence&MockObject $persistence;
 
     protected function setUp(): void
     {
         $this->identityReadRepository = $this->createMock(GoogleOidcIdentityReadRepository::class);
         $this->identityWriteRepository = $this->createMock(GoogleOidcIdentityWriteRepository::class);
         $this->userByEmailFinder = $this->createMock(UserByEmailFinder::class);
-        $this->passwordHasher = $this->createMock(IdentityPasswordHasherInterface::class);
-        $this->persistence = $this->createMock(IdentityWritePersistenceInterface::class);
+        $this->passwordHasher = $this->createMock(IdentityPasswordHasher::class);
+        $this->persistence = $this->createMock(IdentityWritePersistence::class);
     }
 
     public function testReturnsExistingIdentityUserWhenIdentityAlreadyLinked(): void

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Identity\Infrastructure\Guard;
 
-use App\Identity\Application\Guard\IdentityCaptchaVerifierInterface;
-use App\Identity\Application\Guard\IdentityRateLimiterInterface;
+use App\Identity\Application\Guard\IdentityCaptchaVerifier;
+use App\Identity\Application\Guard\IdentityRateLimiter;
 use App\Identity\Application\Guard\IdentityRequestGuardResult;
 use App\Identity\Infrastructure\Guard\IdentityRequestGuard;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -24,14 +24,14 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 final class IdentityRequestGuardTest extends TestCase
 {
     private CsrfTokenManagerInterface&MockObject $csrf;
-    private IdentityCaptchaVerifierInterface&MockObject $turnstile;
-    private IdentityRateLimiterInterface&MockObject $throttler;
+    private IdentityCaptchaVerifier&MockObject $turnstile;
+    private IdentityRateLimiter&MockObject $throttler;
 
     protected function setUp(): void
     {
         $this->csrf = $this->createMock(CsrfTokenManagerInterface::class);
-        $this->turnstile = $this->createMock(IdentityCaptchaVerifierInterface::class);
-        $this->throttler = $this->createMock(IdentityRateLimiterInterface::class);
+        $this->turnstile = $this->createMock(IdentityCaptchaVerifier::class);
+        $this->throttler = $this->createMock(IdentityRateLimiter::class);
     }
 
     public function testReturnsInvalidCsrfFirst(): void

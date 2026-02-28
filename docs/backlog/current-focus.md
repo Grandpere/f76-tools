@@ -6,6 +6,7 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-134: Identity ports sans suffixe `Interface` + corrections collisions de noms implementation/port (done).
 - F76-133: Support ports sans suffixe `Interface` (admin user/audit/contact) + propagation complete (done).
 - F76-132: Audit retention automation (commande unifiee + targets Make + runbook cron) (done).
 - F76-131: Account security UX polish (compteurs sections + badges level + lien admin timeline) (done).

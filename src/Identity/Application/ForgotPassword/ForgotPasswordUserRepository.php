@@ -11,13 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Identity\Application\Common;
+namespace App\Identity\Application\ForgotPassword;
 
 use App\Identity\Domain\Entity\UserEntity;
 
-interface IdentityWritePersistenceInterface
+interface ForgotPasswordUserRepository
 {
-    public function persist(UserEntity $user): void;
-
-    public function flush(): void;
+    public function findOneByEmail(string $email): ?UserEntity;
 }

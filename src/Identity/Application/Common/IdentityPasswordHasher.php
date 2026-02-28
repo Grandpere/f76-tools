@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Identity\Application\ResetPassword;
+namespace App\Identity\Application\Common;
 
 use App\Identity\Domain\Entity\UserEntity;
 
-interface ResetPasswordUserRepositoryInterface
+interface IdentityPasswordHasher
 {
-    public function findOneByResetPasswordTokenHash(string $tokenHash): ?UserEntity;
+    public function hash(UserEntity $user, string $plainPassword): string;
 }

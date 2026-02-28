@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Identity\Infrastructure\Guard;
 
-use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProviderInterface;
+use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProvider;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-final class TurnstileVerifier implements IdentityCaptchaSiteKeyProviderInterface
+final class TurnstileVerifier implements IdentityCaptchaSiteKeyProvider
 {
     public function __construct(
         private readonly HttpClientInterface $httpClient,

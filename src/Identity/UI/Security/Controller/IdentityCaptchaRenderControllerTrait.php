@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Identity\UI\Security\Controller;
 
-use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProviderInterface;
+use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProvider;
 use Symfony\Component\HttpFoundation\Response;
 
 trait IdentityCaptchaRenderControllerTrait
@@ -25,5 +25,5 @@ trait IdentityCaptchaRenderControllerTrait
         ]);
     }
 
-    abstract protected function captchaSiteKeyProvider(): IdentityCaptchaSiteKeyProviderInterface;
+    abstract protected function captchaSiteKeyProvider(): IdentityCaptchaSiteKeyProvider;
 }

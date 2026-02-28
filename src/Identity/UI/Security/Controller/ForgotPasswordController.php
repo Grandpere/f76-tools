@@ -15,8 +15,8 @@ namespace App\Identity\UI\Security\Controller;
 
 use App\Identity\Application\ForgotPassword\ForgotPasswordRequest;
 use App\Identity\Application\ForgotPassword\ForgotPasswordRequestApplicationService;
-use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProviderInterface;
-use App\Identity\Application\Time\IdentityClockInterface;
+use App\Identity\Application\Guard\IdentityCaptchaSiteKeyProvider;
+use App\Identity\Application\Time\IdentityClock;
 use App\Identity\UI\Security\IdentityEmailFlow;
 use App\Identity\UI\Security\IdentityEmailFlowGuard;
 use App\Identity\UI\Security\IdentityFlashResponder;
@@ -33,11 +33,11 @@ final class ForgotPasswordController extends AbstractController
 
     public function __construct(
         private readonly ForgotPasswordRequestApplicationService $forgotPasswordRequestApplicationService,
-        private readonly IdentityClockInterface $identityClock,
+        private readonly IdentityClock $identityClock,
         private readonly IdentityEmailFlowGuard $identityEmailFlowGuard,
         private readonly IdentityFlashResponder $identityFlashResponder,
         private readonly IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
-        private readonly IdentityCaptchaSiteKeyProviderInterface $captchaSiteKeyProvider,
+        private readonly IdentityCaptchaSiteKeyProvider $captchaSiteKeyProvider,
     ) {
     }
 
@@ -70,7 +70,7 @@ final class ForgotPasswordController extends AbstractController
         return $this->renderWithCaptchaSiteKey('security/forgot_password.html.twig');
     }
 
-    protected function captchaSiteKeyProvider(): IdentityCaptchaSiteKeyProviderInterface
+    protected function captchaSiteKeyProvider(): IdentityCaptchaSiteKeyProvider
     {
         return $this->captchaSiteKeyProvider;
     }

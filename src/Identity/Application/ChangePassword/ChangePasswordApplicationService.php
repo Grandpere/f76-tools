@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace App\Identity\Application\ChangePassword;
 
-use App\Identity\Application\Common\IdentityPasswordHasherInterface;
-use App\Identity\Application\Common\IdentityPasswordVerifierInterface;
-use App\Identity\Application\Common\IdentityWritePersistenceInterface;
+use App\Identity\Application\Common\IdentityPasswordHasher;
+use App\Identity\Application\Common\IdentityPasswordVerifier;
+use App\Identity\Application\Common\IdentityWritePersistence;
 use App\Identity\Domain\Entity\UserEntity;
 
 final class ChangePasswordApplicationService
 {
     public function __construct(
-        private readonly IdentityPasswordVerifierInterface $passwordVerifier,
-        private readonly IdentityPasswordHasherInterface $passwordHasher,
-        private readonly IdentityWritePersistenceInterface $persistence,
+        private readonly IdentityPasswordVerifier $passwordVerifier,
+        private readonly IdentityPasswordHasher $passwordHasher,
+        private readonly IdentityWritePersistence $persistence,
     ) {
     }
 
