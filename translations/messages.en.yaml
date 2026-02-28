@@ -239,6 +239,7 @@ admin_users.toggle_admin: Toggle admin
 admin_users.generate_reset_link: Generate reset link
 admin_users.resend_verification: Resend verification email
 admin_users.unlink_google: Unlink Google
+admin_users.unlink_google_disabled_reason: Set a local password first before unlinking Google.
 admin_users.no_users: No users.
 admin_users.flash.invalid_csrf: Invalid action (CSRF).
 admin_users.flash.user_not_found: User not found.

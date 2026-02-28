@@ -239,6 +239,7 @@ admin_users.toggle_admin: Admin umschalten
 admin_users.generate_reset_link: Link zum Zurucksetzen generieren
 admin_users.resend_verification: Verifizierungs-E-Mail erneut senden
 admin_users.unlink_google: Google-Verknupfung losen
+admin_users.unlink_google_disabled_reason: Vor dem Trennen von Google zuerst ein lokales Passwort setzen.
 admin_users.no_users: Keine Benutzer.
 admin_users.flash.invalid_csrf: Ungultige Aktion (CSRF).
 admin_users.flash.user_not_found: Benutzer nicht gefunden.

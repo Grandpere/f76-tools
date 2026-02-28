@@ -149,6 +149,21 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertSame('google', $audit->getContext()['provider'] ?? null);
     }
 
+    public function testUnlinkGoogleButtonIsDisabledWhenUserHasNoLocalPassword(): void
+    {
+        $admin = $this->createUser('admin-unlink-disabled@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed-unlink-disabled@example.com', 'secret123', ['ROLE_USER']);
+        $managed->setHasLocalPassword(false);
+        $this->linkGoogleIdentity($managed, 'google-sub-unlink-disabled');
+        $this->entityManager?->flush();
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr[td[1][normalize-space()='managed-unlink-disabled@example.com']]//form[contains(@action, '/unlink-google')]//button[@disabled]"));
+        self::assertStringContainsString('Set a local password first before unlinking Google.', (string) $this->browser()->getResponse()->getContent());
+    }
+
     public function testAdminCanFilterUsersByGoogleIdentityStatus(): void
     {
         $admin = $this->createUser('admin-filter@example.com', 'secret123', ['ROLE_ADMIN']);

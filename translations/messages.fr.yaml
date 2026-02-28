@@ -239,6 +239,7 @@ admin_users.toggle_admin: Basculer admin
 admin_users.generate_reset_link: Generer un lien de reinitialisation
 admin_users.resend_verification: Renvoyer l email de verification
 admin_users.unlink_google: Delier Google
+admin_users.unlink_google_disabled_reason: Definir d abord un mot de passe local avant de delier Google.
 admin_users.no_users: Aucun utilisateur.
 admin_users.flash.invalid_csrf: Action invalide (CSRF).
 admin_users.flash.user_not_found: Utilisateur introuvable.
