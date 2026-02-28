@@ -85,7 +85,7 @@ final class UserManagementController extends AbstractController
         $sort = $this->normalizeSort($request->query->getString('sort', ''));
         $dir = $this->normalizeSortDirection($request->query->getString('dir', ''));
         $perPage = $this->normalizePerPage((int) $request->query->get('perPage', 30));
-        $page = max(1, (int) $request->query->get('page', 1));
+        $page = $this->normalizePage((int) $request->query->get('page', 1));
         $filteredUsers = $this->filterUsersByActiveStatus($users, $activeFilter);
         $filteredUsers = $this->filterUsersByGoogleIdentity($filteredUsers, $googleIdentitiesByUserId, $googleFilter);
         $filteredUsers = $this->filterUsersByVerificationStatus($filteredUsers, $verifiedFilter);
@@ -299,7 +299,7 @@ final class UserManagementController extends AbstractController
             'sort' => $this->normalizeSort((string) $request->request->get('sort', '')),
             'dir' => $this->normalizeSortDirection((string) $request->request->get('dir', '')),
             'perPage' => $this->normalizePerPage((int) $request->request->get('perPage', 30)),
-            'page' => 1,
+            'page' => $this->normalizePage((int) $request->request->get('page', 1)),
         ]);
     }
 
@@ -500,6 +500,11 @@ final class UserManagementController extends AbstractController
         $allowed = [20, 30, 50, 100];
 
         return in_array($perPage, $allowed, true) ? $perPage : 30;
+    }
+
+    private function normalizePage(int $page): int
+    {
+        return max(1, $page);
     }
 
     private function normalizeSort(string $sort): string

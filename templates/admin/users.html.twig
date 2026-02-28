@@ -170,6 +170,7 @@
                                         <input type="hidden" name="perPage" value="{{ perPage }}">
                                         <input type="hidden" name="sort" value="{{ sort }}">
                                         <input type="hidden" name="dir" value="{{ dir }}">
+                                        <input type="hidden" name="page" value="{{ page }}">
                                         <button type="submit">{{ 'admin_users.toggle_active'|trans }}</button>
                                     </form>
                                     <form method="post" action="{{ path('app_admin_users_toggle_admin', { id: user.id, locale: app.request.locale }) }}">
@@ -182,6 +183,7 @@
                                         <input type="hidden" name="perPage" value="{{ perPage }}">
                                         <input type="hidden" name="sort" value="{{ sort }}">
                                         <input type="hidden" name="dir" value="{{ dir }}">
+                                        <input type="hidden" name="page" value="{{ page }}">
                                         <button type="submit">{{ 'admin_users.toggle_admin'|trans }}</button>
                                     </form>
                                     <form method="post" action="{{ path('app_admin_users_generate_reset_link', { id: user.id, locale: app.request.locale }) }}">
@@ -194,6 +196,7 @@
                                         <input type="hidden" name="perPage" value="{{ perPage }}">
                                         <input type="hidden" name="sort" value="{{ sort }}">
                                         <input type="hidden" name="dir" value="{{ dir }}">
+                                        <input type="hidden" name="page" value="{{ page }}">
                                         <button type="submit">{{ 'admin_users.generate_reset_link'|trans }}</button>
                                     </form>
                                     {% if not user.isEmailVerified %}
@@ -207,6 +210,7 @@
                                             <input type="hidden" name="perPage" value="{{ perPage }}">
                                             <input type="hidden" name="sort" value="{{ sort }}">
                                             <input type="hidden" name="dir" value="{{ dir }}">
+                                            <input type="hidden" name="page" value="{{ page }}">
                                             <button type="submit">{{ 'admin_users.resend_verification'|trans }}</button>
                                         </form>
                                     {% endif %}
@@ -221,6 +225,7 @@
                                             <input type="hidden" name="perPage" value="{{ perPage }}">
                                             <input type="hidden" name="sort" value="{{ sort }}">
                                             <input type="hidden" name="dir" value="{{ dir }}">
+                                            <input type="hidden" name="page" value="{{ page }}">
                                             <button
                                                 type="submit"
                                                 {% if not user.hasLocalPassword %}disabled title="{{ 'admin_users.unlink_google_disabled_reason'|trans }}"{% endif %}

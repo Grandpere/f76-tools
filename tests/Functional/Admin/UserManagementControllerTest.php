@@ -374,6 +374,26 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertStringContainsString('perPage=50', (string) $this->browser()->getResponse()->headers->get('location'));
     }
 
+    public function testAdminActionRedirectPreservesPage(): void
+    {
+        $admin = $this->createUser('admin-preserve-page@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed-preserve-page@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?perPage=20&page=2');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/toggle-active', $managed->getId()), [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'perPage' => 20,
+            'page' => 2,
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        self::assertStringContainsString('page=2', (string) $this->browser()->getResponse()->headers->get('location'));
+    }
+
     public function testAdminActionRedirectPreservesVerificationAndLocalPasswordFilters(): void
     {
         $admin = $this->createUser('admin-preserve-security@example.com', 'secret123', ['ROLE_ADMIN']);
