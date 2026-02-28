@@ -291,6 +291,7 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $firstEmail = trim($crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr[1]/td[1]")->text(''));
         self::assertSame('z-sort@example.com', $firstEmail);
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//thead//th[@aria-sort='descending']/a[contains(@class, 'admin-sort-link')]/span[contains(@class, 'admin-sort-indicator') and normalize-space()='▼']"));
     }
 
     public function testAdminActionRedirectPreservesSearchQuery(): void

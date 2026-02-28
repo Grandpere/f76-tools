@@ -118,10 +118,34 @@
                         {% set emailDir = sort == 'email' and dir == 'asc' ? 'desc' : 'asc' %}
                         {% set createdAtDir = sort == 'createdat' and dir == 'asc' ? 'desc' : 'asc' %}
                         {% set activeDir = sort == 'active' and dir == 'asc' ? 'desc' : 'asc' %}
-                        <th><a href="{{ path('app_admin_users', commonParams|merge({ sort: 'email', dir: emailDir, page: 1 })) }}">{{ 'admin_users.email'|trans }}</a></th>
-                        <th><a href="{{ path('app_admin_users', commonParams|merge({ sort: 'createdat', dir: createdAtDir, page: 1 })) }}">{{ 'admin_users.created_at'|trans }}</a></th>
+                        {% set emailAriaSort = sort == 'email' ? (dir == 'asc' ? 'ascending' : 'descending') : 'none' %}
+                        {% set createdAtAriaSort = sort == 'createdat' ? (dir == 'asc' ? 'ascending' : 'descending') : 'none' %}
+                        {% set activeAriaSort = sort == 'active' ? (dir == 'asc' ? 'ascending' : 'descending') : 'none' %}
+                        <th aria-sort="{{ emailAriaSort }}">
+                            <a class="admin-sort-link" href="{{ path('app_admin_users', commonParams|merge({ sort: 'email', dir: emailDir, page: 1 })) }}">
+                                {{ 'admin_users.email'|trans }}
+                                {% if sort == 'email' %}
+                                    <span class="admin-sort-indicator" aria-hidden="true">{{ dir == 'asc' ? '▲' : '▼' }}</span>
+                                {% endif %}
+                            </a>
+                        </th>
+                        <th aria-sort="{{ createdAtAriaSort }}">
+                            <a class="admin-sort-link" href="{{ path('app_admin_users', commonParams|merge({ sort: 'createdat', dir: createdAtDir, page: 1 })) }}">
+                                {{ 'admin_users.created_at'|trans }}
+                                {% if sort == 'createdat' %}
+                                    <span class="admin-sort-indicator" aria-hidden="true">{{ dir == 'asc' ? '▲' : '▼' }}</span>
+                                {% endif %}
+                            </a>
+                        </th>
                         <th>{{ 'admin_users.roles'|trans }}</th>
-                        <th><a href="{{ path('app_admin_users', commonParams|merge({ sort: 'active', dir: activeDir, page: 1 })) }}">{{ 'admin_users.active'|trans }}</a></th>
+                        <th aria-sort="{{ activeAriaSort }}">
+                            <a class="admin-sort-link" href="{{ path('app_admin_users', commonParams|merge({ sort: 'active', dir: activeDir, page: 1 })) }}">
+                                {{ 'admin_users.active'|trans }}
+                                {% if sort == 'active' %}
+                                    <span class="admin-sort-indicator" aria-hidden="true">{{ dir == 'asc' ? '▲' : '▼' }}</span>
+                                {% endif %}
+                            </a>
+                        </th>
                         <th>{{ 'admin_users.security'|trans }}</th>
                         <th>{{ 'admin_users.identities'|trans }}</th>
                         <th>{{ 'admin_users.actions'|trans }}</th>

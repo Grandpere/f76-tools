@@ -1695,6 +1695,25 @@ span.flatpickr-weekday {
     line-height: 1.3;
 }
 
+.admin-sort-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28rem;
+    color: inherit;
+    text-decoration: none;
+}
+
+.admin-sort-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.12em;
+}
+
+.admin-sort-indicator {
+    color: #8c6d00;
+    font-size: 0.68rem;
+    line-height: 1;
+}
+
 .admin-identity-badge {
     display: inline-flex;
     align-items: center;
