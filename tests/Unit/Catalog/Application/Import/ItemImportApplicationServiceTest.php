@@ -17,8 +17,8 @@ use App\Catalog\Application\Import\ItemImportApplicationService;
 use App\Catalog\Application\Import\ItemImportContextApplier;
 use App\Catalog\Application\Import\ItemImportFileContextResolver;
 use App\Catalog\Application\Import\ItemImportItemHydrator;
-use App\Catalog\Application\Import\ItemImportItemRepositoryInterface;
-use App\Catalog\Application\Import\ItemImportPersistenceInterface;
+use App\Catalog\Application\Import\ItemImportItemRepository;
+use App\Catalog\Application\Import\ItemImportPersistence;
 use App\Catalog\Application\Import\ItemImportTranslationCatalogBuilder;
 use App\Catalog\Application\Import\ItemImportValueNormalizer;
 use App\Catalog\Application\Translation\TranslationCatalogWriter;
@@ -30,13 +30,13 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 final class ItemImportApplicationServiceTest extends TestCase
 {
-    private ItemImportPersistenceInterface&MockObject $persistence;
-    private ItemImportItemRepositoryInterface&MockObject $repository;
+    private ItemImportPersistence&MockObject $persistence;
+    private ItemImportItemRepository&MockObject $repository;
 
     protected function setUp(): void
     {
-        $this->persistence = $this->createMock(ItemImportPersistenceInterface::class);
-        $this->repository = $this->createMock(ItemImportItemRepositoryInterface::class);
+        $this->persistence = $this->createMock(ItemImportPersistence::class);
+        $this->repository = $this->createMock(ItemImportItemRepository::class);
     }
 
     public function testDryRunComputesStatsWithoutPersistingOrWritingCatalog(): void

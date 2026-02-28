@@ -19,11 +19,11 @@ use App\Catalog\Domain\Entity\ItemEntity;
 final class ItemImportApplicationService
 {
     public function __construct(
-        private readonly ItemImportPersistenceInterface $persistence,
-        private readonly ItemImportItemRepositoryInterface $itemRepository,
+        private readonly ItemImportPersistence $persistence,
+        private readonly ItemImportItemRepository $itemRepository,
         private readonly TranslationCatalogWriter $translationCatalogWriter,
         private readonly ItemImportFileContextResolver $fileContextResolver,
-        private readonly ItemImportSourceReaderInterface $sourceReader,
+        private readonly ItemImportSourceReader $sourceReader,
         private readonly ItemImportItemHydrator $itemHydrator,
         private readonly ItemImportTranslationCatalogBuilder $translationCatalogBuilder,
         private readonly ItemImportContextApplier $contextApplier,

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Catalog\Application\Import;
 
-interface ItemImportSourceReaderInterface
+interface ItemImportSourceReader
 {
     /**
      * @return list<string>

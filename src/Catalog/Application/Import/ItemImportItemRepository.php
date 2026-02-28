@@ -14,10 +14,11 @@ declare(strict_types=1);
 namespace App\Catalog\Application\Import;
 
 use App\Catalog\Domain\Entity\ItemEntity;
+use App\Catalog\Domain\Item\ItemTypeEnum;
 
-interface ItemImportPersistenceInterface
+interface ItemImportItemRepository
 {
-    public function persist(ItemEntity $item): void;
+    public function findOneByTypeAndSourceId(ItemTypeEnum $type, int $sourceId): ?ItemEntity;
 
-    public function flush(): void;
+    public function deleteAllBookLists(): int;
 }

@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Catalog\Infrastructure\Import;
 
-use App\Catalog\Application\Import\ItemImportSourceReaderInterface;
+use App\Catalog\Application\Import\ItemImportSourceReader;
 use JsonException;
 use Symfony\Component\Finder\Finder;
 
-final class FilesystemItemImportSourceReader implements ItemImportSourceReaderInterface
+final class FilesystemItemImportSourceReader implements ItemImportSourceReader
 {
     /**
      * @return list<string>
