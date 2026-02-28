@@ -1,0 +1,19 @@
+{% set selectedValue = selectedValue|default('') %}
+<label class="field">
+    <span>{{ label|trans }}</span>
+    <select name="{{ name }}">
+        {% if emptyOptionLabel is defined and emptyOptionLabel %}
+            <option value="">{{ emptyOptionLabel|trans }}</option>
+        {% endif %}
+        {% for option in options %}
+            {% set optionValue = option is iterable and option.value is defined ? option.value : option %}
+            {% set optionLabel = option is iterable and option.label is defined
+                ? option.label
+                : (labelPrefix is defined and labelPrefix
+                    ? (labelPrefix ~ optionValue)|trans
+                    : optionValue)
+            %}
+            <option value="{{ optionValue }}" {% if selectedValue == optionValue %}selected{% endif %}>{{ optionLabel }}</option>
+        {% endfor %}
+    </select>
+</label>

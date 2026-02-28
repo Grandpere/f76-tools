@@ -28,17 +28,14 @@
                     fieldValue: query,
                     placeholder: 'admin_contact.search_placeholder'
                 } %}
-                <label class="field">
-                    <span>{{ 'admin_contact.status'|trans }}</span>
-                    <select name="status">
-                        <option value="">{{ 'admin_contact.any_status'|trans }}</option>
-                        {% for candidate in statusOptions %}
-                            <option value="{{ candidate.value }}" {% if status == candidate.value %}selected{% endif %}>
-                                {{ ('admin_contact.status_' ~ candidate.value)|trans }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </label>
+                {% include 'admin/_select_filter_field.html.twig' with {
+                    label: 'admin_contact.status',
+                    name: 'status',
+                    selectedValue: status,
+                    emptyOptionLabel: 'admin_contact.any_status',
+                    options: statusOptions,
+                    labelPrefix: 'admin_contact.status_'
+                } %}
                 {% include 'admin/_per_page_field.html.twig' with {
                     label: 'admin_contact.per_page',
                     perPage: perPage,

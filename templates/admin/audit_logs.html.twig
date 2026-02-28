@@ -26,15 +26,13 @@
                     fieldValue: query,
                     placeholder: 'admin_audit.search_placeholder'
                 } %}
-                <label class="field">
-                    <span>{{ 'admin_audit.action'|trans }}</span>
-                    <select name="action">
-                        <option value="">{{ 'admin_audit.any_action'|trans }}</option>
-                        {% for candidate in actions %}
-                            <option value="{{ candidate }}" {% if action == candidate %}selected{% endif %}>{{ candidate }}</option>
-                        {% endfor %}
-                    </select>
-                </label>
+                {% include 'admin/_select_filter_field.html.twig' with {
+                    label: 'admin_audit.action',
+                    name: 'action',
+                    selectedValue: action,
+                    emptyOptionLabel: 'admin_audit.any_action',
+                    options: actions
+                } %}
                 {% include 'admin/_per_page_field.html.twig' with {
                     label: 'admin_audit.per_page',
                     perPage: perPage,
