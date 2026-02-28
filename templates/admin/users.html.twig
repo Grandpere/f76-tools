@@ -10,6 +10,7 @@
             localeHiddenFields: {
                 google: googleFilter,
                 active: activeFilter,
+                role: roleFilter,
                 verified: verifiedFilter,
                 localPassword: localPasswordFilter,
                 q: query ?: null,
@@ -37,6 +38,7 @@
                 q: query ?: null,
                 google: googleFilter ?: null,
                 active: activeFilter ?: null,
+                role: roleFilter ?: null,
                 verified: verifiedFilter ?: null,
                 localPassword: localPasswordFilter ?: null,
                 sort: sort,
@@ -69,6 +71,16 @@
                     options: [
                         { value: 'active', label: 'admin_users.active_filter_active'|trans },
                         { value: 'inactive', label: 'admin_users.active_filter_inactive'|trans }
+                    ]
+                } %}
+                {% include 'admin/_select_filter_field.html.twig' with {
+                    label: 'admin_users.role_filter_label',
+                    name: 'role',
+                    selectedValue: roleFilter,
+                    emptyOptionLabel: 'admin_users.role_filter_all',
+                    options: [
+                        { value: 'admin', label: 'admin_users.role_filter_admin'|trans },
+                        { value: 'user', label: 'admin_users.role_filter_user'|trans }
                     ]
                 } %}
                 {% include 'admin/_select_filter_field.html.twig' with {
@@ -188,6 +200,7 @@
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_toggle_active_' ~ user.id) }}">
                                         <input type="hidden" name="google" value="{{ googleFilter }}">
                                         <input type="hidden" name="active" value="{{ activeFilter }}">
+                                        <input type="hidden" name="role" value="{{ roleFilter }}">
                                         <input type="hidden" name="verified" value="{{ verifiedFilter }}">
                                         <input type="hidden" name="localPassword" value="{{ localPasswordFilter }}">
                                         <input type="hidden" name="q" value="{{ query }}">
@@ -201,6 +214,7 @@
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_toggle_admin_' ~ user.id) }}">
                                         <input type="hidden" name="google" value="{{ googleFilter }}">
                                         <input type="hidden" name="active" value="{{ activeFilter }}">
+                                        <input type="hidden" name="role" value="{{ roleFilter }}">
                                         <input type="hidden" name="verified" value="{{ verifiedFilter }}">
                                         <input type="hidden" name="localPassword" value="{{ localPasswordFilter }}">
                                         <input type="hidden" name="q" value="{{ query }}">
@@ -214,6 +228,7 @@
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_generate_reset_link_' ~ user.id) }}">
                                         <input type="hidden" name="google" value="{{ googleFilter }}">
                                         <input type="hidden" name="active" value="{{ activeFilter }}">
+                                        <input type="hidden" name="role" value="{{ roleFilter }}">
                                         <input type="hidden" name="verified" value="{{ verifiedFilter }}">
                                         <input type="hidden" name="localPassword" value="{{ localPasswordFilter }}">
                                         <input type="hidden" name="q" value="{{ query }}">
@@ -228,6 +243,7 @@
                                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_resend_verification_' ~ user.id) }}">
                                             <input type="hidden" name="google" value="{{ googleFilter }}">
                                             <input type="hidden" name="active" value="{{ activeFilter }}">
+                                            <input type="hidden" name="role" value="{{ roleFilter }}">
                                             <input type="hidden" name="verified" value="{{ verifiedFilter }}">
                                             <input type="hidden" name="localPassword" value="{{ localPasswordFilter }}">
                                             <input type="hidden" name="q" value="{{ query }}">
@@ -243,6 +259,7 @@
                                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_unlink_google_' ~ user.id) }}">
                                             <input type="hidden" name="google" value="{{ googleFilter }}">
                                             <input type="hidden" name="active" value="{{ activeFilter }}">
+                                            <input type="hidden" name="role" value="{{ roleFilter }}">
                                             <input type="hidden" name="verified" value="{{ verifiedFilter }}">
                                             <input type="hidden" name="localPassword" value="{{ localPasswordFilter }}">
                                             <input type="hidden" name="q" value="{{ query }}">

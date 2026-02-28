@@ -79,6 +79,7 @@ final class UserManagementController extends AbstractController
         $googleIdentitiesByUserId = $this->adminUserGoogleIdentityReadService->getGoogleIdentityByUserId($users);
         $googleFilter = $this->normalizeGoogleFilter($request->query->getString('google', ''));
         $activeFilter = $this->normalizeActiveFilter($request->query->getString('active', ''));
+        $roleFilter = $this->normalizeRoleFilter($request->query->getString('role', ''));
         $verifiedFilter = $this->normalizeVerifiedFilter($request->query->getString('verified', ''));
         $localPasswordFilter = $this->normalizeLocalPasswordFilter($request->query->getString('localPassword', ''));
         $query = trim($request->query->getString('q', ''));
@@ -88,6 +89,7 @@ final class UserManagementController extends AbstractController
         $page = $this->normalizePage((int) $request->query->get('page', 1));
         $filteredUsers = $this->filterUsersByActiveStatus($users, $activeFilter);
         $filteredUsers = $this->filterUsersByGoogleIdentity($filteredUsers, $googleIdentitiesByUserId, $googleFilter);
+        $filteredUsers = $this->filterUsersByRole($filteredUsers, $roleFilter);
         $filteredUsers = $this->filterUsersByVerificationStatus($filteredUsers, $verifiedFilter);
         $filteredUsers = $this->filterUsersByLocalPasswordStatus($filteredUsers, $localPasswordFilter);
         $filteredUsers = $this->filterUsersBySearchQuery($filteredUsers, $query);
@@ -106,6 +108,7 @@ final class UserManagementController extends AbstractController
             'googleIdentitiesByUserId' => $googleIdentitiesByUserId,
             'googleFilter' => $googleFilter,
             'activeFilter' => $activeFilter,
+            'roleFilter' => $roleFilter,
             'verifiedFilter' => $verifiedFilter,
             'localPasswordFilter' => $localPasswordFilter,
             'query' => $query,
@@ -293,6 +296,7 @@ final class UserManagementController extends AbstractController
             'locale' => $request->getLocale(),
             'google' => $this->normalizeGoogleFilter((string) $request->request->get('google', '')),
             'active' => $this->normalizeActiveFilter((string) $request->request->get('active', '')),
+            'role' => $this->normalizeRoleFilter((string) $request->request->get('role', '')),
             'verified' => $this->normalizeVerifiedFilter((string) $request->request->get('verified', '')),
             'localPassword' => $this->normalizeLocalPasswordFilter((string) $request->request->get('localPassword', '')),
             'q' => trim((string) $request->request->get('q', '')),
@@ -384,6 +388,13 @@ final class UserManagementController extends AbstractController
         return in_array($normalized, ['active', 'inactive'], true) ? $normalized : '';
     }
 
+    private function normalizeRoleFilter(string $roleFilter): string
+    {
+        $normalized = mb_strtolower(trim($roleFilter));
+
+        return in_array($normalized, ['admin', 'user'], true) ? $normalized : '';
+    }
+
     private function normalizeVerifiedFilter(string $verifiedFilter): string
     {
         $normalized = mb_strtolower(trim($verifiedFilter));
@@ -440,6 +451,32 @@ final class UserManagementController extends AbstractController
                 continue;
             }
             if ('unverified' === $verifiedFilter && $user->isEmailVerified()) {
+                continue;
+            }
+            $filtered[] = $user;
+        }
+
+        return $filtered;
+    }
+
+    /**
+     * @param list<UserEntity> $users
+     *
+     * @return list<UserEntity>
+     */
+    private function filterUsersByRole(array $users, string $roleFilter): array
+    {
+        if ('admin' !== $roleFilter && 'user' !== $roleFilter) {
+            return $users;
+        }
+
+        $filtered = [];
+        foreach ($users as $user) {
+            $isAdmin = in_array('ROLE_ADMIN', $user->getRoles(), true);
+            if ('admin' === $roleFilter && !$isAdmin) {
+                continue;
+            }
+            if ('user' === $roleFilter && $isAdmin) {
                 continue;
             }
             $filtered[] = $user;

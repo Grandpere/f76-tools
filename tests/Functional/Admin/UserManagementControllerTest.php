@@ -223,6 +223,23 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='active.filter@example.com']"));
     }
 
+    public function testAdminCanFilterUsersByRole(): void
+    {
+        $admin = $this->createUser('admin-role-filter@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->createUser('member-role-filter@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?role=admin');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='admin-role-filter@example.com']"));
+        self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='member-role-filter@example.com']"));
+
+        $crawler = $this->browser()->request('GET', '/admin/users?role=user');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='member-role-filter@example.com']"));
+        self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='admin-role-filter@example.com']"));
+    }
+
     public function testAdminCanFilterUsersByVerificationStatus(): void
     {
         $admin = $this->createUser('admin-verified-filter@example.com', 'secret123', ['ROLE_ADMIN']);
@@ -417,6 +434,25 @@ final class UserManagementControllerTest extends WebTestCase
         $location = (string) $this->browser()->getResponse()->headers->get('location');
         self::assertStringContainsString('verified=unverified', $location);
         self::assertStringContainsString('localPassword=disabled', $location);
+    }
+
+    public function testAdminActionRedirectPreservesRoleFilter(): void
+    {
+        $admin = $this->createUser('admin-preserve-role@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed-preserve-role@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?role=user');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/toggle-active', $managed->getId()), [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'role' => 'user',
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        self::assertStringContainsString('role=user', (string) $this->browser()->getResponse()->headers->get('location'));
     }
 
     public function testAdminCanResendVerificationEmailForUnverifiedUser(): void

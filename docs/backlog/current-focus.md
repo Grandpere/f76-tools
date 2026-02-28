@@ -6,6 +6,7 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-116: Admin users role filter (`admin|user`) + preservation des params en actions/header + tests cibles (done).
 - F76-115: Admin users sort indicators + `aria-sort` sur colonnes triables (done).
 - F76-114: Admin users preserve current page after actions (POST redirects gardent `page`) + test fonctionnel cible (done).
 - F76-113: Admin users unlink Google UI guard (bouton desactive + aide explicite si pas de mot de passe local) + test fonctionnel cible (done).

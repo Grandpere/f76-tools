@@ -202,6 +202,10 @@ admin_users.active_filter_label: Account status
 admin_users.active_filter_all: All statuses
 admin_users.active_filter_active: Active only
 admin_users.active_filter_inactive: Inactive only
+admin_users.role_filter_label: Role
+admin_users.role_filter_all: All roles
+admin_users.role_filter_admin: Admin only
+admin_users.role_filter_user: User only
 admin_users.verified_filter_label: Email verification
 admin_users.verified_filter_all: All verification states
 admin_users.verified_filter_verified: Verified only
