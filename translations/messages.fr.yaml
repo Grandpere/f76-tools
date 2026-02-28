@@ -113,7 +113,7 @@ admin_translations.flash.saved: 'Traductions "%locale%" enregistrees (%count% cl
 admin_translations.flash.nothing_to_save: Aucune traduction valide a enregistrer.
 admin_translations.flash.invalid_csrf: Jeton CSRF invalide, action refusee.
 
-security.login.page_title: Connexion
+security.login.page_title: 'F76 - Connexion'
 security.login.title: Connexion
 security.login.email: Email
 security.login.password: Mot de passe
@@ -125,7 +125,7 @@ security.login.to_contact: Contact
 security.auth.flash.rate_limited: Trop de tentatives. Merci de patienter quelques minutes puis de reessayer.
 security.auth.flash.captcha_invalid: Echec de validation du CAPTCHA. Merci de reessayer.
 
-security.register.page_title: Inscription
+security.register.page_title: 'F76 - Inscription'
 security.register.title: Inscription
 security.register.email: Email
 security.register.password: Mot de passe
@@ -142,7 +142,7 @@ security.verify.flash.invalid_or_expired: Lien de verification email invalide ou
 security.verify.flash.success: Email verifie. Vous pouvez maintenant vous connecter.
 security.verify.email_subject: Confirmez votre adresse email
 security.verify.email_intro: Cliquez sur ce lien pour verifier votre compte.
-security.forgot.page_title: Mot de passe oublie
+security.forgot.page_title: 'F76 - Mot de passe oublie'
 security.forgot.title: Mot de passe oublie
 security.forgot.email: Email
 security.forgot.submit: Envoyer le lien de reinitialisation
@@ -151,14 +151,14 @@ security.forgot.flash.invalid_csrf: Session invalide, merci de reessayer.
 security.forgot.flash.request_sent: Si cet email existe, un lien de reinitialisation a ete envoye.
 security.forgot.email_subject: Reinitialisez votre mot de passe
 security.forgot.email_intro: Cliquez sur ce lien pour definir un nouveau mot de passe.
-security.resend.page_title: Renvoyer l email de verification
+security.resend.page_title: 'F76 - Renvoyer l email de verification'
 security.resend.title: Renvoyer l email de verification
 security.resend.email: Email
 security.resend.submit: Envoyer l email de verification
 security.resend.to_login: Retour a la connexion
 security.resend.flash.invalid_csrf: Session invalide, merci de reessayer.
 security.resend.flash.sent: Si cet email existe et n est pas encore verifie, un email de verification a ete envoye.
-security.contact.page_title: Contact
+security.contact.page_title: 'F76 - Contact'
 security.contact.title: Contact
 security.contact.email: Email
 security.contact.subject: Sujet
@@ -168,7 +168,7 @@ security.contact.to_login: Retour a la connexion
 security.contact.flash.invalid_csrf: Session invalide, merci de reessayer.
 security.contact.flash.invalid_input: Merci de renseigner un email, un sujet et un message valides.
 security.contact.flash.sent: Votre message a ete envoye.
-security.reset.page_title: Reinitialisation du mot de passe
+security.reset.page_title: 'F76 - Reinitialisation du mot de passe'
 security.reset.title: Reinitialisation du mot de passe
 security.reset.password: Nouveau mot de passe
 security.reset.password_confirm: Confirmer le mot de passe

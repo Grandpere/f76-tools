@@ -113,7 +113,7 @@ admin_translations.flash.saved: 'Translations "%locale%" saved (%count% keys).'
 admin_translations.flash.nothing_to_save: No valid translation to save.
 admin_translations.flash.invalid_csrf: Invalid CSRF token, action rejected.
 
-security.login.page_title: Login
+security.login.page_title: 'F76 - Login'
 security.login.title: Login
 security.login.email: Email
 security.login.password: Password
@@ -125,7 +125,7 @@ security.login.to_contact: Contact
 security.auth.flash.rate_limited: Too many attempts. Please wait a few minutes and try again.
 security.auth.flash.captcha_invalid: CAPTCHA validation failed. Please try again.
 
-security.register.page_title: Register
+security.register.page_title: 'F76 - Register'
 security.register.title: Register
 security.register.email: Email
 security.register.password: Password
@@ -142,7 +142,7 @@ security.verify.flash.invalid_or_expired: Invalid or expired email verification 
 security.verify.flash.success: Email verified. You can now sign in.
 security.verify.email_subject: Confirm your email address
 security.verify.email_intro: Click this link to verify your account.
-security.forgot.page_title: Forgot password
+security.forgot.page_title: 'F76 - Forgot password'
 security.forgot.title: Forgot password
 security.forgot.email: Email
 security.forgot.submit: Send reset link
@@ -151,14 +151,14 @@ security.forgot.flash.invalid_csrf: Invalid session, please try again.
 security.forgot.flash.request_sent: If this email exists, a reset link has been sent.
 security.forgot.email_subject: Reset your password
 security.forgot.email_intro: Click this link to set a new password.
-security.resend.page_title: Resend verification email
+security.resend.page_title: 'F76 - Resend verification email'
 security.resend.title: Resend verification email
 security.resend.email: Email
 security.resend.submit: Send verification email
 security.resend.to_login: Back to login
 security.resend.flash.invalid_csrf: Invalid session, please try again.
 security.resend.flash.sent: If this email exists and is not verified, a verification email has been sent.
-security.contact.page_title: Contact
+security.contact.page_title: 'F76 - Contact'
 security.contact.title: Contact
 security.contact.email: Email
 security.contact.subject: Subject
@@ -168,7 +168,7 @@ security.contact.to_login: Back to login
 security.contact.flash.invalid_csrf: Invalid session, please try again.
 security.contact.flash.invalid_input: Please provide a valid email, subject, and message.
 security.contact.flash.sent: Your message has been sent.
-security.reset.page_title: Reset password
+security.reset.page_title: 'F76 - Reset password'
 security.reset.title: Reset password
 security.reset.password: New password
 security.reset.password_confirm: Confirm password
