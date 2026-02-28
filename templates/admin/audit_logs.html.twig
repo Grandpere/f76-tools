@@ -4,22 +4,19 @@
 
 {% block body %}
     <main class="translations-page">
-        <header class="translations-header">
-            {% include 'admin/_header_tools.html.twig' with {
-                backLabel: 'admin_audit.back_to_dashboard'|trans,
-                localeSelectId: 'admin-audit-header-locale-select',
-                localeHiddenFields: {
-                    q: query,
-                    action: action,
-                    perPage: perPage,
-                    page: page
-                }
-            } %}
-            <p class="catalog-kicker">{{ 'admin_audit.kicker'|trans }}</p>
-            <h1>{{ 'admin_audit.title'|trans }}</h1>
-            <p>{{ 'admin_audit.description'|trans }}</p>
-            {% include 'admin/_nav_links.html.twig' %}
-        </header>
+        {% include 'admin/_page_header.html.twig' with {
+            backLabel: 'admin_audit.back_to_dashboard',
+            localeSelectId: 'admin-audit-header-locale-select',
+            localeHiddenFields: {
+                q: query,
+                action: action,
+                perPage: perPage,
+                page: page
+            },
+            kicker: 'admin_audit.kicker',
+            title: 'admin_audit.title',
+            description: 'admin_audit.description'|trans
+        } %}
 
         <section class="translations-panel">
             <form method="get" class="translations-filters">

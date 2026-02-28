@@ -1,0 +1,11 @@
+<header class="translations-header">
+    {% include 'admin/_header_tools.html.twig' with {
+        backLabel: backLabel|trans,
+        localeSelectId: localeSelectId,
+        localeHiddenFields: localeHiddenFields|default({})
+    } %}
+    <p class="catalog-kicker">{{ kicker|trans }}</p>
+    <h1>{{ title|trans }}</h1>
+    <p>{{ description }}</p>
+    {% include 'admin/_nav_links.html.twig' %}
+</header>

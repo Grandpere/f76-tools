@@ -4,16 +4,13 @@
 
 {% block body %}
     <main class="translations-page">
-        <header class="translations-header">
-            {% include 'admin/_header_tools.html.twig' with {
-                backLabel: 'admin_users.back_to_dashboard'|trans,
-                localeSelectId: 'admin-users-header-locale-select'
-            } %}
-            <p class="catalog-kicker">{{ 'admin_users.kicker'|trans }}</p>
-            <h1>{{ 'admin_users.title'|trans }}</h1>
-            <p>{{ 'admin_users.description'|trans }}</p>
-            {% include 'admin/_nav_links.html.twig' %}
-        </header>
+        {% include 'admin/_page_header.html.twig' with {
+            backLabel: 'admin_users.back_to_dashboard',
+            localeSelectId: 'admin-users-header-locale-select',
+            kicker: 'admin_users.kicker',
+            title: 'admin_users.title',
+            description: 'admin_users.description'|trans
+        } %}
 
         {% for message in app.flashes('success') %}
             <p class="translations-flash success">{{ message|trans }}</p>

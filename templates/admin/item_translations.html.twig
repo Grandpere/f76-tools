@@ -4,22 +4,19 @@
 
 {% block body %}
     <main class="translations-page">
-        <header class="translations-header">
-            {% include 'admin/_header_tools.html.twig' with {
-                backLabel: 'admin_translations.back_to_dashboard'|trans,
-                localeSelectId: 'admin-header-locale-select',
-                localeHiddenFields: {
-                    target: targetLocale,
-                    q: query,
-                    perPage: perPage,
-                    page: page
-                }
-            } %}
-            <p class="catalog-kicker">{{ 'admin_translations.kicker'|trans }}</p>
-            <h1>{{ 'admin_translations.title'|trans }}</h1>
-            <p>{{ 'admin_translations.editing_catalog'|trans({'%locale%': targetLocale}) }}</p>
-            {% include 'admin/_nav_links.html.twig' %}
-        </header>
+        {% include 'admin/_page_header.html.twig' with {
+            backLabel: 'admin_translations.back_to_dashboard',
+            localeSelectId: 'admin-header-locale-select',
+            localeHiddenFields: {
+                target: targetLocale,
+                q: query,
+                perPage: perPage,
+                page: page
+            },
+            kicker: 'admin_translations.kicker',
+            title: 'admin_translations.title',
+            description: 'admin_translations.editing_catalog'|trans({'%locale%': targetLocale})
+        } %}
 
         {% for message in app.flashes('success') %}
             <p class="translations-flash success">{{ message }}</p>
