@@ -64,7 +64,7 @@ final class AccountSecurityControllerTest extends WebTestCase
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('security-profile@example.com', $this->browser()->getResponse()->getContent() ?: '');
         self::assertCount(1, $crawler->filter('a[href^="/change-password"]'));
-        self::assertCount(1, $crawler->filter('a[href^="/progression"]'));
+        self::assertCount(1, $crawler->filter('a[href="/"]'));
     }
 
     public function testSecurityProfileShowsGoogleLinkedState(): void
