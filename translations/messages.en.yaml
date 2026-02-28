@@ -216,6 +216,9 @@ security.account.session_other: Other session
 security.account.session_last_seen: 'Last activity: %date%'
 security.account.session_none: No active session found.
 security.account.logout_other_sessions: Sign out other sessions
+security.account.auth_events_title: Recent security activity
+security.account.auth_events_hint: Latest authentication/security events for your account.
+security.account.auth_events_empty: No security event yet.
 security.account.flash.invalid_csrf: Invalid session, please try again.
 security.account.flash.google_identity_not_found: Google identity not found for your account.
 security.account.flash.google_identity_local_password_required: Cannot unlink Google identity without local password access.

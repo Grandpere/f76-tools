@@ -6,6 +6,7 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-127: Account security recent auth events (front user view) + functional cible (done).
 - F76-126: Auth rate-limit hardening (`register`/`forgot`/`resend` quotas dedies + tests cibles) (done).
 - F76-125: Admin user auth events page + DB persistence auth events (`auth_audit_log`) + lien depuis users admin (done).
 - F76-124: Account active sessions (liste sessions + revoke other sessions + invalidation enforcement) (done).

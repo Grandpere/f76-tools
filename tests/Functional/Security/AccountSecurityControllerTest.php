@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Security;
 
 use App\Identity\Application\Security\ActiveUserSessionRegistry;
+use App\Identity\Domain\Entity\AuthAuditLogEntity;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Identity\Domain\Entity\UserIdentityEntity;
 use DateTimeImmutable;
@@ -85,6 +86,25 @@ final class AccountSecurityControllerTest extends WebTestCase
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('Linked since', $this->browser()->getResponse()->getContent() ?: '');
+    }
+
+    public function testSecurityProfileShowsRecentAuthEvents(): void
+    {
+        $user = $this->createUser('security-events@example.com', 'secret123', ['ROLE_USER']);
+        $event = new AuthAuditLogEntity()
+            ->setUser($user)
+            ->setLevel('info')
+            ->setEvent('security.auth.login.success')
+            ->setClientIp('127.0.0.1')
+            ->setContext(['scope' => 'login']);
+        $this->entityManager?->persist($event);
+        $this->entityManager?->flush();
+        $this->browser()->loginUser($user);
+
+        $this->browser()->request('GET', '/account-security');
+
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertStringContainsString('security.auth.login.success', $this->browser()->getResponse()->getContent() ?: '');
     }
 
     public function testAuthenticatedUserCanUnlinkGoogleIdentityWhenLocalPasswordEnabled(): void

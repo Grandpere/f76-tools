@@ -15,6 +15,7 @@ namespace App\Identity\UI\Security\Controller;
 
 use App\Identity\Application\Oidc\GoogleOidcIdentityReadRepository;
 use App\Identity\Application\Security\ActiveUserSessionRegistry;
+use App\Identity\Application\Security\AuthAuditLogReader;
 use App\Identity\Application\Security\AuthEventLogger;
 use App\Identity\Application\Security\UnlinkOwnGoogleIdentityApplicationService;
 use App\Identity\Application\Security\UnlinkOwnGoogleIdentityResult;
@@ -43,6 +44,7 @@ final class AccountSecurityController extends AbstractController
         private readonly EntityManagerInterface $entityManager,
         private readonly AuthEventLogger $authEventLogger,
         private readonly ActiveUserSessionRegistry $activeUserSessionRegistry,
+        private readonly AuthAuditLogReader $authAuditLogReader,
     ) {
     }
 
@@ -59,6 +61,7 @@ final class AccountSecurityController extends AbstractController
         \assert(is_int($userId));
         $currentSessionId = $request->hasSession() ? $request->getSession()->getId() : '';
         $sessions = $this->activeUserSessionRegistry->listSessions($userId);
+        $authEvents = $this->authAuditLogReader->findLatestByUserId($userId, 12);
 
         return $this->render('security/account_security.html.twig', [
             'userEmail' => $user->getEmail(),
@@ -68,6 +71,7 @@ final class AccountSecurityController extends AbstractController
             'googleLinkedAt' => $googleIdentity?->getCreatedAt(),
             'activeSessions' => $sessions,
             'currentSessionId' => $currentSessionId,
+            'authEvents' => $authEvents,
         ]);
     }
 

@@ -216,6 +216,9 @@ security.account.session_other: Andere Sitzung
 security.account.session_last_seen: 'Letzte Aktivitat: %date%'
 security.account.session_none: Keine aktive Sitzung gefunden.
 security.account.logout_other_sessions: Andere Sitzungen abmelden
+security.account.auth_events_title: Letzte Sicherheitsaktivitat
+security.account.auth_events_hint: Neueste Authentifizierungs-/Sicherheitsereignisse fur Ihr Konto.
+security.account.auth_events_empty: Noch kein Sicherheitsereignis.
 security.account.flash.invalid_csrf: Ungultige Sitzung, bitte erneut versuchen.
 security.account.flash.google_identity_not_found: Google-Identitat fur Ihr Konto nicht gefunden.
 security.account.flash.google_identity_local_password_required: Google-Verknupfung kann ohne lokalen Passwortzugang nicht gelost werden.

@@ -78,6 +78,21 @@
                 {% endif %}
             </section>
 
+            <section class="account-security-sessions">
+                <h3>{{ 'security.account.auth_events_title'|trans }}</h3>
+                <p class="account-security-sub">{{ 'security.account.auth_events_hint'|trans }}</p>
+                <ul class="account-security-session-list">
+                    {% for event in authEvents %}
+                        <li class="account-security-session-item">
+                            <strong>{{ event.event }}</strong>
+                            <small>{{ event.occurredAt|date('Y-m-d H:i:s') }}{% if event.clientIp %} · {{ event.clientIp }}{% endif %}</small>
+                        </li>
+                    {% else %}
+                        <li class="account-security-session-item">{{ 'security.account.auth_events_empty'|trans }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+
             <div class="auth-actions-inline">
                 <a class="auth-button-link" href="{{ path('app_change_password', { locale: app.request.locale }) }}">{{ 'dashboard.header.change_password'|trans }}</a>
                 <a class="auth-button-link auth-button-link-secondary" href="{{ path('app_home', { locale: app.request.locale }) }}">{{ 'security.change_password.to_home'|trans }}</a>

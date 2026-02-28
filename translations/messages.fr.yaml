@@ -216,6 +216,9 @@ security.account.session_other: Autre session
 security.account.session_last_seen: 'Derniere activite: %date%'
 security.account.session_none: Aucune session active trouvee.
 security.account.logout_other_sessions: Deconnecter les autres sessions
+security.account.auth_events_title: Activite securite recente
+security.account.auth_events_hint: Derniers evenements d authentification/securite de votre compte.
+security.account.auth_events_empty: Aucun evenement de securite pour le moment.
 security.account.flash.invalid_csrf: Session invalide, merci de reessayer.
 security.account.flash.google_identity_not_found: Identite Google introuvable pour votre compte.
 security.account.flash.google_identity_local_password_required: Impossible de delier Google sans acces mot de passe local.
