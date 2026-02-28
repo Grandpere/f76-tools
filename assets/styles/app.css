@@ -423,6 +423,23 @@ body::before {
     background: #fffdf6;
 }
 
+.auth-button-link-danger {
+    border-color: rgba(193, 76, 63, 0.45);
+    color: #8d3328 !important;
+    background: #fff;
+}
+
+.auth-button-link-danger:hover {
+    border-color: rgba(193, 76, 63, 0.75);
+    color: #7b2f27 !important;
+    background: #fff6f5;
+}
+
+.auth-button-link:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 .auth-google-button {
     align-self: flex-start;
     display: inline-flex;
@@ -531,6 +548,16 @@ body::before {
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
+}
+
+.account-security-unlink-form {
+    margin: 0;
+}
+
+.account-security-help {
+    margin: 0.6rem 0 0;
+    color: var(--text-2);
+    font-size: 0.82rem;
 }
 
 .catalog-shell {

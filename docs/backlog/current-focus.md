@@ -6,6 +6,7 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-123: Account security unlink Google (self-service avec CSRF + garde-fou mot de passe local + tests unit/functional cibles) (done).
 - F76-122: Front account security page (`/account-security`) + header account dropdown link + coverage fonctionnelle ciblee (done).
 - F76-121: Admin users CSV hardening (UTF-8 BOM + protection CSV formula injection) + test fonctionnel cible (done).
 - F76-120: Admin users created-at range filter (`createdFrom`/`createdTo`) aligne liste + export CSV + preservation params (done).

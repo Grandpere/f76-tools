@@ -207,6 +207,12 @@ security.account.email_verified: E-Mail verifiziert
 security.account.local_password: Lokales Passwort aktiviert
 security.account.google_linked: Google verknupft
 security.account.google_linked_since: 'Verknupft seit %date%'
+security.account.unlink_google: Google-Verknupfung losen
+security.account.unlink_google_disabled_reason: Vor dem Trennen von Google zuerst ein lokales Passwort setzen.
+security.account.flash.invalid_csrf: Ungultige Sitzung, bitte erneut versuchen.
+security.account.flash.google_identity_not_found: Google-Identitat fur Ihr Konto nicht gefunden.
+security.account.flash.google_identity_local_password_required: Google-Verknupfung kann ohne lokalen Passwortzugang nicht gelost werden.
+security.account.flash.google_identity_unlinked: Google-Identitat getrennt.
 
 admin_users.page_title: Benutzer-Backoffice
 admin_users.kicker: Backoffice

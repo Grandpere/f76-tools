@@ -207,6 +207,12 @@ security.account.email_verified: Email verified
 security.account.local_password: Local password enabled
 security.account.google_linked: Google linked
 security.account.google_linked_since: 'Linked since %date%'
+security.account.unlink_google: Unlink Google
+security.account.unlink_google_disabled_reason: Set a local password first before unlinking Google.
+security.account.flash.invalid_csrf: Invalid session, please try again.
+security.account.flash.google_identity_not_found: Google identity not found for your account.
+security.account.flash.google_identity_local_password_required: Cannot unlink Google identity without local password access.
+security.account.flash.google_identity_unlinked: Google identity unlinked.
 
 admin_users.page_title: Users backoffice
 admin_users.kicker: Backoffice

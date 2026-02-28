@@ -207,6 +207,12 @@ security.account.email_verified: Email verifie
 security.account.local_password: Mot de passe local actif
 security.account.google_linked: Google lie
 security.account.google_linked_since: 'Lie depuis %date%'
+security.account.unlink_google: Delier Google
+security.account.unlink_google_disabled_reason: Definir d abord un mot de passe local avant de delier Google.
+security.account.flash.invalid_csrf: Session invalide, merci de reessayer.
+security.account.flash.google_identity_not_found: Identite Google introuvable pour votre compte.
+security.account.flash.google_identity_local_password_required: Impossible de delier Google sans acces mot de passe local.
+security.account.flash.google_identity_unlinked: Identite Google deliee.
 
 admin_users.page_title: Backoffice utilisateurs
 admin_users.kicker: Backoffice

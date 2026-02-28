@@ -6,6 +6,7 @@
     <main class="auth-page">
         <section class="auth-card">
             {% include 'security/_card_header.html.twig' with { title: 'security.account.title' } %}
+            {% include 'security/_flashes.html.twig' %}
 
             <dl class="account-security-list">
                 <div class="account-security-row">
@@ -50,7 +51,16 @@
             <div class="auth-actions-inline">
                 <a class="auth-button-link" href="{{ path('app_change_password', { locale: app.request.locale }) }}">{{ 'dashboard.header.change_password'|trans }}</a>
                 <a class="auth-button-link auth-button-link-secondary" href="{{ path('app_home', { locale: app.request.locale }) }}">{{ 'security.change_password.to_home'|trans }}</a>
+                {% if googleLinked %}
+                    <form method="post" action="{{ path('app_account_security_unlink_google', { locale: app.request.locale }) }}" class="account-security-unlink-form">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('account_unlink_google') }}">
+                        <button class="auth-button-link auth-button-link-danger" type="submit" {% if not localPasswordEnabled %}disabled title="{{ 'security.account.unlink_google_disabled_reason'|trans }}"{% endif %}>{{ 'security.account.unlink_google'|trans }}</button>
+                    </form>
+                {% endif %}
             </div>
+            {% if googleLinked and not localPasswordEnabled %}
+                <p class="account-security-help">{{ 'security.account.unlink_google_disabled_reason'|trans }}</p>
+            {% endif %}
         </section>
     </main>
 {% endblock %}

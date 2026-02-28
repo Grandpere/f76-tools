@@ -85,6 +85,60 @@ final class AccountSecurityControllerTest extends WebTestCase
         self::assertStringContainsString('Linked since', $this->browser()->getResponse()->getContent() ?: '');
     }
 
+    public function testAuthenticatedUserCanUnlinkGoogleIdentityWhenLocalPasswordEnabled(): void
+    {
+        $user = $this->createUser('security-unlink@example.com', 'secret123', ['ROLE_USER']);
+        $this->linkGoogleIdentity($user, 'sub-security-unlink');
+        $this->browser()->loginUser($user);
+
+        $crawler = $this->browser()->request('GET', '/account-security');
+        $tokenNode = $crawler->filter('form[action*="/account-security/unlink-google"] input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', '/account-security/unlink-google', [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        self::assertStringEndsWith('/account-security', (string) parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+
+        $this->entityManager?->clear();
+        $reloaded = $this->findUserByEmail('security-unlink@example.com');
+        self::assertInstanceOf(UserEntity::class, $reloaded);
+        $identity = $this->entityManager?->getRepository(UserIdentityEntity::class)->findOneBy([
+            'user' => $reloaded,
+            'provider' => 'google',
+        ]);
+        self::assertNull($identity);
+    }
+
+    public function testUnlinkGoogleIdentityIsBlockedWithoutLocalPassword(): void
+    {
+        $user = $this->createUser('security-unlink-blocked@example.com', 'secret123', ['ROLE_USER']);
+        $user->setHasLocalPassword(false);
+        $this->entityManager?->flush();
+        $this->linkGoogleIdentity($user, 'sub-security-unlink-blocked');
+        $this->browser()->loginUser($user);
+
+        $crawler = $this->browser()->request('GET', '/account-security');
+        $tokenNode = $crawler->filter('form[action*="/account-security/unlink-google"] input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+        self::assertCount(1, $crawler->filter('form[action*="/account-security/unlink-google"] button[disabled]'));
+
+        $this->browser()->request('POST', '/account-security/unlink-google', [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $this->entityManager?->clear();
+        $reloaded = $this->findUserByEmail('security-unlink-blocked@example.com');
+        self::assertInstanceOf(UserEntity::class, $reloaded);
+        $identity = $this->entityManager?->getRepository(UserIdentityEntity::class)->findOneBy([
+            'user' => $reloaded,
+            'provider' => 'google',
+        ]);
+        self::assertInstanceOf(UserIdentityEntity::class, $identity);
+    }
+
     /**
      * @param list<string> $roles
      */
@@ -111,6 +165,25 @@ final class AccountSecurityControllerTest extends WebTestCase
         }
 
         $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE user_identity, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
+    }
+
+    private function linkGoogleIdentity(UserEntity $user, string $providerUserId): void
+    {
+        $identity = new UserIdentityEntity();
+        $identity
+            ->setUser($user)
+            ->setProvider('google')
+            ->setProviderUserId($providerUserId)
+            ->setProviderEmail($user->getEmail());
+        $this->entityManager?->persist($identity);
+        $this->entityManager?->flush();
+    }
+
+    private function findUserByEmail(string $email): ?UserEntity
+    {
+        $user = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => $email]);
+
+        return $user instanceof UserEntity ? $user : null;
     }
 
     private function browser(): KernelBrowser
