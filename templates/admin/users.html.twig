@@ -10,7 +10,9 @@
             localeHiddenFields: {
                 google: googleFilter,
                 active: activeFilter,
-                q: query
+                q: query,
+                perPage: perPage,
+                page: page
             },
             kicker: 'admin_users.kicker',
             title: 'admin_users.title',
@@ -53,10 +55,23 @@
                         { value: 'inactive', label: 'admin_users.active_filter_inactive'|trans }
                     ]
                 } %}
+                {% include 'admin/_per_page_field.html.twig' with {
+                    label: 'admin_users.per_page',
+                    perPage: perPage,
+                    options: [20, 30, 50, 100]
+                } %}
                 {% include 'admin/_filters_common_hidden_fields.html.twig' %}
                 <button type="submit">{{ 'admin_users.filter'|trans }}</button>
             </form>
-            <p class="catalog-state">{{ 'admin_users.visible_rows'|trans({'%count%': users|length}) }}</p>
+            <p class="catalog-state">{{ 'admin_users.visible_rows'|trans({'%count%': visibleUsers}) }}</p>
+            {% set previousUrl = page > 1 ? path('app_admin_users', { locale: app.request.locale, q: query ?: null, google: googleFilter ?: null, active: activeFilter ?: null, perPage: perPage, page: page - 1 }) : null %}
+            {% set nextUrl = page < totalPages ? path('app_admin_users', { locale: app.request.locale, q: query ?: null, google: googleFilter ?: null, active: activeFilter ?: null, perPage: perPage, page: page + 1 }) : null %}
+            {% include 'admin/_pager.html.twig' with {
+                page: page,
+                totalPages: totalPages,
+                previousUrl: previousUrl,
+                nextUrl: nextUrl
+            } %}
             <h2>{{ 'admin_users.list_title'|trans }}</h2>
             <div class="translations-table-wrap">
                 <table class="translations-table admin-users-table">
@@ -94,6 +109,7 @@
                                         <input type="hidden" name="google" value="{{ googleFilter }}">
                                         <input type="hidden" name="active" value="{{ activeFilter }}">
                                         <input type="hidden" name="q" value="{{ query }}">
+                                        <input type="hidden" name="perPage" value="{{ perPage }}">
                                         <button type="submit">{{ 'admin_users.toggle_active'|trans }}</button>
                                     </form>
                                     <form method="post" action="{{ path('app_admin_users_toggle_admin', { id: user.id, locale: app.request.locale }) }}">
@@ -101,6 +117,7 @@
                                         <input type="hidden" name="google" value="{{ googleFilter }}">
                                         <input type="hidden" name="active" value="{{ activeFilter }}">
                                         <input type="hidden" name="q" value="{{ query }}">
+                                        <input type="hidden" name="perPage" value="{{ perPage }}">
                                         <button type="submit">{{ 'admin_users.toggle_admin'|trans }}</button>
                                     </form>
                                     <form method="post" action="{{ path('app_admin_users_generate_reset_link', { id: user.id, locale: app.request.locale }) }}">
@@ -108,6 +125,7 @@
                                         <input type="hidden" name="google" value="{{ googleFilter }}">
                                         <input type="hidden" name="active" value="{{ activeFilter }}">
                                         <input type="hidden" name="q" value="{{ query }}">
+                                        <input type="hidden" name="perPage" value="{{ perPage }}">
                                         <button type="submit">{{ 'admin_users.generate_reset_link'|trans }}</button>
                                     </form>
                                     {% if isGoogleLinked %}
@@ -116,6 +134,7 @@
                                             <input type="hidden" name="google" value="{{ googleFilter }}">
                                             <input type="hidden" name="active" value="{{ activeFilter }}">
                                             <input type="hidden" name="q" value="{{ query }}">
+                                            <input type="hidden" name="perPage" value="{{ perPage }}">
                                             <button type="submit">{{ 'admin_users.unlink_google'|trans }}</button>
                                         </form>
                                     {% endif %}

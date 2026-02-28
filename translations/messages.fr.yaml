@@ -204,6 +204,7 @@ admin_users.active_filter_active: Actifs uniquement
 admin_users.active_filter_inactive: Inactifs uniquement
 admin_users.search: Recherche
 admin_users.search_placeholder: Email
+admin_users.per_page: Lignes par page
 admin_users.filter: Filtrer
 admin_users.visible_rows: '%count% utilisateurs visibles.'
 admin_users.summary_total_label: Total

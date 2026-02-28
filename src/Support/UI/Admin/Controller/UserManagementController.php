@@ -74,6 +74,8 @@ final class UserManagementController extends AbstractController
         $googleFilter = $this->normalizeGoogleFilter($request->query->getString('google', ''));
         $activeFilter = $this->normalizeActiveFilter($request->query->getString('active', ''));
         $query = trim($request->query->getString('q', ''));
+        $perPage = $this->normalizePerPage((int) $request->query->get('perPage', 30));
+        $page = max(1, (int) $request->query->get('page', 1));
         $filteredUsers = $this->filterUsersByActiveStatus($users, $activeFilter);
         $filteredUsers = $this->filterUsersByGoogleIdentity($filteredUsers, $googleIdentitiesByUserId, $googleFilter);
         $filteredUsers = $this->filterUsersBySearchQuery($filteredUsers, $query);
@@ -81,13 +83,20 @@ final class UserManagementController extends AbstractController
         $googleLinkedCount = count($googleIdentitiesByUserId);
         $googleUnlinkedCount = max(0, $totalUsers - $googleLinkedCount);
         $visibleUsers = count($filteredUsers);
+        $totalPages = max(1, (int) ceil($visibleUsers / $perPage));
+        $page = min($page, $totalPages);
+        $offset = ($page - 1) * $perPage;
+        $paginatedUsers = array_slice($filteredUsers, $offset, $perPage);
 
         return $this->render('admin/users.html.twig', [
-            'users' => $filteredUsers,
+            'users' => $paginatedUsers,
             'googleIdentitiesByUserId' => $googleIdentitiesByUserId,
             'googleFilter' => $googleFilter,
             'activeFilter' => $activeFilter,
             'query' => $query,
+            'page' => $page,
+            'perPage' => $perPage,
+            'totalPages' => $totalPages,
             'totalUsers' => $totalUsers,
             'googleLinkedCount' => $googleLinkedCount,
             'googleUnlinkedCount' => $googleUnlinkedCount,
@@ -234,6 +243,8 @@ final class UserManagementController extends AbstractController
             'google' => $this->normalizeGoogleFilter((string) $request->request->get('google', '')),
             'active' => $this->normalizeActiveFilter((string) $request->request->get('active', '')),
             'q' => trim((string) $request->request->get('q', '')),
+            'perPage' => $this->normalizePerPage((int) $request->request->get('perPage', 30)),
+            'page' => 1,
         ]);
     }
 
@@ -363,5 +374,12 @@ final class UserManagementController extends AbstractController
         }
 
         return $filtered;
+    }
+
+    private function normalizePerPage(int $perPage): int
+    {
+        $allowed = [20, 30, 50, 100];
+
+        return in_array($perPage, $allowed, true) ? $perPage : 30;
     }
 }

@@ -206,6 +206,20 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='active.filter@example.com']"));
     }
 
+    public function testAdminUsersPageSupportsPaginationParameters(): void
+    {
+        $admin = $this->createUser('zzz-admin-page@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->createUser('u1-page@example.com', 'secret123', ['ROLE_USER']);
+        $this->createUser('u2-page@example.com', 'secret123', ['ROLE_USER']);
+        $this->createUser('u3-page@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?perPage=2&page=2');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='u3-page@example.com']"));
+        self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='u1-page@example.com']"));
+    }
+
     public function testAdminActionRedirectPreservesSearchQuery(): void
     {
         $admin = $this->createUser('admin-preserve-q@example.com', 'secret123', ['ROLE_ADMIN']);
@@ -244,6 +258,25 @@ final class UserManagementControllerTest extends WebTestCase
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('active=inactive', (string) $this->browser()->getResponse()->headers->get('location'));
+    }
+
+    public function testAdminActionRedirectPreservesPerPage(): void
+    {
+        $admin = $this->createUser('admin-preserve-per-page@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed-preserve-per-page@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?perPage=50');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/toggle-active', $managed->getId()), [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'perPage' => 50,
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        self::assertStringContainsString('perPage=50', (string) $this->browser()->getResponse()->headers->get('location'));
     }
 
     public function testAdminCanToggleManagedUserRole(): void
