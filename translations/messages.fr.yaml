@@ -202,6 +202,7 @@ admin_users.identities: Identites
 admin_users.actions: Actions
 admin_users.google_linked_yes: Google lie
 admin_users.google_linked_no: Google non lie
+admin_users.google_linked_since: 'Lie depuis %date%'
 admin_users.toggle_active: Activer/Desactiver
 admin_users.toggle_admin: Basculer admin
 admin_users.generate_reset_link: Generer un lien de reinitialisation

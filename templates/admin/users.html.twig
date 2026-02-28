@@ -34,11 +34,15 @@
                             <td>{{ user.roles|join(', ') }}</td>
                             <td>{% if user.isActive %}{{ 'common.yes'|trans }}{% else %}{{ 'common.no'|trans }}{% endif %}</td>
                             <td>
-                                {% set isGoogleLinked = googleLinkedUserIds[user.id]|default(false) %}
-                                {% if isGoogleLinked %}
-                                    {{ 'admin_users.google_linked_yes'|trans }}
+                                {% set googleIdentity = googleIdentitiesByUserId[user.id]|default(null) %}
+                                {% set isGoogleLinked = googleIdentity is not null %}
+                                {% if isGoogleLinked and googleIdentity %}
+                                    <span class="admin-identity-badge admin-identity-badge-linked">{{ 'admin_users.google_linked_yes'|trans }}</span>
+                                    <div class="admin-identity-meta">
+                                        {{ 'admin_users.google_linked_since'|trans({'%date%': googleIdentity.createdAt|date('Y-m-d H:i')}) }}
+                                    </div>
                                 {% else %}
-                                    {{ 'admin_users.google_linked_no'|trans }}
+                                    <span class="admin-identity-badge admin-identity-badge-unlinked">{{ 'admin_users.google_linked_no'|trans }}</span>
                                 {% endif %}
                             </td>
                             <td>

@@ -15,6 +15,7 @@ namespace App\Support\UI\Admin\Controller;
 
 use App\Identity\Application\Security\SignedUrlGenerator;
 use App\Identity\Domain\Entity\UserEntity;
+use App\Support\Application\AdminUser\AdminUserGoogleIdentityReadService;
 use App\Support\Application\AdminUser\AdminUserManagementReadRepositoryInterface;
 use App\Support\Application\AdminUser\GenerateResetLinkApplicationService;
 use App\Support\Application\AdminUser\GenerateResetLinkStatus;
@@ -47,6 +48,7 @@ final class UserManagementController extends AbstractController
 
     public function __construct(
         private readonly AdminUserManagementReadRepositoryInterface $userRepository,
+        private readonly AdminUserGoogleIdentityReadService $adminUserGoogleIdentityReadService,
         private readonly EntityManagerInterface $entityManager,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly SignedUrlGenerator $signedUrlGenerator,
@@ -68,19 +70,11 @@ final class UserManagementController extends AbstractController
     {
         $this->ensureAdminAccess();
         $users = $this->userRepository->findAllOrdered();
-        $googleLinkedUserIds = [];
-        foreach ($users as $user) {
-            $userId = $user->getId();
-            if (!is_int($userId)) {
-                continue;
-            }
-
-            $googleLinkedUserIds[$userId] = $this->unlinkGoogleIdentityApplicationService->hasGoogleIdentity($user);
-        }
+        $googleIdentitiesByUserId = $this->adminUserGoogleIdentityReadService->getGoogleIdentityByUserId($users);
 
         return $this->render('admin/users.html.twig', [
             'users' => $users,
-            'googleLinkedUserIds' => $googleLinkedUserIds,
+            'googleIdentitiesByUserId' => $googleIdentitiesByUserId,
         ]);
     }
 

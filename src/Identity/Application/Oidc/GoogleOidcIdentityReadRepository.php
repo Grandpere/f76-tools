@@ -21,4 +21,11 @@ interface GoogleOidcIdentityReadRepository
     public function findOneByProviderAndProviderUserId(string $provider, string $providerUserId): ?UserIdentityEntity;
 
     public function findOneByUserAndProvider(UserEntity $user, string $provider): ?UserIdentityEntity;
+
+    /**
+     * @param list<int> $userIds
+     *
+     * @return array<int, UserIdentityEntity>
+     */
+    public function findGoogleIdentitiesByUserIds(array $userIds): array;
 }

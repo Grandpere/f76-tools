@@ -91,24 +91,6 @@ final class UnlinkGoogleIdentityApplicationServiceTest extends TestCase
         self::assertSame(UnlinkGoogleIdentityResult::UNLINKED, $result);
     }
 
-    public function testHasGoogleIdentityReturnsTrueWhenPresent(): void
-    {
-        $user = new UserEntity()
-            ->setEmail('test@example.com')
-            ->setPassword('hash');
-        $identity = new UserIdentityEntity()
-            ->setUser($user)
-            ->setProvider('google')
-            ->setProviderUserId('sub-1');
-
-        $this->identityReadRepository->expects(self::once())
-            ->method('findOneByUserAndProvider')
-            ->with($user, 'google')
-            ->willReturn($identity);
-
-        self::assertTrue($this->service()->hasGoogleIdentity($user));
-    }
-
     private function service(): UnlinkGoogleIdentityApplicationService
     {
         return new UnlinkGoogleIdentityApplicationService(

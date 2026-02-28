@@ -202,6 +202,7 @@ admin_users.identities: Identities
 admin_users.actions: Actions
 admin_users.google_linked_yes: Google linked
 admin_users.google_linked_no: Google not linked
+admin_users.google_linked_since: 'Linked since %date%'
 admin_users.toggle_active: Toggle active
 admin_users.toggle_admin: Toggle admin
 admin_users.generate_reset_link: Generate reset link

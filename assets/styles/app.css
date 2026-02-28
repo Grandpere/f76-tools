@@ -1549,12 +1549,17 @@ span.flatpickr-weekday {
 
 .admin-users-table th:nth-child(3),
 .admin-users-table td:nth-child(3) {
-    width: 12%;
+    width: 10%;
+}
+
+.admin-users-table th:nth-child(4),
+.admin-users-table td:nth-child(4) {
+    width: 18%;
 }
 
 .admin-users-table th:last-child,
 .admin-users-table td:last-child {
-    width: 32%;
+    width: 34%;
 }
 
 .translations-table.admin-minerva-timeline-table th:first-child,
@@ -1664,6 +1669,35 @@ span.flatpickr-weekday {
 
 .admin-users-actions button:hover {
     filter: brightness(1.03);
+}
+
+.admin-identity-badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.18rem 0.46rem;
+    text-transform: uppercase;
+}
+
+.admin-identity-badge-linked {
+    background: rgba(47, 147, 85, 0.13);
+    color: #1f6840;
+    border: 1px solid rgba(47, 147, 85, 0.42);
+}
+
+.admin-identity-badge-unlinked {
+    background: rgba(108, 118, 132, 0.1);
+    color: #5a6473;
+    border: 1px solid rgba(108, 118, 132, 0.35);
+}
+
+.admin-identity-meta {
+    margin-top: 0.32rem;
+    font-size: 0.76rem;
+    color: #5a6473;
 }
 
 .translations-help {

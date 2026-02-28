@@ -15,7 +15,6 @@ namespace App\Support\Application\AdminUser;
 
 use App\Identity\Application\Oidc\GoogleOidcIdentityReadRepository;
 use App\Identity\Application\Oidc\GoogleOidcIdentityWriteRepository;
-use App\Identity\Domain\Entity\UserEntity;
 
 final class UnlinkGoogleIdentityApplicationService
 {
@@ -41,10 +40,5 @@ final class UnlinkGoogleIdentityApplicationService
         $this->googleOidcIdentityWriteRepository->delete($identity);
 
         return UnlinkGoogleIdentityResult::UNLINKED;
-    }
-
-    public function hasGoogleIdentity(UserEntity $user): bool
-    {
-        return null !== $this->googleOidcIdentityReadRepository->findOneByUserAndProvider($user, 'google');
     }
 }
