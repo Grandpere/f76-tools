@@ -114,6 +114,8 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-admin"]', $managed->getId())));
         self::assertCount(1, $crawler->filter(sprintf('form[action*="/admin/users/%d/generate-reset-link"]', $managed->getId())));
         self::assertCount(1, $crawler->filter(sprintf('form[action*="/admin/users/%d/unlink-google"]', $managed->getId())));
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//thead//th[normalize-space()='Created at']"));
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[2]"));
         self::assertGreaterThanOrEqual(1, $crawler->filter('.admin-identity-badge-linked')->count());
         self::assertGreaterThanOrEqual(1, $crawler->filter('.admin-identity-meta')->count());
     }

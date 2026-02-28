@@ -213,6 +213,7 @@ admin_users.summary_google_unlinked_label: Google nicht verknupft
 admin_users.summary_visible_label: Sichtbar
 admin_users.list_title: Benutzerliste
 admin_users.email: E-Mail
+admin_users.created_at: Erstellt am
 admin_users.roles: Rollen
 admin_users.active: Aktiv
 admin_users.identities: Identitaten

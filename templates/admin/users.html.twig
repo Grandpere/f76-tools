@@ -78,6 +78,7 @@
                     <thead>
                     <tr>
                         <th>{{ 'admin_users.email'|trans }}</th>
+                        <th>{{ 'admin_users.created_at'|trans }}</th>
                         <th>{{ 'admin_users.roles'|trans }}</th>
                         <th>{{ 'admin_users.active'|trans }}</th>
                         <th>{{ 'admin_users.identities'|trans }}</th>
@@ -88,6 +89,7 @@
                     {% for user in users %}
                         <tr>
                             <td>{{ user.email }}</td>
+                            <td>{{ user.createdAt|date('Y-m-d H:i') }}</td>
                             <td>{{ user.roles|join(', ') }}</td>
                             <td>{% if user.isActive %}{{ 'common.yes'|trans }}{% else %}{{ 'common.no'|trans }}{% endif %}</td>
                             <td>
@@ -143,7 +145,7 @@
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="5">{{ 'admin_users.no_users'|trans }}</td>
+                            <td colspan="6">{{ 'admin_users.no_users'|trans }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

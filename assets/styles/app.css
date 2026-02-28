@@ -1539,27 +1539,32 @@ span.flatpickr-weekday {
 
 .admin-users-table th:first-child,
 .admin-users-table td:first-child {
-    width: 30%;
+    width: 22%;
 }
 
 .admin-users-table th:nth-child(2),
 .admin-users-table td:nth-child(2) {
-    width: 26%;
+    width: 14%;
 }
 
 .admin-users-table th:nth-child(3),
 .admin-users-table td:nth-child(3) {
-    width: 10%;
+    width: 19%;
 }
 
 .admin-users-table th:nth-child(4),
 .admin-users-table td:nth-child(4) {
-    width: 18%;
+    width: 9%;
+}
+
+.admin-users-table th:nth-child(5),
+.admin-users-table td:nth-child(5) {
+    width: 16%;
 }
 
 .admin-users-table th:last-child,
 .admin-users-table td:last-child {
-    width: 34%;
+    width: 20%;
 }
 
 .translations-table.admin-minerva-timeline-table th:first-child,
