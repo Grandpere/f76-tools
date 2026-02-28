@@ -2,15 +2,11 @@
 
 ## Priorite active
 - Stabilisation front post-refacto (headers/nav/blocs front) + corrections UX mineures.
-- F76-087: BOOK lists absolues 1..24 (modele/import/stats/UI coherents metier).
-- F76-086: Minerva front countdown dynamique (arrivee/depart sans rechargement).
-- F76-085: Minerva front source visibility (decision produit: non expose en front, conserve en admin).
-- F76-084: Minerva admin manual overrides (source generated/manual + preservation lors des regenerations).
-- F76-083: Minerva front and schedule (bloc de synthese current + prochaines rotations).
 - F76-002: Evolutions produit Minerva (localisation/date/listes) selon la roadmap metier.
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-097: Current focus priority hygiene (suppression des priorites deja livrees) (done).
 - F76-096: Security links componentization (bloc auth-links factorise) (done).
 - F76-095: Security card header componentization (kicker + title factorises) (done).
 - F76-094: Security anti-bot components (honeypot + turnstile widget/script factorises) (done).
@@ -94,7 +90,7 @@
 - F76-004: Minerva Source Governance (done).
 
 ## Ensuite
-- Formaliser le prochain ticket produit prioritaire (auth UX finale ou bloc Minerva enrichi localisation/dates).
+- Formaliser le prochain ticket produit prioritaire lie a F76-002 (evolution metier Minerva).
 - F76-010: DDD Foundations (done, keep as reference).
 - F76-011: DDD Slice 1 - Progression context (done, keep as reference).
 - F76-001: Contact messages en base + backoffice admin (done).
