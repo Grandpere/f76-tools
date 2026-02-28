@@ -11,6 +11,7 @@ dashboard.header.user_management: Benutzerverwaltung
 dashboard.header.minerva_rotation: Minerva
 dashboard.header.progression: Fortschritt
 dashboard.header.admin: Administration
+dashboard.header.security_profile: Sicherheitsprofil
 dashboard.header.change_password: Passwort andern
 dashboard.header.title: Legendare Mods
 dashboard.header.subtitle: Wahlen Sie einen Charakter aus und markieren Sie gelernte legendare Mods.
@@ -199,6 +200,13 @@ security.change_password.flash.current_password_invalid: Das aktuelle Passwort i
 security.change_password.flash.password_too_short: Das Passwort muss mindestens 8 Zeichen lang sein.
 security.change_password.flash.password_mismatch: Die Passwortbestatigung stimmt nicht uberein.
 security.change_password.flash.success: Passwort erfolgreich aktualisiert.
+security.account.page_title: 'F76 - Kontosicherheit'
+security.account.title: Kontosicherheit
+security.account.email: Konto-E-Mail
+security.account.email_verified: E-Mail verifiziert
+security.account.local_password: Lokales Passwort aktiviert
+security.account.google_linked: Google verknupft
+security.account.google_linked_since: 'Verknupft seit %date%'
 
 admin_users.page_title: Benutzer-Backoffice
 admin_users.kicker: Backoffice

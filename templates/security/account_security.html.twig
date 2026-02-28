@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'security.account.page_title'|trans }}{% endblock %}
+
+{% block body %}
+    <main class="auth-page">
+        <section class="auth-card">
+            {% include 'security/_card_header.html.twig' with { title: 'security.account.title' } %}
+
+            <dl class="account-security-list">
+                <div class="account-security-row">
+                    <dt>{{ 'security.account.email'|trans }}</dt>
+                    <dd>{{ userEmail }}</dd>
+                </div>
+                <div class="account-security-row">
+                    <dt>{{ 'security.account.email_verified'|trans }}</dt>
+                    <dd>
+                        {% if emailVerified %}
+                            <span class="admin-security-badge admin-security-badge-ok">{{ 'common.yes'|trans }}</span>
+                        {% else %}
+                            <span class="admin-security-badge admin-security-badge-warn">{{ 'common.no'|trans }}</span>
+                        {% endif %}
+                    </dd>
+                </div>
+                <div class="account-security-row">
+                    <dt>{{ 'security.account.local_password'|trans }}</dt>
+                    <dd>
+                        {% if localPasswordEnabled %}
+                            <span class="admin-security-badge admin-security-badge-ok">{{ 'common.yes'|trans }}</span>
+                        {% else %}
+                            <span class="admin-security-badge admin-security-badge-warn">{{ 'common.no'|trans }}</span>
+                        {% endif %}
+                    </dd>
+                </div>
+                <div class="account-security-row">
+                    <dt>{{ 'security.account.google_linked'|trans }}</dt>
+                    <dd>
+                        {% if googleLinked %}
+                            <span class="admin-security-badge admin-security-badge-ok">{{ 'common.yes'|trans }}</span>
+                            {% if googleLinkedAt %}
+                                <small class="account-security-sub">{{ 'security.account.google_linked_since'|trans({'%date%': googleLinkedAt|date('Y-m-d H:i')}) }}</small>
+                            {% endif %}
+                        {% else %}
+                            <span class="admin-security-badge admin-security-badge-warn">{{ 'common.no'|trans }}</span>
+                        {% endif %}
+                    </dd>
+                </div>
+            </dl>
+
+            <div class="auth-actions-inline">
+                <a class="auth-button-link" href="{{ path('app_change_password', { locale: app.request.locale }) }}">{{ 'dashboard.header.change_password'|trans }}</a>
+                <a class="auth-button-link auth-button-link-secondary" href="{{ path('app_home', { locale: app.request.locale }) }}">{{ 'security.change_password.to_home'|trans }}</a>
+            </div>
+        </section>
+    </main>
+{% endblock %}

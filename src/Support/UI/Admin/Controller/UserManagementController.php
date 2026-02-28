@@ -192,14 +192,14 @@ final class UserManagementController extends AbstractController
             $googleLinked = null !== $googleIdentity;
 
             fputcsv($handle, [
-                $user->getEmail(),
-                $user->getCreatedAt()->format('Y-m-d H:i:s'),
-                $user->isActive() ? '1' : '0',
-                $user->isEmailVerified() ? '1' : '0',
-                $user->hasLocalPassword() ? '1' : '0',
-                implode('|', $user->getRoles()),
-                $googleLinked ? '1' : '0',
-                $googleLinked ? $googleIdentity->getCreatedAt()->format('Y-m-d H:i:s') : '',
+                $this->sanitizeCsvValue($user->getEmail()),
+                $this->sanitizeCsvValue($user->getCreatedAt()->format('Y-m-d H:i:s')),
+                $this->sanitizeCsvValue($user->isActive() ? '1' : '0'),
+                $this->sanitizeCsvValue($user->isEmailVerified() ? '1' : '0'),
+                $this->sanitizeCsvValue($user->hasLocalPassword() ? '1' : '0'),
+                $this->sanitizeCsvValue(implode('|', $user->getRoles())),
+                $this->sanitizeCsvValue($googleLinked ? '1' : '0'),
+                $this->sanitizeCsvValue($googleLinked ? $googleIdentity->getCreatedAt()->format('Y-m-d H:i:s') : ''),
             ], ',', '"', '');
         }
 
@@ -207,7 +207,7 @@ final class UserManagementController extends AbstractController
         $csvContent = stream_get_contents($handle);
         fclose($handle);
 
-        $response = new Response(is_string($csvContent) ? $csvContent : '');
+        $response = new Response("\xEF\xBB\xBF".(is_string($csvContent) ? $csvContent : ''));
         $response->headers->set('Content-Type', 'text/csv; charset=UTF-8');
         $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"', $filename));
 
@@ -735,6 +735,20 @@ final class UserManagementController extends AbstractController
         }
 
         return $parsed->setTime(23, 59, 59);
+    }
+
+    private function sanitizeCsvValue(string $value): string
+    {
+        if ('' === $value) {
+            return $value;
+        }
+
+        $firstChar = $value[0];
+        if (in_array($firstChar, ['=', '+', '-', '@'], true)) {
+            return "'".$value;
+        }
+
+        return $value;
     }
 
     /**

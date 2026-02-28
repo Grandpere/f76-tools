@@ -6,6 +6,8 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-122: Front account security page (`/account-security`) + header account dropdown link + coverage fonctionnelle ciblee (done).
+- F76-121: Admin users CSV hardening (UTF-8 BOM + protection CSV formula injection) + test fonctionnel cible (done).
 - F76-120: Admin users created-at range filter (`createdFrom`/`createdTo`) aligne liste + export CSV + preservation params (done).
 - F76-119: Admin users force email verification (action support manuelle + audit + tests cibles) (done).
 - F76-118: User self-service change password (page securisee + service applicatif + lien header + tests unit/functional cibles) (done).

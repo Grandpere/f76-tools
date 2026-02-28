@@ -595,6 +595,20 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertStringNotContainsString('plain-export@example.com', $content);
     }
 
+    public function testAdminUsersCsvExportUsesUtf8BomAndSanitizesFormulaLikeCells(): void
+    {
+        $admin = $this->createUser('admin-export-bom@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->createUser('=danger@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $this->browser()->request('GET', '/admin/users/export?q=%40example.com');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        $content = (string) $this->browser()->getResponse()->getContent();
+
+        self::assertStringStartsWith("\xEF\xBB\xBF", $content);
+        self::assertStringContainsString("'=danger@example.com", $content);
+    }
+
     public function testAdminCanToggleManagedUserRole(): void
     {
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
@@ -784,7 +798,7 @@ final class UserManagementControllerTest extends WebTestCase
         if (null === $this->entityManager) {
             return;
         }
-        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
+        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE admin_audit_log, user_identity, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
     }
 
     private function setCreatedAtByEmail(string $email, string $createdAt): void
