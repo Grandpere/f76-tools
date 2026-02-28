@@ -3,8 +3,13 @@
     {% if is_granted('ROLE_ADMIN') %}
         <a class="header-translations-link" href="{{ path('app_admin_users', { locale: app.request.locale }) }}"><img class="header-action-icon" src="/assets/icons/admin.svg" alt="" aria-hidden="true"> {{ 'dashboard.header.admin'|trans }}</a>
     {% endif %}
-    <a class="header-translations-link" href="{{ path('app_change_password', { locale: app.request.locale }) }}">{{ 'dashboard.header.change_password'|trans }}</a>
-    <span class="header-account"><img class="header-action-icon" src="/assets/icons/account.svg" alt="" aria-hidden="true"> <strong>{{ username }}</strong></span>
+    <a class="header-translations-link" href="{{ path('app_contact', { locale: app.request.locale }) }}">{{ 'security.login.to_contact'|trans }}</a>
+    <details class="header-account-menu">
+        <summary class="header-account"><img class="header-action-icon" src="/assets/icons/account.svg" alt="" aria-hidden="true"> <strong>{{ username }}</strong><span class="header-account-caret" aria-hidden="true">▾</span></summary>
+        <div class="header-account-dropdown">
+            <a class="header-account-dropdown-link" href="{{ path('app_change_password', { locale: app.request.locale }) }}">{{ 'dashboard.header.change_password'|trans }}</a>
+        </div>
+    </details>
     <form method="post" action="{{ path('app_logout', { locale: app.request.locale }) }}" class="logout-form header-logout-form">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
         <button type="submit"><img class="logout-icon" src="/assets/icons/logout.svg" alt="" aria-hidden="true"> {{ 'dashboard.header.logout'|trans }}</button>

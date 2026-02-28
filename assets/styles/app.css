@@ -243,6 +243,70 @@ body::before {
     display: inline-flex;
     align-items: center;
     gap: 0.32rem;
+    padding: 0.18rem 0.32rem;
+    border-radius: 8px;
+    transition: background-color 120ms ease, color 120ms ease;
+}
+
+.header-account:hover {
+    color: #ffe38a;
+    background: rgba(255, 221, 118, 0.08);
+}
+
+.header-account-menu {
+    position: relative;
+}
+
+.header-account-menu summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+.header-account-menu summary::-webkit-details-marker {
+    display: none;
+}
+
+.header-account-menu[open] .header-account {
+    color: #ffe38a;
+    background: rgba(255, 221, 118, 0.08);
+}
+
+.header-account-caret {
+    font-size: 0.68rem;
+    opacity: 0.8;
+    transform: translateY(1px);
+}
+
+.header-account-menu[open] .header-account-caret {
+    transform: translateY(1px) rotate(180deg);
+}
+
+.header-account-dropdown {
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    right: 0;
+    min-width: 210px;
+    border: 1px solid rgba(255, 210, 74, 0.35);
+    border-radius: 10px;
+    background: rgba(14, 20, 29, 0.98);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+    padding: 0.3rem;
+    z-index: 5;
+}
+
+.header-account-dropdown-link {
+    display: block;
+    text-decoration: none;
+    color: #dce6f3;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0.4rem 0.5rem;
+}
+
+.header-account-dropdown-link:hover {
+    color: #ffe38a;
+    background: rgba(255, 221, 118, 0.08);
 }
 
 .auth-page {
