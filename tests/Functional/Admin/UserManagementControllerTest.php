@@ -209,15 +209,16 @@ final class UserManagementControllerTest extends WebTestCase
     public function testAdminUsersPageSupportsPaginationParameters(): void
     {
         $admin = $this->createUser('zzz-admin-page@example.com', 'secret123', ['ROLE_ADMIN']);
-        $this->createUser('u1-page@example.com', 'secret123', ['ROLE_USER']);
-        $this->createUser('u2-page@example.com', 'secret123', ['ROLE_USER']);
-        $this->createUser('u3-page@example.com', 'secret123', ['ROLE_USER']);
+        for ($i = 1; $i <= 20; ++$i) {
+            $this->createUser(sprintf('u%02d-page@example.com', $i), 'secret123', ['ROLE_USER']);
+        }
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/admin/users?perPage=2&page=2');
+        $crawler = $this->browser()->request('GET', '/admin/users?perPage=20&page=2');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
-        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='u3-page@example.com']"));
-        self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='u1-page@example.com']"));
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr"));
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='zzz-admin-page@example.com']"));
+        self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='u01-page@example.com']"));
     }
 
     public function testAdminActionRedirectPreservesSearchQuery(): void
