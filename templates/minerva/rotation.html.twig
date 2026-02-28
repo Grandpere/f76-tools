@@ -116,7 +116,7 @@
                     {% if timeline.current %}
                         <p><strong>{{ timeline.current.location }}</strong></p>
                         <p>{{ 'minerva.list_label'|trans({'%list%': timeline.current.listCycle}) }}</p>
-                        <p>{{ timeline.current.startsAt|date('Y-m-d H:i') }} → {{ timeline.current.endsAt|date('Y-m-d H:i') }}</p>
+                        <p>{{ timeline.current.startsAt|date('D d M Y · H:i') }} → {{ timeline.current.endsAt|date('D d M Y · H:i') }}</p>
                     {% else %}
                         <p>{{ 'minerva.current_window_empty'|trans }}</p>
                     {% endif %}
@@ -171,8 +171,8 @@
                                 <tr>
                                     <td>{{ row.listCycle }}</td>
                                     <td>{{ row.location }}</td>
-                                    <td>{{ row.startsAt|date('Y-m-d H:i') }}</td>
-                                    <td>{{ row.endsAt|date('Y-m-d H:i') }}</td>
+                                    <td>{{ row.startsAt|date('D d M Y · H:i') }}</td>
+                                    <td>{{ row.endsAt|date('D d M Y · H:i') }}</td>
                                     <td data-minerva-progression-target="cell" data-list-cycle="{{ row.listCycle }}">
                                         <div class="minerva-progress-cell">
                                             <div class="minerva-progress-meta" data-minerva-progress-meta>-</div>

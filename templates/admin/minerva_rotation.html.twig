@@ -85,8 +85,8 @@
                         <tr>
                             <td>{{ row.location }}</td>
                             <td>{{ row.listCycle }}</td>
-                            <td>{{ row.startsAt|date('Y-m-d H:i') }}</td>
-                            <td>{{ row.endsAt|date('Y-m-d H:i') }}</td>
+                            <td>{{ row.startsAt|date('D d M Y · H:i') }}</td>
+                            <td>{{ row.endsAt|date('D d M Y · H:i') }}</td>
                             <td>
                                 <form method="post" action="{{ path('app_admin_minerva_rotation_override_delete', { locale: app.request.locale, id: row.id }) }}">
                                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_override_delete_' ~ row.id) }}">
@@ -131,8 +131,8 @@
                         <tr>
                             <td>{{ row.listCycle }}</td>
                             <td>{{ row.location }}</td>
-                            <td>{{ row.startsAt|date('Y-m-d H:i') }}</td>
-                            <td>{{ row.endsAt|date('Y-m-d H:i') }}</td>
+                            <td>{{ row.startsAt|date('D d M Y · H:i') }}</td>
+                            <td>{{ row.endsAt|date('D d M Y · H:i') }}</td>
                             <td><span class="item-pill">{{ ('admin_minerva.source_' ~ row.source)|trans }}</span></td>
                             <td><span class="item-pill">{{ ('minerva.status_' ~ row.status)|trans }}</span></td>
                         </tr>

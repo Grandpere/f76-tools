@@ -1254,7 +1254,7 @@ body::before {
 .minerva-table.minerva-timeline-table td:nth-child(3),
 .minerva-table.minerva-timeline-table th:nth-child(4),
 .minerva-table.minerva-timeline-table td:nth-child(4) {
-    width: 9.4rem;
+    width: 13rem;
     white-space: nowrap;
 }
 
@@ -1515,7 +1515,7 @@ span.flatpickr-weekday {
 
 .translations-table.admin-minerva-timeline-table col.col-start,
 .translations-table.admin-minerva-timeline-table col.col-end {
-    width: 9.4rem;
+    width: 13rem;
 }
 
 .translations-table.admin-minerva-timeline-table col.col-source,
