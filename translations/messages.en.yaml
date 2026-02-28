@@ -198,13 +198,19 @@ admin_users.list_title: User list
 admin_users.email: Email
 admin_users.roles: Roles
 admin_users.active: Active
+admin_users.identities: Identities
 admin_users.actions: Actions
+admin_users.google_linked_yes: Google linked
+admin_users.google_linked_no: Google not linked
 admin_users.toggle_active: Toggle active
 admin_users.toggle_admin: Toggle admin
 admin_users.generate_reset_link: Generate reset link
+admin_users.unlink_google: Unlink Google
 admin_users.no_users: No users.
 admin_users.flash.invalid_csrf: Invalid action (CSRF).
 admin_users.flash.user_not_found: User not found.
+admin_users.flash.google_identity_not_found: Google identity not found for this user.
+admin_users.flash.google_identity_unlinked: Google identity unlinked.
 admin_users.flash.cannot_change_self_active: You cannot disable your own account.
 admin_users.flash.cannot_change_self_role: You cannot change your own admin role here.
 admin_users.flash.active_updated: Active status updated.

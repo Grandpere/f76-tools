@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Admin;
 
 use App\Identity\Domain\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserIdentityEntity;
 use App\Support\Domain\Entity\AdminAuditLogEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
@@ -84,6 +85,7 @@ final class UserManagementControllerTest extends WebTestCase
     {
         $admin = $this->createUser('admin-actions@example.com', 'secret123', ['ROLE_ADMIN']);
         $managed = $this->createUser('managed-actions@example.com', 'secret123', ['ROLE_USER']);
+        $this->linkGoogleIdentity($managed, 'google-sub-actions');
         $this->browser()->loginUser($admin);
 
         $crawler = $this->browser()->request('GET', '/admin/users');
@@ -91,6 +93,36 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-active"]', $managed->getId())));
         self::assertCount(1, $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-admin"]', $managed->getId())));
         self::assertCount(1, $crawler->filter(sprintf('form[action*="/admin/users/%d/generate-reset-link"]', $managed->getId())));
+        self::assertCount(1, $crawler->filter(sprintf('form[action*="/admin/users/%d/unlink-google"]', $managed->getId())));
+    }
+
+    public function testAdminCanUnlinkGoogleIdentityForManagedUser(): void
+    {
+        $admin = $this->createUser('admin-unlink@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed-unlink@example.com', 'secret123', ['ROLE_USER']);
+        $this->linkGoogleIdentity($managed, 'google-sub-unlink');
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/unlink-google"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/unlink-google', $managed->getId()), [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $this->entityManager?->clear();
+        $identity = $this->entityManager?->getRepository(UserIdentityEntity::class)->findOneBy([
+            'provider' => 'google',
+            'providerUserId' => 'google-sub-unlink',
+        ]);
+        self::assertNull($identity);
+
+        $audit = $this->findAuditForTargetAction('managed-unlink@example.com', 'user_unlink_google_identity');
+        self::assertInstanceOf(AdminAuditLogEntity::class, $audit);
+        self::assertIsArray($audit->getContext());
+        self::assertSame('google', $audit->getContext()['provider'] ?? null);
     }
 
     public function testAdminCanToggleManagedUserRole(): void
@@ -247,6 +279,18 @@ final class UserManagementControllerTest extends WebTestCase
         $result = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => $email]);
 
         return $result instanceof UserEntity ? $result : null;
+    }
+
+    private function linkGoogleIdentity(UserEntity $user, string $providerUserId): void
+    {
+        $identity = new UserIdentityEntity()
+            ->setUser($user)
+            ->setProvider('google')
+            ->setProviderUserId($providerUserId)
+            ->setProviderEmail($user->getEmail());
+
+        $this->entityManager?->persist($identity);
+        $this->entityManager?->flush();
     }
 
     private function findAuditForTargetAction(string $targetEmail, string $action): ?AdminAuditLogEntity

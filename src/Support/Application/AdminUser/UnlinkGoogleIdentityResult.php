@@ -11,13 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Identity\Application\Oidc;
+namespace App\Support\Application\AdminUser;
 
-use App\Identity\Domain\Entity\UserIdentityEntity;
-
-interface GoogleOidcIdentityWriteRepository
+enum UnlinkGoogleIdentityResult: string
 {
-    public function save(UserIdentityEntity $identity): void;
-
-    public function delete(UserIdentityEntity $identity): void;
+    case USER_NOT_FOUND = 'user_not_found';
+    case GOOGLE_IDENTITY_NOT_FOUND = 'google_identity_not_found';
+    case UNLINKED = 'unlinked';
 }

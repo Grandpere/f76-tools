@@ -54,4 +54,9 @@ final class UserIdentityEntityRepository extends ServiceEntityRepository impleme
     {
         $this->getEntityManager()->persist($identity);
     }
+
+    public function delete(UserIdentityEntity $identity): void
+    {
+        $this->getEntityManager()->remove($identity);
+    }
 }

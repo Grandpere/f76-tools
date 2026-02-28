@@ -23,6 +23,7 @@
                         <th>{{ 'admin_users.email'|trans }}</th>
                         <th>{{ 'admin_users.roles'|trans }}</th>
                         <th>{{ 'admin_users.active'|trans }}</th>
+                        <th>{{ 'admin_users.identities'|trans }}</th>
                         <th>{{ 'admin_users.actions'|trans }}</th>
                     </tr>
                     </thead>
@@ -32,6 +33,14 @@
                             <td>{{ user.email }}</td>
                             <td>{{ user.roles|join(', ') }}</td>
                             <td>{% if user.isActive %}{{ 'common.yes'|trans }}{% else %}{{ 'common.no'|trans }}{% endif %}</td>
+                            <td>
+                                {% set isGoogleLinked = googleLinkedUserIds[user.id]|default(false) %}
+                                {% if isGoogleLinked %}
+                                    {{ 'admin_users.google_linked_yes'|trans }}
+                                {% else %}
+                                    {{ 'admin_users.google_linked_no'|trans }}
+                                {% endif %}
+                            </td>
                             <td>
                                 <div class="admin-users-actions">
                                     <form method="post" action="{{ path('app_admin_users_toggle_active', { id: user.id, locale: app.request.locale }) }}">
@@ -46,12 +55,18 @@
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_generate_reset_link_' ~ user.id) }}">
                                         <button type="submit">{{ 'admin_users.generate_reset_link'|trans }}</button>
                                     </form>
+                                    {% if isGoogleLinked %}
+                                        <form method="post" action="{{ path('app_admin_users_unlink_google', { id: user.id, locale: app.request.locale }) }}">
+                                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_unlink_google_' ~ user.id) }}">
+                                            <button type="submit">{{ 'admin_users.unlink_google'|trans }}</button>
+                                        </form>
+                                    {% endif %}
                                 </div>
                             </td>
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="4">{{ 'admin_users.no_users'|trans }}</td>
+                            <td colspan="5">{{ 'admin_users.no_users'|trans }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

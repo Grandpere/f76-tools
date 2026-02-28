@@ -22,11 +22,14 @@ use App\Support\Application\AdminUser\ToggleUserActiveApplicationService;
 use App\Support\Application\AdminUser\ToggleUserActiveResult;
 use App\Support\Application\AdminUser\ToggleUserAdminApplicationService;
 use App\Support\Application\AdminUser\ToggleUserAdminResult;
+use App\Support\Application\AdminUser\UnlinkGoogleIdentityApplicationService;
+use App\Support\Application\AdminUser\UnlinkGoogleIdentityResult;
 use App\Support\Domain\Entity\AdminAuditLogEntity;
 use App\Support\UI\Admin\AdminAuthenticatedUserContext;
 use App\Support\UI\Admin\GenerateResetLinkFeedbackMapper;
 use App\Support\UI\Admin\ToggleUserActiveFeedbackMapper;
 use App\Support\UI\Admin\ToggleUserAdminFeedbackMapper;
+use App\Support\UI\Admin\UnlinkGoogleIdentityFeedbackMapper;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -54,6 +57,8 @@ final class UserManagementController extends AbstractController
         private readonly ToggleUserAdminFeedbackMapper $toggleUserAdminFeedbackMapper,
         private readonly GenerateResetLinkApplicationService $generateResetLinkApplicationService,
         private readonly GenerateResetLinkFeedbackMapper $generateResetLinkFeedbackMapper,
+        private readonly UnlinkGoogleIdentityApplicationService $unlinkGoogleIdentityApplicationService,
+        private readonly UnlinkGoogleIdentityFeedbackMapper $unlinkGoogleIdentityFeedbackMapper,
         private readonly AdminAuthenticatedUserContext $adminAuthenticatedUserContext,
     ) {
     }
@@ -62,9 +67,20 @@ final class UserManagementController extends AbstractController
     public function index(): Response
     {
         $this->ensureAdminAccess();
+        $users = $this->userRepository->findAllOrdered();
+        $googleLinkedUserIds = [];
+        foreach ($users as $user) {
+            $userId = $user->getId();
+            if (!is_int($userId)) {
+                continue;
+            }
+
+            $googleLinkedUserIds[$userId] = $this->unlinkGoogleIdentityApplicationService->hasGoogleIdentity($user);
+        }
 
         return $this->render('admin/users.html.twig', [
-            'users' => $this->userRepository->findAllOrdered(),
+            'users' => $users,
+            'googleLinkedUserIds' => $googleLinkedUserIds,
         ]);
     }
 
@@ -153,6 +169,37 @@ final class UserManagementController extends AbstractController
             $feedback['flashType'],
             $this->translator->trans($feedback['flashMessage'], $feedback['flashParams']),
         );
+
+        return $this->redirectToUsers($request);
+    }
+
+    #[Route('/{id<\d+>}/unlink-google', name: 'app_admin_users_unlink_google', methods: ['POST'])]
+    public function unlinkGoogleIdentity(int $id, Request $request): RedirectResponse
+    {
+        $failureResponse = $this->guardAdminPostOrFailure($request, 'admin_users_unlink_google_'.$id);
+        if ($failureResponse instanceof RedirectResponse) {
+            return $failureResponse;
+        }
+        $actor = $this->getAuthenticatedUser();
+
+        $result = $this->unlinkGoogleIdentityApplicationService->unlink($id);
+        $feedback = $this->unlinkGoogleIdentityFeedbackMapper->map($result);
+        $this->addFlash($feedback['flashType'], $feedback['flashMessage']);
+
+        if (UnlinkGoogleIdentityResult::UNLINKED === $result) {
+            $user = $this->userRepository->getById($id);
+            if ($user instanceof UserEntity) {
+                $this->persistAuditLog($request, $actor, 'user_unlink_google_identity', $user, [
+                    'provider' => 'google',
+                ]);
+            } else {
+                $this->persistAuditLog($request, $actor, 'user_unlink_google_identity', null, [
+                    'provider' => 'google',
+                    'targetUserId' => $id,
+                ]);
+            }
+            $this->entityManager->flush();
+        }
 
         return $this->redirectToUsers($request);
     }
