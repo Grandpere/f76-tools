@@ -1,6 +1,7 @@
 # Current Focus
 
 ## Priorite active
+- F76-090: Auth UX finalization (coherence titres/liens auth + couverture fonctionnelle).
 - Stabilisation front post-refacto (headers/nav/blocs front) + corrections UX mineures.
 - F76-087: BOOK lists absolues 1..24 (modele/import/stats/UI coherents metier).
 - F76-086: Minerva front countdown dynamique (arrivee/depart sans rechargement).
