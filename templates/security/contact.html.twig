@@ -33,9 +33,11 @@
                 </div>
             </form>
 
-            <p class="auth-links">
-                <a href="{{ path('app_login', { locale: app.request.locale }) }}">{{ 'security.contact.to_login'|trans }}</a>
-            </p>
+            {% include 'security/_links.html.twig' with {
+                links: [
+                    { route: 'app_login', label: 'security.contact.to_login' }
+                ]
+            } %}
         </section>
     </main>
     {% include 'security/_turnstile_script.html.twig' %}

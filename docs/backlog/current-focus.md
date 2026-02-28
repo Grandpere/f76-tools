@@ -11,6 +11,7 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-096: Security links componentization (bloc auth-links factorise) (done).
 - F76-095: Security card header componentization (kicker + title factorises) (done).
 - F76-094: Security anti-bot components (honeypot + turnstile widget/script factorises) (done).
 - F76-093: Security flashes componentization (login error + success/warning flashes centralises) (done).

@@ -50,11 +50,13 @@
                 <button type="submit">{{ 'security.register.submit'|trans }}</button>
             </form>
 
-            <p class="auth-links">
-                <a href="{{ path('app_login', { locale: app.request.locale }) }}">{{ 'security.register.to_login'|trans }}</a>
-                <a href="{{ path('app_forgot_password', { locale: app.request.locale }) }}">{{ 'security.login.to_forgot'|trans }}</a>
-                <a href="{{ path('app_contact', { locale: app.request.locale }) }}">{{ 'security.login.to_contact'|trans }}</a>
-            </p>
+            {% include 'security/_links.html.twig' with {
+                links: [
+                    { route: 'app_login', label: 'security.register.to_login' },
+                    { route: 'app_forgot_password', label: 'security.login.to_forgot' },
+                    { route: 'app_contact', label: 'security.login.to_contact' }
+                ]
+            } %}
         </section>
     </main>
     {% include 'security/_turnstile_script.html.twig' %}
