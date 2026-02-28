@@ -72,12 +72,15 @@ final class UserManagementController extends AbstractController
         $users = $this->userRepository->findAllOrdered();
         $googleIdentitiesByUserId = $this->adminUserGoogleIdentityReadService->getGoogleIdentityByUserId($users);
         $googleFilter = $this->normalizeGoogleFilter($request->query->getString('google', ''));
+        $query = trim($request->query->getString('q', ''));
         $filteredUsers = $this->filterUsersByGoogleIdentity($users, $googleIdentitiesByUserId, $googleFilter);
+        $filteredUsers = $this->filterUsersBySearchQuery($filteredUsers, $query);
 
         return $this->render('admin/users.html.twig', [
             'users' => $filteredUsers,
             'googleIdentitiesByUserId' => $googleIdentitiesByUserId,
             'googleFilter' => $googleFilter,
+            'query' => $query,
         ]);
     }
 
@@ -218,6 +221,7 @@ final class UserManagementController extends AbstractController
         return $this->redirectToRoute('app_admin_users', [
             'locale' => $request->getLocale(),
             'google' => $this->normalizeGoogleFilter((string) $request->request->get('google', '')),
+            'q' => trim((string) $request->request->get('q', '')),
         ]);
     }
 
@@ -293,5 +297,27 @@ final class UserManagementController extends AbstractController
         $normalized = mb_strtolower(trim($googleFilter));
 
         return in_array($normalized, ['linked', 'unlinked'], true) ? $normalized : '';
+    }
+
+    /**
+     * @param list<UserEntity> $users
+     *
+     * @return list<UserEntity>
+     */
+    private function filterUsersBySearchQuery(array $users, string $query): array
+    {
+        if ('' === $query) {
+            return $users;
+        }
+
+        $normalizedQuery = mb_strtolower($query);
+        $filtered = [];
+        foreach ($users as $user) {
+            if (str_contains(mb_strtolower($user->getEmail()), $normalizedQuery)) {
+                $filtered[] = $user;
+            }
+        }
+
+        return $filtered;
     }
 }

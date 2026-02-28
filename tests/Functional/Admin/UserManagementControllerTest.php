@@ -151,7 +151,7 @@ final class UserManagementControllerTest extends WebTestCase
     {
         $admin = $this->createUser('admin-filter@example.com', 'secret123', ['ROLE_ADMIN']);
         $linked = $this->createUser('linked-filter@example.com', 'secret123', ['ROLE_USER']);
-        $unlinked = $this->createUser('unlinked-filter@example.com', 'secret123', ['ROLE_USER']);
+        $this->createUser('unlinked-filter@example.com', 'secret123', ['ROLE_USER']);
         $this->linkGoogleIdentity($linked, 'google-sub-filter');
         $this->browser()->loginUser($admin);
 
@@ -164,6 +164,43 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='unlinked-filter@example.com']"));
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='linked-filter@example.com']"));
+    }
+
+    public function testAdminCanFilterUsersBySearchQuery(): void
+    {
+        $admin = $this->createUser('admin-search@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->createUser('alpha.search@example.com', 'secret123', ['ROLE_USER']);
+        $this->createUser('beta.search@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?q=alpha.search');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='alpha.search@example.com']"));
+        self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='beta.search@example.com']"));
+
+        $crawler = $this->browser()->request('GET', '/admin/users?q=@example.com');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='alpha.search@example.com']"));
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='beta.search@example.com']"));
+    }
+
+    public function testAdminActionRedirectPreservesSearchQuery(): void
+    {
+        $admin = $this->createUser('admin-preserve-q@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed-preserve-q@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?q=managed-preserve-q');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/toggle-active', $managed->getId()), [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'q' => 'managed-preserve-q',
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        self::assertStringContainsString('q=managed-preserve-q', (string) $this->browser()->getResponse()->headers->get('location'));
     }
 
     public function testAdminCanToggleManagedUserRole(): void

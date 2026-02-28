@@ -8,7 +8,8 @@
             backLabel: 'admin_users.back_to_dashboard',
             localeSelectId: 'admin-users-header-locale-select',
             localeHiddenFields: {
-                google: googleFilter
+                google: googleFilter,
+                q: query
             },
             kicker: 'admin_users.kicker',
             title: 'admin_users.title',
@@ -19,6 +20,12 @@
 
         <section class="translations-panel">
             <form method="get" class="translations-filters">
+                {% include 'admin/_text_filter_field.html.twig' with {
+                    label: 'admin_users.search',
+                    name: 'q',
+                    fieldValue: query,
+                    placeholder: 'admin_users.search_placeholder'
+                } %}
                 {% include 'admin/_select_filter_field.html.twig' with {
                     label: 'admin_users.google_filter_label',
                     name: 'google',
@@ -68,22 +75,26 @@
                                     <form method="post" action="{{ path('app_admin_users_toggle_active', { id: user.id, locale: app.request.locale }) }}">
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_toggle_active_' ~ user.id) }}">
                                         <input type="hidden" name="google" value="{{ googleFilter }}">
+                                        <input type="hidden" name="q" value="{{ query }}">
                                         <button type="submit">{{ 'admin_users.toggle_active'|trans }}</button>
                                     </form>
                                     <form method="post" action="{{ path('app_admin_users_toggle_admin', { id: user.id, locale: app.request.locale }) }}">
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_toggle_admin_' ~ user.id) }}">
                                         <input type="hidden" name="google" value="{{ googleFilter }}">
+                                        <input type="hidden" name="q" value="{{ query }}">
                                         <button type="submit">{{ 'admin_users.toggle_admin'|trans }}</button>
                                     </form>
                                     <form method="post" action="{{ path('app_admin_users_generate_reset_link', { id: user.id, locale: app.request.locale }) }}">
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_generate_reset_link_' ~ user.id) }}">
                                         <input type="hidden" name="google" value="{{ googleFilter }}">
+                                        <input type="hidden" name="q" value="{{ query }}">
                                         <button type="submit">{{ 'admin_users.generate_reset_link'|trans }}</button>
                                     </form>
                                     {% if isGoogleLinked %}
                                         <form method="post" action="{{ path('app_admin_users_unlink_google', { id: user.id, locale: app.request.locale }) }}">
                                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_unlink_google_' ~ user.id) }}">
                                             <input type="hidden" name="google" value="{{ googleFilter }}">
+                                            <input type="hidden" name="q" value="{{ query }}">
                                             <button type="submit">{{ 'admin_users.unlink_google'|trans }}</button>
                                         </form>
                                     {% endif %}
