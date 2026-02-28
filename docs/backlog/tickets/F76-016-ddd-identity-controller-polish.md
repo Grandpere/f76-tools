@@ -31,8 +31,8 @@ Un dernier polish peut encore reduire le bruit UI sans changer le comportement.
 - [x] `Registration/Forgot/Resend/Reset/Verify` reutilisent `IdentityFlashResponder`.
 - [x] `IdentityEmailFlow` (enum) ajoute pour porter la config des flows email (scope/csrf/flash/rate-limit/route).
 - [x] `IdentityEmailFlowGuard` + `Registration/Forgot/Resend` reutilisent `IdentityEmailFlow`.
-- [x] `IdentityClockInterface` + `SystemIdentityClock` ajoutes pour centraliser le `now` injecte.
-- [x] `Registration/Forgot/Resend/Reset/Verify` reutilisent `IdentityClockInterface`.
+- [x] `IdentityClock` + `SystemIdentityClock` ajoutes pour centraliser le `now` injecte.
+- [x] `Registration/Forgot/Resend/Reset/Verify` reutilisent `IdentityClock`.
 
 ## Criteres d acceptance
 - Duplication de mapping reduite.

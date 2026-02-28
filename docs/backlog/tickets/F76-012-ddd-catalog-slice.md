@@ -34,7 +34,7 @@ Le contexte Catalog (items, import, traductions) est encore majoritairement port
 - [x] Orchestration complete de l import extraite dans `ItemImportApplicationService`.
 - [x] `ImportItemsCommand` reduite au role d adaptateur CLI (validation/affichage).
 - [x] Resultat d import structure via `ItemImportResult`.
-- [x] Port repository import ajoute (`ItemImportItemRepositoryInterface`) + impl Doctrine branchee.
+- [x] Port repository import ajoute (`ItemImportItemRepository`) + impl Doctrine branchee.
 - [x] `ItemImportApplicationService` depend du port `TranslationCatalogWriterInterface` (pas de classe concrete).
 - [x] Test unitaire `ItemImportApplicationService` ajoute.
 

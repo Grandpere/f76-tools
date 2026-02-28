@@ -108,7 +108,7 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 ## 2026-02-27 - UI namespace migration exposes hidden infrastructure coupling
 - Symptom: after moving web/security controllers into `.../UI/...`, PHPat started failing on direct infra injections that previously went unnoticed.
 - Root cause: legacy `src/Controller/*` classes were outside strict layer checks; once moved under UI namespaces, architectural rules applied.
-- Fix: replaced direct infra dependencies with application-level abstractions (`IdentityCaptchaSiteKeyProviderInterface`, `PlayerReadApplicationService`).
+- Fix: replaced direct infra dependencies with application-level abstractions (`IdentityCaptchaSiteKeyProvider`, `PlayerReadApplicationService`).
 - Prevention: when migrating legacy paths into DDD layers, expect PHPat to surface hidden couplings and budget a follow-up decoupling pass in the same slice.
 
 ## 2026-02-27 - Moving controllers/repositories can trigger PHPat layer violations

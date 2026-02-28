@@ -6,9 +6,9 @@ Les ports d import du contexte `Catalog` etaient encore suffixes.
 
 ## Scope
 - Renommer les ports d import:
-  - `ItemImportItemRepositoryInterface` -> `ItemImportItemRepository`
-  - `ItemImportPersistenceInterface` -> `ItemImportPersistence`
-  - `ItemImportSourceReaderInterface` -> `ItemImportSourceReader`
+  - `ItemImportItemRepository` -> `ItemImportItemRepository`
+  - `ItemImportPersistence` -> `ItemImportPersistence`
+  - `ItemImportSourceReader` -> `ItemImportSourceReader`
 - Propager les renommages dans:
   - service applicatif d import,
   - repositories/infra d import,

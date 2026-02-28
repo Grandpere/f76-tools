@@ -6,9 +6,9 @@ La convention projet impose des noms de ports sans ce suffixe.
 
 ## Scope
 - Renommer:
-  - `ItemReadRepositoryInterface` -> `ItemReadRepository`
-  - `PlayerReadRepositoryInterface` -> `PlayerReadRepository`
-  - `ProgressionOwnedPlayerReadResolverInterface` -> `ProgressionOwnedPlayerReadPort`
+  - `ItemReadRepository` -> `ItemReadRepository`
+  - `PlayerReadRepository` -> `PlayerReadRepository`
+  - `ProgressionOwnedPlayerReadPort` -> `ProgressionOwnedPlayerReadPort`
 - Propager les renommages dans:
   - services applicatifs,
   - repositories et resolvers,

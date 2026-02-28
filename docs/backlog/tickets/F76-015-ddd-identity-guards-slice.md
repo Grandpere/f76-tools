@@ -10,15 +10,15 @@ Il faut factoriser ces gardes sans perdre la lisibilite ni la robustesse securit
 - Reducer la duplication dans `Registration`, `ForgotPassword`, `ResendVerification`.
 
 ## Avancement
-- [x] Port `IdentityRequestGuardInterface` ajoute.
+- [x] Port `IdentityRequestGuard` ajoute.
 - [x] Resultat metier `IdentityRequestGuardResult` ajoute.
 - [x] Adaptateur infra `IdentityRequestGuard` (csrf + honeypot + captcha + rate-limit) ajoute.
-- [x] Ports `IdentityCaptchaVerifierInterface` et `IdentityRateLimiterInterface` ajoutes pour eviter le couplage aux services finaux.
+- [x] Ports `IdentityCaptchaVerifier` et `IdentityRateLimiter` ajoutes pour eviter le couplage aux services finaux.
 - [x] Adaptateurs infra `TurnstileIdentityCaptchaVerifier` et `AuthRequestThrottlerRateLimiter` ajoutes.
 - [x] `RegistrationController`, `ForgotPasswordController`, `ResendVerificationController` deleguent les gardes au service.
 - [x] `IdentityGuardFailureResponder` ajoute pour centraliser log + choix du message flash selon le resultat guard.
 - [x] Controllers Identity reutilisent `IdentityGuardFailureResponder` pour les refus guard.
-- [x] Port `IdentityRequestGuardInterface` lie dans `services.yaml`.
+- [x] Port `IdentityRequestGuard` lie dans `services.yaml`.
 - [x] Test unitaire `IdentityRequestGuard` ajoute.
 - [x] Test unitaire `IdentityGuardFailureResponder` ajoute.
 

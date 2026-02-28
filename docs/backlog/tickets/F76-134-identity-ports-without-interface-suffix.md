@@ -6,21 +6,21 @@ Le contexte `Identity` conservait encore plusieurs ports suffixes.
 
 ## Scope
 - Renommer les ports `Identity` suivants sans suffixe:
-  - `IdentityPasswordHasherInterface` -> `IdentityPasswordHasher`
-  - `IdentityPasswordVerifierInterface` -> `IdentityPasswordVerifier`
-  - `IdentityWritePersistenceInterface` -> `IdentityWritePersistence`
-  - `ForgotPasswordUserRepositoryInterface` -> `ForgotPasswordUserRepository`
-  - `IdentityCaptchaSiteKeyProviderInterface` -> `IdentityCaptchaSiteKeyProvider`
-  - `IdentityCaptchaVerifierInterface` -> `IdentityCaptchaVerifier`
-  - `IdentityRateLimiterInterface` -> `IdentityRateLimiter`
-  - `IdentityRequestGuardInterface` -> `IdentityRequestGuard`
-  - `IdentityLinkEmailSenderInterface` -> `IdentityLinkEmailSender`
-  - `IdentitySignedLinkGeneratorInterface` -> `IdentitySignedLinkGenerator`
-  - `RegistrationUserRepositoryInterface` -> `RegistrationUserRepository`
-  - `ResendVerificationUserRepositoryInterface` -> `ResendVerificationUserRepository`
-  - `ResetPasswordUserRepositoryInterface` -> `ResetPasswordUserRepository`
-  - `IdentityClockInterface` -> `IdentityClock`
-  - `VerifyEmailUserRepositoryInterface` -> `VerifyEmailUserRepository`
+  - `IdentityPasswordHasher` -> `IdentityPasswordHasher`
+  - `IdentityPasswordVerifier` -> `IdentityPasswordVerifier`
+  - `IdentityWritePersistence` -> `IdentityWritePersistence`
+  - `ForgotPasswordUserRepository` -> `ForgotPasswordUserRepository`
+  - `IdentityCaptchaSiteKeyProvider` -> `IdentityCaptchaSiteKeyProvider`
+  - `IdentityCaptchaVerifier` -> `IdentityCaptchaVerifier`
+  - `IdentityRateLimiter` -> `IdentityRateLimiter`
+  - `IdentityRequestGuard` -> `IdentityRequestGuard`
+  - `IdentityLinkEmailSender` -> `IdentityLinkEmailSender`
+  - `IdentitySignedLinkGenerator` -> `IdentitySignedLinkGenerator`
+  - `RegistrationUserRepository` -> `RegistrationUserRepository`
+  - `ResendVerificationUserRepository` -> `ResendVerificationUserRepository`
+  - `ResetPasswordUserRepository` -> `ResetPasswordUserRepository`
+  - `IdentityClock` -> `IdentityClock`
+  - `VerifyEmailUserRepository` -> `VerifyEmailUserRepository`
 - Propager ces changements dans services, infra, UI, tests et DI.
 - Corriger les collisions de nom implementation/port (`IdentityRequestGuard`, `IdentityLinkEmailSender`, `IdentitySignedLinkGenerator`).
 

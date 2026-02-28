@@ -11,27 +11,27 @@ Il faut poursuivre la migration DDD en isolant les use-cases et les policies de 
 
 ## Avancement
 - [x] Use-case `VerifyEmailApplicationService` extrait.
-- [x] Ports `VerifyEmailUserRepositoryInterface` et `IdentityWritePersistenceInterface` ajoutes.
+- [x] Ports `VerifyEmailUserRepository` et `IdentityWritePersistence` ajoutes.
 - [x] `VerifyEmailController` delegue la verification au service applicatif.
 - [x] Test unitaire `VerifyEmailApplicationService` ajoute.
 - [x] Use-case `ResetPasswordApplicationService` extrait (+ `ResetPasswordResult`).
-- [x] Ports `ResetPasswordUserRepositoryInterface` et `IdentityPasswordHasherInterface` ajoutes.
+- [x] Ports `ResetPasswordUserRepository` et `IdentityPasswordHasher` ajoutes.
 - [x] `ResetPasswordController` delegue la logique metier au service applicatif.
 - [x] Ports Identity communs centralises dans `Identity/Application/Common`.
 - [x] Test unitaire `ResetPasswordApplicationService` ajoute.
 - [x] Use-case `ForgotPasswordRequestApplicationService` extrait.
-- [x] Port `ForgotPasswordUserRepositoryInterface` ajoute.
+- [x] Port `ForgotPasswordUserRepository` ajoute.
 - [x] `ForgotPasswordController` delegue la logique de cooldown + emission token.
 - [x] Test unitaire `ForgotPasswordRequestApplicationService` ajoute.
 - [x] Use-case `RegisterUserApplicationService` extrait (+ resultat metier).
-- [x] Port `RegistrationUserRepositoryInterface` ajoute.
+- [x] Port `RegistrationUserRepository` ajoute.
 - [x] `RegistrationController` delegue creation utilisateur + token verification.
 - [x] Test unitaire `RegisterUserApplicationService` ajoute.
 - [x] Use-case `ResendVerificationRequestApplicationService` extrait.
-- [x] Port `ResendVerificationUserRepositoryInterface` ajoute.
+- [x] Port `ResendVerificationUserRepository` ajoute.
 - [x] `ResendVerificationController` delegue la logique de cooldown + emission token verification.
 - [x] Test unitaire `ResendVerificationRequestApplicationService` ajoute.
-- [x] Port `IdentityLinkEmailSenderInterface` ajoute pour les emails de liens Identity.
+- [x] Port `IdentityLinkEmailSender` ajoute pour les emails de liens Identity.
 - [x] Adaptateur infra `IdentityLinkEmailSender` (Signed URL + mailer + traduction) ajoute.
 - [x] Controllers `Registration/Forgot/Resend` deleguent l envoi mail au port applicatif.
 

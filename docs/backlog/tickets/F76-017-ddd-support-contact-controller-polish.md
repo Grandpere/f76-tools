@@ -15,7 +15,7 @@ Le but est d aligner le niveau de "thin controller" avec les slices Identity.
 - [x] Retirer la logique guard inline (csrf/honeypot/captcha/rate-limit) du controller.
 - [x] Conserver les logs et messages flash existants.
 - [x] Extraire la sanitation/validation du payload dans `ContactSubmissionInput`.
-- [x] Extraire l envoi email contact via le port `ContactMessageEmailSenderInterface`.
+- [x] Extraire l envoi email contact via le port `ContactMessageEmailSender`.
 - [x] Extraire l orchestration soumission contact (`persist + delivery`) dans `ContactSubmissionApplicationService`.
 - [x] Extraire le mapping status->logs/flash/redirect dans `ContactSubmissionResponder`.
 - [x] Router l echec guard via `ContactSubmissionResponder` pour retirer la derniere branche UI du controller.

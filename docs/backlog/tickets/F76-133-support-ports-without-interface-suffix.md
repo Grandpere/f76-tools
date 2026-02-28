@@ -6,13 +6,13 @@ Le contexte `Support` contenait encore plusieurs ports suffixes.
 
 ## Scope
 - Renommer les ports `Support` suivants sans suffixe:
-  - `AdminUserAuditReadRepositoryInterface` -> `AdminUserAuditReadRepository`
-  - `AdminUserManagementReadRepositoryInterface` -> `AdminUserManagementReadRepository`
-  - `AdminUserManagementWriteRepositoryInterface` -> `AdminUserManagementWriteRepository`
-  - `AuditLogReadRepositoryInterface` -> `AuditLogReadRepository`
-  - `ContactMessageEmailSenderInterface` -> `ContactMessageEmailSender`
-  - `ContactMessageReadRepositoryInterface` -> `ContactMessageReadRepository`
-  - `ContactMessageStatusWriteRepositoryInterface` -> `ContactMessageStatusWriteRepository`
+  - `AdminUserAuditReadRepository` -> `AdminUserAuditReadRepository`
+  - `AdminUserManagementReadRepository` -> `AdminUserManagementReadRepository`
+  - `AdminUserManagementWriteRepository` -> `AdminUserManagementWriteRepository`
+  - `AuditLogReadRepository` -> `AuditLogReadRepository`
+  - `ContactMessageEmailSender` -> `ContactMessageEmailSender`
+  - `ContactMessageReadRepository` -> `ContactMessageReadRepository`
+  - `ContactMessageStatusWriteRepository` -> `ContactMessageStatusWriteRepository`
 - Propager les renommages dans services, repositories, services applicatifs et tests.
 
 ## Criteres d acceptance
