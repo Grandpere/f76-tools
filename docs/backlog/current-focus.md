@@ -11,6 +11,7 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-091: Front header tools componentization (bloc header partage entre dashboard/minerva/progression) (done).
 - F76-090: Auth UX finalization (coherence titres/liens auth + couverture fonctionnelle) (done).
 - F76-089: Minerva admin datepicker + timeline polish (colonnes/largeurs/synchronisation progression) (done).
 - F76-088: Nav applicative unifiee + separation front en 3 pages (`Mods legendaires`, `Minerva`, `Progression`) + suivi BOOK sur page Minerva (done).
