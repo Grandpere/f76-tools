@@ -1,0 +1,4 @@
+{% set selectedLocale = selectedLocale|default(app.request.locale) %}
+<option value="fr" {% if selectedLocale == 'fr' %}selected{% endif %}>🇫🇷 {{ 'common.locale.fr'|trans }}</option>
+<option value="en" {% if selectedLocale == 'en' %}selected{% endif %}>🇬🇧 {{ 'common.locale.en'|trans }}</option>
+<option value="de" {% if selectedLocale == 'de' %}selected{% endif %}>🇩🇪 {{ 'common.locale.de'|trans }}</option>

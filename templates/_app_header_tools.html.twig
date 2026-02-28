@@ -12,9 +12,7 @@
         <img class="header-locale-icon" src="/assets/icons/language.svg" alt="" aria-hidden="true">
         <label for="{{ localeSelectId }}">{{ 'common.language'|trans }}</label>
         <select id="{{ localeSelectId }}" name="locale" onchange="this.form.submit()">
-            <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 {{ 'common.locale.fr'|trans }}</option>
-            <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 {{ 'common.locale.en'|trans }}</option>
-            <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>🇩🇪 {{ 'common.locale.de'|trans }}</option>
+            {% include '_locale_options.html.twig' %}
         </select>
     </form>
 </div>
