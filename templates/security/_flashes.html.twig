@@ -1,0 +1,11 @@
+{% if authError is defined and authError %}
+    <p class="auth-alert auth-alert-warning">
+        {{ authError.messageKey|trans(authError.messageData, 'security') }}
+    </p>
+{% endif %}
+{% for message in app.flashes('success') %}
+    <p class="auth-alert auth-alert-success">{{ message|trans }}</p>
+{% endfor %}
+{% for message in app.flashes('warning') %}
+    <p class="auth-alert auth-alert-warning">{{ message|trans }}</p>
+{% endfor %}

@@ -11,6 +11,7 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-093: Security flashes componentization (login error + success/warning flashes centralises) (done).
 - F76-092: Admin header tools componentization (retour dashboard + locale + preservation filtres) (done).
 - F76-091: Front header tools componentization (bloc header partage entre dashboard/minerva/progression) (done).
 - F76-090: Auth UX finalization (coherence titres/liens auth + couverture fonctionnelle) (done).

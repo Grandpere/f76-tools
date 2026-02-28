@@ -8,12 +8,7 @@
             <p class="catalog-kicker">Fallout 76</p>
             <h1 class="auth-title">{{ 'security.resend.title'|trans }}</h1>
 
-            {% for message in app.flashes('success') %}
-                <p class="auth-alert auth-alert-success">{{ message|trans }}</p>
-            {% endfor %}
-            {% for message in app.flashes('warning') %}
-                <p class="auth-alert auth-alert-warning">{{ message|trans }}</p>
-            {% endfor %}
+            {% include 'security/_flashes.html.twig' %}
 
             <form method="post" class="auth-form">
                 <div class="visually-hidden" aria-hidden="true">
