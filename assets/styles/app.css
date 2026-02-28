@@ -573,6 +573,43 @@ body::before {
     font-size: 0.93rem;
 }
 
+.account-security-section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+}
+
+.account-security-section-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    flex-wrap: wrap;
+}
+
+.account-security-counter {
+    border: 1px solid rgba(91, 72, 0, 0.28);
+    background: #f4e6b2;
+    color: #5f4b00;
+    font-weight: 700;
+    font-size: 0.72rem;
+    border-radius: 999px;
+    padding: 0.16rem 0.5rem;
+}
+
+.account-security-admin-link {
+    color: #5f4b00;
+    font-weight: 600;
+    font-size: 0.77rem;
+    text-decoration: none;
+}
+
+.account-security-admin-link:hover {
+    color: #3f2f00;
+    text-decoration: underline;
+}
+
 .account-security-session-list {
     list-style: none;
     padding: 0;

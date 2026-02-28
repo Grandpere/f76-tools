@@ -13,16 +13,19 @@ declare(strict_types=1);
 
 namespace App\Identity\Infrastructure\Persistence;
 
+use App\Identity\Application\Security\AuthAuditLogPurger;
 use App\Identity\Application\Security\AuthAuditLogReader;
 use App\Identity\Application\Security\AuthAuditLogView;
 use App\Identity\Domain\Entity\AuthAuditLogEntity;
+use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use RuntimeException;
 
 /**
  * @extends ServiceEntityRepository<AuthAuditLogEntity>
  */
-final class AuthAuditLogEntityRepository extends ServiceEntityRepository implements AuthAuditLogReader
+final class AuthAuditLogEntityRepository extends ServiceEntityRepository implements AuthAuditLogReader, AuthAuditLogPurger
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -43,6 +46,25 @@ final class AuthAuditLogEntityRepository extends ServiceEntityRepository impleme
     public function findByUserIdWithFilters(int $userId, int $limit, string $levelFilter, string $query): array
     {
         $effectiveLimit = max(1, min($limit, 100));
+
+        return $this->fetchByUserIdWithFilters($userId, $effectiveLimit, $levelFilter, $query);
+    }
+
+    /**
+     * @return list<AuthAuditLogView>
+     */
+    public function findByUserIdForExport(int $userId, int $maxRows, string $levelFilter, string $query): array
+    {
+        $effectiveMaxRows = max(1, min($maxRows, 10000));
+
+        return $this->fetchByUserIdWithFilters($userId, $effectiveMaxRows, $levelFilter, $query);
+    }
+
+    /**
+     * @return list<AuthAuditLogView>
+     */
+    private function fetchByUserIdWithFilters(int $userId, int $limit, string $levelFilter, string $query): array
+    {
         $builder = $this->createQueryBuilder('log')
             ->andWhere('IDENTITY(log.user) = :userId')
             ->setParameter('userId', $userId)
@@ -64,7 +86,7 @@ final class AuthAuditLogEntityRepository extends ServiceEntityRepository impleme
 
         /** @var list<AuthAuditLogEntity> $rows */
         $rows = $builder
-            ->setMaxResults($effectiveLimit)
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
 
@@ -85,5 +107,33 @@ final class AuthAuditLogEntityRepository extends ServiceEntityRepository impleme
     public function add(AuthAuditLogEntity $entity): void
     {
         $this->getEntityManager()->persist($entity);
+    }
+
+    public function countOlderThan(DateTimeImmutable $cutoff): int
+    {
+        $count = $this->createQueryBuilder('log')
+            ->select('COUNT(log.id)')
+            ->where('log.occurredAt < :cutoff')
+            ->setParameter('cutoff', $cutoff)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return (int) $count;
+    }
+
+    public function deleteOlderThan(DateTimeImmutable $cutoff): int
+    {
+        $result = $this->createQueryBuilder('log')
+            ->delete()
+            ->where('log.occurredAt < :cutoff')
+            ->setParameter('cutoff', $cutoff)
+            ->getQuery()
+            ->execute();
+
+        if (!is_int($result)) {
+            throw new RuntimeException('Unexpected delete result type for auth audit log purge.');
+        }
+
+        return $result;
     }
 }

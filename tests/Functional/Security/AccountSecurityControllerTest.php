@@ -107,6 +107,19 @@ final class AccountSecurityControllerTest extends WebTestCase
         self::assertStringContainsString('security.auth.login.success', $this->browser()->getResponse()->getContent() ?: '');
     }
 
+    public function testAdminUserSeesLinkToAdminAuthTimeline(): void
+    {
+        $admin = $this->createUser('security-admin-link@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/account-security');
+        $adminId = $admin->getId();
+        \assert(is_int($adminId));
+
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(1, $crawler->filter(sprintf('a[href^="/admin/users/%d/auth-events"]', $adminId)));
+    }
+
     public function testAuthenticatedUserCanUnlinkGoogleIdentityWhenLocalPasswordEnabled(): void
     {
         $user = $this->createUser('security-unlink@example.com', 'secret123', ['ROLE_USER']);

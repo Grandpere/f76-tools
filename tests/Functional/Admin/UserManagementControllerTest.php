@@ -76,6 +76,17 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertSame(403, $this->browser()->getResponse()->getStatusCode());
     }
 
+    public function testNonAdminCannotExportUserAuthEventsCsv(): void
+    {
+        $user = $this->createUser('member-auth-events-export@example.com', 'secret123', ['ROLE_USER']);
+        $target = $this->createUser('target-auth-events-export@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($user);
+
+        $this->browser()->request('GET', sprintf('/admin/users/%d/auth-events/export.csv', $target->getId()));
+
+        self::assertSame(403, $this->browser()->getResponse()->getStatusCode());
+    }
+
     public function testAdminCanSeeUserAuthEventsPage(): void
     {
         $admin = $this->createUser('admin-auth-events@example.com', 'secret123', ['ROLE_ADMIN']);
@@ -90,11 +101,12 @@ final class UserManagementControllerTest extends WebTestCase
         $this->entityManager?->flush();
 
         $this->browser()->loginUser($admin);
-        $this->browser()->request('GET', sprintf('/admin/users/%d/auth-events', $target->getId()));
+        $crawler = $this->browser()->request('GET', sprintf('/admin/users/%d/auth-events', $target->getId()));
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('security.auth.login.success', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('target-auth-events@example.com', (string) $this->browser()->getResponse()->getContent());
+        self::assertCount(1, $crawler->filter(sprintf('a[href^="/admin/users/%d/auth-events/export.csv"]', $target->getId())));
     }
 
     public function testAdminCanFilterUserAuthEventsByLevelAndQuery(): void
@@ -121,6 +133,37 @@ final class UserManagementControllerTest extends WebTestCase
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $content = (string) $this->browser()->getResponse()->getContent();
+        self::assertStringContainsString('security.auth.login.failed', $content);
+        self::assertStringNotContainsString('security.auth.login.success', $content);
+    }
+
+    public function testAdminCanExportUserAuthEventsCsvWithFilters(): void
+    {
+        $admin = $this->createUser('admin-auth-export@example.com', 'secret123', ['ROLE_ADMIN']);
+        $target = $this->createUser('target-auth-export@example.com', 'secret123', ['ROLE_USER']);
+
+        $this->entityManager?->persist(new AuthAuditLogEntity()
+            ->setUser($target)
+            ->setLevel('info')
+            ->setEvent('security.auth.login.success')
+            ->setClientIp('127.0.0.1')
+            ->setContext(['scope' => 'login']));
+        $this->entityManager?->persist(new AuthAuditLogEntity()
+            ->setUser($target)
+            ->setLevel('warning')
+            ->setEvent('security.auth.login.failed')
+            ->setClientIp('198.51.100.99')
+            ->setContext(['scope' => 'login']));
+        $this->entityManager?->flush();
+
+        $this->browser()->loginUser($admin);
+        $this->browser()->request('GET', sprintf('/admin/users/%d/auth-events/export.csv?level=warning&q=198.51.100', $target->getId()));
+
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertStringContainsString('text/csv', (string) $this->browser()->getResponse()->headers->get('content-type'));
+
+        $content = $this->browser()->getResponse()->getContent() ?: '';
+        self::assertStringContainsString('occurred_at,event,level,client_ip,context_json', $content);
         self::assertStringContainsString('security.auth.login.failed', $content);
         self::assertStringNotContainsString('security.auth.login.success', $content);
     }

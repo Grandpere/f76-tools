@@ -215,10 +215,13 @@ security.account.session_current: Current session
 security.account.session_other: Other session
 security.account.session_last_seen: 'Last activity: %date%'
 security.account.session_none: No active session found.
+security.account.sessions_count: '%count% total'
 security.account.logout_other_sessions: Sign out other sessions
 security.account.auth_events_title: Recent security activity
 security.account.auth_events_hint: Latest authentication/security events for your account.
 security.account.auth_events_empty: No security event yet.
+security.account.auth_events_count: '%count% shown'
+security.account.auth_events_admin_link: Open admin timeline
 security.account.flash.invalid_csrf: Invalid session, please try again.
 security.account.flash.google_identity_not_found: Google identity not found for your account.
 security.account.flash.google_identity_local_password_required: Cannot unlink Google identity without local password access.
@@ -301,6 +304,7 @@ admin_users.auth_events_level_filter: Level
 admin_users.auth_events_level_filter_all: All levels
 admin_users.auth_events_search: Search
 admin_users.auth_events_search_placeholder: event or IP
+admin_users.auth_events_export_csv: Export CSV
 admin_users.back_to_users: Back to users
 admin_users.no_users: No users.
 admin_users.flash.invalid_csrf: Invalid action (CSRF).

@@ -64,14 +64,18 @@ final class AccountSecurityController extends AbstractController
         $authEvents = $this->authAuditLogReader->findLatestByUserId($userId, 12);
 
         return $this->render('security/account_security.html.twig', [
+            'userId' => $userId,
+            'isAdmin' => in_array('ROLE_ADMIN', $user->getRoles(), true),
             'userEmail' => $user->getEmail(),
             'emailVerified' => $user->isEmailVerified(),
             'localPasswordEnabled' => $user->hasLocalPassword(),
             'googleLinked' => null !== $googleIdentity,
             'googleLinkedAt' => $googleIdentity?->getCreatedAt(),
             'activeSessions' => $sessions,
+            'activeSessionsCount' => count($sessions),
             'currentSessionId' => $currentSessionId,
             'authEvents' => $authEvents,
+            'authEventsCount' => count($authEvents),
         ]);
     }
 

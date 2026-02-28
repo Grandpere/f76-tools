@@ -20,6 +20,8 @@
             <h2>{{ targetUser.email }}</h2>
             <p>
                 <a class="admin-export-link" href="{{ path('app_admin_users', backParams) }}">{{ 'admin_users.back_to_users'|trans }}</a>
+                ·
+                <a class="admin-export-link" href="{{ path('app_admin_users_auth_events_export_csv', { id: targetUser.id }|merge(exportParams)) }}">{{ 'admin_users.auth_events_export_csv'|trans }}</a>
             </p>
             <form method="get" class="translations-filters">
                 <label class="field">

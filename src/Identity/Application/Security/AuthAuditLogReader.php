@@ -24,4 +24,9 @@ interface AuthAuditLogReader
      * @return list<AuthAuditLogView>
      */
     public function findByUserIdWithFilters(int $userId, int $limit, string $levelFilter, string $query): array;
+
+    /**
+     * @return list<AuthAuditLogView>
+     */
+    public function findByUserIdForExport(int $userId, int $maxRows, string $levelFilter, string $query): array;
 }

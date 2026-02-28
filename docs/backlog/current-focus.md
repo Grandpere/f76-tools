@@ -6,6 +6,9 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-131: Account security UX polish (compteurs sections + badges level + lien admin timeline) (done).
+- F76-130: Auth audit log retention command (`app:auth:audit:purge` + port purge + tests unitaires) (done).
+- F76-129: Admin user auth events export CSV (route dediee + filtres conserves + tests cibles) (done).
 - F76-128: Admin auth events filters (level + query) + functional cible (done).
 - F76-127: Account security recent auth events (front user view) + functional cible (done).
 - F76-126: Auth rate-limit hardening (`register`/`forgot`/`resend` quotas dedies + tests cibles) (done).

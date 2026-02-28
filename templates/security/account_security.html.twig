@@ -49,7 +49,10 @@
             </dl>
 
             <section class="account-security-sessions">
-                <h3>{{ 'security.account.sessions_title'|trans }}</h3>
+                <div class="account-security-section-head">
+                    <h3>{{ 'security.account.sessions_title'|trans }}</h3>
+                    <span class="account-security-counter">{{ 'security.account.sessions_count'|trans({'%count%': activeSessionsCount}) }}</span>
+                </div>
                 <p class="account-security-sub">{{ 'security.account.sessions_hint'|trans }}</p>
                 <ul class="account-security-session-list">
                     {% for session in activeSessions %}
@@ -79,12 +82,23 @@
             </section>
 
             <section class="account-security-sessions">
-                <h3>{{ 'security.account.auth_events_title'|trans }}</h3>
+                <div class="account-security-section-head">
+                    <h3>{{ 'security.account.auth_events_title'|trans }}</h3>
+                    <div class="account-security-section-actions">
+                        <span class="account-security-counter">{{ 'security.account.auth_events_count'|trans({'%count%': authEventsCount}) }}</span>
+                        {% if isAdmin %}
+                            <a class="account-security-admin-link" href="{{ path('app_admin_users_auth_events', { locale: app.request.locale, id: userId }) }}">{{ 'security.account.auth_events_admin_link'|trans }}</a>
+                        {% endif %}
+                    </div>
+                </div>
                 <p class="account-security-sub">{{ 'security.account.auth_events_hint'|trans }}</p>
                 <ul class="account-security-session-list">
                     {% for event in authEvents %}
                         <li class="account-security-session-item">
-                            <strong>{{ event.event }}</strong>
+                            <strong>
+                                {{ event.event }}
+                                <span class="admin-security-badge {{ event.level == 'warning' ? 'admin-security-badge-warn' : 'admin-security-badge-ok' }}">{{ event.level }}</span>
+                            </strong>
                             <small>{{ event.occurredAt|date('Y-m-d H:i:s') }}{% if event.clientIp %} · {{ event.clientIp }}{% endif %}</small>
                         </li>
                     {% else %}

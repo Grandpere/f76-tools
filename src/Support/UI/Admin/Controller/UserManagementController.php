@@ -240,7 +240,56 @@ final class UserManagementController extends AbstractController
             'localeHiddenFields' => $localeHiddenFields,
             'levelFilter' => $level,
             'query' => $query,
+            'exportParams' => [
+                'locale' => $request->getLocale(),
+                'level' => $level,
+                'q' => $query,
+            ],
         ]);
+    }
+
+    #[Route('/{id<\d+>}/auth-events/export.csv', name: 'app_admin_users_auth_events_export_csv', methods: ['GET'])]
+    public function authEventsExportCsv(int $id, Request $request): Response
+    {
+        $this->ensureAdminAccess();
+
+        $targetUser = $this->userRepository->getById($id);
+        if (!$targetUser instanceof UserEntity) {
+            throw $this->createNotFoundException('User not found.');
+        }
+
+        $level = $this->normalizeAuthEventLevel($request->query->getString('level', ''));
+        $query = trim($request->query->getString('q', ''));
+        $events = $this->authAuditLogReader->findByUserIdForExport($id, 10000, $level, $query);
+
+        $filename = sprintf('user-auth-events-%d-%s.csv', $id, new DateTimeImmutable()->format('Ymd-His'));
+        $handle = fopen('php://temp', 'r+');
+        if (false === $handle) {
+            return new Response('', Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        fputcsv($handle, ['occurred_at', 'event', 'level', 'client_ip', 'context_json'], ',', '"', '');
+
+        foreach ($events as $event) {
+            $contextJson = json_encode($event->context, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            fputcsv($handle, [
+                $this->sanitizeCsvValue($event->occurredAt->format('Y-m-d H:i:s')),
+                $this->sanitizeCsvValue($event->event),
+                $this->sanitizeCsvValue($event->level),
+                $this->sanitizeCsvValue($event->clientIp ?? ''),
+                $this->sanitizeCsvValue(is_string($contextJson) ? $contextJson : '{}'),
+            ], ',', '"', '');
+        }
+
+        rewind($handle);
+        $csvContent = stream_get_contents($handle);
+        fclose($handle);
+
+        $response = new Response("\xEF\xBB\xBF".(is_string($csvContent) ? $csvContent : ''));
+        $response->headers->set('Content-Type', 'text/csv; charset=UTF-8');
+        $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"', $filename));
+
+        return $response;
     }
 
     #[Route('/{id<\d+>}/toggle-active', name: 'app_admin_users_toggle_active', methods: ['POST'])]
