@@ -37,15 +37,11 @@
                         {% endfor %}
                     </select>
                 </label>
-                <label class="field">
-                    <span>{{ 'admin_contact.per_page'|trans }}</span>
-                    <select name="perPage">
-                        <option value="20" {% if perPage == 20 %}selected{% endif %}>20</option>
-                        <option value="30" {% if perPage == 30 %}selected{% endif %}>30</option>
-                        <option value="50" {% if perPage == 50 %}selected{% endif %}>50</option>
-                        <option value="100" {% if perPage == 100 %}selected{% endif %}>100</option>
-                    </select>
-                </label>
+                {% include 'admin/_per_page_field.html.twig' with {
+                    label: 'admin_contact.per_page',
+                    perPage: perPage,
+                    options: [20, 30, 50, 100]
+                } %}
                 {% include 'admin/_filters_common_hidden_fields.html.twig' %}
                 <button type="submit">{{ 'admin_contact.filter'|trans }}</button>
             </form>

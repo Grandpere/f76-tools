@@ -30,15 +30,11 @@
                     <span>{{ 'admin_translations.search'|trans }}</span>
                     <input type="search" name="q" value="{{ query }}" placeholder="{{ 'admin_translations.search_placeholder'|trans }}">
                 </label>
-                <label class="field">
-                    <span>{{ 'admin_translations.per_page'|trans }}</span>
-                    <select name="perPage">
-                        <option value="20" {% if perPage == 20 %}selected{% endif %}>20</option>
-                        <option value="40" {% if perPage == 40 %}selected{% endif %}>40</option>
-                        <option value="80" {% if perPage == 80 %}selected{% endif %}>80</option>
-                        <option value="120" {% if perPage == 120 %}selected{% endif %}>120</option>
-                    </select>
-                </label>
+                {% include 'admin/_per_page_field.html.twig' with {
+                    label: 'admin_translations.per_page',
+                    perPage: perPage,
+                    options: [20, 40, 80, 120]
+                } %}
                 {% include 'admin/_filters_common_hidden_fields.html.twig' %}
                 <button type="submit">{{ 'admin_translations.filter'|trans }}</button>
             </form>

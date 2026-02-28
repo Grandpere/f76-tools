@@ -1,0 +1,8 @@
+<label class="field">
+    <span>{{ label|trans }}</span>
+    <select name="perPage">
+        {% for option in options %}
+            <option value="{{ option }}" {% if perPage == option %}selected{% endif %}>{{ option }}</option>
+        {% endfor %}
+    </select>
+</label>

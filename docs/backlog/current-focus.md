@@ -6,6 +6,7 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-106: Admin per-page field componentization (champ perPage factorise) (done).
 - F76-105: Admin filters common hidden fields componentization (locale/page reset factorises) (done).
 - F76-104: Admin pager componentization (pagination admin factorisee) (done).
 - F76-103: Roadmap learned model checkbox clarification (option bool non retenue explicitement close) (done).
