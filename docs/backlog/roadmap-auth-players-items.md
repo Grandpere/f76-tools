@@ -129,7 +129,7 @@ Permettre a un utilisateur authentifie de:
   - [x] reponse generique anti-enumeration (ne pas reveler si email existe),
   - [x] generation + envoi token reset avec expiration,
   - [x] conservation du flow final `GET/POST /reset-password/{token}`.
-- [ ] Anti-bot / anti-abus:
+- [x] Anti-bot / anti-abus:
   - [x] rate limit sur `/register`, `/login`, `/forgot-password`:
     - [x] `/register`,
     - [x] `/login`,
@@ -138,11 +138,11 @@ Permettre a un utilisateur authentifie de:
   - [x] honeypot formulaire sur register/forgot/resend (protection basique anti-bot),
   - [x] captcha (Turnstile) sur register/forgot/resend (actif si cles configurees),
   - [x] journalisation des tentatives sensibles.
-- [ ] Contact:
+- [x] Contact:
   - [x] page de contact (formulaire),
   - [x] anti-spam (honeypot/rate limit/captcha),
   - [x] option de livraison: email direct ou stockage DB + backoffice.
-- [ ] Hygiene URL / exposition des identifiants:
+- [x] Hygiene URL / exposition des identifiants:
   - [x] reduire l usage de query params pour les actions sensibles (preferer POST + CSRF quand possible),
   - [x] eviter les identifiants previsibles dans les URLs publiques (envisager UUID/ULID ou slugs opaques selon contexte),
   - [x] signer les URLs temporaires sensibles (verification email, reset, liens d action),
