@@ -47,14 +47,16 @@
 
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                <button type="submit">{{ 'security.login.submit'|trans }}</button>
+                <div class="auth-primary-actions">
+                    <button type="submit">{{ 'security.login.submit'|trans }}</button>
+                    <a class="auth-button-link" href="{{ path('app_register', { locale: app.request.locale }) }}">{{ 'security.login.to_register'|trans }}</a>
+                </div>
             </form>
 
             <p class="auth-links">
-                <a href="{{ path('app_register', { locale: app.request.locale }) }}">{{ 'security.login.to_register'|trans }}</a>
-                · <a href="{{ path('app_forgot_password', { locale: app.request.locale }) }}">{{ 'security.login.to_forgot'|trans }}</a>
-                · <a href="{{ path('app_resend_verification', { locale: app.request.locale }) }}">{{ 'security.login.to_resend'|trans }}</a>
-                · <a href="{{ path('app_contact', { locale: app.request.locale }) }}">{{ 'security.login.to_contact'|trans }}</a>
+                <a href="{{ path('app_resend_verification', { locale: app.request.locale }) }}">{{ 'security.login.to_resend'|trans }}</a>
+                <a href="{{ path('app_forgot_password', { locale: app.request.locale }) }}">{{ 'security.login.to_forgot'|trans }}</a>
+                <a href="{{ path('app_contact', { locale: app.request.locale }) }}">{{ 'security.login.to_contact'|trans }}</a>
             </p>
         </section>
     </main>

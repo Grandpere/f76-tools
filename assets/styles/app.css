@@ -327,6 +327,38 @@ body::before {
     filter: brightness(1.03);
 }
 
+.auth-primary-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.auth-primary-actions button {
+    align-self: auto;
+}
+
+.auth-button-link {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 0.58rem 0.95rem;
+    cursor: pointer;
+    background: #fff;
+    color: var(--text-1) !important;
+    font-weight: 600;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.auth-button-link:hover {
+    border-color: rgba(230, 185, 0, 0.55);
+    color: #5f4b00 !important;
+    background: #fffdf6;
+}
+
 .auth-alert {
     margin: 0.75rem 0 0;
     padding: 0.58rem 0.7rem;
@@ -349,12 +381,23 @@ body::before {
 
 .auth-links {
     margin: 0.85rem 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
 }
 
 .auth-links a {
     color: #7b6200;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 0.9rem;
+    white-space: normal;
+    background: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
 }
 
 .auth-links a:hover {

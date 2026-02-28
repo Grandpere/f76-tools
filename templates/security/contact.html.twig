@@ -38,12 +38,14 @@
                     <div class="cf-turnstile" data-sitekey="{{ captchaSiteKey }}"></div>
                 {% endif %}
 
-                <button type="submit">{{ 'security.contact.submit'|trans }}</button>
+                <div class="auth-primary-actions">
+                    <button type="submit">{{ 'security.contact.submit'|trans }}</button>
+                    <a class="auth-button-link" href="{{ path('app_register', { locale: app.request.locale }) }}">{{ 'security.login.to_register'|trans }}</a>
+                </div>
             </form>
 
             <p class="auth-links">
                 <a href="{{ path('app_login', { locale: app.request.locale }) }}">{{ 'security.contact.to_login'|trans }}</a>
-                · <a href="{{ path('app_register', { locale: app.request.locale }) }}">{{ 'security.login.to_register'|trans }}</a>
             </p>
         </section>
     </main>
