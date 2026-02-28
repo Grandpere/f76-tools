@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'admin_users.auth_events_page_title'|trans({'%email%': targetUser.email}) }}{% endblock %}
+
+{% block body %}
+    <main class="translations-page">
+        {% include 'admin/_page_header.html.twig' with {
+            backLabel: 'admin_users.back_to_users',
+            backPath: path('app_admin_users', backParams),
+            localeSelectId: 'admin-users-auth-events-header-locale-select',
+            localeHiddenFields: localeHiddenFields,
+            title: 'admin_users.auth_events_title',
+            description: 'admin_users.auth_events_description'|trans({'%email%': targetUser.email})
+        } %}
+
+        {% include 'admin/_flashes.html.twig' %}
+
+        <section class="translations-panel">
+            <h2>{{ targetUser.email }}</h2>
+            <div class="translations-table-wrap">
+                <table class="translations-table admin-auth-events-table">
+                    <thead>
+                    <tr>
+                        <th>{{ 'admin_users.auth_events_occurred_at'|trans }}</th>
+                        <th>{{ 'admin_users.auth_events_event'|trans }}</th>
+                        <th>{{ 'admin_users.auth_events_level'|trans }}</th>
+                        <th>{{ 'admin_users.auth_events_ip'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for event in events %}
+                        <tr>
+                            <td>{{ event.occurredAt|date('Y-m-d H:i:s') }}</td>
+                            <td>{{ event.event }}</td>
+                            <td>{{ event.level }}</td>
+                            <td>{{ event.clientIp ?: '—' }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">{{ 'admin_users.auth_events_empty'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+{% endblock %}

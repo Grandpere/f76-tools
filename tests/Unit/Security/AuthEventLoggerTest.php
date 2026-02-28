@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Security;
 
+use App\Identity\Application\Security\AuthAuditLogWriter;
 use App\Identity\Application\Security\AuthEventLogger;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -59,5 +60,29 @@ final class AuthEventLoggerTest extends TestCase
 
         $authLogger = new AuthEventLogger($logger);
         $authLogger->info('security.auth.test.info', null, '198.51.100.7');
+    }
+
+    public function testWriterIsCalledWhenConfigured(): void
+    {
+        $logger = $this->createMock(LoggerInterface::class);
+        $logger->expects(self::once())->method('info');
+
+        $writer = $this->createMock(AuthAuditLogWriter::class);
+        $writer->expects(self::once())
+            ->method('write')
+            ->with(
+                'info',
+                'security.auth.test.writer',
+                'writer@example.com',
+                '198.51.100.99',
+                self::callback(static function (array $context): bool {
+                    self::assertSame(hash('sha256', 'writer@example.com'), $context['emailHash'] ?? null);
+
+                    return true;
+                }),
+            );
+
+        $authLogger = new AuthEventLogger($logger, $writer);
+        $authLogger->info('security.auth.test.writer', 'Writer@example.com', '198.51.100.99');
     }
 }

@@ -1,6 +1,7 @@
 <header class="translations-header">
     {% include 'admin/_header_tools.html.twig' with {
         backLabel: backLabel|trans,
+        backPath: backPath|default(null),
         localeSelectId: localeSelectId,
         localeHiddenFields: localeHiddenFields|default({})
     } %}

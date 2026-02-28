@@ -209,10 +209,20 @@ security.account.google_linked: Google lie
 security.account.google_linked_since: 'Lie depuis %date%'
 security.account.unlink_google: Delier Google
 security.account.unlink_google_disabled_reason: Definir d abord un mot de passe local avant de delier Google.
+security.account.sessions_title: Sessions actives
+security.account.sessions_hint: Conservez uniquement les sessions de confiance. Vous pouvez deconnecter les autres appareils.
+security.account.session_current: Session courante
+security.account.session_other: Autre session
+security.account.session_last_seen: 'Derniere activite: %date%'
+security.account.session_none: Aucune session active trouvee.
+security.account.logout_other_sessions: Deconnecter les autres sessions
 security.account.flash.invalid_csrf: Session invalide, merci de reessayer.
 security.account.flash.google_identity_not_found: Identite Google introuvable pour votre compte.
 security.account.flash.google_identity_local_password_required: Impossible de delier Google sans acces mot de passe local.
 security.account.flash.google_identity_unlinked: Identite Google deliee.
+security.account.flash.other_sessions_revoked: Les autres sessions ont ete deconnectees.
+security.account.flash.no_other_sessions: Aucune autre session active trouvee.
+security.session.flash.revoked: Votre session a ete revoquee depuis une autre session.
 
 admin_users.page_title: Backoffice utilisateurs
 admin_users.kicker: Backoffice
@@ -275,6 +285,16 @@ admin_users.force_verify_email: Forcer la verification email
 admin_users.resend_verification: Renvoyer l email de verification
 admin_users.unlink_google: Delier Google
 admin_users.unlink_google_disabled_reason: Definir d abord un mot de passe local avant de delier Google.
+admin_users.auth_events: Activite securite
+admin_users.auth_events_page_title: 'Activite securite - %email%'
+admin_users.auth_events_title: Activite securite
+admin_users.auth_events_description: 'Derniers evenements d authentification et de securite pour %email%.'
+admin_users.auth_events_occurred_at: Date
+admin_users.auth_events_event: Evenement
+admin_users.auth_events_level: Niveau
+admin_users.auth_events_ip: IP
+admin_users.auth_events_empty: Aucun evenement de securite pour cet utilisateur.
+admin_users.back_to_users: Retour aux utilisateurs
 admin_users.no_users: Aucun utilisateur.
 admin_users.flash.invalid_csrf: Action invalide (CSRF).
 admin_users.flash.user_not_found: Utilisateur introuvable.

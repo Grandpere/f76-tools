@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Admin;
 
+use App\Identity\Domain\Entity\AuthAuditLogEntity;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Identity\Domain\Entity\UserIdentityEntity;
 use App\Support\Domain\Entity\AdminAuditLogEntity;
@@ -62,6 +63,38 @@ final class UserManagementControllerTest extends WebTestCase
         $this->browser()->request('GET', '/admin/users/export');
 
         self::assertSame(403, $this->browser()->getResponse()->getStatusCode());
+    }
+
+    public function testNonAdminCannotAccessUserAuthEventsPage(): void
+    {
+        $user = $this->createUser('member-auth-events@example.com', 'secret123', ['ROLE_USER']);
+        $target = $this->createUser('target-auth-events@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($user);
+
+        $this->browser()->request('GET', sprintf('/admin/users/%d/auth-events', $target->getId()));
+
+        self::assertSame(403, $this->browser()->getResponse()->getStatusCode());
+    }
+
+    public function testAdminCanSeeUserAuthEventsPage(): void
+    {
+        $admin = $this->createUser('admin-auth-events@example.com', 'secret123', ['ROLE_ADMIN']);
+        $target = $this->createUser('target-auth-events@example.com', 'secret123', ['ROLE_USER']);
+        $authEvent = new AuthAuditLogEntity()
+            ->setUser($target)
+            ->setLevel('info')
+            ->setEvent('security.auth.login.success')
+            ->setClientIp('127.0.0.1')
+            ->setContext(['scope' => 'login']);
+        $this->entityManager?->persist($authEvent);
+        $this->entityManager?->flush();
+
+        $this->browser()->loginUser($admin);
+        $this->browser()->request('GET', sprintf('/admin/users/%d/auth-events', $target->getId()));
+
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertStringContainsString('security.auth.login.success', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('target-auth-events@example.com', (string) $this->browser()->getResponse()->getContent());
     }
 
     public function testNonAdminCannotForceVerifyEmail(): void
@@ -798,7 +831,7 @@ final class UserManagementControllerTest extends WebTestCase
         if (null === $this->entityManager) {
             return;
         }
-        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE admin_audit_log, user_identity, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
+        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE auth_audit_log, admin_audit_log, user_identity, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
     }
 
     private function setCreatedAtByEmail(string $email, string $createdAt): void

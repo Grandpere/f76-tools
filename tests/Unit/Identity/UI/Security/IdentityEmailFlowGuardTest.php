@@ -38,8 +38,8 @@ final class IdentityEmailFlowGuardTest extends TestCase
                 'captcha-token',
                 '127.0.0.1',
                 'user@example.com',
-                5,
-                300,
+                3,
+                600,
             )
             ->willReturn(IdentityRequestGuardResult::ALLOWED);
 

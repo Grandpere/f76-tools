@@ -95,6 +95,33 @@ final class ForgotPasswordControllerTest extends WebTestCase
         self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
     }
 
+    public function testForgotPasswordIsRateLimitedAfterRepeatedAttempts(): void
+    {
+        $email = sprintf('ratelimit-forgot-%s@example.com', uniqid('', true));
+        $crawler = $this->browser()->request('GET', '/forgot-password');
+        $tokenNode = $crawler->filter('input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+        $csrfToken = (string) $tokenNode->attr('value');
+
+        for ($i = 0; $i < 3; ++$i) {
+            $this->browser()->request('POST', '/forgot-password', [
+                '_csrf_token' => $csrfToken,
+                'email' => $email,
+            ]);
+            self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        }
+
+        $this->browser()->request('POST', '/forgot-password', [
+            '_csrf_token' => $csrfToken,
+            'email' => $email,
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        self::assertSame('/forgot-password', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+
+        $this->browser()->followRedirect();
+        self::assertStringContainsString('Too many attempts', (string) $this->browser()->getResponse()->getContent());
+    }
+
     private function createUser(string $email, string $plainPassword): UserEntity
     {
         $hasher = $this->browser()->getContainer()->get(UserPasswordHasherInterface::class);
@@ -116,7 +143,7 @@ final class ForgotPasswordControllerTest extends WebTestCase
         if (null === $this->entityManager) {
             return;
         }
-        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
+        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE auth_audit_log, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
     }
 
     private function browser(): KernelBrowser

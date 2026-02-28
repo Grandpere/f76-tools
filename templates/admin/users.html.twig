@@ -315,6 +315,7 @@
                                             <p class="admin-users-actions-help">{{ 'admin_users.unlink_google_disabled_reason'|trans }}</p>
                                         {% endif %}
                                     {% endif %}
+                                    <a class="admin-users-action-link" href="{{ path('app_admin_users_auth_events', commonParams|merge({ id: user.id })) }}">{{ 'admin_users.auth_events'|trans }}</a>
                                 </div>
                             </td>
                         </tr>

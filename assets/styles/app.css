@@ -560,6 +560,46 @@ body::before {
     font-size: 0.82rem;
 }
 
+.account-security-sessions {
+    margin-top: 0.95rem;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    padding: 0.68rem 0.75rem;
+}
+
+.account-security-sessions h3 {
+    margin: 0;
+    font-size: 0.93rem;
+}
+
+.account-security-session-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.6rem 0;
+    display: grid;
+    gap: 0.45rem;
+}
+
+.account-security-session-item {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0.44rem 0.55rem;
+    display: grid;
+    gap: 0.2rem;
+    background: #fffdfa;
+}
+
+.account-security-session-item strong {
+    font-size: 0.82rem;
+}
+
+.account-security-session-item small {
+    color: var(--text-2);
+    font-size: 0.73rem;
+    line-height: 1.35;
+}
+
 .catalog-shell {
     margin-top: 1.2rem;
     padding: 0;
@@ -1707,6 +1747,24 @@ span.flatpickr-weekday {
     width: 14%;
 }
 
+.admin-auth-events-table th:first-child,
+.admin-auth-events-table td:first-child {
+    width: 11rem;
+}
+
+.admin-auth-events-table th:nth-child(2),
+.admin-auth-events-table td:nth-child(2) {
+    width: 58%;
+}
+
+.admin-auth-events-table th:nth-child(3),
+.admin-auth-events-table td:nth-child(3),
+.admin-auth-events-table th:nth-child(4),
+.admin-auth-events-table td:nth-child(4) {
+    width: 1%;
+    white-space: nowrap;
+}
+
 .translations-table.admin-minerva-timeline-table th:first-child,
 .translations-table.admin-minerva-timeline-table td:first-child {
     width: 1%;
@@ -1820,6 +1878,25 @@ span.flatpickr-weekday {
     opacity: 0.52;
     cursor: not-allowed;
     filter: none;
+}
+
+.admin-users-action-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(29, 37, 49, 0.2);
+    border-radius: 10px;
+    padding: 0.42rem 0.62rem;
+    background: #fff;
+    color: #2b3441;
+    font-weight: 700;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+    text-decoration: none;
+}
+
+.admin-users-action-link:hover {
+    border-color: rgba(160, 119, 0, 0.45);
+    color: #5f4a00;
 }
 
 .admin-users-actions-help {

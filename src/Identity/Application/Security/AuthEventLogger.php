@@ -19,6 +19,7 @@ final class AuthEventLogger
 {
     public function __construct(
         private readonly LoggerInterface $logger,
+        private readonly ?AuthAuditLogWriter $authAuditLogWriter = null,
     ) {
     }
 
@@ -27,7 +28,9 @@ final class AuthEventLogger
      */
     public function info(string $event, ?string $email, ?string $clientIp, array $context = []): void
     {
-        $this->logger->info($event, $this->buildContext($email, $clientIp, $context));
+        $payload = $this->buildContext($email, $clientIp, $context);
+        $this->logger->info($event, $payload);
+        $this->authAuditLogWriter?->write('info', $event, $this->normalizeEmail($email), $clientIp, $payload);
     }
 
     /**
@@ -35,7 +38,9 @@ final class AuthEventLogger
      */
     public function warning(string $event, ?string $email, ?string $clientIp, array $context = []): void
     {
-        $this->logger->warning($event, $this->buildContext($email, $clientIp, $context));
+        $payload = $this->buildContext($email, $clientIp, $context);
+        $this->logger->warning($event, $payload);
+        $this->authAuditLogWriter?->write('warning', $event, $this->normalizeEmail($email), $clientIp, $payload);
     }
 
     /**

@@ -48,6 +48,36 @@
                 </div>
             </dl>
 
+            <section class="account-security-sessions">
+                <h3>{{ 'security.account.sessions_title'|trans }}</h3>
+                <p class="account-security-sub">{{ 'security.account.sessions_hint'|trans }}</p>
+                <ul class="account-security-session-list">
+                    {% for session in activeSessions %}
+                        {% set isCurrentSession = currentSessionId is same as(session.sessionId) %}
+                        <li class="account-security-session-item">
+                            <div>
+                                <strong>{{ isCurrentSession ? 'security.account.session_current'|trans : 'security.account.session_other'|trans }}</strong>
+                                <small>
+                                    {{ 'security.account.session_last_seen'|trans({'%date%': session.lastSeenAt|date('Y-m-d H:i')}) }}
+                                    {% if session.ipAddress %}· {{ session.ipAddress }}{% endif %}
+                                </small>
+                            </div>
+                            {% if session.userAgent %}
+                                <small>{{ session.userAgent }}</small>
+                            {% endif %}
+                        </li>
+                    {% else %}
+                        <li class="account-security-session-item">{{ 'security.account.session_none'|trans }}</li>
+                    {% endfor %}
+                </ul>
+                {% if activeSessions|length > 1 %}
+                    <form method="post" action="{{ path('app_account_security_logout_other_sessions', { locale: app.request.locale }) }}" class="account-security-unlink-form">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('account_logout_other_sessions') }}">
+                        <button class="auth-button-link auth-button-link-secondary" type="submit">{{ 'security.account.logout_other_sessions'|trans }}</button>
+                    </form>
+                {% endif %}
+            </section>
+
             <div class="auth-actions-inline">
                 <a class="auth-button-link" href="{{ path('app_change_password', { locale: app.request.locale }) }}">{{ 'dashboard.header.change_password'|trans }}</a>
                 <a class="auth-button-link auth-button-link-secondary" href="{{ path('app_home', { locale: app.request.locale }) }}">{{ 'security.change_password.to_home'|trans }}</a>

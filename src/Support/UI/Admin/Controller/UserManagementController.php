@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Support\UI\Admin\Controller;
 
+use App\Identity\Application\Security\AuthAuditLogReader;
 use App\Identity\Application\Security\SignedUrlGenerator;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Support\Application\AdminUser\AdminUserGoogleIdentityReadService;
@@ -74,6 +75,7 @@ final class UserManagementController extends AbstractController
         private readonly UnlinkGoogleIdentityFeedbackMapper $unlinkGoogleIdentityFeedbackMapper,
         private readonly AdminAuthenticatedUserContext $adminAuthenticatedUserContext,
         private readonly \App\Identity\UI\Security\IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
+        private readonly AuthAuditLogReader $authAuditLogReader,
     ) {
     }
 
@@ -212,6 +214,29 @@ final class UserManagementController extends AbstractController
         $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"', $filename));
 
         return $response;
+    }
+
+    #[Route('/{id<\d+>}/auth-events', name: 'app_admin_users_auth_events', methods: ['GET'])]
+    public function authEvents(int $id, Request $request): Response
+    {
+        $this->ensureAdminAccess();
+
+        $targetUser = $this->userRepository->getById($id);
+        if (!$targetUser instanceof UserEntity) {
+            throw $this->createNotFoundException('User not found.');
+        }
+
+        $events = $this->authAuditLogReader->findLatestByUserId($id, 30);
+        $backParams = $this->usersListQueryParamsFromRequest($request);
+        $localeHiddenFields = $backParams;
+        unset($localeHiddenFields['locale']);
+
+        return $this->render('admin/user_auth_events.html.twig', [
+            'targetUser' => $targetUser,
+            'events' => $events,
+            'backParams' => $backParams,
+            'localeHiddenFields' => $localeHiddenFields,
+        ]);
     }
 
     #[Route('/{id<\d+>}/toggle-active', name: 'app_admin_users_toggle_active', methods: ['POST'])]
@@ -406,7 +431,15 @@ final class UserManagementController extends AbstractController
 
     private function redirectToUsers(Request $request): RedirectResponse
     {
-        return $this->redirectToRoute('app_admin_users', [
+        return $this->redirectToRoute('app_admin_users', $this->usersListPostParamsFromRequest($request));
+    }
+
+    /**
+     * @return array{locale: string, google: string, active: string, role: string, verified: string, localPassword: string, createdFrom: string, createdTo: string, q: string, sort: string, dir: string, perPage: int, page: int}
+     */
+    private function usersListPostParamsFromRequest(Request $request): array
+    {
+        return [
             'locale' => $request->getLocale(),
             'google' => $this->normalizeGoogleFilter((string) $request->request->get('google', '')),
             'active' => $this->normalizeActiveFilter((string) $request->request->get('active', '')),
@@ -420,7 +453,29 @@ final class UserManagementController extends AbstractController
             'dir' => $this->normalizeSortDirection((string) $request->request->get('dir', '')),
             'perPage' => $this->normalizePerPage((int) $request->request->get('perPage', 30)),
             'page' => $this->normalizePage((int) $request->request->get('page', 1)),
-        ]);
+        ];
+    }
+
+    /**
+     * @return array{locale: string, google: string, active: string, role: string, verified: string, localPassword: string, createdFrom: string, createdTo: string, q: string, sort: string, dir: string, perPage: int, page: int}
+     */
+    private function usersListQueryParamsFromRequest(Request $request): array
+    {
+        return [
+            'locale' => $request->getLocale(),
+            'google' => $this->normalizeGoogleFilter($request->query->getString('google', '')),
+            'active' => $this->normalizeActiveFilter($request->query->getString('active', '')),
+            'role' => $this->normalizeRoleFilter($request->query->getString('role', '')),
+            'verified' => $this->normalizeVerifiedFilter($request->query->getString('verified', '')),
+            'localPassword' => $this->normalizeLocalPasswordFilter($request->query->getString('localPassword', '')),
+            'createdFrom' => $this->normalizeDateFilter($request->query->getString('createdFrom', '')),
+            'createdTo' => $this->normalizeDateFilter($request->query->getString('createdTo', '')),
+            'q' => trim($request->query->getString('q', '')),
+            'sort' => $this->normalizeSort($request->query->getString('sort', '')),
+            'dir' => $this->normalizeSortDirection($request->query->getString('dir', '')),
+            'perPage' => $this->normalizePerPage((int) $request->query->get('perPage', 30)),
+            'page' => $this->normalizePage((int) $request->query->get('page', 1)),
+        ];
     }
 
     /**

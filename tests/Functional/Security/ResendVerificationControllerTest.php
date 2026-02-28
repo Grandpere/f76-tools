@@ -127,12 +127,39 @@ final class ResendVerificationControllerTest extends WebTestCase
         self::assertEquals($requestedAt->getTimestamp(), $updated->getEmailVerificationRequestedAt()?->getTimestamp());
     }
 
+    public function testResendVerificationIsRateLimitedAfterRepeatedAttempts(): void
+    {
+        $email = sprintf('ratelimit-resend-%s@example.com', uniqid('', true));
+        $crawler = $this->browser()->request('GET', '/resend-verification');
+        $tokenNode = $crawler->filter('input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+        $csrfToken = (string) $tokenNode->attr('value');
+
+        for ($i = 0; $i < 3; ++$i) {
+            $this->browser()->request('POST', '/resend-verification', [
+                '_csrf_token' => $csrfToken,
+                'email' => $email,
+            ]);
+            self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        }
+
+        $this->browser()->request('POST', '/resend-verification', [
+            '_csrf_token' => $csrfToken,
+            'email' => $email,
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        self::assertSame('/resend-verification', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+
+        $this->browser()->followRedirect();
+        self::assertStringContainsString('Too many attempts', (string) $this->browser()->getResponse()->getContent());
+    }
+
     private function truncateTables(): void
     {
         if (null === $this->entityManager) {
             return;
         }
-        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
+        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE auth_audit_log, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
     }
 
     private function browser(): KernelBrowser

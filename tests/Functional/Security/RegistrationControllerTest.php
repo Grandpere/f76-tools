@@ -79,12 +79,43 @@ final class RegistrationControllerTest extends WebTestCase
         self::assertNotNull($user->getEmailVerificationRequestedAt());
     }
 
+    public function testRegisterIsRateLimitedAfterRepeatedAttempts(): void
+    {
+        $email = sprintf('ratelimit-register-%s@example.com', uniqid('', true));
+        $crawler = $this->browser()->request('GET', '/register');
+        $tokenNode = $crawler->filter('input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+        $token = (string) $tokenNode->attr('value');
+
+        for ($i = 0; $i < 3; ++$i) {
+            $this->browser()->request('POST', '/register', [
+                '_csrf_token' => $token,
+                'email' => $email,
+                'password' => 'secret123',
+                'password_confirm' => 'different',
+            ]);
+            self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        }
+
+        $this->browser()->request('POST', '/register', [
+            '_csrf_token' => $token,
+            'email' => $email,
+            'password' => 'secret123',
+            'password_confirm' => 'different',
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        self::assertSame('/register', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+
+        $this->browser()->followRedirect();
+        self::assertStringContainsString('Too many attempts', (string) $this->browser()->getResponse()->getContent());
+    }
+
     private function truncateTables(): void
     {
         if (null === $this->entityManager) {
             return;
         }
-        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
+        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE auth_audit_log, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
     }
 
     private function browser(): KernelBrowser

@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Security;
 
+use App\Identity\Application\Security\ActiveUserSessionRegistry;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Identity\Domain\Entity\UserIdentityEntity;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -139,6 +141,34 @@ final class AccountSecurityControllerTest extends WebTestCase
         self::assertInstanceOf(UserIdentityEntity::class, $identity);
     }
 
+    public function testCanLogoutOtherSessionsFromSecurityPage(): void
+    {
+        $user = $this->createUser('security-sessions@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($user);
+
+        $sessionRegistry = $this->browser()->getContainer()->get(ActiveUserSessionRegistry::class);
+        \assert($sessionRegistry instanceof ActiveUserSessionRegistry);
+        $sessionRegistry->registerOrTouch(
+            userId: (int) $user->getId(),
+            sessionId: 'other-session-token',
+            ipAddress: '198.51.100.7',
+            userAgent: 'Mozilla/5.0',
+            now: new DateTimeImmutable('-3 minutes'),
+        );
+
+        $crawler = $this->browser()->request('GET', '/account-security');
+        self::assertCount(1, $crawler->filter('form[action*="/account-security/logout-other-sessions"] input[name="_csrf_token"]'));
+
+        $this->browser()->request('POST', '/account-security/logout-other-sessions', [
+            '_csrf_token' => (string) $crawler->filter('form[action*="/account-security/logout-other-sessions"] input[name="_csrf_token"]')->attr('value'),
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $sessions = $sessionRegistry->listSessions((int) $user->getId());
+        self::assertCount(1, $sessions);
+    }
+
     /**
      * @param list<string> $roles
      */
@@ -164,7 +194,7 @@ final class AccountSecurityControllerTest extends WebTestCase
             return;
         }
 
-        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE user_identity, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
+        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE auth_audit_log, user_identity, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
     }
 
     private function linkGoogleIdentity(UserEntity $user, string $providerUserId): void

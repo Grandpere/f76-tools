@@ -1,7 +1,8 @@
 {% set localeSelectId = localeSelectId|default('admin-header-locale-select') %}
 {% set localeHiddenFields = localeHiddenFields|default({}) %}
+{% set backPath = backPath|default(path('app_dashboard', { locale: app.request.locale })) %}
 <div class="catalog-header-tools">
-    <a class="header-translations-link" href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ backLabel }}</a>
+    <a class="header-translations-link" href="{{ backPath }}">{{ backLabel }}</a>
     <form class="header-locale" method="get">
         {% for field, value in localeHiddenFields %}
             {% if value is not same as(null) and value != '' %}

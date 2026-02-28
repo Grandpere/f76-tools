@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Identity\UI\Security\Controller;
 
 use App\Identity\Application\Oidc\GoogleOidcIdentityReadRepository;
+use App\Identity\Application\Security\ActiveUserSessionRegistry;
 use App\Identity\Application\Security\AuthEventLogger;
 use App\Identity\Application\Security\UnlinkOwnGoogleIdentityApplicationService;
 use App\Identity\Application\Security\UnlinkOwnGoogleIdentityResult;
@@ -41,11 +42,12 @@ final class AccountSecurityController extends AbstractController
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly EntityManagerInterface $entityManager,
         private readonly AuthEventLogger $authEventLogger,
+        private readonly ActiveUserSessionRegistry $activeUserSessionRegistry,
     ) {
     }
 
     #[Route('', name: 'app_account_security', methods: ['GET'])]
-    public function __invoke(): Response
+    public function __invoke(Request $request): Response
     {
         $user = $this->getUser();
         if (!$user instanceof UserEntity) {
@@ -53,6 +55,10 @@ final class AccountSecurityController extends AbstractController
         }
 
         $googleIdentity = $this->googleOidcIdentityReadRepository->findOneByUserAndProvider($user, 'google');
+        $userId = $user->getId();
+        \assert(is_int($userId));
+        $currentSessionId = $request->hasSession() ? $request->getSession()->getId() : '';
+        $sessions = $this->activeUserSessionRegistry->listSessions($userId);
 
         return $this->render('security/account_security.html.twig', [
             'userEmail' => $user->getEmail(),
@@ -60,6 +66,8 @@ final class AccountSecurityController extends AbstractController
             'localPasswordEnabled' => $user->hasLocalPassword(),
             'googleLinked' => null !== $googleIdentity,
             'googleLinkedAt' => $googleIdentity?->getCreatedAt(),
+            'activeSessions' => $sessions,
+            'currentSessionId' => $currentSessionId,
         ]);
     }
 
@@ -97,6 +105,38 @@ final class AccountSecurityController extends AbstractController
         $this->authEventLogger->warning(sprintf('security.account.unlink_google.%s', $result->value), $user->getEmail(), $request->getClientIp(), [
             'provider' => 'google',
         ]);
+
+        return $this->identityLocaleRedirector->toRouteWithRequestLocale($request, 'app_account_security');
+    }
+
+    #[Route('/logout-other-sessions', name: 'app_account_security_logout_other_sessions', methods: ['POST'])]
+    public function logoutOtherSessions(Request $request): RedirectResponse
+    {
+        $user = $this->getUser();
+        if (!$user instanceof UserEntity) {
+            throw new AccessDeniedException('User must be authenticated.');
+        }
+
+        $submittedToken = (string) $request->request->get('_csrf_token', '');
+        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken('account_logout_other_sessions', $submittedToken))) {
+            $this->addFlash('warning', 'security.account.flash.invalid_csrf');
+
+            return $this->identityLocaleRedirector->toRouteWithRequestLocale($request, 'app_account_security');
+        }
+
+        $userId = $user->getId();
+        \assert(is_int($userId));
+        $currentSessionId = $request->hasSession() ? $request->getSession()->getId() : '';
+        $revoked = $this->activeUserSessionRegistry->revokeOtherSessions($userId, $currentSessionId);
+
+        if ($revoked > 0) {
+            $this->addFlash('success', 'security.account.flash.other_sessions_revoked');
+            $this->authEventLogger->info('security.auth.session.revoke_others', $user->getEmail(), $request->getClientIp(), [
+                'revoked' => $revoked,
+            ]);
+        } else {
+            $this->addFlash('warning', 'security.account.flash.no_other_sessions');
+        }
 
         return $this->identityLocaleRedirector->toRouteWithRequestLocale($request, 'app_account_security');
     }

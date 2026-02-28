@@ -47,11 +47,21 @@ enum IdentityEmailFlow: string
 
     public function maxAttempts(): int
     {
-        return 5;
+        return match ($this) {
+            self::REGISTER => 3,
+            self::FORGOT_PASSWORD => 3,
+            self::RESEND_VERIFICATION => 3,
+            self::CONTACT => 5,
+        };
     }
 
     public function windowSeconds(): int
     {
-        return 300;
+        return match ($this) {
+            self::REGISTER => 600,
+            self::FORGOT_PASSWORD => 900,
+            self::RESEND_VERIFICATION => 1800,
+            self::CONTACT => 300,
+        };
     }
 }
