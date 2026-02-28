@@ -20,10 +20,12 @@
 
         <section class="translations-panel">
             <form method="get" class="translations-filters">
-                <label class="field">
-                    <span>{{ 'admin_audit.search'|trans }}</span>
-                    <input type="search" name="q" value="{{ query }}" placeholder="{{ 'admin_audit.search_placeholder'|trans }}">
-                </label>
+                {% include 'admin/_text_filter_field.html.twig' with {
+                    label: 'admin_audit.search',
+                    name: 'q',
+                    fieldValue: query,
+                    placeholder: 'admin_audit.search_placeholder'
+                } %}
                 <label class="field">
                     <span>{{ 'admin_audit.action'|trans }}</span>
                     <select name="action">

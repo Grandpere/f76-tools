@@ -1,0 +1,6 @@
+{% set fieldType = fieldType|default('search') %}
+{% set fieldValue = fieldValue|default('') %}
+<label class="field">
+    <span>{{ label|trans }}</span>
+    <input type="{{ fieldType }}" name="{{ name }}" value="{{ fieldValue }}" {% if placeholder is defined and placeholder %}placeholder="{{ placeholder|trans }}"{% endif %}>
+</label>

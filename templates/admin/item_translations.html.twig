@@ -22,14 +22,19 @@
 
         <section class="translations-panel">
             <form method="get" class="translations-filters">
-                <label class="field">
-                    <span>{{ 'admin_translations.target_file'|trans }}</span>
-                    <input type="text" name="target" value="{{ targetLocale }}" placeholder="fr">
-                </label>
-                <label class="field">
-                    <span>{{ 'admin_translations.search'|trans }}</span>
-                    <input type="search" name="q" value="{{ query }}" placeholder="{{ 'admin_translations.search_placeholder'|trans }}">
-                </label>
+                {% include 'admin/_text_filter_field.html.twig' with {
+                    label: 'admin_translations.target_file',
+                    name: 'target',
+                    fieldType: 'text',
+                    fieldValue: targetLocale,
+                    placeholder: 'fr'
+                } %}
+                {% include 'admin/_text_filter_field.html.twig' with {
+                    label: 'admin_translations.search',
+                    name: 'q',
+                    fieldValue: query,
+                    placeholder: 'admin_translations.search_placeholder'
+                } %}
                 {% include 'admin/_per_page_field.html.twig' with {
                     label: 'admin_translations.per_page',
                     perPage: perPage,
