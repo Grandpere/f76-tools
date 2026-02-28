@@ -22,6 +22,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class MinervaRotationControllerTest extends WebTestCase
 {
@@ -86,6 +87,39 @@ final class MinervaRotationControllerTest extends WebTestCase
         self::assertStringContainsString('Foundation', (string) $this->browser()->getResponse()->getContent());
         self::assertCount(1, $crawler->filter('table.minerva-table'));
         self::assertStringContainsString('Crater', (string) $this->browser()->getResponse()->getContent());
+    }
+
+    public function testTimelineTableColumnsUseExpectedOrder(): void
+    {
+        $user = $this->createUser('minerva@example.com');
+        $now = new DateTimeImmutable('now', new DateTimeZone('UTC'));
+        $this->createRotation(
+            'Foundation',
+            7,
+            $now->modify('-1 day')->format(DATE_ATOM),
+            $now->modify('+1 day')->format(DATE_ATOM),
+            MinervaRotationSourceEnum::MANUAL,
+        );
+
+        $this->browser()->loginUser($user);
+        $crawler = $this->browser()->request('GET', '/minerva-rotation');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+
+        $headers = $crawler->filter('table.minerva-table thead th');
+        self::assertCount(5, $headers);
+
+        $headerTexts = $headers->each(static fn ($node): string => trim(preg_replace('/\s+/', ' ', $node->text()) ?? ''));
+        $translator = $this->browser()->getContainer()->get(TranslatorInterface::class);
+        \assert($translator instanceof TranslatorInterface);
+        $locale = $this->browser()->getRequest()->getLocale();
+
+        self::assertSame([
+            $translator->trans('minerva.list_cycle', locale: $locale),
+            $translator->trans('minerva.location', locale: $locale),
+            $translator->trans('minerva.starts_at', locale: $locale),
+            $translator->trans('minerva.ends_at', locale: $locale),
+            $translator->trans('minerva.list_progress', locale: $locale),
+        ], $headerTexts);
     }
 
     private function createUser(string $email): UserEntity

@@ -100,7 +100,7 @@ final class ItemImportApplicationService
                         'Doublon detecte dans %s pour %s id=%d (conserve)',
                         basename($file),
                         $context->type->value,
-                        $sourceId
+                        $sourceId,
                     );
                     ++$stats['warnings'];
                 }
