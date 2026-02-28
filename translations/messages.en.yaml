@@ -297,6 +297,10 @@ admin_users.auth_events_event: Event
 admin_users.auth_events_level: Level
 admin_users.auth_events_ip: IP
 admin_users.auth_events_empty: No security event for this user yet.
+admin_users.auth_events_level_filter: Level
+admin_users.auth_events_level_filter_all: All levels
+admin_users.auth_events_search: Search
+admin_users.auth_events_search_placeholder: event or IP
 admin_users.back_to_users: Back to users
 admin_users.no_users: No users.
 admin_users.flash.invalid_csrf: Invalid action (CSRF).

@@ -18,6 +18,21 @@
 
         <section class="translations-panel">
             <h2>{{ targetUser.email }}</h2>
+            <form method="get" class="translations-filters">
+                <label class="field">
+                    <span>{{ 'admin_users.auth_events_level_filter'|trans }}</span>
+                    <select name="level">
+                        <option value="">{{ 'admin_users.auth_events_level_filter_all'|trans }}</option>
+                        <option value="info" {% if levelFilter == 'info' %}selected{% endif %}>info</option>
+                        <option value="warning" {% if levelFilter == 'warning' %}selected{% endif %}>warning</option>
+                    </select>
+                </label>
+                <label class="field">
+                    <span>{{ 'admin_users.auth_events_search'|trans }}</span>
+                    <input type="text" name="q" value="{{ query }}" placeholder="{{ 'admin_users.auth_events_search_placeholder'|trans }}">
+                </label>
+                <button type="submit">{{ 'admin_users.filter'|trans }}</button>
+            </form>
             <div class="translations-table-wrap">
                 <table class="translations-table admin-auth-events-table">
                     <thead>

@@ -226,7 +226,9 @@ final class UserManagementController extends AbstractController
             throw $this->createNotFoundException('User not found.');
         }
 
-        $events = $this->authAuditLogReader->findLatestByUserId($id, 30);
+        $level = $this->normalizeAuthEventLevel($request->query->getString('level', ''));
+        $query = trim($request->query->getString('q', ''));
+        $events = $this->authAuditLogReader->findByUserIdWithFilters($id, 60, $level, $query);
         $backParams = $this->usersListQueryParamsFromRequest($request);
         $localeHiddenFields = $backParams;
         unset($localeHiddenFields['locale']);
@@ -236,6 +238,8 @@ final class UserManagementController extends AbstractController
             'events' => $events,
             'backParams' => $backParams,
             'localeHiddenFields' => $localeHiddenFields,
+            'levelFilter' => $level,
+            'query' => $query,
         ]);
     }
 
@@ -763,6 +767,13 @@ final class UserManagementController extends AbstractController
         $normalized = mb_strtolower(trim($dir));
 
         return in_array($normalized, ['asc', 'desc'], true) ? $normalized : 'asc';
+    }
+
+    private function normalizeAuthEventLevel(string $level): string
+    {
+        $normalized = mb_strtolower(trim($level));
+
+        return in_array($normalized, ['info', 'warning'], true) ? $normalized : '';
     }
 
     private function parseDate(string $date): ?DateTimeImmutable

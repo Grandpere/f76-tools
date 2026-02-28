@@ -34,12 +34,36 @@ final class AuthAuditLogEntityRepository extends ServiceEntityRepository impleme
      */
     public function findLatestByUserId(int $userId, int $limit): array
     {
+        return $this->findByUserIdWithFilters($userId, $limit, '', '');
+    }
+
+    /**
+     * @return list<AuthAuditLogView>
+     */
+    public function findByUserIdWithFilters(int $userId, int $limit, string $levelFilter, string $query): array
+    {
         $effectiveLimit = max(1, min($limit, 100));
-        /** @var list<AuthAuditLogEntity> $rows */
-        $rows = $this->createQueryBuilder('log')
+        $builder = $this->createQueryBuilder('log')
             ->andWhere('IDENTITY(log.user) = :userId')
             ->setParameter('userId', $userId)
-            ->orderBy('log.occurredAt', 'DESC')
+            ->orderBy('log.occurredAt', 'DESC');
+
+        $normalizedLevel = mb_strtolower(trim($levelFilter));
+        if (in_array($normalizedLevel, ['info', 'warning'], true)) {
+            $builder
+                ->andWhere('log.level = :level')
+                ->setParameter('level', $normalizedLevel);
+        }
+
+        $normalizedQuery = trim($query);
+        if ('' !== $normalizedQuery) {
+            $builder
+                ->andWhere('log.event LIKE :q OR log.clientIp LIKE :q')
+                ->setParameter('q', '%'.$normalizedQuery.'%');
+        }
+
+        /** @var list<AuthAuditLogEntity> $rows */
+        $rows = $builder
             ->setMaxResults($effectiveLimit)
             ->getQuery()
             ->getResult();

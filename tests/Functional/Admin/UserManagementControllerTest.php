@@ -97,6 +97,34 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertStringContainsString('target-auth-events@example.com', (string) $this->browser()->getResponse()->getContent());
     }
 
+    public function testAdminCanFilterUserAuthEventsByLevelAndQuery(): void
+    {
+        $admin = $this->createUser('admin-auth-filter@example.com', 'secret123', ['ROLE_ADMIN']);
+        $target = $this->createUser('target-auth-filter@example.com', 'secret123', ['ROLE_USER']);
+
+        $this->entityManager?->persist(new AuthAuditLogEntity()
+            ->setUser($target)
+            ->setLevel('info')
+            ->setEvent('security.auth.login.success')
+            ->setClientIp('127.0.0.1')
+            ->setContext(['scope' => 'login']));
+        $this->entityManager?->persist(new AuthAuditLogEntity()
+            ->setUser($target)
+            ->setLevel('warning')
+            ->setEvent('security.auth.login.failed')
+            ->setClientIp('198.51.100.8')
+            ->setContext(['scope' => 'login']));
+        $this->entityManager?->flush();
+
+        $this->browser()->loginUser($admin);
+        $this->browser()->request('GET', sprintf('/admin/users/%d/auth-events?level=warning&q=198.51.100.8', $target->getId()));
+
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        $content = (string) $this->browser()->getResponse()->getContent();
+        self::assertStringContainsString('security.auth.login.failed', $content);
+        self::assertStringNotContainsString('security.auth.login.success', $content);
+    }
+
     public function testNonAdminCannotForceVerifyEmail(): void
     {
         $managed = $this->createUser('managed-force-non-admin@example.com', 'secret123', ['ROLE_USER']);

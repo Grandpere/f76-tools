@@ -19,4 +19,9 @@ interface AuthAuditLogReader
      * @return list<AuthAuditLogView>
      */
     public function findLatestByUserId(int $userId, int $limit): array;
+
+    /**
+     * @return list<AuthAuditLogView>
+     */
+    public function findByUserIdWithFilters(int $userId, int $limit, string $levelFilter, string $query): array;
 }

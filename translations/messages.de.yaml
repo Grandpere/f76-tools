@@ -297,6 +297,10 @@ admin_users.auth_events_event: Ereignis
 admin_users.auth_events_level: Stufe
 admin_users.auth_events_ip: IP
 admin_users.auth_events_empty: Keine Sicherheitsereignisse fur diesen Benutzer.
+admin_users.auth_events_level_filter: Stufe
+admin_users.auth_events_level_filter_all: Alle Stufen
+admin_users.auth_events_search: Suche
+admin_users.auth_events_search_placeholder: Ereignis oder IP
 admin_users.back_to_users: Zuruck zu Benutzern
 admin_users.no_users: Keine Benutzer.
 admin_users.flash.invalid_csrf: Ungultige Aktion (CSRF).
