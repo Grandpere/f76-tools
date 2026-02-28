@@ -202,6 +202,14 @@ admin_users.active_filter_label: Kontostatus
 admin_users.active_filter_all: Alle Status
 admin_users.active_filter_active: Nur aktiv
 admin_users.active_filter_inactive: Nur inaktiv
+admin_users.verified_filter_label: E-Mail-Verifizierung
+admin_users.verified_filter_all: Alle Verifizierungsstatus
+admin_users.verified_filter_verified: Nur verifiziert
+admin_users.verified_filter_unverified: Nur nicht verifiziert
+admin_users.local_password_filter_label: Lokales Passwort
+admin_users.local_password_filter_all: Alle lokalen Passwortstatus
+admin_users.local_password_filter_enabled: Lokales Passwort aktiviert
+admin_users.local_password_filter_disabled: Lokales Passwort deaktiviert
 admin_users.search: Suche
 admin_users.search_placeholder: E-Mail
 admin_users.per_page: Zeilen pro Seite

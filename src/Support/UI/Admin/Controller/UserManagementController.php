@@ -79,6 +79,8 @@ final class UserManagementController extends AbstractController
         $googleIdentitiesByUserId = $this->adminUserGoogleIdentityReadService->getGoogleIdentityByUserId($users);
         $googleFilter = $this->normalizeGoogleFilter($request->query->getString('google', ''));
         $activeFilter = $this->normalizeActiveFilter($request->query->getString('active', ''));
+        $verifiedFilter = $this->normalizeVerifiedFilter($request->query->getString('verified', ''));
+        $localPasswordFilter = $this->normalizeLocalPasswordFilter($request->query->getString('localPassword', ''));
         $query = trim($request->query->getString('q', ''));
         $sort = $this->normalizeSort($request->query->getString('sort', ''));
         $dir = $this->normalizeSortDirection($request->query->getString('dir', ''));
@@ -86,6 +88,8 @@ final class UserManagementController extends AbstractController
         $page = max(1, (int) $request->query->get('page', 1));
         $filteredUsers = $this->filterUsersByActiveStatus($users, $activeFilter);
         $filteredUsers = $this->filterUsersByGoogleIdentity($filteredUsers, $googleIdentitiesByUserId, $googleFilter);
+        $filteredUsers = $this->filterUsersByVerificationStatus($filteredUsers, $verifiedFilter);
+        $filteredUsers = $this->filterUsersByLocalPasswordStatus($filteredUsers, $localPasswordFilter);
         $filteredUsers = $this->filterUsersBySearchQuery($filteredUsers, $query);
         $filteredUsers = $this->sortUsers($filteredUsers, $sort, $dir);
         $totalUsers = count($users);
@@ -102,6 +106,8 @@ final class UserManagementController extends AbstractController
             'googleIdentitiesByUserId' => $googleIdentitiesByUserId,
             'googleFilter' => $googleFilter,
             'activeFilter' => $activeFilter,
+            'verifiedFilter' => $verifiedFilter,
+            'localPasswordFilter' => $localPasswordFilter,
             'query' => $query,
             'sort' => $sort,
             'dir' => $dir,
@@ -287,6 +293,8 @@ final class UserManagementController extends AbstractController
             'locale' => $request->getLocale(),
             'google' => $this->normalizeGoogleFilter((string) $request->request->get('google', '')),
             'active' => $this->normalizeActiveFilter((string) $request->request->get('active', '')),
+            'verified' => $this->normalizeVerifiedFilter((string) $request->request->get('verified', '')),
+            'localPassword' => $this->normalizeLocalPasswordFilter((string) $request->request->get('localPassword', '')),
             'q' => trim((string) $request->request->get('q', '')),
             'sort' => $this->normalizeSort((string) $request->request->get('sort', '')),
             'dir' => $this->normalizeSortDirection((string) $request->request->get('dir', '')),
@@ -376,6 +384,20 @@ final class UserManagementController extends AbstractController
         return in_array($normalized, ['active', 'inactive'], true) ? $normalized : '';
     }
 
+    private function normalizeVerifiedFilter(string $verifiedFilter): string
+    {
+        $normalized = mb_strtolower(trim($verifiedFilter));
+
+        return in_array($normalized, ['verified', 'unverified'], true) ? $normalized : '';
+    }
+
+    private function normalizeLocalPasswordFilter(string $localPasswordFilter): string
+    {
+        $normalized = mb_strtolower(trim($localPasswordFilter));
+
+        return in_array($normalized, ['enabled', 'disabled'], true) ? $normalized : '';
+    }
+
     /**
      * @param list<UserEntity> $users
      *
@@ -393,6 +415,56 @@ final class UserManagementController extends AbstractController
                 continue;
             }
             if ('inactive' === $activeFilter && $user->isActive()) {
+                continue;
+            }
+            $filtered[] = $user;
+        }
+
+        return $filtered;
+    }
+
+    /**
+     * @param list<UserEntity> $users
+     *
+     * @return list<UserEntity>
+     */
+    private function filterUsersByVerificationStatus(array $users, string $verifiedFilter): array
+    {
+        if ('verified' !== $verifiedFilter && 'unverified' !== $verifiedFilter) {
+            return $users;
+        }
+
+        $filtered = [];
+        foreach ($users as $user) {
+            if ('verified' === $verifiedFilter && !$user->isEmailVerified()) {
+                continue;
+            }
+            if ('unverified' === $verifiedFilter && $user->isEmailVerified()) {
+                continue;
+            }
+            $filtered[] = $user;
+        }
+
+        return $filtered;
+    }
+
+    /**
+     * @param list<UserEntity> $users
+     *
+     * @return list<UserEntity>
+     */
+    private function filterUsersByLocalPasswordStatus(array $users, string $localPasswordFilter): array
+    {
+        if ('enabled' !== $localPasswordFilter && 'disabled' !== $localPasswordFilter) {
+            return $users;
+        }
+
+        $filtered = [];
+        foreach ($users as $user) {
+            if ('enabled' === $localPasswordFilter && !$user->hasLocalPassword()) {
+                continue;
+            }
+            if ('disabled' === $localPasswordFilter && $user->hasLocalPassword()) {
                 continue;
             }
             $filtered[] = $user;

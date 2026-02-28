@@ -6,6 +6,7 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-112: Admin users security filters (`verified` + `localPassword`) + preservation en redirection/formulaires + couverture fonctionnelle ciblee (done).
 - F76-111: Front catalog state line componentization (ligne state aria-live factorisee) (done).
 - F76-110: Front catalog filters componentization (player/search + sources factorises) (done).
 - F76-109: Contact status options componentization (options status mutualisees filtre + ligne) (done).

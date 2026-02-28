@@ -208,6 +208,48 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='active.filter@example.com']"));
     }
 
+    public function testAdminCanFilterUsersByVerificationStatus(): void
+    {
+        $admin = $this->createUser('admin-verified-filter@example.com', 'secret123', ['ROLE_ADMIN']);
+        $verified = $this->createUser('verified.filter@example.com', 'secret123', ['ROLE_USER']);
+        $unverified = $this->createUser('unverified.filter@example.com', 'secret123', ['ROLE_USER']);
+        $verified->setIsEmailVerified(true);
+        $unverified->setIsEmailVerified(false);
+        $this->entityManager?->flush();
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?verified=verified');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='verified.filter@example.com']"));
+        self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='unverified.filter@example.com']"));
+
+        $crawler = $this->browser()->request('GET', '/admin/users?verified=unverified');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='unverified.filter@example.com']"));
+        self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='verified.filter@example.com']"));
+    }
+
+    public function testAdminCanFilterUsersByLocalPasswordStatus(): void
+    {
+        $admin = $this->createUser('admin-local-password-filter@example.com', 'secret123', ['ROLE_ADMIN']);
+        $enabled = $this->createUser('enabled.local-password@example.com', 'secret123', ['ROLE_USER']);
+        $disabled = $this->createUser('disabled.local-password@example.com', 'secret123', ['ROLE_USER']);
+        $enabled->setHasLocalPassword(true);
+        $disabled->setHasLocalPassword(false);
+        $this->entityManager?->flush();
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?localPassword=enabled');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='enabled.local-password@example.com']"));
+        self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='disabled.local-password@example.com']"));
+
+        $crawler = $this->browser()->request('GET', '/admin/users?localPassword=disabled');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='disabled.local-password@example.com']"));
+        self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='enabled.local-password@example.com']"));
+    }
+
     public function testAdminUsersPageSupportsPaginationParameters(): void
     {
         $admin = $this->createUser('zzz-admin-page@example.com', 'secret123', ['ROLE_ADMIN']);
@@ -315,6 +357,30 @@ final class UserManagementControllerTest extends WebTestCase
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('perPage=50', (string) $this->browser()->getResponse()->headers->get('location'));
+    }
+
+    public function testAdminActionRedirectPreservesVerificationAndLocalPasswordFilters(): void
+    {
+        $admin = $this->createUser('admin-preserve-security@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed-preserve-security@example.com', 'secret123', ['ROLE_USER']);
+        $managed->setIsEmailVerified(false)->setHasLocalPassword(false);
+        $this->entityManager?->flush();
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?verified=unverified&localPassword=disabled');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/toggle-active', $managed->getId()), [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'verified' => 'unverified',
+            'localPassword' => 'disabled',
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        $location = (string) $this->browser()->getResponse()->headers->get('location');
+        self::assertStringContainsString('verified=unverified', $location);
+        self::assertStringContainsString('localPassword=disabled', $location);
     }
 
     public function testAdminCanResendVerificationEmailForUnverifiedUser(): void
