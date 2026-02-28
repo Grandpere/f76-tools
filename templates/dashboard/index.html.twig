@@ -47,22 +47,15 @@
         >
             <section class="catalog-panel filters-panel">
                 <h2>{{ 'dashboard.filters.title'|trans }}</h2>
-                <div class="catalog-toolbar">
-                    <label class="field">
-                        <span>{{ 'dashboard.filters.player'|trans }}</span>
-                        <select data-item-catalog-target="playerSelect"></select>
-                    </label>
-                    <label class="field">
-                        <span>{{ 'dashboard.filters.search'|trans }}</span>
-                        <input type="search" placeholder="{{ 'dashboard.filters.search_placeholder'|trans }}" data-item-catalog-target="searchInput">
-                    </label>
-                </div>
-                <fieldset class="source-filters">
-                    <legend>{{ 'dashboard.filters.source_filters'|trans }}</legend>
-                    <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropRaid"><img src="/assets/icons/GleamingDepthsMarker.svg" alt="">{{ 'dashboard.sources.raid'|trans }}</label>
-                    <label><input type="checkbox" data-item-catalog-target="sourceFilter" value="dropBurningSprings"><img src="/assets/icons/bounty_hunter_ghoul_icon_128.png" alt="">{{ 'dashboard.sources.burning_springs'|trans }}</label>
-                </fieldset>
-                <p class="catalog-state" role="status" aria-live="polite" data-item-catalog-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
+                {% include '_catalog_player_search_filters.html.twig' with { targetPrefix: 'item-catalog' } %}
+                {% include '_catalog_source_filters.html.twig' with {
+                    targetPrefix: 'item-catalog',
+                    filters: [
+                        { value: 'dropRaid', icon: '/assets/icons/GleamingDepthsMarker.svg', labelKey: 'dashboard.sources.raid' },
+                        { value: 'dropBurningSprings', icon: '/assets/icons/bounty_hunter_ghoul_icon_128.png', labelKey: 'dashboard.sources.burning_springs' }
+                    ]
+                } %}
+                {% include '_catalog_state_line.html.twig' with { targetPrefix: 'item-catalog' } %}
             </section>
             <section class="catalog-panel catalog-block">
                 <h2>{{ 'dashboard.catalog.misc_title'|trans }}</h2>

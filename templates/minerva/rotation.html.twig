@@ -188,24 +188,17 @@
         >
             <section class="catalog-panel filters-panel">
                 <h2>{{ 'dashboard.filters.title'|trans }}</h2>
-                <div class="catalog-toolbar">
-                    <label class="field">
-                        <span>{{ 'dashboard.filters.player'|trans }}</span>
-                        <select data-minerva-knowledge-target="playerSelect"></select>
-                    </label>
-                    <label class="field">
-                        <span>{{ 'dashboard.filters.search'|trans }}</span>
-                        <input type="search" placeholder="{{ 'dashboard.filters.search_placeholder'|trans }}" data-minerva-knowledge-target="searchInput">
-                    </label>
-                </div>
-                <fieldset class="source-filters">
-                    <legend>{{ 'dashboard.filters.source_filters'|trans }}</legend>
-                    <label><input type="checkbox" data-minerva-knowledge-target="sourceFilter" value="dropDailyOps"><img src="/assets/icons/FO76_dailyops_uplink.png" alt="">{{ 'dashboard.sources.daily_ops'|trans }}</label>
-                    <label><input type="checkbox" data-minerva-knowledge-target="sourceFilter" value="vendorRegs"><img src="/assets/icons/Vault79Marker.svg" alt="">{{ 'dashboard.sources.regs'|trans }}</label>
-                    <label><input type="checkbox" data-minerva-knowledge-target="sourceFilter" value="vendorSamuel"><img src="/assets/icons/HammerWingMarker.svg" alt="">{{ 'dashboard.sources.samuel'|trans }}</label>
-                    <label><input type="checkbox" data-minerva-knowledge-target="sourceFilter" value="vendorMortimer"><img src="/assets/icons/SkullRingMarker.svg" alt="">{{ 'dashboard.sources.mortimer'|trans }}</label>
-                </fieldset>
-                <p class="catalog-state" role="status" aria-live="polite" data-minerva-knowledge-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
+                {% include '_catalog_player_search_filters.html.twig' with { targetPrefix: 'minerva-knowledge' } %}
+                {% include '_catalog_source_filters.html.twig' with {
+                    targetPrefix: 'minerva-knowledge',
+                    filters: [
+                        { value: 'dropDailyOps', icon: '/assets/icons/FO76_dailyops_uplink.png', labelKey: 'dashboard.sources.daily_ops' },
+                        { value: 'vendorRegs', icon: '/assets/icons/Vault79Marker.svg', labelKey: 'dashboard.sources.regs' },
+                        { value: 'vendorSamuel', icon: '/assets/icons/HammerWingMarker.svg', labelKey: 'dashboard.sources.samuel' },
+                        { value: 'vendorMortimer', icon: '/assets/icons/SkullRingMarker.svg', labelKey: 'dashboard.sources.mortimer' }
+                    ]
+                } %}
+                {% include '_catalog_state_line.html.twig' with { targetPrefix: 'minerva-knowledge' } %}
             </section>
 
             <section class="catalog-panel catalog-block">

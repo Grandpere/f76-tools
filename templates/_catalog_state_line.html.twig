@@ -1,0 +1,2 @@
+{% set textKey = textKey|default('dashboard.state.loading_players') %}
+<p class="catalog-state" role="status" aria-live="polite" data-{{ targetPrefix }}-target="state">{{ textKey|trans }}</p>

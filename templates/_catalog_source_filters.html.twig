@@ -1,0 +1,6 @@
+<fieldset class="source-filters">
+    <legend>{{ 'dashboard.filters.source_filters'|trans }}</legend>
+    {% for filter in filters %}
+        <label><input type="checkbox" data-{{ targetPrefix }}-target="sourceFilter" value="{{ filter.value }}"><img src="{{ filter.icon }}" alt="">{{ filter.labelKey|trans }}</label>
+    {% endfor %}
+</fieldset>

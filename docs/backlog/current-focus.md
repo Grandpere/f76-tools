@@ -6,6 +6,8 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-111: Front catalog state line componentization (ligne state aria-live factorisee) (done).
+- F76-110: Front catalog filters componentization (player/search + sources factorises) (done).
 - F76-109: Contact status options componentization (options status mutualisees filtre + ligne) (done).
 - F76-108: Admin select filter field componentization (status/action factorises) (done).
 - F76-107: Admin text filter field componentization (champs target/search factorises) (done).

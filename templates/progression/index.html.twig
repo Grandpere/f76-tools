@@ -75,7 +75,7 @@
                         {{ 'progression.character_help_extended'|trans({'%modsLink%': modsLink, '%minervaLink%': minervaLink})|raw }}
                     </span>
                 </p>
-                <p class="catalog-state" role="status" aria-live="polite" data-player-progression-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
+                {% include '_catalog_state_line.html.twig' with { targetPrefix: 'player-progression' } %}
             </section>
             <section class="catalog-panel catalog-block">
                 <div class="backup-header">
