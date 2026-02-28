@@ -28,14 +28,16 @@
                     fieldValue: query,
                     placeholder: 'admin_contact.search_placeholder'
                 } %}
-                {% include 'admin/_select_filter_field.html.twig' with {
-                    label: 'admin_contact.status',
-                    name: 'status',
-                    selectedValue: status,
-                    emptyOptionLabel: 'admin_contact.any_status',
-                    options: statusOptions,
-                    labelPrefix: 'admin_contact.status_'
-                } %}
+                <label class="field">
+                    <span>{{ 'admin_contact.status'|trans }}</span>
+                    <select name="status">
+                        <option value="">{{ 'admin_contact.any_status'|trans }}</option>
+                        {% include 'admin/_contact_status_options.html.twig' with {
+                            statusOptions: statusOptions,
+                            selectedValue: status
+                        } %}
+                    </select>
+                </label>
                 {% include 'admin/_per_page_field.html.twig' with {
                     label: 'admin_contact.per_page',
                     perPage: perPage,
@@ -79,11 +81,10 @@
                                 <form method="post" action="{{ path('app_admin_contact_messages_set_status', { id: row.id, locale: app.request.locale }) }}">
                                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_contact_messages_set_status_' ~ row.id) }}">
                                     <select name="status">
-                                        {% for candidate in statusOptions %}
-                                            <option value="{{ candidate.value }}" {% if row.status.value == candidate.value %}selected{% endif %}>
-                                                {{ ('admin_contact.status_' ~ candidate.value)|trans }}
-                                            </option>
-                                        {% endfor %}
+                                        {% include 'admin/_contact_status_options.html.twig' with {
+                                            statusOptions: statusOptions,
+                                            selectedValue: row.status.value
+                                        } %}
                                     </select>
                                     <button type="submit">{{ 'admin_contact.update_status'|trans }}</button>
                                 </form>

@@ -1,0 +1,6 @@
+{% set selectedValue = selectedValue|default('') %}
+{% for candidate in statusOptions %}
+    <option value="{{ candidate.value }}" {% if selectedValue == candidate.value %}selected{% endif %}>
+        {{ ('admin_contact.status_' ~ candidate.value)|trans }}
+    </option>
+{% endfor %}
