@@ -1,0 +1,5 @@
+{% set honeypotId = honeypotId|default('security-website') %}
+<div class="visually-hidden" aria-hidden="true">
+    <label for="{{ honeypotId }}">Website</label>
+    <input id="{{ honeypotId }}" name="website" type="text" tabindex="-1" autocomplete="off">
+</div>

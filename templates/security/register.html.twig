@@ -11,10 +11,7 @@
             {% include 'security/_flashes.html.twig' %}
 
             <form method="post" class="auth-form">
-                <div class="visually-hidden" aria-hidden="true">
-                    <label for="register-website">Website</label>
-                    <input id="register-website" name="website" type="text" tabindex="-1" autocomplete="off">
-                </div>
+                {% include 'security/_honeypot_field.html.twig' with { honeypotId: 'register-website' } %}
                 <label class="auth-field" for="register-email">
                     <span>{{ 'security.register.email'|trans }}</span>
                     <input
@@ -49,9 +46,7 @@
                 </label>
 
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
-                {% if captchaSiteKey %}
-                    <div class="cf-turnstile" data-sitekey="{{ captchaSiteKey }}"></div>
-                {% endif %}
+                {% include 'security/_turnstile.html.twig' %}
 
                 <button type="submit">{{ 'security.register.submit'|trans }}</button>
             </form>
@@ -63,7 +58,5 @@
             </p>
         </section>
     </main>
-    {% if captchaSiteKey %}
-        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    {% endif %}
+    {% include 'security/_turnstile_script.html.twig' %}
 {% endblock %}

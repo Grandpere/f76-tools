@@ -11,10 +11,7 @@
             {% include 'security/_flashes.html.twig' %}
 
             <form method="post" class="auth-form">
-                <div class="visually-hidden" aria-hidden="true">
-                    <label for="resend-website">Website</label>
-                    <input id="resend-website" name="website" type="text" tabindex="-1" autocomplete="off">
-                </div>
+                {% include 'security/_honeypot_field.html.twig' with { honeypotId: 'resend-website' } %}
                 <label class="auth-field" for="resend-email">
                     <span>{{ 'security.resend.email'|trans }}</span>
                     <input
@@ -27,9 +24,7 @@
                 </label>
 
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('resend_verification') }}">
-                {% if captchaSiteKey %}
-                    <div class="cf-turnstile" data-sitekey="{{ captchaSiteKey }}"></div>
-                {% endif %}
+                {% include 'security/_turnstile.html.twig' %}
 
                 <div class="auth-primary-actions">
                     <button type="submit">{{ 'security.resend.submit'|trans }}</button>
@@ -43,7 +38,5 @@
             </p>
         </section>
     </main>
-    {% if captchaSiteKey %}
-        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    {% endif %}
+    {% include 'security/_turnstile_script.html.twig' %}
 {% endblock %}
