@@ -173,6 +173,7 @@ security.reset.title: Reinitialisation du mot de passe
 security.reset.password: Nouveau mot de passe
 security.reset.password_confirm: Confirmer le mot de passe
 security.reset.submit: Mettre a jour le mot de passe
+security.reset.to_login: Retour a la connexion
 security.reset.flash.invalid_or_expired: Lien invalide ou expire.
 security.reset.flash.invalid_csrf: Session invalide, merci de reessayer.
 security.reset.flash.password_too_short: Le mot de passe doit contenir au moins 8 caracteres.

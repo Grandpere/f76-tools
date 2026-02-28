@@ -173,6 +173,7 @@ security.reset.title: Reset password
 security.reset.password: New password
 security.reset.password_confirm: Confirm password
 security.reset.submit: Update password
+security.reset.to_login: Back to login
 security.reset.flash.invalid_or_expired: Invalid or expired link.
 security.reset.flash.invalid_csrf: Invalid session, please try again.
 security.reset.flash.password_too_short: Password must be at least 8 characters long.
