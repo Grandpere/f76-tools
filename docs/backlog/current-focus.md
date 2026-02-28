@@ -11,6 +11,7 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-089: Minerva admin datepicker + timeline polish (colonnes/largeurs/synchronisation progression) (done).
 - F76-088: Nav applicative unifiee + separation front en 3 pages (`Mods legendaires`, `Minerva`, `Progression`) + suivi BOOK sur page Minerva (done).
 - F76-081: DDD Slice 71 - Admin boundary typing hardening (done).
 - F76-080: DDD Slice 70 - Item translation typed string inputs (done).
