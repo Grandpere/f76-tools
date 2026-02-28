@@ -85,6 +85,7 @@ final class UserManagementControllerTest extends WebTestCase
     {
         $admin = $this->createUser('admin-preserve@example.com', 'secret123', ['ROLE_ADMIN']);
         $managed = $this->createUser('managed-preserve@example.com', 'secret123', ['ROLE_USER']);
+        $this->linkGoogleIdentity($managed, 'google-sub-preserve');
         $this->browser()->loginUser($admin);
 
         $crawler = $this->browser()->request('GET', '/admin/users?google=linked');
