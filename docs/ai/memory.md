@@ -21,6 +21,36 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-02-28 - Flatpickr theme override requires CSS import order
+- Symptom: datepicker popup still showed default blue/black selection despite custom styles.
+- Root cause: `flatpickr.min.css` loaded after app styles, overriding custom theme rules.
+- Fix: import `flatpickr` CSS before `assets/styles/app.css` and keep stronger range selectors in app CSS.
+- Prevention: when theming third-party widgets, ensure vendor CSS is imported first and validate final cascade in built output.
+
+## 2026-02-28 - Admin Minerva column widths were applied to the wrong table
+- Symptom: requested width change (`Liste` compact, `Localisation` dominant) was not visible.
+- Root cause: timeline width class was first attached to the manual-overrides table, then widths stayed weak without fixed table layout.
+- Fix: attach class to timeline table, add explicit `colgroup` and `table-layout: fixed` with dedicated column widths.
+- Prevention: for admin pages with multiple tables, always verify class target in template and prefer `colgroup` + fixed layout for deterministic widths.
+
+## 2026-02-28 - Minerva player switch did not refresh timeline progression
+- Symptom: changing player in Minerva filters updated item cards but timeline progress column stayed stale until reload.
+- Root cause: `minerva_knowledge` and `minerva_progression` Stimulus controllers were independent with no shared event.
+- Fix: emit `f76:minerva-player-changed` from knowledge controller and reload stats in progression controller on event.
+- Prevention: when two controllers share a critical state (active player), define an explicit cross-controller event contract.
+
+## 2026-02-28 - Minerva progression still used legacy modulo-4 fallback
+- Symptom: Minerva timeline progress could show values from lists 1..4 for rows >4.
+- Root cause: front controller `minerva_progression_controller.js` still mapped list numbers with a legacy modulo-4 fallback.
+- Fix: removed fallback mapping and kept strict progress lookup by absolute list number (1..24).
+- Prevention: when domain numbering changes (e.g. list model), remove temporary compatibility fallbacks once migration is completed.
+
+## 2026-02-28 - Minerva special list files can contain duplicate item IDs
+- Symptom: list 24 showed 39 unique items while raw counts of lists 21/22/23 summed to 40.
+- Root cause: source JSON contained duplicated `id` (`931`) within the same special-list payload.
+- Fix: importer emits a warning on duplicate source rows in the same file (`Doublon detecte ... (conserve)`) but does not skip/filter rows.
+- Prevention: keep importer warnings visible, and treat source row count and unique-item count as distinct metrics by design.
+
 ## 2026-02-27 - public/assets may be ignored for new icon files
 - Symptom: `git add` failed with `The following paths are ignored ... public/assets`.
 - Root cause: `.gitignore` rules ignore parts of `public/assets`, while existing files can still be tracked.

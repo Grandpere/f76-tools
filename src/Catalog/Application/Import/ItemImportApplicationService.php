@@ -77,6 +77,8 @@ final class ItemImportApplicationService
                 continue;
             }
 
+            /** @var array<string, true> $seenInCurrentFile */
+            $seenInCurrentFile = [];
             foreach ($payload as $row) {
                 ++$stats['rows'];
 
@@ -92,6 +94,18 @@ final class ItemImportApplicationService
                 }
 
                 $sourceId = (int) $row['id'];
+                $seenKey = sprintf('%s:%d', $context->type->value, $sourceId);
+                if (isset($seenInCurrentFile[$seenKey])) {
+                    $warnings[] = sprintf(
+                        'Doublon detecte dans %s pour %s id=%d (conserve)',
+                        basename($file),
+                        $context->type->value,
+                        $sourceId
+                    );
+                    ++$stats['warnings'];
+                }
+                $seenInCurrentFile[$seenKey] = true;
+
                 $type = $context->type;
                 $memoryKey = sprintf('%s:%d', $type->value, $sourceId);
 

@@ -89,8 +89,10 @@
                 {% set modsLink %}<a href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ 'progression.quick_link_mods'|trans }}</a>{% endset %}
                 {% set minervaLink %}<a href="{{ path('app_minerva_rotation', { locale: app.request.locale }) }}">{{ 'progression.quick_link_minerva'|trans }}</a>{% endset %}
                 <p class="catalog-note info-note">
-                    {{ 'dashboard.create_player.help'|trans }}
-                    {{ 'progression.character_help_extended'|trans({'%modsLink%': modsLink, '%minervaLink%': minervaLink})|raw }}
+                    <span class="info-note-content">
+                        {{ 'dashboard.create_player.help'|trans }}
+                        {{ 'progression.character_help_extended'|trans({'%modsLink%': modsLink, '%minervaLink%': minervaLink})|raw }}
+                    </span>
                 </p>
                 <p class="catalog-state" role="status" aria-live="polite" data-player-progression-target="state">{{ 'dashboard.state.loading_players'|trans }}</p>
             </section>

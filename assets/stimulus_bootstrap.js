@@ -6,6 +6,7 @@ import MinervaKnowledgeController from './controllers/minerva_knowledge_controll
 import MinervaProgressionController from './controllers/minerva_progression_controller.js';
 import PlayerProgressionController from './controllers/player_progression_controller.js';
 import TextareaAutosizeController from './controllers/textarea_autosize_controller.js';
+import MinervaAdminDatepickerController from './controllers/minerva_admin_datepicker_controller.js';
 
 const app = startStimulusApp();
 // register any custom, 3rd party controllers here
@@ -17,3 +18,4 @@ app.register('minerva-knowledge', MinervaKnowledgeController);
 app.register('minerva-progression', MinervaProgressionController);
 app.register('player-progression', PlayerProgressionController);
 app.register('textarea-autosize', TextareaAutosizeController);
+app.register('minerva-admin-datepicker', MinervaAdminDatepickerController);

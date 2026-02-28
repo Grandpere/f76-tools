@@ -10,21 +10,33 @@ export default class extends Controller {
     };
 
     async connect() {
+        this.onPlayerChanged = (event) => {
+            const playerId = String(event?.detail?.playerId || '').trim();
+            if (playerId === '') {
+                return;
+            }
+            void this.loadProgress(playerId);
+        };
+        window.addEventListener('f76:minerva-player-changed', this.onPlayerChanged);
+
         const playerId = this.resolvePlayerId();
-        if (!playerId) {
+        if (playerId) {
+            await this.loadProgress(playerId);
+        }
+    }
+
+    disconnect() {
+        if (this.onPlayerChanged) {
+            window.removeEventListener('f76:minerva-player-changed', this.onPlayerChanged);
+        }
+    }
+
+    async loadProgress(playerId) {
+        const payload = await this.fetchStats(playerId);
+        if (!payload) {
             return;
         }
 
-        const url = this.buildStatsUrl(playerId);
-        const response = await fetch(url, {
-            headers: { Accept: 'application/json' },
-            credentials: 'same-origin',
-        });
-        if (!response.ok) {
-            return;
-        }
-
-        const payload = await response.json();
         const bookByList = Array.isArray(payload?.bookByList) ? payload.bookByList : [];
         const byList = new Map();
         bookByList.forEach((row) => {
@@ -39,6 +51,23 @@ export default class extends Controller {
         });
 
         this.renderProgress(byList);
+    }
+
+    async fetchStats(playerId) {
+        try {
+            const url = this.buildStatsUrl(playerId);
+            const response = await fetch(url, {
+                headers: { Accept: 'application/json' },
+                credentials: 'same-origin',
+            });
+            if (!response.ok) {
+                return null;
+            }
+
+            return await response.json();
+        } catch {
+            return null;
+        }
     }
 
     resolvePlayerId() {
@@ -83,7 +112,7 @@ export default class extends Controller {
 
             const metaNode = cell.querySelector('[data-minerva-progress-meta]');
             const fillNode = cell.querySelector('[data-minerva-progress-fill]');
-            const stat = byList.get(listCycle) ?? byList.get(this.resolveLegacyListMapping(listCycle));
+            const stat = byList.get(listCycle);
 
             if (!metaNode || !fillNode) {
                 return;
@@ -105,13 +134,4 @@ export default class extends Controller {
         });
     }
 
-    resolveLegacyListMapping(listCycle) {
-        if (listCycle >= 1 && listCycle <= 4) {
-            return listCycle;
-        }
-
-        const relative = ((listCycle - 1) % 4) + 1;
-
-        return relative <= 0 ? 1 : relative;
-    }
 }

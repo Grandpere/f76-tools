@@ -90,6 +90,34 @@ final class ItemImportApplicationServiceTest extends TestCase
         self::assertFileExists($projectDir.'/translations/items.de.yaml');
     }
 
+    public function testDuplicateSourceIdInSameFileIsKeptWithWarning(): void
+    {
+        $root = $this->createTempDir();
+        file_put_contents($root.'/minerva_84_alpha.json', '[{"id":931,"name_en":"Plan A"},{"id":931,"name_en":"Plan A Duplicate"}]');
+
+        $this->repository
+            ->expects(self::once())
+            ->method('findOneByTypeAndSourceId')
+            ->willReturn(null);
+        $this->repository->expects(self::never())->method('deleteAllBookLists');
+
+        $this->persistence->expects(self::exactly(2))->method('persist');
+        $this->persistence->expects(self::once())->method('flush');
+
+        $projectDir = $this->createTempDir();
+        $service = $this->createService($this->createTranslationWriter($projectDir));
+        $result = $service->import($root, false, 100, false);
+        $stats = $result->getStats();
+
+        self::assertSame(2, $stats['rows']);
+        self::assertSame(1, $stats['created']);
+        self::assertSame(1, $stats['updated']);
+        self::assertSame(0, $stats['skipped']);
+        self::assertSame(1, $stats['warnings']);
+        self::assertCount(1, $result->getWarnings());
+        self::assertStringContainsString('Doublon detecte', $result->getWarnings()[0]);
+    }
+
     private function createService(TranslationCatalogWriter $translationCatalogWriter): ItemImportApplicationService
     {
         $normalizer = new ItemImportValueNormalizer();

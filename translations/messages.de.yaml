@@ -30,16 +30,16 @@ dashboard.create_player.title: Charakter erstellen
 dashboard.create_player.name: Charaktername
 dashboard.create_player.placeholder: 'Z. B.: VaultDweller'
 dashboard.create_player.submit: Erstellen
-dashboard.create_player.help: Der neue Charakter wird automatisch ausgewahlt.
+dashboard.create_player.help: 'Der neue Charakter wird automatisch ausgewahlt, '
 progression.page_title: 'F76 - Charakterfortschritt'
 progression.title: Charakterfortschritt
 progression.description: Ubersicht des Fortschritts nach legendarem Rang und Minerva-Liste.
 progression.character_block_title: Charakter
 progression.backup_title: Backup
 progression.player_list_label: Charakterliste
-progression.quick_link_mods: Legendare Mods offnen
-progression.quick_link_minerva: Minerva offnen
-progression.character_help_extended: ', der Fortschritt wird aktualisiert, indem Objekte auf den dedizierten Seiten als gelernt markiert werden: %modsLink% und %minervaLink%.'
+progression.quick_link_mods: legendare mods
+progression.quick_link_minerva: minerva
+progression.character_help_extended: 'der Fortschritt wird aktualisiert, indem Objekte auf den dedizierten Seiten als gelernt markiert werden: %modsLink% und %minervaLink%.'
 dashboard.transfer.title: Fortschritt (Backup)
 dashboard.transfer.export: JSON-Export
 dashboard.transfer.import: JSON-Import

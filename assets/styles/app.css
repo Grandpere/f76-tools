@@ -649,7 +649,7 @@ body::before {
 }
 
 .info-note {
-    margin-top: 0.55rem;
+    margin-top: 0.9rem;
     padding: 0.52rem 0.62rem 0.52rem 0.6rem;
     border: 1px solid rgba(244, 197, 43, 0.4);
     border-radius: 10px;
@@ -675,15 +675,20 @@ body::before {
     margin-top: 0.02rem;
 }
 
+.info-note-content {
+    display: inline;
+}
+
 .info-note a {
     color: #6b5200;
-    font-weight: 700;
-    text-decoration: none;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 0.08em;
 }
 
 .info-note a:hover {
     color: #8c6d00;
-    text-decoration: underline;
+    text-decoration-thickness: 2px;
 }
 
 .transfer-controls {
@@ -1230,38 +1235,33 @@ body::before {
     font-size: 0.85rem;
 }
 
-.translations-table.minerva-timeline-table th:first-child,
-.translations-table.minerva-timeline-table td:first-child {
-    width: 1%;
+.minerva-table.minerva-timeline-table th:first-child,
+.minerva-table.minerva-timeline-table td:first-child {
+    width: 3.8rem;
     white-space: nowrap;
     text-align: center;
     padding-left: 0.35rem;
     padding-right: 0.35rem;
 }
 
-.translations-table.minerva-timeline-table th:nth-child(2),
-.translations-table.minerva-timeline-table td:nth-child(2) {
-    width: 20%;
-}
-
-.translations-table.minerva-timeline-table th:nth-child(3),
-.translations-table.minerva-timeline-table td:nth-child(3),
-.translations-table.minerva-timeline-table th:nth-child(4),
-.translations-table.minerva-timeline-table td:nth-child(4) {
-    width: 1%;
-    white-space: nowrap;
-}
-
-.translations-table.minerva-timeline-table th:nth-child(5),
-.translations-table.minerva-timeline-table td:nth-child(5) {
-    width: 1%;
-    white-space: nowrap;
-}
-
-.translations-table.minerva-timeline-table th:nth-child(6),
-.translations-table.minerva-timeline-table td:nth-child(6) {
+.minerva-table.minerva-timeline-table th:nth-child(2),
+.minerva-table.minerva-timeline-table td:nth-child(2) {
     width: auto;
     white-space: normal;
+}
+
+.minerva-table.minerva-timeline-table th:nth-child(3),
+.minerva-table.minerva-timeline-table td:nth-child(3),
+.minerva-table.minerva-timeline-table th:nth-child(4),
+.minerva-table.minerva-timeline-table td:nth-child(4) {
+    width: 9.4rem;
+    white-space: nowrap;
+}
+
+.minerva-table.minerva-timeline-table th:nth-child(5),
+.minerva-table.minerva-timeline-table td:nth-child(5) {
+    width: 9rem;
+    white-space: nowrap;
 }
 
 .minerva-progress-cell {
@@ -1310,6 +1310,131 @@ body::before {
     align-items: center;
 }
 
+.minerva-admin-filters .field input[type='date'],
+.minerva-admin-filters .field input[type='datetime-local'] {
+    min-height: 2.45rem;
+    border-color: rgba(160, 119, 0, 0.32);
+    background: linear-gradient(180deg, #fffef9, #fff8df);
+    padding-right: 0.8rem;
+    color-scheme: light;
+}
+
+.minerva-admin-filters .field .flatpickr-input[readonly] {
+    width: 100%;
+    min-height: 2.45rem;
+    border: 1px solid rgba(160, 119, 0, 0.32);
+    border-radius: 12px;
+    background: linear-gradient(180deg, #fffef9, #fff8df);
+    color: var(--text-0);
+    font-size: 0.95rem;
+    padding: 0.62rem 0.72rem;
+}
+
+.minerva-admin-filters .field .flatpickr-input[readonly]:focus {
+    outline: none;
+    border-color: var(--line-strong);
+    box-shadow: 0 0 0 3px rgba(244, 164, 74, 0.2);
+}
+
+.minerva-admin-filters .field input[type='date']:hover,
+.minerva-admin-filters .field input[type='datetime-local']:hover {
+    border-color: rgba(230, 185, 0, 0.55);
+}
+
+.minerva-admin-filters .field input[type='date']::-webkit-calendar-picker-indicator,
+.minerva-admin-filters .field input[type='datetime-local']::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.82;
+    filter: sepia(1) saturate(3.2) hue-rotate(350deg);
+}
+
+.minerva-admin-filters .field input[type='date']::-webkit-calendar-picker-indicator:hover,
+.minerva-admin-filters .field input[type='datetime-local']::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+.flatpickr-calendar {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--card-glow);
+    background: #fff;
+    font-family: inherit;
+    z-index: 70;
+}
+
+.flatpickr-months .flatpickr-month {
+    color: var(--text-0);
+    fill: var(--text-0);
+}
+
+.flatpickr-current-month input.cur-year,
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+    color: var(--text-0);
+    font-weight: 700;
+}
+
+.flatpickr-weekdays {
+    background: #f7f6f2;
+}
+
+span.flatpickr-weekday {
+    color: var(--text-2);
+    font-weight: 600;
+}
+
+.flatpickr-day {
+    border-radius: 8px;
+    color: var(--text-0);
+}
+
+.flatpickr-day:hover {
+    background: rgba(29, 37, 49, 0.08);
+    border-color: rgba(29, 37, 49, 0.08);
+}
+
+.flatpickr-day.today {
+    border-color: rgba(160, 119, 0, 0.35);
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
+    background: linear-gradient(180deg, #ffe27f, #f4c52b);
+    border-color: rgba(175, 132, 8, 0.78);
+    color: #2a2200;
+}
+
+.flatpickr-day.inRange,
+.flatpickr-day.nextMonthDay.inRange,
+.flatpickr-day.prevMonthDay.inRange {
+    background: rgba(244, 197, 43, 0.2);
+    border-color: rgba(244, 197, 43, 0.16);
+    color: #2a2200;
+    box-shadow: none;
+}
+
+.flatpickr-day.startRange,
+.flatpickr-day.endRange,
+.flatpickr-day.startRange:hover,
+.flatpickr-day.endRange:hover,
+.flatpickr-day.selected:hover {
+    background: linear-gradient(180deg, #ffe27f, #f4c52b);
+    border-color: rgba(175, 132, 8, 0.78);
+    color: #2a2200;
+}
+
+.flatpickr-months .flatpickr-prev-month:hover svg,
+.flatpickr-months .flatpickr-next-month:hover svg {
+    fill: #8c6d00;
+}
+
+.flatpickr-time input:hover,
+.flatpickr-time .flatpickr-am-pm:hover,
+.flatpickr-time input:focus,
+.flatpickr-time .flatpickr-am-pm:focus {
+    background: rgba(244, 197, 43, 0.14);
+}
+
 .translations-table-wrap {
     margin-top: 0.8rem;
     overflow: auto;
@@ -1318,7 +1443,21 @@ body::before {
     background: #fff;
 }
 
+.minerva-table-wrap {
+    margin-top: 0.8rem;
+    overflow: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+}
+
 .translations-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 860px;
+}
+
+.minerva-table {
     width: 100%;
     border-collapse: collapse;
     min-width: 860px;
@@ -1354,8 +1493,57 @@ body::before {
     width: 32%;
 }
 
+.translations-table.admin-minerva-timeline-table th:first-child,
+.translations-table.admin-minerva-timeline-table td:first-child {
+    width: 1%;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.translations-table.admin-minerva-timeline-table {
+    min-width: 760px;
+    table-layout: fixed;
+}
+
+.translations-table.admin-minerva-timeline-table col.col-list {
+    width: 3.8rem;
+}
+
+.translations-table.admin-minerva-timeline-table col.col-location {
+    width: 44%;
+}
+
+.translations-table.admin-minerva-timeline-table col.col-start,
+.translations-table.admin-minerva-timeline-table col.col-end {
+    width: 9.4rem;
+}
+
+.translations-table.admin-minerva-timeline-table col.col-source,
+.translations-table.admin-minerva-timeline-table col.col-status {
+    width: 7.8rem;
+}
+
+.translations-table.admin-minerva-timeline-table th:nth-child(2),
+.translations-table.admin-minerva-timeline-table td:nth-child(2) {
+    white-space: normal;
+}
+
+.translations-table.admin-minerva-timeline-table th:nth-child(3),
+.translations-table.admin-minerva-timeline-table td:nth-child(3),
+.translations-table.admin-minerva-timeline-table th:nth-child(4),
+.translations-table.admin-minerva-timeline-table td:nth-child(4),
+.translations-table.admin-minerva-timeline-table th:nth-child(5),
+.translations-table.admin-minerva-timeline-table td:nth-child(5),
+.translations-table.admin-minerva-timeline-table th:nth-child(6),
+.translations-table.admin-minerva-timeline-table td:nth-child(6) {
+    width: 1%;
+    white-space: nowrap;
+}
+
 .translations-table th,
-.translations-table td {
+.translations-table td,
+.minerva-table th,
+.minerva-table td {
     text-align: left;
     vertical-align: top;
     border-bottom: 1px solid rgba(29, 37, 49, 0.09);
@@ -1363,7 +1551,8 @@ body::before {
     font-size: 0.86rem;
 }
 
-.translations-table th {
+.translations-table th,
+.minerva-table th {
     position: sticky;
     top: 0;
     z-index: 1;

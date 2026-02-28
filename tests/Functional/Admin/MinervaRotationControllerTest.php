@@ -21,6 +21,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class MinervaRotationControllerTest extends WebTestCase
@@ -62,6 +63,44 @@ final class MinervaRotationControllerTest extends WebTestCase
         $this->browser()->request('GET', '/admin/minerva-rotation');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+    }
+
+    public function testTimelineTableColumnsAreOrderedLikeFrontWithSourceAndStatusLast(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/minerva-rotation');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+
+        $headers = $crawler->filter('table.admin-minerva-timeline-table thead th');
+        self::assertCount(6, $headers);
+
+        $headerTexts = $headers->each(static fn ($node): string => trim(preg_replace('/\s+/', ' ', $node->text()) ?? ''));
+        $translator = $this->browser()->getContainer()->get(TranslatorInterface::class);
+        \assert($translator instanceof TranslatorInterface);
+        $locale = $this->browser()->getRequest()->getLocale();
+
+        self::assertSame([
+            $translator->trans('minerva.list_cycle', locale: $locale),
+            $translator->trans('minerva.location', locale: $locale),
+            $translator->trans('minerva.starts_at', locale: $locale),
+            $translator->trans('minerva.ends_at', locale: $locale),
+            $translator->trans('admin_minerva.source', locale: $locale),
+            $translator->trans('minerva.status', locale: $locale),
+        ], $headerTexts);
+    }
+
+    public function testAdminFormsExposeMinervaDatepickerController(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/minerva-rotation');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+
+        self::assertCount(1, $crawler->filter('form[action*="/admin/minerva-rotation/regenerate"][data-controller~="minerva-admin-datepicker"]'));
+        self::assertCount(1, $crawler->filter('form[action*="/admin/minerva-rotation/override/create"][data-controller~="minerva-admin-datepicker"]'));
     }
 
     public function testAdminCanRegenerateRotationFromForm(): void

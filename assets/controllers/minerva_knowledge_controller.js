@@ -29,6 +29,7 @@ export default class extends Controller {
         this.playerSelectTarget.addEventListener('change', async () => {
             this.activePlayerId = this.playerSelectTarget.value;
             this.saveActivePlayerId(this.activePlayerId);
+            this.dispatchActivePlayerChanged();
             this.openBookGroup = null;
             await this.loadItems();
         });
@@ -372,6 +373,7 @@ export default class extends Controller {
         this.activePlayerId = String(selected.id);
         this.saveActivePlayerId(this.activePlayerId);
         this.playerSelectTarget.value = this.activePlayerId;
+        this.dispatchActivePlayerChanged();
     }
 
     readPersistedState() {
@@ -423,6 +425,17 @@ export default class extends Controller {
         } catch {
             // Ignore storage errors.
         }
+    }
+
+    dispatchActivePlayerChanged() {
+        const playerId = String(this.activePlayerId || '').trim();
+        if (playerId === '') {
+            return;
+        }
+
+        window.dispatchEvent(new CustomEvent('f76:minerva-player-changed', {
+            detail: { playerId },
+        }));
     }
 
     readUiTranslations() {
