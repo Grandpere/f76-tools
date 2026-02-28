@@ -166,7 +166,7 @@ Permettre a un utilisateur authentifie de:
 
 ## Risques / Decisions a figer
 - [x] Decider le modele exact learned:
-  - [ ] `isLearned` bool (historique simple, non retenu),
+  - [x] `isLearned` bool (historique simple, non retenu),
   - [x] ou presence/absence en table pivot.
 - [x] Politique de suppression:
   - [x] supprimer un player supprime son knowledge (`ON DELETE CASCADE`).

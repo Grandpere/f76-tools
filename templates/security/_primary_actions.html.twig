@@ -1,0 +1,7 @@
+{% set includeRegister = includeRegister|default(true) %}
+<div class="auth-primary-actions">
+    <button type="submit">{{ submitLabel|trans }}</button>
+    {% if includeRegister %}
+        <a class="auth-button-link" href="{{ path('app_register', { locale: app.request.locale }) }}">{{ 'security.login.to_register'|trans }}</a>
+    {% endif %}
+</div>

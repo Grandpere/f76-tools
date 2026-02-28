@@ -6,6 +6,8 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-103: Roadmap learned model checkbox clarification (option bool non retenue explicitement close) (done).
+- F76-102: Security primary actions componentization (submit + register secondaire factorises) (done).
 - F76-101: Locale options componentization (options FR/EN/DE factorisees front/admin) (done).
 - F76-100: Admin flashes componentization + sync des cases validation fonctionnelle manuelle (done).
 - F76-099: Admin page header componentization (header complet factorise sur les vues admin) (done).

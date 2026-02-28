@@ -25,10 +25,7 @@
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('resend_verification') }}">
                 {% include 'security/_turnstile.html.twig' %}
 
-                <div class="auth-primary-actions">
-                    <button type="submit">{{ 'security.resend.submit'|trans }}</button>
-                    <a class="auth-button-link" href="{{ path('app_register', { locale: app.request.locale }) }}">{{ 'security.login.to_register'|trans }}</a>
-                </div>
+                {% include 'security/_primary_actions.html.twig' with { submitLabel: 'security.resend.submit' } %}
             </form>
 
             {% include 'security/_links.html.twig' with {
