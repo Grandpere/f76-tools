@@ -8,7 +8,6 @@
         <summary class="header-account"><img class="header-action-icon" src="/assets/icons/account.svg" alt="" aria-hidden="true"> <strong>{{ username }}</strong><span class="header-account-caret" aria-hidden="true">▾</span></summary>
         <div class="header-account-dropdown">
             <a class="header-account-dropdown-link" href="{{ path('app_account_security', { locale: app.request.locale }) }}">{{ 'dashboard.header.security_profile'|trans }}</a>
-            <a class="header-account-dropdown-link" href="{{ path('app_change_password', { locale: app.request.locale }) }}">{{ 'dashboard.header.change_password'|trans }}</a>
         </div>
     </details>
     <form method="post" action="{{ path('app_logout', { locale: app.request.locale }) }}" class="logout-form header-logout-form">
