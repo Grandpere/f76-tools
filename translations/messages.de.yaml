@@ -224,6 +224,7 @@ admin_users.google_linked_since: 'Verknupft seit %date%'
 admin_users.toggle_active: Aktiv umschalten
 admin_users.toggle_admin: Admin umschalten
 admin_users.generate_reset_link: Link zum Zurucksetzen generieren
+admin_users.resend_verification: Verifizierungs-E-Mail erneut senden
 admin_users.unlink_google: Google-Verknupfung losen
 admin_users.no_users: Keine Benutzer.
 admin_users.flash.invalid_csrf: Ungultige Aktion (CSRF).
@@ -237,6 +238,9 @@ admin_users.flash.role_updated: Rollen aktualisiert.
 admin_users.flash.reset_link_generated: Link zum Zurucksetzen generiert
 admin_users.flash.reset_link_rate_limited: Link wurde kurzlich erstellt. In %seconds% s erneut versuchen.
 admin_users.flash.reset_link_global_rate_limited: Zu viele Links erstellt (%count%) in %seconds% s. Bitte spater erneut versuchen.
+admin_users.flash.verification_email_sent: Verifizierungs-E-Mail gesendet.
+admin_users.flash.verification_email_already_verified: Die E-Mail dieses Benutzers ist bereits verifiziert.
+admin_users.flash.verification_email_rate_limited: Verifizierungs-E-Mail wurde kurzlich gesendet. In %seconds% s erneut versuchen.
 
 admin_audit.page_title: Audit-Logs Backoffice
 admin_audit.kicker: Backoffice

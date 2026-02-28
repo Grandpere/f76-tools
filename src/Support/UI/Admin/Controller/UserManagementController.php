@@ -19,6 +19,8 @@ use App\Support\Application\AdminUser\AdminUserGoogleIdentityReadService;
 use App\Support\Application\AdminUser\AdminUserManagementReadRepositoryInterface;
 use App\Support\Application\AdminUser\GenerateResetLinkApplicationService;
 use App\Support\Application\AdminUser\GenerateResetLinkStatus;
+use App\Support\Application\AdminUser\ResendVerificationEmailApplicationService;
+use App\Support\Application\AdminUser\ResendVerificationEmailStatus;
 use App\Support\Application\AdminUser\ToggleUserActiveApplicationService;
 use App\Support\Application\AdminUser\ToggleUserActiveResult;
 use App\Support\Application\AdminUser\ToggleUserAdminApplicationService;
@@ -28,6 +30,7 @@ use App\Support\Application\AdminUser\UnlinkGoogleIdentityResult;
 use App\Support\Domain\Entity\AdminAuditLogEntity;
 use App\Support\UI\Admin\AdminAuthenticatedUserContext;
 use App\Support\UI\Admin\GenerateResetLinkFeedbackMapper;
+use App\Support\UI\Admin\ResendVerificationEmailFeedbackMapper;
 use App\Support\UI\Admin\ToggleUserActiveFeedbackMapper;
 use App\Support\UI\Admin\ToggleUserAdminFeedbackMapper;
 use App\Support\UI\Admin\UnlinkGoogleIdentityFeedbackMapper;
@@ -59,9 +62,12 @@ final class UserManagementController extends AbstractController
         private readonly ToggleUserAdminFeedbackMapper $toggleUserAdminFeedbackMapper,
         private readonly GenerateResetLinkApplicationService $generateResetLinkApplicationService,
         private readonly GenerateResetLinkFeedbackMapper $generateResetLinkFeedbackMapper,
+        private readonly ResendVerificationEmailApplicationService $resendVerificationEmailApplicationService,
+        private readonly ResendVerificationEmailFeedbackMapper $resendVerificationEmailFeedbackMapper,
         private readonly UnlinkGoogleIdentityApplicationService $unlinkGoogleIdentityApplicationService,
         private readonly UnlinkGoogleIdentityFeedbackMapper $unlinkGoogleIdentityFeedbackMapper,
         private readonly AdminAuthenticatedUserContext $adminAuthenticatedUserContext,
+        private readonly \App\Identity\UI\Security\IdentityIssuedTokenNotifier $identityIssuedTokenNotifier,
     ) {
     }
 
@@ -74,11 +80,14 @@ final class UserManagementController extends AbstractController
         $googleFilter = $this->normalizeGoogleFilter($request->query->getString('google', ''));
         $activeFilter = $this->normalizeActiveFilter($request->query->getString('active', ''));
         $query = trim($request->query->getString('q', ''));
+        $sort = $this->normalizeSort($request->query->getString('sort', ''));
+        $dir = $this->normalizeSortDirection($request->query->getString('dir', ''));
         $perPage = $this->normalizePerPage((int) $request->query->get('perPage', 30));
         $page = max(1, (int) $request->query->get('page', 1));
         $filteredUsers = $this->filterUsersByActiveStatus($users, $activeFilter);
         $filteredUsers = $this->filterUsersByGoogleIdentity($filteredUsers, $googleIdentitiesByUserId, $googleFilter);
         $filteredUsers = $this->filterUsersBySearchQuery($filteredUsers, $query);
+        $filteredUsers = $this->sortUsers($filteredUsers, $sort, $dir);
         $totalUsers = count($users);
         $googleLinkedCount = count($googleIdentitiesByUserId);
         $googleUnlinkedCount = max(0, $totalUsers - $googleLinkedCount);
@@ -94,6 +103,8 @@ final class UserManagementController extends AbstractController
             'googleFilter' => $googleFilter,
             'activeFilter' => $activeFilter,
             'query' => $query,
+            'sort' => $sort,
+            'dir' => $dir,
             'page' => $page,
             'perPage' => $perPage,
             'totalPages' => $totalPages,
@@ -224,6 +235,40 @@ final class UserManagementController extends AbstractController
         return $this->redirectToUsers($request);
     }
 
+    #[Route('/{id<\d+>}/resend-verification', name: 'app_admin_users_resend_verification', methods: ['POST'])]
+    public function resendVerification(int $id, Request $request): RedirectResponse
+    {
+        $failureResponse = $this->guardAdminPostOrFailure($request, 'admin_users_resend_verification_'.$id);
+        if ($failureResponse instanceof RedirectResponse) {
+            return $failureResponse;
+        }
+        $actor = $this->getAuthenticatedUser();
+
+        $result = $this->resendVerificationEmailApplicationService->request($id);
+        $feedback = $this->resendVerificationEmailFeedbackMapper->map($result);
+        $this->addFlash(
+            $feedback['flashType'],
+            $this->translator->trans($feedback['flashMessage'], $feedback['flashParams']),
+        );
+
+        if (ResendVerificationEmailStatus::GENERATED === $result->status()) {
+            $this->identityIssuedTokenNotifier->notifyVerification(
+                $result->targetUser()?->getEmail(),
+                $result->plainToken(),
+                $request->getLocale(),
+                $request->getClientIp(),
+                'security.auth.admin.resend_verification.token_issued',
+            );
+        }
+
+        if (is_string($feedback['auditAction'])) {
+            $this->persistAuditLog($request, $actor, $feedback['auditAction'], $result->targetUser(), $feedback['auditContext']);
+            $this->entityManager->flush();
+        }
+
+        return $this->redirectToUsers($request);
+    }
+
     private function guardAdminPostOrFailure(Request $request, string $tokenId): ?RedirectResponse
     {
         $this->ensureAdminAccess();
@@ -243,6 +288,8 @@ final class UserManagementController extends AbstractController
             'google' => $this->normalizeGoogleFilter((string) $request->request->get('google', '')),
             'active' => $this->normalizeActiveFilter((string) $request->request->get('active', '')),
             'q' => trim((string) $request->request->get('q', '')),
+            'sort' => $this->normalizeSort((string) $request->request->get('sort', '')),
+            'dir' => $this->normalizeSortDirection((string) $request->request->get('dir', '')),
             'perPage' => $this->normalizePerPage((int) $request->request->get('perPage', 30)),
             'page' => 1,
         ]);
@@ -381,5 +428,39 @@ final class UserManagementController extends AbstractController
         $allowed = [20, 30, 50, 100];
 
         return in_array($perPage, $allowed, true) ? $perPage : 30;
+    }
+
+    private function normalizeSort(string $sort): string
+    {
+        $normalized = mb_strtolower(trim($sort));
+
+        return in_array($normalized, ['email', 'createdat', 'active'], true) ? $normalized : 'email';
+    }
+
+    private function normalizeSortDirection(string $dir): string
+    {
+        $normalized = mb_strtolower(trim($dir));
+
+        return in_array($normalized, ['asc', 'desc'], true) ? $normalized : 'asc';
+    }
+
+    /**
+     * @param list<UserEntity> $users
+     *
+     * @return list<UserEntity>
+     */
+    private function sortUsers(array $users, string $sort, string $dir): array
+    {
+        usort($users, static function (UserEntity $left, UserEntity $right) use ($sort, $dir): int {
+            $comparison = match ($sort) {
+                'createdat' => $left->getCreatedAt() <=> $right->getCreatedAt(),
+                'active' => ((int) $left->isActive()) <=> ((int) $right->isActive()),
+                default => strcmp($left->getEmail(), $right->getEmail()),
+            };
+
+            return 'desc' === $dir ? -$comparison : $comparison;
+        });
+
+        return $users;
     }
 }

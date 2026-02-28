@@ -10,7 +10,9 @@
             localeHiddenFields: {
                 google: googleFilter,
                 active: activeFilter,
-                q: query,
+                q: query ?: null,
+                sort: sort,
+                dir: dir,
                 perPage: perPage,
                 page: page
             },
@@ -28,6 +30,16 @@
                 <span class="admin-users-summary-item">{{ 'admin_users.summary_google_unlinked_label'|trans }}: {{ googleUnlinkedCount }}</span>
                 <span class="admin-users-summary-item">{{ 'admin_users.summary_visible_label'|trans }}: {{ visibleUsers }}</span>
             </div>
+            {% set commonParams = {
+                locale: app.request.locale,
+                q: query ?: null,
+                google: googleFilter ?: null,
+                active: activeFilter ?: null,
+                sort: sort,
+                dir: dir,
+                perPage: perPage,
+                page: page
+            } %}
             <form method="get" class="translations-filters">
                 {% include 'admin/_text_filter_field.html.twig' with {
                     label: 'admin_users.search',
@@ -61,11 +73,13 @@
                     options: [20, 30, 50, 100]
                 } %}
                 {% include 'admin/_filters_common_hidden_fields.html.twig' %}
+                <input type="hidden" name="sort" value="{{ sort }}">
+                <input type="hidden" name="dir" value="{{ dir }}">
                 <button type="submit">{{ 'admin_users.filter'|trans }}</button>
             </form>
             <p class="catalog-state">{{ 'admin_users.visible_rows'|trans({'%count%': visibleUsers}) }}</p>
-            {% set previousUrl = page > 1 ? path('app_admin_users', { locale: app.request.locale, q: query ?: null, google: googleFilter ?: null, active: activeFilter ?: null, perPage: perPage, page: page - 1 }) : null %}
-            {% set nextUrl = page < totalPages ? path('app_admin_users', { locale: app.request.locale, q: query ?: null, google: googleFilter ?: null, active: activeFilter ?: null, perPage: perPage, page: page + 1 }) : null %}
+            {% set previousUrl = page > 1 ? path('app_admin_users', commonParams|merge({ page: page - 1 })) : null %}
+            {% set nextUrl = page < totalPages ? path('app_admin_users', commonParams|merge({ page: page + 1 })) : null %}
             {% include 'admin/_pager.html.twig' with {
                 page: page,
                 totalPages: totalPages,
@@ -77,10 +91,13 @@
                 <table class="translations-table admin-users-table">
                     <thead>
                     <tr>
-                        <th>{{ 'admin_users.email'|trans }}</th>
-                        <th>{{ 'admin_users.created_at'|trans }}</th>
+                        {% set emailDir = sort == 'email' and dir == 'asc' ? 'desc' : 'asc' %}
+                        {% set createdAtDir = sort == 'createdat' and dir == 'asc' ? 'desc' : 'asc' %}
+                        {% set activeDir = sort == 'active' and dir == 'asc' ? 'desc' : 'asc' %}
+                        <th><a href="{{ path('app_admin_users', commonParams|merge({ sort: 'email', dir: emailDir, page: 1 })) }}">{{ 'admin_users.email'|trans }}</a></th>
+                        <th><a href="{{ path('app_admin_users', commonParams|merge({ sort: 'createdat', dir: createdAtDir, page: 1 })) }}">{{ 'admin_users.created_at'|trans }}</a></th>
                         <th>{{ 'admin_users.roles'|trans }}</th>
-                        <th>{{ 'admin_users.active'|trans }}</th>
+                        <th><a href="{{ path('app_admin_users', commonParams|merge({ sort: 'active', dir: activeDir, page: 1 })) }}">{{ 'admin_users.active'|trans }}</a></th>
                         <th>{{ 'admin_users.identities'|trans }}</th>
                         <th>{{ 'admin_users.actions'|trans }}</th>
                     </tr>
@@ -112,6 +129,8 @@
                                         <input type="hidden" name="active" value="{{ activeFilter }}">
                                         <input type="hidden" name="q" value="{{ query }}">
                                         <input type="hidden" name="perPage" value="{{ perPage }}">
+                                        <input type="hidden" name="sort" value="{{ sort }}">
+                                        <input type="hidden" name="dir" value="{{ dir }}">
                                         <button type="submit">{{ 'admin_users.toggle_active'|trans }}</button>
                                     </form>
                                     <form method="post" action="{{ path('app_admin_users_toggle_admin', { id: user.id, locale: app.request.locale }) }}">
@@ -120,6 +139,8 @@
                                         <input type="hidden" name="active" value="{{ activeFilter }}">
                                         <input type="hidden" name="q" value="{{ query }}">
                                         <input type="hidden" name="perPage" value="{{ perPage }}">
+                                        <input type="hidden" name="sort" value="{{ sort }}">
+                                        <input type="hidden" name="dir" value="{{ dir }}">
                                         <button type="submit">{{ 'admin_users.toggle_admin'|trans }}</button>
                                     </form>
                                     <form method="post" action="{{ path('app_admin_users_generate_reset_link', { id: user.id, locale: app.request.locale }) }}">
@@ -128,8 +149,22 @@
                                         <input type="hidden" name="active" value="{{ activeFilter }}">
                                         <input type="hidden" name="q" value="{{ query }}">
                                         <input type="hidden" name="perPage" value="{{ perPage }}">
+                                        <input type="hidden" name="sort" value="{{ sort }}">
+                                        <input type="hidden" name="dir" value="{{ dir }}">
                                         <button type="submit">{{ 'admin_users.generate_reset_link'|trans }}</button>
                                     </form>
+                                    {% if not user.isEmailVerified %}
+                                        <form method="post" action="{{ path('app_admin_users_resend_verification', { id: user.id, locale: app.request.locale }) }}">
+                                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_resend_verification_' ~ user.id) }}">
+                                            <input type="hidden" name="google" value="{{ googleFilter }}">
+                                            <input type="hidden" name="active" value="{{ activeFilter }}">
+                                            <input type="hidden" name="q" value="{{ query }}">
+                                            <input type="hidden" name="perPage" value="{{ perPage }}">
+                                            <input type="hidden" name="sort" value="{{ sort }}">
+                                            <input type="hidden" name="dir" value="{{ dir }}">
+                                            <button type="submit">{{ 'admin_users.resend_verification'|trans }}</button>
+                                        </form>
+                                    {% endif %}
                                     {% if isGoogleLinked %}
                                         <form method="post" action="{{ path('app_admin_users_unlink_google', { id: user.id, locale: app.request.locale }) }}">
                                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_unlink_google_' ~ user.id) }}">
@@ -137,6 +172,8 @@
                                             <input type="hidden" name="active" value="{{ activeFilter }}">
                                             <input type="hidden" name="q" value="{{ query }}">
                                             <input type="hidden" name="perPage" value="{{ perPage }}">
+                                            <input type="hidden" name="sort" value="{{ sort }}">
+                                            <input type="hidden" name="dir" value="{{ dir }}">
                                             <button type="submit">{{ 'admin_users.unlink_google'|trans }}</button>
                                         </form>
                                     {% endif %}

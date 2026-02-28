@@ -224,6 +224,7 @@ admin_users.google_linked_since: 'Linked since %date%'
 admin_users.toggle_active: Toggle active
 admin_users.toggle_admin: Toggle admin
 admin_users.generate_reset_link: Generate reset link
+admin_users.resend_verification: Resend verification email
 admin_users.unlink_google: Unlink Google
 admin_users.no_users: No users.
 admin_users.flash.invalid_csrf: Invalid action (CSRF).
@@ -237,6 +238,9 @@ admin_users.flash.role_updated: Roles updated.
 admin_users.flash.reset_link_generated: Password reset link generated
 admin_users.flash.reset_link_rate_limited: Link already generated recently. Retry in %seconds% s.
 admin_users.flash.reset_link_global_rate_limited: Too many links generated (%count%) over %seconds% s. Retry later.
+admin_users.flash.verification_email_sent: Verification email sent.
+admin_users.flash.verification_email_already_verified: This user email is already verified.
+admin_users.flash.verification_email_rate_limited: Verification email already sent recently. Retry in %seconds% s.
 
 admin_audit.page_title: Audit logs backoffice
 admin_audit.kicker: Backoffice

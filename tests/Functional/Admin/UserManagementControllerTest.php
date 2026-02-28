@@ -115,7 +115,7 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter(sprintf('form[action*="/admin/users/%d/generate-reset-link"]', $managed->getId())));
         self::assertCount(1, $crawler->filter(sprintf('form[action*="/admin/users/%d/unlink-google"]', $managed->getId())));
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//thead//th[normalize-space()='Created at']"));
-        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[2]"));
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr[td[1][normalize-space()='managed-actions@example.com']]/td[2]"));
         self::assertGreaterThanOrEqual(1, $crawler->filter('.admin-identity-badge-linked')->count());
         self::assertGreaterThanOrEqual(1, $crawler->filter('.admin-identity-meta')->count());
     }
@@ -223,6 +223,19 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='u01-page@example.com']"));
     }
 
+    public function testAdminCanSortUsersByEmailDescending(): void
+    {
+        $admin = $this->createUser('admin-sort@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->createUser('a-sort@example.com', 'secret123', ['ROLE_USER']);
+        $this->createUser('z-sort@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?sort=email&dir=desc');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        $firstEmail = trim($crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr[1]/td[1]")->text(''));
+        self::assertSame('z-sort@example.com', $firstEmail);
+    }
+
     public function testAdminActionRedirectPreservesSearchQuery(): void
     {
         $admin = $this->createUser('admin-preserve-q@example.com', 'secret123', ['ROLE_ADMIN']);
@@ -240,6 +253,28 @@ final class UserManagementControllerTest extends WebTestCase
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('q=managed-preserve-q', (string) $this->browser()->getResponse()->headers->get('location'));
+    }
+
+    public function testAdminActionRedirectPreservesSortParameters(): void
+    {
+        $admin = $this->createUser('admin-preserve-sort@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed-preserve-sort@example.com', 'secret123', ['ROLE_USER']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users?sort=createdat&dir=desc');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/toggle-active', $managed->getId()), [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'sort' => 'createdat',
+            'dir' => 'desc',
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        $location = (string) $this->browser()->getResponse()->headers->get('location');
+        self::assertStringContainsString('sort=createdat', $location);
+        self::assertStringContainsString('dir=desc', $location);
     }
 
     public function testAdminActionRedirectPreservesActiveFilter(): void
@@ -280,6 +315,34 @@ final class UserManagementControllerTest extends WebTestCase
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('perPage=50', (string) $this->browser()->getResponse()->headers->get('location'));
+    }
+
+    public function testAdminCanResendVerificationEmailForUnverifiedUser(): void
+    {
+        $admin = $this->createUser('admin-resend@example.com', 'secret123', ['ROLE_ADMIN']);
+        $managed = $this->createUser('managed-resend@example.com', 'secret123', ['ROLE_USER']);
+        $managed->setIsEmailVerified(false);
+        $this->entityManager?->flush();
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/users');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/resend-verification"] input[name="_csrf_token"]', $managed->getId()));
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', sprintf('/admin/users/%d/resend-verification', $managed->getId()), [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $this->entityManager?->clear();
+        $updated = $this->findUserByEmail('managed-resend@example.com');
+        self::assertInstanceOf(UserEntity::class, $updated);
+        self::assertNotNull($updated->getEmailVerificationTokenHash());
+        self::assertNotNull($updated->getEmailVerificationRequestedAt());
+        self::assertNotNull($updated->getEmailVerificationExpiresAt());
+
+        $audit = $this->findAuditForTargetAction('managed-resend@example.com', 'user_resend_verification_email');
+        self::assertInstanceOf(AdminAuditLogEntity::class, $audit);
     }
 
     public function testAdminCanToggleManagedUserRole(): void
