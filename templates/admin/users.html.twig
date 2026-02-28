@@ -5,18 +5,10 @@
 {% block body %}
     <main class="translations-page">
         <header class="translations-header">
-            <div class="catalog-header-tools">
-                <a class="header-translations-link" href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ 'admin_users.back_to_dashboard'|trans }}</a>
-                <form class="header-locale" method="get">
-                    <img class="header-locale-icon" src="/assets/icons/language.svg" alt="" aria-hidden="true">
-                    <label for="admin-users-header-locale-select">{{ 'common.language'|trans }}</label>
-                    <select id="admin-users-header-locale-select" name="locale" onchange="this.form.submit()">
-                        <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 {{ 'common.locale.fr'|trans }}</option>
-                        <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 {{ 'common.locale.en'|trans }}</option>
-                        <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>🇩🇪 {{ 'common.locale.de'|trans }}</option>
-                    </select>
-                </form>
-            </div>
+            {% include 'admin/_header_tools.html.twig' with {
+                backLabel: 'admin_users.back_to_dashboard'|trans,
+                localeSelectId: 'admin-users-header-locale-select'
+            } %}
             <p class="catalog-kicker">{{ 'admin_users.kicker'|trans }}</p>
             <h1>{{ 'admin_users.title'|trans }}</h1>
             <p>{{ 'admin_users.description'|trans }}</p>

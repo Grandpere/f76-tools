@@ -5,24 +5,16 @@
 {% block body %}
     <main class="translations-page">
         <header class="translations-header">
-            <div class="catalog-header-tools">
-                <a class="header-translations-link" href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ 'admin_translations.back_to_dashboard'|trans }}</a>
-                <form class="header-locale" method="get">
-                    <input type="hidden" name="target" value="{{ targetLocale }}">
-                    {% if query %}
-                        <input type="hidden" name="q" value="{{ query }}">
-                    {% endif %}
-                    <input type="hidden" name="perPage" value="{{ perPage }}">
-                    <input type="hidden" name="page" value="{{ page }}">
-                    <img class="header-locale-icon" src="/assets/icons/language.svg" alt="" aria-hidden="true">
-                    <label for="admin-header-locale-select">{{ 'common.language'|trans }}</label>
-                    <select id="admin-header-locale-select" name="locale" onchange="this.form.submit()">
-                        <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 {{ 'common.locale.fr'|trans }}</option>
-                        <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 {{ 'common.locale.en'|trans }}</option>
-                        <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>🇩🇪 {{ 'common.locale.de'|trans }}</option>
-                    </select>
-                </form>
-            </div>
+            {% include 'admin/_header_tools.html.twig' with {
+                backLabel: 'admin_translations.back_to_dashboard'|trans,
+                localeSelectId: 'admin-header-locale-select',
+                localeHiddenFields: {
+                    target: targetLocale,
+                    q: query,
+                    perPage: perPage,
+                    page: page
+                }
+            } %}
             <p class="catalog-kicker">{{ 'admin_translations.kicker'|trans }}</p>
             <h1>{{ 'admin_translations.title'|trans }}</h1>
             <p>{{ 'admin_translations.editing_catalog'|trans({'%locale%': targetLocale}) }}</p>

@@ -1,0 +1,19 @@
+{% set localeSelectId = localeSelectId|default('admin-header-locale-select') %}
+{% set localeHiddenFields = localeHiddenFields|default({}) %}
+<div class="catalog-header-tools">
+    <a class="header-translations-link" href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ backLabel }}</a>
+    <form class="header-locale" method="get">
+        {% for field, value in localeHiddenFields %}
+            {% if value is not same as(null) and value != '' %}
+                <input type="hidden" name="{{ field }}" value="{{ value }}">
+            {% endif %}
+        {% endfor %}
+        <img class="header-locale-icon" src="/assets/icons/language.svg" alt="" aria-hidden="true">
+        <label for="{{ localeSelectId }}">{{ 'common.language'|trans }}</label>
+        <select id="{{ localeSelectId }}" name="locale" onchange="this.form.submit()">
+            <option value="fr" {% if app.request.locale == 'fr' %}selected{% endif %}>🇫🇷 {{ 'common.locale.fr'|trans }}</option>
+            <option value="en" {% if app.request.locale == 'en' %}selected{% endif %}>🇬🇧 {{ 'common.locale.en'|trans }}</option>
+            <option value="de" {% if app.request.locale == 'de' %}selected{% endif %}>🇩🇪 {{ 'common.locale.de'|trans }}</option>
+        </select>
+    </form>
+</div>
