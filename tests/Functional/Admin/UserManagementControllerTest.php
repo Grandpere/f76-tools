@@ -160,7 +160,7 @@ final class UserManagementControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='linked-filter@example.com']"));
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='unlinked-filter@example.com']"));
         self::assertStringContainsString('Google linked: 1', $this->browser()->getResponse()->getContent() ?: '');
-        self::assertStringContainsString('Visible: 1', $this->browser()->getResponse()->getContent() ?: '');
+        self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr"));
 
         $crawler = $this->browser()->request('GET', '/admin/users?google=unlinked');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());

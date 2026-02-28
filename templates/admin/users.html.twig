@@ -20,10 +20,10 @@
 
         <section class="translations-panel">
             <div class="admin-users-summary" aria-live="polite">
-                <span class="admin-users-summary-item">{{ 'admin_users.summary_total'|trans({'%count%': totalUsers}) }}</span>
-                <span class="admin-users-summary-item">{{ 'admin_users.summary_google_linked'|trans({'%count%': googleLinkedCount}) }}</span>
-                <span class="admin-users-summary-item">{{ 'admin_users.summary_google_unlinked'|trans({'%count%': googleUnlinkedCount}) }}</span>
-                <span class="admin-users-summary-item">{{ 'admin_users.summary_visible'|trans({'%count%': visibleUsers}) }}</span>
+                <span class="admin-users-summary-item">{{ 'admin_users.summary_total_label'|trans }}: {{ totalUsers }}</span>
+                <span class="admin-users-summary-item">{{ 'admin_users.summary_google_linked_label'|trans }}: {{ googleLinkedCount }}</span>
+                <span class="admin-users-summary-item">{{ 'admin_users.summary_google_unlinked_label'|trans }}: {{ googleUnlinkedCount }}</span>
+                <span class="admin-users-summary-item">{{ 'admin_users.summary_visible_label'|trans }}: {{ visibleUsers }}</span>
             </div>
             <form method="get" class="translations-filters">
                 {% include 'admin/_text_filter_field.html.twig' with {
