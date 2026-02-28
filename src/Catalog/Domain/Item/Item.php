@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Catalog\Domain\Item;
 
-interface ItemInterface
+interface Item
 {
     public function getSourceId(): int;
 

@@ -14,7 +14,7 @@ Les ports d import du contexte `Catalog` etaient encore suffixes.
   - repositories/infra d import,
   - wiring DI (`config/services.yaml`),
   - tests unitaires associes.
-- Garder `ItemInterface` (domaine metier) inchange.
+- Garder `Item` (domaine metier) inchange.
 
 ## Criteres d acceptance
 - Aucun usage des 3 anciens noms `*Interface` ne subsiste dans le code.

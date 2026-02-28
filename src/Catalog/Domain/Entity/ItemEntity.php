@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Catalog\Domain\Entity;
 
-use App\Catalog\Domain\Item\ItemInterface;
+use App\Catalog\Domain\Item\Item;
 use App\Catalog\Domain\Item\ItemTypeEnum;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -32,7 +32,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 #[ORM\UniqueConstraint(name: 'uniq_item_public_id', columns: ['public_id'])]
 #[ORM\Index(name: 'idx_item_type_rank', columns: ['type', 'rank'])]
 #[ORM\HasLifecycleCallbacks]
-class ItemEntity implements ItemInterface
+class ItemEntity implements Item
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
