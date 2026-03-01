@@ -45,8 +45,6 @@ Project collaboration rules for coding agents.
 - Ownership/security constraints must be explicit; no implicit global access.
 
 ## 7) File And Refactor Guardrails
-- Never create empty placeholder directories.
-- Never create duplicate folders/files with suffixes like ` 2`, `copy`, `-old`, etc.
 - If rename/replace is needed, update/move existing path instead of parallel duplicates.
 - Do not revert unrelated user changes.
 - Avoid destructive git commands (`reset --hard`, etc.) unless explicitly requested.
