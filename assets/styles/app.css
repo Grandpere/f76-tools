@@ -1641,6 +1641,11 @@ body::before {
     padding: 0.72rem 0.78rem;
 }
 
+.admin-minerva-freshness-stale {
+    border-color: rgba(193, 76, 63, 0.35);
+    background: linear-gradient(180deg, #fff6f2, #fff2ec);
+}
+
 .admin-minerva-freshness-header {
     display: flex;
     align-items: center;
@@ -1729,6 +1734,13 @@ body::before {
     margin: 0.28rem 0 0;
     font-size: 0.84rem;
     color: var(--text-1);
+}
+
+.admin-minerva-freshness-alert {
+    margin: 0.5rem 0 0;
+    font-size: 0.83rem;
+    color: #7e2d24;
+    font-weight: 600;
 }
 
 .flatpickr-calendar {

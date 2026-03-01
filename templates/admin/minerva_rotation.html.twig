@@ -46,11 +46,12 @@
             </form>
             <p class="catalog-state">{{ 'admin_minerva.timezone'|trans({'%timezone%': timeline.timezone}) }}</p>
             <div
-                class="admin-minerva-freshness"
+                class="admin-minerva-freshness {{ freshness.missingWindows|default(0) > 0 ? 'admin-minerva-freshness-stale' : '' }}"
                 data-minerva-freshness="1"
                 data-minerva-expected-windows="{{ freshness.expectedWindows|default(0) }}"
                 data-minerva-missing-windows="{{ freshness.missingWindows|default(0) }}"
                 data-minerva-covered="{{ freshness.covered|default(false) ? '1' : '0' }}"
+                data-minerva-stale="{{ freshness.missingWindows|default(0) > 0 ? '1' : '0' }}"
             >
                 <div class="admin-minerva-freshness-header">
                     <h3>{{ 'admin_minerva.freshness_title'|trans }}</h3>
@@ -80,6 +81,9 @@
                         <dd>{{ latestManualAt ? latestManualAt|date('Y-m-d H:i') : ('admin_minerva.freshness_never'|trans) }}</dd>
                     </div>
                 </dl>
+                {% if freshness.missingWindows|default(0) > 0 %}
+                    <p class="admin-minerva-freshness-alert">{{ 'admin_minerva.freshness_alert_missing'|trans }}</p>
+                {% endif %}
                 {% if latestRefreshSummary %}
                     <div
                         class="admin-minerva-last-refresh"
@@ -113,6 +117,9 @@
                         </p>
                     </div>
                 {% endif %}
+                <p class="admin-minerva-last-refresh-line">
+                    <a href="{{ path('app_admin_audit_logs', { locale: app.request.locale, q: 'minerva_', perPage: 30, page: 1 }) }}">{{ 'admin_minerva.view_minerva_audit_logs'|trans }}</a>
+                </p>
             </div>
         </section>
 

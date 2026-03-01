@@ -466,3 +466,5 @@ admin_minerva.last_refresh_summary: 'Expected: %expected% · Missing: %missing% 
 admin_minerva.last_refresh_action_minerva_refresh_dry_run: Dry run
 admin_minerva.last_refresh_action_minerva_refresh_performed: Executed refresh
 admin_minerva.last_refresh_action_minerva_refresh_not_needed: No refresh needed
+admin_minerva.freshness_alert_missing: Coverage has missing windows. Use refresh or regenerate to recover full coverage.
+admin_minerva.view_minerva_audit_logs: View Minerva audit logs

@@ -338,11 +338,14 @@ final class MinervaRotationControllerTest extends WebTestCase
         $expected = (int) $freshnessNode->attr('data-minerva-expected-windows');
         $missing = (int) $freshnessNode->attr('data-minerva-missing-windows');
         $covered = (string) $freshnessNode->attr('data-minerva-covered');
+        $stale = (string) $freshnessNode->attr('data-minerva-stale');
 
         self::assertGreaterThan(0, $expected);
         self::assertGreaterThanOrEqual(0, $missing);
         self::assertLessThanOrEqual($expected, $missing);
         self::assertContains($covered, ['0', '1']);
+        self::assertContains($stale, ['0', '1']);
+        self::assertCount(1, $crawler->filter('a[href*="/admin/audit-logs?q=minerva_"]'));
     }
 
     public function testAdminCanCreateAndDeleteManualOverride(): void

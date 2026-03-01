@@ -50,7 +50,8 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
 ## Planification cron
 - Exemple de cron quotidien (02:15) depuis l hote Docker:
   - `15 2 * * * cd /chemin/vers/f76 && make audit-retention-run >> var/log/audit-retention.log 2>&1`
-- Exemple de cron quotidien Minerva (02:30):
+- Minerva: ordre recommande (02:25 check, 02:30 run):
+  - `25 2 * * * cd /chemin/vers/f76 && make minerva-refresh-check >> var/log/minerva-refresh-check.log 2>&1`
   - `30 2 * * * cd /chemin/vers/f76 && make minerva-refresh-run >> var/log/minerva-refresh.log 2>&1`
 - Recommandation:
   - lancer d abord quelques jours en `audit-retention-dry-run` pour verifier les volumes.

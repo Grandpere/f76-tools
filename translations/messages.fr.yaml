@@ -466,3 +466,5 @@ admin_minerva.last_refresh_summary: 'Attendues: %expected% · Manquantes: %missi
 admin_minerva.last_refresh_action_minerva_refresh_dry_run: Simulation
 admin_minerva.last_refresh_action_minerva_refresh_performed: Refresh execute
 admin_minerva.last_refresh_action_minerva_refresh_not_needed: Aucun refresh necessaire
+admin_minerva.freshness_alert_missing: La couverture contient des fenetres manquantes. Lance un refresh ou une regeneration.
+admin_minerva.view_minerva_audit_logs: Voir les logs d audit Minerva

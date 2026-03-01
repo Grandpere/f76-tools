@@ -466,3 +466,5 @@ admin_minerva.last_refresh_summary: 'Erwartet: %expected% · Fehlend: %missing% 
 admin_minerva.last_refresh_action_minerva_refresh_dry_run: Simulation
 admin_minerva.last_refresh_action_minerva_refresh_performed: Refresh ausgefuhrt
 admin_minerva.last_refresh_action_minerva_refresh_not_needed: Kein Refresh erforderlich
+admin_minerva.freshness_alert_missing: Die Abdeckung enthalt fehlende Fenster. Starte Refresh oder Regenerierung.
+admin_minerva.view_minerva_audit_logs: Minerva-Audit-Logs anzeigen
