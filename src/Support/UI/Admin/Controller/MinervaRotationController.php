@@ -104,6 +104,57 @@ final class MinervaRotationController extends AbstractController
         return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
     }
 
+    #[Route('/refresh', name: 'app_admin_minerva_rotation_refresh', methods: ['POST'])]
+    public function refreshCoverage(Request $request): RedirectResponse
+    {
+        $this->ensureAdminAccess();
+        if (!$this->isValidToken($request, 'admin_minerva_rotation_refresh')) {
+            $this->addFlash('warning', 'admin_minerva.flash.invalid_csrf');
+
+            return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+        }
+
+        $timezone = new DateTimeZone('America/New_York');
+        $from = $this->parseDate((string) $request->request->get('from', ''), true, $timezone);
+        $to = $this->parseDate((string) $request->request->get('to', ''), false, $timezone);
+        if (!$from instanceof DateTimeImmutable || !$to instanceof DateTimeImmutable || $to < $from) {
+            $this->addFlash('warning', 'admin_minerva.flash.invalid_range');
+
+            return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+        }
+
+        $dryRun = filter_var($request->request->get('dryRun', false), FILTER_VALIDATE_BOOL);
+        $result = $this->minervaRotationRefresher->refresh($from, $to, $dryRun);
+
+        if ($dryRun) {
+            $this->addFlash('success', sprintf(
+                'Refresh dry-run · Expected: %d · Missing: %d · Covered: %s',
+                $result['expectedWindows'],
+                $result['missingWindows'],
+                $result['covered'] ? 'yes' : 'no',
+            ));
+        } elseif ($result['performed']) {
+            $this->addFlash('success', 'admin_minerva.flash.refresh_performed');
+            $this->addFlash('success', sprintf(
+                'Expected: %d · Missing(before): %d · Deleted: %d · Inserted: %d · Skipped: %d',
+                $result['expectedWindows'],
+                $result['missingWindows'],
+                $result['deleted'],
+                $result['inserted'],
+                $result['skipped'],
+            ));
+        } else {
+            $this->addFlash('success', 'admin_minerva.flash.refresh_not_needed');
+            $this->addFlash('success', sprintf(
+                'Expected: %d · Missing: %d',
+                $result['expectedWindows'],
+                $result['missingWindows'],
+            ));
+        }
+
+        return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+    }
+
     #[Route('/override/create', name: 'app_admin_minerva_rotation_override_create', methods: ['POST'])]
     public function createOverride(Request $request): RedirectResponse
     {

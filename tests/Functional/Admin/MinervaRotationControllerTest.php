@@ -100,6 +100,7 @@ final class MinervaRotationControllerTest extends WebTestCase
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
 
         self::assertCount(1, $crawler->filter('form[action*="/admin/minerva-rotation/regenerate"][data-controller~="minerva-admin-datepicker"]'));
+        self::assertCount(1, $crawler->filter('form[action*="/admin/minerva-rotation/refresh"][data-controller~="minerva-admin-datepicker"]'));
         self::assertCount(1, $crawler->filter('form[action*="/admin/minerva-rotation/override/create"][data-controller~="minerva-admin-datepicker"]'));
     }
 
@@ -128,6 +129,26 @@ final class MinervaRotationControllerTest extends WebTestCase
 
         self::assertTrue(is_int($count) || is_numeric($count));
         self::assertGreaterThan(0, (int) $count);
+    }
+
+    public function testAdminCanRunCoverageRefreshFromForm(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/minerva-rotation');
+        $tokenNode = $crawler->filter('form[action*="/admin/minerva-rotation/refresh"] input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', '/admin/minerva-rotation/refresh', [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'from' => '2026-03-01',
+            'to' => '2026-03-20',
+            'dryRun' => '1',
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        self::assertSame('/admin/minerva-rotation', $this->browser()->getResponse()->headers->get('location'));
     }
 
     public function testAdminPageDisplaysCoverageFreshnessSummary(): void

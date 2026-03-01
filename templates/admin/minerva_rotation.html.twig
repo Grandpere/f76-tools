@@ -28,6 +28,22 @@
                 </label>
                 <button type="submit">{{ 'admin_minerva.regenerate'|trans }}</button>
             </form>
+            <form method="post" action="{{ path('app_admin_minerva_rotation_refresh', { locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters" data-controller="minerva-admin-datepicker" data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_refresh') }}">
+                <label class="field">
+                    <span>{{ 'admin_minerva.from'|trans }}</span>
+                    <input type="date" name="from" value="{{ defaultFrom }}">
+                </label>
+                <label class="field">
+                    <span>{{ 'admin_minerva.to'|trans }}</span>
+                    <input type="date" name="to" value="{{ defaultTo }}">
+                </label>
+                <label class="field">
+                    <span>{{ 'admin_minerva.refresh_dry_run'|trans }}</span>
+                    <input type="checkbox" name="dryRun" value="1">
+                </label>
+                <button type="submit">{{ 'admin_minerva.refresh'|trans }}</button>
+            </form>
             <p class="catalog-state">{{ 'admin_minerva.timezone'|trans({'%timezone%': timeline.timezone}) }}</p>
             <div
                 class="catalog-state"

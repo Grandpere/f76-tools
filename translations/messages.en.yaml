@@ -413,6 +413,8 @@ admin_minerva.title: Minerva rotation
 admin_minerva.description: Regenerate and review Minerva windows from deterministic rules.
 admin_minerva.back_to_dashboard: Back to dashboard
 admin_minerva.regenerate_title: Regenerate timeline
+admin_minerva.refresh: Refresh coverage
+admin_minerva.refresh_dry_run: Dry run
 admin_minerva.from: From
 admin_minerva.to: To
 admin_minerva.regenerate: Regenerate
@@ -434,6 +436,8 @@ admin_minerva.flash.invalid_csrf: Invalid action (CSRF).
 admin_minerva.flash.invalid_range: Invalid date range.
 admin_minerva.flash.invalid_override: Invalid manual override data.
 admin_minerva.flash.regenerated: Minerva rotation regenerated.
+admin_minerva.flash.refresh_performed: Minerva coverage refreshed.
+admin_minerva.flash.refresh_not_needed: Minerva coverage already complete.
 admin_minerva.flash.override_created: Manual override created.
 admin_minerva.flash.override_deleted: Manual override deleted.
 admin_minerva.flash.override_not_found: Manual override not found.
