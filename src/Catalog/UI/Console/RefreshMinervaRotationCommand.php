@@ -43,7 +43,8 @@ final class RefreshMinervaRotationCommand extends Command
             ->addOption('from', null, InputOption::VALUE_REQUIRED, 'Date de debut (Y-m-d), timezone America/New_York.')
             ->addOption('to', null, InputOption::VALUE_REQUIRED, 'Date de fin (Y-m-d), timezone America/New_York.')
             ->addOption('days', null, InputOption::VALUE_REQUIRED, 'Horizon en jours si --to absent.', '90')
-            ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Analyse sans regeneration');
+            ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Analyse sans regeneration')
+            ->addOption('fail-on-missing', null, InputOption::VALUE_NONE, 'En dry-run, retourne un code non-zero si des fenetres manquent');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -80,6 +81,12 @@ final class RefreshMinervaRotationCommand extends Command
         ]);
 
         if ($dryRun) {
+            $failOnMissing = (bool) $input->getOption('fail-on-missing');
+            if ($failOnMissing && $result['missingWindows'] > 0) {
+                $io->warning('Dry-run detecte des fenetres manquantes.');
+
+                return Command::FAILURE;
+            }
             $io->success('Dry-run termine.');
 
             return Command::SUCCESS;

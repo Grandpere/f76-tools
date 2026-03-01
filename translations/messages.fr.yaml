@@ -460,3 +460,9 @@ admin_minerva.freshness_expected_label: Fenetres attendues
 admin_minerva.freshness_missing_label: Fenetres manquantes
 admin_minerva.freshness_last_generated_label: Derniere generation
 admin_minerva.freshness_last_manual_label: Dernier override manuel
+admin_minerva.last_refresh_title: Dernier refresh execute
+admin_minerva.last_refresh_meta: '%date% par %actor%'
+admin_minerva.last_refresh_summary: 'Attendues: %expected% · Manquantes: %missing% · Supprimees: %deleted% · Inserees: %inserted% · Ignorees: %skipped%'
+admin_minerva.last_refresh_action_minerva_refresh_dry_run: Simulation
+admin_minerva.last_refresh_action_minerva_refresh_performed: Refresh execute
+admin_minerva.last_refresh_action_minerva_refresh_not_needed: Aucun refresh necessaire

@@ -80,6 +80,39 @@
                         <dd>{{ latestManualAt ? latestManualAt|date('Y-m-d H:i') : ('admin_minerva.freshness_never'|trans) }}</dd>
                     </div>
                 </dl>
+                {% if latestRefreshSummary %}
+                    <div
+                        class="admin-minerva-last-refresh"
+                        data-minerva-last-refresh="1"
+                        data-minerva-last-refresh-action="{{ latestRefreshSummary.action }}"
+                        data-minerva-last-refresh-expected="{{ latestRefreshSummary.expectedWindows }}"
+                        data-minerva-last-refresh-missing="{{ latestRefreshSummary.missingWindows }}"
+                        data-minerva-last-refresh-deleted="{{ latestRefreshSummary.deleted }}"
+                        data-minerva-last-refresh-inserted="{{ latestRefreshSummary.inserted }}"
+                        data-minerva-last-refresh-skipped="{{ latestRefreshSummary.skipped }}"
+                        data-minerva-last-refresh-dry-run="{{ latestRefreshSummary.dryRun ? '1' : '0' }}"
+                    >
+                        <p class="admin-minerva-last-refresh-title">{{ 'admin_minerva.last_refresh_title'|trans }}</p>
+                        <p class="admin-minerva-last-refresh-line">
+                            {{ 'admin_minerva.last_refresh_meta'|trans({
+                                '%date%': latestRefreshSummary.occurredAt|date('Y-m-d H:i'),
+                                '%actor%': latestRefreshSummary.actorEmail
+                            }) }}
+                        </p>
+                        <p class="admin-minerva-last-refresh-line">
+                            {{ ('admin_minerva.last_refresh_action_' ~ latestRefreshSummary.action)|trans }}
+                        </p>
+                        <p class="admin-minerva-last-refresh-line">
+                            {{ 'admin_minerva.last_refresh_summary'|trans({
+                                '%expected%': latestRefreshSummary.expectedWindows,
+                                '%missing%': latestRefreshSummary.missingWindows,
+                                '%deleted%': latestRefreshSummary.deleted,
+                                '%inserted%': latestRefreshSummary.inserted,
+                                '%skipped%': latestRefreshSummary.skipped
+                            }) }}
+                        </p>
+                    </div>
+                {% endif %}
             </div>
         </section>
 

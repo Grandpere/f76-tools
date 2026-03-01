@@ -19,9 +19,13 @@ use App\Catalog\Application\Minerva\MinervaRotationRegenerationApplicationServic
 use App\Catalog\Application\Minerva\MinervaRotationRegenerationRepository;
 use App\Catalog\Application\Minerva\MinervaRotationTimelineApplicationService;
 use App\Catalog\Domain\Minerva\MinervaRotationSourceEnum;
+use App\Identity\Domain\Entity\UserEntity;
+use App\Support\Domain\Entity\AdminAuditLogEntity;
+use App\Support\UI\Admin\AdminAuthenticatedUserContext;
 use DateInterval;
 use DateTimeImmutable;
 use DateTimeZone;
+use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -43,6 +47,8 @@ final class MinervaRotationController extends AbstractController
         private readonly MinervaRotationOverrideApplicationService $overrideService,
         private readonly MinervaRotationRefresher $minervaRotationRefresher,
         private readonly MinervaRotationRegenerationRepository $minervaRotationRegenerationRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly AdminAuthenticatedUserContext $adminAuthenticatedUserContext,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly TranslatorInterface $translator,
     ) {
@@ -74,6 +80,7 @@ final class MinervaRotationController extends AbstractController
             'freshness' => $freshness,
             'latestGeneratedAt' => $this->minervaRotationRegenerationRepository->findLatestCreatedAtBySource(MinervaRotationSourceEnum::GENERATED),
             'latestManualAt' => $this->minervaRotationRegenerationRepository->findLatestCreatedAtBySource(MinervaRotationSourceEnum::MANUAL),
+            'latestRefreshSummary' => $this->resolveLatestRefreshSummary(),
         ]);
     }
 
@@ -86,12 +93,18 @@ final class MinervaRotationController extends AbstractController
 
             return $this->redirectToMinervaPageWithRange($request);
         }
+        $actor = $this->getAuthenticatedUser();
 
         $timezone = new DateTimeZone('America/New_York');
         $from = $this->parseDate((string) $request->request->get('from', ''), true, $timezone);
         $to = $this->parseDate((string) $request->request->get('to', ''), false, $timezone);
         if (!$from instanceof DateTimeImmutable || !$to instanceof DateTimeImmutable || $to < $from) {
             $this->addFlash('warning', 'admin_minerva.flash.invalid_range');
+            $this->persistAuditLog($actor, 'minerva_regenerate_invalid_range', [
+                'from' => (string) $request->request->get('from', ''),
+                'to' => (string) $request->request->get('to', ''),
+            ]);
+            $this->entityManager->flush();
 
             return $this->redirectToMinervaPageWithRange($request);
         }
@@ -103,6 +116,14 @@ final class MinervaRotationController extends AbstractController
             '%inserted%' => (string) $result['inserted'],
             '%skipped%' => (string) $result['skipped'],
         ]));
+        $this->persistAuditLog($actor, 'minerva_regenerate', [
+            'from' => $from->format(DATE_ATOM),
+            'to' => $to->format(DATE_ATOM),
+            'deleted' => $result['deleted'],
+            'inserted' => $result['inserted'],
+            'skipped' => $result['skipped'],
+        ]);
+        $this->entityManager->flush();
 
         return $this->redirectToMinervaPageWithRange($request);
     }
@@ -116,12 +137,19 @@ final class MinervaRotationController extends AbstractController
 
             return $this->redirectToMinervaPageWithRange($request);
         }
+        $actor = $this->getAuthenticatedUser();
 
         $timezone = new DateTimeZone('America/New_York');
         $from = $this->parseDate((string) $request->request->get('from', ''), true, $timezone);
         $to = $this->parseDate((string) $request->request->get('to', ''), false, $timezone);
         if (!$from instanceof DateTimeImmutable || !$to instanceof DateTimeImmutable || $to < $from) {
             $this->addFlash('warning', 'admin_minerva.flash.invalid_range');
+            $this->persistAuditLog($actor, 'minerva_refresh_invalid_range', [
+                'from' => (string) $request->request->get('from', ''),
+                'to' => (string) $request->request->get('to', ''),
+                'dryRun' => filter_var($request->request->get('dryRun', false), FILTER_VALIDATE_BOOL),
+            ]);
+            $this->entityManager->flush();
 
             return $this->redirectToMinervaPageWithRange($request);
         }
@@ -138,6 +166,14 @@ final class MinervaRotationController extends AbstractController
                 '%missing%' => (string) $result['missingWindows'],
                 '%covered%' => $coveredLabel,
             ]));
+            $this->persistAuditLog($actor, 'minerva_refresh_dry_run', [
+                'from' => $from->format(DATE_ATOM),
+                'to' => $to->format(DATE_ATOM),
+                'dryRun' => true,
+                'expectedWindows' => $result['expectedWindows'],
+                'missingWindows' => $result['missingWindows'],
+                'covered' => $result['covered'],
+            ]);
         } elseif ($result['performed']) {
             $this->addFlash('success', 'admin_minerva.flash.refresh_performed');
             $this->addFlash('success', $this->translator->trans('admin_minerva.flash.refresh_performed_summary', [
@@ -147,13 +183,32 @@ final class MinervaRotationController extends AbstractController
                 '%inserted%' => (string) $result['inserted'],
                 '%skipped%' => (string) $result['skipped'],
             ]));
+            $this->persistAuditLog($actor, 'minerva_refresh_performed', [
+                'from' => $from->format(DATE_ATOM),
+                'to' => $to->format(DATE_ATOM),
+                'dryRun' => false,
+                'expectedWindows' => $result['expectedWindows'],
+                'missingWindows' => $result['missingWindows'],
+                'missingWindowsBefore' => $result['missingWindows'],
+                'deleted' => $result['deleted'],
+                'inserted' => $result['inserted'],
+                'skipped' => $result['skipped'],
+            ]);
         } else {
             $this->addFlash('success', 'admin_minerva.flash.refresh_not_needed');
             $this->addFlash('success', $this->translator->trans('admin_minerva.flash.refresh_not_needed_summary', [
                 '%expected%' => (string) $result['expectedWindows'],
                 '%missing%' => (string) $result['missingWindows'],
             ]));
+            $this->persistAuditLog($actor, 'minerva_refresh_not_needed', [
+                'from' => $from->format(DATE_ATOM),
+                'to' => $to->format(DATE_ATOM),
+                'dryRun' => false,
+                'expectedWindows' => $result['expectedWindows'],
+                'missingWindows' => $result['missingWindows'],
+            ]);
         }
+        $this->entityManager->flush();
 
         return $this->redirectToMinervaPageWithRange($request);
     }
@@ -167,6 +222,7 @@ final class MinervaRotationController extends AbstractController
 
             return $this->redirectToMinervaPageWithRange($request);
         }
+        $actor = $this->getAuthenticatedUser();
 
         $timezone = new DateTimeZone('America/New_York');
         $location = trim((string) $request->request->get('location', ''));
@@ -176,6 +232,13 @@ final class MinervaRotationController extends AbstractController
 
         if ('' === $location || null === $listCycle || null === $startsAt || null === $endsAt || $endsAt < $startsAt) {
             $this->addFlash('warning', 'admin_minerva.flash.invalid_override');
+            $this->persistAuditLog($actor, 'minerva_override_create_invalid', [
+                'location' => $location,
+                'listCycle' => $listCycle,
+                'startsAt' => (string) $request->request->get('startsAt', ''),
+                'endsAt' => (string) $request->request->get('endsAt', ''),
+            ]);
+            $this->entityManager->flush();
 
             return $this->redirectToMinervaPageWithRange($request);
         }
@@ -184,11 +247,25 @@ final class MinervaRotationController extends AbstractController
             $this->overrideService->createManualOverride($location, $listCycle, $startsAt, $endsAt);
         } catch (InvalidArgumentException) {
             $this->addFlash('warning', 'admin_minerva.flash.invalid_override');
+            $this->persistAuditLog($actor, 'minerva_override_create_invalid', [
+                'location' => $location,
+                'listCycle' => $listCycle,
+                'startsAt' => $startsAt->format(DATE_ATOM),
+                'endsAt' => $endsAt->format(DATE_ATOM),
+            ]);
+            $this->entityManager->flush();
 
             return $this->redirectToMinervaPageWithRange($request);
         }
 
         $this->addFlash('success', 'admin_minerva.flash.override_created');
+        $this->persistAuditLog($actor, 'minerva_override_create', [
+            'location' => $location,
+            'listCycle' => $listCycle,
+            'startsAt' => $startsAt->format(DATE_ATOM),
+            'endsAt' => $endsAt->format(DATE_ATOM),
+        ]);
+        $this->entityManager->flush();
 
         return $this->redirectToMinervaPageWithRange($request);
     }
@@ -202,14 +279,23 @@ final class MinervaRotationController extends AbstractController
 
             return $this->redirectToMinervaPageWithRange($request);
         }
+        $actor = $this->getAuthenticatedUser();
 
         if (!$this->overrideService->deleteManualOverride($id)) {
             $this->addFlash('warning', 'admin_minerva.flash.override_not_found');
+            $this->persistAuditLog($actor, 'minerva_override_delete_not_found', [
+                'overrideId' => $id,
+            ]);
+            $this->entityManager->flush();
 
             return $this->redirectToMinervaPageWithRange($request);
         }
 
         $this->addFlash('success', 'admin_minerva.flash.override_deleted');
+        $this->persistAuditLog($actor, 'minerva_override_delete', [
+            'overrideId' => $id,
+        ]);
+        $this->entityManager->flush();
 
         return $this->redirectToMinervaPageWithRange($request);
     }
@@ -277,6 +363,22 @@ final class MinervaRotationController extends AbstractController
         return $this->csrfTokenManager;
     }
 
+    private function getAuthenticatedUser(): UserEntity
+    {
+        return $this->adminAuthenticatedUserContext->requireAuthenticatedUser($this->getUser());
+    }
+
+    /**
+     * @param array<string, bool|int|string|null> $context
+     */
+    private function persistAuditLog(UserEntity $actor, string $action, array $context): void
+    {
+        $this->entityManager->persist(new AdminAuditLogEntity()
+            ->setActorUser($actor)
+            ->setAction($action)
+            ->setContext($context));
+    }
+
     private function redirectToMinervaPageWithRange(Request $request): RedirectResponse
     {
         $params = ['locale' => $request->getLocale()];
@@ -304,5 +406,80 @@ final class MinervaRotationController extends AbstractController
         }
 
         return $parsed->format('Y-m-d');
+    }
+
+    /**
+     * @return array{
+     *     occurredAt:string,
+     *     action:string,
+     *     actorEmail:string,
+     *     expectedWindows:int,
+     *     missingWindows:int,
+     *     deleted:int,
+     *     inserted:int,
+     *     skipped:int,
+     *     dryRun:bool
+     * }|null
+     */
+    private function resolveLatestRefreshSummary(): ?array
+    {
+        $result = $this->entityManager->getRepository(AdminAuditLogEntity::class)
+            ->createQueryBuilder('a')
+            ->leftJoin('a.actorUser', 'actor')
+            ->addSelect('actor')
+            ->where('a.action IN (:actions)')
+            ->setParameter('actions', [
+                'minerva_refresh_dry_run',
+                'minerva_refresh_performed',
+                'minerva_refresh_not_needed',
+            ])
+            ->orderBy('a.occurredAt', 'DESC')
+            ->addOrderBy('a.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if (!$result instanceof AdminAuditLogEntity) {
+            return null;
+        }
+
+        $context = $result->getContext() ?? [];
+        $actorEmail = $result->getActorUser()->getEmail();
+
+        return [
+            'occurredAt' => $result->getOccurredAt()->format(DATE_ATOM),
+            'action' => $result->getAction(),
+            'actorEmail' => $actorEmail,
+            'expectedWindows' => $this->contextInt($context, 'expectedWindows'),
+            'missingWindows' => $this->contextInt($context, 'missingWindows'),
+            'deleted' => $this->contextInt($context, 'deleted'),
+            'inserted' => $this->contextInt($context, 'inserted'),
+            'skipped' => $this->contextInt($context, 'skipped'),
+            'dryRun' => $this->contextBool($context, 'dryRun'),
+        ];
+    }
+
+    /**
+     * @param array<string, mixed> $context
+     */
+    private function contextInt(array $context, string $key): int
+    {
+        $value = $context[$key] ?? null;
+        if (is_int($value)) {
+            return $value;
+        }
+        if (is_numeric($value)) {
+            return (int) $value;
+        }
+
+        return 0;
+    }
+
+    /**
+     * @param array<string, mixed> $context
+     */
+    private function contextBool(array $context, string $key): bool
+    {
+        return true === ($context[$key] ?? false);
     }
 }

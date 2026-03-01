@@ -16,6 +16,7 @@ namespace App\Tests\Functional\Admin;
 use App\Catalog\Domain\Entity\MinervaRotationEntity;
 use App\Catalog\Domain\Minerva\MinervaRotationSourceEnum;
 use App\Identity\Domain\Entity\UserEntity;
+use App\Support\Domain\Entity\AdminAuditLogEntity;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
@@ -229,6 +230,44 @@ final class MinervaRotationControllerTest extends WebTestCase
         self::assertStringContainsString('locale=', $location);
         self::assertStringContainsString('from=2026-03-01', $location);
         self::assertStringContainsString('to=2026-03-20', $location);
+
+        $audit = $this->entityManager?->getRepository(AdminAuditLogEntity::class)
+            ->createQueryBuilder('a')
+            ->where('a.action = :action')
+            ->setParameter('action', 'minerva_refresh_dry_run')
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        self::assertInstanceOf(AdminAuditLogEntity::class, $audit);
+        $context = $audit->getContext();
+        self::assertIsArray($context);
+        self::assertSame(true, $context['dryRun'] ?? null);
+    }
+
+    public function testAdminPageDisplaysLatestRefreshSummaryFromAuditLog(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/minerva-rotation');
+        $tokenNode = $crawler->filter('form[action*="/admin/minerva-rotation/refresh"] input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', '/admin/minerva-rotation/refresh', [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'from' => '2026-09-01',
+            'to' => '2026-09-20',
+            'dryRun' => '1',
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $crawler = $this->browser()->request('GET', '/admin/minerva-rotation');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        $lastRefreshNode = $crawler->filter('[data-minerva-last-refresh="1"]');
+        self::assertCount(1, $lastRefreshNode);
+        self::assertSame('minerva_refresh_dry_run', $lastRefreshNode->attr('data-minerva-last-refresh-action'));
     }
 
     public function testAdminRefreshRejectsInvalidRangeAndPreservesQueryContext(): void

@@ -1710,6 +1710,27 @@ body::before {
     color: #7e2d24;
 }
 
+.admin-minerva-last-refresh {
+    margin-top: 0.62rem;
+    padding-top: 0.58rem;
+    border-top: 1px solid rgba(29, 37, 49, 0.12);
+}
+
+.admin-minerva-last-refresh-title {
+    margin: 0;
+    font-size: 0.77rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-2);
+    font-weight: 700;
+}
+
+.admin-minerva-last-refresh-line {
+    margin: 0.28rem 0 0;
+    font-size: 0.84rem;
+    color: var(--text-1);
+}
+
 .flatpickr-calendar {
     border: 1px solid var(--line);
     border-radius: 12px;

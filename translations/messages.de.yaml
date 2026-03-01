@@ -460,3 +460,9 @@ admin_minerva.freshness_expected_label: Erwartete Fenster
 admin_minerva.freshness_missing_label: Fehlende Fenster
 admin_minerva.freshness_last_generated_label: Letzte Generierung
 admin_minerva.freshness_last_manual_label: Letzter manueller Override
+admin_minerva.last_refresh_title: Letzte Refresh-Ausfuhrung
+admin_minerva.last_refresh_meta: '%date% von %actor%'
+admin_minerva.last_refresh_summary: 'Erwartet: %expected% · Fehlend: %missing% · Geloscht: %deleted% · Eingefugt: %inserted% · Ubersprungen: %skipped%'
+admin_minerva.last_refresh_action_minerva_refresh_dry_run: Simulation
+admin_minerva.last_refresh_action_minerva_refresh_performed: Refresh ausgefuhrt
+admin_minerva.last_refresh_action_minerva_refresh_not_needed: Kein Refresh erforderlich

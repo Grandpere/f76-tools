@@ -63,6 +63,8 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
   - `docker compose -f compose.yaml exec -T app php bin/console app:minerva:generate-rotation --from=2026-01-01 --to=2026-12-31`
 - Refresh couverture dry-run (horizon glissant):
   - `make minerva-refresh-dry-run`
+- Refresh couverture dry-run strict (exit code non-zero si trous):
+  - `make minerva-refresh-check`
 - Refresh couverture reelle (horizon glissant):
   - `make minerva-refresh-run`
 - Backoffice admin:

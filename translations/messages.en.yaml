@@ -460,3 +460,9 @@ admin_minerva.freshness_expected_label: Expected windows
 admin_minerva.freshness_missing_label: Missing windows
 admin_minerva.freshness_last_generated_label: Last generated
 admin_minerva.freshness_last_manual_label: Last manual override
+admin_minerva.last_refresh_title: Last refresh execution
+admin_minerva.last_refresh_meta: '%date% by %actor%'
+admin_minerva.last_refresh_summary: 'Expected: %expected% · Missing: %missing% · Deleted: %deleted% · Inserted: %inserted% · Skipped: %skipped%'
+admin_minerva.last_refresh_action_minerva_refresh_dry_run: Dry run
+admin_minerva.last_refresh_action_minerva_refresh_performed: Executed refresh
+admin_minerva.last_refresh_action_minerva_refresh_not_needed: No refresh needed

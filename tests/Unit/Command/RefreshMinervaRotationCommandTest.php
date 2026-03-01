@@ -81,6 +81,38 @@ final class RefreshMinervaRotationCommandTest extends TestCase
         self::assertStringContainsString('Plage invalide', $tester->getDisplay());
     }
 
+    public function testDryRunReturnsFailureWhenMissingWindowsAndFailOnMissingEnabled(): void
+    {
+        $this->refreshService
+            ->expects(self::once())
+            ->method('refresh')
+            ->with(
+                self::isInstanceOf(DateTimeImmutable::class),
+                self::isInstanceOf(DateTimeImmutable::class),
+                true,
+            )
+            ->willReturn([
+                'expectedWindows' => 12,
+                'missingWindows' => 2,
+                'covered' => false,
+                'performed' => false,
+                'deleted' => 0,
+                'inserted' => 0,
+                'skipped' => 0,
+            ]);
+
+        $tester = $this->createTester();
+        $exitCode = $tester->execute([
+            '--from' => '2026-03-01',
+            '--to' => '2026-06-30',
+            '--dry-run' => true,
+            '--fail-on-missing' => true,
+        ]);
+
+        self::assertSame(Command::FAILURE, $exitCode);
+        self::assertStringContainsString('fenetres manquantes', $tester->getDisplay());
+    }
+
     private function createTester(): CommandTester
     {
         $command = new RefreshMinervaRotationCommand($this->refreshService);
