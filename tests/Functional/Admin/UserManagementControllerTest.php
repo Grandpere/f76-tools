@@ -602,6 +602,8 @@ final class UserManagementControllerTest extends WebTestCase
     {
         $admin = $this->createUser('admin-preserve-created-range@example.com', 'secret123', ['ROLE_ADMIN']);
         $managed = $this->createUser('managed-preserve-created-range@example.com', 'secret123', ['ROLE_USER']);
+        $this->setCreatedAtByEmail('admin-preserve-created-range@example.com', '2026-02-05 10:00:00');
+        $this->setCreatedAtByEmail('managed-preserve-created-range@example.com', '2026-02-10 10:00:00');
         $this->browser()->loginUser($admin);
 
         $crawler = $this->browser()->request('GET', '/admin/users?createdFrom=2026-02-01&createdTo=2026-02-28');

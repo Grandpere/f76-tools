@@ -310,3 +310,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: extension already present in base image.
 - Fix: removed redundant `docker-php-ext-install opcache`.
 - Prevention: verify base image capabilities before adding extension install steps.
+
+## 2026-03-01 - Functional test brittle on fixed createdAt window
+- Symptom: admin users functional test could not find row/token with `createdFrom/createdTo` filters.
+- Root cause: test used a fixed February 2026 date range while test users were created at current date.
+- Fix: explicitly set `createdAt` for involved users inside the asserted range before requesting the page.
+- Prevention: when asserting date-range filters, always control timestamps in fixtures instead of relying on `now`.
