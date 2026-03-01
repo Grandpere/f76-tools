@@ -437,3 +437,10 @@ admin_minerva.flash.regenerated: Minerva rotation regenerated.
 admin_minerva.flash.override_created: Manual override created.
 admin_minerva.flash.override_deleted: Manual override deleted.
 admin_minerva.flash.override_not_found: Manual override not found.
+admin_minerva.freshness_range: 'Coverage range: %from% -> %to%'
+admin_minerva.freshness_summary: 'Expected windows: %expected% · Missing windows: %missing%'
+admin_minerva.freshness_covered: Coverage is complete for this range.
+admin_minerva.freshness_missing: Coverage has gaps. Run regeneration.
+admin_minerva.freshness_last_generated: 'Last generated row created at: %date%'
+admin_minerva.freshness_last_manual: 'Last manual override created at: %date%'
+admin_minerva.freshness_never: never

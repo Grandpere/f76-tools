@@ -130,6 +130,41 @@ final class MinervaRotationControllerTest extends WebTestCase
         self::assertGreaterThan(0, (int) $count);
     }
 
+    public function testAdminPageDisplaysCoverageFreshnessSummary(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+        $this->persistRotation(
+            source: MinervaRotationSourceEnum::GENERATED,
+            location: 'Foundation',
+            listCycle: 3,
+            startsAt: '2026-03-02T12:00:00+00:00',
+            endsAt: '2026-03-04T12:00:00+00:00',
+        );
+        $this->persistRotation(
+            source: MinervaRotationSourceEnum::MANUAL,
+            location: 'Crater',
+            listCycle: 4,
+            startsAt: '2026-03-05T12:00:00+00:00',
+            endsAt: '2026-03-08T12:00:00+00:00',
+        );
+
+        $crawler = $this->browser()->request('GET', '/admin/minerva-rotation');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+
+        $freshnessNode = $crawler->filter('[data-minerva-freshness="1"]');
+        self::assertCount(1, $freshnessNode);
+
+        $expected = (int) $freshnessNode->attr('data-minerva-expected-windows');
+        $missing = (int) $freshnessNode->attr('data-minerva-missing-windows');
+        $covered = (string) $freshnessNode->attr('data-minerva-covered');
+
+        self::assertGreaterThan(0, $expected);
+        self::assertGreaterThanOrEqual(0, $missing);
+        self::assertLessThanOrEqual($expected, $missing);
+        self::assertContains($covered, ['0', '1']);
+    }
+
     public function testAdminCanCreateAndDeleteManualOverride(): void
     {
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);

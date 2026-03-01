@@ -437,3 +437,10 @@ admin_minerva.flash.regenerated: Rotation Minerva regeneree.
 admin_minerva.flash.override_created: Override manuel cree.
 admin_minerva.flash.override_deleted: Override manuel supprime.
 admin_minerva.flash.override_not_found: Override manuel introuvable.
+admin_minerva.freshness_range: 'Perimetre de couverture: %from% -> %to%'
+admin_minerva.freshness_summary: 'Fenetres attendues: %expected% · Fenetres manquantes: %missing%'
+admin_minerva.freshness_covered: La couverture est complete sur ce perimetre.
+admin_minerva.freshness_missing: Des trous de couverture existent. Lance une regeneration.
+admin_minerva.freshness_last_generated: 'Derniere fenetre generee creee le: %date%'
+admin_minerva.freshness_last_manual: 'Dernier override manuel cree le: %date%'
+admin_minerva.freshness_never: jamais

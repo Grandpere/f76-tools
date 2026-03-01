@@ -156,4 +156,21 @@ final class MinervaRotationEntityRepository extends ServiceEntityRepository impl
 
         return $result instanceof MinervaRotationEntity ? $result : null;
     }
+
+    public function findLatestCreatedAtBySource(MinervaRotationSourceEnum $source): ?DateTimeImmutable
+    {
+        $result = $this->createQueryBuilder('r')
+            ->where('r.source = :source')
+            ->setParameter('source', $source->value)
+            ->orderBy('r.createdAt', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if (!$result instanceof MinervaRotationEntity) {
+            return null;
+        }
+
+        return $result->getCreatedAt();
+    }
 }

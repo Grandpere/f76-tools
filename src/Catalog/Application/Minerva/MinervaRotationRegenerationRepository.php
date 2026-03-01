@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Catalog\Application\Minerva;
 
 use App\Catalog\Domain\Entity\MinervaRotationEntity;
+use App\Catalog\Domain\Minerva\MinervaRotationSourceEnum;
 use DateTimeImmutable;
 
 interface MinervaRotationRegenerationRepository
@@ -36,4 +37,6 @@ interface MinervaRotationRegenerationRepository
     public function findManualOrdered(): array;
 
     public function findManualById(int $id): ?MinervaRotationEntity;
+
+    public function findLatestCreatedAtBySource(MinervaRotationSourceEnum $source): ?DateTimeImmutable;
 }

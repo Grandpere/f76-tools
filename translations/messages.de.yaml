@@ -437,3 +437,10 @@ admin_minerva.flash.regenerated: Minerva-Rotation neu generiert.
 admin_minerva.flash.override_created: Manueller Override erstellt.
 admin_minerva.flash.override_deleted: Manueller Override geloscht.
 admin_minerva.flash.override_not_found: Manueller Override nicht gefunden.
+admin_minerva.freshness_range: 'Abdeckungsbereich: %from% -> %to%'
+admin_minerva.freshness_summary: 'Erwartete Fenster: %expected% · Fehlende Fenster: %missing%'
+admin_minerva.freshness_covered: Die Abdeckung ist fur diesen Bereich vollstandig.
+admin_minerva.freshness_missing: Es gibt Abdeckungslucken. Bitte neu generieren.
+admin_minerva.freshness_last_generated: 'Zuletzt erzeugtes Fenster erstellt am: %date%'
+admin_minerva.freshness_last_manual: 'Zuletzt manuell erstellter Override am: %date%'
+admin_minerva.freshness_never: nie

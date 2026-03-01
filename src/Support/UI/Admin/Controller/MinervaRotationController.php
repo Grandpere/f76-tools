@@ -14,8 +14,11 @@ declare(strict_types=1);
 namespace App\Support\UI\Admin\Controller;
 
 use App\Catalog\Application\Minerva\MinervaRotationOverrideApplicationService;
+use App\Catalog\Application\Minerva\MinervaRotationRefresher;
 use App\Catalog\Application\Minerva\MinervaRotationRegenerationApplicationService;
+use App\Catalog\Application\Minerva\MinervaRotationRegenerationRepository;
 use App\Catalog\Application\Minerva\MinervaRotationTimelineApplicationService;
+use App\Catalog\Domain\Minerva\MinervaRotationSourceEnum;
 use DateInterval;
 use DateTimeImmutable;
 use DateTimeZone;
@@ -37,6 +40,8 @@ final class MinervaRotationController extends AbstractController
         private readonly MinervaRotationTimelineApplicationService $timelineService,
         private readonly MinervaRotationRegenerationApplicationService $regenerationService,
         private readonly MinervaRotationOverrideApplicationService $overrideService,
+        private readonly MinervaRotationRefresher $minervaRotationRefresher,
+        private readonly MinervaRotationRegenerationRepository $minervaRotationRegenerationRepository,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
     ) {
     }
@@ -49,12 +54,22 @@ final class MinervaRotationController extends AbstractController
         $now = new DateTimeImmutable('now', new DateTimeZone('America/New_York'));
         $defaultFrom = $now->format('Y-m-01');
         $defaultTo = $now->add(new DateInterval('P12M'))->format('Y-m-t');
+        $timezone = new DateTimeZone('America/New_York');
+        $from = $this->parseDate($defaultFrom, true, $timezone);
+        $to = $this->parseDate($defaultTo, false, $timezone);
+        $freshness = null;
+        if ($from instanceof DateTimeImmutable && $to instanceof DateTimeImmutable) {
+            $freshness = $this->minervaRotationRefresher->refresh($from, $to, true);
+        }
 
         return $this->render('admin/minerva_rotation.html.twig', [
             'timeline' => $this->timelineService->buildTimeline(),
             'defaultFrom' => $defaultFrom,
             'defaultTo' => $defaultTo,
             'manualOverrides' => $this->buildManualRows(),
+            'freshness' => $freshness,
+            'latestGeneratedAt' => $this->minervaRotationRegenerationRepository->findLatestCreatedAtBySource(MinervaRotationSourceEnum::GENERATED),
+            'latestManualAt' => $this->minervaRotationRegenerationRepository->findLatestCreatedAtBySource(MinervaRotationSourceEnum::MANUAL),
         ]);
     }
 
