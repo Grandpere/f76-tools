@@ -6,6 +6,7 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-138: auto-refresh Minerva (service + commande + action backoffice + bloc fraicheur) (done).
 - F76-137: PHPat guardrails sur le naming des ports (no *Interface en Application/Domain/UI + *Port interface en UI) (done).
 - F76-136: Progression ports sans suffixe `Interface` (ItemReadRepository, PlayerReadRepository, owned-player read port) (done).
 - F76-135: Catalog import ports sans suffixe `Interface` (ItemImport*) + propagation complete (done).
@@ -25,4 +26,4 @@
 - Historique plus ancien: voir `docs/backlog/tickets/` (slices DDD et tickets precedents archives par fichier).
 
 ## Ensuite
-- F76-138: auto-refresh rotation Minerva + indicateur de fraicheur backoffice.
+- Stabilisation UX backoffice/front apres F76-138 (retours fonctionnels + micro-polish).

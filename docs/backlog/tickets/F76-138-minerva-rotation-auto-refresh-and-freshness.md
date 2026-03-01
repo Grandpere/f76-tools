@@ -11,6 +11,13 @@ Le besoin produit est d eviter une timeline vide/incomplete sans intervention ma
 - Ajouter un indicateur de fraicheur en backoffice Minerva (date de derniere regeneration auto/manuelle).
 - Mettre a jour runbook ops avec cadence recommandee (cron journalier).
 
+## Avancement
+- [x] Service applicatif de refresh idempotent (`MinervaRotationRefreshApplicationService`).
+- [x] Commande console `app:minerva:refresh-rotation` (+ targets Make).
+- [x] Formulaire backoffice `/admin/minerva-rotation/refresh` (dry-run/reel).
+- [x] Bloc de fraicheur backoffice (coverage + last generated/manual).
+- [x] Runbook ops mis a jour (`docs/ops/ops-runbook.md`).
+
 ## Hors scope
 - Scraping de sources externes.
 - Override manuel automatique.
