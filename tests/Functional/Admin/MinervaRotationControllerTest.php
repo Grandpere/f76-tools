@@ -134,6 +134,28 @@ final class MinervaRotationControllerTest extends WebTestCase
         self::assertSame('2026-06-30', $overrideHiddenTo->attr('value'));
     }
 
+    public function testAdminPageFallsBackToDefaultRangeWhenQueryDatesAreInvalid(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/minerva-rotation?from=invalid-date&to=2026-99-99');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+
+        $regenerateFrom = $crawler->filter('form[action*="/admin/minerva-rotation/regenerate"] input[name="from"]');
+        $regenerateTo = $crawler->filter('form[action*="/admin/minerva-rotation/regenerate"] input[name="to"]');
+        self::assertCount(1, $regenerateFrom);
+        self::assertCount(1, $regenerateTo);
+
+        $fromValue = (string) $regenerateFrom->attr('value');
+        $toValue = (string) $regenerateTo->attr('value');
+
+        self::assertNotSame('invalid-date', $fromValue);
+        self::assertNotSame('2026-99-99', $toValue);
+        self::assertMatchesRegularExpression('/^\d{4}-\d{2}-\d{2}$/', $fromValue);
+        self::assertMatchesRegularExpression('/^\d{4}-\d{2}-\d{2}$/', $toValue);
+    }
+
     public function testAdminCanRegenerateRotationFromForm(): void
     {
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
