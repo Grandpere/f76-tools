@@ -87,6 +87,8 @@
             <h2>{{ 'admin_minerva.override_title'|trans }}</h2>
             <form method="post" action="{{ path('app_admin_minerva_rotation_override_create', { locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters" data-controller="minerva-admin-datepicker" data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_override_create') }}">
+                <input type="hidden" name="from" value="{{ defaultFrom }}">
+                <input type="hidden" name="to" value="{{ defaultTo }}">
                 <label class="field">
                     <span>{{ 'admin_minerva.override_location'|trans }}</span>
                     <input type="text" name="location" required maxlength="120" placeholder="Foundation">
@@ -126,6 +128,8 @@
                             <td>
                                 <form method="post" action="{{ path('app_admin_minerva_rotation_override_delete', { locale: app.request.locale, id: row.id }) }}">
                                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_override_delete_' ~ row.id) }}">
+                                    <input type="hidden" name="from" value="{{ defaultFrom }}">
+                                    <input type="hidden" name="to" value="{{ defaultTo }}">
                                     <button type="submit">{{ 'admin_minerva.override_delete'|trans }}</button>
                                 </form>
                             </td>

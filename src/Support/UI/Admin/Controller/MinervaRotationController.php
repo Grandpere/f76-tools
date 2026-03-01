@@ -165,7 +165,7 @@ final class MinervaRotationController extends AbstractController
         if (!$this->isValidToken($request, 'admin_minerva_rotation_override_create')) {
             $this->addFlash('warning', 'admin_minerva.flash.invalid_csrf');
 
-            return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+            return $this->redirectToMinervaPageWithRange($request);
         }
 
         $timezone = new DateTimeZone('America/New_York');
@@ -177,7 +177,7 @@ final class MinervaRotationController extends AbstractController
         if ('' === $location || null === $listCycle || null === $startsAt || null === $endsAt || $endsAt < $startsAt) {
             $this->addFlash('warning', 'admin_minerva.flash.invalid_override');
 
-            return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+            return $this->redirectToMinervaPageWithRange($request);
         }
 
         try {
@@ -185,12 +185,12 @@ final class MinervaRotationController extends AbstractController
         } catch (InvalidArgumentException) {
             $this->addFlash('warning', 'admin_minerva.flash.invalid_override');
 
-            return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+            return $this->redirectToMinervaPageWithRange($request);
         }
 
         $this->addFlash('success', 'admin_minerva.flash.override_created');
 
-        return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+        return $this->redirectToMinervaPageWithRange($request);
     }
 
     #[Route('/override/{id}/delete', name: 'app_admin_minerva_rotation_override_delete', methods: ['POST'])]
@@ -200,18 +200,18 @@ final class MinervaRotationController extends AbstractController
         if (!$this->isValidToken($request, 'admin_minerva_rotation_override_delete_'.$id)) {
             $this->addFlash('warning', 'admin_minerva.flash.invalid_csrf');
 
-            return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+            return $this->redirectToMinervaPageWithRange($request);
         }
 
         if (!$this->overrideService->deleteManualOverride($id)) {
             $this->addFlash('warning', 'admin_minerva.flash.override_not_found');
 
-            return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+            return $this->redirectToMinervaPageWithRange($request);
         }
 
         $this->addFlash('success', 'admin_minerva.flash.override_deleted');
 
-        return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+        return $this->redirectToMinervaPageWithRange($request);
     }
 
     private function parseDate(string $value, bool $isStart, DateTimeZone $timezone): ?DateTimeImmutable

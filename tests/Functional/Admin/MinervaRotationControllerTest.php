@@ -201,12 +201,17 @@ final class MinervaRotationControllerTest extends WebTestCase
 
         $this->browser()->request('POST', '/admin/minerva-rotation/override/create', [
             '_csrf_token' => (string) $tokenNode->attr('value'),
+            'from' => '2026-03-01',
+            'to' => '2026-03-20',
             'location' => 'Foundation',
             'listCycle' => '9',
             'startsAt' => '2026-04-01T12:00',
             'endsAt' => '2026-04-03T12:00',
         ]);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        $createLocation = (string) $this->browser()->getResponse()->headers->get('location');
+        self::assertStringContainsString('from=2026-03-01', $createLocation);
+        self::assertStringContainsString('to=2026-03-20', $createLocation);
 
         $manual = $this->entityManager?->getRepository(MinervaRotationEntity::class)
             ->findOneBy(['source' => MinervaRotationSourceEnum::MANUAL->value]);
@@ -223,8 +228,13 @@ final class MinervaRotationControllerTest extends WebTestCase
 
         $this->browser()->request('POST', sprintf('/admin/minerva-rotation/override/%d/delete', $manualId), [
             '_csrf_token' => (string) $deleteTokenNode->attr('value'),
+            'from' => '2026-03-01',
+            'to' => '2026-03-20',
         ]);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        $deleteLocation = (string) $this->browser()->getResponse()->headers->get('location');
+        self::assertStringContainsString('from=2026-03-01', $deleteLocation);
+        self::assertStringContainsString('to=2026-03-20', $deleteLocation);
 
         $deleted = $this->entityManager?->getRepository(MinervaRotationEntity::class)
             ->findOneBy(['id' => $manualId]);
