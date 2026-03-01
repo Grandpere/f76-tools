@@ -414,7 +414,7 @@ admin_minerva.description: Minerva-Fenster aus deterministischen Regeln neu gene
 admin_minerva.back_to_dashboard: Zuruck zum Dashboard
 admin_minerva.regenerate_title: Zeitplan neu generieren
 admin_minerva.refresh: Abdeckung aktualisieren
-admin_minerva.refresh_dry_run: Dry run
+admin_minerva.refresh_dry_run: Simulation
 admin_minerva.from: Von
 admin_minerva.to: Bis
 admin_minerva.regenerate: Neu generieren

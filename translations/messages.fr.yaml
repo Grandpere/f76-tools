@@ -414,7 +414,7 @@ admin_minerva.description: Regenere et consulte les fenetres Minerva depuis des 
 admin_minerva.back_to_dashboard: Retour au dashboard
 admin_minerva.regenerate_title: Regenerer la timeline
 admin_minerva.refresh: Rafraichir la couverture
-admin_minerva.refresh_dry_run: Dry run
+admin_minerva.refresh_dry_run: Simulation
 admin_minerva.from: Du
 admin_minerva.to: Au
 admin_minerva.regenerate: Regenerer

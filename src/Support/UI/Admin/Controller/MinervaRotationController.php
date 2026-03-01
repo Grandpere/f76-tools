@@ -128,10 +128,13 @@ final class MinervaRotationController extends AbstractController
         $result = $this->minervaRotationRefresher->refresh($from, $to, $dryRun);
 
         if ($dryRun) {
+            $coveredLabel = $result['covered']
+                ? $this->translator->trans('admin_minerva.freshness_status_covered')
+                : $this->translator->trans('admin_minerva.freshness_status_missing');
             $this->addFlash('success', $this->translator->trans('admin_minerva.flash.refresh_dry_run_summary', [
                 '%expected%' => (string) $result['expectedWindows'],
                 '%missing%' => (string) $result['missingWindows'],
-                '%covered%' => $result['covered'] ? '1' : '0',
+                '%covered%' => $coveredLabel,
             ]));
         } elseif ($result['performed']) {
             $this->addFlash('success', 'admin_minerva.flash.refresh_performed');
