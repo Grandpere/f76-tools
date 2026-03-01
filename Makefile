@@ -77,6 +77,14 @@ audit-retention-dry-run: ## Dry-run purge for auth/admin audit logs
 audit-retention-run: ## Purge auth/admin audit logs
 	$(DC_EXEC) php bin/console app:audit:retention:run --days=90
 
+.PHONY: minerva-refresh-dry-run
+minerva-refresh-dry-run: ## Dry-run Minerva rotation refresh (next 90 days)
+	$(DC_EXEC) php bin/console app:minerva:refresh-rotation --days=90 --dry-run
+
+.PHONY: minerva-refresh-run
+minerva-refresh-run: ## Minerva rotation refresh (next 90 days)
+	$(DC_EXEC) php bin/console app:minerva:refresh-rotation --days=90
+
 ##
 ## Database
 ##---------------------------------------------------------------------------

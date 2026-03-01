@@ -25,4 +25,4 @@
 - Historique plus ancien: voir `docs/backlog/tickets/` (slices DDD et tickets precedents archives par fichier).
 
 ## Ensuite
-- Formaliser le prochain ticket produit prioritaire lie a F76-002 (evolution metier Minerva).
+- F76-138: auto-refresh rotation Minerva + indicateur de fraicheur backoffice.

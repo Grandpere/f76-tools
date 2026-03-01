@@ -316,3 +316,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: test used a fixed February 2026 date range while test users were created at current date.
 - Fix: explicitly set `createdAt` for involved users inside the asserted range before requesting the page.
 - Prevention: when asserting date-range filters, always control timestamps in fixtures instead of relying on `now`.
+
+## 2026-03-01 - Final services reduce testability without ports
+- Symptom: unit tests failed while mocking `final` application services (PHPUnit cannot double final classes).
+- Root cause: command/service constructors depended on concrete `final` classes instead of application ports.
+- Fix: introduced explicit Minerva ports (`Generator`, `Regenerator`, `Refresher`) and injected interfaces.
+- Prevention: expose application behavior through interfaces (ports) when class will be consumed/mocked in tests.

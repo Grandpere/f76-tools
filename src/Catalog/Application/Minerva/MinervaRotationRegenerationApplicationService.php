@@ -18,10 +18,10 @@ use App\Catalog\Domain\Minerva\MinervaRotationSourceEnum;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class MinervaRotationRegenerationApplicationService
+final class MinervaRotationRegenerationApplicationService implements MinervaRotationRegenerator
 {
     public function __construct(
-        private readonly MinervaRotationGenerationApplicationService $generationService,
+        private readonly MinervaRotationGenerator $generationService,
         private readonly MinervaRotationRegenerationRepository $rotationRepository,
         private readonly EntityManagerInterface $entityManager,
     ) {

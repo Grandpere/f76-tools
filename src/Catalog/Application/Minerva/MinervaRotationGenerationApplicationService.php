@@ -17,7 +17,7 @@ use DateInterval;
 use DateTimeImmutable;
 use DateTimeZone;
 
-final class MinervaRotationGenerationApplicationService
+final class MinervaRotationGenerationApplicationService implements MinervaRotationGenerator
 {
     private const TIMEZONE = 'America/New_York';
     private const LIST_MIN = 1;

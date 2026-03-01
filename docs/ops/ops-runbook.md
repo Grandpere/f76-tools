@@ -50,14 +50,21 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
 ## Planification cron
 - Exemple de cron quotidien (02:15) depuis l hote Docker:
   - `15 2 * * * cd /chemin/vers/f76 && make audit-retention-run >> var/log/audit-retention.log 2>&1`
+- Exemple de cron quotidien Minerva (02:30):
+  - `30 2 * * * cd /chemin/vers/f76 && make minerva-refresh-run >> var/log/minerva-refresh.log 2>&1`
 - Recommandation:
   - lancer d abord quelques jours en `audit-retention-dry-run` pour verifier les volumes.
+  - lancer quelques jours `minerva-refresh-dry-run` avant activation cron.
 
 ## Rotation Minerva
 - Generation dry-run:
   - `docker compose -f compose.yaml exec -T app php bin/console app:minerva:generate-rotation --from=2026-01-01 --to=2026-12-31 --dry-run`
 - Generation reelle:
   - `docker compose -f compose.yaml exec -T app php bin/console app:minerva:generate-rotation --from=2026-01-01 --to=2026-12-31`
+- Refresh couverture dry-run (horizon glissant):
+  - `make minerva-refresh-dry-run`
+- Refresh couverture reelle (horizon glissant):
+  - `make minerva-refresh-run`
 - Backoffice admin:
   - `GET /admin/minerva-rotation` (formulaire de regeneration + visualisation timeline).
 - Page publique authentifiee:

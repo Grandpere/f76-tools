@@ -23,6 +23,11 @@ interface MinervaRotationRegenerationRepository
     /**
      * @return list<MinervaRotationEntity>
      */
+    public function findOverlappingRange(DateTimeImmutable $from, DateTimeImmutable $to): array;
+
+    /**
+     * @return list<MinervaRotationEntity>
+     */
     public function findManualOverlappingRange(DateTimeImmutable $from, DateTimeImmutable $to): array;
 
     /**
