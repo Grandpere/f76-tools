@@ -120,6 +120,9 @@ final class MinervaRotationControllerTest extends WebTestCase
         ]);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        $location = (string) $this->browser()->getResponse()->headers->get('location');
+        self::assertStringContainsString('from=2026-03-01', $location);
+        self::assertStringContainsString('to=2026-03-20', $location);
 
         $count = $this->entityManager?->getRepository(MinervaRotationEntity::class)
             ->createQueryBuilder('r')
