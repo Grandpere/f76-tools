@@ -339,6 +339,31 @@ final class MinervaRotationControllerTest extends WebTestCase
         self::assertNull($deleted);
     }
 
+    public function testAdminOverrideCreateRejectsInvalidPayloadAndPreservesQueryContext(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/minerva-rotation?from=2026-07-01&to=2026-07-31');
+        $tokenNode = $crawler->filter('form[action*="/admin/minerva-rotation/override/create"] input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', '/admin/minerva-rotation/override/create', [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'from' => '2026-07-01',
+            'to' => '2026-07-31',
+            'location' => '',
+            'listCycle' => '0',
+            'startsAt' => '2026-07-10T12:00',
+            'endsAt' => '2026-07-09T12:00',
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        $location = (string) $this->browser()->getResponse()->headers->get('location');
+        self::assertStringContainsString('from=2026-07-01', $location);
+        self::assertStringContainsString('to=2026-07-31', $location);
+    }
+
     public function testRegenerationKeepsManualOverrideAndSkipsOverlappingGeneratedWindow(): void
     {
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
