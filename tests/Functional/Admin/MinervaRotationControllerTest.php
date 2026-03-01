@@ -151,6 +151,8 @@ final class MinervaRotationControllerTest extends WebTestCase
         $location = (string) $this->browser()->getResponse()->headers->get('location');
         self::assertStringStartsWith('/admin/minerva-rotation', $location);
         self::assertStringContainsString('locale=', $location);
+        self::assertStringContainsString('from=2026-03-01', $location);
+        self::assertStringContainsString('to=2026-03-20', $location);
     }
 
     public function testAdminPageDisplaysCoverageFreshnessSummary(): void

@@ -54,8 +54,10 @@ final class MinervaRotationController extends AbstractController
         $this->ensureAdminAccess();
 
         $now = new DateTimeImmutable('now', new DateTimeZone('America/New_York'));
-        $defaultFrom = $now->format('Y-m-01');
-        $defaultTo = $now->add(new DateInterval('P12M'))->format('Y-m-t');
+        $fallbackFrom = $now->format('Y-m-01');
+        $fallbackTo = $now->add(new DateInterval('P12M'))->format('Y-m-t');
+        $defaultFrom = $this->normalizeDateInput($request->query->getString('from', '')) ?? $fallbackFrom;
+        $defaultTo = $this->normalizeDateInput($request->query->getString('to', '')) ?? $fallbackTo;
         $timezone = new DateTimeZone('America/New_York');
         $from = $this->parseDate($defaultFrom, true, $timezone);
         $to = $this->parseDate($defaultTo, false, $timezone);
@@ -82,7 +84,7 @@ final class MinervaRotationController extends AbstractController
         if (!$this->isValidToken($request, 'admin_minerva_rotation_regenerate')) {
             $this->addFlash('warning', 'admin_minerva.flash.invalid_csrf');
 
-            return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+            return $this->redirectToMinervaPageWithRange($request);
         }
 
         $timezone = new DateTimeZone('America/New_York');
@@ -91,7 +93,7 @@ final class MinervaRotationController extends AbstractController
         if (!$from instanceof DateTimeImmutable || !$to instanceof DateTimeImmutable || $to < $from) {
             $this->addFlash('warning', 'admin_minerva.flash.invalid_range');
 
-            return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+            return $this->redirectToMinervaPageWithRange($request);
         }
 
         $result = $this->regenerationService->regenerate($from, $to);
@@ -102,7 +104,7 @@ final class MinervaRotationController extends AbstractController
             '%skipped%' => (string) $result['skipped'],
         ]));
 
-        return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+        return $this->redirectToMinervaPageWithRange($request);
     }
 
     #[Route('/refresh', name: 'app_admin_minerva_rotation_refresh', methods: ['POST'])]
@@ -112,7 +114,7 @@ final class MinervaRotationController extends AbstractController
         if (!$this->isValidToken($request, 'admin_minerva_rotation_refresh')) {
             $this->addFlash('warning', 'admin_minerva.flash.invalid_csrf');
 
-            return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+            return $this->redirectToMinervaPageWithRange($request);
         }
 
         $timezone = new DateTimeZone('America/New_York');
@@ -121,7 +123,7 @@ final class MinervaRotationController extends AbstractController
         if (!$from instanceof DateTimeImmutable || !$to instanceof DateTimeImmutable || $to < $from) {
             $this->addFlash('warning', 'admin_minerva.flash.invalid_range');
 
-            return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+            return $this->redirectToMinervaPageWithRange($request);
         }
 
         $dryRun = filter_var($request->request->get('dryRun', false), FILTER_VALIDATE_BOOL);
@@ -153,7 +155,7 @@ final class MinervaRotationController extends AbstractController
             ]));
         }
 
-        return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
+        return $this->redirectToMinervaPageWithRange($request);
     }
 
     #[Route('/override/create', name: 'app_admin_minerva_rotation_override_create', methods: ['POST'])]
@@ -273,5 +275,34 @@ final class MinervaRotationController extends AbstractController
     protected function csrfTokenManager(): CsrfTokenManagerInterface
     {
         return $this->csrfTokenManager;
+    }
+
+    private function redirectToMinervaPageWithRange(Request $request): RedirectResponse
+    {
+        $params = ['locale' => $request->getLocale()];
+        $from = $this->normalizeDateInput((string) $request->request->get('from', ''));
+        $to = $this->normalizeDateInput((string) $request->request->get('to', ''));
+        if (is_string($from)) {
+            $params['from'] = $from;
+        }
+        if (is_string($to)) {
+            $params['to'] = $to;
+        }
+
+        return $this->redirectToRoute('app_admin_minerva_rotation', $params);
+    }
+
+    private function normalizeDateInput(string $value): ?string
+    {
+        $trimmed = trim($value);
+        if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $trimmed)) {
+            return null;
+        }
+        $parsed = DateTimeImmutable::createFromFormat('Y-m-d', $trimmed);
+        if (!$parsed instanceof DateTimeImmutable) {
+            return null;
+        }
+
+        return $parsed->format('Y-m-d');
     }
 }
