@@ -186,6 +186,27 @@ final class MinervaRotationControllerTest extends WebTestCase
         self::assertGreaterThan(0, (int) $count);
     }
 
+    public function testAdminRegenerateRejectsInvalidRangeAndPreservesQueryContext(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/minerva-rotation?from=2026-04-01&to=2026-04-20');
+        $tokenNode = $crawler->filter('form[action*="/admin/minerva-rotation/regenerate"] input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', '/admin/minerva-rotation/regenerate', [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'from' => '2026-04-20',
+            'to' => '2026-04-01',
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        $location = (string) $this->browser()->getResponse()->headers->get('location');
+        self::assertStringContainsString('from=2026-04-20', $location);
+        self::assertStringContainsString('to=2026-04-01', $location);
+    }
+
     public function testAdminCanRunCoverageRefreshFromForm(): void
     {
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
