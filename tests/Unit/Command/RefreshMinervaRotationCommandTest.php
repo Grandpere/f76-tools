@@ -113,6 +113,56 @@ final class RefreshMinervaRotationCommandTest extends TestCase
         self::assertStringContainsString('fenetres manquantes', $tester->getDisplay());
     }
 
+    public function testDryRunJsonOutputIncludesStatusAndRange(): void
+    {
+        $this->refreshService
+            ->expects(self::once())
+            ->method('refresh')
+            ->with(
+                self::isInstanceOf(DateTimeImmutable::class),
+                self::isInstanceOf(DateTimeImmutable::class),
+                true,
+            )
+            ->willReturn([
+                'expectedWindows' => 12,
+                'missingWindows' => 0,
+                'covered' => true,
+                'performed' => false,
+                'deleted' => 0,
+                'inserted' => 0,
+                'skipped' => 0,
+            ]);
+
+        $tester = $this->createTester();
+        $exitCode = $tester->execute([
+            '--from' => '2026-03-01',
+            '--to' => '2026-06-30',
+            '--dry-run' => true,
+            '--format' => 'json',
+        ]);
+
+        self::assertSame(Command::SUCCESS, $exitCode);
+        $decoded = json_decode($tester->getDisplay(), true, 512, JSON_THROW_ON_ERROR);
+        self::assertIsArray($decoded);
+        self::assertIsArray($decoded['range'] ?? null);
+        self::assertSame('ok', $decoded['status'] ?? null);
+        self::assertSame(0, $decoded['missingWindows'] ?? null);
+        self::assertSame('America/New_York', $decoded['range']['timezone'] ?? null);
+    }
+
+    public function testInvalidFormatReturnsInvalidExitCode(): void
+    {
+        $this->refreshService->expects(self::never())->method('refresh');
+
+        $tester = $this->createTester();
+        $exitCode = $tester->execute([
+            '--format' => 'xml',
+        ]);
+
+        self::assertSame(Command::INVALID, $exitCode);
+        self::assertStringContainsString('Format invalide', $tester->getDisplay());
+    }
+
     private function createTester(): CommandTester
     {
         $command = new RefreshMinervaRotationCommand($this->refreshService);

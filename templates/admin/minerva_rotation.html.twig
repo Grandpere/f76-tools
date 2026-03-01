@@ -67,6 +67,12 @@
                         {{ freshness.covered|default(false) ? 'admin_minerva.freshness_status_covered'|trans : 'admin_minerva.freshness_status_missing'|trans }}
                     </span>
                 </div>
+                <p
+                    class="admin-minerva-consistency-line"
+                    data-minerva-consistency-status="{{ freshness.covered|default(false) ? 'ok' : 'drift' }}"
+                >
+                    {{ freshness.covered|default(false) ? 'admin_minerva.consistency_ok'|trans : 'admin_minerva.consistency_drift'|trans }}
+                </p>
                 <dl class="admin-minerva-freshness-grid">
                     <div>
                         <dt>{{ 'admin_minerva.freshness_range_label'|trans }}</dt>

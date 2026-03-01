@@ -53,6 +53,8 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
 - Minerva: ordre recommande (02:25 check, 02:30 run):
   - `25 2 * * * cd /chemin/vers/f76 && make minerva-refresh-check >> var/log/minerva-refresh-check.log 2>&1`
   - `30 2 * * * cd /chemin/vers/f76 && make minerva-refresh-run >> var/log/minerva-refresh.log 2>&1`
+- Variante exploitable machine (JSON + code retour):
+  - `25 2 * * * cd /chemin/vers/f76 && make minerva-refresh-check-json >> var/log/minerva-refresh-check.json.log 2>&1`
 - Recommandation:
   - lancer d abord quelques jours en `audit-retention-dry-run` pour verifier les volumes.
   - lancer quelques jours `minerva-refresh-dry-run` avant activation cron.
@@ -66,6 +68,8 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
   - `make minerva-refresh-dry-run`
 - Refresh couverture dry-run strict (exit code non-zero si trous):
   - `make minerva-refresh-check`
+- Refresh couverture dry-run strict en JSON (monitoring/log parser):
+  - `make minerva-refresh-check-json`
 - Refresh couverture reelle (horizon glissant):
   - `make minerva-refresh-run`
 - Override manuel exceptionnel (incident):

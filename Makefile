@@ -85,6 +85,10 @@ minerva-refresh-dry-run: ## Dry-run Minerva rotation refresh (next 90 days)
 minerva-refresh-check: ## Dry-run Minerva refresh with non-zero exit when coverage has gaps
 	$(DC_EXEC) php bin/console app:minerva:refresh-rotation --days=90 --dry-run --fail-on-missing
 
+.PHONY: minerva-refresh-check-json
+minerva-refresh-check-json: ## Dry-run Minerva check with machine-readable JSON output
+	$(DC_EXEC) php bin/console app:minerva:refresh-rotation --days=90 --dry-run --fail-on-missing --format=json
+
 .PHONY: minerva-refresh-run
 minerva-refresh-run: ## Minerva rotation refresh (next 90 days)
 	$(DC_EXEC) php bin/console app:minerva:refresh-rotation --days=90

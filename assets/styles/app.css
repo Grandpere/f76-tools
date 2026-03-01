@@ -1721,6 +1721,13 @@ body::before {
     gap: 0.44rem 0.75rem;
 }
 
+.admin-minerva-consistency-line {
+    margin: 0 0 0.5rem;
+    font-size: 0.84rem;
+    color: var(--text-1);
+    font-weight: 600;
+}
+
 .admin-minerva-freshness-grid > div {
     min-width: 0;
 }

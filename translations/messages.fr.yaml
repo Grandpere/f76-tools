@@ -459,6 +459,8 @@ admin_minerva.freshness_never: jamais
 admin_minerva.freshness_title: Fraicheur de couverture
 admin_minerva.freshness_status_covered: Couvert
 admin_minerva.freshness_status_missing: Fenetres manquantes
+admin_minerva.consistency_ok: Le controle de coherence est sain sur cette plage.
+admin_minerva.consistency_drift: Un ecart de coherence est detecte sur cette plage. Verifie le refresh ou la regeneration.
 admin_minerva.freshness_range_label: Perimetre
 admin_minerva.freshness_expected_label: Fenetres attendues
 admin_minerva.freshness_missing_label: Fenetres manquantes

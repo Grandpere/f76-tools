@@ -44,6 +44,7 @@ final class RefreshMinervaRotationCommand extends Command
             ->addOption('to', null, InputOption::VALUE_REQUIRED, 'Date de fin (Y-m-d), timezone America/New_York.')
             ->addOption('days', null, InputOption::VALUE_REQUIRED, 'Horizon en jours si --to absent.', '90')
             ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Analyse sans regeneration')
+            ->addOption('format', null, InputOption::VALUE_REQUIRED, 'Format de sortie: text|json.', 'text')
             ->addOption('fail-on-missing', null, InputOption::VALUE_NONE, 'En dry-run, retourne un code non-zero si des fenetres manquent');
     }
 
@@ -55,22 +56,66 @@ final class RefreshMinervaRotationCommand extends Command
         $fromOption = $input->getOption('from');
         $toOption = $input->getOption('to');
         $daysOption = $input->getOption('days');
+        $formatOption = $input->getOption('format');
+        $format = is_string($formatOption) ? mb_strtolower(trim($formatOption)) : 'text';
+        if (!in_array($format, ['text', 'json'], true)) {
+            $io->error('Format invalide: utiliser --format=text ou --format=json.');
+
+            return Command::INVALID;
+        }
 
         $from = $this->parseDateStart(is_string($fromOption) ? $fromOption : '', $now, $timezone);
         $to = $this->parseDateEnd(is_string($toOption) ? $toOption : '', $from, $timezone, is_string($daysOption) ? $daysOption : '90');
         $dryRun = (bool) $input->getOption('dry-run');
+        $failOnMissing = (bool) $input->getOption('fail-on-missing');
 
         try {
             $result = $this->refreshService->refresh($from, $to, $dryRun);
         } catch (InvalidArgumentException) {
-            $io->error('Plage invalide: --to doit etre superieur ou egal a --from.');
+            if ('json' === $format) {
+                $output->writeln(json_encode([
+                    'ok' => false,
+                    'error' => 'invalid_range',
+                    'message' => 'Plage invalide: --to doit etre superieur ou egal a --from.',
+                ], JSON_THROW_ON_ERROR));
+            } else {
+                $io->error('Plage invalide: --to doit etre superieur ou egal a --from.');
+            }
 
             return Command::INVALID;
+        }
+
+        $hasMissingWindows = $result['missingWindows'] > 0;
+        $status = $this->resolveStatus($dryRun, $hasMissingWindows, $result['performed']);
+        $exitCode = $dryRun && $failOnMissing && $hasMissingWindows ? Command::FAILURE : Command::SUCCESS;
+
+        if ('json' === $format) {
+            $output->writeln(json_encode([
+                'ok' => Command::SUCCESS === $exitCode,
+                'status' => $status,
+                'range' => [
+                    'from' => $from->format(DATE_ATOM),
+                    'to' => $to->format(DATE_ATOM),
+                    'timezone' => 'America/New_York',
+                ],
+                'dryRun' => $dryRun,
+                'failOnMissing' => $failOnMissing,
+                'expectedWindows' => $result['expectedWindows'],
+                'missingWindows' => $result['missingWindows'],
+                'covered' => $result['covered'],
+                'performed' => $result['performed'],
+                'deleted' => $result['deleted'],
+                'inserted' => $result['inserted'],
+                'skipped' => $result['skipped'],
+            ], JSON_THROW_ON_ERROR));
+
+            return $exitCode;
         }
 
         $io->title('Refresh rotation Minerva');
         $io->text(sprintf('Range: %s -> %s (America/New_York)', $from->format('Y-m-d H:i:s'), $to->format('Y-m-d H:i:s')));
         $io->listing([
+            sprintf('Status: %s', $status),
             sprintf('Expected windows: %d', $result['expectedWindows']),
             sprintf('Missing windows: %d', $result['missingWindows']),
             sprintf('Covered: %s', $result['covered'] ? 'yes' : 'no'),
@@ -81,15 +126,14 @@ final class RefreshMinervaRotationCommand extends Command
         ]);
 
         if ($dryRun) {
-            $failOnMissing = (bool) $input->getOption('fail-on-missing');
-            if ($failOnMissing && $result['missingWindows'] > 0) {
+            if (Command::FAILURE === $exitCode) {
                 $io->warning('Dry-run detecte des fenetres manquantes.');
 
-                return Command::FAILURE;
+                return $exitCode;
             }
             $io->success('Dry-run termine.');
 
-            return Command::SUCCESS;
+            return $exitCode;
         }
 
         if ($result['performed']) {
@@ -99,6 +143,19 @@ final class RefreshMinervaRotationCommand extends Command
         }
 
         return Command::SUCCESS;
+    }
+
+    private function resolveStatus(bool $dryRun, bool $hasMissingWindows, bool $performed): string
+    {
+        if ($dryRun) {
+            return $hasMissingWindows ? 'drift_detected' : 'ok';
+        }
+
+        if ($performed) {
+            return 'recovered';
+        }
+
+        return 'ok';
     }
 
     private function parseDateStart(string $value, DateTimeImmutable $fallbackNow, DateTimeZone $timezone): DateTimeImmutable

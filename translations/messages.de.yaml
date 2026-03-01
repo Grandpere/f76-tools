@@ -459,6 +459,8 @@ admin_minerva.freshness_never: nie
 admin_minerva.freshness_title: Abdeckungsfrische
 admin_minerva.freshness_status_covered: Abgedeckt
 admin_minerva.freshness_status_missing: Fehlende Fenster
+admin_minerva.consistency_ok: Der Konsistenz-Check ist fur diesen Zeitraum in Ordnung.
+admin_minerva.consistency_drift: Konsistenzabweichung fur diesen Zeitraum erkannt. Bitte Refresh oder Regenerierung prufen.
 admin_minerva.freshness_range_label: Bereich
 admin_minerva.freshness_expected_label: Erwartete Fenster
 admin_minerva.freshness_missing_label: Fehlende Fenster

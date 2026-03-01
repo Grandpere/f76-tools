@@ -10,7 +10,7 @@ Garantir que la rotation Minerva affichee dans l application reste fiable dans l
 - Override runtime: autorise uniquement en mode exceptionnel (incident ponctuel), puis retour au genere.
 
 ## Rythme operationnel
-- Verification legere: 1 fois par semaine.
+- Verification legere: 1 fois par semaine (ou quotidien via `minerva-refresh-check-json`).
 - Regeneration preventive: 1 fois par mois.
 - Regeneration complete: debut d annee (N) sur N + 1.
 

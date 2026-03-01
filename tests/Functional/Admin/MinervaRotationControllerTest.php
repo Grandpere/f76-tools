@@ -346,6 +346,8 @@ final class MinervaRotationControllerTest extends WebTestCase
         self::assertLessThanOrEqual($expected, $missing);
         self::assertContains($covered, ['0', '1']);
         self::assertContains($stale, ['0', '1']);
+        $consistencyStatus = (string) $crawler->filter('[data-minerva-consistency-status]')->attr('data-minerva-consistency-status');
+        self::assertContains($consistencyStatus, ['ok', 'drift']);
         self::assertCount(1, $crawler->filter('a[href*="/admin/audit-logs"][href*="q=minerva_"]'));
     }
 

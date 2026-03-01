@@ -459,6 +459,8 @@ admin_minerva.freshness_never: never
 admin_minerva.freshness_title: Coverage freshness
 admin_minerva.freshness_status_covered: Covered
 admin_minerva.freshness_status_missing: Missing windows
+admin_minerva.consistency_ok: Consistency check is healthy for this range.
+admin_minerva.consistency_drift: Consistency drift detected for this range. Review refresh/regeneration.
 admin_minerva.freshness_range_label: Range
 admin_minerva.freshness_expected_label: Expected windows
 admin_minerva.freshness_missing_label: Missing windows

@@ -6,6 +6,7 @@
 - Stabilisation post-migration DDD (monitoring regressions + hygiene continue).
 
 ## Termine recemment
+- F76-141: check fiabilite Minerva en JSON + statut coherence visible en admin (done).
 - F76-140: clarification gouvernance source Minerva (admin-only) + docs ops alignees (done).
 - F76-139: Minerva polish UI + extraction lecture resume refresh vers service applicatif audit (done).
 - F76-138: auto-refresh Minerva (service + commande + action backoffice + bloc fraicheur) (done).
