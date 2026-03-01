@@ -104,6 +104,36 @@ final class MinervaRotationControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter('form[action*="/admin/minerva-rotation/override/create"][data-controller~="minerva-admin-datepicker"]'));
     }
 
+    public function testAdminPageUsesQueryDateRangeInForms(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/admin/minerva-rotation?from=2026-05-01&to=2026-06-30');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+
+        $regenerateFrom = $crawler->filter('form[action*="/admin/minerva-rotation/regenerate"] input[name="from"]');
+        $regenerateTo = $crawler->filter('form[action*="/admin/minerva-rotation/regenerate"] input[name="to"]');
+        self::assertCount(1, $regenerateFrom);
+        self::assertCount(1, $regenerateTo);
+        self::assertSame('2026-05-01', $regenerateFrom->attr('value'));
+        self::assertSame('2026-06-30', $regenerateTo->attr('value'));
+
+        $refreshFrom = $crawler->filter('form[action*="/admin/minerva-rotation/refresh"] input[name="from"]');
+        $refreshTo = $crawler->filter('form[action*="/admin/minerva-rotation/refresh"] input[name="to"]');
+        self::assertCount(1, $refreshFrom);
+        self::assertCount(1, $refreshTo);
+        self::assertSame('2026-05-01', $refreshFrom->attr('value'));
+        self::assertSame('2026-06-30', $refreshTo->attr('value'));
+
+        $overrideHiddenFrom = $crawler->filter('form[action*="/admin/minerva-rotation/override/create"] input[name="from"]');
+        $overrideHiddenTo = $crawler->filter('form[action*="/admin/minerva-rotation/override/create"] input[name="to"]');
+        self::assertCount(1, $overrideHiddenFrom);
+        self::assertCount(1, $overrideHiddenTo);
+        self::assertSame('2026-05-01', $overrideHiddenFrom->attr('value'));
+        self::assertSame('2026-06-30', $overrideHiddenTo->attr('value'));
+    }
+
     public function testAdminCanRegenerateRotationFromForm(): void
     {
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
