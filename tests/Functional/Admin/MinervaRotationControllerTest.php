@@ -253,6 +253,24 @@ final class MinervaRotationControllerTest extends WebTestCase
         self::assertStringContainsString('to=2026-04-01', $location);
     }
 
+    public function testAdminRefreshRejectsInvalidCsrfAndPreservesQueryContext(): void
+    {
+        $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+
+        $this->browser()->request('POST', '/admin/minerva-rotation/refresh', [
+            '_csrf_token' => 'invalid-token',
+            'from' => '2026-08-01',
+            'to' => '2026-08-31',
+            'dryRun' => '1',
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        $location = (string) $this->browser()->getResponse()->headers->get('location');
+        self::assertStringContainsString('from=2026-08-01', $location);
+        self::assertStringContainsString('to=2026-08-31', $location);
+    }
+
     public function testAdminPageDisplaysCoverageFreshnessSummary(): void
     {
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
