@@ -1629,6 +1629,10 @@ body::before {
     opacity: 1;
 }
 
+.minerva-admin-filters + .minerva-admin-filters {
+    margin-top: 0.65rem;
+}
+
 .admin-minerva-freshness {
     margin-top: 0.75rem;
     border: 1px solid rgba(29, 37, 49, 0.14);
