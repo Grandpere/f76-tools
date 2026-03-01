@@ -429,6 +429,10 @@ admin_minerva.override_create: Override hinzufugen
 admin_minerva.override_actions: Aktionen
 admin_minerva.override_delete: Loschen
 admin_minerva.override_empty: Kein manueller Override.
+admin_minerva.governance_title: Source Governance
+admin_minerva.governance_primary: Generierte Fenster sind die offizielle Quelle in der Anwendung.
+admin_minerva.governance_override: Manuelle Overrides sind Ausnahmefalle und nur temporar (nur fur Incident-Handling).
+admin_minerva.governance_recovery: Nach Incident-Losung den betroffenen Zeitraum neu generieren und obsolete Overrides entfernen.
 admin_minerva.source: Quelle
 admin_minerva.source_generated: Generiert
 admin_minerva.source_manual: Manuell

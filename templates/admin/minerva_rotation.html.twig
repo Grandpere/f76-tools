@@ -16,6 +16,14 @@
 
         <section class="translations-panel">
             <h2>{{ 'admin_minerva.regenerate_title'|trans }}</h2>
+            <div class="admin-minerva-governance" data-minerva-governance="1">
+                <p class="admin-minerva-governance-title">{{ 'admin_minerva.governance_title'|trans }}</p>
+                <ul>
+                    <li>{{ 'admin_minerva.governance_primary'|trans }}</li>
+                    <li>{{ 'admin_minerva.governance_override'|trans }}</li>
+                    <li>{{ 'admin_minerva.governance_recovery'|trans }}</li>
+                </ul>
+            </div>
             <form method="post" action="{{ path('app_admin_minerva_rotation_regenerate', { locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters" data-controller="minerva-admin-datepicker" data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_regenerate') }}">
                 <label class="field">

@@ -68,6 +68,10 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
   - `make minerva-refresh-check`
 - Refresh couverture reelle (horizon glissant):
   - `make minerva-refresh-run`
+- Override manuel exceptionnel (incident):
+  - creer via `GET /admin/minerva-rotation` > section `Manual overrides`,
+  - limiter la plage au strict necessaire,
+  - apres resolution: regenerer la plage et supprimer l override.
 - Backoffice admin:
   - `GET /admin/minerva-rotation` (formulaire de regeneration + visualisation timeline).
 - Page publique authentifiee:

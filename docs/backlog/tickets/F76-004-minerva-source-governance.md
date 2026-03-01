@@ -6,7 +6,7 @@ La rotation Minerva est generee de maniere deterministe en interne. Il faut cadr
 ## Scope
 - Definir une procedure de verification periodique de la timeline generee.
 - Definir une source de reference documentaire (liens, captures, historique).
-- Definir la reponse operationnelle en cas d ecart constate (sans override runtime pour l instant).
+- Definir la reponse operationnelle en cas d ecart constate (override exceptionnel et temporaire).
 - Documenter le runbook de regeneration annuelle/mensuelle.
 
 ## Avancement
@@ -14,7 +14,7 @@ La rotation Minerva est generee de maniere deterministe en interne. Il faut cadr
 - [x] Sources de reference listees pour verification manuelle.
 - [x] Procedure de gestion d ecart documentee.
 - [x] Runbook de regeneration (mensuel/annuel) documente.
-- [x] Decision explicite: pas d override runtime pour l instant.
+- [x] Decision explicite: override runtime autorise uniquement en mode exceptionnel, puis retour au genere.
 
 ## Criteres d acceptance
 - Procedure de verification documentee (qui, quand, comment).

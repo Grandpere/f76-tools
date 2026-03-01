@@ -7,7 +7,7 @@ Garantir que la rotation Minerva affichee dans l application reste fiable dans l
 - Source runtime unique: base de donnees locale (`minerva_rotation`).
 - Generation: service/commande interne deterministe.
 - Verification externe: manuelle, uniquement pour controle.
-- Override runtime: non active pour le moment.
+- Override runtime: autorise uniquement en mode exceptionnel (incident ponctuel), puis retour au genere.
 
 ## Rythme operationnel
 - Verification legere: 1 fois par semaine.
@@ -32,7 +32,10 @@ Garantir que la rotation Minerva affichee dans l application reste fiable dans l
 3. Si l ecart persiste:
    - ouvrir un ticket backlog "Minerva divergence",
    - documenter date/heure/source/impact,
-   - ne pas introduire d override ad hoc sans validation produit.
+   - creer un override manuel limite a la fenetre impactee.
+4. Une fois l incident resolu:
+   - regenerer la plage impactee,
+   - supprimer les overrides devenus obsoletes.
 
 ## Journalisation minimale recommandee
 Conserver une trace (ticket ou note interne) avec:

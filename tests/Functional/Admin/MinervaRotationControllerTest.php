@@ -61,9 +61,10 @@ final class MinervaRotationControllerTest extends WebTestCase
     {
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
         $this->browser()->loginUser($admin);
-        $this->browser()->request('GET', '/admin/minerva-rotation');
+        $crawler = $this->browser()->request('GET', '/admin/minerva-rotation');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(1, $crawler->filter('[data-minerva-governance="1"]'));
     }
 
     public function testTimelineTableColumnsAreOrderedLikeFrontWithSourceAndStatusLast(): void
