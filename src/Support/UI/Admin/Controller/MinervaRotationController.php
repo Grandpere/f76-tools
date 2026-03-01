@@ -29,6 +29,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/admin/minerva-rotation')]
 final class MinervaRotationController extends AbstractController
@@ -43,6 +44,7 @@ final class MinervaRotationController extends AbstractController
         private readonly MinervaRotationRefresher $minervaRotationRefresher,
         private readonly MinervaRotationRegenerationRepository $minervaRotationRegenerationRepository,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 
@@ -94,12 +96,11 @@ final class MinervaRotationController extends AbstractController
 
         $result = $this->regenerationService->regenerate($from, $to);
         $this->addFlash('success', 'admin_minerva.flash.regenerated');
-        $this->addFlash('success', sprintf(
-            'Deleted: %d · Inserted: %d · Skipped: %d',
-            $result['deleted'],
-            $result['inserted'],
-            $result['skipped'],
-        ));
+        $this->addFlash('success', $this->translator->trans('admin_minerva.flash.regenerated_summary', [
+            '%deleted%' => (string) $result['deleted'],
+            '%inserted%' => (string) $result['inserted'],
+            '%skipped%' => (string) $result['skipped'],
+        ]));
 
         return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);
     }
@@ -127,29 +128,26 @@ final class MinervaRotationController extends AbstractController
         $result = $this->minervaRotationRefresher->refresh($from, $to, $dryRun);
 
         if ($dryRun) {
-            $this->addFlash('success', sprintf(
-                'Refresh dry-run · Expected: %d · Missing: %d · Covered: %s',
-                $result['expectedWindows'],
-                $result['missingWindows'],
-                $result['covered'] ? 'yes' : 'no',
-            ));
+            $this->addFlash('success', $this->translator->trans('admin_minerva.flash.refresh_dry_run_summary', [
+                '%expected%' => (string) $result['expectedWindows'],
+                '%missing%' => (string) $result['missingWindows'],
+                '%covered%' => $result['covered'] ? '1' : '0',
+            ]));
         } elseif ($result['performed']) {
             $this->addFlash('success', 'admin_minerva.flash.refresh_performed');
-            $this->addFlash('success', sprintf(
-                'Expected: %d · Missing(before): %d · Deleted: %d · Inserted: %d · Skipped: %d',
-                $result['expectedWindows'],
-                $result['missingWindows'],
-                $result['deleted'],
-                $result['inserted'],
-                $result['skipped'],
-            ));
+            $this->addFlash('success', $this->translator->trans('admin_minerva.flash.refresh_performed_summary', [
+                '%expected%' => (string) $result['expectedWindows'],
+                '%missing%' => (string) $result['missingWindows'],
+                '%deleted%' => (string) $result['deleted'],
+                '%inserted%' => (string) $result['inserted'],
+                '%skipped%' => (string) $result['skipped'],
+            ]));
         } else {
             $this->addFlash('success', 'admin_minerva.flash.refresh_not_needed');
-            $this->addFlash('success', sprintf(
-                'Expected: %d · Missing: %d',
-                $result['expectedWindows'],
-                $result['missingWindows'],
-            ));
+            $this->addFlash('success', $this->translator->trans('admin_minerva.flash.refresh_not_needed_summary', [
+                '%expected%' => (string) $result['expectedWindows'],
+                '%missing%' => (string) $result['missingWindows'],
+            ]));
         }
 
         return $this->redirectToRoute('app_admin_minerva_rotation', ['locale' => $request->getLocale()]);

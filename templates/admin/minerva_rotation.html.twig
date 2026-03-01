@@ -46,23 +46,40 @@
             </form>
             <p class="catalog-state">{{ 'admin_minerva.timezone'|trans({'%timezone%': timeline.timezone}) }}</p>
             <div
-                class="catalog-state"
+                class="admin-minerva-freshness"
                 data-minerva-freshness="1"
                 data-minerva-expected-windows="{{ freshness.expectedWindows|default(0) }}"
                 data-minerva-missing-windows="{{ freshness.missingWindows|default(0) }}"
                 data-minerva-covered="{{ freshness.covered|default(false) ? '1' : '0' }}"
             >
-                <p>{{ 'admin_minerva.freshness_range'|trans({'%from%': defaultFrom, '%to%': defaultTo}) }}</p>
-                <p>{{ 'admin_minerva.freshness_summary'|trans({'%expected%': freshness.expectedWindows|default(0), '%missing%': freshness.missingWindows|default(0)}) }}</p>
-                <p>
-                    {% if freshness.covered|default(false) %}
-                        {{ 'admin_minerva.freshness_covered'|trans }}
-                    {% else %}
-                        {{ 'admin_minerva.freshness_missing'|trans }}
-                    {% endif %}
-                </p>
-                <p>{{ 'admin_minerva.freshness_last_generated'|trans({'%date%': latestGeneratedAt ? latestGeneratedAt|date('Y-m-d H:i') : ('admin_minerva.freshness_never'|trans)}) }}</p>
-                <p>{{ 'admin_minerva.freshness_last_manual'|trans({'%date%': latestManualAt ? latestManualAt|date('Y-m-d H:i') : ('admin_minerva.freshness_never'|trans)}) }}</p>
+                <div class="admin-minerva-freshness-header">
+                    <h3>{{ 'admin_minerva.freshness_title'|trans }}</h3>
+                    <span class="item-pill {{ freshness.covered|default(false) ? 'admin-minerva-freshness-pill-ok' : 'admin-minerva-freshness-pill-warn' }}">
+                        {{ freshness.covered|default(false) ? 'admin_minerva.freshness_status_covered'|trans : 'admin_minerva.freshness_status_missing'|trans }}
+                    </span>
+                </div>
+                <dl class="admin-minerva-freshness-grid">
+                    <div>
+                        <dt>{{ 'admin_minerva.freshness_range_label'|trans }}</dt>
+                        <dd>{{ defaultFrom }} &rarr; {{ defaultTo }}</dd>
+                    </div>
+                    <div>
+                        <dt>{{ 'admin_minerva.freshness_expected_label'|trans }}</dt>
+                        <dd>{{ freshness.expectedWindows|default(0) }}</dd>
+                    </div>
+                    <div>
+                        <dt>{{ 'admin_minerva.freshness_missing_label'|trans }}</dt>
+                        <dd>{{ freshness.missingWindows|default(0) }}</dd>
+                    </div>
+                    <div>
+                        <dt>{{ 'admin_minerva.freshness_last_generated_label'|trans }}</dt>
+                        <dd>{{ latestGeneratedAt ? latestGeneratedAt|date('Y-m-d H:i') : ('admin_minerva.freshness_never'|trans) }}</dd>
+                    </div>
+                    <div>
+                        <dt>{{ 'admin_minerva.freshness_last_manual_label'|trans }}</dt>
+                        <dd>{{ latestManualAt ? latestManualAt|date('Y-m-d H:i') : ('admin_minerva.freshness_never'|trans) }}</dd>
+                    </div>
+                </dl>
             </div>
         </section>
 

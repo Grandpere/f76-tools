@@ -436,8 +436,12 @@ admin_minerva.flash.invalid_csrf: Action invalide (CSRF).
 admin_minerva.flash.invalid_range: Intervalle de dates invalide.
 admin_minerva.flash.invalid_override: Donnees d override manuel invalides.
 admin_minerva.flash.regenerated: Rotation Minerva regeneree.
+admin_minerva.flash.regenerated_summary: 'Supprimees: %deleted% · Inserees: %inserted% · Ignorees: %skipped%'
 admin_minerva.flash.refresh_performed: Couverture Minerva rafraichie.
+admin_minerva.flash.refresh_performed_summary: 'Attendues: %expected% · Manquantes avant refresh: %missing% · Supprimees: %deleted% · Inserees: %inserted% · Ignorees: %skipped%'
 admin_minerva.flash.refresh_not_needed: Couverture Minerva deja complete.
+admin_minerva.flash.refresh_not_needed_summary: 'Attendues: %expected% · Manquantes: %missing%'
+admin_minerva.flash.refresh_dry_run_summary: 'Refresh dry run · Attendues: %expected% · Manquantes: %missing% · Couvert: %covered%'
 admin_minerva.flash.override_created: Override manuel cree.
 admin_minerva.flash.override_deleted: Override manuel supprime.
 admin_minerva.flash.override_not_found: Override manuel introuvable.
@@ -448,3 +452,11 @@ admin_minerva.freshness_missing: Des trous de couverture existent. Lance une reg
 admin_minerva.freshness_last_generated: 'Derniere fenetre generee creee le: %date%'
 admin_minerva.freshness_last_manual: 'Dernier override manuel cree le: %date%'
 admin_minerva.freshness_never: jamais
+admin_minerva.freshness_title: Fraicheur de couverture
+admin_minerva.freshness_status_covered: Couvert
+admin_minerva.freshness_status_missing: Fenetres manquantes
+admin_minerva.freshness_range_label: Perimetre
+admin_minerva.freshness_expected_label: Fenetres attendues
+admin_minerva.freshness_missing_label: Fenetres manquantes
+admin_minerva.freshness_last_generated_label: Derniere generation
+admin_minerva.freshness_last_manual_label: Dernier override manuel

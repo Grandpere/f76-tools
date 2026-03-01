@@ -1629,6 +1629,83 @@ body::before {
     opacity: 1;
 }
 
+.admin-minerva-freshness {
+    margin-top: 0.75rem;
+    border: 1px solid rgba(29, 37, 49, 0.14);
+    border-radius: 12px;
+    background: linear-gradient(180deg, #fffcf1, #fff8df);
+    padding: 0.72rem 0.78rem;
+}
+
+.admin-minerva-freshness-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    margin-bottom: 0.48rem;
+}
+
+.admin-minerva-freshness-header h3 {
+    margin: 0;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+    font-size: 1.03rem;
+    letter-spacing: 0.02em;
+    color: var(--text-0);
+}
+
+.admin-minerva-freshness-header .item-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 1.65rem;
+    padding: 0.24rem 0.62rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.admin-minerva-freshness-grid {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0.44rem 0.75rem;
+}
+
+.admin-minerva-freshness-grid > div {
+    min-width: 0;
+}
+
+.admin-minerva-freshness-grid dt {
+    margin: 0;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-2);
+    font-weight: 700;
+}
+
+.admin-minerva-freshness-grid dd {
+    margin: 0.14rem 0 0;
+    font-size: 0.86rem;
+    color: var(--text-0);
+    font-weight: 600;
+}
+
+.admin-minerva-freshness-pill-ok {
+    background: rgba(47, 147, 85, 0.16);
+    border-color: rgba(47, 147, 85, 0.4);
+    color: #155733;
+}
+
+.admin-minerva-freshness-pill-warn {
+    background: rgba(193, 76, 63, 0.14);
+    border-color: rgba(193, 76, 63, 0.35);
+    color: #7e2d24;
+}
+
 .flatpickr-calendar {
     border: 1px solid var(--line);
     border-radius: 12px;

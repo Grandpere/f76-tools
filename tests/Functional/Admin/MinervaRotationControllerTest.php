@@ -148,7 +148,9 @@ final class MinervaRotationControllerTest extends WebTestCase
         ]);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/admin/minerva-rotation', $this->browser()->getResponse()->headers->get('location'));
+        $location = (string) $this->browser()->getResponse()->headers->get('location');
+        self::assertStringStartsWith('/admin/minerva-rotation', $location);
+        self::assertStringContainsString('locale=', $location);
     }
 
     public function testAdminPageDisplaysCoverageFreshnessSummary(): void

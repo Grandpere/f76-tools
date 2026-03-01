@@ -436,8 +436,12 @@ admin_minerva.flash.invalid_csrf: Ungultige Aktion (CSRF).
 admin_minerva.flash.invalid_range: Ungultiger Datumsbereich.
 admin_minerva.flash.invalid_override: Ungultige Daten fur manuellen Override.
 admin_minerva.flash.regenerated: Minerva-Rotation neu generiert.
+admin_minerva.flash.regenerated_summary: 'Geloscht: %deleted% · Eingefugt: %inserted% · Ubersprungen: %skipped%'
 admin_minerva.flash.refresh_performed: Minerva-Abdeckung aktualisiert.
+admin_minerva.flash.refresh_performed_summary: 'Erwartet: %expected% · Vorher fehlend: %missing% · Geloscht: %deleted% · Eingefugt: %inserted% · Ubersprungen: %skipped%'
 admin_minerva.flash.refresh_not_needed: Minerva-Abdeckung bereits vollstandig.
+admin_minerva.flash.refresh_not_needed_summary: 'Erwartet: %expected% · Fehlend: %missing%'
+admin_minerva.flash.refresh_dry_run_summary: 'Refresh dry run · Erwartet: %expected% · Fehlend: %missing% · Abgedeckt: %covered%'
 admin_minerva.flash.override_created: Manueller Override erstellt.
 admin_minerva.flash.override_deleted: Manueller Override geloscht.
 admin_minerva.flash.override_not_found: Manueller Override nicht gefunden.
@@ -448,3 +452,11 @@ admin_minerva.freshness_missing: Es gibt Abdeckungslucken. Bitte neu generieren.
 admin_minerva.freshness_last_generated: 'Zuletzt erzeugtes Fenster erstellt am: %date%'
 admin_minerva.freshness_last_manual: 'Zuletzt manuell erstellter Override am: %date%'
 admin_minerva.freshness_never: nie
+admin_minerva.freshness_title: Abdeckungsfrische
+admin_minerva.freshness_status_covered: Abgedeckt
+admin_minerva.freshness_status_missing: Fehlende Fenster
+admin_minerva.freshness_range_label: Bereich
+admin_minerva.freshness_expected_label: Erwartete Fenster
+admin_minerva.freshness_missing_label: Fehlende Fenster
+admin_minerva.freshness_last_generated_label: Letzte Generierung
+admin_minerva.freshness_last_manual_label: Letzter manueller Override

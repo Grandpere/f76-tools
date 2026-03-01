@@ -436,8 +436,12 @@ admin_minerva.flash.invalid_csrf: Invalid action (CSRF).
 admin_minerva.flash.invalid_range: Invalid date range.
 admin_minerva.flash.invalid_override: Invalid manual override data.
 admin_minerva.flash.regenerated: Minerva rotation regenerated.
+admin_minerva.flash.regenerated_summary: 'Deleted: %deleted% · Inserted: %inserted% · Skipped: %skipped%'
 admin_minerva.flash.refresh_performed: Minerva coverage refreshed.
+admin_minerva.flash.refresh_performed_summary: 'Expected: %expected% · Missing before: %missing% · Deleted: %deleted% · Inserted: %inserted% · Skipped: %skipped%'
 admin_minerva.flash.refresh_not_needed: Minerva coverage already complete.
+admin_minerva.flash.refresh_not_needed_summary: 'Expected: %expected% · Missing: %missing%'
+admin_minerva.flash.refresh_dry_run_summary: 'Refresh dry run · Expected: %expected% · Missing: %missing% · Covered: %covered%'
 admin_minerva.flash.override_created: Manual override created.
 admin_minerva.flash.override_deleted: Manual override deleted.
 admin_minerva.flash.override_not_found: Manual override not found.
@@ -448,3 +452,11 @@ admin_minerva.freshness_missing: Coverage has gaps. Run regeneration.
 admin_minerva.freshness_last_generated: 'Last generated row created at: %date%'
 admin_minerva.freshness_last_manual: 'Last manual override created at: %date%'
 admin_minerva.freshness_never: never
+admin_minerva.freshness_title: Coverage freshness
+admin_minerva.freshness_status_covered: Covered
+admin_minerva.freshness_status_missing: Missing windows
+admin_minerva.freshness_range_label: Range
+admin_minerva.freshness_expected_label: Expected windows
+admin_minerva.freshness_missing_label: Missing windows
+admin_minerva.freshness_last_generated_label: Last generated
+admin_minerva.freshness_last_manual_label: Last manual override
