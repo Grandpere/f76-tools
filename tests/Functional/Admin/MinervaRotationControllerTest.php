@@ -345,7 +345,7 @@ final class MinervaRotationControllerTest extends WebTestCase
         self::assertLessThanOrEqual($expected, $missing);
         self::assertContains($covered, ['0', '1']);
         self::assertContains($stale, ['0', '1']);
-        self::assertCount(1, $crawler->filter('a[href*="/admin/audit-logs?q=minerva_"]'));
+        self::assertCount(1, $crawler->filter('a[href*="/admin/audit-logs"][href*="q=minerva_"]'));
     }
 
     public function testAdminCanCreateAndDeleteManualOverride(): void
