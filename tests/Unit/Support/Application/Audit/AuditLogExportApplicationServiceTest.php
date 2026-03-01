@@ -16,6 +16,7 @@ namespace App\Tests\Unit\Support\Application\Audit;
 use App\Support\Application\Audit\AuditLogExportApplicationService;
 use App\Support\Application\Audit\AuditLogExportQuery;
 use App\Support\Application\Audit\AuditLogReadRepository;
+use App\Support\Domain\Entity\AdminAuditLogEntity;
 use PHPUnit\Framework\TestCase;
 
 final class AuditLogExportApplicationServiceTest extends TestCase
@@ -58,5 +59,10 @@ final class InMemoryAuditLogExportRepository implements AuditLogReadRepository
         $this->lastCall = [$query, $action, $maxRows];
 
         return [];
+    }
+
+    public function findLatestByActions(array $actions): ?AdminAuditLogEntity
+    {
+        return null;
     }
 }

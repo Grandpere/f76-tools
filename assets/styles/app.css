@@ -674,6 +674,14 @@ body::before {
     margin-top: 1rem;
 }
 
+.minerva-active-windows-panel {
+    margin-top: 0.9rem;
+}
+
+.minerva-books-panel {
+    margin-top: 1rem;
+}
+
 .create-player-panel {
     display: flex;
     flex-direction: column;
@@ -1734,6 +1742,21 @@ body::before {
     margin: 0.28rem 0 0;
     font-size: 0.84rem;
     color: var(--text-1);
+}
+
+.admin-minerva-audit-link-row {
+    margin-top: 0.52rem;
+}
+
+.admin-minerva-audit-link-row a {
+    color: #5f4b00;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.admin-minerva-audit-link-row a:hover {
+    color: #3f2f00;
+    text-decoration: underline;
 }
 
 .admin-minerva-freshness-alert {

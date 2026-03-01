@@ -139,6 +139,29 @@ final class AdminAuditLogEntityRepository extends ServiceEntityRepository implem
     /**
      * @param list<string> $actions
      */
+    public function findLatestByActions(array $actions): ?AdminAuditLogEntity
+    {
+        if ([] === $actions) {
+            return null;
+        }
+
+        $result = $this->createQueryBuilder('a')
+            ->leftJoin('a.actorUser', 'actor')
+            ->addSelect('actor')
+            ->where('a.action IN (:actions)')
+            ->setParameter('actions', $actions)
+            ->orderBy('a.occurredAt', 'DESC')
+            ->addOrderBy('a.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $result instanceof AdminAuditLogEntity ? $result : null;
+    }
+
+    /**
+     * @param list<string> $actions
+     */
     public function countRecentActionsByActor(UserEntity $actor, array $actions, DateTimeImmutable $since): int
     {
         if ([] === $actions) {

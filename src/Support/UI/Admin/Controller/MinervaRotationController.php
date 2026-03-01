@@ -20,6 +20,7 @@ use App\Catalog\Application\Minerva\MinervaRotationRegenerationRepository;
 use App\Catalog\Application\Minerva\MinervaRotationTimelineApplicationService;
 use App\Catalog\Domain\Minerva\MinervaRotationSourceEnum;
 use App\Identity\Domain\Entity\UserEntity;
+use App\Support\Application\Audit\LatestMinervaRefreshSummaryApplicationService;
 use App\Support\Domain\Entity\AdminAuditLogEntity;
 use App\Support\UI\Admin\AdminAuthenticatedUserContext;
 use DateInterval;
@@ -47,6 +48,7 @@ final class MinervaRotationController extends AbstractController
         private readonly MinervaRotationOverrideApplicationService $overrideService,
         private readonly MinervaRotationRefresher $minervaRotationRefresher,
         private readonly MinervaRotationRegenerationRepository $minervaRotationRegenerationRepository,
+        private readonly LatestMinervaRefreshSummaryApplicationService $latestMinervaRefreshSummaryApplicationService,
         private readonly EntityManagerInterface $entityManager,
         private readonly AdminAuthenticatedUserContext $adminAuthenticatedUserContext,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
@@ -80,7 +82,7 @@ final class MinervaRotationController extends AbstractController
             'freshness' => $freshness,
             'latestGeneratedAt' => $this->minervaRotationRegenerationRepository->findLatestCreatedAtBySource(MinervaRotationSourceEnum::GENERATED),
             'latestManualAt' => $this->minervaRotationRegenerationRepository->findLatestCreatedAtBySource(MinervaRotationSourceEnum::MANUAL),
-            'latestRefreshSummary' => $this->resolveLatestRefreshSummary(),
+            'latestRefreshSummary' => $this->latestMinervaRefreshSummaryApplicationService->resolve(),
         ]);
     }
 
@@ -406,80 +408,5 @@ final class MinervaRotationController extends AbstractController
         }
 
         return $parsed->format('Y-m-d');
-    }
-
-    /**
-     * @return array{
-     *     occurredAt:string,
-     *     action:string,
-     *     actorEmail:string,
-     *     expectedWindows:int,
-     *     missingWindows:int,
-     *     deleted:int,
-     *     inserted:int,
-     *     skipped:int,
-     *     dryRun:bool
-     * }|null
-     */
-    private function resolveLatestRefreshSummary(): ?array
-    {
-        $result = $this->entityManager->getRepository(AdminAuditLogEntity::class)
-            ->createQueryBuilder('a')
-            ->leftJoin('a.actorUser', 'actor')
-            ->addSelect('actor')
-            ->where('a.action IN (:actions)')
-            ->setParameter('actions', [
-                'minerva_refresh_dry_run',
-                'minerva_refresh_performed',
-                'minerva_refresh_not_needed',
-            ])
-            ->orderBy('a.occurredAt', 'DESC')
-            ->addOrderBy('a.id', 'DESC')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        if (!$result instanceof AdminAuditLogEntity) {
-            return null;
-        }
-
-        $context = $result->getContext() ?? [];
-        $actorEmail = $result->getActorUser()->getEmail();
-
-        return [
-            'occurredAt' => $result->getOccurredAt()->format(DATE_ATOM),
-            'action' => $result->getAction(),
-            'actorEmail' => $actorEmail,
-            'expectedWindows' => $this->contextInt($context, 'expectedWindows'),
-            'missingWindows' => $this->contextInt($context, 'missingWindows'),
-            'deleted' => $this->contextInt($context, 'deleted'),
-            'inserted' => $this->contextInt($context, 'inserted'),
-            'skipped' => $this->contextInt($context, 'skipped'),
-            'dryRun' => $this->contextBool($context, 'dryRun'),
-        ];
-    }
-
-    /**
-     * @param array<string, mixed> $context
-     */
-    private function contextInt(array $context, string $key): int
-    {
-        $value = $context[$key] ?? null;
-        if (is_int($value)) {
-            return $value;
-        }
-        if (is_numeric($value)) {
-            return (int) $value;
-        }
-
-        return 0;
-    }
-
-    /**
-     * @param array<string, mixed> $context
-     */
-    private function contextBool(array $context, string $key): bool
-    {
-        return true === ($context[$key] ?? false);
     }
 }

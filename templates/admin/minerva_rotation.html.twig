@@ -117,7 +117,7 @@
                         </p>
                     </div>
                 {% endif %}
-                <p class="admin-minerva-last-refresh-line">
+                <p class="admin-minerva-last-refresh-line admin-minerva-audit-link-row">
                     <a href="{{ path('app_admin_audit_logs', { locale: app.request.locale, q: 'minerva_', perPage: 30, page: 1 }) }}">{{ 'admin_minerva.view_minerva_audit_logs'|trans }}</a>
                 </p>
             </div>

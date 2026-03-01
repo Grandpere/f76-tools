@@ -16,6 +16,7 @@ namespace App\Tests\Unit\Support\Application\Audit;
 use App\Support\Application\Audit\AuditLogListApplicationService;
 use App\Support\Application\Audit\AuditLogListQuery;
 use App\Support\Application\Audit\AuditLogReadRepository;
+use App\Support\Domain\Entity\AdminAuditLogEntity;
 use PHPUnit\Framework\TestCase;
 
 final class AuditLogListApplicationServiceTest extends TestCase
@@ -78,7 +79,7 @@ final class AuditLogListApplicationServiceTest extends TestCase
 final class InMemoryAuditLogReadRepository implements AuditLogReadRepository
 {
     /**
-     * @var list<array{rows: list<\App\Support\Domain\Entity\AdminAuditLogEntity>, total: int}>
+     * @var list<array{rows: list<AdminAuditLogEntity>, total: int}>
      */
     private array $results;
 
@@ -93,8 +94,8 @@ final class InMemoryAuditLogReadRepository implements AuditLogReadRepository
     public array $calls = [];
 
     /**
-     * @param list<array{rows: list<\App\Support\Domain\Entity\AdminAuditLogEntity>, total: int}> $results
-     * @param list<string>                                                                        $actions
+     * @param list<array{rows: list<AdminAuditLogEntity>, total: int}> $results
+     * @param list<string>                                             $actions
      */
     public function __construct(array $results, array $actions)
     {
@@ -122,5 +123,10 @@ final class InMemoryAuditLogReadRepository implements AuditLogReadRepository
     public function findForExport(string $query, string $action, int $maxRows): array
     {
         return [];
+    }
+
+    public function findLatestByActions(array $actions): ?AdminAuditLogEntity
+    {
+        return null;
     }
 }

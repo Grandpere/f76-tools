@@ -31,4 +31,9 @@ interface AuditLogReadRepository
      * @return list<AdminAuditLogEntity>
      */
     public function findForExport(string $query, string $action, int $maxRows): array;
+
+    /**
+     * @param list<string> $actions
+     */
+    public function findLatestByActions(array $actions): ?AdminAuditLogEntity;
 }

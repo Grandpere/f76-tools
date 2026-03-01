@@ -322,3 +322,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: command/service constructors depended on concrete `final` classes instead of application ports.
 - Fix: introduced explicit Minerva ports (`Generator`, `Regenerator`, `Refresher`) and injected interfaces.
 - Prevention: expose application behavior through interfaces (ports) when class will be consumed/mocked in tests.
+
+## 2026-03-01 - Keep audit read queries out UI controllers
+- Symptom: admin Minerva controller contained inline query-builder logic to resolve latest refresh audit summary.
+- Root cause: missing application-level read use-case over existing audit read repository.
+- Fix: added `LatestMinervaRefreshSummaryApplicationService` + `AuditLogReadRepository::findLatestByActions()` and moved query to infrastructure repository.
+- Prevention: when a controller needs persisted read-model data, add/extend an application service/port instead of embedding persistence queries in UI layer.
