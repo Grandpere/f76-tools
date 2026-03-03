@@ -10,11 +10,11 @@ Il manque un cadrage technique final pour la surveillance operationnelle et une 
 - Standardiser un minimum de garde-fous CI/ops.
 
 ## Scope
-- [ ] Definir le format de log/alert attendu a partir de `make minerva-refresh-check-json`.
-- [ ] Ajouter une section "monitoring thresholds" dans `docs/ops/ops-runbook.md`.
-- [ ] Definir une smoke suite fonctionnelle minimale (routes critiques front/admin/auth/API).
-- [ ] Documenter les commandes smoke dans `Makefile` (sans remplacer les suites completes).
-- [ ] Formaliser la procedure de triage en cas d alerte Minerva ou auth.
+- [x] Definir le format de log/alert attendu a partir de `make minerva-refresh-check-json`.
+- [x] Ajouter une section "monitoring thresholds" dans `docs/ops/ops-runbook.md`.
+- [x] Definir une smoke suite fonctionnelle minimale (routes critiques front/admin/auth/API).
+- [x] Documenter les commandes smoke dans `Makefile` (sans remplacer les suites completes).
+- [x] Formaliser la procedure de triage en cas d alerte Minerva ou auth.
 
 ## Criteres d acceptance
 - Une alerte Minerva "drift" est detectable automatiquement a partir du JSON.
@@ -28,4 +28,3 @@ Il manque un cadrage technique final pour la surveillance operationnelle et une 
 ## Risques / rollback
 - Risque: surcharger la CI avec une suite trop large.
 - Mitigation: smoke minimale et stable, distincte de la suite fonctionnelle complete.
-

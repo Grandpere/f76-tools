@@ -83,6 +83,50 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
 - Gouvernance source:
   - `docs/ops/minerva-governance.md`.
 
+## Monitoring thresholds
+- Minerva (signal machine):
+  - Commande: `make minerva-refresh-check-json`.
+  - Le JSON contient `status`, `missingWindows`, `covered`, `performed`.
+  - Seuil `OK`:
+    - `status=ok` et `missingWindows=0`.
+  - Seuil `WARNING`:
+    - `status=drift_detected` et `missingWindows` entre 1 et 2.
+  - Seuil `CRITICAL`:
+    - `status=drift_detected` et `missingWindows >= 3`.
+  - Alerte automatique:
+    - utiliser le code retour non-zero de `make minerva-refresh-check-json` (active avec `--fail-on-missing`) comme condition d alerte.
+- Auth (signal smoke):
+  - Commande: `make phpunit-functional-smoke`.
+  - Seuil `OK`: retour 0.
+  - Seuil `CRITICAL`: retour non-zero (regression sur auth/front/api/admin critiques).
+
+## Smoke suite (rapide)
+- Smoke ops:
+  - `make smoke-ops`
+- Smoke app (fonctionnel critique):
+  - `make smoke-app`
+- Smoke complet:
+  - `make smoke`
+- Couverture smoke app:
+  - `tests/Functional/Security/LoginLogoutTest.php`
+  - `tests/Functional/DashboardControllerTest.php`
+  - `tests/Functional/ProgressionControllerTest.php`
+  - `tests/Functional/MinervaRotationControllerTest.php`
+  - `tests/Functional/Api/PlayerControllerTest.php`
+  - `tests/Functional/Admin/UserManagementControllerTest.php`
+
+## Triage incidents (Minerva/Auth)
+- Incident Minerva (alerte drift):
+  - 1. Lancer `make minerva-refresh-check-json` et relever `missingWindows`.
+  - 2. Lancer `make minerva-refresh-run`.
+  - 3. Relancer `make minerva-refresh-check-json` pour confirmer retour a `status=ok`.
+  - 4. Si drift persiste, appliquer un override manuel minimal via `/admin/minerva-rotation`, puis planifier correction source et suppression override.
+- Incident auth/smoke:
+  - 1. Lancer `make smoke-app` pour reproduire.
+  - 2. Identifier le premier test en echec (auth/front/api/admin) et corriger en priorite.
+  - 3. Relancer `make smoke-app` puis `make phpunit-functional` complet.
+  - 4. Si echec lie a volume de donnees test, relancer `make db-test-init` puis `make smoke-app`.
+
 ## Qualite
 - Analyse statique:
   - `make phpstan`

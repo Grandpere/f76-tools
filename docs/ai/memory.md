@@ -340,3 +340,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: command output format was text-only despite non-zero exit support.
 - Fix: added `--format=json` to `app:minerva:refresh-rotation` and `make minerva-refresh-check-json`.
 - Prevention: for recurring ops checks, provide both stable exit codes and structured output (JSON) in the same command.
+
+## 2026-03-03 - Keep a fast smoke gate separate from full functional suite
+- Symptom: regressions on critical routes could be detected late when only full functional runs were used.
+- Root cause: no dedicated quick gate mixing ops drift signal and key functional flows.
+- Fix: added `make smoke` (`smoke-ops` + `smoke-app`) and documented thresholds/triage in ops runbook.
+- Prevention: run smoke first for rapid signal, then run full `make phpunit-functional` when smoke is green.

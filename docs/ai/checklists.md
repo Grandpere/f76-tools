@@ -58,6 +58,7 @@ Reusable, update-friendly checklists for delivery quality.
 - [ ] `make phpunit-unit`
 - [ ] `make phpunit-integration`
 - [ ] `make php-cs-fixer-check`
+- [ ] `make smoke` (ops + functional critique) pour detection rapide des regressions majeures.
 - [ ] If functional coverage is impacted: ask user to run `make phpunit-functional`, then process returned errors.
 
 ## Maintenance rule

@@ -138,6 +138,26 @@ phpunit-integration: db-test-init ## Run PHPUnit Integration suite
 phpunit-functional: db-test-init ## Run PHPUnit Functional suite
 	$(DC_EXEC_TEST) vendor/bin/phpunit --configuration phpunit.xml --testsuite Functional
 
+.PHONY: phpunit-functional-smoke
+phpunit-functional-smoke: db-test-init ## Run PHPUnit Functional smoke suite (critical routes)
+	$(DC_EXEC_TEST) vendor/bin/phpunit --configuration phpunit.xml \
+		tests/Functional/Security/LoginLogoutTest.php \
+		tests/Functional/DashboardControllerTest.php \
+		tests/Functional/ProgressionControllerTest.php \
+		tests/Functional/MinervaRotationControllerTest.php \
+		tests/Functional/Api/PlayerControllerTest.php \
+		tests/Functional/Admin/UserManagementControllerTest.php
+
+.PHONY: smoke-ops
+smoke-ops: ## Run ops smoke check (Minerva JSON drift signal)
+	$(DC_EXEC) php bin/console app:minerva:refresh-rotation --days=90 --dry-run --fail-on-missing --format=json
+
+.PHONY: smoke-app
+smoke-app: phpunit-functional-smoke ## Run app smoke suite (critical functional flows)
+
+.PHONY: smoke
+smoke: smoke-ops smoke-app ## Run complete smoke suite (ops + app)
+
 
 ##
 ## Quality
