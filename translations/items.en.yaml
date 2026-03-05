@@ -3,64 +3,97 @@ item.misc.10.desc: 'Damage Increases up to +50% as Damage Resistance Decreases. 
 item.misc.10.name: "Berserker's"
 item.misc.100.desc: 'Each Worn Armor Piece Reduces the Cost of Critical Hits by -10% (up to -50% on Full Stack)'
 item.misc.100.name: Limit-Breaking
+item.misc.100.note: 'RAID: Gleaming Depths (only Stage 5) & Bigfoot'
 item.misc.101.desc: 'When Hit, a Poisonous DoT Cloud Harms Nearby Targets for 10s (DoT DMG Increases Per Equipped Piece)'
 item.misc.101.name: "Miasma's"
+item.misc.101.note: 'RAID: Gleaming Depths (only Stage 4) & Bigfoot'
 item.misc.102.desc: 'Health Regenerates Slowly (+1 Health per second) (up to +5 Health per second on Full Stack)'
 item.misc.102.name: "Sawbones's"
+item.misc.102.note: 'RAID: Gleaming Depths (only Stage 5) & Bigfoot'
 item.misc.103.desc: 'Ranged Weapons Deal +5% Bonus Damage (up to +25% on Full Stack)'
 item.misc.103.name: "Ranger's"
+item.misc.103.note: 'RAID: Gleaming Depths (only Stage 4) & Bigfoot'
 item.misc.104.desc: 'Sprinting Action Point Cost Reduced by -20% (up to -100% on Full Stack)'
 item.misc.104.name: "Runner's"
+item.misc.104.note: 'RAID: Gleaming Depths (only Stage 1) & Bigfoot'
 item.misc.105.desc: '+200 Damage Resist for 10s When Standing Still (20s Cooldown) (up to +1000 on Full Stack)'
 item.misc.105.name: "Tanky's"
+item.misc.105.note: 'RAID: Gleaming Depths (only Stage 2) & Bigfoot'
 item.misc.106.desc: '10% Chance for 500 Damage & "Bloody Mess" When Sprinting Into Targets (up to 50% Chance on Full Stack)'
 item.misc.106.name: "Choo-Choo's"
+item.misc.106.note: 'RAID: Gleaming Depths (only Stage 3) & Bigfoot'
+item.misc.1062.desc: 'Reload Speed & Melee Attack Speed increases based on Killstreak Count (2% per Kill)'
+item.misc.1062.name: "Thrill-Seeker's"
+item.misc.1062.note: 'Only from Bigfoot (25% Chance)'
+item.misc.1063.desc: '15% More Damage Blocked'
+item.misc.1063.name: Blocker
 item.misc.107.desc: 'Movement & Sprint Speed Increased by +5% (up to +25% on Full Stack)'
 item.misc.107.name: Propelling
+item.misc.107.note: 'RAID: Gleaming Depths (only Stage 5) & Bigfoot'
 item.misc.108.desc: 'Gain +2 AP Regeneration at the Cost of RADS (up to +10 AP on Full Stack)'
 item.misc.108.name: Radioactive-Powered
+item.misc.108.note: 'RAID: Gleaming Depths (only Stage 1) & Bigfoot'
 item.misc.109.desc: 'Return 10% of Damage Received from an Enemy Target Back Towards Them (up to 50% on Full Stack)'
 item.misc.109.name: Reflective
+item.misc.109.note: 'RAID: Gleaming Depths (only Stage 3) & Bigfoot'
 item.misc.11.desc: '[Armor] -15% Damage From Scorched<br />[Weapon] +50% Damage to Scorched'
 item.misc.11.name: "Zealot's"
 item.misc.110.desc: 'Action Point Cost of V.A.T.S. Attacks Reduced by -5% (up to -25% on Full Stack)'
 item.misc.110.name: "Scanner's"
+item.misc.110.note: 'RAID: Gleaming Depths (only Stage 1) & Bigfoot'
 item.misc.111.desc: 'The Greater the Equipped Item Condition (+100%), the Greater the Weapon Damage (up to +60%)'
 item.misc.111.name: Polished
+item.misc.111.note: 'RAID: Gleaming Depths (only Stage 4) & Bigfoot'
 item.misc.112.desc: 'When Crippling Limbs, They Explode and Deal up to 50 Explosion Damage to Nearby Targets'
 item.misc.112.name: "Fracturer's"
+item.misc.112.note: 'RAID: Gleaming Depths (only Stage 1) & Bigfoot'
 item.misc.113.desc: '+25% damage per crippled limb the target has'
 item.misc.113.name: "Bully's"
+item.misc.113.note: 'RAID: Gleaming Depths (only Stage 1) & Bigfoot'
 item.misc.114.desc: 'When Reloading, Emit a Shock Wave That Stuns Nearby Targets for 3s'
 item.misc.114.name: "Electrician's"
+item.misc.114.note: 'RAID: Gleaming Depths (only Stage 2) & Bigfoot'
 item.misc.116.desc: 'Applies Cryo On Hit That Slow Targets When Dealing Damage in V.A.T.S.'
 item.misc.116.name: "Icemen's"
+item.misc.116.note: 'RAID: Gleaming Depths (only Stage 4) & Bigfoot'
 item.misc.117.desc: 'When Dealing Damage, 50% Chance to Not Use AP (10% Chance for Auto Melee Weapons)'
 item.misc.117.name: "Combo-Breaker's"
+item.misc.117.note: 'RAID: Gleaming Depths (only Stage 3) & Bigfoot'
 item.misc.118.desc: 'When a Combat Target is Burning, Deal +50% Bonus Damage'
 item.misc.118.name: "Pyromaniac's"
+item.misc.118.note: 'RAID: Gleaming Depths (only Stage 5) & Bigfoot'
 item.misc.119.desc: 'When a Combat Target is Poisoned, Deal +50% Bonus Damage'
 item.misc.119.name: "Viper's"
+item.misc.119.note: 'RAID: Gleaming Depths (only Stage 5) & Bigfoot'
 item.misc.12.desc: '[Armor] -15% Damage From Ghouls<br />[Weapon] +50% Damage to Ghouls'
 item.misc.12.name: "Ghoul Slayer's"
 item.misc.120.desc: 'Improves Weapon Recoil & Stability by 50%'
 item.misc.120.name: "Stabilizer's"
+item.misc.120.note: 'RAID: Gleaming Depths (only Stage 2) & Bigfoot'
 item.misc.121.desc: '+20% Weak Spot Damage'
 item.misc.121.name: "Pin-Pointer's"
+item.misc.121.note: 'RAID: Gleaming Depths (only Stage 1) & Bigfoot'
 item.misc.122.desc: 'Critical Hits Restore 10 Health & Action Points instantly and 100 more over 5 seconds for Player & Teammates Within a 100ft Radius'
 item.misc.122.name: "Conductor's"
+item.misc.122.note: 'RAID: Gleaming Depths (only Stage 3) & Bigfoot'
 item.misc.123.desc: '+10% Damage per Onslaught stack, +10 max stacks'
 item.misc.123.name: "Pounder's"
+item.misc.123.note: 'RAID: Gleaming Depths (only Stage 3) & Bigfoot'
 item.misc.124.desc: '+12.5% Melee Damage. Additional +12.5% for Each Nearby Teammate (up to +50% on Full Team)'
 item.misc.124.name: "Fencer's"
+item.misc.124.note: 'RAID: Gleaming Depths (only Stage 2) & Bigfoot'
 item.misc.125.desc: '+10% Damage For Each Combat Target Around You (up to +50%)'
 item.misc.125.name: "Encircler's"
+item.misc.125.note: 'RAID: Gleaming Depths (only Stage 4) & Bigfoot'
 item.misc.126.desc: "Gradually Restores Wearer's & Teammates Health & Action Points Within A 50ft Radius"
 item.misc.126.name: "Rejuvenator's"
+item.misc.126.note: 'RAID: Gleaming Depths (only Stage 2) & Bigfoot'
 item.misc.127.desc: 'Fortifies Physical & Energy Resists by +50 and Poison, Cryo & Fire Resists by +20 for Wearer & Teammates Within a 50ft Radius'
 item.misc.127.name: Aegis
+item.misc.127.note: 'RAID: Gleaming Depths (only Stage 3) & Bigfoot'
 item.misc.128.desc: 'Power Armor Breaks 5% Slower For Owner & All Teammates Within A 50ft Radius (up to 25% Slower on Full Stack)'
 item.misc.128.name: "Stalwart's"
+item.misc.128.note: 'RAID: Gleaming Depths (only Stage 5) & Bigfoot'
 item.misc.13.desc: 'Damage Increases up to 40% as you Fill Your Hunger and Thirst Meters. Currently +24%'
 item.misc.13.name: "Gourmand's"
 item.misc.14.desc: '+50% More Damage when Your Target is Below 40% Health'
@@ -71,7 +104,7 @@ item.misc.16.desc: 'Damage Increases per Addiction up to +100% Currently <+MAG>%
 item.misc.16.name: "Junkie's"
 item.misc.17.desc: '[Armor] -15% Damage From Mirelurks and Insects<br />[Weapon] +50% Damage to Mirelurks and Insects'
 item.misc.17.name: "Exterminator's"
-item.misc.18.desc: '[Armor] +10 Damage Resistance and Energy Resistance While Mutated <br />[Weapon] Damage Increases up to 50% as you gain Mutations. Currently <+MAG>%'
+item.misc.18.desc: '[Armor] Up to 5% Damage Reduction as you acquire more Mutations. Currently <+MAG>%. <br />[Weapon] Damage Increases up to 50% as you gain Mutations. Currently <+MAG>%'
 item.misc.18.name: "Mutant's"
 item.misc.19.desc: '[Armor] -15% Damage From Super Mutants<br />[Weapon] +50% Damage to Super Mutants'
 item.misc.19.name: "Mutant Slayer's"
@@ -87,7 +120,7 @@ item.misc.23.desc: "Reduce Your Target's Damage Output by 25% for 5 seconds"
 item.misc.23.name: "Suppressor's"
 item.misc.24.desc: 'Restore 2% Health over 2 seconds when you Hit a Target'
 item.misc.24.name: "Vampire's"
-item.misc.25.desc: 'Increases Damage Reduction up to 6% as you Fill Your Hunger and Thirst Meters. Currently <+MAG>%'
+item.misc.25.desc: 'Increases Max Health up to 40 as you Fill Your Hunger and Thirst Meters. Currently <+MAG>'
 item.misc.25.name: "Overeater's"
 item.misc.26.desc: '+1 Projectiles +75% Damage -150% Hip-Fire Accuracy +100% Recoil'
 item.misc.26.name: 'Two Shot'
@@ -99,14 +132,14 @@ item.misc.29.desc: '[Armor] 4 Perception and Agility while Cloaked <br />[Weapon
 item.misc.29.name: Nocturnal
 item.misc.3.desc: '+50% Armor Penetration'
 item.misc.3.name: Anti-armor
-item.misc.30.desc: 'Grants up to +35 Energy Resistance and Damage Resistance, the Lower Your Health. Currently <+MAG>'
+item.misc.30.desc: 'Grants up to 10% Damage Reduction at lower Health Percent. Currently <+MAG>%.'
 item.misc.30.name: Bolstering
 item.misc.31.desc: '+5% Damage per Onslaught stack, +9 max stacks'
 item.misc.31.name: Furious
 item.misc.32.desc: '+0.5% Heal Rate'
 item.misc.32.name: Regenerating
-item.misc.33.desc: '-90% Weight'
-item.misc.33.name: Weightless
+item.misc.33.desc: 'Grants up to 10% Damage Reduction at Higher Encumberance. Currently <+MAG>%. (Max at 150% Encumberance)'
+item.misc.33.name: Heavyweight
 item.misc.34.desc: 'Being Hit in Melee causes the Player to become Invisible Once Every 30 Seconds'
 item.misc.34.name: Cloaking
 item.misc.35.desc: 'Gain up to +3 to All S.P.E.C.I.A.L. Stats (except END) when Health is Low. Currently <+MAG>'
@@ -115,19 +148,19 @@ item.misc.36.desc: '+300% Ammo Capacity'
 item.misc.36.name: Quad
 item.misc.37.desc: '+5% Action Point Regen'
 item.misc.37.name: Powered
-item.misc.38.desc: '+25 Cryo Resistance'
+item.misc.38.desc: '+50 Cryo Resistance'
 item.misc.38.name: Warming
 item.misc.39.desc: '+25% Reduced Disease Chance From Environmental Hazards'
 item.misc.39.name: Antiseptic
 item.misc.4.desc: 'Automatically use a Stimpak When Hit While Health is 25% or less, once every 60 seconds'
 item.misc.4.name: 'Auto Stim'
-item.misc.40.desc: '+25 Fire Resistance'
+item.misc.40.desc: '+50 Fire Resistance'
 item.misc.40.name: Fireproof
 item.misc.41.desc: 'Hunger and Thirst Grow 10% Slower'
 item.misc.41.name: Glutton
-item.misc.42.desc: '+25 Poison Resistance'
+item.misc.42.desc: '+50 Poison Resistance'
 item.misc.42.name: "Poisoner's"
-item.misc.43.desc: '+25 Radiation Resistance'
+item.misc.43.desc: '+50 Radiation Resistance'
 item.misc.43.name: HazMat
 item.misc.44.desc: 'Receive 7% Less Explosion Damage'
 item.misc.44.name: Hardy
@@ -165,7 +198,7 @@ item.misc.59.desc: '+50% Chance to Hit a Target in V.A.T.S.'
 item.misc.59.name: 'V.A.T.S. Enhanced'
 item.misc.6.desc: 'Become Invisible While Sneaking and Not Moving'
 item.misc.6.name: Chameleon
-item.misc.60.desc: '+50% Melee Damage Reflection While Blocking'
+item.misc.60.desc: '+50% Blocked Damage Reflection'
 item.misc.60.name: Riposting
 item.misc.61.desc: '+40% Power Attack Damage'
 item.misc.61.name: "Heavy Hitter's"
@@ -179,41 +212,55 @@ item.misc.65.desc: 'Breaks 50% slower'
 item.misc.65.name: Durability
 item.misc.659.desc: 'Ghoul:<br />[Armor] Increases Damage Reduction up to 6% as you Fill Your Feral Meter. Currently <+MAG>%<br />[Weapon] Damage Increases up to 40% as you Fill Your Feral Meter. Currently <+MAG>%'
 item.misc.659.name: Lucid
+item.misc.659.note: 'Only at Bounty Hunting: Head Hunt & Grunt Hunt'
 item.misc.66.desc: '5% chance to deal 12 Energy damage per second for 3 to Melee Attackers.'
 item.misc.66.name: Electrified
 item.misc.660.desc: '[Ghoul]: Target kills makes you go feral faster'
 item.misc.660.name: "Feral's"
+item.misc.660.note: 'Only at Bounty Hunting: Head Hunt & Grunt Hunt'
 item.misc.661.desc: '100% Damage to distant Targets'
 item.misc.661.name: "Sniper's"
+item.misc.661.note: 'Only at Bounty Hunting: Head Hunt & Grunt Hunt'
 item.misc.662.desc: '[Weapon] +10% damage per kill while on a Kill Streak.<br />[Armor] +10 Damage and Energy Resistance per kill while on a Kill Streak (Max 10).'
 item.misc.662.name: Adrenal
+item.misc.662.note: 'Only at Bounty Hunting: Head Hunt & Grunt Hunt'
 item.misc.663.desc: 'Target Kills have 50% chance to grant a low amount of caps.<br />[50% Chance: 1-4 Caps]'
 item.misc.663.name: "Pick Pocketer's"
+item.misc.663.note: 'Only at Bounty Hunting: Head Hunt & Grunt Hunt'
 item.misc.664.desc: 'Fortify Limb Resistance based on Kill Streak count.<br />[1% per Kill]'
 item.misc.664.name: Fierce
-item.misc.665.desc: 'Increase All Resistances by 5'
+item.misc.664.note: 'Only at Bounty Hunting: Head Hunt & Grunt Hunt'
+item.misc.665.desc: 'Increase All Resistances by 25'
 item.misc.665.name: Elementalist
+item.misc.665.note: 'Only at Bounty Hunting: Head Hunt & Grunt Hunt'
 item.misc.666.desc: 'Gain Action Points over time while on a Kill Streak. Effect becomes stronger the higher the Kill Streak.<br />[0,3 - 3 AP/s per Kill]'
 item.misc.666.name: Rushing
+item.misc.666.note: 'Only at Bounty Hunting: Head Hunt & Grunt Hunt'
 item.misc.667.desc: 'Gain Health over time while on a Kill Streak. Effect becomes stronger the higher the Kill Streak.'
 item.misc.667.name: 'Pain Killer'
+item.misc.667.note: 'Only at Bounty Hunting: Head Hunt & Grunt Hunt'
 item.misc.668.desc: '2% Evade'
 item.misc.668.name: Reflex
+item.misc.668.note: 'Only at Bounty Hunting: Head Hunt & Grunt Hunt'
 item.misc.669.desc: '+1 STR per kill while on a Kill Streak (Max 10).'
 item.misc.669.name: Barbarian
+item.misc.669.note: 'Only at Bounty Hunting: Head Hunt & Grunt Hunt'
 item.misc.67.desc: '5% chance to deal 12 Cryo damage per second for 4 to Melee Attackers.'
 item.misc.67.name: Frozen
 item.misc.670.desc: 'Max HP Increased by +20'
 item.misc.670.name: Healthy
+item.misc.670.note: 'Only at Bounty Hunting: Head Hunt & Grunt Hunt'
 item.misc.671.desc: '[Ghoul]: Target Kills Increase Glow by a small amount<br />[Human]: Target Kills Increase Rads by a small amount., (20 RADs)'
 item.misc.671.name: Glowing
+item.misc.671.note: 'Only at Bounty Hunting: Head Hunt & Grunt Hunt'
 item.misc.672.desc: 'Max AP increased by +20'
 item.misc.672.name: Active
+item.misc.672.note: 'Only at Bounty Hunting: Head Hunt & Grunt Hunt'
 item.misc.68.desc: '+5% Effectiveness of Stimpaks, RadAway, and Rad-X'
 item.misc.68.name: "Doctor's"
 item.misc.69.desc: '-5% Damage Taken While Not Moving'
 item.misc.69.name: "Sentinel's"
-item.misc.7.desc: 'Grants up to +35 Energy Resistance and Damage Resistance, the higher Your Health. Currently <+MAG>'
+item.misc.7.desc: 'Grants up to 6% Damage Reduction as Health Increases. Currently <+MAG>%.'
 item.misc.7.name: "Vanguard's"
 item.misc.70.desc: '-50% Fall Damage'
 item.misc.70.name: "Acrobat's"
@@ -235,13 +282,13 @@ item.misc.78.desc: 'Food, Drink, and Chem Weights Reduced by 20%'
 item.misc.78.name: "Thru-hiker's"
 item.misc.79.desc: 'Junk Item Weights Reduced by 20%'
 item.misc.79.name: "Pack Rat's"
-item.misc.8.desc: '[Armor] Grants up to +20 Energy Resistance and Damage Resistance, the higher Your Caps. Currently <+MAG> <br />[Weapon] Up to +50% Damage based on Caps you have. Currently <+MAG>%'
+item.misc.8.desc: '[Armor] Reflect incoming damage based on caps held. Currently <+MAG> (Max 10%) <br />[Weapon] Up to +50% Damage based on Caps you have. Currently <+MAG>%'
 item.misc.8.name: "Aristocrat's"
 item.misc.80.desc: 'Weapon Weights Reduced by 20%'
 item.misc.80.name: "Arms Keeper's"
-item.misc.81.desc: '[Armor] -15% Damage Taken While Blocking <br />[Weapon Melee] -40% Damage Taken While Power Attacking'
+item.misc.81.desc: '[Armor] 5% Chance To Automatically Block Attacks <br />[Weapon Melee] 40% Chance To Automatically Block Attacks'
 item.misc.81.name: "Defender's"
-item.misc.82.desc: '[Armor] -5% Damage Taken While Sprinting <br />[Weapon Melee] -15% Damage Taken While Blocking'
+item.misc.82.desc: '-10% Damage Taken While Sprinting'
 item.misc.82.name: "Cavalier's"
 item.misc.83.desc: '+3 Agility'
 item.misc.83.name: Agility
@@ -257,6 +304,7 @@ item.misc.88.desc: '+3 Perception'
 item.misc.88.name: Perception
 item.misc.888.desc: 'Light Attacks Build Up Charge That Is Released With A Heavy Attack (Max Charges 3)'
 item.misc.888.name: Charged
+item.misc.888.note: 'RAID: Gleaming Depths (Only Stage 3) & Bigfoot'
 item.misc.89.desc: '+3 Strength'
 item.misc.89.name: Strength
 item.misc.9.desc: '[Armor] -15% Damage From Humans<br />[Weapon] +50% Damage to Humans'
@@ -279,8 +327,10 @@ item.misc.97.desc: '-35% Action Point Cost'
 item.misc.97.name: 'V.A.T.S. Optimized'
 item.misc.98.desc: '15% Chance to Instantly Reload When Bashing Enemies (up to 75% Chance on Full Stack)'
 item.misc.98.name: "Battle-Loader's"
+item.misc.98.note: 'RAID: Gleaming Depths (only Stage 2) & Bigfoot'
 item.misc.99.desc: 'Melee Weapons Deal +5% Bonus Damage (up to +25% on Full Stack)'
 item.misc.99.name: "Bruiser's"
+item.misc.99.note: 'RAID: Gleaming Depths (only Stage 4) & Bigfoot'
 
 # book (minerva plan)
 item.book.1000.name: 'Plan: Plasma caster true long barrel'

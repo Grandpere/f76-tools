@@ -3,6 +3,11 @@
 {% block title %}{{ 'dashboard.page_title'|trans }}{% endblock %}
 
 {% block body %}
+    {% if catalogUpdatedAt %}
+        {% set dashboardUpdatedLabel = 'dashboard.catalog_last_updated'|trans({'%date%': catalogUpdatedAt|date('d/m/Y H:i')}) %}
+    {% else %}
+        {% set dashboardUpdatedLabel = 'dashboard.catalog_last_updated_unknown'|trans %}
+    {% endif %}
     {% set uiTranslations = {
         loadingPlayers: 'dashboard.state.loading_players'|trans,
         cannotLoadPlayers: 'dashboard.state.cannot_load_players'|trans,
@@ -23,6 +28,7 @@
         searchFilterPrefix: 'dashboard.state.search_filter_prefix'|trans,
         source_dropRaid: 'dashboard.sources.raid'|trans,
         source_dropBurningSprings: 'dashboard.sources.burning_springs'|trans,
+        source_dropBigfoot: 'dashboard.sources.bigfoot'|trans,
         source_dropDailyOps: 'dashboard.sources.daily_ops'|trans,
         source_vendorRegs: 'dashboard.sources.regs'|trans,
         source_vendorSamuel: 'dashboard.sources.samuel'|trans,
@@ -33,7 +39,8 @@
             localeSelectId: 'dashboard-header-locale-select',
             title: 'dashboard.header.title',
             subtitle: 'dashboard.header.subtitle',
-            activeNav: 'dashboard'
+            activeNav: 'dashboard',
+            extraState: dashboardUpdatedLabel
         } %}
 
         <section
@@ -52,7 +59,8 @@
                     targetPrefix: 'item-catalog',
                     filters: [
                         { value: 'dropRaid', icon: '/assets/icons/GleamingDepthsMarker.svg', labelKey: 'dashboard.sources.raid' },
-                        { value: 'dropBurningSprings', icon: '/assets/icons/bounty_hunter_ghoul_icon_128.png', labelKey: 'dashboard.sources.burning_springs' }
+                        { value: 'dropBurningSprings', icon: '/assets/icons/bounty_hunter_ghoul_icon_128.png', labelKey: 'dashboard.sources.burning_springs' },
+                        { value: 'dropBigfoot', icon: '/assets/icons/bigfoot_icon_128x128.png', labelKey: 'dashboard.sources.bigfoot' }
                     ]
                 } %}
                 {% include '_catalog_state_line.html.twig' with { targetPrefix: 'item-catalog' } %}

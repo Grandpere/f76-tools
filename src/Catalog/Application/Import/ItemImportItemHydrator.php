@@ -41,6 +41,7 @@ final class ItemImportItemHydrator
             'drop_burning_springs',
         ]));
         $item->setDropDailyOps($this->valueNormalizer->toBool($row['drop_dailyops'] ?? null));
+        $item->setDropBigfoot($this->valueNormalizer->toBool($row['drop_bigfoot'] ?? null));
         $item->setVendorRegs($this->valueNormalizer->toBool($row['vendor_regs'] ?? null));
         $item->setVendorSamuel($this->valueNormalizer->toBool($row['vendor_samuel'] ?? null));
         $item->setVendorMortimer($this->valueNormalizer->toBool($row['vendor_mortimer'] ?? null));

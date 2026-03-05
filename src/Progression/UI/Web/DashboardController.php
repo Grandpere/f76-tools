@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Progression\UI\Web;
 
+use App\Catalog\Domain\Item\ItemTypeEnum;
+use App\Catalog\Infrastructure\Persistence\ItemEntityRepository;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Progression\Application\Player\PlayerReadApplicationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,6 +26,7 @@ final class DashboardController extends AbstractController
 {
     public function __construct(
         private readonly PlayerReadApplicationService $playerReadApplicationService,
+        private readonly ItemEntityRepository $itemEntityRepository,
     ) {
     }
 
@@ -41,10 +44,13 @@ final class DashboardController extends AbstractController
             $activePlayerId = $players[0]->getPublicId();
         }
 
+        $catalogUpdatedAt = $this->itemEntityRepository->findLatestUpdatedAtByType(ItemTypeEnum::MISC);
+
         return $this->render('dashboard/index.html.twig', [
             'apiPlayersUrl' => $this->generateUrl('api_players_index'),
             'apiPlayersBaseUrl' => $this->generateUrl('api_players_index'),
             'activePlayerId' => $activePlayerId,
+            'catalogUpdatedAt' => $catalogUpdatedAt,
             'userId' => $user->getId(),
             'username' => $user->getEmail(),
         ]);

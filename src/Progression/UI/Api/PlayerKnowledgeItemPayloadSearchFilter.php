@@ -32,13 +32,17 @@ final class PlayerKnowledgeItemPayloadSearchFilter
             static function (array $row) use ($query): bool {
                 $name = self::normalizeValue($row['name'] ?? null);
                 $description = self::normalizeValue($row['description'] ?? null);
+                $note = self::normalizeValue($row['note'] ?? null);
                 $nameKey = self::normalizeValue($row['nameKey'] ?? null);
                 $descKey = self::normalizeValue($row['descKey'] ?? null);
+                $noteKey = self::normalizeValue($row['noteKey'] ?? null);
 
                 return str_contains($name, $query)
                     || str_contains($description, $query)
+                    || str_contains($note, $query)
                     || str_contains($nameKey, $query)
-                    || str_contains($descKey, $query);
+                    || str_contains($descKey, $query)
+                    || str_contains($noteKey, $query);
             },
         ));
     }

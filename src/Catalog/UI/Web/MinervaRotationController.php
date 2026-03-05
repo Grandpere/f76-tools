@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Catalog\UI\Web;
 
+use App\Catalog\Domain\Item\ItemTypeEnum;
+use App\Catalog\Infrastructure\Persistence\ItemEntityRepository;
 use App\Catalog\Application\Minerva\MinervaRotationTimelineApplicationService;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Progression\Application\Player\PlayerReadApplicationService;
@@ -26,6 +28,7 @@ final class MinervaRotationController extends AbstractController
     public function __construct(
         private readonly MinervaRotationTimelineApplicationService $timelineApplicationService,
         private readonly PlayerReadApplicationService $playerReadApplicationService,
+        private readonly ItemEntityRepository $itemEntityRepository,
     ) {
     }
 
@@ -43,12 +46,15 @@ final class MinervaRotationController extends AbstractController
             $activePlayerId = $players[0]->getPublicId();
         }
 
+        $catalogUpdatedAt = $this->itemEntityRepository->findLatestUpdatedAtByType(ItemTypeEnum::BOOK);
+
         return $this->render('minerva/rotation.html.twig', [
             'timeline' => $this->timelineApplicationService->buildTimeline(),
             'username' => $user->getEmail(),
             'apiPlayersUrl' => $this->generateUrl('api_players_index'),
             'apiPlayersBaseUrl' => $this->generateUrl('api_players_index'),
             'activePlayerId' => $activePlayerId,
+            'catalogUpdatedAt' => $catalogUpdatedAt,
             'storageKey' => sprintf('f76:item-catalog:ui:%d', (int) ($user->getId() ?? 0)),
         ]);
     }

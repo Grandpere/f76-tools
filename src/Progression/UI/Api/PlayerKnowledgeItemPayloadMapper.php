@@ -34,12 +34,15 @@ final class PlayerKnowledgeItemPayloadMapper
      *     name: string,
      *     descKey: string|null,
      *     description: string|null,
+     *     noteKey: string|null,
+     *     note: string|null,
      *     isNew: bool,
      *     price: int|null,
      *     priceMinerva: int|null,
      *     dropRaid: bool,
      *     dropBurningSprings: bool,
      *     dropDailyOps: bool,
+     *     dropBigfoot: bool,
      *     vendorRegs: bool,
      *     vendorSamuel: bool,
      *     vendorMortimer: bool,
@@ -71,12 +74,15 @@ final class PlayerKnowledgeItemPayloadMapper
      *     name: string,
      *     descKey: string|null,
      *     description: string|null,
+     *     noteKey: string|null,
+     *     note: string|null,
      *     isNew: bool,
      *     price: int|null,
      *     priceMinerva: int|null,
      *     dropRaid: bool,
      *     dropBurningSprings: bool,
      *     dropDailyOps: bool,
+     *     dropBigfoot: bool,
      *     vendorRegs: bool,
      *     vendorSamuel: bool,
      *     vendorMortimer: bool,
@@ -105,6 +111,10 @@ final class PlayerKnowledgeItemPayloadMapper
         if (null !== $item->getDescKey()) {
             $description = $this->translator->trans($item->getDescKey(), domain: 'items');
         }
+        $note = null;
+        if (null !== $item->getNoteKey()) {
+            $note = $this->translator->trans($item->getNoteKey(), domain: 'items');
+        }
 
         return [
             'id' => $item->getPublicId(),
@@ -114,12 +124,15 @@ final class PlayerKnowledgeItemPayloadMapper
             'name' => $this->translator->trans($item->getNameKey(), domain: 'items'),
             'descKey' => $item->getDescKey(),
             'description' => $description,
+            'noteKey' => $item->getNoteKey(),
+            'note' => $note,
             'isNew' => $item->isNew(),
             'price' => $item->getPrice(),
             'priceMinerva' => $item->getPriceMinerva(),
             'dropRaid' => $item->isDropRaid(),
             'dropBurningSprings' => $item->isDropBurningSprings(),
             'dropDailyOps' => $item->isDropDailyOps(),
+            'dropBigfoot' => $item->isDropBigfoot(),
             'vendorRegs' => $item->isVendorRegs(),
             'vendorSamuel' => $item->isVendorSamuel(),
             'vendorMortimer' => $item->isVendorMortimer(),

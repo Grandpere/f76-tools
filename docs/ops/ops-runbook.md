@@ -22,6 +22,8 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
   - `make db-migrate`
 
 ## Import des items
+- Sync des sources JSON (Nukaknights):
+  - `make data-sync`
 - Dry-run:
   - `docker compose -f compose.yaml exec -T app php bin/console app:items:import data --dry-run`
 - Import reel:

@@ -22,6 +22,7 @@ final readonly class ItemImportTranslationCatalog
     public function __construct(
         public string $nameKey,
         public ?string $descKey,
+        public ?string $noteKey,
         public array $catalogEn,
         public array $catalogDe,
     ) {

@@ -1249,6 +1249,41 @@ body::before {
     color: var(--text-2);
 }
 
+.item-note-line {
+    margin-top: 0;
+    font-size: 0.8rem;
+    color: #5f6671;
+    display: flex;
+    gap: 0.38rem;
+    align-items: flex-start;
+    padding: 0.42rem 0.5rem;
+    border: 1px solid rgba(107, 122, 141, 0.22);
+    border-radius: 8px;
+    background: rgba(107, 122, 141, 0.08);
+}
+
+.item-note-line::before {
+    content: 'i';
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.62rem;
+    font-weight: 700;
+    line-height: 1;
+    border: 1px solid rgba(107, 122, 141, 0.5);
+    background: #ffffff;
+    color: #5f6671;
+    flex: 0 0 auto;
+    margin-top: 0.03rem;
+}
+
+.item-note-gap {
+    height: 0.7rem;
+}
+
 .item-info-html,
 .item-relations-html,
 .item-source-icons,

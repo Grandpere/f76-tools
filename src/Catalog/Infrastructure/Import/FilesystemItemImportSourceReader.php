@@ -28,8 +28,7 @@ final class FilesystemItemImportSourceReader implements ItemImportSourceReader
         $finder
             ->files()
             ->in($rootPath)
-            ->name('*.json')
-            ->notName('manifest.json');
+            ->name('*.json');
 
         $files = [];
         foreach ($finder as $file) {

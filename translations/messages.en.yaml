@@ -15,6 +15,8 @@ dashboard.header.security_profile: Security profile
 dashboard.header.change_password: Change password
 dashboard.header.title: Legendary mods
 dashboard.header.subtitle: Select a character, then mark learned legendary mods.
+dashboard.catalog_last_updated: 'Last legendary mods update: %date%'
+dashboard.catalog_last_updated_unknown: 'Last legendary mods update: unknown'
 dashboard.header.greeting_prefix: Hello
 dashboard.header.logout: Logout
 dashboard.filters.title: Filters
@@ -24,6 +26,7 @@ dashboard.filters.search_placeholder: 'Name, description, key...'
 dashboard.filters.source_filters: Source filters
 dashboard.sources.raid: Raid
 dashboard.sources.burning_springs: Burning Springs
+dashboard.sources.bigfoot: Bigfoot
 dashboard.sources.daily_ops: Daily Ops
 dashboard.sources.regs: Regs
 dashboard.sources.samuel: Samuel
@@ -373,6 +376,8 @@ admin_contact.flash.status_updated: Status updated.
 minerva.page_title: 'F76 - Minerva'
 minerva.title: Minerva
 minerva.description: Current, upcoming, and past Minerva windows ordered by start date.
+minerva.catalog_last_updated: 'Last Minerva plans update: %date%'
+minerva.catalog_last_updated_unknown: 'Last Minerva plans update: unknown'
 minerva.back_to_dashboard: Back to dashboard
 minerva.timezone: 'Timezone: %timezone%'
 minerva.status: Status

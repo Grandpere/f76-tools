@@ -29,11 +29,14 @@ final class ItemImportTranslationCatalogBuilder
     {
         $nameKey = sprintf('item.%s.%d.name', strtolower($type->value), $sourceId);
         $descKey = sprintf('item.%s.%d.desc', strtolower($type->value), $sourceId);
+        $noteKey = sprintf('item.%s.%d.note', strtolower($type->value), $sourceId);
 
         $nameEn = $this->valueNormalizer->toNullableString($row['name_en'] ?? null);
         $nameDe = $this->valueNormalizer->toNullableString($row['name_de'] ?? null);
         $descEn = $this->valueNormalizer->toNullableString($row['desc_en'] ?? null);
         $descDe = $this->valueNormalizer->toNullableString($row['desc_de'] ?? null);
+        $noteEn = $this->valueNormalizer->toNullableString($row['note_en'] ?? null);
+        $noteDe = $this->valueNormalizer->toNullableString($row['note_de'] ?? null);
 
         $catalogEn = [];
         $catalogDe = [];
@@ -68,9 +71,26 @@ final class ItemImportTranslationCatalogBuilder
             }
         }
 
+        $resolvedNoteKey = null;
+        if (null !== $noteEn || null !== $noteDe) {
+            $resolvedNoteKey = $noteKey;
+            if (null !== $noteEn) {
+                $catalogEn[$noteKey] = $noteEn;
+            } elseif (null !== $noteDe) {
+                $catalogEn[$noteKey] = $noteDe;
+            }
+
+            if (null !== $noteDe) {
+                $catalogDe[$noteKey] = $noteDe;
+            } elseif (null !== $noteEn) {
+                $catalogDe[$noteKey] = $noteEn;
+            }
+        }
+
         return new ItemImportTranslationCatalog(
             $nameKey,
             $resolvedDescKey,
+            $resolvedNoteKey,
             $catalogEn,
             $catalogDe,
         );

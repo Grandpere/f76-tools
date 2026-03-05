@@ -69,6 +69,10 @@ composer-install: ## Install composer dependencies
 cache-clear: ## Clear Symfony cache (dev)
 	$(DC_EXEC) php bin/console cache:clear
 
+.PHONY: data-sync
+data-sync: ## Sync legendary mods + Minerva JSON files from Nukaknights
+	$(DC_EXEC) php bin/console app:data:sync
+
 .PHONY: audit-retention-dry-run
 audit-retention-dry-run: ## Dry-run purge for auth/admin audit logs
 	$(DC_EXEC) php bin/console app:audit:retention:run --days=90 --dry-run

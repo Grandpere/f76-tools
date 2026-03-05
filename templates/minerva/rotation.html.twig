@@ -3,6 +3,12 @@
 {% block title %}{{ 'minerva.page_title'|trans }}{% endblock %}
 
 {% block body %}
+    {% if catalogUpdatedAt %}
+        {% set minervaUpdatedLabel = 'minerva.catalog_last_updated'|trans({'%date%': catalogUpdatedAt|date('d/m/Y H:i')}) %}
+    {% else %}
+        {% set minervaUpdatedLabel = 'minerva.catalog_last_updated_unknown'|trans %}
+    {% endif %}
+    {% set minervaTimezoneLabel = 'minerva.timezone'|trans({'%timezone%': timeline.timezone}) %}
     {% set uiTranslations = {
         loadingPlayers: 'dashboard.state.loading_players'|trans,
         cannotLoadPlayers: 'dashboard.state.cannot_load_players'|trans,
@@ -30,7 +36,7 @@
             title: 'minerva.title',
             subtitle: 'minerva.description',
             activeNav: 'minerva',
-            extraState: 'minerva.timezone'|trans({'%timezone%': timeline.timezone})
+            extraState: minervaTimezoneLabel ~ ' · ' ~ minervaUpdatedLabel
         } %}
 
         <section class="catalog-block">

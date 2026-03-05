@@ -16,6 +16,7 @@ namespace App\Catalog\Infrastructure\Persistence;
 use App\Catalog\Application\Import\ItemImportItemRepository;
 use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
+use DateTimeImmutable;
 use App\Progression\Application\Knowledge\ItemKnowledgeCatalogReadRepository;
 use App\Progression\Application\Knowledge\ItemKnowledgeTransferRepository;
 use App\Progression\Application\Knowledge\ItemReadRepository;
@@ -39,6 +40,23 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
             'type' => $type,
             'sourceId' => $sourceId,
         ]);
+    }
+
+    public function findLatestUpdatedAtByType(ItemTypeEnum $type): ?DateTimeImmutable
+    {
+        $item = $this->createQueryBuilder('i')
+            ->andWhere('i.type = :type')
+            ->setParameter('type', $type)
+            ->orderBy('i.updatedAt', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if (!$item instanceof ItemEntity) {
+            return null;
+        }
+
+        return $item->getUpdatedAt();
     }
 
     public function deleteAllBookLists(): int

@@ -269,6 +269,8 @@ export default class extends Controller {
     renderItemCard(item) {
         const label = this.escape(item.name || item.nameKey);
         const description = item.description ? `<p>${this.escapeWithBreaks(item.description)}</p>` : '';
+        const note = item.note ? `<p class="item-note-line">${this.escapeWithBreaks(item.note)}</p>` : '';
+        const noteGap = description !== '' && note !== '' ? '<div class="item-note-gap" aria-hidden="true"></div>' : '';
         const infoBlock = this.renderInfoBlock(item);
         const iconsFooter = this.renderIconsFooter(item);
         const dailyOpsLine = item.type === 'BOOK' && item.dropDailyOps && !this.infoContainsDailyOps(item.infoHtml)
@@ -288,6 +290,8 @@ export default class extends Controller {
                 </div>
                 ${priceBlock}
                 ${description}
+                ${noteGap}
+                ${note}
                 ${infoBlock}
                 ${dailyOpsLine}
                 ${iconsFooter}
@@ -413,7 +417,6 @@ export default class extends Controller {
         if (item.vendorMortimer) {
             icons.push('<img src="/assets/icons/SkullRingMarker.svg" alt="Mortimer" title="Mortimer">');
         }
-
         if (icons.length === 0) {
             return '';
         }

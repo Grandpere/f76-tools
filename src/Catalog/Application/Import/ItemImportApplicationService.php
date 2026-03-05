@@ -136,6 +136,7 @@ final class ItemImportApplicationService
                 $translationData = $this->translationCatalogBuilder->build($type, $sourceId, $row);
                 $item->setNameKey($translationData->nameKey);
                 $item->setDescKey($translationData->descKey);
+                $item->setNoteKey($translationData->noteKey);
                 $catalogEn = array_merge($catalogEn, $translationData->catalogEn);
                 $catalogDe = array_merge($catalogDe, $translationData->catalogDe);
 

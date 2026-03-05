@@ -81,6 +81,9 @@ class ItemEntity implements Item
     #[ORM\Column(name: 'drop_dailyops', options: ['default' => false])]
     private bool $dropDailyOps = false;
 
+    #[ORM\Column(name: 'drop_bigfoot', options: ['default' => false])]
+    private bool $dropBigfoot = false;
+
     #[ORM\Column(name: 'vendor_regs', options: ['default' => false])]
     private bool $vendorRegs = false;
 
@@ -98,6 +101,9 @@ class ItemEntity implements Item
 
     #[ORM\Column(name: 'relations_html', type: Types::TEXT, nullable: true)]
     private ?string $relationsHtml = null;
+
+    #[ORM\Column(name: 'note_key', length: 255, nullable: true)]
+    private ?string $noteKey = null;
 
     #[ORM\Column(name: 'wiki_url', length: 1024, nullable: true)]
     private ?string $wikiUrl = null;
@@ -327,6 +333,18 @@ class ItemEntity implements Item
         return $this;
     }
 
+    public function isDropBigfoot(): bool
+    {
+        return $this->dropBigfoot;
+    }
+
+    public function setDropBigfoot(bool $dropBigfoot): self
+    {
+        $this->dropBigfoot = $dropBigfoot;
+
+        return $this;
+    }
+
     public function isVendorRegs(): bool
     {
         return $this->vendorRegs;
@@ -395,6 +413,18 @@ class ItemEntity implements Item
     public function setRelationsHtml(?string $relationsHtml): self
     {
         $this->relationsHtml = $relationsHtml;
+
+        return $this;
+    }
+
+    public function getNoteKey(): ?string
+    {
+        return $this->noteKey;
+    }
+
+    public function setNoteKey(?string $noteKey): self
+    {
+        $this->noteKey = $noteKey;
 
         return $this;
     }
