@@ -149,6 +149,7 @@ export default class extends Controller {
             day: 'numeric',
             hour: '2-digit',
             minute: '2-digit',
+            timeZone: 'UTC',
         });
 
         return formatter.format(date);

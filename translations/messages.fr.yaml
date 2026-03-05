@@ -49,6 +49,7 @@ progression.character_help_extended: 'la mise a jour de la progression se fait e
 nuke_codes.page_title: 'F76 - Codes nucleaires'
 nuke_codes.title: Codes nucleaires
 nuke_codes.description: Suivi des codes Alpha, Bravo et Charlie avec leur fenetre de validite.
+nuke_codes.timezone: 'Timezone: %timezone%'
 nuke_codes.state.loading: Chargement des codes nucleaires...
 nuke_codes.state.load_failed: Impossible de charger les codes nucleaires.
 nuke_codes.block.title: Fallout 76 Nuke Codes
