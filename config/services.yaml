@@ -59,6 +59,7 @@ services:
     App\Support\Application\Contact\ContactMessageEmailSender: '@App\Support\Infrastructure\Contact\ContactMessageEmailSender'
     App\Support\Application\Contact\ContactMessageReadRepository: '@App\Support\Infrastructure\Persistence\ContactMessageEntityRepository'
     App\Support\Application\Contact\ContactMessageStatusWriteRepository: '@App\Support\Infrastructure\Persistence\ContactMessageEntityRepository'
+    App\Catalog\Application\NukeCode\NukeCodeReadRepository: '@App\Catalog\Infrastructure\NukeCode\NukacryptNukeCodeReadRepository'
 
     App\Identity\Infrastructure\Guard\TurnstileVerifier:
         arguments:
@@ -75,6 +76,17 @@ services:
     App\Support\Infrastructure\Contact\ContactMessageEmailSender:
         arguments:
             $contactRecipientEmail: '%app.contact_recipient_email%'
+
+    App\Catalog\Application\NukeCode\NukeCodeReadApplicationService:
+        arguments:
+            $cache: '@cache.app'
+            $refreshLeadSeconds: '%env(int:NUKE_CODES_REFRESH_LEAD_SECONDS)%'
+            $staleTtlSeconds: '%env(int:NUKE_CODES_STALE_TTL_SECONDS)%'
+
+    App\Catalog\Infrastructure\NukeCode\NukacryptNukeCodeReadRepository:
+        arguments:
+            $graphqlUrl: '%env(string:NUKECRYPT_GRAPHQL_URL)%'
+            $userAgent: '%env(string:NUKECRYPT_USER_AGENT)%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
