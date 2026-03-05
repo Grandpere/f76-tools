@@ -693,6 +693,107 @@ body::before {
     margin-bottom: 0.7rem;
 }
 
+.nuke-terminal-panel {
+    background: linear-gradient(165deg, #1a2029, #0f131a 58%, #0a0d12);
+    border-color: rgba(255, 210, 74, 0.34);
+    color: #dbe6f5;
+    min-height: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.nuke-terminal-head {
+    font-family: 'Courier New', 'Consolas', monospace;
+    font-size: 0.94rem;
+    line-height: 1.52;
+    margin-bottom: 1.2rem;
+    color: #d5e1f3;
+}
+
+.nuke-terminal-line + .nuke-terminal-line {
+    margin-top: 0.08rem;
+}
+
+.nuke-terminal-line strong {
+    color: #ffd464;
+    font-weight: 700;
+}
+
+.nuke-countdown-line {
+    margin-top: 0.46rem;
+    color: #f4f9ff;
+}
+
+.nuke-terminal-codes {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+.nuke-code-block {
+    flex: 1 1 185px;
+    border: 1px solid rgba(255, 210, 74, 0.26);
+    border-radius: 12px;
+    background: linear-gradient(155deg, rgba(16, 21, 29, 0.72), rgba(35, 45, 60, 0.56));
+    padding: 0.65rem 0.72rem 0.68rem;
+    text-align: center;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+    font-size: clamp(1.5rem, 2.5vw, 1.9rem);
+    letter-spacing: 0.05em;
+    color: #f4f8ff;
+}
+
+.nuke-code-block small {
+    display: inline-block;
+    margin-bottom: 0.12rem;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    color: #aebed4;
+    font-weight: 700;
+}
+
+.nuke-stale-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.09rem 0.38rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 200, 124, 0.45);
+    background: rgba(255, 165, 78, 0.13);
+    color: #ffce92;
+    font-size: 0.68rem;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    margin-left: 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.nuke-terminal-panel .catalog-state {
+    margin-top: 0.8rem;
+    color: #ffcd7e;
+}
+
+.cursor {
+    display: inline-block;
+    width: 0.5rem;
+    background: rgba(255, 212, 100, 0.72);
+    animation: cursor-blink 1s steps(1, end) infinite;
+}
+
+@keyframes cursor-blink {
+    0%,
+    49% {
+        opacity: 1;
+    }
+    50%,
+    100% {
+        opacity: 0;
+    }
+}
+
 .create-player-field {
     grid-column: auto;
 }

@@ -12,6 +12,12 @@
         <a class="app-primary-nav-link" href="{{ path('app_minerva_rotation', { locale: app.request.locale }) }}">{{ 'dashboard.header.minerva_rotation'|trans }}</a>
     {% endif %}
     ·
+    {% if current == 'nuke-codes' %}
+        <span class="app-primary-nav-link is-active">{{ 'dashboard.header.nuke_codes'|trans }}</span>
+    {% else %}
+        <a class="app-primary-nav-link" href="{{ path('app_nuke_codes', { locale: app.request.locale }) }}">{{ 'dashboard.header.nuke_codes'|trans }}</a>
+    {% endif %}
+    ·
     {% if current == 'progression' %}
         <span class="app-primary-nav-link is-active">{{ 'dashboard.header.progression'|trans }}</span>
     {% else %}

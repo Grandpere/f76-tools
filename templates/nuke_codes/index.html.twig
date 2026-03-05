@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'nuke_codes.page_title'|trans }}{% endblock %}
+
+{% block body %}
+    {% set uiTranslations = {
+        loading: 'nuke_codes.state.loading'|trans,
+        loadFailed: 'nuke_codes.state.load_failed'|trans,
+        title: 'nuke_codes.block.title'|trans,
+        validFrom: 'nuke_codes.block.valid_from'|trans,
+        validTo: 'nuke_codes.block.valid_to'|trans,
+        resetIn: 'nuke_codes.block.reset_in'|trans,
+        accessingSilos: 'nuke_codes.block.accessing_silos'|trans,
+        stale: 'nuke_codes.block.stale'|trans,
+        alpha: 'nuke_codes.block.alpha'|trans,
+        bravo: 'nuke_codes.block.bravo'|trans,
+        charlie: 'nuke_codes.block.charlie'|trans
+    } %}
+
+    <main class="catalog-page">
+        {% include '_app_page_header.html.twig' with {
+            localeSelectId: 'nuke-codes-header-locale-select',
+            title: 'nuke_codes.title',
+            subtitle: 'nuke_codes.description',
+            activeNav: 'nuke-codes'
+        } %}
+
+        <section class="catalog-shell">
+            <section
+                class="catalog-panel nuke-terminal-panel"
+                data-controller="nuke-codes-terminal"
+                data-nuke-codes-terminal-api-url-value="{{ apiNukeCodesUrl }}"
+                data-nuke-codes-terminal-locale-value="{{ app.request.locale }}"
+                data-nuke-codes-terminal-ui-translations-value="{{ uiTranslations|json_encode|e('html_attr') }}"
+            >
+                <div class="nuke-terminal-head" data-nuke-codes-terminal-target="head"></div>
+                <div class="nuke-terminal-codes" data-nuke-codes-terminal-target="codes"></div>
+                <p class="catalog-state" data-nuke-codes-terminal-target="state">{{ 'nuke_codes.state.loading'|trans }}</p>
+            </section>
+        </section>
+    </main>
+{% endblock %}

@@ -9,6 +9,7 @@ dashboard.page_title: 'F76 - Mods legendaires'
 dashboard.header.translation_management: Gestion des traductions
 dashboard.header.user_management: Gestion des utilisateurs
 dashboard.header.minerva_rotation: Minerva
+dashboard.header.nuke_codes: Codes nucleaires
 dashboard.header.progression: Progression
 dashboard.header.admin: Administration
 dashboard.header.security_profile: Profil securite
@@ -45,6 +46,20 @@ progression.player_list_label: Liste des personnages
 progression.quick_link_mods: mods legendaires
 progression.quick_link_minerva: minerva
 progression.character_help_extended: 'la mise a jour de la progression se fait en marquant les objets comme appris sur les pages dediees %modsLink% et %minervaLink%.'
+nuke_codes.page_title: 'F76 - Codes nucleaires'
+nuke_codes.title: Codes nucleaires
+nuke_codes.description: Suivi des codes Alpha, Bravo et Charlie avec leur fenetre de validite.
+nuke_codes.state.loading: Chargement des codes nucleaires...
+nuke_codes.state.load_failed: Impossible de charger les codes nucleaires.
+nuke_codes.block.title: Fallout 76 Nuke Codes
+nuke_codes.block.valid_from: Valides depuis
+nuke_codes.block.valid_to: Valides jusqu a
+nuke_codes.block.reset_in: Renouvellement dans
+nuke_codes.block.accessing_silos: Acces aux silos...
+nuke_codes.block.stale: Donnees en cache
+nuke_codes.block.alpha: ALPHA
+nuke_codes.block.bravo: BRAVO
+nuke_codes.block.charlie: CHARLIE
 dashboard.transfer.title: Progression (backup)
 dashboard.transfer.export: Export JSON
 dashboard.transfer.import: Import JSON
