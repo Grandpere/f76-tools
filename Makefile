@@ -73,6 +73,10 @@ cache-clear: ## Clear Symfony cache (dev)
 data-sync: ## Sync legendary mods + Minerva JSON files from Nukaknights
 	$(DC_EXEC) php bin/console app:data:sync
 
+.PHONY: nuke-codes-warmup
+nuke-codes-warmup: ## Warmup nuke codes cache from Nukacrypt
+	$(DC_EXEC) php bin/console app:nuke-codes:warmup
+
 .PHONY: audit-retention-dry-run
 audit-retention-dry-run: ## Dry-run purge for auth/admin audit logs
 	$(DC_EXEC) php bin/console app:audit:retention:run --days=90 --dry-run

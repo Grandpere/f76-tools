@@ -60,6 +60,15 @@ final class NukeCodeReadApplicationService
         return $freshSnapshot;
     }
 
+    public function warmup(bool $force = false): NukeCodeSnapshot
+    {
+        if ($force) {
+            $this->cache->deleteItem(self::CACHE_KEY_CURRENT);
+        }
+
+        return $this->getCurrent();
+    }
+
     private function refresh(): NukeCodeSnapshot
     {
         $nowUtc = new DateTimeImmutable('now', new DateTimeZone('UTC'));
