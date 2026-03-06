@@ -105,10 +105,12 @@ services:
         tags:
             - { name: 'app.roadmap.ocr_provider', priority: 200 }
 
-    App\Catalog\Infrastructure\Roadmap\Ocr\EasyOcrHttpProvider:
+    App\Catalog\Infrastructure\Roadmap\Ocr\OcrSpaceHttpProvider:
         arguments:
-            $ocrUrl: '%env(string:ROADMAP_OCR_EASYOCR_URL)%'
-            $enabled: '%env(bool:ROADMAP_OCR_EASYOCR_ENABLED)%'
+            $apiUrl: '%env(string:ROADMAP_OCR_SPACE_API_URL)%'
+            $apiKey: '%env(string:ROADMAP_OCR_SPACE_API_KEY)%'
+            $enabled: '%env(bool:ROADMAP_OCR_SPACE_ENABLED)%'
+            $timeoutSeconds: '%env(int:ROADMAP_OCR_SPACE_TIMEOUT_SECONDS)%'
         tags:
             - { name: 'app.roadmap.ocr_provider', priority: 150 }
 

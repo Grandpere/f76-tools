@@ -346,3 +346,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: no dedicated quick gate mixing ops drift signal and key functional flows.
 - Fix: added `make smoke` (`smoke-ops` + `smoke-app`) and documented thresholds/triage in ops runbook.
 - Prevention: run smoke first for rapid signal, then run full `make phpunit-functional` when smoke is green.
+
+## 2026-03-06 - EasyOCR sidecar unstable in local Docker for roadmap scans
+- Symptom: OCR chain kept falling back to Tesseract with `EasyOCR HTTP request failed` and `Empty reply from server`.
+- Root cause: EasyOCR sidecar process was unstable during heavy inference on this setup (connection dropped / service stopped).
+- Fix: removed EasyOCR sidecar path and switched to `ocr.space` HTTP provider as OCR fallback.
+- Prevention: for large roadmap-image OCR on constrained local CPU memory, prefer external OCR provider fallback instead of heavy local Python inference service.

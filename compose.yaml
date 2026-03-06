@@ -10,8 +10,6 @@ services:
     depends_on:
       database:
         condition: service_healthy
-      ocr:
-        condition: service_healthy
     volumes:
       - ./:/var/www/html:rw
       - symfony_var:/var/www/html/var
@@ -50,19 +48,6 @@ services:
     image: axllent/mailpit:v1.21
     ports:
       - "8025:8025"
-
-  ocr:
-    build:
-      context: ./docker/ocr
-    environment:
-      OCR_ALLOWED_PREFIX: /var/www/html/data
-    healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/health', timeout=2).read()"]
-      interval: 20s
-      timeout: 5s
-      retries: 10
-    volumes:
-      - ./:/var/www/html:ro
 
 volumes:
   database_data:

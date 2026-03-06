@@ -25,6 +25,7 @@ final class TesseractOcrProvider implements OcrProvider
     public function __construct(
         private readonly CommandRunner $commandRunner,
         private readonly string $binaryPath = 'tesseract',
+        private readonly int $timeoutSeconds = 45,
     ) {
     }
 
@@ -57,7 +58,7 @@ final class TesseractOcrProvider implements OcrProvider
                 '--psm',
                 (string) $psm,
                 'tsv',
-            ], 45);
+            ], $this->timeoutSeconds);
 
             if (!$tsvResult->isSuccessful()) {
                 $errors[] = sprintf('psm=%d exit=%d stderr=%s', $psm, $tsvResult->exitCode, trim($tsvResult->stderr));
