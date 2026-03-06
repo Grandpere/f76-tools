@@ -77,6 +77,10 @@ data-sync: ## Sync legendary mods + Minerva JSON files from Nukaknights
 nuke-codes-warmup: ## Warmup nuke codes cache from Nukacrypt
 	$(DC_EXEC) php bin/console app:nuke-codes:warmup
 
+.PHONY: roadmap-ocr-scan
+roadmap-ocr-scan: ## OCR scan an image with configured roadmap providers (usage: make roadmap-ocr-scan IMAGE=/path/img.png LOCALE=en)
+	$(DC_EXEC) php bin/console app:roadmap:ocr:scan "$(IMAGE)" --locale="$(or $(LOCALE),en)"
+
 .PHONY: audit-retention-dry-run
 audit-retention-dry-run: ## Dry-run purge for auth/admin audit logs
 	$(DC_EXEC) php bin/console app:audit:retention:run --days=90 --dry-run

@@ -60,6 +60,7 @@ services:
     App\Support\Application\Contact\ContactMessageReadRepository: '@App\Support\Infrastructure\Persistence\ContactMessageEntityRepository'
     App\Support\Application\Contact\ContactMessageStatusWriteRepository: '@App\Support\Infrastructure\Persistence\ContactMessageEntityRepository'
     App\Catalog\Application\NukeCode\NukeCodeReadRepository: '@App\Catalog\Infrastructure\NukeCode\NukacryptNukeCodeReadRepository'
+    App\Catalog\Infrastructure\Roadmap\Ocr\CommandRunner: '@App\Catalog\Infrastructure\Roadmap\Ocr\ProcessCommandRunner'
 
     App\Identity\Infrastructure\Guard\TurnstileVerifier:
         arguments:
@@ -87,6 +88,25 @@ services:
         arguments:
             $graphqlUrl: '%env(string:NUKECRYPT_GRAPHQL_URL)%'
             $userAgent: '%env(string:NUKECRYPT_USER_AGENT)%'
+
+    App\Catalog\Application\Roadmap\Ocr\OcrQualityPolicy:
+        arguments:
+            $minConfidence: '%env(float:ROADMAP_OCR_MIN_CONFIDENCE)%'
+            $minNonEmptyLines: '%env(int:ROADMAP_OCR_MIN_NON_EMPTY_LINES)%'
+
+    App\Catalog\Application\Roadmap\Ocr\OcrProviderChain:
+        arguments:
+            $providers: !tagged_iterator app.roadmap.ocr_provider
+
+    App\Catalog\Infrastructure\Roadmap\Ocr\TesseractOcrProvider:
+        arguments:
+            $binaryPath: '%env(string:ROADMAP_OCR_TESSERACT_BIN)%'
+        tags:
+            - { name: 'app.roadmap.ocr_provider', priority: 200 }
+
+    App\Catalog\Infrastructure\Roadmap\Ocr\UnavailablePaddleOcrProvider:
+        tags:
+            - { name: 'app.roadmap.ocr_provider', priority: 100 }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

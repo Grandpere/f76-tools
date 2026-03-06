@@ -1,0 +1,105 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace App\Catalog\UI\Console;
+
+use App\Catalog\Application\Roadmap\Ocr\OcrProviderChain;
+use RuntimeException;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
+
+#[AsCommand(
+    name: 'app:roadmap:ocr:scan',
+    description: 'Scanne une image roadmap avec la chaine OCR configuree et affiche le resultat.',
+)]
+final class ScanRoadmapImageCommand extends Command
+{
+    public function __construct(
+        private readonly OcrProviderChain $ocrProviderChain,
+    ) {
+        parent::__construct();
+    }
+
+    protected function configure(): void
+    {
+        $this
+            ->addArgument('image', InputArgument::REQUIRED, 'Chemin de l image a scanner.')
+            ->addOption('locale', null, InputOption::VALUE_REQUIRED, 'Locale OCR (fr|en|de).', 'en')
+            ->addOption('preview-lines', null, InputOption::VALUE_REQUIRED, 'Nombre max de lignes affichees.', '20');
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        $io = new SymfonyStyle($input, $output);
+
+        $image = $this->normalizeStringInput($input->getArgument('image'));
+        $locale = $this->normalizeStringInput($input->getOption('locale'));
+        $previewLinesRaw = $this->normalizeStringInput($input->getOption('preview-lines'));
+        $previewLines = ctype_digit($previewLinesRaw) ? max(1, (int) $previewLinesRaw) : 20;
+
+        try {
+            $scan = $this->ocrProviderChain->recognize($image, $locale);
+        } catch (RuntimeException $exception) {
+            $io->error('OCR scan failed: '.$exception->getMessage());
+
+            return Command::FAILURE;
+        }
+
+        $io->title('Roadmap OCR scan');
+        $io->definitionList(
+            ['Provider' => $scan->result->provider],
+            ['Confidence' => number_format($scan->result->confidence, 4)],
+            ['Used fallback' => $scan->usedFallback ? 'yes' : 'no'],
+            ['Lines' => (string) count($scan->result->lines)],
+        );
+
+        $io->section('Attempts');
+        foreach ($scan->attempts as $attempt) {
+            $line = sprintf(
+                '- %s | success=%s | acceptable=%s',
+                $attempt->provider,
+                $attempt->successful ? 'yes' : 'no',
+                $attempt->acceptable ? 'yes' : 'no',
+            );
+
+            if (null !== $attempt->confidence) {
+                $line .= sprintf(' | confidence=%.4f', $attempt->confidence);
+            }
+            if ([] !== $attempt->qualityReasons) {
+                $line .= ' | reasons='.implode('; ', $attempt->qualityReasons);
+            }
+            if (null !== $attempt->error) {
+                $line .= ' | error='.$attempt->error;
+            }
+
+            $io->writeln($line);
+        }
+
+        $io->section('Text preview');
+        foreach (array_slice($scan->result->lines, 0, $previewLines) as $line) {
+            $io->writeln('> '.$line);
+        }
+
+        return Command::SUCCESS;
+    }
+
+    private function normalizeStringInput(mixed $value): string
+    {
+        return is_scalar($value) ? trim((string) $value) : '';
+    }
+}
