@@ -52,6 +52,12 @@ final class ScanRoadmapImageCommand extends Command
         $previewLinesRaw = $this->normalizeStringInput($input->getOption('preview-lines'));
         $previewLines = ctype_digit($previewLinesRaw) ? max(1, (int) $previewLinesRaw) : 20;
 
+        if ('' === $image || !is_file($image)) {
+            $io->error(sprintf('Image not found: %s', $image));
+
+            return Command::INVALID;
+        }
+
         try {
             $scan = $this->ocrProviderChain->recognize($image, $locale);
         } catch (RuntimeException $exception) {

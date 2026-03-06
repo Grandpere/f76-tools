@@ -81,6 +81,12 @@ final class OcrProviderChain
             );
         }
 
-        throw new RuntimeException('All OCR providers failed without producing any result.');
+        $parts = [];
+        foreach ($attempts as $attempt) {
+            $fragment = $attempt->provider.': '.($attempt->error ?? 'no output');
+            $parts[] = $fragment;
+        }
+
+        throw new RuntimeException('All OCR providers failed without producing any result. '.implode(' | ', $parts));
     }
 }
