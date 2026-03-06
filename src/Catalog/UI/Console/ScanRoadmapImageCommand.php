@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Catalog\UI\Console;
 
+use App\Catalog\Application\Roadmap\CreateRoadmapSnapshotApplicationService;
+use App\Catalog\Application\Roadmap\CreateRoadmapSnapshotInput;
 use App\Catalog\Application\Roadmap\Ocr\OcrProviderChain;
 use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -31,6 +33,7 @@ final class ScanRoadmapImageCommand extends Command
 {
     public function __construct(
         private readonly OcrProviderChain $ocrProviderChain,
+        private readonly CreateRoadmapSnapshotApplicationService $createRoadmapSnapshotApplicationService,
     ) {
         parent::__construct();
     }
@@ -40,7 +43,8 @@ final class ScanRoadmapImageCommand extends Command
         $this
             ->addArgument('image', InputArgument::REQUIRED, 'Chemin de l image a scanner.')
             ->addOption('locale', null, InputOption::VALUE_REQUIRED, 'Locale OCR (fr|en|de).', 'en')
-            ->addOption('preview-lines', null, InputOption::VALUE_REQUIRED, 'Nombre max de lignes affichees.', '20');
+            ->addOption('preview-lines', null, InputOption::VALUE_REQUIRED, 'Nombre max de lignes affichees.', '20')
+            ->addOption('no-persist', null, InputOption::VALUE_NONE, 'N enregistre pas le snapshot OCR en base.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -51,6 +55,7 @@ final class ScanRoadmapImageCommand extends Command
         $locale = $this->normalizeStringInput($input->getOption('locale'));
         $previewLinesRaw = $this->normalizeStringInput($input->getOption('preview-lines'));
         $previewLines = ctype_digit($previewLinesRaw) ? max(1, (int) $previewLinesRaw) : 20;
+        $persist = !$input->getOption('no-persist');
 
         if ('' === $image || !is_file($image)) {
             $io->error(sprintf('Image not found: %s', $image));
@@ -99,6 +104,29 @@ final class ScanRoadmapImageCommand extends Command
         $io->section('Text preview');
         foreach (array_slice($scan->result->lines, 0, $previewLines) as $line) {
             $io->writeln('> '.$line);
+        }
+
+        if ($persist) {
+            try {
+                $snapshot = $this->createRoadmapSnapshotApplicationService->create(
+                    new CreateRoadmapSnapshotInput(
+                        $locale,
+                        $image,
+                        $scan->result->provider,
+                        $scan->result->confidence,
+                        $scan->result->text,
+                    ),
+                );
+
+                $io->newLine();
+                $io->success(sprintf(
+                    'Roadmap snapshot persisted (id=%d, status=%s).',
+                    $snapshot->getId() ?? 0,
+                    $snapshot->getStatus()->value,
+                ));
+            } catch (RuntimeException $exception) {
+                $io->warning('OCR succeeded but snapshot persistence failed: '.$exception->getMessage());
+            }
         }
 
         return Command::SUCCESS;
