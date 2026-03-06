@@ -106,6 +106,15 @@ final class InMemoryRoadmapSnapshotWriteRepository implements RoadmapSnapshotWri
         return $this->items[$id] ?? null;
     }
 
+    public function findRecent(int $limit = 20): array
+    {
+        if ($limit <= 0) {
+            return [];
+        }
+
+        return array_slice(array_values($this->items), 0, $limit);
+    }
+
     private function forceId(RoadmapSnapshotEntity $snapshot, int $id): void
     {
         $reflection = new \ReflectionClass($snapshot);
@@ -113,4 +122,3 @@ final class InMemoryRoadmapSnapshotWriteRepository implements RoadmapSnapshotWri
         $property->setValue($snapshot, $id);
     }
 }
-

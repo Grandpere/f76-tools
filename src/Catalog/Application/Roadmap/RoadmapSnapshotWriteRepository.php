@@ -11,5 +11,9 @@ interface RoadmapSnapshotWriteRepository
     public function save(RoadmapSnapshotEntity $snapshot): void;
 
     public function findOneById(int $id): ?RoadmapSnapshotEntity;
-}
 
+    /**
+     * @return list<RoadmapSnapshotEntity>
+     */
+    public function findRecent(int $limit = 20): array;
+}

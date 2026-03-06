@@ -258,6 +258,42 @@ admin_users.to_translations: Ubersetzungsverwaltung
 admin_users.to_audit_logs: Audit-Logs
 admin_users.google_filter_label: Google-Identitat
 admin_users.google_filter_all: Alle Benutzer
+
+admin_roadmap.page_title: Roadmap-Backoffice
+admin_roadmap.kicker: Backoffice
+admin_roadmap.title: Roadmap
+admin_roadmap.description: OCR-Snapshots prüfen, strukturierte Events erzeugen und Veröffentlichung freigeben.
+admin_roadmap.back_to_dashboard: Zuruck zum Dashboard
+admin_roadmap.snapshots_title: OCR-Snapshots
+admin_roadmap.snapshot_id: ID
+admin_roadmap.snapshot_locale: Sprache
+admin_roadmap.snapshot_provider: Provider
+admin_roadmap.snapshot_confidence: Konfidenz
+admin_roadmap.snapshot_status: Status
+admin_roadmap.snapshot_scanned_at: Gescannt am
+admin_roadmap.snapshot_actions: Aktionen
+admin_roadmap.open: Offnen
+admin_roadmap.status_draft: Entwurf
+admin_roadmap.status_approved: Freigegeben
+admin_roadmap.status_rejected: Abgelehnt
+admin_roadmap.empty_snapshots: Kein Roadmap-Snapshot gefunden.
+admin_roadmap.selected_snapshot_title: 'Ausgewahlter Snapshot #%id%'
+admin_roadmap.selected_snapshot_state: 'Sprache: %locale% · Status: %status%'
+admin_roadmap.generate_events: Events erzeugen
+admin_roadmap.approve_snapshot: Snapshot freigeben
+admin_roadmap.events_title: Strukturierte Events
+admin_roadmap.event_order: Reihenfolge
+admin_roadmap.event_title: Titel
+admin_roadmap.event_starts_at: Start
+admin_roadmap.event_ends_at: Ende
+admin_roadmap.event_type: Typ
+admin_roadmap.event_notes: Notizen
+admin_roadmap.empty_events: Keine Events fur diesen Snapshot erzeugt.
+admin_roadmap.save_events: Events speichern
+admin_roadmap.flash.invalid_csrf: Ungultige Sitzung, bitte erneut versuchen.
+admin_roadmap.flash.events_generated: Events aus OCR-Snapshot erzeugt.
+admin_roadmap.flash.snapshot_approved: Snapshot freigegeben.
+admin_roadmap.flash.snapshot_not_found: Snapshot nicht gefunden.
 admin_users.google_filter_linked: Google verknupft
 admin_users.google_filter_unlinked: Google nicht verknupft
 admin_users.active_filter_label: Kontostatus

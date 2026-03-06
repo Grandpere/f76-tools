@@ -32,5 +32,20 @@ final class RoadmapSnapshotEntityRepository extends ServiceEntityRepository impl
 
         return $snapshot instanceof RoadmapSnapshotEntity ? $snapshot : null;
     }
-}
 
+    /**
+     * @return list<RoadmapSnapshotEntity>
+     */
+    public function findRecent(int $limit = 20): array
+    {
+        $snapshots = $this->createQueryBuilder('s')
+            ->orderBy('s.scannedAt', 'DESC')
+            ->addOrderBy('s.id', 'DESC')
+            ->setMaxResults(max(1, $limit))
+            ->getQuery()
+            ->getResult();
+
+        /** @var list<RoadmapSnapshotEntity> $snapshots */
+        return $snapshots;
+    }
+}

@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'admin_roadmap.page_title'|trans }}{% endblock %}
+
+{% block body %}
+    <main class="translations-page">
+        {% include 'admin/_page_header.html.twig' with {
+            backLabel: 'admin_roadmap.back_to_dashboard',
+            localeSelectId: 'admin-roadmap-header-locale-select',
+            kicker: 'admin_roadmap.kicker',
+            title: 'admin_roadmap.title',
+            description: 'admin_roadmap.description'|trans
+        } %}
+
+        {% include 'admin/_flashes.html.twig' %}
+
+        <section class="translations-panel">
+            <h2>{{ 'admin_roadmap.snapshots_title'|trans }}</h2>
+            <div class="translations-table-wrap">
+                <table class="translations-table">
+                    <thead>
+                    <tr>
+                        <th>{{ 'admin_roadmap.snapshot_id'|trans }}</th>
+                        <th>{{ 'admin_roadmap.snapshot_locale'|trans }}</th>
+                        <th>{{ 'admin_roadmap.snapshot_provider'|trans }}</th>
+                        <th>{{ 'admin_roadmap.snapshot_confidence'|trans }}</th>
+                        <th>{{ 'admin_roadmap.snapshot_status'|trans }}</th>
+                        <th>{{ 'admin_roadmap.snapshot_scanned_at'|trans }}</th>
+                        <th>{{ 'admin_roadmap.snapshot_actions'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for snapshot in snapshots %}
+                        {% set snapshotId = snapshot.id %}
+                        <tr>
+                            <td>#{{ snapshotId }}</td>
+                            <td>{{ snapshot.locale|upper }}</td>
+                            <td>{{ snapshot.ocrProvider }}</td>
+                            <td>{{ (snapshot.ocrConfidence * 100)|number_format(2, '.', ' ') }}%</td>
+                            <td><span class="item-pill">{{ ('admin_roadmap.status_' ~ snapshot.status.value)|trans }}</span></td>
+                            <td>{{ snapshot.scannedAt|date('Y-m-d H:i') }}</td>
+                            <td>
+                                <a href="{{ path('app_admin_roadmap_snapshots', { locale: app.request.locale, snapshot: snapshotId }) }}">{{ 'admin_roadmap.open'|trans }}</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">{{ 'admin_roadmap.empty_snapshots'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        {% if selectedSnapshot %}
+            <section class="translations-panel">
+                <h2>{{ 'admin_roadmap.selected_snapshot_title'|trans({'%id%': selectedSnapshot.id}) }}</h2>
+                <p class="catalog-state">{{ 'admin_roadmap.selected_snapshot_state'|trans({
+                        '%locale%': selectedSnapshot.locale|upper,
+                        '%status%': ('admin_roadmap.status_' ~ selectedSnapshot.status.value)|trans
+                    }) }}</p>
+                <div class="translations-filters">
+                    <form method="post" action="{{ path('app_admin_roadmap_snapshot_parse_events', { locale: app.request.locale, id: selectedSnapshot.id }) }}">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_parse_events_' ~ selectedSnapshot.id) }}">
+                        <button type="submit">{{ 'admin_roadmap.generate_events'|trans }}</button>
+                    </form>
+                    <form method="post" action="{{ path('app_admin_roadmap_snapshot_approve', { locale: app.request.locale, id: selectedSnapshot.id }) }}">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_approve_' ~ selectedSnapshot.id) }}">
+                        <button type="submit">{{ 'admin_roadmap.approve_snapshot'|trans }}</button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="translations-panel">
+                <h2>{{ 'admin_roadmap.events_title'|trans }}</h2>
+                <form method="post" action="{{ path('app_admin_roadmap_snapshot_events_save', { locale: app.request.locale, id: selectedSnapshot.id }) }}">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_events_save_' ~ selectedSnapshot.id) }}">
+                    <div class="translations-table-wrap">
+                        <table class="translations-table">
+                            <thead>
+                            <tr>
+                                <th>{{ 'admin_roadmap.event_order'|trans }}</th>
+                                <th>{{ 'admin_roadmap.event_title'|trans }}</th>
+                                <th>{{ 'admin_roadmap.event_starts_at'|trans }}</th>
+                                <th>{{ 'admin_roadmap.event_ends_at'|trans }}</th>
+                                <th>{{ 'admin_roadmap.event_type'|trans }}</th>
+                                <th>{{ 'admin_roadmap.event_notes'|trans }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for event in events %}
+                                {% set eventId = event.id %}
+                                <tr>
+                                    <td>{{ event.sortOrder }}</td>
+                                    <td>
+                                        <input type="text" name="events[{{ eventId }}][title]" value="{{ event.title }}" maxlength="255" required>
+                                    </td>
+                                    <td>
+                                        <input type="datetime-local" name="events[{{ eventId }}][startsAt]" value="{{ event.startsAt|date('Y-m-d\\TH:i') }}" required>
+                                    </td>
+                                    <td>
+                                        <input type="datetime-local" name="events[{{ eventId }}][endsAt]" value="{{ event.endsAt|date('Y-m-d\\TH:i') }}" required>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="events[{{ eventId }}][eventType]" value="{{ event.eventType ?? '' }}" maxlength="64">
+                                    </td>
+                                    <td>
+                                        <textarea name="events[{{ eventId }}][notes]" rows="2">{{ event.notes ?? '' }}</textarea>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6">{{ 'admin_roadmap.empty_events'|trans }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="translations-actions">
+                        <button type="submit">{{ 'admin_roadmap.save_events'|trans }}</button>
+                    </div>
+                </form>
+            </section>
+        {% endif %}
+    </main>
+{% endblock %}
+

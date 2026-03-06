@@ -89,4 +89,13 @@ final class InMemorySnapshotRepoForEventGeneration implements RoadmapSnapshotWri
 
         return $snapshot instanceof RoadmapSnapshotEntity ? $snapshot : null;
     }
+
+    public function findRecent(int $limit = 20): array
+    {
+        if ($limit <= 0) {
+            return [];
+        }
+
+        return array_slice(array_values($this->snapshots), 0, $limit);
+    }
 }

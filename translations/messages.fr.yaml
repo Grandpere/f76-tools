@@ -258,6 +258,42 @@ admin_users.to_translations: Gestion des traductions
 admin_users.to_audit_logs: Logs d audit
 admin_users.google_filter_label: Identite Google
 admin_users.google_filter_all: Tous les utilisateurs
+
+admin_roadmap.page_title: Backoffice roadmap
+admin_roadmap.kicker: Backoffice
+admin_roadmap.title: Roadmap
+admin_roadmap.description: Revoir les snapshots OCR, generer les evenements structures et approuver la publication.
+admin_roadmap.back_to_dashboard: Retour au dashboard
+admin_roadmap.snapshots_title: Snapshots OCR
+admin_roadmap.snapshot_id: ID
+admin_roadmap.snapshot_locale: Locale
+admin_roadmap.snapshot_provider: Provider
+admin_roadmap.snapshot_confidence: Confiance
+admin_roadmap.snapshot_status: Statut
+admin_roadmap.snapshot_scanned_at: Scanne le
+admin_roadmap.snapshot_actions: Actions
+admin_roadmap.open: Ouvrir
+admin_roadmap.status_draft: Brouillon
+admin_roadmap.status_approved: Approuve
+admin_roadmap.status_rejected: Rejete
+admin_roadmap.empty_snapshots: Aucun snapshot roadmap trouve.
+admin_roadmap.selected_snapshot_title: 'Snapshot selectionne #%id%'
+admin_roadmap.selected_snapshot_state: 'Locale: %locale% · Statut: %status%'
+admin_roadmap.generate_events: Generer les evenements
+admin_roadmap.approve_snapshot: Approuver le snapshot
+admin_roadmap.events_title: Evenements structures
+admin_roadmap.event_order: Ordre
+admin_roadmap.event_title: Titre
+admin_roadmap.event_starts_at: Debut
+admin_roadmap.event_ends_at: Fin
+admin_roadmap.event_type: Type
+admin_roadmap.event_notes: Notes
+admin_roadmap.empty_events: Aucun evenement genere pour ce snapshot.
+admin_roadmap.save_events: Enregistrer les evenements
+admin_roadmap.flash.invalid_csrf: Session invalide, merci de reessayer.
+admin_roadmap.flash.events_generated: Evenements generes depuis le snapshot OCR.
+admin_roadmap.flash.snapshot_approved: Snapshot approuve.
+admin_roadmap.flash.snapshot_not_found: Snapshot introuvable.
 admin_users.google_filter_linked: Google lie
 admin_users.google_filter_unlinked: Google non lie
 admin_users.active_filter_label: Statut du compte

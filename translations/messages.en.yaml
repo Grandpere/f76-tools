@@ -258,6 +258,42 @@ admin_users.to_translations: Translation management
 admin_users.to_audit_logs: Audit logs
 admin_users.google_filter_label: Google identity
 admin_users.google_filter_all: All users
+
+admin_roadmap.page_title: Roadmap backoffice
+admin_roadmap.kicker: Backoffice
+admin_roadmap.title: Roadmap
+admin_roadmap.description: Review OCR snapshots, generate structured events, and approve publication.
+admin_roadmap.back_to_dashboard: Back to dashboard
+admin_roadmap.snapshots_title: OCR snapshots
+admin_roadmap.snapshot_id: ID
+admin_roadmap.snapshot_locale: Locale
+admin_roadmap.snapshot_provider: Provider
+admin_roadmap.snapshot_confidence: Confidence
+admin_roadmap.snapshot_status: Status
+admin_roadmap.snapshot_scanned_at: Scanned at
+admin_roadmap.snapshot_actions: Actions
+admin_roadmap.open: Open
+admin_roadmap.status_draft: Draft
+admin_roadmap.status_approved: Approved
+admin_roadmap.status_rejected: Rejected
+admin_roadmap.empty_snapshots: No roadmap snapshot found.
+admin_roadmap.selected_snapshot_title: 'Selected snapshot #%id%'
+admin_roadmap.selected_snapshot_state: 'Locale: %locale% · Status: %status%'
+admin_roadmap.generate_events: Generate events
+admin_roadmap.approve_snapshot: Approve snapshot
+admin_roadmap.events_title: Structured events
+admin_roadmap.event_order: Order
+admin_roadmap.event_title: Title
+admin_roadmap.event_starts_at: Start
+admin_roadmap.event_ends_at: End
+admin_roadmap.event_type: Type
+admin_roadmap.event_notes: Notes
+admin_roadmap.empty_events: No event generated for this snapshot.
+admin_roadmap.save_events: Save events
+admin_roadmap.flash.invalid_csrf: Invalid session, please try again.
+admin_roadmap.flash.events_generated: Events generated from OCR snapshot.
+admin_roadmap.flash.snapshot_approved: Snapshot approved.
+admin_roadmap.flash.snapshot_not_found: Snapshot not found.
 admin_users.google_filter_linked: Google linked
 admin_users.google_filter_unlinked: Google not linked
 admin_users.active_filter_label: Account status
