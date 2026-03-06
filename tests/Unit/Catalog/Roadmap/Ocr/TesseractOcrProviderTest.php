@@ -21,22 +21,40 @@ use RuntimeException;
 
 final class TesseractOcrProviderTest extends TestCase
 {
-    public function testRecognizeReturnsTextLinesAndAverageConfidence(): void
+    public function testRecognizeRebuildsParagraphAndAverageConfidenceFromTsv(): void
     {
         $imagePath = $this->createTemporaryImage();
 
         $runner = new FakeCommandRunner([
-            new CommandExecutionResult(0, "Event One\nEvent Two\n", ''),
-            new CommandExecutionResult(0, "level\tpage_num\tblock_num\tpar_num\tline_num\tword_num\tleft\ttop\twidth\theight\tconf\ttext\n5\t1\t1\t1\t1\t1\t0\t0\t10\t10\t96\tEvent\n5\t1\t1\t1\t1\t2\t0\t0\t10\t10\t84\tOne\n", ''),
+            new CommandExecutionResult(0, $this->tsvWithWrappedParagraph(82), ''),
+            new CommandExecutionResult(0, $this->tsvSingleLine('Ignored fallback pass', 70), ''),
+        ]);
+
+        $provider = new TesseractOcrProvider($runner, 'tesseract');
+        $result = $provider->recognize($imagePath, 'fr');
+
+        self::assertSame('tesseract', $result->provider);
+        self::assertSame([
+            'DOUBLE SCORE, DOUBLES MUTATIONS ET CAPSULES A GOGO',
+        ], $result->lines);
+        self::assertEqualsWithDelta(0.82, $result->confidence, 0.0001);
+        self::assertCount(2, $runner->commands);
+    }
+
+    public function testRecognizeSelectsBestPassByScore(): void
+    {
+        $imagePath = $this->createTemporaryImage();
+
+        $runner = new FakeCommandRunner([
+            new CommandExecutionResult(0, $this->tsvSingleLine('LOW CONFIDENCE PASS', 40), ''),
+            new CommandExecutionResult(0, $this->tsvSingleLine('BETTER PASS', 92), ''),
         ]);
 
         $provider = new TesseractOcrProvider($runner, 'tesseract');
         $result = $provider->recognize($imagePath, 'en');
 
-        self::assertSame('tesseract', $result->provider);
-        self::assertSame(['Event One', 'Event Two'], $result->lines);
-        self::assertEqualsWithDelta(0.90, $result->confidence, 0.0001);
-        self::assertCount(2, $runner->commands);
+        self::assertSame(['BETTER PASS'], $result->lines);
+        self::assertEqualsWithDelta(0.92, $result->confidence, 0.0001);
     }
 
     public function testRecognizeThrowsWhenImageDoesNotExist(): void
@@ -49,18 +67,19 @@ final class TesseractOcrProviderTest extends TestCase
         $provider->recognize('/tmp/non-existing-roadmap-file.png', 'fr');
     }
 
-    public function testRecognizeThrowsWhenTesseractCommandFails(): void
+    public function testRecognizeThrowsWhenAllTesseractPassesFail(): void
     {
         $imagePath = $this->createTemporaryImage();
 
         $runner = new FakeCommandRunner([
+            new CommandExecutionResult(1, '', 'missing language data'),
             new CommandExecutionResult(1, '', 'missing language data'),
         ]);
 
         $provider = new TesseractOcrProvider($runner, 'tesseract');
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Tesseract text extraction failed');
+        $this->expectExceptionMessage('Tesseract extraction failed');
 
         $provider->recognize($imagePath, 'de');
     }
@@ -75,6 +94,39 @@ final class TesseractOcrProviderTest extends TestCase
         file_put_contents($path, 'fake image content');
 
         return $path;
+    }
+
+    private function tsvWithWrappedParagraph(float $confidence): string
+    {
+        return "level\tpage_num\tblock_num\tpar_num\tline_num\tword_num\tleft\ttop\twidth\theight\tconf\ttext\n"
+            ."5\t1\t1\t1\t1\t1\t0\t0\t10\t10\t{$confidence}\tDOUBLE\n"
+            ."5\t1\t1\t1\t1\t2\t0\t0\t10\t10\t{$confidence}\tSCORE,\n"
+            ."5\t1\t1\t1\t2\t1\t0\t0\t10\t10\t{$confidence}\tDOUBLES\n"
+            ."5\t1\t1\t1\t2\t2\t0\t0\t10\t10\t{$confidence}\tMUTATIONS\n"
+            ."5\t1\t1\t1\t2\t3\t0\t0\t10\t10\t{$confidence}\tET\n"
+            ."5\t1\t1\t1\t2\t4\t0\t0\t10\t10\t{$confidence}\tCAPSULES\n"
+            ."5\t1\t1\t1\t2\t5\t0\t0\t10\t10\t{$confidence}\tA\n"
+            ."5\t1\t1\t1\t2\t6\t0\t0\t10\t10\t{$confidence}\tGOGO\n";
+    }
+
+    private function tsvSingleLine(string $text, float $confidence): string
+    {
+        $words = preg_split('/\s+/u', trim($text));
+        if (!is_array($words)) {
+            $words = [$text];
+        }
+
+        $rows = ["level\tpage_num\tblock_num\tpar_num\tline_num\tword_num\tleft\ttop\twidth\theight\tconf\ttext"];
+        $wordIndex = 1;
+        foreach ($words as $word) {
+            if ('' === trim($word)) {
+                continue;
+            }
+            $rows[] = sprintf("5\t1\t1\t1\t1\t%d\t0\t0\t10\t10\t%.2f\t%s", $wordIndex, $confidence, $word);
+            ++$wordIndex;
+        }
+
+        return implode("\n", $rows)."\n";
     }
 }
 

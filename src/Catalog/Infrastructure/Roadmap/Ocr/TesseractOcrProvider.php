@@ -19,6 +19,9 @@ use RuntimeException;
 
 final class TesseractOcrProvider implements OcrProvider
 {
+    /** @var list<int> */
+    private const PSM_PASSES = [6, 4];
+
     public function __construct(
         private readonly CommandRunner $commandRunner,
         private readonly string $binaryPath = 'tesseract',
@@ -41,43 +44,54 @@ final class TesseractOcrProvider implements OcrProvider
         }
 
         $lang = $this->mapLocaleToTesseractLang($locale);
+        $passes = [];
+        $errors = [];
 
-        $textResult = $this->commandRunner->run([
-            $this->binaryPath,
-            $image,
-            'stdout',
-            '-l',
-            $lang,
-            '--psm',
-            '6',
-        ], 45);
-        if (!$textResult->isSuccessful()) {
-            throw new RuntimeException(sprintf('Tesseract text extraction failed (exit=%d): %s', $textResult->exitCode, trim($textResult->stderr)));
+        foreach (self::PSM_PASSES as $psm) {
+            $tsvResult = $this->commandRunner->run([
+                $this->binaryPath,
+                $image,
+                'stdout',
+                '-l',
+                $lang,
+                '--psm',
+                (string) $psm,
+                'tsv',
+            ], 45);
+
+            if (!$tsvResult->isSuccessful()) {
+                $errors[] = sprintf('psm=%d exit=%d stderr=%s', $psm, $tsvResult->exitCode, trim($tsvResult->stderr));
+                continue;
+            }
+
+            [$lines, $confidence] = $this->extractParagraphLinesAndConfidenceFromTsv($tsvResult->stdout);
+            $passes[] = [
+                'psm' => $psm,
+                'lines' => $lines,
+                'confidence' => $confidence,
+                'score' => $this->scorePass($confidence, count($lines)),
+            ];
         }
 
-        $tsvResult = $this->commandRunner->run([
-            $this->binaryPath,
-            $image,
-            'stdout',
-            '-l',
-            $lang,
-            '--psm',
-            '6',
-            'tsv',
-        ], 45);
-        if (!$tsvResult->isSuccessful()) {
-            throw new RuntimeException(sprintf('Tesseract confidence extraction failed (exit=%d): %s', $tsvResult->exitCode, trim($tsvResult->stderr)));
+        if ([] === $passes) {
+            $details = [] === $errors ? 'unknown tesseract failure' : implode(' | ', $errors);
+            throw new RuntimeException(sprintf('Tesseract extraction failed: %s', $details));
         }
 
-        $text = trim($textResult->stdout);
-        $lines = $this->extractNonEmptyLines($text);
-        $confidence = $this->extractAverageConfidenceFromTsv($tsvResult->stdout);
+        usort(
+            $passes,
+            static fn (array $a, array $b): int => $b['score'] <=> $a['score'],
+        );
+
+        /** @var array{psm:int, lines:list<string>, confidence:float, score:float} $best */
+        $best = $passes[0];
+        $text = implode("\n", $best['lines']);
 
         return new OcrResult(
             $this->name(),
             $text,
-            $confidence,
-            $lines,
+            $best['confidence'],
+            $best['lines'],
         );
     }
 
@@ -92,77 +106,117 @@ final class TesseractOcrProvider implements OcrProvider
         };
     }
 
-    /**
-     * @return list<string>
-     */
-    private function extractNonEmptyLines(string $text): array
+    private function scorePass(float $confidence, int $lineCount): float
     {
-        if ('' === trim($text)) {
-            return [];
-        }
+        $lineBonus = min(50, max(0, $lineCount)) / 100.0;
 
-        $lines = preg_split('/\R/u', $text);
-        if (!is_array($lines)) {
-            return [];
-        }
-
-        $normalized = [];
-        foreach ($lines as $line) {
-            $clean = trim($line);
-            if ('' !== $clean) {
-                $normalized[] = $clean;
-            }
-        }
-
-        return $normalized;
+        return ($confidence * 10.0) + $lineBonus;
     }
 
-    private function extractAverageConfidenceFromTsv(string $tsv): float
+    /**
+     * @return array{0: list<string>, 1: float}
+     */
+    private function extractParagraphLinesAndConfidenceFromTsv(string $tsv): array
     {
-        $lines = preg_split('/\R/u', trim($tsv));
-        if (!is_array($lines) || count($lines) < 2) {
-            return 0.0;
+        $rows = preg_split('/\R/u', trim($tsv));
+        if (!is_array($rows) || count($rows) < 2) {
+            return [[], 0.0];
         }
+
+        /**
+         * @var array<string, array{
+         *   page:int,
+         *   block:int,
+         *   paragraph:int,
+         *   lines: array<int, array<int, string>>
+         * }> $paragraphs
+         */
+        $paragraphs = [];
 
         $sum = 0.0;
         $count = 0;
 
-        foreach ($lines as $index => $line) {
+        foreach ($rows as $index => $row) {
             if (0 === $index) {
                 continue;
             }
 
-            $columns = explode("\t", $line);
-            if (count($columns) < 11) {
+            $columns = explode("\t", $row);
+            if (count($columns) < 12) {
                 continue;
             }
 
-            $conf = trim((string) $columns[10]);
-            if (!is_numeric($conf)) {
+            $confRaw = trim((string) $columns[10]);
+            if (is_numeric($confRaw)) {
+                $conf = (float) $confRaw;
+                if ($conf >= 0.0) {
+                    $sum += $conf;
+                    ++$count;
+                }
+            }
+
+            $word = trim((string) $columns[11]);
+            if ('' === $word) {
                 continue;
             }
 
-            $confFloat = (float) $conf;
-            if ($confFloat < 0.0) {
+            $page = is_numeric($columns[1]) ? (int) $columns[1] : 0;
+            $block = is_numeric($columns[2]) ? (int) $columns[2] : 0;
+            $paragraph = is_numeric($columns[3]) ? (int) $columns[3] : 0;
+            $line = is_numeric($columns[4]) ? (int) $columns[4] : 0;
+            $wordIndex = is_numeric($columns[5]) ? (int) $columns[5] : 0;
+
+            $paragraphKey = sprintf('%06d:%06d:%06d', $page, $block, $paragraph);
+            if (!isset($paragraphs[$paragraphKey])) {
+                $paragraphs[$paragraphKey] = [
+                    'page' => $page,
+                    'block' => $block,
+                    'paragraph' => $paragraph,
+                    'lines' => [],
+                ];
+            }
+
+            if (!isset($paragraphs[$paragraphKey]['lines'][$line])) {
+                $paragraphs[$paragraphKey]['lines'][$line] = [];
+            }
+
+            $paragraphs[$paragraphKey]['lines'][$line][$wordIndex] = $word;
+        }
+
+        ksort($paragraphs);
+
+        $resultLines = [];
+        foreach ($paragraphs as $paragraphData) {
+            $lineTexts = [];
+            $lineMap = $paragraphData['lines'];
+            ksort($lineMap);
+
+            foreach ($lineMap as $wordsByOrder) {
+                ksort($wordsByOrder);
+                $lineText = trim(implode(' ', $wordsByOrder));
+                if ('' !== $lineText) {
+                    $lineTexts[] = $lineText;
+                }
+            }
+
+            if ([] === $lineTexts) {
                 continue;
             }
 
-            $sum += $confFloat;
-            ++$count;
+            $paragraphText = preg_replace('/\s+/u', ' ', trim(implode(' ', $lineTexts)));
+            if (!is_string($paragraphText) || '' === $paragraphText) {
+                continue;
+            }
+
+            $resultLines[] = $paragraphText;
         }
 
         if (0 === $count) {
-            return 0.0;
+            return [$resultLines, 0.0];
         }
 
-        $normalized = ($sum / $count) / 100.0;
-        if ($normalized < 0.0) {
-            return 0.0;
-        }
-        if ($normalized > 1.0) {
-            return 1.0;
-        }
+        $normalizedConfidence = ($sum / $count) / 100.0;
 
-        return $normalized;
+        return [$resultLines, max(0.0, min(1.0, $normalizedConfidence))];
     }
 }
