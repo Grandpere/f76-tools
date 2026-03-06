@@ -37,6 +37,11 @@ COPY docker/php/conf.d/app.ini /usr/local/etc/php/conf.d/zz-app.ini
 WORKDIR /var/www/html
 
 FROM base AS dev
+RUN apk add --no-cache \
+        tesseract-ocr=5.5.1-r0 \
+        tesseract-ocr-data-eng=5.5.1-r0 \
+        tesseract-ocr-data-fra=5.5.1-r0 \
+        tesseract-ocr-data-deu=5.5.1-r0
 COPY --from=composer:2.8 /usr/bin/composer /usr/local/bin/composer
 COPY --from=deps /app/vendor /var/www/html/vendor
 COPY . /var/www/html
