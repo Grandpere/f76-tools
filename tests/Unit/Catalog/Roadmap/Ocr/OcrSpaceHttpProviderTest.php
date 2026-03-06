@@ -70,5 +70,53 @@ final class OcrSpaceHttpProviderTest extends TestCase
 
         @unlink($imagePath);
     }
-}
 
+    public function testRecognizeResizesOversizedImageByReducingDimensions(): void
+    {
+        if (!function_exists('imagecreatetruecolor')) {
+            self::markTestSkipped('GD extension is required for resize test.');
+        }
+
+        $imagePath = tempnam(sys_get_temp_dir(), 'ocr-space-large-');
+        self::assertNotFalse($imagePath);
+
+        $image = imagecreatetruecolor(1800, 1800);
+        self::assertNotFalse($image);
+        $white = imagecolorallocate($image, 255, 255, 255);
+        self::assertIsInt($white);
+        imagefilledrectangle($image, 0, 0, 1799, 1799, $white);
+        imagepng($image, $imagePath);
+
+        $capturedBody = [];
+        $client = new MockHttpClient(function (string $method, string $url, array $options) use (&$capturedBody): MockResponse {
+            self::assertSame('POST', $method);
+            self::assertSame('https://api.ocr.space/parse/image', $url);
+            self::assertArrayHasKey('body', $options);
+            if (is_string($options['body'])) {
+                parse_str($options['body'], $parsed);
+                /** @var array<string, string> $parsed */
+                $capturedBody = $parsed;
+            } else {
+                self::assertIsArray($options['body']);
+                /** @var array<string, string> $body */
+                $body = $options['body'];
+                $capturedBody = $body;
+            }
+
+            return new MockResponse(json_encode([
+                'IsErroredOnProcessing' => false,
+                'ParsedResults' => [
+                    ['ParsedText' => 'OK'],
+                ],
+            ], JSON_THROW_ON_ERROR));
+        });
+
+        $provider = new OcrSpaceHttpProvider($client, 'https://api.ocr.space/parse/image', 'test-key', true, 60, 10000);
+        $provider->recognize($imagePath, 'en');
+
+        self::assertArrayHasKey('base64Image', $capturedBody);
+        self::assertStringStartsWith('data:image/jpeg;base64,', $capturedBody['base64Image']);
+
+        @unlink($imagePath);
+    }
+}

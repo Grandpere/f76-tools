@@ -111,6 +111,7 @@ services:
             $apiKey: '%env(string:ROADMAP_OCR_SPACE_API_KEY)%'
             $enabled: '%env(bool:ROADMAP_OCR_SPACE_ENABLED)%'
             $timeoutSeconds: '%env(int:ROADMAP_OCR_SPACE_TIMEOUT_SECONDS)%'
+            $maxImageBytes: '%env(int:ROADMAP_OCR_SPACE_MAX_IMAGE_BYTES)%'
         tags:
             - { name: 'app.roadmap.ocr_provider', priority: 150 }
 

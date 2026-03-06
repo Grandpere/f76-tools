@@ -15,6 +15,7 @@ namespace App\Catalog\Infrastructure\Roadmap\Ocr;
 
 use App\Catalog\Application\Roadmap\Ocr\OcrProvider;
 use App\Catalog\Application\Roadmap\Ocr\OcrResult;
+use GdImage;
 use RuntimeException;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -27,6 +28,7 @@ final class OcrSpaceHttpProvider implements OcrProvider
         private readonly string $apiKey,
         private readonly bool $enabled = true,
         private readonly int $timeoutSeconds = 60,
+        private readonly int $maxImageBytes = 950000,
     ) {
     }
 
@@ -55,13 +57,10 @@ final class OcrSpaceHttpProvider implements OcrProvider
             throw new RuntimeException(sprintf('OCR.space image not found: %s', $imagePath));
         }
 
-        $rawImage = file_get_contents($imagePath);
-        if (false === $rawImage) {
-            throw new RuntimeException(sprintf('Unable to read image file for OCR.space: %s', $imagePath));
-        }
-
+        $preparedImage = $this->prepareImageForUpload($imagePath);
+        $rawImage = $preparedImage['content'];
         $language = $this->mapLocaleToOcrSpaceLanguage($locale);
-        $mimeType = $this->guessMimeType($imagePath);
+        $mimeType = $preparedImage['mimeType'];
         $payload = [
             'base64Image' => sprintf('data:%s;base64,%s', $mimeType, base64_encode($rawImage)),
             'isOverlayRequired' => 'false',
@@ -127,6 +126,77 @@ final class OcrSpaceHttpProvider implements OcrProvider
         $confidence = $this->estimateConfidence($text, $lines);
 
         return new OcrResult($this->name(), $text, $confidence, $lines);
+    }
+
+    /**
+     * @return array{content: string, mimeType: string}
+     */
+    private function prepareImageForUpload(string $imagePath): array
+    {
+        $rawImage = file_get_contents($imagePath);
+        if (!is_string($rawImage) || '' === $rawImage) {
+            throw new RuntimeException(sprintf('Unable to read image file for OCR.space: %s', $imagePath));
+        }
+
+        $mimeType = $this->guessMimeType($imagePath);
+        if (strlen($rawImage) <= $this->maxImageBytes) {
+            return ['content' => $rawImage, 'mimeType' => $mimeType];
+        }
+
+        if (!function_exists('imagecreatefromstring')) {
+            throw new RuntimeException('Image exceeds OCR.space limit and GD is not available for resizing.');
+        }
+
+        $source = @imagecreatefromstring($rawImage);
+        if (!$source instanceof GdImage) {
+            throw new RuntimeException('Image exceeds OCR.space limit and could not be decoded for resizing.');
+        }
+
+        $sourceWidth = imagesx($source);
+        $sourceHeight = imagesy($source);
+        $scale = 1.0;
+        $attempt = 0;
+        $currentBytes = '';
+        while ($attempt < 10) {
+            ++$attempt;
+
+            $targetWidth = max(1, (int) floor($sourceWidth * $scale));
+            $targetHeight = max(1, (int) floor($sourceHeight * $scale));
+
+            $canvas = imagecreatetruecolor($targetWidth, $targetHeight);
+            if (!$canvas instanceof GdImage) {
+                break;
+            }
+
+            imagecopyresampled($canvas, $source, 0, 0, 0, 0, $targetWidth, $targetHeight, $sourceWidth, $sourceHeight);
+
+            ob_start();
+            imagejpeg($canvas, null, 92);
+            $encoded = ob_get_clean();
+
+            if (!is_string($encoded) || '' === $encoded) {
+                break;
+            }
+
+            $currentBytes = $encoded;
+            if (strlen($encoded) <= $this->maxImageBytes) {
+                return [
+                    'content' => $encoded,
+                    'mimeType' => 'image/jpeg',
+                ];
+            }
+
+            $scale *= 0.88;
+        }
+
+        if ('' !== $currentBytes) {
+            throw new RuntimeException(sprintf(
+                'Unable to fit image under OCR.space size limit (%d bytes) after resize attempts.',
+                $this->maxImageBytes,
+            ));
+        }
+
+        throw new RuntimeException('Image resize failed before OCR.space upload.');
     }
 
     private function mapLocaleToOcrSpaceLanguage(string $locale): string

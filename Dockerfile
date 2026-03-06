@@ -9,14 +9,19 @@ FROM php:8.5-fpm-alpine AS base
 
 RUN apk add --no-cache \
         bash=5.3.3-r1 \
+        freetype=2.14.1-r0 \
         icu-libs=76.1-r1 \
+        libjpeg-turbo=3.1.2-r0 \
+        libpng=1.6.55-r0 \
         libzip=1.11.4-r1 \
         libpq=18.2-r0 \
+        libwebp=1.6.0-r0 \
     && apk add --no-cache --virtual .build-deps \
         autoconf=2.72-r1 \
         dpkg-dev=1.22.21-r0 \
         dpkg=1.22.21-r0 \
         file=5.46-r2 \
+        freetype-dev=2.14.1-r0 \
         g++=15.2.0-r2 \
         gcc=15.2.0-r2 \
         musl-dev=1.2.5-r21 \
@@ -24,9 +29,13 @@ RUN apk add --no-cache \
         pkgconf=2.5.1-r0 \
         re2c=4.3.1-r0 \
         icu-dev=76.1-r1 \
+        libjpeg-turbo-dev=3.1.2-r0 \
+        libpng-dev=1.6.55-r0 \
+        libwebp-dev=1.6.0-r0 \
         libzip-dev=1.11.4-r1 \
         postgresql18-dev=18.2-r0 \
-    && docker-php-ext-install -j"$(nproc)" intl pdo_pgsql zip \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+    && docker-php-ext-install -j"$(nproc)" gd intl pdo_pgsql zip \
     && apk del .build-deps \
     && rm -rf /tmp/* /var/cache/apk/*
 
