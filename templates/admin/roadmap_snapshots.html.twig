@@ -15,7 +15,11 @@
         {% include 'admin/_flashes.html.twig' %}
 
         <section class="translations-panel">
-            <h2>{{ 'admin_roadmap.snapshots_title'|trans }}</h2>
+            <h2 class="roadmap-step-title">
+                <span class="roadmap-step-badge">1</span>
+                <span>{{ 'admin_roadmap.snapshots_title'|trans }}</span>
+            </h2>
+            <p class="catalog-state roadmap-section-hint">{{ 'admin_roadmap.step_snapshots_hint'|trans }}</p>
             <div class="translations-table-wrap">
                 <table class="translations-table">
                     <thead>
@@ -40,7 +44,13 @@
                             <td><span class="item-pill">{{ ('admin_roadmap.status_' ~ snapshot.status.value)|trans }}</span></td>
                             <td>{{ snapshot.scannedAt|date('Y-m-d H:i') }}</td>
                             <td>
-                                <a href="{{ path('app_admin_roadmap_snapshots', { locale: app.request.locale, snapshot: snapshotId }) }}">{{ 'admin_roadmap.open'|trans }}</a>
+                                <div class="translations-actions roadmap-snapshot-actions">
+                                    <a href="{{ path('app_admin_roadmap_snapshots', { locale: app.request.locale, snapshot: snapshotId }) }}">{{ 'admin_roadmap.open'|trans }}</a>
+                                    <form method="post" action="{{ path('app_admin_roadmap_snapshot_delete', { locale: app.request.locale, id: snapshotId }) }}">
+                                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_delete_' ~ snapshotId) }}">
+                                        <button type="submit" class="roadmap-danger-button">{{ 'admin_roadmap.delete_snapshot'|trans }}</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     {% else %}
@@ -55,74 +65,211 @@
 
         {% if selectedSnapshot %}
             <section class="translations-panel">
-                <h2>{{ 'admin_roadmap.selected_snapshot_title'|trans({'%id%': selectedSnapshot.id}) }}</h2>
+                <h2 class="roadmap-step-title">
+                    <span class="roadmap-step-badge">2</span>
+                    <span>{{ 'admin_roadmap.selected_snapshot_title'|trans({'%id%': selectedSnapshot.id}) }}</span>
+                </h2>
                 <p class="catalog-state">{{ 'admin_roadmap.selected_snapshot_state'|trans({
                         '%locale%': selectedSnapshot.locale|upper,
                         '%status%': ('admin_roadmap.status_' ~ selectedSnapshot.status.value)|trans
                     }) }}</p>
-                <div class="translations-filters">
-                    <form method="post" action="{{ path('app_admin_roadmap_snapshot_parse_events', { locale: app.request.locale, id: selectedSnapshot.id }) }}">
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_parse_events_' ~ selectedSnapshot.id) }}">
-                        <button type="submit">{{ 'admin_roadmap.generate_events'|trans }}</button>
-                    </form>
+                <div class="roadmap-review-grid">
+                    <article class="roadmap-review-card">
+                        <h3>{{ 'admin_roadmap.source_title'|trans }}</h3>
+                        {% if selectedSnapshotImageUrl %}
+                            <a href="{{ selectedSnapshotImageUrl }}" target="_blank" rel="noopener noreferrer">
+                                <img
+                                    class="roadmap-source-image"
+                                    src="{{ selectedSnapshotImageUrl }}"
+                                    alt="{{ 'admin_roadmap.source_image_alt'|trans({'%id%': selectedSnapshot.id}) }}"
+                                    loading="lazy"
+                                >
+                            </a>
+                        {% else %}
+                            <p class="catalog-state">{{ 'admin_roadmap.source_image_unavailable'|trans }}</p>
+                        {% endif %}
+                        <dl class="roadmap-meta-list">
+                            <div>
+                                <dt>{{ 'admin_roadmap.snapshot_locale'|trans }}</dt>
+                                <dd>{{ selectedSnapshot.locale|upper }}</dd>
+                            </div>
+                            <div>
+                                <dt>{{ 'admin_roadmap.snapshot_provider'|trans }}</dt>
+                                <dd>{{ selectedSnapshot.ocrProvider }}</dd>
+                            </div>
+                            <div>
+                                <dt>{{ 'admin_roadmap.snapshot_confidence'|trans }}</dt>
+                                <dd>{{ (selectedSnapshot.ocrConfidence * 100)|number_format(2, '.', ' ') }}%</dd>
+                            </div>
+                            <div>
+                                <dt>{{ 'admin_roadmap.snapshot_scanned_at'|trans }}</dt>
+                                <dd>{{ selectedSnapshot.scannedAt|date('Y-m-d H:i') }}</dd>
+                            </div>
+                            <div>
+                                <dt>{{ 'admin_roadmap.events_count'|trans }}</dt>
+                                <dd>{{ events|length }}</dd>
+                            </div>
+                        </dl>
+                    </article>
+
+                    <article class="roadmap-review-card">
+                        <h3>{{ 'admin_roadmap.raw_text_title'|trans }}</h3>
+                        <form method="post" action="{{ path('app_admin_roadmap_snapshot_raw_text_save', { locale: app.request.locale, id: selectedSnapshot.id }) }}">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_raw_text_save_' ~ selectedSnapshot.id) }}">
+                            <textarea class="roadmap-raw-text" name="raw_text" rows="16">{{ selectedSnapshot.rawText }}</textarea>
+                            <label class="roadmap-generate-toggle">
+                                <input type="checkbox" name="generate_events" value="1">
+                                <span>{{ 'admin_roadmap.generate_after_save'|trans }}</span>
+                            </label>
+                            <div class="translations-actions roadmap-inline-actions">
+                                <button type="submit">{{ 'admin_roadmap.save_raw_text'|trans }}</button>
+                            </div>
+                        </form>
+                    </article>
+                </div>
+                <div class="translations-filters roadmap-primary-actions">
                     <form method="post" action="{{ path('app_admin_roadmap_snapshot_approve', { locale: app.request.locale, id: selectedSnapshot.id }) }}">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_approve_' ~ selectedSnapshot.id) }}">
-                        <button type="submit">{{ 'admin_roadmap.approve_snapshot'|trans }}</button>
+                        <button type="submit" class="roadmap-approve-button">{{ 'admin_roadmap.approve_snapshot'|trans }}</button>
                     </form>
                 </div>
+                <p class="catalog-state roadmap-actions-help">{{ 'admin_roadmap.actions_help'|trans }}</p>
             </section>
 
             <section class="translations-panel">
-                <h2>{{ 'admin_roadmap.events_title'|trans }}</h2>
-                <form method="post" action="{{ path('app_admin_roadmap_snapshot_events_save', { locale: app.request.locale, id: selectedSnapshot.id }) }}">
+                <h2 class="roadmap-step-title">
+                    <span class="roadmap-step-badge">3</span>
+                    <span>{{ 'admin_roadmap.events_title'|trans }}</span>
+                </h2>
+                <div class="roadmap-events-header">
+                    <span class="roadmap-count-pill">{{ events|length }} {{ 'admin_roadmap.events_count'|trans|lower }}</span>
+                </div>
+                <form
+                    method="post"
+                    action="{{ path('app_admin_roadmap_snapshot_events_save', { locale: app.request.locale, id: selectedSnapshot.id }) }}"
+                    data-controller="minerva-admin-datepicker"
+                    data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}"
+                >
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_events_save_' ~ selectedSnapshot.id) }}">
                     <div class="translations-table-wrap">
-                        <table class="translations-table">
-                            <thead>
-                            <tr>
-                                <th>{{ 'admin_roadmap.event_order'|trans }}</th>
-                                <th>{{ 'admin_roadmap.event_title'|trans }}</th>
-                                <th>{{ 'admin_roadmap.event_starts_at'|trans }}</th>
-                                <th>{{ 'admin_roadmap.event_ends_at'|trans }}</th>
-                                <th>{{ 'admin_roadmap.event_type'|trans }}</th>
-                                <th>{{ 'admin_roadmap.event_notes'|trans }}</th>
-                            </tr>
-                            </thead>
+                        <table class="translations-table roadmap-events-table">
+                            <colgroup>
+                                <col class="roadmap-col-order">
+                            <col class="roadmap-col-title">
+                            <col class="roadmap-col-start">
+                            <col class="roadmap-col-end">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>{{ 'admin_roadmap.event_order'|trans }}</th>
+                            <th>{{ 'admin_roadmap.event_title'|trans }}</th>
+                            <th>{{ 'admin_roadmap.event_starts_at'|trans }}</th>
+                            <th>{{ 'admin_roadmap.event_ends_at'|trans }}</th>
+                        </tr>
+                        </thead>
                             <tbody>
                             {% for event in events %}
                                 {% set eventId = event.id %}
                                 <tr>
                                     <td>{{ event.sortOrder }}</td>
                                     <td>
-                                        <input type="text" name="events[{{ eventId }}][title]" value="{{ event.title }}" maxlength="255" required>
+                                        <textarea class="roadmap-input roadmap-title-input" name="events[{{ eventId }}][title]" rows="2" maxlength="255" required>{{ event.title }}</textarea>
                                     </td>
                                     <td>
-                                        <input type="datetime-local" name="events[{{ eventId }}][startsAt]" value="{{ event.startsAt|date('Y-m-d\\TH:i') }}" required>
+                                        <input class="roadmap-input" type="datetime-local" name="events[{{ eventId }}][startsAt]" value="{{ event.startsAt|date('Y-m-d\\TH:i') }}" required>
                                     </td>
-                                    <td>
-                                        <input type="datetime-local" name="events[{{ eventId }}][endsAt]" value="{{ event.endsAt|date('Y-m-d\\TH:i') }}" required>
-                                    </td>
-                                    <td>
-                                        <input type="text" name="events[{{ eventId }}][eventType]" value="{{ event.eventType ?? '' }}" maxlength="64">
-                                    </td>
-                                    <td>
-                                        <textarea name="events[{{ eventId }}][notes]" rows="2">{{ event.notes ?? '' }}</textarea>
-                                    </td>
-                                </tr>
-                            {% else %}
-                                <tr>
-                                    <td colspan="6">{{ 'admin_roadmap.empty_events'|trans }}</td>
-                                </tr>
-                            {% endfor %}
+                                <td>
+                                    <input class="roadmap-input" type="datetime-local" name="events[{{ eventId }}][endsAt]" value="{{ event.endsAt|date('Y-m-d\\TH:i') }}" required>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">{{ 'admin_roadmap.empty_events'|trans }}</td>
+                            </tr>
+                        {% endfor %}
                             </tbody>
                         </table>
                     </div>
-                    <div class="translations-actions">
+                    <div class="translations-actions roadmap-sticky-actions">
                         <button type="submit">{{ 'admin_roadmap.save_events'|trans }}</button>
                     </div>
                 </form>
             </section>
+        {% else %}
+            <section class="translations-panel">
+                <h2 class="roadmap-step-title">
+                    <span class="roadmap-step-badge">2</span>
+                    <span>{{ 'admin_roadmap.selected_snapshot_pending_title'|trans }}</span>
+                </h2>
+                <p class="catalog-state roadmap-actions-help">{{ 'admin_roadmap.selected_snapshot_pending_hint'|trans }}</p>
+            </section>
         {% endif %}
+
+        <section class="translations-panel">
+            <h2 class="roadmap-step-title">
+                <span class="roadmap-step-badge">{{ selectedSnapshot ? '4' : '3' }}</span>
+                <span>{{ 'admin_roadmap.canonical_title'|trans }}</span>
+            </h2>
+            <p class="catalog-state">{{ 'admin_roadmap.canonical_description'|trans }}</p>
+            <form method="post" action="{{ path('app_admin_roadmap_merge_locales', { locale: app.request.locale }) }}" class="translations-filters roadmap-merge-form">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_merge_locales') }}">
+                <label class="roadmap-merge-field">
+                    {{ 'admin_roadmap.merge_fr_snapshot'|trans }}
+                    <input type="number" name="fr_snapshot_id" min="1" step="1" required>
+                </label>
+                <label class="roadmap-merge-field">
+                    {{ 'admin_roadmap.merge_en_snapshot'|trans }}
+                    <input type="number" name="en_snapshot_id" min="1" step="1" required>
+                </label>
+                <label class="roadmap-merge-field">
+                    {{ 'admin_roadmap.merge_de_snapshot'|trans }}
+                    <input type="number" name="de_snapshot_id" min="1" step="1" required>
+                </label>
+                <label class="roadmap-generate-toggle">
+                    <input type="checkbox" name="dry_run" value="1">
+                    <span>{{ 'admin_roadmap.merge_dry_run'|trans }}</span>
+                </label>
+                <button type="submit">{{ 'admin_roadmap.merge_submit'|trans }}</button>
+            </form>
+            <p class="catalog-state roadmap-section-hint">{{ 'admin_roadmap.merge_requires_approved_hint'|trans }}</p>
+            <div class="translations-table-wrap">
+                <table class="translations-table roadmap-canonical-table">
+                    <thead>
+                    <tr>
+                        <th>{{ 'admin_roadmap.canonical_window'|trans }}</th>
+                        <th>{{ 'admin_roadmap.canonical_confidence'|trans }}</th>
+                        <th>{{ 'admin_roadmap.canonical_missing_locales'|trans }}</th>
+                        <th>FR</th>
+                        <th>EN</th>
+                        <th>DE</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in canonicalRows %}
+                        <tr>
+                            <td>
+                                {{ row.startsAt|date('Y-m-d') }} -> {{ row.endsAt|date('Y-m-d') }}
+                            </td>
+                            <td>{{ row.confidenceScore }}%</td>
+                            <td>
+                                {% if row.missingLocales is empty %}
+                                    <span class="roadmap-canonical-pill roadmap-canonical-pill-complete">{{ 'admin_roadmap.canonical_complete'|trans }}</span>
+                                {% else %}
+                                    <span class="roadmap-canonical-pill roadmap-canonical-pill-missing">{{ row.missingLocales|join(', ')|upper }}</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ row.translations.fr ?? '-' }}</td>
+                            <td>{{ row.translations.en ?? '-' }}</td>
+                            <td>{{ row.translations.de ?? '-' }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">{{ 'admin_roadmap.canonical_empty'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </main>
 {% endblock %}
-

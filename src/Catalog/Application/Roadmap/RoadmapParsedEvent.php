@@ -12,9 +12,6 @@ final readonly class RoadmapParsedEvent
         public string $title,
         public DateTimeImmutable $startsAt,
         public DateTimeImmutable $endsAt,
-        public ?string $eventType,
-        public ?string $notes,
     ) {
     }
 }
-

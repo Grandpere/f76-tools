@@ -101,6 +101,16 @@ final class InMemoryRoadmapSnapshotWriteRepository implements RoadmapSnapshotWri
         $this->items[$id] = $snapshot;
     }
 
+    public function delete(RoadmapSnapshotEntity $snapshot): void
+    {
+        $id = $snapshot->getId();
+        if (!is_int($id)) {
+            return;
+        }
+
+        unset($this->items[$id]);
+    }
+
     public function findOneById(int $id): ?RoadmapSnapshotEntity
     {
         return $this->items[$id] ?? null;

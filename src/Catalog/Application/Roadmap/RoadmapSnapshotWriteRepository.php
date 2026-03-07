@@ -10,6 +10,8 @@ interface RoadmapSnapshotWriteRepository
 {
     public function save(RoadmapSnapshotEntity $snapshot): void;
 
+    public function delete(RoadmapSnapshotEntity $snapshot): void;
+
     public function findOneById(int $id): ?RoadmapSnapshotEntity;
 
     /**

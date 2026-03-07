@@ -26,6 +26,13 @@ final class RoadmapSnapshotEntityRepository extends ServiceEntityRepository impl
         $entityManager->flush();
     }
 
+    public function delete(RoadmapSnapshotEntity $snapshot): void
+    {
+        $entityManager = $this->getEntityManager();
+        $entityManager->remove($snapshot);
+        $entityManager->flush();
+    }
+
     public function findOneById(int $id): ?RoadmapSnapshotEntity
     {
         $snapshot = $this->find($id);

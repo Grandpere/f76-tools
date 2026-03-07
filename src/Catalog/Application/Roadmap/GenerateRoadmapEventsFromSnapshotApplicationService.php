@@ -30,6 +30,19 @@ final readonly class GenerateRoadmapEventsFromSnapshotApplicationService
             $snapshot->getLocale(),
             $snapshot->getScannedAt(),
         );
+        usort($parsedEvents, static function (RoadmapParsedEvent $a, RoadmapParsedEvent $b): int {
+            $startsAt = $a->startsAt <=> $b->startsAt;
+            if (0 !== $startsAt) {
+                return $startsAt;
+            }
+
+            $endsAt = $a->endsAt <=> $b->endsAt;
+            if (0 !== $endsAt) {
+                return $endsAt;
+            }
+
+            return strcmp($a->title, $b->title);
+        });
 
         if ($dryRun) {
             return $parsedEvents;
@@ -41,10 +54,8 @@ final readonly class GenerateRoadmapEventsFromSnapshotApplicationService
                 (new RoadmapEventEntity())
                     ->setLocale($snapshot->getLocale())
                     ->setTitle($parsedEvent->title)
-                    ->setEventType($parsedEvent->eventType)
                     ->setStartsAt($parsedEvent->startsAt)
                     ->setEndsAt($parsedEvent->endsAt)
-                    ->setNotes($parsedEvent->notes)
                     ->setSortOrder($index + 1),
             );
         }
@@ -54,4 +65,3 @@ final readonly class GenerateRoadmapEventsFromSnapshotApplicationService
         return $parsedEvents;
     }
 }
-

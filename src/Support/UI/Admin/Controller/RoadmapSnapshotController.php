@@ -6,15 +6,21 @@ namespace App\Support\UI\Admin\Controller;
 
 use App\Catalog\Application\Roadmap\ApproveRoadmapSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\GenerateRoadmapEventsFromSnapshotApplicationService;
+use App\Catalog\Application\Roadmap\MergeRoadmapLocalesApplicationService;
+use App\Catalog\Application\Roadmap\RoadmapCanonicalEventReadRepository;
 use App\Catalog\Application\Roadmap\RoadmapSnapshotWriteRepository;
+use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
+use App\Catalog\Domain\Entity\RoadmapCanonicalEventTranslationEntity;
 use App\Catalog\Domain\Entity\RoadmapEventEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use DateTimeImmutable;
 use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
@@ -26,6 +32,8 @@ final class RoadmapSnapshotController extends AbstractController
 
     public function __construct(
         private readonly RoadmapSnapshotWriteRepository $roadmapSnapshotWriteRepository,
+        private readonly RoadmapCanonicalEventReadRepository $roadmapCanonicalEventReadRepository,
+        private readonly MergeRoadmapLocalesApplicationService $mergeRoadmapLocalesApplicationService,
         private readonly GenerateRoadmapEventsFromSnapshotApplicationService $generateRoadmapEventsFromSnapshotApplicationService,
         private readonly ApproveRoadmapSnapshotApplicationService $approveRoadmapSnapshotApplicationService,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
@@ -41,6 +49,7 @@ final class RoadmapSnapshotController extends AbstractController
         $selectedIdRaw = $request->query->get('snapshot');
         $selectedId = is_scalar($selectedIdRaw) && ctype_digit((string) $selectedIdRaw) ? (int) $selectedIdRaw : null;
         $selectedSnapshot = null;
+        $canonicalRows = [];
 
         if (is_int($selectedId) && $selectedId > 0) {
             $selectedSnapshot = $this->roadmapSnapshotWriteRepository->findOneById($selectedId);
@@ -49,19 +58,51 @@ final class RoadmapSnapshotController extends AbstractController
             $selectedSnapshot = $snapshots[0];
         }
 
+        foreach ($this->roadmapCanonicalEventReadRepository->findAllOrdered() as $event) {
+            $canonicalRows[] = $this->buildCanonicalRow($event);
+        }
+
         $events = [];
+        $selectedSnapshotImageUrl = null;
         if ($selectedSnapshot instanceof RoadmapSnapshotEntity) {
             $events = $selectedSnapshot->getEvents()->toArray();
             usort($events, static function (RoadmapEventEntity $a, RoadmapEventEntity $b): int {
                 return $a->getSortOrder() <=> $b->getSortOrder();
             });
+            $selectedSnapshotImageUrl = $this->generateUrl('app_admin_roadmap_snapshot_source_image', [
+                'locale' => $request->getLocale(),
+                'id' => $selectedSnapshot->getId(),
+            ]);
         }
 
         return $this->render('admin/roadmap_snapshots.html.twig', [
             'snapshots' => $snapshots,
             'selectedSnapshot' => $selectedSnapshot,
             'events' => $events,
+            'selectedSnapshotImageUrl' => $selectedSnapshotImageUrl,
+            'canonicalRows' => $canonicalRows,
         ]);
+    }
+
+    #[Route('/{id<\d+>}/source-image', name: 'app_admin_roadmap_snapshot_source_image', methods: ['GET'])]
+    public function sourceImage(int $id): Response
+    {
+        $this->ensureAdminAccess();
+
+        $snapshot = $this->roadmapSnapshotWriteRepository->findOneById($id);
+        if (!$snapshot instanceof RoadmapSnapshotEntity) {
+            throw $this->createNotFoundException('Snapshot not found.');
+        }
+
+        $imagePath = $this->resolveSnapshotImagePath($snapshot);
+        if (null === $imagePath) {
+            throw $this->createNotFoundException('Snapshot image not found.');
+        }
+
+        $response = new BinaryFileResponse($imagePath);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, basename($imagePath));
+
+        return $response;
     }
 
     #[Route('/{id<\d+>}/parse-events', name: 'app_admin_roadmap_snapshot_parse_events', methods: ['POST'])]
@@ -90,6 +131,136 @@ final class RoadmapSnapshotController extends AbstractController
 
         $this->addFlash('success', 'admin_roadmap.flash.events_generated');
         $this->addFlash('success', sprintf('%d event(s).', count($parsed)));
+
+        return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+            'locale' => $request->getLocale(),
+            'snapshot' => $id,
+        ]);
+    }
+
+    #[Route('/merge-locales', name: 'app_admin_roadmap_merge_locales', methods: ['POST'])]
+    public function mergeLocales(Request $request): RedirectResponse
+    {
+        $this->ensureAdminAccess();
+        if (!$this->isValidToken($request, 'admin_roadmap_merge_locales')) {
+            $this->addFlash('warning', 'admin_roadmap.flash.invalid_csrf');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                'locale' => $request->getLocale(),
+            ]);
+        }
+
+        $frSnapshotId = $this->parsePositiveInt($request->request->get('fr_snapshot_id'));
+        $enSnapshotId = $this->parsePositiveInt($request->request->get('en_snapshot_id'));
+        $deSnapshotId = $this->parsePositiveInt($request->request->get('de_snapshot_id'));
+        $dryRun = '1' === (string) $request->request->get('dry_run');
+
+        if (null === $frSnapshotId || null === $enSnapshotId || null === $deSnapshotId) {
+            $this->addFlash('warning', 'admin_roadmap.flash.merge_invalid_input');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                'locale' => $request->getLocale(),
+            ]);
+        }
+
+        try {
+            $result = $this->mergeRoadmapLocalesApplicationService->merge([
+                'fr' => $frSnapshotId,
+                'en' => $enSnapshotId,
+                'de' => $deSnapshotId,
+            ], $dryRun);
+        } catch (RuntimeException $exception) {
+            $this->addFlash('warning', $exception->getMessage());
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                'locale' => $request->getLocale(),
+            ]);
+        }
+
+        $this->addFlash('success', 'admin_roadmap.flash.merge_success');
+        $this->addFlash('success', sprintf(
+            'Total=%d · High=%d · Medium=%d · Low=%d%s',
+            $result->totalEvents,
+            $result->highConfidenceEvents,
+            $result->mediumConfidenceEvents,
+            $result->lowConfidenceEvents,
+            $dryRun ? ' (dry-run)' : '',
+        ));
+        foreach ($result->warnings as $warning) {
+            $this->addFlash('warning', $warning);
+        }
+
+        return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+            'locale' => $request->getLocale(),
+        ]);
+    }
+
+    #[Route('/{id<\d+>}/delete', name: 'app_admin_roadmap_snapshot_delete', methods: ['POST'])]
+    public function deleteSnapshot(Request $request, int $id): RedirectResponse
+    {
+        $this->ensureAdminAccess();
+        if (!$this->isValidToken($request, 'admin_roadmap_snapshot_delete_'.$id)) {
+            $this->addFlash('warning', 'admin_roadmap.flash.invalid_csrf');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                'locale' => $request->getLocale(),
+            ]);
+        }
+
+        $snapshot = $this->roadmapSnapshotWriteRepository->findOneById($id);
+        if (!$snapshot instanceof RoadmapSnapshotEntity) {
+            $this->addFlash('warning', 'admin_roadmap.flash.snapshot_not_found');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                'locale' => $request->getLocale(),
+            ]);
+        }
+
+        $this->roadmapSnapshotWriteRepository->delete($snapshot);
+        $this->addFlash('success', 'admin_roadmap.flash.snapshot_deleted');
+
+        return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+            'locale' => $request->getLocale(),
+        ]);
+    }
+
+    #[Route('/{id<\d+>}/raw-text/save', name: 'app_admin_roadmap_snapshot_raw_text_save', methods: ['POST'])]
+    public function saveRawText(Request $request, int $id): RedirectResponse
+    {
+        $this->ensureAdminAccess();
+        if (!$this->isValidToken($request, 'admin_roadmap_snapshot_raw_text_save_'.$id)) {
+            $this->addFlash('warning', 'admin_roadmap.flash.invalid_csrf');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                'locale' => $request->getLocale(),
+                'snapshot' => $id,
+            ]);
+        }
+
+        $snapshot = $this->roadmapSnapshotWriteRepository->findOneById($id);
+        if (!$snapshot instanceof RoadmapSnapshotEntity) {
+            $this->addFlash('warning', 'admin_roadmap.flash.snapshot_not_found');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                'locale' => $request->getLocale(),
+            ]);
+        }
+
+        $rawTextInput = $request->request->get('raw_text');
+        $rawText = is_scalar($rawTextInput) ? trim((string) $rawTextInput) : '';
+        $snapshot->setRawText($rawText);
+        $this->roadmapSnapshotWriteRepository->save($snapshot);
+        $this->addFlash('success', 'admin_roadmap.flash.raw_text_saved');
+
+        if ('1' === (string) $request->request->get('generate_events')) {
+            try {
+                $parsed = $this->generateRoadmapEventsFromSnapshotApplicationService->generate($id, false);
+                $this->addFlash('success', 'admin_roadmap.flash.events_generated');
+                $this->addFlash('success', sprintf('%d event(s).', count($parsed)));
+            } catch (RuntimeException $exception) {
+                $this->addFlash('warning', $exception->getMessage());
+            }
+        }
 
         return $this->redirectToRoute('app_admin_roadmap_snapshots', [
             'locale' => $request->getLocale(),
@@ -177,8 +348,6 @@ final class RoadmapSnapshotController extends AbstractController
 
             $event
                 ->setTitle($title)
-                ->setEventType($this->normalizeNullableString($payload['eventType'] ?? null))
-                ->setNotes($this->normalizeNullableString($payload['notes'] ?? null))
                 ->setStartsAt($startsAt)
                 ->setEndsAt($endsAt);
             ++$updated;
@@ -213,15 +382,106 @@ final class RoadmapSnapshotController extends AbstractController
         return $parsed;
     }
 
-    private function normalizeNullableString(mixed $value): ?string
+    private function parsePositiveInt(mixed $value): ?int
     {
         if (!is_scalar($value)) {
             return null;
         }
 
-        $normalized = trim((string) $value);
+        $raw = (string) $value;
+        if (!ctype_digit($raw)) {
+            return null;
+        }
 
-        return '' === $normalized ? null : $normalized;
+        $parsed = (int) $raw;
+
+        return $parsed > 0 ? $parsed : null;
+    }
+
+    /**
+     * @return array{
+     *     translationKey: string,
+     *     startsAt: DateTimeImmutable,
+     *     endsAt: DateTimeImmutable,
+     *     confidenceScore: int,
+     *     translations: array{fr: ?string, en: ?string, de: ?string},
+     *     missingLocales: list<string>
+     * }
+     */
+    private function buildCanonicalRow(RoadmapCanonicalEventEntity $event): array
+    {
+        $translations = [
+            'fr' => null,
+            'en' => null,
+            'de' => null,
+        ];
+
+        foreach ($event->getTranslations() as $translation) {
+            if (!$translation instanceof RoadmapCanonicalEventTranslationEntity) {
+                continue;
+            }
+            $locale = strtolower($translation->getLocale());
+            if (array_key_exists($locale, $translations)) {
+                $translations[$locale] = $translation->getTitle();
+            }
+        }
+
+        $missingLocales = [];
+        foreach ($translations as $locale => $title) {
+            if (!is_string($title) || '' === trim($title)) {
+                $missingLocales[] = $locale;
+            }
+        }
+
+        return [
+            'translationKey' => $event->getTranslationKey(),
+            'startsAt' => $event->getStartsAt(),
+            'endsAt' => $event->getEndsAt(),
+            'confidenceScore' => $event->getConfidenceScore(),
+            'translations' => $translations,
+            'missingLocales' => $missingLocales,
+        ];
+    }
+
+    private function resolveSnapshotImagePath(RoadmapSnapshotEntity $snapshot): ?string
+    {
+        $configuredPath = trim($snapshot->getSourceImagePath());
+        if ('' === $configuredPath) {
+            return null;
+        }
+
+        $projectDir = (string) $this->getParameter('kernel.project_dir');
+        $projectDirReal = realpath($projectDir) ?: $projectDir;
+
+        $candidates = [];
+        if (str_starts_with($configuredPath, '/')) {
+            $candidates[] = $configuredPath;
+        } else {
+            $candidates[] = $projectDir.'/'.ltrim($configuredPath, '/');
+        }
+
+        $dockerProjectPrefix = '/var/www/html/';
+        if (str_starts_with($configuredPath, $dockerProjectPrefix)) {
+            $candidates[] = $projectDir.'/'.ltrim(substr($configuredPath, strlen($dockerProjectPrefix)), '/');
+        }
+
+        foreach (array_unique($candidates) as $candidate) {
+            if (!is_file($candidate) || !is_readable($candidate)) {
+                continue;
+            }
+
+            $resolvedPath = realpath($candidate);
+            if (false === $resolvedPath) {
+                continue;
+            }
+
+            if (!str_starts_with($resolvedPath, rtrim($projectDirReal, '/').'/')) {
+                continue;
+            }
+
+            return $resolvedPath;
+        }
+
+        return null;
     }
 }
-

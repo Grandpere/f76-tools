@@ -31,17 +31,11 @@ class RoadmapEventEntity
     #[ORM\Column(length: 255)]
     private string $title;
 
-    #[ORM\Column(name: 'event_type', length: 64, nullable: true)]
-    private ?string $eventType = null;
-
     #[ORM\Column(name: 'starts_at', type: Types::DATETIME_IMMUTABLE)]
     private DateTimeImmutable $startsAt;
 
     #[ORM\Column(name: 'ends_at', type: Types::DATETIME_IMMUTABLE)]
     private DateTimeImmutable $endsAt;
-
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $notes = null;
 
     #[ORM\Column(name: 'sort_order')]
     private int $sortOrder = 0;
@@ -93,23 +87,6 @@ class RoadmapEventEntity
         return $this;
     }
 
-    public function getEventType(): ?string
-    {
-        return $this->eventType;
-    }
-
-    public function setEventType(?string $eventType): self
-    {
-        $clean = null;
-        if (is_string($eventType)) {
-            $trimmed = trim($eventType);
-            $clean = '' === $trimmed ? null : $trimmed;
-        }
-        $this->eventType = $clean;
-
-        return $this;
-    }
-
     public function getStartsAt(): DateTimeImmutable
     {
         return $this->startsAt;
@@ -130,23 +107,6 @@ class RoadmapEventEntity
     public function setEndsAt(DateTimeImmutable $endsAt): self
     {
         $this->endsAt = $endsAt;
-
-        return $this;
-    }
-
-    public function getNotes(): ?string
-    {
-        return $this->notes;
-    }
-
-    public function setNotes(?string $notes): self
-    {
-        $clean = null;
-        if (is_string($notes)) {
-            $trimmed = trim($notes);
-            $clean = '' === $trimmed ? null : $trimmed;
-        }
-        $this->notes = $clean;
 
         return $this;
     }

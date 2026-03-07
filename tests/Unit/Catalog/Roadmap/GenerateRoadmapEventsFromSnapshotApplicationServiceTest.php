@@ -83,6 +83,16 @@ final class InMemorySnapshotRepoForEventGeneration implements RoadmapSnapshotWri
         $this->snapshots[$id] = $snapshot;
     }
 
+    public function delete(RoadmapSnapshotEntity $snapshot): void
+    {
+        $id = $snapshot->getId();
+        if (!is_int($id)) {
+            return;
+        }
+
+        unset($this->snapshots[$id]);
+    }
+
     public function findOneById(int $id): ?RoadmapSnapshotEntity
     {
         $snapshot = $this->snapshots[$id] ?? null;
