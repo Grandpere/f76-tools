@@ -21,6 +21,36 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-03-06 - Admin roadmap functional tests broke on locale query in form action
+- Symptom: `RoadmapSnapshotControllerTest` could not find CSRF tokens in parse/approve/save forms (`assertCount(1)` got `0`).
+- Root cause: test selectors used `form[action$=\"...\"]` while rendered actions now append `?locale=...`.
+- Fix: switched selectors to `form[action*=\"...\"]` and aligned table count expectation to current page layout (snapshots table + events table when a snapshot is selected).
+- Prevention: for functional selectors on generated routes, prefer `action*=` (or stable form ids) over strict `action$=` when locale/query params may be appended.
+
+## 2026-03-06 - Functional test stale Doctrine entity after multiple HTTP requests
+- Symptom: roadmap snapshot approval test still read `DRAFT` status after successful approve POST.
+- Root cause: test reused the same `EntityManager` across requests and could keep a managed stale entity instance.
+- Fix: call `$entityManager->clear()` before reloading entities after state-changing HTTP requests.
+- Prevention: in functional tests doing write then read across separate requests, clear Doctrine identity map before assertions on persisted state.
+
+## 2026-03-06 - Roadmap month blocks can include non-ranged lines
+- Symptom: expected OCR roadmap count was off by one (assumed 20 events for 4 months x 5 lines).
+- Root cause: some month blocks include one editorial/update line without a date range (`MISE A JOUR ...`) that is not an event window.
+- Fix: parser remains date-range driven; multiline title extraction was improved, but only ranged entries are persisted as events.
+- Prevention: validate roadmap totals by counting date ranges, not visual bullet lines.
+
+## 2026-03-07 - OCR roadmap titles can include footer/banner garbage lines
+- Symptom: parsed event titles sometimes included unrelated OCR text (`Falleut 76`, `COMMUNITY CALENDAR`, `Bethesda`, `TM` artifacts).
+- Root cause: multiline title reconstruction accepted nearby non-event banner/footer lines.
+- Fix: strengthened `isIgnoredTitleLine()` noise filtering (calendar/footer/brand/TM patterns + symbol-only lines).
+- Prevention: keep a dedicated unit test with known OCR garbage snippets to prevent regressions.
+
+## 2026-03-07 - Multi-locale roadmap parsing should use locale profiles, not scattered locale conditionals
+- Symptom: English/German OCR payloads produced 0 events in some real-world date formats.
+- Root cause: locale-specific month aliases/ordinals/date notation were hardcoded in a single parser with limited FR-centric assumptions.
+- Fix: introduced `RoadmapLocaleProfile` + registry (`fr/en/de`) and moved month aliases/title normalization per locale into dedicated profiles; parser now uses one common pipeline with locale profile lookup.
+- Prevention: when adding/changing locale behavior, update only the matching profile + add targeted unit test for that locale format (ordinals, dots, aliases, OCR typos).
+
 ## 2026-02-28 - Flatpickr theme override requires CSS import order
 - Symptom: datepicker popup still showed default blue/black selection despite custom styles.
 - Root cause: `flatpickr.min.css` loaded after app styles, overriding custom theme rules.
@@ -352,3 +382,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: EasyOCR sidecar process was unstable during heavy inference on this setup (connection dropped / service stopped).
 - Fix: removed EasyOCR sidecar path and switched to `ocr.space` HTTP provider as OCR fallback.
 - Prevention: for large roadmap-image OCR on constrained local CPU memory, prefer external OCR provider fallback instead of heavy local Python inference service.
+
+## 2026-03-07 - Roadmap cross-locale date drift from OCR day truncation
+- Symptom: FR snapshot produced `2026-05-03 -> 2026-06-01` while EN/DE produced `2026-05-28 -> 2026-06-01`, creating low-confidence merge warnings.
+- Root cause: OCR truncated a cross-month start day near month-end (`28` read as `3`) on FR raw text.
+- Fix: parser now corrects suspicious cross-month ranges when continuity indicates a late-month start; merge also emits explicit `Potential OCR day mismatch` warning when locale buckets split on same end date with large start-day gap.
+- Prevention: keep locale-merge warnings enabled and manually review any mismatch warning before approving canonical roadmap.

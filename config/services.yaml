@@ -28,6 +28,8 @@ services:
     App\Catalog\Application\Translation\TranslationCatalogReader: '@App\Catalog\Infrastructure\Translation\TranslationCatalogReader'
     App\Catalog\Application\Translation\TranslationCatalogWriter: '@App\Catalog\Infrastructure\Translation\TranslationCatalogWriter'
     App\Catalog\Application\Roadmap\RoadmapSnapshotWriteRepository: '@App\Catalog\Infrastructure\Persistence\RoadmapSnapshotEntityRepository'
+    App\Catalog\Application\Roadmap\RoadmapCanonicalEventWriteRepository: '@App\Catalog\Infrastructure\Persistence\RoadmapCanonicalEventEntityRepository'
+    App\Catalog\Application\Roadmap\RoadmapCanonicalEventReadRepository: '@App\Catalog\Infrastructure\Persistence\RoadmapCanonicalEventEntityRepository'
     App\Catalog\Application\Minerva\MinervaRotationGenerator: '@App\Catalog\Application\Minerva\MinervaRotationGenerationApplicationService'
     App\Catalog\Application\Minerva\MinervaRotationRegenerator: '@App\Catalog\Application\Minerva\MinervaRotationRegenerationApplicationService'
     App\Catalog\Application\Minerva\MinervaRotationRefresher: '@App\Catalog\Application\Minerva\MinervaRotationRefreshApplicationService'

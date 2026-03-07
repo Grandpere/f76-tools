@@ -12,6 +12,12 @@
         <a class="app-primary-nav-link" href="{{ path('app_minerva_rotation', { locale: app.request.locale }) }}">{{ 'dashboard.header.minerva_rotation'|trans }}</a>
     {% endif %}
     ·
+    {% if current == 'roadmap-calendar' %}
+        <span class="app-primary-nav-link is-active">{{ 'dashboard.header.roadmap_calendar'|trans }}</span>
+    {% else %}
+        <a class="app-primary-nav-link" href="{{ path('app_roadmap_calendar', { locale: app.request.locale }) }}">{{ 'dashboard.header.roadmap_calendar'|trans }}</a>
+    {% endif %}
+    ·
     {% if current == 'nuke-codes' %}
         <span class="app-primary-nav-link is-active">{{ 'dashboard.header.nuke_codes'|trans }}</span>
     {% else %}

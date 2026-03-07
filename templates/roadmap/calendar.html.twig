@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'roadmap_calendar.page_title'|trans }}{% endblock %}
+
+{% block body %}
+    <main class="catalog-page">
+        {% include '_app_page_header.html.twig' with {
+            localeSelectId: 'roadmap-calendar-header-locale-select',
+            title: 'roadmap_calendar.title',
+            subtitle: 'roadmap_calendar.description',
+            activeNav: 'roadmap-calendar'
+        } %}
+
+        <section class="catalog-panel">
+            <article class="roadmap-calendar-hero">
+                <p class="roadmap-calendar-hero-line">&gt; {{ 'roadmap_calendar.hero_line_1'|trans }}</p>
+                <p class="roadmap-calendar-hero-line">&gt; {{ 'roadmap_calendar.hero_line_2'|trans({'%count%': rows|length}) }}</p>
+            </article>
+
+            <h2>{{ 'roadmap_calendar.list_title'|trans }}</h2>
+            {% set ongoingCount = rows|filter(row => row.status == 'ongoing')|length %}
+            {% set upcomingCount = rows|filter(row => row.status == 'upcoming')|length %}
+            {% set endedCount = rows|filter(row => row.status == 'ended')|length %}
+
+            <div class="roadmap-calendar-quick-filters">
+                <a href="#roadmap-calendar-ongoing" class="roadmap-calendar-filter-chip">{{ 'roadmap_calendar.status_ongoing'|trans }} · {{ ongoingCount }}</a>
+                <a href="#roadmap-calendar-upcoming" class="roadmap-calendar-filter-chip">{{ 'roadmap_calendar.status_upcoming'|trans }} · {{ upcomingCount }}</a>
+                <a href="#roadmap-calendar-ended" class="roadmap-calendar-filter-chip">{{ 'roadmap_calendar.status_ended'|trans }} · {{ endedCount }}</a>
+            </div>
+
+            {% for status in ['ongoing', 'upcoming', 'ended'] %}
+                {% set sectionRows = rows|filter(row => row.status == status) %}
+                <section id="roadmap-calendar-{{ status }}" class="roadmap-calendar-status-section">
+                    <h3 class="roadmap-calendar-status-title">{{ ('roadmap_calendar.status_' ~ status)|trans }} <span>{{ sectionRows|length }}</span></h3>
+
+                    {% if sectionRows is empty %}
+                        <p class="catalog-state">{{ 'roadmap_calendar.empty_status'|trans }}</p>
+                    {% else %}
+                        <div class="roadmap-calendar-flow">
+                            {% set currentMonthKey = '' %}
+                            {% for row in sectionRows %}
+                                {% set monthKey = row.startsAt|date('Y-m') %}
+                                {% if monthKey != currentMonthKey %}
+                                    {% set currentMonthKey = monthKey %}
+                                    <h4 class="roadmap-calendar-month">{{ row.startsAt|date('F Y') }}</h4>
+                                {% endif %}
+
+                                <article class="roadmap-calendar-event roadmap-calendar-event-{{ row.status }}">
+                                    <div class="roadmap-calendar-event-top">
+                                        <div class="roadmap-calendar-event-dates">
+                                            <span class="roadmap-calendar-date-chip">{{ row.startsAt|date('d/m/Y') }}</span>
+                                            {% if row.endsAt|date('Y-m-d') != row.startsAt|date('Y-m-d') %}
+                                                <span class="roadmap-calendar-date-arrow">→</span>
+                                                <span class="roadmap-calendar-date-chip">{{ row.endsAt|date('d/m/Y') }}</span>
+                                            {% endif %}
+                                        </div>
+                                        <span class="roadmap-calendar-status-pill roadmap-calendar-status-pill-{{ row.status }}">{{ ('roadmap_calendar.status_' ~ row.status)|trans }}</span>
+                                    </div>
+                                    <p class="roadmap-calendar-event-title">{{ row.title }}</p>
+                                </article>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </section>
+            {% endfor %}
+
+            {% if rows is empty %}
+                <p class="catalog-state">{{ 'roadmap_calendar.empty'|trans }}</p>
+            {% endif %}
+        </section>
+    </main>
+{% endblock %}

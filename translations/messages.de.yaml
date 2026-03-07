@@ -9,6 +9,7 @@ dashboard.page_title: 'F76 - Legendare Mods'
 dashboard.header.translation_management: Ubersetzungsverwaltung
 dashboard.header.user_management: Benutzerverwaltung
 dashboard.header.minerva_rotation: Minerva
+dashboard.header.roadmap_calendar: Kalender
 dashboard.header.nuke_codes: Nukecodes
 dashboard.header.progression: Fortschritt
 dashboard.header.admin: Administration
@@ -61,6 +62,17 @@ nuke_codes.block.stale: Zwischengespeicherte Daten
 nuke_codes.block.alpha: ALPHA
 nuke_codes.block.bravo: BRAVO
 nuke_codes.block.charlie: CHARLIE
+roadmap_calendar.page_title: 'F76 - Kalender'
+roadmap_calendar.title: Kalender
+roadmap_calendar.description: Gultige Roadmap-Events.
+roadmap_calendar.list_title: Eventkalender
+roadmap_calendar.hero_line_1: Fallout 76 Community Calendar
+roadmap_calendar.hero_line_2: '%count% Events in der Timeline veroffentlicht'
+roadmap_calendar.status_ongoing: Laufend
+roadmap_calendar.status_upcoming: Kommend
+roadmap_calendar.status_ended: Beendet
+roadmap_calendar.empty_status: Keine Events in diesem Abschnitt.
+roadmap_calendar.empty: Keine Roadmap-Events verfugbar.
 dashboard.transfer.title: Fortschritt (Backup)
 dashboard.transfer.export: JSON-Export
 dashboard.transfer.import: JSON-Import
@@ -265,6 +277,7 @@ admin_roadmap.title: Roadmap
 admin_roadmap.description: OCR-Snapshots prüfen, strukturierte Events erzeugen und Veröffentlichung freigeben.
 admin_roadmap.back_to_dashboard: Zuruck zum Dashboard
 admin_roadmap.snapshots_title: OCR-Snapshots
+admin_roadmap.step_snapshots_hint: Offne einen Snapshot fur OCR-Review sowie Event-Erzeugung/Bearbeitung.
 admin_roadmap.snapshot_id: ID
 admin_roadmap.snapshot_locale: Sprache
 admin_roadmap.snapshot_provider: Provider
@@ -273,27 +286,54 @@ admin_roadmap.snapshot_status: Status
 admin_roadmap.snapshot_scanned_at: Gescannt am
 admin_roadmap.snapshot_actions: Aktionen
 admin_roadmap.open: Offnen
+admin_roadmap.delete_snapshot: Loschen
 admin_roadmap.status_draft: Entwurf
 admin_roadmap.status_approved: Freigegeben
 admin_roadmap.status_rejected: Abgelehnt
 admin_roadmap.empty_snapshots: Kein Roadmap-Snapshot gefunden.
+admin_roadmap.canonical_title: Kanonische Timeline
+admin_roadmap.canonical_description: Zusammengefuhrte Timeline aus FR/EN/DE-Snapshots mit Konfidenz und fehlenden Sprachen.
+admin_roadmap.canonical_window: Zeitfenster
+admin_roadmap.canonical_confidence: Konfidenz
+admin_roadmap.canonical_missing_locales: Fehlende Sprachen
+admin_roadmap.canonical_complete: Vollstandig
+admin_roadmap.canonical_empty: Noch keine kanonischen Events erzeugt.
+admin_roadmap.selected_snapshot_pending_title: Snapshot-Review
+admin_roadmap.selected_snapshot_pending_hint: Offne einen Snapshot aus der Liste, um OCR-Review, Event-Erzeugung und Freigabe zu starten.
+admin_roadmap.merge_fr_snapshot: FR-Snapshot (ID)
+admin_roadmap.merge_en_snapshot: EN-Snapshot (ID)
+admin_roadmap.merge_de_snapshot: DE-Snapshot (ID)
+admin_roadmap.merge_dry_run: Nur Dry-Run
+admin_roadmap.merge_submit: FR/EN/DE zusammenfuhren
+admin_roadmap.merge_requires_approved_hint: Fur die Zusammenfuhrung sind nur freigegebene Snapshots zulassig.
 admin_roadmap.selected_snapshot_title: 'Ausgewahlter Snapshot #%id%'
 admin_roadmap.selected_snapshot_state: 'Sprache: %locale% · Status: %status%'
+admin_roadmap.source_title: Quelle
+admin_roadmap.source_image_alt: 'Roadmap-Quellbild fur Snapshot #%id%'
+admin_roadmap.source_image_unavailable: Quellbild fur diesen Snapshot nicht verfugbar.
+admin_roadmap.raw_text_title: Extrahierter OCR-Text
+admin_roadmap.events_count: Erkannte Events
 admin_roadmap.generate_events: Events erzeugen
+admin_roadmap.save_raw_text: Text speichern
+admin_roadmap.save_and_generate_events: Speichern und Events erzeugen
+admin_roadmap.generate_after_save: Events nach dem Speichern neu erzeugen
 admin_roadmap.approve_snapshot: Snapshot freigeben
+admin_roadmap.actions_help: 'Hinweis: zuerst OCR-Text speichern (optional neu erzeugen), Events anpassen, dann zuletzt freigeben.'
 admin_roadmap.events_title: Strukturierte Events
 admin_roadmap.event_order: Reihenfolge
 admin_roadmap.event_title: Titel
 admin_roadmap.event_starts_at: Start
 admin_roadmap.event_ends_at: Ende
-admin_roadmap.event_type: Typ
-admin_roadmap.event_notes: Notizen
 admin_roadmap.empty_events: Keine Events fur diesen Snapshot erzeugt.
 admin_roadmap.save_events: Events speichern
 admin_roadmap.flash.invalid_csrf: Ungultige Sitzung, bitte erneut versuchen.
 admin_roadmap.flash.events_generated: Events aus OCR-Snapshot erzeugt.
+admin_roadmap.flash.raw_text_saved: OCR-Text gespeichert.
 admin_roadmap.flash.snapshot_approved: Snapshot freigegeben.
 admin_roadmap.flash.snapshot_not_found: Snapshot nicht gefunden.
+admin_roadmap.flash.snapshot_deleted: Snapshot geloscht.
+admin_roadmap.flash.merge_invalid_input: Bitte drei gultige Snapshot-IDs (FR/EN/DE) angeben.
+admin_roadmap.flash.merge_success: Snapshot-Zusammenfuhrung abgeschlossen.
 admin_users.google_filter_linked: Google verknupft
 admin_users.google_filter_unlinked: Google nicht verknupft
 admin_users.active_filter_label: Kontostatus
