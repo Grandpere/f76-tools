@@ -1,63 +1,63 @@
 common.language: Langue
-common.locale.fr: Francais
+common.locale.fr: Français
 common.locale.en: Anglais
 common.locale.de: Allemand
 common.yes: Oui
 common.no: Non
 
-dashboard.page_title: 'F76 - Mods legendaires'
+dashboard.page_title: 'F76 - Mods légendaires'
 dashboard.header.translation_management: Gestion des traductions
 dashboard.header.user_management: Gestion des utilisateurs
 dashboard.header.minerva_rotation: Minerva
-dashboard.header.nuke_codes: Codes nucleaires
+dashboard.header.nuke_codes: Codes nucléaires
 dashboard.header.progression: Progression
 dashboard.header.admin: Administration
-dashboard.header.security_profile: Profil securite
+dashboard.header.security_profile: Profil sécurité
 dashboard.header.change_password: Changer le mot de passe
-dashboard.header.title: Mods legendaires
-dashboard.header.subtitle: Selectionne un personnage puis marque ses mods legendaires appris.
-dashboard.catalog_last_updated: 'Derniere mise a jour des legendary mods: %date%'
-dashboard.catalog_last_updated_unknown: 'Derniere mise a jour des legendary mods: inconnue'
+dashboard.header.title: Mods légendaires
+dashboard.header.subtitle: Sélectionne un personnage puis marque ses mods légendaires appris.
+dashboard.catalog_last_updated: 'Dernière mise à jour des legendary mods: %date%'
+dashboard.catalog_last_updated_unknown: 'Dernière mise à jour des legendary mods: inconnue'
 dashboard.header.greeting_prefix: Bonjour
-dashboard.header.logout: Deconnexion
+dashboard.header.logout: Déconnexion
 dashboard.filters.title: Filtres
 dashboard.filters.player: Personnage
 dashboard.filters.search: Recherche
-dashboard.filters.search_placeholder: 'Nom, description, cle...'
-dashboard.filters.source_filters: Filtres sources
+dashboard.filters.search_placeholder: 'Nom, description, clé...'
+dashboard.filters.source_filters: Filtres de source
 dashboard.sources.raid: Raid
 dashboard.sources.burning_springs: Burning Springs
 dashboard.sources.bigfoot: Bigfoot
-dashboard.sources.daily_ops: Operations quotidiennes
+dashboard.sources.daily_ops: Opérations quotidiennes
 dashboard.sources.regs: Regs
 dashboard.sources.samuel: Samuel
 dashboard.sources.mortimer: Mortimer
-dashboard.create_player.title: Creer un personnage
+dashboard.create_player.title: Créer un personnage
 dashboard.create_player.name: Nom du personnage
 dashboard.create_player.placeholder: 'Ex: VaultDweller'
-dashboard.create_player.submit: Creer
+dashboard.create_player.submit: Créer
 dashboard.create_player.help: 'Le nouveau personnage sera sélectionné automatiquement, '
 progression.page_title: 'F76 - Progression du personnage'
 progression.title: Progression du personnage
-progression.description: Vue d ensemble de la progression par rang legendary et liste Minerva.
+progression.description: Vue d'ensemble de la progression par rang legendary et liste Minerva.
 progression.character_block_title: Personnage
 progression.backup_title: Sauvegarde
 progression.player_list_label: Liste des personnages
-progression.quick_link_mods: mods legendaires
+progression.quick_link_mods: mods légendaires
 progression.quick_link_minerva: minerva
-progression.character_help_extended: 'la mise a jour de la progression se fait en marquant les objets comme appris sur les pages dediees %modsLink% et %minervaLink%.'
-nuke_codes.page_title: 'F76 - Codes nucleaires'
-nuke_codes.title: Codes nucleaires
-nuke_codes.description: Suivi des codes Alpha, Bravo et Charlie avec leur fenetre de validite.
-nuke_codes.timezone: 'Timezone: %timezone%'
-nuke_codes.state.loading: Chargement des codes nucleaires...
-nuke_codes.state.load_failed: Impossible de charger les codes nucleaires.
+progression.character_help_extended: 'la mise à jour de la progression se fait en marquant les objets comme appris sur les pages dédiées %modsLink% et %minervaLink%.'
+nuke_codes.page_title: 'F76 - Codes nucléaires'
+nuke_codes.title: Codes nucléaires
+nuke_codes.description: Suivi des codes Alpha, Bravo et Charlie avec leur fenêtre de validité.
+nuke_codes.timezone: 'Fuseau horaire: %timezone%'
+nuke_codes.state.loading: Chargement des codes nucléaires...
+nuke_codes.state.load_failed: Impossible de charger les codes nucléaires.
 nuke_codes.block.title: Fallout 76 Nuke Codes
 nuke_codes.block.valid_from: Valides depuis
-nuke_codes.block.valid_to: Valides jusqu a
+nuke_codes.block.valid_to: Valides jusqu'à
 nuke_codes.block.reset_in: Renouvellement dans
-nuke_codes.block.accessing_silos: Acces aux silos...
-nuke_codes.block.stale: Donnees en cache
+nuke_codes.block.accessing_silos: Accès aux silos...
+nuke_codes.block.stale: Données en cache
 nuke_codes.block.alpha: ALPHA
 nuke_codes.block.bravo: BRAVO
 nuke_codes.block.charlie: CHARLIE
@@ -65,57 +65,57 @@ dashboard.transfer.title: Progression (backup)
 dashboard.transfer.export: Export JSON
 dashboard.transfer.import: Import JSON
 dashboard.transfer.merge_mode: Mode fusion (conserver existant)
-dashboard.catalog.misc_title: Mods legendaires (par rang)
+dashboard.catalog.misc_title: Mods légendaires (par rang)
 dashboard.catalog.book_title: Plans Minerva (par liste)
 dashboard.stats.title: Progression du personnage
 dashboard.stats.overall: Global
 dashboard.stats.misc: Legendary mods
 dashboard.stats.book: Plans Minerva
-dashboard.stats.by_rank: Detail par rang
-dashboard.stats.by_list: Detail par liste
+dashboard.stats.by_rank: Détail par rang
+dashboard.stats.by_list: Détail par liste
 dashboard.stats.learned_on_total: '%learned% / %total%'
 dashboard.stats.percent_suffix: '%'
 dashboard.stats.rank_prefix: Rang
 dashboard.stats.list_prefix: Liste
 dashboard.state.loading_players: Chargement des personnages...
 dashboard.state.cannot_load_players: Impossible de charger les personnages
-dashboard.state.no_players: Aucun personnage. Cree ton premier personnage via l API /api/players.
+dashboard.state.no_players: Aucun personnage. Crée ton premier personnage via l'API /api/players.
 dashboard.state.player_name_required: Le nom du personnage est requis.
-dashboard.state.creating_player: Creation du personnage...
-dashboard.state.player_name_exists: Un personnage avec ce nom existe deja.
-dashboard.state.create_player_failed: Echec de creation du personnage
-dashboard.state.player_created: 'Personnage cree: %name%'
-dashboard.state.export_done: Export JSON telecharge.
-dashboard.state.export_failed: Echec export progression
-dashboard.state.import_no_file: Choisis un fichier JSON a importer.
+dashboard.state.creating_player: Création du personnage...
+dashboard.state.player_name_exists: Un personnage avec ce nom existe déjà.
+dashboard.state.create_player_failed: Échec de création du personnage
+dashboard.state.player_created: 'Personnage créé: %name%'
+dashboard.state.export_done: Export JSON téléchargé.
+dashboard.state.export_failed: Échec export progression
+dashboard.state.import_no_file: Choisis un fichier JSON à importer.
 dashboard.state.import_invalid_file: Fichier JSON invalide.
-dashboard.state.import_preview_error: Echec preview import progression
+dashboard.state.import_preview_error: Échec preview import progression
 dashboard.state.import_preview_unknown: Import impossible, %count% item(s) inconnus dans le fichier.
-dashboard.state.import_preview_unknown_details_prefix: 'Details'
+dashboard.state.import_preview_unknown_details_prefix: 'Détails'
 dashboard.state.import_confirm_preview: 'Importer maintenant ? Ajouts: %add%, suppressions: %remove%.'
 dashboard.state.importing_progress: Import de la progression...
-dashboard.state.import_done: Import termine.
-dashboard.state.import_failed: Echec import progression
-dashboard.state.no_selected_player: Aucun personnage selectionne.
+dashboard.state.import_done: Import terminé.
+dashboard.state.import_failed: Échec import progression
+dashboard.state.no_selected_player: Aucun personnage sélectionné.
 dashboard.state.loading_items: Chargement des items...
 dashboard.state.load_items_error: Erreur de chargement des items
-dashboard.state.update_failed: Echec de mise a jour
+dashboard.state.update_failed: Échec de mise à jour
 dashboard.state.visible_items: '%count% items visibles'
 dashboard.state.search_filter_prefix: filtre texte
 dashboard.state.source_filters_prefix: filtres sources
-dashboard.empty.no_misc: Aucun mod legendaire trouve.
-dashboard.empty.no_book: Aucun plan Minerva trouve.
+dashboard.empty.no_misc: Aucun mod légendaire trouvé.
+dashboard.empty.no_book: Aucun plan Minerva trouvé.
 dashboard.labels.rank_prefix: Rang
 dashboard.labels.list_prefix: Liste
-dashboard.help.shared_book_learning: 'Info: un plan present dans plusieurs listes partage le meme etat appris. Cocher une occurrence met a jour toutes les autres.'
-dashboard.item.daily_ops_reward: Disponible aussi en recompense d une operation quotidienne reussie.
+dashboard.help.shared_book_learning: 'Info: un plan présent dans plusieurs listes partage le même état appris. Cocher une occurrence met à jour toutes les autres.'
+dashboard.item.daily_ops_reward: Disponible aussi en récompense d'une opération quotidienne réussie.
 dashboard.aria.item_learned: Objet appris
 
 admin_translations.page_title: Backoffice traductions items
 admin_translations.kicker: Backoffice
 admin_translations.title: Traductions des items
-admin_translations.editing_catalog: 'Edition du catalogue translations/items.%locale%.yaml'
-admin_translations.back_to_dashboard: Retour au dashboard
+admin_translations.editing_catalog: 'Édition du catalogue translations/items.%locale%.yaml'
+admin_translations.back_to_dashboard: Retour au tableau de bord
 admin_translations.target_file: Fichier cible
 admin_translations.search: Recherche
 admin_translations.search_placeholder: 'key, EN, DE, cible'
@@ -123,197 +123,197 @@ admin_translations.per_page: Lignes par page
 admin_translations.filter: Filtrer
 admin_translations.visible_rows: '%count% lignes visibles.'
 admin_translations.visible_page_rows: '%count% lignes sur cette page'
-admin_translations.pagination_prev: Precedent
+admin_translations.pagination_prev: Précédent
 admin_translations.pagination_next: Suivant
 admin_translations.pagination_page: 'Page %page% / %total%'
-admin_translations.key: Cle
-admin_translations.no_entries: Aucune entree.
+admin_translations.key: Clé
+admin_translations.no_entries: Aucune entrée.
 admin_translations.save: Enregistrer
 admin_translations.table_caption: 'Table de traduction cible %locale%'
-admin_translations.flash.saved: 'Traductions "%locale%" enregistrees (%count% cles).'
-admin_translations.flash.nothing_to_save: Aucune traduction valide a enregistrer.
-admin_translations.flash.invalid_csrf: Jeton CSRF invalide, action refusee.
+admin_translations.flash.saved: 'Traductions "%locale%" enregistrées (%count% clés).'
+admin_translations.flash.nothing_to_save: Aucune traduction valide à enregistrer.
+admin_translations.flash.invalid_csrf: Jeton CSRF invalide, action refusée.
 
 security.login.page_title: 'F76 - Connexion'
 security.login.title: Connexion
 security.login.email: Email
 security.login.password: Mot de passe
 security.login.submit: Se connecter
-security.login.to_register: Pas encore de compte ? S inscrire
-security.login.to_forgot: Mot de passe oublie ?
-security.login.to_resend: Renvoyer l email de verification
+security.login.to_register: Pas encore de compte ? S'inscrire
+security.login.to_forgot: Mot de passe oublié ?
+security.login.to_resend: Renvoyer l'email de vérification
 security.login.to_contact: Contact
-security.auth.flash.rate_limited: Trop de tentatives. Merci de patienter quelques minutes puis de reessayer.
-security.auth.flash.captcha_invalid: Echec de validation du CAPTCHA. Merci de reessayer.
+security.auth.flash.rate_limited: Trop de tentatives. Merci de patienter quelques minutes puis de réessayer.
+security.auth.flash.captcha_invalid: Échec de validation du CAPTCHA. Merci de réessayer.
 security.oidc.google_cta: Continuer avec Google
 security.oidc.flash.provider_disabled: La connexion Google est indisponible pour le moment.
 security.oidc.flash.provider_unavailable: Impossible de joindre Google pour la connexion actuellement.
-security.oidc.flash.state_invalid: Etat de connexion Google invalide ou expire. Merci de reessayer.
-security.oidc.flash.email_not_verified: L email de votre compte Google doit etre verifie avant connexion.
-security.oidc.flash.account_link_conflict: Ce compte est deja lie a une autre identite Google.
-security.oidc.flash.callback_failed: Echec de la connexion Google. Merci de reessayer.
+security.oidc.flash.state_invalid: État de connexion Google invalide ou expiré. Merci de réessayer.
+security.oidc.flash.email_not_verified: L'email de votre compte Google doit être vérifié avant connexion.
+security.oidc.flash.account_link_conflict: Ce compte est déjà lié à une autre identité Google.
+security.oidc.flash.callback_failed: Échec de la connexion Google. Merci de réessayer.
 
 security.register.page_title: 'F76 - Inscription'
 security.register.title: Inscription
 security.register.email: Email
 security.register.password: Mot de passe
 security.register.password_confirm: Confirmer le mot de passe
-security.register.submit: Creer mon compte
-security.register.to_login: Deja un compte ? Se connecter
-security.register.flash.invalid_csrf: Session invalide, merci de reessayer.
+security.register.submit: Créer mon compte
+security.register.to_login: Déjà un compte ? Se connecter
+security.register.flash.invalid_csrf: Session invalide, merci de réessayer.
 security.register.flash.invalid_email: Adresse email invalide.
-security.register.flash.password_too_short: Le mot de passe doit contenir au moins 8 caracteres.
-security.register.flash.password_mismatch: Les deux mots de passe sont differents.
-security.register.flash.email_exists: Un compte existe deja avec cet email.
-security.register.flash.success: Compte cree. Verifiez votre email puis validez votre compte avant de vous connecter.
-security.verify.flash.invalid_or_expired: Lien de verification email invalide ou expire.
-security.verify.flash.success: Email verifie. Vous pouvez maintenant vous connecter.
+security.register.flash.password_too_short: Le mot de passe doit contenir au moins 8 caractères.
+security.register.flash.password_mismatch: Les deux mots de passe sont différents.
+security.register.flash.email_exists: Un compte existe déjà avec cet email.
+security.register.flash.success: Compte créé. Vérifiez votre email puis validez votre compte avant de vous connecter.
+security.verify.flash.invalid_or_expired: Lien de vérification email invalide ou expiré.
+security.verify.flash.success: Email vérifié. Vous pouvez maintenant vous connecter.
 security.verify.email_subject: Confirmez votre adresse email
-security.verify.email_intro: Cliquez sur ce lien pour verifier votre compte.
-security.forgot.page_title: 'F76 - Mot de passe oublie'
-security.forgot.title: Mot de passe oublie
+security.verify.email_intro: Cliquez sur ce lien pour vérifier votre compte.
+security.forgot.page_title: 'F76 - Mot de passe oublié'
+security.forgot.title: Mot de passe oublié
 security.forgot.email: Email
-security.forgot.submit: Envoyer le lien de reinitialisation
-security.forgot.to_login: Retour a la connexion
-security.forgot.flash.invalid_csrf: Session invalide, merci de reessayer.
-security.forgot.flash.request_sent: Si cet email existe, un lien de reinitialisation a ete envoye.
-security.forgot.email_subject: Reinitialisez votre mot de passe
-security.forgot.email_intro: Cliquez sur ce lien pour definir un nouveau mot de passe.
-security.resend.page_title: 'F76 - Renvoyer l email de verification'
-security.resend.title: Renvoyer l email de verification
+security.forgot.submit: Envoyer le lien de réinitialisation
+security.forgot.to_login: Retour à la connexion
+security.forgot.flash.invalid_csrf: Session invalide, merci de réessayer.
+security.forgot.flash.request_sent: Si cet email existe, un lien de réinitialisation a été envoyé.
+security.forgot.email_subject: Réinitialisez votre mot de passe
+security.forgot.email_intro: Cliquez sur ce lien pour définir un nouveau mot de passe.
+security.resend.page_title: 'F76 - Renvoyer l''email de vérification'
+security.resend.title: Renvoyer l'email de vérification
 security.resend.email: Email
-security.resend.submit: Envoyer l email de verification
-security.resend.to_login: Retour a la connexion
-security.resend.flash.invalid_csrf: Session invalide, merci de reessayer.
-security.resend.flash.sent: Si cet email existe et n est pas encore verifie, un email de verification a ete envoye.
+security.resend.submit: Envoyer l'email de vérification
+security.resend.to_login: Retour à la connexion
+security.resend.flash.invalid_csrf: Session invalide, merci de réessayer.
+security.resend.flash.sent: Si cet email existe et n'est pas encore vérifié, un email de vérification a été envoyé.
 security.contact.page_title: 'F76 - Contact'
 security.contact.title: Contact
 security.contact.email: Email
 security.contact.subject: Sujet
 security.contact.message: Message
 security.contact.submit: Envoyer le message
-security.contact.to_login: Retour a la connexion
-security.contact.flash.invalid_csrf: Session invalide, merci de reessayer.
+security.contact.to_login: Retour à la connexion
+security.contact.flash.invalid_csrf: Session invalide, merci de réessayer.
 security.contact.flash.invalid_input: Merci de renseigner un email, un sujet et un message valides.
-security.contact.flash.sent: Votre message a ete envoye.
-security.reset.page_title: 'F76 - Reinitialisation du mot de passe'
-security.reset.title: Reinitialisation du mot de passe
+security.contact.flash.sent: Votre message a été envoyé.
+security.reset.page_title: 'F76 - Réinitialisation du mot de passe'
+security.reset.title: Réinitialisation du mot de passe
 security.reset.password: Nouveau mot de passe
 security.reset.password_confirm: Confirmer le mot de passe
-security.reset.submit: Mettre a jour le mot de passe
-security.reset.to_login: Retour a la connexion
-security.reset.flash.invalid_or_expired: Lien invalide ou expire.
-security.reset.flash.invalid_csrf: Session invalide, merci de reessayer.
-security.reset.flash.password_too_short: Le mot de passe doit contenir au moins 8 caracteres.
-security.reset.flash.password_mismatch: Les deux mots de passe sont differents.
-security.reset.flash.success: Mot de passe mis a jour. Vous pouvez vous connecter.
+security.reset.submit: Mettre à jour le mot de passe
+security.reset.to_login: Retour à la connexion
+security.reset.flash.invalid_or_expired: Lien invalide ou expiré.
+security.reset.flash.invalid_csrf: Session invalide, merci de réessayer.
+security.reset.flash.password_too_short: Le mot de passe doit contenir au moins 8 caractères.
+security.reset.flash.password_mismatch: Les deux mots de passe sont différents.
+security.reset.flash.success: Mot de passe mis à jour. Vous pouvez vous connecter.
 security.change_password.page_title: 'F76 - Changer le mot de passe'
 security.change_password.title: Changer le mot de passe
 security.change_password.current_password: Mot de passe actuel
 security.change_password.new_password: Nouveau mot de passe
 security.change_password.new_password_confirm: Confirmer le nouveau mot de passe
 security.change_password.submit: Enregistrer le nouveau mot de passe
-security.change_password.to_home: Retour a la progression
-security.change_password.flash.invalid_csrf: Session invalide, merci de reessayer.
+security.change_password.to_home: Retour à la progression
+security.change_password.flash.invalid_csrf: Session invalide, merci de réessayer.
 security.change_password.flash.current_password_invalid: Le mot de passe actuel est invalide.
-security.change_password.flash.password_too_short: Le mot de passe doit contenir au moins 8 caracteres.
-security.change_password.flash.password_mismatch: Les deux mots de passe sont differents.
-security.change_password.flash.success: Mot de passe mis a jour avec succes.
-security.account.page_title: 'F76 - Securite du compte'
-security.account.title: Securite du compte
+security.change_password.flash.password_too_short: Le mot de passe doit contenir au moins 8 caractères.
+security.change_password.flash.password_mismatch: Les deux mots de passe sont différents.
+security.change_password.flash.success: Mot de passe mis à jour avec succès.
+security.account.page_title: 'F76 - Sécurité du compte'
+security.account.title: Sécurité du compte
 security.account.email: Email du compte
-security.account.email_verified: Email verifie
+security.account.email_verified: Email vérifié
 security.account.local_password: Mot de passe local actif
-security.account.google_linked: Google lie
-security.account.google_linked_since: 'Lie depuis %date%'
-security.account.unlink_google: Delier Google
-security.account.unlink_google_disabled_reason: Definir d abord un mot de passe local avant de delier Google.
+security.account.google_linked: Google lié
+security.account.google_linked_since: 'Lié depuis %date%'
+security.account.unlink_google: Délier Google
+security.account.unlink_google_disabled_reason: Définir d'abord un mot de passe local avant de délier Google.
 security.account.sessions_title: Sessions actives
-security.account.sessions_hint: Conservez uniquement les sessions de confiance. Vous pouvez deconnecter les autres appareils.
+security.account.sessions_hint: Conservez uniquement les sessions de confiance. Vous pouvez déconnecter les autres appareils.
 security.account.session_current: Session courante
 security.account.session_other: Autre session
-security.account.session_last_seen: 'Derniere activite: %date%'
-security.account.session_none: Aucune session active trouvee.
+security.account.session_last_seen: 'Dernière activité: %date%'
+security.account.session_none: Aucune session active trouvée.
 security.account.sessions_count: '%count% au total'
-security.account.logout_other_sessions: Deconnecter les autres sessions
-security.account.auth_events_title: Activite securite recente
-security.account.auth_events_hint: Derniers evenements d authentification/securite de votre compte.
-security.account.auth_events_empty: Aucun evenement de securite pour le moment.
-security.account.auth_events_count: '%count% affiches'
+security.account.logout_other_sessions: Déconnecter les autres sessions
+security.account.auth_events_title: Activité sécurité récente
+security.account.auth_events_hint: Derniers événements d'authentification/sécurité de votre compte.
+security.account.auth_events_empty: Aucun événement de sécurité pour le moment.
+security.account.auth_events_count: '%count% affichés'
 security.account.auth_events_admin_link: Ouvrir la timeline admin
-security.account.flash.invalid_csrf: Session invalide, merci de reessayer.
-security.account.flash.google_identity_not_found: Identite Google introuvable pour votre compte.
-security.account.flash.google_identity_local_password_required: Impossible de delier Google sans acces mot de passe local.
-security.account.flash.google_identity_unlinked: Identite Google deliee.
-security.account.flash.other_sessions_revoked: Les autres sessions ont ete deconnectees.
-security.account.flash.no_other_sessions: Aucune autre session active trouvee.
-security.session.flash.revoked: Votre session a ete revoquee depuis une autre session.
+security.account.flash.invalid_csrf: Session invalide, merci de réessayer.
+security.account.flash.google_identity_not_found: Identité Google introuvable pour votre compte.
+security.account.flash.google_identity_local_password_required: Impossible de délier Google sans accès mot de passe local.
+security.account.flash.google_identity_unlinked: Identité Google déliée.
+security.account.flash.other_sessions_revoked: Les autres sessions ont été déconnectées.
+security.account.flash.no_other_sessions: Aucune autre session active trouvée.
+security.session.flash.revoked: Votre session a été révoquée depuis une autre session.
 
 admin_users.page_title: Backoffice utilisateurs
 admin_users.kicker: Backoffice
 admin_users.title: Gestion des utilisateurs
-admin_users.description: Activez/desactivez les comptes, gerez les droits admin et generez des liens de reinitialisation.
-admin_users.back_to_dashboard: Retour au dashboard
+admin_users.description: Activez/désactivez les comptes, gérez les droits admin et générez des liens de réinitialisation.
+admin_users.back_to_dashboard: Retour au tableau de bord
 admin_users.to_translations: Gestion des traductions
-admin_users.to_audit_logs: Logs d audit
-admin_users.google_filter_label: Identite Google
+admin_users.to_audit_logs: Logs d'audit
+admin_users.google_filter_label: Identité Google
 admin_users.google_filter_all: Tous les utilisateurs
 
 admin_roadmap.page_title: Backoffice roadmap
 admin_roadmap.kicker: Backoffice
 admin_roadmap.title: Roadmap
-admin_roadmap.description: Revoir les snapshots OCR, generer les evenements structures et approuver la publication.
-admin_roadmap.back_to_dashboard: Retour au dashboard
+admin_roadmap.description: Revoir les snapshots OCR, générer les événements structurés et approuver la publication.
+admin_roadmap.back_to_dashboard: Retour au tableau de bord
 admin_roadmap.snapshots_title: Snapshots OCR
 admin_roadmap.snapshot_id: ID
 admin_roadmap.snapshot_locale: Locale
 admin_roadmap.snapshot_provider: Provider
 admin_roadmap.snapshot_confidence: Confiance
 admin_roadmap.snapshot_status: Statut
-admin_roadmap.snapshot_scanned_at: Scanne le
+admin_roadmap.snapshot_scanned_at: Scanné le
 admin_roadmap.snapshot_actions: Actions
 admin_roadmap.open: Ouvrir
 admin_roadmap.status_draft: Brouillon
-admin_roadmap.status_approved: Approuve
-admin_roadmap.status_rejected: Rejete
-admin_roadmap.empty_snapshots: Aucun snapshot roadmap trouve.
-admin_roadmap.selected_snapshot_title: 'Snapshot selectionne #%id%'
+admin_roadmap.status_approved: Approuvé
+admin_roadmap.status_rejected: Rejeté
+admin_roadmap.empty_snapshots: Aucun snapshot roadmap trouvé.
+admin_roadmap.selected_snapshot_title: 'Snapshot sélectionné #%id%'
 admin_roadmap.selected_snapshot_state: 'Locale: %locale% · Statut: %status%'
-admin_roadmap.generate_events: Generer les evenements
+admin_roadmap.generate_events: Générer les événements
 admin_roadmap.approve_snapshot: Approuver le snapshot
-admin_roadmap.events_title: Evenements structures
+admin_roadmap.events_title: Événements structurés
 admin_roadmap.event_order: Ordre
 admin_roadmap.event_title: Titre
-admin_roadmap.event_starts_at: Debut
+admin_roadmap.event_starts_at: Début
 admin_roadmap.event_ends_at: Fin
 admin_roadmap.event_type: Type
 admin_roadmap.event_notes: Notes
-admin_roadmap.empty_events: Aucun evenement genere pour ce snapshot.
-admin_roadmap.save_events: Enregistrer les evenements
-admin_roadmap.flash.invalid_csrf: Session invalide, merci de reessayer.
-admin_roadmap.flash.events_generated: Evenements generes depuis le snapshot OCR.
-admin_roadmap.flash.snapshot_approved: Snapshot approuve.
+admin_roadmap.empty_events: Aucun événement généré pour ce snapshot.
+admin_roadmap.save_events: Enregistrer les événements
+admin_roadmap.flash.invalid_csrf: Session invalide, merci de réessayer.
+admin_roadmap.flash.events_generated: Événements générés depuis le snapshot OCR.
+admin_roadmap.flash.snapshot_approved: Snapshot approuvé.
 admin_roadmap.flash.snapshot_not_found: Snapshot introuvable.
-admin_users.google_filter_linked: Google lie
-admin_users.google_filter_unlinked: Google non lie
+admin_users.google_filter_linked: Google lié
+admin_users.google_filter_unlinked: Google non lié
 admin_users.active_filter_label: Statut du compte
 admin_users.active_filter_all: Tous les statuts
 admin_users.active_filter_active: Actifs uniquement
 admin_users.active_filter_inactive: Inactifs uniquement
-admin_users.role_filter_label: Role
-admin_users.role_filter_all: Tous les roles
+admin_users.role_filter_label: Rôle
+admin_users.role_filter_all: Tous les rôles
 admin_users.role_filter_admin: Admin uniquement
 admin_users.role_filter_user: Utilisateur uniquement
-admin_users.verified_filter_label: Verification email
-admin_users.verified_filter_all: Tous les etats de verification
-admin_users.verified_filter_verified: Verifies uniquement
-admin_users.verified_filter_unverified: Non verifies uniquement
+admin_users.verified_filter_label: Vérification email
+admin_users.verified_filter_all: Tous les états de vérification
+admin_users.verified_filter_verified: Vérifiés uniquement
+admin_users.verified_filter_unverified: Non vérifiés uniquement
 admin_users.local_password_filter_label: Mot de passe local
-admin_users.local_password_filter_all: Tous les etats du mot de passe local
-admin_users.local_password_filter_enabled: Mot de passe local active
-admin_users.local_password_filter_disabled: Mot de passe local desactive
-admin_users.created_from_label: Cree a partir du
-admin_users.created_to_label: Cree jusqu au
+admin_users.local_password_filter_all: Tous les états du mot de passe local
+admin_users.local_password_filter_enabled: Mot de passe local activé
+admin_users.local_password_filter_disabled: Mot de passe local désactivé
+admin_users.created_from_label: Créé à partir du
+admin_users.created_to_label: Créé jusqu'au
 admin_users.search: Recherche
 admin_users.search_placeholder: Email
 admin_users.per_page: Lignes par page
@@ -321,69 +321,69 @@ admin_users.filter: Filtrer
 admin_users.export_csv: Export CSV
 admin_users.visible_rows: '%count% utilisateurs visibles.'
 admin_users.summary_total_label: Total
-admin_users.summary_google_linked_label: Google lie
-admin_users.summary_google_unlinked_label: Google non lie
+admin_users.summary_google_linked_label: Google lié
+admin_users.summary_google_unlinked_label: Google non lié
 admin_users.summary_visible_label: Visibles
 admin_users.list_title: Liste des utilisateurs
 admin_users.email: Email
-admin_users.created_at: Cree le
-admin_users.roles: Roles
+admin_users.created_at: Créé le
+admin_users.roles: Rôles
 admin_users.active: Actif
-admin_users.security: Securite
-admin_users.identities: Identites
+admin_users.security: Sécurité
+admin_users.identities: Identités
 admin_users.actions: Actions
-admin_users.google_linked_yes: Google lie
-admin_users.google_linked_no: Google non lie
-admin_users.google_linked_since: 'Lie depuis %date%'
-admin_users.security_email_verified_yes: Email verifie
-admin_users.security_email_verified_no: Email non verifie
-admin_users.security_local_login_yes: Login local disponible
-admin_users.security_local_login_no: Login local indisponible
-admin_users.toggle_active: Activer/Desactiver
+admin_users.google_linked_yes: Google lié
+admin_users.google_linked_no: Google non lié
+admin_users.google_linked_since: 'Lié depuis %date%'
+admin_users.security_email_verified_yes: Email vérifié
+admin_users.security_email_verified_no: Email non vérifié
+admin_users.security_local_login_yes: Connexion locale disponible
+admin_users.security_local_login_no: Connexion locale indisponible
+admin_users.toggle_active: Activer/Désactiver
 admin_users.toggle_admin: Basculer admin
-admin_users.generate_reset_link: Generer un lien de reinitialisation
-admin_users.force_verify_email: Forcer la verification email
-admin_users.resend_verification: Renvoyer l email de verification
-admin_users.unlink_google: Delier Google
-admin_users.unlink_google_disabled_reason: Definir d abord un mot de passe local avant de delier Google.
-admin_users.auth_events: Activite securite
-admin_users.auth_events_page_title: 'Activite securite - %email%'
-admin_users.auth_events_title: Activite securite
-admin_users.auth_events_description: 'Derniers evenements d authentification et de securite pour %email%.'
+admin_users.generate_reset_link: Générer un lien de réinitialisation
+admin_users.force_verify_email: Forcer la vérification email
+admin_users.resend_verification: Renvoyer l'email de vérification
+admin_users.unlink_google: Délier Google
+admin_users.unlink_google_disabled_reason: Définir d'abord un mot de passe local avant de délier Google.
+admin_users.auth_events: Activité sécurité
+admin_users.auth_events_page_title: 'Activité sécurité - %email%'
+admin_users.auth_events_title: Activité sécurité
+admin_users.auth_events_description: 'Derniers événements d''authentification et de sécurité pour %email%.'
 admin_users.auth_events_occurred_at: Date
-admin_users.auth_events_event: Evenement
+admin_users.auth_events_event: Événement
 admin_users.auth_events_level: Niveau
 admin_users.auth_events_ip: IP
-admin_users.auth_events_empty: Aucun evenement de securite pour cet utilisateur.
+admin_users.auth_events_empty: Aucun événement de sécurité pour cet utilisateur.
 admin_users.auth_events_level_filter: Niveau
 admin_users.auth_events_level_filter_all: Tous les niveaux
 admin_users.auth_events_search: Recherche
-admin_users.auth_events_search_placeholder: evenement ou IP
+admin_users.auth_events_search_placeholder: événement ou IP
 admin_users.auth_events_export_csv: Export CSV
 admin_users.back_to_users: Retour aux utilisateurs
 admin_users.no_users: Aucun utilisateur.
 admin_users.flash.invalid_csrf: Action invalide (CSRF).
 admin_users.flash.user_not_found: Utilisateur introuvable.
-admin_users.flash.google_identity_not_found: Identite Google introuvable pour cet utilisateur.
-admin_users.flash.google_identity_unlinked: Identite Google deliee.
-admin_users.flash.google_identity_local_password_required: Impossible de delier Google sans acces mot de passe local.
-admin_users.flash.cannot_change_self_active: Vous ne pouvez pas desactiver votre propre compte.
-admin_users.flash.cannot_change_self_role: Vous ne pouvez pas modifier votre propre role admin ici.
-admin_users.flash.active_updated: Statut actif mis a jour.
-admin_users.flash.role_updated: Roles mis a jour.
-admin_users.flash.reset_link_generated: Lien de reinitialisation genere
-admin_users.flash.reset_link_rate_limited: Lien deja genere recemment. Reessaie dans %seconds% s.
-admin_users.flash.reset_link_global_rate_limited: Trop de liens generes (%count%) sur %seconds% s. Reessaie plus tard.
-admin_users.flash.verification_email_sent: Email de verification envoye.
-admin_users.flash.verification_email_forced: Email marque comme verifie.
-admin_users.flash.verification_email_already_verified: L email de cet utilisateur est deja verifie.
-admin_users.flash.verification_email_rate_limited: Email de verification deja envoye recemment. Reessaie dans %seconds% s.
+admin_users.flash.google_identity_not_found: Identité Google introuvable pour cet utilisateur.
+admin_users.flash.google_identity_unlinked: Identité Google déliée.
+admin_users.flash.google_identity_local_password_required: Impossible de délier Google sans accès mot de passe local.
+admin_users.flash.cannot_change_self_active: Vous ne pouvez pas désactiver votre propre compte.
+admin_users.flash.cannot_change_self_role: Vous ne pouvez pas modifier votre propre rôle admin ici.
+admin_users.flash.active_updated: Statut actif mis à jour.
+admin_users.flash.role_updated: Rôles mis à jour.
+admin_users.flash.reset_link_generated: Lien de réinitialisation généré
+admin_users.flash.reset_link_rate_limited: Lien déjà généré récemment. Réessaie dans %seconds% s.
+admin_users.flash.reset_link_global_rate_limited: Trop de liens générés (%count%) sur %seconds% s. Réessaie plus tard.
+admin_users.flash.verification_email_sent: Email de vérification envoyé.
+admin_users.flash.verification_email_forced: Email marqué comme vérifié.
+admin_users.flash.verification_email_already_verified: L'email de cet utilisateur est déjà vérifié.
+admin_users.flash.verification_email_rate_limited: Email de vérification déjà envoyé récemment. Réessaie dans %seconds% s.
 
-admin_audit.page_title: Backoffice logs d audit
+admin_audit.page_title: Backoffice logs d'audit
 admin_audit.kicker: Backoffice
-admin_audit.title: Logs d audit
-admin_audit.description: Consultez l historique des actions sensibles admin avec filtres et export CSV.
-admin_audit.back_to_dashboard: Retour au dashboard
+admin_audit.title: Logs d'audit
+admin_audit.description: Consultez l'historique des actions sensibles admin avec filtres et export CSV.
+admin_audit.back_to_dashboard: Retour au tableau de bord
 admin_audit.search: Recherche
 admin_audit.search_placeholder: Email acteur/cible ou action
 admin_audit.action: Action
@@ -396,13 +396,13 @@ admin_audit.when: Date
 admin_audit.actor: Acteur
 admin_audit.target: Cible
 admin_audit.context: Contexte
-admin_audit.no_entries: Aucune entree.
+admin_audit.no_entries: Aucune entrée.
 
 admin_contact.page_title: Backoffice messages de contact
 admin_contact.kicker: Backoffice
 admin_contact.title: Messages de contact
-admin_contact.description: Consulte et traite les demandes envoyees via le formulaire public.
-admin_contact.back_to_dashboard: Retour au dashboard
+admin_contact.description: Consulte et traite les demandes envoyées via le formulaire public.
+admin_contact.back_to_dashboard: Retour au tableau de bord
 admin_contact.search: Recherche
 admin_contact.search_placeholder: Email, sujet ou message
 admin_contact.status: Statut
@@ -415,48 +415,48 @@ admin_contact.email: Email
 admin_contact.subject: Sujet
 admin_contact.message: Message
 admin_contact.actions: Actions
-admin_contact.update_status: Mettre a jour
-admin_contact.no_entries: Aucune entree.
+admin_contact.update_status: Mettre à jour
+admin_contact.no_entries: Aucune entrée.
 admin_contact.status_new: Nouveau
 admin_contact.status_in_progress: En cours
-admin_contact.status_closed: Ferme
+admin_contact.status_closed: Fermé
 admin_contact.flash.invalid_csrf: Action invalide (CSRF).
 admin_contact.flash.message_not_found: Message de contact introuvable.
 admin_contact.flash.invalid_status: Statut invalide.
-admin_contact.flash.status_updated: Statut mis a jour.
+admin_contact.flash.status_updated: Statut mis à jour.
 
 minerva.page_title: 'F76 - Minerva'
 minerva.title: Minerva
-minerva.description: Fenetres Minerva actives, a venir et terminees, triees par date de debut.
-minerva.catalog_last_updated: 'Derniere mise a jour des plans Minerva: %date%'
-minerva.catalog_last_updated_unknown: 'Derniere mise a jour des plans Minerva: inconnue'
-minerva.back_to_dashboard: Retour au dashboard
-minerva.timezone: 'Timezone: %timezone%'
+minerva.description: Fenêtres Minerva actives, à venir et terminées, triées par date de début.
+minerva.catalog_last_updated: 'Dernière mise à jour des plans Minerva: %date%'
+minerva.catalog_last_updated_unknown: 'Dernière mise à jour des plans Minerva: inconnue'
+minerva.back_to_dashboard: Retour au tableau de bord
+minerva.timezone: 'Fuseau horaire: %timezone%'
 minerva.status: Statut
 minerva.source: Source
 minerva.location: Localisation
 minerva.list_cycle: Liste
-minerva.starts_at: Debut
+minerva.starts_at: Début
 minerva.ends_at: Fin
 minerva.empty: Aucune rotation disponible.
-minerva.status_upcoming: A venir
+minerva.status_upcoming: À venir
 minerva.status_active: Active
-minerva.status_ended: Terminee
-minerva.source_generated: Generee
+minerva.status_ended: Terminée
+minerva.source_generated: Générée
 minerva.source_manual: Manuelle
-minerva.current_window_title: Fenetre Minerva actuelle
-minerva.current_window_empty: Aucune fenetre Minerva active actuellement.
-minerva.next_windows_title: Prochaines fenetres
-minerva.active_windows_title: Fenetres a venir
-minerva.timeline_title: Timeline complete
+minerva.current_window_title: Fenêtre Minerva actuelle
+minerva.current_window_empty: Aucune fenêtre Minerva active actuellement.
+minerva.next_windows_title: Prochaines fenêtres
+minerva.active_windows_title: Fenêtres à venir
+minerva.timeline_title: Timeline complète
 minerva.list_label: 'Liste %list%'
 minerva.list_progress: Progression
-minerva.countdown_title_active: Ou est Minerva aujourd hui ?
-minerva.countdown_title_upcoming: Ou est Minerva aujourd hui ?
-minerva.countdown_title_empty: Ou est Minerva aujourd hui ?
-minerva.countdown_active_intro: Minerva est actuellement a %location% avec la liste %list%.
-minerva.countdown_upcoming_intro: Minerva n est pas disponible actuellement. Elle sera a %location% avec la liste %list%.
-minerva.countdown_empty_intro: Aucune fenetre Minerva planifiee pour le moment.
+minerva.countdown_title_active: Où est Minerva aujourd'hui ?
+minerva.countdown_title_upcoming: Où est Minerva aujourd'hui ?
+minerva.countdown_title_empty: Où est Minerva aujourd'hui ?
+minerva.countdown_active_intro: Minerva est actuellement à %location% avec la liste %list%.
+minerva.countdown_upcoming_intro: Minerva n'est pas disponible actuellement. Elle sera à %location% avec la liste %list%.
+minerva.countdown_empty_intro: Aucune fenêtre Minerva planifiée pour le moment.
 minerva.countdown_leaves_in: Elle repart dans
 minerva.countdown_arrives_in: Elle arrive dans
 minerva.countdown_days: jours
@@ -467,67 +467,67 @@ minerva.countdown_seconds: secondes
 admin_minerva.page_title: Admin rotation Minerva
 admin_minerva.kicker: Backoffice
 admin_minerva.title: Rotation Minerva
-admin_minerva.description: Regenere et consulte les fenetres Minerva depuis des regles deterministes.
-admin_minerva.back_to_dashboard: Retour au dashboard
-admin_minerva.regenerate_title: Regenerer la timeline
-admin_minerva.refresh: Rafraichir la couverture
+admin_minerva.description: Régénère et consulte les fenêtres Minerva depuis des règles déterministes.
+admin_minerva.back_to_dashboard: Retour au tableau de bord
+admin_minerva.regenerate_title: Régénérer la timeline
+admin_minerva.refresh: Rafraîchir la couverture
 admin_minerva.refresh_dry_run: Simulation
 admin_minerva.from: Du
 admin_minerva.to: Au
-admin_minerva.regenerate: Regenerer
-admin_minerva.timeline_title: Timeline generee
-admin_minerva.timezone: 'Timezone generation: %timezone%'
+admin_minerva.regenerate: Régénérer
+admin_minerva.timeline_title: Timeline générée
+admin_minerva.timezone: 'Fuseau horaire de génération: %timezone%'
 admin_minerva.override_title: Overrides manuels
 admin_minerva.override_location: Localisation
 admin_minerva.override_list: Liste
-admin_minerva.override_starts_at: Debut
+admin_minerva.override_starts_at: Début
 admin_minerva.override_ends_at: Fin
-admin_minerva.override_create: Ajouter l override
+admin_minerva.override_create: Ajouter l'override
 admin_minerva.override_actions: Actions
 admin_minerva.override_delete: Supprimer
 admin_minerva.override_empty: Aucun override manuel.
 admin_minerva.governance_title: Gouvernance source
-admin_minerva.governance_primary: Les fenetres generees sont la source officielle dans l application.
-admin_minerva.governance_override: Les overrides manuels sont exceptionnels et temporaires (gestion d incident uniquement).
-admin_minerva.governance_recovery: Apres resolution d incident, regenere la plage impactee et supprime les overrides devenus inutiles.
+admin_minerva.governance_primary: Les fenêtres générées sont la source officielle dans l'application.
+admin_minerva.governance_override: Les overrides manuels sont exceptionnels et temporaires (gestion d'incident uniquement).
+admin_minerva.governance_recovery: Après résolution d'incident, régénère la plage impactée et supprime les overrides devenus inutiles.
 admin_minerva.source: Source
-admin_minerva.source_generated: Generee
+admin_minerva.source_generated: Générée
 admin_minerva.source_manual: Manuelle
 admin_minerva.flash.invalid_csrf: Action invalide (CSRF).
 admin_minerva.flash.invalid_range: Intervalle de dates invalide.
-admin_minerva.flash.invalid_override: Donnees d override manuel invalides.
-admin_minerva.flash.regenerated: Rotation Minerva regeneree.
-admin_minerva.flash.regenerated_summary: 'Supprimees: %deleted% · Inserees: %inserted% · Ignorees: %skipped%'
-admin_minerva.flash.refresh_performed: Couverture Minerva rafraichie.
-admin_minerva.flash.refresh_performed_summary: 'Attendues: %expected% · Manquantes avant refresh: %missing% · Supprimees: %deleted% · Inserees: %inserted% · Ignorees: %skipped%'
-admin_minerva.flash.refresh_not_needed: Couverture Minerva deja complete.
+admin_minerva.flash.invalid_override: Données d'override manuel invalides.
+admin_minerva.flash.regenerated: Rotation Minerva régénérée.
+admin_minerva.flash.regenerated_summary: 'Supprimées: %deleted% · Insérées: %inserted% · Ignorées: %skipped%'
+admin_minerva.flash.refresh_performed: Couverture Minerva rafraîchie.
+admin_minerva.flash.refresh_performed_summary: 'Attendues: %expected% · Manquantes avant refresh: %missing% · Supprimées: %deleted% · Insérées: %inserted% · Ignorées: %skipped%'
+admin_minerva.flash.refresh_not_needed: Couverture Minerva déjà complète.
 admin_minerva.flash.refresh_not_needed_summary: 'Attendues: %expected% · Manquantes: %missing%'
 admin_minerva.flash.refresh_dry_run_summary: 'Refresh dry run · Attendues: %expected% · Manquantes: %missing% · Couvert: %covered%'
-admin_minerva.flash.override_created: Override manuel cree.
-admin_minerva.flash.override_deleted: Override manuel supprime.
+admin_minerva.flash.override_created: Override manuel créé.
+admin_minerva.flash.override_deleted: Override manuel supprimé.
 admin_minerva.flash.override_not_found: Override manuel introuvable.
-admin_minerva.freshness_range: 'Perimetre de couverture: %from% -> %to%'
-admin_minerva.freshness_summary: 'Fenetres attendues: %expected% · Fenetres manquantes: %missing%'
-admin_minerva.freshness_covered: La couverture est complete sur ce perimetre.
-admin_minerva.freshness_missing: Des trous de couverture existent. Lance une regeneration.
-admin_minerva.freshness_last_generated: 'Derniere fenetre generee creee le: %date%'
-admin_minerva.freshness_last_manual: 'Dernier override manuel cree le: %date%'
+admin_minerva.freshness_range: 'Périmètre de couverture: %from% -> %to%'
+admin_minerva.freshness_summary: 'Fenêtres attendues: %expected% · Fenêtres manquantes: %missing%'
+admin_minerva.freshness_covered: La couverture est complète sur ce périmètre.
+admin_minerva.freshness_missing: Des trous de couverture existent. Lance une régénération.
+admin_minerva.freshness_last_generated: 'Dernière fenêtre générée créée le: %date%'
+admin_minerva.freshness_last_manual: 'Dernier override manuel créé le: %date%'
 admin_minerva.freshness_never: jamais
-admin_minerva.freshness_title: Fraicheur de couverture
+admin_minerva.freshness_title: Fraîcheur de couverture
 admin_minerva.freshness_status_covered: Couvert
-admin_minerva.freshness_status_missing: Fenetres manquantes
-admin_minerva.consistency_ok: Le controle de coherence est sain sur cette plage.
-admin_minerva.consistency_drift: Un ecart de coherence est detecte sur cette plage. Verifie le refresh ou la regeneration.
-admin_minerva.freshness_range_label: Perimetre
-admin_minerva.freshness_expected_label: Fenetres attendues
-admin_minerva.freshness_missing_label: Fenetres manquantes
-admin_minerva.freshness_last_generated_label: Derniere generation
+admin_minerva.freshness_status_missing: Fenêtres manquantes
+admin_minerva.consistency_ok: Le contrôle de cohérence est sain sur cette plage.
+admin_minerva.consistency_drift: Un écart de cohérence est détecté sur cette plage. Vérifie le refresh ou la régénération.
+admin_minerva.freshness_range_label: Périmètre
+admin_minerva.freshness_expected_label: Fenêtres attendues
+admin_minerva.freshness_missing_label: Fenêtres manquantes
+admin_minerva.freshness_last_generated_label: Dernière génération
 admin_minerva.freshness_last_manual_label: Dernier override manuel
-admin_minerva.last_refresh_title: Dernier refresh execute
+admin_minerva.last_refresh_title: Dernier refresh exécuté
 admin_minerva.last_refresh_meta: '%date% par %actor%'
-admin_minerva.last_refresh_summary: 'Attendues: %expected% · Manquantes: %missing% · Supprimees: %deleted% · Inserees: %inserted% · Ignorees: %skipped%'
+admin_minerva.last_refresh_summary: 'Attendues: %expected% · Manquantes: %missing% · Supprimées: %deleted% · Insérées: %inserted% · Ignorées: %skipped%'
 admin_minerva.last_refresh_action_minerva_refresh_dry_run: Simulation
-admin_minerva.last_refresh_action_minerva_refresh_performed: Refresh execute
-admin_minerva.last_refresh_action_minerva_refresh_not_needed: Aucun refresh necessaire
-admin_minerva.freshness_alert_missing: La couverture contient des fenetres manquantes. Lance un refresh ou une regeneration.
-admin_minerva.view_minerva_audit_logs: Voir les logs d audit Minerva
+admin_minerva.last_refresh_action_minerva_refresh_performed: Refresh exécuté
+admin_minerva.last_refresh_action_minerva_refresh_not_needed: Aucun refresh nécessaire
+admin_minerva.freshness_alert_missing: La couverture contient des fenêtres manquantes. Lance un refresh ou une régénération.
+admin_minerva.view_minerva_audit_logs: Voir les logs d'audit Minerva
