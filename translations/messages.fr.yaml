@@ -445,7 +445,7 @@ admin_contact.flash.status_updated: Statut mis à jour.
 
 minerva.page_title: 'F76 - Minerva'
 minerva.title: Minerva
-minerva.description: Fenêtres Minerva actives, à venir et terminées, triées par date de début.
+minerva.description: Sélectionne un personnage puis marque ses plans appris, voir la localisation actuelle de Minerva et les prochaines arrivées.
 minerva.catalog_last_updated: 'Dernière mise à jour des plans Minerva: %date%'
 minerva.catalog_last_updated_unknown: 'Dernière mise à jour des plans Minerva: inconnue'
 minerva.back_to_dashboard: Retour au tableau de bord
