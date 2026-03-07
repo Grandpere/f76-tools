@@ -2547,6 +2547,7 @@ textarea.roadmap-input {
     display: flex;
     flex-direction: column;
     gap: 0.55rem;
+    width: 100%;
 }
 
 .admin-minerva-action-fields {
@@ -2554,6 +2555,8 @@ textarea.roadmap-input {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.62rem;
     align-items: end;
+    width: 100%;
+    flex: 1 1 100%;
 }
 
 .admin-minerva-action-fields .field {
@@ -2572,6 +2575,8 @@ textarea.roadmap-input {
     justify-content: flex-end;
     align-items: center;
     gap: 0.58rem;
+    width: 100%;
+    flex: 1 1 100%;
 }
 
 .admin-minerva-inline-toggle {
