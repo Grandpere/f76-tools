@@ -3278,10 +3278,6 @@ span.flatpickr-weekday {
     .admin-minerva-actions-grid {
         grid-template-columns: 1fr;
     }
-
-    .admin-minerva-action-fields {
-        grid-template-columns: 1fr;
-    }
 }
 
 @media (max-width: 760px) {
@@ -3336,6 +3332,10 @@ span.flatpickr-weekday {
 
     .source-filters {
         grid-column: auto;
+    }
+
+    .admin-minerva-action-fields {
+        grid-template-columns: 1fr;
     }
 
     .item-grid {
