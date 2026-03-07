@@ -49,9 +49,7 @@ export default class extends Controller {
         const staleTag = payload.stale ? `<span class="nuke-stale-badge">${this.escapeHtml(this.t('stale'))}</span>` : '';
 
         this.headTarget.innerHTML = `
-            <div class="nuke-terminal-line">&gt; ${this.escapeHtml(this.t('title'))}</div>
-            <div class="nuke-terminal-line">&gt; ${this.escapeHtml(this.t('validFrom'))} <strong>${this.escapeHtml(this.formatDateTime(validFrom))}</strong></div>
-            <div class="nuke-terminal-line">&gt; ${this.escapeHtml(this.t('validTo'))} <strong>${this.escapeHtml(this.formatDateTime(validTo))}</strong></div>
+            <div class="nuke-terminal-line">&gt; ${this.escapeHtml(this.t('validity'))}: <strong>${this.escapeHtml(this.formatDateTime(validFrom))}</strong> - <strong>${this.escapeHtml(this.formatDateTime(validTo))}</strong></div>
             <div class="nuke-terminal-line">&gt; ${this.escapeHtml(this.t('accessingSilos'))} <span class="cursor">&nbsp;</span> ${staleTag}</div>
             <div class="nuke-terminal-line nuke-countdown-line">${this.escapeHtml(this.t('resetIn'))} <strong data-nuke-codes-terminal-target="countdown"></strong></div>
         `;

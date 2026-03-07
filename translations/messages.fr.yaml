@@ -61,9 +61,7 @@ nuke_codes.description: Suivi des codes Alpha, Bravo et Charlie avec leur fenêt
 nuke_codes.timezone: 'Fuseau horaire: %timezone%'
 nuke_codes.state.loading: Chargement des codes nucléaires...
 nuke_codes.state.load_failed: Impossible de charger les codes nucléaires.
-nuke_codes.block.title: Fallout 76 Nuke Codes
-nuke_codes.block.valid_from: Valides depuis
-nuke_codes.block.valid_to: Valides jusqu'à
+nuke_codes.block.validity: Validité
 nuke_codes.block.reset_in: Renouvellement dans
 nuke_codes.block.accessing_silos: Accès aux silos...
 nuke_codes.block.stale: Données en cache

@@ -61,9 +61,7 @@ nuke_codes.description: Verfolge Alpha-, Bravo- und Charlie-Codes mit ihrem Gult
 nuke_codes.timezone: 'Zeitzone: %timezone%'
 nuke_codes.state.loading: Nukecodes werden geladen...
 nuke_codes.state.load_failed: Nukecodes konnten nicht geladen werden.
-nuke_codes.block.title: Fallout 76 Nuclear Codes
-nuke_codes.block.valid_from: Gultig ab
-nuke_codes.block.valid_to: Gultig bis
+nuke_codes.block.validity: Gultigkeit
 nuke_codes.block.reset_in: Zurucksetzung in
 nuke_codes.block.accessing_silos: Silos werden abgefragt...
 nuke_codes.block.stale: Zwischengespeicherte Daten
