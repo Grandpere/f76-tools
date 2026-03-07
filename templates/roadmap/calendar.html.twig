@@ -11,7 +11,7 @@
             activeNav: 'roadmap-calendar'
         } %}
 
-        <section class="catalog-panel">
+        <section class="catalog-panel catalog-block">
             <h2>{{ 'roadmap_calendar.list_title'|trans }}</h2>
             {% set ongoingCount = rows|filter(row => row.status == 'ongoing')|length %}
             {% set upcomingCount = rows|filter(row => row.status == 'upcoming')|length %}

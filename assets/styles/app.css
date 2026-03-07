@@ -2139,6 +2139,10 @@ body::before {
     filter: brightness(0.98);
 }
 
+.roadmap-calendar-status-section {
+    margin-top: 0.95rem;
+}
+
 .roadmap-calendar-status-section + .roadmap-calendar-status-section {
     margin-top: 1rem;
 }

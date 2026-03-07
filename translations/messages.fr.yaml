@@ -9,6 +9,7 @@ dashboard.page_title: 'F76 - Mods légendaires'
 dashboard.header.translation_management: Gestion des traductions
 dashboard.header.user_management: Gestion des utilisateurs
 dashboard.header.minerva_rotation: Minerva
+dashboard.header.roadmap_calendar: Calendrier
 dashboard.header.nuke_codes: Codes nucléaires
 dashboard.header.progression: Progression
 dashboard.header.admin: Administration
