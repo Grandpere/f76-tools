@@ -473,7 +473,7 @@ admin_contact.flash.status_updated: Status aktualisiert.
 
 minerva.page_title: 'F76 - Minerva'
 minerva.title: Minerva
-minerva.description: Aktive, kommende und vergangene Minerva-Zeitfenster nach Startdatum sortiert.
+minerva.description: Wahle einen Charakter, markiere gelernte Plane, sieh Minervas aktuellen Standort und die nachsten Ankunfte.
 minerva.catalog_last_updated: 'Letzte Aktualisierung der Minerva-Plane: %date%'
 minerva.catalog_last_updated_unknown: 'Letzte Aktualisierung der Minerva-Plane: unbekannt'
 minerva.back_to_dashboard: Zuruck zum Dashboard

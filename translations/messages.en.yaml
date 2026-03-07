@@ -473,7 +473,7 @@ admin_contact.flash.status_updated: Status updated.
 
 minerva.page_title: 'F76 - Minerva'
 minerva.title: Minerva
-minerva.description: Current, upcoming, and past Minerva windows ordered by start date.
+minerva.description: Select a character, mark learned plans, check Minerva's current location, and review upcoming arrivals.
 minerva.catalog_last_updated: 'Last Minerva plans update: %date%'
 minerva.catalog_last_updated_unknown: 'Last Minerva plans update: unknown'
 minerva.back_to_dashboard: Back to dashboard
