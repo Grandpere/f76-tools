@@ -70,7 +70,7 @@ nuke_codes.block.bravo: BRAVO
 nuke_codes.block.charlie: CHARLIE
 roadmap_calendar.page_title: 'F76 - Kalender'
 roadmap_calendar.title: Kalender
-roadmap_calendar.description: Gultige Roadmap-Events.
+roadmap_calendar.description: Diese Seite listet die Events einer Saison auf.
 roadmap_calendar.list_title: Community-Kalender
 roadmap_calendar.hero_line_1: Fallout 76 Community Calendar
 roadmap_calendar.hero_line_2: '%count% Events in der Timeline veroffentlicht'
