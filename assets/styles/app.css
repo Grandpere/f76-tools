@@ -2518,6 +2518,35 @@ textarea.roadmap-input {
     color: var(--text-1);
 }
 
+.admin-minerva-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 0.68rem;
+}
+
+.admin-minerva-action-card {
+    border: 1px solid rgba(29, 37, 49, 0.14);
+    border-radius: 12px;
+    background: linear-gradient(180deg, #fffef8, #fff9e8);
+    padding: 0.68rem 0.72rem;
+}
+
+.admin-minerva-action-card h3 {
+    margin: 0 0 0.48rem;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+}
+
+.admin-minerva-action-card .minerva-admin-filters {
+    margin-top: 0;
+}
+
+.admin-minerva-action-card .minerva-admin-filters .field {
+    min-width: 8.8rem;
+}
+
 .admin-minerva-freshness-stale {
     border-color: rgba(193, 76, 63, 0.35);
     background: linear-gradient(180deg, #fff6f2, #fff2ec);
@@ -3203,6 +3232,10 @@ span.flatpickr-weekday {
 
     .progression-character-toolbar::after {
         display: none;
+    }
+
+    .admin-minerva-actions-grid {
+        grid-template-columns: 1fr;
     }
 }
 

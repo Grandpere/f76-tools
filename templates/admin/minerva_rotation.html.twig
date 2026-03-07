@@ -24,34 +24,43 @@
                     <li>{{ 'admin_minerva.governance_recovery'|trans }}</li>
                 </ul>
             </div>
-            <form method="post" action="{{ path('app_admin_minerva_rotation_regenerate', { locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters" data-controller="minerva-admin-datepicker" data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}">
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_regenerate') }}">
-                <label class="field">
-                    <span>{{ 'admin_minerva.from'|trans }}</span>
-                    <input type="date" name="from" value="{{ defaultFrom }}">
-                </label>
-                <label class="field">
-                    <span>{{ 'admin_minerva.to'|trans }}</span>
-                    <input type="date" name="to" value="{{ defaultTo }}">
-                </label>
-                <button type="submit">{{ 'admin_minerva.regenerate'|trans }}</button>
-            </form>
-            <form method="post" action="{{ path('app_admin_minerva_rotation_refresh', { locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters" data-controller="minerva-admin-datepicker" data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}">
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_refresh') }}">
-                <label class="field">
-                    <span>{{ 'admin_minerva.from'|trans }}</span>
-                    <input type="date" name="from" value="{{ defaultFrom }}">
-                </label>
-                <label class="field">
-                    <span>{{ 'admin_minerva.to'|trans }}</span>
-                    <input type="date" name="to" value="{{ defaultTo }}">
-                </label>
-                <label class="field">
-                    <span>{{ 'admin_minerva.refresh_dry_run'|trans }}</span>
-                    <input type="checkbox" name="dryRun" value="1">
-                </label>
-                <button type="submit">{{ 'admin_minerva.refresh'|trans }}</button>
-            </form>
+            <div class="admin-minerva-actions-grid">
+                <article class="admin-minerva-action-card">
+                    <h3>{{ 'admin_minerva.regenerate'|trans }}</h3>
+                    <form method="post" action="{{ path('app_admin_minerva_rotation_regenerate', { locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters" data-controller="minerva-admin-datepicker" data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_regenerate') }}">
+                        <label class="field">
+                            <span>{{ 'admin_minerva.from'|trans }}</span>
+                            <input type="date" name="from" value="{{ defaultFrom }}">
+                        </label>
+                        <label class="field">
+                            <span>{{ 'admin_minerva.to'|trans }}</span>
+                            <input type="date" name="to" value="{{ defaultTo }}">
+                        </label>
+                        <button type="submit">{{ 'admin_minerva.regenerate'|trans }}</button>
+                    </form>
+                </article>
+
+                <article class="admin-minerva-action-card">
+                    <h3>{{ 'admin_minerva.refresh'|trans }}</h3>
+                    <form method="post" action="{{ path('app_admin_minerva_rotation_refresh', { locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters" data-controller="minerva-admin-datepicker" data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_refresh') }}">
+                        <label class="field">
+                            <span>{{ 'admin_minerva.from'|trans }}</span>
+                            <input type="date" name="from" value="{{ defaultFrom }}">
+                        </label>
+                        <label class="field">
+                            <span>{{ 'admin_minerva.to'|trans }}</span>
+                            <input type="date" name="to" value="{{ defaultTo }}">
+                        </label>
+                        <label class="field">
+                            <span>{{ 'admin_minerva.refresh_dry_run'|trans }}</span>
+                            <input type="checkbox" name="dryRun" value="1">
+                        </label>
+                        <button type="submit">{{ 'admin_minerva.refresh'|trans }}</button>
+                    </form>
+                </article>
+            </div>
             <p class="catalog-state">{{ 'admin_minerva.timezone'|trans({'%timezone%': timeline.timezone}) }}</p>
             <div
                 class="admin-minerva-freshness {{ freshness.missingWindows|default(0) > 0 ? 'admin-minerva-freshness-stale' : '' }}"
