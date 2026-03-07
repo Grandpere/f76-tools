@@ -44,16 +44,16 @@
             {% if timeline.current %}
                 {% set countdownTitle = 'minerva.countdown_title_active'|trans %}
                 {% set countdownText = 'minerva.countdown_active_intro'|trans({
-                    '%location%': timeline.current.location,
-                    '%list%': timeline.current.listCycle
+                    '%location%': '<strong>' ~ timeline.current.location|e ~ '</strong>',
+                    '%list%': '<strong>' ~ timeline.current.listCycle ~ '</strong>'
                 }) %}
                 {% set countdownTargetDate = timeline.current.endsAt %}
                 {% set countdownLabel = 'minerva.countdown_leaves_in'|trans %}
             {% elseif nextWindow %}
                 {% set countdownTitle = 'minerva.countdown_title_upcoming'|trans %}
                 {% set countdownText = 'minerva.countdown_upcoming_intro'|trans({
-                    '%location%': nextWindow.location,
-                    '%list%': nextWindow.listCycle
+                    '%location%': '<strong>' ~ nextWindow.location|e ~ '</strong>',
+                    '%list%': '<strong>' ~ nextWindow.listCycle ~ '</strong>'
                 }) %}
                 {% set countdownTargetDate = nextWindow.startsAt %}
                 {% set countdownLabel = 'minerva.countdown_arrives_in'|trans %}
@@ -71,7 +71,7 @@
                      {% endif %}
             >
                 <h2>{{ countdownTitle }}</h2>
-                <p>{{ countdownText }}</p>
+                <p>{{ countdownText|raw }}</p>
                 {% if countdownTargetDate %}
                     <p class="minerva-countdown-label">{{ countdownLabel }}</p>
                     <div class="minerva-countdown-grid" aria-live="polite">
