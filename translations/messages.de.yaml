@@ -6,8 +6,8 @@ common.yes: Ja
 common.no: Nein
 
 dashboard.page_title: 'F76 - Legendare Mods'
-dashboard.header.translation_management: Ubersetzungsverwaltung
-dashboard.header.user_management: Benutzerverwaltung
+dashboard.header.translation_management: Ubersetzungen
+dashboard.header.user_management: Benutzer
 dashboard.header.minerva_rotation: Minerva
 dashboard.header.roadmap_calendar: Kalender
 dashboard.header.nuke_codes: Nukecodes
