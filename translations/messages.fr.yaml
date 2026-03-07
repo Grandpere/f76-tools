@@ -69,6 +69,17 @@ nuke_codes.block.stale: Données en cache
 nuke_codes.block.alpha: ALPHA
 nuke_codes.block.bravo: BRAVO
 nuke_codes.block.charlie: CHARLIE
+roadmap_calendar.page_title: 'F76 - Calendrier'
+roadmap_calendar.title: Calendrier
+roadmap_calendar.description: Événements roadmap valides.
+roadmap_calendar.list_title: Calendrier communautaire
+roadmap_calendar.hero_line_1: Fallout 76 Community Calendar
+roadmap_calendar.hero_line_2: '%count% événements publiés dans la timeline'
+roadmap_calendar.status_ongoing: En cours
+roadmap_calendar.status_upcoming: À venir
+roadmap_calendar.status_ended: Terminé
+roadmap_calendar.empty_status: Aucun événement dans cette section.
+roadmap_calendar.empty: Aucun événement roadmap disponible.
 dashboard.transfer.title: Progression (backup)
 dashboard.transfer.export: Export JSON
 dashboard.transfer.import: Import JSON

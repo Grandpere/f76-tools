@@ -73,7 +73,7 @@ nuke_codes.block.charlie: CHARLIE
 roadmap_calendar.page_title: 'F76 - Calendar'
 roadmap_calendar.title: Calendar
 roadmap_calendar.description: Valid roadmap events.
-roadmap_calendar.list_title: Event calendar
+roadmap_calendar.list_title: Community calendar
 roadmap_calendar.hero_line_1: Fallout 76 Community Calendar
 roadmap_calendar.hero_line_2: '%count% events published in the timeline'
 roadmap_calendar.status_ongoing: Ongoing
