@@ -2553,11 +2553,18 @@ textarea.roadmap-input {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.62rem;
+    align-items: end;
 }
 
 .admin-minerva-action-fields .field {
     min-width: 0;
     grid-column: auto;
+}
+
+.admin-minerva-action-fields .field input[type='date'],
+.admin-minerva-action-fields .field input[type='datetime-local'],
+.admin-minerva-action-fields .field .flatpickr-input[readonly] {
+    width: 100%;
 }
 
 .admin-minerva-action-submit {
