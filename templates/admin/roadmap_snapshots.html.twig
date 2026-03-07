@@ -210,7 +210,10 @@
                 <span class="roadmap-step-badge">{{ selectedSnapshot ? '4' : '3' }}</span>
                 <span>{{ 'admin_roadmap.canonical_title'|trans }}</span>
             </h2>
-            <p class="catalog-state">{{ 'admin_roadmap.canonical_description'|trans }}</p>
+            <p class="catalog-state roadmap-section-hint roadmap-canonical-intro">
+                {{ 'admin_roadmap.canonical_description'|trans }}
+                {{ 'admin_roadmap.merge_requires_approved_hint'|trans }}
+            </p>
             <form method="post" action="{{ path('app_admin_roadmap_merge_locales', { locale: app.request.locale }) }}" class="translations-filters roadmap-merge-form">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_merge_locales') }}">
                 <label class="roadmap-merge-field">
@@ -231,7 +234,6 @@
                 </label>
                 <button type="submit">{{ 'admin_roadmap.merge_submit'|trans }}</button>
             </form>
-            <p class="catalog-state roadmap-section-hint">{{ 'admin_roadmap.merge_requires_approved_hint'|trans }}</p>
             <div class="translations-table-wrap">
                 <table class="translations-table roadmap-canonical-table">
                     <colgroup>

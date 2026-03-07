@@ -2005,9 +2005,8 @@ body::before {
     box-shadow: 0 0 0 3px rgba(244, 164, 74, 0.2);
 }
 
-.roadmap-merge-form + .roadmap-section-hint {
-    margin-top: 0.36rem;
-    margin-bottom: 1rem;
+.roadmap-canonical-intro {
+    margin-bottom: 1.05rem;
 }
 
 .roadmap-count-pill {
