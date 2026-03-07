@@ -151,27 +151,23 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% set hasActiveOrUpcoming = false %}
-                        {% for row in timeline.rows %}
-                            {% if row.status != 'ended' %}
-                                {% set hasActiveOrUpcoming = true %}
-                                <tr>
-                                    <td>{{ row.listCycle }}</td>
-                                    <td>{{ row.location }}</td>
-                                    <td>{{ row.startsAt|date('D d M Y · H:i') }}</td>
-                                    <td>{{ row.endsAt|date('D d M Y · H:i') }}</td>
-                                    <td data-minerva-progression-target="cell" data-list-cycle="{{ row.listCycle }}">
-                                        <div class="minerva-progress-cell">
-                                            <div class="minerva-progress-meta" data-minerva-progress-meta>-</div>
-                                            <div class="minerva-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                                                <span class="minerva-progress-fill" data-minerva-progress-fill style="width: 0%;"></span>
-                                            </div>
+                        {% for row in timelineTablePagination.rows %}
+                            <tr>
+                                <td>{{ row.listCycle }}</td>
+                                <td>{{ row.location }}</td>
+                                <td>{{ row.startsAt|date('D d M Y · H:i') }}</td>
+                                <td>{{ row.endsAt|date('D d M Y · H:i') }}</td>
+                                <td data-minerva-progression-target="cell" data-list-cycle="{{ row.listCycle }}">
+                                    <div class="minerva-progress-cell">
+                                        <div class="minerva-progress-meta" data-minerva-progress-meta>-</div>
+                                        <div class="minerva-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                            <span class="minerva-progress-fill" data-minerva-progress-fill style="width: 0%;"></span>
                                         </div>
-                                    </td>
-                                </tr>
-                            {% endif %}
+                                    </div>
+                                </td>
+                            </tr>
                         {% endfor %}
-                        {% if not hasActiveOrUpcoming %}
+                        {% if timelineTablePagination.rows is empty %}
                             <tr>
                                 <td colspan="5">{{ 'minerva.empty'|trans }}</td>
                             </tr>
@@ -179,6 +175,38 @@
                         </tbody>
                     </table>
                 </div>
+                {% if timelineTablePagination.pageCount > 1 %}
+                    <nav class="catalog-pagination minerva-pagination" aria-label="Minerva upcoming windows pagination">
+                        {% if timelineTablePagination.currentPage > 1 %}
+                            <a
+                                class="catalog-pagination-link"
+                                href="{{ path('app_minerva_rotation', app.request.query.all|merge({'page': timelineTablePagination.currentPage - 1})) }}"
+                            >
+                                {{ 'minerva.pagination_prev'|trans }}
+                            </a>
+                        {% else %}
+                            <span class="catalog-pagination-link is-disabled">{{ 'minerva.pagination_prev'|trans }}</span>
+                        {% endif %}
+
+                        <span class="catalog-pagination-current">
+                            {{ 'minerva.pagination_page'|trans({
+                                '%page%': timelineTablePagination.currentPage,
+                                '%total%': timelineTablePagination.pageCount
+                            }) }}
+                        </span>
+
+                        {% if timelineTablePagination.currentPage < timelineTablePagination.pageCount %}
+                            <a
+                                class="catalog-pagination-link"
+                                href="{{ path('app_minerva_rotation', app.request.query.all|merge({'page': timelineTablePagination.currentPage + 1})) }}"
+                            >
+                                {{ 'minerva.pagination_next'|trans }}
+                            </a>
+                        {% else %}
+                            <span class="catalog-pagination-link is-disabled">{{ 'minerva.pagination_next'|trans }}</span>
+                        {% endif %}
+                    </nav>
+                {% endif %}
             </section>
         </section>
 

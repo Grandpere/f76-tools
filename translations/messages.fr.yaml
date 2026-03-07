@@ -25,9 +25,17 @@ dashboard.filters.player: Personnage
 dashboard.filters.search: Recherche
 dashboard.filters.search_placeholder: 'Nom, description, clé...'
 dashboard.filters.source_filters: Filtres de source
+dashboard.filters.group_visibility: Visibilité
+dashboard.filters.group_loot_sources: Sources de loot
+dashboard.filters.group_equipment_types: Type d'équipement
 dashboard.sources.raid: Raid
 dashboard.sources.burning_springs: Burning Springs
 dashboard.sources.bigfoot: Bigfoot
+dashboard.sources.new: Nouveau
+dashboard.sources.loot_melee: Arme mêlée
+dashboard.sources.loot_ranged: Arme à distance
+dashboard.sources.loot_armor: Armure
+dashboard.sources.loot_power_armor: Armure assistée
 dashboard.sources.daily_ops: Opérations quotidiennes
 dashboard.sources.regs: Regs
 dashboard.sources.samuel: Samuel
@@ -463,6 +471,9 @@ minerva.countdown_days: jours
 minerva.countdown_hours: heures
 minerva.countdown_minutes: minutes
 minerva.countdown_seconds: secondes
+minerva.pagination_prev: Précédent
+minerva.pagination_next: Suivant
+minerva.pagination_page: 'Page %page% / %total%'
 
 admin_minerva.page_title: Admin rotation Minerva
 admin_minerva.kicker: Backoffice

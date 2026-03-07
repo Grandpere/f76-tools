@@ -122,6 +122,36 @@ final class MinervaRotationControllerTest extends WebTestCase
         ], $headerTexts);
     }
 
+    public function testUpcomingWindowsTableIsPaginatedByTenRows(): void
+    {
+        $user = $this->createUser('minerva-pagination@example.com');
+        $now = new DateTimeImmutable('now', new DateTimeZone('UTC'));
+
+        for ($i = 1; $i <= 12; ++$i) {
+            $start = $now->modify(sprintf('+%d days', $i))->setTime(17, 0);
+            $end = $start->modify('+2 days')->setTime(17, 0);
+
+            $this->createRotation(
+                sprintf('Location %d', $i),
+                $i,
+                $start->format(DATE_ATOM),
+                $end->format(DATE_ATOM),
+                MinervaRotationSourceEnum::GENERATED,
+            );
+        }
+
+        $this->browser()->loginUser($user);
+
+        $crawlerPage1 = $this->browser()->request('GET', '/minerva-rotation?page=1');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(10, $crawlerPage1->filter('table.minerva-table tbody tr'));
+        self::assertCount(1, $crawlerPage1->filter('a.catalog-pagination-link[href*="page=2"]'));
+
+        $crawlerPage2 = $this->browser()->request('GET', '/minerva-rotation?page=2');
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertCount(2, $crawlerPage2->filter('table.minerva-table tbody tr'));
+    }
+
     private function createUser(string $email): UserEntity
     {
         $user = new UserEntity()
