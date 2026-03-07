@@ -27,6 +27,7 @@
             <div class="admin-minerva-actions-grid">
                 <article class="admin-minerva-action-card">
                     <h3>{{ 'admin_minerva.regenerate'|trans }}</h3>
+                    <p class="admin-minerva-action-hint">{{ 'admin_minerva.regenerate_hint'|trans }}</p>
                     <form method="post" action="{{ path('app_admin_minerva_rotation_regenerate', { locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters admin-minerva-action-form" data-controller="minerva-admin-datepicker" data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_regenerate') }}">
                         <div class="admin-minerva-action-fields">
@@ -47,6 +48,7 @@
 
                 <article class="admin-minerva-action-card">
                     <h3>{{ 'admin_minerva.refresh'|trans }}</h3>
+                    <p class="admin-minerva-action-hint">{{ 'admin_minerva.refresh_hint'|trans }}</p>
                     <form method="post" action="{{ path('app_admin_minerva_rotation_refresh', { locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters admin-minerva-action-form" data-controller="minerva-admin-datepicker" data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_refresh') }}">
                         <div class="admin-minerva-action-fields">

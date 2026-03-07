@@ -523,6 +523,8 @@ admin_minerva.back_to_dashboard: Back to dashboard
 admin_minerva.regenerate_title: Regenerate timeline
 admin_minerva.refresh: Refresh coverage
 admin_minerva.refresh_dry_run: Dry run
+admin_minerva.regenerate_hint: Fully rebuilds timeline rows for the selected range.
+admin_minerva.refresh_hint: Checks coverage and fills missing windows; enable Dry run for a no-write simulation.
 admin_minerva.from: From
 admin_minerva.to: To
 admin_minerva.regenerate: Regenerate

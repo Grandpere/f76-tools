@@ -495,6 +495,8 @@ admin_minerva.back_to_dashboard: Retour au tableau de bord
 admin_minerva.regenerate_title: Régénérer la timeline
 admin_minerva.refresh: Rafraîchir la couverture
 admin_minerva.refresh_dry_run: Simulation
+admin_minerva.regenerate_hint: Recalcule entièrement la timeline sur la plage choisie (action de reconstruction).
+admin_minerva.refresh_hint: Vérifie la couverture et complète les fenêtres manquantes; active Simulation pour un dry-run sans écriture.
 admin_minerva.from: Du
 admin_minerva.to: Au
 admin_minerva.regenerate: Régénérer

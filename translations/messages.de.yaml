@@ -523,6 +523,8 @@ admin_minerva.back_to_dashboard: Zuruck zum Dashboard
 admin_minerva.regenerate_title: Zeitplan neu generieren
 admin_minerva.refresh: Abdeckung aktualisieren
 admin_minerva.refresh_dry_run: Simulation
+admin_minerva.regenerate_hint: Erstellt die Timeline im gewahlten Zeitraum vollstandig neu.
+admin_minerva.refresh_hint: Prueft die Abdeckung und erganzt fehlende Fenster; Simulation bleibt ohne DB-Schreibvorgange.
 admin_minerva.from: Von
 admin_minerva.to: Bis
 admin_minerva.regenerate: Neu generieren
