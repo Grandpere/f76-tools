@@ -29,6 +29,11 @@
         source_dropRaid: 'dashboard.sources.raid'|trans,
         source_dropBurningSprings: 'dashboard.sources.burning_springs'|trans,
         source_dropBigfoot: 'dashboard.sources.bigfoot'|trans,
+        source_isNew: 'dashboard.sources.new'|trans,
+        source_lootTypeMelee: 'dashboard.sources.loot_melee'|trans,
+        source_lootTypeRanged: 'dashboard.sources.loot_ranged'|trans,
+        source_lootTypeArmor: 'dashboard.sources.loot_armor'|trans,
+        source_lootTypePowerArmor: 'dashboard.sources.loot_power_armor'|trans,
         source_dropDailyOps: 'dashboard.sources.daily_ops'|trans,
         source_vendorRegs: 'dashboard.sources.regs'|trans,
         source_vendorSamuel: 'dashboard.sources.samuel'|trans,
@@ -57,10 +62,30 @@
                 {% include '_catalog_player_search_filters.html.twig' with { targetPrefix: 'item-catalog' } %}
                 {% include '_catalog_source_filters.html.twig' with {
                     targetPrefix: 'item-catalog',
-                    filters: [
-                        { value: 'dropRaid', icon: '/assets/icons/GleamingDepthsMarker.svg', labelKey: 'dashboard.sources.raid' },
-                        { value: 'dropBurningSprings', icon: '/assets/icons/bounty_hunter_ghoul_icon_128.png', labelKey: 'dashboard.sources.burning_springs' },
-                        { value: 'dropBigfoot', icon: '/assets/icons/bigfoot_icon_128x128.png', labelKey: 'dashboard.sources.bigfoot' }
+                    filterGroups: [
+                        {
+                            titleKey: 'dashboard.filters.group_visibility',
+                            filters: [
+                                { value: 'isNew', labelKey: 'dashboard.sources.new' }
+                            ]
+                        },
+                        {
+                            titleKey: 'dashboard.filters.group_loot_sources',
+                            filters: [
+                                { value: 'dropRaid', icon: '/assets/icons/GleamingDepthsMarker.svg', labelKey: 'dashboard.sources.raid' },
+                                { value: 'dropBurningSprings', icon: '/assets/icons/bounty_hunter_ghoul_icon_128.png', labelKey: 'dashboard.sources.burning_springs' },
+                                { value: 'dropBigfoot', icon: '/assets/icons/bigfoot_icon_128x128.png', labelKey: 'dashboard.sources.bigfoot' }
+                            ]
+                        },
+                        {
+                            titleKey: 'dashboard.filters.group_equipment_types',
+                            filters: [
+                                { value: 'lootTypeMelee', icon: '/assets/icons/FO76_iconwheel_supersledge_black.png', labelKey: 'dashboard.sources.loot_melee' },
+                                { value: 'lootTypeRanged', icon: '/assets/icons/FO76_iconwheel_pistol_black.png', labelKey: 'dashboard.sources.loot_ranged' },
+                                { value: 'lootTypeArmor', icon: '/assets/icons/FO76_iconwheel_armor_black.png', labelKey: 'dashboard.sources.loot_armor' },
+                                { value: 'lootTypePowerArmor', icon: '/assets/icons/FO76_iconwheel_pahelm_black.png', labelKey: 'dashboard.sources.loot_power_armor' }
+                            ]
+                        }
                     ]
                 } %}
                 {% include '_catalog_state_line.html.twig' with { targetPrefix: 'item-catalog' } %}

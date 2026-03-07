@@ -1,6 +1,35 @@
 <fieldset class="source-filters">
     <legend>{{ 'dashboard.filters.source_filters'|trans }}</legend>
-    {% for filter in filters %}
-        <label><input type="checkbox" data-{{ targetPrefix }}-target="sourceFilter" value="{{ filter.value }}"><img src="{{ filter.icon }}" alt="">{{ filter.labelKey|trans }}</label>
-    {% endfor %}
+    {% if filterGroups is defined and filterGroups is not empty %}
+        <div class="source-filter-groups">
+            {% for group in filterGroups %}
+                <div class="source-filter-group">
+                    {% if group.titleKey is defined and group.titleKey %}
+                        <p class="source-filter-group-title">{{ group.titleKey|trans }}</p>
+                    {% endif %}
+                    <div class="source-filter-options">
+                        {% for filter in group.filters %}
+                            <label>
+                                <input type="checkbox" data-{{ targetPrefix }}-target="sourceFilter" value="{{ filter.value }}">
+                                {% if filter.icon is defined and filter.icon %}
+                                    <img src="{{ filter.icon }}" alt="">
+                                {% endif %}
+                                {{ filter.labelKey|trans }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        {% for filter in filters %}
+            <label>
+                <input type="checkbox" data-{{ targetPrefix }}-target="sourceFilter" value="{{ filter.value }}">
+                {% if filter.icon is defined and filter.icon %}
+                    <img src="{{ filter.icon }}" alt="">
+                {% endif %}
+                {{ filter.labelKey|trans }}
+            </label>
+        {% endfor %}
+    {% endif %}
 </fieldset>

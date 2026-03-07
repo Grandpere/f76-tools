@@ -70,7 +70,7 @@ final class RoadmapCalendarControllerTest extends WebTestCase
         self::assertStringContainsString('03/03/2026', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('10/03/2026', (string) $this->browser()->getResponse()->getContent());
         self::assertStringNotContainsString('00:00', (string) $this->browser()->getResponse()->getContent());
-        self::assertStringContainsString("BIGFOOT'S BASH", (string) $this->browser()->getResponse()->getContent());
+        self::assertSame("BIGFOOT'S BASH", trim($crawler->filter('.roadmap-calendar-event-title')->text()));
     }
 
     private function createUser(string $email): UserEntity

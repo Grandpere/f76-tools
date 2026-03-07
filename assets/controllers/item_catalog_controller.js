@@ -355,7 +355,44 @@ export default class extends Controller {
             return this.items;
         }
 
-        return this.items.filter((item) => this.activeSourceFilters.every((filterKey) => item[filterKey] === true));
+        return this.items.filter((item) => this.activeSourceFilters.every((filterKey) => this.matchesFilter(item, filterKey)));
+    }
+
+    matchesFilter(item, filterKey) {
+        if (['lootTypeMelee', 'lootTypeRanged', 'lootTypeArmor', 'lootTypePowerArmor'].includes(filterKey)) {
+            return this.matchesLootTypeFilter(item, filterKey);
+        }
+
+        return item[filterKey] === true;
+    }
+
+    matchesLootTypeFilter(item, filterKey) {
+        if (item.type !== 'MISC') {
+            return false;
+        }
+
+        const relations = String(item.relationsHtml || '').toLowerCase();
+        if (relations === '') {
+            return false;
+        }
+
+        if (filterKey === 'lootTypeMelee') {
+            return relations.includes('weapon: melee');
+        }
+
+        if (filterKey === 'lootTypeRanged') {
+            return relations.includes('weapon: ranged');
+        }
+
+        if (filterKey === 'lootTypePowerArmor') {
+            return relations.includes('power armor');
+        }
+
+        if (filterKey === 'lootTypeArmor') {
+            return relations.includes('title=\"armor\"') || relations.includes("title='armor'");
+        }
+
+        return false;
     }
 
     updateStateCounter() {
