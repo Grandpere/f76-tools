@@ -2855,6 +2855,47 @@ span.flatpickr-weekday {
     white-space: nowrap;
 }
 
+.translations-table.roadmap-canonical-table {
+    min-width: 980px;
+    table-layout: fixed;
+}
+
+.translations-table.roadmap-canonical-table th:first-child,
+.translations-table.roadmap-canonical-table td:first-child {
+    width: 14%;
+    white-space: normal;
+}
+
+.translations-table.roadmap-canonical-table th:last-child,
+.translations-table.roadmap-canonical-table td:last-child {
+    width: 24%;
+    white-space: normal;
+}
+
+.translations-table.roadmap-canonical-table th:nth-child(2),
+.translations-table.roadmap-canonical-table td:nth-child(2) {
+    width: 8%;
+    white-space: nowrap;
+}
+
+.translations-table.roadmap-canonical-table th:nth-child(3),
+.translations-table.roadmap-canonical-table td:nth-child(3) {
+    width: 12%;
+    white-space: normal;
+}
+
+.translations-table.roadmap-canonical-table th:nth-child(4),
+.translations-table.roadmap-canonical-table td:nth-child(4) {
+    width: 22%;
+    white-space: normal;
+}
+
+.translations-table.roadmap-canonical-table th:nth-child(5),
+.translations-table.roadmap-canonical-table td:nth-child(5) {
+    width: 20%;
+    white-space: normal;
+}
+
 .translations-table th,
 .translations-table td,
 .minerva-table th,
