@@ -2542,6 +2542,8 @@ textarea.roadmap-input {
 .admin-minerva-action-hint {
     margin: 0 0 0.58rem;
     font-size: 0.84rem;
+    line-height: 1.35;
+    min-height: 2.3rem;
     color: var(--text-1);
 }
 
