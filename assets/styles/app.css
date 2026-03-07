@@ -2042,6 +2042,37 @@ body::before {
     color: #7e2d24;
 }
 
+.roadmap-canonical-table .roadmap-canonical-col-window {
+    width: 14%;
+}
+
+.roadmap-canonical-table .roadmap-canonical-col-confidence {
+    width: 8%;
+}
+
+.roadmap-canonical-table .roadmap-canonical-col-missing {
+    width: 12%;
+}
+
+.roadmap-canonical-table .roadmap-canonical-col-fr {
+    width: 22%;
+}
+
+.roadmap-canonical-table .roadmap-canonical-col-en {
+    width: 20%;
+}
+
+.roadmap-canonical-table .roadmap-canonical-col-de {
+    width: 24%;
+}
+
+.roadmap-canonical-table td:nth-child(4),
+.roadmap-canonical-table td:nth-child(5),
+.roadmap-canonical-table td:nth-child(6) {
+    line-height: 1.35;
+    word-break: break-word;
+}
+
 .roadmap-events-table th {
     white-space: nowrap;
 }
