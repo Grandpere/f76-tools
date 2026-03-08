@@ -38,11 +38,11 @@ final class AdminAuditLogEntityRepository extends ServiceEntityRepository implem
      */
     public function findPaginated(string $query, string $action, int $page, int $perPage): array
     {
-        $qb = $this->createFilteredQueryBuilder($query, $action);
+        $qb = $this->createFilteredQueryBuilder($query, $action, true);
+        $countQb = $this->createFilteredQueryBuilder($query, $action, '' !== $query);
 
-        $total = (int) (clone $qb)
+        $total = (int) $countQb
             ->select('COUNT(a.id)')
-            ->resetDQLPart('orderBy')
             ->getQuery()
             ->getSingleScalarResult();
 
@@ -65,7 +65,7 @@ final class AdminAuditLogEntityRepository extends ServiceEntityRepository implem
      */
     public function findRowsPage(string $query, string $action, int $page, int $perPage): array
     {
-        $result = $this->executeRowsPageQuery($this->createFilteredQueryBuilder($query, $action), $page, $perPage);
+        $result = $this->executeRowsPageQuery($this->createFilteredQueryBuilder($query, $action, true), $page, $perPage);
 
         if (!is_array($result)) {
             return [];
@@ -204,15 +204,17 @@ final class AdminAuditLogEntityRepository extends ServiceEntityRepository implem
         return $result;
     }
 
-    private function createFilteredQueryBuilder(string $query, string $action): \Doctrine\ORM\QueryBuilder
+    private function createFilteredQueryBuilder(string $query, string $action, bool $withUserJoins): \Doctrine\ORM\QueryBuilder
     {
-        $qb = $this->createQueryBuilder('a')
-            ->leftJoin('a.actorUser', 'actor')
-            ->leftJoin('a.targetUser', 'target')
-            ->addSelect('actor')
-            ->addSelect('target')
-            ->orderBy('a.occurredAt', 'DESC')
-            ->addOrderBy('a.id', 'DESC');
+        $qb = $this->createQueryBuilder('a');
+
+        if ($withUserJoins) {
+            $qb
+                ->leftJoin('a.actorUser', 'actor')
+                ->leftJoin('a.targetUser', 'target')
+                ->addSelect('actor')
+                ->addSelect('target');
+        }
 
         if ('' !== $action) {
             $qb->andWhere('a.action = :action')
@@ -220,9 +222,19 @@ final class AdminAuditLogEntityRepository extends ServiceEntityRepository implem
         }
 
         if ('' !== $query) {
+            if (!$withUserJoins) {
+                $qb
+                    ->leftJoin('a.actorUser', 'actor')
+                    ->leftJoin('a.targetUser', 'target');
+            }
             $needle = '%'.mb_strtolower($query).'%';
             $qb->andWhere('LOWER(actor.email) LIKE :needle OR LOWER(target.email) LIKE :needle OR LOWER(a.action) LIKE :needle')
                 ->setParameter('needle', $needle);
+        }
+
+        if ($withUserJoins) {
+            $qb->orderBy('a.occurredAt', 'DESC')
+                ->addOrderBy('a.id', 'DESC');
         }
 
         return $qb;
