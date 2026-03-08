@@ -201,6 +201,40 @@ body::before {
     color: #cef4d7;
 }
 
+:root[data-theme='terminal'] .minerva-countdown-card,
+:root[data-theme='terminal'] .minerva-window-card,
+:root[data-theme='terminal'] .minerva-upcoming-item,
+:root[data-theme='terminal'] .roadmap-review-card,
+:root[data-theme='terminal'] .admin-minerva-freshness,
+:root[data-theme='terminal'] .admin-minerva-governance,
+:root[data-theme='terminal'] .admin-minerva-action-card,
+:root[data-theme='terminal'] .admin-minerva-last-refresh,
+:root[data-theme='terminal'] .roadmap-calendar-hero,
+:root[data-theme='terminal'] .roadmap-calendar-status-section,
+:root[data-theme='terminal'] .roadmap-calendar-event,
+:root[data-theme='terminal'] .roadmap-canonical-pill,
+:root[data-theme='terminal'] .roadmap-count-pill,
+:root[data-theme='terminal'] .transfer-unknown-panel {
+    background: linear-gradient(160deg, #0b1712, #0f1f18);
+    border-color: rgba(116, 229, 146, 0.25);
+    color: #d5f7dc;
+}
+
+:root[data-theme='terminal'] .roadmap-source-image,
+:root[data-theme='terminal'] .roadmap-raw-text {
+    background: #0a1511;
+    border-color: rgba(116, 229, 146, 0.26);
+    color: #d5f7dc;
+}
+
+:root[data-theme='terminal'] .roadmap-step-badge,
+:root[data-theme='terminal'] .roadmap-calendar-date-chip,
+:root[data-theme='terminal'] .roadmap-calendar-status-pill {
+    background: #12311f;
+    border-color: rgba(116, 229, 146, 0.4);
+    color: #d2f7db;
+}
+
 .catalog-header h1 {
     margin: 0;
     font-family: 'Rajdhani', 'Inter', sans-serif;
