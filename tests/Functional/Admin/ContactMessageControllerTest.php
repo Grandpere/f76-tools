@@ -62,6 +62,9 @@ final class ContactMessageControllerTest extends WebTestCase
 
         $this->browser()->loginUser($admin);
         $this->browser()->request('GET', '/en/admin/contact-messages?status=closed');
+        if (302 === $this->browser()->getResponse()->getStatusCode()) {
+            $this->browser()->followRedirect();
+        }
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $content = $this->browser()->getResponse()->getContent() ?: '';

@@ -20,4 +20,3 @@ interface ItemCatalogTimestampReadRepository
 {
     public function findLatestUpdatedAtByType(ItemTypeEnum $type): ?DateTimeImmutable;
 }
-

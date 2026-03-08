@@ -111,7 +111,7 @@ final class MinervaRotationControllerTest extends WebTestCase
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/minerva-rotation?from=2026-05-01&to=2026-06-30');
+        $crawler = $this->getAndFollowRedirect('/en/admin/minerva-rotation?from=2026-05-01&to=2026-06-30');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
 
         $regenerateFrom = $crawler->filter('form[action*="/en/admin/minerva-rotation/regenerate"] input[name="from"]');
@@ -141,7 +141,7 @@ final class MinervaRotationControllerTest extends WebTestCase
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/minerva-rotation?from=invalid-date&to=2026-99-99');
+        $crawler = $this->getAndFollowRedirect('/en/admin/minerva-rotation?from=invalid-date&to=2026-99-99');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
 
         $regenerateFrom = $crawler->filter('form[action*="/en/admin/minerva-rotation/regenerate"] input[name="from"]');
@@ -193,7 +193,7 @@ final class MinervaRotationControllerTest extends WebTestCase
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/minerva-rotation?from=2026-04-01&to=2026-04-20');
+        $crawler = $this->getAndFollowRedirect('/en/admin/minerva-rotation?from=2026-04-01&to=2026-04-20');
         $tokenNode = $crawler->filter('form[action*="/en/admin/minerva-rotation/regenerate"] input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
 
@@ -275,7 +275,7 @@ final class MinervaRotationControllerTest extends WebTestCase
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/minerva-rotation?from=2026-04-01&to=2026-04-20');
+        $crawler = $this->getAndFollowRedirect('/en/admin/minerva-rotation?from=2026-04-01&to=2026-04-20');
         $tokenNode = $crawler->filter('form[action*="/en/admin/minerva-rotation/refresh"] input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
 
@@ -406,7 +406,7 @@ final class MinervaRotationControllerTest extends WebTestCase
         $admin = $this->createUser('admin@example.com', 'secret123', ['ROLE_ADMIN']);
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/minerva-rotation?from=2026-07-01&to=2026-07-31');
+        $crawler = $this->getAndFollowRedirect('/en/admin/minerva-rotation?from=2026-07-01&to=2026-07-31');
         $tokenNode = $crawler->filter('form[action*="/en/admin/minerva-rotation/override/create"] input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
 
@@ -526,5 +526,15 @@ final class MinervaRotationControllerTest extends WebTestCase
         }
 
         return $this->client;
+    }
+
+    private function getAndFollowRedirect(string $uri): \Symfony\Component\DomCrawler\Crawler
+    {
+        $crawler = $this->browser()->request('GET', $uri);
+        if (302 === $this->browser()->getResponse()->getStatusCode()) {
+            return $this->browser()->followRedirect();
+        }
+
+        return $crawler;
     }
 }

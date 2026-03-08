@@ -130,6 +130,9 @@ final class UserManagementControllerTest extends WebTestCase
 
         $this->browser()->loginUser($admin);
         $this->browser()->request('GET', sprintf('/en/admin/users/%d/auth-events?level=warning&q=198.51.100.8', $target->getId()));
+        if (302 === $this->browser()->getResponse()->getStatusCode()) {
+            $this->browser()->followRedirect();
+        }
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $content = (string) $this->browser()->getResponse()->getContent();
@@ -158,6 +161,9 @@ final class UserManagementControllerTest extends WebTestCase
 
         $this->browser()->loginUser($admin);
         $this->browser()->request('GET', sprintf('/en/admin/users/%d/auth-events/export.csv?level=warning&q=198.51.100', $target->getId()));
+        if (302 === $this->browser()->getResponse()->getStatusCode()) {
+            $this->browser()->followRedirect();
+        }
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('text/csv', (string) $this->browser()->getResponse()->headers->get('content-type'));
@@ -215,7 +221,7 @@ final class UserManagementControllerTest extends WebTestCase
         $this->linkGoogleIdentity($managed, 'google-sub-preserve');
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?google=linked');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?google=linked');
         $tokenNode = $crawler->filter(sprintf('form[action*="/en/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
         self::assertCount(1, $tokenNode);
 
@@ -299,13 +305,13 @@ final class UserManagementControllerTest extends WebTestCase
         $this->linkGoogleIdentity($linked, 'google-sub-filter');
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?google=linked');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?google=linked');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='linked-filter@example.com']"));
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='unlinked-filter@example.com']"));
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr"));
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?google=unlinked');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?google=unlinked');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='unlinked-filter@example.com']"));
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='linked-filter@example.com']"));
@@ -318,12 +324,12 @@ final class UserManagementControllerTest extends WebTestCase
         $this->createUser('beta.search@example.com', 'secret123', ['ROLE_USER']);
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?q=alpha.search');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?q=alpha.search');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='alpha.search@example.com']"));
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='beta.search@example.com']"));
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?q=@example.com');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?q=@example.com');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='alpha.search@example.com']"));
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='beta.search@example.com']"));
@@ -338,12 +344,12 @@ final class UserManagementControllerTest extends WebTestCase
         $this->entityManager?->flush();
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?active=active');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?active=active');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='active.filter@example.com']"));
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='inactive.filter@example.com']"));
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?active=inactive');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?active=inactive');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='inactive.filter@example.com']"));
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='active.filter@example.com']"));
@@ -355,12 +361,12 @@ final class UserManagementControllerTest extends WebTestCase
         $this->createUser('member-role-filter@example.com', 'secret123', ['ROLE_USER']);
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?role=admin');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?role=admin');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='admin-role-filter@example.com']"));
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='member-role-filter@example.com']"));
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?role=user');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?role=user');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='member-role-filter@example.com']"));
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='admin-role-filter@example.com']"));
@@ -376,12 +382,12 @@ final class UserManagementControllerTest extends WebTestCase
         $this->entityManager?->flush();
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?verified=verified');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?verified=verified');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='verified.filter@example.com']"));
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='unverified.filter@example.com']"));
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?verified=unverified');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?verified=unverified');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='unverified.filter@example.com']"));
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='verified.filter@example.com']"));
@@ -397,12 +403,12 @@ final class UserManagementControllerTest extends WebTestCase
         $this->entityManager?->flush();
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?localPassword=enabled');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?localPassword=enabled');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='enabled.local-password@example.com']"));
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='disabled.local-password@example.com']"));
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?localPassword=disabled');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?localPassword=disabled');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='disabled.local-password@example.com']"));
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='enabled.local-password@example.com']"));
@@ -418,7 +424,7 @@ final class UserManagementControllerTest extends WebTestCase
         $this->setCreatedAtByEmail('admin-created-filter@example.com', '2026-01-15 10:00:00');
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?createdFrom=2026-02-20&createdTo=2026-02-28');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?createdFrom=2026-02-20&createdTo=2026-02-28');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='newer-created-filter@example.com']"));
         self::assertCount(0, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='older-created-filter@example.com']"));
@@ -432,7 +438,7 @@ final class UserManagementControllerTest extends WebTestCase
         }
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?perPage=20&page=2');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?perPage=20&page=2');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr"));
         self::assertCount(1, $crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr/td[1][normalize-space()='zzz-admin-page@example.com']"));
@@ -446,7 +452,7 @@ final class UserManagementControllerTest extends WebTestCase
         $this->createUser('z-sort@example.com', 'secret123', ['ROLE_USER']);
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?sort=email&dir=desc');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?sort=email&dir=desc');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $firstEmail = trim($crawler->filterXPath("//table[contains(@class, 'admin-users-table')]//tbody/tr[1]/td[1]")->text(''));
         self::assertSame('z-sort@example.com', $firstEmail);
@@ -459,7 +465,7 @@ final class UserManagementControllerTest extends WebTestCase
         $managed = $this->createUser('managed-preserve-q@example.com', 'secret123', ['ROLE_USER']);
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?q=managed-preserve-q');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?q=managed-preserve-q');
         $tokenNode = $crawler->filter(sprintf('form[action*="/en/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
         self::assertCount(1, $tokenNode);
 
@@ -478,7 +484,7 @@ final class UserManagementControllerTest extends WebTestCase
         $managed = $this->createUser('managed-preserve-sort@example.com', 'secret123', ['ROLE_USER']);
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?sort=createdat&dir=desc');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?sort=createdat&dir=desc');
         $tokenNode = $crawler->filter(sprintf('form[action*="/en/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
         self::assertCount(1, $tokenNode);
 
@@ -502,7 +508,7 @@ final class UserManagementControllerTest extends WebTestCase
         $this->entityManager?->flush();
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?active=inactive');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?active=inactive');
         $tokenNode = $crawler->filter(sprintf('form[action*="/en/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
         self::assertCount(1, $tokenNode);
 
@@ -521,7 +527,7 @@ final class UserManagementControllerTest extends WebTestCase
         $managed = $this->createUser('managed-preserve-per-page@example.com', 'secret123', ['ROLE_USER']);
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?perPage=50');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?perPage=50');
         $tokenNode = $crawler->filter(sprintf('form[action*="/en/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
         self::assertCount(1, $tokenNode);
 
@@ -540,7 +546,7 @@ final class UserManagementControllerTest extends WebTestCase
         $managed = $this->createUser('managed-preserve-page@example.com', 'secret123', ['ROLE_USER']);
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?perPage=20&page=2');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?perPage=20&page=2');
         $tokenNode = $crawler->filter(sprintf('form[action*="/en/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
         self::assertCount(1, $tokenNode);
 
@@ -562,7 +568,7 @@ final class UserManagementControllerTest extends WebTestCase
         $this->entityManager?->flush();
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?verified=unverified&localPassword=disabled');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?verified=unverified&localPassword=disabled');
         $tokenNode = $crawler->filter(sprintf('form[action*="/en/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
         self::assertCount(1, $tokenNode);
 
@@ -584,7 +590,7 @@ final class UserManagementControllerTest extends WebTestCase
         $managed = $this->createUser('managed-preserve-role@example.com', 'secret123', ['ROLE_USER']);
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?role=user');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?role=user');
         $tokenNode = $crawler->filter(sprintf('form[action*="/en/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
         self::assertCount(1, $tokenNode);
 
@@ -605,7 +611,7 @@ final class UserManagementControllerTest extends WebTestCase
         $this->setCreatedAtByEmail('managed-preserve-created-range@example.com', '2026-02-10 10:00:00');
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/users?createdFrom=2026-02-01&createdTo=2026-02-28');
+        $crawler = $this->getAndFollowRedirect('/en/admin/users?createdFrom=2026-02-01&createdTo=2026-02-28');
         $tokenNode = $crawler->filter(sprintf('form[action*="/en/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
         self::assertCount(1, $tokenNode);
 
@@ -691,6 +697,9 @@ final class UserManagementControllerTest extends WebTestCase
         $this->browser()->loginUser($admin);
 
         $this->browser()->request('GET', '/en/admin/users/export?google=linked&role=user&sort=email&dir=asc');
+        if (302 === $this->browser()->getResponse()->getStatusCode()) {
+            $this->browser()->followRedirect();
+        }
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('text/csv', (string) $this->browser()->getResponse()->headers->get('content-type'));
 
@@ -707,6 +716,9 @@ final class UserManagementControllerTest extends WebTestCase
         $this->browser()->loginUser($admin);
 
         $this->browser()->request('GET', '/en/admin/users/export?q=%40example.com');
+        if (302 === $this->browser()->getResponse()->getStatusCode()) {
+            $this->browser()->followRedirect();
+        }
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $content = (string) $this->browser()->getResponse()->getContent();
 
@@ -929,5 +941,15 @@ final class UserManagementControllerTest extends WebTestCase
         }
 
         return $this->client;
+    }
+
+    private function getAndFollowRedirect(string $uri): \Symfony\Component\DomCrawler\Crawler
+    {
+        $crawler = $this->browser()->request('GET', $uri);
+        if (302 === $this->browser()->getResponse()->getStatusCode()) {
+            return $this->browser()->followRedirect();
+        }
+
+        return $crawler;
     }
 }

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Catalog\Infrastructure\Persistence;
 
-use App\Catalog\Application\Item\ItemCatalogTimestampReadRepository;
 use App\Catalog\Application\Import\ItemImportItemRepository;
+use App\Catalog\Application\Item\ItemCatalogTimestampReadRepository;
 use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
 use App\Progression\Application\Knowledge\ItemKnowledgeCatalogReadRepository;
