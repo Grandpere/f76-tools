@@ -333,6 +333,13 @@ body::before {
     margin: 0 0 0.55rem auto;
 }
 
+.header-control-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: nowrap;
+}
+
 .header-logout-form button {
     color: var(--accent-2);
     text-decoration: none;
@@ -3540,6 +3547,10 @@ span.flatpickr-weekday {
         width: 100%;
         margin: 0 0 0.25rem 0;
         justify-content: flex-start;
+    }
+
+    .header-control-group {
+        flex-wrap: wrap;
     }
 
     .header-translations-link {
