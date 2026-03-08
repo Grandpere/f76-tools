@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace App\Support\Application\Audit;
 
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
+
 final class LatestMinervaRefreshSummaryApplicationService
 {
     /**
@@ -26,6 +29,7 @@ final class LatestMinervaRefreshSummaryApplicationService
 
     public function __construct(
         private readonly AuditLogReadRepository $auditLogReadRepository,
+        private readonly CacheInterface $cache,
     ) {
     }
 
@@ -44,24 +48,42 @@ final class LatestMinervaRefreshSummaryApplicationService
      */
     public function resolve(): ?array
     {
-        $latest = $this->auditLogReadRepository->findLatestByActions(self::MINERVA_REFRESH_ACTIONS);
-        if (null === $latest) {
-            return null;
-        }
+        /** @var array{
+         *     occurredAt:string,
+         *     action:string,
+         *     actorEmail:string,
+         *     expectedWindows:int,
+         *     missingWindows:int,
+         *     deleted:int,
+         *     inserted:int,
+         *     skipped:int,
+         *     dryRun:bool
+         * }|null $summary
+         */
+        $summary = $this->cache->get('admin_minerva.latest_refresh_summary.v1', function (ItemInterface $item): ?array {
+            $item->expiresAfter(60);
 
-        $context = $latest->getContext() ?? [];
+            $latest = $this->auditLogReadRepository->findLatestByActions(self::MINERVA_REFRESH_ACTIONS);
+            if (null === $latest) {
+                return null;
+            }
 
-        return [
-            'occurredAt' => $latest->getOccurredAt()->format(DATE_ATOM),
-            'action' => $latest->getAction(),
-            'actorEmail' => $latest->getActorUser()->getEmail(),
-            'expectedWindows' => $this->contextInt($context, 'expectedWindows'),
-            'missingWindows' => $this->contextInt($context, 'missingWindows'),
-            'deleted' => $this->contextInt($context, 'deleted'),
-            'inserted' => $this->contextInt($context, 'inserted'),
-            'skipped' => $this->contextInt($context, 'skipped'),
-            'dryRun' => true === ($context['dryRun'] ?? false),
-        ];
+            $context = $latest->getContext() ?? [];
+
+            return [
+                'occurredAt' => $latest->getOccurredAt()->format(DATE_ATOM),
+                'action' => $latest->getAction(),
+                'actorEmail' => $latest->getActorUser()->getEmail(),
+                'expectedWindows' => $this->contextInt($context, 'expectedWindows'),
+                'missingWindows' => $this->contextInt($context, 'missingWindows'),
+                'deleted' => $this->contextInt($context, 'deleted'),
+                'inserted' => $this->contextInt($context, 'inserted'),
+                'skipped' => $this->contextInt($context, 'skipped'),
+                'dryRun' => true === ($context['dryRun'] ?? false),
+            ];
+        });
+
+        return $summary;
     }
 
     /**

@@ -19,12 +19,13 @@ use App\Support\Application\Audit\LatestMinervaRefreshSummaryApplicationService;
 use App\Support\Domain\Entity\AdminAuditLogEntity;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 final class LatestMinervaRefreshSummaryApplicationServiceTest extends TestCase
 {
     public function testResolveReturnsNullWhenNoMatchingAuditEntry(): void
     {
-        $service = new LatestMinervaRefreshSummaryApplicationService(new InMemoryLatestMinervaAuditLogReadRepository(null));
+        $service = new LatestMinervaRefreshSummaryApplicationService(new InMemoryLatestMinervaAuditLogReadRepository(null), new ArrayAdapter());
 
         self::assertNull($service->resolve());
     }
@@ -48,7 +49,8 @@ final class LatestMinervaRefreshSummaryApplicationServiceTest extends TestCase
                 'dryRun' => false,
             ]);
 
-        $service = new LatestMinervaRefreshSummaryApplicationService(new InMemoryLatestMinervaAuditLogReadRepository($entry));
+        $repository = new InMemoryLatestMinervaAuditLogReadRepository($entry);
+        $service = new LatestMinervaRefreshSummaryApplicationService($repository, new ArrayAdapter());
         $summary = $service->resolve();
 
         self::assertIsArray($summary);
@@ -60,6 +62,36 @@ final class LatestMinervaRefreshSummaryApplicationServiceTest extends TestCase
         self::assertSame(4, $summary['inserted']);
         self::assertSame(0, $summary['skipped']);
         self::assertFalse($summary['dryRun']);
+        self::assertSame(1, $repository->latestCalls);
+    }
+
+    public function testResolveUsesCacheForConsecutiveCalls(): void
+    {
+        $actor = new UserEntity()
+            ->setEmail('admin@example.com')
+            ->setPassword('hash');
+
+        $entry = new AdminAuditLogEntity()
+            ->setActorUser($actor)
+            ->setAction('minerva_refresh_dry_run')
+            ->setOccurredAt(new DateTimeImmutable('2026-03-01T10:00:00+00:00'))
+            ->setContext([
+                'expectedWindows' => 60,
+                'missingWindows' => 0,
+                'deleted' => 0,
+                'inserted' => 0,
+                'skipped' => 0,
+                'dryRun' => true,
+            ]);
+
+        $repository = new InMemoryLatestMinervaAuditLogReadRepository($entry);
+        $service = new LatestMinervaRefreshSummaryApplicationService($repository, new ArrayAdapter());
+
+        $first = $service->resolve();
+        $second = $service->resolve();
+
+        self::assertSame($first, $second);
+        self::assertSame(1, $repository->latestCalls);
     }
 }
 
@@ -68,6 +100,8 @@ final class LatestMinervaRefreshSummaryApplicationServiceTest extends TestCase
  */
 final class InMemoryLatestMinervaAuditLogReadRepository implements AuditLogReadRepository
 {
+    public int $latestCalls = 0;
+
     public function __construct(
         private readonly ?AdminAuditLogEntity $latest,
     ) {
@@ -90,6 +124,8 @@ final class InMemoryLatestMinervaAuditLogReadRepository implements AuditLogReadR
 
     public function findLatestByActions(array $actions): ?AdminAuditLogEntity
     {
+        ++$this->latestCalls;
+
         return $this->latest;
     }
 }
