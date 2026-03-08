@@ -1,4 +1,8 @@
 common.language: Langue
+common.theme: Thème
+common.theme.default: Actuel
+common.theme.official: Officiel
+common.theme.terminal: Terminal
 common.locale.fr: Français
 common.locale.en: Anglais
 common.locale.de: Allemand

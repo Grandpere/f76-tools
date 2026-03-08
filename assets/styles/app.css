@@ -19,6 +19,44 @@
     --card-glow: 0 12px 28px rgba(11, 14, 19, 0.08);
 }
 
+:root[data-theme='official'] {
+    --bg-0: #f5f2e8;
+    --bg-1: #ebe4d1;
+    --bg-2: #ddd4bd;
+    --panel: #fffdf7;
+    --panel-strong: #151b22;
+    --panel-soft: #f5efdf;
+    --line: rgba(26, 33, 43, 0.2);
+    --line-strong: rgba(224, 185, 84, 0.9);
+    --text-0: #1f2430;
+    --text-1: #3d4657;
+    --text-2: #667182;
+    --accent: #d6ab42;
+    --accent-2: #efc85b;
+    --ok: #3a9960;
+    --danger: #bf5045;
+    --card-glow: 0 16px 34px rgba(20, 24, 31, 0.12);
+}
+
+:root[data-theme='terminal'] {
+    --bg-0: #060d0a;
+    --bg-1: #091510;
+    --bg-2: #0d1b14;
+    --panel: #0c1712;
+    --panel-strong: #03110b;
+    --panel-soft: #101d17;
+    --line: rgba(84, 176, 120, 0.26);
+    --line-strong: rgba(123, 235, 144, 0.7);
+    --text-0: #ccf7d4;
+    --text-1: #9be1aa;
+    --text-2: #6db487;
+    --accent: #6ddd87;
+    --accent-2: #9cffb1;
+    --ok: #74e592;
+    --danger: #f77c7c;
+    --card-glow: 0 16px 38px rgba(0, 0, 0, 0.42);
+}
+
 * {
     box-sizing: border-box;
 }
@@ -76,6 +114,17 @@ body::before {
     background: linear-gradient(135deg, #131920, #242d39);
     box-shadow: var(--card-glow);
     color: #f5f7fc;
+}
+
+:root[data-theme='official'] .catalog-header {
+    border-color: rgba(214, 171, 66, 0.45);
+    background: linear-gradient(135deg, #1a222e, #2c3747);
+}
+
+:root[data-theme='terminal'] .catalog-header {
+    border-color: rgba(123, 235, 144, 0.5);
+    background: linear-gradient(135deg, #08120d, #0e1d16);
+    color: #d8ffe0;
 }
 
 .catalog-header h1 {
@@ -179,6 +228,39 @@ body::before {
     border: 1px solid rgba(255, 210, 74, 0.34);
     border-radius: 999px;
     padding: 0.22rem 0.45rem 0.22rem 0.62rem;
+}
+
+.header-theme {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: rgba(11, 15, 22, 0.38);
+    border: 1px solid rgba(255, 210, 74, 0.34);
+    border-radius: 999px;
+    padding: 0.22rem 0.45rem 0.22rem 0.62rem;
+}
+
+.header-theme label {
+    color: #d2deed;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+
+.header-theme select {
+    border: 0;
+    border-radius: 999px;
+    background: rgba(21, 28, 37, 0.92);
+    color: #f3f7ff;
+    font-size: 0.78rem;
+    padding: 0.25rem 0.54rem;
+    min-width: 116px;
+}
+
+.header-theme select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 221, 118, 0.45);
 }
 
 .header-locale-icon {

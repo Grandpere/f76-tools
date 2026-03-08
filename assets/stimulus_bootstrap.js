@@ -8,6 +8,7 @@ import NukeCodesTerminalController from './controllers/nuke_codes_terminal_contr
 import PlayerProgressionController from './controllers/player_progression_controller.js';
 import TextareaAutosizeController from './controllers/textarea_autosize_controller.js';
 import MinervaAdminDatepickerController from './controllers/minerva_admin_datepicker_controller.js';
+import ThemeSwitcherController from './controllers/theme_switcher_controller.js';
 
 const app = startStimulusApp();
 // register any custom, 3rd party controllers here
@@ -21,3 +22,4 @@ app.register('nuke-codes-terminal', NukeCodesTerminalController);
 app.register('player-progression', PlayerProgressionController);
 app.register('textarea-autosize', TextareaAutosizeController);
 app.register('minerva-admin-datepicker', MinervaAdminDatepickerController);
+app.register('theme-switcher', ThemeSwitcherController);
