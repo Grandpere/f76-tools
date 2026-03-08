@@ -379,11 +379,13 @@ body::before {
     margin: 0;
 }
 
-.header-control-spacer {
+.header-theme-icon {
     width: 16px;
     height: 16px;
     flex: 0 0 auto;
-    display: inline-block;
+    display: block;
+    color: #f4ca56;
+    opacity: 0.95;
 }
 
 .header-theme label {
