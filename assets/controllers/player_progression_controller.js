@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    static targets = ['playerSelect', 'createNameInput', 'createButton', 'state', 'statsPanel', 'exportButton', 'importFileInput', 'importMergeCheckbox', 'importButton', 'importUnknownPanel'];
+    static targets = ['playerSelect', 'createNameInput', 'createButton', 'state', 'statsPanel', 'backupState', 'exportButton', 'importFileInput', 'importMergeCheckbox', 'importButton', 'importUnknownPanel'];
     static values = {
         playersUrl: String,
         playersBaseUrl: String,
@@ -18,6 +18,7 @@ export default class extends Controller {
         this.translations = this.readUiTranslations();
         this.playerUiState = this.readPersistedState();
         this.bindEvents();
+        this.setBackupState('');
         await this.loadPlayers();
     }
 
@@ -148,7 +149,7 @@ export default class extends Controller {
 
     async exportKnowledge() {
         if (!this.activePlayerId) {
-            this.setState(this.t('noSelectedPlayer'));
+            this.setBackupState(this.t('noSelectedPlayer'));
             return;
         }
 
@@ -158,7 +159,7 @@ export default class extends Controller {
             credentials: 'same-origin',
         });
         if (!response.ok) {
-            this.setState(`${this.t('exportFailed')} (${response.status}).`);
+            this.setBackupState(`${this.t('exportFailed')} (${response.status}).`);
             return;
         }
 
@@ -172,19 +173,19 @@ export default class extends Controller {
         link.click();
         link.remove();
         URL.revokeObjectURL(objectUrl);
-        this.setState(this.t('exportDone'));
+        this.setBackupState(this.t('exportDone'));
     }
 
     async importKnowledge() {
         if (!this.activePlayerId) {
-            this.setState(this.t('noSelectedPlayer'));
+            this.setBackupState(this.t('noSelectedPlayer'));
             return;
         }
 
         const file = this.importFileInputTarget.files && this.importFileInputTarget.files[0];
         if (!file) {
             this.clearImportUnknownPanel();
-            this.setState(this.t('importNoFile'));
+            this.setBackupState(this.t('importNoFile'));
             return;
         }
 
@@ -194,7 +195,7 @@ export default class extends Controller {
             parsed = JSON.parse(text);
         } catch {
             this.clearImportUnknownPanel();
-            this.setState(this.t('importInvalidFile'));
+            this.setBackupState(this.t('importInvalidFile'));
             return;
         }
 
@@ -214,7 +215,7 @@ export default class extends Controller {
         });
         if (!previewResponse.ok) {
             this.clearImportUnknownPanel();
-            this.setState(`${this.t('importPreviewError')} (${previewResponse.status}).`);
+            this.setBackupState(`${this.t('importPreviewError')} (${previewResponse.status}).`);
             return;
         }
 
@@ -232,7 +233,7 @@ export default class extends Controller {
                 })
                 .join(', ');
             const suffix = unknownItems.length > 8 ? ', ...' : '';
-            this.setState(
+            this.setBackupState(
                 `${this.t('importPreviewUnknown', { '%count%': unknownItems.length })} ${this.t('importPreviewUnknownDetailsPrefix')}: ${details}${suffix}`,
             );
             return;
@@ -248,7 +249,7 @@ export default class extends Controller {
         }
 
         this.importButtonTarget.disabled = true;
-        this.setState(this.t('importingProgress'));
+        this.setBackupState(this.t('importingProgress'));
 
         const response = await fetch(this.appendLocaleToUrl(`${this.playersBaseUrlValue}/${this.activePlayerId}/knowledge/import`), {
             method: 'POST',
@@ -266,14 +267,14 @@ export default class extends Controller {
         this.importButtonTarget.disabled = false;
 
         if (!response.ok) {
-            this.setState(`${this.t('importFailed')} (${response.status}).`);
+            this.setBackupState(`${this.t('importFailed')} (${response.status}).`);
             return;
         }
 
         this.importFileInputTarget.value = '';
         this.clearImportUnknownPanel();
         await this.loadStats();
-        this.setState(this.t('importDone'));
+        this.setBackupState(this.t('importDone'));
     }
 
     renderImportUnknownPanel(unknownItems) {
@@ -471,6 +472,13 @@ export default class extends Controller {
 
     setState(message) {
         this.stateTarget.textContent = message;
+    }
+
+    setBackupState(message) {
+        if (!this.hasBackupStateTarget) {
+            return;
+        }
+        this.backupStateTarget.textContent = message;
     }
 
     t(key, params = {}) {

@@ -77,24 +77,31 @@
                 </p>
                 {% include '_catalog_state_line.html.twig' with { targetPrefix: 'player-progression' } %}
             </section>
-            <section class="catalog-panel catalog-block">
-                <div class="backup-header">
-                    <h2>{{ 'progression.backup_title'|trans }}</h2>
-                    <div class="transfer-actions">
-                        <button type="button" data-player-progression-target="importButton">{{ 'dashboard.transfer.import'|trans }}</button>
-                        <button type="button" data-player-progression-target="exportButton">{{ 'dashboard.transfer.export'|trans }}</button>
-                    </div>
+            <section class="catalog-panel catalog-block progression-backup-panel">
+                <h2>{{ 'progression.backup_title'|trans }}</h2>
+                <div class="transfer-sections">
+                    <article class="transfer-section">
+                        <h3>{{ 'dashboard.transfer.export'|trans }}</h3>
+                        <div class="transfer-actions">
+                            <button type="button" data-player-progression-target="exportButton">{{ 'dashboard.transfer.export'|trans }}</button>
+                        </div>
+                    </article>
+                    <article class="transfer-section">
+                        <h3>{{ 'dashboard.transfer.import'|trans }}</h3>
+                        <div class="transfer-controls">
+                            <label class="transfer-file">
+                                <input type="file" accept="application/json" data-player-progression-target="importFileInput">
+                            </label>
+                            <label class="transfer-checkbox">
+                                <input type="checkbox" data-player-progression-target="importMergeCheckbox">
+                                {{ 'dashboard.transfer.merge_mode'|trans }}
+                            </label>
+                            <button type="button" data-player-progression-target="importButton">{{ 'dashboard.transfer.import'|trans }}</button>
+                        </div>
+                        <p class="catalog-state" role="status" aria-live="polite" data-player-progression-target="backupState"></p>
+                        <div class="transfer-unknown-panel" data-player-progression-target="importUnknownPanel"></div>
+                    </article>
                 </div>
-                <div class="transfer-controls">
-                    <label class="transfer-file">
-                        <input type="file" accept="application/json" data-player-progression-target="importFileInput">
-                    </label>
-                    <label class="transfer-checkbox">
-                        <input type="checkbox" data-player-progression-target="importMergeCheckbox">
-                        {{ 'dashboard.transfer.merge_mode'|trans }}
-                    </label>
-                </div>
-                <div class="transfer-unknown-panel" data-player-progression-target="importUnknownPanel"></div>
             </section>
             <section class="catalog-panel catalog-block">
                 <div data-player-progression-target="statsPanel"></div>
