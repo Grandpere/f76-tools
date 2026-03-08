@@ -56,7 +56,8 @@ final class RegistrationControllerTest extends WebTestCase
 
     public function testRegisterCreatesUserAndRedirectsToLogin(): void
     {
-        $crawler = $this->browser()->request('GET', '/en/register');
+        $server = ['REMOTE_ADDR' => '10.70.0.11'];
+        $crawler = $this->browser()->request('GET', '/en/register', [], [], $server);
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
         $token = (string) $tokenNode->attr('value');
@@ -66,7 +67,7 @@ final class RegistrationControllerTest extends WebTestCase
             'email' => 'new-user@example.com',
             'password' => 'secret123',
             'password_confirm' => 'secret123',
-        ]);
+        ], [], $server);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
