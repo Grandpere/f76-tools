@@ -32,7 +32,7 @@ final class AuditLogListApplicationService
         $page = min($query->page, $totalPages);
 
         if ($page !== $query->page) {
-            $result = $this->auditLogRepository->findPaginated($query->query, $query->action, $page, $query->perPage);
+            $result['rows'] = $this->auditLogRepository->findRowsPage($query->query, $query->action, $page, $query->perPage);
         }
 
         return new AuditLogListResult(

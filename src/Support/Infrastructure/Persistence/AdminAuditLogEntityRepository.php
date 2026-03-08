@@ -38,24 +38,7 @@ final class AdminAuditLogEntityRepository extends ServiceEntityRepository implem
      */
     public function findPaginated(string $query, string $action, int $page, int $perPage): array
     {
-        $qb = $this->createQueryBuilder('a')
-            ->leftJoin('a.actorUser', 'actor')
-            ->leftJoin('a.targetUser', 'target')
-            ->addSelect('actor')
-            ->addSelect('target')
-            ->orderBy('a.occurredAt', 'DESC')
-            ->addOrderBy('a.id', 'DESC');
-
-        if ('' !== $action) {
-            $qb->andWhere('a.action = :action')
-                ->setParameter('action', $action);
-        }
-
-        if ('' !== $query) {
-            $needle = '%'.mb_strtolower($query).'%';
-            $qb->andWhere('LOWER(actor.email) LIKE :needle OR LOWER(target.email) LIKE :needle OR LOWER(a.action) LIKE :needle')
-                ->setParameter('needle', $needle);
-        }
+        $qb = $this->createFilteredQueryBuilder($query, $action);
 
         $total = (int) (clone $qb)
             ->select('COUNT(a.id)')
@@ -63,13 +46,7 @@ final class AdminAuditLogEntityRepository extends ServiceEntityRepository implem
             ->getQuery()
             ->getSingleScalarResult();
 
-        $offset = max(0, ($page - 1) * $perPage);
-        $result = $qb
-            ->setFirstResult($offset)
-            ->setMaxResults($perPage)
-            ->getQuery()
-            ->getResult();
-
+        $result = $this->executeRowsPageQuery($qb, $page, $perPage);
         if (!is_array($result)) {
             $result = [];
         }
@@ -81,6 +58,23 @@ final class AdminAuditLogEntityRepository extends ServiceEntityRepository implem
             'rows' => $rows,
             'total' => $total,
         ];
+    }
+
+    /**
+     * @return list<AdminAuditLogEntity>
+     */
+    public function findRowsPage(string $query, string $action, int $page, int $perPage): array
+    {
+        $result = $this->executeRowsPageQuery($this->createFilteredQueryBuilder($query, $action), $page, $perPage);
+
+        if (!is_array($result)) {
+            return [];
+        }
+
+        /** @var list<AdminAuditLogEntity> $rows */
+        $rows = array_values(array_filter($result, static fn (mixed $row): bool => $row instanceof AdminAuditLogEntity));
+
+        return $rows;
     }
 
     /**
@@ -208,5 +202,40 @@ final class AdminAuditLogEntityRepository extends ServiceEntityRepository implem
         }
 
         return $result;
+    }
+
+    private function createFilteredQueryBuilder(string $query, string $action): \Doctrine\ORM\QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->leftJoin('a.actorUser', 'actor')
+            ->leftJoin('a.targetUser', 'target')
+            ->addSelect('actor')
+            ->addSelect('target')
+            ->orderBy('a.occurredAt', 'DESC')
+            ->addOrderBy('a.id', 'DESC');
+
+        if ('' !== $action) {
+            $qb->andWhere('a.action = :action')
+                ->setParameter('action', $action);
+        }
+
+        if ('' !== $query) {
+            $needle = '%'.mb_strtolower($query).'%';
+            $qb->andWhere('LOWER(actor.email) LIKE :needle OR LOWER(target.email) LIKE :needle OR LOWER(a.action) LIKE :needle')
+                ->setParameter('needle', $needle);
+        }
+
+        return $qb;
+    }
+
+    private function executeRowsPageQuery(\Doctrine\ORM\QueryBuilder $qb, int $page, int $perPage): mixed
+    {
+        $offset = max(0, ($page - 1) * $perPage);
+
+        return $qb
+            ->setFirstResult($offset)
+            ->setMaxResults($perPage)
+            ->getQuery()
+            ->getResult();
     }
 }

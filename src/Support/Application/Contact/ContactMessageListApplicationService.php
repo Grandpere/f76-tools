@@ -27,7 +27,7 @@ final class ContactMessageListApplicationService
         $totalPages = max(1, (int) ceil($totalRows / $query->perPage));
         $page = min($query->page, $totalPages);
         if ($page !== $query->page) {
-            $result = $this->contactMessageRepository->findPaginated($query->query, $query->status, $page, $query->perPage);
+            $result['rows'] = $this->contactMessageRepository->findRowsPage($query->query, $query->status, $page, $query->perPage);
         }
 
         return new ContactMessageListResult(

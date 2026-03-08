@@ -112,6 +112,11 @@ final class InMemoryLatestMinervaAuditLogReadRepository implements AuditLogReadR
         return ['rows' => [], 'total' => 0];
     }
 
+    public function findRowsPage(string $query, string $action, int $page, int $perPage): array
+    {
+        return [];
+    }
+
     public function findDistinctActions(): array
     {
         return [];

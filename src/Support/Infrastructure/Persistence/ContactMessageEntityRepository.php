@@ -50,6 +50,47 @@ final class ContactMessageEntityRepository extends ServiceEntityRepository imple
      */
     public function findPaginated(string $query, ?ContactMessageStatusEnum $status, int $page, int $perPage): array
     {
+        $qb = $this->createFilteredQueryBuilder($query, $status);
+
+        $total = (int) (clone $qb)
+            ->select('COUNT(c.id)')
+            ->resetDQLPart('orderBy')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $result = $this->executeRowsPageQuery($qb, $page, $perPage);
+        if (!is_array($result)) {
+            $result = [];
+        }
+
+        /** @var list<ContactMessageEntity> $rows */
+        $rows = array_values(array_filter($result, static fn (mixed $row): bool => $row instanceof ContactMessageEntity));
+
+        return [
+            'rows' => $rows,
+            'total' => $total,
+        ];
+    }
+
+    /**
+     * @return list<ContactMessageEntity>
+     */
+    public function findRowsPage(string $query, ?ContactMessageStatusEnum $status, int $page, int $perPage): array
+    {
+        $result = $this->executeRowsPageQuery($this->createFilteredQueryBuilder($query, $status), $page, $perPage);
+
+        if (!is_array($result)) {
+            return [];
+        }
+
+        /** @var list<ContactMessageEntity> $rows */
+        $rows = array_values(array_filter($result, static fn (mixed $row): bool => $row instanceof ContactMessageEntity));
+
+        return $rows;
+    }
+
+    private function createFilteredQueryBuilder(string $query, ?ContactMessageStatusEnum $status): \Doctrine\ORM\QueryBuilder
+    {
         $qb = $this->createQueryBuilder('c')
             ->orderBy('c.createdAt', 'DESC')
             ->addOrderBy('c.id', 'DESC');
@@ -65,29 +106,17 @@ final class ContactMessageEntityRepository extends ServiceEntityRepository imple
                 ->setParameter('needle', $needle);
         }
 
-        $total = (int) (clone $qb)
-            ->select('COUNT(c.id)')
-            ->resetDQLPart('orderBy')
-            ->getQuery()
-            ->getSingleScalarResult();
+        return $qb;
+    }
 
+    private function executeRowsPageQuery(\Doctrine\ORM\QueryBuilder $qb, int $page, int $perPage): mixed
+    {
         $offset = max(0, ($page - 1) * $perPage);
-        $result = $qb
+
+        return $qb
             ->setFirstResult($offset)
             ->setMaxResults($perPage)
             ->getQuery()
             ->getResult();
-
-        if (!is_array($result)) {
-            $result = [];
-        }
-
-        /** @var list<ContactMessageEntity> $rows */
-        $rows = array_values(array_filter($result, static fn (mixed $row): bool => $row instanceof ContactMessageEntity));
-
-        return [
-            'rows' => $rows,
-            'total' => $total,
-        ];
     }
 }

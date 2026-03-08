@@ -116,6 +116,18 @@ final class InMemoryAuditLogReadRepository implements AuditLogReadRepository
         return $result;
     }
 
+    public function findRowsPage(string $query, string $action, int $page, int $perPage): array
+    {
+        $this->calls[] = [$query, $action, $page, $perPage];
+
+        $result = array_shift($this->results);
+        if (!is_array($result)) {
+            return [];
+        }
+
+        return $result['rows'];
+    }
+
     public function findDistinctActions(): array
     {
         return $this->actions;

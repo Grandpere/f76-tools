@@ -22,4 +22,9 @@ interface ContactMessageReadRepository
      * @return array{rows: list<ContactMessageEntity>, total: int}
      */
     public function findPaginated(string $query, ?ContactMessageStatusEnum $status, int $page, int $perPage): array;
+
+    /**
+     * @return list<ContactMessageEntity>
+     */
+    public function findRowsPage(string $query, ?ContactMessageStatusEnum $status, int $page, int $perPage): array;
 }

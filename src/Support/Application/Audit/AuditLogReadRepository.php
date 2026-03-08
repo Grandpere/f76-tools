@@ -23,6 +23,11 @@ interface AuditLogReadRepository
     public function findPaginated(string $query, string $action, int $page, int $perPage): array;
 
     /**
+     * @return list<AdminAuditLogEntity>
+     */
+    public function findRowsPage(string $query, string $action, int $page, int $perPage): array;
+
+    /**
      * @return list<string>
      */
     public function findDistinctActions(): array;

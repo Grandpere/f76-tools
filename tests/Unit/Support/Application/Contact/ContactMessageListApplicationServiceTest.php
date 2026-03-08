@@ -109,4 +109,16 @@ final class InMemoryContactMessageReadRepository implements ContactMessageReadRe
 
         return $result;
     }
+
+    public function findRowsPage(string $query, ?ContactMessageStatusEnum $status, int $page, int $perPage): array
+    {
+        $this->calls[] = [$query, $status, $page, $perPage];
+
+        $result = array_shift($this->results);
+        if (!is_array($result)) {
+            return [];
+        }
+
+        return $result['rows'];
+    }
 }
