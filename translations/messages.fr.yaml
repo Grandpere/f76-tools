@@ -142,6 +142,7 @@ dashboard.empty.no_book: Aucun plan Minerva trouvé.
 dashboard.labels.rank_prefix: Rang
 dashboard.labels.list_prefix: Liste
 dashboard.help.shared_book_learning: 'Info: un plan présent dans plusieurs listes partage le même état appris. Cocher une occurrence met à jour toutes les autres.'
+minerva.help.shared_book_learning: un plan présent dans plusieurs listes partage le même état appris. Cocher une occurrence met à jour toutes les autres.
 dashboard.item.daily_ops_reward: Disponible aussi en récompense d'une opération quotidienne réussie.
 dashboard.aria.item_learned: Objet appris
 

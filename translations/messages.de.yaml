@@ -142,6 +142,7 @@ dashboard.empty.no_book: Kein Minerva-Plan gefunden.
 dashboard.labels.rank_prefix: Rang
 dashboard.labels.list_prefix: Liste
 dashboard.help.shared_book_learning: 'Info: Ein Plan in mehreren Listen teilt denselben Gelernt-Status. Das Aktivieren einer Vorkommnis aktualisiert alle anderen.'
+minerva.help.shared_book_learning: Ein Plan in mehreren Listen teilt denselben Gelernt-Status. Das Aktivieren einer Vorkommnis aktualisiert alle anderen.
 dashboard.item.daily_ops_reward: Auch als Belohnung fur eine erfolgreich abgeschlossene tagliche Operation verfugbar.
 dashboard.aria.item_learned: Objekt gelernt
 
