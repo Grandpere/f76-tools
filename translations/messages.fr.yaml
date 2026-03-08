@@ -480,10 +480,10 @@ minerva.status_active: Active
 minerva.status_ended: Terminée
 minerva.source_generated: Générée
 minerva.source_manual: Manuelle
-minerva.current_window_title: Fenêtre Minerva actuelle
-minerva.current_window_empty: Aucune fenêtre Minerva active actuellement.
-minerva.next_windows_title: Prochaines fenêtres
-minerva.active_windows_title: Fenêtres à venir
+minerva.current_window_title: Localisation actuelle
+minerva.current_window_empty: Minerva n'est pas disponible actuellement.
+minerva.next_windows_title: Prochaines localisation
+minerva.active_windows_title: Localisation à venir
 minerva.timeline_title: Timeline complète
 minerva.list_label: 'Liste %list%'
 minerva.list_progress: Progression

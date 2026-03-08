@@ -508,10 +508,10 @@ minerva.status_active: Active
 minerva.status_ended: Ended
 minerva.source_generated: Generated
 minerva.source_manual: Manual
-minerva.current_window_title: Current Minerva window
-minerva.current_window_empty: No active Minerva window right now.
-minerva.next_windows_title: Next windows
-minerva.active_windows_title: Active and upcoming windows
+minerva.current_window_title: Current location
+minerva.current_window_empty: Minerva is not available right now.
+minerva.next_windows_title: Next locations
+minerva.active_windows_title: Upcoming locations
 minerva.timeline_title: Full timeline
 minerva.list_label: 'List %list%'
 minerva.list_progress: Progress
