@@ -3789,6 +3789,26 @@ span.flatpickr-weekday {
     color: #0a1811;
 }
 
+:root[data-theme='terminal'] .info-note {
+    background: rgba(109, 221, 135, 0.12);
+    border-color: rgba(116, 229, 146, 0.4);
+    color: #c9f7d2;
+}
+
+:root[data-theme='terminal'] .info-note::before {
+    background: #6ddd87;
+    color: #0a1811;
+}
+
+:root[data-theme='terminal'] .info-note a,
+:root[data-theme='terminal'] .info-note a:visited {
+    color: #ccf7d4;
+}
+
+:root[data-theme='terminal'] .info-note a:hover {
+    color: #e7ffee;
+}
+
 :root[data-theme='terminal'] .source-filters label img {
     filter: invert(85%) sepia(9%) saturate(583%) hue-rotate(72deg) brightness(105%) contrast(95%);
 }
