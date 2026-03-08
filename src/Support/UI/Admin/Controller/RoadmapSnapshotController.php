@@ -29,12 +29,16 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 #[Route('/{_locale<en|fr|de>}/admin/roadmap', defaults: ['_locale' => 'en'])]
 final class RoadmapSnapshotController extends AbstractController
 {
+    private const CANONICAL_ROWS_CACHE_KEY = 'admin_roadmap.canonical_rows.v1';
+
     use AdminRoleGuardControllerTrait;
     use AdminCsrfTokenValidatorTrait;
 
@@ -45,6 +49,7 @@ final class RoadmapSnapshotController extends AbstractController
         private readonly GenerateRoadmapEventsFromSnapshotApplicationService $generateRoadmapEventsFromSnapshotApplicationService,
         private readonly ApproveRoadmapSnapshotApplicationService $approveRoadmapSnapshotApplicationService,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
+        private readonly CacheInterface $cache,
     ) {
     }
 
@@ -69,9 +74,24 @@ final class RoadmapSnapshotController extends AbstractController
                 : $snapshots[0];
         }
 
-        foreach ($this->roadmapCanonicalEventReadRepository->findAllOrdered() as $event) {
-            $canonicalRows[] = $this->buildCanonicalRow($event);
-        }
+        /** @var list<array{
+         *     startsAt: DateTimeImmutable,
+         *     endsAt: DateTimeImmutable,
+         *     confidenceScore: int,
+         *     missingLocales: list<string>,
+         *     translations: array{fr?: string, en?: string, de?: string}
+         * }> $canonicalRows
+         */
+        $canonicalRows = $this->cache->get(self::CANONICAL_ROWS_CACHE_KEY, function (ItemInterface $item): array {
+            $item->expiresAfter(60);
+
+            $rows = [];
+            foreach ($this->roadmapCanonicalEventReadRepository->findAllOrdered() as $event) {
+                $rows[] = $this->buildCanonicalRow($event);
+            }
+
+            return $rows;
+        });
 
         $events = [];
         $selectedSnapshotImageUrl = null;
@@ -199,6 +219,9 @@ final class RoadmapSnapshotController extends AbstractController
         ));
         foreach ($result->warnings as $warning) {
             $this->addFlash('warning', $warning);
+        }
+        if (!$dryRun) {
+            $this->cache->delete(self::CANONICAL_ROWS_CACHE_KEY);
         }
 
         return $this->redirectToRoute('app_admin_roadmap_snapshots', [
