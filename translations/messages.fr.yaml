@@ -211,6 +211,7 @@ security.contact.subject: Sujet
 security.contact.message: Message
 security.contact.submit: Envoyer le message
 security.contact.to_login: Retour à la connexion
+security.contact.to_home: Retour
 security.contact.flash.invalid_csrf: Session invalide, merci de réessayer.
 security.contact.flash.invalid_input: Merci de renseigner un email, un sujet et un message valides.
 security.contact.flash.sent: Votre message a été envoyé.

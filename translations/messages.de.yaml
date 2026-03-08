@@ -211,6 +211,7 @@ security.contact.subject: Betreff
 security.contact.message: Nachricht
 security.contact.submit: Nachricht senden
 security.contact.to_login: Zuruck zur Anmeldung
+security.contact.to_home: Zuruck
 security.contact.flash.invalid_csrf: Ungultige Sitzung, bitte erneut versuchen.
 security.contact.flash.invalid_input: Bitte geben Sie eine gultige E-Mail, einen Betreff und eine Nachricht an.
 security.contact.flash.sent: Ihre Nachricht wurde gesendet.

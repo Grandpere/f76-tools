@@ -27,12 +27,12 @@
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('contact') }}">
                 {% include 'security/_turnstile.html.twig' %}
 
-                {% include 'security/_primary_actions.html.twig' with { submitLabel: 'security.contact.submit' } %}
+                {% include 'security/_primary_actions.html.twig' with { submitLabel: 'security.contact.submit', includeRegister: false } %}
             </form>
 
             {% include 'security/_links.html.twig' with {
                 links: [
-                    { route: 'app_login', label: 'security.contact.to_login' }
+                    { route: 'app_home', label: 'security.contact.to_home' }
                 ]
             } %}
         </section>
