@@ -31,6 +31,11 @@ final class PlayerReadApplicationService
         return $this->playerRepository->findByUser($user);
     }
 
+    public function findFirstPublicIdForUser(UserEntity $user): ?string
+    {
+        return $this->playerRepository->findFirstPublicIdByUser($user);
+    }
+
     public function findOwnedByPublicId(UserEntity $user, string $publicId): ?PlayerEntity
     {
         return $this->playerRepository->findOneByPublicIdAndUser($publicId, $user);

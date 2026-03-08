@@ -23,5 +23,7 @@ interface PlayerReadRepository
      */
     public function findByUser(UserEntity $user): array;
 
+    public function findFirstPublicIdByUser(UserEntity $user): ?string;
+
     public function findOneByPublicIdAndUser(string $publicId, UserEntity $user): ?PlayerEntity;
 }

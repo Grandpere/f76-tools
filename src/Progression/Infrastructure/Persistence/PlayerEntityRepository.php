@@ -46,6 +46,24 @@ final class PlayerEntityRepository extends ServiceEntityRepository implements Pl
         return $result;
     }
 
+    public function findFirstPublicIdByUser(UserEntity $user): ?string
+    {
+        $result = $this->createQueryBuilder('p')
+            ->select('p.publicId')
+            ->andWhere('p.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('p.name', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if (!is_array($result) || !isset($result['publicId']) || !is_string($result['publicId'])) {
+            return null;
+        }
+
+        return $result['publicId'];
+    }
+
     public function findOneByPublicIdAndUser(string $publicId, UserEntity $user): ?PlayerEntity
     {
         $result = $this->createQueryBuilder('p')

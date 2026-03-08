@@ -219,6 +219,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: introduced an interface port and wired consumers to it (`ProgressionOwnedPlayerReadPort`).
 - Prevention: when a service is expected to be doubled in unit tests, depend on an interface in collaborators.
 
+## 2026-03-08 - Never run functional suite in parallel against shared test DB
+- Symptom: massive false negatives in functional tests (deadlocks, missing tables, random 302/404), while code changes were unrelated.
+- Root cause: two `make phpunit-functional` runs executed concurrently and both mutated the same `app_test` database lifecycle (drop/create/migrate) at the same time.
+- Fix: rerun functional tests in a single serial execution only; ignore parallel run output as invalid.
+- Prevention: never launch multiple functional-suite commands concurrently in this project unless isolated test databases are configured per process.
+
 ## 2026-02-27 - Unit test on 204 JsonResponse content expected empty string
 - Symptom: unit test failed asserting `''` for a `JsonResponse` with HTTP 204.
 - Root cause: Symfony `JsonResponse(null, 204)` serializes as `{}` content, not empty string.

@@ -39,11 +39,7 @@ final class DashboardController extends AbstractController
             throw new AccessDeniedException('User must be authenticated.');
         }
 
-        $players = $this->playerReadApplicationService->listForUser($user);
-        $activePlayerId = null;
-        if ([] !== $players) {
-            $activePlayerId = $players[0]->getPublicId();
-        }
+        $activePlayerId = $this->playerReadApplicationService->findFirstPublicIdForUser($user);
 
         $catalogUpdatedAt = $this->itemCatalogTimestampReadRepository->findLatestUpdatedAtByType(ItemTypeEnum::MISC);
 

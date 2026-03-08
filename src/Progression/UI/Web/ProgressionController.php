@@ -38,11 +38,7 @@ final class ProgressionController extends AbstractController
             throw new AccessDeniedException('User must be authenticated.');
         }
 
-        $players = $this->playerReadApplicationService->listForUser($user);
-        $activePlayerId = null;
-        if ([] !== $players) {
-            $activePlayerId = $players[0]->getPublicId();
-        }
+        $activePlayerId = $this->playerReadApplicationService->findFirstPublicIdForUser($user);
 
         return $this->render('progression/index.html.twig', [
             'username' => $user->getEmail(),
