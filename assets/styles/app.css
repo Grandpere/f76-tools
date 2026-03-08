@@ -384,8 +384,8 @@ body::before {
     height: 16px;
     flex: 0 0 auto;
     display: block;
-    color: #f4ca56;
     opacity: 0.95;
+    filter: invert(82%) sepia(34%) saturate(717%) hue-rotate(356deg) brightness(102%) contrast(95%);
 }
 
 .header-theme label {
@@ -463,6 +463,29 @@ body::before {
 .header-locale select:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(255, 221, 118, 0.45);
+}
+
+:root[data-theme='official'] .header-theme,
+:root[data-theme='official'] .header-locale {
+    background: rgba(255, 248, 231, 0.96);
+    border-color: rgba(214, 171, 66, 0.5);
+}
+
+:root[data-theme='official'] .header-theme label,
+:root[data-theme='official'] .header-locale label {
+    color: #324055;
+}
+
+:root[data-theme='official'] .header-theme select,
+:root[data-theme='official'] .header-locale select {
+    background: #ffffff;
+    color: #1f2430;
+}
+
+:root[data-theme='terminal'] .header-theme,
+:root[data-theme='terminal'] .header-locale {
+    background: rgba(6, 21, 14, 0.92);
+    border-color: rgba(116, 229, 146, 0.34);
 }
 
 .logout-icon {
