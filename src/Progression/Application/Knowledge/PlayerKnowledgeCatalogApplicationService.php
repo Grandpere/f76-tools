@@ -30,7 +30,7 @@ final class PlayerKnowledgeCatalogApplicationService
     public function listForPlayer(PlayerEntity $player, ?ItemTypeEnum $type = null): array
     {
         $items = $this->itemRepository->findAllOrdered($type);
-        $learnedMap = array_fill_keys($this->knowledgeRepository->findLearnedItemIdsByPlayer($player), true);
+        $learnedMap = array_fill_keys($this->knowledgeRepository->findLearnedItemIdsByPlayer($player, $type), true);
 
         $rows = [];
         foreach ($items as $item) {

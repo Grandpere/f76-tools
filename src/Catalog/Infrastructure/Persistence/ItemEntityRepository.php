@@ -45,7 +45,8 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
 
     public function findLatestUpdatedAtByType(ItemTypeEnum $type): ?DateTimeImmutable
     {
-        $item = $this->createQueryBuilder('i')
+        $value = $this->createQueryBuilder('i')
+            ->select('i.updatedAt')
             ->andWhere('i.type = :type')
             ->setParameter('type', $type)
             ->orderBy('i.updatedAt', 'DESC')
@@ -53,11 +54,11 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
             ->getQuery()
             ->getOneOrNullResult();
 
-        if (!$item instanceof ItemEntity) {
+        if (!is_array($value) || !($value['updatedAt'] ?? null) instanceof DateTimeImmutable) {
             return null;
         }
 
-        return $item->getUpdatedAt();
+        return $value['updatedAt'];
     }
 
     public function deleteAllBookLists(): int

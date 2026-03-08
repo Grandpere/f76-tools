@@ -44,7 +44,7 @@ final class PlayerKnowledgeCatalogApplicationServiceTest extends TestCase
         $knowledgeRepository
             ->expects(self::once())
             ->method('findLearnedItemIdsByPlayer')
-            ->with($player)
+            ->with($player, ItemTypeEnum::BOOK)
             ->willReturn([102]);
 
         $service = new PlayerKnowledgeCatalogApplicationService($itemRepository, $knowledgeRepository);
@@ -75,7 +75,7 @@ final class PlayerKnowledgeCatalogApplicationServiceTest extends TestCase
         $knowledgeRepository
             ->expects(self::once())
             ->method('findLearnedItemIdsByPlayer')
-            ->with($player)
+            ->with($player, null)
             ->willReturn([]);
 
         $service = new PlayerKnowledgeCatalogApplicationService($itemRepository, $knowledgeRepository);

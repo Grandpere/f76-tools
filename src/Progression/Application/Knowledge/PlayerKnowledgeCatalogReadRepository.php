@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Progression\Application\Knowledge;
 
+use App\Catalog\Domain\Item\ItemTypeEnum;
 use App\Progression\Domain\Entity\PlayerEntity;
 
 interface PlayerKnowledgeCatalogReadRepository
@@ -20,5 +21,5 @@ interface PlayerKnowledgeCatalogReadRepository
     /**
      * @return list<int>
      */
-    public function findLearnedItemIdsByPlayer(PlayerEntity $player): array;
+    public function findLearnedItemIdsByPlayer(PlayerEntity $player, ?ItemTypeEnum $type = null): array;
 }

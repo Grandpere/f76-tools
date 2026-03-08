@@ -47,14 +47,21 @@ final class PlayerItemKnowledgeEntityRepository extends ServiceEntityRepository 
     /**
      * @return list<int>
      */
-    public function findLearnedItemIdsByPlayer(PlayerEntity $player): array
+    public function findLearnedItemIdsByPlayer(PlayerEntity $player, ?ItemTypeEnum $type = null): array
     {
-        $rows = $this->createQueryBuilder('k')
+        $qb = $this->createQueryBuilder('k')
             ->select('IDENTITY(k.item) AS itemId')
             ->andWhere('k.player = :player')
-            ->setParameter('player', $player)
-            ->getQuery()
-            ->getScalarResult();
+            ->setParameter('player', $player);
+
+        if ($type instanceof ItemTypeEnum) {
+            $qb
+                ->join('k.item', 'i')
+                ->andWhere('i.type = :type')
+                ->setParameter('type', $type);
+        }
+
+        $rows = $qb->getQuery()->getScalarResult();
 
         $ids = [];
         foreach ($rows as $row) {
