@@ -99,8 +99,8 @@ dashboard.transfer.title: Progression (backup)
 dashboard.transfer.export: Export JSON
 dashboard.transfer.import: Import JSON
 dashboard.transfer.merge_mode: Merge mode (keep existing)
-dashboard.catalog.misc_title: Legendary mods (by rank)
-dashboard.catalog.book_title: Minerva plans (by list)
+dashboard.catalog.misc_title: Legendary mods
+dashboard.catalog.book_title: Minerva plans
 dashboard.stats.title: Character progress
 dashboard.stats.overall: Overall
 dashboard.stats.misc: Legendary mods
