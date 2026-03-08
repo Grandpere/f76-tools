@@ -37,7 +37,8 @@
                                 {% set monthKey = row.startsAt|date('Y-m') %}
                                 {% if monthKey != currentMonthKey %}
                                     {% set currentMonthKey = monthKey %}
-                                    <h4 class="roadmap-calendar-month">{{ row.startsAt|format_date(pattern='LLLL y', locale=app.request.locale) }}</h4>
+                                    {% set monthNumber = row.startsAt|date('n') %}
+                                    <h4 class="roadmap-calendar-month">{{ ('common.month.' ~ monthNumber)|trans }} {{ row.startsAt|date('Y') }}</h4>
                                 {% endif %}
 
                                 <article class="roadmap-calendar-event roadmap-calendar-event-{{ row.status }}">

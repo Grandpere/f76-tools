@@ -3587,3 +3587,130 @@ span.flatpickr-weekday {
         width: auto;
     }
 }
+
+/* Terminal theme hard overrides kept at EOF to win cascade against light defaults */
+:root[data-theme='terminal'] .catalog-panel,
+:root[data-theme='terminal'] .translations-panel,
+:root[data-theme='terminal'] .auth-card,
+:root[data-theme='terminal'] .source-filters,
+:root[data-theme='terminal'] .source-filter-group,
+:root[data-theme='terminal'] .account-security-row,
+:root[data-theme='terminal'] .account-security-sessions {
+    background: linear-gradient(160deg, #0b1712, #0f1f18) !important;
+    border-color: rgba(116, 229, 146, 0.25) !important;
+    color: #d5f7dc;
+}
+
+:root[data-theme='terminal'] .admin-users-summary-item {
+    background: #0f1d16;
+    border-color: rgba(116, 229, 146, 0.28);
+    color: #d5f7dc;
+}
+
+:root[data-theme='terminal'] .admin-security-badge-ok {
+    background: rgba(47, 147, 85, 0.22);
+    border-color: rgba(116, 229, 146, 0.42);
+    color: #c9f8d3;
+}
+
+:root[data-theme='terminal'] .admin-security-badge-warn {
+    background: rgba(193, 76, 63, 0.2);
+    border-color: rgba(247, 124, 124, 0.4);
+    color: #ffd0cb;
+}
+
+:root[data-theme='terminal'] .admin-identity-badge-linked {
+    background: rgba(47, 147, 85, 0.22);
+    border-color: rgba(116, 229, 146, 0.42);
+    color: #c9f8d3;
+}
+
+:root[data-theme='terminal'] .admin-identity-badge-unlinked {
+    background: rgba(193, 76, 63, 0.2);
+    border-color: rgba(247, 124, 124, 0.4);
+    color: #ffd0cb;
+}
+
+:root[data-theme='terminal'] .catalog-pagination-link {
+    background: #0e1a14;
+    border-color: rgba(116, 229, 146, 0.28);
+    color: #ccf7d4;
+}
+
+:root[data-theme='terminal'] .catalog-pagination-link:hover {
+    border-color: rgba(156, 255, 177, 0.62);
+    color: #e7ffee;
+}
+
+:root[data-theme='terminal'] .catalog-pagination-current {
+    color: #aee9bb;
+}
+
+:root[data-theme='terminal'] .translations-table code {
+    background: rgba(116, 229, 146, 0.08);
+    color: #c9f7d2;
+    border-radius: 6px;
+    padding: 0.06rem 0.32rem;
+}
+
+:root[data-theme='terminal'] .roadmap-snapshot-actions a,
+:root[data-theme='terminal'] .roadmap-snapshot-actions a:visited {
+    color: #ccf7d4;
+}
+
+:root[data-theme='terminal'] .roadmap-snapshot-actions a:hover {
+    color: #e7ffee;
+}
+
+:root[data-theme='terminal'] .roadmap-input,
+:root[data-theme='terminal'] .roadmap-merge-field input[type='number'],
+:root[data-theme='terminal'] .roadmap-events-table input[type='datetime-local'].roadmap-input,
+:root[data-theme='terminal'] .roadmap-events-table .flatpickr-input[readonly],
+:root[data-theme='terminal'] .minerva-admin-filters .field input[type='date'],
+:root[data-theme='terminal'] .minerva-admin-filters .field input[type='datetime-local'],
+:root[data-theme='terminal'] .minerva-admin-filters .field .flatpickr-input[readonly] {
+    background: #0a1511 !important;
+    border-color: rgba(116, 229, 146, 0.32) !important;
+    color: #d5f7dc !important;
+}
+
+:root[data-theme='terminal'] .flatpickr-calendar {
+    background: #0c1712;
+    border-color: rgba(116, 229, 146, 0.3);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+}
+
+:root[data-theme='terminal'] .flatpickr-months .flatpickr-month,
+:root[data-theme='terminal'] .flatpickr-weekdays {
+    background: #122119;
+    color: #c9f7d2;
+}
+
+:root[data-theme='terminal'] .flatpickr-day {
+    color: #c9f7d2;
+}
+
+:root[data-theme='terminal'] .flatpickr-day.today {
+    border-color: rgba(156, 255, 177, 0.7);
+}
+
+:root[data-theme='terminal'] .flatpickr-day.selected,
+:root[data-theme='terminal'] .flatpickr-day.startRange,
+:root[data-theme='terminal'] .flatpickr-day.endRange {
+    background: #6ddd87;
+    border-color: #6ddd87;
+    color: #0a1811;
+}
+
+:root[data-theme='terminal'] .flatpickr-day.inRange,
+:root[data-theme='terminal'] .flatpickr-day.nextMonthDay.inRange,
+:root[data-theme='terminal'] .flatpickr-day.prevMonthDay.inRange {
+    background: rgba(109, 221, 135, 0.2);
+    border-color: rgba(109, 221, 135, 0.2);
+}
+
+:root[data-theme='terminal'] .item-relations-html img,
+:root[data-theme='terminal'] .item-source-icons img,
+:root[data-theme='terminal'] .item-drop-sources img {
+    filter: invert(85%) sepia(9%) saturate(583%) hue-rotate(72deg) brightness(105%) contrast(95%);
+}

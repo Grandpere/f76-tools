@@ -6,6 +6,18 @@ common.theme.terminal: Terminal
 common.locale.fr: Français
 common.locale.en: Anglais
 common.locale.de: Allemand
+common.month.1: Janvier
+common.month.2: Février
+common.month.3: Mars
+common.month.4: Avril
+common.month.5: Mai
+common.month.6: Juin
+common.month.7: Juillet
+common.month.8: Août
+common.month.9: Septembre
+common.month.10: Octobre
+common.month.11: Novembre
+common.month.12: Décembre
 common.yes: Oui
 common.no: Non
 
