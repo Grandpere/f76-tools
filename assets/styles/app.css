@@ -127,6 +127,80 @@ body::before {
     color: #d8ffe0;
 }
 
+:root[data-theme='terminal'] .catalog-subtitle,
+:root[data-theme='terminal'] .catalog-user,
+:root[data-theme='terminal'] .header-locale label,
+:root[data-theme='terminal'] .header-theme label {
+    color: #b3eac0;
+}
+
+:root[data-theme='terminal'] .auth-card,
+:root[data-theme='terminal'] .catalog-panel,
+:root[data-theme='terminal'] .stats-card,
+:root[data-theme='terminal'] .stats-group,
+:root[data-theme='terminal'] .catalog-subgroup,
+:root[data-theme='terminal'] .item-card,
+:root[data-theme='terminal'] .translations-table-wrap,
+:root[data-theme='terminal'] .minerva-table-wrap {
+    background: linear-gradient(160deg, #0b1712, #0f1f18);
+    border-color: rgba(116, 229, 146, 0.25);
+    color: #d5f7dc;
+}
+
+:root[data-theme='terminal'] .catalog-subgroup summary,
+:root[data-theme='terminal'] .item-card p,
+:root[data-theme='terminal'] .item-extra-line,
+:root[data-theme='terminal'] .item-note-line,
+:root[data-theme='terminal'] .stats-card-sub,
+:root[data-theme='terminal'] .stats-row-head span {
+    color: #aee9bb;
+}
+
+:root[data-theme='terminal'] .stats-bar {
+    background: rgba(64, 111, 76, 0.55);
+}
+
+:root[data-theme='terminal'] .stats-bar span {
+    background: linear-gradient(90deg, #66d887, #97f0ae);
+}
+
+:root[data-theme='terminal'] .auth-field input,
+:root[data-theme='terminal'] .auth-field textarea,
+:root[data-theme='terminal'] .field input,
+:root[data-theme='terminal'] .field select,
+:root[data-theme='terminal'] .field textarea,
+:root[data-theme='terminal'] .header-locale select,
+:root[data-theme='terminal'] .header-theme select,
+:root[data-theme='terminal'] .translations-table textarea {
+    background: #0a1511;
+    color: #d5f7dc;
+    border-color: rgba(116, 229, 146, 0.32);
+}
+
+:root[data-theme='terminal'] .auth-field input:focus,
+:root[data-theme='terminal'] .auth-field textarea:focus,
+:root[data-theme='terminal'] .field input:focus,
+:root[data-theme='terminal'] .field select:focus,
+:root[data-theme='terminal'] .field textarea:focus,
+:root[data-theme='terminal'] .header-locale select:focus,
+:root[data-theme='terminal'] .header-theme select:focus {
+    border-color: rgba(156, 255, 177, 0.7);
+    box-shadow: 0 0 0 2px rgba(156, 255, 177, 0.25);
+}
+
+:root[data-theme='terminal'] .translations-table th,
+:root[data-theme='terminal'] .minerva-table th {
+    background: #122119;
+    color: #bdf0c8;
+    border-bottom-color: rgba(116, 229, 146, 0.35);
+}
+
+:root[data-theme='terminal'] .translations-table td,
+:root[data-theme='terminal'] .minerva-table td {
+    border-bottom-color: rgba(116, 229, 146, 0.16);
+    color: #cef4d7;
+}
+
 .catalog-header h1 {
     margin: 0;
     font-family: 'Rajdhani', 'Inter', sans-serif;
