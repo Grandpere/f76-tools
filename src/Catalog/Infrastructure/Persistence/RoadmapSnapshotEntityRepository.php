@@ -49,6 +49,22 @@ final class RoadmapSnapshotEntityRepository extends ServiceEntityRepository impl
         return $snapshot instanceof RoadmapSnapshotEntity ? $snapshot : null;
     }
 
+    public function findOneWithEventsById(int $id): ?RoadmapSnapshotEntity
+    {
+        $snapshot = $this->createQueryBuilder('s')
+            ->leftJoin('s.events', 'e')
+            ->addSelect('e')
+            ->where('s.id = :id')
+            ->setParameter('id', $id)
+            ->orderBy('e.sortOrder', 'ASC')
+            ->addOrderBy('e.id', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $snapshot instanceof RoadmapSnapshotEntity ? $snapshot : null;
+    }
+
     /**
      * @return list<RoadmapSnapshotEntity>
      */

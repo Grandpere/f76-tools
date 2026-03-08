@@ -188,6 +188,11 @@ final class InMemorySnapshotRepoForMerge implements RoadmapSnapshotWriteReposito
         return $this->snapshots[$id] ?? null;
     }
 
+    public function findOneWithEventsById(int $id): ?RoadmapSnapshotEntity
+    {
+        return $this->findOneById($id);
+    }
+
     public function findRecent(int $limit = 20): array
     {
         if ($limit <= 0) {

@@ -126,6 +126,11 @@ final class InMemoryRoadmapSnapshotWriteRepository implements RoadmapSnapshotWri
         return $this->items[$id] ?? null;
     }
 
+    public function findOneWithEventsById(int $id): ?RoadmapSnapshotEntity
+    {
+        return $this->findOneById($id);
+    }
+
     public function findRecent(int $limit = 20): array
     {
         if ($limit <= 0) {

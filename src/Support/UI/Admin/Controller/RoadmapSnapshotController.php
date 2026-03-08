@@ -60,10 +60,13 @@ final class RoadmapSnapshotController extends AbstractController
         $canonicalRows = [];
 
         if (is_int($selectedId) && $selectedId > 0) {
-            $selectedSnapshot = $this->roadmapSnapshotWriteRepository->findOneById($selectedId);
+            $selectedSnapshot = $this->roadmapSnapshotWriteRepository->findOneWithEventsById($selectedId);
         }
         if (!$selectedSnapshot instanceof RoadmapSnapshotEntity && [] !== $snapshots) {
-            $selectedSnapshot = $snapshots[0];
+            $fallbackId = $snapshots[0]->getId();
+            $selectedSnapshot = is_int($fallbackId)
+                ? $this->roadmapSnapshotWriteRepository->findOneWithEventsById($fallbackId)
+                : $snapshots[0];
         }
 
         foreach ($this->roadmapCanonicalEventReadRepository->findAllOrdered() as $event) {

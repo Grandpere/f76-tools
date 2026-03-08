@@ -23,6 +23,8 @@ interface RoadmapSnapshotWriteRepository
 
     public function findOneById(int $id): ?RoadmapSnapshotEntity;
 
+    public function findOneWithEventsById(int $id): ?RoadmapSnapshotEntity;
+
     /**
      * @return list<RoadmapSnapshotEntity>
      */
