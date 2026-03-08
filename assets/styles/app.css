@@ -353,7 +353,7 @@ body::before {
     border: 1px solid rgba(255, 210, 74, 0.34);
     border-radius: 999px;
     padding: 0.22rem 0.45rem 0.22rem 0.62rem;
-    min-height: 34px;
+    height: 36px;
     margin: 0;
 }
 
@@ -365,7 +365,7 @@ body::before {
     border: 1px solid rgba(255, 210, 74, 0.34);
     border-radius: 999px;
     padding: 0.22rem 0.45rem 0.22rem 0.62rem;
-    min-height: 34px;
+    height: 36px;
     margin: 0;
 }
 
@@ -375,6 +375,7 @@ body::before {
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-weight: 600;
+    line-height: 1;
 }
 
 .header-theme select {
@@ -386,6 +387,8 @@ body::before {
     line-height: 1.2;
     padding: 0.25rem 0.54rem;
     min-width: 116px;
+    height: 28px;
+    display: block;
 }
 
 .header-theme select:focus {
@@ -405,6 +408,7 @@ body::before {
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-weight: 600;
+    line-height: 1;
 }
 
 .header-translations-link {
@@ -431,6 +435,8 @@ body::before {
     line-height: 1.2;
     padding: 0.25rem 0.54rem;
     min-width: 122px;
+    height: 28px;
+    display: block;
 }
 
 .header-locale select:focus {
