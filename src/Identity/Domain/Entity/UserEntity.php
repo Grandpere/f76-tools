@@ -53,6 +53,9 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(name: 'is_email_verified', options: ['default' => true])]
     private bool $isEmailVerified = true;
 
+    #[ORM\Column(name: 'is_admin', options: ['default' => false])]
+    private bool $isAdmin = false;
+
     #[ORM\Column(name: 'email_verification_token_hash', length: 64, nullable: true)]
     private ?string $emailVerificationTokenHash = null;
 
@@ -142,8 +145,14 @@ class UserEntity implements UserInterface, PasswordAuthenticatedUserInterface
         /** @var list<string> $uniqueRoles */
         $uniqueRoles = array_values(array_unique($normalized));
         $this->roles = $uniqueRoles;
+        $this->isAdmin = in_array('ROLE_ADMIN', $uniqueRoles, true);
 
         return $this;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->isAdmin;
     }
 
     public function getPassword(): string

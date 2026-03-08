@@ -116,14 +116,14 @@ final class UserEntityRepository extends ServiceEntityRepository implements User
     public function getAdminSummary(): AdminUserSummary
     {
         $sql = <<<'SQL'
-SELECT
-    COUNT(u.id) AS total_users,
-    COUNT(ui.id) AS google_linked_users
-FROM app_user u
-LEFT JOIN user_identity ui
-    ON ui.user_id = u.id
-    AND ui.provider = :provider
-SQL;
+            SELECT
+                COUNT(u.id) AS total_users,
+                COUNT(ui.id) AS google_linked_users
+            FROM app_user u
+            LEFT JOIN user_identity ui
+                ON ui.user_id = u.id
+                AND ui.provider = :provider
+            SQL;
 
         /** @var array{total_users: int|string, google_linked_users: int|string} $row */
         $row = $this->getEntityManager()->getConnection()->fetchAssociative($sql, [
@@ -161,6 +161,12 @@ SQL;
             $qb->andWhere('ui.id IS NOT NULL');
         } elseif ('unlinked' === $criteria->googleFilter) {
             $qb->andWhere('ui.id IS NULL');
+        }
+
+        if ('admin' === $criteria->roleFilter) {
+            $qb->andWhere('u.isAdmin = :isAdmin')->setParameter('isAdmin', true);
+        } elseif ('user' === $criteria->roleFilter) {
+            $qb->andWhere('u.isAdmin = :isAdmin')->setParameter('isAdmin', false);
         }
 
         if ('verified' === $criteria->verifiedFilter) {
