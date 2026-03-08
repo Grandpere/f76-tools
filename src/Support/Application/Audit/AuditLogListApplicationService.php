@@ -13,10 +13,14 @@ declare(strict_types=1);
 
 namespace App\Support\Application\Audit;
 
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
+
 final class AuditLogListApplicationService
 {
     public function __construct(
         private readonly AuditLogReadRepository $auditLogRepository,
+        private readonly CacheInterface $cache,
     ) {
     }
 
@@ -36,7 +40,11 @@ final class AuditLogListApplicationService
             totalRows: $totalRows,
             query: $query->query,
             action: $query->action,
-            actions: $this->auditLogRepository->findDistinctActions(),
+            actions: $this->cache->get('admin_audit.distinct_actions.v1', function (ItemInterface $item): array {
+                $item->expiresAfter(300);
+
+                return $this->auditLogRepository->findDistinctActions();
+            }),
             page: $page,
             perPage: $query->perPage,
             totalPages: $totalPages,

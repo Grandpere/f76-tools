@@ -18,6 +18,7 @@ use App\Support\Application\Audit\AuditLogListQuery;
 use App\Support\Application\Audit\AuditLogReadRepository;
 use App\Support\Domain\Entity\AdminAuditLogEntity;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 final class AuditLogListApplicationServiceTest extends TestCase
 {
@@ -27,7 +28,7 @@ final class AuditLogListApplicationServiceTest extends TestCase
             ['rows' => [], 'total' => 12],
         ], ['a1', 'a2']);
 
-        $service = new AuditLogListApplicationService($repository);
+        $service = new AuditLogListApplicationService($repository, new ArrayAdapter());
         $result = $service->list(AuditLogListQuery::fromRaw('  login ', ' user_toggle_active ', 1, 40));
 
         self::assertSame('login', $result->query);
@@ -46,7 +47,7 @@ final class AuditLogListApplicationServiceTest extends TestCase
             ['rows' => [], 'total' => 31],
         ], []);
 
-        $service = new AuditLogListApplicationService($repository);
+        $service = new AuditLogListApplicationService($repository, new ArrayAdapter());
         $result = $service->list(AuditLogListQuery::fromRaw('', '', 99, 10));
 
         self::assertSame(4, $result->page);
@@ -62,7 +63,7 @@ final class AuditLogListApplicationServiceTest extends TestCase
             ['rows' => [], 'total' => 0],
         ], []);
 
-        $service = new AuditLogListApplicationService($repository);
+        $service = new AuditLogListApplicationService($repository, new ArrayAdapter());
         $result = $service->list(AuditLogListQuery::fromRaw(null, null, null, null));
 
         self::assertSame('', $result->query);
