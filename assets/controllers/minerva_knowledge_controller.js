@@ -175,10 +175,7 @@ export default class extends Controller {
             </details>
         `).join('');
 
-        return `
-            <p class="catalog-note">${this.escape(this.t('sharedInfo'))}</p>
-            ${groupsHtml}
-        `;
+        return groupsHtml;
     }
 
     renderItemCard(item) {
