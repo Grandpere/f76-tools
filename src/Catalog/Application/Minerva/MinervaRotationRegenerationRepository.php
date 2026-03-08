@@ -39,4 +39,9 @@ interface MinervaRotationRegenerationRepository
     public function findManualById(int $id): ?MinervaRotationEntity;
 
     public function findLatestCreatedAtBySource(MinervaRotationSourceEnum $source): ?DateTimeImmutable;
+
+    /**
+     * @return array{generated: ?DateTimeImmutable, manual: ?DateTimeImmutable}
+     */
+    public function findLatestCreatedAtSummary(): array;
 }

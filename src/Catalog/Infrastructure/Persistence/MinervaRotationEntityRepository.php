@@ -173,4 +173,47 @@ final class MinervaRotationEntityRepository extends ServiceEntityRepository impl
 
         return $result->getCreatedAt();
     }
+
+    /**
+     * @return array{generated: ?DateTimeImmutable, manual: ?DateTimeImmutable}
+     */
+    public function findLatestCreatedAtSummary(): array
+    {
+        $rows = $this->getEntityManager()->getConnection()->fetchAllAssociative(
+            <<<'SQL'
+SELECT source, MAX(created_at) AS latest_created_at
+FROM minerva_rotation
+WHERE source IN (:generated, :manual)
+GROUP BY source
+SQL
+            ,
+            [
+                'generated' => MinervaRotationSourceEnum::GENERATED->value,
+                'manual' => MinervaRotationSourceEnum::MANUAL->value,
+            ],
+        );
+
+        $generated = null;
+        $manual = null;
+
+        foreach ($rows as $row) {
+            $source = isset($row['source']) && is_string($row['source']) ? $row['source'] : null;
+            $rawDate = isset($row['latest_created_at']) && is_string($row['latest_created_at']) ? $row['latest_created_at'] : null;
+            if (null === $source || null === $rawDate || '' === trim($rawDate)) {
+                continue;
+            }
+
+            $parsed = new DateTimeImmutable($rawDate);
+            if (MinervaRotationSourceEnum::GENERATED->value === $source) {
+                $generated = $parsed;
+            } elseif (MinervaRotationSourceEnum::MANUAL->value === $source) {
+                $manual = $parsed;
+            }
+        }
+
+        return [
+            'generated' => $generated,
+            'manual' => $manual,
+        ];
+    }
 }

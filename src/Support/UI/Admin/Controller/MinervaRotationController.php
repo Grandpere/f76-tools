@@ -18,7 +18,6 @@ use App\Catalog\Application\Minerva\MinervaRotationRefresher;
 use App\Catalog\Application\Minerva\MinervaRotationRegenerationApplicationService;
 use App\Catalog\Application\Minerva\MinervaRotationRegenerationRepository;
 use App\Catalog\Application\Minerva\MinervaRotationTimelineApplicationService;
-use App\Catalog\Domain\Minerva\MinervaRotationSourceEnum;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Support\Application\Audit\LatestMinervaRefreshSummaryApplicationService;
 use App\Support\Domain\Entity\AdminAuditLogEntity;
@@ -74,14 +73,16 @@ final class MinervaRotationController extends AbstractController
             $freshness = $this->minervaRotationRefresher->refresh($from, $to, true);
         }
 
+        $latestSummary = $this->minervaRotationRegenerationRepository->findLatestCreatedAtSummary();
+
         return $this->render('admin/minerva_rotation.html.twig', [
             'timeline' => $this->timelineService->buildTimeline(),
             'defaultFrom' => $defaultFrom,
             'defaultTo' => $defaultTo,
             'manualOverrides' => $this->buildManualRows(),
             'freshness' => $freshness,
-            'latestGeneratedAt' => $this->minervaRotationRegenerationRepository->findLatestCreatedAtBySource(MinervaRotationSourceEnum::GENERATED),
-            'latestManualAt' => $this->minervaRotationRegenerationRepository->findLatestCreatedAtBySource(MinervaRotationSourceEnum::MANUAL),
+            'latestGeneratedAt' => $latestSummary['generated'],
+            'latestManualAt' => $latestSummary['manual'],
             'latestRefreshSummary' => $this->latestMinervaRefreshSummaryApplicationService->resolve(),
         ]);
     }
