@@ -94,9 +94,17 @@
                 <p class="account-security-sub">{{ 'security.account.auth_events_hint'|trans }}</p>
                 <ul class="account-security-session-list">
                     {% for event in authEvents %}
+                        {% set rawEventLabel = event.event %}
+                        {% set translatedEventLabel = rawEventLabel|trans %}
+                        {% set displayEventLabel = translatedEventLabel != rawEventLabel
+                            ? translatedEventLabel
+                            : rawEventLabel
+                                |replace({'security.auth.': '', 'security.account.': '', 'security.': '', '.': ' '})
+                                |title
+                        %}
                         <li class="account-security-session-item">
                             <strong>
-                                {{ event.event }}
+                                {{ displayEventLabel }}
                                 <span class="admin-security-badge {{ event.level == 'warning' ? 'admin-security-badge-warn' : 'admin-security-badge-ok' }}">{{ event.level }}</span>
                             </strong>
                             <small>{{ event.occurredAt|date('Y-m-d H:i:s') }}{% if event.clientIp %} · {{ event.clientIp }}{% endif %}</small>
