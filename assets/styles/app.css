@@ -136,10 +136,15 @@ body::before {
 
 :root[data-theme='terminal'] .auth-card,
 :root[data-theme='terminal'] .catalog-panel,
+:root[data-theme='terminal'] .translations-panel,
 :root[data-theme='terminal'] .stats-card,
 :root[data-theme='terminal'] .stats-group,
 :root[data-theme='terminal'] .catalog-subgroup,
 :root[data-theme='terminal'] .item-card,
+:root[data-theme='terminal'] .source-filters,
+:root[data-theme='terminal'] .source-filter-group,
+:root[data-theme='terminal'] .account-security-row,
+:root[data-theme='terminal'] .account-security-sessions,
 :root[data-theme='terminal'] .translations-table-wrap,
 :root[data-theme='terminal'] .minerva-table-wrap {
     background: linear-gradient(160deg, #0b1712, #0f1f18);
@@ -148,10 +153,15 @@ body::before {
 }
 
 :root[data-theme='terminal'] .catalog-subgroup summary,
+:root[data-theme='terminal'] .source-filter-group-title,
+:root[data-theme='terminal'] .source-filters legend,
+:root[data-theme='terminal'] .source-filters label,
 :root[data-theme='terminal'] .item-card p,
 :root[data-theme='terminal'] .item-extra-line,
 :root[data-theme='terminal'] .item-note-line,
 :root[data-theme='terminal'] .stats-card-sub,
+:root[data-theme='terminal'] .account-security-row dt,
+:root[data-theme='terminal'] .account-security-sub,
 :root[data-theme='terminal'] .stats-row-head span {
     color: #aee9bb;
 }
@@ -169,6 +179,7 @@ body::before {
 :root[data-theme='terminal'] .field input,
 :root[data-theme='terminal'] .field select,
 :root[data-theme='terminal'] .field textarea,
+:root[data-theme='terminal'] .source-filters input[type='checkbox'],
 :root[data-theme='terminal'] .header-locale select,
 :root[data-theme='terminal'] .header-theme select,
 :root[data-theme='terminal'] .translations-table textarea {
@@ -199,6 +210,12 @@ body::before {
 :root[data-theme='terminal'] .minerva-table td {
     border-bottom-color: rgba(116, 229, 146, 0.16);
     color: #cef4d7;
+}
+
+:root[data-theme='terminal'] .source-filters input[type='checkbox']:checked,
+:root[data-theme='terminal'] .item-learned-checkbox:checked {
+    background: linear-gradient(180deg, #6ddd87, #9cffb1);
+    border-color: rgba(156, 255, 177, 0.85);
 }
 
 :root[data-theme='terminal'] .minerva-countdown-card,
