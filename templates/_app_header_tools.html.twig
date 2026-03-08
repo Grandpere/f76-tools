@@ -16,6 +16,7 @@
     </form>
     <div class="header-control-group">
         <div class="header-theme" data-controller="theme-switcher">
+            <span class="header-control-spacer" aria-hidden="true"></span>
             <label for="{{ localeSelectId }}-theme">{{ 'common.theme'|trans }}</label>
             <select id="{{ localeSelectId }}-theme" data-theme-switcher-target="select" data-action="change->theme-switcher#change">
                 <option value="default">{{ 'common.theme.default'|trans }}</option>
