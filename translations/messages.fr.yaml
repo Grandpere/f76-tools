@@ -482,8 +482,8 @@ minerva.source_generated: Générée
 minerva.source_manual: Manuelle
 minerva.current_window_title: Localisation actuelle
 minerva.current_window_empty: Minerva n'est pas disponible actuellement.
-minerva.next_windows_title: Prochaines localisation
-minerva.active_windows_title: Localisation à venir
+minerva.next_windows_title: Prochaines localisations
+minerva.active_windows_title: Localisations à venir
 minerva.timeline_title: Timeline complète
 minerva.list_label: 'Liste %list%'
 minerva.list_progress: Progression
