@@ -18,6 +18,8 @@ use Symfony\Contracts\Cache\ItemInterface;
 
 final class LatestMinervaRefreshSummaryApplicationService
 {
+    private const CACHE_KEY = 'admin_minerva.latest_refresh_summary.v1';
+
     /**
      * @var list<string>
      */
@@ -60,7 +62,7 @@ final class LatestMinervaRefreshSummaryApplicationService
          *     dryRun:bool
          * }|null $summary
          */
-        $summary = $this->cache->get('admin_minerva.latest_refresh_summary.v1', function (ItemInterface $item): ?array {
+        $summary = $this->cache->get(self::CACHE_KEY, function (ItemInterface $item): ?array {
             $item->expiresAfter(60);
 
             $latest = $this->auditLogReadRepository->findLatestByActions(self::MINERVA_REFRESH_ACTIONS);
@@ -84,6 +86,11 @@ final class LatestMinervaRefreshSummaryApplicationService
         });
 
         return $summary;
+    }
+
+    public function invalidate(): void
+    {
+        $this->cache->delete(self::CACHE_KEY);
     }
 
     /**

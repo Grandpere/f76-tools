@@ -212,6 +212,7 @@ final class MinervaRotationController extends AbstractController
             ]);
         }
         $this->entityManager->flush();
+        $this->latestMinervaRefreshSummaryApplicationService->invalidate();
 
         return $this->redirectToMinervaPageWithRange($request);
     }
