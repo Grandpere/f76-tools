@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace DoctrineMigrations;
 
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
@@ -80,4 +89,3 @@ final class Version20260306193000 extends AbstractMigration
         $this->addSql('DROP TABLE roadmap_snapshot');
     }
 }
-

@@ -44,24 +44,24 @@ final class RegistrationControllerTest extends WebTestCase
 
     public function testRegisterPageIsAccessible(): void
     {
-        $crawler = $this->browser()->request('GET', '/register');
+        $crawler = $this->browser()->request('GET', '/en/register');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filter('form'));
         self::assertCount(1, $crawler->filter('input[name="email"]'));
-        self::assertCount(1, $crawler->filter('a[href^="/auth/google/start"]'));
-        self::assertCount(1, $crawler->filter('a[href^="/forgot-password"]'));
-        self::assertCount(1, $crawler->filter('a[href^="/contact"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/en/auth/google/start"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/en/forgot-password"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/en/contact"]'));
     }
 
     public function testRegisterCreatesUserAndRedirectsToLogin(): void
     {
-        $crawler = $this->browser()->request('GET', '/register');
+        $crawler = $this->browser()->request('GET', '/en/register');
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
         $token = (string) $tokenNode->attr('value');
 
-        $this->browser()->request('POST', '/register', [
+        $this->browser()->request('POST', '/en/register', [
             '_csrf_token' => $token,
             'email' => 'new-user@example.com',
             'password' => 'secret123',
@@ -69,7 +69,7 @@ final class RegistrationControllerTest extends WebTestCase
         ]);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
         $user = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => 'new-user@example.com']);
         self::assertInstanceOf(UserEntity::class, $user);
@@ -82,13 +82,13 @@ final class RegistrationControllerTest extends WebTestCase
     public function testRegisterIsRateLimitedAfterRepeatedAttempts(): void
     {
         $email = sprintf('ratelimit-register-%s@example.com', uniqid('', true));
-        $crawler = $this->browser()->request('GET', '/register');
+        $crawler = $this->browser()->request('GET', '/en/register');
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
         $token = (string) $tokenNode->attr('value');
 
         for ($i = 0; $i < 3; ++$i) {
-            $this->browser()->request('POST', '/register', [
+            $this->browser()->request('POST', '/en/register', [
                 '_csrf_token' => $token,
                 'email' => $email,
                 'password' => 'secret123',
@@ -97,14 +97,14 @@ final class RegistrationControllerTest extends WebTestCase
             self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         }
 
-        $this->browser()->request('POST', '/register', [
+        $this->browser()->request('POST', '/en/register', [
             '_csrf_token' => $token,
             'email' => $email,
             'password' => 'secret123',
             'password_confirm' => 'different',
         ]);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/register', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/register', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
         $this->browser()->followRedirect();
         self::assertStringContainsString('Too many attempts', (string) $this->browser()->getResponse()->getContent());

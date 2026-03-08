@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Catalog\Application\Roadmap;
 
 use App\Catalog\Application\Roadmap\Locale\RoadmapLocaleProfileRegistry;
@@ -94,9 +103,7 @@ final class RoadmapRawTextEventParser
             } elseif (str_starts_with($line, '- ') && [] !== $lines) {
                 $suffix = ltrim($line, "- \t");
                 $lastIndex = array_key_last($lines);
-                if (is_int($lastIndex)) {
-                    $lines[$lastIndex] = $this->normalizeDateArtifacts(rtrim($lines[$lastIndex]).' - '.$suffix);
-                }
+                $lines[$lastIndex] = $this->normalizeDateArtifacts(rtrim($lines[$lastIndex]).' - '.$suffix);
                 continue;
             }
 
@@ -156,7 +163,7 @@ final class RoadmapRawTextEventParser
             }
 
             $candidate = $lines[$candidateIndex];
-            if ($this->extractDateRange($candidate, $locale, new DateTimeImmutable(), null) !== null) {
+            if (null !== $this->extractDateRange($candidate, $locale, new DateTimeImmutable(), null)) {
                 break;
             }
             if ($this->looksLikeMonthOnlyLabel($candidate, $locale)) {
@@ -195,7 +202,7 @@ final class RoadmapRawTextEventParser
             }
 
             $candidate = $lines[$candidateIndex];
-            if ($this->extractDateRange($candidate, $locale, new DateTimeImmutable(), null) !== null) {
+            if (null !== $this->extractDateRange($candidate, $locale, new DateTimeImmutable(), null)) {
                 continue;
             }
             if ($this->looksLikeMonthOnlyLabel($candidate, $locale)) {
@@ -327,18 +334,18 @@ final class RoadmapRawTextEventParser
     private function extractSingleDate(string $line, string $locale, DateTimeImmutable $referenceDate): ?array
     {
         $profile = $this->profileRegistry->profileFor($locale);
-        if (str_contains($line, '-') || str_contains($line, '–') || preg_match('/\b(BIS|TO)\b/iu', $line) === 1) {
+        if (str_contains($line, '-') || str_contains($line, '–') || 1 === preg_match('/\b(BIS|TO)\b/iu', $line)) {
             return null;
         }
 
         if (preg_match('/^\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s+([^\s]+)\s*(.*)$/iu', $line, $matches)) {
             $day = (int) $matches[1];
             $month = $this->monthNameToNumber($matches[2], $locale);
-            $inlineTail = (string) ($matches[3] ?? '');
+            $inlineTail = (string) $matches[3];
         } elseif ($profile->usesMonthFirstDates() && preg_match('/^\s*([^\s]+)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s*(.*)$/iu', $line, $matches)) {
             $month = $this->monthNameToNumber($matches[1], $locale);
             $day = (int) $matches[2];
-            $inlineTail = (string) ($matches[3] ?? '');
+            $inlineTail = (string) $matches[3];
         } else {
             return null;
         }
@@ -399,7 +406,7 @@ final class RoadmapRawTextEventParser
                     $prefixMatches[] = (int) $monthNumber;
                 }
             }
-            if (count($prefixMatches) === 1) {
+            if (1 === count($prefixMatches)) {
                 return $prefixMatches[0];
             }
         }
@@ -587,11 +594,11 @@ final class RoadmapRawTextEventParser
             return true;
         }
 
-        if (preg_match('/^[^[:alnum:]]+$/u', $normalized) === 1) {
+        if (1 === preg_match('/^[^[:alnum:]]+$/u', $normalized)) {
             return true;
         }
 
-        if (preg_match('/^\d{4}\s+ZENIMAX$/u', $normalized) === 1) {
+        if (1 === preg_match('/^\d{4}\s+ZENIMAX$/u', $normalized)) {
             return true;
         }
 
@@ -601,7 +608,7 @@ final class RoadmapRawTextEventParser
             || str_contains($normalized, 'ZENIMAX')
             || str_contains($normalized, 'FALLOUT')
             || str_contains($normalized, 'FALLEUT')
-            || preg_match('/\bTM\b/u', $normalized) === 1
+            || 1 === preg_match('/\bTM\b/u', $normalized)
         ) {
             return true;
         }

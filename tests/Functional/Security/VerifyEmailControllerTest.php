@@ -64,7 +64,7 @@ final class VerifyEmailControllerTest extends WebTestCase
         ]));
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
         $this->entityManager?->clear();
         $updated = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => 'verify-target@example.com']);
@@ -79,7 +79,7 @@ final class VerifyEmailControllerTest extends WebTestCase
         $this->browser()->request('GET', '/verify-email/not-a-valid-token');
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
     }
 
     private function truncateTables(): void

@@ -25,7 +25,7 @@ final class IdentitySignedLinkGenerator implements \App\Identity\Application\Not
     public function generateVerificationUrl(string $locale, string $token): string
     {
         return $this->signedUrlGenerator->generate('app_verify_email', [
-            'locale' => $locale,
+            '_locale' => $locale,
             'token' => $token,
         ]);
     }
@@ -33,7 +33,7 @@ final class IdentitySignedLinkGenerator implements \App\Identity\Application\Not
     public function generateResetPasswordUrl(string $locale, string $token): string
     {
         return $this->signedUrlGenerator->generate('app_reset_password', [
-            'locale' => $locale,
+            '_locale' => $locale,
             'token' => $token,
         ]);
     }

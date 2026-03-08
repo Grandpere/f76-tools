@@ -35,7 +35,8 @@ final class ContactController extends AbstractController
     ) {
     }
 
-    #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
+    #[Route('/{_locale<en|fr|de>}/contact', name: 'app_contact', methods: ['GET', 'POST'], defaults: ['_locale' => 'en'])]
+    #[Route('/contact', methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
         if ($request->isMethod('POST')) {

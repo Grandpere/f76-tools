@@ -50,7 +50,7 @@ final class ChangePasswordControllerTest extends WebTestCase
         $this->browser()->request('GET', '/change-password');
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
     }
 
     public function testAuthenticatedUserCanChangePassword(): void

@@ -1,8 +1,8 @@
 <p>
-    <a href="{{ path('app_admin_users', { locale: app.request.locale }) }}">{{ 'dashboard.header.user_management'|trans }}</a>
-    · <a href="{{ path('app_admin_item_translations', { locale: app.request.locale, target: 'fr' }) }}">{{ 'dashboard.header.translation_management'|trans }}</a>
-    · <a href="{{ path('app_admin_minerva_rotation', { locale: app.request.locale }) }}">{{ 'admin_minerva.title'|trans }}</a>
-    · <a href="{{ path('app_admin_roadmap_snapshots', { locale: app.request.locale }) }}">{{ 'admin_roadmap.title'|trans }}</a>
-    · <a href="{{ path('app_admin_contact_messages', { locale: app.request.locale }) }}">{{ 'admin_contact.title'|trans }}</a>
-    · <a href="{{ path('app_admin_audit_logs', { locale: app.request.locale }) }}">{{ 'admin_audit.title'|trans }}</a>
+    <a href="{{ path('app_admin_users', { _locale: app.request.locale }) }}">{{ 'dashboard.header.user_management'|trans }}</a>
+    · <a href="{{ path('app_admin_item_translations', { _locale: app.request.locale, target: 'fr' }) }}">{{ 'dashboard.header.translation_management'|trans }}</a>
+    · <a href="{{ path('app_admin_minerva_rotation', { _locale: app.request.locale }) }}">{{ 'admin_minerva.title'|trans }}</a>
+    · <a href="{{ path('app_admin_roadmap_snapshots', { _locale: app.request.locale }) }}">{{ 'admin_roadmap.title'|trans }}</a>
+    · <a href="{{ path('app_admin_contact_messages', { _locale: app.request.locale }) }}">{{ 'admin_contact.title'|trans }}</a>
+    · <a href="{{ path('app_admin_audit_logs', { _locale: app.request.locale }) }}">{{ 'admin_audit.title'|trans }}</a>
 </p>

@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('/admin/translations/items')]
+#[Route('/{_locale<en|fr|de>}/admin/translations/items', defaults: ['_locale' => 'en'])]
 final class ItemTranslationController extends AbstractController
 {
     use AdminRoleGuardControllerTrait;
@@ -57,7 +57,7 @@ final class ItemTranslationController extends AbstractController
                 $this->addFlash('warning', $this->translator->trans('admin_translations.flash.invalid_csrf'));
 
                 return $this->redirectToRoute('app_admin_item_translations', [
-                    'locale' => $request->getLocale(),
+                    '_locale' => $request->getLocale(),
                     'target' => $targetLocale,
                     'q' => $query,
                     'page' => $page,
@@ -87,7 +87,7 @@ final class ItemTranslationController extends AbstractController
             }
 
             return $this->redirectToRoute('app_admin_item_translations', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
                 'target' => $targetLocale,
                 'q' => $query,
                 'page' => $page,

@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Catalog\Roadmap;
 
 use App\Catalog\Application\Roadmap\MergeRoadmapLocalesApplicationService;
@@ -12,6 +21,7 @@ use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use App\Catalog\Domain\Roadmap\RoadmapSnapshotStatusEnum;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 use RuntimeException;
 
 final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
@@ -105,7 +115,7 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
 
     private function snapshot(int $id, string $locale, string $rawText): RoadmapSnapshotEntity
     {
-        $snapshot = (new RoadmapSnapshotEntity())
+        $snapshot = new RoadmapSnapshotEntity()
             ->setLocale($locale)
             ->setSourceImagePath('/tmp/mock-'.$locale.'.jpg')
             ->setSourceImageHash(str_repeat('a', 64))
@@ -114,7 +124,7 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
             ->setRawText($rawText)
             ->setStatus(RoadmapSnapshotStatusEnum::APPROVED);
 
-        $reflection = new \ReflectionClass($snapshot);
+        $reflection = new ReflectionClass($snapshot);
         $property = $reflection->getProperty('id');
         $property->setValue($snapshot, $id);
 

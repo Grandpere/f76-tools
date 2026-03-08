@@ -48,7 +48,7 @@
                 </span>
             </div>
             {% set commonParams = {
-                locale: app.request.locale,
+                _locale: app.request.locale,
                 q: query ?: null,
                 google: googleFilter ?: null,
                 active: activeFilter ?: null,
@@ -230,7 +230,7 @@
                             </td>
                             <td>
                                 <div class="admin-users-actions">
-                                    <form method="post" action="{{ path('app_admin_users_toggle_active', { id: user.id, locale: app.request.locale }) }}">
+                                    <form method="post" action="{{ path('app_admin_users_toggle_active', { id: user.id, _locale: app.request.locale }) }}">
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_toggle_active_' ~ user.id) }}">
                                         <input type="hidden" name="google" value="{{ googleFilter }}">
                                         <input type="hidden" name="active" value="{{ activeFilter }}">
@@ -246,7 +246,7 @@
                                         <input type="hidden" name="page" value="{{ page }}">
                                         <button class="admin-users-btn-primary" type="submit">{{ 'admin_users.toggle_active'|trans }}</button>
                                     </form>
-                                    <form method="post" action="{{ path('app_admin_users_toggle_admin', { id: user.id, locale: app.request.locale }) }}">
+                                    <form method="post" action="{{ path('app_admin_users_toggle_admin', { id: user.id, _locale: app.request.locale }) }}">
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_toggle_admin_' ~ user.id) }}">
                                         <input type="hidden" name="google" value="{{ googleFilter }}">
                                         <input type="hidden" name="active" value="{{ activeFilter }}">
@@ -262,7 +262,7 @@
                                         <input type="hidden" name="page" value="{{ page }}">
                                         <button class="admin-users-btn-primary" type="submit">{{ 'admin_users.toggle_admin'|trans }}</button>
                                     </form>
-                                    <form method="post" action="{{ path('app_admin_users_generate_reset_link', { id: user.id, locale: app.request.locale }) }}">
+                                    <form method="post" action="{{ path('app_admin_users_generate_reset_link', { id: user.id, _locale: app.request.locale }) }}">
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_generate_reset_link_' ~ user.id) }}">
                                         <input type="hidden" name="google" value="{{ googleFilter }}">
                                         <input type="hidden" name="active" value="{{ activeFilter }}">
@@ -279,7 +279,7 @@
                                         <button class="admin-users-btn-secondary" type="submit">{{ 'admin_users.generate_reset_link'|trans }}</button>
                                     </form>
                                     {% if not user.isEmailVerified %}
-                                        <form method="post" action="{{ path('app_admin_users_force_verify_email', { id: user.id, locale: app.request.locale }) }}">
+                                        <form method="post" action="{{ path('app_admin_users_force_verify_email', { id: user.id, _locale: app.request.locale }) }}">
                                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_force_verify_email_' ~ user.id) }}">
                                             <input type="hidden" name="google" value="{{ googleFilter }}">
                                             <input type="hidden" name="active" value="{{ activeFilter }}">
@@ -295,7 +295,7 @@
                                             <input type="hidden" name="page" value="{{ page }}">
                                             <button class="admin-users-btn-secondary" type="submit">{{ 'admin_users.force_verify_email'|trans }}</button>
                                         </form>
-                                        <form method="post" action="{{ path('app_admin_users_resend_verification', { id: user.id, locale: app.request.locale }) }}">
+                                        <form method="post" action="{{ path('app_admin_users_resend_verification', { id: user.id, _locale: app.request.locale }) }}">
                                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_resend_verification_' ~ user.id) }}">
                                             <input type="hidden" name="google" value="{{ googleFilter }}">
                                             <input type="hidden" name="active" value="{{ activeFilter }}">
@@ -313,7 +313,7 @@
                                         </form>
                                     {% endif %}
                                     {% if isGoogleLinked %}
-                                        <form method="post" action="{{ path('app_admin_users_unlink_google', { id: user.id, locale: app.request.locale }) }}">
+                                        <form method="post" action="{{ path('app_admin_users_unlink_google', { id: user.id, _locale: app.request.locale }) }}">
                                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_users_unlink_google_' ~ user.id) }}">
                                             <input type="hidden" name="google" value="{{ googleFilter }}">
                                             <input type="hidden" name="active" value="{{ activeFilter }}">

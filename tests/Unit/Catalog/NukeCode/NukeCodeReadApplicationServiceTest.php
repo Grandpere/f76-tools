@@ -2,12 +2,22 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Catalog\NukeCode;
 
 use App\Catalog\Application\NukeCode\NukeCodeReadApplicationService;
 use App\Catalog\Application\NukeCode\NukeCodeReadRepository;
 use App\Catalog\Application\NukeCode\NukeCodeResetCalculator;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 final class NukeCodeReadApplicationServiceTest extends TestCase
@@ -79,12 +89,12 @@ final class InMemoryNukeCodeReadRepository implements NukeCodeReadRepository
         ++$this->calls;
 
         if ($this->throwOnFetch) {
-            throw new \RuntimeException('upstream failure');
+            throw new RuntimeException('upstream failure');
         }
 
         $row = array_shift($this->rows);
         if (!is_array($row)) {
-            throw new \RuntimeException('no more fake rows');
+            throw new RuntimeException('no more fake rows');
         }
 
         return $row;

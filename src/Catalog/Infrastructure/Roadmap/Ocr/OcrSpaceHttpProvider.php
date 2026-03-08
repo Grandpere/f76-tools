@@ -190,10 +190,7 @@ final class OcrSpaceHttpProvider implements OcrProvider
         }
 
         if ('' !== $currentBytes) {
-            throw new RuntimeException(sprintf(
-                'Unable to fit image under OCR.space size limit (%d bytes) after resize attempts.',
-                $this->maxImageBytes,
-            ));
+            throw new RuntimeException(sprintf('Unable to fit image under OCR.space size limit (%d bytes) after resize attempts.', $this->maxImageBytes));
         }
 
         throw new RuntimeException('Image resize failed before OCR.space upload.');

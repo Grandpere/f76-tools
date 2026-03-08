@@ -58,9 +58,9 @@ final class ResetPasswordControllerTest extends WebTestCase
         $signedUrl = $this->signedUrl('app_reset_password', ['token' => $rawToken]);
         $crawler = $this->browser()->request('GET', $signedUrl);
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
-        self::assertCount(1, $crawler->filter('a[href^="/login"]'));
-        self::assertCount(1, $crawler->filter('a[href^="/forgot-password"]'));
-        self::assertCount(1, $crawler->filter('a[href^="/contact"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/en/login"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/en/forgot-password"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/en/contact"]'));
 
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
@@ -73,7 +73,7 @@ final class ResetPasswordControllerTest extends WebTestCase
         ]);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
         $this->entityManager?->clear();
         $updated = $this->findUserByEmail('reset-target@example.com');
@@ -91,7 +91,7 @@ final class ResetPasswordControllerTest extends WebTestCase
         $this->browser()->request('GET', $this->signedUrl('app_reset_password', ['token' => 'not-a-valid-token']));
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
     }
 
     public function testExpiredTokenRedirectsToLogin(): void
@@ -105,7 +105,7 @@ final class ResetPasswordControllerTest extends WebTestCase
         $this->browser()->request('GET', $this->signedUrl('app_reset_password', ['token' => $rawToken]));
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
     }
 
     private function createUser(string $email, string $plainPassword): UserEntity

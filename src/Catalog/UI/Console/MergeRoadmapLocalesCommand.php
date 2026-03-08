@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Catalog\UI\Console;
 
 use App\Catalog\Application\Roadmap\MergeRoadmapLocalesApplicationService;
@@ -37,10 +46,16 @@ final class MergeRoadmapLocalesCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $fr = (int) $input->getArgument('frSnapshotId');
-        $en = (int) $input->getArgument('enSnapshotId');
-        $de = (int) $input->getArgument('deSnapshotId');
+        $fr = $this->parsePositiveIntArgument($input->getArgument('frSnapshotId'));
+        $en = $this->parsePositiveIntArgument($input->getArgument('enSnapshotId'));
+        $de = $this->parsePositiveIntArgument($input->getArgument('deSnapshotId'));
         $dryRun = (bool) $input->getOption('dry-run');
+
+        if (null === $fr || null === $en || null === $de) {
+            $io->error('Snapshot IDs must be positive integers.');
+
+            return Command::INVALID;
+        }
 
         $result = $this->mergeRoadmapLocalesApplicationService->merge([
             'fr' => $fr,
@@ -70,5 +85,19 @@ final class MergeRoadmapLocalesCommand extends Command
 
         return Command::SUCCESS;
     }
-}
 
+    private function parsePositiveIntArgument(mixed $value): ?int
+    {
+        if (is_int($value)) {
+            return $value > 0 ? $value : null;
+        }
+
+        if (!is_string($value) || !ctype_digit($value)) {
+            return null;
+        }
+
+        $parsed = (int) $value;
+
+        return $parsed > 0 ? $parsed : null;
+    }
+}

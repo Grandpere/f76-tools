@@ -45,13 +45,13 @@ final class ForgotPasswordControllerTest extends WebTestCase
 
     public function testForgotPasswordPageIsAccessible(): void
     {
-        $crawler = $this->browser()->request('GET', '/forgot-password');
+        $crawler = $this->browser()->request('GET', '/en/forgot-password');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filter('form'));
         self::assertCount(1, $crawler->filter('input[name="email"]'));
-        self::assertCount(1, $crawler->filter('a[href^="/register"]'));
-        self::assertCount(1, $crawler->filter('a[href^="/contact"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/en/login"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/en/contact"]'));
     }
 
     public function testForgotPasswordCreatesResetTokenForExistingUser(): void
@@ -59,18 +59,18 @@ final class ForgotPasswordControllerTest extends WebTestCase
         $email = sprintf('forgot-target-%s@example.com', uniqid('', true));
         $this->createUser($email, 'secret123');
 
-        $crawler = $this->browser()->request('GET', '/forgot-password');
+        $crawler = $this->browser()->request('GET', '/en/forgot-password');
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
         $csrfToken = (string) $tokenNode->attr('value');
 
-        $this->browser()->request('POST', '/forgot-password', [
+        $this->browser()->request('POST', '/en/forgot-password', [
             '_csrf_token' => $csrfToken,
             'email' => $email,
         ]);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
         $this->entityManager?->clear();
         $updated = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => $email]);
@@ -83,42 +83,42 @@ final class ForgotPasswordControllerTest extends WebTestCase
     public function testForgotPasswordReturnsGenericResponseForUnknownEmail(): void
     {
         $email = sprintf('unknown-%s@example.com', uniqid('', true));
-        $crawler = $this->browser()->request('GET', '/forgot-password');
+        $crawler = $this->browser()->request('GET', '/en/forgot-password');
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
         $csrfToken = (string) $tokenNode->attr('value');
 
-        $this->browser()->request('POST', '/forgot-password', [
+        $this->browser()->request('POST', '/en/forgot-password', [
             '_csrf_token' => $csrfToken,
             'email' => $email,
         ]);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
     }
 
     public function testForgotPasswordIsRateLimitedAfterRepeatedAttempts(): void
     {
         $email = sprintf('ratelimit-forgot-%s@example.com', uniqid('', true));
-        $crawler = $this->browser()->request('GET', '/forgot-password');
+        $crawler = $this->browser()->request('GET', '/en/forgot-password');
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
         $csrfToken = (string) $tokenNode->attr('value');
 
         for ($i = 0; $i < 3; ++$i) {
-            $this->browser()->request('POST', '/forgot-password', [
+            $this->browser()->request('POST', '/en/forgot-password', [
                 '_csrf_token' => $csrfToken,
                 'email' => $email,
             ]);
             self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         }
 
-        $this->browser()->request('POST', '/forgot-password', [
+        $this->browser()->request('POST', '/en/forgot-password', [
             '_csrf_token' => $csrfToken,
             'email' => $email,
         ]);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/forgot-password', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/forgot-password', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
         $this->browser()->followRedirect();
         self::assertStringContainsString('Too many attempts', (string) $this->browser()->getResponse()->getContent());

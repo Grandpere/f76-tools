@@ -67,8 +67,8 @@
                         <select data-player-progression-target="playerSelect"></select>
                     </label>
                 </div>
-                {% set modsLink %}<a href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ 'progression.quick_link_mods'|trans }}</a>{% endset %}
-                {% set minervaLink %}<a href="{{ path('app_minerva_rotation', { locale: app.request.locale }) }}">{{ 'progression.quick_link_minerva'|trans }}</a>{% endset %}
+                {% set modsLink %}<a href="{{ path('app_dashboard', { _locale: app.request.locale }) }}">{{ 'progression.quick_link_mods'|trans }}</a>{% endset %}
+                {% set minervaLink %}<a href="{{ path('app_minerva_rotation', { _locale: app.request.locale }) }}">{{ 'progression.quick_link_minerva'|trans }}</a>{% endset %}
                 <p class="catalog-note info-note">
                     <span class="info-note-content">
                         {{ 'dashboard.create_player.help'|trans }}

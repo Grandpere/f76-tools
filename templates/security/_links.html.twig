@@ -1,5 +1,5 @@
 <p class="auth-links">
     {% for link in links %}
-        <a href="{{ path(link.route, { locale: app.request.locale }) }}">{{ link.label|trans }}</a>
+        <a href="{{ path(link.route, { _locale: app.request.locale }) }}">{{ link.label|trans }}</a>
     {% endfor %}
 </p>

@@ -11,16 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Catalog\Application\Roadmap;
+namespace App\Catalog\Application\Item;
 
+use App\Catalog\Domain\Item\ItemTypeEnum;
 use DateTimeImmutable;
 
-final readonly class RoadmapParsedEvent
+interface ItemCatalogTimestampReadRepository
 {
-    public function __construct(
-        public string $title,
-        public DateTimeImmutable $startsAt,
-        public DateTimeImmutable $endsAt,
-    ) {
-    }
+    public function findLatestUpdatedAtByType(ItemTypeEnum $type): ?DateTimeImmutable;
 }
+

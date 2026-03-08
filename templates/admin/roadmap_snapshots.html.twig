@@ -45,8 +45,8 @@
                             <td>{{ snapshot.scannedAt|date('Y-m-d H:i') }}</td>
                             <td>
                                 <div class="translations-actions roadmap-snapshot-actions">
-                                    <a href="{{ path('app_admin_roadmap_snapshots', { locale: app.request.locale, snapshot: snapshotId }) }}">{{ 'admin_roadmap.open'|trans }}</a>
-                                    <form method="post" action="{{ path('app_admin_roadmap_snapshot_delete', { locale: app.request.locale, id: snapshotId }) }}">
+                                    <a href="{{ path('app_admin_roadmap_snapshots', { _locale: app.request.locale, snapshot: snapshotId }) }}">{{ 'admin_roadmap.open'|trans }}</a>
+                                    <form method="post" action="{{ path('app_admin_roadmap_snapshot_delete', { _locale: app.request.locale, id: snapshotId }) }}">
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_delete_' ~ snapshotId) }}">
                                         <button type="submit" class="roadmap-danger-button">{{ 'admin_roadmap.delete_snapshot'|trans }}</button>
                                     </form>
@@ -114,7 +114,7 @@
 
                     <article class="roadmap-review-card">
                         <h3>{{ 'admin_roadmap.raw_text_title'|trans }}</h3>
-                        <form method="post" action="{{ path('app_admin_roadmap_snapshot_raw_text_save', { locale: app.request.locale, id: selectedSnapshot.id }) }}">
+                        <form method="post" action="{{ path('app_admin_roadmap_snapshot_raw_text_save', { _locale: app.request.locale, id: selectedSnapshot.id }) }}">
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_raw_text_save_' ~ selectedSnapshot.id) }}">
                             <textarea class="roadmap-raw-text" name="raw_text" rows="16">{{ selectedSnapshot.rawText }}</textarea>
                             <label class="roadmap-generate-toggle">
@@ -128,7 +128,7 @@
                     </article>
                 </div>
                 <div class="translations-filters roadmap-primary-actions">
-                    <form method="post" action="{{ path('app_admin_roadmap_snapshot_approve', { locale: app.request.locale, id: selectedSnapshot.id }) }}">
+                    <form method="post" action="{{ path('app_admin_roadmap_snapshot_approve', { _locale: app.request.locale, id: selectedSnapshot.id }) }}">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_approve_' ~ selectedSnapshot.id) }}">
                         <button type="submit" class="roadmap-approve-button">{{ 'admin_roadmap.approve_snapshot'|trans }}</button>
                     </form>
@@ -148,7 +148,7 @@
                 </div>
                 <form
                     method="post"
-                    action="{{ path('app_admin_roadmap_snapshot_events_save', { locale: app.request.locale, id: selectedSnapshot.id }) }}"
+                    action="{{ path('app_admin_roadmap_snapshot_events_save', { _locale: app.request.locale, id: selectedSnapshot.id }) }}"
                     data-controller="minerva-admin-datepicker"
                     data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}"
                 >
@@ -216,7 +216,7 @@
                 {{ 'admin_roadmap.canonical_description'|trans }}
                 {{ 'admin_roadmap.merge_requires_approved_hint'|trans }}
             </p>
-            <form method="post" action="{{ path('app_admin_roadmap_merge_locales', { locale: app.request.locale }) }}" class="translations-filters roadmap-merge-form">
+            <form method="post" action="{{ path('app_admin_roadmap_merge_locales', { _locale: app.request.locale }) }}" class="translations-filters roadmap-merge-form">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_merge_locales') }}">
                 <label class="roadmap-merge-field">
                     {{ 'admin_roadmap.merge_fr_snapshot'|trans }}

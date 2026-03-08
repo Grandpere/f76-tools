@@ -38,17 +38,17 @@ security:
 
     # Note: Only the *first* matching rule is applied
     access_control:
-        - { path: ^/contact$, roles: PUBLIC_ACCESS }
-        - { path: ^/auth/google/start$, roles: PUBLIC_ACCESS }
-        - { path: ^/auth/google/callback$, roles: PUBLIC_ACCESS }
-        - { path: ^/register$, roles: PUBLIC_ACCESS }
-        - { path: ^/verify-email, roles: PUBLIC_ACCESS }
-        - { path: ^/resend-verification$, roles: PUBLIC_ACCESS }
-        - { path: ^/forgot-password$, roles: PUBLIC_ACCESS }
-        - { path: ^/reset-password, roles: PUBLIC_ACCESS }
-        - { path: ^/login$, roles: PUBLIC_ACCESS }
-        - { path: ^/logout$, roles: PUBLIC_ACCESS }
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/(?:(?:en|fr|de)/)?contact$, roles: PUBLIC_ACCESS }
+        - { path: ^/(?:(?:en|fr|de)/)?auth/google/start$, roles: PUBLIC_ACCESS }
+        - { path: ^/(?:(?:en|fr|de)/)?auth/google/callback$, roles: PUBLIC_ACCESS }
+        - { path: ^/(?:(?:en|fr|de)/)?register$, roles: PUBLIC_ACCESS }
+        - { path: ^/(?:(?:en|fr|de)/)?verify-email, roles: PUBLIC_ACCESS }
+        - { path: ^/(?:(?:en|fr|de)/)?resend-verification$, roles: PUBLIC_ACCESS }
+        - { path: ^/(?:(?:en|fr|de)/)?forgot-password$, roles: PUBLIC_ACCESS }
+        - { path: ^/(?:(?:en|fr|de)/)?reset-password, roles: PUBLIC_ACCESS }
+        - { path: ^/(?:(?:en|fr|de)/)?login$, roles: PUBLIC_ACCESS }
+        - { path: ^/(?:(?:en|fr|de)/)?logout$, roles: PUBLIC_ACCESS }
+        - { path: ^/(?:(?:en|fr|de)/)?admin, roles: ROLE_ADMIN }
         - { path: ^/, roles: ROLE_USER }
 
 when@test:

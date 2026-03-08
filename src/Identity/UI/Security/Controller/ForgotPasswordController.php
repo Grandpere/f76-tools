@@ -41,7 +41,8 @@ final class ForgotPasswordController extends AbstractController
     ) {
     }
 
-    #[Route('/forgot-password', name: 'app_forgot_password', methods: ['GET', 'POST'])]
+    #[Route('/{_locale<en|fr|de>}/forgot-password', name: 'app_forgot_password', methods: ['GET', 'POST'], defaults: ['_locale' => 'en'])]
+    #[Route('/forgot-password', methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
         if ($request->isMethod('POST')) {

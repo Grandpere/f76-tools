@@ -44,8 +44,8 @@
                 <button type="submit">{{ 'admin_translations.filter'|trans }}</button>
             </form>
             <p class="catalog-state">{{ 'admin_translations.visible_rows'|trans({'%count%': totalRows}) }}</p>
-            {% set previousUrl = page > 1 ? path('app_admin_item_translations', { locale: app.request.locale, target: targetLocale, q: query ?: null, perPage: perPage, page: page - 1 }) : null %}
-            {% set nextUrl = page < totalPages ? path('app_admin_item_translations', { locale: app.request.locale, target: targetLocale, q: query ?: null, perPage: perPage, page: page + 1 }) : null %}
+            {% set previousUrl = page > 1 ? path('app_admin_item_translations', { _locale: app.request.locale, target: targetLocale, q: query ?: null, perPage: perPage, page: page - 1 }) : null %}
+            {% set nextUrl = page < totalPages ? path('app_admin_item_translations', { _locale: app.request.locale, target: targetLocale, q: query ?: null, perPage: perPage, page: page + 1 }) : null %}
             {% include 'admin/_pager.html.twig' with {
                 page: page,
                 totalPages: totalPages,

@@ -50,7 +50,8 @@ final class GoogleOidcController extends AbstractController
     ) {
     }
 
-    #[Route('/auth/google/start', name: 'app_oidc_google_start', methods: ['GET'])]
+    #[Route('/{_locale<en|fr|de>}/auth/google/start', name: 'app_oidc_google_start', methods: ['GET'], defaults: ['_locale' => 'en'])]
+    #[Route('/auth/google/start', methods: ['GET'])]
     public function start(Request $request): Response
     {
         if (!$this->googleOidcConfig->isEnabled()) {
@@ -73,7 +74,7 @@ final class GoogleOidcController extends AbstractController
         $session->set(self::ISSUED_AT_SESSION_KEY, time());
 
         $redirectUri = $this->urlGenerator->generate('app_oidc_google_callback', [
-            'locale' => $request->getLocale(),
+            '_locale' => $request->getLocale(),
         ], UrlGeneratorInterface::ABSOLUTE_URL);
 
         try {
@@ -94,7 +95,8 @@ final class GoogleOidcController extends AbstractController
         return new RedirectResponse($authorizationUrl);
     }
 
-    #[Route('/auth/google/callback', name: 'app_oidc_google_callback', methods: ['GET'])]
+    #[Route('/{_locale<en|fr|de>}/auth/google/callback', name: 'app_oidc_google_callback', methods: ['GET'], defaults: ['_locale' => 'en'])]
+    #[Route('/auth/google/callback', methods: ['GET'])]
     public function callback(Request $request): Response
     {
         if (!$this->googleOidcConfig->isEnabled()) {
@@ -130,7 +132,7 @@ final class GoogleOidcController extends AbstractController
         }
 
         $redirectUri = $this->urlGenerator->generate('app_oidc_google_callback', [
-            'locale' => $request->getLocale(),
+            '_locale' => $request->getLocale(),
         ], UrlGeneratorInterface::ABSOLUTE_URL);
 
         try {

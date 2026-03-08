@@ -1,16 +1,16 @@
 {% set localeSelectId = localeSelectId|default('header-locale-select') %}
 <div class="catalog-header-tools">
     {% if is_granted('ROLE_ADMIN') %}
-        <a class="header-translations-link" href="{{ path('app_admin_users', { locale: app.request.locale }) }}"><img class="header-action-icon" src="/assets/icons/admin.svg" alt="" aria-hidden="true"> {{ 'dashboard.header.admin'|trans }}</a>
+        <a class="header-translations-link" href="{{ path('app_admin_users', { _locale: app.request.locale }) }}"><img class="header-action-icon" src="/assets/icons/admin.svg" alt="" aria-hidden="true"> {{ 'dashboard.header.admin'|trans }}</a>
     {% endif %}
-    <a class="header-translations-link" href="{{ path('app_contact', { locale: app.request.locale }) }}">{{ 'security.login.to_contact'|trans }}</a>
+    <a class="header-translations-link" href="{{ path('app_contact', { _locale: app.request.locale }) }}">{{ 'security.login.to_contact'|trans }}</a>
     <details class="header-account-menu">
         <summary class="header-account"><img class="header-action-icon" src="/assets/icons/account.svg" alt="" aria-hidden="true"> <strong>{{ username }}</strong><span class="header-account-caret" aria-hidden="true">▾</span></summary>
         <div class="header-account-dropdown">
-            <a class="header-account-dropdown-link" href="{{ path('app_account_security', { locale: app.request.locale }) }}">{{ 'dashboard.header.security_profile'|trans }}</a>
+            <a class="header-account-dropdown-link" href="{{ path('app_account_security', { _locale: app.request.locale }) }}">{{ 'dashboard.header.security_profile'|trans }}</a>
         </div>
     </details>
-    <form method="post" action="{{ path('app_logout', { locale: app.request.locale }) }}" class="logout-form header-logout-form">
+    <form method="post" action="{{ path('app_logout', { _locale: app.request.locale }) }}" class="logout-form header-logout-form">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
         <button type="submit"><img class="logout-icon" src="/assets/icons/logout.svg" alt="" aria-hidden="true"> {{ 'dashboard.header.logout'|trans }}</button>
     </form>

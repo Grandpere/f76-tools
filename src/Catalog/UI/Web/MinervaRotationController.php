@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Catalog\UI\Web;
 
-use App\Catalog\Domain\Item\ItemTypeEnum;
-use App\Catalog\Infrastructure\Persistence\ItemEntityRepository;
+use App\Catalog\Application\Item\ItemCatalogTimestampReadRepository;
 use App\Catalog\Application\Minerva\MinervaRotationTimelineApplicationService;
+use App\Catalog\Domain\Item\ItemTypeEnum;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Progression\Application\Player\PlayerReadApplicationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,11 +29,12 @@ final class MinervaRotationController extends AbstractController
     public function __construct(
         private readonly MinervaRotationTimelineApplicationService $timelineApplicationService,
         private readonly PlayerReadApplicationService $playerReadApplicationService,
-        private readonly ItemEntityRepository $itemEntityRepository,
+        private readonly ItemCatalogTimestampReadRepository $itemCatalogTimestampReadRepository,
     ) {
     }
 
-    #[Route('/minerva-rotation', name: 'app_minerva_rotation', methods: ['GET'])]
+    #[Route('/{_locale<en|fr|de>}/minerva-rotation', name: 'app_minerva_rotation', methods: ['GET'], defaults: ['_locale' => 'en'])]
+    #[Route('/minerva-rotation', methods: ['GET'])]
     public function __invoke(Request $request): Response
     {
         $user = $this->getUser();
@@ -47,7 +48,7 @@ final class MinervaRotationController extends AbstractController
             $activePlayerId = $players[0]->getPublicId();
         }
 
-        $catalogUpdatedAt = $this->itemEntityRepository->findLatestUpdatedAtByType(ItemTypeEnum::BOOK);
+        $catalogUpdatedAt = $this->itemCatalogTimestampReadRepository->findLatestUpdatedAtByType(ItemTypeEnum::BOOK);
 
         $timeline = $this->timelineApplicationService->buildTimeline();
         $tablePagination = $this->buildTablePagination($timeline, (int) $request->query->get('page', 1), 10);

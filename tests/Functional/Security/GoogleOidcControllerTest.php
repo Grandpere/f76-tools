@@ -51,7 +51,7 @@ final class GoogleOidcControllerTest extends WebTestCase
         $this->browser()->getContainer()->set(GoogleOidcConfig::class, new TestEnabledGoogleOidcConfig());
         $this->browser()->getContainer()->set(GoogleOidcClient::class, new TestGoogleOidcClient('https://accounts.google.com/o/oauth2/v2/auth'));
 
-        $this->browser()->request('GET', '/auth/google/start?locale=en');
+        $this->browser()->request('GET', '/en/auth/google/start');
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         $location = (string) $this->browser()->getResponse()->headers->get('location');
@@ -66,10 +66,10 @@ final class GoogleOidcControllerTest extends WebTestCase
         $this->browser()->getContainer()->set(GoogleOidcConfig::class, new TestEnabledGoogleOidcConfig());
         $this->browser()->getContainer()->set(GoogleOidcClient::class, new TestGoogleOidcClient('https://accounts.google.com/o/oauth2/v2/auth?mock=1'));
 
-        $this->browser()->request('GET', '/auth/google/callback?locale=en&code=code-123&state=invalid-state');
+        $this->browser()->request('GET', '/en/auth/google/callback?code=code-123&state=invalid-state');
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
     }
 
     public function testCallbackCreatesUserIdentityAndLogsIn(): void
@@ -79,7 +79,7 @@ final class GoogleOidcControllerTest extends WebTestCase
         $this->browser()->getContainer()->set(GoogleOidcClient::class, $client);
         $this->browser()->disableReboot();
 
-        $this->browser()->request('GET', '/auth/google/start?locale=en');
+        $this->browser()->request('GET', '/en/auth/google/start');
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
 
         $redirectLocation = (string) $this->browser()->getResponse()->headers->get('location');
@@ -88,9 +88,9 @@ final class GoogleOidcControllerTest extends WebTestCase
         self::assertIsString($state);
         self::assertNotSame('', trim($state));
 
-        $this->browser()->request('GET', '/auth/google/callback?locale=en&code=code-123&state='.rawurlencode($state));
+        $this->browser()->request('GET', '/en/auth/google/callback?code=code-123&state='.rawurlencode($state));
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
         $user = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => 'oidc@example.com']);
         self::assertInstanceOf(UserEntity::class, $user);

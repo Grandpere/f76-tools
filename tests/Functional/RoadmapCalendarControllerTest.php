@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Functional;
 
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
@@ -47,14 +56,14 @@ final class RoadmapCalendarControllerTest extends WebTestCase
     public function testPageRendersCanonicalEventsWithoutTimeDisplay(): void
     {
         $user = $this->createUser('roadmap-calendar@example.com');
-        $event = (new RoadmapCanonicalEventEntity())
+        $event = new RoadmapCanonicalEventEntity()
             ->setTranslationKey('roadmap.event.20260303.20260310')
             ->setStartsAt(new DateTimeImmutable('2026-03-03 00:00:00'))
             ->setEndsAt(new DateTimeImmutable('2026-03-10 23:59:59'))
             ->setSortOrder(1)
             ->setConfidenceScore(100);
         $event->addTranslation(
-            (new RoadmapCanonicalEventTranslationEntity())
+            new RoadmapCanonicalEventTranslationEntity()
                 ->setLocale('en')
                 ->setTitle("BIGFOOT'S BASH"),
         );
@@ -75,7 +84,7 @@ final class RoadmapCalendarControllerTest extends WebTestCase
 
     private function createUser(string $email): UserEntity
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail($email)
             ->setRoles(['ROLE_USER'])
             ->setPassword('$2y$13$5QzWfXyM7FuU7f1w8rRZBupJrbj5gaMmkX6A8hA1z7f4h56yQW2mS');

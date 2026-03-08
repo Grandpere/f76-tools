@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Catalog\Domain\Entity;
 
 use DateTimeImmutable;
@@ -30,10 +39,10 @@ class RoadmapCanonicalEventTranslationEntity
     private string $title;
 
     #[ORM\Column(name: 'created_at', type: Types::DATETIME_IMMUTABLE)]
-    private DateTimeImmutable $createdAt;
+    private DateTimeImmutable $createdAt; // @phpstan-ignore property.onlyWritten
 
     #[ORM\Column(name: 'updated_at', type: Types::DATETIME_IMMUTABLE)]
-    private DateTimeImmutable $updatedAt;
+    private DateTimeImmutable $updatedAt; // @phpstan-ignore property.onlyWritten
 
     public function getId(): ?int
     {
@@ -90,4 +99,3 @@ class RoadmapCanonicalEventTranslationEntity
         $this->updatedAt = new DateTimeImmutable();
     }
 }
-

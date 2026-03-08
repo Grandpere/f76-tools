@@ -2,9 +2,17 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Catalog\Application\Roadmap;
 
-use App\Catalog\Domain\Entity\RoadmapCanonicalEventTranslationEntity;
 use DateTimeImmutable;
 
 final readonly class RoadmapCalendarReadApplicationService
@@ -31,9 +39,6 @@ final readonly class RoadmapCalendarReadApplicationService
         foreach ($this->roadmapCanonicalEventReadRepository->findAllOrdered() as $event) {
             $titles = [];
             foreach ($event->getTranslations() as $translation) {
-                if (!$translation instanceof RoadmapCanonicalEventTranslationEntity) {
-                    continue;
-                }
                 $translationLocale = strtolower($translation->getLocale());
                 $title = trim($translation->getTitle());
                 if ('' !== $title) {
@@ -58,6 +63,9 @@ final readonly class RoadmapCalendarReadApplicationService
         return $rows;
     }
 
+    /**
+     * @return 'ongoing'|'upcoming'|'ended'
+     */
     private function resolveStatus(DateTimeImmutable $startsAt, DateTimeImmutable $endsAt, DateTimeImmutable $now): string
     {
         if ($now < $startsAt) {

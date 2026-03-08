@@ -105,7 +105,7 @@ final class ActiveSessionSubscriber implements EventSubscriberInterface
 
             $session->invalidate();
             $event->setResponse(new RedirectResponse($this->urlGenerator->generate('app_login', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
             ])));
 
             return;

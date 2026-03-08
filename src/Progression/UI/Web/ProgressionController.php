@@ -27,8 +27,10 @@ final class ProgressionController extends AbstractController
     ) {
     }
 
-    #[Route('/', name: 'app_home', methods: ['GET'])]
-    #[Route('/progression', name: 'app_progression', methods: ['GET'])]
+    #[Route('/{_locale<en|fr|de>}/', name: 'app_home', methods: ['GET'], defaults: ['_locale' => 'en'])]
+    #[Route('/{_locale<en|fr|de>}/progression', name: 'app_progression', methods: ['GET'], defaults: ['_locale' => 'en'])]
+    #[Route('/', methods: ['GET'])]
+    #[Route('/progression', methods: ['GET'])]
     public function __invoke(): Response
     {
         $user = $this->getUser();

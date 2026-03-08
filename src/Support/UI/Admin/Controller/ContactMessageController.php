@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-#[Route('/admin/contact-messages')]
+#[Route('/{_locale<en|fr|de>}/admin/contact-messages', defaults: ['_locale' => 'en'])]
 final class ContactMessageController extends AbstractController
 {
     use AdminRoleGuardControllerTrait;

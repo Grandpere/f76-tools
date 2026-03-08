@@ -21,7 +21,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 final class NukeCodeController extends AbstractController
 {
-    #[Route('/nuke-codes', name: 'app_nuke_codes', methods: ['GET'])]
+    #[Route('/{_locale<en|fr|de>}/nuke-codes', name: 'app_nuke_codes', methods: ['GET'], defaults: ['_locale' => 'en'])]
+    #[Route('/nuke-codes', methods: ['GET'])]
     public function __invoke(): Response
     {
         $user = $this->getUser();

@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Catalog\Roadmap;
 
 use App\Catalog\Application\Roadmap\GenerateRoadmapEventsFromSnapshotApplicationService;
@@ -9,13 +18,14 @@ use App\Catalog\Application\Roadmap\RoadmapRawTextEventParser;
 use App\Catalog\Application\Roadmap\RoadmapSnapshotWriteRepository;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 use RuntimeException;
 
 final class GenerateRoadmapEventsFromSnapshotApplicationServiceTest extends TestCase
 {
     public function testGeneratePersistsEventsWhenNotDryRun(): void
     {
-        $snapshot = (new RoadmapSnapshotEntity())
+        $snapshot = new RoadmapSnapshotEntity()
             ->setLocale('fr')
             ->setSourceImagePath('/tmp/mock.jpg')
             ->setSourceImageHash(str_repeat('a', 64))
@@ -49,7 +59,7 @@ final class GenerateRoadmapEventsFromSnapshotApplicationServiceTest extends Test
 
     private function forceId(RoadmapSnapshotEntity $snapshot, int $id): void
     {
-        $reflection = new \ReflectionClass($snapshot);
+        $reflection = new ReflectionClass($snapshot);
         $property = $reflection->getProperty('id');
         $property->setValue($snapshot, $id);
     }

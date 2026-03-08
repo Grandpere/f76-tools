@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Progression\UI\Web;
 
+use App\Catalog\Application\Item\ItemCatalogTimestampReadRepository;
 use App\Catalog\Domain\Item\ItemTypeEnum;
-use App\Catalog\Infrastructure\Persistence\ItemEntityRepository;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Progression\Application\Player\PlayerReadApplicationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,11 +26,12 @@ final class DashboardController extends AbstractController
 {
     public function __construct(
         private readonly PlayerReadApplicationService $playerReadApplicationService,
-        private readonly ItemEntityRepository $itemEntityRepository,
+        private readonly ItemCatalogTimestampReadRepository $itemCatalogTimestampReadRepository,
     ) {
     }
 
-    #[Route('/mods-legendaires', name: 'app_dashboard', methods: ['GET'])]
+    #[Route('/{_locale<en|fr|de>}/mods-legendaires', name: 'app_dashboard', methods: ['GET'], defaults: ['_locale' => 'en'])]
+    #[Route('/mods-legendaires', methods: ['GET'])]
     public function index(): Response
     {
         $user = $this->getUser();
@@ -44,7 +45,7 @@ final class DashboardController extends AbstractController
             $activePlayerId = $players[0]->getPublicId();
         }
 
-        $catalogUpdatedAt = $this->itemEntityRepository->findLatestUpdatedAtByType(ItemTypeEnum::MISC);
+        $catalogUpdatedAt = $this->itemCatalogTimestampReadRepository->findLatestUpdatedAtByType(ItemTypeEnum::MISC);
 
         return $this->render('dashboard/index.html.twig', [
             'apiPlayersUrl' => $this->generateUrl('api_players_index'),

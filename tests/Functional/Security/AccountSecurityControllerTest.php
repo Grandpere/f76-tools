@@ -49,10 +49,10 @@ final class AccountSecurityControllerTest extends WebTestCase
 
     public function testAnonymousUserIsRedirectedToLogin(): void
     {
-        $this->browser()->request('GET', '/account-security');
+        $this->browser()->request('GET', '/en/account-security');
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
     }
 
     public function testAuthenticatedUserSeesSecurityProfile(): void
@@ -62,11 +62,11 @@ final class AccountSecurityControllerTest extends WebTestCase
         $this->entityManager?->flush();
         $this->browser()->loginUser($user);
 
-        $crawler = $this->browser()->request('GET', '/account-security');
+        $crawler = $this->browser()->request('GET', '/en/account-security');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('security-profile@example.com', $this->browser()->getResponse()->getContent() ?: '');
-        self::assertCount(1, $crawler->filter('a[href^="/change-password"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/en/change-password"]'));
         self::assertCount(1, $crawler->filter('.auth-actions-inline .auth-button-link-secondary'));
     }
 
@@ -82,7 +82,7 @@ final class AccountSecurityControllerTest extends WebTestCase
         $this->entityManager?->flush();
         $this->browser()->loginUser($user);
 
-        $this->browser()->request('GET', '/account-security');
+        $this->browser()->request('GET', '/en/account-security');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('Linked since', $this->browser()->getResponse()->getContent() ?: '');
@@ -101,10 +101,10 @@ final class AccountSecurityControllerTest extends WebTestCase
         $this->entityManager?->flush();
         $this->browser()->loginUser($user);
 
-        $this->browser()->request('GET', '/account-security');
+        $this->browser()->request('GET', '/en/account-security');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
-        self::assertStringContainsString('security.auth.login.success', $this->browser()->getResponse()->getContent() ?: '');
+        self::assertStringContainsString('Login Success', $this->browser()->getResponse()->getContent() ?: '');
     }
 
     public function testAdminUserSeesLinkToAdminAuthTimeline(): void
@@ -112,12 +112,12 @@ final class AccountSecurityControllerTest extends WebTestCase
         $admin = $this->createUser('security-admin-link@example.com', 'secret123', ['ROLE_ADMIN']);
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/account-security');
+        $crawler = $this->browser()->request('GET', '/en/account-security');
         $adminId = $admin->getId();
         \assert(is_int($adminId));
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
-        self::assertCount(1, $crawler->filter(sprintf('a[href^="/admin/users/%d/auth-events"]', $adminId)));
+        self::assertCount(1, $crawler->filter(sprintf('a[href^="/en/admin/users/%d/auth-events"]', $adminId)));
     }
 
     public function testAuthenticatedUserCanUnlinkGoogleIdentityWhenLocalPasswordEnabled(): void
@@ -126,15 +126,15 @@ final class AccountSecurityControllerTest extends WebTestCase
         $this->linkGoogleIdentity($user, 'sub-security-unlink');
         $this->browser()->loginUser($user);
 
-        $crawler = $this->browser()->request('GET', '/account-security');
-        $tokenNode = $crawler->filter('form[action*="/account-security/unlink-google"] input[name="_csrf_token"]');
+        $crawler = $this->browser()->request('GET', '/en/account-security');
+        $tokenNode = $crawler->filter('form[action*="/en/account-security/unlink-google"] input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
 
-        $this->browser()->request('POST', '/account-security/unlink-google', [
+        $this->browser()->request('POST', '/en/account-security/unlink-google', [
             '_csrf_token' => (string) $tokenNode->attr('value'),
         ]);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertStringEndsWith('/account-security', (string) parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertStringEndsWith('/en/account-security', (string) parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
         $this->entityManager?->clear();
         $reloaded = $this->findUserByEmail('security-unlink@example.com');
@@ -154,12 +154,12 @@ final class AccountSecurityControllerTest extends WebTestCase
         $this->linkGoogleIdentity($user, 'sub-security-unlink-blocked');
         $this->browser()->loginUser($user);
 
-        $crawler = $this->browser()->request('GET', '/account-security');
-        $tokenNode = $crawler->filter('form[action*="/account-security/unlink-google"] input[name="_csrf_token"]');
+        $crawler = $this->browser()->request('GET', '/en/account-security');
+        $tokenNode = $crawler->filter('form[action*="/en/account-security/unlink-google"] input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
-        self::assertCount(1, $crawler->filter('form[action*="/account-security/unlink-google"] button[disabled]'));
+        self::assertCount(1, $crawler->filter('form[action*="/en/account-security/unlink-google"] button[disabled]'));
 
-        $this->browser()->request('POST', '/account-security/unlink-google', [
+        $this->browser()->request('POST', '/en/account-security/unlink-google', [
             '_csrf_token' => (string) $tokenNode->attr('value'),
         ]);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
@@ -189,11 +189,11 @@ final class AccountSecurityControllerTest extends WebTestCase
             now: new DateTimeImmutable('-3 minutes'),
         );
 
-        $crawler = $this->browser()->request('GET', '/account-security');
-        self::assertCount(1, $crawler->filter('form[action*="/account-security/logout-other-sessions"] input[name="_csrf_token"]'));
+        $crawler = $this->browser()->request('GET', '/en/account-security');
+        self::assertCount(1, $crawler->filter('form[action*="/en/account-security/logout-other-sessions"] input[name="_csrf_token"]'));
 
-        $this->browser()->request('POST', '/account-security/logout-other-sessions', [
-            '_csrf_token' => (string) $crawler->filter('form[action*="/account-security/logout-other-sessions"] input[name="_csrf_token"]')->attr('value'),
+        $this->browser()->request('POST', '/en/account-security/logout-other-sessions', [
+            '_csrf_token' => (string) $crawler->filter('form[action*="/en/account-security/logout-other-sessions"] input[name="_csrf_token"]')->attr('value'),
         ]);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());

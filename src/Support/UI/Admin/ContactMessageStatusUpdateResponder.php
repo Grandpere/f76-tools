@@ -45,7 +45,7 @@ final class ContactMessageStatusUpdateResponder
     private function redirectToList(Request $request): RedirectResponse
     {
         return new RedirectResponse($this->urlGenerator->generate('app_admin_contact_messages', [
-            'locale' => $request->getLocale(),
+            '_locale' => $request->getLocale(),
         ]));
     }
 

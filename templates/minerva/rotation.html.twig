@@ -179,7 +179,7 @@
                         {% if timelineTablePagination.currentPage > 1 %}
                             <a
                                 class="catalog-pagination-link"
-                                href="{{ path('app_minerva_rotation', app.request.query.all|merge({'page': timelineTablePagination.currentPage - 1})) }}"
+                                href="{{ path('app_minerva_rotation', app.request.query.all|merge({'_locale': app.request.locale, 'page': timelineTablePagination.currentPage - 1})) }}"
                             >
                                 {{ 'minerva.pagination_prev'|trans }}
                             </a>
@@ -197,7 +197,7 @@
                         {% if timelineTablePagination.currentPage < timelineTablePagination.pageCount %}
                             <a
                                 class="catalog-pagination-link"
-                                href="{{ path('app_minerva_rotation', app.request.query.all|merge({'page': timelineTablePagination.currentPage + 1})) }}"
+                                href="{{ path('app_minerva_rotation', app.request.query.all|merge({'_locale': app.request.locale, 'page': timelineTablePagination.currentPage + 1})) }}"
                             >
                                 {{ 'minerva.pagination_next'|trans }}
                             </a>

@@ -13,21 +13,22 @@ declare(strict_types=1);
 
 namespace App\Catalog\Infrastructure\Persistence;
 
+use App\Catalog\Application\Item\ItemCatalogTimestampReadRepository;
 use App\Catalog\Application\Import\ItemImportItemRepository;
 use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
-use DateTimeImmutable;
 use App\Progression\Application\Knowledge\ItemKnowledgeCatalogReadRepository;
 use App\Progression\Application\Knowledge\ItemKnowledgeTransferRepository;
 use App\Progression\Application\Knowledge\ItemReadRepository;
 use App\Progression\Application\Knowledge\ItemStatsReadRepository;
+use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<ItemEntity>
  */
-final class ItemEntityRepository extends ServiceEntityRepository implements ItemKnowledgeTransferRepository, ItemStatsReadRepository, ItemImportItemRepository, ItemKnowledgeCatalogReadRepository, ItemReadRepository
+final class ItemEntityRepository extends ServiceEntityRepository implements ItemKnowledgeTransferRepository, ItemStatsReadRepository, ItemImportItemRepository, ItemKnowledgeCatalogReadRepository, ItemReadRepository, ItemCatalogTimestampReadRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

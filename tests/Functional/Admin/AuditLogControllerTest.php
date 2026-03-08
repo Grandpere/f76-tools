@@ -47,7 +47,7 @@ final class AuditLogControllerTest extends WebTestCase
     {
         $user = $this->createUser('member@example.com', 'secret123', ['ROLE_USER']);
         $this->browser()->loginUser($user);
-        $this->browser()->request('GET', '/admin/audit-logs');
+        $this->browser()->request('GET', '/en/admin/audit-logs');
 
         self::assertSame(403, $this->browser()->getResponse()->getStatusCode());
     }
@@ -56,7 +56,7 @@ final class AuditLogControllerTest extends WebTestCase
     {
         $user = $this->createUser('member@example.com', 'secret123', ['ROLE_USER']);
         $this->browser()->loginUser($user);
-        $this->browser()->request('GET', '/admin/audit-logs/export.csv');
+        $this->browser()->request('GET', '/en/admin/audit-logs/export.csv');
 
         self::assertSame(403, $this->browser()->getResponse()->getStatusCode());
     }
@@ -67,16 +67,16 @@ final class AuditLogControllerTest extends WebTestCase
         $managed = $this->createUser('managed@example.com', 'secret123', ['ROLE_USER']);
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/admin/users');
-        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
+        $crawler = $this->browser()->request('GET', '/en/admin/users');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/en/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
         self::assertCount(1, $tokenNode);
 
-        $this->browser()->request('POST', sprintf('/admin/users/%d/toggle-active', $managed->getId()), [
+        $this->browser()->request('POST', sprintf('/en/admin/users/%d/toggle-active', $managed->getId()), [
             '_csrf_token' => (string) $tokenNode->attr('value'),
         ]);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
 
-        $this->browser()->request('GET', '/admin/audit-logs?action=user_toggle_active');
+        $this->browser()->request('GET', '/en/admin/audit-logs?action=user_toggle_active');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $content = $this->browser()->getResponse()->getContent() ?: '';
         self::assertStringContainsString('user_toggle_active', $content);
@@ -90,16 +90,16 @@ final class AuditLogControllerTest extends WebTestCase
         $managed = $this->createUser('managed@example.com', 'secret123', ['ROLE_USER']);
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/admin/users');
-        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
+        $crawler = $this->browser()->request('GET', '/en/admin/users');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/en/admin/users/%d/toggle-active"] input[name="_csrf_token"]', $managed->getId()));
         self::assertCount(1, $tokenNode);
 
-        $this->browser()->request('POST', sprintf('/admin/users/%d/toggle-active', $managed->getId()), [
+        $this->browser()->request('POST', sprintf('/en/admin/users/%d/toggle-active', $managed->getId()), [
             '_csrf_token' => (string) $tokenNode->attr('value'),
         ]);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
 
-        $this->browser()->request('GET', '/admin/audit-logs/export.csv?action=user_toggle_active');
+        $this->browser()->request('GET', '/en/admin/audit-logs/export.csv?action=user_toggle_active');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('text/csv', (string) $this->browser()->getResponse()->headers->get('content-type'));
 

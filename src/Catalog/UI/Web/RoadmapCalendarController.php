@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Catalog\UI\Web;
 
 use App\Catalog\Application\Roadmap\RoadmapCalendarReadApplicationService;
@@ -19,7 +28,8 @@ final class RoadmapCalendarController extends AbstractController
     ) {
     }
 
-    #[Route('/roadmap-calendar', name: 'app_roadmap_calendar', methods: ['GET'])]
+    #[Route('/{_locale<en|fr|de>}/roadmap-calendar', name: 'app_roadmap_calendar', methods: ['GET'], defaults: ['_locale' => 'en'])]
+    #[Route('/roadmap-calendar', methods: ['GET'])]
     public function __invoke(Request $request): Response
     {
         $user = $this->getUser();

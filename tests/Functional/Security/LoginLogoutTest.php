@@ -46,20 +46,20 @@ final class LoginLogoutTest extends WebTestCase
 
     public function testLoginPageIsAccessibleWhenAnonymous(): void
     {
-        $crawler = $this->browser()->request('GET', '/login');
+        $crawler = $this->browser()->request('GET', '/en/login');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filter('form'));
         self::assertCount(1, $crawler->filter('input[name="_username"]'));
         self::assertCount(1, $crawler->filter('input[name="_password"]'));
-        self::assertCount(1, $crawler->filter('a[href^="/auth/google/start"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/en/auth/google/start"]'));
     }
 
     public function testCanLoginAndLogoutWithFormAuthentication(): void
     {
         $user = $this->createUser('security-login@example.com', 'secret123');
 
-        $crawler = $this->browser()->request('GET', '/login');
+        $crawler = $this->browser()->request('GET', '/en/login');
         $form = $crawler->filter('form')->form([
             '_username' => $user->getEmail(),
             '_password' => 'secret123',
@@ -76,18 +76,18 @@ final class LoginLogoutTest extends WebTestCase
         $logoutForm = $this->browser()->getCrawler()->filter('form[action*="/logout"]')->form();
         $this->browser()->submit($logoutForm);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
-        $this->browser()->request('GET', '/');
+        $this->browser()->request('GET', '/en/');
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertStringContainsString('/login', (string) $this->browser()->getResponse()->headers->get('location'));
+        self::assertStringContainsString('/en/login', (string) $this->browser()->getResponse()->headers->get('location'));
     }
 
     public function testCannotLoginWhenEmailIsNotVerified(): void
     {
         $user = $this->createUser('security-unverified@example.com', 'secret123', isEmailVerified: false);
 
-        $crawler = $this->browser()->request('GET', '/login');
+        $crawler = $this->browser()->request('GET', '/en/login');
         $form = $crawler->filter('form')->form([
             '_username' => $user->getEmail(),
             '_password' => 'secret123',
@@ -95,7 +95,7 @@ final class LoginLogoutTest extends WebTestCase
         $this->browser()->submit($form);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
         $this->browser()->followRedirect();
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
@@ -107,7 +107,7 @@ final class LoginLogoutTest extends WebTestCase
     {
         $user = $this->createUser('security-get-logout@example.com', 'secret123');
 
-        $crawler = $this->browser()->request('GET', '/login');
+        $crawler = $this->browser()->request('GET', '/en/login');
         $form = $crawler->filter('form')->form([
             '_username' => $user->getEmail(),
             '_password' => 'secret123',
@@ -116,9 +116,9 @@ final class LoginLogoutTest extends WebTestCase
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         $this->browser()->followRedirect();
 
-        $this->browser()->request('GET', '/logout');
+        $this->browser()->request('GET', '/en/logout');
 
-        $this->browser()->request('GET', '/');
+        $this->browser()->request('GET', '/en/');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString($user->getEmail(), $this->browser()->getResponse()->getContent() ?: '');
     }
@@ -128,7 +128,7 @@ final class LoginLogoutTest extends WebTestCase
         $user = $this->createUser('security-ratelimit@example.com', 'secret123');
 
         for ($attempt = 1; $attempt <= 6; ++$attempt) {
-            $crawler = $this->browser()->request('GET', '/login?locale=en');
+            $crawler = $this->browser()->request('GET', '/en/login');
             $form = $crawler->filter('form')->form([
                 '_username' => $user->getEmail(),
                 '_password' => 'wrong-password',
@@ -138,7 +138,7 @@ final class LoginLogoutTest extends WebTestCase
             $this->browser()->followRedirect();
         }
 
-        $crawler = $this->browser()->request('GET', '/login?locale=en');
+        $crawler = $this->browser()->request('GET', '/en/login');
         $form = $crawler->filter('form')->form([
             '_username' => $user->getEmail(),
             '_password' => 'secret123',
@@ -146,7 +146,7 @@ final class LoginLogoutTest extends WebTestCase
         $this->browser()->submit($form);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
     }
 
     private function createUser(string $email, string $plainPassword, bool $isEmailVerified = true): UserEntity

@@ -40,12 +40,12 @@
                 } %}
                 {% include 'admin/_filters_common_hidden_fields.html.twig' %}
                 <button type="submit">{{ 'admin_audit.filter'|trans }}</button>
-                <a href="{{ path('app_admin_audit_logs_export', { locale: app.request.locale, q: query ?: null, action: action ?: null }) }}">{{ 'admin_audit.export_csv'|trans }}</a>
+                <a href="{{ path('app_admin_audit_logs_export', { _locale: app.request.locale, q: query ?: null, action: action ?: null }) }}">{{ 'admin_audit.export_csv'|trans }}</a>
             </form>
             <p class="catalog-state">{{ 'admin_audit.visible_rows'|trans({'%count%': totalRows}) }}</p>
 
-            {% set previousUrl = page > 1 ? path('app_admin_audit_logs', { locale: app.request.locale, q: query ?: null, action: action ?: null, perPage: perPage, page: page - 1 }) : null %}
-            {% set nextUrl = page < totalPages ? path('app_admin_audit_logs', { locale: app.request.locale, q: query ?: null, action: action ?: null, perPage: perPage, page: page + 1 }) : null %}
+            {% set previousUrl = page > 1 ? path('app_admin_audit_logs', { _locale: app.request.locale, q: query ?: null, action: action ?: null, perPage: perPage, page: page - 1 }) : null %}
+            {% set nextUrl = page < totalPages ? path('app_admin_audit_logs', { _locale: app.request.locale, q: query ?: null, action: action ?: null, perPage: perPage, page: page + 1 }) : null %}
             {% include 'admin/_pager.html.twig' with {
                 page: page,
                 totalPages: totalPages,

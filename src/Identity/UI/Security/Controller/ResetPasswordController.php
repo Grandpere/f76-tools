@@ -25,7 +25,6 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-#[Route('/reset-password')]
 final class ResetPasswordController extends AbstractController
 {
     use IdentitySignedTokenValidationControllerTrait;
@@ -40,7 +39,8 @@ final class ResetPasswordController extends AbstractController
     ) {
     }
 
-    #[Route('/{token}', name: 'app_reset_password', methods: ['GET', 'POST'])]
+    #[Route('/{_locale<en|fr|de>}/reset-password/{token}', name: 'app_reset_password', methods: ['GET', 'POST'], defaults: ['_locale' => 'en'])]
+    #[Route('/reset-password/{token}', methods: ['GET', 'POST'])]
     public function __invoke(string $token, Request $request): Response
     {
         $validationFailureFlashMessage = $this->resolveSignedTokenFailureFlashMessage(

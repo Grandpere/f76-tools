@@ -54,7 +54,10 @@ final class LoginRateLimitSubscriber implements EventSubscriberInterface
         }
 
         $request = $event->getRequest();
-        if (!$request->isMethod('POST') || '/login' !== $request->getPathInfo()) {
+        if (
+            !$request->isMethod('POST')
+            || 1 !== preg_match('#^/(?:(?:en|fr|de)/)?login$#', $request->getPathInfo())
+        ) {
             return;
         }
 
@@ -77,7 +80,7 @@ final class LoginRateLimitSubscriber implements EventSubscriberInterface
         }
 
         $event->setResponse(new RedirectResponse($this->urlGenerator->generate('app_login', [
-            'locale' => $request->getLocale(),
+            '_locale' => $request->getLocale(),
         ])));
     }
 

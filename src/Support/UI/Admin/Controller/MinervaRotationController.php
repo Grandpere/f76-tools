@@ -36,7 +36,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('/admin/minerva-rotation')]
+#[Route('/{_locale<en|fr|de>}/admin/minerva-rotation', defaults: ['_locale' => 'en'])]
 final class MinervaRotationController extends AbstractController
 {
     use AdminRoleGuardControllerTrait;
@@ -383,7 +383,7 @@ final class MinervaRotationController extends AbstractController
 
     private function redirectToMinervaPageWithRange(Request $request): RedirectResponse
     {
-        $params = ['locale' => $request->getLocale()];
+        $params = ['_locale' => $request->getLocale()];
         $from = $this->normalizeDateInput((string) $request->request->get('from', ''));
         $to = $this->normalizeDateInput((string) $request->request->get('to', ''));
         if (is_string($from)) {

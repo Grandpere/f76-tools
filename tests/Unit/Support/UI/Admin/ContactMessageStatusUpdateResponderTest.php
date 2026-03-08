@@ -30,7 +30,7 @@ final class ContactMessageStatusUpdateResponderTest extends TestCase
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $urlGenerator->expects(self::once())
             ->method('generate')
-            ->with('app_admin_contact_messages', ['locale' => 'fr'])
+            ->with('app_admin_contact_messages', ['_locale' => 'fr'])
             ->willReturn('/fr/admin/contact-messages');
 
         $responder = new ContactMessageStatusUpdateResponder(
@@ -53,7 +53,7 @@ final class ContactMessageStatusUpdateResponderTest extends TestCase
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);
         $urlGenerator->expects(self::once())
             ->method('generate')
-            ->with('app_admin_contact_messages', ['locale' => 'fr'])
+            ->with('app_admin_contact_messages', ['_locale' => 'fr'])
             ->willReturn('/fr/admin/contact-messages');
 
         $responder = new ContactMessageStatusUpdateResponder(

@@ -46,13 +46,13 @@ final class ResendVerificationControllerTest extends WebTestCase
 
     public function testResendPageIsAccessible(): void
     {
-        $crawler = $this->browser()->request('GET', '/resend-verification');
+        $crawler = $this->browser()->request('GET', '/en/resend-verification');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filter('form'));
         self::assertCount(1, $crawler->filter('input[name="email"]'));
-        self::assertCount(1, $crawler->filter('a[href^="/register"]'));
-        self::assertCount(1, $crawler->filter('a[href^="/contact"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/en/login"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/en/contact"]'));
     }
 
     public function testResendUpdatesTokenForUnverifiedUser(): void
@@ -71,18 +71,18 @@ final class ResendVerificationControllerTest extends WebTestCase
         $this->entityManager?->persist($user);
         $this->entityManager?->flush();
 
-        $crawler = $this->browser()->request('GET', '/resend-verification');
+        $crawler = $this->browser()->request('GET', '/en/resend-verification');
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
         $csrfToken = (string) $tokenNode->attr('value');
 
-        $this->browser()->request('POST', '/resend-verification', [
+        $this->browser()->request('POST', '/en/resend-verification', [
             '_csrf_token' => $csrfToken,
             'email' => $email,
         ]);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
         $this->entityManager?->clear();
         $updated = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => $email]);
@@ -109,18 +109,18 @@ final class ResendVerificationControllerTest extends WebTestCase
         $this->entityManager?->persist($user);
         $this->entityManager?->flush();
 
-        $crawler = $this->browser()->request('GET', '/resend-verification');
+        $crawler = $this->browser()->request('GET', '/en/resend-verification');
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
         $csrfToken = (string) $tokenNode->attr('value');
 
-        $this->browser()->request('POST', '/resend-verification', [
+        $this->browser()->request('POST', '/en/resend-verification', [
             '_csrf_token' => $csrfToken,
             'email' => $email,
         ]);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/login', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
         $this->entityManager?->clear();
         $updated = $this->entityManager?->getRepository(UserEntity::class)->findOneBy(['email' => $email]);
@@ -132,25 +132,25 @@ final class ResendVerificationControllerTest extends WebTestCase
     public function testResendVerificationIsRateLimitedAfterRepeatedAttempts(): void
     {
         $email = sprintf('ratelimit-resend-%s@example.com', uniqid('', true));
-        $crawler = $this->browser()->request('GET', '/resend-verification');
+        $crawler = $this->browser()->request('GET', '/en/resend-verification');
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
         $csrfToken = (string) $tokenNode->attr('value');
 
         for ($i = 0; $i < 3; ++$i) {
-            $this->browser()->request('POST', '/resend-verification', [
+            $this->browser()->request('POST', '/en/resend-verification', [
                 '_csrf_token' => $csrfToken,
                 'email' => $email,
             ]);
             self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         }
 
-        $this->browser()->request('POST', '/resend-verification', [
+        $this->browser()->request('POST', '/en/resend-verification', [
             '_csrf_token' => $csrfToken,
             'email' => $email,
         ]);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/resend-verification', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/resend-verification', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
         $this->browser()->followRedirect();
         self::assertStringContainsString('Too many attempts', (string) $this->browser()->getResponse()->getContent());

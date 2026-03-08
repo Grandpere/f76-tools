@@ -28,7 +28,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-#[Route('/change-password', name: 'app_change_password', methods: ['GET', 'POST'])]
 final class ChangePasswordController extends AbstractController
 {
     public function __construct(
@@ -40,6 +39,8 @@ final class ChangePasswordController extends AbstractController
     ) {
     }
 
+    #[Route('/{_locale<en|fr|de>}/change-password', name: 'app_change_password', methods: ['GET', 'POST'], defaults: ['_locale' => 'en'])]
+    #[Route('/change-password', methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
         $user = $this->getUser();

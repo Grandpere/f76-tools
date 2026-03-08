@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/admin/audit-logs')]
+#[Route('/{_locale<en|fr|de>}/admin/audit-logs', defaults: ['_locale' => 'en'])]
 final class AuditLogController extends AbstractController
 {
     use AdminRoleGuardControllerTrait;

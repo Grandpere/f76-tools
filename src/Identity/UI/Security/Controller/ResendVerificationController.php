@@ -41,7 +41,8 @@ final class ResendVerificationController extends AbstractController
     ) {
     }
 
-    #[Route('/resend-verification', name: 'app_resend_verification', methods: ['GET', 'POST'])]
+    #[Route('/{_locale<en|fr|de>}/resend-verification', name: 'app_resend_verification', methods: ['GET', 'POST'], defaults: ['_locale' => 'en'])]
+    #[Route('/resend-verification', methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
         if ($request->isMethod('POST')) {

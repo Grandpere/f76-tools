@@ -32,7 +32,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-#[Route('/account-security')]
 final class AccountSecurityController extends AbstractController
 {
     public function __construct(
@@ -48,7 +47,8 @@ final class AccountSecurityController extends AbstractController
     ) {
     }
 
-    #[Route('', name: 'app_account_security', methods: ['GET'])]
+    #[Route('/{_locale<en|fr|de>}/account-security', name: 'app_account_security', methods: ['GET'], defaults: ['_locale' => 'en'])]
+    #[Route('/account-security', methods: ['GET'])]
     public function __invoke(Request $request): Response
     {
         $user = $this->getUser();
@@ -79,7 +79,8 @@ final class AccountSecurityController extends AbstractController
         ]);
     }
 
-    #[Route('/unlink-google', name: 'app_account_security_unlink_google', methods: ['POST'])]
+    #[Route('/{_locale<en|fr|de>}/account-security/unlink-google', name: 'app_account_security_unlink_google', methods: ['POST'], defaults: ['_locale' => 'en'])]
+    #[Route('/account-security/unlink-google', methods: ['POST'])]
     public function unlinkGoogle(Request $request): RedirectResponse
     {
         $user = $this->getUser();
@@ -117,7 +118,8 @@ final class AccountSecurityController extends AbstractController
         return $this->identityLocaleRedirector->toRouteWithRequestLocale($request, 'app_account_security');
     }
 
-    #[Route('/logout-other-sessions', name: 'app_account_security_logout_other_sessions', methods: ['POST'])]
+    #[Route('/{_locale<en|fr|de>}/account-security/logout-other-sessions', name: 'app_account_security_logout_other_sessions', methods: ['POST'], defaults: ['_locale' => 'en'])]
+    #[Route('/account-security/logout-other-sessions', methods: ['POST'])]
     public function logoutOtherSessions(Request $request): RedirectResponse
     {
         $user = $this->getUser();

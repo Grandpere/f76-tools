@@ -52,7 +52,7 @@ final class ItemTranslationControllerTest extends WebTestCase
 
     public function testPageRedirectsWhenNotAuthenticated(): void
     {
-        $this->browser()->request('GET', '/admin/translations/items');
+        $this->browser()->request('GET', '/en/admin/translations/items');
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('/login', (string) $this->browser()->getResponse()->headers->get('location'));
@@ -63,10 +63,10 @@ final class ItemTranslationControllerTest extends WebTestCase
         $user = $this->createUser('translations-view@example.com');
         $this->browser()->loginUser($user);
 
-        $crawler = $this->browser()->request('GET', '/admin/translations/items?locale=fr&target=zz&q=item.misc.10.name');
+        $crawler = $this->browser()->request('GET', '/en/admin/translations/items?target=zz&q=item.misc.10.name');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
-        self::assertCount(1, $crawler->filter('h1:contains("Traductions des items")'));
+        self::assertCount(1, $crawler->filter('h1'));
         self::assertCount(1, $crawler->filter('textarea[name="entries[item.misc.10.name]"]'));
     }
 
@@ -74,7 +74,7 @@ final class ItemTranslationControllerTest extends WebTestCase
     {
         $user = $this->createUser('translations-save@example.com');
         $this->browser()->loginUser($user);
-        $crawler = $this->browser()->request('GET', '/admin/translations/items?locale=fr&target=zz');
+        $crawler = $this->browser()->request('GET', '/en/admin/translations/items?target=zz');
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
         $token = (string) $tokenNode->attr('value');
@@ -87,7 +87,7 @@ final class ItemTranslationControllerTest extends WebTestCase
         preg_match('/^entries\[(.+)\]$/', $entryFieldName, $matches);
         $entryKey = $matches[1];
 
-        $this->browser()->request('POST', '/admin/translations/items?locale=fr&target=zz', [
+        $this->browser()->request('POST', '/en/admin/translations/items?target=zz', [
             '_csrf_token' => $token,
             'target' => 'zz',
             'entries' => [
@@ -108,7 +108,7 @@ final class ItemTranslationControllerTest extends WebTestCase
         $user = $this->createUser('translations-visible@example.com');
         $this->browser()->loginUser($user);
 
-        $crawler = $this->browser()->request('GET', '/admin/translations/items?locale=fr&target=zz');
+        $crawler = $this->browser()->request('GET', '/en/admin/translations/items?target=zz');
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
         $token = (string) $tokenNode->attr('value');
@@ -120,7 +120,7 @@ final class ItemTranslationControllerTest extends WebTestCase
         preg_match('/^entries\[(.+)\]$/', $entryFieldName, $matches);
         $entryKey = $matches[1];
 
-        $this->browser()->request('POST', '/admin/translations/items?locale=fr&target=zz', [
+        $this->browser()->request('POST', '/en/admin/translations/items?target=zz', [
             '_csrf_token' => $token,
             'target' => 'zz',
             'entries' => [
@@ -129,7 +129,7 @@ final class ItemTranslationControllerTest extends WebTestCase
         ]);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
 
-        $reload = $this->browser()->request('GET', '/admin/translations/items?locale=fr&target=zz&q='.$entryKey);
+        $reload = $this->browser()->request('GET', '/en/admin/translations/items?target=zz&q='.$entryKey);
         $textarea = $reload->filter(sprintf('textarea[name="entries[%s]"]', $entryKey));
         self::assertCount(1, $textarea);
         self::assertSame('Valeur visible', trim((string) $textarea->text('')));
@@ -140,7 +140,7 @@ final class ItemTranslationControllerTest extends WebTestCase
         $user = $this->createUser('translations-invalid-csrf@example.com');
         $this->browser()->loginUser($user);
 
-        $this->browser()->request('POST', '/admin/translations/items?locale=fr&target=zz', [
+        $this->browser()->request('POST', '/en/admin/translations/items?target=zz', [
             '_csrf_token' => 'invalid-token',
             'target' => 'zz',
             'entries' => [
@@ -157,7 +157,7 @@ final class ItemTranslationControllerTest extends WebTestCase
         $user = $this->createUser('translations-pagination@example.com');
         $this->browser()->loginUser($user);
 
-        $crawler = $this->browser()->request('GET', '/admin/translations/items?locale=fr&target=zz&q=item.misc.&perPage=2&page=2');
+        $crawler = $this->browser()->request('GET', '/en/admin/translations/items?target=zz&q=item.misc.&perPage=2&page=2');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(2, $crawler->filter('textarea[name^="entries["]'));

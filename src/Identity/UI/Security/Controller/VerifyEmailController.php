@@ -34,7 +34,8 @@ final class VerifyEmailController extends AbstractController
     ) {
     }
 
-    #[Route('/verify-email/{token}', name: 'app_verify_email', methods: ['GET'])]
+    #[Route('/{_locale<en|fr|de>}/verify-email/{token}', name: 'app_verify_email', methods: ['GET'], defaults: ['_locale' => 'en'])]
+    #[Route('/verify-email/{token}', methods: ['GET'])]
     public function __invoke(string $token, Request $request): RedirectResponse
     {
         $validationFailureFlashMessage = $this->resolveSignedTokenFailureFlashMessage(

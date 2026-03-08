@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Support\UI\Admin\Controller;
 
 use App\Catalog\Application\Roadmap\ApproveRoadmapSnapshotApplicationService;
@@ -10,7 +19,6 @@ use App\Catalog\Application\Roadmap\MergeRoadmapLocalesApplicationService;
 use App\Catalog\Application\Roadmap\RoadmapCanonicalEventReadRepository;
 use App\Catalog\Application\Roadmap\RoadmapSnapshotWriteRepository;
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
-use App\Catalog\Domain\Entity\RoadmapCanonicalEventTranslationEntity;
 use App\Catalog\Domain\Entity\RoadmapEventEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use DateTimeImmutable;
@@ -24,7 +32,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-#[Route('/admin/roadmap')]
+#[Route('/{_locale<en|fr|de>}/admin/roadmap', defaults: ['_locale' => 'en'])]
 final class RoadmapSnapshotController extends AbstractController
 {
     use AdminRoleGuardControllerTrait;
@@ -70,7 +78,7 @@ final class RoadmapSnapshotController extends AbstractController
                 return $a->getSortOrder() <=> $b->getSortOrder();
             });
             $selectedSnapshotImageUrl = $this->generateUrl('app_admin_roadmap_snapshot_source_image', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
                 'id' => $selectedSnapshot->getId(),
             ]);
         }
@@ -113,7 +121,7 @@ final class RoadmapSnapshotController extends AbstractController
             $this->addFlash('warning', 'admin_roadmap.flash.invalid_csrf');
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
                 'snapshot' => $id,
             ]);
         }
@@ -124,7 +132,7 @@ final class RoadmapSnapshotController extends AbstractController
             $this->addFlash('warning', $exception->getMessage());
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
                 'snapshot' => $id,
             ]);
         }
@@ -133,7 +141,7 @@ final class RoadmapSnapshotController extends AbstractController
         $this->addFlash('success', sprintf('%d event(s).', count($parsed)));
 
         return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-            'locale' => $request->getLocale(),
+            '_locale' => $request->getLocale(),
             'snapshot' => $id,
         ]);
     }
@@ -146,7 +154,7 @@ final class RoadmapSnapshotController extends AbstractController
             $this->addFlash('warning', 'admin_roadmap.flash.invalid_csrf');
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
             ]);
         }
 
@@ -159,7 +167,7 @@ final class RoadmapSnapshotController extends AbstractController
             $this->addFlash('warning', 'admin_roadmap.flash.merge_invalid_input');
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
             ]);
         }
 
@@ -173,7 +181,7 @@ final class RoadmapSnapshotController extends AbstractController
             $this->addFlash('warning', $exception->getMessage());
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
             ]);
         }
 
@@ -191,7 +199,7 @@ final class RoadmapSnapshotController extends AbstractController
         }
 
         return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-            'locale' => $request->getLocale(),
+            '_locale' => $request->getLocale(),
         ]);
     }
 
@@ -203,7 +211,7 @@ final class RoadmapSnapshotController extends AbstractController
             $this->addFlash('warning', 'admin_roadmap.flash.invalid_csrf');
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
             ]);
         }
 
@@ -212,7 +220,7 @@ final class RoadmapSnapshotController extends AbstractController
             $this->addFlash('warning', 'admin_roadmap.flash.snapshot_not_found');
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
             ]);
         }
 
@@ -220,7 +228,7 @@ final class RoadmapSnapshotController extends AbstractController
         $this->addFlash('success', 'admin_roadmap.flash.snapshot_deleted');
 
         return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-            'locale' => $request->getLocale(),
+            '_locale' => $request->getLocale(),
         ]);
     }
 
@@ -232,7 +240,7 @@ final class RoadmapSnapshotController extends AbstractController
             $this->addFlash('warning', 'admin_roadmap.flash.invalid_csrf');
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
                 'snapshot' => $id,
             ]);
         }
@@ -242,7 +250,7 @@ final class RoadmapSnapshotController extends AbstractController
             $this->addFlash('warning', 'admin_roadmap.flash.snapshot_not_found');
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
             ]);
         }
 
@@ -263,7 +271,7 @@ final class RoadmapSnapshotController extends AbstractController
         }
 
         return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-            'locale' => $request->getLocale(),
+            '_locale' => $request->getLocale(),
             'snapshot' => $id,
         ]);
     }
@@ -276,7 +284,7 @@ final class RoadmapSnapshotController extends AbstractController
             $this->addFlash('warning', 'admin_roadmap.flash.invalid_csrf');
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
                 'snapshot' => $id,
             ]);
         }
@@ -287,7 +295,7 @@ final class RoadmapSnapshotController extends AbstractController
             $this->addFlash('warning', $exception->getMessage());
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
                 'snapshot' => $id,
             ]);
         }
@@ -295,7 +303,7 @@ final class RoadmapSnapshotController extends AbstractController
         $this->addFlash('success', 'admin_roadmap.flash.snapshot_approved');
 
         return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-            'locale' => $request->getLocale(),
+            '_locale' => $request->getLocale(),
             'snapshot' => $id,
         ]);
     }
@@ -308,7 +316,7 @@ final class RoadmapSnapshotController extends AbstractController
             $this->addFlash('warning', 'admin_roadmap.flash.invalid_csrf');
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
                 'snapshot' => $id,
             ]);
         }
@@ -318,7 +326,7 @@ final class RoadmapSnapshotController extends AbstractController
             $this->addFlash('warning', 'admin_roadmap.flash.snapshot_not_found');
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
             ]);
         }
 
@@ -357,7 +365,7 @@ final class RoadmapSnapshotController extends AbstractController
         $this->addFlash('success', sprintf('%d event(s) updated.', $updated));
 
         return $this->redirectToRoute('app_admin_roadmap_snapshots', [
-            'locale' => $request->getLocale(),
+            '_locale' => $request->getLocale(),
             'snapshot' => $id,
         ]);
     }
@@ -417,9 +425,6 @@ final class RoadmapSnapshotController extends AbstractController
         ];
 
         foreach ($event->getTranslations() as $translation) {
-            if (!$translation instanceof RoadmapCanonicalEventTranslationEntity) {
-                continue;
-            }
             $locale = strtolower($translation->getLocale());
             if (array_key_exists($locale, $translations)) {
                 $translations[$locale] = $translation->getTitle();
@@ -450,7 +455,11 @@ final class RoadmapSnapshotController extends AbstractController
             return null;
         }
 
-        $projectDir = (string) $this->getParameter('kernel.project_dir');
+        $projectDirParameter = $this->getParameter('kernel.project_dir');
+        if (!is_string($projectDirParameter) || '' === $projectDirParameter) {
+            return null;
+        }
+        $projectDir = $projectDirParameter;
         $projectDirReal = realpath($projectDir) ?: $projectDir;
 
         $candidates = [];

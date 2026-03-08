@@ -49,7 +49,7 @@ final class ContactMessageControllerTest extends WebTestCase
     {
         $user = $this->createUser('member@example.com', 'secret123', ['ROLE_USER']);
         $this->browser()->loginUser($user);
-        $this->browser()->request('GET', '/admin/contact-messages');
+        $this->browser()->request('GET', '/en/admin/contact-messages');
 
         self::assertSame(403, $this->browser()->getResponse()->getStatusCode());
     }
@@ -61,7 +61,7 @@ final class ContactMessageControllerTest extends WebTestCase
         $this->createContactMessage('two@example.com', 'Question 2', 'Second message body', ContactMessageStatusEnum::CLOSED);
 
         $this->browser()->loginUser($admin);
-        $this->browser()->request('GET', '/admin/contact-messages?status=closed');
+        $this->browser()->request('GET', '/en/admin/contact-messages?status=closed');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $content = $this->browser()->getResponse()->getContent() ?: '';
@@ -75,11 +75,11 @@ final class ContactMessageControllerTest extends WebTestCase
         $contact = $this->createContactMessage('visitor@example.com', 'Need help', 'Message body for status update.');
 
         $this->browser()->loginUser($admin);
-        $crawler = $this->browser()->request('GET', '/admin/contact-messages');
-        $tokenNode = $crawler->filter(sprintf('form[action*="/admin/contact-messages/%d/status"] input[name="_csrf_token"]', $contact->getId()));
+        $crawler = $this->browser()->request('GET', '/en/admin/contact-messages');
+        $tokenNode = $crawler->filter(sprintf('form[action*="/en/admin/contact-messages/%d/status"] input[name="_csrf_token"]', $contact->getId()));
         self::assertCount(1, $tokenNode);
 
-        $this->browser()->request('POST', sprintf('/admin/contact-messages/%d/status', $contact->getId()), [
+        $this->browser()->request('POST', sprintf('/en/admin/contact-messages/%d/status', $contact->getId()), [
             '_csrf_token' => (string) $tokenNode->attr('value'),
             'status' => ContactMessageStatusEnum::IN_PROGRESS->value,
         ]);

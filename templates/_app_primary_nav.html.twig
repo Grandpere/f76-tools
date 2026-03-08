@@ -3,30 +3,30 @@
     {% if current == 'dashboard' %}
         <span class="app-primary-nav-link is-active">{{ 'dashboard.header.title'|trans }}</span>
     {% else %}
-        <a class="app-primary-nav-link" href="{{ path('app_dashboard', { locale: app.request.locale }) }}">{{ 'dashboard.header.title'|trans }}</a>
+        <a class="app-primary-nav-link" href="{{ path('app_dashboard', { _locale: app.request.locale }) }}">{{ 'dashboard.header.title'|trans }}</a>
     {% endif %}
     ·
     {% if current == 'minerva' %}
         <span class="app-primary-nav-link is-active">{{ 'dashboard.header.minerva_rotation'|trans }}</span>
     {% else %}
-        <a class="app-primary-nav-link" href="{{ path('app_minerva_rotation', { locale: app.request.locale }) }}">{{ 'dashboard.header.minerva_rotation'|trans }}</a>
+        <a class="app-primary-nav-link" href="{{ path('app_minerva_rotation', { _locale: app.request.locale }) }}">{{ 'dashboard.header.minerva_rotation'|trans }}</a>
     {% endif %}
     ·
     {% if current == 'roadmap-calendar' %}
         <span class="app-primary-nav-link is-active">{{ 'dashboard.header.roadmap_calendar'|trans }}</span>
     {% else %}
-        <a class="app-primary-nav-link" href="{{ path('app_roadmap_calendar', { locale: app.request.locale }) }}">{{ 'dashboard.header.roadmap_calendar'|trans }}</a>
+        <a class="app-primary-nav-link" href="{{ path('app_roadmap_calendar', { _locale: app.request.locale }) }}">{{ 'dashboard.header.roadmap_calendar'|trans }}</a>
     {% endif %}
     ·
     {% if current == 'nuke-codes' %}
         <span class="app-primary-nav-link is-active">{{ 'dashboard.header.nuke_codes'|trans }}</span>
     {% else %}
-        <a class="app-primary-nav-link" href="{{ path('app_nuke_codes', { locale: app.request.locale }) }}">{{ 'dashboard.header.nuke_codes'|trans }}</a>
+        <a class="app-primary-nav-link" href="{{ path('app_nuke_codes', { _locale: app.request.locale }) }}">{{ 'dashboard.header.nuke_codes'|trans }}</a>
     {% endif %}
     ·
     {% if current == 'progression' %}
         <span class="app-primary-nav-link is-active">{{ 'dashboard.header.progression'|trans }}</span>
     {% else %}
-        <a class="app-primary-nav-link" href="{{ path('app_progression', { locale: app.request.locale }) }}">{{ 'dashboard.header.progression'|trans }}</a>
+        <a class="app-primary-nav-link" href="{{ path('app_progression', { _locale: app.request.locale }) }}">{{ 'dashboard.header.progression'|trans }}</a>
     {% endif %}
 </span>

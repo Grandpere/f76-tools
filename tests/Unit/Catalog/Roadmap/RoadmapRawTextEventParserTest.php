@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Unit\Catalog\Roadmap;
 
 use App\Catalog\Application\Roadmap\RoadmapRawTextEventParser;
@@ -14,12 +23,12 @@ final class RoadmapRawTextEventParserTest extends TestCase
     {
         $parser = new RoadmapRawTextEventParser();
         $text = <<<TXT
-3 MARS - 10 MARS
-LA FETE DU YETI
+            3 MARS - 10 MARS
+            LA FETE DU YETI
 
-10 MARS - 24 MARS
-ENVAHISSEURS D'AU-DELA
-TXT;
+            10 MARS - 24 MARS
+            ENVAHISSEURS D'AU-DELA
+            TXT;
 
         $events = $parser->parse($text, 'fr', new DateTimeImmutable('2026-03-02 10:00:00'));
 
@@ -34,9 +43,9 @@ TXT;
     {
         $parser = new RoadmapRawTextEventParser();
         $text = <<<TXT
-7 APRIL - 14 APRIL
-DOUBLE XP
-TXT;
+            7 APRIL - 14 APRIL
+            DOUBLE XP
+            TXT;
 
         $events = $parser->parse($text, 'en', new DateTimeImmutable('2026-04-01 00:00:00'));
 
@@ -50,9 +59,9 @@ TXT;
     {
         $parser = new RoadmapRawTextEventParser();
         $text = <<<TXT
-1st APR - 5th APR
-DOUBLE SCORE
-TXT;
+            1st APR - 5th APR
+            DOUBLE SCORE
+            TXT;
 
         $events = $parser->parse($text, 'en', new DateTimeImmutable('2026-04-01 00:00:00'));
 
@@ -66,9 +75,9 @@ TXT;
     {
         $parser = new RoadmapRawTextEventParser();
         $text = <<<TXT
-5 MÄRZ - 12 MÄRZ
-DOPPELTE MUTATIONEN
-TXT;
+            5 MÄRZ - 12 MÄRZ
+            DOPPELTE MUTATIONEN
+            TXT;
 
         $events = $parser->parse($text, 'de', new DateTimeImmutable('2026-03-01 00:00:00'));
 
@@ -82,9 +91,9 @@ TXT;
     {
         $parser = new RoadmapRawTextEventParser();
         $text = <<<TXT
-7. APR - 14. APR
-DOPPELTE MUTATIONEN
-TXT;
+            7. APR - 14. APR
+            DOPPELTE MUTATIONEN
+            TXT;
 
         $events = $parser->parse($text, 'de', new DateTimeImmutable('2026-04-01 00:00:00'));
 
@@ -98,83 +107,83 @@ TXT;
     {
         $parser = new RoadmapRawTextEventParser();
         $text = <<<TXT
-RIP DARING
-AND THE
-CRYPTIDS FROM BEYOND THE COSMOS
-FALLOUT 76 SEASON 24
-FALLOUT76 COMMUNITY CALENDAR
+            RIP DARING
+            AND THE
+            CRYPTIDS FROM BEYOND THE COSMOS
+            FALLOUT 76 SEASON 24
+            FALLOUT76 COMMUNITY CALENDAR
 
-Mars
-FORET SAUVAGE ET SAISON 24
-3 MARS MISE A JOUR
-FORET SAUVAGE
-3 MARS - 10 MARS
-LA FETE DU YETI
-10 MARS - 24 MARS
-EVENEMENT LES
-ENVAHISSEURS D AU DELA
-12 MARS - 16 MARS
-CAPSULES A GOGO ET GRANDE
-PROMOTION DE MINERVA
-19 MARS - 23 MARS
-DOUBLE S.C.O.R.E., DOUBLES MUTATIONS
-ET CHOIX SPECIAL DE MURMRGH
+            Mars
+            FORET SAUVAGE ET SAISON 24
+            3 MARS MISE A JOUR
+            FORET SAUVAGE
+            3 MARS - 10 MARS
+            LA FETE DU YETI
+            10 MARS - 24 MARS
+            EVENEMENT LES
+            ENVAHISSEURS D AU DELA
+            12 MARS - 16 MARS
+            CAPSULES A GOGO ET GRANDE
+            PROMOTION DE MINERVA
+            19 MARS - 23 MARS
+            DOUBLE S.C.O.R.E., DOUBLES MUTATIONS
+            ET CHOIX SPECIAL DE MURMRGH
 
-Avril
-RIP DARING : EXPERT EN ARMES EXTRAORDINAIRE !
-7 AVRIL - 14 AVRIL
-EVENEMENTS
-PUBLICS MUTANTS
-16 AVRIL - 20 AVRIL
-DOUBLE XP, DOUBLES MUTATIONS ET
-GRANDE PROMOTION DE MINERVA
-21 AVRIL - 5 MAI
-MINI SAISON RIP DARING
-28 AVRIL - 12 MAI
-EVENEMENTS CALCINES
-EFFRAYANTS
-30 AVRIL - 4 MAI
-DOUBLE S.C.O.R.E., DOUBLES
-MUTATIONS ET CAPSULES A GOGO
+            Avril
+            RIP DARING : EXPERT EN ARMES EXTRAORDINAIRE !
+            7 AVRIL - 14 AVRIL
+            EVENEMENTS
+            PUBLICS MUTANTS
+            16 AVRIL - 20 AVRIL
+            DOUBLE XP, DOUBLES MUTATIONS ET
+            GRANDE PROMOTION DE MINERVA
+            21 AVRIL - 5 MAI
+            MINI SAISON RIP DARING
+            28 AVRIL - 12 MAI
+            EVENEMENTS CALCINES
+            EFFRAYANTS
+            30 AVRIL - 4 MAI
+            DOUBLE S.C.O.R.E., DOUBLES
+            MUTATIONS ET CAPSULES A GOGO
 
-Mai
-FLEAU DE BELZABEILLE
-7 MAI - 11 MAI
-SURPLUS DE MITRAILLE
-14 MAI - 18 MAI
-DOUBLES MUTATIONS ET
-CHASSEURS DE TRESORS
-19 MAI - 2 JUIN
-EVENEMENT FLORAISON
-EXPLOSIVE
-21 MAI - 25 MAI
-CHOIX SPECIAL DE MURMRGH ET
-GRANDE PROMOTION DE MINERVA
-28 MAI - 1ER JUIN
-FIEVRE DE L OR
+            Mai
+            FLEAU DE BELZABEILLE
+            7 MAI - 11 MAI
+            SURPLUS DE MITRAILLE
+            14 MAI - 18 MAI
+            DOUBLES MUTATIONS ET
+            CHASSEURS DE TRESORS
+            19 MAI - 2 JUIN
+            EVENEMENT FLORAISON
+            EXPLOSIVE
+            21 MAI - 25 MAI
+            CHOIX SPECIAL DE MURMRGH ET
+            GRANDE PROMOTION DE MINERVA
+            28 MAI - 1ER JUIN
+            FIEVRE DE L OR
 
-Juin
-NOUVELLE MISE A JOUR ET SAISON 25
-4 JUIN - 8 JUIN
-CAPSULES A GOGO
-9 JUIN - 16 JUIN
-EVENEMENTS PUBLICS
-MUTANTS
-11 JUIN - 15 JUIN
-SURPLUS DE MITRAILLE
-ET DOUBLES MUTATIONS
-18 JUIN - 22 JUIN
-DOUBLE S.C.O.R.E., DOUBLES
-MUTATIONS, CHASSEUR DE TRESORS
-ET PROMOTION LEGENDAIRE
-23 JUIN - 7 JUILLET
-EVENEMENT DEUX
-SERVICES DE SEMAINE
-DE LA VIANDE
+            Juin
+            NOUVELLE MISE A JOUR ET SAISON 25
+            4 JUIN - 8 JUIN
+            CAPSULES A GOGO
+            9 JUIN - 16 JUIN
+            EVENEMENTS PUBLICS
+            MUTANTS
+            11 JUIN - 15 JUIN
+            SURPLUS DE MITRAILLE
+            ET DOUBLES MUTATIONS
+            18 JUIN - 22 JUIN
+            DOUBLE S.C.O.R.E., DOUBLES
+            MUTATIONS, CHASSEUR DE TRESORS
+            ET PROMOTION LEGENDAIRE
+            23 JUIN - 7 JUILLET
+            EVENEMENT DEUX
+            SERVICES DE SEMAINE
+            DE LA VIANDE
 
-BETHESDA
-2026 ZeniMax
-TXT;
+            BETHESDA
+            2026 ZeniMax
+            TXT;
 
         $events = $parser->parse($text, 'fr', new DateTimeImmutable('2026-03-02 10:00:00'));
 
@@ -198,15 +207,15 @@ TXT;
     {
         $parser = new RoadmapRawTextEventParser();
         $text = <<<TXT
-3 MARS - 10 MARS
-LA FETE DU YETI
-Falleut 76
-COMMUNITY CALENDAR
-•Bethesda™
-KA TM 2024 7 iA
-10 MARS - 24 MARS
-ENVAHISSEURS D'AU-DELA
-TXT;
+            3 MARS - 10 MARS
+            LA FETE DU YETI
+            Falleut 76
+            COMMUNITY CALENDAR
+            •Bethesda™
+            KA TM 2024 7 iA
+            10 MARS - 24 MARS
+            ENVAHISSEURS D'AU-DELA
+            TXT;
 
         $events = $parser->parse($text, 'fr', new DateTimeImmutable('2026-03-02 10:00:00'));
 
@@ -219,13 +228,13 @@ TXT;
     {
         $parser = new RoadmapRawTextEventParser();
         $text = <<<TXT
-3 MARS - 10 MARS
-LA FETE DU YETI
-7 AVRlL - 14 AVRlL
-EVENEMENTS PUBLICS MUTANTS
-28 MA1 - 1ER JUlN
-FIEVRE DE L OR
-TXT;
+            3 MARS - 10 MARS
+            LA FETE DU YETI
+            7 AVRlL - 14 AVRlL
+            EVENEMENTS PUBLICS MUTANTS
+            28 MA1 - 1ER JUlN
+            FIEVRE DE L OR
+            TXT;
 
         $events = $parser->parse($text, 'fr', new DateTimeImmutable('2026-03-02 10:00:00'));
 
@@ -240,9 +249,9 @@ TXT;
     {
         $parser = new RoadmapRawTextEventParser();
         $text = <<<TXT
-7 AVRIL - 14 A/RI|
-EVENEMENTS PUBLICS MUTANTS
-TXT;
+            7 AVRIL - 14 A/RI|
+            EVENEMENTS PUBLICS MUTANTS
+            TXT;
 
         $events = $parser->parse($text, 'fr', new DateTimeImmutable('2026-03-02 10:00:00'));
 
@@ -255,83 +264,83 @@ TXT;
     {
         $parser = new RoadmapRawTextEventParser();
         $text = <<<TXT
-RIP DARING
-AND THE
-CRYPTIDS FROM BEYOND THE COSMOS
-FALLOUT
-Mars
-FORET SAUVAGE ET SAISON 24
-3 MARS
-MISĘ A JOUR
-FORET SAUVAGE
-3 MARS - 10 MARS
-LA FÉTE DU YETI
-10 MARS - 24 MARS
-ÉVÉNEMENT LES
-ENVAHISSEURS D'AU-DELÀ
-Avril
-RIP DARING : EXPERT EN ARMES EXTRAORDINAIRE !
-7 AVRIL - 14 AVRIL
-ÉVÉNEMENTS
-PUBLICS MUTANTS
-16 AVRIL - 20 AVRIL
-DOUBLE XP, DOUBLES MUTATIONS ET
-GRANDE PROMOTION DE MINERVA
-21 AVRIL - 5 MAI
-MINI SAISON RIP DARING
-Mai
-FLÉAU DE BELZABEILLE
-7 MAI - 11 MAI
-SURPLUS DE MITRAILLE
-14 MAI - 18 MAI
-DOUBLES MUTATIONS ET
-CHASSEUR DE TRESORS
-19 MAI - 2 JUIN
-ÉVÉNEMENT FLORAISON
-EXPLOSIVE
-12 MARS -
-16 MARS
-CAPSULES À GOGO ET GRANDE
-PROMOTION DE MINERVA
-00
-19 MARS - 23 MARS
-DOUBLE S.C.O.R.E., DOUBLES MUTATIONS
-ET CHOIX SPECIAL DE MURMRGH
-28 AVRIL - 12 MAI
-ÉVÉNEMENT CALCINÉS
-EFFRAYANTS
-30 AVRIL
-- 4 MAI
-DOUBLE S.C.O.R.E., DOUBLES
-MITATIONS ET CAPCILES A GOGO
-21 MAI - 25 MAI
-CHOIX SPECIAL DE MURMRGH ET
-GRANDE PROMOTION DE MINERVA
-3 MAI - TER JUIN
-FIÈVRE DE L'OR
-Juin
-NOUVELLE MISE À JOUR ET SAISON 25
-4 JUIN - 8 JUIN
-CAPSULES À GOGO
-9 JUIN - 16 JUIN
-ÉVÉNEMENTS PUBLICS
-MUTANTS
-11 JUIN - 15 JUIN
-SURPLUS DE MITRAILLE
-ET DOUBLES MUTATIONS
-18 JUIN - 22 JU
-DOUBLE S.C.O.R.E., DOUBLES
-MUTATIONS, CHASSEUR DE TRÉSORS
-ET PROMOTION LÉGENDAIRE
-Falleut 76
-COMMUNITY CALENDAR
-23 JUIN -7 JUHLET
-ÉVÉNEMENT DEUX
-SERVICES DE SEMAINE
-DE LA VIANDE
-•Bethesda™
-KA TM 2024 7 iA
-TXT;
+            RIP DARING
+            AND THE
+            CRYPTIDS FROM BEYOND THE COSMOS
+            FALLOUT
+            Mars
+            FORET SAUVAGE ET SAISON 24
+            3 MARS
+            MISĘ A JOUR
+            FORET SAUVAGE
+            3 MARS - 10 MARS
+            LA FÉTE DU YETI
+            10 MARS - 24 MARS
+            ÉVÉNEMENT LES
+            ENVAHISSEURS D'AU-DELÀ
+            Avril
+            RIP DARING : EXPERT EN ARMES EXTRAORDINAIRE !
+            7 AVRIL - 14 AVRIL
+            ÉVÉNEMENTS
+            PUBLICS MUTANTS
+            16 AVRIL - 20 AVRIL
+            DOUBLE XP, DOUBLES MUTATIONS ET
+            GRANDE PROMOTION DE MINERVA
+            21 AVRIL - 5 MAI
+            MINI SAISON RIP DARING
+            Mai
+            FLÉAU DE BELZABEILLE
+            7 MAI - 11 MAI
+            SURPLUS DE MITRAILLE
+            14 MAI - 18 MAI
+            DOUBLES MUTATIONS ET
+            CHASSEUR DE TRESORS
+            19 MAI - 2 JUIN
+            ÉVÉNEMENT FLORAISON
+            EXPLOSIVE
+            12 MARS -
+            16 MARS
+            CAPSULES À GOGO ET GRANDE
+            PROMOTION DE MINERVA
+            00
+            19 MARS - 23 MARS
+            DOUBLE S.C.O.R.E., DOUBLES MUTATIONS
+            ET CHOIX SPECIAL DE MURMRGH
+            28 AVRIL - 12 MAI
+            ÉVÉNEMENT CALCINÉS
+            EFFRAYANTS
+            30 AVRIL
+            - 4 MAI
+            DOUBLE S.C.O.R.E., DOUBLES
+            MITATIONS ET CAPCILES A GOGO
+            21 MAI - 25 MAI
+            CHOIX SPECIAL DE MURMRGH ET
+            GRANDE PROMOTION DE MINERVA
+            3 MAI - TER JUIN
+            FIÈVRE DE L'OR
+            Juin
+            NOUVELLE MISE À JOUR ET SAISON 25
+            4 JUIN - 8 JUIN
+            CAPSULES À GOGO
+            9 JUIN - 16 JUIN
+            ÉVÉNEMENTS PUBLICS
+            MUTANTS
+            11 JUIN - 15 JUIN
+            SURPLUS DE MITRAILLE
+            ET DOUBLES MUTATIONS
+            18 JUIN - 22 JU
+            DOUBLE S.C.O.R.E., DOUBLES
+            MUTATIONS, CHASSEUR DE TRÉSORS
+            ET PROMOTION LÉGENDAIRE
+            Falleut 76
+            COMMUNITY CALENDAR
+            23 JUIN -7 JUHLET
+            ÉVÉNEMENT DEUX
+            SERVICES DE SEMAINE
+            DE LA VIANDE
+            •Bethesda™
+            KA TM 2024 7 iA
+            TXT;
 
         $events = $parser->parse($text, 'fr', new DateTimeImmutable('2026-03-02 10:00:00'));
 
@@ -345,10 +354,10 @@ TXT;
     {
         $parser = new RoadmapRawTextEventParser();
         $text = <<<TXT
-3 MARS
-MISĘ A JOUR
-FORET SAUVAGE
-TXT;
+            3 MARS
+            MISĘ A JOUR
+            FORET SAUVAGE
+            TXT;
 
         $events = $parser->parse($text, 'fr', new DateTimeImmutable('2026-03-02 10:00:00'));
 
@@ -360,9 +369,9 @@ TXT;
     {
         $parser = new RoadmapRawTextEventParser();
         $text = <<<TXT
-3 MARS - 10 MARS
-LA FÉTE DU YETI
-TXT;
+            3 MARS - 10 MARS
+            LA FÉTE DU YETI
+            TXT;
 
         $events = $parser->parse($text, 'fr', new DateTimeImmutable('2026-03-02 10:00:00'));
 
@@ -374,79 +383,79 @@ TXT;
     {
         $parser = new RoadmapRawTextEventParser();
         $text = <<<TXT
-RIP DARING
-AND THE
-CRYPTIDS FROM BEYOND THE COSMOS
-FALLOUT
-Mäng
-DAS HINTERLAND UND SAISON 24
-3. MÄRZ
-UPDATE: DAS
-HINTERLAND
-3. BIS 10. MÄRZ
-BIGFOOTS PARTY
-10. BIS 24. MÄRZ
-EVENT: ANGREIFER AUS
-DEM ALL
-April
-RIP DARING: WAFFENNARR DER EXTRAKLASSE!
-7. BIS 14. APRI
-MUTIERTE ÖFFENTLICHE
-EVENTS
-BIS 20. APRIL
-DOPPELTE EP, DOPPELMUTATIONEN
-UND MINERVAS SONDERANGEBOTE
-APRIL BIS 5. MAI
-MINI-SAISON:
-RIP DARING
-Mai
-DIE BIEZELBUB-MISERE
-7. BIS 11. MAI
-SCHEINE-SEGEN
-14. BIS 18. MAI
-DOPPELMUTATIONEN
-UND SCHATZSUCHER
-19. MAI BIS 2. JUNI
-EVENT: DAS GROBE
-BLÜHEN
-00
-12. BİS 16. MÄRZ
-REICHLICH KRONKORKEN UND
-MINERVAS SONDERANGEBOTE
-19. BIS 23. MÄRZ
-DOPPELTER S.C.O.R.E., DOPPELMUTATIONEN
-UND MURMRGHS GEHEIME AUSWAHL
-28. APRIL BIS 12. MAI
-GRUSELIGE-VERBRANNTE-
-EVENT
-30. APRIL BIS 4. MA
-DOPPELTER S.C.O.R.E., DOPPELMUTATIONEN
-IND REICHLICH KRONKORKEN
-21. BIS 25. MA
-MURMRGHS GEHEIME AUSWAHL
-UND MINERVAS SONDERANGEBOTE
-28. MAI BIS 1. JUNI
-GOLDRAUSCH
-Juni
-BEVORSTEHENDES UPDATE UND SAISON 25
-4. BIS 8. JUNI
-REICHLICH KRONKORKEN
-9. BIS 16. JUNI
-MUTIERTE ÖFFENTLICHE
-EVENTS
-11. BIS 15. JUNI
-SCHEINE-SEGEN UND
-DOPPELMUTATIONEN
-18. BIS 22. JUNI
-DOPPELTER S.C.O.R.E., DOPPELMUTATIONEN
-SCHATZSUCHER UND LEGENDÄRE ANGEBOTE
-Falleut 76
-23. JUNI BIS 7. JULI
-EVENT: FLEISCHWOCHE
-SAMT NACHSCHLAG
-•Bethesda™
-COMMUNITY CALENDAR
-TXT;
+            RIP DARING
+            AND THE
+            CRYPTIDS FROM BEYOND THE COSMOS
+            FALLOUT
+            Mäng
+            DAS HINTERLAND UND SAISON 24
+            3. MÄRZ
+            UPDATE: DAS
+            HINTERLAND
+            3. BIS 10. MÄRZ
+            BIGFOOTS PARTY
+            10. BIS 24. MÄRZ
+            EVENT: ANGREIFER AUS
+            DEM ALL
+            April
+            RIP DARING: WAFFENNARR DER EXTRAKLASSE!
+            7. BIS 14. APRI
+            MUTIERTE ÖFFENTLICHE
+            EVENTS
+            BIS 20. APRIL
+            DOPPELTE EP, DOPPELMUTATIONEN
+            UND MINERVAS SONDERANGEBOTE
+            APRIL BIS 5. MAI
+            MINI-SAISON:
+            RIP DARING
+            Mai
+            DIE BIEZELBUB-MISERE
+            7. BIS 11. MAI
+            SCHEINE-SEGEN
+            14. BIS 18. MAI
+            DOPPELMUTATIONEN
+            UND SCHATZSUCHER
+            19. MAI BIS 2. JUNI
+            EVENT: DAS GROBE
+            BLÜHEN
+            00
+            12. BİS 16. MÄRZ
+            REICHLICH KRONKORKEN UND
+            MINERVAS SONDERANGEBOTE
+            19. BIS 23. MÄRZ
+            DOPPELTER S.C.O.R.E., DOPPELMUTATIONEN
+            UND MURMRGHS GEHEIME AUSWAHL
+            28. APRIL BIS 12. MAI
+            GRUSELIGE-VERBRANNTE-
+            EVENT
+            30. APRIL BIS 4. MA
+            DOPPELTER S.C.O.R.E., DOPPELMUTATIONEN
+            IND REICHLICH KRONKORKEN
+            21. BIS 25. MA
+            MURMRGHS GEHEIME AUSWAHL
+            UND MINERVAS SONDERANGEBOTE
+            28. MAI BIS 1. JUNI
+            GOLDRAUSCH
+            Juni
+            BEVORSTEHENDES UPDATE UND SAISON 25
+            4. BIS 8. JUNI
+            REICHLICH KRONKORKEN
+            9. BIS 16. JUNI
+            MUTIERTE ÖFFENTLICHE
+            EVENTS
+            11. BIS 15. JUNI
+            SCHEINE-SEGEN UND
+            DOPPELMUTATIONEN
+            18. BIS 22. JUNI
+            DOPPELTER S.C.O.R.E., DOPPELMUTATIONEN
+            SCHATZSUCHER UND LEGENDÄRE ANGEBOTE
+            Falleut 76
+            23. JUNI BIS 7. JULI
+            EVENT: FLEISCHWOCHE
+            SAMT NACHSCHLAG
+            •Bethesda™
+            COMMUNITY CALENDAR
+            TXT;
 
         $events = $parser->parse($text, 'de', new DateTimeImmutable('2026-03-02 10:00:00'));
 
@@ -466,77 +475,77 @@ TXT;
     {
         $parser = new RoadmapRawTextEventParser();
         $text = <<<TXT
-RIP DARING
-AND THE
-CRYPTIDS FROM BEYOND THE COSMOS
-FALLOUT
-March
-THE BACKWOODS AND SEASON 24
-MARCH 3
-THE BACKWOODS
-UPDATE
-MAR 3 - MAR 10
-BIGFOOT'S BASH
-MAR 10 - MAR 24
-INVADERS FROM BEYOND
-EVENT
-April
-RIP DARING: WEAPONS EXPERT EXTRAORDINAIRE!
-APRIL 7 - APRIL 14
-MUTATED PUBLIC
-EVENTS
-APRIL 16 - APRIL 20
-DOUBLE XP, DOUBLE MUTATIONS,
-AND MINERVA'S BIG SALE
-APRIL 21 - MAY 5
-RIP DARING MINI SEASON
-May
-PLIGHT OF THE BEEZLEBUB
-MAY 7 - MAY 11
-SCRIP SURPLUS
-MAY 14 - MAY 18
-DOUBLE MUTATIONS AND
-TREASURE HUNTER
-MAY 19 - JUNE 2
-THE BIG BLOOM EVENT
-MAR 12 - MAR 16
-CAPS-A-PLENTY AND
-MINERVA'S BIG SALE
-00
-•
-MAR 19 - MAR 23
-DOUBLE SCORE, DOUBLE MUTATIONS,
-AND MURMH'S SPECIAL PICK
-APRIL 28 - MAY 12
-SPOOKY SCORCHED
-EVENT
-APRIL 30 - MAY 4
-DOUBLE SCORE, DOUBLE
-MUTATIONS, AND CAPS-A-PLENTY
-MAY 21 - MAY 25
-MURMH'S SPECIAL PICK
-AND MINERVA'S BIG SALE
-MAY 28 - JUNE 1
-GOLD RUSH
-June
-UPCOMING UPDATE AND SEASON 25
-JUNE 4 - JUNE 8
-CAPS-A-PLENTY
-JUNE 9 - JUNE 16
-MUTATED PUBLIC EVENTS
-JUNE 11 - JUNE 15
-SCRIP SURPLUS AND
-DOUBLE MUTATIONS
-JUNE 18 - JUNE 22
-DOUBLE SCORE, DOUBLE MUTATIONS,
-TREASURE HUNTER, AND LEGENDARY SALE
-Falleut 76,
-JUNE 23 - JULY 7
-TWO HELPINGS OF
-MEAT WEEK EVENT
-•Bethesda™
-COMMUNITY CALENDAR
-TXT;
+            RIP DARING
+            AND THE
+            CRYPTIDS FROM BEYOND THE COSMOS
+            FALLOUT
+            March
+            THE BACKWOODS AND SEASON 24
+            MARCH 3
+            THE BACKWOODS
+            UPDATE
+            MAR 3 - MAR 10
+            BIGFOOT'S BASH
+            MAR 10 - MAR 24
+            INVADERS FROM BEYOND
+            EVENT
+            April
+            RIP DARING: WEAPONS EXPERT EXTRAORDINAIRE!
+            APRIL 7 - APRIL 14
+            MUTATED PUBLIC
+            EVENTS
+            APRIL 16 - APRIL 20
+            DOUBLE XP, DOUBLE MUTATIONS,
+            AND MINERVA'S BIG SALE
+            APRIL 21 - MAY 5
+            RIP DARING MINI SEASON
+            May
+            PLIGHT OF THE BEEZLEBUB
+            MAY 7 - MAY 11
+            SCRIP SURPLUS
+            MAY 14 - MAY 18
+            DOUBLE MUTATIONS AND
+            TREASURE HUNTER
+            MAY 19 - JUNE 2
+            THE BIG BLOOM EVENT
+            MAR 12 - MAR 16
+            CAPS-A-PLENTY AND
+            MINERVA'S BIG SALE
+            00
+            •
+            MAR 19 - MAR 23
+            DOUBLE SCORE, DOUBLE MUTATIONS,
+            AND MURMH'S SPECIAL PICK
+            APRIL 28 - MAY 12
+            SPOOKY SCORCHED
+            EVENT
+            APRIL 30 - MAY 4
+            DOUBLE SCORE, DOUBLE
+            MUTATIONS, AND CAPS-A-PLENTY
+            MAY 21 - MAY 25
+            MURMH'S SPECIAL PICK
+            AND MINERVA'S BIG SALE
+            MAY 28 - JUNE 1
+            GOLD RUSH
+            June
+            UPCOMING UPDATE AND SEASON 25
+            JUNE 4 - JUNE 8
+            CAPS-A-PLENTY
+            JUNE 9 - JUNE 16
+            MUTATED PUBLIC EVENTS
+            JUNE 11 - JUNE 15
+            SCRIP SURPLUS AND
+            DOUBLE MUTATIONS
+            JUNE 18 - JUNE 22
+            DOUBLE SCORE, DOUBLE MUTATIONS,
+            TREASURE HUNTER, AND LEGENDARY SALE
+            Falleut 76,
+            JUNE 23 - JULY 7
+            TWO HELPINGS OF
+            MEAT WEEK EVENT
+            •Bethesda™
+            COMMUNITY CALENDAR
+            TXT;
 
         $events = $parser->parse($text, 'en', new DateTimeImmutable('2026-03-02 10:00:00'));
 
@@ -599,37 +608,7 @@ TXT;
 
     /**
      * @param list<\App\Catalog\Application\Roadmap\RoadmapParsedEvent> $events
-     * @param list<string> $fragments
-     */
-    private function containsTitleFragmentsInRange(array $events, array $fragments, string $startsAt, string $endsAt): bool
-    {
-        foreach ($events as $event) {
-            if (
-                $event->startsAt->format('Y-m-d H:i:s') !== $startsAt
-                || $event->endsAt->format('Y-m-d H:i:s') !== $endsAt
-            ) {
-                continue;
-            }
-
-            $normalizedTitle = $this->normalizeTitleForAssert($event->title);
-            $allPresent = true;
-            foreach ($fragments as $fragment) {
-                if (!str_contains($normalizedTitle, $this->normalizeTitleForAssert($fragment))) {
-                    $allPresent = false;
-                    break;
-                }
-            }
-            if ($allPresent) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * @param list<\App\Catalog\Application\Roadmap\RoadmapParsedEvent> $events
-     * @param list<string> $fragments
+     * @param list<string>                                              $fragments
      */
     private function containsTitleFragments(array $events, array $fragments): bool
     {

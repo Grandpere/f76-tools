@@ -28,7 +28,7 @@
                 <article class="admin-minerva-action-card">
                     <h3>{{ 'admin_minerva.regenerate'|trans }}</h3>
                     <p class="admin-minerva-action-hint">{{ 'admin_minerva.regenerate_hint'|trans }}</p>
-                    <form method="post" action="{{ path('app_admin_minerva_rotation_regenerate', { locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters admin-minerva-action-form" data-controller="minerva-admin-datepicker" data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}">
+                    <form method="post" action="{{ path('app_admin_minerva_rotation_regenerate', { _locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters admin-minerva-action-form" data-controller="minerva-admin-datepicker" data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_regenerate') }}">
                         <div class="admin-minerva-action-fields">
                             <label class="field">
@@ -49,7 +49,7 @@
                 <article class="admin-minerva-action-card">
                     <h3>{{ 'admin_minerva.refresh'|trans }}</h3>
                     <p class="admin-minerva-action-hint">{{ 'admin_minerva.refresh_hint'|trans }}</p>
-                    <form method="post" action="{{ path('app_admin_minerva_rotation_refresh', { locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters admin-minerva-action-form" data-controller="minerva-admin-datepicker" data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}">
+                    <form method="post" action="{{ path('app_admin_minerva_rotation_refresh', { _locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters admin-minerva-action-form" data-controller="minerva-admin-datepicker" data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_refresh') }}">
                         <div class="admin-minerva-action-fields">
                             <label class="field">
@@ -151,14 +151,14 @@
                     </div>
                 {% endif %}
                 <p class="admin-minerva-last-refresh-line admin-minerva-audit-link-row">
-                    <a href="{{ path('app_admin_audit_logs', { locale: app.request.locale, q: 'minerva_', perPage: 30, page: 1 }) }}">{{ 'admin_minerva.view_minerva_audit_logs'|trans }}</a>
+                    <a href="{{ path('app_admin_audit_logs', { _locale: app.request.locale, q: 'minerva_', perPage: 30, page: 1 }) }}">{{ 'admin_minerva.view_minerva_audit_logs'|trans }}</a>
                 </p>
             </div>
         </section>
 
         <section class="translations-panel">
             <h2>{{ 'admin_minerva.override_title'|trans }}</h2>
-            <form method="post" action="{{ path('app_admin_minerva_rotation_override_create', { locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters" data-controller="minerva-admin-datepicker" data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}">
+            <form method="post" action="{{ path('app_admin_minerva_rotation_override_create', { _locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters" data-controller="minerva-admin-datepicker" data-minerva-admin-datepicker-locale-value="{{ app.request.locale }}">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_override_create') }}">
                 <input type="hidden" name="from" value="{{ defaultFrom }}">
                 <input type="hidden" name="to" value="{{ defaultTo }}">
@@ -199,7 +199,7 @@
                             <td>{{ row.startsAt|date('D d M Y · H:i') }}</td>
                             <td>{{ row.endsAt|date('D d M Y · H:i') }}</td>
                             <td>
-                                <form method="post" action="{{ path('app_admin_minerva_rotation_override_delete', { locale: app.request.locale, id: row.id }) }}">
+                                <form method="post" action="{{ path('app_admin_minerva_rotation_override_delete', { _locale: app.request.locale, id: row.id }) }}">
                                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_minerva_rotation_override_delete_' ~ row.id) }}">
                                     <input type="hidden" name="from" value="{{ defaultFrom }}">
                                     <input type="hidden" name="to" value="{{ defaultTo }}">

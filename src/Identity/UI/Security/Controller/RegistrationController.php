@@ -45,7 +45,8 @@ final class RegistrationController extends AbstractController
     ) {
     }
 
-    #[Route('/register', name: 'app_register', methods: ['GET', 'POST'])]
+    #[Route('/{_locale<en|fr|de>}/register', name: 'app_register', methods: ['GET', 'POST'], defaults: ['_locale' => 'en'])]
+    #[Route('/register', methods: ['GET', 'POST'])]
     public function __invoke(Request $request): Response
     {
         if (null !== $this->getUser()) {

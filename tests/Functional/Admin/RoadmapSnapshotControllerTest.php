@@ -2,10 +2,19 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Functional\Admin;
 
-use App\Catalog\Domain\Entity\RoadmapEventEntity;
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
+use App\Catalog\Domain\Entity\RoadmapEventEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use App\Catalog\Domain\Roadmap\RoadmapSnapshotStatusEnum;
 use App\Identity\Domain\Entity\UserEntity;
@@ -42,7 +51,7 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
     {
         $user = $this->createUser('member-roadmap@example.com', ['ROLE_USER']);
         $this->browser()->loginUser($user);
-        $this->browser()->request('GET', '/admin/roadmap');
+        $this->browser()->request('GET', '/en/admin/roadmap');
 
         self::assertSame(403, $this->browser()->getResponse()->getStatusCode());
     }
@@ -53,7 +62,7 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         $snapshot = $this->createSnapshot('fr', "3 MARS - 10 MARS\nLA FETE DU YETI");
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/admin/roadmap?snapshot='.$snapshot->getId());
+        $crawler = $this->browser()->request('GET', '/en/admin/roadmap?snapshot='.$snapshot->getId());
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filter('h1:contains("Roadmap")'));
@@ -69,11 +78,11 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         self::assertNotNull($snapshotId);
 
         $this->browser()->loginUser($admin);
-        $crawler = $this->browser()->request('GET', '/admin/roadmap?snapshot='.$snapshotId);
+        $crawler = $this->browser()->request('GET', '/en/admin/roadmap?snapshot='.$snapshotId);
 
-        $parseTokenNode = $crawler->filter('form[action*="/admin/roadmap/'.$snapshotId.'/raw-text/save"] input[name="_csrf_token"]');
+        $parseTokenNode = $crawler->filter('form[action*="/en/admin/roadmap/'.$snapshotId.'/raw-text/save"] input[name="_csrf_token"]');
         self::assertCount(1, $parseTokenNode);
-        $this->browser()->request('POST', '/admin/roadmap/'.$snapshotId.'/raw-text/save', [
+        $this->browser()->request('POST', '/en/admin/roadmap/'.$snapshotId.'/raw-text/save', [
             '_csrf_token' => (string) $parseTokenNode->attr('value'),
             'raw_text' => "3 MARS - 10 MARS\nLA FETE DU YETI",
             'generate_events' => '1',
@@ -85,10 +94,10 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         self::assertInstanceOf(RoadmapSnapshotEntity::class, $reloaded);
         self::assertGreaterThan(0, $reloaded->getEvents()->count());
 
-        $approvePage = $this->browser()->request('GET', '/admin/roadmap?snapshot='.$snapshotId);
-        $approveTokenNode = $approvePage->filter('form[action*="/admin/roadmap/'.$snapshotId.'/approve"] input[name="_csrf_token"]');
+        $approvePage = $this->browser()->request('GET', '/en/admin/roadmap?snapshot='.$snapshotId);
+        $approveTokenNode = $approvePage->filter('form[action*="/en/admin/roadmap/'.$snapshotId.'/approve"] input[name="_csrf_token"]');
         self::assertCount(1, $approveTokenNode);
-        $this->browser()->request('POST', '/admin/roadmap/'.$snapshotId.'/approve', [
+        $this->browser()->request('POST', '/en/admin/roadmap/'.$snapshotId.'/approve', [
             '_csrf_token' => (string) $approveTokenNode->attr('value'),
         ]);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
@@ -104,7 +113,7 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
     {
         $admin = $this->createUser('admin-roadmap-edit@example.com', ['ROLE_ADMIN']);
         $snapshot = $this->createSnapshot('en', "7 APRIL - 14 APRIL\nDOUBLE XP");
-        $event = (new RoadmapEventEntity())
+        $event = new RoadmapEventEntity()
             ->setSnapshot($snapshot)
             ->setLocale('en')
             ->setTitle('DOUBLE XP')
@@ -121,11 +130,11 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         self::assertNotNull($eventId);
 
         $this->browser()->loginUser($admin);
-        $crawler = $this->browser()->request('GET', '/admin/roadmap?snapshot='.$snapshotId);
-        $tokenNode = $crawler->filter('form[action*="/admin/roadmap/'.$snapshotId.'/events/save"] input[name="_csrf_token"]');
+        $crawler = $this->browser()->request('GET', '/en/admin/roadmap?snapshot='.$snapshotId);
+        $tokenNode = $crawler->filter('form[action*="/en/admin/roadmap/'.$snapshotId.'/events/save"] input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
 
-        $this->browser()->request('POST', '/admin/roadmap/'.$snapshotId.'/events/save', [
+        $this->browser()->request('POST', '/en/admin/roadmap/'.$snapshotId.'/events/save', [
             '_csrf_token' => (string) $tokenNode->attr('value'),
             'events' => [
                 (string) $eventId => [
@@ -151,11 +160,11 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         self::assertNotNull($snapshotId);
 
         $this->browser()->loginUser($admin);
-        $crawler = $this->browser()->request('GET', '/admin/roadmap?snapshot='.$snapshotId);
-        $tokenNode = $crawler->filter('form[action*="/admin/roadmap/'.$snapshotId.'/raw-text/save"] input[name="_csrf_token"]');
+        $crawler = $this->browser()->request('GET', '/en/admin/roadmap?snapshot='.$snapshotId);
+        $tokenNode = $crawler->filter('form[action*="/en/admin/roadmap/'.$snapshotId.'/raw-text/save"] input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
 
-        $this->browser()->request('POST', '/admin/roadmap/'.$snapshotId.'/raw-text/save', [
+        $this->browser()->request('POST', '/en/admin/roadmap/'.$snapshotId.'/raw-text/save', [
             '_csrf_token' => (string) $tokenNode->attr('value'),
             'raw_text' => "3 MARS - 10 MARS\nLA FETE DU YETI\nLIGNE AJOUTEE",
         ]);
@@ -179,11 +188,11 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         self::assertNotNull($snapshotId);
 
         $this->browser()->loginUser($admin);
-        $crawler = $this->browser()->request('GET', '/admin/roadmap');
-        $tokenNode = $crawler->filter('form[action*="/admin/roadmap/'.$snapshotId.'/delete"] input[name="_csrf_token"]');
+        $crawler = $this->browser()->request('GET', '/en/admin/roadmap');
+        $tokenNode = $crawler->filter('form[action*="/en/admin/roadmap/'.$snapshotId.'/delete"] input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
 
-        $this->browser()->request('POST', '/admin/roadmap/'.$snapshotId.'/delete', [
+        $this->browser()->request('POST', '/en/admin/roadmap/'.$snapshotId.'/delete', [
             '_csrf_token' => (string) $tokenNode->attr('value'),
         ]);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
@@ -214,11 +223,11 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         self::assertNotNull($deSnapshotId);
 
         $this->browser()->loginUser($admin);
-        $crawler = $this->browser()->request('GET', '/admin/roadmap');
-        $tokenNode = $crawler->filter('form[action*="/admin/roadmap/merge-locales"] input[name="_csrf_token"]');
+        $crawler = $this->browser()->request('GET', '/en/admin/roadmap');
+        $tokenNode = $crawler->filter('form[action*="/en/admin/roadmap/merge-locales"] input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
 
-        $this->browser()->request('POST', '/admin/roadmap/merge-locales', [
+        $this->browser()->request('POST', '/en/admin/roadmap/merge-locales', [
             '_csrf_token' => (string) $tokenNode->attr('value'),
             'fr_snapshot_id' => (string) $frSnapshotId,
             'en_snapshot_id' => (string) $enSnapshotId,
@@ -246,11 +255,11 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         self::assertNotNull($deSnapshotId);
 
         $this->browser()->loginUser($admin);
-        $crawler = $this->browser()->request('GET', '/admin/roadmap');
-        $tokenNode = $crawler->filter('form[action*="/admin/roadmap/merge-locales"] input[name="_csrf_token"]');
+        $crawler = $this->browser()->request('GET', '/en/admin/roadmap');
+        $tokenNode = $crawler->filter('form[action*="/en/admin/roadmap/merge-locales"] input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
 
-        $this->browser()->request('POST', '/admin/roadmap/merge-locales', [
+        $this->browser()->request('POST', '/en/admin/roadmap/merge-locales', [
             '_csrf_token' => (string) $tokenNode->attr('value'),
             'fr_snapshot_id' => (string) $frSnapshotId,
             'en_snapshot_id' => (string) $enSnapshotId,
@@ -264,9 +273,12 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         self::assertCount(0, $canonicalEvents);
     }
 
+    /**
+     * @param list<string> $roles
+     */
     private function createUser(string $email, array $roles): UserEntity
     {
-        $user = (new UserEntity())
+        $user = new UserEntity()
             ->setEmail($email)
             ->setRoles($roles)
             ->setPassword('$2y$13$5QzWfXyM7FuU7f1w8rRZBupJrbj5gaMmkX6A8hA1z7f4h56yQW2mS');
@@ -279,7 +291,7 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
 
     private function createSnapshot(string $locale, string $rawText): RoadmapSnapshotEntity
     {
-        $snapshot = (new RoadmapSnapshotEntity())
+        $snapshot = new RoadmapSnapshotEntity()
             ->setLocale($locale)
             ->setSourceImagePath('/tmp/sample-roadmap-'.$locale.'.jpg')
             ->setSourceImageHash(hash('sha256', $rawText))

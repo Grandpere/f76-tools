@@ -44,26 +44,26 @@ final class ContactControllerTest extends WebTestCase
 
     public function testContactPageIsAccessible(): void
     {
-        $crawler = $this->browser()->request('GET', '/contact');
+        $crawler = $this->browser()->request('GET', '/en/contact');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertCount(1, $crawler->filter('form'));
         self::assertCount(1, $crawler->filter('input[name="email"]'));
         self::assertCount(1, $crawler->filter('input[name="subject"]'));
         self::assertCount(1, $crawler->filter('textarea[name="message"]'));
-        self::assertCount(1, $crawler->filter('a[href^="/register"]'));
+        self::assertCount(1, $crawler->filter('a[href^="/en/"]'));
     }
 
     public function testContactPostRedirectsWithSuccessFlash(): void
     {
         self::assertSame(0, $this->countContactMessages());
 
-        $crawler = $this->browser()->request('GET', '/contact');
+        $crawler = $this->browser()->request('GET', '/en/contact');
         $tokenNode = $crawler->filter('input[name="_csrf_token"]');
         self::assertCount(1, $tokenNode);
         $csrfToken = (string) $tokenNode->attr('value');
 
-        $this->browser()->request('POST', '/contact', [
+        $this->browser()->request('POST', '/en/contact', [
             '_csrf_token' => $csrfToken,
             'email' => 'visitor@example.com',
             'subject' => 'Need help',
@@ -71,7 +71,7 @@ final class ContactControllerTest extends WebTestCase
         ]);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-        self::assertSame('/contact', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+        self::assertSame('/en/contact', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
 
         $this->browser()->followRedirect();
         self::assertStringContainsString(
@@ -89,19 +89,19 @@ final class ContactControllerTest extends WebTestCase
     public function testContactRateLimitTriggersAfterRepeatedPosts(): void
     {
         for ($attempt = 1; $attempt <= 6; ++$attempt) {
-            $crawler = $this->browser()->request('GET', '/contact');
+            $crawler = $this->browser()->request('GET', '/en/contact');
             $tokenNode = $crawler->filter('input[name="_csrf_token"]');
             self::assertCount(1, $tokenNode);
             $csrfToken = (string) $tokenNode->attr('value');
 
-            $this->browser()->request('POST', '/contact', [
+            $this->browser()->request('POST', '/en/contact', [
                 '_csrf_token' => $csrfToken,
                 'email' => 'ratelimit@example.com',
                 'subject' => sprintf('Request %d', $attempt),
                 'message' => 'Message body valid for contact rate limiter test.',
             ]);
             self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
-            self::assertSame('/contact', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
+            self::assertSame('/en/contact', parse_url((string) $this->browser()->getResponse()->headers->get('location'), PHP_URL_PATH));
         }
 
         $this->browser()->followRedirect();

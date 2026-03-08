@@ -48,8 +48,8 @@
             </form>
             <p class="catalog-state">{{ 'admin_contact.visible_rows'|trans({'%count%': totalRows}) }}</p>
 
-            {% set previousUrl = page > 1 ? path('app_admin_contact_messages', { locale: app.request.locale, q: query ?: null, status: status ?: null, perPage: perPage, page: page - 1 }) : null %}
-            {% set nextUrl = page < totalPages ? path('app_admin_contact_messages', { locale: app.request.locale, q: query ?: null, status: status ?: null, perPage: perPage, page: page + 1 }) : null %}
+            {% set previousUrl = page > 1 ? path('app_admin_contact_messages', { _locale: app.request.locale, q: query ?: null, status: status ?: null, perPage: perPage, page: page - 1 }) : null %}
+            {% set nextUrl = page < totalPages ? path('app_admin_contact_messages', { _locale: app.request.locale, q: query ?: null, status: status ?: null, perPage: perPage, page: page + 1 }) : null %}
             {% include 'admin/_pager.html.twig' with {
                 page: page,
                 totalPages: totalPages,
@@ -78,7 +78,7 @@
                             <td>{{ row.message }}</td>
                             <td>{{ ('admin_contact.status_' ~ row.status.value)|trans }}</td>
                             <td>
-                                <form method="post" action="{{ path('app_admin_contact_messages_set_status', { id: row.id, locale: app.request.locale }) }}">
+                                <form method="post" action="{{ path('app_admin_contact_messages_set_status', { id: row.id, _locale: app.request.locale }) }}">
                                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_contact_messages_set_status_' ~ row.id) }}">
                                     <select name="status">
                                         {% include 'admin/_contact_status_options.html.twig' with {

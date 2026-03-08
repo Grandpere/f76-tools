@@ -48,7 +48,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('/admin/users')]
+#[Route('/{_locale<en|fr|de>}/admin/users', defaults: ['_locale' => 'en'])]
 final class UserManagementController extends AbstractController
 {
     use AdminRoleGuardControllerTrait;
@@ -231,7 +231,7 @@ final class UserManagementController extends AbstractController
         $events = $this->authAuditLogReader->findByUserIdWithFilters($id, 60, $level, $query);
         $backParams = $this->usersListQueryParamsFromRequest($request);
         $localeHiddenFields = $backParams;
-        unset($localeHiddenFields['locale']);
+        unset($localeHiddenFields['_locale']);
 
         return $this->render('admin/user_auth_events.html.twig', [
             'targetUser' => $targetUser,
@@ -241,7 +241,7 @@ final class UserManagementController extends AbstractController
             'levelFilter' => $level,
             'query' => $query,
             'exportParams' => [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
                 'level' => $level,
                 'q' => $query,
             ],
@@ -363,7 +363,7 @@ final class UserManagementController extends AbstractController
 
         if (GenerateResetLinkStatus::GENERATED === $result->getStatus() && is_string($result->getToken())) {
             $resetUrl = $this->signedUrlGenerator->generate('app_reset_password', [
-                'locale' => $request->getLocale(),
+                '_locale' => $request->getLocale(),
                 'token' => $result->getToken(),
             ]);
 
@@ -488,12 +488,12 @@ final class UserManagementController extends AbstractController
     }
 
     /**
-     * @return array{locale: string, google: string, active: string, role: string, verified: string, localPassword: string, createdFrom: string, createdTo: string, q: string, sort: string, dir: string, perPage: int, page: int}
+     * @return array{_locale: string, google: string, active: string, role: string, verified: string, localPassword: string, createdFrom: string, createdTo: string, q: string, sort: string, dir: string, perPage: int, page: int}
      */
     private function usersListPostParamsFromRequest(Request $request): array
     {
         return [
-            'locale' => $request->getLocale(),
+            '_locale' => $request->getLocale(),
             'google' => $this->normalizeGoogleFilter((string) $request->request->get('google', '')),
             'active' => $this->normalizeActiveFilter((string) $request->request->get('active', '')),
             'role' => $this->normalizeRoleFilter((string) $request->request->get('role', '')),
@@ -510,12 +510,12 @@ final class UserManagementController extends AbstractController
     }
 
     /**
-     * @return array{locale: string, google: string, active: string, role: string, verified: string, localPassword: string, createdFrom: string, createdTo: string, q: string, sort: string, dir: string, perPage: int, page: int}
+     * @return array{_locale: string, google: string, active: string, role: string, verified: string, localPassword: string, createdFrom: string, createdTo: string, q: string, sort: string, dir: string, perPage: int, page: int}
      */
     private function usersListQueryParamsFromRequest(Request $request): array
     {
         return [
-            'locale' => $request->getLocale(),
+            '_locale' => $request->getLocale(),
             'google' => $this->normalizeGoogleFilter($request->query->getString('google', '')),
             'active' => $this->normalizeActiveFilter($request->query->getString('active', '')),
             'role' => $this->normalizeRoleFilter($request->query->getString('role', '')),
@@ -539,7 +539,7 @@ final class UserManagementController extends AbstractController
         /** @var array<string, bool|int|string|null> $payload */
         $payload = [
             'ip' => $request->getClientIp(),
-            'locale' => $request->getLocale(),
+            '_locale' => $request->getLocale(),
         ];
 
         if (is_array($context)) {

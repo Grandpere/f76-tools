@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of a F76 project.
+ *
+ * (c) Lorenzo Marozzo <lorenzo.marozzo@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Catalog\Application\Roadmap;
 
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
@@ -92,7 +101,7 @@ final readonly class MergeRoadmapLocalesApplicationService
                 );
             }
 
-            $canonicalEvent = (new RoadmapCanonicalEventEntity())
+            $canonicalEvent = new RoadmapCanonicalEventEntity()
                 ->setTranslationKey(sprintf('roadmap.event.%s.%s', $bucket['startsAt']->format('Ymd'), $bucket['endsAt']->format('Ymd')))
                 ->setStartsAt($bucket['startsAt'])
                 ->setEndsAt($bucket['endsAt'])
@@ -101,7 +110,7 @@ final readonly class MergeRoadmapLocalesApplicationService
 
             foreach ($bucket['titles'] as $locale => $title) {
                 $canonicalEvent->addTranslation(
-                    (new RoadmapCanonicalEventTranslationEntity())
+                    new RoadmapCanonicalEventTranslationEntity()
                         ->setLocale((string) $locale)
                         ->setTitle((string) $title),
                 );
@@ -140,16 +149,12 @@ final readonly class MergeRoadmapLocalesApplicationService
         $snapshotId = $snapshot->getId();
         $id = is_int($snapshotId) ? (string) $snapshotId : 'unknown';
 
-        throw new RuntimeException(sprintf(
-            'Snapshot %s for locale %s must be approved before merge (current: %s).',
-            $id,
-            strtoupper($locale),
-            $snapshot->getStatus()->value,
-        ));
+        throw new RuntimeException(sprintf('Snapshot %s for locale %s must be approved before merge (current: %s).', $id, strtoupper($locale), $snapshot->getStatus()->value));
     }
 
     /**
      * @param list<array{startsAt: DateTimeImmutable, endsAt: DateTimeImmutable, titles: array<string, string>}> $buckets
+     *
      * @return list<string>
      */
     private function detectPotentialRangeConflicts(array $buckets, int $localeCount): array
