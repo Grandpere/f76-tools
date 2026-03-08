@@ -41,7 +41,7 @@ dashboard.filters.title: Filter
 dashboard.filters.player: Charakter
 dashboard.filters.search: Suche
 dashboard.filters.search_placeholder: 'Name, Beschreibung, Schlussel...'
-dashboard.filters.source_filters: Quellenfilter
+dashboard.filters.source_filters: Filter
 dashboard.filters.group_visibility: Sichtbarkeit
 dashboard.filters.group_loot_sources: Loot-Quellen
 dashboard.filters.group_equipment_types: Ausrustungstyp
