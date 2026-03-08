@@ -98,12 +98,16 @@ roadmap_calendar.empty: Aucun événement roadmap disponible.
 dashboard.transfer.title: Progression (backup)
 dashboard.transfer.export: Export JSON
 dashboard.transfer.import: Import JSON
-dashboard.transfer.merge_mode: Mode fusion (conserver existant)
+dashboard.transfer.import_help: Importe un fichier JSON de progression pour le personnage sélectionné.
+dashboard.transfer.import_note: La fusion ajoute les éléments manquants sans retirer ceux déjà appris.
+dashboard.transfer.export_help: Exporte la progression du personnage sélectionné au format JSON.
+dashboard.transfer.export_note: Le fichier exporté peut être conservé comme sauvegarde ou partagé.
+dashboard.transfer.merge_mode: Fusion
 dashboard.catalog.misc_title: Mods légendaires
 dashboard.catalog.book_title: Plans Minerva
 dashboard.stats.title: Progression du personnage
 dashboard.stats.overall: Global
-dashboard.stats.misc: Legendary mods
+dashboard.stats.misc: Mods légendaires
 dashboard.stats.book: Plans Minerva
 dashboard.stats.by_rank: Détail par rang
 dashboard.stats.by_list: Détail par liste

@@ -1361,7 +1361,7 @@ body::before {
 .transfer-section {
     border: 1px solid var(--line);
     border-radius: 12px;
-    background: var(--panel-soft);
+    background: var(--panel);
     padding: 0.65rem 0.72rem;
 }
 
@@ -1374,6 +1374,12 @@ body::before {
 
 .transfer-section .transfer-actions {
     margin-top: 0.58rem;
+}
+
+.transfer-section-note {
+    margin: 0.42rem 0 0;
+    color: var(--text-2);
+    font-size: 0.82rem;
 }
 
 .info-note {
@@ -1425,6 +1431,10 @@ body::before {
     flex-wrap: wrap;
     gap: 0.6rem;
     align-items: center;
+}
+
+.transfer-controls .transfer-checkbox {
+    margin-left: auto;
 }
 
 .transfer-actions button {

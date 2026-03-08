@@ -98,7 +98,11 @@ roadmap_calendar.empty: Keine Roadmap-Events verfugbar.
 dashboard.transfer.title: Fortschritt (Backup)
 dashboard.transfer.export: JSON-Export
 dashboard.transfer.import: JSON-Import
-dashboard.transfer.merge_mode: Merge-Modus (bestehendes behalten)
+dashboard.transfer.import_help: Importiert eine JSON-Fortschrittsdatei fur den ausgewahlten Charakter.
+dashboard.transfer.import_note: Der Merge-Modus fugt fehlende Eintrage hinzu, ohne gelernte zu entfernen.
+dashboard.transfer.export_help: Exportiert den Fortschritt des ausgewahlten Charakters als JSON.
+dashboard.transfer.export_note: Die exportierte Datei kann als Backup gespeichert oder geteilt werden.
+dashboard.transfer.merge_mode: Zusammenfuhren
 dashboard.catalog.misc_title: Legendare Mods
 dashboard.catalog.book_title: Minerva-Plane
 dashboard.stats.title: Charakterfortschritt

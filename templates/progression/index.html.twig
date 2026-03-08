@@ -81,13 +81,9 @@
                 <h2>{{ 'progression.backup_title'|trans }}</h2>
                 <div class="transfer-sections">
                     <article class="transfer-section">
-                        <h3>{{ 'dashboard.transfer.export'|trans }}</h3>
-                        <div class="transfer-actions">
-                            <button type="button" data-player-progression-target="exportButton">{{ 'dashboard.transfer.export'|trans }}</button>
-                        </div>
-                    </article>
-                    <article class="transfer-section">
                         <h3>{{ 'dashboard.transfer.import'|trans }}</h3>
+                        <p class="catalog-note">{{ 'dashboard.transfer.import_help'|trans }}</p>
+                        <p class="transfer-section-note">{{ 'dashboard.transfer.import_note'|trans }}</p>
                         <div class="transfer-controls">
                             <label class="transfer-file">
                                 <input type="file" accept="application/json" data-player-progression-target="importFileInput">
@@ -100,6 +96,14 @@
                         </div>
                         <p class="catalog-state" role="status" aria-live="polite" data-player-progression-target="backupState"></p>
                         <div class="transfer-unknown-panel" data-player-progression-target="importUnknownPanel"></div>
+                    </article>
+                    <article class="transfer-section">
+                        <h3>{{ 'dashboard.transfer.export'|trans }}</h3>
+                        <p class="catalog-note">{{ 'dashboard.transfer.export_help'|trans }}</p>
+                        <p class="transfer-section-note">{{ 'dashboard.transfer.export_note'|trans }}</p>
+                        <div class="transfer-actions">
+                            <button type="button" data-player-progression-target="exportButton">{{ 'dashboard.transfer.export'|trans }}</button>
+                        </div>
                     </article>
                 </div>
             </section>
