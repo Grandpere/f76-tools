@@ -2223,6 +2223,25 @@ body::before {
     border-radius: 10px;
 }
 
+.roadmap-snapshot-actions a,
+.roadmap-snapshot-actions a:visited {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(160, 119, 0, 0.38);
+    background: #fff;
+    color: #5f4a00;
+    text-decoration: none;
+    font-weight: 700;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+}
+
+.roadmap-snapshot-actions a:hover {
+    background: #fff6d2;
+    border-color: rgba(160, 119, 0, 0.52);
+    color: #5f4a00;
+}
+
 .roadmap-danger-button {
     border-color: rgba(173, 58, 47, 0.36) !important;
     background: linear-gradient(180deg, #ffe5df, #ffcec5) !important;
@@ -2264,10 +2283,7 @@ body::before {
 
 .roadmap-actions-help {
     margin-top: 0.55rem;
-    padding: 0.45rem 0.6rem;
-    border: 1px dashed rgba(160, 119, 0, 0.35);
-    border-radius: 10px;
-    background: linear-gradient(180deg, #fffef8, #fff8df);
+    margin-bottom: 0;
 }
 
 .roadmap-events-header {
@@ -3330,9 +3346,10 @@ span.flatpickr-weekday {
 }
 
 .admin-users-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.36rem;
+    min-width: 16.5rem;
 }
 
 .admin-users-actions form {
@@ -3348,6 +3365,8 @@ span.flatpickr-weekday {
     color: #2a2200;
     font-weight: 700;
     font-family: 'Rajdhani', 'Inter', sans-serif;
+    width: 100%;
+    justify-content: center;
 }
 
 .admin-users-actions button:hover {
@@ -3372,6 +3391,8 @@ span.flatpickr-weekday {
     font-weight: 700;
     font-family: 'Rajdhani', 'Inter', sans-serif;
     text-decoration: none;
+    width: 100%;
+    grid-column: 1 / -1;
 }
 
 .admin-users-action-link:hover {
@@ -3381,10 +3402,26 @@ span.flatpickr-weekday {
 
 .admin-users-actions-help {
     margin: 0.08rem 0 0;
-    width: 100%;
+    grid-column: 1 / -1;
     font-size: 0.72rem;
     color: #7b2f27;
     line-height: 1.3;
+}
+
+.admin-users-btn-primary {
+    background: linear-gradient(180deg, #ffe27f, #f4c52b);
+}
+
+.admin-users-btn-secondary {
+    background: #fff8df;
+    color: #5f4a00;
+    border-color: rgba(160, 119, 0, 0.28);
+}
+
+.admin-users-btn-danger {
+    background: #fff0ee;
+    color: #7b2f27;
+    border-color: rgba(193, 76, 63, 0.35);
 }
 
 .admin-sort-link {
@@ -3478,22 +3515,53 @@ span.flatpickr-weekday {
 }
 
 .admin-users-summary {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.42rem;
-    margin-bottom: 0.78rem;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 0.85rem;
 }
 
 .admin-users-summary-item {
-    display: inline-flex;
-    align-items: center;
-    border-radius: 999px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    border-radius: 12px;
     border: 1px solid var(--line);
-    background: #fff;
+    background: var(--panel-soft);
     color: var(--text-1);
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    padding: 0.22rem 0.52rem;
+    padding: 0.5rem 0.6rem 0.45rem;
+}
+
+.admin-users-summary-label {
+    color: var(--text-2);
+}
+
+.admin-users-summary-value {
+    color: var(--text-0);
+    font-size: 1.15rem;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+    line-height: 1;
+}
+
+.admin-users-filters {
+    margin-bottom: 0.35rem;
+    padding: 0.62rem;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--panel-soft);
+}
+
+.admin-users-table-wrap {
+    margin-top: 0.6rem;
+}
+
+.admin-users-badge-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.28rem;
 }
 
 .translations-help {
@@ -3601,6 +3669,10 @@ span.flatpickr-weekday {
     .admin-minerva-actions-grid {
         grid-template-columns: 1fr;
     }
+
+    .admin-users-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 760px) {
@@ -3693,6 +3765,15 @@ span.flatpickr-weekday {
     .roadmap-events-table .roadmap-col-end {
         width: auto;
     }
+
+    .admin-users-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-users-actions {
+        grid-template-columns: 1fr;
+        min-width: 0;
+    }
 }
 
 /* Terminal theme hard overrides kept at EOF to win cascade against light defaults */
@@ -3712,6 +3793,23 @@ span.flatpickr-weekday {
     background: #0f1d16;
     border-color: rgba(116, 229, 146, 0.28);
     color: #d5f7dc;
+}
+
+:root[data-theme='terminal'] .admin-users-filters {
+    background: #0f1d16;
+    border-color: rgba(116, 229, 146, 0.28);
+}
+
+:root[data-theme='terminal'] .admin-users-btn-secondary {
+    background: #0f1d16;
+    color: #d5f7dc;
+    border-color: rgba(116, 229, 146, 0.28);
+}
+
+:root[data-theme='terminal'] .admin-users-btn-danger {
+    background: rgba(193, 76, 63, 0.2);
+    color: #ffd0cb;
+    border-color: rgba(247, 124, 124, 0.4);
 }
 
 :root[data-theme='terminal'] .admin-security-badge-ok {
@@ -3762,10 +3860,14 @@ span.flatpickr-weekday {
 
 :root[data-theme='terminal'] .roadmap-snapshot-actions a,
 :root[data-theme='terminal'] .roadmap-snapshot-actions a:visited {
+    background: #0f1d16;
+    border-color: rgba(116, 229, 146, 0.28);
     color: #ccf7d4;
 }
 
 :root[data-theme='terminal'] .roadmap-snapshot-actions a:hover {
+    background: #12241b;
+    border-color: rgba(156, 255, 177, 0.62);
     color: #e7ffee;
 }
 

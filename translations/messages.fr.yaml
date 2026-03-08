@@ -305,6 +305,7 @@ admin_roadmap.title: Roadmap
 admin_roadmap.description: Revoir les snapshots OCR, générer les événements structurés et approuver la publication.
 admin_roadmap.back_to_dashboard: Retour au tableau de bord
 admin_roadmap.snapshots_title: Snapshots OCR
+admin_roadmap.step_snapshots_hint: Ouvre un snapshot pour revoir le texte OCR, puis générer/modifier les événements.
 admin_roadmap.snapshot_id: ID
 admin_roadmap.snapshot_locale: Locale
 admin_roadmap.snapshot_provider: Provider
@@ -313,14 +314,39 @@ admin_roadmap.snapshot_status: Statut
 admin_roadmap.snapshot_scanned_at: Scanné le
 admin_roadmap.snapshot_actions: Actions
 admin_roadmap.open: Ouvrir
+admin_roadmap.delete_snapshot: Supprimer
 admin_roadmap.status_draft: Brouillon
 admin_roadmap.status_approved: Approuvé
 admin_roadmap.status_rejected: Rejeté
 admin_roadmap.empty_snapshots: Aucun snapshot roadmap trouvé.
+admin_roadmap.canonical_title: Timeline canonique
+admin_roadmap.canonical_description: Timeline fusionnée depuis les snapshots FR/EN/DE avec score de confiance et suivi des langues manquantes.
+admin_roadmap.canonical_window: Période
+admin_roadmap.canonical_confidence: Confiance
+admin_roadmap.canonical_missing_locales: Langues manquantes
+admin_roadmap.canonical_complete: Complet
+admin_roadmap.canonical_empty: Aucun événement canonique généré pour le moment.
+admin_roadmap.selected_snapshot_pending_title: Revue du snapshot
+admin_roadmap.selected_snapshot_pending_hint: Ouvre un snapshot de la liste pour démarrer la revue OCR, la génération d'événements et l'approbation.
+admin_roadmap.merge_fr_snapshot: Snapshot FR (ID)
+admin_roadmap.merge_en_snapshot: Snapshot EN (ID)
+admin_roadmap.merge_de_snapshot: Snapshot DE (ID)
+admin_roadmap.merge_dry_run: Dry-run uniquement
+admin_roadmap.merge_submit: Fusionner FR/EN/DE
+admin_roadmap.merge_requires_approved_hint: La fusion accepte uniquement des snapshots approuvés.
 admin_roadmap.selected_snapshot_title: 'Snapshot sélectionné #%id%'
 admin_roadmap.selected_snapshot_state: 'Locale: %locale% · Statut: %status%'
+admin_roadmap.source_title: Source
+admin_roadmap.source_image_alt: 'Image source roadmap pour le snapshot #%id%'
+admin_roadmap.source_image_unavailable: Image source indisponible pour ce snapshot.
+admin_roadmap.raw_text_title: Texte OCR extrait
+admin_roadmap.events_count: Événements détectés
 admin_roadmap.generate_events: Générer les événements
+admin_roadmap.save_raw_text: Sauvegarder le texte
+admin_roadmap.save_and_generate_events: Sauvegarder et générer les événements
+admin_roadmap.generate_after_save: Régénérer les événements après sauvegarde
 admin_roadmap.approve_snapshot: Approuver le snapshot
+admin_roadmap.actions_help: 'Info: sauvegarde d''abord le texte OCR (régénération optionnelle), ajuste les événements, puis approuve en dernier.'
 admin_roadmap.events_title: Événements structurés
 admin_roadmap.event_order: Ordre
 admin_roadmap.event_title: Titre
@@ -332,8 +358,12 @@ admin_roadmap.empty_events: Aucun événement généré pour ce snapshot.
 admin_roadmap.save_events: Enregistrer les événements
 admin_roadmap.flash.invalid_csrf: Session invalide, merci de réessayer.
 admin_roadmap.flash.events_generated: Événements générés depuis le snapshot OCR.
+admin_roadmap.flash.raw_text_saved: Texte OCR sauvegardé.
 admin_roadmap.flash.snapshot_approved: Snapshot approuvé.
 admin_roadmap.flash.snapshot_not_found: Snapshot introuvable.
+admin_roadmap.flash.snapshot_deleted: Snapshot supprimé.
+admin_roadmap.flash.merge_invalid_input: Merci de fournir trois IDs de snapshot valides (FR/EN/DE).
+admin_roadmap.flash.merge_success: Fusion des snapshots terminée.
 admin_users.google_filter_linked: Google lié
 admin_users.google_filter_unlinked: Google non lié
 admin_users.active_filter_label: Statut du compte
