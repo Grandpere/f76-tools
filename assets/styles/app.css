@@ -379,6 +379,17 @@ body::before {
     margin: 0;
 }
 
+.header-theme::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    display: inline-block;
+    opacity: 0.75;
+    box-sizing: border-box;
+}
+
 .header-theme label {
     color: #d2deed;
     font-size: 0.72rem;
