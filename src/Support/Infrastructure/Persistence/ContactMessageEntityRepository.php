@@ -50,11 +50,11 @@ final class ContactMessageEntityRepository extends ServiceEntityRepository imple
      */
     public function findPaginated(string $query, ?ContactMessageStatusEnum $status, int $page, int $perPage): array
     {
-        $qb = $this->createFilteredQueryBuilder($query, $status);
+        $qb = $this->createFilteredQueryBuilder($query, $status, true);
+        $countQb = $this->createFilteredQueryBuilder($query, $status, false);
 
-        $total = (int) (clone $qb)
+        $total = (int) $countQb
             ->select('COUNT(c.id)')
-            ->resetDQLPart('orderBy')
             ->getQuery()
             ->getSingleScalarResult();
 
@@ -77,7 +77,7 @@ final class ContactMessageEntityRepository extends ServiceEntityRepository imple
      */
     public function findRowsPage(string $query, ?ContactMessageStatusEnum $status, int $page, int $perPage): array
     {
-        $result = $this->executeRowsPageQuery($this->createFilteredQueryBuilder($query, $status), $page, $perPage);
+        $result = $this->executeRowsPageQuery($this->createFilteredQueryBuilder($query, $status, true), $page, $perPage);
 
         if (!is_array($result)) {
             return [];
@@ -89,11 +89,9 @@ final class ContactMessageEntityRepository extends ServiceEntityRepository imple
         return $rows;
     }
 
-    private function createFilteredQueryBuilder(string $query, ?ContactMessageStatusEnum $status): \Doctrine\ORM\QueryBuilder
+    private function createFilteredQueryBuilder(string $query, ?ContactMessageStatusEnum $status, bool $withOrderBy): \Doctrine\ORM\QueryBuilder
     {
-        $qb = $this->createQueryBuilder('c')
-            ->orderBy('c.createdAt', 'DESC')
-            ->addOrderBy('c.id', 'DESC');
+        $qb = $this->createQueryBuilder('c');
 
         if ($status instanceof ContactMessageStatusEnum) {
             $qb->andWhere('c.status = :status')
@@ -104,6 +102,11 @@ final class ContactMessageEntityRepository extends ServiceEntityRepository imple
             $needle = '%'.mb_strtolower($query).'%';
             $qb->andWhere('LOWER(c.email) LIKE :needle OR LOWER(c.subject) LIKE :needle OR LOWER(c.message) LIKE :needle')
                 ->setParameter('needle', $needle);
+        }
+
+        if ($withOrderBy) {
+            $qb->orderBy('c.createdAt', 'DESC')
+                ->addOrderBy('c.id', 'DESC');
         }
 
         return $qb;
