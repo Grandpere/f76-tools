@@ -13,13 +13,18 @@ declare(strict_types=1);
 
 namespace App\Catalog\Application\Translation;
 
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
+
 final class ItemTranslationBackofficeApplicationService
 {
     private const DOMAIN = 'items';
+    private const CACHE_KEY_PREFIX = 'admin_item_translations.base_rows.';
 
     public function __construct(
         private readonly TranslationCatalogReader $catalogReader,
         private readonly TranslationCatalogWriter $catalogWriter,
+        private readonly CacheInterface $cache,
     ) {
     }
 
@@ -34,6 +39,7 @@ final class ItemTranslationBackofficeApplicationService
         }
 
         $this->catalogWriter->upsert($targetLocale, self::DOMAIN, $upserts);
+        $this->cache->delete($this->baseRowsCacheKey($targetLocale));
 
         return count($upserts);
     }
@@ -43,41 +49,54 @@ final class ItemTranslationBackofficeApplicationService
      */
     public function buildRows(string $targetLocale, ?string $query): array
     {
-        $catalogEn = $this->catalogReader->load('en', self::DOMAIN);
-        $catalogDe = $this->catalogReader->load('de', self::DOMAIN);
-        $catalogTarget = $this->catalogReader->load($targetLocale, self::DOMAIN);
+        /** @var list<array{key: string, en: string, de: string, target: string, section: string}> $rows */
+        $rows = $this->cache->get($this->baseRowsCacheKey($targetLocale), function (ItemInterface $item) use ($targetLocale): array {
+            $item->expiresAfter(300);
 
-        $keys = array_keys($catalogEn);
-        sort($keys);
+            $catalogEn = $this->catalogReader->load('en', self::DOMAIN);
+            $catalogDe = $this->catalogReader->load('de', self::DOMAIN);
+            $catalogTarget = $this->catalogReader->load($targetLocale, self::DOMAIN);
 
-        $rows = [];
-        foreach ($keys as $key) {
-            if (!str_starts_with($key, 'item.misc.') && !str_starts_with($key, 'item.book.')) {
-                continue;
-            }
+            $keys = array_keys($catalogEn);
+            sort($keys);
 
-            $en = $catalogEn[$key] ?? '';
-            $de = $catalogDe[$key] ?? $en;
-            $target = $catalogTarget[$key] ?? '';
-            $section = str_starts_with($key, 'item.misc.') ? 'misc' : 'book';
-
-            if (null !== $query) {
-                $haystack = mb_strtolower($key.' '.$en.' '.$de.' '.$target);
-                if (!str_contains($haystack, $query)) {
+            $builtRows = [];
+            foreach ($keys as $key) {
+                if (!str_starts_with($key, 'item.misc.') && !str_starts_with($key, 'item.book.')) {
                     continue;
                 }
+
+                $en = $catalogEn[$key] ?? '';
+                $de = $catalogDe[$key] ?? $en;
+                $target = $catalogTarget[$key] ?? '';
+                $section = str_starts_with($key, 'item.misc.') ? 'misc' : 'book';
+
+                $builtRows[] = [
+                    'key' => $key,
+                    'en' => $en,
+                    'de' => $de,
+                    'target' => $target,
+                    'section' => $section,
+                ];
             }
 
-            $rows[] = [
-                'key' => $key,
-                'en' => $en,
-                'de' => $de,
-                'target' => $target,
-                'section' => $section,
-            ];
+            return $builtRows;
+        });
+
+        if (null === $query) {
+            return $rows;
         }
 
-        return $rows;
+        $filteredRows = [];
+        foreach ($rows as $row) {
+            $haystack = mb_strtolower($row['key'].' '.$row['en'].' '.$row['de'].' '.$row['target']);
+            if (!str_contains($haystack, $query)) {
+                continue;
+            }
+            $filteredRows[] = $row;
+        }
+
+        return $filteredRows;
     }
 
     /**
@@ -105,5 +124,10 @@ final class ItemTranslationBackofficeApplicationService
         }
 
         return $normalized;
+    }
+
+    private function baseRowsCacheKey(string $targetLocale): string
+    {
+        return self::CACHE_KEY_PREFIX.$targetLocale;
     }
 }

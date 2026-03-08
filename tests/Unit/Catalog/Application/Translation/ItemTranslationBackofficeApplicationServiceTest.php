@@ -18,6 +18,7 @@ use App\Catalog\Application\Translation\TranslationCatalogReader;
 use App\Catalog\Application\Translation\TranslationCatalogWriter;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 final class ItemTranslationBackofficeApplicationServiceTest extends TestCase
 {
@@ -27,7 +28,7 @@ final class ItemTranslationBackofficeApplicationServiceTest extends TestCase
         $reader = $this->createMock(TranslationCatalogReader::class);
         /** @var TranslationCatalogWriter&MockObject $writer */
         $writer = $this->createMock(TranslationCatalogWriter::class);
-        $service = new ItemTranslationBackofficeApplicationService($reader, $writer);
+        $service = new ItemTranslationBackofficeApplicationService($reader, $writer, new ArrayAdapter());
 
         $writer
             ->expects(self::once())
@@ -53,7 +54,7 @@ final class ItemTranslationBackofficeApplicationServiceTest extends TestCase
         $reader = $this->createMock(TranslationCatalogReader::class);
         /** @var TranslationCatalogWriter&MockObject $writer */
         $writer = $this->createMock(TranslationCatalogWriter::class);
-        $service = new ItemTranslationBackofficeApplicationService($reader, $writer);
+        $service = new ItemTranslationBackofficeApplicationService($reader, $writer, new ArrayAdapter());
 
         $reader
             ->method('load')
