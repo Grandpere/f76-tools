@@ -15,6 +15,8 @@ namespace App\Catalog\Application\Minerva;
 
 use DateTimeImmutable;
 use InvalidArgumentException;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 final class MinervaRotationRefreshApplicationService implements MinervaRotationRefresher
 {
@@ -22,6 +24,7 @@ final class MinervaRotationRefreshApplicationService implements MinervaRotationR
         private readonly MinervaRotationGenerator $generationService,
         private readonly MinervaRotationRegenerator $regenerationService,
         private readonly MinervaRotationRegenerationRepository $rotationRepository,
+        private readonly CacheInterface $cache,
     ) {
     }
 
@@ -41,6 +44,45 @@ final class MinervaRotationRefreshApplicationService implements MinervaRotationR
         if ($to < $from) {
             throw new InvalidArgumentException('Minerva refresh range is invalid.');
         }
+
+        if ($dryRun) {
+            $cacheKey = sprintf('minerva.refresh.dryrun.%s.%s', $from->format('U'), $to->format('U'));
+
+            /** @var array{
+             *     expectedWindows: int,
+             *     missingWindows: int,
+             *     covered: bool,
+             *     performed: bool,
+             *     deleted: int,
+             *     inserted: int,
+             *     skipped: int
+             * } $cachedResult
+             */
+            $cachedResult = $this->cache->get($cacheKey, function (ItemInterface $item) use ($from, $to): array {
+                $item->expiresAfter(60);
+
+                return $this->computeRefreshResult($from, $to, true);
+            });
+
+            return $cachedResult;
+        }
+
+        return $this->computeRefreshResult($from, $to, false);
+    }
+
+    /**
+     * @return array{
+     *     expectedWindows: int,
+     *     missingWindows: int,
+     *     covered: bool,
+     *     performed: bool,
+     *     deleted: int,
+     *     inserted: int,
+     *     skipped: int
+     * }
+     */
+    private function computeRefreshResult(DateTimeImmutable $from, DateTimeImmutable $to, bool $dryRun): array
+    {
 
         $expectedRows = $this->generationService->generate($from, $to);
         $existingRows = $this->rotationRepository->findOverlappingRange($from, $to);

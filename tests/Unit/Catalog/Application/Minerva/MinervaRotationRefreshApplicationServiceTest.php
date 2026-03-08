@@ -21,6 +21,7 @@ use App\Catalog\Domain\Entity\MinervaRotationEntity;
 use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 final class MinervaRotationRefreshApplicationServiceTest extends TestCase
 {
@@ -64,7 +65,7 @@ final class MinervaRotationRefreshApplicationServiceTest extends TestCase
         $regenerationService = $this->createMock(MinervaRotationRegenerator::class);
         $regenerationService->expects(self::never())->method('regenerate');
 
-        $service = new MinervaRotationRefreshApplicationService($generationService, $regenerationService, $repository);
+        $service = new MinervaRotationRefreshApplicationService($generationService, $regenerationService, $repository, new ArrayAdapter());
         $result = $service->refresh($from, $to);
 
         self::assertSame(1, $result['expectedWindows']);
@@ -130,7 +131,7 @@ final class MinervaRotationRefreshApplicationServiceTest extends TestCase
                 'skipped' => 0,
             ]);
 
-        $service = new MinervaRotationRefreshApplicationService($generationService, $regenerationService, $repository);
+        $service = new MinervaRotationRefreshApplicationService($generationService, $regenerationService, $repository, new ArrayAdapter());
         $result = $service->refresh($from, $to);
 
         self::assertSame(2, $result['expectedWindows']);
@@ -174,12 +175,52 @@ final class MinervaRotationRefreshApplicationServiceTest extends TestCase
         $regenerationService = $this->createMock(MinervaRotationRegenerator::class);
         $regenerationService->expects(self::never())->method('regenerate');
 
-        $service = new MinervaRotationRefreshApplicationService($generationService, $regenerationService, $repository);
+        $service = new MinervaRotationRefreshApplicationService($generationService, $regenerationService, $repository, new ArrayAdapter());
         $result = $service->refresh($from, $to, true);
 
         self::assertSame(1, $result['expectedWindows']);
         self::assertSame(1, $result['missingWindows']);
         self::assertFalse($result['covered']);
         self::assertFalse($result['performed']);
+    }
+
+    public function testDryRunUsesCacheForSameRange(): void
+    {
+        $from = new DateTimeImmutable('2026-03-01 00:00:00');
+        $to = new DateTimeImmutable('2026-03-31 23:59:59');
+
+        /** @var MinervaRotationGenerator&MockObject $generationService */
+        $generationService = $this->createMock(MinervaRotationGenerator::class);
+        $generationService
+            ->expects(self::once())
+            ->method('generate')
+            ->with($from, $to)
+            ->willReturn([
+                [
+                    'location' => 'Foundation',
+                    'listCycle' => 1,
+                    'startsAt' => new DateTimeImmutable('2026-03-02 12:00:00'),
+                    'endsAt' => new DateTimeImmutable('2026-03-04 12:00:00'),
+                ],
+            ]);
+
+        /** @var MinervaRotationRegenerationRepository&MockObject $repository */
+        $repository = $this->createMock(MinervaRotationRegenerationRepository::class);
+        $repository
+            ->expects(self::once())
+            ->method('findOverlappingRange')
+            ->with($from, $to)
+            ->willReturn([]);
+
+        /** @var MinervaRotationRegenerator&MockObject $regenerationService */
+        $regenerationService = $this->createMock(MinervaRotationRegenerator::class);
+        $regenerationService->expects(self::never())->method('regenerate');
+
+        $service = new MinervaRotationRefreshApplicationService($generationService, $regenerationService, $repository, new ArrayAdapter());
+
+        $first = $service->refresh($from, $to, true);
+        $second = $service->refresh($from, $to, true);
+
+        self::assertSame($first, $second);
     }
 }
