@@ -3714,3 +3714,28 @@ span.flatpickr-weekday {
 :root[data-theme='terminal'] .item-drop-sources img {
     filter: invert(85%) sepia(9%) saturate(583%) hue-rotate(72deg) brightness(105%) contrast(95%);
 }
+
+:root[data-theme='terminal'] .source-filters label img {
+    filter: invert(85%) sepia(9%) saturate(583%) hue-rotate(72deg) brightness(105%) contrast(95%);
+}
+
+:root[data-theme='terminal'] .translations-pager {
+    background: #0f1d16;
+    border-color: rgba(116, 229, 146, 0.28);
+    color: #c9f7d2;
+}
+
+:root[data-theme='terminal'] .translations-pager a,
+:root[data-theme='terminal'] .translations-pager a:visited {
+    color: #ccf7d4;
+}
+
+:root[data-theme='terminal'] .translations-pager a:hover {
+    color: #e7ffee;
+}
+
+:root[data-theme='terminal'] .translations-section-row td {
+    background: #12311f;
+    color: #d8ffe0;
+    border-bottom-color: rgba(116, 229, 146, 0.35);
+}
