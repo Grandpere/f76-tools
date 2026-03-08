@@ -18,6 +18,7 @@ use App\Catalog\Application\Minerva\MinervaRotationRefresher;
 use App\Catalog\Application\Minerva\MinervaRotationRegenerationApplicationService;
 use App\Catalog\Application\Minerva\MinervaRotationRegenerationRepository;
 use App\Catalog\Application\Minerva\MinervaRotationTimelineApplicationService;
+use App\Catalog\Domain\Minerva\MinervaRotationSourceEnum;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Support\Application\Audit\LatestMinervaRefreshSummaryApplicationService;
 use App\Support\Domain\Entity\AdminAuditLogEntity;
@@ -73,13 +74,14 @@ final class MinervaRotationController extends AbstractController
             $freshness = $this->minervaRotationRefresher->refresh($from, $to, true);
         }
 
+        $timeline = $this->timelineService->buildTimeline();
         $latestSummary = $this->minervaRotationRegenerationRepository->findLatestCreatedAtSummary();
 
         return $this->render('admin/minerva_rotation.html.twig', [
-            'timeline' => $this->timelineService->buildTimeline(),
+            'timeline' => $timeline,
             'defaultFrom' => $defaultFrom,
             'defaultTo' => $defaultTo,
-            'manualOverrides' => $this->buildManualRows(),
+            'manualOverrides' => $this->buildManualRowsFromTimeline($timeline['rows']),
             'freshness' => $freshness,
             'latestGeneratedAt' => $latestSummary['generated'],
             'latestManualAt' => $latestSummary['manual'],
@@ -340,22 +342,23 @@ final class MinervaRotationController extends AbstractController
     }
 
     /**
+     * @param list<array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string,source:string,status:string}> $timelineRows
+     *
      * @return list<array{id:int,location:string,listCycle:int,startsAt:string,endsAt:string}>
      */
-    private function buildManualRows(): array
+    private function buildManualRowsFromTimeline(array $timelineRows): array
     {
         $rows = [];
-        foreach ($this->overrideService->listManualOverrides() as $override) {
-            $id = $override->getId();
-            if (!is_int($id)) {
+        foreach ($timelineRows as $row) {
+            if (MinervaRotationSourceEnum::MANUAL->value !== $row['source']) {
                 continue;
             }
             $rows[] = [
-                'id' => $id,
-                'location' => $override->getLocation(),
-                'listCycle' => $override->getListCycle(),
-                'startsAt' => $override->getStartsAt()->format(DATE_ATOM),
-                'endsAt' => $override->getEndsAt()->format(DATE_ATOM),
+                'id' => $row['id'],
+                'location' => $row['location'],
+                'listCycle' => $row['listCycle'],
+                'startsAt' => $row['startsAt'],
+                'endsAt' => $row['endsAt'],
             ];
         }
 
