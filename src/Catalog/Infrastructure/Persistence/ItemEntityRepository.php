@@ -122,6 +122,48 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
         return $items;
     }
 
+    /**
+     * @return array{all: int, misc: int, book: int}
+     */
+    public function countAllByType(): array
+    {
+        $rows = $this->createQueryBuilder('i')
+            ->select('i.type AS type')
+            ->addSelect('COUNT(i.id) AS totalCount')
+            ->groupBy('i.type')
+            ->getQuery()
+            ->getScalarResult();
+
+        $misc = 0;
+        $book = 0;
+        foreach ($rows as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+
+            $typeRaw = $row['type'] ?? null;
+            $countRaw = $row['totalCount'] ?? null;
+            if (!is_string($typeRaw) || (!is_int($countRaw) && !is_numeric($countRaw))) {
+                continue;
+            }
+
+            $count = (int) $countRaw;
+            if (ItemTypeEnum::MISC->value === $typeRaw) {
+                $misc = $count;
+                continue;
+            }
+            if (ItemTypeEnum::BOOK->value === $typeRaw) {
+                $book = $count;
+            }
+        }
+
+        return [
+            'all' => $misc + $book,
+            'misc' => $misc,
+            'book' => $book,
+        ];
+    }
+
     public function countAll(): int
     {
         $count = $this->createQueryBuilder('i')
@@ -213,8 +255,11 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
     public function findAllOrdered(?ItemTypeEnum $type = null): array
     {
         $qb = $this->createQueryBuilder('i')
+            ->leftJoin('i.bookLists', 'bl')
+            ->addSelect('bl')
             ->orderBy('i.type', 'ASC')
-            ->addOrderBy('i.sourceId', 'ASC');
+            ->addOrderBy('i.sourceId', 'ASC')
+            ->addOrderBy('bl.listNumber', 'ASC');
 
         if (null !== $type) {
             $qb->andWhere('i.type = :type')

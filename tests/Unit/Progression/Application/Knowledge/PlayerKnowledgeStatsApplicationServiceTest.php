@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Progression\Application\Knowledge;
 
-use App\Catalog\Domain\Item\ItemTypeEnum;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Progression\Application\Knowledge\ItemStatsReadRepository;
 use App\Progression\Application\Knowledge\PlayerKnowledgeStatsApplicationService;
@@ -35,23 +34,19 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
         $player = $this->createPlayer('01ARZ3NDEKTSV4RRFFQ69G5FAV');
         $service = new PlayerKnowledgeStatsApplicationService($itemRepository, $knowledgeRepository);
 
-        $itemRepository->method('countAll')->willReturn(10);
-        $itemRepository
-            ->method('countByType')
-            ->willReturnMap([
-                [ItemTypeEnum::MISC, 4],
-                [ItemTypeEnum::BOOK, 6],
-            ]);
+        $itemRepository->method('countAllByType')->willReturn([
+            'all' => 10,
+            'misc' => 4,
+            'book' => 6,
+        ]);
         $itemRepository->method('findMiscTotalsByRank')->willReturn([1 => 2, 2 => 2]);
         $itemRepository->method('findBookTotalsByListNumber')->willReturn([1 => 3, 4 => 3]);
 
-        $knowledgeRepository->method('countLearnedByPlayer')->willReturn(5);
-        $knowledgeRepository
-            ->method('countLearnedByPlayerAndType')
-            ->willReturnMap([
-                [$player, ItemTypeEnum::MISC, 1],
-                [$player, ItemTypeEnum::BOOK, 4],
-            ]);
+        $knowledgeRepository->method('countLearnedByPlayerByType')->willReturn([
+            'all' => 5,
+            'misc' => 1,
+            'book' => 4,
+        ]);
         $knowledgeRepository->method('findLearnedMiscCountsByRank')->willReturn([1 => 1, 2 => 0]);
         $knowledgeRepository->method('findLearnedBookCountsByListNumber')->willReturn([1 => 2, 4 => 2]);
 

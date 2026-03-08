@@ -70,6 +70,51 @@ final class PlayerItemKnowledgeEntityRepository extends ServiceEntityRepository 
         return $ids;
     }
 
+    /**
+     * @return array{all: int, misc: int, book: int}
+     */
+    public function countLearnedByPlayerByType(PlayerEntity $player): array
+    {
+        $rows = $this->createQueryBuilder('k')
+            ->select('i.type AS type')
+            ->addSelect('COUNT(k.id) AS learnedCount')
+            ->join('k.item', 'i')
+            ->andWhere('k.player = :player')
+            ->setParameter('player', $player)
+            ->groupBy('i.type')
+            ->getQuery()
+            ->getScalarResult();
+
+        $misc = 0;
+        $book = 0;
+        foreach ($rows as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+
+            $typeRaw = $row['type'] ?? null;
+            $countRaw = $row['learnedCount'] ?? null;
+            if (!is_string($typeRaw) || (!is_int($countRaw) && !is_numeric($countRaw))) {
+                continue;
+            }
+
+            $count = (int) $countRaw;
+            if (ItemTypeEnum::MISC->value === $typeRaw) {
+                $misc = $count;
+                continue;
+            }
+            if (ItemTypeEnum::BOOK->value === $typeRaw) {
+                $book = $count;
+            }
+        }
+
+        return [
+            'all' => $misc + $book,
+            'misc' => $misc,
+            'book' => $book,
+        ];
+    }
+
     public function countLearnedByPlayer(PlayerEntity $player): int
     {
         $count = $this->createQueryBuilder('k')

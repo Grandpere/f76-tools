@@ -18,6 +18,11 @@ use App\Progression\Domain\Entity\PlayerEntity;
 
 interface PlayerKnowledgeStatsReadRepository
 {
+    /**
+     * @return array{all: int, misc: int, book: int}
+     */
+    public function countLearnedByPlayerByType(PlayerEntity $player): array;
+
     public function countLearnedByPlayer(PlayerEntity $player): int;
 
     public function countLearnedByPlayerAndType(PlayerEntity $player, ItemTypeEnum $type): int;

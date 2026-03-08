@@ -17,6 +17,11 @@ use App\Catalog\Domain\Item\ItemTypeEnum;
 
 interface ItemStatsReadRepository
 {
+    /**
+     * @return array{all: int, misc: int, book: int}
+     */
+    public function countAllByType(): array;
+
     public function countAll(): int;
 
     public function countByType(ItemTypeEnum $type): int;

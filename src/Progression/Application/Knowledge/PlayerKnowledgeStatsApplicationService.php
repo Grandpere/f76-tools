@@ -38,13 +38,15 @@ final class PlayerKnowledgeStatsApplicationService
      */
     public function getStats(PlayerEntity $player): array
     {
-        $totalAll = $this->itemRepository->countAll();
-        $totalMisc = $this->itemRepository->countByType(ItemTypeEnum::MISC);
-        $totalBook = $this->itemRepository->countByType(ItemTypeEnum::BOOK);
+        $totals = $this->itemRepository->countAllByType();
+        $totalAll = $totals['all'];
+        $totalMisc = $totals['misc'];
+        $totalBook = $totals['book'];
 
-        $learnedAll = $this->knowledgeRepository->countLearnedByPlayer($player);
-        $learnedMisc = $this->knowledgeRepository->countLearnedByPlayerAndType($player, ItemTypeEnum::MISC);
-        $learnedBook = $this->knowledgeRepository->countLearnedByPlayerAndType($player, ItemTypeEnum::BOOK);
+        $learned = $this->knowledgeRepository->countLearnedByPlayerByType($player);
+        $learnedAll = $learned['all'];
+        $learnedMisc = $learned['misc'];
+        $learnedBook = $learned['book'];
 
         $miscTotals = $this->itemRepository->findMiscTotalsByRank();
         $miscLearned = $this->knowledgeRepository->findLearnedMiscCountsByRank($player);
