@@ -11,7 +11,8 @@
             localeHiddenFields: localeHiddenFields,
             kicker: 'admin_users.kicker',
             title: 'admin_users.auth_events_title',
-            description: 'admin_users.auth_events_description'|trans({'%email%': targetUser.email})
+            description: 'admin_users.auth_events_description'|trans({'%email%': targetUser.email}),
+            activeNav: 'users'
         } %}
 
         {% include 'admin/_flashes.html.twig' %}

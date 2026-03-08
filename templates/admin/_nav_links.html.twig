@@ -1,8 +1,8 @@
-<p>
-    <a href="{{ path('app_admin_users', { _locale: app.request.locale }) }}">{{ 'dashboard.header.user_management'|trans }}</a>
-    · <a href="{{ path('app_admin_item_translations', { _locale: app.request.locale, target: 'fr' }) }}">{{ 'dashboard.header.translation_management'|trans }}</a>
-    · <a href="{{ path('app_admin_minerva_rotation', { _locale: app.request.locale }) }}">{{ 'admin_minerva.title'|trans }}</a>
-    · <a href="{{ path('app_admin_roadmap_snapshots', { _locale: app.request.locale }) }}">{{ 'admin_roadmap.title'|trans }}</a>
-    · <a href="{{ path('app_admin_contact_messages', { _locale: app.request.locale }) }}">{{ 'admin_contact.title'|trans }}</a>
-    · <a href="{{ path('app_admin_audit_logs', { _locale: app.request.locale }) }}">{{ 'admin_audit.title'|trans }}</a>
+<p class="admin-primary-nav">
+    <a class="app-primary-nav-link {{ active == 'users' ? 'is-active' : '' }}" href="{{ path('app_admin_users', { _locale: app.request.locale }) }}">{{ 'dashboard.header.user_management'|trans }}</a>
+    · <a class="app-primary-nav-link {{ active == 'translations' ? 'is-active' : '' }}" href="{{ path('app_admin_item_translations', { _locale: app.request.locale, target: 'fr' }) }}">{{ 'dashboard.header.translation_management'|trans }}</a>
+    · <a class="app-primary-nav-link {{ active == 'minerva' ? 'is-active' : '' }}" href="{{ path('app_admin_minerva_rotation', { _locale: app.request.locale }) }}">{{ 'admin_minerva.title'|trans }}</a>
+    · <a class="app-primary-nav-link {{ active == 'roadmap' ? 'is-active' : '' }}" href="{{ path('app_admin_roadmap_snapshots', { _locale: app.request.locale }) }}">{{ 'admin_roadmap.title'|trans }}</a>
+    · <a class="app-primary-nav-link {{ active == 'contact' ? 'is-active' : '' }}" href="{{ path('app_admin_contact_messages', { _locale: app.request.locale }) }}">{{ 'admin_contact.title'|trans }}</a>
+    · <a class="app-primary-nav-link {{ active == 'audit' ? 'is-active' : '' }}" href="{{ path('app_admin_audit_logs', { _locale: app.request.locale }) }}">{{ 'admin_audit.title'|trans }}</a>
 </p>

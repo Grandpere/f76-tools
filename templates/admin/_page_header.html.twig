@@ -8,5 +8,5 @@
     <p class="catalog-kicker">{{ kicker|trans }}</p>
     <h1>{{ title|trans }}</h1>
     <p>{{ description }}</p>
-    {% include 'admin/_nav_links.html.twig' %}
+    {% include 'admin/_nav_links.html.twig' with { active: activeNav|default('') } %}
 </header>

@@ -15,7 +15,8 @@
             },
             kicker: 'admin_translations.kicker',
             title: 'admin_translations.title',
-            description: 'admin_translations.editing_catalog'|trans({'%locale%': targetLocale})
+            description: 'admin_translations.editing_catalog'|trans({'%locale%': targetLocale}),
+            activeNav: 'translations'
         } %}
 
         {% include 'admin/_flashes.html.twig' with { translateMessages: false } %}

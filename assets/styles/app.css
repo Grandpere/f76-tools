@@ -304,6 +304,11 @@ body::before {
     text-underline-offset: 2px;
 }
 
+.admin-primary-nav {
+    margin: 0.85rem 0 0;
+    color: #9aa8bc;
+}
+
 .logout-form {
     display: inline;
 }
