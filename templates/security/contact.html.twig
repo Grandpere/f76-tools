@@ -27,7 +27,9 @@
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('contact') }}">
                 {% include 'security/_turnstile.html.twig' %}
 
-                {% include 'security/_primary_actions.html.twig' with { submitLabel: 'security.contact.submit', includeRegister: false } %}
+                <div class="auth-primary-actions">
+                    <button type="submit">{{ 'security.contact.submit'|trans }}</button>
+                </div>
             </form>
 
             {% include 'security/_links.html.twig' with {
