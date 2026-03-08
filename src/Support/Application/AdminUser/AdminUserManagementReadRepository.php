@@ -20,7 +20,18 @@ interface AdminUserManagementReadRepository
     /**
      * @return list<UserEntity>
      */
-    public function findAllOrdered(): array;
+    public function findByAdminCriteria(AdminUserListCriteria $criteria): array;
+
+    /**
+     * @return list<UserEntity>
+     */
+    public function findAllByAdminCriteria(AdminUserListCriteria $criteria): array;
+
+    public function countByAdminCriteria(AdminUserListCriteria $criteria): int;
+
+    public function countAllUsers(): int;
+
+    public function countGoogleLinkedUsers(): int;
 
     public function getById(int $id): ?UserEntity;
 }

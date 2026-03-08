@@ -20,9 +20,13 @@ use App\Identity\Application\ResetPassword\ResetPasswordUserRepository;
 use App\Identity\Application\User\UserByEmailFinder;
 use App\Identity\Application\VerifyEmail\VerifyEmailUserRepository;
 use App\Identity\Domain\Entity\UserEntity;
+use App\Identity\Domain\Entity\UserIdentityEntity;
+use App\Support\Application\AdminUser\AdminUserListCriteria;
 use App\Support\Application\AdminUser\AdminUserManagementReadRepository;
 use App\Support\Application\AdminUser\AdminUserManagementWriteRepository;
+use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -70,19 +74,139 @@ final class UserEntityRepository extends ServiceEntityRepository implements User
     /**
      * @return list<UserEntity>
      */
-    public function findAllOrdered(): array
+    public function findByAdminCriteria(AdminUserListCriteria $criteria): array
     {
-        $result = $this->createQueryBuilder('u')
-            ->orderBy('u.email', 'ASC')
-            ->getQuery()
-            ->getResult();
+        $qb = $this->createAdminCriteriaQueryBuilder($criteria);
+        $this->applyAdminSort($qb, $criteria);
+        $qb->setFirstResult($criteria->offset());
+        $qb->setMaxResults($criteria->perPage);
+
+        $result = $qb->getQuery()->getResult();
 
         /** @var list<UserEntity> $result */
         return $result;
     }
 
+    /**
+     * @return list<UserEntity>
+     */
+    public function findAllByAdminCriteria(AdminUserListCriteria $criteria): array
+    {
+        $qb = $this->createAdminCriteriaQueryBuilder($criteria);
+        $this->applyAdminSort($qb, $criteria);
+
+        $result = $qb->getQuery()->getResult();
+
+        /** @var list<UserEntity> $result */
+        return $result;
+    }
+
+    public function countByAdminCriteria(AdminUserListCriteria $criteria): int
+    {
+        $qb = $this->createAdminCriteriaQueryBuilder($criteria)
+            ->select('COUNT(u.id)');
+
+        /** @var int|string $count */
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return (int) $count;
+    }
+
+    public function countAllUsers(): int
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('COUNT(u.id)');
+
+        /** @var int|string $count */
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return (int) $count;
+    }
+
+    public function countGoogleLinkedUsers(): int
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder()
+            ->select('COUNT(ui.id)')
+            ->from(UserIdentityEntity::class, 'ui')
+            ->where('ui.provider = :provider')
+            ->setParameter('provider', 'google');
+
+        /** @var int|string $count */
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return (int) $count;
+    }
+
     public function save(UserEntity $user): void
     {
         $this->getEntityManager()->persist($user);
+    }
+
+    private function createAdminCriteriaQueryBuilder(AdminUserListCriteria $criteria): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        $needsGoogleJoin = '' !== $criteria->googleFilter;
+        if ($needsGoogleJoin) {
+            $qb->leftJoin(UserIdentityEntity::class, 'ui', 'WITH', 'ui.user = u AND ui.provider = :googleProvider');
+            $qb->setParameter('googleProvider', 'google');
+        }
+
+        if ('active' === $criteria->activeFilter) {
+            $qb->andWhere('u.isActive = :isActive')->setParameter('isActive', true);
+        } elseif ('inactive' === $criteria->activeFilter) {
+            $qb->andWhere('u.isActive = :isActive')->setParameter('isActive', false);
+        }
+
+        if ('linked' === $criteria->googleFilter) {
+            $qb->andWhere('ui.id IS NOT NULL');
+        } elseif ('unlinked' === $criteria->googleFilter) {
+            $qb->andWhere('ui.id IS NULL');
+        }
+
+        if ('admin' === $criteria->roleFilter) {
+            $qb->andWhere('u.roles LIKE :roleAdmin')->setParameter('roleAdmin', '%"ROLE_ADMIN"%');
+        } elseif ('user' === $criteria->roleFilter) {
+            $qb->andWhere('u.roles NOT LIKE :roleAdmin')->setParameter('roleAdmin', '%"ROLE_ADMIN"%');
+        }
+
+        if ('verified' === $criteria->verifiedFilter) {
+            $qb->andWhere('u.isEmailVerified = :isEmailVerified')->setParameter('isEmailVerified', true);
+        } elseif ('unverified' === $criteria->verifiedFilter) {
+            $qb->andWhere('u.isEmailVerified = :isEmailVerified')->setParameter('isEmailVerified', false);
+        }
+
+        if ('enabled' === $criteria->localPasswordFilter) {
+            $qb->andWhere('u.hasLocalPassword = :hasLocalPassword')->setParameter('hasLocalPassword', true);
+        } elseif ('disabled' === $criteria->localPasswordFilter) {
+            $qb->andWhere('u.hasLocalPassword = :hasLocalPassword')->setParameter('hasLocalPassword', false);
+        }
+
+        if ($criteria->createdFrom instanceof DateTimeImmutable) {
+            $qb->andWhere('u.createdAt >= :createdFrom')->setParameter('createdFrom', $criteria->createdFrom);
+        }
+        if ($criteria->createdTo instanceof DateTimeImmutable) {
+            $qb->andWhere('u.createdAt <= :createdTo')->setParameter('createdTo', $criteria->createdTo);
+        }
+
+        if ('' !== $criteria->query) {
+            $qb->andWhere('LOWER(u.email) LIKE :q')->setParameter('q', '%'.mb_strtolower($criteria->query).'%');
+        }
+
+        return $qb;
+    }
+
+    private function applyAdminSort(QueryBuilder $qb, AdminUserListCriteria $criteria): void
+    {
+        $direction = 'desc' === $criteria->dir ? 'DESC' : 'ASC';
+
+        $sortField = match ($criteria->sort) {
+            'createdat' => 'u.createdAt',
+            'active' => 'u.isActive',
+            default => 'u.email',
+        };
+
+        $qb->orderBy($sortField, $direction)
+            ->addOrderBy('u.email', 'ASC');
     }
 }

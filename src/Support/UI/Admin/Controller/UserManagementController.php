@@ -17,6 +17,7 @@ use App\Identity\Application\Security\AuthAuditLogReader;
 use App\Identity\Application\Security\SignedUrlGenerator;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Support\Application\AdminUser\AdminUserGoogleIdentityReadService;
+use App\Support\Application\AdminUser\AdminUserListCriteria;
 use App\Support\Application\AdminUser\AdminUserManagementReadRepository;
 use App\Support\Application\AdminUser\ForceVerifyEmailApplicationService;
 use App\Support\Application\AdminUser\ForceVerifyEmailResult;
@@ -83,8 +84,6 @@ final class UserManagementController extends AbstractController
     public function index(Request $request): Response
     {
         $this->ensureAdminAccess();
-        $users = $this->userRepository->findAllOrdered();
-        $googleIdentitiesByUserId = $this->adminUserGoogleIdentityReadService->getGoogleIdentityByUserId($users);
         $googleFilter = $this->normalizeGoogleFilter($request->query->getString('google', ''));
         $activeFilter = $this->normalizeActiveFilter($request->query->getString('active', ''));
         $roleFilter = $this->normalizeRoleFilter($request->query->getString('role', ''));
@@ -97,26 +96,44 @@ final class UserManagementController extends AbstractController
         $dir = $this->normalizeSortDirection($request->query->getString('dir', ''));
         $perPage = $this->normalizePerPage((int) $request->query->get('perPage', 30));
         $page = $this->normalizePage((int) $request->query->get('page', 1));
-        $filteredUsers = $this->filterUsersByActiveStatus($users, $activeFilter);
-        $filteredUsers = $this->filterUsersByGoogleIdentity($filteredUsers, $googleIdentitiesByUserId, $googleFilter);
-        $filteredUsers = $this->filterUsersByRole($filteredUsers, $roleFilter);
-        $filteredUsers = $this->filterUsersByVerificationStatus($filteredUsers, $verifiedFilter);
-        $filteredUsers = $this->filterUsersByLocalPasswordStatus($filteredUsers, $localPasswordFilter);
-        $filteredUsers = $this->filterUsersByCreatedAtRange(
-            $filteredUsers,
+
+        $criteria = new AdminUserListCriteria(
+            $googleFilter,
+            $activeFilter,
+            $roleFilter,
+            $verifiedFilter,
+            $localPasswordFilter,
             $this->parseDateStartOfDay($createdFrom),
             $this->parseDateEndOfDay($createdTo),
+            $query,
+            $sort,
+            $dir,
+            $page,
+            $perPage,
         );
-        $filteredUsers = $this->filterUsersBySearchQuery($filteredUsers, $query);
-        $filteredUsers = $this->sortUsers($filteredUsers, $sort, $dir);
-        $totalUsers = count($users);
-        $googleLinkedCount = count($googleIdentitiesByUserId);
+
+        $totalUsers = $this->userRepository->countAllUsers();
+        $googleLinkedCount = $this->userRepository->countGoogleLinkedUsers();
         $googleUnlinkedCount = max(0, $totalUsers - $googleLinkedCount);
-        $visibleUsers = count($filteredUsers);
+        $visibleUsers = $this->userRepository->countByAdminCriteria($criteria);
         $totalPages = max(1, (int) ceil($visibleUsers / $perPage));
         $page = min($page, $totalPages);
-        $offset = ($page - 1) * $perPage;
-        $paginatedUsers = array_slice($filteredUsers, $offset, $perPage);
+        $criteria = new AdminUserListCriteria(
+            $googleFilter,
+            $activeFilter,
+            $roleFilter,
+            $verifiedFilter,
+            $localPasswordFilter,
+            $this->parseDateStartOfDay($createdFrom),
+            $this->parseDateEndOfDay($createdTo),
+            $query,
+            $sort,
+            $dir,
+            $page,
+            $perPage,
+        );
+        $paginatedUsers = $this->userRepository->findByAdminCriteria($criteria);
+        $googleIdentitiesByUserId = $this->adminUserGoogleIdentityReadService->getGoogleIdentityByUserId($paginatedUsers);
 
         return $this->render('admin/users.html.twig', [
             'users' => $paginatedUsers,
@@ -145,8 +162,6 @@ final class UserManagementController extends AbstractController
     public function exportCsv(Request $request): Response
     {
         $this->ensureAdminAccess();
-        $users = $this->userRepository->findAllOrdered();
-        $googleIdentitiesByUserId = $this->adminUserGoogleIdentityReadService->getGoogleIdentityByUserId($users);
         $googleFilter = $this->normalizeGoogleFilter($request->query->getString('google', ''));
         $activeFilter = $this->normalizeActiveFilter($request->query->getString('active', ''));
         $roleFilter = $this->normalizeRoleFilter($request->query->getString('role', ''));
@@ -157,19 +172,22 @@ final class UserManagementController extends AbstractController
         $query = trim($request->query->getString('q', ''));
         $sort = $this->normalizeSort($request->query->getString('sort', ''));
         $dir = $this->normalizeSortDirection($request->query->getString('dir', ''));
-
-        $filteredUsers = $this->filterUsersByActiveStatus($users, $activeFilter);
-        $filteredUsers = $this->filterUsersByGoogleIdentity($filteredUsers, $googleIdentitiesByUserId, $googleFilter);
-        $filteredUsers = $this->filterUsersByRole($filteredUsers, $roleFilter);
-        $filteredUsers = $this->filterUsersByVerificationStatus($filteredUsers, $verifiedFilter);
-        $filteredUsers = $this->filterUsersByLocalPasswordStatus($filteredUsers, $localPasswordFilter);
-        $filteredUsers = $this->filterUsersByCreatedAtRange(
-            $filteredUsers,
+        $criteria = new AdminUserListCriteria(
+            $googleFilter,
+            $activeFilter,
+            $roleFilter,
+            $verifiedFilter,
+            $localPasswordFilter,
             $this->parseDateStartOfDay($createdFrom),
             $this->parseDateEndOfDay($createdTo),
+            $query,
+            $sort,
+            $dir,
+            1,
+            1,
         );
-        $filteredUsers = $this->filterUsersBySearchQuery($filteredUsers, $query);
-        $filteredUsers = $this->sortUsers($filteredUsers, $sort, $dir);
+        $filteredUsers = $this->userRepository->findAllByAdminCriteria($criteria);
+        $googleIdentitiesByUserId = $this->adminUserGoogleIdentityReadService->getGoogleIdentityByUserId($filteredUsers);
 
         $filename = sprintf('admin-users-%s.csv', new DateTimeImmutable()->format('Ymd-His'));
         $handle = fopen('php://temp', 'r+');
@@ -565,39 +583,6 @@ final class UserManagementController extends AbstractController
         return $this->csrfTokenManager;
     }
 
-    /**
-     * @param list<UserEntity>                                           $users
-     * @param array<int, \App\Identity\Domain\Entity\UserIdentityEntity> $googleIdentitiesByUserId
-     *
-     * @return list<UserEntity>
-     */
-    private function filterUsersByGoogleIdentity(array $users, array $googleIdentitiesByUserId, string $googleFilter): array
-    {
-        if ('linked' !== $googleFilter && 'unlinked' !== $googleFilter) {
-            return $users;
-        }
-
-        $filtered = [];
-        foreach ($users as $user) {
-            $userId = $user->getId();
-            if (!is_int($userId)) {
-                continue;
-            }
-
-            $isLinked = array_key_exists($userId, $googleIdentitiesByUserId);
-            if ('linked' === $googleFilter && !$isLinked) {
-                continue;
-            }
-            if ('unlinked' === $googleFilter && $isLinked) {
-                continue;
-            }
-
-            $filtered[] = $user;
-        }
-
-        return $filtered;
-    }
-
     private function normalizeGoogleFilter(string $googleFilter): string
     {
         $normalized = mb_strtolower(trim($googleFilter));
@@ -641,155 +626,6 @@ final class UserManagementController extends AbstractController
         }
 
         return null !== $this->parseDate($normalized) ? $normalized : '';
-    }
-
-    /**
-     * @param list<UserEntity> $users
-     *
-     * @return list<UserEntity>
-     */
-    private function filterUsersByActiveStatus(array $users, string $activeFilter): array
-    {
-        if ('active' !== $activeFilter && 'inactive' !== $activeFilter) {
-            return $users;
-        }
-
-        $filtered = [];
-        foreach ($users as $user) {
-            if ('active' === $activeFilter && !$user->isActive()) {
-                continue;
-            }
-            if ('inactive' === $activeFilter && $user->isActive()) {
-                continue;
-            }
-            $filtered[] = $user;
-        }
-
-        return $filtered;
-    }
-
-    /**
-     * @param list<UserEntity> $users
-     *
-     * @return list<UserEntity>
-     */
-    private function filterUsersByVerificationStatus(array $users, string $verifiedFilter): array
-    {
-        if ('verified' !== $verifiedFilter && 'unverified' !== $verifiedFilter) {
-            return $users;
-        }
-
-        $filtered = [];
-        foreach ($users as $user) {
-            if ('verified' === $verifiedFilter && !$user->isEmailVerified()) {
-                continue;
-            }
-            if ('unverified' === $verifiedFilter && $user->isEmailVerified()) {
-                continue;
-            }
-            $filtered[] = $user;
-        }
-
-        return $filtered;
-    }
-
-    /**
-     * @param list<UserEntity> $users
-     *
-     * @return list<UserEntity>
-     */
-    private function filterUsersByRole(array $users, string $roleFilter): array
-    {
-        if ('admin' !== $roleFilter && 'user' !== $roleFilter) {
-            return $users;
-        }
-
-        $filtered = [];
-        foreach ($users as $user) {
-            $isAdmin = in_array('ROLE_ADMIN', $user->getRoles(), true);
-            if ('admin' === $roleFilter && !$isAdmin) {
-                continue;
-            }
-            if ('user' === $roleFilter && $isAdmin) {
-                continue;
-            }
-            $filtered[] = $user;
-        }
-
-        return $filtered;
-    }
-
-    /**
-     * @param list<UserEntity> $users
-     *
-     * @return list<UserEntity>
-     */
-    private function filterUsersByLocalPasswordStatus(array $users, string $localPasswordFilter): array
-    {
-        if ('enabled' !== $localPasswordFilter && 'disabled' !== $localPasswordFilter) {
-            return $users;
-        }
-
-        $filtered = [];
-        foreach ($users as $user) {
-            if ('enabled' === $localPasswordFilter && !$user->hasLocalPassword()) {
-                continue;
-            }
-            if ('disabled' === $localPasswordFilter && $user->hasLocalPassword()) {
-                continue;
-            }
-            $filtered[] = $user;
-        }
-
-        return $filtered;
-    }
-
-    /**
-     * @param list<UserEntity> $users
-     *
-     * @return list<UserEntity>
-     */
-    private function filterUsersByCreatedAtRange(array $users, ?DateTimeImmutable $from, ?DateTimeImmutable $to): array
-    {
-        if (!$from instanceof DateTimeImmutable && !$to instanceof DateTimeImmutable) {
-            return $users;
-        }
-
-        $filtered = [];
-        foreach ($users as $user) {
-            $createdAt = $user->getCreatedAt();
-            if ($from instanceof DateTimeImmutable && $createdAt < $from) {
-                continue;
-            }
-            if ($to instanceof DateTimeImmutable && $createdAt > $to) {
-                continue;
-            }
-            $filtered[] = $user;
-        }
-
-        return $filtered;
-    }
-
-    /**
-     * @param list<UserEntity> $users
-     *
-     * @return list<UserEntity>
-     */
-    private function filterUsersBySearchQuery(array $users, string $query): array
-    {
-        if ('' === $query) {
-            return $users;
-        }
-
-        $normalizedQuery = mb_strtolower($query);
-        $filtered = [];
-        foreach ($users as $user) {
-            if (str_contains(mb_strtolower($user->getEmail()), $normalizedQuery)) {
-                $filtered[] = $user;
-            }
-        }
-
-        return $filtered;
     }
 
     private function normalizePerPage(int $perPage): int
@@ -864,25 +700,5 @@ final class UserManagementController extends AbstractController
         }
 
         return $value;
-    }
-
-    /**
-     * @param list<UserEntity> $users
-     *
-     * @return list<UserEntity>
-     */
-    private function sortUsers(array $users, string $sort, string $dir): array
-    {
-        usort($users, static function (UserEntity $left, UserEntity $right) use ($sort, $dir): int {
-            $comparison = match ($sort) {
-                'createdat' => $left->getCreatedAt() <=> $right->getCreatedAt(),
-                'active' => ((int) $left->isActive()) <=> ((int) $right->isActive()),
-                default => strcmp($left->getEmail(), $right->getEmail()),
-            };
-
-            return 'desc' === $dir ? -$comparison : $comparison;
-        });
-
-        return $users;
     }
 }
