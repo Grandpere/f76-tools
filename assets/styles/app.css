@@ -1810,10 +1810,14 @@ body::before {
     color: #ced7e5;
 }
 
-.translations-header .header-locale {
+.translations-header .header-control-group {
     align-self: flex-end;
     margin-bottom: 0.45rem;
     width: fit-content;
+}
+
+.translations-header .header-locale {
+    margin-bottom: 0;
 }
 
 .translations-header a {
@@ -3569,7 +3573,7 @@ span.flatpickr-weekday {
         margin-bottom: 0.55rem;
     }
 
-    .translations-header .header-locale {
+    .translations-header .header-control-group {
         align-self: flex-start;
     }
 
