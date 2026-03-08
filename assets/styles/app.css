@@ -353,6 +353,8 @@ body::before {
     border: 1px solid rgba(255, 210, 74, 0.34);
     border-radius: 999px;
     padding: 0.22rem 0.45rem 0.22rem 0.62rem;
+    min-height: 34px;
+    margin: 0;
 }
 
 .header-theme {
@@ -363,6 +365,8 @@ body::before {
     border: 1px solid rgba(255, 210, 74, 0.34);
     border-radius: 999px;
     padding: 0.22rem 0.45rem 0.22rem 0.62rem;
+    min-height: 34px;
+    margin: 0;
 }
 
 .header-theme label {
@@ -379,6 +383,7 @@ body::before {
     background: rgba(21, 28, 37, 0.92);
     color: #f3f7ff;
     font-size: 0.78rem;
+    line-height: 1.2;
     padding: 0.25rem 0.54rem;
     min-width: 116px;
 }
@@ -423,6 +428,7 @@ body::before {
     background: rgba(21, 28, 37, 0.92);
     color: #f3f7ff;
     font-size: 0.78rem;
+    line-height: 1.2;
     padding: 0.25rem 0.54rem;
     min-width: 122px;
 }
