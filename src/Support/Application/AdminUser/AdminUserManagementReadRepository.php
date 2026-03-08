@@ -29,9 +29,7 @@ interface AdminUserManagementReadRepository
 
     public function countByAdminCriteria(AdminUserListCriteria $criteria): int;
 
-    public function countAllUsers(): int;
-
-    public function countGoogleLinkedUsers(): int;
+    public function getAdminSummary(): AdminUserSummary;
 
     public function getById(int $id): ?UserEntity;
 }

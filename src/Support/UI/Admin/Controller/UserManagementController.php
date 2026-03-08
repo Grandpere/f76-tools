@@ -100,7 +100,7 @@ final class UserManagementController extends AbstractController
         $criteria = new AdminUserListCriteria(
             $googleFilter,
             $activeFilter,
-            $roleFilter,
+            '',
             $verifiedFilter,
             $localPasswordFilter,
             $this->parseDateStartOfDay($createdFrom),
@@ -112,27 +112,40 @@ final class UserManagementController extends AbstractController
             $perPage,
         );
 
-        $totalUsers = $this->userRepository->countAllUsers();
-        $googleLinkedCount = $this->userRepository->countGoogleLinkedUsers();
+        $summary = $this->userRepository->getAdminSummary();
+        $totalUsers = $summary->totalUsers;
+        $googleLinkedCount = $summary->googleLinkedUsers;
         $googleUnlinkedCount = max(0, $totalUsers - $googleLinkedCount);
-        $visibleUsers = $this->userRepository->countByAdminCriteria($criteria);
-        $totalPages = max(1, (int) ceil($visibleUsers / $perPage));
-        $page = min($page, $totalPages);
-        $criteria = new AdminUserListCriteria(
-            $googleFilter,
-            $activeFilter,
-            $roleFilter,
-            $verifiedFilter,
-            $localPasswordFilter,
-            $this->parseDateStartOfDay($createdFrom),
-            $this->parseDateEndOfDay($createdTo),
-            $query,
-            $sort,
-            $dir,
-            $page,
-            $perPage,
-        );
-        $paginatedUsers = $this->userRepository->findByAdminCriteria($criteria);
+
+        if ('' === $roleFilter) {
+            $visibleUsers = $this->userRepository->countByAdminCriteria($criteria);
+            $totalPages = max(1, (int) ceil($visibleUsers / $perPage));
+            $page = min($page, $totalPages);
+            $criteria = new AdminUserListCriteria(
+                $googleFilter,
+                $activeFilter,
+                '',
+                $verifiedFilter,
+                $localPasswordFilter,
+                $this->parseDateStartOfDay($createdFrom),
+                $this->parseDateEndOfDay($createdTo),
+                $query,
+                $sort,
+                $dir,
+                $page,
+                $perPage,
+            );
+            $paginatedUsers = $this->userRepository->findByAdminCriteria($criteria);
+        } else {
+            $allUsers = $this->userRepository->findAllByAdminCriteria($criteria);
+            $filteredUsers = $this->filterUsersByRole($allUsers, $roleFilter);
+            $visibleUsers = count($filteredUsers);
+            $totalPages = max(1, (int) ceil($visibleUsers / $perPage));
+            $page = min($page, $totalPages);
+            $offset = ($page - 1) * $perPage;
+            $paginatedUsers = array_slice($filteredUsers, $offset, $perPage);
+        }
+
         $googleIdentitiesByUserId = $this->adminUserGoogleIdentityReadService->getGoogleIdentityByUserId($paginatedUsers);
 
         return $this->render('admin/users.html.twig', [
@@ -175,7 +188,7 @@ final class UserManagementController extends AbstractController
         $criteria = new AdminUserListCriteria(
             $googleFilter,
             $activeFilter,
-            $roleFilter,
+            '',
             $verifiedFilter,
             $localPasswordFilter,
             $this->parseDateStartOfDay($createdFrom),
@@ -187,6 +200,7 @@ final class UserManagementController extends AbstractController
             1,
         );
         $filteredUsers = $this->userRepository->findAllByAdminCriteria($criteria);
+        $filteredUsers = $this->filterUsersByRole($filteredUsers, $roleFilter);
         $googleIdentitiesByUserId = $this->adminUserGoogleIdentityReadService->getGoogleIdentityByUserId($filteredUsers);
 
         $filename = sprintf('admin-users-%s.csv', new DateTimeImmutable()->format('Ymd-His'));
@@ -626,6 +640,32 @@ final class UserManagementController extends AbstractController
         }
 
         return null !== $this->parseDate($normalized) ? $normalized : '';
+    }
+
+    /**
+     * @param list<UserEntity> $users
+     *
+     * @return list<UserEntity>
+     */
+    private function filterUsersByRole(array $users, string $roleFilter): array
+    {
+        if ('admin' !== $roleFilter && 'user' !== $roleFilter) {
+            return $users;
+        }
+
+        $filtered = [];
+        foreach ($users as $user) {
+            $isAdmin = in_array('ROLE_ADMIN', $user->getRoles(), true);
+            if ('admin' === $roleFilter && !$isAdmin) {
+                continue;
+            }
+            if ('user' === $roleFilter && $isAdmin) {
+                continue;
+            }
+            $filtered[] = $user;
+        }
+
+        return $filtered;
     }
 
     private function normalizePerPage(int $perPage): int

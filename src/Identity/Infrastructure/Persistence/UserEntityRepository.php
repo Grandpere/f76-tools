@@ -24,6 +24,7 @@ use App\Identity\Domain\Entity\UserIdentityEntity;
 use App\Support\Application\AdminUser\AdminUserListCriteria;
 use App\Support\Application\AdminUser\AdminUserManagementReadRepository;
 use App\Support\Application\AdminUser\AdminUserManagementWriteRepository;
+use App\Support\Application\AdminUser\AdminUserSummary;
 use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -112,29 +113,27 @@ final class UserEntityRepository extends ServiceEntityRepository implements User
         return (int) $count;
     }
 
-    public function countAllUsers(): int
+    public function getAdminSummary(): AdminUserSummary
     {
-        $qb = $this->createQueryBuilder('u')
-            ->select('COUNT(u.id)');
+        $sql = <<<'SQL'
+SELECT
+    COUNT(u.id) AS total_users,
+    COUNT(ui.id) AS google_linked_users
+FROM app_user u
+LEFT JOIN user_identity ui
+    ON ui.user_id = u.id
+    AND ui.provider = :provider
+SQL;
 
-        /** @var int|string $count */
-        $count = $qb->getQuery()->getSingleScalarResult();
+        /** @var array{total_users: int|string, google_linked_users: int|string} $row */
+        $row = $this->getEntityManager()->getConnection()->fetchAssociative($sql, [
+            'provider' => 'google',
+        ]);
 
-        return (int) $count;
-    }
-
-    public function countGoogleLinkedUsers(): int
-    {
-        $qb = $this->getEntityManager()->createQueryBuilder()
-            ->select('COUNT(ui.id)')
-            ->from(UserIdentityEntity::class, 'ui')
-            ->where('ui.provider = :provider')
-            ->setParameter('provider', 'google');
-
-        /** @var int|string $count */
-        $count = $qb->getQuery()->getSingleScalarResult();
-
-        return (int) $count;
+        return new AdminUserSummary(
+            (int) $row['total_users'],
+            (int) $row['google_linked_users'],
+        );
     }
 
     public function save(UserEntity $user): void
@@ -162,12 +161,6 @@ final class UserEntityRepository extends ServiceEntityRepository implements User
             $qb->andWhere('ui.id IS NOT NULL');
         } elseif ('unlinked' === $criteria->googleFilter) {
             $qb->andWhere('ui.id IS NULL');
-        }
-
-        if ('admin' === $criteria->roleFilter) {
-            $qb->andWhere('u.roles LIKE :roleAdmin')->setParameter('roleAdmin', '%"ROLE_ADMIN"%');
-        } elseif ('user' === $criteria->roleFilter) {
-            $qb->andWhere('u.roles NOT LIKE :roleAdmin')->setParameter('roleAdmin', '%"ROLE_ADMIN"%');
         }
 
         if ('verified' === $criteria->verifiedFilter) {
