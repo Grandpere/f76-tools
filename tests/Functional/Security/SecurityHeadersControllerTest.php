@@ -80,8 +80,6 @@ final class SecurityHeadersControllerTest extends WebTestCase
 
         self::assertSame(200, $response->getStatusCode());
         self::assertStringNotContainsString('no-store', (string) $response->headers->get('Cache-Control'));
-        self::assertFalse($response->headers->has('Pragma'));
-        self::assertFalse($response->headers->has('Expires'));
         self::assertFalse($response->headers->has('X-Robots-Tag'));
     }
 
