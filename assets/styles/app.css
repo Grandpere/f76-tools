@@ -3346,6 +3346,32 @@ span.flatpickr-weekday {
     font-size: 0.86rem;
 }
 
+.translations-table .admin-empty-cell,
+.minerva-table .admin-empty-cell {
+    text-align: center;
+    font-weight: 600;
+    color: #5a6473;
+    background: linear-gradient(180deg, rgba(247, 246, 242, 0.8), rgba(239, 236, 225, 0.7));
+    padding: 1rem 0.8rem;
+}
+
+.translations-table .admin-empty-cell::before,
+.minerva-table .admin-empty-cell::before {
+    content: 'i';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.35rem;
+    border-radius: 999px;
+    background: rgba(160, 119, 0, 0.2);
+    color: #5f4a00;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+    font-weight: 700;
+    line-height: 1;
+}
+
 .translations-table th,
 .minerva-table th {
     position: sticky;
@@ -3883,6 +3909,18 @@ span.flatpickr-weekday {
     color: #c9f7d2;
     border-radius: 6px;
     padding: 0.06rem 0.32rem;
+}
+
+:root[data-theme='terminal'] .translations-table .admin-empty-cell,
+:root[data-theme='terminal'] .minerva-table .admin-empty-cell {
+    color: #a6dca9;
+    background: linear-gradient(180deg, rgba(5, 28, 15, 0.66), rgba(8, 39, 21, 0.62));
+}
+
+:root[data-theme='terminal'] .translations-table .admin-empty-cell::before,
+:root[data-theme='terminal'] .minerva-table .admin-empty-cell::before {
+    background: rgba(132, 226, 138, 0.18);
+    color: #9df2a1;
 }
 
 :root[data-theme='terminal'] .roadmap-snapshot-actions a,
