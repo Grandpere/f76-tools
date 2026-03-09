@@ -78,6 +78,7 @@ final class SecurityHeadersSubscriberTest extends TestCase
         self::assertStringContainsString('max-age=0', $cacheControl);
         self::assertSame('no-cache', $headers->get('Pragma'));
         self::assertSame('0', $headers->get('Expires'));
+        self::assertSame('noindex, nofollow, noarchive', $headers->get('X-Robots-Tag'));
     }
 
     public function testDoesNotApplyNoStoreHeadersToPublicPages(): void
@@ -107,6 +108,7 @@ final class SecurityHeadersSubscriberTest extends TestCase
         self::assertStringContainsString('max-age=0', $cacheControl);
         self::assertSame('no-cache', $headers->get('Pragma'));
         self::assertSame('0', $headers->get('Expires'));
+        self::assertSame('noindex, nofollow, noarchive', $headers->get('X-Robots-Tag'));
     }
 
     public function testAppliesCspInEnforceMode(): void

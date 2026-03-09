@@ -76,6 +76,7 @@ final class SecurityHeadersSubscriber implements EventSubscriberInterface
             $headers->set('Cache-Control', 'no-store, private, max-age=0');
             $headers->set('Pragma', 'no-cache');
             $headers->set('Expires', '0');
+            $headers->set('X-Robots-Tag', 'noindex, nofollow, noarchive');
         }
     }
 
