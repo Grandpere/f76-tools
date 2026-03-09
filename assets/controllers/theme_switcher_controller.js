@@ -1,35 +1,39 @@
 import { Controller } from '@hotwired/stimulus';
 
 const STORAGE_KEY = 'f76-theme';
-const THEMES = new Set(['default', 'official', 'terminal']);
+const THEMES = new Set(['default', 'terminal']);
 
 export default class extends Controller {
-    static targets = ['select'];
+    static targets = ['toggle'];
 
     connect() {
-        this.applyTheme(this.readStoredTheme());
+        const storedTheme = this.readStoredTheme();
+        this.applyTheme(storedTheme);
+        this.syncAllToggles(storedTheme);
     }
 
-    change(event) {
-        const value = typeof event?.target?.value === 'string' ? event.target.value : 'default';
-        this.applyTheme(value);
-        this.storeTheme(value);
-        this.syncAllSelects(value);
+    toggle(event) {
+        const isChecked = event?.target instanceof HTMLInputElement ? event.target.checked : false;
+        const theme = isChecked ? 'terminal' : 'default';
+        this.applyTheme(theme);
+        this.storeTheme(theme);
+        this.syncAllToggles(theme);
     }
 
     applyTheme(theme) {
-        const normalized = THEMES.has(theme) ? theme : 'default';
+        const normalized = this.normalizeTheme(theme);
         document.documentElement.setAttribute('data-theme', normalized);
 
-        if (this.hasSelectTarget) {
-            this.selectTarget.value = normalized;
+        if (this.hasToggleTarget) {
+            this.toggleTarget.checked = normalized === 'terminal';
         }
     }
 
-    syncAllSelects(theme) {
-        document.querySelectorAll('[data-theme-switcher-target="select"]').forEach((node) => {
-            if (node instanceof HTMLSelectElement) {
-                node.value = theme;
+    syncAllToggles(theme) {
+        const normalized = this.normalizeTheme(theme);
+        document.querySelectorAll('[data-theme-switcher-target="toggle"]').forEach((node) => {
+            if (node instanceof HTMLInputElement && node.type === 'checkbox') {
+                node.checked = normalized === 'terminal';
             }
         });
     }
@@ -37,7 +41,12 @@ export default class extends Controller {
     readStoredTheme() {
         try {
             const value = localStorage.getItem(STORAGE_KEY);
-            return THEMES.has(value) ? value : 'default';
+            const normalized = this.normalizeTheme(value);
+            if (normalized !== value) {
+                this.storeTheme(normalized);
+            }
+
+            return normalized;
         } catch {
             return 'default';
         }
@@ -45,9 +54,17 @@ export default class extends Controller {
 
     storeTheme(theme) {
         try {
-            localStorage.setItem(STORAGE_KEY, THEMES.has(theme) ? theme : 'default');
+            localStorage.setItem(STORAGE_KEY, this.normalizeTheme(theme));
         } catch {
             // Ignore storage failures.
         }
+    }
+
+    normalizeTheme(theme) {
+        if (theme === 'official') {
+            return 'default';
+        }
+
+        return THEMES.has(theme) ? theme : 'default';
     }
 }

@@ -8,8 +8,10 @@
             (() => {
                 try {
                     const savedTheme = localStorage.getItem('f76-theme');
-                    if (savedTheme === 'default' || savedTheme === 'official' || savedTheme === 'terminal') {
-                        document.documentElement.setAttribute('data-theme', savedTheme);
+                    const normalizedTheme = savedTheme === 'terminal' ? 'terminal' : 'default';
+                    document.documentElement.setAttribute('data-theme', normalizedTheme);
+                    if (savedTheme !== normalizedTheme) {
+                        localStorage.setItem('f76-theme', normalizedTheme);
                     }
                 } catch (_) {
                     document.documentElement.setAttribute('data-theme', 'default');

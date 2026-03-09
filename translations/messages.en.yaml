@@ -1,5 +1,6 @@
 common.language: Language
 common.theme: Theme
+common.dark_mode: Dark mode
 common.theme.default: Current
 common.theme.official: Official
 common.theme.terminal: Terminal

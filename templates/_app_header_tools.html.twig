@@ -17,12 +17,8 @@
     <div class="header-control-group">
         <div class="header-theme" data-controller="theme-switcher">
             <img class="header-theme-icon" src="/assets/icons/theme.svg" alt="" aria-hidden="true">
-            <label for="{{ localeSelectId }}-theme">{{ 'common.theme'|trans }}</label>
-            <select id="{{ localeSelectId }}-theme" data-theme-switcher-target="select" data-action="change->theme-switcher#change">
-                <option value="default">{{ 'common.theme.default'|trans }}</option>
-                <option value="official">{{ 'common.theme.official'|trans }}</option>
-                <option value="terminal">{{ 'common.theme.terminal'|trans }}</option>
-            </select>
+            <label for="{{ localeSelectId }}-theme">{{ 'common.dark_mode'|trans }}</label>
+            <input id="{{ localeSelectId }}-theme" type="checkbox" class="header-theme-toggle" data-theme-switcher-target="toggle" data-action="change->theme-switcher#toggle">
         </div>
         <form class="header-locale" method="get">
             <img class="header-locale-icon" src="/assets/icons/language.svg" alt="" aria-hidden="true">
