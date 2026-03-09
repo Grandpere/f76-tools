@@ -52,10 +52,23 @@ final class SecurityHeadersSubscriber implements EventSubscriberInterface
         if (!$headers->has('Permissions-Policy')) {
             $headers->set('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
         }
+        if (!$headers->has('Content-Security-Policy-Report-Only')) {
+            $headers->set(
+                'Content-Security-Policy-Report-Only',
+                "default-src 'self'; "
+                ."base-uri 'self'; "
+                ."form-action 'self'; "
+                ."frame-ancestors 'none'; "
+                ."img-src 'self' data: blob:; "
+                ."font-src 'self' data:; "
+                ."script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com; "
+                ."style-src 'self' 'unsafe-inline'; "
+                ."connect-src 'self' https://challenges.cloudflare.com"
+            );
+        }
 
         if ('prod' === $this->appEnv && $event->getRequest()->isSecure() && !$headers->has('Strict-Transport-Security')) {
             $headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
         }
     }
 }
-

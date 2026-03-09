@@ -39,6 +39,7 @@ Conclusion:
 - headers HTTP:
   - ajout de `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`,
   - `HSTS` active uniquement en `prod` + HTTPS.
+  - ajout d'une `Content-Security-Policy-Report-Only` non bloquante pour preparer la mise en place CSP stricte.
 - guard secret:
   - blocage explicite en `prod` si `APP_SECRET` vide (HTTP + console).
 - OIDC Google:
