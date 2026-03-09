@@ -52,6 +52,8 @@ Conclusion:
 - cache securite:
   - pool dedie `cache.security_state` pour throttling/sessions actives.
   - en `prod`, ce pool est configure sur Redis (via `REDIS_URL`) pour un etat partage multi-instance.
+- reverse proxy:
+  - `trusted_proxies`/`trusted_headers` configures explicitement pour la coherence des en-tetes `X-Forwarded-*`.
 
 ## Findings
 
