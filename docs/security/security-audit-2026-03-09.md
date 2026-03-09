@@ -183,3 +183,12 @@ Conclusion:
 ## Notes de contexte local
 - Absence de HTTPS en local: acceptable pour dev.
 - HSTS et cookies `secure=true` doivent etre actives en prod HTTPS, pas forcees en local.
+
+## Risques restants vs acceptes (au 2026-03-09)
+| Domaine | Risque restant | Niveau | Decision | Action/owner |
+|---|---|---:|---|---|
+| CSP | Politique encore permissive (`unsafe-inline` / `unsafe-eval`) | Moyen | Accepte temporairement | Observer puis durcir directives script/style avant go-live |
+| Reverse proxy | Mauvaise valeur `TRUSTED_PROXIES` en prod peut fausser IP/scheme | Moyen | Non accepte | Configurer IP/LB reelles en infra avant ouverture publique |
+| Redis securite | `cache.security_state` non partage si `REDIS_URL` mal pointe | Moyen | Non accepte | Valider `REDIS_URL` prod et test multi-instance |
+| Secrets | Secrets par defaut en fichiers d'exemple | Faible | Accepte en dev | Injecter tous secrets via env/secrets manager en prod |
+| Rate limits | Seuils actuels possiblement sous/sur-adaptes a la charge reelle | Faible | Accepte avec suivi | Ajuster via monitoring apres baseline trafic |

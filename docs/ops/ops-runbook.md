@@ -23,6 +23,12 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
 - Ouvrir un shell dans le conteneur app:
   - `make shell`
 
+## Exemple production (compose)
+- Fichier: `compose.prod.example.yaml`
+- Objectif: base de depart sans secrets versionnes (variables requises via env).
+- Lancement type:
+  - `docker compose -f compose.prod.example.yaml up -d`
+
 ## Base de donnees
 - Initialiser/reinitialiser la DB (drop + create + migrations):
   - `make db-init`
