@@ -48,6 +48,15 @@ Reusable, update-friendly checklists for delivery quality.
 - [ ] Filtering/sorting/export parity verified.
 - [ ] Forms have server-side validation and clear feedback.
 
+## 6.1) UX final polish checklist (front + admin)
+- [ ] Headers/navigation are consistent across all main pages.
+- [ ] Info/warning/error/success helper blocks share a unified visual system.
+- [ ] Empty states use a consistent tone and styling on sensitive tables/pages.
+- [ ] Key actions are visually differentiated (`primary`, `secondary`, `danger`).
+- [ ] Texts are harmonized across `fr/en/de` (terminology + tone).
+- [ ] Spacing/alignment are validated for dense admin forms and tables.
+- [ ] Terminal theme has equivalent contrast/readability for all critical blocks.
+
 ## 7) Importmap/assets checklist
 - [ ] New JS package added to `importmap.php`.
 - [ ] `php bin/console importmap:install` executed (if required).

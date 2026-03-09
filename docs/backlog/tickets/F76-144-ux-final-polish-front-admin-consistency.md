@@ -14,7 +14,7 @@ La plupart des pages front/admin sont harmonisees, mais il reste une passe UX fi
 - [ ] Harmoniser les textes d aide contextuels (ton, longueur, terminologie).
 - [ ] Renforcer les etats vides/erreur sur pages admin sensibles (Minerva, users, audit, contact).
 - [ ] Verifier la coherence navigation/header sur toutes les pages front principales.
-- [ ] Capturer les ajustements dans une checklist UX de reference dans `docs/ai/checklists.md`.
+- [x] Capturer les ajustements dans une checklist UX de reference dans `docs/ai/checklists.md`.
 
 ## Criteres d acceptance
 - Les parcours critiques sont lisibles et coherents sans ambiguite d action.
@@ -28,4 +28,3 @@ La plupart des pages front/admin sont harmonisees, mais il reste une passe UX fi
 ## Risques / rollback
 - Risque: regressions visuelles non detectees sur mobile.
 - Mitigation: validation explicite desktop/mobile et checklist de verification avant merge.
-
