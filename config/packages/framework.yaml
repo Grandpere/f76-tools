@@ -18,3 +18,10 @@ when@test:
         test: true
         session:
             storage_factory_id: session.storage.factory.mock_file
+
+when@prod:
+    framework:
+        trusted_hosts:
+            - '%env(string:TRUSTED_HOSTS)%'
+        session:
+            cookie_secure: true

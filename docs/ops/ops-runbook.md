@@ -9,6 +9,7 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
 
 ## Reverse proxy (prod)
 - Configurer `TRUSTED_PROXIES` (ex: IP/LB internes) dans l'environnement de production.
+- Configurer `TRUSTED_HOSTS` (regex domaines autorises) dans l'environnement de production.
 - Ne pas conserver la valeur de fallback dev (`127.0.0.1,REMOTE_ADDR`) en production.
 - Cette config est necessaire pour des IP client/scheme HTTPS fiables via `X-Forwarded-*`.
 - CSP:

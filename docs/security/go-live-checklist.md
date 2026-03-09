@@ -10,6 +10,7 @@ Checklist pre-deploiement production (version courte, operationnelle).
 
 ## 2) Reverse proxy et HTTPS
 - [ ] `TRUSTED_PROXIES` configure avec les IP/LB de prod.
+- [ ] `TRUSTED_HOSTS` configure avec les domaines autorises en prod.
 - [ ] Application servie uniquement en HTTPS.
 - [ ] `Strict-Transport-Security` observe en reponse (env prod + HTTPS).
 

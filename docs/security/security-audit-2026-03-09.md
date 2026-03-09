@@ -58,6 +58,7 @@ Conclusion:
   - en `prod`, ce pool est configure sur Redis (via `REDIS_URL`) pour un etat partage multi-instance.
 - reverse proxy:
   - `trusted_proxies`/`trusted_headers` configures explicitement pour la coherence des en-tetes `X-Forwarded-*`.
+  - `trusted_hosts` active en `prod` pour limiter les hosts acceptes.
 
 ## Findings
 
