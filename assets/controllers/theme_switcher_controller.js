@@ -41,12 +41,7 @@ export default class extends Controller {
     readStoredTheme() {
         try {
             const value = localStorage.getItem(STORAGE_KEY);
-            const normalized = this.normalizeTheme(value);
-            if (normalized !== value) {
-                this.storeTheme(normalized);
-            }
-
-            return normalized;
+            return this.normalizeTheme(value);
         } catch {
             return 'default';
         }
@@ -61,10 +56,6 @@ export default class extends Controller {
     }
 
     normalizeTheme(theme) {
-        if (theme === 'official') {
-            return 'default';
-        }
-
         return THEMES.has(theme) ? theme : 'default';
     }
 }

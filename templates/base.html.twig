@@ -10,9 +10,6 @@
                     const savedTheme = localStorage.getItem('f76-theme');
                     const normalizedTheme = savedTheme === 'terminal' ? 'terminal' : 'default';
                     document.documentElement.setAttribute('data-theme', normalizedTheme);
-                    if (savedTheme !== normalizedTheme) {
-                        localStorage.setItem('f76-theme', normalizedTheme);
-                    }
                 } catch (_) {
                     document.documentElement.setAttribute('data-theme', 'default');
                 }
