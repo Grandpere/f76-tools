@@ -3,10 +3,10 @@
 ## Priorite active
 - Stabilisation front post-refacto (headers/nav/blocs front) + corrections UX mineures.
 - F76-002: Evolutions produit Minerva (localisation/date/listes) selon la roadmap metier.
-- F76-144: UX final polish front/admin consistency.
 - F76-145: Fondations roadmap OCR (provider chain + fallback qualite).
 
 ## Termine recemment
+- F76-144: UX final polish front/admin consistency (done).
 - F76-143: monitoring thresholds + smoke suite ops/app + triage runbook (done).
 - F76-141: check fiabilite Minerva en JSON + statut coherence visible en admin (done).
 - F76-140: clarification gouvernance source Minerva (admin-only) + docs ops alignees (done).
