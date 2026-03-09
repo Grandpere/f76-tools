@@ -56,4 +56,20 @@ final class TurnstileVerifierTest extends TestCase
 
         self::assertFalse($verifier->verify('token-value', '127.0.0.1'));
     }
+
+    public function testVerifierUsesConfiguredTimeout(): void
+    {
+        $capturedTimeout = null;
+        $client = new MockHttpClient(function (string $method, string $url, array $options) use (&$capturedTimeout): MockResponse {
+            self::assertSame('POST', $method);
+            self::assertSame('https://challenges.cloudflare.com/turnstile/v0/siteverify', $url);
+            $capturedTimeout = $options['timeout'] ?? null;
+
+            return new MockResponse(json_encode(['success' => true], JSON_THROW_ON_ERROR));
+        });
+        $verifier = new TurnstileVerifier($client, 'site-key', 'secret-key', 3);
+
+        self::assertTrue($verifier->verify('token-value', '127.0.0.1'));
+        self::assertEquals(3, $capturedTimeout);
+    }
 }
