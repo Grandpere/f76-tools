@@ -19,6 +19,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class SecurityHeadersSubscriber implements EventSubscriberInterface
 {
+    private const SENSITIVE_PATH_PATTERN = '#^/(?:(?:en|fr|de)/)?(?:admin(?:/|$)|account-security(?:/|$)|change-password(?:/|$)|reset-password(?:/|$)|verify-email(?:/|$))#';
+
     public function __construct(
         private readonly string $appEnv,
     ) {
@@ -78,6 +80,13 @@ final class SecurityHeadersSubscriber implements EventSubscriberInterface
 
         if ('prod' === $this->appEnv && $event->getRequest()->isSecure() && !$headers->has('Strict-Transport-Security')) {
             $headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+        }
+
+        $path = $event->getRequest()->getPathInfo();
+        if (1 === preg_match(self::SENSITIVE_PATH_PATTERN, $path)) {
+            $headers->set('Cache-Control', 'no-store, private, max-age=0');
+            $headers->set('Pragma', 'no-cache');
+            $headers->set('Expires', '0');
         }
     }
 }

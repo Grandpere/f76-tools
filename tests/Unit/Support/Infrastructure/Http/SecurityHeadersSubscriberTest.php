@@ -64,6 +64,35 @@ final class SecurityHeadersSubscriberTest extends TestCase
         self::assertFalse($event->getResponse()->headers->has('Strict-Transport-Security'));
     }
 
+    public function testAppliesNoStoreHeadersToSensitivePages(): void
+    {
+        $subscriber = new SecurityHeadersSubscriber('dev');
+        $event = $this->responseEvent('http://localhost/en/admin/users', true);
+
+        $subscriber->onKernelResponse($event);
+
+        $headers = $event->getResponse()->headers;
+        $cacheControl = (string) $headers->get('Cache-Control');
+        self::assertStringContainsString('no-store', $cacheControl);
+        self::assertStringContainsString('private', $cacheControl);
+        self::assertStringContainsString('max-age=0', $cacheControl);
+        self::assertSame('no-cache', $headers->get('Pragma'));
+        self::assertSame('0', $headers->get('Expires'));
+    }
+
+    public function testDoesNotApplyNoStoreHeadersToPublicPages(): void
+    {
+        $subscriber = new SecurityHeadersSubscriber('dev');
+        $event = $this->responseEvent('http://localhost/en/roadmap-calendar', true);
+
+        $subscriber->onKernelResponse($event);
+
+        $headers = $event->getResponse()->headers;
+        self::assertNotSame('no-store, private, max-age=0', $headers->get('Cache-Control'));
+        self::assertFalse($headers->has('Pragma'));
+        self::assertFalse($headers->has('Expires'));
+    }
+
     private function responseEvent(string $url, bool $mainRequest): ResponseEvent
     {
         $kernel = $this->createMock(HttpKernelInterface::class);

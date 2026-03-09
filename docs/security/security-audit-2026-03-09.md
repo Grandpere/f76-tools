@@ -41,6 +41,7 @@ Conclusion:
   - ajout de `Cross-Origin-Opener-Policy`, `Cross-Origin-Resource-Policy`, `X-Permitted-Cross-Domain-Policies`,
   - `HSTS` active uniquement en `prod` + HTTPS.
   - ajout d'une `Content-Security-Policy-Report-Only` non bloquante pour preparer la mise en place CSP stricte.
+  - `Cache-Control: no-store` applique sur pages sensibles (admin, account-security, change/reset password, verify-email).
 - guard secret:
   - blocage explicite en `prod` si `APP_SECRET` vide (HTTP + console).
 - OIDC Google:
