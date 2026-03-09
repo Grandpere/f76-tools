@@ -36,6 +36,7 @@ final class GoogleOidcHttpClient implements GoogleOidcClient
     public function __construct(
         private readonly HttpClientInterface $httpClient,
         private readonly GoogleOidcConfig $config,
+        private readonly int $timeoutSeconds = 10,
     ) {
     }
 
@@ -86,7 +87,9 @@ final class GoogleOidcHttpClient implements GoogleOidcClient
         $this->assertIssuerAllowed($issuer);
 
         try {
-            $response = $this->httpClient->request('GET', $issuer.'/.well-known/openid-configuration');
+            $response = $this->httpClient->request('GET', $issuer.'/.well-known/openid-configuration', [
+                'timeout' => max(1, $this->timeoutSeconds),
+            ]);
             /** @var array<string, mixed> $payload */
             $payload = $response->toArray(false);
         } catch (ExceptionInterface $exception) {
@@ -125,6 +128,7 @@ final class GoogleOidcHttpClient implements GoogleOidcClient
                     'client_secret' => $this->config->clientSecret(),
                     'code_verifier' => $codeVerifier,
                 ],
+                'timeout' => max(1, $this->timeoutSeconds),
             ]);
             /** @var array<string, mixed> $payload */
             $payload = $response->toArray(false);
@@ -147,6 +151,7 @@ final class GoogleOidcHttpClient implements GoogleOidcClient
                 'headers' => [
                     'Authorization' => 'Bearer '.$accessToken,
                 ],
+                'timeout' => max(1, $this->timeoutSeconds),
             ]);
             /** @var array<string, mixed> $payload */
             $payload = $response->toArray(false);

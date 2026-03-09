@@ -79,6 +79,27 @@ final class GoogleOidcHttpClientTest extends TestCase
         self::assertTrue($profile->emailVerified());
     }
 
+    public function testDiscoveryRequestUsesConfiguredTimeout(): void
+    {
+        $capturedTimeout = null;
+        $httpClient = new MockHttpClient(function (string $method, string $url, array $options) use (&$capturedTimeout): MockResponse {
+            self::assertSame('GET', $method);
+            self::assertStringContainsString('/.well-known/openid-configuration', $url);
+            $capturedTimeout = $options['timeout'] ?? null;
+
+            return new MockResponse(json_encode([
+                'authorization_endpoint' => 'https://accounts.google.com/o/oauth2/v2/auth',
+                'token_endpoint' => 'https://oauth2.googleapis.com/token',
+                'userinfo_endpoint' => 'https://openidconnect.googleapis.com/v1/userinfo',
+            ], JSON_THROW_ON_ERROR));
+        });
+
+        $client = new GoogleOidcHttpClient($httpClient, $this->config('https://accounts.google.com'), 7);
+        $client->buildAuthorizationUrl('http://localhost/callback', 'state', 'nonce', 'challenge');
+
+        self::assertEquals(7, $capturedTimeout);
+    }
+
     private function config(string $issuer): GoogleOidcConfig
     {
         return new class($issuer) implements GoogleOidcConfig {
@@ -109,4 +130,3 @@ final class GoogleOidcHttpClientTest extends TestCase
         };
     }
 }
-
