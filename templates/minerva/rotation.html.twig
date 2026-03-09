@@ -114,8 +114,8 @@
                             {% for row in timeline.upcoming %}
                                 <li class="minerva-upcoming-item">
                                     <div class="minerva-upcoming-main">
-                                        <span class="item-pill">{{ 'minerva.list_label'|trans({'%list%': row.listCycle}) }}</span>
                                         <strong>{{ row.location }}</strong>
+                                        <span class="item-pill">{{ 'minerva.list_label'|trans({'%list%': row.listCycle}) }}</span>
                                     </div>
                                     <div class="minerva-upcoming-dates">
                                         <span>{{ 'minerva.starts_at'|trans }}: {{ row.startsAt|date('D d M Y · H:i') }}</span>
