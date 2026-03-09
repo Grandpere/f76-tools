@@ -49,6 +49,9 @@ Conclusion:
 - clients HTTP externes:
   - Nukacrypt: URL HTTPS + host strict `api.nukacrypt.com` + timeout explicite.
   - OCR.space: URL HTTPS + host strict `api.ocr.space`.
+- cache securite:
+  - pool dedie `cache.security_state` pour throttling/sessions actives.
+  - en `prod`, ce pool est configure sur Redis (via `REDIS_URL`) pour un etat partage multi-instance.
 
 ## Findings
 

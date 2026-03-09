@@ -71,6 +71,14 @@ services:
             $secretKey: '%env(string:TURNSTILE_SECRET_KEY)%'
             $timeoutSeconds: '%env(int:TURNSTILE_TIMEOUT_SECONDS)%'
 
+    App\Identity\Infrastructure\Guard\AuthRequestThrottler:
+        arguments:
+            $cachePool: '@cache.security_state'
+
+    App\Identity\Infrastructure\Security\CacheActiveUserSessionRegistry:
+        arguments:
+            $cachePool: '@cache.security_state'
+
     App\Identity\Infrastructure\Oidc\GoogleOidcConfigProvider:
         arguments:
             $enabled: '%env(bool:OIDC_GOOGLE_ENABLED)%'
