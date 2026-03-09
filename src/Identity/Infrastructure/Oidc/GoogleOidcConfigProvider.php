@@ -17,6 +17,8 @@ use App\Identity\Application\Oidc\GoogleOidcConfig;
 
 final class GoogleOidcConfigProvider implements GoogleOidcConfig
 {
+    private const EXPECTED_ISSUER = 'https://accounts.google.com';
+
     public function __construct(
         private readonly bool $enabled,
         private readonly string $issuer,
@@ -31,7 +33,7 @@ final class GoogleOidcConfigProvider implements GoogleOidcConfig
             return false;
         }
 
-        return '' !== trim($this->issuer)
+        return $this->isIssuerAllowed($this->issuer())
             && '' !== trim($this->clientId)
             && '' !== trim($this->clientSecret);
     }
@@ -49,5 +51,12 @@ final class GoogleOidcConfigProvider implements GoogleOidcConfig
     public function clientSecret(): string
     {
         return trim($this->clientSecret);
+    }
+
+    private function isIssuerAllowed(string $issuer): bool
+    {
+        $normalized = rtrim(trim($issuer), '/');
+
+        return self::EXPECTED_ISSUER === $normalized;
     }
 }

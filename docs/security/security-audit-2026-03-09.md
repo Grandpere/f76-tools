@@ -45,6 +45,7 @@ Conclusion:
 - guard secret:
   - blocage explicite en `prod` si `APP_SECRET` vide (HTTP + console).
 - OIDC Google:
+  - validation fail-fast de la config (`GoogleOidcConfigProvider`) pour n'activer OIDC que sur issuer Google attendu.
   - validation stricte `issuer=https://accounts.google.com`,
   - endpoints discovery limites a des hosts Google autorises (`accounts.google.com`, `oauth2.googleapis.com`, `openidconnect.googleapis.com`).
   - timeout HTTP explicite configurable (`OIDC_GOOGLE_TIMEOUT_SECONDS`).
