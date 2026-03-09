@@ -93,6 +93,22 @@ final class SecurityHeadersSubscriberTest extends TestCase
         self::assertFalse($headers->has('Expires'));
     }
 
+    public function testAppliesNoStoreHeadersToPublicAuthPages(): void
+    {
+        $subscriber = new SecurityHeadersSubscriber('dev');
+        $event = $this->responseEvent('http://localhost/en/login', true);
+
+        $subscriber->onKernelResponse($event);
+
+        $headers = $event->getResponse()->headers;
+        $cacheControl = (string) $headers->get('Cache-Control');
+        self::assertStringContainsString('no-store', $cacheControl);
+        self::assertStringContainsString('private', $cacheControl);
+        self::assertStringContainsString('max-age=0', $cacheControl);
+        self::assertSame('no-cache', $headers->get('Pragma'));
+        self::assertSame('0', $headers->get('Expires'));
+    }
+
     private function responseEvent(string $url, bool $mainRequest): ResponseEvent
     {
         $kernel = $this->createMock(HttpKernelInterface::class);

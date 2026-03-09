@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class SecurityHeadersSubscriber implements EventSubscriberInterface
 {
-    private const SENSITIVE_PATH_PATTERN = '#^/(?:(?:en|fr|de)/)?(?:admin(?:/|$)|account-security(?:/|$)|change-password(?:/|$)|reset-password(?:/|$)|verify-email(?:/|$))#';
+    private const SENSITIVE_PATH_PATTERN = '#^/(?:(?:en|fr|de)/)?(?:admin(?:/|$)|account-security(?:/|$)|change-password(?:/|$)|reset-password(?:/|$)|verify-email(?:/|$)|login(?:/|$)|register(?:/|$)|forgot-password(?:/|$)|resend-verification(?:/|$)|contact(?:/|$))#';
 
     public function __construct(
         private readonly string $appEnv,
