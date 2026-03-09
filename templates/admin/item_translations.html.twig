@@ -75,7 +75,11 @@
                                 {% set currentSection = row.section %}
                                 <tr class="translations-section-row">
                                     <td colspan="2">
-                                        {% if row.section == 'misc' %}# misc (legendary mod){% else %}# book (minerva plan){% endif %}
+                                        {% if row.section == 'misc' %}
+                                            {{ 'admin_translations.section_misc'|trans }}
+                                        {% else %}
+                                            {{ 'admin_translations.section_book'|trans }}
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% endif %}
@@ -83,8 +87,8 @@
                                 <td><code>{{ row.key }}</code></td>
                                 <td>
                                     <textarea name="entries[{{ row.key }}]" rows="4" data-autosize="true">{{ row.target }}</textarea>
-                                    <p class="translations-help"><strong>EN:</strong> {{ row.en }}</p>
-                                    <p class="translations-help"><strong>DE:</strong> {{ row.de }}</p>
+                                    <p class="translations-help"><strong>{{ 'admin_translations.reference_en'|trans }}:</strong> {{ row.en }}</p>
+                                    <p class="translations-help"><strong>{{ 'admin_translations.reference_de'|trans }}:</strong> {{ row.de }}</p>
                                 </td>
                             </tr>
                         {% else %}

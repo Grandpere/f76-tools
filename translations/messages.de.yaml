@@ -170,6 +170,10 @@ admin_translations.key: Schlussel
 admin_translations.no_entries: Keine Eintrage.
 admin_translations.save: Speichern
 admin_translations.table_caption: 'Ubersetzungstabelle fur Ziel %locale%'
+admin_translations.reference_en: EN
+admin_translations.reference_de: DE
+admin_translations.section_misc: '# misc (legendarer Mod)'
+admin_translations.section_book: '# book (Minerva-Plan)'
 admin_translations.flash.saved: 'Ubersetzungen "%locale%" gespeichert (%count% Schlussel).'
 admin_translations.flash.nothing_to_save: Keine gultige Ubersetzung zum Speichern.
 admin_translations.flash.invalid_csrf: Ungultiges CSRF-Token, Aktion abgelehnt.
@@ -426,6 +430,8 @@ admin_users.auth_events_ip: IP
 admin_users.auth_events_empty: Keine Sicherheitsereignisse fur diesen Benutzer.
 admin_users.auth_events_level_filter: Stufe
 admin_users.auth_events_level_filter_all: Alle Stufen
+admin_users.auth_events_level_info: Info
+admin_users.auth_events_level_warning: Warnung
 admin_users.auth_events_search: Suche
 admin_users.auth_events_search_placeholder: Ereignis oder IP
 admin_users.auth_events_export_csv: CSV-Export

@@ -170,6 +170,10 @@ admin_translations.key: Key
 admin_translations.no_entries: No entries.
 admin_translations.save: Save
 admin_translations.table_caption: 'Translation table for target %locale%'
+admin_translations.reference_en: EN
+admin_translations.reference_de: DE
+admin_translations.section_misc: '# misc (legendary mod)'
+admin_translations.section_book: '# book (minerva plan)'
 admin_translations.flash.saved: 'Translations "%locale%" saved (%count% keys).'
 admin_translations.flash.nothing_to_save: No valid translation to save.
 admin_translations.flash.invalid_csrf: Invalid CSRF token, action rejected.
@@ -426,6 +430,8 @@ admin_users.auth_events_ip: IP
 admin_users.auth_events_empty: No security event for this user yet.
 admin_users.auth_events_level_filter: Level
 admin_users.auth_events_level_filter_all: All levels
+admin_users.auth_events_level_info: Info
+admin_users.auth_events_level_warning: Warning
 admin_users.auth_events_search: Search
 admin_users.auth_events_search_placeholder: event or IP
 admin_users.auth_events_export_csv: Export CSV

@@ -29,8 +29,8 @@
                     <span>{{ 'admin_users.auth_events_level_filter'|trans }}</span>
                     <select name="level">
                         <option value="">{{ 'admin_users.auth_events_level_filter_all'|trans }}</option>
-                        <option value="info" {% if levelFilter == 'info' %}selected{% endif %}>info</option>
-                        <option value="warning" {% if levelFilter == 'warning' %}selected{% endif %}>warning</option>
+                        <option value="info" {% if levelFilter == 'info' %}selected{% endif %}>{{ 'admin_users.auth_events_level_info'|trans }}</option>
+                        <option value="warning" {% if levelFilter == 'warning' %}selected{% endif %}>{{ 'admin_users.auth_events_level_warning'|trans }}</option>
                     </select>
                 </label>
                 <label class="field">
@@ -59,7 +59,7 @@
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="4">{{ 'admin_users.auth_events_empty'|trans }}</td>
+                            <td class="admin-empty-cell" colspan="4">{{ 'admin_users.auth_events_empty'|trans }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

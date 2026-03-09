@@ -170,6 +170,10 @@ admin_translations.key: Clé
 admin_translations.no_entries: Aucune entrée.
 admin_translations.save: Enregistrer
 admin_translations.table_caption: 'Table de traduction cible %locale%'
+admin_translations.reference_en: EN
+admin_translations.reference_de: DE
+admin_translations.section_misc: '# misc (mod légendaire)'
+admin_translations.section_book: '# book (plan minerva)'
 admin_translations.flash.saved: 'Traductions "%locale%" enregistrées (%count% clés).'
 admin_translations.flash.nothing_to_save: Aucune traduction valide à enregistrer.
 admin_translations.flash.invalid_csrf: Jeton CSRF invalide, action refusée.
@@ -428,6 +432,8 @@ admin_users.auth_events_ip: IP
 admin_users.auth_events_empty: Aucun événement de sécurité pour cet utilisateur.
 admin_users.auth_events_level_filter: Niveau
 admin_users.auth_events_level_filter_all: Tous les niveaux
+admin_users.auth_events_level_info: Info
+admin_users.auth_events_level_warning: Avertissement
 admin_users.auth_events_search: Recherche
 admin_users.auth_events_search_placeholder: événement ou IP
 admin_users.auth_events_export_csv: Export CSV
