@@ -3511,6 +3511,13 @@ span.flatpickr-weekday {
     background: #fff6d2;
 }
 
+.admin-auth-events-tools {
+    margin: 0.22rem 0 0.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.42rem;
+}
+
 .admin-identity-badge {
     display: inline-flex;
     align-items: center;

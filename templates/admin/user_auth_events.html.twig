@@ -19,9 +19,8 @@
 
         <section class="translations-panel">
             <h2>{{ targetUser.email }}</h2>
-            <p>
+            <p class="admin-auth-events-tools">
                 <a class="admin-export-link" href="{{ path('app_admin_users', backParams) }}">{{ 'admin_users.back_to_users'|trans }}</a>
-                ·
                 <a class="admin-export-link" href="{{ path('app_admin_users_auth_events_export_csv', { id: targetUser.id }|merge(exportParams)) }}">{{ 'admin_users.auth_events_export_csv'|trans }}</a>
             </p>
             <form method="get" class="translations-filters">
@@ -54,7 +53,11 @@
                         <tr>
                             <td>{{ event.occurredAt|date('Y-m-d H:i:s') }}</td>
                             <td>{{ event.event }}</td>
-                            <td>{{ event.level }}</td>
+                            <td>
+                                <span class="admin-security-badge {{ event.level == 'warning' ? 'admin-security-badge-warn' : 'admin-security-badge-ok' }}">
+                                    {{ event.level == 'warning' ? 'admin_users.auth_events_level_warning'|trans : 'admin_users.auth_events_level_info'|trans }}
+                                </span>
+                            </td>
                             <td>{{ event.clientIp ?: '—' }}</td>
                         </tr>
                     {% else %}
