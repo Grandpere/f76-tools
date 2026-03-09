@@ -20,7 +20,9 @@
                 <span class="roadmap-step-badge">1</span>
                 <span>{{ 'admin_roadmap.snapshots_title'|trans }}</span>
             </h2>
-            <p class="catalog-state roadmap-section-hint">{{ 'admin_roadmap.step_snapshots_hint'|trans }}</p>
+            <p class="catalog-note info-note roadmap-section-hint">
+                <span class="info-note-content">{{ 'admin_roadmap.step_snapshots_hint'|trans }}</span>
+            </p>
             <div class="translations-table-wrap">
                 <table class="translations-table">
                     <thead>
@@ -204,7 +206,9 @@
                     <span class="roadmap-step-badge">2</span>
                     <span>{{ 'admin_roadmap.selected_snapshot_pending_title'|trans }}</span>
                 </h2>
-                <p class="catalog-state roadmap-actions-help">{{ 'admin_roadmap.selected_snapshot_pending_hint'|trans }}</p>
+                <p class="catalog-note info-note roadmap-actions-help">
+                    <span class="info-note-content">{{ 'admin_roadmap.selected_snapshot_pending_hint'|trans }}</span>
+                </p>
             </section>
         {% endif %}
 
@@ -213,9 +217,11 @@
                 <span class="roadmap-step-badge">{{ selectedSnapshot ? '4' : '3' }}</span>
                 <span>{{ 'admin_roadmap.canonical_title'|trans }}</span>
             </h2>
-            <p class="catalog-state roadmap-section-hint roadmap-canonical-intro">
-                {{ 'admin_roadmap.canonical_description'|trans }}
-                {{ 'admin_roadmap.merge_requires_approved_hint'|trans }}
+            <p class="catalog-note info-note roadmap-section-hint roadmap-canonical-intro">
+                <span class="info-note-content">
+                    {{ 'admin_roadmap.canonical_description'|trans }}
+                    {{ 'admin_roadmap.merge_requires_approved_hint'|trans }}
+                </span>
             </p>
             <form method="post" action="{{ path('app_admin_roadmap_merge_locales', { _locale: app.request.locale }) }}" class="translations-filters roadmap-merge-form">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_merge_locales') }}">
