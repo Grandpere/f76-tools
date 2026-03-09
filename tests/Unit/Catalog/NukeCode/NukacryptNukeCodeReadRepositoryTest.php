@@ -66,4 +66,22 @@ final class NukacryptNukeCodeReadRepositoryTest extends TestCase
 
         $repository->fetchCurrent();
     }
+
+    public function testFetchCurrentThrowsWhenGraphqlUrlIsNotAllowed(): void
+    {
+        $client = new MockHttpClient([
+            new MockResponse(json_encode(['data' => []], JSON_THROW_ON_ERROR)),
+        ]);
+
+        $repository = new NukacryptNukeCodeReadRepository(
+            $client,
+            'http://evil.local/graphql',
+            'f76-data-sync-experimentation/1.0',
+        );
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('must target https://api.nukacrypt.com');
+
+        $repository->fetchCurrent();
+    }
 }

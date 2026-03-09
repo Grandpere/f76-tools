@@ -22,6 +22,8 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class OcrSpaceHttpProvider implements OcrProvider
 {
+    private const ALLOWED_HOST = 'api.ocr.space';
+
     public function __construct(
         private readonly HttpClientInterface $httpClient,
         private readonly string $apiUrl,
@@ -47,6 +49,7 @@ final class OcrSpaceHttpProvider implements OcrProvider
         if ('' === $apiUrl) {
             throw new RuntimeException('OCR.space API URL is empty.');
         }
+        $this->assertApiUrlAllowed($apiUrl);
 
         $apiKey = trim($this->apiKey);
         if ('' === $apiKey) {
@@ -299,5 +302,19 @@ final class OcrSpaceHttpProvider implements OcrProvider
         }
 
         return 'unknown OCR.space error';
+    }
+
+    private function assertApiUrlAllowed(string $apiUrl): void
+    {
+        $parts = parse_url($apiUrl);
+        if (!is_array($parts)) {
+            throw new RuntimeException('OCR.space API URL is invalid.');
+        }
+
+        $scheme = mb_strtolower((string) ($parts['scheme'] ?? ''));
+        $host = mb_strtolower((string) ($parts['host'] ?? ''));
+        if ('https' !== $scheme || self::ALLOWED_HOST !== $host) {
+            throw new RuntimeException('OCR.space API URL must target https://api.ocr.space.');
+        }
     }
 }

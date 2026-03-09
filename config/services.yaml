@@ -92,6 +92,7 @@ services:
         arguments:
             $graphqlUrl: '%env(string:NUKECRYPT_GRAPHQL_URL)%'
             $userAgent: '%env(string:NUKECRYPT_USER_AGENT)%'
+            $timeoutSeconds: '%env(int:NUKECRYPT_TIMEOUT_SECONDS)%'
 
     App\Catalog\Application\Roadmap\Ocr\OcrQualityPolicy:
         arguments:

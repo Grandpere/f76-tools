@@ -44,6 +44,9 @@ Conclusion:
 - OIDC Google:
   - validation stricte `issuer=https://accounts.google.com`,
   - endpoints discovery limites a des hosts Google autorises (`accounts.google.com`, `oauth2.googleapis.com`, `openidconnect.googleapis.com`).
+- clients HTTP externes:
+  - Nukacrypt: URL HTTPS + host strict `api.nukacrypt.com` + timeout explicite.
+  - OCR.space: URL HTTPS + host strict `api.ocr.space`.
 
 ## Findings
 

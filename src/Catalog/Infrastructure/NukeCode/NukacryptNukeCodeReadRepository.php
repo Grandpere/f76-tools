@@ -20,10 +20,13 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class NukacryptNukeCodeReadRepository implements NukeCodeReadRepository
 {
+    private const ALLOWED_HOST = 'api.nukacrypt.com';
+
     public function __construct(
         private readonly HttpClientInterface $httpClient,
         private readonly string $graphqlUrl,
         private readonly string $userAgent,
+        private readonly int $timeoutSeconds = 10,
     ) {
     }
 
@@ -32,12 +35,15 @@ final class NukacryptNukeCodeReadRepository implements NukeCodeReadRepository
      */
     public function fetchCurrent(): array
     {
+        $this->assertGraphqlUrlAllowed();
+
         try {
             $response = $this->httpClient->request('POST', $this->graphqlUrl, [
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'User-Agent' => $this->userAgent,
                 ],
+                'timeout' => max(1, $this->timeoutSeconds),
                 'json' => [
                     'query' => 'query CurrentNukeCodes { nukeCodes { alpha bravo charlie } }',
                 ],
@@ -79,5 +85,20 @@ final class NukacryptNukeCodeReadRepository implements NukeCodeReadRepository
         }
 
         return trim($value);
+    }
+
+    private function assertGraphqlUrlAllowed(): void
+    {
+        $url = trim($this->graphqlUrl);
+        $parts = parse_url($url);
+        if (!is_array($parts)) {
+            throw new RuntimeException('Nukacrypt GraphQL URL is invalid.');
+        }
+
+        $scheme = mb_strtolower((string) ($parts['scheme'] ?? ''));
+        $host = mb_strtolower((string) ($parts['host'] ?? ''));
+        if ('https' !== $scheme || self::ALLOWED_HOST !== $host) {
+            throw new RuntimeException('Nukacrypt GraphQL URL must target https://api.nukacrypt.com.');
+        }
     }
 }

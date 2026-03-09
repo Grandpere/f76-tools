@@ -80,6 +80,21 @@ final class OcrSpaceHttpProviderTest extends TestCase
         @unlink($imagePath);
     }
 
+    public function testRecognizeFailsWhenApiUrlIsNotAllowed(): void
+    {
+        $imagePath = tempnam(sys_get_temp_dir(), 'ocr-space-test-');
+        self::assertNotFalse($imagePath);
+        file_put_contents($imagePath, 'fake-image');
+
+        $provider = new OcrSpaceHttpProvider(new MockHttpClient(), 'http://evil.local/parse/image', 'test-key', true, 60);
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('must target https://api.ocr.space');
+        $provider->recognize($imagePath, 'fr');
+
+        @unlink($imagePath);
+    }
+
     public function testRecognizeResizesOversizedImageByReducingDimensions(): void
     {
         if (!function_exists('imagecreatetruecolor')) {
