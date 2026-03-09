@@ -22,9 +22,18 @@ export default class extends Controller {
 
             const payload = await response.json();
             this.stateTarget.textContent = `${payload.title} - ${payload.updatedAt}`;
-            this.listTarget.innerHTML = payload.cards
-                .map((card) => `<li><strong>${card.label}</strong>: ${card.value}</li>`)
-                .join('');
+            this.listTarget.innerHTML = '';
+
+            const cards = Array.isArray(payload.cards) ? payload.cards : [];
+            cards.forEach((card) => {
+                const item = document.createElement('li');
+                const label = document.createElement('strong');
+                label.textContent = String(card?.label ?? '');
+                item.appendChild(label);
+                item.append(': ');
+                item.append(String(card?.value ?? ''));
+                this.listTarget.appendChild(item);
+            });
         } catch (error) {
             this.stateTarget.textContent = 'Impossible de charger les donnees.';
             console.error(error);

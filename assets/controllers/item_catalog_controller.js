@@ -689,15 +689,17 @@ export default class extends Controller {
             Array.from(node.attributes).forEach((attr) => {
                 const name = attr.name.toLowerCase();
                 const value = attr.value;
+                const normalizedValue = String(value ?? '').trim();
+                const normalizedLower = normalizedValue.toLowerCase();
                 if (!allowedAttrs.has(name)) {
                     node.removeAttribute(attr.name);
                     return;
                 }
-                if (name === 'src' && (value.startsWith('javascript:') || value.startsWith('data:'))) {
+                if (name === 'src' && (normalizedLower.startsWith('javascript:') || normalizedLower.startsWith('data:'))) {
                     node.removeAttribute(attr.name);
                     return;
                 }
-                if (name === 'src' && value.startsWith('/cms/')) {
+                if (name === 'src' && normalizedValue.startsWith('/cms/')) {
                     const filename = value.split('/').pop() || '';
                     if (filename !== '') {
                         const mappedFilename = filename === 'raid_icon_black_128.png'
@@ -707,6 +709,10 @@ export default class extends Controller {
                     } else {
                         node.removeAttribute(attr.name);
                     }
+                    return;
+                }
+                if (name === 'src' && !normalizedValue.startsWith('/assets/icons/')) {
+                    node.removeAttribute(attr.name);
                 }
             });
         });

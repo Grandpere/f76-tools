@@ -69,6 +69,7 @@ services:
         arguments:
             $siteKey: '%env(string:TURNSTILE_SITE_KEY)%'
             $secretKey: '%env(string:TURNSTILE_SECRET_KEY)%'
+            $timeoutSeconds: '%env(int:TURNSTILE_TIMEOUT_SECONDS)%'
 
     App\Identity\Infrastructure\Oidc\GoogleOidcConfigProvider:
         arguments:
@@ -121,6 +122,15 @@ services:
     App\Catalog\Infrastructure\Roadmap\Ocr\UnavailablePaddleOcrProvider:
         tags:
             - { name: 'app.roadmap.ocr_provider', priority: 100 }
+
+    App\Support\Infrastructure\Http\SecurityHeadersSubscriber:
+        arguments:
+            $appEnv: '%kernel.environment%'
+
+    App\Support\Infrastructure\Security\AppSecretGuardSubscriber:
+        arguments:
+            $appSecret: '%kernel.secret%'
+            $appEnv: '%kernel.environment%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

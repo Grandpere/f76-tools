@@ -23,6 +23,7 @@ final class TurnstileVerifier implements IdentityCaptchaSiteKeyProvider
         private readonly HttpClientInterface $httpClient,
         private readonly string $siteKey,
         private readonly string $secretKey,
+        private readonly int $timeoutSeconds = 5,
     ) {
     }
 
@@ -58,6 +59,7 @@ final class TurnstileVerifier implements IdentityCaptchaSiteKeyProvider
                     'response' => $token,
                     'remoteip' => (string) $clientIp,
                 ],
+                'timeout' => max(1, $this->timeoutSeconds),
             ]);
             $payload = $response->toArray(false);
         } catch (ExceptionInterface) {
