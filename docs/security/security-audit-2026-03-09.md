@@ -13,7 +13,7 @@ Perimetre verifie:
 
 ## Synthese executive
 - Critique: 0
-- Eleve: 1
+- Eleve: 0
 - Moyen: 4
 - Faible: 2
 
@@ -55,9 +55,10 @@ Conclusion:
 
 ## Findings
 
-### [HIGH] `APP_SECRET` vide par defaut dans `.env`
+### [RESOLVED] `APP_SECRET` vide par defaut dans `.env`
 - Fichier: `.env`
-- Constat: `APP_SECRET=` est vide dans le fichier versionne.
+- Constat (avant): `APP_SECRET=` etait vide dans le fichier versionne.
+- Statut: corrige, valeur non vide de dev renseignee dans `.env` + garde-fou runtime en `prod`.
 - Impact:
   - signature d'URL (UriSigner) faible/invalide si l'environnement herite de cette valeur,
   - affaiblit les mecanismes relies au secret framework.
