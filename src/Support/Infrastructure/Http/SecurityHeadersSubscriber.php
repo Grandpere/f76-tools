@@ -52,6 +52,15 @@ final class SecurityHeadersSubscriber implements EventSubscriberInterface
         if (!$headers->has('Permissions-Policy')) {
             $headers->set('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
         }
+        if (!$headers->has('Cross-Origin-Opener-Policy')) {
+            $headers->set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+        }
+        if (!$headers->has('Cross-Origin-Resource-Policy')) {
+            $headers->set('Cross-Origin-Resource-Policy', 'same-origin');
+        }
+        if (!$headers->has('X-Permitted-Cross-Domain-Policies')) {
+            $headers->set('X-Permitted-Cross-Domain-Policies', 'none');
+        }
         if (!$headers->has('Content-Security-Policy-Report-Only')) {
             $headers->set(
                 'Content-Security-Policy-Report-Only',

@@ -34,6 +34,9 @@ final class SecurityHeadersSubscriberTest extends TestCase
         self::assertSame('DENY', $headers->get('X-Frame-Options'));
         self::assertSame('strict-origin-when-cross-origin', $headers->get('Referrer-Policy'));
         self::assertSame('geolocation=(), microphone=(), camera=()', $headers->get('Permissions-Policy'));
+        self::assertSame('same-origin-allow-popups', $headers->get('Cross-Origin-Opener-Policy'));
+        self::assertSame('same-origin', $headers->get('Cross-Origin-Resource-Policy'));
+        self::assertSame('none', $headers->get('X-Permitted-Cross-Domain-Policies'));
         self::assertNotNull($headers->get('Content-Security-Policy-Report-Only'));
         self::assertFalse($headers->has('Strict-Transport-Security'));
     }
@@ -75,4 +78,3 @@ final class SecurityHeadersSubscriberTest extends TestCase
         );
     }
 }
-

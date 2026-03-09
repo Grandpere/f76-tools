@@ -38,6 +38,7 @@ Conclusion:
   - policy explicite (`cookie_secure`, `cookie_httponly`, `cookie_samesite`).
 - headers HTTP:
   - ajout de `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`,
+  - ajout de `Cross-Origin-Opener-Policy`, `Cross-Origin-Resource-Policy`, `X-Permitted-Cross-Domain-Policies`,
   - `HSTS` active uniquement en `prod` + HTTPS.
   - ajout d'une `Content-Security-Policy-Report-Only` non bloquante pour preparer la mise en place CSP stricte.
 - guard secret:
