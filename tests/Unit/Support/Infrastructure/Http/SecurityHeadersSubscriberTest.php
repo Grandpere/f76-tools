@@ -109,6 +109,30 @@ final class SecurityHeadersSubscriberTest extends TestCase
         self::assertSame('0', $headers->get('Expires'));
     }
 
+    public function testAppliesCspInEnforceMode(): void
+    {
+        $subscriber = new SecurityHeadersSubscriber('dev', 'enforce');
+        $event = $this->responseEvent('http://localhost/', true);
+
+        $subscriber->onKernelResponse($event);
+
+        $headers = $event->getResponse()->headers;
+        self::assertNotNull($headers->get('Content-Security-Policy'));
+        self::assertFalse($headers->has('Content-Security-Policy-Report-Only'));
+    }
+
+    public function testDisablesCspWhenModeOff(): void
+    {
+        $subscriber = new SecurityHeadersSubscriber('dev', 'off');
+        $event = $this->responseEvent('http://localhost/', true);
+
+        $subscriber->onKernelResponse($event);
+
+        $headers = $event->getResponse()->headers;
+        self::assertFalse($headers->has('Content-Security-Policy'));
+        self::assertFalse($headers->has('Content-Security-Policy-Report-Only'));
+    }
+
     private function responseEvent(string $url, bool $mainRequest): ResponseEvent
     {
         $kernel = $this->createMock(HttpKernelInterface::class);

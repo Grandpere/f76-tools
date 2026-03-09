@@ -20,9 +20,11 @@ use Symfony\Component\HttpKernel\KernelEvents;
 final class SecurityHeadersSubscriber implements EventSubscriberInterface
 {
     private const SENSITIVE_PATH_PATTERN = '#^/(?:(?:en|fr|de)/)?(?:admin(?:/|$)|account-security(?:/|$)|change-password(?:/|$)|reset-password(?:/|$)|verify-email(?:/|$)|login(?:/|$)|register(?:/|$)|forgot-password(?:/|$)|resend-verification(?:/|$)|contact(?:/|$))#';
+    private const CSP_POLICY = "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data: blob:; font-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://challenges.cloudflare.com";
 
     public function __construct(
         private readonly string $appEnv,
+        private readonly string $cspMode = 'report_only',
     ) {
     }
 
@@ -63,20 +65,7 @@ final class SecurityHeadersSubscriber implements EventSubscriberInterface
         if (!$headers->has('X-Permitted-Cross-Domain-Policies')) {
             $headers->set('X-Permitted-Cross-Domain-Policies', 'none');
         }
-        if (!$headers->has('Content-Security-Policy-Report-Only')) {
-            $headers->set(
-                'Content-Security-Policy-Report-Only',
-                "default-src 'self'; "
-                ."base-uri 'self'; "
-                ."form-action 'self'; "
-                ."frame-ancestors 'none'; "
-                ."img-src 'self' data: blob:; "
-                ."font-src 'self' data:; "
-                ."script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com; "
-                ."style-src 'self' 'unsafe-inline'; "
-                ."connect-src 'self' https://challenges.cloudflare.com"
-            );
-        }
+        $this->applyCspHeader($headers);
 
         if ('prod' === $this->appEnv && $event->getRequest()->isSecure() && !$headers->has('Strict-Transport-Security')) {
             $headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
@@ -87,6 +76,26 @@ final class SecurityHeadersSubscriber implements EventSubscriberInterface
             $headers->set('Cache-Control', 'no-store, private, max-age=0');
             $headers->set('Pragma', 'no-cache');
             $headers->set('Expires', '0');
+        }
+    }
+
+    private function applyCspHeader(\Symfony\Component\HttpFoundation\ResponseHeaderBag $headers): void
+    {
+        $mode = mb_strtolower(trim($this->cspMode));
+        if ('off' === $mode) {
+            return;
+        }
+
+        if ('enforce' === $mode) {
+            if (!$headers->has('Content-Security-Policy')) {
+                $headers->set('Content-Security-Policy', self::CSP_POLICY);
+            }
+
+            return;
+        }
+
+        if (!$headers->has('Content-Security-Policy-Report-Only')) {
+            $headers->set('Content-Security-Policy-Report-Only', self::CSP_POLICY);
         }
     }
 }

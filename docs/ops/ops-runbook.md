@@ -11,6 +11,9 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
 - Configurer `TRUSTED_PROXIES` (ex: IP/LB internes) dans l'environnement de production.
 - Ne pas conserver la valeur de fallback dev (`127.0.0.1,REMOTE_ADDR`) en production.
 - Cette config est necessaire pour des IP client/scheme HTTPS fiables via `X-Forwarded-*`.
+- CSP:
+  - `SECURITY_CSP_MODE=report_only` par defaut.
+  - Basculer en `SECURITY_CSP_MODE=enforce` apres periode d'observation.
 
 ## Commandes de base
 - Demarrer la stack:

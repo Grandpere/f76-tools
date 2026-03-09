@@ -139,6 +139,7 @@ services:
     App\Support\Infrastructure\Http\SecurityHeadersSubscriber:
         arguments:
             $appEnv: '%kernel.environment%'
+            $cspMode: '%env(string:SECURITY_CSP_MODE)%'
 
     App\Support\Infrastructure\Security\AppSecretGuardSubscriber:
         arguments:
