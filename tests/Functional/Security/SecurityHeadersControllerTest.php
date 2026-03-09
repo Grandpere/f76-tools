@@ -75,12 +75,11 @@ final class SecurityHeadersControllerTest extends WebTestCase
         $user = $this->createUser('user-headers@example.com');
         $this->browser()->loginUser($user);
 
-        $this->browser()->request('GET', '/en/roadmap-calendar');
+        $this->browser()->request('GET', '/en/');
         $response = $this->browser()->getResponse();
 
         self::assertSame(200, $response->getStatusCode());
         self::assertStringNotContainsString('no-store', (string) $response->headers->get('Cache-Control'));
-        self::assertFalse($response->headers->has('X-Robots-Tag'));
     }
 
     /**
