@@ -84,4 +84,34 @@ final class NukacryptNukeCodeReadRepositoryTest extends TestCase
 
         $repository->fetchCurrent();
     }
+
+    public function testFetchCurrentUsesConfiguredTimeout(): void
+    {
+        $capturedTimeout = null;
+        $client = new MockHttpClient(function (string $method, string $url, array $options) use (&$capturedTimeout): MockResponse {
+            self::assertSame('POST', $method);
+            self::assertSame('https://api.nukacrypt.com/graphql', $url);
+            $capturedTimeout = $options['timeout'] ?? null;
+
+            return new MockResponse(json_encode([
+                'data' => [
+                    'nukeCodes' => [
+                        'alpha' => '1',
+                        'bravo' => '2',
+                        'charlie' => '3',
+                    ],
+                ],
+            ], JSON_THROW_ON_ERROR));
+        });
+
+        $repository = new NukacryptNukeCodeReadRepository(
+            $client,
+            'https://api.nukacrypt.com/graphql',
+            'f76-data-sync-experimentation/1.0',
+            7,
+        );
+        $repository->fetchCurrent();
+
+        self::assertEquals(7, $capturedTimeout);
+    }
 }

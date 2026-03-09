@@ -143,4 +143,32 @@ final class OcrSpaceHttpProviderTest extends TestCase
 
         @unlink($imagePath);
     }
+
+    public function testRecognizeUsesConfiguredTimeout(): void
+    {
+        $imagePath = tempnam(sys_get_temp_dir(), 'ocr-space-timeout-');
+        self::assertNotFalse($imagePath);
+        file_put_contents($imagePath, 'fake-image');
+
+        $capturedTimeout = null;
+        $client = new MockHttpClient(function (string $method, string $url, array $options) use (&$capturedTimeout): MockResponse {
+            self::assertSame('POST', $method);
+            self::assertSame('https://api.ocr.space/parse/image', $url);
+            $capturedTimeout = $options['timeout'] ?? null;
+
+            return new MockResponse(json_encode([
+                'IsErroredOnProcessing' => false,
+                'ParsedResults' => [
+                    ['ParsedText' => 'OK'],
+                ],
+            ], JSON_THROW_ON_ERROR));
+        });
+
+        $provider = new OcrSpaceHttpProvider($client, 'https://api.ocr.space/parse/image', 'test-key', true, 11);
+        $provider->recognize($imagePath, 'en');
+
+        self::assertEquals(11, $capturedTimeout);
+
+        @unlink($imagePath);
+    }
 }
