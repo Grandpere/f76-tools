@@ -41,6 +41,9 @@ Conclusion:
   - `HSTS` active uniquement en `prod` + HTTPS.
 - guard secret:
   - blocage explicite en `prod` si `APP_SECRET` vide (HTTP + console).
+- OIDC Google:
+  - validation stricte `issuer=https://accounts.google.com`,
+  - endpoints discovery limites a des hosts Google autorises (`accounts.google.com`, `oauth2.googleapis.com`, `openidconnect.googleapis.com`).
 
 ## Findings
 

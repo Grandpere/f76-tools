@@ -22,6 +22,14 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class GoogleOidcHttpClient implements GoogleOidcClient
 {
+    private const ISSUER_HOST = 'accounts.google.com';
+    /** @var list<string> */
+    private const ALLOWED_ENDPOINT_HOSTS = [
+        'accounts.google.com',
+        'oauth2.googleapis.com',
+        'openidconnect.googleapis.com',
+    ];
+
     /** @var array{authorization_endpoint: string, token_endpoint: string, userinfo_endpoint: string}|null */
     private ?array $cachedDiscovery = null;
 
@@ -75,6 +83,7 @@ final class GoogleOidcHttpClient implements GoogleOidcClient
         if ('' === $issuer) {
             throw new GoogleOidcProviderException('OIDC issuer is empty.');
         }
+        $this->assertIssuerAllowed($issuer);
 
         try {
             $response = $this->httpClient->request('GET', $issuer.'/.well-known/openid-configuration');
@@ -91,6 +100,9 @@ final class GoogleOidcHttpClient implements GoogleOidcClient
         if ('' === $authorizationEndpoint || '' === $tokenEndpoint || '' === $userinfoEndpoint) {
             throw new GoogleOidcProviderException('OIDC discovery missing required endpoints.');
         }
+        $this->assertEndpointAllowed($authorizationEndpoint, 'authorization_endpoint');
+        $this->assertEndpointAllowed($tokenEndpoint, 'token_endpoint');
+        $this->assertEndpointAllowed($userinfoEndpoint, 'userinfo_endpoint');
 
         $this->cachedDiscovery = [
             'authorization_endpoint' => $authorizationEndpoint,
@@ -183,5 +195,38 @@ final class GoogleOidcHttpClient implements GoogleOidcClient
         }
 
         return false;
+    }
+
+    private function assertIssuerAllowed(string $issuer): void
+    {
+        $parts = parse_url($issuer);
+        if (!is_array($parts)) {
+            throw new GoogleOidcProviderException('OIDC issuer URL is invalid.');
+        }
+
+        $scheme = mb_strtolower((string) ($parts['scheme'] ?? ''));
+        $host = mb_strtolower((string) ($parts['host'] ?? ''));
+
+        if ('https' !== $scheme || self::ISSUER_HOST !== $host) {
+            throw new GoogleOidcProviderException('OIDC issuer must be https://accounts.google.com.');
+        }
+    }
+
+    private function assertEndpointAllowed(string $endpoint, string $key): void
+    {
+        $parts = parse_url($endpoint);
+        if (!is_array($parts)) {
+            throw new GoogleOidcProviderException(sprintf('OIDC %s URL is invalid.', $key));
+        }
+
+        $scheme = mb_strtolower((string) ($parts['scheme'] ?? ''));
+        $host = mb_strtolower((string) ($parts['host'] ?? ''));
+        if ('https' !== $scheme) {
+            throw new GoogleOidcProviderException(sprintf('OIDC %s must use HTTPS.', $key));
+        }
+
+        if (!in_array($host, self::ALLOWED_ENDPOINT_HOSTS, true)) {
+            throw new GoogleOidcProviderException(sprintf('OIDC %s host is not allowed.', $key));
+        }
     }
 }
