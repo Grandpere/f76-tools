@@ -11,7 +11,7 @@ La plupart des pages front/admin sont harmonisees, mais il reste une passe UX fi
 ## Scope
 - [ ] Faire un audit UI page par page (desktop + mobile) sur les parcours principaux.
 - [x] Uniformiser les espaces/tailles/contrastes des blocs "etat" (success/warning/error/info).
-- [ ] Harmoniser les textes d aide contextuels (ton, longueur, terminologie).
+- [x] Harmoniser les textes d aide contextuels (ton, longueur, terminologie).
 - [x] Renforcer les etats vides/erreur sur pages admin sensibles (Minerva, users, audit, contact).
 - [x] Verifier la coherence navigation/header sur toutes les pages front principales.
 - [x] Capturer les ajustements dans une checklist UX de reference dans `docs/ai/checklists.md`.
