@@ -134,10 +134,18 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
 
 ## Triage incidents (Minerva/Auth)
 - Incident Minerva (alerte drift):
-  - 1. Lancer `make minerva-refresh-check-json` et relever `missingWindows`.
-  - 2. Lancer `make minerva-refresh-run`.
-  - 3. Relancer `make minerva-refresh-check-json` pour confirmer retour a `status=ok`.
-  - 4. Si drift persiste, appliquer un override manuel minimal via `/admin/minerva-rotation`, puis planifier correction source et suppression override.
+  - 1. Ouvrir un ticket incident avec `docs/ops/minerva-incident-template.md`.
+  - 2. Lancer `make minerva-refresh-check-json` et relever `missingWindows`.
+  - 3. Lancer `make minerva-refresh-run`.
+  - 4. Relancer `make minerva-refresh-check-json` pour confirmer retour a `status=ok`.
+  - 5. Si drift persiste:
+    - confirmer au moins 2 preuves externes,
+    - faire valider la gravite par le referent produit,
+    - appliquer un override manuel minimal via `/admin/minerva-rotation`.
+  - 6. Cloture obligatoire:
+    - regenerer la plage impactee,
+    - supprimer l override temporaire,
+    - verifier front/admin et consigner la cause racine.
 - Incident auth/smoke:
   - 1. Lancer `make smoke-app` pour reproduire.
   - 2. Identifier le premier test en echec (auth/front/api/admin) et corriger en priorite.
@@ -155,3 +163,4 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
 ## Notes
 - Les tests fonctionnels et integration recreent la DB de test.
 - En pratique, lancer `make phpstan` + `make phpunit-unit` avant les suites plus couteuses.
+- Pour Minerva incident: voir aussi `docs/ops/minerva-governance.md`.

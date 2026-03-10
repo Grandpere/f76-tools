@@ -10,12 +10,12 @@ Il manque encore un playbook metier strict pour gerer un incident reel de diverg
 - Eviter les overrides persistants non justifies.
 
 ## Scope
-- [ ] Definir les roles/responsabilites (qui detecte, qui valide, qui execute).
-- [ ] Definir la gravite d incident et la priorisation (mineur/majeur).
-- [ ] Definir les preconditions de creation d override (preuves minimales).
-- [ ] Definir la checklist de cloture (regeneration, suppression override, verification post-incident).
-- [ ] Ajouter un template de ticket incident Minerva dans `docs/ops/`.
-- [ ] Mettre a jour `docs/ops/minerva-governance.md` et `docs/ops/ops-runbook.md`.
+- [x] Definir les roles/responsabilites (qui detecte, qui valide, qui execute).
+- [x] Definir la gravite d incident et la priorisation (mineur/majeur).
+- [x] Definir les preconditions de creation d override (preuves minimales).
+- [x] Definir la checklist de cloture (regeneration, suppression override, verification post-incident).
+- [x] Ajouter un template de ticket incident Minerva dans `docs/ops/`.
+- [x] Mettre a jour `docs/ops/minerva-governance.md` et `docs/ops/ops-runbook.md`.
 
 ## Criteres d acceptance
 - Le processus incident Minerva est documente de bout en bout.
@@ -30,3 +30,5 @@ Il manque encore un playbook metier strict pour gerer un incident reel de diverg
 - Risque: documentation trop theorique et non utilisable en exploitation.
 - Mitigation: procedure orientee actions + exemples concrets + checklist executable.
 
+## Statut
+- Done - 2026-03-10

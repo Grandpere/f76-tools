@@ -5,6 +5,7 @@
 - F76-002: Evolutions produit Minerva (localisation/date/listes) selon la roadmap metier.
 
 ## Termine recemment
+- F76-142: Minerva incident playbook and override lifecycle (done).
 - F76-145: Fondations roadmap OCR (provider chain + fallback qualite) (done).
 - F76-144: UX final polish front/admin consistency (done).
 - F76-143: monitoring thresholds + smoke suite ops/app + triage runbook (done).
