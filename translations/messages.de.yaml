@@ -312,6 +312,9 @@ admin_roadmap.description: OCR-Snapshots prüfen, strukturierte Events erzeugen
 admin_roadmap.back_to_dashboard: Zuruck zum Dashboard
 admin_roadmap.snapshots_title: OCR-Snapshots
 admin_roadmap.step_snapshots_hint: Offne einen Snapshot fur OCR-Review sowie Event-Erzeugung/Bearbeitung.
+admin_roadmap.upload_locale: Bildsprache
+admin_roadmap.upload_image: Roadmap-Bild
+admin_roadmap.upload_submit: Hochladen und scannen
 admin_roadmap.snapshot_id: ID
 admin_roadmap.snapshot_locale: Sprache
 admin_roadmap.snapshot_provider: Provider
@@ -345,7 +348,11 @@ admin_roadmap.merge_requires_same_season_hint: Alle drei Snapshots mussen zur gl
 admin_roadmap.merge_snapshot_context: 'Erkannte Saison: %season%'
 admin_roadmap.merge_snapshot_context_missing: 'Erkannte Saison: unbekannt'
 admin_roadmap.selected_snapshot_title: 'Ausgewahlter Snapshot #%id%'
-admin_roadmap.selected_snapshot_state: 'Sprache: %locale% · Status: %status%'
+admin_roadmap.selected_snapshot_state: 'Sprache: %locale% · Status: %status% · Saison: %season%'
+admin_roadmap.snapshot_season_unknown: Unbekannt
+admin_roadmap.season_status_active: Aktiv
+admin_roadmap.season_status_finished: Beendet
+admin_roadmap.season_status_upcoming: Kommend
 admin_roadmap.source_title: Quelle
 admin_roadmap.source_image_alt: 'Roadmap-Quellbild fur Snapshot #%id%'
 admin_roadmap.source_image_unavailable: Quellbild fur diesen Snapshot nicht verfugbar.
@@ -373,6 +380,12 @@ admin_roadmap.flash.snapshot_deleted: Snapshot geloscht.
 admin_roadmap.flash.merge_invalid_input: Bitte drei gultige Snapshot-IDs (FR/EN/DE) angeben.
 admin_roadmap.flash.merge_success: Snapshot-Zusammenfuhrung abgeschlossen.
 admin_roadmap.flash.merge_missing_season: Jeder Snapshot muss vor der Zusammenfuhrung eine erkannte Saison haben.
+admin_roadmap.flash.upload_invalid_locale: Ungultige Sprache fur OCR-Upload.
+admin_roadmap.flash.upload_missing_file: Bitte ein Bild zum Upload auswahlen.
+admin_roadmap.flash.upload_invalid_file_type: Es sind nur Bilddateien erlaubt.
+admin_roadmap.flash.upload_storage_error: Lokaler Speicher fur Roadmap-Uploads konnte nicht vorbereitet werden.
+admin_roadmap.flash.upload_failed: Roadmap-OCR-Upload fehlgeschlagen.
+admin_roadmap.flash.upload_success: Bild hochgeladen und OCR-Snapshot erstellt.
 admin_users.google_filter_linked: Google verknupft
 admin_users.google_filter_unlinked: Google nicht verknupft
 admin_users.active_filter_label: Kontostatus

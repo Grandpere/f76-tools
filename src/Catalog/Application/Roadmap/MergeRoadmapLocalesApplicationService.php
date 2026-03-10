@@ -136,6 +136,25 @@ final readonly class MergeRoadmapLocalesApplicationService
             $this->roadmapCanonicalEventWriteRepository->saveAll($canonicalEvents);
             $this->roadmapSeasonRepository->deactivateAllExcept($expectedSeason);
             $expectedSeason->setIsActive(true);
+            if ([] === $canonicalEvents) {
+                $expectedSeason
+                    ->setStartsAt(null)
+                    ->setEndsAt(null);
+            } else {
+                $seasonStartsAt = $canonicalEvents[0]->getStartsAt();
+                $seasonEndsAt = $canonicalEvents[0]->getEndsAt();
+                foreach ($canonicalEvents as $canonicalEvent) {
+                    if ($canonicalEvent->getStartsAt() < $seasonStartsAt) {
+                        $seasonStartsAt = $canonicalEvent->getStartsAt();
+                    }
+                    if ($canonicalEvent->getEndsAt() > $seasonEndsAt) {
+                        $seasonEndsAt = $canonicalEvent->getEndsAt();
+                    }
+                }
+                $expectedSeason
+                    ->setStartsAt($seasonStartsAt)
+                    ->setEndsAt($seasonEndsAt);
+            }
             $this->roadmapSeasonRepository->save($expectedSeason);
         }
 

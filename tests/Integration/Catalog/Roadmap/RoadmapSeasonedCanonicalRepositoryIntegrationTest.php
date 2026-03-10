@@ -15,9 +15,12 @@ namespace App\Tests\Integration\Catalog\Roadmap;
 
 use App\Catalog\Application\Roadmap\RoadmapCanonicalEventReadRepository;
 use App\Catalog\Application\Roadmap\RoadmapSeasonRepository;
+use App\Catalog\Application\Roadmap\RoadmapSnapshotWriteRepository;
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventTranslationEntity;
+use App\Catalog\Domain\Entity\RoadmapEventEntity;
 use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
+use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -27,6 +30,7 @@ final class RoadmapSeasonedCanonicalRepositoryIntegrationTest extends KernelTest
     private ?EntityManagerInterface $entityManager = null;
     private ?RoadmapCanonicalEventReadRepository $canonicalReadRepository = null;
     private ?RoadmapSeasonRepository $seasonRepository = null;
+    private ?RoadmapSnapshotWriteRepository $snapshotRepository = null;
 
     protected function setUp(): void
     {
@@ -45,6 +49,10 @@ final class RoadmapSeasonedCanonicalRepositoryIntegrationTest extends KernelTest
         \assert($seasonRepository instanceof RoadmapSeasonRepository);
         $this->seasonRepository = $seasonRepository;
 
+        $snapshotRepository = $container->get(RoadmapSnapshotWriteRepository::class);
+        \assert($snapshotRepository instanceof RoadmapSnapshotWriteRepository);
+        $this->snapshotRepository = $snapshotRepository;
+
         $this->truncateTables();
     }
 
@@ -55,6 +63,7 @@ final class RoadmapSeasonedCanonicalRepositoryIntegrationTest extends KernelTest
         $this->entityManager = null;
         $this->canonicalReadRepository = null;
         $this->seasonRepository = null;
+        $this->snapshotRepository = null;
     }
 
     public function testReadRepositoryCanScopeCanonicalEventsByActiveSeason(): void
@@ -100,6 +109,54 @@ final class RoadmapSeasonedCanonicalRepositoryIntegrationTest extends KernelTest
         self::assertIsArray($rows);
         self::assertCount(1, $rows);
         self::assertSame('roadmap.season_24.event.20260303.20260310', $rows[0]->getTranslationKey());
+    }
+
+    public function testFindOneWithEventsByIdReturnsAllSnapshotEvents(): void
+    {
+        $snapshot = new RoadmapSnapshotEntity()
+            ->setLocale('fr')
+            ->setSourceImagePath('/tmp/roadmap-fr.jpg')
+            ->setSourceImageHash(str_repeat('a', 64))
+            ->setOcrProvider('ocr.space')
+            ->setOcrConfidence(0.91)
+            ->setRawText('SAISON 24')
+            ->setScannedAt(new DateTimeImmutable('2026-03-03 10:00:00'));
+
+        $snapshot
+            ->addEvent(
+                new RoadmapEventEntity()
+                    ->setLocale('fr')
+                    ->setTitle('Event 1')
+                    ->setStartsAt(new DateTimeImmutable('2026-03-03 00:00:00'))
+                    ->setEndsAt(new DateTimeImmutable('2026-03-03 23:59:59'))
+                    ->setSortOrder(1),
+            )
+            ->addEvent(
+                new RoadmapEventEntity()
+                    ->setLocale('fr')
+                    ->setTitle('Event 2')
+                    ->setStartsAt(new DateTimeImmutable('2026-03-04 00:00:00'))
+                    ->setEndsAt(new DateTimeImmutable('2026-03-04 23:59:59'))
+                    ->setSortOrder(2),
+            )
+            ->addEvent(
+                new RoadmapEventEntity()
+                    ->setLocale('fr')
+                    ->setTitle('Event 3')
+                    ->setStartsAt(new DateTimeImmutable('2026-03-05 00:00:00'))
+                    ->setEndsAt(new DateTimeImmutable('2026-03-05 23:59:59'))
+                    ->setSortOrder(3),
+            );
+
+        $this->entityManager?->persist($snapshot);
+        $this->entityManager?->flush();
+
+        $snapshotId = $snapshot->getId();
+        self::assertIsInt($snapshotId);
+
+        $loaded = $this->snapshotRepository?->findOneWithEventsById($snapshotId);
+        self::assertInstanceOf(RoadmapSnapshotEntity::class, $loaded);
+        self::assertCount(3, $loaded->getEvents());
     }
 
     private function truncateTables(): void

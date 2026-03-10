@@ -59,7 +59,6 @@ final class RoadmapSnapshotEntityRepository extends ServiceEntityRepository impl
             ->setParameter('id', $id)
             ->orderBy('e.sortOrder', 'ASC')
             ->addOrderBy('e.id', 'ASC')
-            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
 

@@ -14,8 +14,11 @@ declare(strict_types=1);
 namespace App\Support\UI\Admin\Controller;
 
 use App\Catalog\Application\Roadmap\ApproveRoadmapSnapshotApplicationService;
+use App\Catalog\Application\Roadmap\CreateRoadmapSnapshotApplicationService;
+use App\Catalog\Application\Roadmap\CreateRoadmapSnapshotInput;
 use App\Catalog\Application\Roadmap\GenerateRoadmapEventsFromSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\MergeRoadmapLocalesApplicationService;
+use App\Catalog\Application\Roadmap\Ocr\OcrProviderChain;
 use App\Catalog\Application\Roadmap\RoadmapCanonicalEventReadRepository;
 use App\Catalog\Application\Roadmap\RoadmapSeasonExtractor;
 use App\Catalog\Application\Roadmap\RoadmapSeasonRepository;
@@ -28,6 +31,7 @@ use DateTimeImmutable;
 use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,6 +40,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
+use Throwable;
 
 #[Route('/{_locale<en|fr|de>}/admin/roadmap', defaults: ['_locale' => 'en'])]
 final class RoadmapSnapshotController extends AbstractController
@@ -49,6 +54,8 @@ final class RoadmapSnapshotController extends AbstractController
         private readonly RoadmapCanonicalEventReadRepository $roadmapCanonicalEventReadRepository,
         private readonly RoadmapSeasonRepository $roadmapSeasonRepository,
         private readonly RoadmapSeasonExtractor $roadmapSeasonExtractor,
+        private readonly OcrProviderChain $ocrProviderChain,
+        private readonly CreateRoadmapSnapshotApplicationService $createRoadmapSnapshotApplicationService,
         private readonly MergeRoadmapLocalesApplicationService $mergeRoadmapLocalesApplicationService,
         private readonly GenerateRoadmapEventsFromSnapshotApplicationService $generateRoadmapEventsFromSnapshotApplicationService,
         private readonly ApproveRoadmapSnapshotApplicationService $approveRoadmapSnapshotApplicationService,
@@ -131,6 +138,102 @@ final class RoadmapSnapshotController extends AbstractController
             'activeSeason' => $activeSeason,
             'selectedSeason' => $selectedSeason,
             'mergeSnapshotContext' => $mergeSnapshotContext,
+        ]);
+    }
+
+    #[Route('/upload', name: 'app_admin_roadmap_snapshot_upload', methods: ['POST'])]
+    public function uploadSnapshot(Request $request): RedirectResponse
+    {
+        $this->ensureAdminAccess();
+
+        if (!$this->isValidToken($request, 'admin_roadmap_snapshot_upload')) {
+            $this->addFlash('warning', 'admin_roadmap.flash.invalid_csrf');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                '_locale' => $request->getLocale(),
+            ]);
+        }
+
+        $localeInput = strtolower(trim((string) $request->request->get('locale', 'en')));
+        if (!in_array($localeInput, ['fr', 'en', 'de'], true)) {
+            $this->addFlash('warning', 'admin_roadmap.flash.upload_invalid_locale');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                '_locale' => $request->getLocale(),
+            ]);
+        }
+
+        $file = $request->files->get('image');
+        if (!$file instanceof UploadedFile || !$file->isValid()) {
+            $this->addFlash('warning', 'admin_roadmap.flash.upload_missing_file');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                '_locale' => $request->getLocale(),
+            ]);
+        }
+
+        $mimeType = (string) ($file->getMimeType() ?? '');
+        if (!str_starts_with($mimeType, 'image/')) {
+            $this->addFlash('warning', 'admin_roadmap.flash.upload_invalid_file_type');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                '_locale' => $request->getLocale(),
+            ]);
+        }
+
+        $projectDirParameter = $this->getParameter('kernel.project_dir');
+        if (!is_string($projectDirParameter) || '' === $projectDirParameter) {
+            $this->addFlash('warning', 'admin_roadmap.flash.upload_storage_error');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                '_locale' => $request->getLocale(),
+            ]);
+        }
+
+        $relativeDirectory = 'var/data/roadmap_uploads';
+        $absoluteDirectory = rtrim($projectDirParameter, '/').'/'.$relativeDirectory;
+        if (!is_dir($absoluteDirectory) && !mkdir($absoluteDirectory, 0o775, true) && !is_dir($absoluteDirectory)) {
+            $this->addFlash('warning', 'admin_roadmap.flash.upload_storage_error');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                '_locale' => $request->getLocale(),
+            ]);
+        }
+
+        try {
+            $extension = $file->guessExtension() ?: $file->getClientOriginalExtension();
+            $extension = '' !== trim((string) $extension) ? strtolower((string) $extension) : 'bin';
+            $filename = sprintf('roadmap_%s_%s_%s.%s', $localeInput, new DateTimeImmutable()->format('Ymd_His'), bin2hex(random_bytes(4)), $extension);
+
+            $storedFile = $file->move($absoluteDirectory, $filename);
+            $absolutePath = $storedFile->getPathname();
+            $relativePath = $relativeDirectory.'/'.$filename;
+
+            $scan = $this->ocrProviderChain->recognize($absolutePath, $localeInput);
+            $snapshot = $this->createRoadmapSnapshotApplicationService->create(
+                new CreateRoadmapSnapshotInput(
+                    $localeInput,
+                    $relativePath,
+                    $scan->result->provider,
+                    $scan->result->confidence,
+                    $scan->result->text,
+                ),
+            );
+        } catch (Throwable $exception) {
+            $this->addFlash('warning', 'admin_roadmap.flash.upload_failed');
+            $this->addFlash('warning', $exception->getMessage());
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                '_locale' => $request->getLocale(),
+            ]);
+        }
+
+        $snapshotId = $snapshot->getId();
+        $this->addFlash('success', 'admin_roadmap.flash.upload_success');
+
+        return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+            '_locale' => $request->getLocale(),
+            'snapshot' => is_int($snapshotId) ? $snapshotId : null,
         ]);
     }
 

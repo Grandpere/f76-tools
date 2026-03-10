@@ -2398,8 +2398,20 @@ body::before {
     color: #7e2d24;
 }
 
+.roadmap-canonical-table .roadmap-canonical-col-season {
+    width: 7%;
+}
+
+.roadmap-season-filter-form {
+    margin-bottom: 0.72rem;
+}
+
+.roadmap-upload-form {
+    margin-bottom: 0.72rem;
+}
+
 .roadmap-canonical-table .roadmap-canonical-col-window {
-    width: 11%;
+    width: 14%;
 }
 
 .roadmap-canonical-table .roadmap-canonical-col-confidence {
@@ -2407,24 +2419,24 @@ body::before {
 }
 
 .roadmap-canonical-table .roadmap-canonical-col-missing {
-    width: 12%;
+    width: 10%;
 }
 
 .roadmap-canonical-table .roadmap-canonical-col-fr {
-    width: 22%;
+    width: 21%;
 }
 
 .roadmap-canonical-table .roadmap-canonical-col-en {
-    width: 20%;
+    width: 19%;
 }
 
 .roadmap-canonical-table .roadmap-canonical-col-de {
-    width: 24%;
+    width: 21%;
 }
 
-.roadmap-canonical-table td:nth-child(4),
 .roadmap-canonical-table td:nth-child(5),
-.roadmap-canonical-table td:nth-child(6) {
+.roadmap-canonical-table td:nth-child(6),
+.roadmap-canonical-table td:nth-child(7) {
     line-height: 1.35;
     word-break: break-word;
 }
@@ -3298,36 +3310,48 @@ span.flatpickr-weekday {
 
 .translations-table.roadmap-canonical-table th:first-child,
 .translations-table.roadmap-canonical-table td:first-child {
-    width: 11%;
-    white-space: normal;
+    width: 7%;
+    white-space: nowrap;
 }
 
 .translations-table.roadmap-canonical-table th:last-child,
 .translations-table.roadmap-canonical-table td:last-child {
-    width: 24%;
+    width: 21%;
     white-space: normal;
 }
 
 .translations-table.roadmap-canonical-table th:nth-child(2),
 .translations-table.roadmap-canonical-table td:nth-child(2) {
-    width: 8%;
-    white-space: nowrap;
+    width: 14%;
+    white-space: normal;
 }
 
 .translations-table.roadmap-canonical-table th:nth-child(3),
 .translations-table.roadmap-canonical-table td:nth-child(3) {
-    width: 12%;
-    white-space: normal;
+    width: 8%;
+    white-space: nowrap;
 }
 
 .translations-table.roadmap-canonical-table th:nth-child(4),
 .translations-table.roadmap-canonical-table td:nth-child(4) {
-    width: 24%;
-    white-space: normal;
+    width: 10%;
+    white-space: nowrap;
 }
 
 .translations-table.roadmap-canonical-table th:nth-child(5),
 .translations-table.roadmap-canonical-table td:nth-child(5) {
+    width: 21%;
+    white-space: normal;
+}
+
+.translations-table.roadmap-canonical-table th:nth-child(6),
+.translations-table.roadmap-canonical-table td:nth-child(6) {
+    width: 19%;
+    white-space: normal;
+}
+
+.translations-table.roadmap-canonical-table th:nth-child(7),
+.translations-table.roadmap-canonical-table td:nth-child(7) {
     width: 21%;
     white-space: normal;
 }
@@ -4026,6 +4050,24 @@ span.flatpickr-weekday {
 
 :root[data-theme='terminal'] .source-filters label img {
     filter: invert(85%) sepia(9%) saturate(583%) hue-rotate(72deg) brightness(105%) contrast(95%);
+}
+
+:root[data-theme='terminal'] .roadmap-sticky-actions {
+    background: transparent;
+}
+
+:root[data-theme='terminal'] .translations-flash.success,
+:root[data-theme='terminal'] .auth-alert-success {
+    border-color: rgba(116, 229, 146, 0.48);
+    background: rgba(47, 147, 85, 0.24);
+    color: #d6ffe0;
+}
+
+:root[data-theme='terminal'] .translations-flash.warning,
+:root[data-theme='terminal'] .auth-alert-warning {
+    border-color: rgba(247, 124, 124, 0.52);
+    background: rgba(193, 76, 63, 0.26);
+    color: #ffe3df;
 }
 
 :root[data-theme='terminal'] .translations-pager {

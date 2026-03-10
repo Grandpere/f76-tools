@@ -4,6 +4,7 @@
 - Aucune priorite active immediate (prochain ticket a definir).
 
 ## Termine recemment
+- F76-147: upload roadmap OCR via backoffice (done).
 - F76-146: roadmap saison (modele season + merge scoped + saison active front/admin) (done).
 - F76-087: BOOK lists en modele absolu 1..24 (done).
 - F76-002: Rotation Minerva (socle localisation/date/listes) (done).

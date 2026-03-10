@@ -140,9 +140,10 @@ make minerva-refresh-run
 ```
 
 Roadmap saison (workflow recommande):
-1. OCR scan en FR, EN, DE.
-2. Validation/approval des 3 snapshots en backoffice roadmap.
+1. Backoffice roadmap: uploader les 3 images (FR, EN, DE) via le formulaire d'import OCR.
+2. Verifier/corriger chaque snapshot, puis approuver les 3.
 3. Merge FR/EN/DE (la saison fusionnee devient active automatiquement).
+4. Option fallback/diagnostic: commande manuelle `make roadmap-ocr-scan IMAGE=... LOCALE=...`.
 
 ### Audit / retention
 ```bash

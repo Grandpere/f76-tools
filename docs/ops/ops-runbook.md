@@ -167,9 +167,10 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
 
 ## Roadmap saisonniere
 - Procedure recommandee a chaque nouvelle saison:
-  - 1. Lancer OCR sur les 3 langues (FR/EN/DE) avec `make roadmap-ocr-scan`.
-  - 2. Ouvrir `GET /{locale}/admin/roadmap`, verifier/corriger le texte OCR, generer puis approuver chaque snapshot.
+  - 1. Ouvrir `GET /{locale}/admin/roadmap` puis uploader les 3 images roadmap (FR/EN/DE) via le formulaire d import OCR.
+  - 2. Verifier/corriger le texte OCR, generer puis approuver chaque snapshot.
   - 3. Lancer la fusion FR/EN/DE depuis l admin roadmap.
+  - 4. Fallback/diagnostic possible avec `make roadmap-ocr-scan IMAGE=... LOCALE=...`.
 - Regle de publication:
   - la fusion remplace uniquement les evenements canoniques de la saison concernee,
   - la saison fusionnee devient active automatiquement,

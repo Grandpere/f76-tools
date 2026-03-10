@@ -34,8 +34,8 @@ final class RoadmapRawTextEventParserTest extends TestCase
 
         self::assertCount(2, $events);
         self::assertSame('LA FÊTE DU YETI', $events[0]->title);
-        self::assertSame('2026-03-03 00:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
-        self::assertSame('2026-03-10 23:59:59', $events[0]->endsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-03-03 18:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-03-10 18:00:00', $events[0]->endsAt->format('Y-m-d H:i:s'));
         self::assertSame('ENVAHISSEURS D\'AU-DELA', $events[1]->title);
     }
 
@@ -51,8 +51,8 @@ final class RoadmapRawTextEventParserTest extends TestCase
 
         self::assertCount(1, $events);
         self::assertSame('DOUBLE XP', $events[0]->title);
-        self::assertSame('2026-04-07 00:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
-        self::assertSame('2026-04-14 23:59:59', $events[0]->endsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-04-07 18:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-04-14 18:00:00', $events[0]->endsAt->format('Y-m-d H:i:s'));
     }
 
     public function testParseEnglishDateRangesWithOrdinalsAndShortMonths(): void
@@ -67,8 +67,8 @@ final class RoadmapRawTextEventParserTest extends TestCase
 
         self::assertCount(1, $events);
         self::assertSame('DOUBLE SCORE', $events[0]->title);
-        self::assertSame('2026-04-01 00:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
-        self::assertSame('2026-04-05 23:59:59', $events[0]->endsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-04-01 18:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-04-05 18:00:00', $events[0]->endsAt->format('Y-m-d H:i:s'));
     }
 
     public function testParseGermanDateRangesWithUmlautNormalization(): void
@@ -83,8 +83,8 @@ final class RoadmapRawTextEventParserTest extends TestCase
 
         self::assertCount(1, $events);
         self::assertSame('DOPPELTE MUTATIONEN', $events[0]->title);
-        self::assertSame('2026-03-05 00:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
-        self::assertSame('2026-03-12 23:59:59', $events[0]->endsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-03-05 18:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-03-12 18:00:00', $events[0]->endsAt->format('Y-m-d H:i:s'));
     }
 
     public function testParseGermanDateRangesWithDotNotationAndAliases(): void
@@ -99,8 +99,8 @@ final class RoadmapRawTextEventParserTest extends TestCase
 
         self::assertCount(1, $events);
         self::assertSame('DOPPELTE MUTATIONEN', $events[0]->title);
-        self::assertSame('2026-04-07 00:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
-        self::assertSame('2026-04-14 23:59:59', $events[0]->endsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-04-07 18:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-04-14 18:00:00', $events[0]->endsAt->format('Y-m-d H:i:s'));
     }
 
     public function testParseFrenchRoadmapWithMultilineTitlesAndFirsterDay(): void
@@ -196,11 +196,11 @@ final class RoadmapRawTextEventParserTest extends TestCase
         self::assertSame('FIEVRE DE L OR', $events[14]->title);
         self::assertSame('EVENEMENT DEUX SERVICES DE SEMAINE DE LA VIANDE', $events[19]->title);
 
-        self::assertSame('2026-03-03 00:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
-        self::assertSame('2026-03-03 23:59:59', $events[0]->endsAt->format('Y-m-d H:i:s'));
-        self::assertSame('2026-05-28 00:00:00', $events[14]->startsAt->format('Y-m-d H:i:s'));
-        self::assertSame('2026-06-01 23:59:59', $events[14]->endsAt->format('Y-m-d H:i:s'));
-        self::assertSame('2026-07-07 23:59:59', $events[19]->endsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-03-03 16:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-03-03 20:00:00', $events[0]->endsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-05-28 18:00:00', $events[14]->startsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-06-01 18:00:00', $events[14]->endsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-07-07 18:00:00', $events[19]->endsAt->format('Y-m-d H:i:s'));
     }
 
     public function testParseIgnoresKnownOcrNoiseLinesInTitles(): void
@@ -239,10 +239,10 @@ final class RoadmapRawTextEventParserTest extends TestCase
         $events = $parser->parse($text, 'fr', new DateTimeImmutable('2026-03-02 10:00:00'));
 
         self::assertCount(3, $events);
-        self::assertSame('2026-04-07 00:00:00', $events[1]->startsAt->format('Y-m-d H:i:s'));
-        self::assertSame('2026-04-14 23:59:59', $events[1]->endsAt->format('Y-m-d H:i:s'));
-        self::assertSame('2026-05-28 00:00:00', $events[2]->startsAt->format('Y-m-d H:i:s'));
-        self::assertSame('2026-06-01 23:59:59', $events[2]->endsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-04-07 18:00:00', $events[1]->startsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-04-14 18:00:00', $events[1]->endsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-05-28 18:00:00', $events[2]->startsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-06-01 18:00:00', $events[2]->endsAt->format('Y-m-d H:i:s'));
     }
 
     public function testParseAcceptsDamagedEndMonthTokenAndInfersMonthWhenNeeded(): void
@@ -256,8 +256,8 @@ final class RoadmapRawTextEventParserTest extends TestCase
         $events = $parser->parse($text, 'fr', new DateTimeImmutable('2026-03-02 10:00:00'));
 
         self::assertCount(1, $events);
-        self::assertSame('2026-04-07 00:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
-        self::assertSame('2026-04-14 23:59:59', $events[0]->endsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-04-07 18:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-04-14 18:00:00', $events[0]->endsAt->format('Y-m-d H:i:s'));
     }
 
     public function testParseProvidedRawTextWithSplitDateLinesAndTerOrdinal(): void
@@ -564,11 +564,12 @@ final class RoadmapRawTextEventParserTest extends TestCase
     private function containsEvent(array $events, string $title, string $startsAt, string $endsAt): bool
     {
         $expectedTitle = $this->normalizeTitleForAssert($title);
+        [$expectedStartsAt, $expectedEndsAt] = $this->normalizeExpectedWindow($startsAt, $endsAt);
         foreach ($events as $event) {
             if (
                 $this->normalizeTitleForAssert($event->title) === $expectedTitle
-                && $event->startsAt->format('Y-m-d H:i:s') === $startsAt
-                && $event->endsAt->format('Y-m-d H:i:s') === $endsAt
+                && $event->startsAt->format('Y-m-d H:i:s') === $expectedStartsAt
+                && $event->endsAt->format('Y-m-d H:i:s') === $expectedEndsAt
             ) {
                 return true;
             }
@@ -594,10 +595,11 @@ final class RoadmapRawTextEventParserTest extends TestCase
      */
     private function containsDateRange(array $events, string $startsAt, string $endsAt): bool
     {
+        [$expectedStartsAt, $expectedEndsAt] = $this->normalizeExpectedWindow($startsAt, $endsAt);
         foreach ($events as $event) {
             if (
-                $event->startsAt->format('Y-m-d H:i:s') === $startsAt
-                && $event->endsAt->format('Y-m-d H:i:s') === $endsAt
+                $event->startsAt->format('Y-m-d H:i:s') === $expectedStartsAt
+                && $event->endsAt->format('Y-m-d H:i:s') === $expectedEndsAt
             ) {
                 return true;
             }
@@ -628,5 +630,20 @@ final class RoadmapRawTextEventParserTest extends TestCase
         }
 
         return false;
+    }
+
+    /**
+     * @return array{0:string,1:string}
+     */
+    private function normalizeExpectedWindow(string $startsAt, string $endsAt): array
+    {
+        $startDate = substr($startsAt, 0, 10);
+        $endDate = substr($endsAt, 0, 10);
+
+        if ($startDate === $endDate) {
+            return [$startDate.' 16:00:00', $endDate.' 20:00:00'];
+        }
+
+        return [$startDate.' 18:00:00', $endDate.' 18:00:00'];
     }
 }

@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Admin;
 
+use App\Catalog\Application\Roadmap\Ocr\OcrProvider;
+use App\Catalog\Application\Roadmap\Ocr\OcrProviderChain;
+use App\Catalog\Application\Roadmap\Ocr\OcrResult;
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
 use App\Catalog\Domain\Entity\RoadmapEventEntity;
 use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
@@ -24,6 +27,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class RoadmapSnapshotControllerTest extends WebTestCase
 {
@@ -240,6 +244,56 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         $canonicalEvents = $this->entityManager?->getRepository(RoadmapCanonicalEventEntity::class)->findAll();
         self::assertIsArray($canonicalEvents);
         self::assertGreaterThan(0, count($canonicalEvents));
+    }
+
+    public function testAdminCanUploadRoadmapImageAndCreateSnapshot(): void
+    {
+        $admin = $this->createUser('admin-roadmap-upload@example.com', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+
+        $provider = new class implements OcrProvider {
+            public function name(): string
+            {
+                return 'test-ocr';
+            }
+
+            public function recognize(string $imagePath, string $locale): OcrResult
+            {
+                return new OcrResult(
+                    'test-ocr',
+                    "SEASON 24\nMARCH 3 - MARCH 10\nBIGFOOT'S BASH",
+                    0.95,
+                    ['SEASON 24', 'MARCH 3 - MARCH 10', "BIGFOOT'S BASH"],
+                );
+            }
+        };
+        $this->browser()->getContainer()->set(OcrProviderChain::class, new OcrProviderChain([$provider]));
+
+        $crawler = $this->browser()->request('GET', '/en/admin/roadmap');
+        $tokenNode = $crawler->filter('form[action*="/en/admin/roadmap/upload"] input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+
+        $tmpFile = tempnam(sys_get_temp_dir(), 'roadmap-upload-');
+        self::assertNotFalse($tmpFile);
+        file_put_contents($tmpFile, base64_decode('/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAQEBUQEBAVFRUVFRUVFRUVFRUVFRUWFxUWFhUVFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGxAQGy8lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAAEAAgMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABQYBAwQCB//EADkQAAIBAwIDBQYEBwAAAAAAAAECAwAEEQUSITEGE0FRImFxgZEHFDKhsdHh8BUjQmKywdL/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAQIDBAUG/8QAJhEBAAICAQQCAgMAAAAAAAAAAAECABEDEiExBEETIlFhFDJxgf/aAAwDAQACEQMRAD8A9fQREQEREBERAREQEREBERAREQEREBERA//Z'));
+        $uploadedFile = new UploadedFile($tmpFile, 'roadmap.jpg', 'image/jpeg', null, true);
+
+        $this->browser()->request('POST', '/en/admin/roadmap/upload', [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'locale' => 'en',
+        ], [
+            'image' => $uploadedFile,
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        $this->entityManager?->clear();
+
+        $snapshots = $this->entityManager?->getRepository(RoadmapSnapshotEntity::class)->findBy([], ['id' => 'DESC']);
+        self::assertIsArray($snapshots);
+        self::assertCount(1, $snapshots);
+        self::assertSame('en', $snapshots[0]->getLocale());
+        self::assertSame('test-ocr', $snapshots[0]->getOcrProvider());
+        self::assertStringContainsString('SEASON 24', $snapshots[0]->getRawText());
     }
 
     public function testAdminMergeLocalesRejectsDraftSnapshots(): void

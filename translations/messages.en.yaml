@@ -312,6 +312,9 @@ admin_roadmap.description: Review OCR snapshots, generate structured events, and
 admin_roadmap.back_to_dashboard: Back to dashboard
 admin_roadmap.snapshots_title: OCR snapshots
 admin_roadmap.step_snapshots_hint: Open a snapshot to review OCR text, then generate/edit events.
+admin_roadmap.upload_locale: Image locale
+admin_roadmap.upload_image: Roadmap image
+admin_roadmap.upload_submit: Upload and scan
 admin_roadmap.snapshot_id: ID
 admin_roadmap.snapshot_locale: Locale
 admin_roadmap.snapshot_provider: Provider
@@ -345,7 +348,11 @@ admin_roadmap.merge_requires_same_season_hint: All three snapshots must belong t
 admin_roadmap.merge_snapshot_context: 'Detected season: %season%'
 admin_roadmap.merge_snapshot_context_missing: 'Detected season: unknown'
 admin_roadmap.selected_snapshot_title: 'Selected snapshot #%id%'
-admin_roadmap.selected_snapshot_state: 'Locale: %locale% · Status: %status%'
+admin_roadmap.selected_snapshot_state: 'Locale: %locale% · Status: %status% · Season: %season%'
+admin_roadmap.snapshot_season_unknown: Unknown
+admin_roadmap.season_status_active: Active
+admin_roadmap.season_status_finished: Finished
+admin_roadmap.season_status_upcoming: Upcoming
 admin_roadmap.source_title: Source
 admin_roadmap.source_image_alt: 'Roadmap source image for snapshot #%id%'
 admin_roadmap.source_image_unavailable: Source image unavailable for this snapshot.
@@ -373,6 +380,12 @@ admin_roadmap.flash.snapshot_deleted: Snapshot deleted.
 admin_roadmap.flash.merge_invalid_input: Please provide three valid snapshot IDs (FR/EN/DE).
 admin_roadmap.flash.merge_success: Snapshot merge completed.
 admin_roadmap.flash.merge_missing_season: Each snapshot must have a detected season before merge.
+admin_roadmap.flash.upload_invalid_locale: Invalid locale for OCR upload.
+admin_roadmap.flash.upload_missing_file: Please choose an image to upload.
+admin_roadmap.flash.upload_invalid_file_type: Only image files are accepted.
+admin_roadmap.flash.upload_storage_error: Unable to prepare local storage for roadmap uploads.
+admin_roadmap.flash.upload_failed: Roadmap OCR upload failed.
+admin_roadmap.flash.upload_success: Image uploaded and OCR snapshot created.
 admin_users.google_filter_linked: Google linked
 admin_users.google_filter_unlinked: Google not linked
 admin_users.active_filter_label: Account status

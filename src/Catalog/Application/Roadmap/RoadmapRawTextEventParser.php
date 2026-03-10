@@ -18,6 +18,11 @@ use DateTimeImmutable;
 
 final class RoadmapRawTextEventParser
 {
+    private const DEFAULT_START_HOUR = 18;
+    private const DEFAULT_END_HOUR = 18;
+    private const SINGLE_DAY_START_HOUR = 16;
+    private const SINGLE_DAY_END_HOUR = 20;
+
     private RoadmapLocaleProfileRegistry $profileRegistry;
 
     public function __construct(?RoadmapLocaleProfileRegistry $profileRegistry = null)
@@ -316,9 +321,20 @@ final class RoadmapRawTextEventParser
         $year = (int) $referenceDate->format('Y');
         $endYear = $endMonth < $startMonth ? $year + 1 : $year;
 
-        $startsAt = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', sprintf('%04d-%02d-%02d 00:00:00', $year, $startMonth, $startDay));
-        $endsAt = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', sprintf('%04d-%02d-%02d 23:59:59', $endYear, $endMonth, $endDay));
-        if (!$startsAt instanceof DateTimeImmutable || !$endsAt instanceof DateTimeImmutable) {
+        $isSingleDay = $year === $endYear && $startMonth === $endMonth && $startDay === $endDay;
+        $startsAt = $this->buildDateTime(
+            $year,
+            $startMonth,
+            $startDay,
+            $isSingleDay ? self::SINGLE_DAY_START_HOUR : self::DEFAULT_START_HOUR,
+        );
+        $endsAt = $this->buildDateTime(
+            $endYear,
+            $endMonth,
+            $endDay,
+            $isSingleDay ? self::SINGLE_DAY_END_HOUR : self::DEFAULT_END_HOUR,
+        );
+        if (null === $startsAt || null === $endsAt) {
             return null;
         }
 
@@ -355,9 +371,9 @@ final class RoadmapRawTextEventParser
         }
 
         $year = (int) $referenceDate->format('Y');
-        $startsAt = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', sprintf('%04d-%02d-%02d 00:00:00', $year, $month, $day));
-        $endsAt = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', sprintf('%04d-%02d-%02d 23:59:59', $year, $month, $day));
-        if (!$startsAt instanceof DateTimeImmutable || !$endsAt instanceof DateTimeImmutable) {
+        $startsAt = $this->buildDateTime($year, $month, $day, self::SINGLE_DAY_START_HOUR);
+        $endsAt = $this->buildDateTime($year, $month, $day, self::SINGLE_DAY_END_HOUR);
+        if (null === $startsAt || null === $endsAt) {
             return null;
         }
 
@@ -585,6 +601,13 @@ final class RoadmapRawTextEventParser
         }
 
         return (int) $date->format('t');
+    }
+
+    private function buildDateTime(int $year, int $month, int $day, int $hour): ?DateTimeImmutable
+    {
+        $dateTime = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', sprintf('%04d-%02d-%02d %02d:00:00', $year, $month, $day, $hour));
+
+        return $dateTime instanceof DateTimeImmutable ? $dateTime : null;
     }
 
     private function isIgnoredTitleLine(string $line): bool
