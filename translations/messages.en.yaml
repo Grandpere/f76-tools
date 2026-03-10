@@ -356,6 +356,7 @@ admin_roadmap.season_status_upcoming: Upcoming
 admin_roadmap.source_title: Source
 admin_roadmap.source_image_alt: 'Roadmap source image for snapshot #%id%'
 admin_roadmap.source_image_unavailable: Source image unavailable for this snapshot.
+admin_roadmap.snapshot_ocr_attempts: OCR attempts
 admin_roadmap.raw_text_title: OCR extracted text
 admin_roadmap.events_count: Events detected
 admin_roadmap.generate_events: Generate events
@@ -386,6 +387,12 @@ admin_roadmap.flash.upload_invalid_file_type: Only image files are accepted.
 admin_roadmap.flash.upload_storage_error: Unable to prepare local storage for roadmap uploads.
 admin_roadmap.flash.upload_failed: Roadmap OCR upload failed.
 admin_roadmap.flash.upload_success: Image uploaded and OCR snapshot created.
+admin_roadmap.flash.upload_attempts_heading: "OCR details:"
+admin_roadmap.flash.upload_attempt_ok: "%provider%: ok (%confidence%%, %status%) · %reasons%"
+admin_roadmap.flash.upload_attempt_failed: "%provider%: failed (%error%)"
+admin_roadmap.flash.upload_attempt_status_accepted: accepted
+admin_roadmap.flash.upload_attempt_status_rejected: rejected
+admin_roadmap.flash.upload_attempt_no_reason: no reason
 admin_users.google_filter_linked: Google linked
 admin_users.google_filter_unlinked: Google not linked
 admin_users.active_filter_label: Account status

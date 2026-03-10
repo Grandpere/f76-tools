@@ -162,6 +162,10 @@
                                 <dd>{{ events|length }}</dd>
                             </div>
                         </dl>
+                        {% if selectedSnapshot.ocrAttemptsSummary %}
+                            <h4 class="roadmap-attempts-title">{{ 'admin_roadmap.snapshot_ocr_attempts'|trans }}</h4>
+                            <pre class="roadmap-attempts-summary">{{ selectedSnapshot.ocrAttemptsSummary }}</pre>
+                        {% endif %}
                     </article>
 
                     <article class="roadmap-review-card">

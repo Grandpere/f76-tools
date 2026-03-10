@@ -18,6 +18,7 @@ use App\Catalog\Application\Roadmap\CreateRoadmapSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\CreateRoadmapSnapshotInput;
 use App\Catalog\Application\Roadmap\GenerateRoadmapEventsFromSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\MergeRoadmapLocalesApplicationService;
+use App\Catalog\Application\Roadmap\Ocr\OcrAttempt;
 use App\Catalog\Application\Roadmap\Ocr\OcrProviderChain;
 use App\Catalog\Application\Roadmap\RoadmapCanonicalEventReadRepository;
 use App\Catalog\Application\Roadmap\RoadmapSeasonExtractor;
@@ -40,6 +41,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Throwable;
 
 #[Route('/{_locale<en|fr|de>}/admin/roadmap', defaults: ['_locale' => 'en'])]
@@ -61,6 +63,7 @@ final class RoadmapSnapshotController extends AbstractController
         private readonly ApproveRoadmapSnapshotApplicationService $approveRoadmapSnapshotApplicationService,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly CacheInterface $cache,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 
@@ -219,6 +222,7 @@ final class RoadmapSnapshotController extends AbstractController
                     $scan->result->text,
                 ),
             );
+            $snapshot->setOcrAttemptsSummary($this->buildOcrAttemptsSummary($scan->attempts));
             $snapshot->setSourceImagePath($relativePath);
             $this->roadmapSnapshotWriteRepository->save($snapshot);
         } catch (Throwable $exception) {
@@ -232,6 +236,10 @@ final class RoadmapSnapshotController extends AbstractController
 
         $snapshotId = $snapshot->getId();
         $this->addFlash('success', 'admin_roadmap.flash.upload_success');
+        $this->addFlash('success', $this->translator->trans('admin_roadmap.flash.upload_attempts_heading'));
+        foreach ($scan->attempts as $attempt) {
+            $this->addFlash('success', $this->formatOcrAttemptFlash($attempt));
+        }
 
         return $this->redirectToRoute('app_admin_roadmap_snapshots', [
             '_locale' => $request->getLocale(),
@@ -580,6 +588,81 @@ final class RoadmapSnapshotController extends AbstractController
         $parsed = (int) $raw;
 
         return $parsed > 0 ? $parsed : null;
+    }
+
+    private function formatOcrAttemptFlash(OcrAttempt $attempt): string
+    {
+        if (!$attempt->successful) {
+            return $this->translator->trans('admin_roadmap.flash.upload_attempt_failed', [
+                '%provider%' => $attempt->provider,
+                '%error%' => (string) ($attempt->error ?? 'unknown error'),
+            ]);
+        }
+
+        $statusKey = $attempt->acceptable
+            ? 'admin_roadmap.flash.upload_attempt_status_accepted'
+            : 'admin_roadmap.flash.upload_attempt_status_rejected';
+        $status = $this->translator->trans($statusKey);
+
+        $reasons = [];
+        foreach ($attempt->qualityReasons as $reason) {
+            $clean = trim($reason);
+            if ('' !== $clean) {
+                $reasons[] = $clean;
+            }
+        }
+
+        $reasonsText = [] === $reasons
+            ? $this->translator->trans('admin_roadmap.flash.upload_attempt_no_reason')
+            : implode('; ', $reasons);
+
+        return $this->translator->trans('admin_roadmap.flash.upload_attempt_ok', [
+            '%provider%' => $attempt->provider,
+            '%confidence%' => number_format((float) ($attempt->confidence ?? 0.0) * 100, 2, '.', ''),
+            '%status%' => $status,
+            '%reasons%' => $reasonsText,
+        ]);
+    }
+
+    /**
+     * @param list<OcrAttempt> $attempts
+     */
+    private function buildOcrAttemptsSummary(array $attempts): ?string
+    {
+        $lines = [];
+        foreach ($attempts as $attempt) {
+            if (!$attempt->successful) {
+                $lines[] = sprintf(
+                    '%s: failed (%s)',
+                    $attempt->provider,
+                    (string) ($attempt->error ?? 'unknown error'),
+                );
+                continue;
+            }
+
+            $status = $attempt->acceptable ? 'accepted' : 'rejected';
+            $reasons = [];
+            foreach ($attempt->qualityReasons as $reason) {
+                $clean = trim($reason);
+                if ('' !== $clean) {
+                    $reasons[] = $clean;
+                }
+            }
+            $reasonsText = [] === $reasons ? 'no reason' : implode('; ', $reasons);
+            $lines[] = sprintf(
+                '%s: ok (%.2f%%, %s) · %s',
+                $attempt->provider,
+                (float) ($attempt->confidence ?? 0.0) * 100,
+                $status,
+                $reasonsText,
+            );
+        }
+
+        if ([] === $lines) {
+            return null;
+        }
+
+        return implode("\n", $lines);
     }
 
     /**

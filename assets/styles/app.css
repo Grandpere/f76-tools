@@ -2157,6 +2157,27 @@ body::before {
     margin-top: 0.08rem;
 }
 
+.roadmap-attempts-title {
+    margin: 0.55rem 0 0.3rem;
+    font-size: 0.88rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-2);
+}
+
+.roadmap-attempts-summary {
+    margin: 0;
+    padding: 0.58rem 0.65rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface-subtle);
+    color: var(--text-1);
+    font-size: 0.79rem;
+    line-height: 1.38;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
 .roadmap-review-card {
     border: 1px solid rgba(29, 37, 49, 0.14);
     border-radius: 12px;

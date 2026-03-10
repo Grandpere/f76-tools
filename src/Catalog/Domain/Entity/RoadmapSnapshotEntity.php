@@ -52,6 +52,9 @@ class RoadmapSnapshotEntity
     #[ORM\Column(name: 'raw_text', type: Types::TEXT)]
     private string $rawText;
 
+    #[ORM\Column(name: 'ocr_attempts_summary', type: Types::TEXT, nullable: true)]
+    private ?string $ocrAttemptsSummary = null;
+
     #[ORM\Column(length: 16, enumType: RoadmapSnapshotStatusEnum::class)]
     private RoadmapSnapshotStatusEnum $status = RoadmapSnapshotStatusEnum::DRAFT;
 
@@ -160,6 +163,19 @@ class RoadmapSnapshotEntity
     public function setRawText(string $rawText): self
     {
         $this->rawText = trim($rawText);
+
+        return $this;
+    }
+
+    public function getOcrAttemptsSummary(): ?string
+    {
+        return $this->ocrAttemptsSummary;
+    }
+
+    public function setOcrAttemptsSummary(?string $ocrAttemptsSummary): self
+    {
+        $clean = trim((string) $ocrAttemptsSummary);
+        $this->ocrAttemptsSummary = '' === $clean ? null : $clean;
 
         return $this;
     }
