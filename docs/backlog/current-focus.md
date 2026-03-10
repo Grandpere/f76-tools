@@ -1,9 +1,11 @@
 # Current Focus
 
 ## Priorite active
-- F76-002: Evolutions produit Minerva (localisation/date/listes) selon la roadmap metier.
+- Aucune priorite active immediate (prochain ticket a definir).
 
 ## Termine recemment
+- F76-002: Rotation Minerva (socle localisation/date/listes) (done).
+- Stabilisation UX backoffice/front apres F76-138 (retours fonctionnels + micro-polish) (done).
 - Stabilisation front post-refacto (perf queries + ajustements UX mineurs) (done, commits `d6af2a0`, `58491be`, `c53463c`).
 - F76-142: Minerva incident playbook and override lifecycle (done).
 - F76-145: Fondations roadmap OCR (provider chain + fallback qualite) (done).
@@ -32,4 +34,4 @@
 - Historique plus ancien: voir `docs/backlog/tickets/` (slices DDD et tickets precedents archives par fichier).
 
 ## Ensuite
-- Stabilisation UX backoffice/front apres F76-138 (retours fonctionnels + micro-polish).
+- Prochain chantier a prioriser.
