@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Catalog\Infrastructure\Roadmap\Ocr;
 
 use App\Catalog\Application\Roadmap\Ocr\OcrProvider;
+use App\Catalog\Application\Roadmap\Ocr\OcrProviderUnavailableException;
 use App\Catalog\Application\Roadmap\Ocr\OcrResult;
-use RuntimeException;
 
 final class UnavailablePaddleOcrProvider implements OcrProvider
 {
@@ -26,6 +26,9 @@ final class UnavailablePaddleOcrProvider implements OcrProvider
 
     public function recognize(string $imagePath, string $locale): OcrResult
     {
-        throw new RuntimeException('Paddle OCR provider is not installed/configured yet.');
+        throw new OcrProviderUnavailableException(
+            $this->name(),
+            'Paddle OCR provider is not installed/configured yet.',
+        );
     }
 }

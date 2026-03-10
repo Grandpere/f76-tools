@@ -38,6 +38,7 @@ final class OcrProviderChain
         }
 
         $attempts = [];
+        $unavailableProviders = [];
         $bestSuccessfulResult = null;
 
         foreach ($this->providers as $provider) {
@@ -67,6 +68,9 @@ final class OcrProviderChain
                         $attempts,
                     );
                 }
+            } catch (OcrProviderUnavailableException $exception) {
+                $unavailableProviders[] = $exception->providerName();
+                continue;
             } catch (Throwable $exception) {
                 $attempts[] = new OcrAttempt(
                     $provider->name(),
@@ -91,6 +95,9 @@ final class OcrProviderChain
         foreach ($attempts as $attempt) {
             $fragment = $attempt->provider.': '.($attempt->error ?? 'no output');
             $parts[] = $fragment;
+        }
+        if ([] !== $unavailableProviders) {
+            $parts[] = 'unavailable: '.implode(', ', array_unique($unavailableProviders));
         }
 
         throw new RuntimeException('All OCR providers failed without producing any result. '.implode(' | ', $parts));

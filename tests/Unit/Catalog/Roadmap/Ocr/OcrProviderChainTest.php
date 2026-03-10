@@ -15,6 +15,7 @@ namespace App\Tests\Unit\Catalog\Roadmap\Ocr;
 
 use App\Catalog\Application\Roadmap\Ocr\OcrProvider;
 use App\Catalog\Application\Roadmap\Ocr\OcrProviderChain;
+use App\Catalog\Application\Roadmap\Ocr\OcrProviderUnavailableException;
 use App\Catalog\Application\Roadmap\Ocr\OcrQualityAssessor;
 use App\Catalog\Application\Roadmap\Ocr\OcrQualityPolicy;
 use App\Catalog\Application\Roadmap\Ocr\OcrResult;
@@ -92,6 +93,20 @@ final class OcrProviderChainTest extends TestCase
         self::assertFalse($result->attempts[1]->acceptable);
     }
 
+    public function testSkipsUnavailableProviderFromAttempts(): void
+    {
+        $chain = new OcrProviderChain([
+            new UnavailableProvider('paddle', 'not installed'),
+            new FakeProvider('tesseract', new OcrResult('tesseract', 'Good', 0.91, ['Good'])),
+        ]);
+
+        $result = $chain->recognize('/tmp/roadmap.png', 'fr');
+
+        self::assertSame('tesseract', $result->result->provider);
+        self::assertCount(1, $result->attempts);
+        self::assertSame('tesseract', $result->attempts[0]->provider);
+    }
+
     public function testThrowsWhenNoProviderConfigured(): void
     {
         $chain = new OcrProviderChain([]);
@@ -138,5 +153,24 @@ final readonly class ThrowingProvider implements OcrProvider
     public function recognize(string $imagePath, string $locale): OcrResult
     {
         throw new RuntimeException($this->message);
+    }
+}
+
+final readonly class UnavailableProvider implements OcrProvider
+{
+    public function __construct(
+        private string $name,
+        private string $message,
+    ) {
+    }
+
+    public function name(): string
+    {
+        return $this->name;
+    }
+
+    public function recognize(string $imagePath, string $locale): OcrResult
+    {
+        throw new OcrProviderUnavailableException($this->name, $this->message);
     }
 }
