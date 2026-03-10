@@ -62,6 +62,12 @@ Reusable, update-friendly checklists for delivery quality.
 - [ ] `php bin/console importmap:install` executed (if required).
 - [ ] Turbo/frame reload behavior verified.
 
+## 7.1) OCR provider/dependency checklist
+- [ ] Before adding OCR system dependency (example: `tesseract-ocr`, language packs, Paddle), get explicit user approval.
+- [ ] Document required runtime dependencies and install commands in docs/runbook before enabling provider in production.
+- [ ] Keep a fallback provider chain and quality thresholds explicit (`confidence`, minimum non-empty lines).
+- [ ] Ensure OCR attempts are traceable (provider, success/failure, quality reasons, error message).
+
 ## 8) Final local gate checklist
 - [ ] `make phpstan`
 - [ ] `make phpunit-unit`
