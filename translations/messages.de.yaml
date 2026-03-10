@@ -91,6 +91,7 @@ roadmap_calendar.description: Diese Seite listet die Events einer Saison auf.
 roadmap_calendar.list_title: Community-Kalender
 roadmap_calendar.hero_line_1: Fallout 76 Community Calendar
 roadmap_calendar.hero_line_2: '%count% Events in der Timeline veroffentlicht'
+roadmap_calendar.active_season: 'Aktive Saison: %season%'
 roadmap_calendar.status_ongoing: Laufend
 roadmap_calendar.status_upcoming: Kommend
 roadmap_calendar.status_ended: Beendet
@@ -318,6 +319,7 @@ admin_roadmap.snapshot_confidence: Konfidenz
 admin_roadmap.snapshot_status: Status
 admin_roadmap.snapshot_scanned_at: Gescannt am
 admin_roadmap.snapshot_actions: Aktionen
+admin_roadmap.snapshot_season: Saison
 admin_roadmap.open: Offnen
 admin_roadmap.delete_snapshot: Loschen
 admin_roadmap.status_draft: Entwurf
@@ -339,6 +341,9 @@ admin_roadmap.merge_de_snapshot: DE-Snapshot (ID)
 admin_roadmap.merge_dry_run: Nur Dry-Run
 admin_roadmap.merge_submit: FR/EN/DE zusammenfuhren
 admin_roadmap.merge_requires_approved_hint: Fur die Zusammenfuhrung sind nur freigegebene Snapshots zulassig.
+admin_roadmap.merge_requires_same_season_hint: Alle drei Snapshots mussen zur gleichen Saison gehoren.
+admin_roadmap.merge_snapshot_context: 'Erkannte Saison: %season%'
+admin_roadmap.merge_snapshot_context_missing: 'Erkannte Saison: unbekannt'
 admin_roadmap.selected_snapshot_title: 'Ausgewahlter Snapshot #%id%'
 admin_roadmap.selected_snapshot_state: 'Sprache: %locale% · Status: %status%'
 admin_roadmap.source_title: Quelle
@@ -367,6 +372,7 @@ admin_roadmap.flash.snapshot_not_found: Snapshot nicht gefunden.
 admin_roadmap.flash.snapshot_deleted: Snapshot geloscht.
 admin_roadmap.flash.merge_invalid_input: Bitte drei gultige Snapshot-IDs (FR/EN/DE) angeben.
 admin_roadmap.flash.merge_success: Snapshot-Zusammenfuhrung abgeschlossen.
+admin_roadmap.flash.merge_missing_season: Jeder Snapshot muss vor der Zusammenfuhrung eine erkannte Saison haben.
 admin_users.google_filter_linked: Google verknupft
 admin_users.google_filter_unlinked: Google nicht verknupft
 admin_users.active_filter_label: Kontostatus

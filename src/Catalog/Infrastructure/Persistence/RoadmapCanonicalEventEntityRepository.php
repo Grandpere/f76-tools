@@ -16,6 +16,8 @@ namespace App\Catalog\Infrastructure\Persistence;
 use App\Catalog\Application\Roadmap\RoadmapCanonicalEventReadRepository;
 use App\Catalog\Application\Roadmap\RoadmapCanonicalEventWriteRepository;
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
+use App\Catalog\Domain\Entity\RoadmapCanonicalEventTranslationEntity;
+use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -32,8 +34,26 @@ final class RoadmapCanonicalEventEntityRepository extends ServiceEntityRepositor
     public function clearAll(): void
     {
         $entityManager = $this->getEntityManager();
-        $entityManager->createQuery('DELETE FROM App\Catalog\Domain\Entity\RoadmapCanonicalEventTranslationEntity t')->execute();
-        $entityManager->createQuery('DELETE FROM App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity e')->execute();
+        $entityManager->createQuery(sprintf('DELETE FROM %s t', RoadmapCanonicalEventTranslationEntity::class))->execute();
+        $entityManager->createQuery(sprintf('DELETE FROM %s e', RoadmapCanonicalEventEntity::class))->execute();
+    }
+
+    public function clearBySeason(RoadmapSeasonEntity $season): void
+    {
+        $seasonId = $season->getId();
+        if (!is_int($seasonId)) {
+            return;
+        }
+
+        $connection = $this->getEntityManager()->getConnection();
+        $connection->executeStatement(
+            'DELETE FROM roadmap_canonical_event_translation WHERE event_id IN (SELECT id FROM roadmap_canonical_event WHERE season_id = :seasonId)',
+            ['seasonId' => $seasonId],
+        );
+        $connection->executeStatement(
+            'DELETE FROM roadmap_canonical_event WHERE season_id = :seasonId',
+            ['seasonId' => $seasonId],
+        );
     }
 
     public function saveAll(array $events): void
@@ -45,16 +65,20 @@ final class RoadmapCanonicalEventEntityRepository extends ServiceEntityRepositor
         $entityManager->flush();
     }
 
-    public function findAllOrdered(): array
+    public function findAllOrdered(?RoadmapSeasonEntity $season = null): array
     {
-        $events = $this->createQueryBuilder('e')
+        $qb = $this->createQueryBuilder('e')
             ->leftJoin('e.translations', 't')
             ->addSelect('t')
             ->orderBy('e.startsAt', 'ASC')
             ->addOrderBy('e.sortOrder', 'ASC')
-            ->addOrderBy('e.id', 'ASC')
-            ->getQuery()
-            ->getResult();
+            ->addOrderBy('e.id', 'ASC');
+
+        if ($season instanceof RoadmapSeasonEntity) {
+            $qb->andWhere('e.season = :season')->setParameter('season', $season);
+        }
+
+        $events = $qb->getQuery()->getResult();
 
         /** @var list<RoadmapCanonicalEventEntity> $events */
         return $events;

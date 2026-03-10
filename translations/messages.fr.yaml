@@ -91,6 +91,7 @@ roadmap_calendar.description: Cette page liste les événements d'une saison.
 roadmap_calendar.list_title: Calendrier communautaire
 roadmap_calendar.hero_line_1: Fallout 76 Community Calendar
 roadmap_calendar.hero_line_2: '%count% événements publiés dans la timeline'
+roadmap_calendar.active_season: 'Saison active: %season%'
 roadmap_calendar.status_ongoing: En cours
 roadmap_calendar.status_upcoming: À venir
 roadmap_calendar.status_ended: Terminé
@@ -318,6 +319,7 @@ admin_roadmap.snapshot_confidence: Confiance
 admin_roadmap.snapshot_status: Statut
 admin_roadmap.snapshot_scanned_at: Scanné le
 admin_roadmap.snapshot_actions: Actions
+admin_roadmap.snapshot_season: Saison
 admin_roadmap.open: Ouvrir
 admin_roadmap.delete_snapshot: Supprimer
 admin_roadmap.status_draft: Brouillon
@@ -339,6 +341,9 @@ admin_roadmap.merge_de_snapshot: Snapshot DE (ID)
 admin_roadmap.merge_dry_run: Dry-run uniquement
 admin_roadmap.merge_submit: Fusionner FR/EN/DE
 admin_roadmap.merge_requires_approved_hint: La fusion accepte uniquement des snapshots approuvés.
+admin_roadmap.merge_requires_same_season_hint: Les trois snapshots doivent appartenir à la même saison.
+admin_roadmap.merge_snapshot_context: 'Saison détectée: %season%'
+admin_roadmap.merge_snapshot_context_missing: 'Saison détectée: inconnue'
 admin_roadmap.selected_snapshot_title: 'Snapshot sélectionné #%id%'
 admin_roadmap.selected_snapshot_state: 'Locale: %locale% · Statut: %status%'
 admin_roadmap.source_title: Source
@@ -369,6 +374,7 @@ admin_roadmap.flash.snapshot_not_found: Snapshot introuvable.
 admin_roadmap.flash.snapshot_deleted: Snapshot supprimé.
 admin_roadmap.flash.merge_invalid_input: Merci de fournir trois IDs de snapshot valides (FR/EN/DE).
 admin_roadmap.flash.merge_success: Fusion des snapshots terminée.
+admin_roadmap.flash.merge_missing_season: Chaque snapshot doit avoir une saison détectée avant fusion.
 admin_users.google_filter_linked: Google lié
 admin_users.google_filter_unlinked: Google non lié
 admin_users.active_filter_label: Statut du compte

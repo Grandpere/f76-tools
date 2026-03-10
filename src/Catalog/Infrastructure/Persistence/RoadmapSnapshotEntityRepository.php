@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Catalog\Infrastructure\Persistence;
 
 use App\Catalog\Application\Roadmap\RoadmapSnapshotWriteRepository;
+use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -68,14 +69,18 @@ final class RoadmapSnapshotEntityRepository extends ServiceEntityRepository impl
     /**
      * @return list<RoadmapSnapshotEntity>
      */
-    public function findRecent(int $limit = 20): array
+    public function findRecent(int $limit = 20, ?RoadmapSeasonEntity $season = null): array
     {
-        $snapshots = $this->createQueryBuilder('s')
+        $qb = $this->createQueryBuilder('s')
             ->orderBy('s.scannedAt', 'DESC')
             ->addOrderBy('s.id', 'DESC')
-            ->setMaxResults(max(1, $limit))
-            ->getQuery()
-            ->getResult();
+            ->setMaxResults(max(1, $limit));
+
+        if ($season instanceof RoadmapSeasonEntity) {
+            $qb->andWhere('s.season = :season')->setParameter('season', $season);
+        }
+
+        $snapshots = $qb->getQuery()->getResult();
 
         /** @var list<RoadmapSnapshotEntity> $snapshots */
         return $snapshots;

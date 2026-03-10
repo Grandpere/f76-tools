@@ -16,7 +16,10 @@ namespace App\Tests\Unit\Catalog\Roadmap;
 use App\Catalog\Application\Roadmap\ApproveRoadmapSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\CreateRoadmapSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\CreateRoadmapSnapshotInput;
+use App\Catalog\Application\Roadmap\RoadmapSeasonExtractor;
+use App\Catalog\Application\Roadmap\RoadmapSeasonRepository;
 use App\Catalog\Application\Roadmap\RoadmapSnapshotWriteRepository;
+use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use App\Catalog\Domain\Roadmap\RoadmapSnapshotStatusEnum;
 use PHPUnit\Framework\TestCase;
@@ -28,7 +31,8 @@ final class CreateAndApproveRoadmapSnapshotApplicationServiceTest extends TestCa
     public function testCreatePersistsDraftSnapshot(): void
     {
         $repository = new InMemoryRoadmapSnapshotWriteRepository();
-        $service = new CreateRoadmapSnapshotApplicationService($repository);
+        $seasonRepository = new InMemoryRoadmapSeasonRepository();
+        $service = new CreateRoadmapSnapshotApplicationService($repository, $seasonRepository, new RoadmapSeasonExtractor());
 
         $imagePath = tempnam(sys_get_temp_dir(), 'roadmap-snapshot-');
         self::assertNotFalse($imagePath);
@@ -39,12 +43,13 @@ final class CreateAndApproveRoadmapSnapshotApplicationServiceTest extends TestCa
             $imagePath,
             'ocr.space',
             0.91,
-            'Hello world',
+            "SAISON 24\nHello world",
         ));
 
         self::assertSame(RoadmapSnapshotStatusEnum::DRAFT, $snapshot->getStatus());
         self::assertSame('fr', $snapshot->getLocale());
         self::assertNotNull($snapshot->getId());
+        self::assertSame(24, $snapshot->getSeason()?->getSeasonNumber());
 
         @unlink($imagePath);
     }
@@ -52,7 +57,8 @@ final class CreateAndApproveRoadmapSnapshotApplicationServiceTest extends TestCa
     public function testApproveSwitchesStatusToApproved(): void
     {
         $repository = new InMemoryRoadmapSnapshotWriteRepository();
-        $create = new CreateRoadmapSnapshotApplicationService($repository);
+        $seasonRepository = new InMemoryRoadmapSeasonRepository();
+        $create = new CreateRoadmapSnapshotApplicationService($repository, $seasonRepository, new RoadmapSeasonExtractor());
         $approve = new ApproveRoadmapSnapshotApplicationService($repository);
 
         $imagePath = tempnam(sys_get_temp_dir(), 'roadmap-snapshot-');
@@ -64,7 +70,7 @@ final class CreateAndApproveRoadmapSnapshotApplicationServiceTest extends TestCa
             $imagePath,
             'ocr.space',
             0.92,
-            'Hello world',
+            "SEASON 24\nHello world",
         ));
         $snapshotId = $snapshot->getId();
         self::assertNotNull($snapshotId);
@@ -131,13 +137,18 @@ final class InMemoryRoadmapSnapshotWriteRepository implements RoadmapSnapshotWri
         return $this->findOneById($id);
     }
 
-    public function findRecent(int $limit = 20): array
+    public function findRecent(int $limit = 20, ?RoadmapSeasonEntity $season = null): array
     {
         if ($limit <= 0) {
             return [];
         }
 
-        return array_slice(array_values($this->items), 0, $limit);
+        $items = array_values($this->items);
+        if ($season instanceof RoadmapSeasonEntity) {
+            $items = array_values(array_filter($items, static fn (RoadmapSnapshotEntity $item): bool => $item->getSeason()?->getId() === $season->getId()));
+        }
+
+        return array_slice($items, 0, $limit);
     }
 
     private function forceId(RoadmapSnapshotEntity $snapshot, int $id): void
@@ -145,5 +156,69 @@ final class InMemoryRoadmapSnapshotWriteRepository implements RoadmapSnapshotWri
         $reflection = new ReflectionClass($snapshot);
         $property = $reflection->getProperty('id');
         $property->setValue($snapshot, $id);
+    }
+}
+
+final class InMemoryRoadmapSeasonRepository implements RoadmapSeasonRepository
+{
+    /** @var array<int, RoadmapSeasonEntity> */
+    private array $items = [];
+    private int $nextId = 1;
+
+    public function save(RoadmapSeasonEntity $season): void
+    {
+        if (!is_int($season->getId())) {
+            $reflection = new ReflectionClass($season);
+            $property = $reflection->getProperty('id');
+            $property->setValue($season, $this->nextId++);
+        }
+
+        $id = $season->getId();
+        if (is_int($id)) {
+            $this->items[$id] = $season;
+        }
+    }
+
+    public function findOneById(int $id): ?RoadmapSeasonEntity
+    {
+        return $this->items[$id] ?? null;
+    }
+
+    public function findOneBySeasonNumber(int $seasonNumber): ?RoadmapSeasonEntity
+    {
+        foreach ($this->items as $item) {
+            if ($item->getSeasonNumber() === $seasonNumber) {
+                return $item;
+            }
+        }
+
+        return null;
+    }
+
+    public function findActive(): ?RoadmapSeasonEntity
+    {
+        foreach ($this->items as $item) {
+            if ($item->isActive()) {
+                return $item;
+            }
+        }
+
+        return null;
+    }
+
+    public function findAllOrderedBySeasonNumberDesc(): array
+    {
+        $items = array_values($this->items);
+        usort($items, static fn (RoadmapSeasonEntity $a, RoadmapSeasonEntity $b): int => $b->getSeasonNumber() <=> $a->getSeasonNumber());
+
+        return $items;
+    }
+
+    public function deactivateAllExcept(?RoadmapSeasonEntity $activeSeason): void
+    {
+        $activeId = $activeSeason?->getId();
+        foreach ($this->items as $item) {
+            $item->setIsActive(is_int($activeId) && $item->getId() === $activeId);
+        }
     }
 }

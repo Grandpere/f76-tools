@@ -91,6 +91,7 @@ roadmap_calendar.description: This page lists events for a season.
 roadmap_calendar.list_title: Community calendar
 roadmap_calendar.hero_line_1: Fallout 76 Community Calendar
 roadmap_calendar.hero_line_2: '%count% events published in the timeline'
+roadmap_calendar.active_season: 'Active season: %season%'
 roadmap_calendar.status_ongoing: Ongoing
 roadmap_calendar.status_upcoming: Upcoming
 roadmap_calendar.status_ended: Ended
@@ -318,6 +319,7 @@ admin_roadmap.snapshot_confidence: Confidence
 admin_roadmap.snapshot_status: Status
 admin_roadmap.snapshot_scanned_at: Scanned at
 admin_roadmap.snapshot_actions: Actions
+admin_roadmap.snapshot_season: Season
 admin_roadmap.open: Open
 admin_roadmap.delete_snapshot: Delete
 admin_roadmap.status_draft: Draft
@@ -339,6 +341,9 @@ admin_roadmap.merge_de_snapshot: DE snapshot (ID)
 admin_roadmap.merge_dry_run: Dry-run only
 admin_roadmap.merge_submit: Merge FR/EN/DE
 admin_roadmap.merge_requires_approved_hint: Merge accepts approved snapshots only.
+admin_roadmap.merge_requires_same_season_hint: All three snapshots must belong to the same season.
+admin_roadmap.merge_snapshot_context: 'Detected season: %season%'
+admin_roadmap.merge_snapshot_context_missing: 'Detected season: unknown'
 admin_roadmap.selected_snapshot_title: 'Selected snapshot #%id%'
 admin_roadmap.selected_snapshot_state: 'Locale: %locale% · Status: %status%'
 admin_roadmap.source_title: Source
@@ -367,6 +372,7 @@ admin_roadmap.flash.snapshot_not_found: Snapshot not found.
 admin_roadmap.flash.snapshot_deleted: Snapshot deleted.
 admin_roadmap.flash.merge_invalid_input: Please provide three valid snapshot IDs (FR/EN/DE).
 admin_roadmap.flash.merge_success: Snapshot merge completed.
+admin_roadmap.flash.merge_missing_season: Each snapshot must have a detected season before merge.
 admin_users.google_filter_linked: Google linked
 admin_users.google_filter_unlinked: Google not linked
 admin_users.active_filter_label: Account status

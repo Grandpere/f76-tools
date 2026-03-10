@@ -139,6 +139,11 @@ make minerva-refresh-check-json
 make minerva-refresh-run
 ```
 
+Roadmap saison (workflow recommande):
+1. OCR scan en FR, EN, DE.
+2. Validation/approval des 3 snapshots en backoffice roadmap.
+3. Merge FR/EN/DE (la saison fusionnee devient active automatiquement).
+
 ### Audit / retention
 ```bash
 make audit-retention-dry-run
@@ -170,6 +175,7 @@ docker compose -f compose.yaml exec -T app php bin/console app:items:import data
 Notes:
 - L'import est idempotent (mise à jour + creation).
 - Les traductions UI restent dans `translations/`.
+- Les evenements roadmap canoniques sont scopes par saison (pas d'ecrasement global inter-saisons).
 
 ## Qualite et tests
 Commandes standard:

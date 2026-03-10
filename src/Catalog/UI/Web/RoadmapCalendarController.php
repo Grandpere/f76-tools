@@ -39,6 +39,7 @@ final class RoadmapCalendarController extends AbstractController
 
         return $this->render('roadmap/calendar.html.twig', [
             'username' => $user->getEmail(),
+            'seasonNumber' => $this->roadmapCalendarReadApplicationService->activeSeasonNumber(),
             'rows' => $this->roadmapCalendarReadApplicationService->listForLocale($request->getLocale()),
         ]);
     }

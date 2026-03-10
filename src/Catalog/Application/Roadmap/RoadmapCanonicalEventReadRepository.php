@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace App\Catalog\Application\Roadmap;
 
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
+use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 
 interface RoadmapCanonicalEventReadRepository
 {
     /**
      * @return list<RoadmapCanonicalEventEntity>
      */
-    public function findAllOrdered(): array;
+    public function findAllOrdered(?RoadmapSeasonEntity $season = null): array;
 }

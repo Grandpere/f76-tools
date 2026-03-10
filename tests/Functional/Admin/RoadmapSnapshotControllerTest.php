@@ -15,6 +15,7 @@ namespace App\Tests\Functional\Admin;
 
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
 use App\Catalog\Domain\Entity\RoadmapEventEntity;
+use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use App\Catalog\Domain\Roadmap\RoadmapSnapshotStatusEnum;
 use App\Identity\Domain\Entity\UserEntity;
@@ -273,6 +274,45 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         self::assertCount(0, $canonicalEvents);
     }
 
+    public function testAdminMergeLocalesRejectsSnapshotsFromDifferentSeasons(): void
+    {
+        $admin = $this->createUser('admin-roadmap-merge-season@example.com', ['ROLE_ADMIN']);
+        $frSnapshot = $this->createSnapshot('fr', "3 MARS - 10 MARS\nLA FETE DU YETI", 24);
+        $enSnapshot = $this->createSnapshot('en', "MARCH 3 - MARCH 10\nBIGFOOT'S BASH", 24);
+        $deSnapshot = $this->createSnapshot('de', "3. BIS 10. MÄRZ\nBIGFOOTS PARTY", 25);
+        $frSnapshot->setStatus(RoadmapSnapshotStatusEnum::APPROVED);
+        $enSnapshot->setStatus(RoadmapSnapshotStatusEnum::APPROVED);
+        $deSnapshot->setStatus(RoadmapSnapshotStatusEnum::APPROVED);
+        $this->entityManager?->persist($frSnapshot);
+        $this->entityManager?->persist($enSnapshot);
+        $this->entityManager?->persist($deSnapshot);
+        $this->entityManager?->flush();
+        $frSnapshotId = $frSnapshot->getId();
+        $enSnapshotId = $enSnapshot->getId();
+        $deSnapshotId = $deSnapshot->getId();
+        self::assertNotNull($frSnapshotId);
+        self::assertNotNull($enSnapshotId);
+        self::assertNotNull($deSnapshotId);
+
+        $this->browser()->loginUser($admin);
+        $crawler = $this->browser()->request('GET', '/en/admin/roadmap');
+        $tokenNode = $crawler->filter('form[action*="/en/admin/roadmap/merge-locales"] input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', '/en/admin/roadmap/merge-locales', [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'fr_snapshot_id' => (string) $frSnapshotId,
+            'en_snapshot_id' => (string) $enSnapshotId,
+            'de_snapshot_id' => (string) $deSnapshotId,
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $canonicalEvents = $this->entityManager?->getRepository(RoadmapCanonicalEventEntity::class)->findAll();
+        self::assertIsArray($canonicalEvents);
+        self::assertCount(0, $canonicalEvents);
+    }
+
     /**
      * @param list<string> $roles
      */
@@ -289,14 +329,16 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         return $user;
     }
 
-    private function createSnapshot(string $locale, string $rawText): RoadmapSnapshotEntity
+    private function createSnapshot(string $locale, string $rawText, int $seasonNumber = 24): RoadmapSnapshotEntity
     {
+        $season = $this->ensureSeason($seasonNumber);
         $snapshot = new RoadmapSnapshotEntity()
             ->setLocale($locale)
             ->setSourceImagePath('/tmp/sample-roadmap-'.$locale.'.jpg')
             ->setSourceImageHash(hash('sha256', $rawText))
             ->setOcrProvider('ocr.space')
             ->setOcrConfidence(0.91)
+            ->setSeason($season)
             ->setRawText($rawText);
 
         $this->entityManager?->persist($snapshot);
@@ -312,7 +354,24 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         }
 
         $connection = $this->entityManager->getConnection();
-        $connection->executeStatement('TRUNCATE TABLE roadmap_canonical_event_translation, roadmap_canonical_event, roadmap_event, roadmap_snapshot, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
+        $connection->executeStatement('TRUNCATE TABLE roadmap_canonical_event_translation, roadmap_canonical_event, roadmap_event, roadmap_snapshot, roadmap_season, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
+    }
+
+    private function ensureSeason(int $seasonNumber): RoadmapSeasonEntity
+    {
+        $existing = $this->entityManager?->getRepository(RoadmapSeasonEntity::class)->findOneBy(['seasonNumber' => $seasonNumber]);
+        if ($existing instanceof RoadmapSeasonEntity) {
+            return $existing;
+        }
+
+        $season = new RoadmapSeasonEntity()
+            ->setSeasonNumber($seasonNumber)
+            ->setTitle(sprintf('Season %d', $seasonNumber))
+            ->setIsActive(false);
+        $this->entityManager?->persist($season);
+        $this->entityManager?->flush();
+
+        return $season;
     }
 
     private function browser(): KernelBrowser

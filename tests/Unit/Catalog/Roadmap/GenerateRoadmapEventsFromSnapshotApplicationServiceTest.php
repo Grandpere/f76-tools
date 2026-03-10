@@ -16,6 +16,7 @@ namespace App\Tests\Unit\Catalog\Roadmap;
 use App\Catalog\Application\Roadmap\GenerateRoadmapEventsFromSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\RoadmapRawTextEventParser;
 use App\Catalog\Application\Roadmap\RoadmapSnapshotWriteRepository;
+use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -115,12 +116,17 @@ final class InMemorySnapshotRepoForEventGeneration implements RoadmapSnapshotWri
         return $this->findOneById($id);
     }
 
-    public function findRecent(int $limit = 20): array
+    public function findRecent(int $limit = 20, ?RoadmapSeasonEntity $season = null): array
     {
         if ($limit <= 0) {
             return [];
         }
 
-        return array_slice(array_values($this->snapshots), 0, $limit);
+        $items = array_values($this->snapshots);
+        if ($season instanceof RoadmapSeasonEntity) {
+            $items = array_values(array_filter($items, static fn (RoadmapSnapshotEntity $item): bool => $item->getSeason()?->getId() === $season->getId()));
+        }
+
+        return array_slice($items, 0, $limit);
     }
 }

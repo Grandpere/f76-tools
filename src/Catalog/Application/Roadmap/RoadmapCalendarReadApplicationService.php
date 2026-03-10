@@ -19,6 +19,7 @@ final readonly class RoadmapCalendarReadApplicationService
 {
     public function __construct(
         private RoadmapCanonicalEventReadRepository $roadmapCanonicalEventReadRepository,
+        private RoadmapSeasonRepository $roadmapSeasonRepository,
     ) {
     }
 
@@ -35,8 +36,12 @@ final readonly class RoadmapCalendarReadApplicationService
         $normalizedLocale = strtolower(trim($locale));
         $now = new DateTimeImmutable('now');
         $rows = [];
+        $activeSeason = $this->roadmapSeasonRepository->findActive();
+        if (null === $activeSeason) {
+            return [];
+        }
 
-        foreach ($this->roadmapCanonicalEventReadRepository->findAllOrdered() as $event) {
+        foreach ($this->roadmapCanonicalEventReadRepository->findAllOrdered($activeSeason) as $event) {
             $titles = [];
             foreach ($event->getTranslations() as $translation) {
                 $translationLocale = strtolower($translation->getLocale());
@@ -61,6 +66,13 @@ final readonly class RoadmapCalendarReadApplicationService
         }
 
         return $rows;
+    }
+
+    public function activeSeasonNumber(): ?int
+    {
+        $activeSeason = $this->roadmapSeasonRepository->findActive();
+
+        return $activeSeason?->getSeasonNumber();
     }
 
     /**

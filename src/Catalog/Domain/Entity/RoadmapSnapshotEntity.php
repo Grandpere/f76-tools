@@ -25,6 +25,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'roadmap_snapshot')]
 #[ORM\Index(name: 'idx_roadmap_snapshot_locale_status', columns: ['locale', 'status'])]
 #[ORM\Index(name: 'idx_roadmap_snapshot_scanned_at', columns: ['scanned_at'])]
+#[ORM\Index(name: 'idx_roadmap_snapshot_season_locale_status', columns: ['season_id', 'locale', 'status'])]
 #[ORM\HasLifecycleCallbacks]
 class RoadmapSnapshotEntity
 {
@@ -59,6 +60,10 @@ class RoadmapSnapshotEntity
 
     #[ORM\Column(name: 'approved_at', type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeImmutable $approvedAt = null;
+
+    #[ORM\ManyToOne(targetEntity: RoadmapSeasonEntity::class)]
+    #[ORM\JoinColumn(name: 'season_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
+    private ?RoadmapSeasonEntity $season = null;
 
     #[ORM\ManyToOne(targetEntity: UserEntity::class)]
     #[ORM\JoinColumn(name: 'approved_by_user_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
@@ -186,6 +191,18 @@ class RoadmapSnapshotEntity
     public function getApprovedAt(): ?DateTimeImmutable
     {
         return $this->approvedAt;
+    }
+
+    public function getSeason(): ?RoadmapSeasonEntity
+    {
+        return $this->season;
+    }
+
+    public function setSeason(?RoadmapSeasonEntity $season): self
+    {
+        $this->season = $season;
+
+        return $this;
     }
 
     public function getApprovedByUser(): ?UserEntity

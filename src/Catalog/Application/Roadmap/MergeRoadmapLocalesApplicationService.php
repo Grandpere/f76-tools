@@ -15,6 +15,7 @@ namespace App\Catalog\Application\Roadmap;
 
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventTranslationEntity;
+use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use App\Catalog\Domain\Roadmap\RoadmapSnapshotStatusEnum;
 use DateTimeImmutable;
@@ -26,6 +27,7 @@ final readonly class MergeRoadmapLocalesApplicationService
         private RoadmapSnapshotWriteRepository $snapshotWriteRepository,
         private RoadmapRawTextEventParser $roadmapRawTextEventParser,
         private RoadmapCanonicalEventWriteRepository $roadmapCanonicalEventWriteRepository,
+        private RoadmapSeasonRepository $roadmapSeasonRepository,
     ) {
     }
 
@@ -37,6 +39,7 @@ final readonly class MergeRoadmapLocalesApplicationService
         $buckets = [];
         $warnings = [];
         $localeCount = 3;
+        $expectedSeason = null;
 
         foreach ($snapshotIdsByLocale as $locale => $snapshotId) {
             $snapshot = $this->snapshotWriteRepository->findOneById($snapshotId);
@@ -44,6 +47,7 @@ final readonly class MergeRoadmapLocalesApplicationService
                 throw new RuntimeException(sprintf('Roadmap snapshot not found: %d', $snapshotId));
             }
             $this->assertApprovedSnapshot($snapshot, (string) $locale);
+            $expectedSeason = $this->assertMergeSeasonConsistency($snapshot, (string) $locale, $expectedSeason);
 
             $parsedEvents = $this->roadmapRawTextEventParser->parse(
                 $snapshot->getRawText(),
@@ -102,11 +106,17 @@ final readonly class MergeRoadmapLocalesApplicationService
             }
 
             $canonicalEvent = new RoadmapCanonicalEventEntity()
-                ->setTranslationKey(sprintf('roadmap.event.%s.%s', $bucket['startsAt']->format('Ymd'), $bucket['endsAt']->format('Ymd')))
+                ->setTranslationKey(sprintf(
+                    'roadmap.season_%d.event.%s.%s',
+                    $expectedSeason->getSeasonNumber(),
+                    $bucket['startsAt']->format('Ymd'),
+                    $bucket['endsAt']->format('Ymd'),
+                ))
                 ->setStartsAt($bucket['startsAt'])
                 ->setEndsAt($bucket['endsAt'])
                 ->setSortOrder($index + 1)
-                ->setConfidenceScore($confidence);
+                ->setConfidenceScore($confidence)
+                ->setSeason($expectedSeason);
 
             foreach ($bucket['titles'] as $locale => $title) {
                 $canonicalEvent->addTranslation(
@@ -122,8 +132,11 @@ final readonly class MergeRoadmapLocalesApplicationService
         $warnings = array_merge($warnings, $this->detectPotentialRangeConflicts($buckets, $localeCount));
 
         if (!$dryRun) {
-            $this->roadmapCanonicalEventWriteRepository->clearAll();
+            $this->roadmapCanonicalEventWriteRepository->clearBySeason($expectedSeason);
             $this->roadmapCanonicalEventWriteRepository->saveAll($canonicalEvents);
+            $this->roadmapSeasonRepository->deactivateAllExcept($expectedSeason);
+            $expectedSeason->setIsActive(true);
+            $this->roadmapSeasonRepository->save($expectedSeason);
         }
 
         return new MergeRoadmapLocalesResult(
@@ -150,6 +163,29 @@ final readonly class MergeRoadmapLocalesApplicationService
         $id = is_int($snapshotId) ? (string) $snapshotId : 'unknown';
 
         throw new RuntimeException(sprintf('Snapshot %s for locale %s must be approved before merge (current: %s).', $id, strtoupper($locale), $snapshot->getStatus()->value));
+    }
+
+    private function assertMergeSeasonConsistency(
+        RoadmapSnapshotEntity $snapshot,
+        string $locale,
+        ?RoadmapSeasonEntity $expectedSeason,
+    ): RoadmapSeasonEntity {
+        $season = $snapshot->getSeason();
+        if (!$season instanceof RoadmapSeasonEntity) {
+            $snapshotId = $snapshot->getId();
+            $id = is_int($snapshotId) ? (string) $snapshotId : 'unknown';
+            throw new RuntimeException(sprintf('Snapshot %s for locale %s has no detected season.', $id, strtoupper($locale)));
+        }
+
+        if ($expectedSeason instanceof RoadmapSeasonEntity) {
+            $expectedId = $expectedSeason->getId();
+            $currentId = $season->getId();
+            if (!is_int($expectedId) || !is_int($currentId) || $currentId !== $expectedId) {
+                throw new RuntimeException(sprintf('Snapshots must belong to the same season before merge (expected season %d, got %d for locale %s).', $expectedSeason->getSeasonNumber(), $season->getSeasonNumber(), strtoupper($locale)));
+            }
+        }
+
+        return $season;
     }
 
     /**

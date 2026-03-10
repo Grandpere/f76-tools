@@ -17,9 +17,12 @@ use App\Catalog\Application\Roadmap\ApproveRoadmapSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\GenerateRoadmapEventsFromSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\MergeRoadmapLocalesApplicationService;
 use App\Catalog\Application\Roadmap\RoadmapCanonicalEventReadRepository;
+use App\Catalog\Application\Roadmap\RoadmapSeasonExtractor;
+use App\Catalog\Application\Roadmap\RoadmapSeasonRepository;
 use App\Catalog\Application\Roadmap\RoadmapSnapshotWriteRepository;
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
 use App\Catalog\Domain\Entity\RoadmapEventEntity;
+use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use DateTimeImmutable;
 use RuntimeException;
@@ -29,22 +32,23 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Symfony\Contracts\Cache\CacheInterface;
-use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 #[Route('/{_locale<en|fr|de>}/admin/roadmap', defaults: ['_locale' => 'en'])]
 final class RoadmapSnapshotController extends AbstractController
 {
-    private const CANONICAL_ROWS_CACHE_KEY = 'admin_roadmap.canonical_rows.v1';
-
     use AdminRoleGuardControllerTrait;
     use AdminCsrfTokenValidatorTrait;
+    private const CANONICAL_ROWS_CACHE_KEY_PREFIX = 'admin_roadmap.canonical_rows.v2.';
 
     public function __construct(
         private readonly RoadmapSnapshotWriteRepository $roadmapSnapshotWriteRepository,
         private readonly RoadmapCanonicalEventReadRepository $roadmapCanonicalEventReadRepository,
+        private readonly RoadmapSeasonRepository $roadmapSeasonRepository,
+        private readonly RoadmapSeasonExtractor $roadmapSeasonExtractor,
         private readonly MergeRoadmapLocalesApplicationService $mergeRoadmapLocalesApplicationService,
         private readonly GenerateRoadmapEventsFromSnapshotApplicationService $generateRoadmapEventsFromSnapshotApplicationService,
         private readonly ApproveRoadmapSnapshotApplicationService $approveRoadmapSnapshotApplicationService,
@@ -58,11 +62,17 @@ final class RoadmapSnapshotController extends AbstractController
     {
         $this->ensureAdminAccess();
 
-        $snapshots = $this->roadmapSnapshotWriteRepository->findRecent(30);
+        $seasons = $this->roadmapSeasonRepository->findAllOrderedBySeasonNumberDesc();
+        $activeSeason = $this->roadmapSeasonRepository->findActive();
+        $seasonFilterId = $this->parsePositiveInt($request->query->get('season'));
+        $selectedSeason = is_int($seasonFilterId) ? $this->roadmapSeasonRepository->findOneById($seasonFilterId) : null;
+
+        $snapshots = $this->roadmapSnapshotWriteRepository->findRecent(30, $selectedSeason);
         $selectedIdRaw = $request->query->get('snapshot');
         $selectedId = is_scalar($selectedIdRaw) && ctype_digit((string) $selectedIdRaw) ? (int) $selectedIdRaw : null;
         $selectedSnapshot = null;
         $canonicalRows = [];
+        $canonicalSeason = $selectedSeason ?? $activeSeason;
 
         if (is_int($selectedId) && $selectedId > 0) {
             $selectedSnapshot = $this->roadmapSnapshotWriteRepository->findOneWithEventsById($selectedId);
@@ -77,21 +87,26 @@ final class RoadmapSnapshotController extends AbstractController
         /** @var list<array{
          *     startsAt: DateTimeImmutable,
          *     endsAt: DateTimeImmutable,
+         *     seasonNumber: int|null,
          *     confidenceScore: int,
          *     missingLocales: list<string>,
          *     translations: array{fr?: string, en?: string, de?: string}
          * }> $canonicalRows
          */
-        $canonicalRows = $this->cache->get(self::CANONICAL_ROWS_CACHE_KEY, function (ItemInterface $item): array {
+        $canonicalSeasonId = $canonicalSeason instanceof RoadmapSeasonEntity ? $canonicalSeason->getId() : null;
+        $canonicalCacheKey = self::CANONICAL_ROWS_CACHE_KEY_PREFIX.(is_int($canonicalSeasonId) ? (string) $canonicalSeasonId : 'none');
+        $canonicalRows = $this->cache->get($canonicalCacheKey, function (ItemInterface $item) use ($canonicalSeason): array {
             $item->expiresAfter(60);
 
             $rows = [];
-            foreach ($this->roadmapCanonicalEventReadRepository->findAllOrdered() as $event) {
+            foreach ($this->roadmapCanonicalEventReadRepository->findAllOrdered($canonicalSeason) as $event) {
                 $rows[] = $this->buildCanonicalRow($event);
             }
 
             return $rows;
         });
+
+        $mergeSnapshotContext = $this->resolveMergeSnapshotContext($request);
 
         $events = [];
         $selectedSnapshotImageUrl = null;
@@ -112,6 +127,10 @@ final class RoadmapSnapshotController extends AbstractController
             'events' => $events,
             'selectedSnapshotImageUrl' => $selectedSnapshotImageUrl,
             'canonicalRows' => $canonicalRows,
+            'seasons' => $seasons,
+            'activeSeason' => $activeSeason,
+            'selectedSeason' => $selectedSeason,
+            'mergeSnapshotContext' => $mergeSnapshotContext,
         ]);
     }
 
@@ -173,17 +192,20 @@ final class RoadmapSnapshotController extends AbstractController
     public function mergeLocales(Request $request): RedirectResponse
     {
         $this->ensureAdminAccess();
+        $frSnapshotId = $this->parsePositiveInt($request->request->get('fr_snapshot_id'));
+        $enSnapshotId = $this->parsePositiveInt($request->request->get('en_snapshot_id'));
+        $deSnapshotId = $this->parsePositiveInt($request->request->get('de_snapshot_id'));
+
         if (!$this->isValidToken($request, 'admin_roadmap_merge_locales')) {
             $this->addFlash('warning', 'admin_roadmap.flash.invalid_csrf');
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
                 '_locale' => $request->getLocale(),
+                'fr_snapshot_id' => $frSnapshotId,
+                'en_snapshot_id' => $enSnapshotId,
+                'de_snapshot_id' => $deSnapshotId,
             ]);
         }
-
-        $frSnapshotId = $this->parsePositiveInt($request->request->get('fr_snapshot_id'));
-        $enSnapshotId = $this->parsePositiveInt($request->request->get('en_snapshot_id'));
-        $deSnapshotId = $this->parsePositiveInt($request->request->get('de_snapshot_id'));
         $dryRun = '1' === (string) $request->request->get('dry_run');
 
         if (null === $frSnapshotId || null === $enSnapshotId || null === $deSnapshotId) {
@@ -191,6 +213,9 @@ final class RoadmapSnapshotController extends AbstractController
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
                 '_locale' => $request->getLocale(),
+                'fr_snapshot_id' => $frSnapshotId,
+                'en_snapshot_id' => $enSnapshotId,
+                'de_snapshot_id' => $deSnapshotId,
             ]);
         }
 
@@ -205,6 +230,9 @@ final class RoadmapSnapshotController extends AbstractController
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
                 '_locale' => $request->getLocale(),
+                'fr_snapshot_id' => $frSnapshotId,
+                'en_snapshot_id' => $enSnapshotId,
+                'de_snapshot_id' => $deSnapshotId,
             ]);
         }
 
@@ -221,7 +249,13 @@ final class RoadmapSnapshotController extends AbstractController
             $this->addFlash('warning', $warning);
         }
         if (!$dryRun) {
-            $this->cache->delete(self::CANONICAL_ROWS_CACHE_KEY);
+            $this->cache->delete(self::CANONICAL_ROWS_CACHE_KEY_PREFIX.'none');
+            foreach ($this->roadmapSeasonRepository->findAllOrderedBySeasonNumberDesc() as $season) {
+                $seasonId = $season->getId();
+                if (is_int($seasonId)) {
+                    $this->cache->delete(self::CANONICAL_ROWS_CACHE_KEY_PREFIX.(string) $seasonId);
+                }
+            }
         }
 
         return $this->redirectToRoute('app_admin_roadmap_snapshots', [
@@ -283,6 +317,17 @@ final class RoadmapSnapshotController extends AbstractController
         $rawTextInput = $request->request->get('raw_text');
         $rawText = is_scalar($rawTextInput) ? trim((string) $rawTextInput) : '';
         $snapshot->setRawText($rawText);
+        $seasonNumber = $this->roadmapSeasonExtractor->extractSeasonNumber($rawText);
+        if (is_int($seasonNumber) && $seasonNumber > 0) {
+            $season = $this->roadmapSeasonRepository->findOneBySeasonNumber($seasonNumber);
+            if (!$season instanceof RoadmapSeasonEntity) {
+                $season = new RoadmapSeasonEntity()
+                    ->setSeasonNumber($seasonNumber)
+                    ->setTitle(sprintf('Season %d', $seasonNumber));
+                $this->roadmapSeasonRepository->save($season);
+            }
+            $snapshot->setSeason($season);
+        }
         $this->roadmapSnapshotWriteRepository->save($snapshot);
         $this->addFlash('success', 'admin_roadmap.flash.raw_text_saved');
 
@@ -437,6 +482,7 @@ final class RoadmapSnapshotController extends AbstractController
      *     translationKey: string,
      *     startsAt: DateTimeImmutable,
      *     endsAt: DateTimeImmutable,
+     *     seasonNumber: int|null,
      *     confidenceScore: int,
      *     translations: array{fr: ?string, en: ?string, de: ?string},
      *     missingLocales: list<string>
@@ -468,10 +514,45 @@ final class RoadmapSnapshotController extends AbstractController
             'translationKey' => $event->getTranslationKey(),
             'startsAt' => $event->getStartsAt(),
             'endsAt' => $event->getEndsAt(),
+            'seasonNumber' => $event->getSeason()?->getSeasonNumber(),
             'confidenceScore' => $event->getConfidenceScore(),
             'translations' => $translations,
             'missingLocales' => $missingLocales,
         ];
+    }
+
+    /**
+     * @return array{fr: array{snapshotId: int, seasonNumber: ?int}|null, en: array{snapshotId: int, seasonNumber: ?int}|null, de: array{snapshotId: int, seasonNumber: ?int}|null}
+     */
+    private function resolveMergeSnapshotContext(Request $request): array
+    {
+        $context = [
+            'fr' => null,
+            'en' => null,
+            'de' => null,
+        ];
+
+        foreach (['fr', 'en', 'de'] as $locale) {
+            $snapshotId = $this->parsePositiveInt($request->query->get($locale.'_snapshot_id'));
+            if (!is_int($snapshotId)) {
+                continue;
+            }
+            $snapshot = $this->roadmapSnapshotWriteRepository->findOneById($snapshotId);
+            if (!$snapshot instanceof RoadmapSnapshotEntity) {
+                $context[$locale] = [
+                    'snapshotId' => $snapshotId,
+                    'seasonNumber' => null,
+                ];
+                continue;
+            }
+
+            $context[$locale] = [
+                'snapshotId' => $snapshotId,
+                'seasonNumber' => $snapshot->getSeason()?->getSeasonNumber(),
+            ];
+        }
+
+        return $context;
     }
 
     private function resolveSnapshotImagePath(RoadmapSnapshotEntity $snapshot): ?string

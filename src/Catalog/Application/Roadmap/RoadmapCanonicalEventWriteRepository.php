@@ -14,10 +14,13 @@ declare(strict_types=1);
 namespace App\Catalog\Application\Roadmap;
 
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
+use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 
 interface RoadmapCanonicalEventWriteRepository
 {
     public function clearAll(): void;
+
+    public function clearBySeason(RoadmapSeasonEntity $season): void;
 
     /**
      * @param list<RoadmapCanonicalEventEntity> $events

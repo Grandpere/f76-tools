@@ -16,8 +16,10 @@ namespace App\Tests\Unit\Catalog\Roadmap;
 use App\Catalog\Application\Roadmap\MergeRoadmapLocalesApplicationService;
 use App\Catalog\Application\Roadmap\RoadmapCanonicalEventWriteRepository;
 use App\Catalog\Application\Roadmap\RoadmapRawTextEventParser;
+use App\Catalog\Application\Roadmap\RoadmapSeasonRepository;
 use App\Catalog\Application\Roadmap\RoadmapSnapshotWriteRepository;
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
+use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use App\Catalog\Domain\Roadmap\RoadmapSnapshotStatusEnum;
 use PHPUnit\Framework\TestCase;
@@ -34,10 +36,12 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
 
         $snapshotRepo = new InMemorySnapshotRepoForMerge([$fr, $en, $de]);
         $canonicalRepo = new InMemoryCanonicalRepoForMerge();
+        $seasonRepo = new InMemorySeasonRepoForMerge([$this->season(24, true)]);
         $service = new MergeRoadmapLocalesApplicationService(
             $snapshotRepo,
             new RoadmapRawTextEventParser(),
             $canonicalRepo,
+            $seasonRepo,
         );
 
         $result = $service->merge(['fr' => 1, 'en' => 2, 'de' => 3], false);
@@ -46,8 +50,9 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
         self::assertSame(1, $result->highConfidenceEvents);
         self::assertSame(1, $result->mediumConfidenceEvents);
         self::assertSame(0, $result->lowConfidenceEvents);
-        self::assertTrue($canonicalRepo->cleared);
+        self::assertTrue($canonicalRepo->clearedBySeason);
         self::assertCount(2, $canonicalRepo->savedEvents);
+        self::assertSame(24, $seasonRepo->findActive()?->getSeasonNumber());
     }
 
     public function testMergeDryRunDoesNotPersist(): void
@@ -58,16 +63,18 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
 
         $snapshotRepo = new InMemorySnapshotRepoForMerge([$fr, $en, $de]);
         $canonicalRepo = new InMemoryCanonicalRepoForMerge();
+        $seasonRepo = new InMemorySeasonRepoForMerge([$this->season(24, false)]);
         $service = new MergeRoadmapLocalesApplicationService(
             $snapshotRepo,
             new RoadmapRawTextEventParser(),
             $canonicalRepo,
+            $seasonRepo,
         );
 
         $result = $service->merge(['fr' => 1, 'en' => 2, 'de' => 3], true);
 
         self::assertSame(1, $result->totalEvents);
-        self::assertFalse($canonicalRepo->cleared);
+        self::assertFalse($canonicalRepo->clearedBySeason);
         self::assertCount(0, $canonicalRepo->savedEvents);
     }
 
@@ -79,10 +86,12 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
 
         $snapshotRepo = new InMemorySnapshotRepoForMerge([$fr, $en, $de]);
         $canonicalRepo = new InMemoryCanonicalRepoForMerge();
+        $seasonRepo = new InMemorySeasonRepoForMerge([$this->season(24, false)]);
         $service = new MergeRoadmapLocalesApplicationService(
             $snapshotRepo,
             new RoadmapRawTextEventParser(),
             $canonicalRepo,
+            $seasonRepo,
         );
 
         $result = $service->merge(['fr' => 1, 'en' => 2, 'de' => 3], true);
@@ -101,10 +110,12 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
 
         $snapshotRepo = new InMemorySnapshotRepoForMerge([$fr, $en, $de]);
         $canonicalRepo = new InMemoryCanonicalRepoForMerge();
+        $seasonRepo = new InMemorySeasonRepoForMerge([$this->season(24, false)]);
         $service = new MergeRoadmapLocalesApplicationService(
             $snapshotRepo,
             new RoadmapRawTextEventParser(),
             $canonicalRepo,
+            $seasonRepo,
         );
 
         $this->expectException(RuntimeException::class);
@@ -113,8 +124,32 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
         $service->merge(['fr' => 1, 'en' => 2, 'de' => 3], true);
     }
 
+    public function testMergeThrowsWhenSnapshotsBelongToDifferentSeasons(): void
+    {
+        $fr = $this->snapshot(1, 'fr', "3 MARS - 10 MARS\nFETE DU YETI");
+        $en = $this->snapshot(2, 'en', "MAR 3 - MAR 10\nBIGFOOT'S BASH");
+        $de = $this->snapshot(3, 'de', "3. BIS 10. MARZ\nBIGFOOTS PARTY");
+        $de->setSeason($this->season(25, false));
+
+        $snapshotRepo = new InMemorySnapshotRepoForMerge([$fr, $en, $de]);
+        $canonicalRepo = new InMemoryCanonicalRepoForMerge();
+        $seasonRepo = new InMemorySeasonRepoForMerge([$this->season(24, false), $this->season(25, false)]);
+        $service = new MergeRoadmapLocalesApplicationService(
+            $snapshotRepo,
+            new RoadmapRawTextEventParser(),
+            $canonicalRepo,
+            $seasonRepo,
+        );
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('same season');
+
+        $service->merge(['fr' => 1, 'en' => 2, 'de' => 3], true);
+    }
+
     private function snapshot(int $id, string $locale, string $rawText): RoadmapSnapshotEntity
     {
+        $season = $this->season(24, false);
         $snapshot = new RoadmapSnapshotEntity()
             ->setLocale($locale)
             ->setSourceImagePath('/tmp/mock-'.$locale.'.jpg')
@@ -122,6 +157,7 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
             ->setOcrProvider('ocr.space')
             ->setOcrConfidence(0.95)
             ->setRawText($rawText)
+            ->setSeason($season)
             ->setStatus(RoadmapSnapshotStatusEnum::APPROVED);
 
         $reflection = new ReflectionClass($snapshot);
@@ -129,6 +165,20 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
         $property->setValue($snapshot, $id);
 
         return $snapshot;
+    }
+
+    private function season(int $number, bool $active): RoadmapSeasonEntity
+    {
+        $season = new RoadmapSeasonEntity()
+            ->setSeasonNumber($number)
+            ->setTitle(sprintf('Season %d', $number))
+            ->setIsActive($active);
+
+        $reflection = new ReflectionClass($season);
+        $property = $reflection->getProperty('id');
+        $property->setValue($season, $number);
+
+        return $season;
     }
 
     /**
@@ -193,19 +243,25 @@ final class InMemorySnapshotRepoForMerge implements RoadmapSnapshotWriteReposito
         return $this->findOneById($id);
     }
 
-    public function findRecent(int $limit = 20): array
+    public function findRecent(int $limit = 20, ?RoadmapSeasonEntity $season = null): array
     {
         if ($limit <= 0) {
             return [];
         }
 
-        return array_slice(array_values($this->snapshots), 0, $limit);
+        $items = array_values($this->snapshots);
+        if ($season instanceof RoadmapSeasonEntity) {
+            $items = array_values(array_filter($items, static fn (RoadmapSnapshotEntity $item): bool => $item->getSeason()?->getId() === $season->getId()));
+        }
+
+        return array_slice($items, 0, $limit);
     }
 }
 
 final class InMemoryCanonicalRepoForMerge implements RoadmapCanonicalEventWriteRepository
 {
     public bool $cleared = false;
+    public bool $clearedBySeason = false;
 
     /** @var list<RoadmapCanonicalEventEntity> */
     public array $savedEvents = [];
@@ -216,8 +272,84 @@ final class InMemoryCanonicalRepoForMerge implements RoadmapCanonicalEventWriteR
         $this->savedEvents = [];
     }
 
+    public function clearBySeason(RoadmapSeasonEntity $season): void
+    {
+        $this->clearedBySeason = true;
+        $this->savedEvents = [];
+    }
+
     public function saveAll(array $events): void
     {
         $this->savedEvents = $events;
+    }
+}
+
+final class InMemorySeasonRepoForMerge implements RoadmapSeasonRepository
+{
+    /** @var array<int, RoadmapSeasonEntity> */
+    private array $items = [];
+
+    /**
+     * @param list<RoadmapSeasonEntity> $seasons
+     */
+    public function __construct(array $seasons)
+    {
+        foreach ($seasons as $season) {
+            $id = $season->getId();
+            if (is_int($id)) {
+                $this->items[$id] = $season;
+            }
+        }
+    }
+
+    public function save(RoadmapSeasonEntity $season): void
+    {
+        $id = $season->getId();
+        if (is_int($id)) {
+            $this->items[$id] = $season;
+        }
+    }
+
+    public function findOneById(int $id): ?RoadmapSeasonEntity
+    {
+        return $this->items[$id] ?? null;
+    }
+
+    public function findOneBySeasonNumber(int $seasonNumber): ?RoadmapSeasonEntity
+    {
+        foreach ($this->items as $item) {
+            if ($item->getSeasonNumber() === $seasonNumber) {
+                return $item;
+            }
+        }
+
+        return null;
+    }
+
+    public function findActive(): ?RoadmapSeasonEntity
+    {
+        foreach ($this->items as $item) {
+            if ($item->isActive()) {
+                return $item;
+            }
+        }
+
+        return null;
+    }
+
+    public function findAllOrderedBySeasonNumberDesc(): array
+    {
+        $items = array_values($this->items);
+        usort($items, static fn (RoadmapSeasonEntity $a, RoadmapSeasonEntity $b): int => $b->getSeasonNumber() <=> $a->getSeasonNumber());
+
+        return $items;
+    }
+
+    public function deactivateAllExcept(?RoadmapSeasonEntity $activeSeason): void
+    {
+        $activeId = $activeSeason?->getId();
+        foreach ($this->items as $item) {
+            $item->setIsActive(is_int($activeId) && $item->getId() === $activeId);
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace App\Tests\Functional;
 
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventTranslationEntity;
+use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -56,7 +57,13 @@ final class RoadmapCalendarControllerTest extends WebTestCase
     public function testPageRendersCanonicalEventsWithoutTimeDisplay(): void
     {
         $user = $this->createUser('roadmap-calendar@example.com');
+        $season = new RoadmapSeasonEntity()
+            ->setSeasonNumber(24)
+            ->setTitle('Season 24')
+            ->setIsActive(true);
+        $this->entityManager?->persist($season);
         $event = new RoadmapCanonicalEventEntity()
+            ->setSeason($season)
             ->setTranslationKey('roadmap.event.20260303.20260310')
             ->setStartsAt(new DateTimeImmutable('2026-03-03 00:00:00'))
             ->setEndsAt(new DateTimeImmutable('2026-03-10 23:59:59'))
@@ -101,7 +108,7 @@ final class RoadmapCalendarControllerTest extends WebTestCase
             return;
         }
 
-        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE roadmap_canonical_event_translation, roadmap_canonical_event, minerva_rotation, contact_message, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
+        $this->entityManager->getConnection()->executeStatement('TRUNCATE TABLE roadmap_canonical_event_translation, roadmap_canonical_event, roadmap_season, minerva_rotation, contact_message, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
     }
 
     private function browser(): KernelBrowser

@@ -164,3 +164,13 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
 - Les tests fonctionnels et integration recreent la DB de test.
 - En pratique, lancer `make phpstan` + `make phpunit-unit` avant les suites plus couteuses.
 - Pour Minerva incident: voir aussi `docs/ops/minerva-governance.md`.
+
+## Roadmap saisonniere
+- Procedure recommandee a chaque nouvelle saison:
+  - 1. Lancer OCR sur les 3 langues (FR/EN/DE) avec `make roadmap-ocr-scan`.
+  - 2. Ouvrir `GET /{locale}/admin/roadmap`, verifier/corriger le texte OCR, generer puis approuver chaque snapshot.
+  - 3. Lancer la fusion FR/EN/DE depuis l admin roadmap.
+- Regle de publication:
+  - la fusion remplace uniquement les evenements canoniques de la saison concernee,
+  - la saison fusionnee devient active automatiquement,
+  - les saisons precedentes restent en base (pas d ecrasement global).

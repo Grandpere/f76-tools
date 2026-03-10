@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Catalog\Application\Roadmap;
 
+use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 
 interface RoadmapSnapshotWriteRepository
@@ -28,5 +29,5 @@ interface RoadmapSnapshotWriteRepository
     /**
      * @return list<RoadmapSnapshotEntity>
      */
-    public function findRecent(int $limit = 20): array;
+    public function findRecent(int $limit = 20, ?RoadmapSeasonEntity $season = null): array;
 }

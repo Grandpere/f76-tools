@@ -23,6 +23,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'roadmap_canonical_event')]
 #[ORM\Index(name: 'idx_roadmap_canonical_event_starts_at', columns: ['starts_at'])]
 #[ORM\Index(name: 'idx_roadmap_canonical_event_ends_at', columns: ['ends_at'])]
+#[ORM\Index(name: 'idx_roadmap_canonical_event_season_starts_sort', columns: ['season_id', 'starts_at', 'sort_order'])]
 #[ORM\HasLifecycleCallbacks]
 class RoadmapCanonicalEventEntity
 {
@@ -45,6 +46,10 @@ class RoadmapCanonicalEventEntity
 
     #[ORM\Column(name: 'sort_order')]
     private int $sortOrder = 0;
+
+    #[ORM\ManyToOne(targetEntity: RoadmapSeasonEntity::class)]
+    #[ORM\JoinColumn(name: 'season_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
+    private ?RoadmapSeasonEntity $season = null;
 
     #[ORM\Column(name: 'created_at', type: Types::DATETIME_IMMUTABLE)]
     private DateTimeImmutable $createdAt; // @phpstan-ignore property.onlyWritten
@@ -124,6 +129,18 @@ class RoadmapCanonicalEventEntity
     public function setSortOrder(int $sortOrder): self
     {
         $this->sortOrder = max(0, $sortOrder);
+
+        return $this;
+    }
+
+    public function getSeason(): ?RoadmapSeasonEntity
+    {
+        return $this->season;
+    }
+
+    public function setSeason(?RoadmapSeasonEntity $season): self
+    {
+        $this->season = $season;
 
         return $this;
     }

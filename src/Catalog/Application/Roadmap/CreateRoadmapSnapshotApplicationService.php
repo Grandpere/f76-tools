@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Catalog\Application\Roadmap;
 
+use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use App\Catalog\Domain\Roadmap\RoadmapSnapshotStatusEnum;
 use RuntimeException;
@@ -21,6 +22,8 @@ final readonly class CreateRoadmapSnapshotApplicationService
 {
     public function __construct(
         private RoadmapSnapshotWriteRepository $snapshotWriteRepository,
+        private RoadmapSeasonRepository $roadmapSeasonRepository,
+        private RoadmapSeasonExtractor $roadmapSeasonExtractor,
     ) {
     }
 
@@ -39,6 +42,18 @@ final readonly class CreateRoadmapSnapshotApplicationService
             ->setOcrConfidence($input->ocrConfidence)
             ->setRawText($input->rawText)
             ->setStatus(RoadmapSnapshotStatusEnum::DRAFT);
+
+        $seasonNumber = $this->roadmapSeasonExtractor->extractSeasonNumber($input->rawText);
+        if (is_int($seasonNumber) && $seasonNumber > 0) {
+            $season = $this->roadmapSeasonRepository->findOneBySeasonNumber($seasonNumber);
+            if (!$season instanceof RoadmapSeasonEntity) {
+                $season = new RoadmapSeasonEntity()
+                    ->setSeasonNumber($seasonNumber)
+                    ->setTitle(sprintf('Season %d', $seasonNumber));
+                $this->roadmapSeasonRepository->save($season);
+            }
+            $snapshot->setSeason($season);
+        }
 
         $this->snapshotWriteRepository->save($snapshot);
 

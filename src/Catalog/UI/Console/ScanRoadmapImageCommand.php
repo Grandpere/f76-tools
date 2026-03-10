@@ -124,6 +124,11 @@ final class ScanRoadmapImageCommand extends Command
                     $snapshot->getId() ?? 0,
                     $snapshot->getStatus()->value,
                 ));
+                if (null === $snapshot->getSeason()) {
+                    $io->warning('No season marker detected in OCR text. Snapshot saved without season.');
+                } else {
+                    $io->text(sprintf('Detected season: %d', $snapshot->getSeason()->getSeasonNumber()));
+                }
             } catch (RuntimeException $exception) {
                 $io->warning('OCR succeeded but snapshot persistence failed: '.$exception->getMessage());
             }
