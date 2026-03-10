@@ -23,3 +23,5 @@ Les overrides manuels sont visibles en admin, mais le front Minerva ne montre pa
 - Risque faible: regression d affichage Twig.
 - Rollback: revert du commit ticket (pas d impact schema).
 
+## Statut
+- Done - 2026-03-10

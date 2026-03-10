@@ -27,3 +27,5 @@ La rotation Minerva est generee de facon deterministe. Il faut pouvoir traiter r
 - Mitigation: validations strictes + CSRF + flash explicite.
 - Rollback: revert du commit ticket (migration incluse via down).
 
+## Statut
+- Done - 2026-03-10

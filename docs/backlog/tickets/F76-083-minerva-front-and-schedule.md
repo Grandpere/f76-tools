@@ -27,3 +27,6 @@ La base DDD est stabilisee. Le prochain besoin produit est d'ameliorer l'experie
 ## Risques / rollback
 - Risque: regressions de rendu Twig si cles de traduction manquantes.
 - Rollback: revert du commit ticket sans impact schema/migration.
+
+## Statut
+- Done - 2026-03-10

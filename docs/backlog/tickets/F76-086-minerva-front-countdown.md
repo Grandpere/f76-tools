@@ -19,3 +19,5 @@ Le front Minerva a besoin d un indicateur temporel dynamique pour savoir rapidem
 ## Tests
 - Functional: presence du bloc countdown et des cibles Stimulus sur la page Minerva.
 
+## Statut
+- Done - 2026-03-10
