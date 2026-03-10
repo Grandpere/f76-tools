@@ -76,8 +76,7 @@ final class AuditLogControllerTest extends WebTestCase
         ]);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
 
-        $this->browser()->request('GET', '/en/admin/audit-logs?action=user_toggle_active');
-        $this->browser()->followRedirect();
+        $this->getAndFollowRedirect('/en/admin/audit-logs?action=user_toggle_active');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $content = $this->browser()->getResponse()->getContent() ?: '';
         self::assertStringContainsString('user_toggle_active', $content);
@@ -100,8 +99,7 @@ final class AuditLogControllerTest extends WebTestCase
         ]);
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
 
-        $this->browser()->request('GET', '/en/admin/audit-logs/export.csv?action=user_toggle_active');
-        $this->browser()->followRedirect();
+        $this->getAndFollowRedirect('/en/admin/audit-logs/export.csv?action=user_toggle_active');
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('text/csv', (string) $this->browser()->getResponse()->headers->get('content-type'));
 
@@ -146,5 +144,13 @@ final class AuditLogControllerTest extends WebTestCase
         }
 
         return $this->client;
+    }
+
+    private function getAndFollowRedirect(string $uri): void
+    {
+        $this->browser()->request('GET', $uri);
+        if (302 === $this->browser()->getResponse()->getStatusCode()) {
+            $this->browser()->followRedirect();
+        }
     }
 }

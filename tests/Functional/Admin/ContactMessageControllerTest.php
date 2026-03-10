@@ -61,10 +61,7 @@ final class ContactMessageControllerTest extends WebTestCase
         $this->createContactMessage('two@example.com', 'Question 2', 'Second message body', ContactMessageStatusEnum::CLOSED);
 
         $this->browser()->loginUser($admin);
-        $this->browser()->request('GET', '/en/admin/contact-messages?status=closed');
-        if (302 === $this->browser()->getResponse()->getStatusCode()) {
-            $this->browser()->followRedirect();
-        }
+        $this->getAndFollowRedirect('/en/admin/contact-messages?status=closed');
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $content = $this->browser()->getResponse()->getContent() ?: '';
@@ -147,5 +144,13 @@ final class ContactMessageControllerTest extends WebTestCase
         }
 
         return $this->client;
+    }
+
+    private function getAndFollowRedirect(string $uri): void
+    {
+        $this->browser()->request('GET', $uri);
+        if (302 === $this->browser()->getResponse()->getStatusCode()) {
+            $this->browser()->followRedirect();
+        }
     }
 }

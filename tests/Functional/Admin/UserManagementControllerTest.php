@@ -129,10 +129,7 @@ final class UserManagementControllerTest extends WebTestCase
         $this->entityManager?->flush();
 
         $this->browser()->loginUser($admin);
-        $this->browser()->request('GET', sprintf('/en/admin/users/%d/auth-events?level=warning&q=198.51.100.8', $target->getId()));
-        if (302 === $this->browser()->getResponse()->getStatusCode()) {
-            $this->browser()->followRedirect();
-        }
+        $this->getAndFollowRedirect(sprintf('/en/admin/users/%d/auth-events?level=warning&q=198.51.100.8', $target->getId()));
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         $content = (string) $this->browser()->getResponse()->getContent();
@@ -160,10 +157,7 @@ final class UserManagementControllerTest extends WebTestCase
         $this->entityManager?->flush();
 
         $this->browser()->loginUser($admin);
-        $this->browser()->request('GET', sprintf('/en/admin/users/%d/auth-events/export.csv?level=warning&q=198.51.100', $target->getId()));
-        if (302 === $this->browser()->getResponse()->getStatusCode()) {
-            $this->browser()->followRedirect();
-        }
+        $this->getAndFollowRedirect(sprintf('/en/admin/users/%d/auth-events/export.csv?level=warning&q=198.51.100', $target->getId()));
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('text/csv', (string) $this->browser()->getResponse()->headers->get('content-type'));

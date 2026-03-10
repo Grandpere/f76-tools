@@ -56,8 +56,13 @@ final class AdminQueryStateSubscriber implements EventSubscriberInterface
 
         $stored = $request->getSession()->get($stateKey);
         if (is_array($stored) && [] !== $stored) {
-            /* @var array<string, mixed> $stored */
-            $request->query->replace($stored);
+            $normalized = [];
+            foreach ($stored as $key => $value) {
+                if (is_string($key)) {
+                    $normalized[$key] = $value;
+                }
+            }
+            $request->query->replace($normalized);
         }
     }
 
