@@ -61,9 +61,9 @@ export default class extends Controller {
 
     async loadPlayers() {
         this.setState(this.t('loadingPlayers'));
-        this.miscListTarget.innerHTML = '';
+        this.miscListTarget.replaceChildren();
         if (this.hasBookListTarget) {
-            this.bookListTarget.innerHTML = '';
+            this.bookListTarget.replaceChildren();
         }
 
         const response = await fetch(this.appendLocaleToUrl(this.playersUrlValue), {

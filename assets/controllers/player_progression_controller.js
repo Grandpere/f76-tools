@@ -52,7 +52,7 @@ export default class extends Controller {
 
     async loadPlayers() {
         this.setState(this.t('loadingPlayers'));
-        this.statsPanelTarget.innerHTML = '';
+        this.statsPanelTarget.replaceChildren();
 
         const response = await fetch(this.appendLocaleToUrl(this.playersUrlValue), {
             headers: { Accept: 'application/json' },
@@ -301,7 +301,7 @@ export default class extends Controller {
         if (!this.hasImportUnknownPanelTarget) {
             return;
         }
-        this.importUnknownPanelTarget.innerHTML = '';
+        this.importUnknownPanelTarget.replaceChildren();
     }
 
     renderPlayerSelect() {
@@ -323,7 +323,7 @@ export default class extends Controller {
 
     renderStats() {
         if (!this.stats || typeof this.stats !== 'object') {
-            this.statsPanelTarget.innerHTML = '';
+            this.statsPanelTarget.replaceChildren();
             return;
         }
 

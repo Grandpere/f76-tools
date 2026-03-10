@@ -22,7 +22,7 @@ export default class extends Controller {
 
             const payload = await response.json();
             this.stateTarget.textContent = `${payload.title} - ${payload.updatedAt}`;
-            this.listTarget.innerHTML = '';
+            this.listTarget.replaceChildren();
 
             const cards = Array.isArray(payload.cards) ? payload.cards : [];
             cards.forEach((card) => {

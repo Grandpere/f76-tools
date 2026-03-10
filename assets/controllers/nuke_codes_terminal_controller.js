@@ -37,8 +37,8 @@ export default class extends Controller {
             this.startTicker();
         } catch {
             this.stateTarget.textContent = this.t('loadFailed');
-            this.headTarget.innerHTML = '';
-            this.codesTarget.innerHTML = '';
+            this.headTarget.replaceChildren();
+            this.codesTarget.replaceChildren();
         }
     }
 
