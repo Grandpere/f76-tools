@@ -117,6 +117,7 @@ make logs
 make ps
 make shell
 ```
+`make restart-app` attend automatiquement que l'URL de login reponde avant de rendre la main.
 
 ### Base de donnees
 ```bash
@@ -213,9 +214,6 @@ Problème de permissions/volume `var`. Relancer :
 ```bash
 make restart-app
 ```
-
-### 502 temporaire apres restart
-Nginx peut répondre 502 pendant le redémarrage `php-fpm`. Attendre quelques secondes puis refresh.
 
 ### Mail non recu
 Verifier `MAILER_DSN` et consulter Mailpit: [http://localhost:8025](http://localhost:8025)
