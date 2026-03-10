@@ -48,6 +48,16 @@ ps: ## List containers
 .PHONY: restart-app
 restart-app: ## Restart app container only
 	$(DC) restart app
+	@echo "Waiting for HTTP readiness on http://localhost:8000/en/login ..."
+	@for i in $$(seq 1 60); do \
+		if curl -fsS "http://localhost:8000/en/login" >/dev/null 2>&1; then \
+			echo "App is ready."; \
+			exit 0; \
+		fi; \
+		sleep 1; \
+	done; \
+	echo "Timeout: app is not ready after 60s."; \
+	exit 1
 
 .PHONY: shell
 shell: ## Open a shell in app container
