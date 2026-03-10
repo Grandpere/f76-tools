@@ -1,10 +1,10 @@
 # Current Focus
 
 ## Priorite active
-- Stabilisation front post-refacto (headers/nav/blocs front) + corrections UX mineures.
 - F76-002: Evolutions produit Minerva (localisation/date/listes) selon la roadmap metier.
 
 ## Termine recemment
+- Stabilisation front post-refacto (perf queries + ajustements UX mineurs) (done, commits `d6af2a0`, `58491be`, `c53463c`).
 - F76-142: Minerva incident playbook and override lifecycle (done).
 - F76-145: Fondations roadmap OCR (provider chain + fallback qualite) (done).
 - F76-144: UX final polish front/admin consistency (done).
