@@ -38,7 +38,7 @@ final class OcrProviderChain
         }
 
         $attempts = [];
-        $lastSuccessfulResult = null;
+        $bestSuccessfulResult = null;
 
         foreach ($this->providers as $provider) {
             try {
@@ -53,7 +53,13 @@ final class OcrProviderChain
                     $assessment->reasons,
                 );
 
-                $lastSuccessfulResult = $result;
+                if (
+                    !$bestSuccessfulResult instanceof OcrResult
+                    || $result->confidence > $bestSuccessfulResult->confidence
+                ) {
+                    $bestSuccessfulResult = $result;
+                }
+
                 if ($assessment->acceptable) {
                     return new OcrChainResult(
                         $result,
@@ -73,9 +79,9 @@ final class OcrProviderChain
             }
         }
 
-        if ($lastSuccessfulResult instanceof OcrResult) {
+        if ($bestSuccessfulResult instanceof OcrResult) {
             return new OcrChainResult(
-                $lastSuccessfulResult,
+                $bestSuccessfulResult,
                 count($attempts) > 1,
                 $attempts,
             );

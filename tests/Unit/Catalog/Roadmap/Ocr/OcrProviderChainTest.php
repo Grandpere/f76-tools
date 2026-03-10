@@ -73,6 +73,25 @@ final class OcrProviderChainTest extends TestCase
         self::assertSame('binary not available', $result->attempts[0]->error);
     }
 
+    public function testKeepsBestConfidenceWhenNoProviderMeetsThreshold(): void
+    {
+        $chain = new OcrProviderChain(
+            [
+                new FakeProvider('ocr.space', new OcrResult('ocr.space', 'Result A', 0.8978, ['Result A'])),
+                new FakeProvider('tesseract', new OcrResult('tesseract', 'Result B', 0.8338, ['Result B'])),
+            ],
+            new OcrQualityAssessor(new OcrQualityPolicy(0.90, 1)),
+        );
+
+        $result = $chain->recognize('/tmp/roadmap.png', 'fr');
+
+        self::assertSame('ocr.space', $result->result->provider);
+        self::assertTrue($result->usedFallback);
+        self::assertCount(2, $result->attempts);
+        self::assertFalse($result->attempts[0]->acceptable);
+        self::assertFalse($result->attempts[1]->acceptable);
+    }
+
     public function testThrowsWhenNoProviderConfigured(): void
     {
         $chain = new OcrProviderChain([]);
