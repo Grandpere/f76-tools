@@ -13,6 +13,12 @@ Ce decalage cree une progression trompeuse et des ambiguities entre "liste" et "
 - Front dashboard BOOK: supprimer le hardcode 1..4 et afficher les groupes selon les listes presentes.
 - Progression Minerva front: consommer prioritairement les listes absolues, avec fallback temporaire.
 
+## Avancement
+- [x] Contrainte DB et migration `list_number` etendue a `1..24`.
+- [x] Mapping import Minerva `61..84 -> 1..24` + logique liste speciale conservee.
+- [x] Reset/rebuild des liaisons BOOK a l import (`deleteAllBookLists` + reconstruction).
+- [x] Affichage front/progression sans hardcode `1..4` (groupement sur listes presentes).
+
 ## Criteres d acceptance
 - Les stats `bookByList` peuvent exposer des listes au-dela de 4 (jusqu a 24 selon donnees importees).
 - Le dashboard affiche les plans Minerva par listes reelles importees (plus de hardcode 4 listes).
@@ -23,3 +29,5 @@ Ce decalage cree une progression trompeuse et des ambiguities entre "liste" et "
 - Relancer un import complet JSON avec reset des liaisons BOOK.
 - Verifier visuellement dashboard + rotation Minerva.
 
+## Statut
+- Done - 2026-03-10

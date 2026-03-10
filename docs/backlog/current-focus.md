@@ -4,6 +4,7 @@
 - Aucune priorite active immediate (prochain ticket a definir).
 
 ## Termine recemment
+- F76-087: BOOK lists en modele absolu 1..24 (done).
 - F76-002: Rotation Minerva (socle localisation/date/listes) (done).
 - Stabilisation UX backoffice/front apres F76-138 (retours fonctionnels + micro-polish) (done).
 - Stabilisation front post-refacto (perf queries + ajustements UX mineurs) (done, commits `d6af2a0`, `58491be`, `c53463c`).
