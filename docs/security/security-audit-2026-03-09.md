@@ -194,3 +194,14 @@ Conclusion:
 | Redis securite | `cache.security_state` non partage si `REDIS_URL` mal pointe | Moyen | Non accepte | Valider `REDIS_URL` prod et test multi-instance |
 | Secrets | Secrets par defaut en fichiers d'exemple | Faible | Accepte en dev | Injecter tous secrets via env/secrets manager en prod |
 | Rate limits | Seuils actuels possiblement sous/sur-adaptes a la charge reelle | Faible | Accepte avec suivi | Ajuster via monitoring apres baseline trafic |
+
+## Follow-up verification (2026-03-10)
+- Le socle technique est bien en place dans le repo:
+  - headers/CSP mode/trusted proxies+hosts/cookies/session hardening,
+  - pool `cache.security_state` + support Redis prod,
+  - runbook ops et commandes smoke/retention.
+- Les points restants sont majoritairement infra runtime:
+  - injection des secrets prod hors repo,
+  - configuration LB/HTTPS/HSTS effective,
+  - validation multi-instance Redis security state,
+  - calibration alerting et validation go-live finale.
