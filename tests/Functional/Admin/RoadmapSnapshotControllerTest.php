@@ -250,6 +250,7 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
     {
         $admin = $this->createUser('admin-roadmap-upload@example.com', ['ROLE_ADMIN']);
         $this->browser()->loginUser($admin);
+        $this->browser()->disableReboot();
 
         $provider = new class implements OcrProvider {
             public function name(): string
@@ -275,8 +276,10 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
 
         $tmpFile = tempnam(sys_get_temp_dir(), 'roadmap-upload-');
         self::assertNotFalse($tmpFile);
-        file_put_contents($tmpFile, base64_decode('/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAQEBUQEBAVFRUVFRUVFRUVFRUVFRUWFxUWFhUVFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGxAQGy8lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAAEAAgMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABQYBAwQCB//EADkQAAIBAwIDBQYEBwAAAAAAAAECAwAEEQUSITEGE0FRImFxgZEHFDKhsdHh8BUjQmKywdL/xAAaAQEAAwEBAQAAAAAAAAAAAAAAAQIDBAUG/8QAJhEBAAICAQQCAgMAAAAAAAAAAAECABEDEiExBEETIlFhFDJxgf/aAAwDAQACEQMRAD8A9fQREQEREBERAREQEREBERAREQEREBERA//Z'));
-        $uploadedFile = new UploadedFile($tmpFile, 'roadmap.jpg', 'image/jpeg', null, true);
+        $pngContent = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgA6V7x8AAAAASUVORK5CYII=', true);
+        self::assertIsString($pngContent);
+        file_put_contents($tmpFile, $pngContent);
+        $uploadedFile = new UploadedFile($tmpFile, 'roadmap.png', 'image/png', null, true);
 
         $this->browser()->request('POST', '/en/admin/roadmap/upload', [
             '_csrf_token' => (string) $tokenNode->attr('value'),

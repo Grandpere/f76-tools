@@ -120,7 +120,7 @@ services:
             $binaryPath: '%env(string:ROADMAP_OCR_TESSERACT_BIN)%'
             $timeoutSeconds: '%env(int:ROADMAP_OCR_TIMEOUT_SECONDS)%'
         tags:
-            - { name: 'app.roadmap.ocr_provider', priority: 200 }
+            - { name: 'app.roadmap.ocr_provider', priority: 150 }
 
     App\Catalog\Infrastructure\Roadmap\Ocr\OcrSpaceHttpProvider:
         arguments:
@@ -130,7 +130,7 @@ services:
             $timeoutSeconds: '%env(int:ROADMAP_OCR_SPACE_TIMEOUT_SECONDS)%'
             $maxImageBytes: '%env(int:ROADMAP_OCR_SPACE_MAX_IMAGE_BYTES)%'
         tags:
-            - { name: 'app.roadmap.ocr_provider', priority: 150 }
+            - { name: 'app.roadmap.ocr_provider', priority: 200 }
 
     App\Catalog\Infrastructure\Roadmap\Ocr\UnavailablePaddleOcrProvider:
         tags:

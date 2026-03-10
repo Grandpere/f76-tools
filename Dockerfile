@@ -43,7 +43,10 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
     CMD pgrep -x php-fpm > /dev/null || exit 1
 
 COPY docker/php/conf.d/app.ini /usr/local/etc/php/conf.d/zz-app.ini
+COPY docker/php/entrypoint.sh /usr/local/bin/app-entrypoint
+RUN chmod +x /usr/local/bin/app-entrypoint
 WORKDIR /var/www/html
+ENTRYPOINT ["app-entrypoint"]
 
 FROM base AS dev
 RUN apk add --no-cache \

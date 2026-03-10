@@ -2407,7 +2407,13 @@ body::before {
 }
 
 .roadmap-upload-form {
+    align-items: flex-start;
     margin-bottom: 0.72rem;
+}
+
+.roadmap-upload-form button[type='submit'] {
+    align-self: flex-start;
+    margin-top: 1.45rem;
 }
 
 .roadmap-canonical-table .roadmap-canonical-col-window {

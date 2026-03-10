@@ -394,3 +394,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: OCR truncated a cross-month start day near month-end (`28` read as `3`) on FR raw text.
 - Fix: parser now corrects suspicious cross-month ranges when continuity indicates a late-month start; merge also emits explicit `Potential OCR day mismatch` warning when locale buckets split on same end date with large start-day gap.
 - Prevention: keep locale-merge warnings enabled and manually review any mismatch warning before approving canonical roadmap.
+
+## 2026-03-10 - Functional test service override lost between requests
+- Symptom: roadmap upload functional test created zero snapshots even with an OCR stub provider configured.
+- Root cause: `KernelBrowser` rebooted the kernel between GET and POST, dropping the overridden `OcrProviderChain` service from the test container.
+- Fix: disabled reboot in that test before overriding the service (`$client->disableReboot()`), so the same container is reused for upload POST.
+- Prevention: when a functional test overrides container services and performs multiple requests, disable reboot (or re-inject before each request).

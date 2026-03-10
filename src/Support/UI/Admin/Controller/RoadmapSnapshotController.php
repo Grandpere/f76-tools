@@ -213,12 +213,14 @@ final class RoadmapSnapshotController extends AbstractController
             $snapshot = $this->createRoadmapSnapshotApplicationService->create(
                 new CreateRoadmapSnapshotInput(
                     $localeInput,
-                    $relativePath,
+                    $absolutePath,
                     $scan->result->provider,
                     $scan->result->confidence,
                     $scan->result->text,
                 ),
             );
+            $snapshot->setSourceImagePath($relativePath);
+            $this->roadmapSnapshotWriteRepository->save($snapshot);
         } catch (Throwable $exception) {
             $this->addFlash('warning', 'admin_roadmap.flash.upload_failed');
             $this->addFlash('warning', $exception->getMessage());
