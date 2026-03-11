@@ -324,6 +324,7 @@ admin_roadmap.snapshot_quality: Qualität
 admin_roadmap.snapshot_quality_ok: OK
 admin_roadmap.snapshot_quality_warn: Prufen
 admin_roadmap.snapshot_quality_error: Blockiert
+admin_roadmap.snapshot_quality_legend: "Qualitatslegende: E = blockierende Fehler, W = Warnungen."
 admin_roadmap.snapshot_scanned_at: Gescannt am
 admin_roadmap.snapshot_actions: Aktionen
 admin_roadmap.snapshot_season: Saison
