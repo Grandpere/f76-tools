@@ -424,3 +424,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: normalization merged `... BIS` with any next line (including titles), and month resolution was strict to selected locale for month-first patterns.
 - Fix: restrict `... BIS` merge to date-like continuations, support deferred continuation lines, and add cross-locale month token fallback (FR/EN/DE maps) for month-first parsing while keeping strict token checks to avoid false positives.
 - Prevention: validate parser changes against mixed-locale real snapshots (including legacy uploads) and keep dedicated unit tests for split-date continuations.
+
+## 2026-03-11 - Duplicate range warning should not flag valid overlapping events
+- Symptom: roadmap quality flagged `Duplicate range detected` for snapshots where two distinct events intentionally shared the same date window.
+- Root cause: validator warning logic keyed only on date range and ignored title difference.
+- Fix: duplicate warning now triggers only when both range and normalized title match (true duplicate), not when different events share the same dates.
+- Prevention: keep validator tests for both cases (same range + different titles => no warning, same range + same title => warning).

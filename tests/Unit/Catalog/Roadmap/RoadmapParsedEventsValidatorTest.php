@@ -102,4 +102,47 @@ final class RoadmapParsedEventsValidatorTest extends TestCase
 
         self::assertFalse($result->hasErrors());
     }
+
+    public function testDuplicateRangeWarningIsIgnoredWhenTitlesDiffer(): void
+    {
+        $validator = new RoadmapParsedEventsValidator();
+        $events = [
+            new RoadmapParsedEvent(
+                'SURPLUS DE MITRAILLE ET DOUBLES MUTATIONS',
+                new DateTimeImmutable('2024-09-26 18:00:00'),
+                new DateTimeImmutable('2024-09-30 18:00:00'),
+            ),
+            new RoadmapParsedEvent(
+                'WEEK-END DOUBLE S.C.O.R.E.',
+                new DateTimeImmutable('2024-09-26 18:00:00'),
+                new DateTimeImmutable('2024-09-30 18:00:00'),
+            ),
+        ];
+
+        $result = $validator->validate($events, 'fr', 'FALLOUT 76 SEASON 17');
+
+        self::assertSame([], $result->warnings);
+    }
+
+    public function testDuplicateRangeWarningIsKeptWhenTitlesMatch(): void
+    {
+        $validator = new RoadmapParsedEventsValidator();
+        $events = [
+            new RoadmapParsedEvent(
+                'MUTATED PUBLIC EVENTS',
+                new DateTimeImmutable('2025-08-19 18:00:00'),
+                new DateTimeImmutable('2025-08-26 18:00:00'),
+            ),
+            new RoadmapParsedEvent(
+                'MUTATED PUBLIC EVENTS',
+                new DateTimeImmutable('2025-08-19 18:00:00'),
+                new DateTimeImmutable('2025-08-26 18:00:00'),
+            ),
+        ];
+
+        $result = $validator->validate($events, 'en', 'FALLOUT 76 SEASON 21');
+
+        self::assertNotSame([], $result->warnings);
+        self::assertStringContainsString('Duplicate range detected', implode(' ', $result->warnings));
+    }
 }

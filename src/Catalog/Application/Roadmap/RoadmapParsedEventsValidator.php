@@ -51,6 +51,7 @@ final class RoadmapParsedEventsValidator
             }
         }
 
+        /** @var array<string, array{index: int, titleKey: string}> $seenRanges */
         $seenRanges = [];
         $previousStartsAt = null;
 
@@ -78,13 +79,18 @@ final class RoadmapParsedEventsValidator
 
             $rangeKey = $event->startsAt->format('Y-m-d H:i:s').'|'.$event->endsAt->format('Y-m-d H:i:s');
             if (isset($seenRanges[$rangeKey])) {
-                $warnings[] = sprintf(
-                    'Duplicate range detected between events #%d and #%d.',
-                    $seenRanges[$rangeKey],
-                    $labelIndex,
-                );
+                if ($seenRanges[$rangeKey]['titleKey'] === $this->normalizeTitleForDuplicateCheck($event->title)) {
+                    $warnings[] = sprintf(
+                        'Duplicate range detected between events #%d and #%d.',
+                        $seenRanges[$rangeKey]['index'],
+                        $labelIndex,
+                    );
+                }
             } else {
-                $seenRanges[$rangeKey] = $labelIndex;
+                $seenRanges[$rangeKey] = [
+                    'index' => $labelIndex,
+                    'titleKey' => $this->normalizeTitleForDuplicateCheck($event->title),
+                ];
             }
         }
 
@@ -148,6 +154,15 @@ final class RoadmapParsedEventsValidator
         $diff = $min->diff($max);
 
         return is_int($diff->days) ? $diff->days : null;
+    }
+
+    private function normalizeTitleForDuplicateCheck(string $title): string
+    {
+        $normalized = mb_strtoupper(trim($title));
+        $normalized = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $normalized) ?? $normalized;
+        $normalized = preg_replace('/\s+/u', ' ', $normalized) ?? $normalized;
+
+        return trim($normalized);
     }
 
     /**
