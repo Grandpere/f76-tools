@@ -107,7 +107,41 @@ final class RoadmapRawTextEventParser
             $lastRangeEnd = $singleDate['endsAt'];
         }
 
-        return $events;
+        return $this->deduplicateByRangeKeepingBestTitle($events);
+    }
+
+    /**
+     * @param list<RoadmapParsedEvent> $events
+     *
+     * @return list<RoadmapParsedEvent>
+     */
+    private function deduplicateByRangeKeepingBestTitle(array $events): array
+    {
+        $bestByRange = [];
+        foreach ($events as $event) {
+            $rangeKey = $event->startsAt->format('Y-m-d H:i:s').'|'.$event->endsAt->format('Y-m-d H:i:s');
+            if (!isset($bestByRange[$rangeKey])) {
+                $bestByRange[$rangeKey] = $event;
+                continue;
+            }
+
+            $currentBest = $bestByRange[$rangeKey];
+            if ($this->titleQualityScore($event->title) > $this->titleQualityScore($currentBest->title)) {
+                $bestByRange[$rangeKey] = $event;
+            }
+        }
+
+        return array_values($bestByRange);
+    }
+
+    private function titleQualityScore(string $title): int
+    {
+        $score = mb_strlen(trim($title));
+        if (1 === preg_match('/(?:©|RIGHT\s+RES|BETHESDA|ZENIMAX|COMMUNITY\s+CALENDAR)/iu', $title)) {
+            $score -= 1000;
+        }
+
+        return $score;
     }
 
     /**

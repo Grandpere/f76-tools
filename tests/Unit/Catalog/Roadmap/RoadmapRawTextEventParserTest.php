@@ -705,6 +705,22 @@ final class RoadmapRawTextEventParserTest extends TestCase
         self::assertFalse($this->containsDateRange($events, '2025-08-18 16:00:00', '2025-08-18 20:00:00'));
     }
 
+    public function testParserKeepsBestTitleWhenDuplicateRangeIsDetected(): void
+    {
+        $parser = new RoadmapRawTextEventParser();
+        $text = <<<TXT
+            26 SEPTEMBRE - 30 SEPTEMBRE
+            SURPLUS DE MITRAILLE ET DOUBLES MUTATIONS
+            26 SEPTEMBRE - 30 SEPTEMBRE
+            WEEK-END DOUBLE S.C.O.R.E. © 2024 Bethesda
+            TXT;
+
+        $events = $parser->parse($text, 'fr', new DateTimeImmutable('2024-09-01 10:00:00'));
+
+        self::assertCount(1, $events);
+        self::assertSame('SURPLUS DE MITRAILLE ET DOUBLES MUTATIONS', $events[0]->title);
+    }
+
     private function normalizeTitleForAssert(string $value): string
     {
         $normalized = mb_strtoupper(trim($value));
