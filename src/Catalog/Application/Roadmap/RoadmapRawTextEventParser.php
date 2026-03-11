@@ -357,7 +357,7 @@ final class RoadmapRawTextEventParser
             } else {
                 // Format: "APRIL 7 - APRIL 14" / "MAR 3 - MAR 10"
                 if ($profile->usesMonthFirstDates() && preg_match(
-                    '/([^\s\-–]+)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s*'.$connectorPattern.'\s*([^\s\-–]+)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?/iu',
+                    '/([^\s\-–]+)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?(?:\s*,?\s*\d{2,4})?\s*'.$connectorPattern.'\s*([^\s\-–]+)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?(?:\s*,?\s*\d{2,4})?/iu',
                     $line,
                     $matches,
                 )) {
@@ -367,7 +367,7 @@ final class RoadmapRawTextEventParser
                     $endDay = (int) $matches[4];
                 // Format: "APRIL 21 - MAY 5" with noisy separator variants
                 } elseif ($profile->usesMonthFirstDates() && preg_match(
-                    '/([^\s\-–]+)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s*'.$connectorPattern.'\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s*([^\s\-–]+)/iu',
+                    '/([^\s\-–]+)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?(?:\s*,?\s*\d{2,4})?\s*'.$connectorPattern.'\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?(?:\s*,?\s*\d{2,4})?\s*([^\s\-–]+)/iu',
                     $line,
                     $matches,
                 )) {
@@ -441,16 +441,16 @@ final class RoadmapRawTextEventParser
             return null;
         }
 
-        if (preg_match('/^\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s+([^\s]+)\s*(.*)$/iu', $line, $matches)) {
+        if (preg_match('/^\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s+([^\s]+)(?:\s*,?\s*(\d{2,4}))?\s*(.*)$/iu', $line, $matches)) {
             $day = (int) $matches[1];
             $month = $this->monthNameToNumber($matches[2], $locale);
-            $inlineTail = (string) $matches[3];
-            $year = (int) $referenceDate->format('Y');
-        } elseif ($profile->usesMonthFirstDates() && preg_match('/^\s*([^\s]+)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s*(.*)$/iu', $line, $matches)) {
+            $year = $this->normalizeParsedYear((string) $matches[3], $referenceDate) ?? (int) $referenceDate->format('Y');
+            $inlineTail = (string) $matches[4];
+        } elseif ($profile->usesMonthFirstDates() && preg_match('/^\s*([^\s]+)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?(?:\s*,?\s*(\d{2,4}))?\s*(.*)$/iu', $line, $matches)) {
             $month = $this->monthNameToNumber($matches[1], $locale);
             $day = (int) $matches[2];
-            $inlineTail = (string) $matches[3];
-            $year = (int) $referenceDate->format('Y');
+            $year = $this->normalizeParsedYear((string) $matches[3], $referenceDate) ?? (int) $referenceDate->format('Y');
+            $inlineTail = (string) $matches[4];
         } elseif (preg_match('/^\s*(\d{1,2})\s*[\/\.\-]\s*(\d{1,2})(?:\s*[\/\.\-]\s*(\d{2,4}))?\s*(.*)$/u', $line, $matches)) {
             $day = (int) $matches[1];
             $month = (int) $matches[2];
