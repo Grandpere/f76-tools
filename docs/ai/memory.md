@@ -21,6 +21,24 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-03-11 - OCR fallback must keep best confidence, not last provider
+- Symptom: when all OCR providers were below acceptance threshold, snapshot kept a lower-quality result (e.g. tesseract 0.83 over ocr.space 0.89).
+- Root cause: `OcrProviderChain` returned the last successful provider instead of the best-confidence successful provider.
+- Fix: chain now tracks highest confidence among successful attempts and returns that result when no provider is acceptable.
+- Prevention: keep a unit test for "all providers rejected by threshold" asserting best-confidence fallback selection.
+
+## 2026-03-11 - Optional OCR providers should not pollute attempt diagnostics
+- Symptom: admin OCR details repeatedly showed `paddle ... not installed/configured`, creating noise and confusion.
+- Root cause: unavailable optional provider was treated as a regular failed attempt.
+- Fix: introduced `OcrProviderUnavailableException`; chain skips unavailable providers in attempt reporting while preserving real failures.
+- Prevention: optional/inactive providers should raise dedicated unavailable exceptions and be excluded from operator-facing failure summaries.
+
+## 2026-03-11 - Roadmap merge quality should rely on reviewed snapshot events when present
+- Symptom: merge could reparse raw OCR text and ignore manually corrected `roadmap_event` rows from admin, reducing reliability on older seasons.
+- Root cause: merge pipeline always parsed `raw_text` instead of preferring persisted reviewed events.
+- Fix: merge now uses snapshot persisted events first (sorted), falls back to parser only when events are absent, and runs quality validation before merge.
+- Prevention: for review-driven workflows, merge/publish should consume edited persisted artifacts before any regeneration fallback.
+
 ## 2026-03-06 - Admin roadmap functional tests broke on locale query in form action
 - Symptom: `RoadmapSnapshotControllerTest` could not find CSRF tokens in parse/approve/save forms (`assertCount(1)` got `0`).
 - Root cause: test selectors used `form[action$=\"...\"]` while rendered actions now append `?locale=...`.

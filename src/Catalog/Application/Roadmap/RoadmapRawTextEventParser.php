@@ -36,13 +36,14 @@ final class RoadmapRawTextEventParser
     public function parse(string $rawText, string $locale, DateTimeImmutable $referenceDate): array
     {
         $lines = $this->normalizeLines($rawText);
+        $dateMarkerIndexes = $this->detectDateMarkerIndexes($lines, $locale, $referenceDate);
         $events = [];
         $lastRangeEnd = null;
 
         foreach ($lines as $index => $line) {
             $dateRange = $this->extractDateRange($line, $locale, $referenceDate, $lastRangeEnd);
             if (null !== $dateRange) {
-                $title = $this->resolveTitle($lines, $index, $locale);
+                $title = $this->resolveTitle($lines, $index, $locale, $dateMarkerIndexes);
                 if ('' === $title) {
                     $title = sprintf('Event %d', count($events) + 1);
                 }
@@ -62,7 +63,7 @@ final class RoadmapRawTextEventParser
                 continue;
             }
 
-            $title = $this->resolveTitleForSingleDate($lines, $index, $locale, $singleDate['inlineTitle']);
+            $title = $this->resolveTitleForSingleDate($lines, $index, $locale, $singleDate['inlineTitle'], $dateMarkerIndexes);
             if ('' === $title) {
                 $title = sprintf('Event %d', count($events) + 1);
             }
@@ -120,11 +121,13 @@ final class RoadmapRawTextEventParser
 
     /**
      * @param list<string> $lines
+     * @param list<int>    $dateMarkerIndexes
      */
-    private function resolveTitle(array $lines, int $dateLineIndex, string $locale): string
+    private function resolveTitle(array $lines, int $dateLineIndex, string $locale, array $dateMarkerIndexes): string
     {
         $profile = $this->profileRegistry->profileFor($locale);
-        $candidate = $this->findCandidateTitleForward($lines, $dateLineIndex, $locale);
+        $nextDateMarkerIndex = $this->nextDateMarkerIndex($dateMarkerIndexes, $dateLineIndex);
+        $candidate = $this->findCandidateTitleForward($lines, $dateLineIndex, $locale, $nextDateMarkerIndex);
         if ('' !== $candidate) {
             return $profile->normalizeTitle($candidate);
         }
@@ -134,8 +137,9 @@ final class RoadmapRawTextEventParser
 
     /**
      * @param list<string> $lines
+     * @param list<int>    $dateMarkerIndexes
      */
-    private function resolveTitleForSingleDate(array $lines, int $dateLineIndex, string $locale, string $inlineTitle): string
+    private function resolveTitleForSingleDate(array $lines, int $dateLineIndex, string $locale, string $inlineTitle, array $dateMarkerIndexes): string
     {
         $profile = $this->profileRegistry->profileFor($locale);
         $parts = [];
@@ -143,7 +147,8 @@ final class RoadmapRawTextEventParser
             $parts[] = $inlineTitle;
         }
 
-        $forwardTitle = $this->findCandidateTitleForward($lines, $dateLineIndex, $locale);
+        $nextDateMarkerIndex = $this->nextDateMarkerIndex($dateMarkerIndexes, $dateLineIndex);
+        $forwardTitle = $this->findCandidateTitleForward($lines, $dateLineIndex, $locale, $nextDateMarkerIndex);
         if ('' !== $forwardTitle) {
             $parts[] = $forwardTitle;
         }
@@ -158,19 +163,19 @@ final class RoadmapRawTextEventParser
     /**
      * @param list<string> $lines
      */
-    private function findCandidateTitleForward(array $lines, int $dateLineIndex, string $locale): string
+    private function findCandidateTitleForward(array $lines, int $dateLineIndex, string $locale, ?int $nextDateMarkerIndex): string
     {
         $parts = [];
-        for ($offset = 1; $offset <= 4; ++$offset) {
+        for ($offset = 1; $offset <= 6; ++$offset) {
             $candidateIndex = $dateLineIndex + $offset;
             if (!isset($lines[$candidateIndex])) {
                 break;
             }
-
-            $candidate = $lines[$candidateIndex];
-            if (null !== $this->extractDateRange($candidate, $locale, new DateTimeImmutable(), null)) {
+            if (is_int($nextDateMarkerIndex) && $candidateIndex >= $nextDateMarkerIndex) {
                 break;
             }
+
+            $candidate = $lines[$candidateIndex];
             if ($this->looksLikeMonthOnlyLabel($candidate, $locale)) {
                 break;
             }
@@ -193,6 +198,47 @@ final class RoadmapRawTextEventParser
         }
 
         return $this->normalizeTitle(implode(' ', $parts));
+    }
+
+    /**
+     * @param list<string> $lines
+     *
+     * @return list<int>
+     */
+    private function detectDateMarkerIndexes(array $lines, string $locale, DateTimeImmutable $referenceDate): array
+    {
+        $indexes = [];
+        foreach ($lines as $index => $line) {
+            if (null !== $this->extractDateRange($line, $locale, $referenceDate, null)) {
+                $indexes[] = $index;
+                continue;
+            }
+            if (null !== $this->extractSingleDate($line, $locale, $referenceDate)) {
+                $indexes[] = $index;
+            }
+        }
+
+        if ([] === $indexes) {
+            return [];
+        }
+
+        sort($indexes);
+
+        return array_values(array_unique($indexes));
+    }
+
+    /**
+     * @param list<int> $dateMarkerIndexes
+     */
+    private function nextDateMarkerIndex(array $dateMarkerIndexes, int $currentIndex): ?int
+    {
+        foreach ($dateMarkerIndexes as $markerIndex) {
+            if ($markerIndex > $currentIndex) {
+                return $markerIndex;
+            }
+        }
+
+        return null;
     }
 
     /**

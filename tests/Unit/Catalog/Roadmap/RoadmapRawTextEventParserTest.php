@@ -103,6 +103,23 @@ final class RoadmapRawTextEventParserTest extends TestCase
         self::assertSame('2026-04-14 18:00:00', $events[0]->endsAt->format('Y-m-d H:i:s'));
     }
 
+    public function testParseDoesNotLeakTitleIntoNextDateBlock(): void
+    {
+        $parser = new RoadmapRawTextEventParser();
+        $text = <<<TXT
+            3 MARS - 10 MARS
+            PREMIER EVENEMENT
+            10 MARS - 24 MARS
+            SECOND EVENEMENT
+            TXT;
+
+        $events = $parser->parse($text, 'fr', new DateTimeImmutable('2026-03-01 00:00:00'));
+
+        self::assertCount(2, $events);
+        self::assertSame('PREMIER EVENEMENT', $events[0]->title);
+        self::assertSame('SECOND EVENEMENT', $events[1]->title);
+    }
+
     public function testParseFrenchRoadmapWithMultilineTitlesAndFirsterDay(): void
     {
         $parser = new RoadmapRawTextEventParser();

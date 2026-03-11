@@ -21,6 +21,8 @@ use App\Catalog\Application\Roadmap\MergeRoadmapLocalesApplicationService;
 use App\Catalog\Application\Roadmap\Ocr\OcrAttempt;
 use App\Catalog\Application\Roadmap\Ocr\OcrProviderChain;
 use App\Catalog\Application\Roadmap\RoadmapCanonicalEventReadRepository;
+use App\Catalog\Application\Roadmap\RoadmapParsedEvent;
+use App\Catalog\Application\Roadmap\RoadmapParsedEventsValidator;
 use App\Catalog\Application\Roadmap\RoadmapSeasonExtractor;
 use App\Catalog\Application\Roadmap\RoadmapSeasonRepository;
 use App\Catalog\Application\Roadmap\RoadmapSnapshotWriteRepository;
@@ -60,6 +62,7 @@ final class RoadmapSnapshotController extends AbstractController
         private readonly CreateRoadmapSnapshotApplicationService $createRoadmapSnapshotApplicationService,
         private readonly MergeRoadmapLocalesApplicationService $mergeRoadmapLocalesApplicationService,
         private readonly GenerateRoadmapEventsFromSnapshotApplicationService $generateRoadmapEventsFromSnapshotApplicationService,
+        private readonly RoadmapParsedEventsValidator $roadmapParsedEventsValidator,
         private readonly ApproveRoadmapSnapshotApplicationService $approveRoadmapSnapshotApplicationService,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly CacheInterface $cache,
@@ -294,6 +297,7 @@ final class RoadmapSnapshotController extends AbstractController
 
         $this->addFlash('success', 'admin_roadmap.flash.events_generated');
         $this->addFlash('success', sprintf('%d event(s).', count($parsed)));
+        $this->addParseQualityFlashes($id, $parsed);
 
         return $this->redirectToRoute('app_admin_roadmap_snapshots', [
             '_locale' => $request->getLocale(),
@@ -449,6 +453,7 @@ final class RoadmapSnapshotController extends AbstractController
                 $parsed = $this->generateRoadmapEventsFromSnapshotApplicationService->generate($id, false);
                 $this->addFlash('success', 'admin_roadmap.flash.events_generated');
                 $this->addFlash('success', sprintf('%d event(s).', count($parsed)));
+                $this->addParseQualityFlashes($id, $parsed);
             } catch (RuntimeException $exception) {
                 $this->addFlash('warning', $exception->getMessage());
             }
@@ -588,6 +593,30 @@ final class RoadmapSnapshotController extends AbstractController
         $parsed = (int) $raw;
 
         return $parsed > 0 ? $parsed : null;
+    }
+
+    /**
+     * @param list<RoadmapParsedEvent> $parsed
+     */
+    private function addParseQualityFlashes(int $snapshotId, array $parsed): void
+    {
+        $snapshot = $this->roadmapSnapshotWriteRepository->findOneById($snapshotId);
+        if (!$snapshot instanceof RoadmapSnapshotEntity) {
+            return;
+        }
+
+        $validation = $this->roadmapParsedEventsValidator->validate(
+            $parsed,
+            $snapshot->getLocale(),
+            $snapshot->getRawText(),
+        );
+
+        foreach ($validation->warnings as $warning) {
+            $this->addFlash('warning', $warning);
+        }
+        foreach ($validation->errors as $error) {
+            $this->addFlash('warning', $error);
+        }
     }
 
     private function formatOcrAttemptFlash(OcrAttempt $attempt): string

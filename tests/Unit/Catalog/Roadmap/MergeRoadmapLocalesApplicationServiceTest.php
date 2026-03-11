@@ -15,6 +15,7 @@ namespace App\Tests\Unit\Catalog\Roadmap;
 
 use App\Catalog\Application\Roadmap\MergeRoadmapLocalesApplicationService;
 use App\Catalog\Application\Roadmap\RoadmapCanonicalEventWriteRepository;
+use App\Catalog\Application\Roadmap\RoadmapParsedEventsValidator;
 use App\Catalog\Application\Roadmap\RoadmapRawTextEventParser;
 use App\Catalog\Application\Roadmap\RoadmapSeasonRepository;
 use App\Catalog\Application\Roadmap\RoadmapSnapshotWriteRepository;
@@ -40,6 +41,7 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
         $service = new MergeRoadmapLocalesApplicationService(
             $snapshotRepo,
             new RoadmapRawTextEventParser(),
+            new RoadmapParsedEventsValidator(),
             $canonicalRepo,
             $seasonRepo,
         );
@@ -67,6 +69,7 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
         $service = new MergeRoadmapLocalesApplicationService(
             $snapshotRepo,
             new RoadmapRawTextEventParser(),
+            new RoadmapParsedEventsValidator(),
             $canonicalRepo,
             $seasonRepo,
         );
@@ -90,6 +93,7 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
         $service = new MergeRoadmapLocalesApplicationService(
             $snapshotRepo,
             new RoadmapRawTextEventParser(),
+            new RoadmapParsedEventsValidator(),
             $canonicalRepo,
             $seasonRepo,
         );
@@ -114,6 +118,7 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
         $service = new MergeRoadmapLocalesApplicationService(
             $snapshotRepo,
             new RoadmapRawTextEventParser(),
+            new RoadmapParsedEventsValidator(),
             $canonicalRepo,
             $seasonRepo,
         );
@@ -137,6 +142,7 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
         $service = new MergeRoadmapLocalesApplicationService(
             $snapshotRepo,
             new RoadmapRawTextEventParser(),
+            new RoadmapParsedEventsValidator(),
             $canonicalRepo,
             $seasonRepo,
         );
@@ -145,6 +151,69 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
         $this->expectExceptionMessage('same season');
 
         $service->merge(['fr' => 1, 'en' => 2, 'de' => 3], true);
+    }
+
+    public function testMergeThrowsWhenQualityChecksFailForSeasonLikeSnapshot(): void
+    {
+        $fr = $this->snapshot(1, 'fr', "FALLOUT 76 SEASON 01\nCOMMUNITY CALENDAR\n3 MARS - 10 MARS\nFETE DU YETI");
+        $en = $this->snapshot(2, 'en', "FALLOUT 76 SEASON 01\nCOMMUNITY CALENDAR\nMAR 3 - MAR 10\nBIGFOOT'S BASH");
+        $de = $this->snapshot(3, 'de', "FALLOUT 76 SEASON 01\nCOMMUNITY CALENDAR\n3. BIS 10. MARZ\nBIGFOOTS PARTY");
+
+        $snapshotRepo = new InMemorySnapshotRepoForMerge([$fr, $en, $de]);
+        $canonicalRepo = new InMemoryCanonicalRepoForMerge();
+        $seasonRepo = new InMemorySeasonRepoForMerge([$this->season(24, false)]);
+        $service = new MergeRoadmapLocalesApplicationService(
+            $snapshotRepo,
+            new RoadmapRawTextEventParser(),
+            new RoadmapParsedEventsValidator(),
+            $canonicalRepo,
+            $seasonRepo,
+        );
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('failed quality checks');
+
+        $service->merge(['fr' => 1, 'en' => 2, 'de' => 3], true);
+    }
+
+    public function testMergeUsesPersistedSnapshotEventsWhenAvailable(): void
+    {
+        $fr = $this->snapshot(1, 'fr', "3 MARS - 10 MARS\nRAW TITLE");
+        $fr->clearEvents();
+        $fr->addEvent(
+            (new \App\Catalog\Domain\Entity\RoadmapEventEntity())
+                ->setLocale('fr')
+                ->setTitle('MANUAL TITLE FR')
+                ->setStartsAt(new \DateTimeImmutable('2026-03-03 18:00:00'))
+                ->setEndsAt(new \DateTimeImmutable('2026-03-10 18:00:00'))
+                ->setSortOrder(1),
+        );
+        $en = $this->snapshot(2, 'en', "MAR 3 - MAR 10\nMANUAL TITLE EN");
+        $de = $this->snapshot(3, 'de', "3. BIS 10. MARZ\nMANUAL TITLE DE");
+
+        $snapshotRepo = new InMemorySnapshotRepoForMerge([$fr, $en, $de]);
+        $canonicalRepo = new InMemoryCanonicalRepoForMerge();
+        $seasonRepo = new InMemorySeasonRepoForMerge([$this->season(24, true)]);
+        $service = new MergeRoadmapLocalesApplicationService(
+            $snapshotRepo,
+            new RoadmapRawTextEventParser(),
+            new RoadmapParsedEventsValidator(),
+            $canonicalRepo,
+            $seasonRepo,
+        );
+
+        $result = $service->merge(['fr' => 1, 'en' => 2, 'de' => 3], false);
+
+        self::assertSame(1, $result->totalEvents);
+        self::assertCount(1, $canonicalRepo->savedEvents);
+        $saved = $canonicalRepo->savedEvents[0];
+        $frTranslation = null;
+        foreach ($saved->getTranslations() as $translation) {
+            if ('fr' === $translation->getLocale()) {
+                $frTranslation = $translation->getTitle();
+            }
+        }
+        self::assertSame('MANUAL TITLE FR', $frTranslation);
     }
 
     private function snapshot(int $id, string $locale, string $rawText): RoadmapSnapshotEntity

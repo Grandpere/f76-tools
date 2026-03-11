@@ -15,6 +15,7 @@ namespace App\Catalog\Application\Roadmap;
 
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventTranslationEntity;
+use App\Catalog\Domain\Entity\RoadmapEventEntity;
 use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use App\Catalog\Domain\Roadmap\RoadmapSnapshotStatusEnum;
@@ -26,6 +27,7 @@ final readonly class MergeRoadmapLocalesApplicationService
     public function __construct(
         private RoadmapSnapshotWriteRepository $snapshotWriteRepository,
         private RoadmapRawTextEventParser $roadmapRawTextEventParser,
+        private RoadmapParsedEventsValidator $roadmapParsedEventsValidator,
         private RoadmapCanonicalEventWriteRepository $roadmapCanonicalEventWriteRepository,
         private RoadmapSeasonRepository $roadmapSeasonRepository,
     ) {
@@ -49,11 +51,22 @@ final readonly class MergeRoadmapLocalesApplicationService
             $this->assertApprovedSnapshot($snapshot, (string) $locale);
             $expectedSeason = $this->assertMergeSeasonConsistency($snapshot, (string) $locale, $expectedSeason);
 
-            $parsedEvents = $this->roadmapRawTextEventParser->parse(
+            $parsedEvents = $this->resolveSnapshotEvents($snapshot, (string) $locale);
+            $validation = $this->roadmapParsedEventsValidator->validate(
+                $parsedEvents,
+                (string) $locale,
                 $snapshot->getRawText(),
-                $locale,
-                $snapshot->getScannedAt(),
             );
+            if ($validation->hasErrors()) {
+                $snapshotIdText = is_int($snapshot->getId()) ? (string) $snapshot->getId() : 'unknown';
+                throw new RuntimeException(sprintf(
+                    'Snapshot %s for locale %s failed quality checks: %s',
+                    $snapshotIdText,
+                    strtoupper((string) $locale),
+                    implode(' | ', $validation->errors),
+                ));
+            }
+            $warnings = array_merge($warnings, $validation->warnings);
 
             foreach ($parsedEvents as $event) {
                 $key = $this->rangeKey($event->startsAt, $event->endsAt);
@@ -182,6 +195,41 @@ final readonly class MergeRoadmapLocalesApplicationService
         $id = is_int($snapshotId) ? (string) $snapshotId : 'unknown';
 
         throw new RuntimeException(sprintf('Snapshot %s for locale %s must be approved before merge (current: %s).', $id, strtoupper($locale), $snapshot->getStatus()->value));
+    }
+
+    /**
+     * @return list<RoadmapParsedEvent>
+     */
+    private function resolveSnapshotEvents(RoadmapSnapshotEntity $snapshot, string $locale): array
+    {
+        if ($snapshot->getEvents()->count() > 0) {
+            $persisted = $snapshot->getEvents()->toArray();
+            usort($persisted, static function (RoadmapEventEntity $a, RoadmapEventEntity $b): int {
+                $sort = $a->getSortOrder() <=> $b->getSortOrder();
+                if (0 !== $sort) {
+                    return $sort;
+                }
+
+                return $a->getStartsAt() <=> $b->getStartsAt();
+            });
+
+            $resolved = [];
+            foreach ($persisted as $event) {
+                $resolved[] = new RoadmapParsedEvent(
+                    $event->getTitle(),
+                    $event->getStartsAt(),
+                    $event->getEndsAt(),
+                );
+            }
+
+            return $resolved;
+        }
+
+        return $this->roadmapRawTextEventParser->parse(
+            $snapshot->getRawText(),
+            $locale,
+            $snapshot->getScannedAt(),
+        );
     }
 
     private function assertMergeSeasonConsistency(
