@@ -2178,6 +2178,50 @@ body::before {
     overflow-wrap: anywhere;
 }
 
+.roadmap-quality-cell {
+    min-width: 9.2rem;
+}
+
+.roadmap-quality-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 1.5rem;
+    padding: 0.2rem 0.58rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
+
+.roadmap-quality-pill--ok {
+    background: rgba(47, 147, 85, 0.15);
+    border-color: rgba(47, 147, 85, 0.4);
+    color: #155733;
+}
+
+.roadmap-quality-pill--warn {
+    background: rgba(194, 126, 44, 0.18);
+    border-color: rgba(194, 126, 44, 0.42);
+    color: #7e470d;
+}
+
+.roadmap-quality-pill--error {
+    background: rgba(193, 76, 63, 0.16);
+    border-color: rgba(193, 76, 63, 0.38);
+    color: #7f1f17;
+}
+
+.roadmap-quality-meta {
+    display: block;
+    margin-top: 0.22rem;
+    font-size: 0.69rem;
+    color: var(--text-2);
+    letter-spacing: 0.02em;
+}
+
 .roadmap-review-card {
     border: 1px solid rgba(29, 37, 49, 0.14);
     border-radius: 12px;

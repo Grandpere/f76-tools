@@ -81,6 +81,7 @@ final class RoadmapSnapshotController extends AbstractController
         $selectedSeason = is_int($seasonFilterId) ? $this->roadmapSeasonRepository->findOneById($seasonFilterId) : null;
 
         $snapshots = $this->roadmapSnapshotWriteRepository->findRecent(30, $selectedSeason);
+        $snapshotQualityById = $this->buildSnapshotQualityById($snapshots);
         $selectedIdRaw = $request->query->get('snapshot');
         $selectedId = is_scalar($selectedIdRaw) && ctype_digit((string) $selectedIdRaw) ? (int) $selectedIdRaw : null;
         $selectedSnapshot = null;
@@ -144,6 +145,7 @@ final class RoadmapSnapshotController extends AbstractController
             'activeSeason' => $activeSeason,
             'selectedSeason' => $selectedSeason,
             'mergeSnapshotContext' => $mergeSnapshotContext,
+            'snapshotQualityById' => $snapshotQualityById,
         ]);
     }
 
@@ -617,6 +619,82 @@ final class RoadmapSnapshotController extends AbstractController
         foreach ($validation->errors as $error) {
             $this->addFlash('warning', $error);
         }
+    }
+
+    /**
+     * @param list<RoadmapSnapshotEntity> $snapshots
+     *
+     * @return array<int, array{level: string, errors: int, warnings: int}>
+     */
+    private function buildSnapshotQualityById(array $snapshots): array
+    {
+        $qualityById = [];
+
+        foreach ($snapshots as $snapshot) {
+            $snapshotId = $snapshot->getId();
+            if (!is_int($snapshotId)) {
+                continue;
+            }
+
+            try {
+                $parsedEvents = $this->resolveSnapshotParsedEvents($snapshot, $snapshotId);
+                $validation = $this->roadmapParsedEventsValidator->validate(
+                    $parsedEvents,
+                    $snapshot->getLocale(),
+                    $snapshot->getRawText(),
+                );
+                $errorCount = count($validation->errors);
+                $warningCount = count($validation->warnings);
+                $level = $errorCount > 0
+                    ? 'error'
+                    : ($warningCount > 0 ? 'warn' : 'ok');
+
+                $qualityById[$snapshotId] = [
+                    'level' => $level,
+                    'errors' => $errorCount,
+                    'warnings' => $warningCount,
+                ];
+            } catch (RuntimeException) {
+                $qualityById[$snapshotId] = [
+                    'level' => 'error',
+                    'errors' => 1,
+                    'warnings' => 0,
+                ];
+            }
+        }
+
+        return $qualityById;
+    }
+
+    /**
+     * @return list<RoadmapParsedEvent>
+     */
+    private function resolveSnapshotParsedEvents(RoadmapSnapshotEntity $snapshot, int $snapshotId): array
+    {
+        if ($snapshot->getEvents()->count() > 0) {
+            $persisted = $snapshot->getEvents()->toArray();
+            usort($persisted, static function (RoadmapEventEntity $a, RoadmapEventEntity $b): int {
+                $sort = $a->getSortOrder() <=> $b->getSortOrder();
+                if (0 !== $sort) {
+                    return $sort;
+                }
+
+                return $a->getStartsAt() <=> $b->getStartsAt();
+            });
+
+            $resolved = [];
+            foreach ($persisted as $event) {
+                $resolved[] = new RoadmapParsedEvent(
+                    $event->getTitle(),
+                    $event->getStartsAt(),
+                    $event->getEndsAt(),
+                );
+            }
+
+            return $resolved;
+        }
+
+        return $this->generateRoadmapEventsFromSnapshotApplicationService->generate($snapshotId, true);
     }
 
     private function formatOcrAttemptFlash(OcrAttempt $attempt): string

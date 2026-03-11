@@ -67,6 +67,7 @@
                         <th>{{ 'admin_roadmap.snapshot_provider'|trans }}</th>
                         <th>{{ 'admin_roadmap.snapshot_confidence'|trans }}</th>
                         <th>{{ 'admin_roadmap.snapshot_status'|trans }}</th>
+                        <th>{{ 'admin_roadmap.snapshot_quality'|trans }}</th>
                         <th>{{ 'admin_roadmap.snapshot_season'|trans }}</th>
                         <th>{{ 'admin_roadmap.snapshot_scanned_at'|trans }}</th>
                         <th>{{ 'admin_roadmap.snapshot_actions'|trans }}</th>
@@ -81,6 +82,17 @@
                             <td>{{ snapshot.ocrProvider }}</td>
                             <td>{{ (snapshot.ocrConfidence * 100)|number_format(2, '.', ' ') }}%</td>
                             <td><span class="item-pill">{{ ('admin_roadmap.status_' ~ snapshot.status.value)|trans }}</span></td>
+                            {% set quality = snapshotQualityById[snapshotId]|default({ level: 'warn', errors: 0, warnings: 0 }) %}
+                            <td class="roadmap-quality-cell">
+                                <span class="item-pill roadmap-quality-pill roadmap-quality-pill--{{ quality.level }}">
+                                    {{ ('admin_roadmap.snapshot_quality_' ~ quality.level)|trans }}
+                                </span>
+                                {% if quality.errors > 0 or quality.warnings > 0 %}
+                                    <small class="roadmap-quality-meta">
+                                        {{ quality.errors }}E · {{ quality.warnings }}W
+                                    </small>
+                                {% endif %}
+                            </td>
                             <td>
                                 {% if snapshot.season %}
                                     {% set snapshotSeasonStatusKey = snapshot.season.isActive
@@ -105,7 +117,7 @@
                         </tr>
                     {% else %}
                         <tr>
-                            <td class="admin-empty-cell" colspan="8">{{ 'admin_roadmap.empty_snapshots'|trans }}</td>
+                            <td class="admin-empty-cell" colspan="9">{{ 'admin_roadmap.empty_snapshots'|trans }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

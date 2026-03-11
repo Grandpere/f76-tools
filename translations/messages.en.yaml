@@ -320,6 +320,10 @@ admin_roadmap.snapshot_locale: Locale
 admin_roadmap.snapshot_provider: Provider
 admin_roadmap.snapshot_confidence: Confidence
 admin_roadmap.snapshot_status: Status
+admin_roadmap.snapshot_quality: Quality
+admin_roadmap.snapshot_quality_ok: OK
+admin_roadmap.snapshot_quality_warn: Review
+admin_roadmap.snapshot_quality_error: Blocking
 admin_roadmap.snapshot_scanned_at: Scanned at
 admin_roadmap.snapshot_actions: Actions
 admin_roadmap.snapshot_season: Season
