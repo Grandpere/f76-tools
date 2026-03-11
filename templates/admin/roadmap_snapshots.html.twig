@@ -53,6 +53,15 @@
                         {% endfor %}
                     </select>
                 </label>
+                <label class="field">
+                    {{ 'admin_roadmap.snapshot_quality_filter'|trans }}
+                    <select name="quality">
+                        <option value="">{{ 'admin_roadmap.snapshot_quality_filter_all'|trans }}</option>
+                        <option value="ok" {{ qualityFilter == 'ok' ? 'selected' : '' }}>{{ 'admin_roadmap.snapshot_quality_ok'|trans }}</option>
+                        <option value="warn" {{ qualityFilter == 'warn' ? 'selected' : '' }}>{{ 'admin_roadmap.snapshot_quality_warn'|trans }}</option>
+                        <option value="error" {{ qualityFilter == 'error' ? 'selected' : '' }}>{{ 'admin_roadmap.snapshot_quality_error'|trans }}</option>
+                    </select>
+                </label>
                 <button type="submit">{{ 'admin_translations.filter'|trans }}</button>
             </form>
             <p class="catalog-note info-note roadmap-section-hint">

@@ -79,9 +79,22 @@ final class RoadmapSnapshotController extends AbstractController
         $activeSeason = $this->roadmapSeasonRepository->findActive();
         $seasonFilterId = $this->parsePositiveInt($request->query->get('season'));
         $selectedSeason = is_int($seasonFilterId) ? $this->roadmapSeasonRepository->findOneById($seasonFilterId) : null;
+        $qualityFilter = $this->normalizeSnapshotQualityFilter($request->query->get('quality'));
 
         $snapshots = $this->roadmapSnapshotWriteRepository->findRecent(30, $selectedSeason);
         $snapshotQualityById = $this->buildSnapshotQualityById($snapshots);
+        if (is_string($qualityFilter)) {
+            $snapshots = array_values(array_filter(
+                $snapshots,
+                function (RoadmapSnapshotEntity $snapshot) use ($snapshotQualityById, $qualityFilter): bool {
+                    $id = $snapshot->getId();
+
+                    return is_int($id)
+                        && isset($snapshotQualityById[$id])
+                        && $snapshotQualityById[$id]['level'] === $qualityFilter;
+                },
+            ));
+        }
         $selectedIdRaw = $request->query->get('snapshot');
         $selectedId = is_scalar($selectedIdRaw) && ctype_digit((string) $selectedIdRaw) ? (int) $selectedIdRaw : null;
         $selectedSnapshot = null;
@@ -149,6 +162,7 @@ final class RoadmapSnapshotController extends AbstractController
             'seasons' => $seasons,
             'activeSeason' => $activeSeason,
             'selectedSeason' => $selectedSeason,
+            'qualityFilter' => $qualityFilter,
             'mergeSnapshotContext' => $mergeSnapshotContext,
             'snapshotQualityById' => $snapshotQualityById,
             'selectedSnapshotQuality' => $selectedSnapshotQuality,
@@ -622,6 +636,20 @@ final class RoadmapSnapshotController extends AbstractController
         $parsed = (int) $raw;
 
         return $parsed > 0 ? $parsed : null;
+    }
+
+    private function normalizeSnapshotQualityFilter(mixed $raw): ?string
+    {
+        if (!is_scalar($raw)) {
+            return null;
+        }
+
+        $value = strtolower(trim((string) $raw));
+        if (!in_array($value, ['ok', 'warn', 'error'], true)) {
+            return null;
+        }
+
+        return $value;
     }
 
     /**

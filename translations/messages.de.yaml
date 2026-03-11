@@ -328,6 +328,8 @@ admin_roadmap.snapshot_quality_legend: "Qualitatslegende: E = blockierende Fehle
 admin_roadmap.snapshot_quality_details: Qualitätsdetails
 admin_roadmap.snapshot_quality_errors: Blockierende Fehler
 admin_roadmap.snapshot_quality_warnings: Warnungen
+admin_roadmap.snapshot_quality_filter: Nach Qualität filtern
+admin_roadmap.snapshot_quality_filter_all: Alle
 admin_roadmap.snapshot_scanned_at: Gescannt am
 admin_roadmap.snapshot_actions: Aktionen
 admin_roadmap.snapshot_season: Saison
