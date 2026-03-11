@@ -318,6 +318,12 @@
                     {{ 'admin_roadmap.merge_requires_same_season_hint'|trans }}
                 </span>
             </p>
+            {% set mergeHasBlockingQuality = false %}
+            {% for mergeLocale in ['fr', 'en', 'de'] %}
+                {% if mergeSnapshotContext[mergeLocale] and mergeSnapshotContext[mergeLocale].qualityLevel == 'error' %}
+                    {% set mergeHasBlockingQuality = true %}
+                {% endif %}
+            {% endfor %}
             <form method="post" action="{{ path('app_admin_roadmap_merge_locales', { _locale: app.request.locale }) }}" class="translations-filters roadmap-merge-form">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_merge_locales') }}">
                 <label class="roadmap-merge-field">
@@ -330,6 +336,13 @@
                             {% else %}
                                 {{ 'admin_roadmap.merge_snapshot_context_missing'|trans }}
                             {% endif %}
+                        </small>
+                        <small class="roadmap-merge-quality-line">
+                            {{ 'admin_roadmap.merge_quality_label'|trans }}:
+                            <span class="item-pill roadmap-quality-pill roadmap-quality-pill--{{ mergeSnapshotContext.fr.qualityLevel }}">
+                                {{ ('admin_roadmap.snapshot_quality_' ~ mergeSnapshotContext.fr.qualityLevel)|trans }}
+                            </span>
+                            {{ mergeSnapshotContext.fr.errors }}E · {{ mergeSnapshotContext.fr.warnings }}W
                         </small>
                     {% endif %}
                 </label>
@@ -344,6 +357,13 @@
                                 {{ 'admin_roadmap.merge_snapshot_context_missing'|trans }}
                             {% endif %}
                         </small>
+                        <small class="roadmap-merge-quality-line">
+                            {{ 'admin_roadmap.merge_quality_label'|trans }}:
+                            <span class="item-pill roadmap-quality-pill roadmap-quality-pill--{{ mergeSnapshotContext.en.qualityLevel }}">
+                                {{ ('admin_roadmap.snapshot_quality_' ~ mergeSnapshotContext.en.qualityLevel)|trans }}
+                            </span>
+                            {{ mergeSnapshotContext.en.errors }}E · {{ mergeSnapshotContext.en.warnings }}W
+                        </small>
                     {% endif %}
                 </label>
                 <label class="roadmap-merge-field">
@@ -357,14 +377,24 @@
                                 {{ 'admin_roadmap.merge_snapshot_context_missing'|trans }}
                             {% endif %}
                         </small>
+                        <small class="roadmap-merge-quality-line">
+                            {{ 'admin_roadmap.merge_quality_label'|trans }}:
+                            <span class="item-pill roadmap-quality-pill roadmap-quality-pill--{{ mergeSnapshotContext.de.qualityLevel }}">
+                                {{ ('admin_roadmap.snapshot_quality_' ~ mergeSnapshotContext.de.qualityLevel)|trans }}
+                            </span>
+                            {{ mergeSnapshotContext.de.errors }}E · {{ mergeSnapshotContext.de.warnings }}W
+                        </small>
                     {% endif %}
                 </label>
                 <label class="roadmap-generate-toggle">
                     <input type="checkbox" name="dry_run" value="1">
                     <span>{{ 'admin_roadmap.merge_dry_run'|trans }}</span>
                 </label>
-                <button type="submit">{{ 'admin_roadmap.merge_submit'|trans }}</button>
+                <button type="submit" {{ mergeHasBlockingQuality ? 'disabled' : '' }}>{{ 'admin_roadmap.merge_submit'|trans }}</button>
             </form>
+            {% if mergeHasBlockingQuality %}
+                <p class="catalog-note roadmap-merge-blocking-note">{{ 'admin_roadmap.merge_quality_blocking_hint'|trans }}</p>
+            {% endif %}
             <div class="translations-table-wrap">
                 <table class="translations-table roadmap-canonical-table">
                     <colgroup>

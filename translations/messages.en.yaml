@@ -353,6 +353,8 @@ admin_roadmap.merge_dry_run: Dry-run only
 admin_roadmap.merge_submit: Merge FR/EN/DE
 admin_roadmap.merge_requires_approved_hint: Merge accepts approved snapshots only.
 admin_roadmap.merge_requires_same_season_hint: All three snapshots must belong to the same season.
+admin_roadmap.merge_quality_label: Quality
+admin_roadmap.merge_quality_blocking_hint: Merge is disabled while at least one snapshot is blocking.
 admin_roadmap.merge_snapshot_context: 'Detected season: %season%'
 admin_roadmap.merge_snapshot_context_missing: 'Detected season: unknown'
 admin_roadmap.selected_snapshot_title: 'Selected snapshot #%id%'

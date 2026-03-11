@@ -2262,6 +2262,19 @@ body::before {
     color: #81541a;
 }
 
+.roadmap-merge-quality-line {
+    display: flex;
+    align-items: center;
+    gap: 0.34rem;
+    margin-top: 0.18rem;
+}
+
+.roadmap-merge-blocking-note {
+    margin-top: 0.5rem;
+    color: #a1392f;
+    font-weight: 600;
+}
+
 .roadmap-review-card {
     border: 1px solid rgba(29, 37, 49, 0.14);
     border-radius: 12px;

@@ -859,7 +859,11 @@ final class RoadmapSnapshotController extends AbstractController
     }
 
     /**
-     * @return array{fr: array{snapshotId: int, seasonNumber: ?int}|null, en: array{snapshotId: int, seasonNumber: ?int}|null, de: array{snapshotId: int, seasonNumber: ?int}|null}
+     * @return array{
+     *     fr: array{snapshotId: int, seasonNumber: ?int, qualityLevel: string, errors: int, warnings: int}|null,
+     *     en: array{snapshotId: int, seasonNumber: ?int, qualityLevel: string, errors: int, warnings: int}|null,
+     *     de: array{snapshotId: int, seasonNumber: ?int, qualityLevel: string, errors: int, warnings: int}|null
+     * }
      */
     private function resolveMergeSnapshotContext(Request $request): array
     {
@@ -879,13 +883,20 @@ final class RoadmapSnapshotController extends AbstractController
                 $context[$locale] = [
                     'snapshotId' => $snapshotId,
                     'seasonNumber' => null,
+                    'qualityLevel' => 'error',
+                    'errors' => 1,
+                    'warnings' => 0,
                 ];
                 continue;
             }
 
+            $assessment = $this->assessSnapshotQuality($snapshot, $snapshotId);
             $context[$locale] = [
                 'snapshotId' => $snapshotId,
                 'seasonNumber' => $snapshot->getSeason()?->getSeasonNumber(),
+                'qualityLevel' => $assessment['level'],
+                'errors' => count($assessment['errors']),
+                'warnings' => count($assessment['warnings']),
             ];
         }
 
