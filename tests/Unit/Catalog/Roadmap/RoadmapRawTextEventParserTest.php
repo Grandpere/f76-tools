@@ -685,6 +685,26 @@ final class RoadmapRawTextEventParserTest extends TestCase
         self::assertTrue($this->containsDateRange($events, '2026-09-04 18:00:00', '2026-09-08 18:00:00'));
     }
 
+    public function testParserMergesTwoConsecutiveSingleDatesIntoOneRangeWhenTitleFollows(): void
+    {
+        $parser = new RoadmapRawTextEventParser();
+        $text = <<<TXT
+            AUG 12 - AUG 26
+            MINI SEASON
+            AUG 14
+            AUG 18
+            SCRIP SURPLUS
+            AUG 19 - AUG 26
+            MUTATED PUBLIC EVENTS
+            TXT;
+
+        $events = $parser->parse($text, 'de', new DateTimeImmutable('2025-08-01 10:00:00'));
+
+        self::assertTrue($this->containsDateRange($events, '2025-08-14 18:00:00', '2025-08-18 18:00:00'));
+        self::assertFalse($this->containsDateRange($events, '2025-08-14 16:00:00', '2025-08-14 20:00:00'));
+        self::assertFalse($this->containsDateRange($events, '2025-08-18 16:00:00', '2025-08-18 20:00:00'));
+    }
+
     private function normalizeTitleForAssert(string $value): string
     {
         $normalized = mb_strtoupper(trim($value));

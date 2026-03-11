@@ -41,8 +41,13 @@ final class RoadmapRawTextEventParser
         $dateMarkerIndexes = $this->detectDateMarkerIndexes($lines, $locale, $effectiveReferenceDate);
         $events = [];
         $lastRangeEnd = null;
+        $consumedIndexes = [];
 
         foreach ($lines as $index => $line) {
+            if (isset($consumedIndexes[$index])) {
+                continue;
+            }
+
             $dateRange = $this->extractDateRange($line, $locale, $effectiveReferenceDate, $lastRangeEnd);
             if (null !== $dateRange) {
                 $title = $this->resolveTitle($lines, $index, $locale, $dateMarkerIndexes);
@@ -63,6 +68,30 @@ final class RoadmapRawTextEventParser
             $singleDate = $this->extractSingleDate($line, $locale, $effectiveReferenceDate);
             if (null === $singleDate) {
                 continue;
+            }
+
+            if (
+                '' === trim($singleDate['inlineTitle'])
+                && isset($lines[$index + 1])
+            ) {
+                $nextSingleDate = $this->extractSingleDate($lines[$index + 1], $locale, $effectiveReferenceDate);
+                if (
+                    is_array($nextSingleDate)
+                    && '' === trim($nextSingleDate['inlineTitle'])
+                ) {
+                    $inferredTitle = $this->resolveTitleForSingleDate($lines, $index + 1, $locale, '', $dateMarkerIndexes);
+                    if ('' !== $inferredTitle) {
+                        $startsAt = $singleDate['startsAt']->setTime(self::DEFAULT_START_HOUR, 0);
+                        $endsAt = $nextSingleDate['startsAt']->setTime(self::DEFAULT_END_HOUR, 0);
+                        if ($endsAt >= $startsAt) {
+                            $events[] = new RoadmapParsedEvent($inferredTitle, $startsAt, $endsAt);
+                            $lastRangeEnd = $endsAt;
+                            $consumedIndexes[$index + 1] = true;
+
+                            continue;
+                        }
+                    }
+                }
             }
 
             $title = $this->resolveTitleForSingleDate($lines, $index, $locale, $singleDate['inlineTitle'], $dateMarkerIndexes);
