@@ -16,6 +16,7 @@ namespace App\Catalog\Application\Roadmap;
 final class RoadmapParsedEventsValidator
 {
     private const MIN_SEASON_EVENTS = 8;
+    private const MIN_PARTIAL_SEASON_EVENTS = 6;
     private const MAX_REASONABLE_EVENTS = 40;
     private const MAX_REASONABLE_EVENT_DAYS = 35;
 
@@ -39,12 +40,15 @@ final class RoadmapParsedEventsValidator
         }
 
         $isSeasonRoadmap = $this->looksLikeSeasonRoadmapText($rawText);
-        if ($isSeasonRoadmap && $eventCount < self::MIN_SEASON_EVENTS) {
-            $errors[] = sprintf(
-                'Too few events detected for a season roadmap (%d, expected at least %d).',
-                $eventCount,
-                self::MIN_SEASON_EVENTS,
-            );
+        if ($isSeasonRoadmap) {
+            $expectedMinimum = $this->resolveMinimumSeasonEvents($rawText);
+            if ($eventCount < $expectedMinimum) {
+                $errors[] = sprintf(
+                    'Too few events detected for a season roadmap (%d, expected at least %d).',
+                    $eventCount,
+                    $expectedMinimum,
+                );
+            }
         }
 
         $seenRanges = [];
@@ -97,6 +101,20 @@ final class RoadmapParsedEventsValidator
         }
 
         return 1 === preg_match('/\b(?:SEASON|SAISON|COMMUNITY\s+CALENDAR|CALENDRIER)\b/iu', $rawText);
+    }
+
+    private function resolveMinimumSeasonEvents(string $rawText): int
+    {
+        if ('' === trim($rawText)) {
+            return self::MIN_SEASON_EVENTS;
+        }
+
+        // Late-season roadmap cards can explicitly announce upcoming months and legitimately contain fewer entries.
+        if (1 === preg_match('/\b(?:COMING\s+SOON|WERDEN\s+IN\s+K[ÜU]RZE|BIENT[ÔO]T|A\s+VENIR|TO\s+BE\s+ANNOUNCED)\b/iu', $rawText)) {
+            return self::MIN_PARTIAL_SEASON_EVENTS;
+        }
+
+        return self::MIN_SEASON_EVENTS;
     }
 
     /**

@@ -58,5 +58,26 @@ final class RoadmapParsedEventsValidatorTest extends TestCase
         self::assertTrue($result->hasErrors());
         self::assertStringContainsString('not chronological', implode(' ', $result->errors));
     }
-}
 
+    public function testPartialSeasonTextAllowsLowerMinimumEventCount(): void
+    {
+        $validator = new RoadmapParsedEventsValidator();
+        $events = [];
+        for ($i = 0; $i < 7; ++$i) {
+            $day = 1 + ($i * 2);
+            $events[] = new RoadmapParsedEvent(
+                'Event '.($i + 1),
+                new DateTimeImmutable(sprintf('2026-08-%02d 18:00:00', $day)),
+                new DateTimeImmutable(sprintf('2026-08-%02d 18:00:00', $day + 1)),
+            );
+        }
+
+        $result = $validator->validate(
+            $events,
+            'de',
+            "FALLOUT 76 SEASON 21\nCOMMUNITY CALENDAR\nAUGUST AND SEPTEMBER COMING SOON...",
+        );
+
+        self::assertFalse($result->hasErrors());
+    }
+}
