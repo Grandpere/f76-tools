@@ -277,6 +277,47 @@ final class RoadmapRawTextEventParser
         $profile = $this->profileRegistry->profileFor($locale);
         $connectorPattern = '(?:-|–|BIS|TO)';
 
+        if (preg_match(
+            '/(\d{1,2})\s*[\/\.\-]\s*(\d{1,2})(?:\s*[\/\.\-]\s*(\d{2,4}))?\s*'.$connectorPattern.'\s*(\d{1,2})\s*[\/\.\-]\s*(\d{1,2})(?:\s*[\/\.\-]\s*(\d{2,4}))?/u',
+            $line,
+            $numeric,
+        )) {
+            $startDay = (int) $numeric[1];
+            $startMonth = (int) $numeric[2];
+            $startYear = $this->normalizeParsedYear((string) $numeric[3], $referenceDate) ?? (int) $referenceDate->format('Y');
+            $endDay = (int) $numeric[4];
+            $endMonth = (int) $numeric[5];
+            $endYear = $this->normalizeParsedYear((string) ($numeric[6] ?? ''), $referenceDate);
+            if (!is_int($endYear)) {
+                $endYear = $endMonth < $startMonth ? $startYear + 1 : $startYear;
+            }
+
+            $startDay = max(1, min(31, $startDay));
+            $endDay = max(1, min(31, $endDay));
+            $startMonth = max(1, min(12, $startMonth));
+            $endMonth = max(1, min(12, $endMonth));
+
+            $isSingleDay = $startYear === $endYear && $startMonth === $endMonth && $startDay === $endDay;
+            $startsAt = $this->buildDateTime(
+                $startYear,
+                $startMonth,
+                $startDay,
+                $isSingleDay ? self::SINGLE_DAY_START_HOUR : self::DEFAULT_START_HOUR,
+            );
+            $endsAt = $this->buildDateTime(
+                $endYear,
+                $endMonth,
+                $endDay,
+                $isSingleDay ? self::SINGLE_DAY_END_HOUR : self::DEFAULT_END_HOUR,
+            );
+            if ($startsAt instanceof DateTimeImmutable && $endsAt instanceof DateTimeImmutable) {
+                return [
+                    'startsAt' => $startsAt,
+                    'endsAt' => $endsAt,
+                ];
+            }
+        }
+
         // Format: "3 MARCH - 10 MARCH" / "30. APRIL BIS 4. MAI"
         if (!preg_match(
             '/(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s*([^\s\-–]+)\s*'.$connectorPattern.'\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s*([^\s\-–]+)/iu',
@@ -404,19 +445,25 @@ final class RoadmapRawTextEventParser
             $day = (int) $matches[1];
             $month = $this->monthNameToNumber($matches[2], $locale);
             $inlineTail = (string) $matches[3];
+            $year = (int) $referenceDate->format('Y');
         } elseif ($profile->usesMonthFirstDates() && preg_match('/^\s*([^\s]+)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s*(.*)$/iu', $line, $matches)) {
             $month = $this->monthNameToNumber($matches[1], $locale);
             $day = (int) $matches[2];
             $inlineTail = (string) $matches[3];
+            $year = (int) $referenceDate->format('Y');
+        } elseif (preg_match('/^\s*(\d{1,2})\s*[\/\.\-]\s*(\d{1,2})(?:\s*[\/\.\-]\s*(\d{2,4}))?\s*(.*)$/u', $line, $matches)) {
+            $day = (int) $matches[1];
+            $month = (int) $matches[2];
+            $year = $this->normalizeParsedYear((string) $matches[3], $referenceDate) ?? (int) $referenceDate->format('Y');
+            $inlineTail = (string) $matches[4];
         } else {
             return null;
         }
 
-        if ($month <= 0) {
+        if ($month <= 0 || $month > 12) {
             return null;
         }
 
-        $year = (int) $referenceDate->format('Y');
         $startsAt = $this->buildDateTime($year, $month, $day, self::SINGLE_DAY_START_HOUR);
         $endsAt = $this->buildDateTime($year, $month, $day, self::SINGLE_DAY_END_HOUR);
         if (null === $startsAt || null === $endsAt) {
@@ -654,6 +701,26 @@ final class RoadmapRawTextEventParser
         $dateTime = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', sprintf('%04d-%02d-%02d %02d:00:00', $year, $month, $day, $hour));
 
         return $dateTime instanceof DateTimeImmutable ? $dateTime : null;
+    }
+
+    private function normalizeParsedYear(string $rawYear, DateTimeImmutable $referenceDate): ?int
+    {
+        $clean = trim($rawYear);
+        if ('' === $clean || !ctype_digit($clean)) {
+            return null;
+        }
+
+        $parsed = (int) $clean;
+        if (2 === strlen($clean)) {
+            $baseCentury = (int) floor(((int) $referenceDate->format('Y')) / 100);
+            $parsed = ($baseCentury * 100) + $parsed;
+        }
+
+        if ($parsed < 2000 || $parsed > 2100) {
+            return null;
+        }
+
+        return $parsed;
     }
 
     private function isIgnoredTitleLine(string $line): bool

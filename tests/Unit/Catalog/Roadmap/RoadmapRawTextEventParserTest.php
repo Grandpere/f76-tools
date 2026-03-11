@@ -71,6 +71,22 @@ final class RoadmapRawTextEventParserTest extends TestCase
         self::assertSame('2026-04-05 18:00:00', $events[0]->endsAt->format('Y-m-d H:i:s'));
     }
 
+    public function testParseNumericDateRangeFormatWithExplicitYear(): void
+    {
+        $parser = new RoadmapRawTextEventParser();
+        $text = <<<TXT
+            03/03/2026 - 10/03/2026
+            BIGFOOT'S BASH
+            TXT;
+
+        $events = $parser->parse($text, 'en', new DateTimeImmutable('2026-03-01 00:00:00'));
+
+        self::assertCount(1, $events);
+        self::assertSame('BIGFOOT\'S BASH', $events[0]->title);
+        self::assertSame('2026-03-03 18:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-03-10 18:00:00', $events[0]->endsAt->format('Y-m-d H:i:s'));
+    }
+
     public function testParseGermanDateRangesWithUmlautNormalization(): void
     {
         $parser = new RoadmapRawTextEventParser();
@@ -101,6 +117,21 @@ final class RoadmapRawTextEventParserTest extends TestCase
         self::assertSame('DOPPELTE MUTATIONEN', $events[0]->title);
         self::assertSame('2026-04-07 18:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
         self::assertSame('2026-04-14 18:00:00', $events[0]->endsAt->format('Y-m-d H:i:s'));
+    }
+
+    public function testParseNumericSingleDateFormatWithInlineTitle(): void
+    {
+        $parser = new RoadmapRawTextEventParser();
+        $text = <<<TXT
+            12/03/2026 WILD APPALACHIA UPDATE
+            TXT;
+
+        $events = $parser->parse($text, 'fr', new DateTimeImmutable('2026-03-01 00:00:00'));
+
+        self::assertCount(1, $events);
+        self::assertSame('WILD APPALACHIA UPDATE', $events[0]->title);
+        self::assertSame('2026-03-12 16:00:00', $events[0]->startsAt->format('Y-m-d H:i:s'));
+        self::assertSame('2026-03-12 20:00:00', $events[0]->endsAt->format('Y-m-d H:i:s'));
     }
 
     public function testParseDoesNotLeakTitleIntoNextDateBlock(): void
