@@ -651,6 +651,40 @@ final class RoadmapRawTextEventParserTest extends TestCase
         self::assertFalse($this->containsTitleFragments($events, ['00']));
     }
 
+    public function testDateLineEndingWithBisDoesNotMergeWithTitleLine(): void
+    {
+        $parser = new RoadmapRawTextEventParser();
+        $text = <<<TXT
+            Dezember
+            2. BIS 7. JAN.
+            SCHEINE-SEGEN UND
+            LEGENDÄRE ANGEBOTE
+            30. JAN. BIS
+            DOPPELTER S.C.O.R.E., SCHATZSUCHER UND DOPPELMUTATIONEN
+            •BIS 3. FEB.
+            TXT;
+
+        $events = $parser->parse($text, 'de', new DateTimeImmutable('2026-01-02 10:00:00'));
+
+        self::assertCount(2, $events);
+        self::assertTrue($this->containsDateRange($events, '2026-01-02 18:00:00', '2026-01-07 18:00:00'));
+        self::assertTrue($this->containsDateRange($events, '2026-01-30 18:00:00', '2026-02-03 18:00:00'));
+    }
+
+    public function testParserCanReadMonthFirstDateEvenWhenLocaleIsGerman(): void
+    {
+        $parser = new RoadmapRawTextEventParser();
+        $text = <<<TXT
+            SEPT 4 - SEPT 8
+            LEGENDARY VENDOR SALE
+            TXT;
+
+        $events = $parser->parse($text, 'de', new DateTimeImmutable('2026-09-01 10:00:00'));
+
+        self::assertCount(1, $events);
+        self::assertTrue($this->containsDateRange($events, '2026-09-04 18:00:00', '2026-09-08 18:00:00'));
+    }
+
     private function normalizeTitleForAssert(string $value): string
     {
         $normalized = mb_strtoupper(trim($value));

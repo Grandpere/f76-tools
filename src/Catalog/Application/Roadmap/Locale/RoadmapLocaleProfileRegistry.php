@@ -45,4 +45,12 @@ final class RoadmapLocaleProfileRegistry
 
         return new EnglishRoadmapLocaleProfile();
     }
+
+    /**
+     * @return list<RoadmapLocaleProfile>
+     */
+    public function allProfiles(): array
+    {
+        return $this->profiles;
+    }
 }

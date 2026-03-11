@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Catalog\Application\Roadmap;
 
 use App\Catalog\Application\Roadmap\Locale\RoadmapLocaleProfileRegistry;
+use App\Catalog\Application\Roadmap\Locale\RoadmapLocaleProfile;
 use DateTimeImmutable;
 
 final class RoadmapRawTextEventParser
@@ -99,14 +100,32 @@ final class RoadmapRawTextEventParser
         }
 
         $lines = [];
+        $pendingRangePrefix = null;
         $count = count($preNormalized);
         for ($index = 0; $index < $count; ++$index) {
             $line = $preNormalized[$index];
+
+            if (
+                is_string($pendingRangePrefix)
+                && 1 === preg_match('/^(?:[•\*\-\.,]?\s*)?(?:BIS|TO)\b/iu', $line)
+            ) {
+                $suffix = preg_replace('/^(?:[•\*\-\.,]?\s*)?(?:BIS|TO)\s*/iu', '', $line) ?? $line;
+                $line = $pendingRangePrefix.' '.ltrim($suffix, " \t");
+                $pendingRangePrefix = null;
+            }
 
             if (str_ends_with($line, '-') && isset($preNormalized[$index + 1])) {
                 $next = ltrim($preNormalized[$index + 1], "- \t");
                 $line = rtrim(substr($line, 0, -1)).' - '.$next;
                 ++$index;
+            } elseif (1 === preg_match('/\b(?:BIS|TO)\s*$/iu', $line) && isset($preNormalized[$index + 1])) {
+                $next = ltrim($preNormalized[$index + 1], " \t");
+                if ($this->looksLikeDateContinuationFragment($next)) {
+                    $line = rtrim($line).' '.$next;
+                    ++$index;
+                } else {
+                    $pendingRangePrefix = rtrim($line);
+                }
             } elseif (str_starts_with($line, '- ') && [] !== $lines) {
                 $suffix = ltrim($line, "- \t");
                 $lastIndex = array_key_last($lines);
@@ -275,7 +294,6 @@ final class RoadmapRawTextEventParser
      */
     private function extractDateRange(string $line, string $locale, DateTimeImmutable $referenceDate, ?DateTimeImmutable $lastRangeEnd): ?array
     {
-        $profile = $this->profileRegistry->profileFor($locale);
         $connectorPattern = '(?:-|–|BIS|TO)';
 
         if (preg_match(
@@ -357,25 +375,25 @@ final class RoadmapRawTextEventParser
                 $startDay = $this->inferMissingStartDay($endDay, $startMonth, $endMonth, $referenceDate, $lastRangeEnd);
             } else {
                 // Format: "APRIL 7 - APRIL 14" / "MAR 3 - MAR 10"
-                if ($profile->usesMonthFirstDates() && preg_match(
+                if (preg_match(
                     '/([^\s\-–]+)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?(?:\s*,?\s*\d{2,4})?\s*'.$connectorPattern.'\s*([^\s\-–]+)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?(?:\s*,?\s*\d{2,4})?/iu',
                     $line,
                     $matches,
                 )) {
-                    $startMonth = $this->monthNameToNumber($matches[1], $locale);
+                    $startMonth = $this->monthNameToNumber($matches[1], $locale, false);
                     $startDay = (int) $matches[2];
-                    $endMonth = $this->monthNameToNumber($matches[3], $locale);
+                    $endMonth = $this->monthNameToNumber($matches[3], $locale, false);
                     $endDay = (int) $matches[4];
                 // Format: "APRIL 21 - MAY 5" with noisy separator variants
-                } elseif ($profile->usesMonthFirstDates() && preg_match(
+                } elseif (preg_match(
                     '/([^\s\-–]+)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?(?:\s*,?\s*\d{2,4})?\s*'.$connectorPattern.'\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?(?:\s*,?\s*\d{2,4})?\s*([^\s\-–]+)/iu',
                     $line,
                     $matches,
                 )) {
-                    $startMonth = $this->monthNameToNumber($matches[1], $locale);
+                    $startMonth = $this->monthNameToNumber($matches[1], $locale, false);
                     $startDay = (int) $matches[2];
                     $endDay = (int) $matches[3];
-                    $endMonth = $this->monthNameToNumber($matches[4], $locale);
+                    $endMonth = $this->monthNameToNumber($matches[4], $locale, false);
                 } else {
                     return null;
                 }
@@ -437,7 +455,6 @@ final class RoadmapRawTextEventParser
      */
     private function extractSingleDate(string $line, string $locale, DateTimeImmutable $referenceDate): ?array
     {
-        $profile = $this->profileRegistry->profileFor($locale);
         if (str_contains($line, '-') || str_contains($line, '–') || 1 === preg_match('/\b(BIS|TO)\b/iu', $line)) {
             return null;
         }
@@ -447,8 +464,8 @@ final class RoadmapRawTextEventParser
             $month = $this->monthNameToNumber($matches[2], $locale);
             $year = $this->normalizeParsedYear((string) $matches[3], $referenceDate) ?? (int) $referenceDate->format('Y');
             $inlineTail = (string) $matches[4];
-        } elseif ($profile->usesMonthFirstDates() && preg_match('/^\s*([^\s]+)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?(?:\s*,?\s*(\d{2,4}))?\s*(.*)$/iu', $line, $matches)) {
-            $month = $this->monthNameToNumber($matches[1], $locale);
+        } elseif (preg_match('/^\s*([^\s\d\/\.\-]+)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?(?:\s*,?\s*(\d{2,4}))?\s*(.*)$/iu', $line, $matches)) {
+            $month = $this->monthNameToNumber($matches[1], $locale, false);
             $day = (int) $matches[2];
             $year = $this->normalizeParsedYear((string) $matches[3], $referenceDate) ?? (int) $referenceDate->format('Y');
             $inlineTail = (string) $matches[4];
@@ -492,10 +509,57 @@ final class RoadmapRawTextEventParser
         return isset($profile->monthAliases()[$normalized]);
     }
 
-    private function monthNameToNumber(string $rawMonth, string $locale): int
+    private function monthNameToNumber(string $rawMonth, string $locale, bool $allowFuzzy = true): int
     {
         $profile = $this->profileRegistry->profileFor($locale);
         $normalized = $this->normalizeMonthToken($rawMonth);
+        if (in_array($normalized, ['BIS', 'TO', 'UND', 'AND', 'ET', 'EVENT', 'UPDATE'], true)) {
+            return 0;
+        }
+
+        $resolved = $this->resolveMonthNumberFromProfile($normalized, $profile);
+        if ($resolved > 0) {
+            return $resolved;
+        }
+
+        foreach ($this->profileRegistry->allProfiles() as $fallbackProfile) {
+            if ($fallbackProfile === $profile) {
+                continue;
+            }
+
+            $resolved = $this->resolveMonthNumberFromProfile($normalized, $fallbackProfile);
+            if ($resolved > 0) {
+                return $resolved;
+            }
+        }
+
+        if (!$allowFuzzy) {
+            return 0;
+        }
+
+        $map = $profile->monthMap();
+        // Fallback for OCR typos: "AVRlL", "MA1", "JUlN", etc.
+        if (mb_strlen($normalized) >= 2) {
+            $bestMonth = 0;
+            $bestDistance = PHP_INT_MAX;
+            foreach ($map as $monthNumber => $label) {
+                $distance = levenshtein($normalized, $label);
+                if ($distance < $bestDistance) {
+                    $bestDistance = $distance;
+                    $bestMonth = (int) $monthNumber;
+                }
+            }
+
+            if ($bestMonth > 0 && $bestDistance <= 3) {
+                return $bestMonth;
+            }
+        }
+
+        return 0;
+    }
+
+    private function resolveMonthNumberFromProfile(string $normalized, RoadmapLocaleProfile $profile): int
+    {
         $aliases = $profile->monthAliases();
         if (isset($aliases[$normalized])) {
             return (int) $aliases[$normalized];
@@ -518,23 +582,6 @@ final class RoadmapRawTextEventParser
             }
             if (1 === count($prefixMatches)) {
                 return $prefixMatches[0];
-            }
-        }
-
-        // Fallback for OCR typos: "AVRlL", "MA1", "JUlN", etc.
-        if (mb_strlen($normalized) >= 2) {
-            $bestMonth = 0;
-            $bestDistance = PHP_INT_MAX;
-            foreach ($map as $monthNumber => $label) {
-                $distance = levenshtein($normalized, $label);
-                if ($distance < $bestDistance) {
-                    $bestDistance = $distance;
-                    $bestMonth = (int) $monthNumber;
-                }
-            }
-
-            if ($bestMonth > 0 && $bestDistance <= 3) {
-                return $bestMonth;
             }
         }
 
@@ -571,6 +618,14 @@ final class RoadmapRawTextEventParser
         $normalized = preg_replace('/\bLER\b/u', '1ER', $normalized) ?? $normalized;
 
         return trim(preg_replace('/\s+/u', ' ', $normalized) ?? $normalized);
+    }
+
+    private function looksLikeDateContinuationFragment(string $line): bool
+    {
+        return 1 === preg_match(
+            '/^(?:[•\*\-\.,]?\s*)?(?:\d{1,2}\b|(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC|JANV|FEV|FÉV|MARS|AVR|MAI|JUIN|JUIL|AOUT|AOÛT|SEPT|OCT|NOV|DEC|D[ÉE]C|JANUAR|FEBRUAR|MARZ|MÄRZ|APRIL|MAI|JUNI|JULI|AUGUST|SEPTEMBER|OKTOBER|NOVEMBER|DEZEMBER)\b|(?:BIS|TO)\b)/iu',
+            $line,
+        );
     }
 
     private function normalizeTitle(string $value): string

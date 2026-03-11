@@ -418,3 +418,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: `KernelBrowser` rebooted the kernel between GET and POST, dropping the overridden `OcrProviderChain` service from the test container.
 - Fix: disabled reboot in that test before overriding the service (`$client->disableReboot()`), so the same container is reused for upload POST.
 - Prevention: when a functional test overrides container services and performs multiple requests, disable reboot (or re-inject before each request).
+
+## 2026-03-11 - OCR date parsing regressed on split `BIS` lines and mixed locale snapshots
+- Symptom: some roadmap snapshots dropped events or produced broken windows (`end < start`) when OCR split date lines (`... BIS` on one line, continuation later) and when snapshot locale did not match text language.
+- Root cause: normalization merged `... BIS` with any next line (including titles), and month resolution was strict to selected locale for month-first patterns.
+- Fix: restrict `... BIS` merge to date-like continuations, support deferred continuation lines, and add cross-locale month token fallback (FR/EN/DE maps) for month-first parsing while keeping strict token checks to avoid false positives.
+- Prevention: validate parser changes against mixed-locale real snapshots (including legacy uploads) and keep dedicated unit tests for split-date continuations.
