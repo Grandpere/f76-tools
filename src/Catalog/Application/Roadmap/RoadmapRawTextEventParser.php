@@ -661,6 +661,26 @@ final class RoadmapRawTextEventParser
                     $startDay = (int) $matches[2];
                     $endDay = (int) $matches[3];
                     $endMonth = $this->monthNameToNumber($matches[4], $locale, false);
+                // Format: "5 SEPTEMBRE - 12" (end month omitted)
+                } elseif (preg_match(
+                    '/(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s*([^\s\-–]+)\s*'.$connectorPattern.'\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s*$/iu',
+                    $line,
+                    $matches,
+                )) {
+                    $startDay = (int) $matches[1];
+                    $startMonth = $this->monthNameToNumber($matches[2], $locale, false);
+                    $endDay = (int) $matches[3];
+                    $endMonth = $startMonth;
+                // Format: "SEPTEMBRE 5 - 12" (end month omitted, month-first)
+                } elseif (preg_match(
+                    '/([^\s\-–]+)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s*'.$connectorPattern.'\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s*$/iu',
+                    $line,
+                    $matches,
+                )) {
+                    $startMonth = $this->monthNameToNumber($matches[1], $locale, false);
+                    $startDay = (int) $matches[2];
+                    $endDay = (int) $matches[3];
+                    $endMonth = $startMonth;
                 } else {
                     return null;
                 }
@@ -709,6 +729,17 @@ final class RoadmapRawTextEventParser
         );
         if (null === $startsAt || null === $endsAt) {
             return null;
+        }
+
+        if ($endsAt < $startsAt) {
+            $recovered = $this->recoverInvertedEndDate($year, $startMonth, $startDay, $endMonth, $endDay, $line);
+            if (is_array($recovered)) {
+                [$recoveredYear, $recoveredMonth, $recoveredDay] = $recovered;
+                $candidateEndsAt = $this->buildDateTime($recoveredYear, $recoveredMonth, $recoveredDay, self::DEFAULT_END_HOUR);
+                if ($candidateEndsAt instanceof DateTimeImmutable && $candidateEndsAt >= $startsAt) {
+                    $endsAt = $candidateEndsAt;
+                }
+            }
         }
 
         return [
@@ -1028,6 +1059,49 @@ final class RoadmapRawTextEventParser
         $dateTime = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', sprintf('%04d-%02d-%02d %02d:00:00', $year, $month, $day, $hour));
 
         return $dateTime instanceof DateTimeImmutable ? $dateTime : null;
+    }
+
+    /**
+     * @return array{int, int, int}|null
+     */
+    private function recoverInvertedEndDate(
+        int $year,
+        int $startMonth,
+        int $startDay,
+        int $endMonth,
+        int $endDay,
+        string $line,
+    ): ?array {
+        if ($endMonth !== $startMonth) {
+            return null;
+        }
+
+        $daysInMonth = $this->daysInMonth($year, $startMonth);
+
+        // OCR often truncates tens on end day (e.g. "16" -> "1", "23" -> "2").
+        foreach ([10, 20, 30] as $offset) {
+            $candidateDay = $endDay + $offset;
+            if ($candidateDay < $startDay || $candidateDay > $daysInMonth) {
+                continue;
+            }
+            if (($candidateDay - $startDay) <= 14) {
+                return [$year, $startMonth, $candidateDay];
+            }
+        }
+
+        // If range starts at end of month and OCR captured low end day, it is likely next-month rollover.
+        if ($startDay >= 24 && $endDay <= 7) {
+            $nextMonth = $startMonth + 1;
+            $nextYear = $year;
+            if ($nextMonth > 12) {
+                $nextMonth = 1;
+                ++$nextYear;
+            }
+
+            return [$nextYear, $nextMonth, $endDay];
+        }
+
+        return null;
     }
 
     private function normalizeParsedYear(string $rawYear, DateTimeImmutable $referenceDate): ?int

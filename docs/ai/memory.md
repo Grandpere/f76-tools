@@ -436,3 +436,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: parser assumed one date range per line and simple forward/backward title lookup, which breaks on OCR column interleaving.
 - Fix: added paired-consecutive-date handling and multi-range line splitting with title pairing heuristics (`left,right,left` and `left,right,left,right` patterns).
 - Prevention: keep unit tests for multi-range line splits and alternating title-line assignment.
+
+## 2026-03-11 - Inverted roadmap ranges from OCR-truncated end days
+- Symptom: some parsed events had `end < start` on noisy FR snapshots (e.g. `5 SEPT - 1` instead of `5 SEPT - 11/12`, or month rollover truncated).
+- Root cause: OCR often dropped tens on end day or omitted rollover context near month end.
+- Fix: added inverted-range recovery in parser (`+10/+20/+30` day reconstruction for short windows, and month rollover fallback for end-of-month starts).
+- Prevention: for OCR-heavy snapshots, keep parser recovery for `end < start` before validation; validator should only flag residual impossible windows.
