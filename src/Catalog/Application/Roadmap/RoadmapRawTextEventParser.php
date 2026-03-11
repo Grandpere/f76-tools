@@ -36,12 +36,13 @@ final class RoadmapRawTextEventParser
     public function parse(string $rawText, string $locale, DateTimeImmutable $referenceDate): array
     {
         $lines = $this->normalizeLines($rawText);
-        $dateMarkerIndexes = $this->detectDateMarkerIndexes($lines, $locale, $referenceDate);
+        $effectiveReferenceDate = $this->resolveReferenceDateFromRawText($rawText, $referenceDate);
+        $dateMarkerIndexes = $this->detectDateMarkerIndexes($lines, $locale, $effectiveReferenceDate);
         $events = [];
         $lastRangeEnd = null;
 
         foreach ($lines as $index => $line) {
-            $dateRange = $this->extractDateRange($line, $locale, $referenceDate, $lastRangeEnd);
+            $dateRange = $this->extractDateRange($line, $locale, $effectiveReferenceDate, $lastRangeEnd);
             if (null !== $dateRange) {
                 $title = $this->resolveTitle($lines, $index, $locale, $dateMarkerIndexes);
                 if ('' === $title) {
@@ -58,7 +59,7 @@ final class RoadmapRawTextEventParser
                 continue;
             }
 
-            $singleDate = $this->extractSingleDate($line, $locale, $referenceDate);
+            $singleDate = $this->extractSingleDate($line, $locale, $effectiveReferenceDate);
             if (null === $singleDate) {
                 continue;
             }
@@ -721,6 +722,89 @@ final class RoadmapRawTextEventParser
         }
 
         return $parsed;
+    }
+
+    private function resolveReferenceDateFromRawText(string $rawText, DateTimeImmutable $fallback): DateTimeImmutable
+    {
+        $yearCounts = $this->countCandidateYears($rawText, true);
+        if ([] === $yearCounts) {
+            $yearCounts = $this->countCandidateYears($rawText, false);
+        }
+
+        if ([] === $yearCounts) {
+            return $fallback;
+        }
+
+        arsort($yearCounts);
+        $topFrequency = max($yearCounts);
+        $candidates = [];
+        foreach ($yearCounts as $year => $count) {
+            if ($count === $topFrequency) {
+                $candidates[] = (int) $year;
+            }
+        }
+
+        if ([] === $candidates) {
+            return $fallback;
+        }
+
+        $fallbackYear = (int) $fallback->format('Y');
+        usort($candidates, static function (int $left, int $right) use ($fallbackYear): int {
+            $leftDelta = abs($left - $fallbackYear);
+            $rightDelta = abs($right - $fallbackYear);
+            if ($leftDelta !== $rightDelta) {
+                return $leftDelta <=> $rightDelta;
+            }
+
+            return $right <=> $left;
+        });
+        $selectedYear = $candidates[0];
+
+        return $fallback->setDate(
+            $selectedYear,
+            (int) $fallback->format('m'),
+            (int) $fallback->format('d'),
+        );
+    }
+
+    /**
+     * @return array<int, int>
+     */
+    private function countCandidateYears(string $rawText, bool $skipNoisyLines): array
+    {
+        $yearCounts = [];
+        $lines = preg_split('/\R/u', $rawText);
+        if (!is_array($lines)) {
+            return [];
+        }
+
+        foreach ($lines as $line) {
+            $normalizedLine = $this->normalizeWord((string) $line);
+            if (
+                $skipNoisyLines
+                && (
+                    str_contains($normalizedLine, 'BETHESDA')
+                    || str_contains($normalizedLine, 'ZENIMAX')
+                    || str_contains($normalizedLine, 'COMMUNITY CALENDAR')
+                    || 1 === preg_match('/\bTM\b/u', $normalizedLine)
+                )
+            ) {
+                continue;
+            }
+
+            if (!preg_match_all('/\b(20\d{2})\b/u', (string) $line, $matches)) {
+                continue;
+            }
+            foreach ($matches[1] as $rawYear) {
+                $year = (int) $rawYear;
+                if ($year < 2018 || $year > 2035) {
+                    continue;
+                }
+                $yearCounts[$year] = ($yearCounts[$year] ?? 0) + 1;
+            }
+        }
+
+        return $yearCounts;
     }
 
     private function isIgnoredTitleLine(string $line): bool
