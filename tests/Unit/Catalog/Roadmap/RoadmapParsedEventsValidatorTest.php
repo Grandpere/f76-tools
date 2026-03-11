@@ -80,4 +80,26 @@ final class RoadmapParsedEventsValidatorTest extends TestCase
 
         self::assertFalse($result->hasErrors());
     }
+
+    public function testPartialSeasonWindowAllowsLowerMinimumWithoutKeyword(): void
+    {
+        $validator = new RoadmapParsedEventsValidator();
+        $events = [
+            new RoadmapParsedEvent('A', new DateTimeImmutable('2025-07-29 18:00:00'), new DateTimeImmutable('2025-08-12 18:00:00')),
+            new RoadmapParsedEvent('B', new DateTimeImmutable('2025-07-31 18:00:00'), new DateTimeImmutable('2025-08-04 18:00:00')),
+            new RoadmapParsedEvent('C', new DateTimeImmutable('2025-08-07 18:00:00'), new DateTimeImmutable('2025-08-11 18:00:00')),
+            new RoadmapParsedEvent('D', new DateTimeImmutable('2025-08-12 18:00:00'), new DateTimeImmutable('2025-08-26 18:00:00')),
+            new RoadmapParsedEvent('E', new DateTimeImmutable('2025-08-14 18:00:00'), new DateTimeImmutable('2025-08-18 18:00:00')),
+            new RoadmapParsedEvent('F', new DateTimeImmutable('2025-08-19 18:00:00'), new DateTimeImmutable('2025-08-26 18:00:00')),
+            new RoadmapParsedEvent('G', new DateTimeImmutable('2025-08-28 18:00:00'), new DateTimeImmutable('2025-09-01 18:00:00')),
+        ];
+
+        $result = $validator->validate(
+            $events,
+            'de',
+            "FALLOUT 76 SEASON 21\nCOMMUNITY CALENDAR",
+        );
+
+        self::assertFalse($result->hasErrors());
+    }
 }

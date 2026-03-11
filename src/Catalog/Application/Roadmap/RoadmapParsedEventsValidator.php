@@ -41,7 +41,7 @@ final class RoadmapParsedEventsValidator
 
         $isSeasonRoadmap = $this->looksLikeSeasonRoadmapText($rawText);
         if ($isSeasonRoadmap) {
-            $expectedMinimum = $this->resolveMinimumSeasonEvents($rawText);
+            $expectedMinimum = $this->resolveMinimumSeasonEvents($rawText, $events);
             if ($eventCount < $expectedMinimum) {
                 $errors[] = sprintf(
                     'Too few events detected for a season roadmap (%d, expected at least %d).',
@@ -103,7 +103,10 @@ final class RoadmapParsedEventsValidator
         return 1 === preg_match('/\b(?:SEASON|SAISON|COMMUNITY\s+CALENDAR|CALENDRIER)\b/iu', $rawText);
     }
 
-    private function resolveMinimumSeasonEvents(string $rawText): int
+    /**
+     * @param list<RoadmapParsedEvent> $events
+     */
+    private function resolveMinimumSeasonEvents(string $rawText, array $events): int
     {
         if ('' === trim($rawText)) {
             return self::MIN_SEASON_EVENTS;
@@ -114,7 +117,37 @@ final class RoadmapParsedEventsValidator
             return self::MIN_PARTIAL_SEASON_EVENTS;
         }
 
+        $windowDays = $this->estimateEventWindowDays($events);
+        if (is_int($windowDays) && $windowDays <= 50) {
+            return self::MIN_PARTIAL_SEASON_EVENTS;
+        }
+
         return self::MIN_SEASON_EVENTS;
+    }
+
+    /**
+     * @param list<RoadmapParsedEvent> $events
+     */
+    private function estimateEventWindowDays(array $events): ?int
+    {
+        if ([] === $events) {
+            return null;
+        }
+
+        $min = $events[0]->startsAt;
+        $max = $events[0]->endsAt;
+        foreach ($events as $event) {
+            if ($event->startsAt < $min) {
+                $min = $event->startsAt;
+            }
+            if ($event->endsAt > $max) {
+                $max = $event->endsAt;
+            }
+        }
+
+        $diff = $min->diff($max);
+
+        return is_int($diff->days) ? $diff->days : null;
     }
 
     /**
