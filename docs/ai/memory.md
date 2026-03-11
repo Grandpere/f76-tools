@@ -430,3 +430,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: validator warning logic keyed only on date range and ignored title difference.
 - Fix: duplicate warning now triggers only when both range and normalized title match (true duplicate), not when different events share the same dates.
 - Prevention: keep validator tests for both cases (same range + different titles => no warning, same range + same title => warning).
+
+## 2026-03-11 - OCR snapshots can encode two events on one line or two date lines before titles
+- Symptom: roadmap parser missed one event and mis-assigned titles on FR snapshot blocks (e.g. `12-16` + `19-23` on one line; `8-12` + `13-27` with alternating title lines).
+- Root cause: parser assumed one date range per line and simple forward/backward title lookup, which breaks on OCR column interleaving.
+- Fix: added paired-consecutive-date handling and multi-range line splitting with title pairing heuristics (`left,right,left` and `left,right,left,right` patterns).
+- Prevention: keep unit tests for multi-range line splits and alternating title-line assignment.

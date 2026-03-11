@@ -48,6 +48,27 @@ final class RoadmapRawTextEventParser
                 continue;
             }
 
+            $pairedConsecutiveRanges = $this->extractPairedConsecutiveDateRanges($lines, $index, $locale, $effectiveReferenceDate, $lastRangeEnd);
+            if (is_array($pairedConsecutiveRanges)) {
+                [$firstRange, $secondRange, $pairTitles] = $pairedConsecutiveRanges;
+
+                $firstTitle = $pairTitles[0];
+                $secondTitle = $pairTitles[1];
+                if ('' === $firstTitle) {
+                    $firstTitle = sprintf('Event %d', count($events) + 1);
+                }
+                if ('' === $secondTitle) {
+                    $secondTitle = sprintf('Event %d', count($events) + 2);
+                }
+
+                $events[] = new RoadmapParsedEvent($firstTitle, $firstRange['startsAt'], $firstRange['endsAt']);
+                $events[] = new RoadmapParsedEvent($secondTitle, $secondRange['startsAt'], $secondRange['endsAt']);
+                $lastRangeEnd = $secondRange['endsAt'];
+                $consumedIndexes[$index + 1] = true;
+
+                continue;
+            }
+
             $multipleRanges = $this->extractMultipleDateRangesFromLine($line, $locale, $effectiveReferenceDate, $lastRangeEnd);
             if (count($multipleRanges) >= 2) {
                 $pairedTitles = $this->collectFollowingTitleLinesForMultiRange($lines, $index, $locale, count($multipleRanges));
@@ -131,6 +152,104 @@ final class RoadmapRawTextEventParser
         }
 
         return $events;
+    }
+
+    /**
+     * @param list<string> $lines
+     *
+     * @return array{
+     *   0: array{startsAt: DateTimeImmutable, endsAt: DateTimeImmutable},
+     *   1: array{startsAt: DateTimeImmutable, endsAt: DateTimeImmutable},
+     *   2: array{0: string, 1: string}
+     * }|null
+     */
+    private function extractPairedConsecutiveDateRanges(
+        array $lines,
+        int $index,
+        string $locale,
+        DateTimeImmutable $referenceDate,
+        ?DateTimeImmutable $lastRangeEnd,
+    ): ?array {
+        if (!isset($lines[$index + 1])) {
+            return null;
+        }
+
+        $firstRange = $this->extractDateRange($lines[$index], $locale, $referenceDate, $lastRangeEnd);
+        if (!is_array($firstRange)) {
+            return null;
+        }
+
+        $secondRange = $this->extractDateRange($lines[$index + 1], $locale, $referenceDate, $firstRange['endsAt']);
+        if (!is_array($secondRange)) {
+            return null;
+        }
+
+        $titleLines = [];
+        for ($offset = 2; $offset <= 8; ++$offset) {
+            $candidateIndex = $index + $offset;
+            if (!isset($lines[$candidateIndex])) {
+                break;
+            }
+
+            $candidate = $lines[$candidateIndex];
+            if (null !== $this->extractDateRange($candidate, $locale, new DateTimeImmutable(), null)) {
+                break;
+            }
+            if (null !== $this->extractSingleDate($candidate, $locale, new DateTimeImmutable())) {
+                break;
+            }
+            if ($this->looksLikeMonthOnlyLabel($candidate, $locale)) {
+                break;
+            }
+            if ($this->isIgnoredTitleLine($candidate)) {
+                continue;
+            }
+
+            $titleLines[] = $this->normalizeTitle($candidate);
+        }
+
+        if ([] === $titleLines) {
+            return null;
+        }
+
+        return [$firstRange, $secondRange, $this->splitTitleLinesForDatePair($titleLines)];
+    }
+
+    /**
+     * @param list<string> $titleLines
+     *
+     * @return array{0: string, 1: string}
+     */
+    private function splitTitleLinesForDatePair(array $titleLines): array
+    {
+        if (1 === count($titleLines)) {
+            return [$titleLines[0], $titleLines[0]];
+        }
+        if (2 === count($titleLines)) {
+            return [$titleLines[0], $titleLines[1]];
+        }
+        if (3 === count($titleLines)) {
+            // Frequent OCR column pattern: left, right, left.
+            return [$this->normalizeTitle($titleLines[0].' '.$titleLines[2]), $titleLines[1]];
+        }
+
+        if (count($titleLines) >= 4 && $this->looksLikeContinuationLine($titleLines[2])) {
+            // Frequent OCR column pattern on 4 lines: left, right, left, right.
+            $first = $this->normalizeTitle($titleLines[0].' '.$titleLines[2]);
+            $second = $this->normalizeTitle($titleLines[1].' '.$titleLines[3]);
+
+            return [$first, $second];
+        }
+
+        $first = $titleLines[0];
+        $second = $this->normalizeTitle(implode(' ', array_slice($titleLines, 1)));
+
+        return [$first, $second];
+    }
+
+    private function looksLikeContinuationLine(string $line): bool
+    {
+        return 1 === preg_match('/^(?:ET|AND|UND|&)\b/iu', trim($line));
     }
 
     /**

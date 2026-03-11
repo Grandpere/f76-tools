@@ -741,6 +741,31 @@ final class RoadmapRawTextEventParserTest extends TestCase
         self::assertSame('CHOIX SPÉCIAL DE MURMRGH', (string) $this->findTitleByRange($events, '2024-09-19 18:00:00', '2024-09-23 18:00:00'));
     }
 
+    public function testParserSplitsTwoDateRangesWithAlternatingFourTitleLines(): void
+    {
+        $parser = new RoadmapRawTextEventParser();
+        $text = <<<TXT
+            8 AOÛT - 12 AOÛT
+            13 AOÛT - 27 AOÛT
+            WEEK-END DOUBLE S.C.O.R.E.
+            ÉQUINOXE DE
+            ET FIÈVRE DE L'OR
+            L'HOMME-PHALÈNE
+            TXT;
+
+        $events = $parser->parse($text, 'fr', new DateTimeImmutable('2024-08-01 10:00:00'));
+
+        self::assertCount(2, $events);
+        self::assertSame(
+            'WEEK-END DOUBLE S.C.O.R.E ET FIÈVRE DE L\'OR',
+            (string) $this->findTitleByRange($events, '2024-08-08 18:00:00', '2024-08-12 18:00:00'),
+        );
+        self::assertSame(
+            'ÉQUINOXE DE L\'HOMME-PHALÈNE',
+            (string) $this->findTitleByRange($events, '2024-08-13 18:00:00', '2024-08-27 18:00:00'),
+        );
+    }
+
     private function normalizeTitleForAssert(string $value): string
     {
         $normalized = mb_strtoupper(trim($value));
