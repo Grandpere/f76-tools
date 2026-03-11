@@ -325,6 +325,9 @@ admin_roadmap.snapshot_quality_ok: OK
 admin_roadmap.snapshot_quality_warn: Review
 admin_roadmap.snapshot_quality_error: Blocking
 admin_roadmap.snapshot_quality_legend: "Quality legend: E = blocking errors, W = warnings."
+admin_roadmap.snapshot_quality_details: Quality details
+admin_roadmap.snapshot_quality_errors: Blocking errors
+admin_roadmap.snapshot_quality_warnings: Warnings
 admin_roadmap.snapshot_scanned_at: Scanned at
 admin_roadmap.snapshot_actions: Actions
 admin_roadmap.snapshot_season: Season

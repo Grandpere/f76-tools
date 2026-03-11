@@ -177,6 +177,32 @@
                                 <dd>{{ events|length }}</dd>
                             </div>
                         </dl>
+                        {% if selectedSnapshotQuality %}
+                            <div class="roadmap-quality-panel">
+                                <h4 class="roadmap-attempts-title">{{ 'admin_roadmap.snapshot_quality_details'|trans }}</h4>
+                                <p class="roadmap-quality-current">
+                                    <span class="item-pill roadmap-quality-pill roadmap-quality-pill--{{ selectedSnapshotQuality.level }}">
+                                        {{ ('admin_roadmap.snapshot_quality_' ~ selectedSnapshotQuality.level)|trans }}
+                                    </span>
+                                </p>
+                                {% if selectedSnapshotQuality.errors is not empty %}
+                                    <p class="roadmap-quality-list-title">{{ 'admin_roadmap.snapshot_quality_errors'|trans }}</p>
+                                    <ul class="roadmap-quality-list roadmap-quality-list--error">
+                                        {% for message in selectedSnapshotQuality.errors %}
+                                            <li>{{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                {% if selectedSnapshotQuality.warnings is not empty %}
+                                    <p class="roadmap-quality-list-title">{{ 'admin_roadmap.snapshot_quality_warnings'|trans }}</p>
+                                    <ul class="roadmap-quality-list roadmap-quality-list--warn">
+                                        {% for message in selectedSnapshotQuality.warnings %}
+                                            <li>{{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        {% endif %}
                         {% if selectedSnapshot.ocrAttemptsSummary %}
                             <h4 class="roadmap-attempts-title">{{ 'admin_roadmap.snapshot_ocr_attempts'|trans }}</h4>
                             <pre class="roadmap-attempts-summary">{{ selectedSnapshot.ocrAttemptsSummary }}</pre>

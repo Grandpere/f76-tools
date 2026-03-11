@@ -124,6 +124,7 @@ final class RoadmapSnapshotController extends AbstractController
 
         $events = [];
         $selectedSnapshotImageUrl = null;
+        $selectedSnapshotQuality = null;
         if ($selectedSnapshot instanceof RoadmapSnapshotEntity) {
             $events = $selectedSnapshot->getEvents()->toArray();
             usort($events, static function (RoadmapEventEntity $a, RoadmapEventEntity $b): int {
@@ -133,6 +134,10 @@ final class RoadmapSnapshotController extends AbstractController
                 '_locale' => $request->getLocale(),
                 'id' => $selectedSnapshot->getId(),
             ]);
+            $selectedSnapshotId = $selectedSnapshot->getId();
+            if (is_int($selectedSnapshotId)) {
+                $selectedSnapshotQuality = $this->assessSnapshotQuality($selectedSnapshot, $selectedSnapshotId);
+            }
         }
 
         return $this->render('admin/roadmap_snapshots.html.twig', [
@@ -146,6 +151,7 @@ final class RoadmapSnapshotController extends AbstractController
             'selectedSeason' => $selectedSeason,
             'mergeSnapshotContext' => $mergeSnapshotContext,
             'snapshotQualityById' => $snapshotQualityById,
+            'selectedSnapshotQuality' => $selectedSnapshotQuality,
         ]);
     }
 
@@ -657,34 +663,49 @@ final class RoadmapSnapshotController extends AbstractController
                 continue;
             }
 
-            try {
-                $parsedEvents = $this->resolveSnapshotParsedEvents($snapshot, $snapshotId);
-                $validation = $this->roadmapParsedEventsValidator->validate(
-                    $parsedEvents,
-                    $snapshot->getLocale(),
-                    $snapshot->getRawText(),
-                );
-                $errorCount = count($validation->errors);
-                $warningCount = count($validation->warnings);
-                $level = $errorCount > 0
-                    ? 'error'
-                    : ($warningCount > 0 ? 'warn' : 'ok');
-
-                $qualityById[$snapshotId] = [
-                    'level' => $level,
-                    'errors' => $errorCount,
-                    'warnings' => $warningCount,
-                ];
-            } catch (RuntimeException) {
-                $qualityById[$snapshotId] = [
-                    'level' => 'error',
-                    'errors' => 1,
-                    'warnings' => 0,
-                ];
-            }
+            $assessment = $this->assessSnapshotQuality($snapshot, $snapshotId);
+            $qualityById[$snapshotId] = [
+                'level' => $assessment['level'],
+                'errors' => count($assessment['errors']),
+                'warnings' => count($assessment['warnings']),
+            ];
         }
 
         return $qualityById;
+    }
+
+    /**
+     * @return array{
+     *     level: string,
+     *     errors: list<string>,
+     *     warnings: list<string>
+     * }
+     */
+    private function assessSnapshotQuality(RoadmapSnapshotEntity $snapshot, int $snapshotId): array
+    {
+        try {
+            $parsedEvents = $this->resolveSnapshotParsedEvents($snapshot, $snapshotId);
+            $validation = $this->roadmapParsedEventsValidator->validate(
+                $parsedEvents,
+                $snapshot->getLocale(),
+                $snapshot->getRawText(),
+            );
+            $level = [] !== $validation->errors
+                ? 'error'
+                : ([] !== $validation->warnings ? 'warn' : 'ok');
+
+            return [
+                'level' => $level,
+                'errors' => $validation->errors,
+                'warnings' => $validation->warnings,
+            ];
+        } catch (RuntimeException $exception) {
+            return [
+                'level' => 'error',
+                'errors' => [$exception->getMessage()],
+                'warnings' => [],
+            ];
+        }
     }
 
     /**
