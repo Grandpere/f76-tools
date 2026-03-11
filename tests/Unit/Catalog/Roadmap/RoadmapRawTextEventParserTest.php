@@ -705,7 +705,7 @@ final class RoadmapRawTextEventParserTest extends TestCase
         self::assertFalse($this->containsDateRange($events, '2025-08-18 16:00:00', '2025-08-18 20:00:00'));
     }
 
-    public function testParserKeepsBestTitleWhenDuplicateRangeIsDetected(): void
+    public function testParserKeepsDuplicateRangeWhenTitlesAreDifferentAndStripsFooterNoise(): void
     {
         $parser = new RoadmapRawTextEventParser();
         $text = <<<TXT
@@ -717,8 +717,28 @@ final class RoadmapRawTextEventParserTest extends TestCase
 
         $events = $parser->parse($text, 'fr', new DateTimeImmutable('2024-09-01 10:00:00'));
 
-        self::assertCount(1, $events);
-        self::assertSame('SURPLUS DE MITRAILLE ET DOUBLES MUTATIONS', $events[0]->title);
+        self::assertCount(2, $events);
+        self::assertSame(2, $this->countRangeOccurrences($events, '2024-09-26 18:00:00', '2024-09-30 18:00:00'));
+        self::assertTrue($this->containsTitleFragments($events, ['WEEK-END DOUBLE S.C.O.R.E.']));
+        self::assertFalse($this->containsTitleFragments($events, ['Bethesda']));
+    }
+
+    public function testParserSplitsTwoRangesOnSameLineAndMapsFollowingTitles(): void
+    {
+        $parser = new RoadmapRawTextEventParser();
+        $text = <<<TXT
+            12 SEPTEMBRE - 16 SEPTEMBRE 19 SEPTEMBRE - 23 SEPTEMBRE
+            WEEK-END DOUBLE XP
+            CHOIX SPÉCIAL DE MURMRGH
+            TXT;
+
+        $events = $parser->parse($text, 'fr', new DateTimeImmutable('2024-09-01 10:00:00'));
+
+        self::assertCount(2, $events);
+        self::assertTrue($this->containsDateRange($events, '2024-09-12 18:00:00', '2024-09-16 18:00:00'));
+        self::assertTrue($this->containsDateRange($events, '2024-09-19 18:00:00', '2024-09-23 18:00:00'));
+        self::assertSame('WEEK-END DOUBLE XP', (string) $this->findTitleByRange($events, '2024-09-12 18:00:00', '2024-09-16 18:00:00'));
+        self::assertSame('CHOIX SPÉCIAL DE MURMRGH', (string) $this->findTitleByRange($events, '2024-09-19 18:00:00', '2024-09-23 18:00:00'));
     }
 
     private function normalizeTitleForAssert(string $value): string
@@ -749,6 +769,43 @@ final class RoadmapRawTextEventParserTest extends TestCase
         }
 
         return false;
+    }
+
+    /**
+     * @param list<\App\Catalog\Application\Roadmap\RoadmapParsedEvent> $events
+     */
+    private function countRangeOccurrences(array $events, string $startsAt, string $endsAt): int
+    {
+        [$expectedStartsAt, $expectedEndsAt] = $this->normalizeExpectedWindow($startsAt, $endsAt);
+        $count = 0;
+        foreach ($events as $event) {
+            if (
+                $event->startsAt->format('Y-m-d H:i:s') === $expectedStartsAt
+                && $event->endsAt->format('Y-m-d H:i:s') === $expectedEndsAt
+            ) {
+                ++$count;
+            }
+        }
+
+        return $count;
+    }
+
+    /**
+     * @param list<\App\Catalog\Application\Roadmap\RoadmapParsedEvent> $events
+     */
+    private function findTitleByRange(array $events, string $startsAt, string $endsAt): ?string
+    {
+        [$expectedStartsAt, $expectedEndsAt] = $this->normalizeExpectedWindow($startsAt, $endsAt);
+        foreach ($events as $event) {
+            if (
+                $event->startsAt->format('Y-m-d H:i:s') === $expectedStartsAt
+                && $event->endsAt->format('Y-m-d H:i:s') === $expectedEndsAt
+            ) {
+                return $event->title;
+            }
+        }
+
+        return null;
     }
 
     /**

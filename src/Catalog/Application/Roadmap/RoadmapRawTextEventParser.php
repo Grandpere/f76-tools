@@ -48,6 +48,29 @@ final class RoadmapRawTextEventParser
                 continue;
             }
 
+            $multipleRanges = $this->extractMultipleDateRangesFromLine($line, $locale, $effectiveReferenceDate, $lastRangeEnd);
+            if (count($multipleRanges) >= 2) {
+                $pairedTitles = $this->collectFollowingTitleLinesForMultiRange($lines, $index, $locale, count($multipleRanges));
+                foreach ($multipleRanges as $rangeIndex => $dateRange) {
+                    $title = $pairedTitles[$rangeIndex] ?? '';
+                    if ('' === $title) {
+                        $title = $this->resolveTitle($lines, $index, $locale, $dateMarkerIndexes);
+                    }
+                    if ('' === $title) {
+                        $title = sprintf('Event %d', count($events) + 1);
+                    }
+
+                    $events[] = new RoadmapParsedEvent(
+                        $title,
+                        $dateRange['startsAt'],
+                        $dateRange['endsAt'],
+                    );
+                    $lastRangeEnd = $dateRange['endsAt'];
+                }
+
+                continue;
+            }
+
             $dateRange = $this->extractDateRange($line, $locale, $effectiveReferenceDate, $lastRangeEnd);
             if (null !== $dateRange) {
                 $title = $this->resolveTitle($lines, $index, $locale, $dateMarkerIndexes);
@@ -107,41 +130,7 @@ final class RoadmapRawTextEventParser
             $lastRangeEnd = $singleDate['endsAt'];
         }
 
-        return $this->deduplicateByRangeKeepingBestTitle($events);
-    }
-
-    /**
-     * @param list<RoadmapParsedEvent> $events
-     *
-     * @return list<RoadmapParsedEvent>
-     */
-    private function deduplicateByRangeKeepingBestTitle(array $events): array
-    {
-        $bestByRange = [];
-        foreach ($events as $event) {
-            $rangeKey = $event->startsAt->format('Y-m-d H:i:s').'|'.$event->endsAt->format('Y-m-d H:i:s');
-            if (!isset($bestByRange[$rangeKey])) {
-                $bestByRange[$rangeKey] = $event;
-                continue;
-            }
-
-            $currentBest = $bestByRange[$rangeKey];
-            if ($this->titleQualityScore($event->title) > $this->titleQualityScore($currentBest->title)) {
-                $bestByRange[$rangeKey] = $event;
-            }
-        }
-
-        return array_values($bestByRange);
-    }
-
-    private function titleQualityScore(string $title): int
-    {
-        $score = mb_strlen(trim($title));
-        if (1 === preg_match('/(?:©|RIGHT\s+RES|BETHESDA|ZENIMAX|COMMUNITY\s+CALENDAR)/iu', $title)) {
-            $score -= 1000;
-        }
-
-        return $score;
+        return $events;
     }
 
     /**
@@ -215,7 +204,7 @@ final class RoadmapRawTextEventParser
             return $profile->normalizeTitle($candidate);
         }
 
-        return $profile->normalizeTitle($this->findCandidateTitleBackward($lines, $dateLineIndex, $locale));
+        return $profile->normalizeTitle($this->findCandidateTitleBackward($lines, $dateLineIndex, $locale, $dateMarkerIndexes));
     }
 
     /**
@@ -325,10 +314,40 @@ final class RoadmapRawTextEventParser
     }
 
     /**
+     * @param list<int> $dateMarkerIndexes
+     */
+    private function previousDateMarkerIndex(array $dateMarkerIndexes, int $currentIndex): ?int
+    {
+        $previous = null;
+        foreach ($dateMarkerIndexes as $markerIndex) {
+            if ($markerIndex >= $currentIndex) {
+                break;
+            }
+            $previous = $markerIndex;
+        }
+
+        return $previous;
+    }
+
+    /**
      * @param list<string> $lines
      */
-    private function findCandidateTitleBackward(array $lines, int $dateLineIndex, string $locale): string
+    /**
+     * @param list<string> $lines
+     * @param list<int>    $dateMarkerIndexes
+     */
+    private function findCandidateTitleBackward(array $lines, int $dateLineIndex, string $locale, array $dateMarkerIndexes): string
     {
+        $previousDateMarkerIndex = $this->previousDateMarkerIndex($dateMarkerIndexes, $dateLineIndex);
+        if (
+            is_int($previousDateMarkerIndex)
+            && isset($lines[$previousDateMarkerIndex])
+            && null !== $this->extractSingleDate($lines[$previousDateMarkerIndex], $locale, new DateTimeImmutable())
+            && ($dateLineIndex - $previousDateMarkerIndex) <= 4
+        ) {
+            return '';
+        }
+
         for ($offset = 1; $offset <= 2; ++$offset) {
             $candidateIndex = $dateLineIndex - $offset;
             if (!isset($lines[$candidateIndex])) {
@@ -350,6 +369,72 @@ final class RoadmapRawTextEventParser
         }
 
         return '';
+    }
+
+    /**
+     * @return list<array{startsAt: DateTimeImmutable, endsAt: DateTimeImmutable}>
+     */
+    private function extractMultipleDateRangesFromLine(string $line, string $locale, DateTimeImmutable $referenceDate, ?DateTimeImmutable $lastRangeEnd): array
+    {
+        $matchCount = preg_match_all(
+            '/\d{1,2}\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s*[^\s\-–]+\s*(?:-|–|BIS|TO)\s*\d{1,2}\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s*[^\s\-–]+/iu',
+            $line,
+            $matches,
+        );
+        if (!is_int($matchCount) || $matchCount < 2) {
+            return [];
+        }
+
+        $ranges = [];
+        $cursorLastRangeEnd = $lastRangeEnd;
+        foreach ($matches[0] as $fragment) {
+            $range = $this->extractDateRange($fragment, $locale, $referenceDate, $cursorLastRangeEnd);
+            if (null === $range) {
+                continue;
+            }
+
+            $ranges[] = $range;
+            $cursorLastRangeEnd = $range['endsAt'];
+        }
+
+        return count($ranges) >= 2 ? $ranges : [];
+    }
+
+    /**
+     * @param list<string> $lines
+     *
+     * @return list<string>
+     */
+    private function collectFollowingTitleLinesForMultiRange(array $lines, int $dateLineIndex, string $locale, int $limit): array
+    {
+        $titles = [];
+        for ($offset = 1; $offset <= 6; ++$offset) {
+            $candidateIndex = $dateLineIndex + $offset;
+            if (!isset($lines[$candidateIndex])) {
+                break;
+            }
+
+            $candidate = $lines[$candidateIndex];
+            if (null !== $this->extractDateRange($candidate, $locale, new DateTimeImmutable(), null)) {
+                break;
+            }
+            if (null !== $this->extractSingleDate($candidate, $locale, new DateTimeImmutable())) {
+                break;
+            }
+            if ($this->looksLikeMonthOnlyLabel($candidate, $locale)) {
+                break;
+            }
+            if ($this->isIgnoredTitleLine($candidate)) {
+                continue;
+            }
+
+            $titles[] = $this->normalizeTitle($candidate);
+            if (count($titles) >= $limit) {
+                break;
+            }
+        }
+
+        return $titles;
     }
 
     /**
@@ -695,8 +780,12 @@ final class RoadmapRawTextEventParser
     {
         $cleaned = $this->normalizeOcrUnicodeArtifacts($value);
         $title = trim(preg_replace('/\s+/u', ' ', $cleaned) ?? $cleaned);
+        $title = preg_replace('/^[\s•·]+/u', '', $title) ?? $title;
         $title = preg_replace('/\s+([,.;:!?])/u', '$1', $title) ?? $title;
         $title = preg_replace('/(?:\s+00)+\s*$/u', '', $title) ?? $title;
+        $title = preg_replace('/\s*[•·]+\s*$/u', '', $title) ?? $title;
+        $title = preg_replace('/\s*[^\p{L}\p{N}\)\]]+\s*$/u', '', $title) ?? $title;
+        $title = preg_replace('/\s*(?:©|\(C\)|BETHESDA|ZENIMAX|COMMUNITY\s+CALENDAR).*/iu', '', $title) ?? $title;
 
         return trim($title);
     }
@@ -940,14 +1029,15 @@ final class RoadmapRawTextEventParser
             return true;
         }
 
-        if (
-            str_contains($normalized, 'COMMUNITY CALENDAR')
-            || str_contains($normalized, 'BETHESDA')
-            || str_contains($normalized, 'ZENIMAX')
-            || str_contains($normalized, 'FALLOUT')
-            || str_contains($normalized, 'FALLEUT')
-            || 1 === preg_match('/\bTM\b/u', $normalized)
-        ) {
+        $isBrandingLine = 1 === preg_match(
+            '/^(?:\d{4}\s+)?(?:COMMUNITY CALENDAR|BETHESDA|ZENIMAX|FALLOUT(?:\s*76)?|FALLEUT(?:\s*76)?)$/u',
+            $normalized,
+        );
+        if ($isBrandingLine || 1 === preg_match('/\bTM\b/u', $normalized)) {
+            return true;
+        }
+
+        if (str_contains($normalized, 'BETHESDA') && mb_strlen($normalized) <= 20) {
             return true;
         }
 
