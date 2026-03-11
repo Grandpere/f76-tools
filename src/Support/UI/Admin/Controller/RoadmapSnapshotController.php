@@ -480,6 +480,27 @@ final class RoadmapSnapshotController extends AbstractController
             ]);
         }
 
+        $snapshot = $this->roadmapSnapshotWriteRepository->findOneById($id);
+        if ($snapshot instanceof RoadmapSnapshotEntity) {
+            $parsed = $this->resolveSnapshotParsedEvents($snapshot, $id);
+            $validation = $this->roadmapParsedEventsValidator->validate(
+                $parsed,
+                $snapshot->getLocale(),
+                $snapshot->getRawText(),
+            );
+            if ($validation->hasErrors()) {
+                $this->addFlash('warning', 'admin_roadmap.flash.snapshot_quality_blocking');
+                foreach ($validation->errors as $error) {
+                    $this->addFlash('warning', $error);
+                }
+
+                return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                    '_locale' => $request->getLocale(),
+                    'snapshot' => $id,
+                ]);
+            }
+        }
+
         try {
             $this->approveRoadmapSnapshotApplicationService->approve($id);
         } catch (RuntimeException $exception) {

@@ -381,6 +381,7 @@ admin_roadmap.flash.invalid_csrf: Ungultige Sitzung, bitte erneut versuchen.
 admin_roadmap.flash.events_generated: Events aus OCR-Snapshot erzeugt.
 admin_roadmap.flash.raw_text_saved: OCR-Text gespeichert.
 admin_roadmap.flash.snapshot_approved: Snapshot freigegeben.
+admin_roadmap.flash.snapshot_quality_blocking: Dieser Snapshot kann bei blockierender Qualitat nicht freigegeben werden.
 admin_roadmap.flash.snapshot_not_found: Snapshot nicht gefunden.
 admin_roadmap.flash.snapshot_deleted: Snapshot geloscht.
 admin_roadmap.flash.merge_invalid_input: Bitte drei gultige Snapshot-IDs (FR/EN/DE) angeben.

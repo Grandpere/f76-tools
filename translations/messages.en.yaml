@@ -381,6 +381,7 @@ admin_roadmap.flash.invalid_csrf: Invalid session, please try again.
 admin_roadmap.flash.events_generated: Events generated from OCR snapshot.
 admin_roadmap.flash.raw_text_saved: OCR text saved.
 admin_roadmap.flash.snapshot_approved: Snapshot approved.
+admin_roadmap.flash.snapshot_quality_blocking: Cannot approve this snapshot while quality checks are blocking.
 admin_roadmap.flash.snapshot_not_found: Snapshot not found.
 admin_roadmap.flash.snapshot_deleted: Snapshot deleted.
 admin_roadmap.flash.merge_invalid_input: Please provide three valid snapshot IDs (FR/EN/DE).
