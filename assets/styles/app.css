@@ -244,6 +244,15 @@ body::before {
     color: #d5f7dc;
 }
 
+:root[data-theme='terminal'] .roadmap-import-card {
+    background: linear-gradient(180deg, rgba(13, 22, 16, 0.95), rgba(9, 18, 13, 0.92));
+    border-color: rgba(118, 199, 152, 0.3);
+}
+
+:root[data-theme='terminal'] .roadmap-import-title {
+    color: #b7ebc5;
+}
+
 :root[data-theme='terminal'] .roadmap-step-badge,
 :root[data-theme='terminal'] .roadmap-calendar-date-chip,
 :root[data-theme='terminal'] .roadmap-calendar-status-pill {
@@ -2397,6 +2406,13 @@ body::before {
     filter: brightness(0.98);
 }
 
+.roadmap-merged-pill {
+    margin-left: 0.45rem;
+    background: rgba(52, 117, 69, 0.12);
+    border-color: rgba(52, 117, 69, 0.34);
+    color: #1f5e31;
+}
+
 .roadmap-generate-toggle {
     margin-top: 0.6rem;
     display: inline-flex;
@@ -2524,14 +2540,83 @@ body::before {
     margin-bottom: 0.72rem;
 }
 
+.roadmap-import-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+    margin-bottom: 0.72rem;
+}
+
+.roadmap-import-card {
+    border: 1px solid rgba(23, 44, 78, 0.14);
+    border-radius: 14px;
+    padding: 0.8rem 0.9rem 0.85rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(251, 246, 228, 0.9));
+}
+
+.roadmap-import-title {
+    margin: 0 0 0.5rem;
+    font-size: 1.05rem;
+    color: #1e3558;
+}
+
 .roadmap-upload-form {
     align-items: flex-start;
-    margin-bottom: 0.72rem;
+    margin-bottom: 0;
 }
 
 .roadmap-upload-form button[type='submit'] {
     align-self: flex-start;
     margin-top: 1.45rem;
+}
+
+.roadmap-upload-form--stack .field {
+    flex: 1 1 100%;
+    max-width: 100%;
+}
+
+.roadmap-upload-form--stack button[type='submit'] {
+    margin-top: 0.3rem;
+}
+
+.roadmap-snapshots-table .roadmap-snapshots-col-id {
+    width: 5%;
+}
+
+.roadmap-snapshots-table .roadmap-snapshots-col-locale {
+    width: 6%;
+}
+
+.roadmap-snapshots-table .roadmap-snapshots-col-provider {
+    width: 11%;
+}
+
+.roadmap-snapshots-table .roadmap-snapshots-col-confidence {
+    width: 8%;
+}
+
+.roadmap-snapshots-table .roadmap-snapshots-col-status {
+    width: 9%;
+}
+
+.roadmap-snapshots-table .roadmap-snapshots-col-quality {
+    width: 12%;
+}
+
+.roadmap-snapshots-table .roadmap-snapshots-col-season {
+    width: 14%;
+}
+
+.roadmap-snapshots-table .roadmap-snapshots-col-merge {
+    width: 11%;
+}
+
+.roadmap-snapshots-table .roadmap-snapshots-col-scanned {
+    width: 12%;
+}
+
+.roadmap-snapshots-table .roadmap-snapshots-col-actions {
+    width: 12%;
 }
 
 .roadmap-canonical-table .roadmap-canonical-col-window {
@@ -3951,6 +4036,10 @@ span.flatpickr-weekday {
         align-items: stretch;
     }
 
+    .roadmap-import-grid {
+        grid-template-columns: 1fr;
+    }
+
     .roadmap-review-grid {
         grid-template-columns: 1fr;
     }
@@ -4086,6 +4175,12 @@ span.flatpickr-weekday {
     background: #12241b;
     border-color: rgba(156, 255, 177, 0.62);
     color: #e7ffee;
+}
+
+:root[data-theme='terminal'] .roadmap-merged-pill {
+    background: rgba(74, 156, 103, 0.24);
+    border-color: rgba(74, 156, 103, 0.55);
+    color: #c8f5d3;
 }
 
 :root[data-theme='terminal'] .roadmap-input,

@@ -315,7 +315,10 @@ admin_roadmap.step_snapshots_hint: Offne einen Snapshot fur OCR-Review sowie Eve
 admin_roadmap.upload_locale: Bildsprache
 admin_roadmap.upload_image: Roadmap-Bild
 admin_roadmap.upload_submit: Hochladen und scannen
+admin_roadmap.import_ocr_title: OCR-Import (Bild)
+admin_roadmap.import_json_title: JSON-Import (manuell)
 admin_roadmap.json_season_number: Saisonnnummer (optional)
+admin_roadmap.json_image_optional: Quellbild (optional)
 admin_roadmap.json_payload: JSON-Payload
 admin_roadmap.json_submit: JSON importieren
 admin_roadmap.snapshot_id: ID
@@ -324,6 +327,7 @@ admin_roadmap.snapshot_provider: Provider
 admin_roadmap.snapshot_confidence: Konfidenz
 admin_roadmap.snapshot_status: Status
 admin_roadmap.snapshot_quality: Qualität
+admin_roadmap.snapshot_merge_usage: Merge
 admin_roadmap.snapshot_quality_ok: OK
 admin_roadmap.snapshot_quality_warn: Prufen
 admin_roadmap.snapshot_quality_error: Blockiert
@@ -338,6 +342,8 @@ admin_roadmap.snapshot_actions: Aktionen
 admin_roadmap.snapshot_season: Saison
 admin_roadmap.open: Offnen
 admin_roadmap.delete_snapshot: Loschen
+admin_roadmap.snapshot_used_in_merge: Fur Merge verwendet
+admin_roadmap.snapshot_delete_used_hint: Dieser Snapshot wurde bereits in einer kanonischen Zusammenführung verwendet.
 admin_roadmap.status_draft: Entwurf
 admin_roadmap.status_approved: Freigegeben
 admin_roadmap.status_rejected: Abgelehnt
@@ -394,6 +400,7 @@ admin_roadmap.flash.snapshot_approved: Snapshot freigegeben.
 admin_roadmap.flash.snapshot_quality_blocking: Dieser Snapshot kann bei blockierender Qualitat nicht freigegeben werden.
 admin_roadmap.flash.snapshot_not_found: Snapshot nicht gefunden.
 admin_roadmap.flash.snapshot_deleted: Snapshot geloscht.
+admin_roadmap.flash.snapshot_deleted_used_in_merge: Dieser Snapshot wurde bereits in einer kanonischen Zusammenführung verwendet. Die kanonische Timeline bleibt unverändert.
 admin_roadmap.flash.merge_invalid_input: Bitte drei gultige Snapshot-IDs (FR/EN/DE) angeben.
 admin_roadmap.flash.merge_success: Snapshot-Zusammenfuhrung abgeschlossen.
 admin_roadmap.flash.merge_missing_season: Jeder Snapshot muss vor der Zusammenfuhrung eine erkannte Saison haben.

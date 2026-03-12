@@ -17,6 +17,7 @@ use App\Catalog\Application\Roadmap\Ocr\OcrProvider;
 use App\Catalog\Application\Roadmap\Ocr\OcrProviderChain;
 use App\Catalog\Application\Roadmap\Ocr\OcrResult;
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
+use App\Catalog\Domain\Entity\RoadmapCanonicalEventTranslationEntity;
 use App\Catalog\Domain\Entity\RoadmapEventEntity;
 use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
@@ -207,6 +208,71 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         self::assertNull($deleted);
     }
 
+    public function testDeleteSnapshotRemovesRelatedEventsAndSourceImageButKeepsCanonicalTimeline(): void
+    {
+        $admin = $this->createUser('admin-roadmap-delete-cleanup@example.com', ['ROLE_ADMIN']);
+        $snapshot = $this->createSnapshot('fr', "3 MARS - 10 MARS\nLA FETE DU YETI");
+        $event = new RoadmapEventEntity()
+            ->setSnapshot($snapshot)
+            ->setLocale('fr')
+            ->setTitle('LA FETE DU YETI')
+            ->setStartsAt(new DateTimeImmutable('2026-03-03 18:00:00'))
+            ->setEndsAt(new DateTimeImmutable('2026-03-10 18:00:00'))
+            ->setSortOrder(1);
+        $snapshot->addEvent($event);
+
+        $uploadDirectory = '/var/www/html/var/data/roadmap_uploads';
+        if (!is_dir($uploadDirectory)) {
+            mkdir($uploadDirectory, 0o775, true);
+        }
+        $imageAbsolutePath = $uploadDirectory.'/test-delete-snapshot.png';
+        file_put_contents($imageAbsolutePath, 'png');
+        $snapshot->setSourceImagePath('var/data/roadmap_uploads/test-delete-snapshot.png');
+
+        $canonical = (new RoadmapCanonicalEventEntity())
+            ->setTranslationKey('roadmap.s24.sample.1')
+            ->setStartsAt(new DateTimeImmutable('2026-03-03 18:00:00'))
+            ->setEndsAt(new DateTimeImmutable('2026-03-10 18:00:00'))
+            ->setConfidenceScore(100)
+            ->setSortOrder(1);
+        $canonical->addTranslation(
+            (new RoadmapCanonicalEventTranslationEntity())
+                ->setLocale('fr')
+                ->setTitle('La fete du yeti'),
+        );
+
+        $this->entityManager?->persist($snapshot);
+        $this->entityManager?->persist($canonical);
+        $this->entityManager?->flush();
+
+        $snapshotId = $snapshot->getId();
+        self::assertNotNull($snapshotId);
+        self::assertFileExists($imageAbsolutePath);
+
+        $this->browser()->loginUser($admin);
+        $crawler = $this->browser()->request('GET', '/en/admin/roadmap');
+        $tokenNode = $crawler->filter('form[action*="/en/admin/roadmap/'.$snapshotId.'/delete"] input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', '/en/admin/roadmap/'.$snapshotId.'/delete', [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+        ]);
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+
+        $this->entityManager?->clear();
+        $deletedSnapshot = $this->entityManager?->getRepository(RoadmapSnapshotEntity::class)->find($snapshotId);
+        self::assertNull($deletedSnapshot);
+
+        $remainingSnapshotEvents = $this->entityManager?->getRepository(RoadmapEventEntity::class)->findAll();
+        self::assertIsArray($remainingSnapshotEvents);
+        self::assertCount(0, $remainingSnapshotEvents);
+
+        $remainingCanonical = $this->entityManager?->getRepository(RoadmapCanonicalEventEntity::class)->findAll();
+        self::assertIsArray($remainingCanonical);
+        self::assertCount(1, $remainingCanonical);
+        self::assertFileDoesNotExist($imageAbsolutePath);
+    }
+
     public function testAdminCanMergeLocalesFromForm(): void
     {
         $admin = $this->createUser('admin-roadmap-merge@example.com', ['ROLE_ADMIN']);
@@ -244,6 +310,9 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         $canonicalEvents = $this->entityManager?->getRepository(RoadmapCanonicalEventEntity::class)->findAll();
         self::assertIsArray($canonicalEvents);
         self::assertGreaterThan(0, count($canonicalEvents));
+
+        $mergeResultPage = $this->getAndFollowRedirect('/en/admin/roadmap');
+        self::assertCount(3, $mergeResultPage->filter('td:contains("Used in merge")'));
     }
 
     public function testAdminCanUploadRoadmapImageAndCreateSnapshot(): void
@@ -316,14 +385,14 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
                 'season' => 24,
                 'events' => [
                     [
-                        'date_start' => '2026-03-03',
-                        'date_end' => '2026-03-10',
-                        'title' => "Bigfoot's Bash",
-                    ],
-                    [
                         'date_start' => '2026-03-10',
                         'date_end' => '2026-03-24',
                         'title' => 'Invaders From Beyond Event',
+                    ],
+                    [
+                        'date_start' => '2026-03-03',
+                        'date_end' => '2026-03-10',
+                        'title' => "Bigfoot's Bash",
                     ],
                 ],
             ], JSON_THROW_ON_ERROR),
@@ -339,6 +408,9 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         self::assertSame('manual.json', $snapshots[0]->getOcrProvider());
         self::assertCount(2, $snapshots[0]->getEvents());
         self::assertSame(24, $snapshots[0]->getSeason()?->getSeasonNumber());
+        $events = $snapshots[0]->getEvents()->toArray();
+        usort($events, static fn (RoadmapEventEntity $a, RoadmapEventEntity $b): int => $a->getSortOrder() <=> $b->getSortOrder());
+        self::assertSame("Bigfoot's Bash", $events[0]->getTitle());
     }
 
     public function testAdminMergeLocalesRejectsDraftSnapshots(): void
@@ -453,7 +525,7 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         }
 
         $connection = $this->entityManager->getConnection();
-        $connection->executeStatement('TRUNCATE TABLE roadmap_canonical_event_translation, roadmap_canonical_event, roadmap_event, roadmap_snapshot, roadmap_season, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
+        $connection->executeStatement('TRUNCATE TABLE roadmap_canonical_event_translation, roadmap_canonical_event, roadmap_event, roadmap_snapshot, roadmap_season, admin_audit_log, player_item_knowledge, item_book_list, player, item, app_user RESTART IDENTITY CASCADE');
     }
 
     private function ensureSeason(int $seasonNumber): RoadmapSeasonEntity

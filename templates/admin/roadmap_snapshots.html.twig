@@ -20,38 +20,50 @@
                 <span class="roadmap-step-badge">1</span>
                 <span>{{ 'admin_roadmap.snapshots_title'|trans }}</span>
             </h2>
-            <form method="post" action="{{ path('app_admin_roadmap_snapshot_upload', { _locale: app.request.locale }) }}" enctype="multipart/form-data" class="translations-filters minerva-admin-filters roadmap-upload-form">
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_upload') }}">
-                <label class="field">
-                    {{ 'admin_roadmap.upload_locale'|trans }}
-                    <select name="locale" required>
-                        {% include '_locale_options.html.twig' with { selectedLocale: app.request.locale } %}
-                    </select>
-                </label>
-                <label class="field">
-                    {{ 'admin_roadmap.upload_image'|trans }}
-                    <input type="file" name="image" accept="image/*" required>
-                </label>
-                <button type="submit">{{ 'admin_roadmap.upload_submit'|trans }}</button>
-            </form>
-            <form method="post" action="{{ path('app_admin_roadmap_snapshot_import_json', { _locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters roadmap-upload-form">
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_import_json') }}">
-                <label class="field">
-                    {{ 'admin_roadmap.upload_locale'|trans }}
-                    <select name="locale" required>
-                        {% include '_locale_options.html.twig' with { selectedLocale: app.request.locale } %}
-                    </select>
-                </label>
-                <label class="field">
-                    {{ 'admin_roadmap.json_season_number'|trans }}
-                    <input type="number" name="season_number" min="1" step="1" placeholder="24">
-                </label>
-                <label class="field field--full">
-                    {{ 'admin_roadmap.json_payload'|trans }}
-                    <textarea class="roadmap-raw-text" name="json_payload" rows="8" placeholder='{"season":24,"events":[{"date_start":"2026-03-03","date_end":"2026-03-10","title":"Bigfoot&apos;s Bash"}]}' required></textarea>
-                </label>
-                <button type="submit">{{ 'admin_roadmap.json_submit'|trans }}</button>
-            </form>
+            <div class="roadmap-import-grid">
+                <section class="roadmap-import-card">
+                    <h3 class="roadmap-import-title">{{ 'admin_roadmap.import_ocr_title'|trans }}</h3>
+                    <form method="post" action="{{ path('app_admin_roadmap_snapshot_upload', { _locale: app.request.locale }) }}" enctype="multipart/form-data" class="translations-filters minerva-admin-filters roadmap-upload-form roadmap-upload-form--stack">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_upload') }}">
+                        <label class="field">
+                            {{ 'admin_roadmap.upload_locale'|trans }}
+                            <select name="locale" required>
+                                {% include '_locale_options.html.twig' with { selectedLocale: app.request.locale } %}
+                            </select>
+                        </label>
+                        <label class="field field--full">
+                            {{ 'admin_roadmap.upload_image'|trans }}
+                            <input type="file" name="image" accept="image/*" required>
+                        </label>
+                        <button type="submit">{{ 'admin_roadmap.upload_submit'|trans }}</button>
+                    </form>
+                </section>
+                <section class="roadmap-import-card">
+                    <h3 class="roadmap-import-title">{{ 'admin_roadmap.import_json_title'|trans }}</h3>
+                    <form method="post" action="{{ path('app_admin_roadmap_snapshot_import_json', { _locale: app.request.locale }) }}" enctype="multipart/form-data" class="translations-filters minerva-admin-filters roadmap-upload-form roadmap-upload-form--stack">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_import_json') }}">
+                        <label class="field">
+                            {{ 'admin_roadmap.upload_locale'|trans }}
+                            <select name="locale" required>
+                                {% include '_locale_options.html.twig' with { selectedLocale: app.request.locale } %}
+                            </select>
+                        </label>
+                        <label class="field">
+                            {{ 'admin_roadmap.json_season_number'|trans }}
+                            <input type="number" name="season_number" min="1" step="1" placeholder="24">
+                        </label>
+                        <label class="field field--full">
+                            {{ 'admin_roadmap.json_image_optional'|trans }}
+                            <input type="file" name="image" accept="image/*">
+                        </label>
+                        <label class="field field--full">
+                            {{ 'admin_roadmap.json_payload'|trans }}
+                            <textarea class="roadmap-raw-text" name="json_payload" rows="8" placeholder='{"season":24,"events":[{"date_start":"2026-03-03","date_end":"2026-03-10","title":"Bigfoot&apos;s Bash"}]}' required></textarea>
+                        </label>
+                        <button type="submit">{{ 'admin_roadmap.json_submit'|trans }}</button>
+                    </form>
+                </section>
+            </div>
             <form method="get" class="translations-filters minerva-admin-filters roadmap-season-filter-form">
                 {% if selectedSnapshot %}
                     <input type="hidden" name="snapshot" value="{{ selectedSnapshot.id }}">
@@ -86,7 +98,19 @@
                 <span class="info-note-content">{{ 'admin_roadmap.step_snapshots_hint'|trans }}</span>
             </p>
             <div class="translations-table-wrap">
-                <table class="translations-table">
+                <table class="translations-table roadmap-snapshots-table">
+                    <colgroup>
+                        <col class="roadmap-snapshots-col-id">
+                        <col class="roadmap-snapshots-col-locale">
+                        <col class="roadmap-snapshots-col-provider">
+                        <col class="roadmap-snapshots-col-confidence">
+                        <col class="roadmap-snapshots-col-status">
+                        <col class="roadmap-snapshots-col-quality">
+                        <col class="roadmap-snapshots-col-season">
+                        <col class="roadmap-snapshots-col-merge">
+                        <col class="roadmap-snapshots-col-scanned">
+                        <col class="roadmap-snapshots-col-actions">
+                    </colgroup>
                     <thead>
                     <tr>
                         <th>{{ 'admin_roadmap.snapshot_id'|trans }}</th>
@@ -96,6 +120,7 @@
                         <th>{{ 'admin_roadmap.snapshot_status'|trans }}</th>
                         <th>{{ 'admin_roadmap.snapshot_quality'|trans }}</th>
                         <th>{{ 'admin_roadmap.snapshot_season'|trans }}</th>
+                        <th>{{ 'admin_roadmap.snapshot_merge_usage'|trans }}</th>
                         <th>{{ 'admin_roadmap.snapshot_scanned_at'|trans }}</th>
                         <th>{{ 'admin_roadmap.snapshot_actions'|trans }}</th>
                     </tr>
@@ -131,20 +156,27 @@
                                     —
                                 {% endif %}
                             </td>
+                            <td>
+                                {% if mergedSnapshotIds[snapshotId]|default(false) %}
+                                    <span class="item-pill roadmap-merged-pill">{{ 'admin_roadmap.snapshot_used_in_merge'|trans }}</span>
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
                             <td>{{ snapshot.scannedAt|date('Y-m-d H:i') }}</td>
                             <td>
                                 <div class="translations-actions roadmap-snapshot-actions">
                                     <a href="{{ path('app_admin_roadmap_snapshots', { _locale: app.request.locale, snapshot: snapshotId }) }}">{{ 'admin_roadmap.open'|trans }}</a>
                                     <form method="post" action="{{ path('app_admin_roadmap_snapshot_delete', { _locale: app.request.locale, id: snapshotId }) }}">
                                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_delete_' ~ snapshotId) }}">
-                                        <button type="submit" class="roadmap-danger-button">{{ 'admin_roadmap.delete_snapshot'|trans }}</button>
+                                        <button type="submit" class="roadmap-danger-button" title="{{ mergedSnapshotIds[snapshotId]|default(false) ? ('admin_roadmap.snapshot_delete_used_hint'|trans) : '' }}">{{ 'admin_roadmap.delete_snapshot'|trans }}</button>
                                     </form>
                                 </div>
                             </td>
                         </tr>
                     {% else %}
                         <tr>
-                            <td class="admin-empty-cell" colspan="9">{{ 'admin_roadmap.empty_snapshots'|trans }}</td>
+                            <td class="admin-empty-cell" colspan="10">{{ 'admin_roadmap.empty_snapshots'|trans }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

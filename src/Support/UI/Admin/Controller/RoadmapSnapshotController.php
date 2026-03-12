@@ -30,7 +30,10 @@ use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
 use App\Catalog\Domain\Entity\RoadmapEventEntity;
 use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
+use App\Identity\Domain\Entity\UserEntity;
+use App\Support\Domain\Entity\AdminAuditLogEntity;
 use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use JsonException;
 use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -66,6 +69,7 @@ final class RoadmapSnapshotController extends AbstractController
         private readonly RoadmapParsedEventsValidator $roadmapParsedEventsValidator,
         private readonly ApproveRoadmapSnapshotApplicationService $approveRoadmapSnapshotApplicationService,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
+        private readonly EntityManagerInterface $entityManager,
         private readonly CacheInterface $cache,
         private readonly TranslatorInterface $translator,
     ) {
@@ -84,6 +88,7 @@ final class RoadmapSnapshotController extends AbstractController
 
         $snapshots = $this->roadmapSnapshotWriteRepository->findRecent(30, $selectedSeason);
         $snapshotQualityById = $this->buildSnapshotQualityById($snapshots);
+        $mergedSnapshotIds = $this->findMergedSnapshotIds();
         if (is_string($qualityFilter)) {
             $snapshots = array_values(array_filter(
                 $snapshots,
@@ -167,6 +172,7 @@ final class RoadmapSnapshotController extends AbstractController
             'mergeSnapshotContext' => $mergeSnapshotContext,
             'snapshotQualityById' => $snapshotQualityById,
             'selectedSnapshotQuality' => $selectedSnapshotQuality,
+            'mergedSnapshotIds' => $mergedSnapshotIds,
         ]);
     }
 
@@ -333,6 +339,15 @@ final class RoadmapSnapshotController extends AbstractController
             ]);
         }
 
+        $projectDirParameter = $this->getParameter('kernel.project_dir');
+        if (!is_string($projectDirParameter) || '' === $projectDirParameter) {
+            $this->addFlash('warning', 'admin_roadmap.flash.upload_storage_error');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                '_locale' => $request->getLocale(),
+            ]);
+        }
+
         $seasonNumber = $this->parsePositiveInt($request->request->get('season_number'));
         if (!is_int($seasonNumber)) {
             $seasonNumber = $this->parsePositiveInt($decodedPayload['season'] ?? null);
@@ -384,10 +399,59 @@ final class RoadmapSnapshotController extends AbstractController
             ];
         }
 
+        usort($normalizedEvents, static function (array $a, array $b): int {
+            $startsAtSort = $a['startsAt'] <=> $b['startsAt'];
+            if (0 !== $startsAtSort) {
+                return $startsAtSort;
+            }
+
+            $endsAtSort = $a['endsAt'] <=> $b['endsAt'];
+            if (0 !== $endsAtSort) {
+                return $endsAtSort;
+            }
+
+            return $a['title'] <=> $b['title'];
+        });
+
+        $sourceImagePath = '';
+        $sourceImageHash = hash('sha256', $rawJson);
+        $optionalImage = $request->files->get('image');
+        if ($optionalImage instanceof UploadedFile && $optionalImage->isValid()) {
+            $mimeType = (string) ($optionalImage->getMimeType() ?? '');
+            if (!str_starts_with($mimeType, 'image/')) {
+                $this->addFlash('warning', 'admin_roadmap.flash.upload_invalid_file_type');
+
+                return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                    '_locale' => $request->getLocale(),
+                ]);
+            }
+
+            $relativeDirectory = 'var/data/roadmap_uploads';
+            $absoluteDirectory = rtrim($projectDirParameter, '/').'/'.$relativeDirectory;
+            if (!is_dir($absoluteDirectory) && !mkdir($absoluteDirectory, 0o775, true) && !is_dir($absoluteDirectory)) {
+                $this->addFlash('warning', 'admin_roadmap.flash.upload_storage_error');
+
+                return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                    '_locale' => $request->getLocale(),
+                ]);
+            }
+
+            $extension = $optionalImage->guessExtension() ?: $optionalImage->getClientOriginalExtension();
+            $extension = '' !== trim((string) $extension) ? strtolower((string) $extension) : 'bin';
+            $filename = sprintf('roadmap_json_%s_%s_%s.%s', $localeInput, new DateTimeImmutable()->format('Ymd_His'), bin2hex(random_bytes(4)), $extension);
+            $storedFile = $optionalImage->move($absoluteDirectory, $filename);
+            $absolutePath = $storedFile->getPathname();
+            $sourceImagePath = $relativeDirectory.'/'.$filename;
+            $fileHash = hash_file('sha256', $absolutePath);
+            if (is_string($fileHash)) {
+                $sourceImageHash = $fileHash;
+            }
+        }
+
         $snapshot = new RoadmapSnapshotEntity()
             ->setLocale($localeInput)
-            ->setSourceImagePath('')
-            ->setSourceImageHash(hash('sha256', $rawJson))
+            ->setSourceImagePath($sourceImagePath)
+            ->setSourceImageHash($sourceImageHash)
             ->setOcrProvider('manual.json')
             ->setOcrConfidence(1.0)
             ->setRawText(json_encode($decodedPayload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: $rawJson)
@@ -534,6 +598,7 @@ final class RoadmapSnapshotController extends AbstractController
             $this->addFlash('warning', $warning);
         }
         if (!$dryRun) {
+            $this->persistRoadmapMergeAuditLog($frSnapshotId, $enSnapshotId, $deSnapshotId, $result->totalEvents);
             $this->cache->delete(self::CANONICAL_ROWS_CACHE_KEY_PREFIX.'none');
             foreach ($this->roadmapSeasonRepository->findAllOrderedBySeasonNumberDesc() as $season) {
                 $seasonId = $season->getId();
@@ -567,6 +632,15 @@ final class RoadmapSnapshotController extends AbstractController
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [
                 '_locale' => $request->getLocale(),
             ]);
+        }
+
+        $imagePath = $this->resolveSnapshotImagePath($snapshot);
+        if (is_string($imagePath)) {
+            @unlink($imagePath);
+        }
+
+        if ($this->isSnapshotUsedInMerge($id)) {
+            $this->addFlash('warning', 'admin_roadmap.flash.snapshot_deleted_used_in_merge');
         }
 
         $this->roadmapSnapshotWriteRepository->delete($snapshot);
@@ -1150,5 +1224,67 @@ final class RoadmapSnapshotController extends AbstractController
         }
 
         return null;
+    }
+
+    /**
+     * @return array<int, true>
+     */
+    private function findMergedSnapshotIds(): array
+    {
+        $rows = $this->entityManager->createQueryBuilder()
+            ->select('a.context')
+            ->from(AdminAuditLogEntity::class, 'a')
+            ->where('a.action = :action')
+            ->setParameter('action', 'roadmap_merge_locales')
+            ->orderBy('a.occurredAt', 'DESC')
+            ->setMaxResults(250)
+            ->getQuery()
+            ->getArrayResult();
+
+        $snapshotIds = [];
+        foreach ($rows as $row) {
+            if (!is_array($row) || !isset($row['context']) || !is_array($row['context'])) {
+                continue;
+            }
+
+            $context = $row['context'];
+            foreach (['frSnapshotId', 'enSnapshotId', 'deSnapshotId'] as $key) {
+                $value = $context[$key] ?? null;
+                if (is_int($value) && $value > 0) {
+                    $snapshotIds[$value] = true;
+                }
+            }
+        }
+
+        return $snapshotIds;
+    }
+
+    private function isSnapshotUsedInMerge(int $snapshotId): bool
+    {
+        $mergedSnapshotIds = $this->findMergedSnapshotIds();
+
+        return isset($mergedSnapshotIds[$snapshotId]);
+    }
+
+    private function persistRoadmapMergeAuditLog(int $frSnapshotId, int $enSnapshotId, int $deSnapshotId, int $totalEvents): void
+    {
+        $actor = $this->getUser();
+        if (!$actor instanceof UserEntity) {
+            return;
+        }
+
+        $this->entityManager->persist(
+            (new AdminAuditLogEntity())
+                ->setActorUser($actor)
+                ->setAction('roadmap_merge_locales')
+                ->setContext([
+                    'frSnapshotId' => $frSnapshotId,
+                    'enSnapshotId' => $enSnapshotId,
+                    'deSnapshotId' => $deSnapshotId,
+                    'totalEvents' => $totalEvents,
+                ])
+                ->setOccurredAt(new DateTimeImmutable()),
+        );
+        $this->entityManager->flush();
     }
 }

@@ -315,7 +315,10 @@ admin_roadmap.step_snapshots_hint: Open a snapshot to review OCR text, then gene
 admin_roadmap.upload_locale: Image locale
 admin_roadmap.upload_image: Roadmap image
 admin_roadmap.upload_submit: Upload and scan
+admin_roadmap.import_ocr_title: OCR import (image)
+admin_roadmap.import_json_title: JSON import (manual)
 admin_roadmap.json_season_number: Season number (optional)
+admin_roadmap.json_image_optional: Source image (optional)
 admin_roadmap.json_payload: JSON payload
 admin_roadmap.json_submit: Import JSON
 admin_roadmap.snapshot_id: ID
@@ -324,6 +327,7 @@ admin_roadmap.snapshot_provider: Provider
 admin_roadmap.snapshot_confidence: Confidence
 admin_roadmap.snapshot_status: Status
 admin_roadmap.snapshot_quality: Quality
+admin_roadmap.snapshot_merge_usage: Merge
 admin_roadmap.snapshot_quality_ok: OK
 admin_roadmap.snapshot_quality_warn: Review
 admin_roadmap.snapshot_quality_error: Blocking
@@ -338,6 +342,8 @@ admin_roadmap.snapshot_actions: Actions
 admin_roadmap.snapshot_season: Season
 admin_roadmap.open: Open
 admin_roadmap.delete_snapshot: Delete
+admin_roadmap.snapshot_used_in_merge: Used in merge
+admin_roadmap.snapshot_delete_used_hint: This snapshot was already used in a canonical merge.
 admin_roadmap.status_draft: Draft
 admin_roadmap.status_approved: Approved
 admin_roadmap.status_rejected: Rejected
@@ -394,6 +400,7 @@ admin_roadmap.flash.snapshot_approved: Snapshot approved.
 admin_roadmap.flash.snapshot_quality_blocking: Cannot approve this snapshot while quality checks are blocking.
 admin_roadmap.flash.snapshot_not_found: Snapshot not found.
 admin_roadmap.flash.snapshot_deleted: Snapshot deleted.
+admin_roadmap.flash.snapshot_deleted_used_in_merge: This snapshot had already been used for a canonical merge. Canonical timeline remains unchanged.
 admin_roadmap.flash.merge_invalid_input: Please provide three valid snapshot IDs (FR/EN/DE).
 admin_roadmap.flash.merge_success: Snapshot merge completed.
 admin_roadmap.flash.merge_missing_season: Each snapshot must have a detected season before merge.
