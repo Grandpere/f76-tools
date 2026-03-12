@@ -253,6 +253,41 @@ body::before {
     color: #b7ebc5;
 }
 
+:root[data-theme='terminal'] .roadmap-json-prompt-dialog {
+    background: linear-gradient(180deg, rgba(10, 21, 16, 0.98), rgba(8, 16, 13, 0.96));
+    border-color: rgba(118, 199, 152, 0.3);
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.58);
+}
+
+:root[data-theme='terminal'] .roadmap-json-prompt-dialog h4 {
+    color: #b7ebc5;
+}
+
+:root[data-theme='terminal'] .roadmap-json-prompt-textarea {
+    background: #09130f;
+    border-color: rgba(118, 199, 152, 0.32);
+    color: #d3f7db;
+}
+
+:root[data-theme='terminal'] .roadmap-json-prompt-button,
+:root[data-theme='terminal'] .roadmap-json-prompt-close {
+    background: linear-gradient(180deg, #12311f, #0f281b) !important;
+    border-color: rgba(118, 199, 152, 0.4) !important;
+    color: #d3f7db !important;
+}
+
+:root[data-theme='terminal'] .roadmap-json-prompt-open {
+    background: linear-gradient(180deg, #12311f, #0f281b);
+    border-color: rgba(118, 199, 152, 0.4);
+    color: #d3f7db;
+}
+
+:root[data-theme='terminal'] .roadmap-json-prompt-toast {
+    background: rgba(74, 156, 103, 0.24);
+    border-color: rgba(74, 156, 103, 0.55);
+    color: #c8f5d3;
+}
+
 :root[data-theme='terminal'] .roadmap-step-badge,
 :root[data-theme='terminal'] .roadmap-calendar-date-chip,
 :root[data-theme='terminal'] .roadmap-calendar-status-pill {
@@ -2558,6 +2593,104 @@ body::before {
     margin: 0 0 0.5rem;
     font-size: 1.05rem;
     color: #1e3558;
+}
+
+.roadmap-json-prompt-note {
+    margin-top: 0;
+    margin-bottom: 0.7rem;
+}
+
+.roadmap-json-prompt-open {
+    margin-left: 0.55rem;
+    border: 1px solid rgba(160, 119, 0, 0.4);
+    background: linear-gradient(180deg, #ffe28d, #f8c94c);
+    color: #4e3800;
+    border-radius: 9px;
+    padding: 0.22rem 0.58rem;
+    font-weight: 700;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+}
+
+.roadmap-json-prompt-open:hover {
+    filter: brightness(0.98);
+}
+
+.roadmap-json-prompt-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    background: rgba(8, 13, 19, 0.55);
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+}
+
+.roadmap-json-prompt-modal[hidden] {
+    display: none !important;
+}
+
+.roadmap-json-prompt-dialog {
+    width: min(760px, 100%);
+    background: #fff8e9;
+    border: 1px solid rgba(32, 47, 71, 0.24);
+    border-radius: 14px;
+    box-shadow: 0 22px 44px rgba(12, 21, 36, 0.28);
+    padding: 0.95rem;
+}
+
+.roadmap-json-prompt-dialog h4 {
+    margin: 0 0 0.55rem;
+    font-size: 1.02rem;
+    color: #1e3558;
+}
+
+.roadmap-json-prompt-textarea {
+    width: 100%;
+    min-height: 280px;
+    resize: vertical;
+    border: 1px solid rgba(25, 39, 61, 0.2);
+    border-radius: 10px;
+    background: #fff;
+    color: #1b2b44;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    padding: 0.62rem;
+}
+
+.roadmap-json-prompt-actions {
+    margin-top: 0.65rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.roadmap-json-prompt-button,
+.roadmap-json-prompt-close {
+    border: 1px solid rgba(160, 119, 0, 0.4) !important;
+    background: linear-gradient(180deg, #ffe28d, #f8c94c) !important;
+    color: #4e3800 !important;
+    border-radius: 9px;
+    padding: 0.33rem 0.62rem;
+    font-weight: 700;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+}
+
+.roadmap-json-prompt-button:hover,
+.roadmap-json-prompt-close:hover {
+    filter: brightness(0.98);
+}
+
+.roadmap-json-prompt-toast {
+    margin-top: 0.45rem;
+    border: 1px solid rgba(52, 117, 69, 0.34);
+    background: rgba(52, 117, 69, 0.11);
+    color: #1f5e31;
+    border-radius: 8px;
+    padding: 0.3rem 0.55rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    width: fit-content;
 }
 
 .roadmap-upload-form {

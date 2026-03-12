@@ -6,6 +6,7 @@ import MinervaKnowledgeController from './controllers/minerva_knowledge_controll
 import MinervaProgressionController from './controllers/minerva_progression_controller.js';
 import NukeCodesTerminalController from './controllers/nuke_codes_terminal_controller.js';
 import PlayerProgressionController from './controllers/player_progression_controller.js';
+import RoadmapJsonPromptController from './controllers/roadmap_json_prompt_controller.js';
 import TextareaAutosizeController from './controllers/textarea_autosize_controller.js';
 import MinervaAdminDatepickerController from './controllers/minerva_admin_datepicker_controller.js';
 import ThemeSwitcherController from './controllers/theme_switcher_controller.js';
@@ -20,6 +21,7 @@ app.register('minerva-knowledge', MinervaKnowledgeController);
 app.register('minerva-progression', MinervaProgressionController);
 app.register('nuke-codes-terminal', NukeCodesTerminalController);
 app.register('player-progression', PlayerProgressionController);
+app.register('roadmap-json-prompt', RoadmapJsonPromptController);
 app.register('textarea-autosize', TextareaAutosizeController);
 app.register('minerva-admin-datepicker', MinervaAdminDatepickerController);
 app.register('theme-switcher', ThemeSwitcherController);

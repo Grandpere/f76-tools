@@ -321,6 +321,12 @@ admin_roadmap.json_season_number: Saisonnnummer (optional)
 admin_roadmap.json_image_optional: Quellbild (optional)
 admin_roadmap.json_payload: JSON-Payload
 admin_roadmap.json_submit: JSON importieren
+admin_roadmap.json_prompt_hint: Nutze einen Standard-Prompt, um aus dem Bild ein sauberes JSON zu erzeugen.
+admin_roadmap.json_prompt_open: Prompt anzeigen
+admin_roadmap.json_prompt_title: Empfohlener Prompt (Claude)
+admin_roadmap.json_prompt_copy: Prompt kopieren
+admin_roadmap.json_prompt_close: Schließen
+admin_roadmap.json_prompt_copied: Kopiert
 admin_roadmap.snapshot_id: ID
 admin_roadmap.snapshot_locale: Sprache
 admin_roadmap.snapshot_provider: Provider

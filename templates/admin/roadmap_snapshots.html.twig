@@ -38,8 +38,14 @@
                         <button type="submit">{{ 'admin_roadmap.upload_submit'|trans }}</button>
                     </form>
                 </section>
-                <section class="roadmap-import-card">
+                <section class="roadmap-import-card" data-controller="roadmap-json-prompt" data-roadmap-json-prompt-copied-label-value="{{ 'admin_roadmap.json_prompt_copied'|trans }}">
                     <h3 class="roadmap-import-title">{{ 'admin_roadmap.import_json_title'|trans }}</h3>
+                    <p class="catalog-note info-note roadmap-json-prompt-note">
+                        <span class="info-note-content">{{ 'admin_roadmap.json_prompt_hint'|trans }}</span>
+                        <button type="button" class="roadmap-json-prompt-open" data-action="roadmap-json-prompt#open">
+                            {{ 'admin_roadmap.json_prompt_open'|trans }}
+                        </button>
+                    </p>
                     <form method="post" action="{{ path('app_admin_roadmap_snapshot_import_json', { _locale: app.request.locale }) }}" enctype="multipart/form-data" class="translations-filters minerva-admin-filters roadmap-upload-form roadmap-upload-form--stack">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_import_json') }}">
                         <label class="field">
@@ -62,6 +68,35 @@
                         </label>
                         <button type="submit">{{ 'admin_roadmap.json_submit'|trans }}</button>
                     </form>
+                    <div class="roadmap-json-prompt-modal" data-roadmap-json-prompt-target="modal" data-action="click->roadmap-json-prompt#backdropClose" hidden>
+                        <div class="roadmap-json-prompt-dialog" role="dialog" aria-modal="true" aria-labelledby="roadmap-json-prompt-title">
+                            <h4 id="roadmap-json-prompt-title">{{ 'admin_roadmap.json_prompt_title'|trans }}</h4>
+                            <textarea class="roadmap-json-prompt-textarea" readonly data-roadmap-json-prompt-target="prompt">Tu es un extracteur de données de calendrier. Analyse cette image et extrais tous les événements visibles.
+Retourne :
+
+1/ Un tableau markdown avec les colonnes : Date début | Date fin | Événement
+2/ Un bloc JSON avec ce format exact, sans texte autour :
+
+json{
+  "season": &lt;numéro&gt;,
+  "name": "&lt;nom de la saison&gt;",
+  "events": [
+    {"date_start": "YYYY-MM-DD", "date_end": "YYYY-MM-DD", "title": "&lt;titre exact&gt;"}
+  ]
+}
+Règles :
+- Dates au format ISO 8601
+- Si une date de fin chevauche le mois suivant, déduis l'année correctement
+- Si les dates exactes d'un événement ne sont pas précisées, note-le dans le titre entre parenthèses
+- Conserve les titres dans la langue d'origine de l'image
+- Trie les événements par date_start croissante</textarea>
+                            <div class="roadmap-json-prompt-actions">
+                                <button type="button" class="roadmap-json-prompt-button" data-action="roadmap-json-prompt#copy">{{ 'admin_roadmap.json_prompt_copy'|trans }}</button>
+                                <button type="button" class="roadmap-json-prompt-close" data-action="roadmap-json-prompt#close">{{ 'admin_roadmap.json_prompt_close'|trans }}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="roadmap-json-prompt-toast" data-roadmap-json-prompt-target="toast" hidden></div>
                 </section>
             </div>
             <form method="get" class="translations-filters minerva-admin-filters roadmap-season-filter-form">
