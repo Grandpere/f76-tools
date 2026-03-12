@@ -344,6 +344,7 @@ final class RoadmapRawTextEventParser
     private function resolveTitleForSingleDate(array $lines, int $dateLineIndex, string $locale, string $inlineTitle, array $dateMarkerIndexes): string
     {
         $profile = $this->profileRegistry->profileFor($locale);
+        $blockCandidate = $this->findCandidateTitleFromFollowingDateBlock($lines, $dateLineIndex, $locale, $dateMarkerIndexes);
         $parts = [];
         if ('' !== $inlineTitle && !$this->isIgnoredTitleLine($inlineTitle)) {
             $parts[] = $inlineTitle;
@@ -355,11 +356,28 @@ final class RoadmapRawTextEventParser
             $parts[] = $forwardTitle;
         }
 
-        if ([] === $parts) {
+        $candidate = '' !== implode('', $parts) ? $this->normalizeTitle(implode(' ', $parts)) : '';
+        $backwardCandidate = $this->findCandidateTitleBackward($lines, $dateLineIndex, $locale, $dateMarkerIndexes);
+
+        if (
+            '' !== $blockCandidate
+            && ('' === $candidate || $this->isWeakTitleCandidate($candidate) || $this->isStrongerTitleCandidate($blockCandidate, $candidate))
+        ) {
+            $candidate = $blockCandidate;
+        }
+
+        if (
+            '' !== $backwardCandidate
+            && ('' === $candidate || $this->isWeakTitleCandidate($candidate) || $this->isStrongerTitleCandidate($backwardCandidate, $candidate))
+        ) {
+            $candidate = $backwardCandidate;
+        }
+
+        if ('' === $candidate) {
             return '';
         }
 
-        return $profile->normalizeTitle($this->normalizeTitle(implode(' ', $parts)));
+        return $profile->normalizeTitle($candidate);
     }
 
     /**
@@ -382,6 +400,11 @@ final class RoadmapRawTextEventParser
                 if (1 === $offset && $this->lineLikelyMissingEndMonth($lines[$dateLineIndex])) {
                     continue;
                 }
+                if ([] === $parts) {
+                    // OCR blocks can inject standalone month labels between date lines and titles.
+                    continue;
+                }
+
                 break;
             }
             if ($this->isIgnoredTitleLine($candidate)) {
@@ -460,8 +483,13 @@ final class RoadmapRawTextEventParser
             }
 
             $line = $lines[$index];
-            if ($this->looksLikeMonthOnlyLabel($line, $locale) && $offset > 2) {
-                break;
+            if ($this->looksLikeMonthOnlyLabel($line, $locale)) {
+                // OCR often repeats month labels in the middle of title columns.
+                if (count($pool) >= $expectedCount && $offset > 2) {
+                    break;
+                }
+
+                continue;
             }
             if (null !== $this->extractDateRange($line, $locale, new DateTimeImmutable(), null)) {
                 continue;
@@ -477,7 +505,13 @@ final class RoadmapRawTextEventParser
             if ('' === $title || $this->looksLikeNonTitleFragment($title)) {
                 continue;
             }
-            $pool[] = $title;
+
+            $lastIndex = array_key_last($pool);
+            if (null !== $lastIndex && $this->shouldMergeCandidateTitleLines($pool[$lastIndex], $title)) {
+                $pool[$lastIndex] = $this->normalizeTitle($pool[$lastIndex].' '.$title);
+            } else {
+                $pool[] = $title;
+            }
 
             if (count($pool) >= max(6, $expectedCount * 2)) {
                 break;
@@ -485,10 +519,108 @@ final class RoadmapRawTextEventParser
         }
 
         if ($expectedCount > 0 && count($pool) > $expectedCount) {
+            $pool = array_values($pool);
+            $pool = $this->trimCandidatePoolByQuality($pool, $expectedCount, $locale);
+        }
+
+        if ($expectedCount > 0 && count($pool) > $expectedCount) {
             return array_slice($pool, 0, $expectedCount);
         }
 
+        return array_values($pool);
+    }
+
+    /**
+     * @param list<string> $pool
+     *
+     * @return list<string>
+     */
+    private function trimCandidatePoolByQuality(array $pool, int $expectedCount, string $locale): array
+    {
+        if ($expectedCount <= 0 || count($pool) <= $expectedCount) {
+            return $pool;
+        }
+
+        while (count($pool) > $expectedCount) {
+            $lowestScore = null;
+            $lowestIndex = 0;
+
+            foreach ($pool as $index => $candidate) {
+                $score = $this->titleCandidateScore($candidate, $locale);
+                if (null === $lowestScore || $score < $lowestScore) {
+                    $lowestScore = $score;
+                    $lowestIndex = $index;
+                }
+            }
+
+            unset($pool[$lowestIndex]);
+            $pool = array_values($pool);
+        }
+
         return $pool;
+    }
+
+    private function titleCandidateScore(string $title, string $locale): int
+    {
+        if ($this->looksLikeMonthOnlyLabel($title, $locale)) {
+            return -1000;
+        }
+
+        $normalized = $this->normalizeWord($title);
+        if ('' === $normalized) {
+            return -1000;
+        }
+
+        if ($this->looksLikeNonTitleFragment($title)) {
+            return -800;
+        }
+
+        $words = $this->titleWordCount($title);
+        $score = min($words, 8) * 10;
+
+        if ($words <= 1) {
+            $score -= 30;
+        }
+
+        if (1 === preg_match('/\b(?:EVENT|EVENEMENT|ÉVÉNEMENT|WEEK-?END|MUTATIONS?|DOUBLE|SCORE|XP|SALE|PROMOTION|PUBLICS?)\b/iu', $title)) {
+            $score += 8;
+        }
+
+        if ($this->isWeakTitleCandidate($title)) {
+            $score -= 25;
+        }
+
+        return $score;
+    }
+
+    private function shouldMergeCandidateTitleLines(string $left, string $right): bool
+    {
+        if ($this->looksLikeContinuationLine($right)) {
+            return true;
+        }
+
+        $leftWords = $this->titleWordCount($left);
+        $rightWords = $this->titleWordCount($right);
+
+        if ($leftWords <= 1 && $rightWords >= 1) {
+            return true;
+        }
+
+        if ($leftWords >= 1 && $rightWords <= 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function titleWordCount(string $title): int
+    {
+        $count = preg_match_all('/\p{L}+/u', $title);
+        if (!is_int($count)) {
+            return 0;
+        }
+
+        return $count;
     }
 
     /**
@@ -1039,6 +1171,11 @@ final class RoadmapRawTextEventParser
         $cleaned = $this->normalizeOcrUnicodeArtifacts($value);
         $title = trim(preg_replace('/\s+/u', ' ', $cleaned) ?? $cleaned);
         $title = preg_replace('/^[\s•·]+/u', '', $title) ?? $title;
+        $title = preg_replace(
+            '/^(?:\d{1,2}(?:ER|ST|ND|RD|TH)?(?:\s+[[:alpha:]\.]+)?\s*(?:-|–|BIS|TO)\s*)+/iu',
+            '',
+            $title,
+        ) ?? $title;
         $title = preg_replace('/\s+([,.;:!?])/u', '$1', $title) ?? $title;
         $title = preg_replace('/(?:\s+00)+\s*$/u', '', $title) ?? $title;
         $title = preg_replace('/\s*[•·]+\s*$/u', '', $title) ?? $title;
@@ -1089,6 +1226,10 @@ final class RoadmapRawTextEventParser
             return true;
         }
 
+        if (1 === preg_match('/^EVENT\s+\d+$/u', $normalized)) {
+            return true;
+        }
+
         if (1 === preg_match('/^\d+$/u', $normalized)) {
             return true;
         }
@@ -1103,15 +1244,22 @@ final class RoadmapRawTextEventParser
      */
     private function cleanupParsedEvents(array $events, string $locale): array
     {
+        $profile = $this->profileRegistry->profileFor($locale);
         $normalized = [];
         foreach ($events as $event) {
             $title = $this->normalizeTitle($event->title);
-            if ('' === $title || $this->looksLikeNonTitleFragment($title)) {
+            if ('' === $title || $this->isWeakTitleForCleanup($title, $locale)) {
                 $title = $this->fallbackUntitledTitle($locale);
+            } else {
+                $title = $profile->normalizeTitle($title);
             }
 
             $normalized[] = new RoadmapParsedEvent($title, $event->startsAt, $event->endsAt);
         }
+
+        $normalized = $this->replaceWeakTitlesWithStrongTitlesFromSameStartDate($normalized, $locale);
+
+        $normalized = $this->dropWeakEventsWhenSameWindowHasStrongerTitle($normalized, $locale);
 
         $seen = [];
         $cleaned = [];
@@ -1127,6 +1275,110 @@ final class RoadmapRawTextEventParser
         }
 
         return $cleaned;
+    }
+
+    /**
+     * @param list<RoadmapParsedEvent> $events
+     *
+     * @return list<RoadmapParsedEvent>
+     */
+    private function replaceWeakTitlesWithStrongTitlesFromSameStartDate(array $events, string $locale): array
+    {
+        $strongByStartDate = [];
+        foreach ($events as $event) {
+            if ($this->isWeakTitleForCleanup($event->title, $locale)) {
+                continue;
+            }
+            $dateKey = $event->startsAt->format('Y-m-d');
+            if (!isset($strongByStartDate[$dateKey])) {
+                $strongByStartDate[$dateKey] = [];
+            }
+            $strongByStartDate[$dateKey][$this->normalizeWord($event->title)] = $event->title;
+        }
+
+        $updated = [];
+        foreach ($events as $event) {
+            $title = $event->title;
+            if ($this->isWeakTitleForCleanup($title, $locale)) {
+                $dateKey = $event->startsAt->format('Y-m-d');
+                if (isset($strongByStartDate[$dateKey]) && 1 === count($strongByStartDate[$dateKey])) {
+                    $title = array_values($strongByStartDate[$dateKey])[0];
+                }
+            }
+
+            $updated[] = new RoadmapParsedEvent($title, $event->startsAt, $event->endsAt);
+        }
+
+        return $updated;
+    }
+
+    /**
+     * @param list<RoadmapParsedEvent> $events
+     *
+     * @return list<RoadmapParsedEvent>
+     */
+    private function dropWeakEventsWhenSameWindowHasStrongerTitle(array $events, string $locale): array
+    {
+        $byWindow = [];
+        foreach ($events as $event) {
+            $windowKey = $event->startsAt->format('Y-m-d H:i:s').'|'.$event->endsAt->format('Y-m-d H:i:s');
+            $byWindow[$windowKey][] = $event;
+        }
+
+        $filtered = [];
+        foreach ($byWindow as $windowEvents) {
+            $hasStrong = false;
+            foreach ($windowEvents as $event) {
+                if (!$this->isWeakTitleForCleanup($event->title, $locale)) {
+                    $hasStrong = true;
+                    break;
+                }
+            }
+
+            foreach ($windowEvents as $event) {
+                if ($hasStrong && $this->isWeakTitleForCleanup($event->title, $locale)) {
+                    continue;
+                }
+
+                $filtered[] = $event;
+            }
+        }
+
+        usort($filtered, static function (RoadmapParsedEvent $left, RoadmapParsedEvent $right): int {
+            if ($left->startsAt < $right->startsAt) {
+                return -1;
+            }
+            if ($left->startsAt > $right->startsAt) {
+                return 1;
+            }
+            if ($left->endsAt < $right->endsAt) {
+                return -1;
+            }
+            if ($left->endsAt > $right->endsAt) {
+                return 1;
+            }
+
+            return strcmp($left->title, $right->title);
+        });
+
+        return $filtered;
+    }
+
+    private function isWeakTitleForCleanup(string $title, string $locale): bool
+    {
+        if ('' === trim($title)) {
+            return true;
+        }
+
+        if ($this->looksLikeNonTitleFragment($title)) {
+            return true;
+        }
+
+        if ($this->looksLikeMonthOnlyLabel($title, $locale)) {
+            return true;
+        }
+
+        return false;
     }
 
     private function fallbackUntitledTitle(string $locale): string

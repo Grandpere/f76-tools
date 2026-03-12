@@ -472,6 +472,55 @@ final class RoadmapRawTextEventParserTest extends TestCase
         self::assertSame('LA FÊTE DU YETI', $events[0]->title);
     }
 
+    public function testParseSkipsMonthNoiseAndKeepsStrongerTitleForSameWindow(): void
+    {
+        $parser = new RoadmapRawTextEventParser();
+        $text = <<<TXT
+            3 MARS - 10 MARS
+            SEPTEMBRE
+            3 MARS - 10 MARS
+            LA FETE DU YETI
+            TXT;
+
+        $events = $parser->parse($text, 'fr', new DateTimeImmutable('2026-03-02 10:00:00'));
+
+        self::assertTrue($this->containsTitleFragments($events, ['LA FÊTE DU YETI']));
+        self::assertFalse($this->containsTitleFragments($events, ['SEPTEMBRE']));
+    }
+
+    public function testParseSingleDateCanResolveTitleFromFollowingBlockWhenInlineMissing(): void
+    {
+        $parser = new RoadmapRawTextEventParser();
+        $text = <<<TXT
+            31 OCTOBRE - 4 NOVEMBRE
+            14 NOVEMBRE
+            21 NOVEMBRE - 25 NOVEMBRE
+            EVENT LES ENVAHISSEURS
+            JOYEUX ANNIVERSAIRE,
+            SURPLUS DE MITRAILLE
+            TXT;
+
+        $events = $parser->parse($text, 'fr', new DateTimeImmutable('2026-10-01 10:00:00'));
+
+        self::assertCount(3, $events);
+        self::assertSame('JOYEUX ANNIVERSAIRE FALLOUT 76 !', $events[1]->title);
+    }
+
+    public function testParseMergesWeakOneWordTitleFragmentsFromFollowingBlock(): void
+    {
+        $parser = new RoadmapRawTextEventParser();
+        $text = <<<TXT
+            10 MARS - 24 MARS
+            ÉVÉNEMENTS
+            PUBLICS MUTANTS
+            TXT;
+
+        $events = $parser->parse($text, 'fr', new DateTimeImmutable('2026-03-02 10:00:00'));
+
+        self::assertCount(1, $events);
+        self::assertSame('ÉVÉNEMENTS PUBLICS MUTANTS', $events[0]->title);
+    }
+
     public function testParseGermanProvidedRawTextBuildsTwentyEvents(): void
     {
         $parser = new RoadmapRawTextEventParser();

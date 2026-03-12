@@ -84,6 +84,22 @@ final class TesseractOcrProviderTest extends TestCase
         $provider->recognize($imagePath, 'de');
     }
 
+    public function testRecognizeFiltersLowConfidenceAndNonAlphanumericNoiseWords(): void
+    {
+        $imagePath = $this->createTemporaryImage();
+
+        $runner = new FakeCommandRunner([
+            new CommandExecutionResult(0, $this->tsvWithNoiseAndValidWord(), ''),
+            new CommandExecutionResult(0, $this->tsvSingleLine('fallback pass', 10), ''),
+        ]);
+
+        $provider = new TesseractOcrProvider($runner, 'tesseract');
+        $result = $provider->recognize($imagePath, 'fr');
+
+        self::assertSame(['MISE A JOUR'], $result->lines);
+        self::assertGreaterThan(0.80, $result->confidence);
+    }
+
     private function createTemporaryImage(): string
     {
         $path = tempnam(sys_get_temp_dir(), 'roadmap_ocr_test_');
@@ -127,6 +143,16 @@ final class TesseractOcrProviderTest extends TestCase
         }
 
         return implode("\n", $rows)."\n";
+    }
+
+    private function tsvWithNoiseAndValidWord(): string
+    {
+        return "level\tpage_num\tblock_num\tpar_num\tline_num\tword_num\tleft\ttop\twidth\theight\tconf\ttext\n"
+            ."5\t1\t1\t1\t1\t1\t0\t0\t10\t10\t5\t###\n"
+            ."5\t1\t1\t1\t1\t2\t0\t0\t10\t10\t10\tNOISE\n"
+            ."5\t1\t1\t1\t1\t3\t0\t0\t10\t10\t87\tMISE\n"
+            ."5\t1\t1\t1\t1\t4\t0\t0\t10\t10\t87\tA\n"
+            ."5\t1\t1\t1\t1\t5\t0\t0\t10\t10\t87\tJOUR\n";
     }
 }
 

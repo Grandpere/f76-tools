@@ -45,6 +45,7 @@ final class TesseractOcrProvider implements OcrProvider
         }
 
         $lang = $this->mapLocaleToTesseractLang($locale);
+        [$imageWidth, $imageHeight] = $this->resolveImageDimensions($image);
         $passes = [];
         $errors = [];
 
@@ -65,7 +66,11 @@ final class TesseractOcrProvider implements OcrProvider
                 continue;
             }
 
-            [$lines, $confidence] = $this->extractParagraphLinesAndConfidenceFromTsv($tsvResult->stdout);
+            [$lines, $confidence] = $this->extractParagraphLinesAndConfidenceFromTsv(
+                $tsvResult->stdout,
+                $imageWidth,
+                $imageHeight,
+            );
             $passes[] = [
                 'psm' => $psm,
                 'lines' => $lines,
@@ -117,7 +122,7 @@ final class TesseractOcrProvider implements OcrProvider
     /**
      * @return array{0: list<string>, 1: float}
      */
-    private function extractParagraphLinesAndConfidenceFromTsv(string $tsv): array
+    private function extractParagraphLinesAndConfidenceFromTsv(string $tsv, ?int $imageWidth = null, ?int $imageHeight = null): array
     {
         $rows = preg_split('/\R/u', trim($tsv));
         if (!is_array($rows) || count($rows) < 2) {
@@ -148,17 +153,24 @@ final class TesseractOcrProvider implements OcrProvider
             }
 
             $confRaw = trim((string) $columns[10]);
+            $word = trim((string) $columns[11]);
+            if ('' === $word) {
+                continue;
+            }
+
+            $left = is_numeric($columns[6]) ? (int) $columns[6] : 0;
+            $top = is_numeric($columns[7]) ? (int) $columns[7] : 0;
+            $width = is_numeric($columns[8]) ? (int) $columns[8] : 0;
+            $height = is_numeric($columns[9]) ? (int) $columns[9] : 0;
+            if (!$this->shouldKeepWordBox($word, $left, $top, $width, $height, $confRaw, $imageWidth, $imageHeight)) {
+                continue;
+            }
             if (is_numeric($confRaw)) {
                 $conf = (float) $confRaw;
                 if ($conf >= 0.0) {
                     $sum += $conf;
                     ++$count;
                 }
-            }
-
-            $word = trim((string) $columns[11]);
-            if ('' === $word) {
-                continue;
             }
 
             $page = is_numeric($columns[1]) ? (int) $columns[1] : 0;
@@ -219,5 +231,79 @@ final class TesseractOcrProvider implements OcrProvider
         $normalizedConfidence = ($sum / $count) / 100.0;
 
         return [$resultLines, max(0.0, min(1.0, $normalizedConfidence))];
+    }
+
+    private function shouldKeepWordBox(
+        string $word,
+        int $left,
+        int $top,
+        int $width,
+        int $height,
+        string $confRaw,
+        ?int $imageWidth,
+        ?int $imageHeight,
+    ): bool {
+        if ('' === trim($word)) {
+            return false;
+        }
+
+        if (!preg_match('/\p{L}|\d/u', $word)) {
+            return false;
+        }
+
+        if (is_numeric($confRaw) && ((float) $confRaw) >= 0.0 && ((float) $confRaw) < 20.0) {
+            return false;
+        }
+
+        if ($width <= 0 || $height <= 0) {
+            return false;
+        }
+
+        $ratio = $width / max(1, $height);
+        if ($ratio > 22.0 || $ratio < 0.08) {
+            return false;
+        }
+
+        $minWidth = 4;
+        $minHeight = 4;
+        $minArea = 20;
+        if (is_int($imageWidth) && $imageWidth > 0 && is_int($imageHeight) && $imageHeight > 0) {
+            $minWidth = max($minWidth, (int) round($imageWidth * 0.006));
+            $minHeight = max($minHeight, (int) round($imageHeight * 0.004));
+            $minArea = max($minArea, (int) round(($imageWidth * $imageHeight) * 0.00003));
+        }
+
+        $area = $width * $height;
+        if ($width < $minWidth || $height < $minHeight || $area < $minArea) {
+            return false;
+        }
+
+        if (is_int($imageWidth) && $imageWidth > 0 && is_int($imageHeight) && $imageHeight > 0) {
+            $margin = max(2, (int) round(min($imageWidth, $imageHeight) * 0.003));
+            $right = $left + $width;
+            $bottom = $top + $height;
+            $isOnBorder = $left <= $margin || $top <= $margin || $right >= ($imageWidth - $margin) || $bottom >= ($imageHeight - $margin);
+            if ($isOnBorder && $area < ($minArea * 2)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @return array{0: int|null, 1: int|null}
+     */
+    private function resolveImageDimensions(string $imagePath): array
+    {
+        $imageSize = @getimagesize($imagePath);
+        if (!is_array($imageSize)) {
+            return [null, null];
+        }
+
+        $width = $imageSize[0];
+        $height = $imageSize[1];
+
+        return [$width, $height];
     }
 }
