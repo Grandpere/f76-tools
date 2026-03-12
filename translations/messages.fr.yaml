@@ -315,6 +315,9 @@ admin_roadmap.step_snapshots_hint: Ouvre un snapshot pour revoir le texte OCR, p
 admin_roadmap.upload_locale: Locale de l'image
 admin_roadmap.upload_image: Image roadmap
 admin_roadmap.upload_submit: Importer et scanner
+admin_roadmap.json_season_number: Numéro de saison (optionnel)
+admin_roadmap.json_payload: Payload JSON
+admin_roadmap.json_submit: Importer le JSON
 admin_roadmap.snapshot_id: ID
 admin_roadmap.snapshot_locale: Locale
 admin_roadmap.snapshot_provider: Provider
@@ -408,6 +411,11 @@ admin_roadmap.flash.upload_attempt_failed: "%provider% : échec (%error%)"
 admin_roadmap.flash.upload_attempt_status_accepted: accepté
 admin_roadmap.flash.upload_attempt_status_rejected: rejeté
 admin_roadmap.flash.upload_attempt_no_reason: aucun motif
+admin_roadmap.flash.json_missing_payload: Merci de fournir un payload JSON.
+admin_roadmap.flash.json_invalid_payload: Payload JSON invalide.
+admin_roadmap.flash.json_missing_events: Le payload JSON doit contenir un tableau events non vide.
+admin_roadmap.flash.json_invalid_event: 'Événement JSON #%index% invalide (title/date_start/date_end attendus).'
+admin_roadmap.flash.json_import_success: '%count% événement(s) importé(s) depuis le JSON.'
 admin_users.google_filter_linked: Google lié
 admin_users.google_filter_unlinked: Google non lié
 admin_users.active_filter_label: Statut du compte

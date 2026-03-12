@@ -315,6 +315,9 @@ admin_roadmap.step_snapshots_hint: Offne einen Snapshot fur OCR-Review sowie Eve
 admin_roadmap.upload_locale: Bildsprache
 admin_roadmap.upload_image: Roadmap-Bild
 admin_roadmap.upload_submit: Hochladen und scannen
+admin_roadmap.json_season_number: Saisonnnummer (optional)
+admin_roadmap.json_payload: JSON-Payload
+admin_roadmap.json_submit: JSON importieren
 admin_roadmap.snapshot_id: ID
 admin_roadmap.snapshot_locale: Sprache
 admin_roadmap.snapshot_provider: Provider
@@ -406,6 +409,11 @@ admin_roadmap.flash.upload_attempt_failed: "%provider%: fehlgeschlagen (%error%)
 admin_roadmap.flash.upload_attempt_status_accepted: akzeptiert
 admin_roadmap.flash.upload_attempt_status_rejected: abgelehnt
 admin_roadmap.flash.upload_attempt_no_reason: kein Grund
+admin_roadmap.flash.json_missing_payload: Bitte ein JSON-Payload angeben.
+admin_roadmap.flash.json_invalid_payload: Ungültiges JSON-Payload.
+admin_roadmap.flash.json_missing_events: Das JSON-Payload muss ein nicht-leeres events-Array enthalten.
+admin_roadmap.flash.json_invalid_event: 'Ungültiges JSON-Event #%index% (title/date_start/date_end erwartet).'
+admin_roadmap.flash.json_import_success: '%count% Event(s) aus JSON importiert.'
 admin_users.google_filter_linked: Google verknupft
 admin_users.google_filter_unlinked: Google nicht verknupft
 admin_users.active_filter_label: Kontostatus

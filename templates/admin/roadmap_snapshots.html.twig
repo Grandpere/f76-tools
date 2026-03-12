@@ -34,6 +34,24 @@
                 </label>
                 <button type="submit">{{ 'admin_roadmap.upload_submit'|trans }}</button>
             </form>
+            <form method="post" action="{{ path('app_admin_roadmap_snapshot_import_json', { _locale: app.request.locale }) }}" class="translations-filters minerva-admin-filters roadmap-upload-form">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_import_json') }}">
+                <label class="field">
+                    {{ 'admin_roadmap.upload_locale'|trans }}
+                    <select name="locale" required>
+                        {% include '_locale_options.html.twig' with { selectedLocale: app.request.locale } %}
+                    </select>
+                </label>
+                <label class="field">
+                    {{ 'admin_roadmap.json_season_number'|trans }}
+                    <input type="number" name="season_number" min="1" step="1" placeholder="24">
+                </label>
+                <label class="field field--full">
+                    {{ 'admin_roadmap.json_payload'|trans }}
+                    <textarea class="roadmap-raw-text" name="json_payload" rows="8" placeholder='{"season":24,"events":[{"date_start":"2026-03-03","date_end":"2026-03-10","title":"Bigfoot&apos;s Bash"}]}' required></textarea>
+                </label>
+                <button type="submit">{{ 'admin_roadmap.json_submit'|trans }}</button>
+            </form>
             <form method="get" class="translations-filters minerva-admin-filters roadmap-season-filter-form">
                 {% if selectedSnapshot %}
                     <input type="hidden" name="snapshot" value="{{ selectedSnapshot.id }}">

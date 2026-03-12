@@ -151,7 +151,7 @@ final class RoadmapRawTextEventParser
             $lastRangeEnd = $singleDate['endsAt'];
         }
 
-        return $events;
+        return $this->cleanupParsedEvents($events, $locale);
     }
 
     /**
@@ -318,9 +318,20 @@ final class RoadmapRawTextEventParser
     {
         $profile = $this->profileRegistry->profileFor($locale);
         $nextDateMarkerIndex = $this->nextDateMarkerIndex($dateMarkerIndexes, $dateLineIndex);
+        $blockCandidate = $this->findCandidateTitleFromFollowingDateBlock($lines, $dateLineIndex, $locale, $dateMarkerIndexes);
         $candidate = $this->findCandidateTitleForward($lines, $dateLineIndex, $locale, $nextDateMarkerIndex);
+        if (
+            '' !== $blockCandidate
+            && ('' === $candidate || $this->isWeakTitleCandidate($candidate) || $this->isStrongerTitleCandidate($blockCandidate, $candidate))
+        ) {
+            return $profile->normalizeTitle($blockCandidate);
+        }
         if ('' !== $candidate) {
             return $profile->normalizeTitle($candidate);
+        }
+
+        if ('' !== $blockCandidate) {
+            return $profile->normalizeTitle($blockCandidate);
         }
 
         return $profile->normalizeTitle($this->findCandidateTitleBackward($lines, $dateLineIndex, $locale, $dateMarkerIndexes));
@@ -368,6 +379,9 @@ final class RoadmapRawTextEventParser
 
             $candidate = $lines[$candidateIndex];
             if ($this->looksLikeMonthOnlyLabel($candidate, $locale)) {
+                if (1 === $offset && $this->lineLikelyMissingEndMonth($lines[$dateLineIndex])) {
+                    continue;
+                }
                 break;
             }
             if ($this->isIgnoredTitleLine($candidate)) {
@@ -389,6 +403,92 @@ final class RoadmapRawTextEventParser
         }
 
         return $this->normalizeTitle(implode(' ', $parts));
+    }
+
+    /**
+     * @param list<string> $lines
+     * @param list<int>    $dateMarkerIndexes
+     */
+    private function findCandidateTitleFromFollowingDateBlock(array $lines, int $dateLineIndex, string $locale, array $dateMarkerIndexes): string
+    {
+        $markerPosition = array_search($dateLineIndex, $dateMarkerIndexes, true);
+        if (!is_int($markerPosition)) {
+            return '';
+        }
+
+        $startPosition = $markerPosition;
+        while ($startPosition > 0 && ($dateMarkerIndexes[$startPosition] - $dateMarkerIndexes[$startPosition - 1]) <= 1) {
+            --$startPosition;
+        }
+
+        $endPosition = $markerPosition;
+        while (($endPosition + 1) < count($dateMarkerIndexes) && ($dateMarkerIndexes[$endPosition + 1] - $dateMarkerIndexes[$endPosition]) <= 1) {
+            ++$endPosition;
+        }
+
+        $blockLength = $endPosition - $startPosition + 1;
+        if ($blockLength < 3) {
+            return '';
+        }
+
+        $ordinalInBlock = $markerPosition - $startPosition;
+        $titlePool = $this->collectTitlesAfterDateBlock($lines, $locale, $dateMarkerIndexes[$endPosition], $blockLength);
+        if ([] === $titlePool) {
+            return '';
+        }
+
+        if ($ordinalInBlock < count($titlePool)) {
+            return $titlePool[$ordinalInBlock];
+        }
+
+        return $titlePool[count($titlePool) - 1];
+    }
+
+    /**
+     * @param list<string> $lines
+     *
+     * @return list<string>
+     */
+    private function collectTitlesAfterDateBlock(array $lines, string $locale, int $blockEndLineIndex, int $expectedCount): array
+    {
+        $pool = [];
+        $lineCount = count($lines);
+        for ($offset = 1; $offset <= 48; ++$offset) {
+            $index = $blockEndLineIndex + $offset;
+            if ($index < 0 || $index >= $lineCount) {
+                break;
+            }
+
+            $line = $lines[$index];
+            if ($this->looksLikeMonthOnlyLabel($line, $locale) && $offset > 2) {
+                break;
+            }
+            if (null !== $this->extractDateRange($line, $locale, new DateTimeImmutable(), null)) {
+                continue;
+            }
+            if (null !== $this->extractSingleDate($line, $locale, new DateTimeImmutable())) {
+                continue;
+            }
+            if ($this->isIgnoredTitleLine($line)) {
+                continue;
+            }
+
+            $title = $this->normalizeTitle($line);
+            if ('' === $title || $this->looksLikeNonTitleFragment($title)) {
+                continue;
+            }
+            $pool[] = $title;
+
+            if (count($pool) >= max(6, $expectedCount * 2)) {
+                break;
+            }
+        }
+
+        if ($expectedCount > 0 && count($pool) > $expectedCount) {
+            return array_slice($pool, 0, $expectedCount);
+        }
+
+        return $pool;
     }
 
     /**
@@ -918,6 +1018,14 @@ final class RoadmapRawTextEventParser
         return trim(preg_replace('/\s+/u', ' ', $normalized) ?? $normalized);
     }
 
+    private function lineLikelyMissingEndMonth(string $line): bool
+    {
+        return 1 === preg_match(
+            '/(?:\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s*[^\s\-–]+\s*(?:-|–|BIS|TO)\s*(\d{1,2})\.?(?:\s*(?:ER|ST|ND|RD|TH))?\s*$/iu',
+            $line,
+        );
+    }
+
     private function looksLikeDateContinuationFragment(string $line): bool
     {
         return 1 === preg_match(
@@ -934,10 +1042,100 @@ final class RoadmapRawTextEventParser
         $title = preg_replace('/\s+([,.;:!?])/u', '$1', $title) ?? $title;
         $title = preg_replace('/(?:\s+00)+\s*$/u', '', $title) ?? $title;
         $title = preg_replace('/\s*[•·]+\s*$/u', '', $title) ?? $title;
-        $title = preg_replace('/\s*[^\p{L}\p{N}\)\]]+\s*$/u', '', $title) ?? $title;
+        $title = preg_replace('/\s*[-–|]+\s*$/u', '', $title) ?? $title;
         $title = preg_replace('/\s*(?:©|\(C\)|BETHESDA|ZENIMAX|COMMUNITY\s+CALENDAR).*/iu', '', $title) ?? $title;
 
         return trim($title);
+    }
+
+    private function isWeakTitleCandidate(string $title): bool
+    {
+        $wordCount = preg_match_all('/\p{L}+/u', $title);
+        if (!is_int($wordCount) || $wordCount <= 0) {
+            return true;
+        }
+
+        if ($wordCount <= 2) {
+            return true;
+        }
+
+        $normalized = $this->normalizeWord($title);
+
+        return in_array($normalized, ['MUTATED', 'MUTANTS', 'DOUBLE XP', 'DOUBLE SCORE', 'WEEKEND'], true);
+    }
+
+    private function isStrongerTitleCandidate(string $left, string $right): bool
+    {
+        $leftWords = preg_match_all('/\p{L}+/u', $left);
+        $rightWords = preg_match_all('/\p{L}+/u', $right);
+        if (!is_int($leftWords)) {
+            $leftWords = 0;
+        }
+        if (!is_int($rightWords)) {
+            $rightWords = 0;
+        }
+
+        if ($leftWords !== $rightWords) {
+            return $leftWords > $rightWords;
+        }
+
+        return mb_strlen($left) > mb_strlen($right);
+    }
+
+    private function looksLikeNonTitleFragment(string $title): bool
+    {
+        $normalized = $this->normalizeWord($title);
+        if ('' === $normalized) {
+            return true;
+        }
+
+        if (1 === preg_match('/^\d+$/u', $normalized)) {
+            return true;
+        }
+
+        return 1 === preg_match('/^[A-Z0-9]{1,2}$/u', $normalized);
+    }
+
+    /**
+     * @param list<RoadmapParsedEvent> $events
+     *
+     * @return list<RoadmapParsedEvent>
+     */
+    private function cleanupParsedEvents(array $events, string $locale): array
+    {
+        $normalized = [];
+        foreach ($events as $event) {
+            $title = $this->normalizeTitle($event->title);
+            if ('' === $title || $this->looksLikeNonTitleFragment($title)) {
+                $title = $this->fallbackUntitledTitle($locale);
+            }
+
+            $normalized[] = new RoadmapParsedEvent($title, $event->startsAt, $event->endsAt);
+        }
+
+        $seen = [];
+        $cleaned = [];
+        foreach ($normalized as $event) {
+            $key = $event->startsAt->format('Y-m-d H:i:s')
+                .'|'.$event->endsAt->format('Y-m-d H:i:s')
+                .'|'.$this->normalizeWord($event->title);
+            if (isset($seen[$key])) {
+                continue;
+            }
+            $seen[$key] = true;
+            $cleaned[] = $event;
+        }
+
+        return $cleaned;
+    }
+
+    private function fallbackUntitledTitle(string $locale): string
+    {
+        return match ($locale) {
+            'de' => 'Ereignis zu prüfen',
+            'en' => 'Event to review',
+            default => 'Événement à vérifier',
+        };
     }
 
     private function normalizeOcrUnicodeArtifacts(string $value): string
@@ -1235,6 +1433,14 @@ final class RoadmapRawTextEventParser
         }
 
         if ('RIP DARING' === $normalized || 'BETHESDA' === $normalized) {
+            return true;
+        }
+
+        if (1 === preg_match('/^(?:THEME|THÈME)\s+DE\s+C\.?A\.?M\.?P\.?/u', $normalized)) {
+            return true;
+        }
+
+        if (in_array($normalized, ['STOP', 'YIELD', 'O'], true)) {
             return true;
         }
 

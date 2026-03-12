@@ -31,6 +31,7 @@ final class OcrSpaceHttpProvider implements OcrProvider
         private readonly bool $enabled = true,
         private readonly int $timeoutSeconds = 60,
         private readonly int $maxImageBytes = 950000,
+        private readonly int $ocrEngine = 2,
     ) {
     }
 
@@ -60,39 +61,13 @@ final class OcrSpaceHttpProvider implements OcrProvider
             throw new RuntimeException(sprintf('OCR.space image not found: %s', $imagePath));
         }
 
+        $ocrEngine = $this->resolveOcrEngine();
         $preparedImage = $this->prepareImageForUpload($imagePath);
         $rawImage = $preparedImage['content'];
         $language = $this->mapLocaleToOcrSpaceLanguage($locale);
         $mimeType = $preparedImage['mimeType'];
-        $payload = [
-            'base64Image' => sprintf('data:%s;base64,%s', $mimeType, base64_encode($rawImage)),
-            'isOverlayRequired' => 'false',
-            'language' => $language,
-            'OCREngine' => '2',
-            'scale' => 'true',
-        ];
-
-        try {
-            $response = $this->httpClient->request('POST', $apiUrl, [
-                'headers' => [
-                    'apikey' => $apiKey,
-                    'Accept' => 'application/json',
-                    'Content-Type' => 'application/x-www-form-urlencoded',
-                ],
-                'body' => $payload,
-                'timeout' => $this->timeoutSeconds,
-            ]);
-
-            if (200 !== $response->getStatusCode()) {
-                throw new RuntimeException(sprintf('OCR.space returned HTTP %d.', $response->getStatusCode()));
-            }
-
-            /** @var array<string, mixed> $body */
-            $body = $response->toArray(false);
-        } catch (ExceptionInterface $exception) {
-            throw new RuntimeException('OCR.space HTTP request failed.', 0, $exception);
-        }
-
+        $base64Image = sprintf('data:%s;base64,%s', $mimeType, base64_encode($rawImage));
+        $body = $this->requestOcrSpace($apiUrl, $apiKey, $base64Image, $language, $ocrEngine);
         if (($body['IsErroredOnProcessing'] ?? false) === true) {
             $message = $this->extractErrorMessage($body);
             throw new RuntimeException(sprintf('OCR.space rejected image: %s', $message));
@@ -102,33 +77,191 @@ final class OcrSpaceHttpProvider implements OcrProvider
         if (!is_array($parsedResults) || [] === $parsedResults) {
             throw new RuntimeException('OCR.space returned no parsed results.');
         }
+        /** @var list<mixed> $parsedResultsList */
+        $parsedResultsList = array_values($parsedResults);
 
-        $textBlocks = [];
-        foreach ($parsedResults as $entry) {
-            if (!is_array($entry)) {
-                continue;
+        $overlayLines = $this->extractOverlayLines($parsedResultsList);
+        if ([] !== $overlayLines) {
+            $lines = $overlayLines;
+            $text = implode("\n", $lines);
+        } else {
+            $textBlocks = [];
+            foreach ($parsedResultsList as $entry) {
+                if (!is_array($entry)) {
+                    continue;
+                }
+
+                $parsedText = $entry['ParsedText'] ?? null;
+                if (!is_string($parsedText)) {
+                    continue;
+                }
+
+                $cleanText = trim($parsedText);
+                if ('' !== $cleanText) {
+                    $textBlocks[] = $cleanText;
+                }
             }
 
-            $parsedText = $entry['ParsedText'] ?? null;
-            if (!is_string($parsedText)) {
-                continue;
+            if ([] === $textBlocks) {
+                throw new RuntimeException('OCR.space returned empty parsed text.');
             }
 
-            $cleanText = trim($parsedText);
-            if ('' !== $cleanText) {
-                $textBlocks[] = $cleanText;
-            }
+            $text = implode("\n\n", $textBlocks);
+            $lines = $this->normalizeLines($text);
         }
-
-        if ([] === $textBlocks) {
-            throw new RuntimeException('OCR.space returned empty parsed text.');
-        }
-
-        $text = implode("\n\n", $textBlocks);
-        $lines = $this->normalizeLines($text);
         $confidence = $this->estimateConfidence($text, $lines);
 
         return new OcrResult($this->name(), $text, $confidence, $lines);
+    }
+
+    /**
+     * @param list<mixed> $parsedResults
+     *
+     * @return list<string>
+     */
+    private function extractOverlayLines(array $parsedResults): array
+    {
+        $entries = [];
+        foreach ($parsedResults as $parsedResult) {
+            if (!is_array($parsedResult)) {
+                continue;
+            }
+
+            $overlay = $parsedResult['TextOverlay'] ?? null;
+            if (!is_array($overlay)) {
+                continue;
+            }
+
+            $lines = $overlay['Lines'] ?? null;
+            if (!is_array($lines)) {
+                continue;
+            }
+
+            foreach ($lines as $line) {
+                if (!is_array($line)) {
+                    continue;
+                }
+
+                $lineText = $line['LineText'] ?? null;
+                if (!is_string($lineText)) {
+                    continue;
+                }
+
+                $cleanText = trim($lineText);
+                if ('' === $cleanText) {
+                    continue;
+                }
+
+                $top = $line['MinTop'] ?? null;
+                $left = null;
+                $words = $line['Words'] ?? null;
+                if (is_array($words) && isset($words[0]) && is_array($words[0])) {
+                    $left = $words[0]['Left'] ?? null;
+                }
+
+                $entries[] = [
+                    'text' => $cleanText,
+                    'top' => is_numeric($top) ? (int) $top : 0,
+                    'left' => is_numeric($left) ? (int) $left : 0,
+                ];
+            }
+        }
+
+        if ([] === $entries) {
+            return [];
+        }
+
+        $entries = $this->orderOverlayEntriesForReading($entries);
+
+        $ordered = [];
+        foreach ($entries as $entry) {
+            $ordered[] = $entry['text'];
+        }
+
+        return $ordered;
+    }
+
+    /**
+     * @param list<array{text: string, top: int, left: int}> $entries
+     * @return list<array{text: string, top: int, left: int}>
+     */
+    private function orderOverlayEntriesForReading(array $entries): array
+    {
+        if (!$this->shouldUseColumnFirstOrdering($entries)) {
+            usort($entries, static function (array $left, array $right): int {
+                $topCompare = $left['top'] <=> $right['top'];
+                if (0 !== $topCompare) {
+                    return $topCompare;
+                }
+
+                return $left['left'] <=> $right['left'];
+            });
+
+            return $entries;
+        }
+
+        usort($entries, static fn (array $left, array $right): int => $left['left'] <=> $right['left']);
+
+        $columns = [];
+        $columnThreshold = 220;
+        foreach ($entries as $entry) {
+            $placed = false;
+            foreach ($columns as &$column) {
+                if (abs($entry['left'] - $column['anchor']) <= $columnThreshold) {
+                    $column['rows'][] = $entry;
+                    $column['anchor'] = (int) round(($column['anchor'] + $entry['left']) / 2);
+                    $placed = true;
+                    break;
+                }
+            }
+            unset($column);
+
+            if (!$placed) {
+                $columns[] = [
+                    'anchor' => $entry['left'],
+                    'rows' => [$entry],
+                ];
+            }
+        }
+
+        usort($columns, static fn (array $left, array $right): int => $left['anchor'] <=> $right['anchor']);
+        $ordered = [];
+        foreach ($columns as $column) {
+            $rows = $column['rows'];
+            usort($rows, static function (array $left, array $right): int {
+                $topCompare = $left['top'] <=> $right['top'];
+                if (0 !== $topCompare) {
+                    return $topCompare;
+                }
+
+                return $left['left'] <=> $right['left'];
+            });
+            foreach ($rows as $row) {
+                $ordered[] = $row;
+            }
+        }
+
+        return $ordered;
+    }
+
+    /**
+     * @param list<array{text: string, top: int, left: int}> $entries
+     */
+    private function shouldUseColumnFirstOrdering(array $entries): bool
+    {
+        if (count($entries) < 40) {
+            return false;
+        }
+
+        $minLeft = PHP_INT_MAX;
+        $maxLeft = 0;
+        foreach ($entries as $entry) {
+            $minLeft = min($minLeft, $entry['left']);
+            $maxLeft = max($maxLeft, $entry['left']);
+        }
+
+        // Wide x-distribution strongly suggests multi-column calendar layout.
+        return ($maxLeft - $minLeft) >= 900;
     }
 
     /**
@@ -208,6 +341,52 @@ final class OcrSpaceHttpProvider implements OcrProvider
             str_starts_with($normalized, 'de') => 'ger',
             default => 'eng',
         };
+    }
+
+    private function resolveOcrEngine(): int
+    {
+        if (in_array($this->ocrEngine, [1, 2], true)) {
+            return $this->ocrEngine;
+        }
+
+        throw new RuntimeException(sprintf('OCR.space engine "%d" is invalid. Allowed values: 1, 2.', $this->ocrEngine));
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function requestOcrSpace(string $apiUrl, string $apiKey, string $base64Image, string $language, int $engine): array
+    {
+        $payload = [
+            'base64Image' => $base64Image,
+            'isOverlayRequired' => 'true',
+            'language' => $language,
+            'OCREngine' => (string) $engine,
+            'scale' => 'true',
+        ];
+
+        try {
+            $response = $this->httpClient->request('POST', $apiUrl, [
+                'headers' => [
+                    'apikey' => $apiKey,
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/x-www-form-urlencoded',
+                ],
+                'body' => $payload,
+                'timeout' => $this->timeoutSeconds,
+            ]);
+
+            if (200 !== $response->getStatusCode()) {
+                throw new RuntimeException(sprintf('OCR.space returned HTTP %d.', $response->getStatusCode()));
+            }
+
+            /** @var array<string, mixed> $body */
+            $body = $response->toArray(false);
+        } catch (ExceptionInterface $exception) {
+            throw new RuntimeException('OCR.space HTTP request failed.', 0, $exception);
+        }
+
+        return $body;
     }
 
     private function guessMimeType(string $imagePath): string

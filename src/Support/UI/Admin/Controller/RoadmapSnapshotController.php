@@ -31,6 +31,7 @@ use App\Catalog\Domain\Entity\RoadmapEventEntity;
 use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use DateTimeImmutable;
+use JsonException;
 use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -244,7 +245,7 @@ final class RoadmapSnapshotController extends AbstractController
                     $absolutePath,
                     $scan->result->provider,
                     $scan->result->confidence,
-                    $scan->result->text,
+                    $this->buildStructuredRawText($scan->result->lines, $scan->result->text),
                 ),
             );
             $snapshot->setOcrAttemptsSummary($this->buildOcrAttemptsSummary($scan->attempts));
@@ -265,6 +266,151 @@ final class RoadmapSnapshotController extends AbstractController
         foreach ($scan->attempts as $attempt) {
             $this->addFlash('success', $this->formatOcrAttemptFlash($attempt));
         }
+
+        return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+            '_locale' => $request->getLocale(),
+            'snapshot' => is_int($snapshotId) ? $snapshotId : null,
+        ]);
+    }
+
+    #[Route('/import-json', name: 'app_admin_roadmap_snapshot_import_json', methods: ['POST'])]
+    public function importJsonSnapshot(Request $request): RedirectResponse
+    {
+        $this->ensureAdminAccess();
+
+        if (!$this->isValidToken($request, 'admin_roadmap_snapshot_import_json')) {
+            $this->addFlash('warning', 'admin_roadmap.flash.invalid_csrf');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                '_locale' => $request->getLocale(),
+            ]);
+        }
+
+        $localeInput = strtolower(trim((string) $request->request->get('locale', 'en')));
+        if (!in_array($localeInput, ['fr', 'en', 'de'], true)) {
+            $this->addFlash('warning', 'admin_roadmap.flash.upload_invalid_locale');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                '_locale' => $request->getLocale(),
+            ]);
+        }
+
+        $rawJson = trim((string) $request->request->get('json_payload', ''));
+        if ('' === $rawJson) {
+            $this->addFlash('warning', 'admin_roadmap.flash.json_missing_payload');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                '_locale' => $request->getLocale(),
+            ]);
+        }
+
+        try {
+            /** @var mixed $decodedPayload */
+            $decodedPayload = json_decode($rawJson, true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $exception) {
+            $this->addFlash('warning', 'admin_roadmap.flash.json_invalid_payload');
+            $this->addFlash('warning', $exception->getMessage());
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                '_locale' => $request->getLocale(),
+            ]);
+        }
+
+        if (!is_array($decodedPayload)) {
+            $this->addFlash('warning', 'admin_roadmap.flash.json_invalid_payload');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                '_locale' => $request->getLocale(),
+            ]);
+        }
+
+        $eventsPayload = $decodedPayload['events'] ?? null;
+        if (!is_array($eventsPayload) || [] === $eventsPayload) {
+            $this->addFlash('warning', 'admin_roadmap.flash.json_missing_events');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                '_locale' => $request->getLocale(),
+            ]);
+        }
+
+        $seasonNumber = $this->parsePositiveInt($request->request->get('season_number'));
+        if (!is_int($seasonNumber)) {
+            $seasonNumber = $this->parsePositiveInt($decodedPayload['season'] ?? null);
+        }
+
+        $season = null;
+        if (is_int($seasonNumber)) {
+            $season = $this->roadmapSeasonRepository->findOneBySeasonNumber($seasonNumber);
+            if (!$season instanceof RoadmapSeasonEntity) {
+                $season = new RoadmapSeasonEntity()
+                    ->setSeasonNumber($seasonNumber)
+                    ->setTitle(sprintf('Season %d', $seasonNumber));
+                $this->roadmapSeasonRepository->save($season);
+            }
+        }
+
+        $normalizedEvents = [];
+        foreach (array_values($eventsPayload) as $index => $row) {
+            if (!is_array($row)) {
+                $this->addFlash('warning', $this->translator->trans('admin_roadmap.flash.json_invalid_event', [
+                    '%index%' => (string) ($index + 1),
+                ]));
+
+                return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                    '_locale' => $request->getLocale(),
+                ]);
+            }
+
+            $titleValue = $row['title'] ?? null;
+            $startsAtValue = $row['date_start'] ?? null;
+            $endsAtValue = $row['date_end'] ?? null;
+            $title = is_string($titleValue) ? trim($titleValue) : '';
+            $startsAt = $this->parseJsonDate(is_string($startsAtValue) ? $startsAtValue : '');
+            $endsAt = $this->parseJsonDate(is_string($endsAtValue) ? $endsAtValue : '');
+            if ('' === $title || !$startsAt instanceof DateTimeImmutable || !$endsAt instanceof DateTimeImmutable || $endsAt < $startsAt) {
+                $this->addFlash('warning', $this->translator->trans('admin_roadmap.flash.json_invalid_event', [
+                    '%index%' => (string) ($index + 1),
+                ]));
+
+                return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                    '_locale' => $request->getLocale(),
+                ]);
+            }
+
+            $normalizedEvents[] = [
+                'title' => $title,
+                'startsAt' => $startsAt,
+                'endsAt' => $endsAt,
+            ];
+        }
+
+        $snapshot = new RoadmapSnapshotEntity()
+            ->setLocale($localeInput)
+            ->setSourceImagePath('')
+            ->setSourceImageHash(hash('sha256', $rawJson))
+            ->setOcrProvider('manual.json')
+            ->setOcrConfidence(1.0)
+            ->setRawText(json_encode($decodedPayload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: $rawJson)
+            ->setSeason($season);
+
+        $sortOrder = 1;
+        foreach ($normalizedEvents as $eventData) {
+            $snapshot->addEvent(
+                (new RoadmapEventEntity())
+                    ->setLocale($localeInput)
+                    ->setTitle($eventData['title'])
+                    ->setStartsAt($eventData['startsAt'])
+                    ->setEndsAt($eventData['endsAt'])
+                    ->setSortOrder($sortOrder),
+            );
+            ++$sortOrder;
+        }
+
+        $this->roadmapSnapshotWriteRepository->save($snapshot);
+        $snapshotId = $snapshot->getId();
+        $this->addFlash('success', $this->translator->trans('admin_roadmap.flash.json_import_success', [
+            '%count%' => (string) count($normalizedEvents),
+        ]));
 
         return $this->redirectToRoute('app_admin_roadmap_snapshots', [
             '_locale' => $request->getLocale(),
@@ -622,6 +768,18 @@ final class RoadmapSnapshotController extends AbstractController
         return $parsed;
     }
 
+    private function parseJsonDate(string $value): ?DateTimeImmutable
+    {
+        $trimmed = trim($value);
+        if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $trimmed)) {
+            return null;
+        }
+
+        $parsed = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $trimmed.' 18:00:00');
+
+        return $parsed instanceof DateTimeImmutable ? $parsed : null;
+    }
+
     private function parsePositiveInt(mixed $value): ?int
     {
         if (!is_scalar($value)) {
@@ -929,6 +1087,23 @@ final class RoadmapSnapshotController extends AbstractController
         }
 
         return $context;
+    }
+
+    /**
+     * @param list<string> $lines
+     */
+    private function buildStructuredRawText(array $lines, string $fallbackText): string
+    {
+        $normalizedLines = array_values(array_filter(array_map(
+            static fn (string $line): string => trim($line),
+            $lines,
+        ), static fn (string $line): bool => '' !== $line));
+
+        if ([] !== $normalizedLines) {
+            return implode("\n", $normalizedLines);
+        }
+
+        return $fallbackText;
     }
 
     private function resolveSnapshotImagePath(RoadmapSnapshotEntity $snapshot): ?string

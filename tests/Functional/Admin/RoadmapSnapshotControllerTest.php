@@ -299,6 +299,48 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         self::assertStringContainsString('SEASON 24', $snapshots[0]->getRawText());
     }
 
+    public function testAdminCanImportRoadmapJsonAndCreateSnapshotWithEvents(): void
+    {
+        $admin = $this->createUser('admin-roadmap-json@example.com', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/en/admin/roadmap');
+        $tokenNode = $crawler->filter('form[action*="/en/admin/roadmap/import-json"] input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+
+        $this->browser()->request('POST', '/en/admin/roadmap/import-json', [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'locale' => 'en',
+            'season_number' => '24',
+            'json_payload' => json_encode([
+                'season' => 24,
+                'events' => [
+                    [
+                        'date_start' => '2026-03-03',
+                        'date_end' => '2026-03-10',
+                        'title' => "Bigfoot's Bash",
+                    ],
+                    [
+                        'date_start' => '2026-03-10',
+                        'date_end' => '2026-03-24',
+                        'title' => 'Invaders From Beyond Event',
+                    ],
+                ],
+            ], JSON_THROW_ON_ERROR),
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        $this->entityManager?->clear();
+
+        $snapshots = $this->entityManager?->getRepository(RoadmapSnapshotEntity::class)->findBy([], ['id' => 'DESC']);
+        self::assertIsArray($snapshots);
+        self::assertCount(1, $snapshots);
+        self::assertSame('en', $snapshots[0]->getLocale());
+        self::assertSame('manual.json', $snapshots[0]->getOcrProvider());
+        self::assertCount(2, $snapshots[0]->getEvents());
+        self::assertSame(24, $snapshots[0]->getSeason()?->getSeasonNumber());
+    }
+
     public function testAdminMergeLocalesRejectsDraftSnapshots(): void
     {
         $admin = $this->createUser('admin-roadmap-merge-draft@example.com', ['ROLE_ADMIN']);

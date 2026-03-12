@@ -114,7 +114,7 @@ final class ScanRoadmapImageCommand extends Command
                         $image,
                         $scan->result->provider,
                         $scan->result->confidence,
-                        $scan->result->text,
+                        $this->buildStructuredRawText($scan->result->lines, $scan->result->text),
                     ),
                 );
 
@@ -140,5 +140,22 @@ final class ScanRoadmapImageCommand extends Command
     private function normalizeStringInput(mixed $value): string
     {
         return is_scalar($value) ? trim((string) $value) : '';
+    }
+
+    /**
+     * @param list<string> $lines
+     */
+    private function buildStructuredRawText(array $lines, string $fallbackText): string
+    {
+        $normalizedLines = array_values(array_filter(array_map(
+            static fn (string $line): string => trim($line),
+            $lines,
+        ), static fn (string $line): bool => '' !== $line));
+
+        if ([] !== $normalizedLines) {
+            return implode("\n", $normalizedLines);
+        }
+
+        return $fallbackText;
     }
 }

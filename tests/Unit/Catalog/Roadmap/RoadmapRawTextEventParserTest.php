@@ -757,7 +757,7 @@ final class RoadmapRawTextEventParserTest extends TestCase
 
         self::assertCount(2, $events);
         self::assertSame(
-            'WEEK-END DOUBLE S.C.O.R.E ET FIÈVRE DE L\'OR',
+            'WEEK-END DOUBLE S.C.O.R.E. ET FIÈVRE DE L\'OR',
             (string) $this->findTitleByRange($events, '2024-08-08 18:00:00', '2024-08-12 18:00:00'),
         );
         self::assertSame(

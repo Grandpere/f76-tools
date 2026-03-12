@@ -315,6 +315,9 @@ admin_roadmap.step_snapshots_hint: Open a snapshot to review OCR text, then gene
 admin_roadmap.upload_locale: Image locale
 admin_roadmap.upload_image: Roadmap image
 admin_roadmap.upload_submit: Upload and scan
+admin_roadmap.json_season_number: Season number (optional)
+admin_roadmap.json_payload: JSON payload
+admin_roadmap.json_submit: Import JSON
 admin_roadmap.snapshot_id: ID
 admin_roadmap.snapshot_locale: Locale
 admin_roadmap.snapshot_provider: Provider
@@ -406,6 +409,11 @@ admin_roadmap.flash.upload_attempt_failed: "%provider%: failed (%error%)"
 admin_roadmap.flash.upload_attempt_status_accepted: accepted
 admin_roadmap.flash.upload_attempt_status_rejected: rejected
 admin_roadmap.flash.upload_attempt_no_reason: no reason
+admin_roadmap.flash.json_missing_payload: Please provide a JSON payload.
+admin_roadmap.flash.json_invalid_payload: Invalid JSON payload.
+admin_roadmap.flash.json_missing_events: JSON payload must contain a non-empty events array.
+admin_roadmap.flash.json_invalid_event: 'Invalid JSON event #%index% (expected title/date_start/date_end).'
+admin_roadmap.flash.json_import_success: '%count% event(s) imported from JSON.'
 admin_users.google_filter_linked: Google linked
 admin_users.google_filter_unlinked: Google not linked
 admin_users.active_filter_label: Account status
