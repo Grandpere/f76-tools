@@ -100,6 +100,21 @@ final class TesseractOcrProviderTest extends TestCase
         self::assertGreaterThan(0.80, $result->confidence);
     }
 
+    public function testRecognizeFiltersLowQualityCollapsedLines(): void
+    {
+        $imagePath = $this->createTemporaryImage();
+
+        $runner = new FakeCommandRunner([
+            new CommandExecutionResult(0, $this->tsvSingleLine('||| ::: ---', 88), ''),
+            new CommandExecutionResult(0, $this->tsvSingleLine('DOUBLE SCORE', 65), ''),
+        ]);
+
+        $provider = new TesseractOcrProvider($runner, 'tesseract');
+        $result = $provider->recognize($imagePath, 'en');
+
+        self::assertSame(['DOUBLE SCORE'], $result->lines);
+    }
+
     private function createTemporaryImage(): string
     {
         $path = tempnam(sys_get_temp_dir(), 'roadmap_ocr_test_');

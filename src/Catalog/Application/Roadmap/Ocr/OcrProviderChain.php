@@ -102,4 +102,42 @@ final class OcrProviderChain
 
         throw new RuntimeException('All OCR providers failed without producing any result. '.implode(' | ', $parts));
     }
+
+    public function recognizeWithProvider(string $imagePath, string $locale, string $providerName): OcrChainResult
+    {
+        $normalizedProviderName = strtolower(trim($providerName));
+        if ('' === $normalizedProviderName) {
+            throw new RuntimeException('Provider name is empty.');
+        }
+
+        if ('auto' === $normalizedProviderName) {
+            return $this->recognize($imagePath, $locale);
+        }
+
+        foreach ($this->providers as $provider) {
+            if (strtolower($provider->name()) !== $normalizedProviderName) {
+                continue;
+            }
+
+            try {
+                $result = $provider->recognize($imagePath, $locale);
+                $assessment = $this->qualityAssessor->assess($result);
+                $attempt = new OcrAttempt(
+                    $provider->name(),
+                    true,
+                    $result->confidence,
+                    $assessment->acceptable,
+                    $assessment->reasons,
+                );
+
+                return new OcrChainResult($result, false, [$attempt]);
+            } catch (OcrProviderUnavailableException $exception) {
+                throw new RuntimeException(sprintf('Provider "%s" is unavailable: %s', $provider->name(), $exception->getMessage()));
+            } catch (Throwable $exception) {
+                throw new RuntimeException(sprintf('Provider "%s" failed: %s', $provider->name(), $exception->getMessage()), 0, $exception);
+            }
+        }
+
+        throw new RuntimeException(sprintf('Provider "%s" not found in OCR chain.', $providerName));
+    }
 }

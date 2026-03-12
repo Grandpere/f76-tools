@@ -66,16 +66,17 @@ final class TesseractOcrProvider implements OcrProvider
                 continue;
             }
 
-            [$lines, $confidence] = $this->extractParagraphLinesAndConfidenceFromTsv(
+            [$rawLines, $confidence] = $this->extractParagraphLinesAndConfidenceFromTsv(
                 $tsvResult->stdout,
                 $imageWidth,
                 $imageHeight,
             );
+            $lines = $this->filterLinesByTextQuality($rawLines);
             $passes[] = [
                 'psm' => $psm,
                 'lines' => $lines,
                 'confidence' => $confidence,
-                'score' => $this->scorePass($confidence, count($lines)),
+                'score' => $this->scorePass($confidence, $lines),
             ];
         }
 
@@ -112,11 +113,20 @@ final class TesseractOcrProvider implements OcrProvider
         };
     }
 
-    private function scorePass(float $confidence, int $lineCount): float
+    /**
+     * @param list<string> $lines
+     */
+    private function scorePass(float $confidence, array $lines): float
     {
+        $lineCount = count($lines);
         $lineBonus = min(50, max(0, $lineCount)) / 100.0;
+        $qualitySum = 0.0;
+        foreach ($lines as $line) {
+            $qualitySum += $this->lineTextQualityScore($line);
+        }
+        $avgQuality = $lineCount > 0 ? ($qualitySum / $lineCount) : 0.0;
 
-        return ($confidence * 10.0) + $lineBonus;
+        return ($confidence * 10.0) + $lineBonus + ($avgQuality * 2.0);
     }
 
     /**
@@ -305,5 +315,71 @@ final class TesseractOcrProvider implements OcrProvider
         $height = $imageSize[1];
 
         return [$width, $height];
+    }
+
+    /**
+     * @param list<string> $lines
+     *
+     * @return list<string>
+     */
+    private function filterLinesByTextQuality(array $lines): array
+    {
+        $filtered = [];
+        foreach ($lines as $line) {
+            $candidate = trim(preg_replace('/\s+/u', ' ', $line) ?? $line);
+            if ('' === $candidate) {
+                continue;
+            }
+            if ($this->lineTextQualityScore($candidate) < 0.35) {
+                continue;
+            }
+
+            $filtered[] = $candidate;
+        }
+
+        return $filtered;
+    }
+
+    private function lineTextQualityScore(string $line): float
+    {
+        $length = mb_strlen($line);
+        if ($length <= 0) {
+            return 0.0;
+        }
+
+        $alphaCount = preg_match_all('/\p{L}|\d/u', $line);
+        if (!is_int($alphaCount)) {
+            $alphaCount = 0;
+        }
+        $symbolCount = preg_match_all('/[^\p{L}\d\s]/u', $line);
+        if (!is_int($symbolCount)) {
+            $symbolCount = 0;
+        }
+
+        if ($alphaCount < 2) {
+            return 0.0;
+        }
+
+        if (1 === preg_match('/^[\W_]+$/u', $line)) {
+            return 0.0;
+        }
+
+        if (1 === preg_match('/([|:_\.\-])\1{2,}/u', $line)) {
+            return 0.1;
+        }
+
+        $alphaRatio = $alphaCount / max(1, $length);
+        $symbolRatio = $symbolCount / max(1, $length);
+        $wordCount = preg_match_all('/\p{L}+/u', $line);
+        if (!is_int($wordCount)) {
+            $wordCount = 0;
+        }
+
+        $score = 0.0;
+        $score += min(1.0, $alphaRatio * 1.8) * 0.6;
+        $score += (1.0 - min(1.0, $symbolRatio * 2.5)) * 0.2;
+        $score += min(1.0, $wordCount / 6.0) * 0.2;
+
+        return max(0.0, min(1.0, $score));
     }
 }

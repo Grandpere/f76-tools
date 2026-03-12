@@ -116,6 +116,33 @@ final class OcrProviderChainTest extends TestCase
 
         $chain->recognize('/tmp/roadmap.png', 'en');
     }
+
+    public function testRecognizeWithProviderSelectsRequestedProviderOnly(): void
+    {
+        $chain = new OcrProviderChain([
+            new FakeProvider('tesseract', new OcrResult('tesseract', 'Tesseract result', 0.91, ['Tesseract result'])),
+            new FakeProvider('ocr.space', new OcrResult('ocr.space', 'OCR.space result', 0.88, ['OCR.space result'])),
+        ]);
+
+        $result = $chain->recognizeWithProvider('/tmp/roadmap.png', 'fr', 'ocr.space');
+
+        self::assertSame('ocr.space', $result->result->provider);
+        self::assertFalse($result->usedFallback);
+        self::assertCount(1, $result->attempts);
+        self::assertSame('ocr.space', $result->attempts[0]->provider);
+    }
+
+    public function testRecognizeWithProviderThrowsWhenProviderNotFound(): void
+    {
+        $chain = new OcrProviderChain([
+            new FakeProvider('tesseract', new OcrResult('tesseract', 'Result', 0.91, ['Result'])),
+        ]);
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('not found');
+
+        $chain->recognizeWithProvider('/tmp/roadmap.png', 'fr', 'ocr.space');
+    }
 }
 
 final readonly class FakeProvider implements OcrProvider
