@@ -57,6 +57,25 @@ final class TesseractOcrProviderTest extends TestCase
         self::assertEqualsWithDelta(0.92, $result->confidence, 0.0001);
     }
 
+    public function testRecognizeRunsRescuePsmPassesWhenBaseConfidenceTooLow(): void
+    {
+        $imagePath = $this->createTemporaryImage();
+
+        $runner = new FakeCommandRunner([
+            new CommandExecutionResult(0, $this->tsvSingleLine('weak pass one', 40), ''),
+            new CommandExecutionResult(0, $this->tsvSingleLine('weak pass two', 42), ''),
+            new CommandExecutionResult(0, $this->tsvSingleLine('rescue pass', 91), ''),
+            new CommandExecutionResult(0, $this->tsvSingleLine('rescue pass two', 89), ''),
+        ]);
+
+        $provider = new TesseractOcrProvider($runner, 'tesseract');
+        $result = $provider->recognize($imagePath, 'en');
+
+        self::assertSame(['rescue pass'], $result->lines);
+        self::assertEqualsWithDelta(0.91, $result->confidence, 0.0001);
+        self::assertCount(4, $runner->commands);
+    }
+
     public function testRecognizeThrowsWhenImageDoesNotExist(): void
     {
         $provider = new TesseractOcrProvider(new FakeCommandRunner([]), 'tesseract');
@@ -72,6 +91,8 @@ final class TesseractOcrProviderTest extends TestCase
         $imagePath = $this->createTemporaryImage();
 
         $runner = new FakeCommandRunner([
+            new CommandExecutionResult(1, '', 'missing language data'),
+            new CommandExecutionResult(1, '', 'missing language data'),
             new CommandExecutionResult(1, '', 'missing language data'),
             new CommandExecutionResult(1, '', 'missing language data'),
         ]);
@@ -107,6 +128,8 @@ final class TesseractOcrProviderTest extends TestCase
         $runner = new FakeCommandRunner([
             new CommandExecutionResult(0, $this->tsvSingleLine('||| ::: ---', 88), ''),
             new CommandExecutionResult(0, $this->tsvSingleLine('DOUBLE SCORE', 65), ''),
+            new CommandExecutionResult(0, $this->tsvSingleLine('DOUBLE SCORE', 64), ''),
+            new CommandExecutionResult(0, $this->tsvSingleLine('DOUBLE SCORE', 63), ''),
         ]);
 
         $provider = new TesseractOcrProvider($runner, 'tesseract');

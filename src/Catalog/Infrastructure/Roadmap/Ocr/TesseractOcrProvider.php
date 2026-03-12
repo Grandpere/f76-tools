@@ -20,7 +20,9 @@ use RuntimeException;
 final class TesseractOcrProvider implements OcrProvider
 {
     /** @var list<int> */
-    private const PSM_PASSES = [6, 4];
+    private const BASE_PSM_PASSES = [6, 4];
+    /** @var list<int> */
+    private const RESCUE_PSM_PASSES = [11, 7];
 
     public function __construct(
         private readonly CommandRunner $commandRunner,
@@ -49,35 +51,14 @@ final class TesseractOcrProvider implements OcrProvider
         $passes = [];
         $errors = [];
 
-        foreach (self::PSM_PASSES as $psm) {
-            $tsvResult = $this->commandRunner->run([
-                $this->binaryPath,
-                $image,
-                'stdout',
-                '-l',
-                $lang,
-                '--psm',
-                (string) $psm,
-                'tsv',
-            ], $this->timeoutSeconds);
+        foreach (self::BASE_PSM_PASSES as $psm) {
+            $this->runPass($image, $lang, $psm, $imageWidth, $imageHeight, $passes, $errors);
+        }
 
-            if (!$tsvResult->isSuccessful()) {
-                $errors[] = sprintf('psm=%d exit=%d stderr=%s', $psm, $tsvResult->exitCode, trim($tsvResult->stderr));
-                continue;
+        if ($this->shouldRunRescuePasses($passes)) {
+            foreach (self::RESCUE_PSM_PASSES as $psm) {
+                $this->runPass($image, $lang, $psm, $imageWidth, $imageHeight, $passes, $errors);
             }
-
-            [$rawLines, $confidence] = $this->extractParagraphLinesAndConfidenceFromTsv(
-                $tsvResult->stdout,
-                $imageWidth,
-                $imageHeight,
-            );
-            $lines = $this->filterLinesByTextQuality($rawLines);
-            $passes[] = [
-                'psm' => $psm,
-                'lines' => $lines,
-                'confidence' => $confidence,
-                'score' => $this->scorePass($confidence, $lines),
-            ];
         }
 
         if ([] === $passes) {
@@ -100,6 +81,69 @@ final class TesseractOcrProvider implements OcrProvider
             $best['confidence'],
             $best['lines'],
         );
+    }
+
+    /**
+     * @param list<array{psm:int, lines:list<string>, confidence:float, score:float}> $passes
+     * @param list<string> $errors
+     */
+    private function runPass(
+        string $imagePath,
+        string $lang,
+        int $psm,
+        ?int $imageWidth,
+        ?int $imageHeight,
+        array &$passes,
+        array &$errors,
+    ): void {
+        $tsvResult = $this->commandRunner->run([
+            $this->binaryPath,
+            $imagePath,
+            'stdout',
+            '-l',
+            $lang,
+            '--psm',
+            (string) $psm,
+            'tsv',
+        ], $this->timeoutSeconds);
+
+        if (!$tsvResult->isSuccessful()) {
+            $errors[] = sprintf('psm=%d exit=%d stderr=%s', $psm, $tsvResult->exitCode, trim($tsvResult->stderr));
+
+            return;
+        }
+
+        [$rawLines, $confidence] = $this->extractParagraphLinesAndConfidenceFromTsv(
+            $tsvResult->stdout,
+            $imageWidth,
+            $imageHeight,
+        );
+        $lines = $this->filterLinesByTextQuality($rawLines);
+        $passes[] = [
+            'psm' => $psm,
+            'lines' => $lines,
+            'confidence' => $confidence,
+            'score' => $this->scorePass($confidence, $lines),
+        ];
+    }
+
+    /**
+     * @param list<array{psm:int, lines:list<string>, confidence:float, score:float}> $passes
+     */
+    private function shouldRunRescuePasses(array $passes): bool
+    {
+        if ([] === $passes) {
+            return true;
+        }
+
+        $bestConfidence = 0.0;
+        foreach ($passes as $pass) {
+            if ($pass['confidence'] > $bestConfidence) {
+                $bestConfidence = $pass['confidence'];
+            }
+        }
+
+        return $bestConfidence < 0.75;
     }
 
     private function mapLocaleToTesseractLang(string $locale): string
