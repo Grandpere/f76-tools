@@ -76,6 +76,34 @@ final class RoadmapTitleComparisonServiceTest extends TestCase
         self::assertSame(0, $result['unmatched_ocr_windows']);
     }
 
+    public function testCompareParsedToParsedUsesMonthDayFallbackWhenYearsDiffer(): void
+    {
+        $service = new RoadmapTitleComparisonService();
+
+        $leftEvents = [
+            new RoadmapParsedEvent(
+                'Double XP',
+                new DateTimeImmutable('2026-11-28 18:00:00'),
+                new DateTimeImmutable('2026-12-02 18:00:00'),
+            ),
+        ];
+        $rightEvents = [
+            new RoadmapParsedEvent(
+                'Double XP et Mutations',
+                new DateTimeImmutable('2024-11-28 18:00:00'),
+                new DateTimeImmutable('2024-12-02 18:00:00'),
+            ),
+        ];
+
+        $result = $service->compareParsedToParsed($leftEvents, $rightEvents);
+
+        self::assertSame(1, $result['matched_windows']);
+        self::assertSame('month_day', $result['window_mode']);
+        self::assertSame(0, $result['exact_matches']);
+        self::assertGreaterThan(0.0, $result['average_similarity']);
+        self::assertCount(1, $result['mismatches']);
+    }
+
     private function manualEvent(string $title, string $startsAt, string $endsAt): RoadmapEventEntity
     {
         return (new RoadmapEventEntity())

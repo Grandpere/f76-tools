@@ -41,16 +41,52 @@ final class RoadmapTitleComparisonService
      */
     public function compareParsedToManual(array $ocrEvents, array $manualEvents): array
     {
-        $strictMatcher = $this->buildWindowMatcher($ocrEvents, $manualEvents, false);
-        $result = $this->compareWithMatcher($ocrEvents, $manualEvents, $strictMatcher);
+        $manualAsParsed = array_map(
+            static fn (RoadmapEventEntity $event): RoadmapParsedEvent => new RoadmapParsedEvent(
+                $event->getTitle(),
+                $event->getStartsAt(),
+                $event->getEndsAt(),
+            ),
+            $manualEvents,
+        );
+
+        return $this->compareParsedToParsed($ocrEvents, $manualAsParsed);
+    }
+
+    /**
+     * @param list<RoadmapParsedEvent> $leftEvents
+     * @param list<RoadmapParsedEvent> $rightEvents
+     *
+     * @return array{
+     *   total_ocr: int,
+     *   total_manual: int,
+     *   matched_windows: int,
+     *   exact_matches: int,
+     *   average_similarity: float,
+     *   placeholder_count: int,
+     *   short_title_count: int,
+     *   unmatched_ocr_windows: int,
+     *   window_mode: string,
+     *   mismatches: list<array{
+     *     window: string,
+     *     similarity: float,
+     *     ocr_title: string,
+     *     manual_title: string
+     *   }>
+     * }
+     */
+    public function compareParsedToParsed(array $leftEvents, array $rightEvents): array
+    {
+        $strictMatcher = $this->buildWindowMatcher($leftEvents, $rightEvents, false);
+        $result = $this->compareWithMatcher($leftEvents, $rightEvents, $strictMatcher);
         if ($result['matched_windows'] > 0) {
             $result['window_mode'] = 'date';
 
             return $result;
         }
 
-        $monthDayMatcher = $this->buildWindowMatcher($ocrEvents, $manualEvents, true);
-        $result = $this->compareWithMatcher($ocrEvents, $manualEvents, $monthDayMatcher);
+        $monthDayMatcher = $this->buildWindowMatcher($leftEvents, $rightEvents, true);
+        $result = $this->compareWithMatcher($leftEvents, $rightEvents, $monthDayMatcher);
         $result['window_mode'] = 'month_day';
 
         return $result;
@@ -58,7 +94,7 @@ final class RoadmapTitleComparisonService
 
     /**
      * @param list<RoadmapParsedEvent> $ocrEvents
-     * @param list<RoadmapEventEntity> $manualEvents
+     * @param list<RoadmapParsedEvent> $manualEvents
      * @param array<string, list<string>> $manualByWindow
      *
      * @return array{
@@ -143,7 +179,7 @@ final class RoadmapTitleComparisonService
 
     /**
      * @param list<RoadmapParsedEvent> $ocrEvents
-     * @param list<RoadmapEventEntity> $manualEvents
+     * @param list<RoadmapParsedEvent> $manualEvents
      *
      * @return array<string, list<string>>
      */
@@ -152,11 +188,11 @@ final class RoadmapTitleComparisonService
         if (!$monthDayFallback) {
             $manualByWindow = [];
             foreach ($manualEvents as $event) {
-                $key = $this->windowKey($event->getStartsAt()->format('Y-m-d'), $event->getEndsAt()->format('Y-m-d'));
+                $key = $this->windowKey($event->startsAt->format('Y-m-d'), $event->endsAt->format('Y-m-d'));
                 if (!isset($manualByWindow[$key])) {
                     $manualByWindow[$key] = [];
                 }
-                $manualByWindow[$key][] = trim($event->getTitle());
+                $manualByWindow[$key][] = trim($event->title);
             }
 
             return $manualByWindow;
@@ -164,11 +200,11 @@ final class RoadmapTitleComparisonService
 
         $manualByWindow = [];
         foreach ($manualEvents as $event) {
-            $key = $this->windowKey($event->getStartsAt()->format('m-d'), $event->getEndsAt()->format('m-d'));
+            $key = $this->windowKey($event->startsAt->format('m-d'), $event->endsAt->format('m-d'));
             if (!isset($manualByWindow[$key])) {
                 $manualByWindow[$key] = [];
             }
-            $manualByWindow[$key][] = trim($event->getTitle());
+            $manualByWindow[$key][] = trim($event->title);
         }
 
         $mapped = [];
