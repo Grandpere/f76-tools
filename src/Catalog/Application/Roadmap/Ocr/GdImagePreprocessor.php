@@ -18,6 +18,8 @@ use RuntimeException;
 
 final class GdImagePreprocessor
 {
+    private const PREPROCESS_MODES = ['grayscale', 'bw', 'strong-bw', 'layout-bw'];
+
     /**
      * @return array{path:string, temporary:bool}
      */
@@ -28,8 +30,8 @@ final class GdImagePreprocessor
             return ['path' => $imagePath, 'temporary' => false];
         }
 
-        if (!in_array($normalizedMode, ['grayscale', 'bw', 'strong-bw'], true)) {
-            throw new RuntimeException(sprintf('Unsupported preprocess mode "%s". Allowed: none, grayscale, bw, strong-bw.', $mode));
+        if (!in_array($normalizedMode, self::PREPROCESS_MODES, true)) {
+            throw new RuntimeException(sprintf('Unsupported preprocess mode "%s". Allowed: none, %s.', $mode, implode(', ', self::PREPROCESS_MODES)));
         }
 
         if (
@@ -50,12 +52,16 @@ final class GdImagePreprocessor
             throw new RuntimeException(sprintf('Unable to decode image for preprocessing: %s', $imagePath));
         }
 
-        imagefilter($image, IMG_FILTER_GRAYSCALE);
+        if ('layout-bw' === $normalizedMode) {
+            $image = $this->prepareLayoutBwImage($image);
+        } else {
+            imagefilter($image, IMG_FILTER_GRAYSCALE);
 
-        if ('grayscale' !== $normalizedMode) {
-            imagefilter($image, IMG_FILTER_CONTRAST, 'strong-bw' === $normalizedMode ? -45 : -25);
-            imagefilter($image, IMG_FILTER_BRIGHTNESS, 'strong-bw' === $normalizedMode ? 8 : 4);
-            $this->thresholdToBlackAndWhite($image, 'strong-bw' === $normalizedMode ? 150 : 165);
+            if ('grayscale' !== $normalizedMode) {
+                imagefilter($image, IMG_FILTER_CONTRAST, 'strong-bw' === $normalizedMode ? -45 : -25);
+                imagefilter($image, IMG_FILTER_BRIGHTNESS, 'strong-bw' === $normalizedMode ? 8 : 4);
+                $this->thresholdToBlackAndWhite($image, 'strong-bw' === $normalizedMode ? 150 : 165);
+            }
         }
 
         $tmp = tempnam(sys_get_temp_dir(), 'roadmap_pre_');
@@ -113,5 +119,95 @@ final class GdImagePreprocessor
         }
 
         return $color;
+    }
+
+    private function prepareLayoutBwImage(GdImage $image): GdImage
+    {
+        $cropped = $this->cropToRightRoadmapPane($image);
+        $image = $cropped;
+
+        $upscaled = $this->upscaleImage($image, 1.9);
+        $image = $upscaled;
+
+        imagefilter($image, IMG_FILTER_GRAYSCALE);
+        imagefilter($image, IMG_FILTER_CONTRAST, -52);
+        imagefilter($image, IMG_FILTER_BRIGHTNESS, 10);
+        $this->thresholdToBlackAndWhite($image, 152);
+
+        return $image;
+    }
+
+    private function cropToRightRoadmapPane(GdImage $image): GdImage
+    {
+        if (!function_exists('imagecrop')) {
+            return $image;
+        }
+
+        $width = imagesx($image);
+        $height = imagesy($image);
+        if ($width < 200 || $height < 120) {
+            return $image;
+        }
+
+        $x = (int) round($width * 0.26);
+        $y = (int) round($height * 0.07);
+        $cropWidth = max(1, $width - $x);
+        $cropHeight = max(1, (int) round($height * 0.9));
+        if ($x + $cropWidth > $width) {
+            $cropWidth = $width - $x;
+        }
+        if ($y + $cropHeight > $height) {
+            $cropHeight = $height - $y;
+        }
+
+        $cropped = @imagecrop($image, [
+            'x' => $x,
+            'y' => $y,
+            'width' => $cropWidth,
+            'height' => $cropHeight,
+        ]);
+
+        return $cropped instanceof GdImage ? $cropped : $image;
+    }
+
+    private function upscaleImage(GdImage $image, float $factor): GdImage
+    {
+        if (!function_exists('imagecreatetruecolor') || !function_exists('imagecopyresampled')) {
+            return $image;
+        }
+
+        $sourceWidth = imagesx($image);
+        $sourceHeight = imagesy($image);
+        $targetWidth = max(1, (int) round($sourceWidth * $factor));
+        $targetHeight = max(1, (int) round($sourceHeight * $factor));
+        if ($targetWidth === $sourceWidth && $targetHeight === $sourceHeight) {
+            return $image;
+        }
+
+        $canvas = imagecreatetruecolor($targetWidth, $targetHeight);
+        if (!$canvas instanceof GdImage) {
+            return $image;
+        }
+
+        $white = imagecolorallocate($canvas, 255, 255, 255);
+        if (false === $white) {
+            return $image;
+        }
+        imagefill($canvas, 0, 0, $white);
+
+        imagecopyresampled(
+            $canvas,
+            $image,
+            0,
+            0,
+            0,
+            0,
+            $targetWidth,
+            $targetHeight,
+            $sourceWidth,
+            $sourceHeight,
+        );
+
+        return $canvas;
     }
 }

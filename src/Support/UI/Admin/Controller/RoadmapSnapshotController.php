@@ -199,7 +199,7 @@ final class RoadmapSnapshotController extends AbstractController
             ]);
         }
         $preprocessMode = strtolower(trim((string) $request->request->get('preprocess', 'none')));
-        if (!in_array($preprocessMode, ['none', 'grayscale', 'bw', 'strong-bw'], true)) {
+        if (!in_array($preprocessMode, ['none', 'grayscale', 'bw', 'strong-bw', 'layout-bw'], true)) {
             $this->addFlash('warning', 'admin_roadmap.flash.upload_invalid_preprocess');
 
             return $this->redirectToRoute('app_admin_roadmap_snapshots', [

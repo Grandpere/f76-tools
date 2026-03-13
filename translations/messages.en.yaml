@@ -319,6 +319,7 @@ admin_roadmap.upload_preprocess_none: None
 admin_roadmap.upload_preprocess_grayscale: Grayscale
 admin_roadmap.upload_preprocess_bw: Black and white
 admin_roadmap.upload_preprocess_strong_bw: Strong black and white
+admin_roadmap.upload_preprocess_layout_bw: Layout (right pane + strong B/W)
 admin_roadmap.upload_submit: Upload and scan
 admin_roadmap.import_ocr_title: OCR import (image)
 admin_roadmap.import_json_title: JSON import (manual)

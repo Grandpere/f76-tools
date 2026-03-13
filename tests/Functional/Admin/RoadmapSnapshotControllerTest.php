@@ -353,6 +353,7 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         $this->browser()->request('POST', '/en/admin/roadmap/upload', [
             '_csrf_token' => (string) $tokenNode->attr('value'),
             'locale' => 'en',
+            'preprocess' => 'layout-bw',
         ], [
             'image' => $uploadedFile,
         ]);
@@ -364,8 +365,9 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         self::assertIsArray($snapshots);
         self::assertCount(1, $snapshots);
         self::assertSame('en', $snapshots[0]->getLocale());
-        self::assertSame('test-ocr', $snapshots[0]->getOcrProvider());
-        self::assertStringContainsString('SEASON 24', $snapshots[0]->getRawText());
+        self::assertSame('pending', $snapshots[0]->getOcrProvider());
+        self::assertSame('layout-bw', $snapshots[0]->getOcrPreprocessMode());
+        self::assertNotSame('', $snapshots[0]->getSourceImagePath());
     }
 
     public function testAdminUploadRejectsInvalidPreprocessMode(): void

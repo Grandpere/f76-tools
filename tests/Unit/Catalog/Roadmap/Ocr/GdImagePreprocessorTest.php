@@ -45,6 +45,21 @@ final class GdImagePreprocessorTest extends TestCase
         self::assertFileDoesNotExist($prepared['path']);
     }
 
+    public function testPrepareCreatesTemporaryFileForLayoutBw(): void
+    {
+        $path = $this->createTemporaryPng();
+        $preprocessor = new GdImagePreprocessor();
+
+        $prepared = $preprocessor->prepare($path, 'layout-bw');
+
+        self::assertTrue($prepared['temporary']);
+        self::assertFileExists($prepared['path']);
+        self::assertNotSame($path, $prepared['path']);
+
+        $preprocessor->cleanup($prepared['path'], true);
+        self::assertFileDoesNotExist($prepared['path']);
+    }
+
     public function testPrepareThrowsForUnsupportedMode(): void
     {
         $path = $this->createTemporaryPng();
