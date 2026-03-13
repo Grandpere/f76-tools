@@ -23,6 +23,7 @@ final class TesseractOcrProvider implements OcrProvider
     private const BASE_PSM_PASSES = [6, 4];
     /** @var list<int> */
     private const RESCUE_PSM_PASSES = [11, 7];
+    private const CROP_PREFIX = 'roadmap_tesseract_crop_';
 
     public function __construct(
         private readonly CommandRunner $commandRunner,
@@ -48,39 +49,49 @@ final class TesseractOcrProvider implements OcrProvider
 
         $lang = $this->mapLocaleToTesseractLang($locale);
         [$imageWidth, $imageHeight] = $this->resolveImageDimensions($image);
+        $sources = $this->buildRecognitionSources($image, $imageWidth, $imageHeight);
         $passes = [];
         $errors = [];
 
-        foreach (self::BASE_PSM_PASSES as $psm) {
-            $this->runPass($image, $lang, $psm, $imageWidth, $imageHeight, $passes, $errors);
-        }
+        try {
+            foreach ($sources as $source) {
+                $sourcePath = $source['path'];
+                $sourceWidth = $source['width'] ?? $imageWidth;
+                $sourceHeight = $source['height'] ?? $imageHeight;
+                foreach (self::BASE_PSM_PASSES as $psm) {
+                    $this->runPass($sourcePath, $lang, $psm, $sourceWidth, $sourceHeight, $passes, $errors);
+                }
 
-        if ($this->shouldRunRescuePasses($passes)) {
-            foreach (self::RESCUE_PSM_PASSES as $psm) {
-                $this->runPass($image, $lang, $psm, $imageWidth, $imageHeight, $passes, $errors);
+                if ($this->shouldRunRescuePasses($passes)) {
+                    foreach (self::RESCUE_PSM_PASSES as $psm) {
+                        $this->runPass($sourcePath, $lang, $psm, $sourceWidth, $sourceHeight, $passes, $errors);
+                    }
+                }
             }
+
+            if ([] === $passes) {
+                $details = [] === $errors ? 'unknown tesseract failure' : implode(' | ', $errors);
+                throw new RuntimeException(sprintf('Tesseract extraction failed: %s', $details));
+            }
+
+            usort(
+                $passes,
+                static fn (array $a, array $b): int => $b['score'] <=> $a['score'],
+            );
+
+            /** @var array{psm:int, lines:list<string>, confidence:float, score:float} $best */
+            $best = $passes[0];
+            $text = implode("\n", $best['lines']);
+
+            return new OcrResult(
+                $this->name(),
+                $text,
+                $best['confidence'],
+                $best['lines'],
+            );
+        } finally {
+            $this->cleanupRecognitionSources($sources);
         }
-
-        if ([] === $passes) {
-            $details = [] === $errors ? 'unknown tesseract failure' : implode(' | ', $errors);
-            throw new RuntimeException(sprintf('Tesseract extraction failed: %s', $details));
-        }
-
-        usort(
-            $passes,
-            static fn (array $a, array $b): int => $b['score'] <=> $a['score'],
-        );
-
-        /** @var array{psm:int, lines:list<string>, confidence:float, score:float} $best */
-        $best = $passes[0];
-        $text = implode("\n", $best['lines']);
-
-        return new OcrResult(
-            $this->name(),
-            $text,
-            $best['confidence'],
-            $best['lines'],
-        );
     }
 
     /**
@@ -425,5 +436,160 @@ final class TesseractOcrProvider implements OcrProvider
         $score += min(1.0, $wordCount / 6.0) * 0.2;
 
         return max(0.0, min(1.0, $score));
+    }
+
+    /**
+     * @return list<array{
+     *   path:string,
+     *   temporary:bool,
+     *   width:int|null,
+     *   height:int|null
+     * }>
+     */
+    private function buildRecognitionSources(string $imagePath, ?int $imageWidth, ?int $imageHeight): array
+    {
+        $sources = [[
+            'path' => $imagePath,
+            'temporary' => false,
+            'width' => $imageWidth,
+            'height' => $imageHeight,
+        ]];
+
+        if (!$this->isLikelyRoadmapLayout($imageWidth, $imageHeight)) {
+            return $sources;
+        }
+
+        $rightStartX = (int) floor(($imageWidth ?? 0) * 0.32);
+        $rightWidth = (int) floor(($imageWidth ?? 0) * 0.68);
+        $timelineTop = (int) floor(($imageHeight ?? 0) * 0.12);
+        $timelineHeight = (int) floor(($imageHeight ?? 0) * 0.86);
+
+        $cropSpecs = [[
+            'x' => $rightStartX,
+            'y' => $timelineTop,
+            'w' => $rightWidth,
+            'h' => $timelineHeight,
+        ]];
+
+        $bands = 4;
+        $bandHeight = (int) floor($timelineHeight / $bands);
+        for ($i = 0; $i < $bands; ++$i) {
+            $y = $timelineTop + ($i * $bandHeight);
+            $h = 3 === $i ? (($timelineTop + $timelineHeight) - $y) : $bandHeight;
+            $cropSpecs[] = [
+                'x' => $rightStartX,
+                'y' => $y,
+                'w' => $rightWidth,
+                'h' => $h,
+            ];
+        }
+
+        foreach ($cropSpecs as $spec) {
+            $crop = $this->createTemporaryCrop($imagePath, $spec['x'], $spec['y'], $spec['w'], $spec['h']);
+            if (null === $crop) {
+                continue;
+            }
+            $sources[] = [
+                'path' => $crop,
+                'temporary' => true,
+                'width' => $spec['w'],
+                'height' => $spec['h'],
+            ];
+        }
+
+        return $sources;
+    }
+
+    /**
+     * @param list<array{path:string, temporary:bool, width:int|null, height:int|null}> $sources
+     */
+    private function cleanupRecognitionSources(array $sources): void
+    {
+        foreach ($sources as $source) {
+            if (!$source['temporary']) {
+                continue;
+            }
+            $path = $source['path'];
+            if (is_file($path)) {
+                @unlink($path);
+            }
+        }
+    }
+
+    private function isLikelyRoadmapLayout(?int $imageWidth, ?int $imageHeight): bool
+    {
+        if (!is_int($imageWidth) || !is_int($imageHeight) || $imageWidth <= 0 || $imageHeight <= 0) {
+            return false;
+        }
+        if ($imageWidth < 1000 || $imageHeight < 600) {
+            return false;
+        }
+
+        return $imageWidth > $imageHeight;
+    }
+
+    private function createTemporaryCrop(string $imagePath, int $x, int $y, int $w, int $h): ?string
+    {
+        if (
+            !function_exists('imagecreatefromstring')
+            || !function_exists('imagecreatetruecolor')
+            || !function_exists('imagecopy')
+            || !function_exists('imagejpeg')
+        ) {
+            return null;
+        }
+
+        if ($w <= 0 || $h <= 0) {
+            return null;
+        }
+
+        $raw = @file_get_contents($imagePath);
+        if (false === $raw) {
+            return null;
+        }
+
+        $sourceImage = @imagecreatefromstring($raw);
+        if (false === $sourceImage) {
+            return null;
+        }
+
+        try {
+            $sourceWidth = imagesx($sourceImage);
+            $sourceHeight = imagesy($sourceImage);
+            if ($x < 0 || $y < 0 || $x >= $sourceWidth || $y >= $sourceHeight) {
+                return null;
+            }
+
+            $cropWidth = min($w, $sourceWidth - $x);
+            $cropHeight = min($h, $sourceHeight - $y);
+            if ($cropWidth <= 0 || $cropHeight <= 0) {
+                return null;
+            }
+
+            $targetImage = imagecreatetruecolor($cropWidth, $cropHeight);
+            if (false === $targetImage) {
+                return null;
+            }
+            try {
+                imagecopy($targetImage, $sourceImage, 0, 0, $x, $y, $cropWidth, $cropHeight);
+
+                $tempPath = tempnam(sys_get_temp_dir(), self::CROP_PREFIX);
+                if (false === $tempPath) {
+                    return null;
+                }
+
+                if (!imagejpeg($targetImage, $tempPath, 95)) {
+                    @unlink($tempPath);
+
+                    return null;
+                }
+
+                return $tempPath;
+            } finally {
+                imagedestroy($targetImage);
+            }
+        } finally {
+            imagedestroy($sourceImage);
+        }
     }
 }

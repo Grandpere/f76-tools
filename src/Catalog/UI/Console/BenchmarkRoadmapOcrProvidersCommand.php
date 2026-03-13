@@ -53,7 +53,8 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
             ->addOption('provider-b', null, InputOption::VALUE_REQUIRED, 'Second provider OCR.', 'tesseract')
             ->addOption('top', null, InputOption::VALUE_REQUIRED, 'Nombre max d ecarts affiches.', '12')
             ->addOption('preview-lines', null, InputOption::VALUE_REQUIRED, 'Nombre max de lignes OCR par provider.', '8')
-            ->addOption('show-all-windows', null, InputOption::VALUE_NONE, 'Affiche toutes les fenetres alignees (pas seulement les ecarts).');
+            ->addOption('show-all-windows', null, InputOption::VALUE_NONE, 'Affiche toutes les fenetres alignees (pas seulement les ecarts).')
+            ->addOption('raw-only', null, InputOption::VALUE_NONE, 'Compare uniquement la qualite OCR brute (sans parser).');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -67,6 +68,7 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
         $top = max(1, $this->toPositiveInt($input->getOption('top')));
         $previewLines = max(1, $this->toPositiveInt($input->getOption('preview-lines')));
         $showAllWindows = true === $input->getOption('show-all-windows');
+        $rawOnly = true === $input->getOption('raw-only');
 
         if ('' === $image || !is_file($image)) {
             $io->error(sprintf('Image not found: %s', $image));
@@ -97,6 +99,38 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
 
         $rawA = $this->buildStructuredRawText($scanA->result->lines, $scanA->result->text);
         $rawB = $this->buildStructuredRawText($scanB->result->lines, $scanB->result->text);
+
+        if ($rawOnly) {
+            $metricsA = $this->computeRawMetrics($scanA->result->lines, $rawA, $locale);
+            $metricsB = $this->computeRawMetrics($scanB->result->lines, $rawB, $locale);
+
+            $io->title('Roadmap OCR providers benchmark (raw-only)');
+            $io->definitionList(
+                ['Image' => $image],
+                ['Locale' => strtoupper($locale)],
+                ['Provider A' => $scanA->result->provider],
+                ['Provider B' => $scanB->result->provider],
+            );
+
+            $summary = new Table($output);
+            $summary->setHeaders(['Metric', 'A', 'B']);
+            $summary->addRows([
+                ['Provider', $scanA->result->provider, $scanB->result->provider],
+                ['Confidence', number_format($scanA->result->confidence, 4), number_format($scanB->result->confidence, 4)],
+                ['Total lines', (string) count($scanA->result->lines), (string) count($scanB->result->lines)],
+                ['Non-empty lines', (string) $metricsA['non_empty_lines'], (string) $metricsB['non_empty_lines']],
+                ['Date-like lines', (string) $metricsA['date_like_lines'], (string) $metricsB['date_like_lines']],
+                ['Month-like lines', (string) $metricsA['month_like_lines'], (string) $metricsB['month_like_lines']],
+                ['Uppercase ratio', sprintf('%.2f', $metricsA['uppercase_ratio']), sprintf('%.2f', $metricsB['uppercase_ratio'])],
+                ['Word count', (string) $metricsA['word_count'], (string) $metricsB['word_count']],
+            ]);
+            $summary->render();
+
+            $this->renderProviderPreview($io, 'A', $scanA->result->provider, $scanA->result->lines, $previewLines);
+            $this->renderProviderPreview($io, 'B', $scanB->result->provider, $scanB->result->lines, $previewLines);
+
+            return Command::SUCCESS;
+        }
 
         $eventsA = $this->roadmapRawTextEventParser->parse($rawA, $locale, $referenceDate);
         $eventsB = $this->roadmapRawTextEventParser->parse($rawB, $locale, $referenceDate);
@@ -335,6 +369,99 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
         $singleSpaced = preg_replace('/\s+/u', ' ', $lettersOnly) ?? $lettersOnly;
 
         return trim($singleSpaced);
+    }
+
+    /**
+     * @param list<string> $lines
+     *
+     * @return array{
+     *   non_empty_lines:int,
+     *   date_like_lines:int,
+     *   month_like_lines:int,
+     *   uppercase_ratio:float,
+     *   word_count:int
+     * }
+     */
+    private function computeRawMetrics(array $lines, string $rawText, string $locale): array
+    {
+        $nonEmptyLines = 0;
+        $dateLikeLines = 0;
+        $monthLikeLines = 0;
+        foreach ($lines as $line) {
+            $candidate = trim($line);
+            if ('' === $candidate) {
+                continue;
+            }
+            ++$nonEmptyLines;
+
+            if (1 === preg_match('/\b\d{1,2}\s*(?:-|AU|TO|BIS)\s*\d{1,2}\b/iu', $candidate) || 1 === preg_match('/\b\d{1,2}\b/u', $candidate)) {
+                ++$dateLikeLines;
+            }
+
+            if ($this->lineContainsMonthToken($candidate, $locale)) {
+                ++$monthLikeLines;
+            }
+        }
+
+        $letters = preg_match_all('/\p{L}/u', $rawText);
+        if (!is_int($letters)) {
+            $letters = 0;
+        }
+        $upperLetters = preg_match_all('/\p{Lu}/u', $rawText);
+        if (!is_int($upperLetters)) {
+            $upperLetters = 0;
+        }
+        $wordCount = preg_match_all('/\p{L}+/u', $rawText);
+        if (!is_int($wordCount)) {
+            $wordCount = 0;
+        }
+
+        return [
+            'non_empty_lines' => $nonEmptyLines,
+            'date_like_lines' => $dateLikeLines,
+            'month_like_lines' => $monthLikeLines,
+            'uppercase_ratio' => $letters > 0 ? ($upperLetters / $letters) : 0.0,
+            'word_count' => $wordCount,
+        ];
+    }
+
+    private function lineContainsMonthToken(string $line, string $locale): bool
+    {
+        $normalizedLocale = strtolower(trim($locale));
+
+        $tokens = match (true) {
+            str_starts_with($normalizedLocale, 'fr') => ['JANVIER', 'FEVRIER', 'MARS', 'AVRIL', 'MAI', 'JUIN', 'JUILLET', 'AOUT', 'SEPTEMBRE', 'OCTOBRE', 'NOVEMBRE', 'DECEMBRE'],
+            str_starts_with($normalizedLocale, 'de') => ['JANUAR', 'FEBRUAR', 'MARZ', 'APRIL', 'MAI', 'JUNI', 'JULI', 'AUGUST', 'SEPTEMBER', 'OKTOBER', 'NOVEMBER', 'DEZEMBER'],
+            default => ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'],
+        };
+
+        $upper = mb_strtoupper($line);
+        $ascii = strtr($upper, [
+            'À' => 'A',
+            'Â' => 'A',
+            'Ä' => 'A',
+            'Ç' => 'C',
+            'É' => 'E',
+            'È' => 'E',
+            'Ê' => 'E',
+            'Ë' => 'E',
+            'Î' => 'I',
+            'Ï' => 'I',
+            'Ô' => 'O',
+            'Ö' => 'O',
+            'Ù' => 'U',
+            'Û' => 'U',
+            'Ü' => 'U',
+            'ß' => 'SS',
+        ]);
+
+        foreach ($tokens as $token) {
+            if (str_contains($ascii, $token)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
