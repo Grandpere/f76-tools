@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-03-13 - Roadmap OCR layout preprocessing works better when stacking monthly right-pane bands
+- Symptom: OCR on full roadmap image remained noisy on older seasons despite grayscale/bw filters.
+- Root cause: decorative left pane and mixed layout density polluted recognition; one-pass preprocessing preserved too much irrelevant content.
+- Fix: added `layout-bw` preprocessing mode that crops the right timeline pane, splits it into 4 monthly bands, stacks them, then applies strong grayscale/contrast/bw preprocessing.
+- Prevention: keep OCR preprocessing modes explicit and benchmark with the same sample image set before changing parser heuristics.
+
 ## 2026-03-11 - OCR fallback must keep best confidence, not last provider
 - Symptom: when all OCR providers were below acceptance threshold, snapshot kept a lower-quality result (e.g. tesseract 0.83 over ocr.space 0.89).
 - Root cause: `OcrProviderChain` returned the last successful provider instead of the best-confidence successful provider.

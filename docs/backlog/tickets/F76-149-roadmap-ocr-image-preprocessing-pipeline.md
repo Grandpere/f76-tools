@@ -1,7 +1,7 @@
 # F76-149 - Roadmap OCR image preprocessing pipeline (layout-first)
 
 ## Status
-`Todo`
+`In progress`
 
 ## Contexte
 - Les roadmaps saison sont des images chargees (fond illustre + colonnes + texte petit).
@@ -57,4 +57,3 @@ Introduire une pipeline "image first" avant OCR:
 - Risque: plus de bruit si les zones sont mal cadrees.
 - Mitigation: profils explicites + mode debug + fallback rapide vers `none`.
 - Rollback: desactiver pipeline preprocess via option/parametre, sans impact sur les snapshots existants.
-

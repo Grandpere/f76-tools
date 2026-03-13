@@ -125,6 +125,7 @@ final class GdImagePreprocessor
     {
         $cropped = $this->cropToRightRoadmapPane($image);
         $image = $cropped;
+        $image = $this->splitAndStackMonthlyBands($image);
 
         $upscaled = $this->upscaleImage($image, 1.9);
         $image = $upscaled;
@@ -168,6 +169,91 @@ final class GdImagePreprocessor
         ]);
 
         return $cropped instanceof GdImage ? $cropped : $image;
+    }
+
+    private function splitAndStackMonthlyBands(GdImage $image): GdImage
+    {
+        if (!function_exists('imagecrop') || !function_exists('imagecopy')) {
+            return $image;
+        }
+
+        $width = imagesx($image);
+        $height = imagesy($image);
+        if ($width < 200 || $height < 200) {
+            return $image;
+        }
+
+        $topOffset = (int) round($height * 0.04);
+        $bottomOffset = (int) round($height * 0.03);
+        $usableHeight = $height - $topOffset - $bottomOffset;
+        if ($usableHeight < 120) {
+            return $image;
+        }
+
+        $bandCount = 4;
+        $baseBandHeight = (int) floor($usableHeight / $bandCount);
+        if ($baseBandHeight < 28) {
+            return $image;
+        }
+
+        $overlap = (int) round($baseBandHeight * 0.07);
+        $bands = [];
+
+        for ($index = 0; $index < $bandCount; ++$index) {
+            $bandY = $topOffset + ($index * $baseBandHeight) - $overlap;
+            $bandHeight = $baseBandHeight + (2 * $overlap);
+            if ($index === $bandCount - 1) {
+                $bandHeight = ($height - $bottomOffset) - $bandY;
+            }
+
+            $bandY = max(0, $bandY);
+            if ($bandY + $bandHeight > $height) {
+                $bandHeight = $height - $bandY;
+            }
+            if ($bandHeight < 16) {
+                continue;
+            }
+
+            $band = @imagecrop($image, [
+                'x' => 0,
+                'y' => $bandY,
+                'width' => $width,
+                'height' => $bandHeight,
+            ]);
+
+            if ($band instanceof GdImage) {
+                $bands[] = $band;
+            }
+        }
+
+        if ([] === $bands) {
+            return $image;
+        }
+
+        $gap = 12;
+        $targetHeight = ($gap * (count($bands) - 1));
+        foreach ($bands as $band) {
+            $targetHeight += imagesy($band);
+        }
+
+        $canvas = imagecreatetruecolor($width, $targetHeight);
+        if (!$canvas instanceof GdImage) {
+            return $image;
+        }
+
+        $white = imagecolorallocate($canvas, 255, 255, 255);
+        if (false === $white) {
+            return $image;
+        }
+        imagefill($canvas, 0, 0, $white);
+
+        $offsetY = 0;
+        foreach ($bands as $band) {
+            imagecopy($canvas, $band, 0, $offsetY, 0, 0, imagesx($band), imagesy($band));
+            $offsetY += imagesy($band) + $gap;
+        }
+
+        return $canvas;
     }
 
     private function upscaleImage(GdImage $image, float $factor): GdImage
