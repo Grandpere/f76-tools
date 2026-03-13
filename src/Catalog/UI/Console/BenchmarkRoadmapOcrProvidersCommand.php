@@ -18,6 +18,7 @@ use App\Catalog\Application\Roadmap\RoadmapParsedEventsValidator;
 use App\Catalog\Application\Roadmap\RoadmapRawTextEventParser;
 use App\Catalog\Application\Roadmap\RoadmapParsedEvent;
 use App\Catalog\Application\Roadmap\RoadmapTitleComparisonService;
+use App\Catalog\Application\Roadmap\Ocr\GdImagePreprocessor;
 use DateTimeImmutable;
 use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -40,6 +41,7 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
         private readonly RoadmapRawTextEventParser $roadmapRawTextEventParser,
         private readonly RoadmapParsedEventsValidator $roadmapParsedEventsValidator,
         private readonly RoadmapTitleComparisonService $roadmapTitleComparisonService,
+        private readonly GdImagePreprocessor $gdImagePreprocessor,
     ) {
         parent::__construct();
     }
@@ -51,6 +53,7 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
             ->addOption('locale', null, InputOption::VALUE_REQUIRED, 'Locale OCR (fr|en|de).', 'en')
             ->addOption('provider-a', null, InputOption::VALUE_REQUIRED, 'Premier provider OCR.', 'ocr.space')
             ->addOption('provider-b', null, InputOption::VALUE_REQUIRED, 'Second provider OCR.', 'tesseract')
+            ->addOption('preprocess', null, InputOption::VALUE_REQUIRED, 'Preprocess image mode (none|grayscale|bw|strong-bw).', 'none')
             ->addOption('top', null, InputOption::VALUE_REQUIRED, 'Nombre max d ecarts affiches.', '12')
             ->addOption('preview-lines', null, InputOption::VALUE_REQUIRED, 'Nombre max de lignes OCR par provider.', '8')
             ->addOption('show-all-windows', null, InputOption::VALUE_NONE, 'Affiche toutes les fenetres alignees (pas seulement les ecarts).')
@@ -65,6 +68,7 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
         $locale = $this->normalizeStringInput($input->getOption('locale'));
         $providerA = strtolower($this->normalizeStringInput($input->getOption('provider-a')));
         $providerB = strtolower($this->normalizeStringInput($input->getOption('provider-b')));
+        $preprocessMode = strtolower($this->normalizeStringInput($input->getOption('preprocess')));
         $top = max(1, $this->toPositiveInt($input->getOption('top')));
         $previewLines = max(1, $this->toPositiveInt($input->getOption('preview-lines')));
         $showAllWindows = true === $input->getOption('show-all-windows');
@@ -85,16 +89,25 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
 
             return Command::INVALID;
         }
+        if (!in_array($preprocessMode, ['none', 'grayscale', 'bw', 'strong-bw'], true)) {
+            $io->error(sprintf('Invalid preprocess "%s". Allowed values: none, grayscale, bw, strong-bw.', $preprocessMode));
+
+            return Command::INVALID;
+        }
 
         $referenceDate = new DateTimeImmutable();
+        $prepared = ['path' => $image, 'temporary' => false];
 
         try {
-            $scanA = $this->ocrProviderChain->recognizeWithProvider($image, $locale, $providerA);
-            $scanB = $this->ocrProviderChain->recognizeWithProvider($image, $locale, $providerB);
+            $prepared = $this->gdImagePreprocessor->prepare($image, $preprocessMode);
+            $scanA = $this->ocrProviderChain->recognizeWithProvider($prepared['path'], $locale, $providerA);
+            $scanB = $this->ocrProviderChain->recognizeWithProvider($prepared['path'], $locale, $providerB);
         } catch (RuntimeException $exception) {
             $io->error('OCR comparison failed: '.$exception->getMessage());
 
             return Command::FAILURE;
+        } finally {
+            $this->gdImagePreprocessor->cleanup($prepared['path'], true === $prepared['temporary']);
         }
 
         $rawA = $this->buildStructuredRawText($scanA->result->lines, $scanA->result->text);
@@ -108,6 +121,7 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
             $io->definitionList(
                 ['Image' => $image],
                 ['Locale' => strtoupper($locale)],
+                ['Preprocess' => $preprocessMode],
                 ['Provider A' => $scanA->result->provider],
                 ['Provider B' => $scanB->result->provider],
             );
@@ -143,6 +157,7 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
         $io->definitionList(
             ['Image' => $image],
             ['Locale' => strtoupper($locale)],
+            ['Preprocess' => $preprocessMode],
             ['Provider A' => $scanA->result->provider],
             ['Provider B' => $scanB->result->provider],
             ['Matched windows' => (string) $comparison['matched_windows']],

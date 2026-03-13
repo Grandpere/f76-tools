@@ -553,43 +553,35 @@ final class TesseractOcrProvider implements OcrProvider
             return null;
         }
 
-        try {
-            $sourceWidth = imagesx($sourceImage);
-            $sourceHeight = imagesy($sourceImage);
-            if ($x < 0 || $y < 0 || $x >= $sourceWidth || $y >= $sourceHeight) {
-                return null;
-            }
-
-            $cropWidth = min($w, $sourceWidth - $x);
-            $cropHeight = min($h, $sourceHeight - $y);
-            if ($cropWidth <= 0 || $cropHeight <= 0) {
-                return null;
-            }
-
-            $targetImage = imagecreatetruecolor($cropWidth, $cropHeight);
-            if (false === $targetImage) {
-                return null;
-            }
-            try {
-                imagecopy($targetImage, $sourceImage, 0, 0, $x, $y, $cropWidth, $cropHeight);
-
-                $tempPath = tempnam(sys_get_temp_dir(), self::CROP_PREFIX);
-                if (false === $tempPath) {
-                    return null;
-                }
-
-                if (!imagejpeg($targetImage, $tempPath, 95)) {
-                    @unlink($tempPath);
-
-                    return null;
-                }
-
-                return $tempPath;
-            } finally {
-                imagedestroy($targetImage);
-            }
-        } finally {
-            imagedestroy($sourceImage);
+        $sourceWidth = imagesx($sourceImage);
+        $sourceHeight = imagesy($sourceImage);
+        if ($x < 0 || $y < 0 || $x >= $sourceWidth || $y >= $sourceHeight) {
+            return null;
         }
+
+        $cropWidth = min($w, $sourceWidth - $x);
+        $cropHeight = min($h, $sourceHeight - $y);
+        if ($cropWidth <= 0 || $cropHeight <= 0) {
+            return null;
+        }
+
+        $targetImage = imagecreatetruecolor($cropWidth, $cropHeight);
+        if (false === $targetImage) {
+            return null;
+        }
+        imagecopy($targetImage, $sourceImage, 0, 0, $x, $y, $cropWidth, $cropHeight);
+
+        $tempPath = tempnam(sys_get_temp_dir(), self::CROP_PREFIX);
+        if (false === $tempPath) {
+            return null;
+        }
+
+        if (!imagejpeg($targetImage, $tempPath, 95)) {
+            @unlink($tempPath);
+
+            return null;
+        }
+
+        return $tempPath;
     }
 }

@@ -15,6 +15,7 @@ namespace App\Catalog\UI\Console;
 
 use App\Catalog\Application\Roadmap\CreateRoadmapSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\CreateRoadmapSnapshotInput;
+use App\Catalog\Application\Roadmap\Ocr\GdImagePreprocessor;
 use App\Catalog\Application\Roadmap\Ocr\OcrProviderChain;
 use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -34,6 +35,7 @@ final class ScanRoadmapImageCommand extends Command
     public function __construct(
         private readonly OcrProviderChain $ocrProviderChain,
         private readonly CreateRoadmapSnapshotApplicationService $createRoadmapSnapshotApplicationService,
+        private readonly GdImagePreprocessor $gdImagePreprocessor,
     ) {
         parent::__construct();
     }
@@ -44,6 +46,7 @@ final class ScanRoadmapImageCommand extends Command
             ->addArgument('image', InputArgument::REQUIRED, 'Chemin de l image a scanner.')
             ->addOption('locale', null, InputOption::VALUE_REQUIRED, 'Locale OCR (fr|en|de).', 'en')
             ->addOption('provider', null, InputOption::VALUE_REQUIRED, 'Provider OCR (auto|ocr.space|tesseract).', 'auto')
+            ->addOption('preprocess', null, InputOption::VALUE_REQUIRED, 'Preprocess image mode (none|grayscale|bw|strong-bw).', 'none')
             ->addOption('preview-lines', null, InputOption::VALUE_REQUIRED, 'Nombre max de lignes affichees.', '20')
             ->addOption('no-persist', null, InputOption::VALUE_NONE, 'N enregistre pas le snapshot OCR en base.');
     }
@@ -55,6 +58,7 @@ final class ScanRoadmapImageCommand extends Command
         $image = $this->normalizeStringInput($input->getArgument('image'));
         $locale = $this->normalizeStringInput($input->getOption('locale'));
         $provider = strtolower($this->normalizeStringInput($input->getOption('provider')));
+        $preprocessMode = strtolower($this->normalizeStringInput($input->getOption('preprocess')));
         $previewLinesRaw = $this->normalizeStringInput($input->getOption('preview-lines'));
         $previewLines = ctype_digit($previewLinesRaw) ? max(1, (int) $previewLinesRaw) : 20;
         $persist = !$input->getOption('no-persist');
@@ -69,18 +73,28 @@ final class ScanRoadmapImageCommand extends Command
 
             return Command::INVALID;
         }
+        if (!in_array($preprocessMode, ['none', 'grayscale', 'bw', 'strong-bw'], true)) {
+            $io->error(sprintf('Invalid preprocess "%s". Allowed values: none, grayscale, bw, strong-bw.', $preprocessMode));
 
+            return Command::INVALID;
+        }
+
+        $prepared = ['path' => $image, 'temporary' => false];
         try {
-            $scan = $this->ocrProviderChain->recognizeWithProvider($image, $locale, $provider);
+            $prepared = $this->gdImagePreprocessor->prepare($image, $preprocessMode);
+            $scan = $this->ocrProviderChain->recognizeWithProvider($prepared['path'], $locale, $provider);
         } catch (RuntimeException $exception) {
             $io->error('OCR scan failed: '.$exception->getMessage());
 
             return Command::FAILURE;
+        } finally {
+            $this->gdImagePreprocessor->cleanup($prepared['path'], true === $prepared['temporary']);
         }
 
         $io->title('Roadmap OCR scan');
         $io->definitionList(
             ['Requested provider' => $provider],
+            ['Preprocess' => $preprocessMode],
             ['Provider' => $scan->result->provider],
             ['Confidence' => number_format($scan->result->confidence, 4)],
             ['Used fallback' => $scan->usedFallback ? 'yes' : 'no'],
