@@ -58,7 +58,7 @@ final readonly class ProcessRoadmapSnapshotOcrMessageHandler
             ->setOcrPreprocessMode($message->preprocessMode);
         $this->roadmapSnapshotWriteRepository->save($snapshot);
 
-        $prepared = ['path' => $absoluteImagePath, 'temporary' => false];
+        $prepared = ['path' => $absoluteImagePath, 'temporary' => false, 'meta' => ['mode' => 'none']];
 
         try {
             $prepared = $this->gdImagePreprocessor->prepare($absoluteImagePath, $message->preprocessMode);
@@ -69,7 +69,7 @@ final readonly class ProcessRoadmapSnapshotOcrMessageHandler
                 ->setOcrProvider($scan->result->provider)
                 ->setOcrConfidence($scan->result->confidence)
                 ->setRawText($rawText)
-                ->setOcrAttemptsSummary($this->buildOcrAttemptsSummary($scan->attempts))
+                ->setOcrAttemptsSummary($this->buildOcrAttemptsSummary($scan->attempts, $prepared['meta']))
                 ->setScannedAt(new DateTimeImmutable())
                 ->setOcrProcessingStatus(RoadmapOcrProcessingStatusEnum::DONE)
                 ->setOcrProcessingError(null);
@@ -134,15 +134,24 @@ final readonly class ProcessRoadmapSnapshotOcrMessageHandler
     }
 
     /**
-     * @param list<OcrAttempt> $attempts
+     * @param list<OcrAttempt>      $attempts
+     * @param array<string, scalar> $preprocessMeta
      */
-    private function buildOcrAttemptsSummary(array $attempts): string
+    private function buildOcrAttemptsSummary(array $attempts, array $preprocessMeta = []): string
     {
-        if ([] === $attempts) {
+        if ([] === $attempts && [] === $preprocessMeta) {
             return '';
         }
 
         $lines = [];
+        if ([] !== $preprocessMeta) {
+            $pairs = [];
+            foreach ($preprocessMeta as $key => $value) {
+                $pairs[] = sprintf('%s=%s', $key, (string) $value);
+            }
+            $lines[] = '[preprocess] '.implode(' | ', $pairs);
+        }
+
         foreach ($attempts as $attempt) {
             $line = sprintf(
                 '%s | success=%s | acceptable=%s',

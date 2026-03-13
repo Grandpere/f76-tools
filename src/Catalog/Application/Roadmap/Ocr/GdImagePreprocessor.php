@@ -21,13 +21,27 @@ final class GdImagePreprocessor
     private const PREPROCESS_MODES = ['grayscale', 'bw', 'strong-bw', 'layout-bw'];
 
     /**
-     * @return array{path:string, temporary:bool}
+     * @return array{path:string, temporary:bool, meta:array<string, scalar>}
      */
     public function prepare(string $imagePath, string $mode): array
     {
         $normalizedMode = strtolower(trim($mode));
+        $inputSize = @getimagesize($imagePath);
+        $inputWidth = is_array($inputSize) ? (int) $inputSize[0] : 0;
+        $inputHeight = is_array($inputSize) ? (int) $inputSize[1] : 0;
+
         if ('' === $normalizedMode || 'none' === $normalizedMode) {
-            return ['path' => $imagePath, 'temporary' => false];
+            return [
+                'path' => $imagePath,
+                'temporary' => false,
+                'meta' => [
+                    'mode' => 'none',
+                    'input_width' => $inputWidth,
+                    'input_height' => $inputHeight,
+                    'output_width' => $inputWidth,
+                    'output_height' => $inputHeight,
+                ],
+            ];
         }
 
         if (!in_array($normalizedMode, self::PREPROCESS_MODES, true)) {
@@ -74,7 +88,29 @@ final class GdImagePreprocessor
             throw new RuntimeException('Unable to write preprocessed image.');
         }
 
-        return ['path' => $tmp, 'temporary' => true];
+        $outputWidth = imagesx($image);
+        $outputHeight = imagesy($image);
+        $meta = [
+            'mode' => $normalizedMode,
+            'input_width' => $inputWidth,
+            'input_height' => $inputHeight,
+            'output_width' => $outputWidth,
+            'output_height' => $outputHeight,
+        ];
+
+        if ('layout-bw' === $normalizedMode) {
+            $cropX = (int) round($inputWidth * 0.26);
+            $cropY = (int) round($inputHeight * 0.07);
+            $meta['layout_strategy'] = 'right-pane>split-4>stack>upscale';
+            $meta['layout_crop_x'] = $cropX;
+            $meta['layout_crop_y'] = $cropY;
+            $meta['layout_crop_width'] = max(1, $inputWidth - $cropX);
+            $meta['layout_crop_height'] = max(1, (int) round($inputHeight * 0.9));
+            $meta['layout_band_count'] = 4;
+            $meta['layout_upscale_factor'] = 1.9;
+        }
+
+        return ['path' => $tmp, 'temporary' => true, 'meta' => $meta];
     }
 
     public function cleanup(string $path, bool $temporary): void

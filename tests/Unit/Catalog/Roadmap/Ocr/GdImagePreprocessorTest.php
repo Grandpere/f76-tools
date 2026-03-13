@@ -29,6 +29,7 @@ final class GdImagePreprocessorTest extends TestCase
 
         self::assertSame($path, $prepared['path']);
         self::assertFalse($prepared['temporary']);
+        self::assertSame('none', $prepared['meta']['mode'] ?? null);
     }
 
     public function testPrepareCreatesTemporaryFileForStrongBw(): void
@@ -55,6 +56,8 @@ final class GdImagePreprocessorTest extends TestCase
         self::assertTrue($prepared['temporary']);
         self::assertFileExists($prepared['path']);
         self::assertNotSame($path, $prepared['path']);
+        self::assertSame('layout-bw', $prepared['meta']['mode'] ?? null);
+        self::assertSame('right-pane>split-4>stack>upscale', $prepared['meta']['layout_strategy'] ?? null);
         $dimensions = @getimagesize($prepared['path']);
         self::assertIsArray($dimensions);
         self::assertArrayHasKey(0, $dimensions);

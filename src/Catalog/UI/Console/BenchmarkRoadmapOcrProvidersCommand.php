@@ -96,7 +96,7 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
         }
 
         $referenceDate = new DateTimeImmutable();
-        $prepared = ['path' => $image, 'temporary' => false];
+        $prepared = ['path' => $image, 'temporary' => false, 'meta' => ['mode' => 'none']];
 
         try {
             $prepared = $this->gdImagePreprocessor->prepare($image, $preprocessMode);
@@ -122,6 +122,7 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
                 ['Image' => $image],
                 ['Locale' => strtoupper($locale)],
                 ['Preprocess' => $preprocessMode],
+                ['Preprocess details' => $this->formatPreprocessMeta($prepared['meta'])],
                 ['Provider A' => $scanA->result->provider],
                 ['Provider B' => $scanB->result->provider],
             );
@@ -158,6 +159,7 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
             ['Image' => $image],
             ['Locale' => strtoupper($locale)],
             ['Preprocess' => $preprocessMode],
+            ['Preprocess details' => $this->formatPreprocessMeta($prepared['meta'])],
             ['Provider A' => $scanA->result->provider],
             ['Provider B' => $scanB->result->provider],
             ['Matched windows' => (string) $comparison['matched_windows']],
@@ -533,5 +535,22 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
         }
 
         return $fallbackText;
+    }
+
+    /**
+     * @param array<string, scalar> $meta
+     */
+    private function formatPreprocessMeta(array $meta): string
+    {
+        if ([] === $meta) {
+            return 'n/a';
+        }
+
+        $parts = [];
+        foreach ($meta as $key => $value) {
+            $parts[] = sprintf('%s=%s', $key, (string) $value);
+        }
+
+        return implode(' | ', $parts);
     }
 }

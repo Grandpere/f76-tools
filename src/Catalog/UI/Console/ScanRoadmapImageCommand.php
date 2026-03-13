@@ -79,7 +79,7 @@ final class ScanRoadmapImageCommand extends Command
             return Command::INVALID;
         }
 
-        $prepared = ['path' => $image, 'temporary' => false];
+        $prepared = ['path' => $image, 'temporary' => false, 'meta' => ['mode' => 'none']];
         try {
             $prepared = $this->gdImagePreprocessor->prepare($image, $preprocessMode);
             $scan = $this->ocrProviderChain->recognizeWithProvider($prepared['path'], $locale, $provider);
@@ -95,6 +95,7 @@ final class ScanRoadmapImageCommand extends Command
         $io->definitionList(
             ['Requested provider' => $provider],
             ['Preprocess' => $preprocessMode],
+            ['Preprocess details' => $this->formatPreprocessMeta($prepared['meta'])],
             ['Provider' => $scan->result->provider],
             ['Confidence' => number_format($scan->result->confidence, 4)],
             ['Used fallback' => $scan->usedFallback ? 'yes' : 'no'],
@@ -179,5 +180,22 @@ final class ScanRoadmapImageCommand extends Command
         }
 
         return $fallbackText;
+    }
+
+    /**
+     * @param array<string, scalar> $meta
+     */
+    private function formatPreprocessMeta(array $meta): string
+    {
+        if ([] === $meta) {
+            return 'n/a';
+        }
+
+        $parts = [];
+        foreach ($meta as $key => $value) {
+            $parts[] = sprintf('%s=%s', $key, (string) $value);
+        }
+
+        return implode(' | ', $parts);
     }
 }
