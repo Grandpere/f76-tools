@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Catalog\Application\Roadmap;
 
-use App\Catalog\Application\Roadmap\Locale\RoadmapLocaleProfileRegistry;
 use App\Catalog\Application\Roadmap\Locale\RoadmapLocaleProfile;
+use App\Catalog\Application\Roadmap\Locale\RoadmapLocaleProfileRegistry;
 use DateTimeImmutable;
 
 final class RoadmapRawTextEventParser

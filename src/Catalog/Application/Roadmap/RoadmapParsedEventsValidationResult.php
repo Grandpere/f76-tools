@@ -30,4 +30,3 @@ final readonly class RoadmapParsedEventsValidationResult
         return [] !== $this->errors;
     }
 }
-

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Progression\Application\Knowledge;
 
-use App\Catalog\Domain\Item\ItemTypeEnum;
 use App\Progression\Domain\Entity\PlayerEntity;
 
 final class PlayerKnowledgeStatsApplicationService

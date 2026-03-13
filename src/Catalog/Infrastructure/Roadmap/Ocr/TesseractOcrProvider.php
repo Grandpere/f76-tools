@@ -96,7 +96,7 @@ final class TesseractOcrProvider implements OcrProvider
 
     /**
      * @param list<array{psm:int, lines:list<string>, confidence:float, score:float}> $passes
-     * @param list<string> $errors
+     * @param list<string>                                                            $errors
      */
     private function runPass(
         string $imagePath,

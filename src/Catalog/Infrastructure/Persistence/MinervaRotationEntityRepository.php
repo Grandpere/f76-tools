@@ -181,12 +181,11 @@ final class MinervaRotationEntityRepository extends ServiceEntityRepository impl
     {
         $rows = $this->getEntityManager()->getConnection()->fetchAllAssociative(
             <<<'SQL'
-SELECT source, MAX(created_at) AS latest_created_at
-FROM minerva_rotation
-WHERE source IN (:generated, :manual)
-GROUP BY source
-SQL
-            ,
+                SELECT source, MAX(created_at) AS latest_created_at
+                FROM minerva_rotation
+                WHERE source IN (:generated, :manual)
+                GROUP BY source
+                SQL,
             [
                 'generated' => MinervaRotationSourceEnum::GENERATED->value,
                 'manual' => MinervaRotationSourceEnum::MANUAL->value,

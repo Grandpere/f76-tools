@@ -59,12 +59,7 @@ final readonly class MergeRoadmapLocalesApplicationService
             );
             if ($validation->hasErrors()) {
                 $snapshotIdText = is_int($snapshot->getId()) ? (string) $snapshot->getId() : 'unknown';
-                throw new RuntimeException(sprintf(
-                    'Snapshot %s for locale %s failed quality checks: %s',
-                    $snapshotIdText,
-                    strtoupper((string) $locale),
-                    implode(' | ', $validation->errors),
-                ));
+                throw new RuntimeException(sprintf('Snapshot %s for locale %s failed quality checks: %s', $snapshotIdText, strtoupper((string) $locale), implode(' | ', $validation->errors)));
             }
             $warnings = array_merge($warnings, $validation->warnings);
 

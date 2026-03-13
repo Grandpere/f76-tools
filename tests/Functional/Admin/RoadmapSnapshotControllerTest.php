@@ -229,14 +229,14 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         file_put_contents($imageAbsolutePath, 'png');
         $snapshot->setSourceImagePath('var/data/roadmap_uploads/test-delete-snapshot.png');
 
-        $canonical = (new RoadmapCanonicalEventEntity())
+        $canonical = new RoadmapCanonicalEventEntity()
             ->setTranslationKey('roadmap.s24.sample.1')
             ->setStartsAt(new DateTimeImmutable('2026-03-03 18:00:00'))
             ->setEndsAt(new DateTimeImmutable('2026-03-10 18:00:00'))
             ->setConfidenceScore(100)
             ->setSortOrder(1);
         $canonical->addTranslation(
-            (new RoadmapCanonicalEventTranslationEntity())
+            new RoadmapCanonicalEventTranslationEntity()
                 ->setLocale('fr')
                 ->setTitle('La fete du yeti'),
         );

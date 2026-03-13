@@ -183,6 +183,7 @@ final class OcrSpaceHttpProvider implements OcrProvider
 
     /**
      * @param list<array{text: string, top: int, left: int}> $entries
+     *
      * @return list<array{text: string, top: int, left: int}>
      */
     private function orderOverlayEntriesForReading(array $entries): array

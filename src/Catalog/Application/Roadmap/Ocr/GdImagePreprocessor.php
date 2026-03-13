@@ -29,10 +29,7 @@ final class GdImagePreprocessor
         }
 
         if (!in_array($normalizedMode, ['grayscale', 'bw', 'strong-bw'], true)) {
-            throw new RuntimeException(sprintf(
-                'Unsupported preprocess mode "%s". Allowed: none, grayscale, bw, strong-bw.',
-                $mode,
-            ));
+            throw new RuntimeException(sprintf('Unsupported preprocess mode "%s". Allowed: none, grayscale, bw, strong-bw.', $mode));
         }
 
         if (

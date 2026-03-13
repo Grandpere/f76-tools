@@ -106,7 +106,7 @@ final class RoadmapTitleComparisonServiceTest extends TestCase
 
     private function manualEvent(string $title, string $startsAt, string $endsAt): RoadmapEventEntity
     {
-        return (new RoadmapEventEntity())
+        return new RoadmapEventEntity()
             ->setLocale('fr')
             ->setTitle($title)
             ->setStartsAt(new DateTimeImmutable($startsAt))

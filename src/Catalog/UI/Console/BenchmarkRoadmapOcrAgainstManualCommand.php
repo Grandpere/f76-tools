@@ -142,8 +142,8 @@ final class BenchmarkRoadmapOcrAgainstManualCommand extends Command
         foreach ($candidates as $snapshot) {
             if (
                 $snapshot->getLocale() === $locale
-                && $snapshot->getStatus() === RoadmapSnapshotStatusEnum::APPROVED
-                && $snapshot->getOcrProvider() === 'manual.json'
+                && RoadmapSnapshotStatusEnum::APPROVED === $snapshot->getStatus()
+                && 'manual.json' === $snapshot->getOcrProvider()
             ) {
                 $withEvents = $this->snapshotWriteRepository->findOneWithEventsById($snapshot->getId() ?? 0);
                 if ($withEvents instanceof RoadmapSnapshotEntity) {

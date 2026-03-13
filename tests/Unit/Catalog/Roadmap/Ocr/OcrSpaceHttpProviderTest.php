@@ -300,6 +300,4 @@ final class OcrSpaceHttpProviderTest extends TestCase
 
         @unlink($imagePath);
     }
-
-    
 }

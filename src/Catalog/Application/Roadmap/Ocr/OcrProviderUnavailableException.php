@@ -29,4 +29,3 @@ final class OcrProviderUnavailableException extends RuntimeException
         return $this->providerName;
     }
 }
-

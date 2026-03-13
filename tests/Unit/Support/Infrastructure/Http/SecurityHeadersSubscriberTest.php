@@ -17,8 +17,8 @@ use App\Support\Infrastructure\Http\SecurityHeadersSubscriber;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 final class SecurityHeadersSubscriberTest extends TestCase
 {
@@ -50,7 +50,7 @@ final class SecurityHeadersSubscriberTest extends TestCase
 
         self::assertSame(
             'max-age=31536000; includeSubDomains',
-            $event->getResponse()->headers->get('Strict-Transport-Security')
+            $event->getResponse()->headers->get('Strict-Transport-Security'),
         );
     }
 

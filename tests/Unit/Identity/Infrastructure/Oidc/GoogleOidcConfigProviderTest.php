@@ -69,4 +69,3 @@ final class GoogleOidcConfigProviderTest extends TestCase
         self::assertSame('client-secret', $provider->clientSecret());
     }
 }
-

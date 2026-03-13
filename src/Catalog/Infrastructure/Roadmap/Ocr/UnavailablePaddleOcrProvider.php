@@ -26,9 +26,6 @@ final class UnavailablePaddleOcrProvider implements OcrProvider
 
     public function recognize(string $imagePath, string $locale): OcrResult
     {
-        throw new OcrProviderUnavailableException(
-            $this->name(),
-            'Paddle OCR provider is not installed/configured yet.',
-        );
+        throw new OcrProviderUnavailableException($this->name(), 'Paddle OCR provider is not installed/configured yet.');
     }
 }

@@ -16,9 +16,9 @@ namespace App\Support\UI\Admin\Controller;
 use App\Catalog\Application\Roadmap\ApproveRoadmapSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\CreateRoadmapSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\CreateRoadmapSnapshotInput;
-use App\Catalog\Application\Roadmap\Ocr\GdImagePreprocessor;
 use App\Catalog\Application\Roadmap\GenerateRoadmapEventsFromSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\MergeRoadmapLocalesApplicationService;
+use App\Catalog\Application\Roadmap\Ocr\GdImagePreprocessor;
 use App\Catalog\Application\Roadmap\Ocr\OcrAttempt;
 use App\Catalog\Application\Roadmap\Ocr\OcrProviderChain;
 use App\Catalog\Application\Roadmap\RoadmapCanonicalEventReadRepository;
@@ -331,7 +331,6 @@ final class RoadmapSnapshotController extends AbstractController
         }
 
         try {
-            /** @var mixed $decodedPayload */
             $decodedPayload = json_decode($rawJson, true, 512, JSON_THROW_ON_ERROR);
         } catch (JsonException $exception) {
             $this->addFlash('warning', 'admin_roadmap.flash.json_invalid_payload');
@@ -480,7 +479,7 @@ final class RoadmapSnapshotController extends AbstractController
         $sortOrder = 1;
         foreach ($normalizedEvents as $eventData) {
             $snapshot->addEvent(
-                (new RoadmapEventEntity())
+                new RoadmapEventEntity()
                     ->setLocale($localeInput)
                     ->setTitle($eventData['title'])
                     ->setStartsAt($eventData['startsAt'])
@@ -1294,7 +1293,7 @@ final class RoadmapSnapshotController extends AbstractController
         }
 
         $this->entityManager->persist(
-            (new AdminAuditLogEntity())
+            new AdminAuditLogEntity()
                 ->setActorUser($actor)
                 ->setAction('roadmap_merge_locales')
                 ->setContext([

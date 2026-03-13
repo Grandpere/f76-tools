@@ -93,8 +93,8 @@ final class RoadmapTitleComparisonService
     }
 
     /**
-     * @param list<RoadmapParsedEvent> $ocrEvents
-     * @param list<RoadmapParsedEvent> $manualEvents
+     * @param list<RoadmapParsedEvent>    $ocrEvents
+     * @param list<RoadmapParsedEvent>    $manualEvents
      * @param array<string, list<string>> $manualByWindow
      *
      * @return array{

@@ -88,4 +88,3 @@ final class OcrQualityAssessorTest extends TestCase
         self::assertStringContainsString('non-empty lines', $assessment->reasons[1]);
     }
 }
-

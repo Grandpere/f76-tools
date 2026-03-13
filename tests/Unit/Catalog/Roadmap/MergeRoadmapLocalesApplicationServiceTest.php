@@ -23,6 +23,7 @@ use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
 use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
 use App\Catalog\Domain\Roadmap\RoadmapSnapshotStatusEnum;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use RuntimeException;
@@ -181,11 +182,11 @@ final class MergeRoadmapLocalesApplicationServiceTest extends TestCase
         $fr = $this->snapshot(1, 'fr', "3 MARS - 10 MARS\nRAW TITLE");
         $fr->clearEvents();
         $fr->addEvent(
-            (new \App\Catalog\Domain\Entity\RoadmapEventEntity())
+            new \App\Catalog\Domain\Entity\RoadmapEventEntity()
                 ->setLocale('fr')
                 ->setTitle('MANUAL TITLE FR')
-                ->setStartsAt(new \DateTimeImmutable('2026-03-03 18:00:00'))
-                ->setEndsAt(new \DateTimeImmutable('2026-03-10 18:00:00'))
+                ->setStartsAt(new DateTimeImmutable('2026-03-03 18:00:00'))
+                ->setEndsAt(new DateTimeImmutable('2026-03-10 18:00:00'))
                 ->setSortOrder(1),
         );
         $en = $this->snapshot(2, 'en', "MAR 3 - MAR 10\nMANUAL TITLE EN");

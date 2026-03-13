@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Catalog\UI\Console;
 
+use App\Catalog\Application\Roadmap\Ocr\GdImagePreprocessor;
 use App\Catalog\Application\Roadmap\Ocr\OcrProviderChain;
+use App\Catalog\Application\Roadmap\RoadmapParsedEvent;
 use App\Catalog\Application\Roadmap\RoadmapParsedEventsValidator;
 use App\Catalog\Application\Roadmap\RoadmapRawTextEventParser;
-use App\Catalog\Application\Roadmap\RoadmapParsedEvent;
 use App\Catalog\Application\Roadmap\RoadmapTitleComparisonService;
-use App\Catalog\Application\Roadmap\Ocr\GdImagePreprocessor;
 use DateTimeImmutable;
 use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;

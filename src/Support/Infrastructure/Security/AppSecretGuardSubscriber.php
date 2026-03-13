@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Support\Infrastructure\Security;
 
 use RuntimeException;
-use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\ConsoleEvents;
+use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -61,4 +61,3 @@ final class AppSecretGuardSubscriber implements EventSubscriberInterface
         }
     }
 }
-

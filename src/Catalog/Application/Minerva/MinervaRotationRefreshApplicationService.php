@@ -83,7 +83,6 @@ final class MinervaRotationRefreshApplicationService implements MinervaRotationR
      */
     private function computeRefreshResult(DateTimeImmutable $from, DateTimeImmutable $to, bool $dryRun): array
     {
-
         $expectedRows = $this->generationService->generate($from, $to);
         $existingRows = $this->rotationRepository->findOverlappingRange($from, $to);
         $missingWindows = 0;

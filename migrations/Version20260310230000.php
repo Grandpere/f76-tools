@@ -33,4 +33,3 @@ final class Version20260310230000 extends AbstractMigration
         $this->addSql('ALTER TABLE roadmap_snapshot DROP ocr_attempts_summary');
     }
 }
-
