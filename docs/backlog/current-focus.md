@@ -1,7 +1,7 @@
 # Current Focus
 
 ## Priorite active
-- Aucune priorite active immediate (prochain ticket a definir).
+- F76-149: Roadmap OCR image preprocessing pipeline (layout-first, no new dependency) - `Todo`.
 
 ## Termine recemment
 - F76-147: upload roadmap OCR via backoffice (done).
@@ -37,4 +37,4 @@
 - Historique plus ancien: voir `docs/backlog/tickets/` (slices DDD et tickets precedents archives par fichier).
 
 ## Ensuite
-- Prochain chantier a prioriser.
+- F76-150: OCR microservice Python optionnel (a evaluer apres stabilisation F76-149).
