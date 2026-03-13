@@ -47,19 +47,27 @@ final class PythonRoadmapOcrProvider implements OcrProvider
         }
 
         $endpoint = $this->buildEndpoint();
+        $imageResource = fopen($imagePath, 'rb');
+        if (false === $imageResource) {
+            throw new RuntimeException(sprintf('Unable to open image for python OCR: %s', $imagePath));
+        }
 
         try {
             $response = $this->httpClient->request('POST', $endpoint, [
                 'timeout' => max(1, $this->timeoutSeconds),
                 'body' => [
                     'locale' => strtolower(trim($locale)),
-                    'image' => fopen($imagePath, 'rb'),
+                    'image' => $imageResource,
                 ],
             ]);
             $statusCode = $response->getStatusCode();
             $rawBody = $response->getContent(false);
         } catch (ExceptionInterface $exception) {
             throw new OcrProviderUnavailableException($this->name(), 'python OCR service unavailable: '.$exception->getMessage());
+        } finally {
+            if (is_resource($imageResource)) {
+                fclose($imageResource);
+            }
         }
 
         if ($statusCode >= 500) {

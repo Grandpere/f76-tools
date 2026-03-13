@@ -175,3 +175,13 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
   - la fusion remplace uniquement les evenements canoniques de la saison concernee,
   - la saison fusionnee devient active automatiquement,
   - les saisons precedentes restent en base (pas d ecrasement global).
+
+## OCR Python optionnel
+- Le provider `python.ocr` est desactive par defaut (`ROADMAP_PY_OCR_ENABLED=0`).
+- Pour l activer localement:
+  - 1. Lancer le sidecar: `make ocr-up`
+  - 2. Mettre `ROADMAP_PY_OCR_ENABLED=1` dans `.env.local`
+  - 3. Redemarrer l app: `make restart-app`
+- Diagnostic:
+  - logs sidecar: `make ocr-logs`
+  - scan cible: `make roadmap-ocr-scan IMAGE=... LOCALE=...`

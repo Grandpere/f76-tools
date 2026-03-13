@@ -59,6 +59,18 @@ restart-app: ## Restart app container only
 	echo "Timeout: app is not ready after 60s."; \
 	exit 1
 
+.PHONY: ocr-up
+ocr-up: ## Start roadmap OCR sidecar
+	$(DC) --profile ocr up -d roadmap-ocr
+
+.PHONY: ocr-down
+ocr-down: ## Stop roadmap OCR sidecar
+	$(DC) --profile ocr stop roadmap-ocr
+
+.PHONY: ocr-logs
+ocr-logs: ## Follow roadmap OCR logs
+	$(DC) --profile ocr logs -f roadmap-ocr
+
 .PHONY: shell
 shell: ## Open a shell in app container
 	$(DC_EXEC) sh
