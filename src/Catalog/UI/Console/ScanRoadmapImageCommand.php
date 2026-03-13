@@ -46,7 +46,7 @@ final class ScanRoadmapImageCommand extends Command
             ->addArgument('image', InputArgument::REQUIRED, 'Chemin de l image a scanner.')
             ->addOption('locale', null, InputOption::VALUE_REQUIRED, 'Locale OCR (fr|en|de).', 'en')
             ->addOption('provider', null, InputOption::VALUE_REQUIRED, 'Provider OCR (auto|ocr.space|tesseract).', 'auto')
-            ->addOption('preprocess', null, InputOption::VALUE_REQUIRED, 'Preprocess image mode (none|grayscale|bw|strong-bw|layout-bw).', 'none')
+            ->addOption('preprocess', null, InputOption::VALUE_REQUIRED, 'Preprocess image mode (none|grayscale|bw|strong-bw|layout-bw).', 'layout-bw')
             ->addOption('preview-lines', null, InputOption::VALUE_REQUIRED, 'Nombre max de lignes affichees.', '20')
             ->addOption('no-persist', null, InputOption::VALUE_NONE, 'N enregistre pas le snapshot OCR en base.');
     }

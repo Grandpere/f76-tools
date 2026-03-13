@@ -53,7 +53,7 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
             ->addOption('locale', null, InputOption::VALUE_REQUIRED, 'Locale OCR (fr|en|de).', 'en')
             ->addOption('provider-a', null, InputOption::VALUE_REQUIRED, 'Premier provider OCR.', 'ocr.space')
             ->addOption('provider-b', null, InputOption::VALUE_REQUIRED, 'Second provider OCR.', 'tesseract')
-            ->addOption('preprocess', null, InputOption::VALUE_REQUIRED, 'Preprocess image mode (none|grayscale|bw|strong-bw|layout-bw).', 'none')
+            ->addOption('preprocess', null, InputOption::VALUE_REQUIRED, 'Preprocess image mode (none|grayscale|bw|strong-bw|layout-bw).', 'layout-bw')
             ->addOption('top', null, InputOption::VALUE_REQUIRED, 'Nombre max d ecarts affiches.', '12')
             ->addOption('preview-lines', null, InputOption::VALUE_REQUIRED, 'Nombre max de lignes OCR par provider.', '8')
             ->addOption('show-all-windows', null, InputOption::VALUE_NONE, 'Affiche toutes les fenetres alignees (pas seulement les ecarts).')
