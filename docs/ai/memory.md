@@ -454,3 +454,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: OCR often dropped tens on end day or omitted rollover context near month end.
 - Fix: added inverted-range recovery in parser (`+10/+20/+30` day reconstruction for short windows, and month rollover fallback for end-of-month starts).
 - Prevention: for OCR-heavy snapshots, keep parser recovery for `end < start` before validation; validator should only flag residual impossible windows.
+
+## 2026-03-13 - Snapshot deletion must only unlink files from roadmap uploads directory
+- Symptom: deleting a snapshot could remove a versioned example image when `source_image_path` pointed outside uploads (e.g. `data/roadmap_calendar_examples/...`).
+- Root cause: `deleteSnapshot()` unlinked any resolved in-project path, without restricting deletion scope to managed uploads.
+- Fix: added `resolveSnapshotDeletableImagePath()` and only allow unlink under `var/data/roadmap_uploads/`; source image preview still works from other locations.
+- Prevention: never `unlink` user/content paths unless explicitly scoped to a dedicated managed storage directory.

@@ -59,18 +59,6 @@ restart-app: ## Restart app container only
 	echo "Timeout: app is not ready after 60s."; \
 	exit 1
 
-.PHONY: ocr-up
-ocr-up: ## Start roadmap OCR sidecar
-	$(DC) --profile ocr up -d roadmap-ocr
-
-.PHONY: ocr-down
-ocr-down: ## Stop roadmap OCR sidecar
-	$(DC) --profile ocr stop roadmap-ocr
-
-.PHONY: ocr-logs
-ocr-logs: ## Follow roadmap OCR logs
-	$(DC) --profile ocr logs -f roadmap-ocr
-
 .PHONY: shell
 shell: ## Open a shell in app container
 	$(DC_EXEC) sh
@@ -98,10 +86,6 @@ data-sync: ## Sync legendary mods + Minerva JSON files from Nukaknights
 .PHONY: nuke-codes-warmup
 nuke-codes-warmup: ## Warmup nuke codes cache from Nukacrypt
 	$(DC_EXEC) php bin/console app:nuke-codes:warmup
-
-.PHONY: roadmap-ocr-scan
-roadmap-ocr-scan: ## OCR scan an image with configured roadmap providers (usage: make roadmap-ocr-scan IMAGE=/path/img.png LOCALE=en)
-	$(DC_EXEC) php bin/console app:roadmap:ocr:scan "$(IMAGE)" --locale="$(or $(LOCALE),en)"
 
 .PHONY: audit-retention-dry-run
 audit-retention-dry-run: ## Dry-run purge for auth/admin audit logs

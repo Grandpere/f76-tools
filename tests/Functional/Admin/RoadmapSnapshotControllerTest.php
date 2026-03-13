@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Admin;
 
-use App\Catalog\Application\Roadmap\Ocr\OcrProvider;
-use App\Catalog\Application\Roadmap\Ocr\OcrProviderChain;
-use App\Catalog\Application\Roadmap\Ocr\OcrResult;
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
 use App\Catalog\Domain\Entity\RoadmapCanonicalEventTranslationEntity;
 use App\Catalog\Domain\Entity\RoadmapEventEntity;
@@ -28,7 +25,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class RoadmapSnapshotControllerTest extends WebTestCase
 {
@@ -319,55 +315,19 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
     {
         $admin = $this->createUser('admin-roadmap-upload@example.com', ['ROLE_ADMIN']);
         $this->browser()->loginUser($admin);
-        $this->browser()->disableReboot();
-
-        $provider = new class implements OcrProvider {
-            public function name(): string
-            {
-                return 'test-ocr';
-            }
-
-            public function recognize(string $imagePath, string $locale): OcrResult
-            {
-                return new OcrResult(
-                    'test-ocr',
-                    "SEASON 24\nMARCH 3 - MARCH 10\nBIGFOOT'S BASH",
-                    0.95,
-                    ['SEASON 24', 'MARCH 3 - MARCH 10', "BIGFOOT'S BASH"],
-                );
-            }
-        };
-        $this->browser()->getContainer()->set(OcrProviderChain::class, new OcrProviderChain([$provider]));
-
         $crawler = $this->browser()->request('GET', '/en/admin/roadmap');
-        $tokenNode = $crawler->filter('form[action*="/en/admin/roadmap/upload"] input[name="_csrf_token"]');
-        self::assertCount(1, $tokenNode);
+        self::assertCount(0, $crawler->filter('form[action*="/en/admin/roadmap/upload"]'));
 
-        $tmpFile = tempnam(sys_get_temp_dir(), 'roadmap-upload-');
-        self::assertNotFalse($tmpFile);
-        $pngContent = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgA6V7x8AAAAASUVORK5CYII=', true);
-        self::assertIsString($pngContent);
-        file_put_contents($tmpFile, $pngContent);
-        $uploadedFile = new UploadedFile($tmpFile, 'roadmap.png', 'image/png', null, true);
-
-        $this->browser()->request('POST', '/en/admin/roadmap/upload', [
-            '_csrf_token' => (string) $tokenNode->attr('value'),
-            'locale' => 'en',
-            'preprocess' => 'layout-bw',
-        ], [
-            'image' => $uploadedFile,
-        ]);
+        $this->browser()->request('POST', '/en/admin/roadmap/upload');
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        $redirected = $this->getAndFollowRedirect('/en/admin/roadmap');
+        self::assertCount(1, $redirected->filter('p.translations-flash.warning:contains("OCR import is disabled. Use JSON import instead.")'));
         $this->entityManager?->clear();
 
         $snapshots = $this->entityManager?->getRepository(RoadmapSnapshotEntity::class)->findBy([], ['id' => 'DESC']);
         self::assertIsArray($snapshots);
-        self::assertCount(1, $snapshots);
-        self::assertSame('en', $snapshots[0]->getLocale());
-        self::assertSame('pending', $snapshots[0]->getOcrProvider());
-        self::assertSame('layout-bw', $snapshots[0]->getOcrPreprocessMode());
-        self::assertNotSame('', $snapshots[0]->getSourceImagePath());
+        self::assertCount(0, $snapshots);
     }
 
     public function testAdminUploadRejectsInvalidPreprocessMode(): void
@@ -376,25 +336,16 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         $this->browser()->loginUser($admin);
 
         $crawler = $this->browser()->request('GET', '/en/admin/roadmap');
-        $tokenNode = $crawler->filter('form[action*="/en/admin/roadmap/upload"] input[name="_csrf_token"]');
-        self::assertCount(1, $tokenNode);
-
-        $tmpFile = tempnam(sys_get_temp_dir(), 'roadmap-upload-');
-        self::assertNotFalse($tmpFile);
-        $pngContent = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgA6V7x8AAAAASUVORK5CYII=', true);
-        self::assertIsString($pngContent);
-        file_put_contents($tmpFile, $pngContent);
-        $uploadedFile = new UploadedFile($tmpFile, 'roadmap.png', 'image/png', null, true);
+        self::assertCount(0, $crawler->filter('form[action*="/en/admin/roadmap/upload"]'));
 
         $this->browser()->request('POST', '/en/admin/roadmap/upload', [
-            '_csrf_token' => (string) $tokenNode->attr('value'),
             'locale' => 'en',
             'preprocess' => 'unknown-mode',
-        ], [
-            'image' => $uploadedFile,
         ]);
 
         self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        $redirected = $this->getAndFollowRedirect('/en/admin/roadmap');
+        self::assertCount(1, $redirected->filter('p.translations-flash.warning:contains("OCR import is disabled. Use JSON import instead.")'));
         $this->entityManager?->clear();
         $snapshots = $this->entityManager?->getRepository(RoadmapSnapshotEntity::class)->findAll();
         self::assertIsArray($snapshots);

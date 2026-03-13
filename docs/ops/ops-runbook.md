@@ -167,21 +167,10 @@ Ce document regroupe les commandes d exploitation courantes pour ce projet Symfo
 
 ## Roadmap saisonniere
 - Procedure recommandee a chaque nouvelle saison:
-  - 1. Ouvrir `GET /{locale}/admin/roadmap` puis uploader les 3 images roadmap (FR/EN/DE) via le formulaire d import OCR (`layout-bw` par defaut).
-  - 2. Verifier/corriger le texte OCR, generer puis approuver chaque snapshot.
+  - 1. Ouvrir `GET /{locale}/admin/roadmap` puis importer les 3 snapshots roadmap (FR/EN/DE) via JSON.
+  - 2. Verifier/corriger les evenements, puis approuver chaque snapshot.
   - 3. Lancer la fusion FR/EN/DE depuis l admin roadmap.
-  - 4. Fallback/diagnostic possible avec `make roadmap-ocr-scan IMAGE=... LOCALE=...` (preprocess `layout-bw` par defaut, surcharge via `-- --preprocess=none` si besoin).
 - Regle de publication:
   - la fusion remplace uniquement les evenements canoniques de la saison concernee,
   - la saison fusionnee devient active automatiquement,
   - les saisons precedentes restent en base (pas d ecrasement global).
-
-## OCR Python optionnel
-- Le provider `python.ocr` est desactive par defaut (`ROADMAP_PY_OCR_ENABLED=0`).
-- Pour l activer localement:
-  - 1. Lancer le sidecar: `make ocr-up`
-  - 2. Mettre `ROADMAP_PY_OCR_ENABLED=1` dans `.env.local`
-  - 3. Redemarrer l app: `make restart-app`
-- Diagnostic:
-  - logs sidecar: `make ocr-logs`
-  - scan cible: `make roadmap-ocr-scan IMAGE=... LOCALE=...`

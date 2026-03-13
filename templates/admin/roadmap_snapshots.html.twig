@@ -14,40 +14,12 @@
         } %}
 
         {% include 'admin/_flashes.html.twig' %}
-
         <section class="translations-panel">
             <h2 class="roadmap-step-title">
                 <span class="roadmap-step-badge">1</span>
                 <span>{{ 'admin_roadmap.snapshots_title'|trans }}</span>
             </h2>
             <div class="roadmap-import-grid">
-                <section class="roadmap-import-card">
-                    <h3 class="roadmap-import-title">{{ 'admin_roadmap.import_ocr_title'|trans }}</h3>
-                    <form method="post" action="{{ path('app_admin_roadmap_snapshot_upload', { _locale: app.request.locale }) }}" enctype="multipart/form-data" class="translations-filters minerva-admin-filters roadmap-upload-form roadmap-upload-form--stack">
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('admin_roadmap_snapshot_upload') }}">
-                        <label class="field">
-                            {{ 'admin_roadmap.upload_locale'|trans }}
-                            <select name="locale" required>
-                                {% include '_locale_options.html.twig' with { selectedLocale: app.request.locale } %}
-                            </select>
-                        </label>
-                        <label class="field field--full">
-                            {{ 'admin_roadmap.upload_image'|trans }}
-                            <input type="file" name="image" accept="image/*" required>
-                        </label>
-                        <label class="field">
-                            {{ 'admin_roadmap.upload_preprocess'|trans }}
-                            <select name="preprocess">
-                                <option value="none">{{ 'admin_roadmap.upload_preprocess_none'|trans }}</option>
-                                <option value="grayscale">{{ 'admin_roadmap.upload_preprocess_grayscale'|trans }}</option>
-                                <option value="bw">{{ 'admin_roadmap.upload_preprocess_bw'|trans }}</option>
-                                <option value="strong-bw">{{ 'admin_roadmap.upload_preprocess_strong_bw'|trans }}</option>
-                                <option value="layout-bw" selected>{{ 'admin_roadmap.upload_preprocess_layout_bw'|trans }}</option>
-                            </select>
-                        </label>
-                        <button type="submit">{{ 'admin_roadmap.upload_submit'|trans }}</button>
-                    </form>
-                </section>
                 <section class="roadmap-import-card" data-controller="roadmap-json-prompt" data-roadmap-json-prompt-copied-label-value="{{ 'admin_roadmap.json_prompt_copied'|trans }}">
                     <h3 class="roadmap-import-title">{{ 'admin_roadmap.import_json_title'|trans }}</h3>
                     <p class="catalog-note info-note roadmap-json-prompt-note">

@@ -434,6 +434,7 @@ admin_roadmap.flash.upload_storage_error: Impossible de préparer le stockage lo
 admin_roadmap.flash.upload_failed: Échec de l'import OCR roadmap.
 admin_roadmap.flash.upload_success: Image importée et snapshot OCR créé.
 admin_roadmap.flash.upload_queued: Image importée. Le traitement OCR est en file d'attente.
+admin_roadmap.flash.upload_disabled: L'import OCR est désactivé. Utilise l'import JSON.
 admin_roadmap.flash.upload_preprocess_used: 'Prétraitement utilisé : %mode%'
 admin_roadmap.flash.upload_attempts_heading: "Détails OCR :"
 admin_roadmap.flash.upload_attempt_ok: "%provider% : ok (%confidence%%, %status%) · %reasons%"

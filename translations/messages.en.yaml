@@ -432,6 +432,7 @@ admin_roadmap.flash.upload_storage_error: Unable to prepare local storage for ro
 admin_roadmap.flash.upload_failed: Roadmap OCR upload failed.
 admin_roadmap.flash.upload_success: Image uploaded and OCR snapshot created.
 admin_roadmap.flash.upload_queued: Image uploaded. OCR processing is queued.
+admin_roadmap.flash.upload_disabled: OCR import is disabled. Use JSON import instead.
 admin_roadmap.flash.upload_preprocess_used: 'Preprocess used: %mode%'
 admin_roadmap.flash.upload_attempts_heading: "OCR details:"
 admin_roadmap.flash.upload_attempt_ok: "%provider%: ok (%confidence%%, %status%) · %reasons%"

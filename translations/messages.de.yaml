@@ -432,6 +432,7 @@ admin_roadmap.flash.upload_storage_error: Lokaler Speicher fur Roadmap-Uploads k
 admin_roadmap.flash.upload_failed: Roadmap-OCR-Upload fehlgeschlagen.
 admin_roadmap.flash.upload_success: Bild hochgeladen und OCR-Snapshot erstellt.
 admin_roadmap.flash.upload_queued: Bild hochgeladen. OCR-Verarbeitung wurde in die Warteschlange gestellt.
+admin_roadmap.flash.upload_disabled: OCR-Import ist deaktiviert. Bitte JSON-Import verwenden.
 admin_roadmap.flash.upload_preprocess_used: 'Verwendete Vorverarbeitung: %mode%'
 admin_roadmap.flash.upload_attempts_heading: "OCR-Details:"
 admin_roadmap.flash.upload_attempt_ok: "%provider%: ok (%confidence%%, %status%) · %reasons%"
