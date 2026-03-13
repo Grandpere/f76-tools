@@ -16,6 +16,7 @@ namespace App\Support\UI\Admin\Controller;
 use App\Catalog\Application\Roadmap\ApproveRoadmapSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\CreateRoadmapSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\CreateRoadmapSnapshotInput;
+use App\Catalog\Application\Roadmap\Ocr\GdImagePreprocessor;
 use App\Catalog\Application\Roadmap\GenerateRoadmapEventsFromSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\MergeRoadmapLocalesApplicationService;
 use App\Catalog\Application\Roadmap\Ocr\OcrAttempt;
@@ -63,6 +64,7 @@ final class RoadmapSnapshotController extends AbstractController
         private readonly RoadmapSeasonRepository $roadmapSeasonRepository,
         private readonly RoadmapSeasonExtractor $roadmapSeasonExtractor,
         private readonly OcrProviderChain $ocrProviderChain,
+        private readonly GdImagePreprocessor $gdImagePreprocessor,
         private readonly CreateRoadmapSnapshotApplicationService $createRoadmapSnapshotApplicationService,
         private readonly MergeRoadmapLocalesApplicationService $mergeRoadmapLocalesApplicationService,
         private readonly GenerateRoadmapEventsFromSnapshotApplicationService $generateRoadmapEventsFromSnapshotApplicationService,
@@ -197,6 +199,14 @@ final class RoadmapSnapshotController extends AbstractController
                 '_locale' => $request->getLocale(),
             ]);
         }
+        $preprocessMode = strtolower(trim((string) $request->request->get('preprocess', 'none')));
+        if (!in_array($preprocessMode, ['none', 'grayscale', 'bw', 'strong-bw'], true)) {
+            $this->addFlash('warning', 'admin_roadmap.flash.upload_invalid_preprocess');
+
+            return $this->redirectToRoute('app_admin_roadmap_snapshots', [
+                '_locale' => $request->getLocale(),
+            ]);
+        }
 
         $file = $request->files->get('image');
         if (!$file instanceof UploadedFile || !$file->isValid()) {
@@ -244,7 +254,12 @@ final class RoadmapSnapshotController extends AbstractController
             $absolutePath = $storedFile->getPathname();
             $relativePath = $relativeDirectory.'/'.$filename;
 
-            $scan = $this->ocrProviderChain->recognize($absolutePath, $localeInput);
+            $prepared = $this->gdImagePreprocessor->prepare($absolutePath, $preprocessMode);
+            try {
+                $scan = $this->ocrProviderChain->recognize($prepared['path'], $localeInput);
+            } finally {
+                $this->gdImagePreprocessor->cleanup($prepared['path'], true === $prepared['temporary']);
+            }
             $snapshot = $this->createRoadmapSnapshotApplicationService->create(
                 new CreateRoadmapSnapshotInput(
                     $localeInput,
@@ -271,6 +286,11 @@ final class RoadmapSnapshotController extends AbstractController
         $this->addFlash('success', $this->translator->trans('admin_roadmap.flash.upload_attempts_heading'));
         foreach ($scan->attempts as $attempt) {
             $this->addFlash('success', $this->formatOcrAttemptFlash($attempt));
+        }
+        if ('none' !== $preprocessMode) {
+            $this->addFlash('success', $this->translator->trans('admin_roadmap.flash.upload_preprocess_used', [
+                '%mode%' => $preprocessMode,
+            ]));
         }
 
         return $this->redirectToRoute('app_admin_roadmap_snapshots', [

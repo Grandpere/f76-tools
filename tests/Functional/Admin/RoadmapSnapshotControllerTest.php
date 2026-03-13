@@ -368,6 +368,37 @@ final class RoadmapSnapshotControllerTest extends WebTestCase
         self::assertStringContainsString('SEASON 24', $snapshots[0]->getRawText());
     }
 
+    public function testAdminUploadRejectsInvalidPreprocessMode(): void
+    {
+        $admin = $this->createUser('admin-roadmap-upload-preprocess@example.com', ['ROLE_ADMIN']);
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->browser()->request('GET', '/en/admin/roadmap');
+        $tokenNode = $crawler->filter('form[action*="/en/admin/roadmap/upload"] input[name="_csrf_token"]');
+        self::assertCount(1, $tokenNode);
+
+        $tmpFile = tempnam(sys_get_temp_dir(), 'roadmap-upload-');
+        self::assertNotFalse($tmpFile);
+        $pngContent = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgA6V7x8AAAAASUVORK5CYII=', true);
+        self::assertIsString($pngContent);
+        file_put_contents($tmpFile, $pngContent);
+        $uploadedFile = new UploadedFile($tmpFile, 'roadmap.png', 'image/png', null, true);
+
+        $this->browser()->request('POST', '/en/admin/roadmap/upload', [
+            '_csrf_token' => (string) $tokenNode->attr('value'),
+            'locale' => 'en',
+            'preprocess' => 'unknown-mode',
+        ], [
+            'image' => $uploadedFile,
+        ]);
+
+        self::assertSame(302, $this->browser()->getResponse()->getStatusCode());
+        $this->entityManager?->clear();
+        $snapshots = $this->entityManager?->getRepository(RoadmapSnapshotEntity::class)->findAll();
+        self::assertIsArray($snapshots);
+        self::assertCount(0, $snapshots);
+    }
+
     public function testAdminCanImportRoadmapJsonAndCreateSnapshotWithEvents(): void
     {
         $admin = $this->createUser('admin-roadmap-json@example.com', ['ROLE_ADMIN']);

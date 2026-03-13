@@ -35,6 +35,15 @@
                             {{ 'admin_roadmap.upload_image'|trans }}
                             <input type="file" name="image" accept="image/*" required>
                         </label>
+                        <label class="field">
+                            {{ 'admin_roadmap.upload_preprocess'|trans }}
+                            <select name="preprocess">
+                                <option value="none">{{ 'admin_roadmap.upload_preprocess_none'|trans }}</option>
+                                <option value="grayscale">{{ 'admin_roadmap.upload_preprocess_grayscale'|trans }}</option>
+                                <option value="bw">{{ 'admin_roadmap.upload_preprocess_bw'|trans }}</option>
+                                <option value="strong-bw">{{ 'admin_roadmap.upload_preprocess_strong_bw'|trans }}</option>
+                            </select>
+                        </label>
                         <button type="submit">{{ 'admin_roadmap.upload_submit'|trans }}</button>
                     </form>
                 </section>

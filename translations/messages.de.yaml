@@ -314,6 +314,11 @@ admin_roadmap.snapshots_title: OCR-Snapshots
 admin_roadmap.step_snapshots_hint: Offne einen Snapshot fur OCR-Review sowie Event-Erzeugung/Bearbeitung.
 admin_roadmap.upload_locale: Bildsprache
 admin_roadmap.upload_image: Roadmap-Bild
+admin_roadmap.upload_preprocess: Vorverarbeitung
+admin_roadmap.upload_preprocess_none: Keine
+admin_roadmap.upload_preprocess_grayscale: Graustufen
+admin_roadmap.upload_preprocess_bw: Schwarz-Weiß
+admin_roadmap.upload_preprocess_strong_bw: Starkes Schwarz-Weiß
 admin_roadmap.upload_submit: Hochladen und scannen
 admin_roadmap.import_ocr_title: OCR-Import (Bild)
 admin_roadmap.import_json_title: JSON-Import (manuell)
@@ -411,11 +416,13 @@ admin_roadmap.flash.merge_invalid_input: Bitte drei gultige Snapshot-IDs (FR/EN/
 admin_roadmap.flash.merge_success: Snapshot-Zusammenfuhrung abgeschlossen.
 admin_roadmap.flash.merge_missing_season: Jeder Snapshot muss vor der Zusammenfuhrung eine erkannte Saison haben.
 admin_roadmap.flash.upload_invalid_locale: Ungultige Sprache fur OCR-Upload.
+admin_roadmap.flash.upload_invalid_preprocess: Ungultiger Vorverarbeitungsmodus.
 admin_roadmap.flash.upload_missing_file: Bitte ein Bild zum Upload auswahlen.
 admin_roadmap.flash.upload_invalid_file_type: Es sind nur Bilddateien erlaubt.
 admin_roadmap.flash.upload_storage_error: Lokaler Speicher fur Roadmap-Uploads konnte nicht vorbereitet werden.
 admin_roadmap.flash.upload_failed: Roadmap-OCR-Upload fehlgeschlagen.
 admin_roadmap.flash.upload_success: Bild hochgeladen und OCR-Snapshot erstellt.
+admin_roadmap.flash.upload_preprocess_used: 'Verwendete Vorverarbeitung: %mode%'
 admin_roadmap.flash.upload_attempts_heading: "OCR-Details:"
 admin_roadmap.flash.upload_attempt_ok: "%provider%: ok (%confidence%%, %status%) · %reasons%"
 admin_roadmap.flash.upload_attempt_failed: "%provider%: fehlgeschlagen (%error%)"
