@@ -326,7 +326,7 @@ admin_roadmap.json_season_number: Season number (optional)
 admin_roadmap.json_image_optional: Source image (optional)
 admin_roadmap.json_payload: JSON payload
 admin_roadmap.json_submit: Import JSON
-admin_roadmap.json_prompt_hint: Use a standard prompt to generate a clean JSON from the image.
+admin_roadmap.json_prompt_hint: Use this prompt on claude.ai (or another vision-capable assistant) to generate a clean JSON from the image.
 admin_roadmap.json_prompt_open: View prompt
 admin_roadmap.json_prompt_title: Recommended prompt (Claude)
 admin_roadmap.json_prompt_copy: Copy prompt

@@ -38,3 +38,4 @@
 
 ## Ensuite
 - F76-150: OCR microservice Python optionnel (a evaluer apres stabilisation F76-149).
+- F76-151: OCR roadmap upload en asynchrone (messenger + statut admin snapshot).
