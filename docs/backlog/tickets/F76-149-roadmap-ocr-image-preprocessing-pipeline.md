@@ -1,7 +1,7 @@
 # F76-149 - Roadmap OCR image preprocessing pipeline (layout-first)
 
 ## Status
-`In progress`
+`Done`
 
 ## Contexte
 - Les roadmaps saison sont des images chargees (fond illustre + colonnes + texte petit).
