@@ -124,6 +124,7 @@ db-init: ## Drop schema, create schema, run migrations
 	$(DC_EXEC) php bin/console doctrine:schema:drop --force --full-database
 	$(DC_EXEC) php bin/console doctrine:database:create --if-not-exists
 	$(DC_EXEC) php bin/console doctrine:migrations:migrate --no-interaction
+	-$(DC_EXEC) php bin/console messenger:setup-transports 2>/dev/null
 
 .PHONY: db-migrate
 db-migrate: ## Run migrations (no interaction)
