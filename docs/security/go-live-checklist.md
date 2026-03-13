@@ -10,7 +10,6 @@ Checklist pre-deploiement production (version courte, operationnelle).
 - [ ] `APP_SECRET` fort, unique, configure hors repo.
 - [ ] `OIDC_GOOGLE_CLIENT_SECRET` configure hors repo.
 - [ ] `TURNSTILE_SECRET_KEY` configure hors repo.
-- [ ] `ROADMAP_OCR_SPACE_API_KEY` configure hors repo (si OCR.space actif).
 
 ## 2) Reverse proxy et HTTPS
 - [x] Support app pour `TRUSTED_PROXIES` et `TRUSTED_HOSTS` present.

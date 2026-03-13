@@ -102,9 +102,6 @@ OIDC_GOOGLE_ISSUER=https://accounts.google.com
 OIDC_GOOGLE_CLIENT_ID=
 OIDC_GOOGLE_CLIENT_SECRET=
 
-# OCR roadmap (optionnel)
-ROADMAP_OCR_SPACE_ENABLED=0
-ROADMAP_OCR_SPACE_API_KEY=
 ```
 
 ## Commandes utiles
@@ -131,7 +128,6 @@ make db-test-init
 ```bash
 make data-sync
 make nuke-codes-warmup
-make roadmap-ocr-scan IMAGE=/var/www/html/data/assets/roadmap.png LOCALE=fr
 
 make minerva-refresh-dry-run
 make minerva-refresh-check
@@ -140,10 +136,9 @@ make minerva-refresh-run
 ```
 
 Roadmap saison (workflow recommande):
-1. Backoffice roadmap: uploader les 3 images (FR, EN, DE) via le formulaire d'import OCR.
+1. Backoffice roadmap: importer les 3 snapshots JSON (FR, EN, DE).
 2. Verifier/corriger chaque snapshot, puis approuver les 3.
 3. Merge FR/EN/DE (la saison fusionnee devient active automatiquement).
-4. Option fallback/diagnostic: commande manuelle `make roadmap-ocr-scan IMAGE=... LOCALE=...`.
 
 ### Audit / retention
 ```bash

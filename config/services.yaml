@@ -63,7 +63,6 @@ services:
     App\Support\Application\Contact\ContactMessageReadRepository: '@App\Support\Infrastructure\Persistence\ContactMessageEntityRepository'
     App\Support\Application\Contact\ContactMessageStatusWriteRepository: '@App\Support\Infrastructure\Persistence\ContactMessageEntityRepository'
     App\Catalog\Application\NukeCode\NukeCodeReadRepository: '@App\Catalog\Infrastructure\NukeCode\NukacryptNukeCodeReadRepository'
-    App\Catalog\Infrastructure\Roadmap\Ocr\CommandRunner: '@App\Catalog\Infrastructure\Roadmap\Ocr\ProcessCommandRunner'
 
     App\Identity\Infrastructure\Guard\TurnstileVerifier:
         arguments:
@@ -105,45 +104,6 @@ services:
             $graphqlUrl: '%env(string:NUKECRYPT_GRAPHQL_URL)%'
             $userAgent: '%env(string:NUKECRYPT_USER_AGENT)%'
             $timeoutSeconds: '%env(int:NUKECRYPT_TIMEOUT_SECONDS)%'
-
-    App\Catalog\Application\Roadmap\Ocr\OcrQualityPolicy:
-        arguments:
-            $minConfidence: '%env(float:ROADMAP_OCR_MIN_CONFIDENCE)%'
-            $minNonEmptyLines: '%env(int:ROADMAP_OCR_MIN_NON_EMPTY_LINES)%'
-
-    App\Catalog\Application\Roadmap\Ocr\OcrProviderChain:
-        arguments:
-            $providers: !tagged_iterator app.roadmap.ocr_provider
-
-    App\Catalog\Infrastructure\Roadmap\Ocr\TesseractOcrProvider:
-        arguments:
-            $binaryPath: '%env(string:ROADMAP_OCR_TESSERACT_BIN)%'
-            $timeoutSeconds: '%env(int:ROADMAP_OCR_TIMEOUT_SECONDS)%'
-        tags:
-            - { name: 'app.roadmap.ocr_provider', priority: 220 }
-
-    App\Catalog\Infrastructure\Roadmap\Ocr\PythonRoadmapOcrProvider:
-        arguments:
-            $enabled: '%env(bool:ROADMAP_PY_OCR_ENABLED)%'
-            $baseUrl: '%env(string:ROADMAP_PY_OCR_BASE_URL)%'
-            $timeoutSeconds: '%env(int:ROADMAP_PY_OCR_TIMEOUT_SECONDS)%'
-        tags:
-            - { name: 'app.roadmap.ocr_provider', priority: 240 }
-
-    App\Catalog\Infrastructure\Roadmap\Ocr\OcrSpaceHttpProvider:
-        arguments:
-            $apiUrl: '%env(string:ROADMAP_OCR_SPACE_API_URL)%'
-            $apiKey: '%env(string:ROADMAP_OCR_SPACE_API_KEY)%'
-            $enabled: '%env(bool:ROADMAP_OCR_SPACE_ENABLED)%'
-            $timeoutSeconds: '%env(int:ROADMAP_OCR_SPACE_TIMEOUT_SECONDS)%'
-            $maxImageBytes: '%env(int:ROADMAP_OCR_SPACE_MAX_IMAGE_BYTES)%'
-            $ocrEngine: '%env(int:ROADMAP_OCR_SPACE_ENGINE)%'
-        tags:
-            - { name: 'app.roadmap.ocr_provider', priority: 200 }
-
-    App\Catalog\Infrastructure\Roadmap\Ocr\UnavailablePaddleOcrProvider:
-        tags:
-            - { name: 'app.roadmap.ocr_provider', priority: 100 }
 
     App\Support\Infrastructure\Http\SecurityHeadersSubscriber:
         arguments:
