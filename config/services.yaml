@@ -122,6 +122,14 @@ services:
         tags:
             - { name: 'app.roadmap.ocr_provider', priority: 220 }
 
+    App\Catalog\Infrastructure\Roadmap\Ocr\PythonRoadmapOcrProvider:
+        arguments:
+            $enabled: '%env(bool:ROADMAP_PY_OCR_ENABLED)%'
+            $baseUrl: '%env(string:ROADMAP_PY_OCR_BASE_URL)%'
+            $timeoutSeconds: '%env(int:ROADMAP_PY_OCR_TIMEOUT_SECONDS)%'
+        tags:
+            - { name: 'app.roadmap.ocr_provider', priority: 240 }
+
     App\Catalog\Infrastructure\Roadmap\Ocr\OcrSpaceHttpProvider:
         arguments:
             $apiUrl: '%env(string:ROADMAP_OCR_SPACE_API_URL)%'

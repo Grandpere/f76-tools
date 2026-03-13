@@ -80,7 +80,7 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
             return Command::INVALID;
         }
         if (!$this->isAllowedProvider($providerA) || !$this->isAllowedProvider($providerB)) {
-            $io->error('Invalid provider. Allowed values: auto, ocr.space, tesseract.');
+            $io->error('Invalid provider. Allowed values: auto, python.ocr, ocr.space, tesseract.');
 
             return Command::INVALID;
         }
@@ -517,7 +517,7 @@ final class BenchmarkRoadmapOcrProvidersCommand extends Command
 
     private function isAllowedProvider(string $provider): bool
     {
-        return in_array($provider, ['auto', 'ocr.space', 'tesseract'], true);
+        return in_array($provider, ['auto', 'python.ocr', 'ocr.space', 'tesseract'], true);
     }
 
     /**

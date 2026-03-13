@@ -45,7 +45,7 @@ final class ScanRoadmapImageCommand extends Command
         $this
             ->addArgument('image', InputArgument::REQUIRED, 'Chemin de l image a scanner.')
             ->addOption('locale', null, InputOption::VALUE_REQUIRED, 'Locale OCR (fr|en|de).', 'en')
-            ->addOption('provider', null, InputOption::VALUE_REQUIRED, 'Provider OCR (auto|ocr.space|tesseract).', 'auto')
+            ->addOption('provider', null, InputOption::VALUE_REQUIRED, 'Provider OCR (auto|python.ocr|ocr.space|tesseract).', 'auto')
             ->addOption('preprocess', null, InputOption::VALUE_REQUIRED, 'Preprocess image mode (none|grayscale|bw|strong-bw|layout-bw).', 'layout-bw')
             ->addOption('preview-lines', null, InputOption::VALUE_REQUIRED, 'Nombre max de lignes affichees.', '20')
             ->addOption('no-persist', null, InputOption::VALUE_NONE, 'N enregistre pas le snapshot OCR en base.');
@@ -68,8 +68,8 @@ final class ScanRoadmapImageCommand extends Command
 
             return Command::INVALID;
         }
-        if (!in_array($provider, ['auto', 'ocr.space', 'tesseract'], true)) {
-            $io->error(sprintf('Invalid provider "%s". Allowed values: auto, ocr.space, tesseract.', $provider));
+        if (!in_array($provider, ['auto', 'python.ocr', 'ocr.space', 'tesseract'], true)) {
+            $io->error(sprintf('Invalid provider "%s". Allowed values: auto, python.ocr, ocr.space, tesseract.', $provider));
 
             return Command::INVALID;
         }
