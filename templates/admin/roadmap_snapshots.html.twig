@@ -147,6 +147,7 @@ Règles :
                         <col class="roadmap-snapshots-col-id">
                         <col class="roadmap-snapshots-col-locale">
                         <col class="roadmap-snapshots-col-provider">
+                        <col class="roadmap-snapshots-col-provider">
                         <col class="roadmap-snapshots-col-confidence">
                         <col class="roadmap-snapshots-col-status">
                         <col class="roadmap-snapshots-col-quality">
@@ -160,6 +161,7 @@ Règles :
                         <th>{{ 'admin_roadmap.snapshot_id'|trans }}</th>
                         <th>{{ 'admin_roadmap.snapshot_locale'|trans }}</th>
                         <th>{{ 'admin_roadmap.snapshot_provider'|trans }}</th>
+                        <th>{{ 'admin_roadmap.snapshot_ocr_status'|trans }}</th>
                         <th>{{ 'admin_roadmap.snapshot_confidence'|trans }}</th>
                         <th>{{ 'admin_roadmap.snapshot_status'|trans }}</th>
                         <th>{{ 'admin_roadmap.snapshot_quality'|trans }}</th>
@@ -176,6 +178,11 @@ Règles :
                             <td>#{{ snapshotId }}</td>
                             <td>{{ snapshot.locale|upper }}</td>
                             <td>{{ snapshot.ocrProvider }}</td>
+                            <td>
+                                <span class="item-pill">
+                                    {{ ('admin_roadmap.ocr_status_' ~ snapshot.ocrProcessingStatus.value)|trans }}
+                                </span>
+                            </td>
                             <td>{{ (snapshot.ocrConfidence * 100)|number_format(2, '.', ' ') }}%</td>
                             <td><span class="item-pill">{{ ('admin_roadmap.status_' ~ snapshot.status.value)|trans }}</span></td>
                             {% set quality = snapshotQualityById[snapshotId]|default({ level: 'warn', errors: 0, warnings: 0 }) %}
@@ -220,7 +227,7 @@ Règles :
                         </tr>
                     {% else %}
                         <tr>
-                            <td class="admin-empty-cell" colspan="10">{{ 'admin_roadmap.empty_snapshots'|trans }}</td>
+                            <td class="admin-empty-cell" colspan="11">{{ 'admin_roadmap.empty_snapshots'|trans }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -268,9 +275,19 @@ Règles :
                                 <dd>{{ selectedSnapshot.ocrProvider }}</dd>
                             </div>
                             <div>
+                                <dt>{{ 'admin_roadmap.snapshot_ocr_status'|trans }}</dt>
+                                <dd>{{ ('admin_roadmap.ocr_status_' ~ selectedSnapshot.ocrProcessingStatus.value)|trans }}</dd>
+                            </div>
+                            <div>
                                 <dt>{{ 'admin_roadmap.snapshot_confidence'|trans }}</dt>
                                 <dd>{{ (selectedSnapshot.ocrConfidence * 100)|number_format(2, '.', ' ') }}%</dd>
                             </div>
+                            {% if selectedSnapshot.ocrProcessingError %}
+                                <div>
+                                    <dt>{{ 'admin_roadmap.snapshot_ocr_error'|trans }}</dt>
+                                    <dd>{{ selectedSnapshot.ocrProcessingError }}</dd>
+                                </div>
+                            {% endif %}
                             <div>
                                 <dt>{{ 'admin_roadmap.snapshot_scanned_at'|trans }}</dt>
                                 <dd>{{ selectedSnapshot.scannedAt|date('Y-m-d H:i') }}</dd>

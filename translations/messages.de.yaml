@@ -335,6 +335,8 @@ admin_roadmap.json_prompt_copied: Kopiert
 admin_roadmap.snapshot_id: ID
 admin_roadmap.snapshot_locale: Sprache
 admin_roadmap.snapshot_provider: Provider
+admin_roadmap.snapshot_ocr_status: OCR-Status
+admin_roadmap.snapshot_ocr_error: OCR-Fehler
 admin_roadmap.snapshot_confidence: Konfidenz
 admin_roadmap.snapshot_status: Status
 admin_roadmap.snapshot_quality: Qualität
@@ -346,6 +348,8 @@ admin_roadmap.snapshot_quality_legend: "Qualitatslegende: E = blockierende Fehle
 admin_roadmap.snapshot_quality_details: Qualitätsdetails
 admin_roadmap.snapshot_quality_errors: Blockierende Fehler
 admin_roadmap.snapshot_quality_warnings: Warnungen
+admin_roadmap.snapshot_quality_waiting_ocr: OCR wird verarbeitet. Qualitatsprufungen sind nach Abschluss verfugbar.
+admin_roadmap.snapshot_quality_failed_ocr: OCR-Verarbeitung fehlgeschlagen.
 admin_roadmap.snapshot_quality_filter: Nach Qualität filtern
 admin_roadmap.snapshot_quality_filter_all: Alle
 admin_roadmap.snapshot_scanned_at: Gescannt am
@@ -358,6 +362,10 @@ admin_roadmap.snapshot_delete_used_hint: Dieser Snapshot wurde bereits in einer 
 admin_roadmap.status_draft: Entwurf
 admin_roadmap.status_approved: Freigegeben
 admin_roadmap.status_rejected: Abgelehnt
+admin_roadmap.ocr_status_queued: In Warteschlange
+admin_roadmap.ocr_status_processing: In Bearbeitung
+admin_roadmap.ocr_status_done: Fertig
+admin_roadmap.ocr_status_failed: Fehlgeschlagen
 admin_roadmap.empty_snapshots: Kein Roadmap-Snapshot gefunden.
 admin_roadmap.canonical_title: Kanonische Timeline
 admin_roadmap.canonical_description: Zusammengefuhrte Timeline aus FR/EN/DE-Snapshots mit Konfidenz und fehlenden Sprachen.
@@ -422,6 +430,7 @@ admin_roadmap.flash.upload_invalid_file_type: Es sind nur Bilddateien erlaubt.
 admin_roadmap.flash.upload_storage_error: Lokaler Speicher fur Roadmap-Uploads konnte nicht vorbereitet werden.
 admin_roadmap.flash.upload_failed: Roadmap-OCR-Upload fehlgeschlagen.
 admin_roadmap.flash.upload_success: Bild hochgeladen und OCR-Snapshot erstellt.
+admin_roadmap.flash.upload_queued: Bild hochgeladen. OCR-Verarbeitung wurde in die Warteschlange gestellt.
 admin_roadmap.flash.upload_preprocess_used: 'Verwendete Vorverarbeitung: %mode%'
 admin_roadmap.flash.upload_attempts_heading: "OCR-Details:"
 admin_roadmap.flash.upload_attempt_ok: "%provider%: ok (%confidence%%, %status%) · %reasons%"

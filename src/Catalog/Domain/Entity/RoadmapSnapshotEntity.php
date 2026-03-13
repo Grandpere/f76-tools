@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Catalog\Domain\Entity;
 
+use App\Catalog\Domain\Roadmap\RoadmapOcrProcessingStatusEnum;
 use App\Catalog\Domain\Roadmap\RoadmapSnapshotStatusEnum;
 use App\Identity\Domain\Entity\UserEntity;
 use DateTimeImmutable;
@@ -54,6 +55,15 @@ class RoadmapSnapshotEntity
 
     #[ORM\Column(name: 'ocr_attempts_summary', type: Types::TEXT, nullable: true)]
     private ?string $ocrAttemptsSummary = null;
+
+    #[ORM\Column(name: 'ocr_processing_status', length: 16, enumType: RoadmapOcrProcessingStatusEnum::class)]
+    private RoadmapOcrProcessingStatusEnum $ocrProcessingStatus = RoadmapOcrProcessingStatusEnum::DONE;
+
+    #[ORM\Column(name: 'ocr_processing_error', type: Types::TEXT, nullable: true)]
+    private ?string $ocrProcessingError = null;
+
+    #[ORM\Column(name: 'ocr_preprocess_mode', length: 16)]
+    private string $ocrPreprocessMode = 'none';
 
     #[ORM\Column(length: 16, enumType: RoadmapSnapshotStatusEnum::class)]
     private RoadmapSnapshotStatusEnum $status = RoadmapSnapshotStatusEnum::DRAFT;
@@ -176,6 +186,44 @@ class RoadmapSnapshotEntity
     {
         $clean = trim((string) $ocrAttemptsSummary);
         $this->ocrAttemptsSummary = '' === $clean ? null : $clean;
+
+        return $this;
+    }
+
+    public function getOcrProcessingStatus(): RoadmapOcrProcessingStatusEnum
+    {
+        return $this->ocrProcessingStatus;
+    }
+
+    public function setOcrProcessingStatus(RoadmapOcrProcessingStatusEnum $ocrProcessingStatus): self
+    {
+        $this->ocrProcessingStatus = $ocrProcessingStatus;
+
+        return $this;
+    }
+
+    public function getOcrProcessingError(): ?string
+    {
+        return $this->ocrProcessingError;
+    }
+
+    public function setOcrProcessingError(?string $ocrProcessingError): self
+    {
+        $clean = trim((string) $ocrProcessingError);
+        $this->ocrProcessingError = '' === $clean ? null : $clean;
+
+        return $this;
+    }
+
+    public function getOcrPreprocessMode(): string
+    {
+        return $this->ocrPreprocessMode;
+    }
+
+    public function setOcrPreprocessMode(string $ocrPreprocessMode): self
+    {
+        $normalized = strtolower(trim($ocrPreprocessMode));
+        $this->ocrPreprocessMode = '' !== $normalized ? $normalized : 'none';
 
         return $this;
     }

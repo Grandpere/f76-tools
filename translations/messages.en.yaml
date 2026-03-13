@@ -335,6 +335,8 @@ admin_roadmap.json_prompt_copied: Copied
 admin_roadmap.snapshot_id: ID
 admin_roadmap.snapshot_locale: Locale
 admin_roadmap.snapshot_provider: Provider
+admin_roadmap.snapshot_ocr_status: OCR status
+admin_roadmap.snapshot_ocr_error: OCR error
 admin_roadmap.snapshot_confidence: Confidence
 admin_roadmap.snapshot_status: Status
 admin_roadmap.snapshot_quality: Quality
@@ -346,6 +348,8 @@ admin_roadmap.snapshot_quality_legend: "Quality legend: E = blocking errors, W =
 admin_roadmap.snapshot_quality_details: Quality details
 admin_roadmap.snapshot_quality_errors: Blocking errors
 admin_roadmap.snapshot_quality_warnings: Warnings
+admin_roadmap.snapshot_quality_waiting_ocr: OCR is in progress. Quality checks will be available once processing finishes.
+admin_roadmap.snapshot_quality_failed_ocr: OCR processing failed.
 admin_roadmap.snapshot_quality_filter: Filter by quality
 admin_roadmap.snapshot_quality_filter_all: All
 admin_roadmap.snapshot_scanned_at: Scanned at
@@ -358,6 +362,10 @@ admin_roadmap.snapshot_delete_used_hint: This snapshot was already used in a can
 admin_roadmap.status_draft: Draft
 admin_roadmap.status_approved: Approved
 admin_roadmap.status_rejected: Rejected
+admin_roadmap.ocr_status_queued: Queued
+admin_roadmap.ocr_status_processing: Processing
+admin_roadmap.ocr_status_done: Done
+admin_roadmap.ocr_status_failed: Failed
 admin_roadmap.empty_snapshots: No roadmap snapshot found.
 admin_roadmap.canonical_title: Canonical timeline
 admin_roadmap.canonical_description: Merged timeline from FR/EN/DE snapshots with confidence and missing locale tracking.
@@ -422,6 +430,7 @@ admin_roadmap.flash.upload_invalid_file_type: Only image files are accepted.
 admin_roadmap.flash.upload_storage_error: Unable to prepare local storage for roadmap uploads.
 admin_roadmap.flash.upload_failed: Roadmap OCR upload failed.
 admin_roadmap.flash.upload_success: Image uploaded and OCR snapshot created.
+admin_roadmap.flash.upload_queued: Image uploaded. OCR processing is queued.
 admin_roadmap.flash.upload_preprocess_used: 'Preprocess used: %mode%'
 admin_roadmap.flash.upload_attempts_heading: "OCR details:"
 admin_roadmap.flash.upload_attempt_ok: "%provider%: ok (%confidence%%, %status%) · %reasons%"

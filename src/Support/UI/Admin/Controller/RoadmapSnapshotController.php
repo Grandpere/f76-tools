@@ -18,9 +18,7 @@ use App\Catalog\Application\Roadmap\CreateRoadmapSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\CreateRoadmapSnapshotInput;
 use App\Catalog\Application\Roadmap\GenerateRoadmapEventsFromSnapshotApplicationService;
 use App\Catalog\Application\Roadmap\MergeRoadmapLocalesApplicationService;
-use App\Catalog\Application\Roadmap\Ocr\GdImagePreprocessor;
-use App\Catalog\Application\Roadmap\Ocr\OcrAttempt;
-use App\Catalog\Application\Roadmap\Ocr\OcrProviderChain;
+use App\Catalog\Application\Roadmap\Ocr\ProcessRoadmapSnapshotOcrMessage;
 use App\Catalog\Application\Roadmap\RoadmapCanonicalEventReadRepository;
 use App\Catalog\Application\Roadmap\RoadmapParsedEvent;
 use App\Catalog\Application\Roadmap\RoadmapParsedEventsValidator;
@@ -31,6 +29,7 @@ use App\Catalog\Domain\Entity\RoadmapCanonicalEventEntity;
 use App\Catalog\Domain\Entity\RoadmapEventEntity;
 use App\Catalog\Domain\Entity\RoadmapSeasonEntity;
 use App\Catalog\Domain\Entity\RoadmapSnapshotEntity;
+use App\Catalog\Domain\Roadmap\RoadmapOcrProcessingStatusEnum;
 use App\Identity\Domain\Entity\UserEntity;
 use App\Support\Domain\Entity\AdminAuditLogEntity;
 use DateTimeImmutable;
@@ -44,6 +43,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
@@ -63,9 +63,8 @@ final class RoadmapSnapshotController extends AbstractController
         private readonly RoadmapCanonicalEventReadRepository $roadmapCanonicalEventReadRepository,
         private readonly RoadmapSeasonRepository $roadmapSeasonRepository,
         private readonly RoadmapSeasonExtractor $roadmapSeasonExtractor,
-        private readonly OcrProviderChain $ocrProviderChain,
-        private readonly GdImagePreprocessor $gdImagePreprocessor,
         private readonly CreateRoadmapSnapshotApplicationService $createRoadmapSnapshotApplicationService,
+        private readonly MessageBusInterface $messageBus,
         private readonly MergeRoadmapLocalesApplicationService $mergeRoadmapLocalesApplicationService,
         private readonly GenerateRoadmapEventsFromSnapshotApplicationService $generateRoadmapEventsFromSnapshotApplicationService,
         private readonly RoadmapParsedEventsValidator $roadmapParsedEventsValidator,
@@ -254,24 +253,31 @@ final class RoadmapSnapshotController extends AbstractController
             $absolutePath = $storedFile->getPathname();
             $relativePath = $relativeDirectory.'/'.$filename;
 
-            $prepared = $this->gdImagePreprocessor->prepare($absolutePath, $preprocessMode);
-            try {
-                $scan = $this->ocrProviderChain->recognize($prepared['path'], $localeInput);
-            } finally {
-                $this->gdImagePreprocessor->cleanup($prepared['path'], true === $prepared['temporary']);
-            }
             $snapshot = $this->createRoadmapSnapshotApplicationService->create(
                 new CreateRoadmapSnapshotInput(
                     $localeInput,
                     $absolutePath,
-                    $scan->result->provider,
-                    $scan->result->confidence,
-                    $this->buildStructuredRawText($scan->result->lines, $scan->result->text),
+                    'pending',
+                    0.0,
+                    '',
                 ),
             );
-            $snapshot->setOcrAttemptsSummary($this->buildOcrAttemptsSummary($scan->attempts));
             $snapshot->setSourceImagePath($relativePath);
+            $snapshot->setOcrPreprocessMode($preprocessMode);
+            $snapshot->setOcrProcessingStatus(RoadmapOcrProcessingStatusEnum::QUEUED);
+            $snapshot->setOcrProcessingError(null);
             $this->roadmapSnapshotWriteRepository->save($snapshot);
+
+            $snapshotId = $snapshot->getId();
+            if (!is_int($snapshotId)) {
+                throw new RuntimeException('Snapshot ID is missing after persistence.');
+            }
+
+            $this->messageBus->dispatch(new ProcessRoadmapSnapshotOcrMessage(
+                $snapshotId,
+                $localeInput,
+                $preprocessMode,
+            ));
         } catch (Throwable $exception) {
             $this->addFlash('warning', 'admin_roadmap.flash.upload_failed');
             $this->addFlash('warning', $exception->getMessage());
@@ -282,16 +288,10 @@ final class RoadmapSnapshotController extends AbstractController
         }
 
         $snapshotId = $snapshot->getId();
-        $this->addFlash('success', 'admin_roadmap.flash.upload_success');
-        $this->addFlash('success', $this->translator->trans('admin_roadmap.flash.upload_attempts_heading'));
-        foreach ($scan->attempts as $attempt) {
-            $this->addFlash('success', $this->formatOcrAttemptFlash($attempt));
-        }
-        if ('none' !== $preprocessMode) {
-            $this->addFlash('success', $this->translator->trans('admin_roadmap.flash.upload_preprocess_used', [
-                '%mode%' => $preprocessMode,
-            ]));
-        }
+        $this->addFlash('success', 'admin_roadmap.flash.upload_queued');
+        $this->addFlash('success', $this->translator->trans('admin_roadmap.flash.upload_preprocess_used', [
+            '%mode%' => $preprocessMode,
+        ]));
 
         return $this->redirectToRoute('app_admin_roadmap_snapshots', [
             '_locale' => $request->getLocale(),
@@ -962,6 +962,27 @@ final class RoadmapSnapshotController extends AbstractController
      */
     private function assessSnapshotQuality(RoadmapSnapshotEntity $snapshot, int $snapshotId): array
     {
+        $processingStatus = $snapshot->getOcrProcessingStatus();
+        if (RoadmapOcrProcessingStatusEnum::QUEUED === $processingStatus || RoadmapOcrProcessingStatusEnum::PROCESSING === $processingStatus) {
+            return [
+                'level' => 'warn',
+                'errors' => [],
+                'warnings' => [$this->translator->trans('admin_roadmap.snapshot_quality_waiting_ocr')],
+            ];
+        }
+        if (RoadmapOcrProcessingStatusEnum::FAILED === $processingStatus) {
+            $error = trim((string) $snapshot->getOcrProcessingError());
+            if ('' === $error) {
+                $error = $this->translator->trans('admin_roadmap.snapshot_quality_failed_ocr');
+            }
+
+            return [
+                'level' => 'error',
+                'errors' => [$error],
+                'warnings' => [],
+            ];
+        }
+
         try {
             $parsedEvents = $this->resolveSnapshotParsedEvents($snapshot, $snapshotId);
             $validation = $this->roadmapParsedEventsValidator->validate(
@@ -1016,81 +1037,6 @@ final class RoadmapSnapshotController extends AbstractController
         }
 
         return $this->generateRoadmapEventsFromSnapshotApplicationService->generate($snapshotId, true);
-    }
-
-    private function formatOcrAttemptFlash(OcrAttempt $attempt): string
-    {
-        if (!$attempt->successful) {
-            return $this->translator->trans('admin_roadmap.flash.upload_attempt_failed', [
-                '%provider%' => $attempt->provider,
-                '%error%' => (string) ($attempt->error ?? 'unknown error'),
-            ]);
-        }
-
-        $statusKey = $attempt->acceptable
-            ? 'admin_roadmap.flash.upload_attempt_status_accepted'
-            : 'admin_roadmap.flash.upload_attempt_status_rejected';
-        $status = $this->translator->trans($statusKey);
-
-        $reasons = [];
-        foreach ($attempt->qualityReasons as $reason) {
-            $clean = trim($reason);
-            if ('' !== $clean) {
-                $reasons[] = $clean;
-            }
-        }
-
-        $reasonsText = [] === $reasons
-            ? $this->translator->trans('admin_roadmap.flash.upload_attempt_no_reason')
-            : implode('; ', $reasons);
-
-        return $this->translator->trans('admin_roadmap.flash.upload_attempt_ok', [
-            '%provider%' => $attempt->provider,
-            '%confidence%' => number_format((float) ($attempt->confidence ?? 0.0) * 100, 2, '.', ''),
-            '%status%' => $status,
-            '%reasons%' => $reasonsText,
-        ]);
-    }
-
-    /**
-     * @param list<OcrAttempt> $attempts
-     */
-    private function buildOcrAttemptsSummary(array $attempts): ?string
-    {
-        $lines = [];
-        foreach ($attempts as $attempt) {
-            if (!$attempt->successful) {
-                $lines[] = sprintf(
-                    '%s: failed (%s)',
-                    $attempt->provider,
-                    (string) ($attempt->error ?? 'unknown error'),
-                );
-                continue;
-            }
-
-            $status = $attempt->acceptable ? 'accepted' : 'rejected';
-            $reasons = [];
-            foreach ($attempt->qualityReasons as $reason) {
-                $clean = trim($reason);
-                if ('' !== $clean) {
-                    $reasons[] = $clean;
-                }
-            }
-            $reasonsText = [] === $reasons ? 'no reason' : implode('; ', $reasons);
-            $lines[] = sprintf(
-                '%s: ok (%.2f%%, %s) · %s',
-                $attempt->provider,
-                (float) ($attempt->confidence ?? 0.0) * 100,
-                $status,
-                $reasonsText,
-            );
-        }
-
-        if ([] === $lines) {
-            return null;
-        }
-
-        return implode("\n", $lines);
     }
 
     /**
@@ -1180,23 +1126,6 @@ final class RoadmapSnapshotController extends AbstractController
         }
 
         return $context;
-    }
-
-    /**
-     * @param list<string> $lines
-     */
-    private function buildStructuredRawText(array $lines, string $fallbackText): string
-    {
-        $normalizedLines = array_values(array_filter(array_map(
-            static fn (string $line): string => trim($line),
-            $lines,
-        ), static fn (string $line): bool => '' !== $line));
-
-        if ([] !== $normalizedLines) {
-            return implode("\n", $normalizedLines);
-        }
-
-        return $fallbackText;
     }
 
     private function resolveSnapshotImagePath(RoadmapSnapshotEntity $snapshot): ?string
