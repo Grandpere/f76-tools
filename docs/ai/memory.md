@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-03-13 - Async messenger transport requires Doctrine table migration in prod DB
+- Symptom: roadmap OCR upload failed with `relation "messenger_messages" does not exist`.
+- Root cause: `MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0` disables runtime table auto-creation, and async feature shipped before creating `messenger_messages`.
+- Fix: added migration `Version20260313193000` creating `messenger_messages` + compound queue index.
+- Prevention: every new Doctrine Messenger async route must ship with transport table migration (or explicit setup command in deploy runbook).
+
 ## 2026-03-13 - Roadmap OCR layout preprocessing works better when stacking monthly right-pane bands
 - Symptom: OCR on full roadmap image remained noisy on older seasons despite grayscale/bw filters.
 - Root cause: decorative left pane and mixed layout density polluted recognition; one-pass preprocessing preserved too much irrelevant content.
