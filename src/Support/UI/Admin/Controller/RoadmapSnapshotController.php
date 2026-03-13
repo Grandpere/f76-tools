@@ -244,6 +244,7 @@ final class RoadmapSnapshotController extends AbstractController
             ]);
         }
 
+        $snapshot = null;
         try {
             $extension = $file->guessExtension() ?: $file->getClientOriginalExtension();
             $extension = '' !== trim((string) $extension) ? strtolower((string) $extension) : 'bin';
@@ -279,6 +280,12 @@ final class RoadmapSnapshotController extends AbstractController
                 $preprocessMode,
             ));
         } catch (Throwable $exception) {
+            if ($snapshot instanceof RoadmapSnapshotEntity) {
+                $snapshot
+                    ->setOcrProcessingStatus(RoadmapOcrProcessingStatusEnum::FAILED)
+                    ->setOcrProcessingError($exception->getMessage());
+                $this->roadmapSnapshotWriteRepository->save($snapshot);
+            }
             $this->addFlash('warning', 'admin_roadmap.flash.upload_failed');
             $this->addFlash('warning', $exception->getMessage());
 
