@@ -24,7 +24,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'app:roadmap:snapshot:approve',
-    description: 'Approuve un snapshot OCR roadmap pour publication.',
+    description: 'Approuve un snapshot roadmap pour publication.',
 )]
 final class ApproveRoadmapSnapshotCommand extends Command
 {

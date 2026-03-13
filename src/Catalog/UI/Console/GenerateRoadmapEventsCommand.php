@@ -25,7 +25,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'app:roadmap:snapshot:parse-events',
-    description: 'Parse un snapshot OCR et genere les roadmap_event associes.',
+    description: 'Parse un snapshot roadmap et genere les roadmap_event associes.',
 )]
 final class GenerateRoadmapEventsCommand extends Command
 {
