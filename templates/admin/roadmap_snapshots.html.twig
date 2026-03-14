@@ -22,8 +22,13 @@
             <div class="roadmap-import-grid">
                 <section class="roadmap-import-card" data-controller="roadmap-json-prompt" data-roadmap-json-prompt-copied-label-value="{{ 'admin_roadmap.json_prompt_copied'|trans }}">
                     <h3 class="roadmap-import-title">{{ 'admin_roadmap.import_json_title'|trans }}</h3>
+                    {% set extractorLink = '<a href="https://github.com/Grandpere/f76-roadmap-extractor" target="_blank" rel="noopener noreferrer">F76-roadmap-extractor</a>' %}
+                    {% set claudeLink = '<a href="https://claude.ai/" target="_blank" rel="noopener noreferrer">claude.ai</a>' %}
                     <p class="catalog-note info-note roadmap-json-prompt-note">
-                        <span class="info-note-content">{{ 'admin_roadmap.json_prompt_hint'|trans }}</span>
+                        <span class="info-note-content">{{ 'admin_roadmap.json_prompt_hint'|trans({
+                                '%extractor_link%': extractorLink,
+                                '%claude_link%': claudeLink
+                            })|raw }}</span>
                         <button type="button" class="roadmap-json-prompt-open" data-action="roadmap-json-prompt#open">
                             {{ 'admin_roadmap.json_prompt_open'|trans }}
                         </button>

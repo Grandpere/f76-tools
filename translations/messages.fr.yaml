@@ -327,7 +327,7 @@ admin_roadmap.json_season_number: Numéro de saison (optionnel)
 admin_roadmap.json_image_optional: Image source (optionnelle)
 admin_roadmap.json_payload: Payload JSON
 admin_roadmap.json_submit: Importer le JSON
-admin_roadmap.json_prompt_hint: Utilise ce prompt sur claude.ai (ou un assistant avec vision) pour générer un JSON propre depuis l'image.
+admin_roadmap.json_prompt_hint: "Tu peux utiliser l'app macOS %extractor_link% ou le prompt sur %claude_link% pour générer un JSON propre depuis l'image."
 admin_roadmap.json_prompt_open: Voir le prompt
 admin_roadmap.json_prompt_title: Prompt recommandé (Claude)
 admin_roadmap.json_prompt_copy: Copier le prompt
