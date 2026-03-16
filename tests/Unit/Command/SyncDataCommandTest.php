@@ -44,6 +44,31 @@ final class SyncDataCommandTest extends TestCase
         self::assertSame(1, $fandomCommand->calls);
     }
 
+    public function testOnlyFandomJsonFormatReturnsMachineReadablePayload(): void
+    {
+        $kernel = $this->createMock(KernelInterface::class);
+        $kernel->method('getProjectDir')->willReturn(sys_get_temp_dir());
+
+        $syncCommand = new SyncDataCommand($kernel);
+        $fandomCommand = new TestFandomCommand(Command::SUCCESS);
+
+        $application = new \Symfony\Component\Console\Application();
+        $application->addCommand($syncCommand);
+        $application->addCommand($fandomCommand);
+
+        $tester = new CommandTester($syncCommand);
+        $exitCode = $tester->execute([
+            '--only' => 'fandom',
+            '--format' => 'json',
+        ]);
+
+        self::assertSame(Command::SUCCESS, $exitCode);
+        /** @var array<string, mixed> $decoded */
+        $decoded = json_decode($tester->getDisplay(), true, 512, JSON_THROW_ON_ERROR);
+        self::assertSame('fandom', $decoded['scope'] ?? null);
+        self::assertSame('ok', $decoded['status'] ?? null);
+    }
+
     public function testOnlyFandomFailsWhenDelegatedCommandFails(): void
     {
         $kernel = $this->createMock(KernelInterface::class);
@@ -63,6 +88,25 @@ final class SyncDataCommandTest extends TestCase
 
         self::assertSame(Command::FAILURE, $exitCode);
         self::assertSame(1, $fandomCommand->calls);
+    }
+
+    public function testInvalidFormatReturnsInvalidCode(): void
+    {
+        $kernel = $this->createMock(KernelInterface::class);
+        $kernel->method('getProjectDir')->willReturn(sys_get_temp_dir());
+
+        $syncCommand = new SyncDataCommand($kernel);
+        $application = new \Symfony\Component\Console\Application();
+        $application->addCommand($syncCommand);
+        $application->addCommand(new TestFandomCommand(Command::SUCCESS));
+
+        $tester = new CommandTester($syncCommand);
+        $exitCode = $tester->execute([
+            '--only' => 'fandom',
+            '--format' => 'yaml',
+        ]);
+
+        self::assertSame(Command::INVALID, $exitCode);
     }
 }
 

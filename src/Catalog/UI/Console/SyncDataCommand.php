@@ -48,15 +48,21 @@ final class SyncDataCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $io->title('Data sync');
 
         $onlyRaw = $input->getOption('only');
         $only = is_string($onlyRaw) ? strtolower(trim($onlyRaw)) : 'all';
         $runNukaknights = 'all' === $only || 'nukaknights' === $only;
         $runFandom = 'all' === $only || 'fandom' === $only;
+        $formatRaw = $input->getOption('format');
+        $format = is_string($formatRaw) ? strtolower(trim($formatRaw)) : 'text';
+        $isJson = 'json' === $format;
 
-        if (!$runNukaknights && !$runFandom) {
-            $io->error('Option --only invalide. Valeurs attendues: all, nukaknights, fandom.');
+        if (!$isJson) {
+            $io->title('Data sync');
+        }
+
+        if ((!$runNukaknights && !$runFandom) || !in_array($format, ['text', 'json'], true)) {
+            $io->error('Options invalides. --only: all|nukaknights|fandom ; --format: text|json.');
 
             return Command::INVALID;
         }
@@ -65,10 +71,13 @@ final class SyncDataCommand extends Command
 
         $errors = [];
         $updated = 0;
+        $updatedNukaknights = 0;
         $fandomCode = null;
 
         if ($runNukaknights) {
-            $io->section('Nukaknights');
+            if (!$isJson) {
+                $io->section('Nukaknights');
+            }
             $httpClient = HttpClient::create([
                 'timeout' => 20,
                 'headers' => [
@@ -81,8 +90,9 @@ final class SyncDataCommand extends Command
                 $url = self::BASE_URL.'?legendary_mods='.$legendaryRank.'&lang=en';
                 $target = sprintf('%s/data/legendary_mods_pages/legendary_mods_%d_en.json', $projectDir, $legendaryRank);
 
-                if ($this->syncFile($httpClient, $url, $target, $errors, $io)) {
+                if ($this->syncFile($httpClient, $url, $target, $errors, $io, !$isJson)) {
                     ++$updated;
+                    ++$updatedNukaknights;
                 }
             }
 
@@ -90,25 +100,49 @@ final class SyncDataCommand extends Command
                 $url = self::BASE_URL.'?minerva='.$minervaList.'&lang=en';
                 $target = sprintf('%s/data/minerva_pages/minerva_%d_en.json', $projectDir, $minervaList);
 
-                if ($this->syncFile($httpClient, $url, $target, $errors, $io)) {
+                if ($this->syncFile($httpClient, $url, $target, $errors, $io, !$isJson)) {
                     ++$updated;
+                    ++$updatedNukaknights;
                 }
             }
         }
 
         if ($runFandom) {
-            $io->section('Fandom');
+            if (!$isJson) {
+                $io->section('Fandom');
+            }
             $fandomCode = $this->runFandomSync($input, $output, $io);
+        }
+
+        $hasFailure = [] !== $errors || (null !== $fandomCode && Command::SUCCESS !== $fandomCode);
+        $fandomStatus = null === $fandomCode ? 'skipped' : (Command::SUCCESS === $fandomCode ? 'ok' : 'failed');
+        $exitCode = $hasFailure ? Command::FAILURE : Command::SUCCESS;
+        if ('json' === $format) {
+            $output->writeln((string) json_encode([
+                'scope' => $only,
+                'updated_files' => $updated,
+                'updated_by_source' => [
+                    'nukaknights' => $updatedNukaknights,
+                    'fandom' => Command::SUCCESS === $fandomCode ? 1 : 0,
+                ],
+                'fandom_status' => $fandomStatus,
+                'errors_count' => count($errors),
+                'errors' => $errors,
+                'status' => Command::SUCCESS === $exitCode ? 'ok' : 'failed',
+            ], JSON_THROW_ON_ERROR));
+
+            return $exitCode;
         }
 
         $io->newLine();
         $io->definitionList(
             ['Updated files' => (string) $updated],
-            ['Fandom sync' => null === $fandomCode ? 'skipped' : (Command::SUCCESS === $fandomCode ? 'ok' : 'failed')],
+            ['Updated Nukaknights' => (string) $updatedNukaknights],
+            ['Fandom sync' => $fandomStatus],
             ['Errors' => (string) count($errors)],
         );
 
-        if ([] !== $errors || (null !== $fandomCode && Command::SUCCESS !== $fandomCode)) {
+        if ($hasFailure) {
             foreach ($errors as $error) {
                 $io->error($error);
             }
@@ -116,18 +150,19 @@ final class SyncDataCommand extends Command
                 $io->error('Fandom sync failed.');
             }
 
-            return Command::FAILURE;
+            return $exitCode;
         }
 
         $io->success('Sync terminee.');
 
-        return Command::SUCCESS;
+        return $exitCode;
     }
 
     protected function configure(): void
     {
         $this
             ->addOption('only', null, InputOption::VALUE_REQUIRED, 'Scope sync: all|nukaknights|fandom', 'all')
+            ->addOption('format', null, InputOption::VALUE_REQUIRED, 'Output format: text|json', 'text')
             ->addOption('fandom-output-dir', null, InputOption::VALUE_REQUIRED, 'Forwarded to app:data:sync:fandom --output-dir')
             ->addOption('fandom-no-delay', null, InputOption::VALUE_NONE, 'Forwarded to app:data:sync:fandom --no-delay');
     }
@@ -135,7 +170,7 @@ final class SyncDataCommand extends Command
     /**
      * @param list<string> $errors
      */
-    private function syncFile(HttpClientInterface $httpClient, string $url, string $target, array &$errors, SymfonyStyle $io): bool
+    private function syncFile(HttpClientInterface $httpClient, string $url, string $target, array &$errors, SymfonyStyle $io, bool $displayProgress): bool
     {
         for ($attempt = 1; $attempt <= self::MAX_ATTEMPTS; ++$attempt) {
             $this->naturalDelay();
@@ -168,7 +203,9 @@ final class SyncDataCommand extends Command
                     return false;
                 }
 
-                $io->text(sprintf('Updated: %s', str_replace($this->kernel->getProjectDir().'/', '', $target)));
+                if ($displayProgress) {
+                    $io->text(sprintf('Updated: %s', str_replace($this->kernel->getProjectDir().'/', '', $target)));
+                }
 
                 return true;
             } catch (ExceptionInterface|JsonException $e) {

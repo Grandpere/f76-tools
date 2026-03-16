@@ -26,7 +26,8 @@ Ajouter un pipeline de sync multi-sources coherent (sans duplication instable) e
 - Done (slice 1): `app:data:sync` orchestre maintenant `all|nukaknights|fandom`, avec delegation vers `app:data:sync:fandom`.
 - Done (slice 1): tests unitaires ajoutes pour la delegation Fandom (`--only=fandom` success/failure).
 - Done (slice 2): preparation Nukacrypt cote import via resolver URL externe (`form_id` -> URL Nukacrypt standard) quand provider=`nukacrypt`.
-- Remaining: source de sync Nukacrypt read-only + rapport de sync par source/collisions.
+- Done (slice 3): reporting sync multi-sources (`--format=json`, compteurs par source, validation d options) + couverture unitaire.
+- Remaining: source de sync Nukacrypt read-only + rapport de collisions.
 
 ## Hors scope
 - Matching semantique avance cross-source par similarite de nom.
