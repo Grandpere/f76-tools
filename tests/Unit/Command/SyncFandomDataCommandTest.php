@@ -125,6 +125,7 @@ HTML,
         self::assertArrayHasKey('weight', $firstResource['columns']);
         self::assertArrayHasKey('value', $firstResource['columns']);
         self::assertArrayHasKey('form_id', $firstResource['columns']);
+        self::assertArrayHasKey('wiki_url', $firstResource['columns']);
         self::assertIsArray($firstResource['availability'] ?? null);
         self::assertArrayHasKey('containers', $firstResource['availability']);
 

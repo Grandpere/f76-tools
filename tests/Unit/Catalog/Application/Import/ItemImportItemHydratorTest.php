@@ -65,4 +65,18 @@ final class ItemImportItemHydratorTest extends TestCase
         self::assertSame('relations', $item->getRelationsHtml());
         self::assertIsArray($item->getPayload());
     }
+
+    public function testHydrateNormalizesZeroEditorIdToNull(): void
+    {
+        $item = new ItemEntity()
+            ->setType(ItemTypeEnum::BOOK)
+            ->setSourceId(62);
+
+        $hydrator = new ItemImportItemHydrator(new ItemImportValueNormalizer());
+        $hydrator->hydrate($item, [
+            'editor_id' => '0',
+        ]);
+
+        self::assertNull($item->getEditorId());
+    }
 }

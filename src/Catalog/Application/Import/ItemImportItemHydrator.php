@@ -28,7 +28,11 @@ final class ItemImportItemHydrator
     public function hydrate(ItemEntity $item, array $row): void
     {
         $item->setFormId($this->valueNormalizer->toNullableString($row['form_id'] ?? null));
-        $item->setEditorId($this->valueNormalizer->toNullableString($row['editor_id'] ?? null));
+        $editorId = $this->valueNormalizer->toNullableString($row['editor_id'] ?? null);
+        if ('0' === $editorId) {
+            $editorId = null;
+        }
+        $item->setEditorId($editorId);
         $item->setPrice($this->valueNormalizer->toNullableInt($row['price'] ?? null));
         $item->setPriceMinerva($this->valueNormalizer->toNullableInt($row['price_minerva'] ?? null));
         $item->setWikiUrl($this->valueNormalizer->toNullableString($row['wiki_url'] ?? null));

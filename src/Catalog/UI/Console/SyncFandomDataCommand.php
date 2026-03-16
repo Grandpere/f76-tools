@@ -621,6 +621,10 @@ final class SyncFandomDataCommand extends Command
             $title = $slug;
         }
 
+        if (!isset($columns['wiki_url']) || $this->isMissingColumnValue($columns['wiki_url'])) {
+            $columns['wiki_url'] = 'https://fallout.fandom.com'.$href;
+        }
+
         foreach (self::AVAILABILITY_KEYS as $key) {
             if (!array_key_exists($key, $availability)) {
                 $availability[$key] = false;
