@@ -1,0 +1,1576 @@
+{
+    "generated_at": "2026-03-16T14:28:52+00:00",
+    "source": "fallout.fandom.com",
+    "page": "Fallout_76_plans/Power_armor",
+    "url": "https://fallout.fandom.com/wiki/Fallout_76_plans/Power_armor",
+    "sections_count": 11,
+    "resources_count": 54,
+    "resources": [
+        {
+            "type": "plan",
+            "slug": "Plan:_Excavator_helmet",
+            "title": "Plan: Excavator helmet",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Excavator helmet",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00501887"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 2,
+                    "row_index": 2
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Excavator power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Excavator_left_arm",
+            "title": "Plan: Excavator left arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Excavator left arm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00501885"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 2,
+                    "row_index": 3
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Excavator power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Excavator_left_leg",
+            "title": "Plan: Excavator left leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Excavator left leg",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00501888"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 2,
+                    "row_index": 5
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Excavator power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Excavator_right_arm",
+            "title": "Plan: Excavator right arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Excavator right arm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00501886"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 2,
+                    "row_index": 4
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Excavator power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Excavator_right_leg",
+            "title": "Plan: Excavator right leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Excavator right leg",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00501889"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 2,
+                    "row_index": 6
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Excavator power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Excavator_torso",
+            "title": "Plan: Excavator torso",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Excavator torso",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0050188A"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 2,
+                    "row_index": 7
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Excavator power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Hellcat_chest_piece",
+            "title": "Plan: Hellcat chest piece",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Hellcat chest piece",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0060D5BC"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 9,
+                    "row_index": 7
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Hellcat power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Hellcat_helm",
+            "title": "Plan: Hellcat helm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Hellcat helm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0060D5BE"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 9,
+                    "row_index": 2
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Hellcat power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Hellcat_left_arm",
+            "title": "Plan: Hellcat left arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Hellcat left arm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0060D5C0"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 9,
+                    "row_index": 3
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Hellcat power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Hellcat_left_leg",
+            "title": "Plan: Hellcat left leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Hellcat left leg",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0060D5BB"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 9,
+                    "row_index": 5
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Hellcat power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Hellcat_right_arm",
+            "title": "Plan: Hellcat right arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Hellcat right arm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0060D5BF"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 9,
+                    "row_index": 4
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Hellcat power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Hellcat_right_leg",
+            "title": "Plan: Hellcat right leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Hellcat right leg",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0060D5BD"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 9,
+                    "row_index": 6
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Hellcat power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Raider_power_chest_piece",
+            "title": "Plan: Raider power chest piece",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Raider power chest piece",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00501890"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 1,
+                    "row_index": 7
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Raider power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Raider_power_helm",
+            "title": "Plan: Raider power helm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Raider power helm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0050188D"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 1,
+                    "row_index": 2
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Raider power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Raider_power_left_arm",
+            "title": "Plan: Raider power left arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Raider power left arm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0050188B"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 1,
+                    "row_index": 3
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Raider power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Raider_power_left_leg",
+            "title": "Plan: Raider power left leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Raider power left leg",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0050188E"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 1,
+                    "row_index": 5
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Raider power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Raider_power_right_arm",
+            "title": "Plan: Raider power right arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Raider power right arm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0050188C"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 1,
+                    "row_index": 4
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Raider power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Raider_power_right_leg",
+            "title": "Plan: Raider power right leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Raider power right leg",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0050188F"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 1,
+                    "row_index": 6
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Raider power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Strangler_heart_chest_piece",
+            "title": "Plan: Strangler heart chest piece",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Strangler heart chest piece",
+                "weight": "0.25",
+                "value": "1250",
+                "form_id": "005535FB"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 7,
+                    "row_index": 5
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Strangler heart power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Strangler_heart_helmet",
+            "title": "Plan: Strangler heart helmet",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Strangler heart helmet",
+                "weight": "0.25",
+                "value": "1650",
+                "form_id": "00553BEA"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 7,
+                    "row_index": 2
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Strangler heart power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Strangler_heart_left_arm",
+            "title": "Plan: Strangler heart left arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Strangler heart left arm",
+                "weight": "0.25",
+                "value": "1000",
+                "form_id": "005535F9"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 7,
+                    "row_index": 3
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Strangler heart power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Strangler_heart_left_leg",
+            "title": "Plan: Strangler heart left leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Strangler heart left leg",
+                "weight": "0.25",
+                "value": "1000",
+                "form_id": "005535FA"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 7,
+                    "row_index": 4
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Strangler heart power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Strangler_heart_right_arm",
+            "title": "Plan: Strangler heart right arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Strangler heart right arm",
+                "weight": "0.25",
+                "value": "1000",
+                "form_id": "00553BEB"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 7,
+                    "row_index": 6
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Strangler heart power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Strangler_heart_right_leg",
+            "title": "Plan: Strangler heart right leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Strangler heart right leg",
+                "weight": "0.25",
+                "value": "1000",
+                "form_id": "00553BEC"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 7,
+                    "row_index": 7
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Strangler heart power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-45_chest_piece",
+            "title": "Plan: T-45 chest piece",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-45 chest piece",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00501896"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 3,
+                    "row_index": 7
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-45 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-45_helm",
+            "title": "Plan: T-45 helm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-45 helm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00501893"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 3,
+                    "row_index": 2
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-45 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-45_left_arm",
+            "title": "Plan: T-45 left arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-45 left arm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00501891"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 3,
+                    "row_index": 3
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-45 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-45_left_leg",
+            "title": "Plan: T-45 left leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-45 left leg",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00501894"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 3,
+                    "row_index": 5
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-45 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-45_right_arm",
+            "title": "Plan: T-45 right arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-45 right arm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00501892"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 3,
+                    "row_index": 4
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-45 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-45_right_leg",
+            "title": "Plan: T-45 right leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-45 right leg",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00501895"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 3,
+                    "row_index": 6
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-45 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-51b_chest_piece",
+            "title": "Plan: T-51b chest piece",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-51b chest piece",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0050189C"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 4,
+                    "row_index": 7
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-51b power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-51b_helm",
+            "title": "Plan: T-51b helm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-51b helm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00501899"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 4,
+                    "row_index": 2
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-51b power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-51b_left_arm",
+            "title": "Plan: T-51b left arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-51b left arm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00501897"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 4,
+                    "row_index": 3
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-51b power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-51b_left_leg",
+            "title": "Plan: T-51b left leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-51b left leg",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0050189A"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 4,
+                    "row_index": 5
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-51b power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-51b_right_arm",
+            "title": "Plan: T-51b right arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-51b right arm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00501898"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 4,
+                    "row_index": 4
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-51b power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-51b_right_leg",
+            "title": "Plan: T-51b right leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-51b right leg",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0050189B"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 4,
+                    "row_index": 6
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-51b power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-60_chest_piece",
+            "title": "Plan: T-60 chest piece",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-60 chest piece",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "005018A2"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 5,
+                    "row_index": 7
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-60 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-60_helm",
+            "title": "Plan: T-60 helm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-60 helm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0050189F"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 5,
+                    "row_index": 2
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-60 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-60_left_arm",
+            "title": "Plan: T-60 left arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-60 left arm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0050189D"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 5,
+                    "row_index": 3
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-60 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-60_left_leg",
+            "title": "Plan: T-60 left leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-60 left leg",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "005018A0"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 5,
+                    "row_index": 5
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-60 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-60_right_arm",
+            "title": "Plan: T-60 right arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-60 right arm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0050189E"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 5,
+                    "row_index": 4
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-60 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-60_right_leg",
+            "title": "Plan: T-60 right leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-60 right leg",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "005018A1"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 5,
+                    "row_index": 6
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-60 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-65_helm",
+            "title": "Plan: T-65 helm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-65 helm",
+                "weight": "0.25",
+                "value": "1650",
+                "form_id": "00589355"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 8,
+                    "row_index": 2
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-65 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-65_left_arm",
+            "title": "Plan: T-65 left arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-65 left arm",
+                "weight": "0.25",
+                "value": "1000",
+                "form_id": "00589353"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 8,
+                    "row_index": 3
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-65 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-65_left_leg",
+            "title": "Plan: T-65 left leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-65 left leg",
+                "weight": "0.25",
+                "value": "1000",
+                "form_id": "00589356"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 8,
+                    "row_index": 5
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-65 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-65_right_arm",
+            "title": "Plan: T-65 right arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-65 right arm",
+                "weight": "0.25",
+                "value": "1000",
+                "form_id": "00589354"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 8,
+                    "row_index": 4
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-65 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-65_right_leg",
+            "title": "Plan: T-65 right leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-65 right leg",
+                "weight": "0.25",
+                "value": "1000",
+                "form_id": "00589357"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 8,
+                    "row_index": 6
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-65 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_T-65_torso",
+            "title": "Plan: T-65 torso",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: T-65 torso",
+                "weight": "0.25",
+                "value": "1250",
+                "form_id": "00589358"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 8,
+                    "row_index": 7
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "T-65 power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Ultracite_helm",
+            "title": "Plan: Ultracite helm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Ultracite helm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "005018A5"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 6,
+                    "row_index": 2
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Ultracite power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Ultracite_left_arm",
+            "title": "Plan: Ultracite left arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Ultracite left arm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "005018A3"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 6,
+                    "row_index": 3
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Ultracite power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Ultracite_left_leg",
+            "title": "Plan: Ultracite left leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Ultracite left leg",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "005018A6"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 6,
+                    "row_index": 5
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Ultracite power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Ultracite_right_arm",
+            "title": "Plan: Ultracite right arm",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Ultracite right arm",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "005018A4"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 6,
+                    "row_index": 4
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Ultracite power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Ultracite_right_leg",
+            "title": "Plan: Ultracite right leg",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Ultracite right leg",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "005018A7"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 6,
+                    "row_index": 6
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Ultracite power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Ultracite_torso",
+            "title": "Plan: Ultracite torso",
+            "section": "Power armor",
+            "columns": {
+                "name": "Plan: Ultracite torso",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "005018A8"
+            },
+            "sources": [
+                {
+                    "section": "Power armor",
+                    "table_index": 6,
+                    "row_index": 7
+                },
+                {
+                    "section": "Power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                },
+                {
+                    "section": "Ultracite power armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        }
+    ]
+}
