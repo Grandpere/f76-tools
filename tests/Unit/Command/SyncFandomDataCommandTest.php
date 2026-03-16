@@ -49,18 +49,20 @@ final class SyncFandomDataCommandTest extends TestCase
                     'parse' => [
                         'text' => <<<HTML
 <table>
-  <tr><th>Item</th><th>Weight</th><th>Value</th><th>Form ID</th></tr>
+  <tr><th>Item</th><th>Weight</th><th>Value</th><th>Form ID</th><th>Containers</th></tr>
   <tr>
     <td><a href="/wiki/Recipe:Berry_Mentats">Recipe: Berry Mentats</a></td>
     <td>0.25</td>
     <td>35</td>
     <td>00123ABC</td>
+    <td>Yes</td>
   </tr>
   <tr>
     <td><a href="/wiki/Plan:Laser_Gun">Plan: Laser Gun</a></td>
     <td>0.1</td>
     <td>50</td>
     <td>00AAAAAA</td>
+    <td>-</td>
   </tr>
 </table>
 HTML,
@@ -123,6 +125,18 @@ HTML,
         self::assertArrayHasKey('weight', $firstResource['columns']);
         self::assertArrayHasKey('value', $firstResource['columns']);
         self::assertArrayHasKey('form_id', $firstResource['columns']);
+        self::assertIsArray($firstResource['availability'] ?? null);
+        self::assertArrayHasKey('containers', $firstResource['availability']);
+
+        $availabilityValues = array_map(static function (mixed $row): bool {
+            if (!is_array($row) || !is_array($row['availability'] ?? null)) {
+                return false;
+            }
+
+            return (bool) ($row['availability']['containers'] ?? false);
+        }, $pageDecoded['resources']);
+        self::assertContains(true, $availabilityValues);
+        self::assertContains(false, $availabilityValues);
     }
 
     public function testSyncFailsOnInvalidPayload(): void

@@ -38,6 +38,20 @@ final class SyncFandomDataCommand extends Command
     /**
      * @var list<string>
      */
+    private const AVAILABILITY_KEYS = [
+        'containers',
+        'random_encounters',
+        'enemies',
+        'seasonal_content',
+        'treasure_maps',
+        'quests',
+        'vendors',
+        'world_spawns',
+    ];
+
+    /**
+     * @var list<string>
+     */
     private const DEFAULT_PAGES = [
         'Fallout_76_recipes',
         'Fallout_76_plans/Workshop',
@@ -362,7 +376,8 @@ final class SyncFandomDataCommand extends Command
      *     slug:string,
      *     title:string,
      *     section:string,
-     *     columns:array<string, string>,
+     *     columns:array<string, scalar>,
+     *     availability:array<string, bool>,
      *     sources:list<array{section:string, table_index:int, row_index:int}>
      * }>
      */
@@ -414,7 +429,8 @@ final class SyncFandomDataCommand extends Command
                     }
 
                     $columns = $this->extractColumnsFromCells($tdNodes, $headers);
-                    $linkedResources = $this->extractResourcesFromCells($xpath, $tdNodes, $sectionLabel, $columns, $tableIndex, $rowIndex);
+                    $availability = $this->extractAvailabilityFromCells($tdNodes, $headers);
+                    $linkedResources = $this->extractResourcesFromCells($xpath, $tdNodes, $sectionLabel, $columns, $availability, $tableIndex, $rowIndex);
                     foreach ($linkedResources as $resource) {
                         $seenKeys[$resource['type'].'|'.$resource['slug']] = true;
                         $resources[] = $resource;
@@ -468,7 +484,7 @@ final class SyncFandomDataCommand extends Command
      * @param list<DOMNode> $cells
      * @param list<string>  $headers
      *
-     * @return array<string, string>
+     * @return array<string, scalar>
      */
     private function extractColumnsFromCells(array $cells, array $headers): array
     {
@@ -476,6 +492,10 @@ final class SyncFandomDataCommand extends Command
         foreach ($cells as $index => $cellNode) {
             $label = $headers[$index] ?? 'column_'.($index + 1);
             $key = $this->normalizeColumnKey($label, $index + 1);
+            if (in_array($key, self::AVAILABILITY_KEYS, true)) {
+                continue;
+            }
+
             $value = $this->normalizeText($cellNode->textContent ?? '');
             if ('' === $value) {
                 continue;
@@ -492,19 +512,47 @@ final class SyncFandomDataCommand extends Command
     }
 
     /**
+     * @param list<DOMNode> $cells
+     * @param list<string>  $headers
+     *
+     * @return array<string, bool>
+     */
+    private function extractAvailabilityFromCells(array $cells, array $headers): array
+    {
+        $availability = [];
+        foreach (self::AVAILABILITY_KEYS as $key) {
+            $availability[$key] = false;
+        }
+
+        foreach ($cells as $index => $cellNode) {
+            $label = $headers[$index] ?? 'column_'.($index + 1);
+            $key = $this->normalizeColumnKey($label, $index + 1);
+            if (!in_array($key, self::AVAILABILITY_KEYS, true)) {
+                continue;
+            }
+
+            $availability[$key] = $this->isTruthyAvailabilityCell($cellNode);
+        }
+
+        return $availability;
+    }
+
+    /**
      * @param list<DOMNode>         $cells
-     * @param array<string, string> $columns
+     * @param array<string, scalar> $columns
+     * @param array<string, bool>   $availability
      *
      * @return list<array{
      *     type:string,
      *     slug:string,
      *     title:string,
      *     section:string,
-     *     columns:array<string, string>,
+     *     columns:array<string, scalar>,
+     *     availability:array<string, bool>,
      *     sources:list<array{section:string, table_index:int, row_index:int}>
      * }>
      */
-    private function extractResourcesFromCells(DOMXPath $xpath, array $cells, string $sectionLabel, array $columns, int $tableIndex, int $rowIndex): array
+    private function extractResourcesFromCells(DOMXPath $xpath, array $cells, string $sectionLabel, array $columns, array $availability, int $tableIndex, int $rowIndex): array
     {
         $resources = [];
         foreach ($cells as $cellNode) {
@@ -518,7 +566,7 @@ final class SyncFandomDataCommand extends Command
                     continue;
                 }
 
-                $resource = $this->resourceFromLink($linkNode, $sectionLabel, $columns, $tableIndex, $rowIndex);
+                $resource = $this->resourceFromLink($linkNode, $sectionLabel, $columns, $tableIndex, $rowIndex, $availability);
                 if (null !== $resource) {
                     $resources[] = $resource;
                 }
@@ -529,18 +577,20 @@ final class SyncFandomDataCommand extends Command
     }
 
     /**
-     * @param array<string, string> $columns
+     * @param array<string, scalar> $columns
+     * @param array<string, bool>   $availability
      *
      * @return array{
      *     type:string,
      *     slug:string,
      *     title:string,
      *     section:string,
-     *     columns:array<string, string>,
+     *     columns:array<string, scalar>,
+     *     availability:array<string, bool>,
      *     sources:list<array{section:string, table_index:int, row_index:int}>
      * }|null
      */
-    private function resourceFromLink(DOMElement $linkNode, string $sectionLabel, array $columns, int $tableIndex, int $rowIndex): ?array
+    private function resourceFromLink(DOMElement $linkNode, string $sectionLabel, array $columns, int $tableIndex, int $rowIndex, array $availability = []): ?array
     {
         $href = (string) $linkNode->getAttribute('href');
         if (!str_starts_with($href, '/wiki/')) {
@@ -569,12 +619,19 @@ final class SyncFandomDataCommand extends Command
             $title = $slug;
         }
 
+        foreach (self::AVAILABILITY_KEYS as $key) {
+            if (!array_key_exists($key, $availability)) {
+                $availability[$key] = false;
+            }
+        }
+
         return [
             'type' => $resourceType,
             'slug' => $slug,
             'title' => $title,
             'section' => $sectionLabel,
             'columns' => $columns,
+            'availability' => $availability,
             'sources' => [[
                 'section' => $sectionLabel,
                 'table_index' => $tableIndex,
@@ -589,7 +646,8 @@ final class SyncFandomDataCommand extends Command
      *     slug:string,
      *     title:string,
      *     section:string,
-     *     columns:array<string, string>,
+     *     columns:array<string, scalar>,
+     *     availability:array<string, bool>,
      *     sources:list<array{section:string, table_index:int, row_index:int}>
      * }> $resources
      *
@@ -598,7 +656,8 @@ final class SyncFandomDataCommand extends Command
      *     slug:string,
      *     title:string,
      *     section:string,
-     *     columns:array<string, string>,
+     *     columns:array<string, scalar>,
+     *     availability:array<string, bool>,
      *     sources:list<array{section:string, table_index:int, row_index:int}>
      * }>
      */
@@ -616,6 +675,11 @@ final class SyncFandomDataCommand extends Command
                 if (!isset($indexed[$key]['columns'][$columnKey]) || '' === $indexed[$key]['columns'][$columnKey]) {
                     $indexed[$key]['columns'][$columnKey] = $columnValue;
                 }
+            }
+
+            foreach (self::AVAILABILITY_KEYS as $availabilityKey) {
+                $indexed[$key]['availability'][$availabilityKey] = (bool) ($indexed[$key]['availability'][$availabilityKey] ?? false)
+                    || (bool) ($resource['availability'][$availabilityKey] ?? false);
             }
 
             foreach ($resource['sources'] as $source) {
@@ -659,6 +723,31 @@ final class SyncFandomDataCommand extends Command
             return 'name';
         }
 
+        if (str_contains($normalized, 'containers')) {
+            return 'containers';
+        }
+        if (str_contains($normalized, 'random encounters')) {
+            return 'random_encounters';
+        }
+        if (str_contains($normalized, 'enemies')) {
+            return 'enemies';
+        }
+        if (str_contains($normalized, 'seasonal content')) {
+            return 'seasonal_content';
+        }
+        if (str_contains($normalized, 'treasure maps')) {
+            return 'treasure_maps';
+        }
+        if (str_contains($normalized, 'quests')) {
+            return 'quests';
+        }
+        if (str_contains($normalized, 'vendors')) {
+            return 'vendors';
+        }
+        if (str_contains($normalized, 'world spawns')) {
+            return 'world_spawns';
+        }
+
         $slug = preg_replace('/[^a-z0-9]+/', '_', $normalized);
         $slug = trim((string) $slug, '_');
 
@@ -670,6 +759,31 @@ final class SyncFandomDataCommand extends Command
         $normalized = preg_replace('/\s+/u', ' ', trim($value));
 
         return '' === $normalized || null === $normalized ? '' : $normalized;
+    }
+
+    private function isTruthyAvailabilityCell(DOMNode $cellNode): bool
+    {
+        $text = strtolower($this->normalizeText($cellNode->textContent ?? ''));
+        if ('' !== $text) {
+            $falsyTokens = ['-', '—', 'none', 'no', 'n/a', 'false', '0'];
+            if (!in_array($text, $falsyTokens, true)) {
+                return true;
+            }
+        }
+
+        if (!$cellNode instanceof DOMElement) {
+            return false;
+        }
+
+        $document = $cellNode->ownerDocument;
+        if (!$document instanceof DOMDocument) {
+            return false;
+        }
+
+        $xpath = new DOMXPath($document);
+        $markers = $xpath->query('.//img|.//svg|.//*[contains(@class,"va-icon") or @title]', $cellNode);
+
+        return false !== $markers && $markers->count() > 0;
     }
 
     /**
