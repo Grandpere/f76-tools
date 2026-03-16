@@ -34,7 +34,7 @@ final class ItemImportContextApplierTest extends TestCase
             ->setType(ItemTypeEnum::MISC)
             ->setSourceId(1);
 
-        $result = $this->applier->apply($item, 1, ItemImportFileContext::misc(2));
+        $result = $this->applier->apply($item, 1, ItemImportFileContext::misc(2, 'nukaknights'));
 
         self::assertTrue($result->valid);
         self::assertNull($result->warning);
@@ -48,7 +48,7 @@ final class ItemImportContextApplierTest extends TestCase
             ->setSourceId(1)
             ->setRank(1);
 
-        $result = $this->applier->apply($item, 1, ItemImportFileContext::misc(3));
+        $result = $this->applier->apply($item, 1, ItemImportFileContext::misc(3, 'nukaknights'));
 
         self::assertTrue($result->valid);
         self::assertNotNull($result->warning);
@@ -62,7 +62,7 @@ final class ItemImportContextApplierTest extends TestCase
             ->setSourceId(61)
             ->setRank(4);
 
-        $result = $this->applier->apply($item, 61, ItemImportFileContext::book(4, true));
+        $result = $this->applier->apply($item, 61, ItemImportFileContext::book(4, true, 'nukaknights'));
 
         self::assertTrue($result->valid);
         self::assertNull($result->warning);
@@ -81,6 +81,7 @@ final class ItemImportContextApplierTest extends TestCase
             null,
             null,
             false,
+            'nukaknights',
         );
         $miscResult = $this->applier->apply($item, 1, $invalidMiscContext);
 
@@ -91,6 +92,7 @@ final class ItemImportContextApplierTest extends TestCase
             null,
             null,
             false,
+            'nukaknights',
         );
         $bookResult = $this->applier->apply($item, 1, $invalidBookContext);
 

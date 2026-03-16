@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Catalog\UI\Console;
 
+use DateTimeImmutable;
 use DOMDocument;
 use DOMElement;
 use DOMNode;
@@ -115,11 +116,11 @@ final class SyncFandomDataCommand extends Command
         $outputDir = $this->resolveOutputDirectory(
             $projectDir,
             $input->getOption('output-dir'),
-            $input->getOption('output')
+            $input->getOption('output'),
         );
         $useDelay = !(bool) $input->getOption('no-delay');
 
-        if (!is_dir($outputDir) && !mkdir($outputDir, 0775, true) && !is_dir($outputDir)) {
+        if (!is_dir($outputDir) && !mkdir($outputDir, 0o775, true) && !is_dir($outputDir)) {
             $io->error(sprintf('Impossible de creer le dossier de sortie: %s', $outputDir));
 
             return Command::FAILURE;
@@ -127,7 +128,7 @@ final class SyncFandomDataCommand extends Command
 
         $pageSummaries = [];
         $resourcesTotal = 0;
-        $generatedAt = (new \DateTimeImmutable())->format(DATE_ATOM);
+        $generatedAt = new DateTimeImmutable()->format(DATE_ATOM);
 
         try {
             foreach ($pages as $page) {
@@ -167,7 +168,7 @@ final class SyncFandomDataCommand extends Command
                 $deduplicated = $this->deduplicateAndMerge($pageResources);
                 usort(
                     $deduplicated,
-                    static fn (array $left, array $right): int => [$left['type'], $left['slug']] <=> [$right['type'], $right['slug']]
+                    static fn (array $left, array $right): int => [$left['type'], $left['slug']] <=> [$right['type'], $right['slug']],
                 );
 
                 $fileName = $this->resolvePageFileName($page);
@@ -225,8 +226,6 @@ final class SyncFandomDataCommand extends Command
     }
 
     /**
-     * @param mixed $pageOption
-     *
      * @return list<string>
      */
     private function resolvePages(mixed $pageOption): array
@@ -405,7 +404,7 @@ final class SyncFandomDataCommand extends Command
                 $headers = [];
                 $rowIndex = 0;
                 /** @var DOMNodeList<DOMNode>|false $rows */
-                $rows = (new DOMXPath($dom))->query('.//tr', $tableNode);
+                $rows = new DOMXPath($dom)->query('.//tr', $tableNode);
                 if (false === $rows) {
                     continue;
                 }
@@ -540,9 +539,9 @@ final class SyncFandomDataCommand extends Command
     }
 
     /**
-     * @param list<DOMNode>         $cells
-     * @param array<string, mixed>  $columns
-     * @param array<string, bool>   $availability
+     * @param list<DOMNode>        $cells
+     * @param array<string, mixed> $columns
+     * @param array<string, bool>  $availability
      *
      * @return list<array{
      *     type:string,
@@ -579,8 +578,8 @@ final class SyncFandomDataCommand extends Command
     }
 
     /**
-     * @param array<string, mixed>  $columns
-     * @param array<string, bool>   $availability
+     * @param array<string, mixed> $columns
+     * @param array<string, bool>  $availability
      *
      * @return array{
      *     type:string,

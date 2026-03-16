@@ -79,4 +79,31 @@ final class ItemImportItemHydratorTest extends TestCase
 
         self::assertNull($item->getEditorId());
     }
+
+    public function testBuildExternalSourceDataUsesFormIdWhenAvailable(): void
+    {
+        $hydrator = new ItemImportItemHydrator(new ItemImportValueNormalizer());
+
+        $data = $hydrator->buildExternalSourceData([
+            'form_id' => '0052E485',
+            'wiki_url' => 'https://fallout.fandom.com/wiki/Plan:_10mm_pistol',
+            'custom' => 'value',
+        ], 42);
+
+        self::assertSame('0052E485', $data['externalRef']);
+        self::assertSame('https://fallout.fandom.com/wiki/Plan:_10mm_pistol', $data['externalUrl']);
+        self::assertSame('value', $data['metadata']['custom'] ?? null);
+    }
+
+    public function testBuildExternalSourceDataFallsBackToSourceIdRef(): void
+    {
+        $hydrator = new ItemImportItemHydrator(new ItemImportValueNormalizer());
+
+        $data = $hydrator->buildExternalSourceData([
+            'wiki_url' => null,
+        ], 77);
+
+        self::assertSame('source_id:77', $data['externalRef']);
+        self::assertNull($data['externalUrl']);
+    }
 }

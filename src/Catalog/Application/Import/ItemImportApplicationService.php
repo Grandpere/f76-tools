@@ -132,6 +132,13 @@ final class ItemImportApplicationService
                 }
 
                 $this->itemHydrator->hydrate($item, $row);
+                $externalSource = $this->itemHydrator->buildExternalSourceData($row, $sourceId);
+                $item->upsertExternalSource(
+                    $context->sourceProvider,
+                    $externalSource['externalRef'],
+                    $externalSource['externalUrl'],
+                    $externalSource['metadata'],
+                );
 
                 $translationData = $this->translationCatalogBuilder->build($type, $sourceId, $row);
                 $item->setNameKey($translationData->nameKey);

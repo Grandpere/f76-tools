@@ -22,26 +22,29 @@ final readonly class ItemImportFileContext
         public ?int $rank,
         public ?int $listNumber,
         public bool $isSpecialList,
+        public string $sourceProvider,
     ) {
     }
 
-    public static function misc(int $rank): self
+    public static function misc(int $rank, string $sourceProvider): self
     {
         return new self(
             ItemTypeEnum::MISC,
             $rank,
             null,
             false,
+            $sourceProvider,
         );
     }
 
-    public static function book(int $listNumber, bool $isSpecialList): self
+    public static function book(int $listNumber, bool $isSpecialList, string $sourceProvider): self
     {
         return new self(
             ItemTypeEnum::BOOK,
             null,
             $listNumber,
             $isSpecialList,
+            $sourceProvider,
         );
     }
 }

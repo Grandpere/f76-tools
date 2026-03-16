@@ -26,7 +26,7 @@ final class SyncFandomDataCommandTest extends TestCase
     public function testSyncWritesPerPageFilesAndIndexWithTableColumns(): void
     {
         $projectDir = sys_get_temp_dir().'/f76-sync-fandom-'.bin2hex(random_bytes(5));
-        mkdir($projectDir, 0777, true);
+        mkdir($projectDir, 0o777, true);
 
         $client = new MockHttpClient(function (string $method, string $url, array $options): MockResponse {
             $query = is_array($options['query'] ?? null) ? $options['query'] : [];
@@ -48,24 +48,24 @@ final class SyncFandomDataCommandTest extends TestCase
                 return new MockResponse((string) json_encode([
                     'parse' => [
                         'text' => <<<HTML
-<table>
-  <tr><th>Item</th><th>Weight</th><th>Value</th><th>Form ID</th><th>Containers</th></tr>
-  <tr>
-    <td><a href="/wiki/Recipe:Berry_Mentats">Recipe: Berry Mentats</a> <span title="Wastelanders"></span></td>
-    <td>0.25</td>
-    <td>35 <span title="Bottle cap"></span></td>
-    <td>00123ABC</td>
-    <td>Yes</td>
-  </tr>
-  <tr>
-    <td><a href="/wiki/Plan:Laser_Gun">Plan: Laser Gun</a></td>
-    <td>0.1</td>
-    <td>50</td>
-    <td>00AAAAAA</td>
-    <td>-</td>
-  </tr>
-</table>
-HTML,
+                            <table>
+                              <tr><th>Item</th><th>Weight</th><th>Value</th><th>Form ID</th><th>Containers</th></tr>
+                              <tr>
+                                <td><a href="/wiki/Recipe:Berry_Mentats">Recipe: Berry Mentats</a> <span title="Wastelanders"></span></td>
+                                <td>0.25</td>
+                                <td>35 <span title="Bottle cap"></span></td>
+                                <td>00123ABC</td>
+                                <td>Yes</td>
+                              </tr>
+                              <tr>
+                                <td><a href="/wiki/Plan:Laser_Gun">Plan: Laser Gun</a></td>
+                                <td>0.1</td>
+                                <td>50</td>
+                                <td>00AAAAAA</td>
+                                <td>-</td>
+                              </tr>
+                            </table>
+                            HTML,
                     ],
                 ]));
             }
@@ -161,7 +161,7 @@ HTML,
     public function testSyncFailsOnInvalidPayload(): void
     {
         $projectDir = sys_get_temp_dir().'/f76-sync-fandom-'.bin2hex(random_bytes(5));
-        mkdir($projectDir, 0777, true);
+        mkdir($projectDir, 0o777, true);
 
         $client = new MockHttpClient([
             new MockResponse('{"parse":{"sections":[{"index":"1","line":"Recipes"}]}}'),

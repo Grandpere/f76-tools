@@ -30,6 +30,7 @@ final class ItemImportFileContextResolverTest extends TestCase
         self::assertSame(3, $context->rank);
         self::assertNull($context->listNumber);
         self::assertFalse($context->isSpecialList);
+        self::assertSame('nukaknights', $context->sourceProvider);
     }
 
     public function testResolveReturnsBookContextForMinervaRegularAndSpecialFiles(): void
@@ -42,6 +43,7 @@ final class ItemImportFileContextResolverTest extends TestCase
         self::assertNull($regular->rank);
         self::assertSame(1, $regular->listNumber);
         self::assertFalse($regular->isSpecialList);
+        self::assertSame('nukaknights', $regular->sourceProvider);
 
         $special = $resolver->resolve('/tmp/minerva_64_en.json');
         self::assertNotNull($special);

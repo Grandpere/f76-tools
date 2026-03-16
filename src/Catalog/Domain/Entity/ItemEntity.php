@@ -129,9 +129,16 @@ class ItemEntity implements Item
     #[ORM\OneToMany(mappedBy: 'item', targetEntity: ItemBookListEntity::class, cascade: ['persist'], orphanRemoval: true)]
     private Collection $bookLists;
 
+    /**
+     * @var Collection<int, ItemExternalSourceEntity>
+     */
+    #[ORM\OneToMany(mappedBy: 'item', targetEntity: ItemExternalSourceEntity::class, cascade: ['persist'], orphanRemoval: true)]
+    private Collection $externalSources;
+
     public function __construct()
     {
         $this->bookLists = new ArrayCollection();
+        $this->externalSources = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -467,6 +474,44 @@ class ItemEntity implements Item
     public function setPayload(?array $payload): self
     {
         $this->payload = $payload;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ItemExternalSourceEntity>
+     */
+    public function getExternalSources(): Collection
+    {
+        return $this->externalSources;
+    }
+
+    /**
+     * @param array<string, mixed>|null $metadata
+     */
+    public function upsertExternalSource(string $provider, string $externalRef, ?string $externalUrl, ?array $metadata): self
+    {
+        $normalizedProvider = strtolower(trim($provider));
+        $normalizedRef = trim($externalRef);
+
+        foreach ($this->externalSources as $externalSource) {
+            if ($externalSource->getProvider() === $normalizedProvider && $externalSource->getExternalRef() === $normalizedRef) {
+                $externalSource
+                    ->setExternalUrl($externalUrl)
+                    ->setMetadata($metadata);
+
+                return $this;
+            }
+        }
+
+        $externalSource = new ItemExternalSourceEntity()
+            ->setItem($this)
+            ->setProvider($normalizedProvider)
+            ->setExternalRef($normalizedRef)
+            ->setExternalUrl($externalUrl)
+            ->setMetadata($metadata);
+
+        $this->externalSources->add($externalSource);
 
         return $this;
     }

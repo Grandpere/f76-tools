@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-03-16 - Multi-source catalog migration should use dual-write first
+- Symptom: moving source-specific fields out of `item` in one shot would risk broad regressions across import/read flows.
+- Root cause: existing import and UI still read legacy columns while new source metadata model is being introduced.
+- Fix: implemented `item_external_source` with migration backfill and import dual-write, while keeping legacy columns temporarily.
+- Prevention: for schema separations of core vs provider data, always sequence as: create new store -> backfill -> dual-write -> switch reads -> cleanup.
+
 ## 2026-03-16 - Catalog multi-source requires source metadata model, not item table growth
 - Symptom: adding Fandom fields exposed schema pressure (`wiki_url`, currencies, availability flags, tags) and upcoming Nukacrypt integration would add more source-specific attributes.
 - Root cause: `item` was carrying both common catalog fields and provider-specific metadata, causing churn and risk on each new source.

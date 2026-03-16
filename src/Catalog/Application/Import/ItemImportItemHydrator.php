@@ -56,6 +56,30 @@ final class ItemImportItemHydrator
     }
 
     /**
+     * @param array<string, mixed> $row
+     *
+     * @return array{externalRef: string, externalUrl: string|null, metadata: array<string, mixed>}
+     */
+    public function buildExternalSourceData(array $row, int $sourceId): array
+    {
+        $externalRef = $this->valueNormalizer->toNullableString($row['form_id'] ?? null);
+        if (null === $externalRef) {
+            $externalRef = sprintf('source_id:%d', $sourceId);
+        }
+
+        $externalUrl = $this->valueNormalizer->toNullableString($row['wiki_url'] ?? null);
+
+        /** @var array<string, mixed> $metadata */
+        $metadata = $this->valueNormalizer->normalizePayload($row);
+
+        return [
+            'externalRef' => $externalRef,
+            'externalUrl' => $externalUrl,
+            'metadata' => $metadata,
+        ];
+    }
+
+    /**
      * @param array<mixed> $row
      *
      * @return array<string, mixed>

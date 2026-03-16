@@ -1,8 +1,12 @@
 # Current Focus
 
 ## Priorite active
-- F76-152: Catalog items multi-source (core item + source metadata table) - `Todo`.
+- F76-152: Catalog items multi-source (core item + source metadata table) - `In progress`.
 - F76-150: OCR microservice Python optionnel - `Deferred` (remplace par flux JSON manuel pour roadmap).
+
+### Avancement F76-152
+- Slice 1/2 done: table `item_external_source` + backfill + dual-write import.
+- Reste: lecture ciblee via metadata source et cleanup des colonnes legacy source-specifiques.
 
 ## Termine recemment
 - F76-147: upload roadmap OCR via backoffice (done).

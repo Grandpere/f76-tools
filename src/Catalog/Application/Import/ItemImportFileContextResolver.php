@@ -20,7 +20,7 @@ final class ItemImportFileContextResolver
         $filename = basename($filePath);
 
         if (1 === preg_match('/^legendary_mods_(\d+)_\w+\.json$/', $filename, $matches)) {
-            return ItemImportFileContext::misc((int) $matches[1]);
+            return ItemImportFileContext::misc((int) $matches[1], 'nukaknights');
         }
 
         if (1 === preg_match('/^minerva_(\d+)_\w+\.json$/', $filename, $matches)) {
@@ -31,7 +31,7 @@ final class ItemImportFileContextResolver
             }
             $isSpecialList = 0 === $listNumber % 4;
 
-            return ItemImportFileContext::book($listNumber, $isSpecialList);
+            return ItemImportFileContext::book($listNumber, $isSpecialList, 'nukaknights');
         }
 
         return null;

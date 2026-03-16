@@ -22,6 +22,7 @@ use App\Catalog\Application\Import\ItemImportPersistence;
 use App\Catalog\Application\Import\ItemImportTranslationCatalogBuilder;
 use App\Catalog\Application\Import\ItemImportValueNormalizer;
 use App\Catalog\Application\Translation\TranslationCatalogWriter;
+use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Infrastructure\Import\FilesystemItemImportSourceReader;
 use App\Catalog\Infrastructure\Translation\TranslationCatalogWriter as YamlTranslationCatalogWriter;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -67,7 +68,7 @@ final class ItemImportApplicationServiceTest extends TestCase
     public function testWriteModePersistsFlushesAndWritesCatalogs(): void
     {
         $root = $this->createTempDir();
-        file_put_contents($root.'/legendary_mods_1_alpha.json', '[{"id":10,"name_en":"Mod A"}]');
+        file_put_contents($root.'/legendary_mods_1_alpha.json', '[{"id":10,"name_en":"Mod A","form_id":"0052E485","wiki_url":"https://example.test/wiki/mod-a"}]');
 
         $this->repository
             ->expects(self::once())
@@ -78,7 +79,12 @@ final class ItemImportApplicationServiceTest extends TestCase
             ->method('deleteAllBookLists')
             ->willReturn(0);
 
-        $this->persistence->expects(self::once())->method('persist');
+        $persistedItem = null;
+        $this->persistence->expects(self::once())
+            ->method('persist')
+            ->willReturnCallback(static function (ItemEntity $item) use (&$persistedItem): void {
+                $persistedItem = $item;
+            });
         $this->persistence->expects(self::once())->method('flush');
         $projectDir = $this->createTempDir();
         $service = $this->createService($this->createTranslationWriter($projectDir));
@@ -86,6 +92,13 @@ final class ItemImportApplicationServiceTest extends TestCase
 
         self::assertFalse($result->hasErrors());
         self::assertSame(1, $result->getStats()['created']);
+        self::assertInstanceOf(ItemEntity::class, $persistedItem);
+        self::assertCount(1, $persistedItem->getExternalSources());
+        $externalSource = $persistedItem->getExternalSources()->first();
+        self::assertNotFalse($externalSource);
+        self::assertSame('nukaknights', $externalSource->getProvider());
+        self::assertSame('0052E485', $externalSource->getExternalRef());
+        self::assertSame('https://example.test/wiki/mod-a', $externalSource->getExternalUrl());
         self::assertFileExists($projectDir.'/translations/items.en.yaml');
         self::assertFileExists($projectDir.'/translations/items.de.yaml');
     }
