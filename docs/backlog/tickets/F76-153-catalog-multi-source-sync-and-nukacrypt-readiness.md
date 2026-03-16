@@ -1,7 +1,7 @@
 # F76-153 - Catalog multi-source sync pipeline + Nukacrypt readiness
 
 ## Status
-`Todo (blocked by F76-152)`
+`In progress`
 
 ## Contexte
 - Les imports Nukaknights/Fandom existent, mais la consolidation multi-sources doit etre stabilisee apres la refonte de modele F76-152.
@@ -21,6 +21,12 @@ Ajouter un pipeline de sync multi-sources coherent (sans duplication instable) e
 - lignes ignorees/rejetees,
 - collisions detectees.
 - Documenter le runbook operateur pour lancer/valider les syncs.
+
+### Progress
+- Done (slice 1): `app:data:sync` orchestre maintenant `all|nukaknights|fandom`, avec delegation vers `app:data:sync:fandom`.
+- Done (slice 1): tests unitaires ajoutes pour la delegation Fandom (`--only=fandom` success/failure).
+- Done (slice 2): preparation Nukacrypt cote import via resolver URL externe (`form_id` -> URL Nukacrypt standard) quand provider=`nukacrypt`.
+- Remaining: source de sync Nukacrypt read-only + rapport de sync par source/collisions.
 
 ## Hors scope
 - Matching semantique avance cross-source par similarite de nom.

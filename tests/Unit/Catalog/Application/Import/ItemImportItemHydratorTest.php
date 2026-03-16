@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Catalog\Application\Import;
 
+use App\Catalog\Application\Import\ItemImportExternalUrlResolver;
 use App\Catalog\Application\Import\ItemImportItemHydrator;
 use App\Catalog\Application\Import\ItemImportValueNormalizer;
 use App\Catalog\Domain\Entity\ItemEntity;
@@ -27,7 +28,8 @@ final class ItemImportItemHydratorTest extends TestCase
             ->setType(ItemTypeEnum::BOOK)
             ->setSourceId(61);
 
-        $hydrator = new ItemImportItemHydrator(new ItemImportValueNormalizer());
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer));
         $hydrator->hydrate($item, [
             'form_id' => '0xabc',
             'editor_id' => 'ed_1',
@@ -63,8 +65,9 @@ final class ItemImportItemHydratorTest extends TestCase
 
     public function testBuildExternalSourceDataNormalizesZeroEditorIdToNull(): void
     {
-        $hydrator = new ItemImportItemHydrator(new ItemImportValueNormalizer());
-        $data = $hydrator->buildExternalSourceData([
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer));
+        $data = $hydrator->buildExternalSourceData('nukaknights', [
             'editor_id' => '0',
         ], 62);
 
@@ -74,9 +77,10 @@ final class ItemImportItemHydratorTest extends TestCase
 
     public function testBuildExternalSourceDataUsesFormIdWhenAvailable(): void
     {
-        $hydrator = new ItemImportItemHydrator(new ItemImportValueNormalizer());
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer));
 
-        $data = $hydrator->buildExternalSourceData([
+        $data = $hydrator->buildExternalSourceData('nukaknights', [
             'form_id' => '0052E485',
             'wiki_url' => 'https://fallout.fandom.com/wiki/Plan:_10mm_pistol',
             'custom' => 'value',
@@ -89,13 +93,27 @@ final class ItemImportItemHydratorTest extends TestCase
 
     public function testBuildExternalSourceDataFallsBackToSourceIdRef(): void
     {
-        $hydrator = new ItemImportItemHydrator(new ItemImportValueNormalizer());
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer));
 
-        $data = $hydrator->buildExternalSourceData([
+        $data = $hydrator->buildExternalSourceData('nukaknights', [
             'wiki_url' => null,
         ], 77);
 
         self::assertSame('source_id:77', $data['externalRef']);
         self::assertNull($data['externalUrl']);
+    }
+
+    public function testBuildExternalSourceDataBuildsNukacryptUrlFromFormId(): void
+    {
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer));
+
+        $data = $hydrator->buildExternalSourceData('nukacrypt', [
+            'form_id' => '004E9FCF',
+        ], 123);
+
+        self::assertSame('004E9FCF', $data['externalRef']);
+        self::assertSame('https://nukacrypt.com/FO76/w/latest/SeventySix.esm/004e9fcf', $data['externalUrl']);
     }
 }

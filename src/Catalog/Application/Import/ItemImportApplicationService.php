@@ -132,7 +132,7 @@ final class ItemImportApplicationService
                 }
 
                 $this->itemHydrator->hydrate($item, $row);
-                $externalSource = $this->itemHydrator->buildExternalSourceData($row, $sourceId);
+                $externalSource = $this->itemHydrator->buildExternalSourceData($context->sourceProvider, $row, $sourceId);
                 $item->upsertExternalSource(
                     $context->sourceProvider,
                     $externalSource['externalRef'],

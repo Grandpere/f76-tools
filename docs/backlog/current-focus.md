@@ -7,7 +7,8 @@
 ### Avancement F76-153
 - Done (slice 1): `app:data:sync` devient orchestrateur (`all|nukaknights|fandom`) avec delegation a `app:data:sync:fandom`.
 - Done (slice 1): tests unitaires ajoutés pour l orchestration Fandom (`only=fandom` success/failure).
-- Remaining: integrer la preparation Nukacrypt source metadata et rapport de sync multi-sources.
+- Done (slice 2): generation d URL externe Nukacrypt en import (`form_id` -> URL standard) quand provider=`nukacrypt`.
+- Remaining: integrer la source de sync Nukacrypt read-only et le rapport de sync multi-sources/collisions.
 
 ## Termine recemment
 - F76-152: Catalog items multi-source (core item + source metadata table) (done).
