@@ -766,7 +766,12 @@ final class SyncFandomDataCommand extends Command
         $text = strtolower($this->normalizeText($cellNode->textContent ?? ''));
         if ('' !== $text) {
             $falsyTokens = ['-', '—', 'none', 'no', 'n/a', 'false', '0'];
-            if (!in_array($text, $falsyTokens, true)) {
+            if (in_array($text, $falsyTokens, true)) {
+                return false;
+            }
+
+            $truthyTokens = ['yes', 'true', '1', 'available'];
+            if (in_array($text, $truthyTokens, true)) {
                 return true;
             }
         }
@@ -781,9 +786,43 @@ final class SyncFandomDataCommand extends Command
         }
 
         $xpath = new DOMXPath($document);
-        $markers = $xpath->query('.//img|.//svg|.//*[contains(@class,"va-icon") or @title]', $cellNode);
+        $markers = $xpath->query('.//*[@title]|.//img[@alt]', $cellNode);
+        if (false !== $markers) {
+            $negativeHints = ['no', 'none', 'cross', 'not available', 'unavailable'];
+            $positiveHints = ['yes', 'true', 'check', 'available'];
 
-        return false !== $markers && $markers->count() > 0;
+            foreach ($markers as $marker) {
+                if (!$marker instanceof DOMElement) {
+                    continue;
+                }
+
+                $title = strtolower($this->normalizeText($marker->getAttribute('title')));
+                $alt = strtolower($this->normalizeText($marker->getAttribute('alt')));
+                $combined = trim($title.' '.$alt);
+                if ('' === $combined) {
+                    continue;
+                }
+
+                foreach ($negativeHints as $hint) {
+                    if (str_contains($combined, $hint)) {
+                        return false;
+                    }
+                }
+                foreach ($positiveHints as $hint) {
+                    if (str_contains($combined, $hint)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        // If a marker exists but no explicit yes/no hint was found, stay conservative.
+        $hasAnyIcon = $xpath->query('.//img|.//svg|.//*[contains(@class,"va-icon")]', $cellNode);
+        if (false !== $hasAnyIcon && $hasAnyIcon->count() > 0) {
+            return false;
+        }
+
+        return false;
     }
 
     /**
