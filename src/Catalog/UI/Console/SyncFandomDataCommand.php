@@ -210,7 +210,7 @@ final class SyncFandomDataCommand extends Command
     private function resolveOutputPath(string $projectDir, mixed $option): string
     {
         if (!is_scalar($option) || '' === trim((string) $option)) {
-            return $projectDir.'/data/assets/fandom/fallout_fandom_resources.json';
+            return $projectDir.'/data/plan_recipes_pages/fallout_fandom_resources.json';
         }
 
         $value = trim((string) $option);
