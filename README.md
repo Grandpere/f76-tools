@@ -173,7 +173,7 @@ Notes:
 - L'import est idempotent (mise à jour + creation).
 - Les traductions UI restent dans `translations/`.
 - Les evenements roadmap canoniques sont scopes par saison (pas d'ecrasement global inter-saisons).
-- La sync Fandom ecrit un JSON agrege dans `data/plan_recipes_pages/fallout_fandom_resources.json`.
+- La sync Fandom ecrit des fichiers par page dans `data/plan_recipes_pages/` (`recipes.json`, `plans_*.json`) + `index.json`.
 
 ## Qualite et tests
 Commandes standard:
