@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-03-16 - Catalog multi-source requires source metadata model, not item table growth
+- Symptom: adding Fandom fields exposed schema pressure (`wiki_url`, currencies, availability flags, tags) and upcoming Nukacrypt integration would add more source-specific attributes.
+- Root cause: `item` was carrying both common catalog fields and provider-specific metadata, causing churn and risk on each new source.
+- Fix: decision recorded to move provider data into a dedicated per-item source metadata model (`provider`, `external_ref`, `external_url`, `metadata`) while keeping `item` as domain core.
+- Prevention: for any new external source, add mappings in source-metadata layer first; avoid adding provider-specific columns to `item`.
+
 ## 2026-03-13 - Async messenger transport requires Doctrine table migration in prod DB
 - Symptom: roadmap OCR upload failed with `relation "messenger_messages" does not exist`.
 - Root cause: `MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0` disables runtime table auto-creation, and async feature shipped before creating `messenger_messages`.

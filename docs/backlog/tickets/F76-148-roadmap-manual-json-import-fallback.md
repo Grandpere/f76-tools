@@ -1,7 +1,7 @@
 # F76-148 - Roadmap manual JSON import fallback (AI-assisted)
 
 ## Status
-`In progress`
+`Done`
 
 ## Context
 - OCR parsing of Fallout 76 roadmap images is good on dates but still inconsistent on some titles for older/multi-column seasons.
@@ -21,8 +21,8 @@ Provide an admin fallback flow to import a reviewed roadmap JSON payload directl
 - Save as draft snapshot/events and keep existing approve/merge lifecycle.
 
 ### Progress
-- Done: direct JSON import form (admin roadmap), strict payload validation, draft snapshot creation (`manual.json`), and event persistence.
-- Remaining: optional preview step before persistence (currently validates + persists in one action).
+- Done: direct JSON import form (admin roadmap), strict payload validation, draft snapshot creation (`manual.json`), event persistence, and helper prompt modal for guided extraction workflow.
+- Remaining: none in this ticket (future UX refinements tracked separately if needed).
 
 ## Out of scope
 - Direct paid API integration (Claude Vision API, etc.).

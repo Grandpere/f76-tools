@@ -1,11 +1,13 @@
 # Current Focus
 
 ## Priorite active
-- F76-150: OCR microservice Python optionnel (a evaluer apres stabilisation F76-149) - `Todo`.
+- F76-152: Catalog items multi-source (core item + source metadata table) - `Todo`.
+- F76-150: OCR microservice Python optionnel - `Deferred` (remplace par flux JSON manuel pour roadmap).
 
 ## Termine recemment
 - F76-147: upload roadmap OCR via backoffice (done).
 - F76-151: OCR roadmap upload en asynchrone (messenger + statut admin snapshot) (done).
+- F76-148: fallback import manuel JSON roadmap (done).
 - F76-149: Roadmap OCR image preprocessing pipeline (layout-first, no new dependency) (done).
 - F76-146: roadmap saison (modele season + merge scoped + saison active front/admin) (done).
 - F76-087: BOOK lists en modele absolu 1..24 (done).
@@ -39,3 +41,4 @@
 - Historique plus ancien: voir `docs/backlog/tickets/` (slices DDD et tickets precedents archives par fichier).
 
 ## Ensuite
+- F76-153: pipeline de sync multi-sources + preparation Nukacrypt (apres F76-152).
