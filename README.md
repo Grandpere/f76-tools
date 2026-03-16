@@ -128,6 +128,7 @@ make db-test-init
 ```bash
 make data-sync
 make nuke-codes-warmup
+docker compose -f compose.yaml exec -T app php bin/console app:data:sync:fandom
 
 make minerva-refresh-dry-run
 make minerva-refresh-check
@@ -172,6 +173,7 @@ Notes:
 - L'import est idempotent (mise à jour + creation).
 - Les traductions UI restent dans `translations/`.
 - Les evenements roadmap canoniques sont scopes par saison (pas d'ecrasement global inter-saisons).
+- La sync Fandom ecrit un JSON agrege dans `data/assets/fandom/fallout_fandom_resources.json`.
 
 ## Qualite et tests
 Commandes standard:
