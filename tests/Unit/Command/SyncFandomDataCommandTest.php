@@ -51,9 +51,9 @@ final class SyncFandomDataCommandTest extends TestCase
 <table>
   <tr><th>Item</th><th>Weight</th><th>Value</th><th>Form ID</th><th>Containers</th></tr>
   <tr>
-    <td><a href="/wiki/Recipe:Berry_Mentats">Recipe: Berry Mentats</a></td>
+    <td><a href="/wiki/Recipe:Berry_Mentats">Recipe: Berry Mentats</a> <span title="Wastelanders"></span></td>
     <td>0.25</td>
-    <td>35</td>
+    <td>35 <span title="Bottle cap"></span></td>
     <td>00123ABC</td>
     <td>Yes</td>
   </tr>
@@ -137,6 +137,24 @@ HTML,
         }, $pageDecoded['resources']);
         self::assertContains(true, $availabilityValues);
         self::assertContains(false, $availabilityValues);
+
+        $nameTagsDetected = false;
+        $currencyDetected = false;
+        foreach ($pageDecoded['resources'] as $row) {
+            if (!is_array($row) || !is_array($row['columns'] ?? null)) {
+                continue;
+            }
+            $columns = $row['columns'];
+            if (is_array($columns['name_tags'] ?? null) && in_array('Wastelanders', $columns['name_tags'], true)) {
+                $nameTagsDetected = true;
+            }
+            if (is_scalar($columns['value_currency'] ?? null) && 'Bottle cap' === (string) $columns['value_currency']) {
+                $currencyDetected = true;
+            }
+        }
+
+        self::assertTrue($nameTagsDetected);
+        self::assertTrue($currencyDetected);
     }
 
     public function testSyncFailsOnInvalidPayload(): void

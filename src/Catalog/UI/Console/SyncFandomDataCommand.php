@@ -376,7 +376,7 @@ final class SyncFandomDataCommand extends Command
      *     slug:string,
      *     title:string,
      *     section:string,
-     *     columns:array<string, scalar>,
+     *     columns:array<string, mixed>,
      *     availability:array<string, bool>,
      *     sources:list<array{section:string, table_index:int, row_index:int}>
      * }>
@@ -484,7 +484,7 @@ final class SyncFandomDataCommand extends Command
      * @param list<DOMNode> $cells
      * @param list<string>  $headers
      *
-     * @return array<string, scalar>
+     * @return array<string, mixed>
      */
     private function extractColumnsFromCells(array $cells, array $headers): array
     {
@@ -507,6 +507,8 @@ final class SyncFandomDataCommand extends Command
                 $columns[$key] = $value;
             }
         }
+
+        $columns = array_merge($columns, $this->extractAdditionalMetadataFromCells($cells, $headers));
 
         return $columns;
     }
@@ -539,7 +541,7 @@ final class SyncFandomDataCommand extends Command
 
     /**
      * @param list<DOMNode>         $cells
-     * @param array<string, scalar> $columns
+     * @param array<string, mixed>  $columns
      * @param array<string, bool>   $availability
      *
      * @return list<array{
@@ -547,7 +549,7 @@ final class SyncFandomDataCommand extends Command
      *     slug:string,
      *     title:string,
      *     section:string,
-     *     columns:array<string, scalar>,
+     *     columns:array<string, mixed>,
      *     availability:array<string, bool>,
      *     sources:list<array{section:string, table_index:int, row_index:int}>
      * }>
@@ -577,7 +579,7 @@ final class SyncFandomDataCommand extends Command
     }
 
     /**
-     * @param array<string, scalar> $columns
+     * @param array<string, mixed>  $columns
      * @param array<string, bool>   $availability
      *
      * @return array{
@@ -585,7 +587,7 @@ final class SyncFandomDataCommand extends Command
      *     slug:string,
      *     title:string,
      *     section:string,
-     *     columns:array<string, scalar>,
+     *     columns:array<string, mixed>,
      *     availability:array<string, bool>,
      *     sources:list<array{section:string, table_index:int, row_index:int}>
      * }|null
@@ -646,7 +648,7 @@ final class SyncFandomDataCommand extends Command
      *     slug:string,
      *     title:string,
      *     section:string,
-     *     columns:array<string, scalar>,
+     *     columns:array<string, mixed>,
      *     availability:array<string, bool>,
      *     sources:list<array{section:string, table_index:int, row_index:int}>
      * }> $resources
@@ -656,7 +658,7 @@ final class SyncFandomDataCommand extends Command
      *     slug:string,
      *     title:string,
      *     section:string,
-     *     columns:array<string, scalar>,
+     *     columns:array<string, mixed>,
      *     availability:array<string, bool>,
      *     sources:list<array{section:string, table_index:int, row_index:int}>
      * }>
@@ -672,7 +674,7 @@ final class SyncFandomDataCommand extends Command
             }
 
             foreach ($resource['columns'] as $columnKey => $columnValue) {
-                if (!isset($indexed[$key]['columns'][$columnKey]) || '' === $indexed[$key]['columns'][$columnKey]) {
+                if (!array_key_exists($columnKey, $indexed[$key]['columns']) || $this->isMissingColumnValue($indexed[$key]['columns'][$columnKey])) {
                     $indexed[$key]['columns'][$columnKey] = $columnValue;
                 }
             }
@@ -759,6 +761,147 @@ final class SyncFandomDataCommand extends Command
         $normalized = preg_replace('/\s+/u', ' ', trim($value));
 
         return '' === $normalized || null === $normalized ? '' : $normalized;
+    }
+
+    /**
+     * @param list<DOMNode> $cells
+     * @param list<string>  $headers
+     *
+     * @return array<string, mixed>
+     */
+    private function extractAdditionalMetadataFromCells(array $cells, array $headers): array
+    {
+        $nameIndex = null;
+        $valueIndex = null;
+        foreach ($headers as $index => $header) {
+            $key = $this->normalizeColumnKey($header, $index + 1);
+            if ('name' === $key) {
+                $nameIndex = $index;
+            }
+            if ('value' === $key) {
+                $valueIndex = $index;
+            }
+        }
+
+        $meta = [];
+        if (null !== $nameIndex && isset($cells[$nameIndex])) {
+            $tags = $this->extractInformativeTagsFromCell($cells[$nameIndex]);
+            if ([] !== $tags) {
+                $meta['name_tags'] = $tags;
+            }
+        }
+
+        if (null !== $valueIndex && isset($cells[$valueIndex])) {
+            $currency = $this->extractCurrencyFromCell($cells[$valueIndex]);
+            if (null !== $currency) {
+                $meta['value_currency'] = $currency;
+                $meta['likely_minerva_source'] = str_contains(strtolower($currency), 'gold bullion');
+            }
+        }
+
+        return $meta;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function extractInformativeTagsFromCell(DOMNode $cellNode): array
+    {
+        if (!$cellNode instanceof DOMElement) {
+            return [];
+        }
+
+        $document = $cellNode->ownerDocument;
+        if (!$document instanceof DOMDocument) {
+            return [];
+        }
+
+        $xpath = new DOMXPath($document);
+        $markers = $xpath->query('.//*[@title]|.//img[@alt]', $cellNode);
+        if (false === $markers) {
+            return [];
+        }
+
+        $ignored = [
+            'yes', 'no', 'true', 'false', 'available', 'not available', 'none',
+            'bottle cap', 'gold bullion',
+        ];
+        $tags = [];
+        foreach ($markers as $marker) {
+            if (!$marker instanceof DOMElement) {
+                continue;
+            }
+            foreach (['title', 'alt'] as $attribute) {
+                $raw = $this->normalizeText($marker->getAttribute($attribute));
+                if ('' === $raw) {
+                    continue;
+                }
+
+                $normalized = strtolower($raw);
+                if (in_array($normalized, $ignored, true)) {
+                    continue;
+                }
+                if (str_starts_with($normalized, 'plan:') || str_starts_with($normalized, 'recipe:')) {
+                    continue;
+                }
+
+                $tags[$raw] = true;
+            }
+        }
+
+        return array_keys($tags);
+    }
+
+    private function extractCurrencyFromCell(DOMNode $cellNode): ?string
+    {
+        $text = strtolower($this->normalizeText($cellNode->textContent ?? ''));
+        foreach (['bottle cap', 'gold bullion', 'stamp', 'scrip'] as $currency) {
+            if (str_contains($text, $currency)) {
+                return ucwords($currency);
+            }
+        }
+
+        if (!$cellNode instanceof DOMElement) {
+            return null;
+        }
+
+        $document = $cellNode->ownerDocument;
+        if (!$document instanceof DOMDocument) {
+            return null;
+        }
+
+        $xpath = new DOMXPath($document);
+        $markers = $xpath->query('.//*[@title]|.//img[@alt]', $cellNode);
+        if (false === $markers) {
+            return null;
+        }
+
+        foreach ($markers as $marker) {
+            if (!$marker instanceof DOMElement) {
+                continue;
+            }
+            foreach (['title', 'alt'] as $attribute) {
+                $raw = $this->normalizeText($marker->getAttribute($attribute));
+                if ('' === $raw) {
+                    continue;
+                }
+                $normalized = strtolower($raw);
+                if (str_contains($normalized, 'bottle cap')) {
+                    return 'Bottle cap';
+                }
+                if (str_contains($normalized, 'gold bullion')) {
+                    return 'Gold bullion';
+                }
+                if (str_contains($normalized, 'stamp')) {
+                    return 'Stamp';
+                }
+                if (str_contains($normalized, 'scrip')) {
+                    return 'Scrip';
+                }
+            }
+        }
+
+        return null;
     }
 
     private function isTruthyAvailabilityCell(DOMNode $cellNode): bool
@@ -860,5 +1003,20 @@ final class SyncFandomDataCommand extends Command
     private function naturalDelay(): void
     {
         usleep(random_int(self::MIN_DELAY_US, self::MAX_DELAY_US));
+    }
+
+    private function isMissingColumnValue(mixed $value): bool
+    {
+        if (null === $value) {
+            return true;
+        }
+        if (is_string($value)) {
+            return '' === trim($value);
+        }
+        if (is_array($value)) {
+            return [] === $value;
+        }
+
+        return false;
     }
 }
