@@ -129,6 +129,8 @@ make db-test-init
 make data-sync
 make nuke-codes-warmup
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync:fandom
+docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=fandom --fandom-no-delay
+docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=nukaknights
 
 make minerva-refresh-dry-run
 make minerva-refresh-check

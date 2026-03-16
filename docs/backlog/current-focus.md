@@ -1,8 +1,13 @@
 # Current Focus
 
 ## Priorite active
-- F76-153: pipeline de sync multi-sources + preparation Nukacrypt (apres F76-152) - `Todo`.
+- F76-153: pipeline de sync multi-sources + preparation Nukacrypt (apres F76-152) - `In progress`.
 - F76-150: OCR microservice Python optionnel - `Deferred` (remplace par flux JSON manuel pour roadmap).
+
+### Avancement F76-153
+- Done (slice 1): `app:data:sync` devient orchestrateur (`all|nukaknights|fandom`) avec delegation a `app:data:sync:fandom`.
+- Done (slice 1): tests unitaires ajoutés pour l orchestration Fandom (`only=fandom` success/failure).
+- Remaining: integrer la preparation Nukacrypt source metadata et rapport de sync multi-sources.
 
 ## Termine recemment
 - F76-152: Catalog items multi-source (core item + source metadata table) (done).

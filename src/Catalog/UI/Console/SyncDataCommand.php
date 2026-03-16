@@ -16,13 +16,16 @@ namespace App\Catalog\UI\Console;
 use JsonException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Throwable;
 
 #[AsCommand(
     name: 'app:data:sync',
@@ -45,47 +48,72 @@ final class SyncDataCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $io->title('Data sync (Nukaknights)');
+        $io->title('Data sync');
+
+        $onlyRaw = $input->getOption('only');
+        $only = is_string($onlyRaw) ? strtolower(trim($onlyRaw)) : 'all';
+        $runNukaknights = 'all' === $only || 'nukaknights' === $only;
+        $runFandom = 'all' === $only || 'fandom' === $only;
+
+        if (!$runNukaknights && !$runFandom) {
+            $io->error('Option --only invalide. Valeurs attendues: all, nukaknights, fandom.');
+
+            return Command::INVALID;
+        }
 
         $projectDir = rtrim($this->kernel->getProjectDir(), '/');
-        $httpClient = HttpClient::create([
-            'timeout' => 20,
-            'headers' => [
-                'Accept' => 'application/json',
-                'User-Agent' => 'f76-data-sync-experimentation/1.0 (+https://github.com/Grandpere/f76-tools)',
-            ],
-        ]);
 
         $errors = [];
         $updated = 0;
+        $fandomCode = null;
 
-        foreach (range(1, 4) as $legendaryRank) {
-            $url = self::BASE_URL.'?legendary_mods='.$legendaryRank.'&lang=en';
-            $target = sprintf('%s/data/legendary_mods_pages/legendary_mods_%d_en.json', $projectDir, $legendaryRank);
+        if ($runNukaknights) {
+            $io->section('Nukaknights');
+            $httpClient = HttpClient::create([
+                'timeout' => 20,
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'User-Agent' => 'f76-data-sync-experimentation/1.0 (+https://github.com/Grandpere/f76-tools)',
+                ],
+            ]);
 
-            if ($this->syncFile($httpClient, $url, $target, $errors, $io)) {
-                ++$updated;
+            foreach (range(1, 4) as $legendaryRank) {
+                $url = self::BASE_URL.'?legendary_mods='.$legendaryRank.'&lang=en';
+                $target = sprintf('%s/data/legendary_mods_pages/legendary_mods_%d_en.json', $projectDir, $legendaryRank);
+
+                if ($this->syncFile($httpClient, $url, $target, $errors, $io)) {
+                    ++$updated;
+                }
+            }
+
+            foreach (range(61, 84) as $minervaList) {
+                $url = self::BASE_URL.'?minerva='.$minervaList.'&lang=en';
+                $target = sprintf('%s/data/minerva_pages/minerva_%d_en.json', $projectDir, $minervaList);
+
+                if ($this->syncFile($httpClient, $url, $target, $errors, $io)) {
+                    ++$updated;
+                }
             }
         }
 
-        foreach (range(61, 84) as $minervaList) {
-            $url = self::BASE_URL.'?minerva='.$minervaList.'&lang=en';
-            $target = sprintf('%s/data/minerva_pages/minerva_%d_en.json', $projectDir, $minervaList);
-
-            if ($this->syncFile($httpClient, $url, $target, $errors, $io)) {
-                ++$updated;
-            }
+        if ($runFandom) {
+            $io->section('Fandom');
+            $fandomCode = $this->runFandomSync($input, $output, $io);
         }
 
         $io->newLine();
         $io->definitionList(
             ['Updated files' => (string) $updated],
+            ['Fandom sync' => null === $fandomCode ? 'skipped' : (Command::SUCCESS === $fandomCode ? 'ok' : 'failed')],
             ['Errors' => (string) count($errors)],
         );
 
-        if ([] !== $errors) {
+        if ([] !== $errors || (null !== $fandomCode && Command::SUCCESS !== $fandomCode)) {
             foreach ($errors as $error) {
                 $io->error($error);
+            }
+            if (null !== $fandomCode && Command::SUCCESS !== $fandomCode) {
+                $io->error('Fandom sync failed.');
             }
 
             return Command::FAILURE;
@@ -94,6 +122,14 @@ final class SyncDataCommand extends Command
         $io->success('Sync terminee.');
 
         return Command::SUCCESS;
+    }
+
+    protected function configure(): void
+    {
+        $this
+            ->addOption('only', null, InputOption::VALUE_REQUIRED, 'Scope sync: all|nukaknights|fandom', 'all')
+            ->addOption('fandom-output-dir', null, InputOption::VALUE_REQUIRED, 'Forwarded to app:data:sync:fandom --output-dir')
+            ->addOption('fandom-no-delay', null, InputOption::VALUE_NONE, 'Forwarded to app:data:sync:fandom --no-delay');
     }
 
     /**
@@ -166,5 +202,35 @@ final class SyncDataCommand extends Command
     {
         $delayMs = random_int(self::MIN_DELAY_BETWEEN_REQUESTS_MS, self::MAX_DELAY_BETWEEN_REQUESTS_MS);
         usleep($delayMs * 1000);
+    }
+
+    private function runFandomSync(InputInterface $input, OutputInterface $output, SymfonyStyle $io): int
+    {
+        $application = $this->getApplication();
+        if (null === $application) {
+            $io->error('Console application is not available to run Fandom sync.');
+
+            return Command::FAILURE;
+        }
+
+        try {
+            $fandomCommand = $application->find('app:data:sync:fandom');
+        } catch (Throwable $exception) {
+            $io->error(sprintf('Unable to find app:data:sync:fandom command: %s', $exception->getMessage()));
+
+            return Command::FAILURE;
+        }
+
+        /** @var array<string, mixed> $arguments */
+        $arguments = [];
+        $outputDir = $input->getOption('fandom-output-dir');
+        if (is_string($outputDir) && '' !== trim($outputDir)) {
+            $arguments['--output-dir'] = trim($outputDir);
+        }
+        if ((bool) $input->getOption('fandom-no-delay')) {
+            $arguments['--no-delay'] = true;
+        }
+
+        return $fandomCommand->run(new ArrayInput($arguments), $output);
     }
 }
