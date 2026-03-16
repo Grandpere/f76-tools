@@ -1,7 +1,7 @@
 # F76-152 - Catalog items multi-source: core item + source metadata
 
 ## Status
-`In progress`
+`Done`
 
 ## Contexte
 - Le catalogue consomme maintenant plusieurs sources heterogenes (Nukaknights, Fandom, et prochainement Nukacrypt).
@@ -49,7 +49,8 @@ Stabiliser le modele de donnees pour accueillir plusieurs sources sans toucher e
 ### Progress
 - Done (slice 1): entite `ItemExternalSource` + relation Doctrine avec `Item` + migration SQL + backfill initial depuis `item`.
 - Done (slice 2): import dual-write branche sur `item_external_source` (provider/ref/url/metadata), sans regression sur les champs existants.
-- Remaining: read model explicite (si necessaire), suppression des colonnes legacy source-specifiques, et runbook final.
+- Done (slice 3): suppression des colonnes legacy source-specifiques de `item` (`form_id`, `editor_id`, `wiki_url`, `tradeable`, `payload`) apres migration de split.
+- Remaining: none for this ticket (la suite fonctionnelle est dans F76-153).
 
 ## Criteres d acceptance
 - Ajouter une nouvelle source ne demande plus d alterer la table `item`.

@@ -135,7 +135,7 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
     {
         $owner = $this->createUser('owner-new-flag@example.com');
         $player = $this->createPlayer($owner, 'Owner');
-        $this->createItem(501, ItemTypeEnum::BOOK, null, 'catalog.new.name', null, 250, 188, true);
+        $this->createItem(501, ItemTypeEnum::BOOK, null, 'catalog.new.name', 250, 188, true);
 
         $this->browser()->loginUser($owner);
         $this->browser()->request('GET', sprintf('/api/players/%s/items?q=catalog.new.name', $player->getPublicId()));
@@ -221,15 +221,11 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
         return $player;
     }
 
-    /**
-     * @param array<string, mixed>|null $payload
-     */
     private function createItem(
         int $sourceId,
         ItemTypeEnum $type,
         ?int $rank,
         string $nameKey,
-        ?array $payload = null,
         ?int $price = null,
         ?int $priceMinerva = null,
         bool $isNew = false,
@@ -239,7 +235,6 @@ final class PlayerItemKnowledgeControllerTest extends WebTestCase
             ->setType($type)
             ->setNameKey($nameKey)
             ->setRank($rank)
-            ->setPayload($payload)
             ->setPrice($price)
             ->setPriceMinerva($priceMinerva)
             ->setIsNew($isNew);

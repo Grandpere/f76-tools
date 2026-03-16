@@ -27,16 +27,8 @@ final class ItemImportItemHydrator
      */
     public function hydrate(ItemEntity $item, array $row): void
     {
-        $item->setFormId($this->valueNormalizer->toNullableString($row['form_id'] ?? null));
-        $editorId = $this->valueNormalizer->toNullableString($row['editor_id'] ?? null);
-        if ('0' === $editorId) {
-            $editorId = null;
-        }
-        $item->setEditorId($editorId);
         $item->setPrice($this->valueNormalizer->toNullableInt($row['price'] ?? null));
         $item->setPriceMinerva($this->valueNormalizer->toNullableInt($row['price_minerva'] ?? null));
-        $item->setWikiUrl($this->valueNormalizer->toNullableString($row['wiki_url'] ?? null));
-        $item->setTradeable(1 === $this->valueNormalizer->toNullableInt($row['tradeable'] ?? 0));
         $item->setIsNew($this->valueNormalizer->toBool($row['new'] ?? null));
         $item->setDropRaid($this->valueNormalizer->toBool($row['drop_raid'] ?? null));
         $item->setDropBurningSprings($this->valueNormalizer->toBoolFromRowAny($row, [
@@ -52,7 +44,6 @@ final class ItemImportItemHydrator
         $item->setInfoHtml($this->valueNormalizer->toNullableString($row['info'] ?? null));
         $item->setDropSourcesHtml($this->valueNormalizer->toNullableString($row['drop_sources'] ?? null));
         $item->setRelationsHtml($this->valueNormalizer->toNullableString($row['relations'] ?? null));
-        $item->setPayload($this->valueNormalizer->normalizePayload($row));
     }
 
     /**
@@ -71,6 +62,10 @@ final class ItemImportItemHydrator
 
         /** @var array<string, mixed> $metadata */
         $metadata = $this->valueNormalizer->normalizePayload($row);
+        $editorId = $metadata['editor_id'] ?? null;
+        if (is_scalar($editorId) && '0' === (string) $editorId) {
+            $metadata['editor_id'] = null;
+        }
 
         return [
             'externalRef' => $externalRef,

@@ -47,12 +47,8 @@ final class ItemImportItemHydratorTest extends TestCase
             'relations' => 'relations',
         ]);
 
-        self::assertSame('0xabc', $item->getFormId());
-        self::assertSame('ed_1', $item->getEditorId());
         self::assertSame(250, $item->getPrice());
         self::assertSame(188, $item->getPriceMinerva());
-        self::assertSame('https://example.test', $item->getWikiUrl());
-        self::assertTrue($item->isTradeable());
         self::assertTrue($item->isNew());
         self::assertFalse($item->isDropRaid());
         self::assertTrue($item->isDropBurningSprings());
@@ -63,21 +59,17 @@ final class ItemImportItemHydratorTest extends TestCase
         self::assertSame('info', $item->getInfoHtml());
         self::assertSame('drop', $item->getDropSourcesHtml());
         self::assertSame('relations', $item->getRelationsHtml());
-        self::assertIsArray($item->getPayload());
     }
 
-    public function testHydrateNormalizesZeroEditorIdToNull(): void
+    public function testBuildExternalSourceDataNormalizesZeroEditorIdToNull(): void
     {
-        $item = new ItemEntity()
-            ->setType(ItemTypeEnum::BOOK)
-            ->setSourceId(62);
-
         $hydrator = new ItemImportItemHydrator(new ItemImportValueNormalizer());
-        $hydrator->hydrate($item, [
+        $data = $hydrator->buildExternalSourceData([
             'editor_id' => '0',
-        ]);
+        ], 62);
 
-        self::assertNull($item->getEditorId());
+        self::assertArrayHasKey('editor_id', $data['metadata']);
+        self::assertNull($data['metadata']['editor_id']);
     }
 
     public function testBuildExternalSourceDataUsesFormIdWhenAvailable(): void

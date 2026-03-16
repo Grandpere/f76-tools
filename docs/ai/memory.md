@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-03-16 - After dual-write stabilization, remove legacy source columns quickly
+- Symptom: keeping both `item_external_source` and legacy source columns in `item` prolongs drift risk and duplicate truth.
+- Root cause: split migrations often stop at dual-write, leaving cleanup postponed indefinitely.
+- Fix: added follow-up migration dropping `item.form_id`, `item.editor_id`, `item.wiki_url`, `item.tradeable`, `item.payload` once backfill + dual-write were validated.
+- Prevention: for core/source data split, always plan cleanup migration in the same delivery window after tests pass.
+
 ## 2026-03-16 - Multi-source catalog migration should use dual-write first
 - Symptom: moving source-specific fields out of `item` in one shot would risk broad regressions across import/read flows.
 - Root cause: existing import and UI still read legacy columns while new source metadata model is being introduced.

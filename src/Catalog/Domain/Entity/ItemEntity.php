@@ -54,12 +54,6 @@ class ItemEntity implements Item
     #[ORM\Column(name: 'desc_key', length: 255, nullable: true)]
     private ?string $descKey = null;
 
-    #[ORM\Column(name: 'form_id', length: 32, nullable: true)]
-    private ?string $formId = null;
-
-    #[ORM\Column(name: 'editor_id', length: 255, nullable: true)]
-    private ?string $editorId = null;
-
     #[ORM\Column(nullable: true)]
     private ?int $rank = null;
 
@@ -104,18 +98,6 @@ class ItemEntity implements Item
 
     #[ORM\Column(name: 'note_key', length: 255, nullable: true)]
     private ?string $noteKey = null;
-
-    #[ORM\Column(name: 'wiki_url', length: 1024, nullable: true)]
-    private ?string $wikiUrl = null;
-
-    #[ORM\Column(options: ['default' => false])]
-    private bool $tradeable = false;
-
-    /**
-     * @var array<string, mixed>|null
-     */
-    #[ORM\Column(type: Types::JSON, nullable: true)]
-    private ?array $payload = null;
 
     #[ORM\Column(name: 'created_at', type: Types::DATETIME_IMMUTABLE)]
     private DateTimeImmutable $createdAt;
@@ -199,30 +181,6 @@ class ItemEntity implements Item
     public function setDescKey(?string $descKey): self
     {
         $this->descKey = $descKey;
-
-        return $this;
-    }
-
-    public function getFormId(): ?string
-    {
-        return $this->formId;
-    }
-
-    public function setFormId(?string $formId): self
-    {
-        $this->formId = $formId;
-
-        return $this;
-    }
-
-    public function getEditorId(): ?string
-    {
-        return $this->editorId;
-    }
-
-    public function setEditorId(?string $editorId): self
-    {
-        $this->editorId = $editorId;
 
         return $this;
     }
@@ -432,48 +390,6 @@ class ItemEntity implements Item
     public function setNoteKey(?string $noteKey): self
     {
         $this->noteKey = $noteKey;
-
-        return $this;
-    }
-
-    public function getWikiUrl(): ?string
-    {
-        return $this->wikiUrl;
-    }
-
-    public function setWikiUrl(?string $wikiUrl): self
-    {
-        $this->wikiUrl = $wikiUrl;
-
-        return $this;
-    }
-
-    public function isTradeable(): bool
-    {
-        return $this->tradeable;
-    }
-
-    public function setTradeable(bool $tradeable): self
-    {
-        $this->tradeable = $tradeable;
-
-        return $this;
-    }
-
-    /**
-     * @return array<string, mixed>|null
-     */
-    public function getPayload(): ?array
-    {
-        return $this->payload;
-    }
-
-    /**
-     * @param array<string, mixed>|null $payload
-     */
-    public function setPayload(?array $payload): self
-    {
-        $this->payload = $payload;
 
         return $this;
     }
