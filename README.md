@@ -192,7 +192,7 @@ Notes:
 - `app:data:sync` affiche maintenant une progression explicite par dataset pour `Nukaknights` (`Legendary mods`, `Minerva`) afin d eviter l impression de blocage pendant les appels externes.
 - Le sync `Fandom` conserve maintenant les pages deja reussies et ecrit un `index.json` partiel si une page externe echoue. Pour une relance ciblee, utiliser `app:data:sync --only=fandom --fandom-page='...'`.
 - Le sync `fallout.wiki` applique maintenant la meme logique: pages reussies conservees, `index.json` partiel avec `page_errors`, et relance ciblee via `app:data:sync --only=fallout-wiki --fallout-wiki-page='...'`.
-- Nukacrypt est actuellement exploite en recherche ciblee par nom (`app:data:probe:nukacrypt-record ... --signature=BOOK`) pour arbitrage ponctuel; le lookup direct public par `form_id` n est pas encore suffisamment fiable pour en faire un sync exhaustif, et certaines recherches GraphQL qui repondent dans le navigateur/hote peuvent encore revenir vides depuis le conteneur app.
+- Nukacrypt est actuellement exploite en recherche ciblee par nom (`app:data:probe:nukacrypt-record ...`) pour arbitrage ponctuel; le lookup direct public par `form_id` n est pas encore suffisamment fiable pour en faire un sync exhaustif, et certains cas qui repondent via un `curl` colle manuellement dans le shell du conteneur `app` ne sont pas encore reproductibles via le runtime PHP de l application.
 - Pour arbitrer un conflit entre deux noms candidats, utiliser `app:data:probe:nukacrypt-conflict` avec un `--expected-form-id` et un ou plusieurs `--candidate`; un `--editor-id` peut etre ajoute quand il est connu.
 
 ## Qualite et tests
