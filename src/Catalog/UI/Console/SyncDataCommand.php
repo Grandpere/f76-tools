@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Catalog\UI\Console;
 
+use DateTimeImmutable;
 use JsonException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -31,7 +32,7 @@ use Throwable;
     name: 'app:data:sync',
     description: 'Synchronise les fichiers JSON legendary mods et Minerva depuis Nukaknights.',
 )]
-final class SyncDataCommand extends Command
+class SyncDataCommand extends Command
 {
     private const BASE_URL = 'https://nukaknights.com/ajax/home.html';
     private const MAX_ATTEMPTS = 3;
@@ -73,6 +74,7 @@ final class SyncDataCommand extends Command
         $errors = [];
         $updated = 0;
         $updatedNukaknights = 0;
+        $nukaknightsSummary = null;
         $fandomCode = null;
         $falloutWikiCode = null;
 
@@ -80,33 +82,9 @@ final class SyncDataCommand extends Command
             if (!$isJson) {
                 $io->section('Nukaknights');
             }
-            $httpClient = HttpClient::create([
-                'timeout' => 20,
-                'headers' => [
-                    'Accept' => 'application/json',
-                    'User-Agent' => 'f76-data-sync-experimentation/1.0 (+https://github.com/Grandpere/f76-tools)',
-                ],
-            ]);
-
-            foreach (range(1, 4) as $legendaryRank) {
-                $url = self::BASE_URL.'?legendary_mods='.$legendaryRank.'&lang=en';
-                $target = sprintf('%s/data/sources/nukaknights/legendary_mods/legendary_mods_%d_en.json', $projectDir, $legendaryRank);
-
-                if ($this->syncFile($httpClient, $url, $target, $errors, $io, !$isJson)) {
-                    ++$updated;
-                    ++$updatedNukaknights;
-                }
-            }
-
-            foreach (range(61, 84) as $minervaList) {
-                $url = self::BASE_URL.'?minerva='.$minervaList.'&lang=en';
-                $target = sprintf('%s/data/sources/nukaknights/minerva/minerva_%d_en.json', $projectDir, $minervaList);
-
-                if ($this->syncFile($httpClient, $url, $target, $errors, $io, !$isJson)) {
-                    ++$updated;
-                    ++$updatedNukaknights;
-                }
-            }
+            $nukaknightsSummary = $this->syncNukaknights($projectDir, $errors, $io, !$isJson);
+            $updated += $nukaknightsSummary['updated_files'];
+            $updatedNukaknights = $nukaknightsSummary['updated_files'];
         }
 
         if ($runFandom) {
@@ -138,6 +116,7 @@ final class SyncDataCommand extends Command
                     'fandom' => Command::SUCCESS === $fandomCode ? 1 : 0,
                     'fallout_wiki' => Command::SUCCESS === $falloutWikiCode ? 1 : 0,
                 ],
+                'nukaknights_index' => $nukaknightsSummary['index'] ?? null,
                 'fandom_status' => $fandomStatus,
                 'fallout_wiki_status' => $falloutWikiStatus,
                 'errors_count' => count($errors),
@@ -156,6 +135,12 @@ final class SyncDataCommand extends Command
             ['Fallout Wiki sync' => $falloutWikiStatus],
             ['Errors' => (string) count($errors)],
         );
+        if (is_array($nukaknightsSummary)) {
+            $io->definitionList(
+                ['Nukaknights output' => $nukaknightsSummary['output_directory']],
+                ['Nukaknights index' => $nukaknightsSummary['index']],
+            );
+        }
 
         if ($hasFailure) {
             foreach ($errors as $error) {
@@ -189,8 +174,121 @@ final class SyncDataCommand extends Command
 
     /**
      * @param list<string> $errors
+     *
+     * @return array{
+     *     updated_files:int,
+     *     output_directory:string,
+     *     index:string,
+     *     datasets:list<array{
+     *         dataset:string,
+     *         directory:string,
+     *         files_synced:int,
+     *         files_total:int,
+     *         files:list<array{file:string,url:string}>
+     *     }>
+     * }
      */
-    private function syncFile(HttpClientInterface $httpClient, string $url, string $target, array &$errors, SymfonyStyle $io, bool $displayProgress): bool
+    protected function syncNukaknights(string $projectDir, array &$errors, SymfonyStyle $io, bool $displayProgress): array
+    {
+        $httpClient = $this->createHttpClient();
+        $generatedAt = new DateTimeImmutable()->format(DATE_ATOM);
+        $outputDirectory = $projectDir.'/data/sources/nukaknights';
+
+        $datasets = [
+            'legendary_mods' => [
+                'label' => 'Legendary mods',
+                'directory' => $outputDirectory.'/legendary_mods',
+                'entries' => array_map(
+                    static fn (int $rank): array => [
+                        'url' => self::BASE_URL.'?legendary_mods='.$rank.'&lang=en',
+                        'file' => sprintf('legendary_mods_%d_en.json', $rank),
+                    ],
+                    range(1, 4),
+                ),
+            ],
+            'minerva' => [
+                'label' => 'Minerva',
+                'directory' => $outputDirectory.'/minerva',
+                'entries' => array_map(
+                    static fn (int $list): array => [
+                        'url' => self::BASE_URL.'?minerva='.$list.'&lang=en',
+                        'file' => sprintf('minerva_%d_en.json', $list),
+                    ],
+                    range(61, 84),
+                ),
+            ],
+        ];
+
+        $updatedFiles = 0;
+        $datasetSummaries = [];
+
+        foreach ($datasets as $datasetName => $dataset) {
+            $syncedInDataset = 0;
+            $files = [];
+            $entries = $dataset['entries'];
+
+            foreach ($entries as $index => $entry) {
+                $target = $dataset['directory'].'/'.$entry['file'];
+                if ($this->syncFile($httpClient, $entry['url'], $target, $errors)) {
+                    ++$updatedFiles;
+                    ++$syncedInDataset;
+                }
+
+                $files[] = [
+                    'file' => $entry['file'],
+                    'url' => $entry['url'],
+                ];
+
+                if ($displayProgress) {
+                    $io->text(sprintf(
+                        '%s %d/%d -> %s',
+                        $dataset['label'],
+                        $index + 1,
+                        count($entries),
+                        str_replace($projectDir.'/', '', $target),
+                    ));
+                }
+            }
+
+            $datasetSummaries[] = [
+                'dataset' => $datasetName,
+                'directory' => str_replace($projectDir.'/', '', $dataset['directory']),
+                'files_synced' => $syncedInDataset,
+                'files_total' => count($entries),
+                'files' => $files,
+            ];
+
+            if ($displayProgress) {
+                $io->text(sprintf(
+                    '%s summary: %d/%d files synced',
+                    $dataset['label'],
+                    $syncedInDataset,
+                    count($entries),
+                ));
+            }
+        }
+
+        $indexPath = $outputDirectory.'/index.json';
+        $this->writeJson($indexPath, [
+            'generated_at' => $generatedAt,
+            'source' => 'nukaknights.com',
+            'datasets_count' => count($datasetSummaries),
+            'files_total' => array_sum(array_map(static fn (array $summary): int => $summary['files_total'], $datasetSummaries)),
+            'datasets' => $datasetSummaries,
+        ]);
+
+        return [
+            'updated_files' => $updatedFiles,
+            'output_directory' => str_replace($projectDir.'/', '', $outputDirectory),
+            'index' => str_replace($projectDir.'/', '', $indexPath),
+            'datasets' => $datasetSummaries,
+        ];
+    }
+
+    /**
+     * @param list<string> $errors
+     */
+    protected function syncFile(HttpClientInterface $httpClient, string $url, string $target, array &$errors): bool
     {
         for ($attempt = 1; $attempt <= self::MAX_ATTEMPTS; ++$attempt) {
             $this->naturalDelay();
@@ -223,10 +321,6 @@ final class SyncDataCommand extends Command
                     return false;
                 }
 
-                if ($displayProgress) {
-                    $io->text(sprintf('Updated: %s', str_replace($this->kernel->getProjectDir().'/', '', $target)));
-                }
-
                 return true;
             } catch (ExceptionInterface|JsonException $e) {
                 if ($attempt < self::MAX_ATTEMPTS) {
@@ -241,6 +335,26 @@ final class SyncDataCommand extends Command
         }
 
         return false;
+    }
+
+    protected function createHttpClient(): HttpClientInterface
+    {
+        return HttpClient::create([
+            'timeout' => 20,
+            'headers' => [
+                'Accept' => 'application/json',
+                'User-Agent' => 'f76-data-sync-experimentation/1.0 (+https://github.com/Grandpere/f76-tools)',
+            ],
+        ]);
+    }
+
+    /**
+     * @param array<string, mixed> $payload
+     */
+    protected function writeJson(string $path, array $payload): void
+    {
+        $encoded = json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+        file_put_contents($path, $encoded."\n");
     }
 
     private function isRetryableStatus(int $statusCode): bool

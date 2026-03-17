@@ -15,6 +15,7 @@ namespace App\Tests\Unit\Command;
 
 use App\Catalog\UI\Console\SyncDataCommand;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -31,7 +32,7 @@ final class SyncDataCommandTest extends TestCase
         $syncCommand = new SyncDataCommand($kernel);
         $fandomCommand = new TestDelegatedSyncCommand('app:data:sync:fandom', Command::SUCCESS);
 
-        $application = new \Symfony\Component\Console\Application();
+        $application = new Application();
         $application->addCommand($syncCommand);
         $application->addCommand($fandomCommand);
 
@@ -52,7 +53,7 @@ final class SyncDataCommandTest extends TestCase
         $syncCommand = new SyncDataCommand($kernel);
         $falloutWikiCommand = new TestDelegatedSyncCommand('app:data:sync:fallout-wiki', Command::SUCCESS);
 
-        $application = new \Symfony\Component\Console\Application();
+        $application = new Application();
         $application->addCommand($syncCommand);
         $application->addCommand($falloutWikiCommand);
 
@@ -73,7 +74,7 @@ final class SyncDataCommandTest extends TestCase
         $syncCommand = new SyncDataCommand($kernel);
         $fandomCommand = new TestDelegatedSyncCommand('app:data:sync:fandom', Command::SUCCESS);
 
-        $application = new \Symfony\Component\Console\Application();
+        $application = new Application();
         $application->addCommand($syncCommand);
         $application->addCommand($fandomCommand);
 
@@ -98,7 +99,7 @@ final class SyncDataCommandTest extends TestCase
         $syncCommand = new SyncDataCommand($kernel);
         $falloutWikiCommand = new TestDelegatedSyncCommand('app:data:sync:fallout-wiki', Command::SUCCESS);
 
-        $application = new \Symfony\Component\Console\Application();
+        $application = new Application();
         $application->addCommand($syncCommand);
         $application->addCommand($falloutWikiCommand);
 
@@ -124,7 +125,7 @@ final class SyncDataCommandTest extends TestCase
         $syncCommand = new SyncDataCommand($kernel);
         $fandomCommand = new TestDelegatedSyncCommand('app:data:sync:fandom', Command::FAILURE);
 
-        $application = new \Symfony\Component\Console\Application();
+        $application = new Application();
         $application->addCommand($syncCommand);
         $application->addCommand($fandomCommand);
 
@@ -143,7 +144,7 @@ final class SyncDataCommandTest extends TestCase
         $kernel->method('getProjectDir')->willReturn(sys_get_temp_dir());
 
         $syncCommand = new SyncDataCommand($kernel);
-        $application = new \Symfony\Component\Console\Application();
+        $application = new Application();
         $application->addCommand($syncCommand);
         $application->addCommand(new TestDelegatedSyncCommand('app:data:sync:fandom', Command::SUCCESS));
 
@@ -154,6 +155,43 @@ final class SyncDataCommandTest extends TestCase
         ]);
 
         self::assertSame(Command::INVALID, $exitCode);
+    }
+
+    public function testOnlyNukaknightsJsonFormatIncludesIndexAndSummary(): void
+    {
+        $projectDir = sys_get_temp_dir().'/f76-sync-'.uniqid('', true);
+        mkdir($projectDir, 0o777, true);
+
+        $kernel = $this->createMock(KernelInterface::class);
+        $kernel->method('getProjectDir')->willReturn($projectDir);
+
+        $syncCommand = new TestableSyncDataCommand($kernel);
+        $application = new Application();
+        $application->addCommand($syncCommand);
+
+        $tester = new CommandTester($syncCommand);
+        $exitCode = $tester->execute([
+            '--only' => 'nukaknights',
+            '--format' => 'json',
+        ]);
+
+        self::assertSame(Command::SUCCESS, $exitCode);
+        /** @var array<string, mixed> $decoded */
+        $decoded = json_decode($tester->getDisplay(), true, 512, JSON_THROW_ON_ERROR);
+        /** @var array<string, int> $updatedBySource */
+        $updatedBySource = is_array($decoded['updated_by_source'] ?? null) ? $decoded['updated_by_source'] : [];
+        self::assertSame(28, $updatedBySource['nukaknights'] ?? null);
+        self::assertSame('data/sources/nukaknights/index.json', $decoded['nukaknights_index'] ?? null);
+        self::assertCount(28, $syncCommand->syncedTargets);
+        self::assertArrayHasKey($projectDir.'/data/sources/nukaknights/index.json', $syncCommand->writtenJson);
+        /** @var array<string, mixed> $index */
+        $index = $syncCommand->writtenJson[$projectDir.'/data/sources/nukaknights/index.json'];
+        self::assertSame('nukaknights.com', $index['source'] ?? null);
+        self::assertSame(2, $index['datasets_count'] ?? null);
+        self::assertSame(28, $index['files_total'] ?? null);
+        /** @var list<array<string, mixed>> $datasets */
+        $datasets = is_array($index['datasets'] ?? null) ? $index['datasets'] : [];
+        self::assertCount(2, $datasets);
     }
 }
 
@@ -171,5 +209,32 @@ final class TestDelegatedSyncCommand extends Command
         ++$this->calls;
 
         return $this->code;
+    }
+}
+
+final class TestableSyncDataCommand extends SyncDataCommand
+{
+    /** @var list<string> */
+    public array $syncedTargets = [];
+
+    /** @var array<string, array<string, mixed>> */
+    public array $writtenJson = [];
+
+    public function __construct(KernelInterface $kernel)
+    {
+        parent::__construct($kernel);
+        $this->setName('app:data:sync');
+    }
+
+    protected function syncFile(\Symfony\Contracts\HttpClient\HttpClientInterface $httpClient, string $url, string $target, array &$errors): bool
+    {
+        $this->syncedTargets[] = $target;
+
+        return true;
+    }
+
+    protected function writeJson(string $path, array $payload): void
+    {
+        $this->writtenJson[$path] = $payload;
     }
 }

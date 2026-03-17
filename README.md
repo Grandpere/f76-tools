@@ -180,9 +180,10 @@ Notes:
 - Les traductions UI restent dans `translations/`.
 - Les evenements roadmap canoniques sont scopes par saison (pas d'ecrasement global inter-saisons).
 - Les sources brutes sont organisees sous `data/sources/` par provider.
-- Nukaknights ecrit par defaut dans `data/sources/nukaknights/{legendary_mods,minerva}/`.
+- Nukaknights ecrit par defaut dans `data/sources/nukaknights/{legendary_mods,minerva}/` + `index.json`.
 - Fandom ecrit par defaut dans `data/sources/fandom/plan_recipes/` (`recipes.json`, `plans_*.json`) + `index.json`.
 - Fallout Wiki ecrit par defaut dans `data/sources/fallout_wiki/plan_recipes/` (`recipes.json`, `plans_*.json`) + `index.json`.
+- `app:data:sync` affiche maintenant une progression explicite par dataset pour `Nukaknights` (`Legendary mods`, `Minerva`) afin d eviter l impression de blocage pendant les appels externes.
 
 ## Qualite et tests
 Commandes standard:

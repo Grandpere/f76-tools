@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-03-17 - Multi-source raw sync should always expose a provider index and visible progress
+- Symptom: `app:data:sync` felt inconsistent because Fandom/Fallout Wiki produced `index.json` while Nukaknights only wrote raw files, and long external syncs could look stalled in the terminal.
+- Root cause: Nukaknights kept its older endpoint-per-file flow without the same catalog summary and progress conventions as the newer wiki sources.
+- Fix: `app:data:sync` now writes `data/sources/nukaknights/index.json` and prints explicit per-dataset progress (`Legendary mods`, `Minerva`) during the sync.
+- Prevention: every raw sync source should ship with both an operator-readable progress output and a machine-readable provider index for downstream tooling.
+
 ## 2026-03-16 - After dual-write stabilization, remove legacy source columns quickly
 - Symptom: keeping both `item_external_source` and legacy source columns in `item` prolongs drift risk and duplicate truth.
 - Root cause: split migrations often stop at dual-write, leaving cleanup postponed indefinitely.
