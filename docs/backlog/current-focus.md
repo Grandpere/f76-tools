@@ -12,6 +12,7 @@
 - Done (slice 4): enrichissement metadata Nukacrypt depuis `keywords` (extraction noms + `UnsellableObject` => `derived.tradeable=false`).
 - Done (slice 5): `app:data:sync` orchestre aussi `fallout-wiki`, avec une commande dediee et des tests unitaires.
 - Done (slice 6): l import sait maintenant lire les payloads `resources` Fandom/Fallout Wiki, ignorer `index.json` et consolider un meme item cross-source via `form_id`.
+- Done (slice 7): ajout d un rapport console `app:data:report:source-diff` pour comparer Fandom/Fallout Wiki item par item avant de figer la politique de merge.
 - Remaining: integrer la source de sync Nukacrypt read-only, le rapport de collisions et la politique de merge cross-source.
 
 ## Termine recemment

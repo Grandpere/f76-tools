@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Catalog\Infrastructure\Persistence;
 
 use App\Catalog\Application\Import\ItemImportItemRepository;
+use App\Catalog\Application\Import\ItemSourceComparisonReadRepository;
 use App\Catalog\Application\Item\ItemCatalogTimestampReadRepository;
 use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
@@ -28,7 +29,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<ItemEntity>
  */
-final class ItemEntityRepository extends ServiceEntityRepository implements ItemKnowledgeTransferRepository, ItemStatsReadRepository, ItemImportItemRepository, ItemKnowledgeCatalogReadRepository, ItemReadRepository, ItemCatalogTimestampReadRepository
+final class ItemEntityRepository extends ServiceEntityRepository implements ItemKnowledgeTransferRepository, ItemStatsReadRepository, ItemImportItemRepository, ItemKnowledgeCatalogReadRepository, ItemReadRepository, ItemCatalogTimestampReadRepository, ItemSourceComparisonReadRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -97,6 +98,33 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
         $item = $this->find($id);
 
         return $item instanceof ItemEntity ? $item : null;
+    }
+
+    /**
+     * @return list<ItemEntity>
+     */
+    public function findItemsWithProviders(string $providerA, string $providerB, ?ItemTypeEnum $type, int $limit): array
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->addSelect('srcA', 'srcB')
+            ->join('i.externalSources', 'srcA', 'WITH', 'srcA.provider = :providerA')
+            ->join('i.externalSources', 'srcB', 'WITH', 'srcB.provider = :providerB')
+            ->setParameter('providerA', strtolower(trim($providerA)))
+            ->setParameter('providerB', strtolower(trim($providerB)))
+            ->orderBy('i.type', 'ASC')
+            ->addOrderBy('i.sourceId', 'ASC')
+            ->setMaxResults(max(1, $limit));
+
+        if (null !== $type) {
+            $qb
+                ->andWhere('i.type = :type')
+                ->setParameter('type', $type);
+        }
+
+        $items = $qb->getQuery()->getResult();
+
+        /** @var list<ItemEntity> $items */
+        return $items;
     }
 
     public function findOneByPublicId(string $publicId): ?ItemEntity

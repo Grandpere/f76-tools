@@ -402,6 +402,19 @@ class ItemEntity implements Item
         return $this->externalSources;
     }
 
+    public function findExternalSourceByProvider(string $provider): ?ItemExternalSourceEntity
+    {
+        $normalizedProvider = strtolower(trim($provider));
+
+        foreach ($this->externalSources as $externalSource) {
+            if ($externalSource->getProvider() === $normalizedProvider) {
+                return $externalSource;
+            }
+        }
+
+        return null;
+    }
+
     /**
      * @param array<string, mixed>|null $metadata
      */

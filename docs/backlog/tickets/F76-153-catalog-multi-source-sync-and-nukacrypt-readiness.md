@@ -30,6 +30,7 @@ Ajouter un pipeline de sync multi-sources coherent (sans duplication instable) e
 - Done (slice 4): enrichissement metadata Nukacrypt depuis `keywords` (noms de keywords + derive `tradeable=false` si `UnsellableObject`).
 - Done (slice 5): commande `app:data:sync:fallout-wiki` versionnee et raccordee a l orchestrateur `app:data:sync` avec reporting dedie.
 - Done (slice 6): l import lit maintenant les payloads `resources` Fandom/Fallout Wiki, ignore `index.json`, mappe `form_id` -> `source_id` et consolide plusieurs providers sur un meme item.
+- Done (slice 7): rapport console `app:data:report:source-diff` pour visualiser les champs divergents Fandom/Fallout Wiki avant arbitrage de merge.
 - Remaining: source de sync Nukacrypt read-only + rapport de collisions + politique de merge cross-source.
 
 ## Hors scope

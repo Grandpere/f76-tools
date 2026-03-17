@@ -51,6 +51,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: `FilesystemItemImportSourceReader` now ignores `index.json`, unwraps `resources[*]`, flattens `columns`/`availability`, derives a stable numeric `id` from `form_id`, and feeds normalized rows into the existing import pipeline.
 - Prevention: every new raw source format must either match the flat-row contract or add a reader normalization test before import wiring.
 
+## 2026-03-17 - Compare multi-source catalog data before inventing merge rules
+- Symptom: deciding merge policy too early risks encoding fragile assumptions about which provider is "right" on `obtained`, booleans, values, or URLs.
+- Root cause: once multiple providers feed the same item, source differences become a product decision, not just a parsing decision.
+- Fix: added a read-only console report (`app:data:report:source-diff`) that lists per-item divergent fields between two providers.
+- Prevention: before implementing consolidation rules or admin merge UI, inspect real diffs from the report and decide field priorities from observed data.
+
 ## 2026-03-13 - Async messenger transport requires Doctrine table migration in prod DB
 - Symptom: roadmap OCR upload failed with `relation "messenger_messages" does not exist`.
 - Root cause: `MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0` disables runtime table auto-creation, and async feature shipped before creating `messenger_messages`.
