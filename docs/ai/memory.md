@@ -81,6 +81,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: introduced a read-only merge policy + report (`app:data:report:source-merge`) with explicit per-field priorities: `fandom` for availability-style booleans/weight/currency, `fallout.wiki` for `unlocks`/`obtained`/`type`, and names consolidated only when values are equivalent after loose normalization.
 - Prevention: for future providers, add merge rules field by field and keep URLs/source-specific references out of the consolidated profile unless there is a clear single-source requirement.
 
+## 2026-03-17 - Expose new cross-source consolidation additively before wiring UI behavior
+- Symptom: the merge policy existed in console only, so future UI work would otherwise need to reimplement or rediscover the same consolidation rules.
+- Root cause: no read-side payload exposed the retained fields/conflicts yet.
+- Fix: added an additive `sourceMerge` block to the player item API payload, leaving existing fields unchanged while surfacing retained decisions and remaining conflicts.
+- Prevention: when introducing a new read-side consolidation rule, expose it as additive metadata first so consumers can adopt it gradually without breaking current UX.
+
 ## 2026-03-17 - Treat live third-party API 500s as an external blocker, not a mapping bug
 - Symptom: Nukacrypt GraphQL introspection and `nukeCodes` succeed, but item queries (`esmRecord`, `esmRecords`) return HTTP 500 even on simple `formId`/`searchTerm` probes.
 - Root cause: the remote item endpoint is unstable or expects undocumented constraints; the failure is server-side, not caused by local parsing code.

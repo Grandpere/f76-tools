@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Progression\UI\Api;
 
+use App\Catalog\Application\Import\ItemSourceMergePolicy;
 use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
 use App\Progression\UI\Api\PlayerKnowledgeItemPayloadMapper;
@@ -51,7 +52,7 @@ final class PlayerKnowledgeItemPayloadMapperTest extends TestCase
                 ['catalog.book.name', [], 'items', null, 'Name translated'],
             ]);
 
-        $mapper = new PlayerKnowledgeItemPayloadMapper($translator);
+        $mapper = new PlayerKnowledgeItemPayloadMapper($translator, new ItemSourceMergePolicy());
         $payload = $mapper->map($item, true);
 
         self::assertSame('01J4C4ZQ5V7Y4M8N2B6D9K3P1R', $payload['id']);
@@ -69,6 +70,7 @@ final class PlayerKnowledgeItemPayloadMapperTest extends TestCase
         self::assertSame('<p>info</p>', $payload['infoHtml']);
         self::assertSame('<img src="/img/drop.png">', $payload['dropSourcesHtml']);
         self::assertSame('<img src="/img/relation.png">', $payload['relationsHtml']);
+        self::assertNull($payload['sourceMerge']);
         self::assertSame([1, 4], $payload['listNumbers']);
         self::assertTrue($payload['isInSpecialList']);
         self::assertTrue($payload['learned']);
@@ -91,11 +93,12 @@ final class PlayerKnowledgeItemPayloadMapperTest extends TestCase
             ->with('catalog.misc.name', [], 'items')
             ->willReturn('Misc translated');
 
-        $mapper = new PlayerKnowledgeItemPayloadMapper($translator);
+        $mapper = new PlayerKnowledgeItemPayloadMapper($translator, new ItemSourceMergePolicy());
         $payload = $mapper->map($item, false);
 
         self::assertNull($payload['descKey']);
         self::assertNull($payload['description']);
+        self::assertNull($payload['sourceMerge']);
         self::assertSame('Misc translated', $payload['name']);
         self::assertSame([], $payload['listNumbers']);
         self::assertFalse($payload['isInSpecialList']);
@@ -129,7 +132,7 @@ final class PlayerKnowledgeItemPayloadMapperTest extends TestCase
                 ['catalog.second.name', [], 'items', null, 'Second'],
             ]);
 
-        $mapper = new PlayerKnowledgeItemPayloadMapper($translator);
+        $mapper = new PlayerKnowledgeItemPayloadMapper($translator, new ItemSourceMergePolicy());
         $payload = $mapper->mapCatalogRows([
             ['item' => $first, 'learned' => true],
             ['item' => $second, 'learned' => false],
@@ -140,6 +143,39 @@ final class PlayerKnowledgeItemPayloadMapperTest extends TestCase
         self::assertTrue($payload[0]['learned']);
         self::assertSame('01J4D0Y7QH2K9P5V3M1N8B6R4B', $payload[1]['id']);
         self::assertFalse($payload[1]['learned']);
+    }
+
+    public function testMapIncludesSourceMergeWhenFandomAndWikiSourcesExist(): void
+    {
+        $item = new ItemEntity()
+            ->setSourceId(2161)
+            ->setType(ItemTypeEnum::BOOK)
+            ->setNameKey('catalog.book.name');
+        $item->upsertExternalSource('fandom', '00000871', null, [
+            'name_en' => 'Plan: Assault rifle fierce receiver',
+            'containers' => true,
+        ]);
+        $item->upsertExternalSource('fallout_wiki', '00000871', null, [
+            'name_en' => 'Plan: Assault Rifle Fierce Receiver',
+            'unlocks' => ['text' => 'Fierce receiver'],
+        ]);
+        $this->setItemPublicId($item, '01J4D0Y7QH2K9P5V3M1N8B6R4C');
+
+        $translator = $this->createMock(TranslatorInterface::class);
+        $translator
+            ->expects(self::once())
+            ->method('trans')
+            ->with('catalog.book.name', [], 'items')
+            ->willReturn('Name translated');
+
+        $mapper = new PlayerKnowledgeItemPayloadMapper($translator, new ItemSourceMergePolicy());
+        $payload = $mapper->map($item, false);
+
+        self::assertIsArray($payload['sourceMerge']);
+        self::assertSame('Plan: Assault Rifle Fierce Receiver', $payload['sourceMerge']['label']);
+        self::assertSame('fandom', $payload['sourceMerge']['retained']['containers']['provider']);
+        self::assertSame('fallout_wiki', $payload['sourceMerge']['retained']['unlocks']['provider']);
+        self::assertSame([], $payload['sourceMerge']['conflicts']);
     }
 
     private function setItemPublicId(ItemEntity $item, string $publicId): void

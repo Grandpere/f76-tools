@@ -13,13 +13,18 @@ declare(strict_types=1);
 
 namespace App\Progression\UI\Api;
 
+use App\Catalog\Application\Import\ItemSourceMergePolicy;
 use App\Catalog\Domain\Entity\ItemEntity;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class PlayerKnowledgeItemPayloadMapper
 {
+    private const MERGE_PROVIDER_A = 'fandom';
+    private const MERGE_PROVIDER_B = 'fallout_wiki';
+
     public function __construct(
         private readonly TranslatorInterface $translator,
+        private readonly ItemSourceMergePolicy $itemSourceMergePolicy,
     ) {
     }
 
@@ -49,6 +54,21 @@ final class PlayerKnowledgeItemPayloadMapper
      *     infoHtml: string|null,
      *     dropSourcesHtml: string|null,
      *     relationsHtml: string|null,
+     *     sourceMerge: array{
+     *         label:string,
+     *         retained: array<string, array{
+     *             provider:string,
+     *             value:mixed,
+     *             reason:string,
+     *             otherValue:mixed
+     *         }>,
+     *         conflicts: list<array{
+     *             field:string,
+     *             valueA:mixed,
+     *             valueB:mixed,
+     *             reason:string
+     *         }>
+     *     }|null,
      *     rank: int|null,
      *     listNumbers: list<int>,
      *     isInSpecialList: bool,
@@ -89,6 +109,21 @@ final class PlayerKnowledgeItemPayloadMapper
      *     infoHtml: string|null,
      *     dropSourcesHtml: string|null,
      *     relationsHtml: string|null,
+     *     sourceMerge: array{
+     *         label:string,
+     *         retained: array<string, array{
+     *             provider:string,
+     *             value:mixed,
+     *             reason:string,
+     *             otherValue:mixed
+     *         }>,
+     *         conflicts: list<array{
+     *             field:string,
+     *             valueA:mixed,
+     *             valueB:mixed,
+     *             reason:string
+     *         }>
+     *     }|null,
      *     rank: int|null,
      *     listNumbers: list<int>,
      *     isInSpecialList: bool,
@@ -115,6 +150,7 @@ final class PlayerKnowledgeItemPayloadMapper
         if (null !== $item->getNoteKey()) {
             $note = $this->translator->trans($item->getNoteKey(), domain: 'items');
         }
+        $sourceMerge = $this->buildSourceMergePayload($item);
 
         return [
             'id' => $item->getPublicId(),
@@ -139,10 +175,62 @@ final class PlayerKnowledgeItemPayloadMapper
             'infoHtml' => $item->getInfoHtml(),
             'dropSourcesHtml' => $item->getDropSourcesHtml(),
             'relationsHtml' => $item->getRelationsHtml(),
+            'sourceMerge' => $sourceMerge,
             'rank' => $item->getRank(),
             'listNumbers' => array_values(array_unique($listNumbers)),
             'isInSpecialList' => $isInSpecialList,
             'learned' => $learned,
+        ];
+    }
+
+    /**
+     * @return array{
+     *     label:string,
+     *     retained: array<string, array{
+     *         provider:string,
+     *         value:mixed,
+     *         reason:string,
+     *         otherValue:mixed
+     *     }>,
+     *     conflicts: list<array{
+     *         field:string,
+     *         valueA:mixed,
+     *         valueB:mixed,
+     *         reason:string
+     *     }>
+     * }|null
+     */
+    private function buildSourceMergePayload(ItemEntity $item): ?array
+    {
+        $result = $this->itemSourceMergePolicy->merge($item, self::MERGE_PROVIDER_A, self::MERGE_PROVIDER_B);
+        if (null === $result) {
+            return null;
+        }
+
+        $retained = [];
+        foreach ($result->decisions as $decision) {
+            $retained[$decision->field] = [
+                'provider' => $decision->provider,
+                'value' => $decision->value,
+                'reason' => $decision->reason,
+                'otherValue' => $decision->otherValue,
+            ];
+        }
+
+        $conflicts = [];
+        foreach ($result->conflicts as $conflict) {
+            $conflicts[] = [
+                'field' => $conflict->field,
+                'valueA' => $conflict->valueA,
+                'valueB' => $conflict->valueB,
+                'reason' => $conflict->reason,
+            ];
+        }
+
+        return [
+            'label' => $result->label,
+            'retained' => $retained,
+            'conflicts' => $conflicts,
         ];
     }
 }

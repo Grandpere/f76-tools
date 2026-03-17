@@ -18,6 +18,7 @@
 - Done (slice 10): le sync Fandom conserve les pages reussies en cas d erreur distante, ecrit un index partiel avec `page_errors` et permet une relance ciblee via `--fandom-page`.
 - Done (slice 11): le sync `fallout.wiki` applique le meme mode partiel que Fandom (`page_errors`, index partiel, relance ciblee via `--fallout-wiki-page`).
 - Done (slice 12): premiere politique de merge cross-source en lecture + rapport console `app:data:report:source-merge` pour rendre visibles les champs retenus et les conflits restants entre `fandom` et `fallout.wiki`.
+- Done (slice 13): le payload API des items expose maintenant `sourceMerge` de facon additive, pour rendre la consolidation cross-source consommable sans casser le front existant.
 - Note: les requetes item GraphQL Nukacrypt (`esmRecord` / `esmRecords`) repondent actuellement en HTTP 500 cote serveur, alors que l introspection et `nukeCodes` fonctionnent.
 - Remaining: source de sync Nukacrypt read-only (bloquee tant que l endpoint item renvoie 500) + branchement progressif de la consolidation cross-source dans les lectures metier si la politique actuelle se confirme.
 
