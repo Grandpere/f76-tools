@@ -63,6 +63,7 @@ services:
     App\Support\Application\Contact\ContactMessageReadRepository: '@App\Support\Infrastructure\Persistence\ContactMessageEntityRepository'
     App\Support\Application\Contact\ContactMessageStatusWriteRepository: '@App\Support\Infrastructure\Persistence\ContactMessageEntityRepository'
     App\Catalog\Application\NukeCode\NukeCodeReadRepository: '@App\Catalog\Infrastructure\NukeCode\NukacryptNukeCodeReadRepository'
+    App\Catalog\Application\Nukacrypt\NukacryptRecordLookup: '@App\Catalog\Infrastructure\Nukacrypt\NukacryptRecordLookupRepository'
 
     App\Identity\Infrastructure\Guard\TurnstileVerifier:
         arguments:
@@ -100,6 +101,12 @@ services:
             $staleTtlSeconds: '%env(int:NUKE_CODES_STALE_TTL_SECONDS)%'
 
     App\Catalog\Infrastructure\NukeCode\NukacryptNukeCodeReadRepository:
+        arguments:
+            $graphqlUrl: '%env(string:NUKECRYPT_GRAPHQL_URL)%'
+            $userAgent: '%env(string:NUKECRYPT_USER_AGENT)%'
+            $timeoutSeconds: '%env(int:NUKECRYPT_TIMEOUT_SECONDS)%'
+
+    App\Catalog\Infrastructure\Nukacrypt\NukacryptRecordLookupRepository:
         arguments:
             $graphqlUrl: '%env(string:NUKECRYPT_GRAPHQL_URL)%'
             $userAgent: '%env(string:NUKECRYPT_USER_AGENT)%'

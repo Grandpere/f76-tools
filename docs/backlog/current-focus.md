@@ -21,8 +21,9 @@
 - Done (slice 13): le payload API des items expose maintenant `sourceMerge` de facon additive, pour rendre la consolidation cross-source consommable sans casser le front existant.
 - Done (slice 14): ajout d un rapport de synthese `app:data:report:source-merge-summary` pour voir, par champ, combien de fois la politique retient chaque provider et combien de conflits subsistent.
 - Done (slice 15): les doublons intra-provider `fandom`/`fallout_wiki` sur un meme `form_id` sont maintenant ignores a l import (premiere occurrence conservee), et le merge de nom prefere la variante la plus specifique quand une source ajoute un suffixe parenthetique.
-- Note: les requetes item GraphQL Nukacrypt (`esmRecord` / `esmRecords`) repondent actuellement en HTTP 500 cote serveur, alors que l introspection et `nukeCodes` fonctionnent.
-- Remaining: source de sync Nukacrypt read-only (bloquee tant que l endpoint item renvoie 500) + branchement progressif de la consolidation cross-source dans les lectures metier si la politique actuelle se confirme.
+- Done (slice 16): ajout d un probe console Nukacrypt read-only (`app:data:probe:nukacrypt-record`) base sur `esmRecords(searchTerm + signatures)` pour arbitrage cible des conflits source par nom.
+- Note: le lookup public Nukacrypt direct par `form_id` via `esmRecord` reste non fiable depuis l app (HTTP 500 / corps vide), mais la recherche ciblee `esmRecords(searchTerm + signature=BOOK)` fonctionne pour des arbitrages ponctuels.
+- Remaining: brancher cette recherche Nukacrypt dans un rapport/outil d arbitrage semi-automatique des conflits restants, sans tenter de sync exhaustif `BOOK`.
 
 ## Termine recemment
 - F76-152: Catalog items multi-source (core item + source metadata table) (done).

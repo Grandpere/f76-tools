@@ -39,8 +39,9 @@ Ajouter un pipeline de sync multi-sources coherent (sans duplication instable) e
 - Done (slice 13): le payload API `PlayerItemKnowledge` expose maintenant un bloc additif `sourceMerge` (retained/conflicts) afin de rendre la consolidation cross-source disponible aux futurs usages UI sans modifier le comportement front courant.
 - Done (slice 14): ajout d une synthese `app:data:report:source-merge-summary` pour suivre la politique de merge au niveau catalogue (par champ, provider retenu, conflits restants).
 - Done (slice 15): correction de la qualite source cote import pour `fandom`/`fallout_wiki` en ignorant les doublons `form_id` intra-provider (premiere occurrence conservee) + regle de merge nom plus specifique pour les variantes parenthetiques comme `Healing Salve (Toxic Valley)`.
-- Note: verification live du GraphQL Nukacrypt le 2026-03-17 : `nukeCodes` et l introspection repondent, mais `esmRecord` / `esmRecords` renvoient HTTP 500 cote serveur.
-- Remaining: source de sync Nukacrypt read-only (bloquee tant que l endpoint item renvoie 500) + branchement progressif de la consolidation cross-source dans les lectures metier/UI si la politique se confirme.
+- Done (slice 16): ajout d un probe console Nukacrypt `app:data:probe:nukacrypt-record` appuye sur `esmRecords(searchTerm + signatures)` pour verifier ponctuellement un nom/source sans sync exhaustif.
+- Note: verification live du GraphQL Nukacrypt le 2026-03-17 : `nukeCodes` et l introspection repondent, `esmRecord(formId)` reste instable/HTTP 500 depuis l app, mais `esmRecords(searchTerm + signature=BOOK)` fonctionne pour des recherches ciblees.
+- Remaining: brancher la recherche Nukacrypt ciblee dans un rapport d arbitrage semi-automatique des conflits, puis seulement evaluer s il faut aller plus loin; pas de sync global `BOOK` tant que le contrat public par `formId` n est pas fiable.
 
 ## Hors scope
 - Matching semantique avance cross-source par similarite de nom.

@@ -105,6 +105,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: paused the read-only Nukacrypt item sync and continued with read-only collision reporting on local multi-source data instead.
 - Prevention: when a third-party API returns reproducible 5xx on minimal valid probes, record it as an upstream blocker and avoid shipping speculative client logic on top of it.
 
+## 2026-03-17 - Nukacrypt public GraphQL is usable for targeted search, not reliable direct formId lookup
+- Symptom: a direct `esmRecord(formId)` lookup from the app kept returning HTTP 500 / empty body, while the user could still browse records on the Nukacrypt site.
+- Root cause: the public GraphQL contract is inconsistent: `games` and `nukeCodes` are stable, `esmRecord(formId)` is not reliable from the app context, but `esmRecords(searchTerm + signatures)` does answer for exact item-name probes.
+- Fix: replaced the attempted direct `formId` lookup slice with a targeted console probe built on `esmRecords(searchTerm, signatures)`, which is enough for semi-automatic conflict arbitration by candidate names.
+- Prevention: when integrating third-party GraphQL, validate the exact query shape live before designing abstractions; if only search works reliably, model the client as a search helper instead of a direct-ID repository.
+
 ## 2026-03-13 - Async messenger transport requires Doctrine table migration in prod DB
 - Symptom: roadmap OCR upload failed with `relation "messenger_messages" does not exist`.
 - Root cause: `MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0` disables runtime table auto-creation, and async feature shipped before creating `messenger_messages`.

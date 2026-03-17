@@ -138,6 +138,7 @@ docker compose -f compose.yaml exec -T app php bin/console app:data:report:sourc
 docker compose -f compose.yaml exec -T app php bin/console app:data:report:source-merge
 docker compose -f compose.yaml exec -T app php bin/console app:data:report:source-merge-summary
 docker compose -f compose.yaml exec -T app php bin/console app:data:report:source-collisions
+docker compose -f compose.yaml exec -T app php bin/console app:data:probe:nukacrypt-record 'Plan: Vault 96 Jumpsuit' --signature=BOOK --format=json
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=nukaknights
 
 make minerva-refresh-dry-run
@@ -190,6 +191,7 @@ Notes:
 - `app:data:sync` affiche maintenant une progression explicite par dataset pour `Nukaknights` (`Legendary mods`, `Minerva`) afin d eviter l impression de blocage pendant les appels externes.
 - Le sync `Fandom` conserve maintenant les pages deja reussies et ecrit un `index.json` partiel si une page externe echoue. Pour une relance ciblee, utiliser `app:data:sync --only=fandom --fandom-page='...'`.
 - Le sync `fallout.wiki` applique maintenant la meme logique: pages reussies conservees, `index.json` partiel avec `page_errors`, et relance ciblee via `app:data:sync --only=fallout-wiki --fallout-wiki-page='...'`.
+- Nukacrypt est actuellement exploite en recherche ciblee par nom (`app:data:probe:nukacrypt-record ... --signature=BOOK`) pour arbitrage ponctuel; le lookup direct public par `form_id` n est pas encore suffisamment fiable pour en faire un sync exhaustif.
 
 ## Qualite et tests
 Commandes standard:
