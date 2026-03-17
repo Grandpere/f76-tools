@@ -95,7 +95,8 @@ final class SyncFandomDataCommand extends Command
             ->addOption('page', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Pages Fandom (format Fallout_76_recipes, Fallout_76_plans/Workshop, ...).')
             ->addOption('output-dir', null, InputOption::VALUE_REQUIRED, 'Dossier de sortie JSON (absolu ou relatif au projet).')
             ->addOption('output', null, InputOption::VALUE_REQUIRED, 'Compat legacy: ancien chemin de sortie. Si present et termine par .json, seul son dossier est conserve.')
-            ->addOption('no-delay', null, InputOption::VALUE_NONE, 'Desactive le delai naturel entre les requetes.');
+            ->addOption('no-delay', null, InputOption::VALUE_NONE, 'Desactive le delai naturel entre les requetes.')
+            ->addOption('fail-fast', null, InputOption::VALUE_NONE, 'Arrete le sync a la premiere page en erreur au lieu de conserver les pages deja synchronisees.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -119,6 +120,7 @@ final class SyncFandomDataCommand extends Command
             $input->getOption('output'),
         );
         $useDelay = !(bool) $input->getOption('no-delay');
+        $failFast = (bool) $input->getOption('fail-fast');
 
         if (!is_dir($outputDir) && !mkdir($outputDir, 0o775, true) && !is_dir($outputDir)) {
             $io->error(sprintf('Impossible de creer le dossier de sortie: %s', $outputDir));
@@ -129,9 +131,10 @@ final class SyncFandomDataCommand extends Command
         $pageSummaries = [];
         $resourcesTotal = 0;
         $generatedAt = new DateTimeImmutable()->format(DATE_ATOM);
+        $pageErrors = [];
 
-        try {
-            foreach ($pages as $page) {
+        foreach ($pages as $page) {
+            try {
                 if ($useDelay) {
                     $this->naturalDelay();
                 }
@@ -196,30 +199,51 @@ final class SyncFandomDataCommand extends Command
                 ];
 
                 $io->text(sprintf('%s: %d sections, %d resources -> %s', $page, count($sections), count($deduplicated), $fileName));
-            }
-        } catch (RuntimeException $exception) {
-            $io->error($exception->getMessage());
+            } catch (RuntimeException $exception) {
+                $pageUrl = sprintf('https://fallout.fandom.com/wiki/%s', str_replace(' ', '_', $page));
+                $pageErrors[] = [
+                    'page' => $page,
+                    'url' => $pageUrl,
+                    'message' => $exception->getMessage(),
+                ];
 
-            return Command::FAILURE;
+                if ($failFast) {
+                    $io->error($exception->getMessage());
+
+                    return Command::FAILURE;
+                }
+
+                $io->warning(sprintf('%s -> %s', $page, $exception->getMessage()));
+            }
         }
 
         $indexPath = $outputDir.'/index.json';
         $indexPayload = [
             'generated_at' => $generatedAt,
             'source' => 'fallout.fandom.com',
+            'pages_attempted_count' => count($pages),
             'pages_count' => count($pageSummaries),
+            'pages_failed_count' => count($pageErrors),
             'resources_total' => $resourcesTotal,
             'pages' => $pageSummaries,
+            'page_errors' => $pageErrors,
         ];
         $this->writeJson($indexPath, $indexPayload);
 
         $io->newLine();
         $io->definitionList(
             ['Pages' => (string) count($pageSummaries)],
+            ['Pages failed' => (string) count($pageErrors)],
             ['Resources total' => (string) $resourcesTotal],
             ['Output directory' => str_starts_with($outputDir, $projectDir) ? str_replace($projectDir.'/', '', $outputDir) : $outputDir],
             ['Index' => str_starts_with($indexPath, $projectDir) ? str_replace($projectDir.'/', '', $indexPath) : $indexPath],
         );
+        if ([] !== $pageErrors) {
+            $io->warning('Sync Fandom terminee avec pages en erreur. Les pages reussies et l index partiel ont ete conserves.');
+
+            return Command::FAILURE;
+        }
+
         $io->success('Sync Fandom terminee.');
 
         return Command::SUCCESS;

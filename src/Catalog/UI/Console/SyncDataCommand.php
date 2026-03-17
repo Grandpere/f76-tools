@@ -167,6 +167,7 @@ class SyncDataCommand extends Command
             ->addOption('only', null, InputOption::VALUE_REQUIRED, 'Scope sync: all|nukaknights|fandom|fallout-wiki', 'all')
             ->addOption('format', null, InputOption::VALUE_REQUIRED, 'Output format: text|json', 'text')
             ->addOption('fandom-output-dir', null, InputOption::VALUE_REQUIRED, 'Forwarded to app:data:sync:fandom --output-dir')
+            ->addOption('fandom-page', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Forwarded to app:data:sync:fandom --page')
             ->addOption('fandom-no-delay', null, InputOption::VALUE_NONE, 'Forwarded to app:data:sync:fandom --no-delay')
             ->addOption('fallout-wiki-output-dir', null, InputOption::VALUE_REQUIRED, 'Forwarded to app:data:sync:fallout-wiki --output-dir')
             ->addOption('fallout-wiki-no-delay', null, InputOption::VALUE_NONE, 'Forwarded to app:data:sync:fallout-wiki --no-delay');
@@ -430,6 +431,12 @@ class SyncDataCommand extends Command
         $outputDir = $input->getOption($outputDirOptionName);
         if (is_string($outputDir) && '' !== trim($outputDir)) {
             $arguments['--output-dir'] = trim($outputDir);
+        }
+        if ('app:data:sync:fandom' === $commandName) {
+            $pages = $input->getOption('fandom-page');
+            if (is_array($pages) && [] !== $pages) {
+                $arguments['--page'] = array_values(array_filter($pages, static fn (mixed $page): bool => is_scalar($page) && '' !== trim((string) $page)));
+            }
         }
         if ((bool) $input->getOption($noDelayOptionName)) {
             $arguments['--no-delay'] = true;

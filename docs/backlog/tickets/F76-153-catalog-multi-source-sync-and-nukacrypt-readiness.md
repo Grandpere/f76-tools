@@ -33,6 +33,7 @@ Ajouter un pipeline de sync multi-sources coherent (sans duplication instable) e
 - Done (slice 7): rapport console `app:data:report:source-diff` pour visualiser les champs divergents Fandom/Fallout Wiki avant arbitrage de merge.
 - Done (slice 8): rapport console `app:data:report:source-collisions` pour identifier les `external_ref` rattaches a plusieurs items.
 - Done (slice 9): `app:data:sync` ecrit aussi un `index.json` pour Nukaknights et affiche une progression plus lisible par dataset afin de mieux suivre les syncs longs.
+- Done (slice 10): le sync Fandom n abandonne plus tout le lot sur une seule page en erreur; il conserve les pages reussies, ajoute `page_errors` dans l index et permet une relance ciblee via `--fandom-page`.
 - Note: verification live du GraphQL Nukacrypt le 2026-03-17 : `nukeCodes` et l introspection repondent, mais `esmRecord` / `esmRecords` renvoient HTTP 500 cote serveur.
 - Remaining: source de sync Nukacrypt read-only (bloquee tant que l endpoint item renvoie 500) + politique de merge cross-source.
 

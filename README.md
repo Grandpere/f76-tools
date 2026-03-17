@@ -130,6 +130,7 @@ make data-sync
 make nuke-codes-warmup
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync:fandom
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=fandom --fandom-no-delay
+docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=fandom --fandom-page='Fallout_76_plans/Weapons'
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync:fallout-wiki
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=fallout-wiki --fallout-wiki-no-delay
 docker compose -f compose.yaml exec -T app php bin/console app:data:report:source-diff
@@ -184,6 +185,7 @@ Notes:
 - Fandom ecrit par defaut dans `data/sources/fandom/plan_recipes/` (`recipes.json`, `plans_*.json`) + `index.json`.
 - Fallout Wiki ecrit par defaut dans `data/sources/fallout_wiki/plan_recipes/` (`recipes.json`, `plans_*.json`) + `index.json`.
 - `app:data:sync` affiche maintenant une progression explicite par dataset pour `Nukaknights` (`Legendary mods`, `Minerva`) afin d eviter l impression de blocage pendant les appels externes.
+- Le sync `Fandom` conserve maintenant les pages deja reussies et ecrit un `index.json` partiel si une page externe echoue. Pour une relance ciblee, utiliser `app:data:sync --only=fandom --fandom-page='...'`.
 
 ## Qualite et tests
 Commandes standard:

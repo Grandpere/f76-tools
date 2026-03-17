@@ -45,6 +45,28 @@ final class SyncDataCommandTest extends TestCase
         self::assertSame(1, $fandomCommand->calls);
     }
 
+    public function testOnlyFandomForwardsSelectedPages(): void
+    {
+        $kernel = $this->createMock(KernelInterface::class);
+        $kernel->method('getProjectDir')->willReturn(sys_get_temp_dir());
+
+        $syncCommand = new SyncDataCommand($kernel);
+        $fandomCommand = new TestDelegatedSyncCommand('app:data:sync:fandom', Command::SUCCESS);
+
+        $application = new Application();
+        $application->addCommand($syncCommand);
+        $application->addCommand($fandomCommand);
+
+        $tester = new CommandTester($syncCommand);
+        $exitCode = $tester->execute([
+            '--only' => 'fandom',
+            '--fandom-page' => ['Fallout_76_plans/Weapons'],
+        ]);
+
+        self::assertSame(Command::SUCCESS, $exitCode);
+        self::assertSame(['Fallout_76_plans/Weapons'], $fandomCommand->lastPages);
+    }
+
     public function testOnlyFalloutWikiDelegatesToFalloutWikiCommandAndSucceeds(): void
     {
         $kernel = $this->createMock(KernelInterface::class);
@@ -198,6 +220,8 @@ final class SyncDataCommandTest extends TestCase
 final class TestDelegatedSyncCommand extends Command
 {
     public int $calls = 0;
+    /** @var list<string> */
+    public array $lastPages = [];
 
     public function __construct(string $name, private readonly int $code)
     {
@@ -207,8 +231,20 @@ final class TestDelegatedSyncCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         ++$this->calls;
+        $pages = $input->getOption('page');
+        if (is_array($pages)) {
+            $this->lastPages = array_values(array_map(
+                static fn (string|int|float|bool $page): string => trim((string) $page),
+                array_filter($pages, static fn (mixed $page): bool => is_scalar($page) && '' !== trim((string) $page)),
+            ));
+        }
 
         return $this->code;
+    }
+
+    protected function configure(): void
+    {
+        $this->addOption('page', null, \Symfony\Component\Console\Input\InputOption::VALUE_REQUIRED | \Symfony\Component\Console\Input\InputOption::VALUE_IS_ARRAY);
     }
 }
 

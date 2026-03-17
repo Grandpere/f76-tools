@@ -27,6 +27,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: `app:data:sync` now writes `data/sources/nukaknights/index.json` and prints explicit per-dataset progress (`Legendary mods`, `Minerva`) during the sync.
 - Prevention: every raw sync source should ship with both an operator-readable progress output and a machine-readable provider index for downstream tooling.
 
+## 2026-03-17 - External page sync should degrade to partial success instead of dropping the whole batch
+- Symptom: a single upstream Fandom 502 on one page could abort the whole sync, even though previous pages had already been scraped successfully.
+- Root cause: the page loop was wrapped in one global `try/catch`, so one remote page failure stopped index generation and hid successful partial work.
+- Fix: Fandom sync now catches failures per page, preserves successful page files, writes a partial `index.json` with `page_errors`, and supports targeted reruns via `app:data:sync --only=fandom --fandom-page='...'`.
+- Prevention: for third-party multi-page syncs, isolate failures per page/resource and always emit a machine-readable partial summary.
+
 ## 2026-03-16 - After dual-write stabilization, remove legacy source columns quickly
 - Symptom: keeping both `item_external_source` and legacy source columns in `item` prolongs drift risk and duplicate truth.
 - Root cause: split migrations often stop at dual-write, leaving cleanup postponed indefinitely.

@@ -184,4 +184,63 @@ final class SyncFandomDataCommandTest extends TestCase
         self::assertSame(Command::FAILURE, $exitCode);
         self::assertStringContainsString('missing section html', strtolower($tester->getDisplay()));
     }
+
+    public function testSyncKeepsSuccessfulPagesAndWritesPartialIndexWhenOnePageFails(): void
+    {
+        $projectDir = sys_get_temp_dir().'/f76-sync-fandom-'.bin2hex(random_bytes(5));
+        mkdir($projectDir, 0o777, true);
+
+        $client = new MockHttpClient(function (string $method, string $url, array $options): MockResponse {
+            $query = is_array($options['query'] ?? null) ? $options['query'] : [];
+            $page = is_scalar($query['page'] ?? null) ? (string) $query['page'] : '';
+            $prop = is_scalar($query['prop'] ?? null) ? (string) $query['prop'] : '';
+
+            if ('Fallout_76_recipes' === $page && 'sections' === $prop) {
+                return new MockResponse('{"parse":{"sections":[{"index":"1","line":"Recipes"}]}}');
+            }
+
+            if ('Fallout_76_recipes' === $page && 'text' === $prop) {
+                return new MockResponse((string) json_encode([
+                    'parse' => [
+                        'text' => '<table><tr><th>Name</th><th>Form ID</th></tr><tr><td><a href="/wiki/Recipe:Tea">Recipe: Tea</a></td><td>00112233</td></tr></table>',
+                    ],
+                ]));
+            }
+
+            if ('Fallout_76_plans/Weapons' === $page) {
+                return new MockResponse('Bad gateway', ['http_code' => 502]);
+            }
+
+            return new MockResponse('{"error":"unexpected"}', ['http_code' => 400]);
+        });
+
+        $kernel = $this->createMock(KernelInterface::class);
+        $kernel->method('getProjectDir')->willReturn($projectDir);
+
+        $command = new SyncFandomDataCommand($kernel, $client);
+        $tester = new CommandTester($command);
+
+        $exitCode = $tester->execute([
+            '--page' => ['Fallout_76_recipes', 'Fallout_76_plans/Weapons'],
+            '--output-dir' => 'data/sources/fandom/plan_recipes/test_partial',
+            '--no-delay' => true,
+        ]);
+
+        self::assertSame(Command::FAILURE, $exitCode);
+
+        $indexPath = $projectDir.'/data/sources/fandom/plan_recipes/test_partial/index.json';
+        $recipesPath = $projectDir.'/data/sources/fandom/plan_recipes/test_partial/recipes.json';
+
+        self::assertFileExists($indexPath);
+        self::assertFileExists($recipesPath);
+        self::assertFileDoesNotExist($projectDir.'/data/sources/fandom/plan_recipes/test_partial/plans_weapons.json');
+
+        $indexDecoded = json_decode((string) file_get_contents($indexPath), true, 512, \JSON_THROW_ON_ERROR);
+        self::assertIsArray($indexDecoded);
+        self::assertSame(2, $indexDecoded['pages_attempted_count']);
+        self::assertSame(1, $indexDecoded['pages_count']);
+        self::assertSame(1, $indexDecoded['pages_failed_count']);
+        self::assertIsArray($indexDecoded['page_errors'] ?? null);
+        self::assertCount(1, $indexDecoded['page_errors']);
+    }
 }
