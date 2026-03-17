@@ -83,14 +83,14 @@ final class SyncFandomDataCommandTest extends TestCase
 
         $exitCode = $tester->execute([
             '--page' => ['Fallout_76_recipes'],
-            '--output-dir' => 'data/plan_recipes_pages/test_sync',
+            '--output-dir' => 'data/sources/fandom/plan_recipes/test_sync',
             '--no-delay' => true,
         ]);
 
         self::assertSame(Command::SUCCESS, $exitCode);
 
-        $indexPath = $projectDir.'/data/plan_recipes_pages/test_sync/index.json';
-        $recipesPath = $projectDir.'/data/plan_recipes_pages/test_sync/recipes.json';
+        $indexPath = $projectDir.'/data/sources/fandom/plan_recipes/test_sync/index.json';
+        $recipesPath = $projectDir.'/data/sources/fandom/plan_recipes/test_sync/recipes.json';
         self::assertFileExists($indexPath);
         self::assertFileExists($recipesPath);
 

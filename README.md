@@ -175,7 +175,9 @@ Notes:
 - L'import est idempotent (mise à jour + creation).
 - Les traductions UI restent dans `translations/`.
 - Les evenements roadmap canoniques sont scopes par saison (pas d'ecrasement global inter-saisons).
-- La sync Fandom ecrit des fichiers par page dans `data/plan_recipes_pages/` (`recipes.json`, `plans_*.json`) + `index.json`.
+- Les sources brutes sont organisees sous `data/sources/` par provider.
+- Nukaknights ecrit par defaut dans `data/sources/nukaknights/{legendary_mods,minerva}/`.
+- Fandom ecrit par defaut dans `data/sources/fandom/plan_recipes/` (`recipes.json`, `plans_*.json`) + `index.json`.
 
 ## Qualite et tests
 Commandes standard:

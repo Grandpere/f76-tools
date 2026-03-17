@@ -262,7 +262,7 @@ final class SyncFandomDataCommand extends Command
         }
 
         if (null === $value) {
-            return $projectDir.'/data/plan_recipes_pages';
+            return $projectDir.'/data/sources/fandom/plan_recipes';
         }
 
         if (str_starts_with($value, '/')) {

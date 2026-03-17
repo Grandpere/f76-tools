@@ -88,7 +88,7 @@ final class SyncDataCommand extends Command
 
             foreach (range(1, 4) as $legendaryRank) {
                 $url = self::BASE_URL.'?legendary_mods='.$legendaryRank.'&lang=en';
-                $target = sprintf('%s/data/legendary_mods_pages/legendary_mods_%d_en.json', $projectDir, $legendaryRank);
+                $target = sprintf('%s/data/sources/nukaknights/legendary_mods/legendary_mods_%d_en.json', $projectDir, $legendaryRank);
 
                 if ($this->syncFile($httpClient, $url, $target, $errors, $io, !$isJson)) {
                     ++$updated;
@@ -98,7 +98,7 @@ final class SyncDataCommand extends Command
 
             foreach (range(61, 84) as $minervaList) {
                 $url = self::BASE_URL.'?minerva='.$minervaList.'&lang=en';
-                $target = sprintf('%s/data/minerva_pages/minerva_%d_en.json', $projectDir, $minervaList);
+                $target = sprintf('%s/data/sources/nukaknights/minerva/minerva_%d_en.json', $projectDir, $minervaList);
 
                 if ($this->syncFile($httpClient, $url, $target, $errors, $io, !$isJson)) {
                     ++$updated;
