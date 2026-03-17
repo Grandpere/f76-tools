@@ -115,7 +115,8 @@ final class NukacryptRecordLookupRepositoryTest extends TestCase
     public function testSearchUsesConfiguredTimeout(): void
     {
         $capturedTimeout = null;
-        $client = new MockHttpClient(function (string $method, string $url, array $options) use (&$capturedTimeout): MockResponse {
+        $capturedSecondRequestPayload = null;
+        $client = new MockHttpClient(function (string $method, string $url, array $options) use (&$capturedTimeout, &$capturedSecondRequestPayload): MockResponse {
             self::assertSame('POST', $method);
             self::assertSame('https://api.nukacrypt.com/graphql', $url);
             $capturedTimeout = $options['timeout'] ?? null;
@@ -139,6 +140,14 @@ final class NukacryptRecordLookupRepositoryTest extends TestCase
                 ], JSON_THROW_ON_ERROR));
             }
 
+            $capturedSecondRequestPayload = $options['json'] ?? null;
+            if (!is_array($capturedSecondRequestPayload) && is_string($options['body'] ?? null)) {
+                $decoded = json_decode($options['body'], true);
+                if (is_array($decoded)) {
+                    $capturedSecondRequestPayload = $decoded;
+                }
+            }
+
             return new MockResponse(json_encode([
                 'data' => [
                     'esmRecords' => [
@@ -159,6 +168,23 @@ final class NukacryptRecordLookupRepositoryTest extends TestCase
         $repository->search('Plan: Vault 96 Jumpsuit');
 
         self::assertEquals(7, $capturedTimeout);
+        self::assertIsArray($capturedSecondRequestPayload);
+        /** @var array<string, mixed> $capturedSecondRequestPayload */
+        $capturedSecondRequestPayload = $capturedSecondRequestPayload;
+        /** @var array<string, mixed> $variables */
+        $variables = is_array($capturedSecondRequestPayload['variables'] ?? null) ? $capturedSecondRequestPayload['variables'] : [];
+        /** @var array<string, mixed> $gameState */
+        $gameState = is_array($variables['gameState'] ?? null) ? $variables['gameState'] : [];
+        /** @var array<string, mixed> $page */
+        $page = is_array($variables['page'] ?? null) ? $variables['page'] : [];
+        /** @var array<string, mixed> $sort */
+        $sort = is_array($page['sort'] ?? null) ? $page['sort'] : [];
+
+        self::assertSame('primary', $gameState['fileId'] ?? null);
+        self::assertSame(0, $page['offset'] ?? null);
+        self::assertSame(25, $page['limit'] ?? null);
+        self::assertSame('form_id', $sort['attribute'] ?? null);
+        self::assertSame('ASC', $sort['direction'] ?? null);
     }
 
     public function testSearchByEditorIdReturnsResolvedRecords(): void

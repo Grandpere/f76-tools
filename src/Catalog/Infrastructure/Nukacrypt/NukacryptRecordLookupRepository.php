@@ -24,7 +24,7 @@ final class NukacryptRecordLookupRepository implements NukacryptRecordLookup
     private const ALLOWED_HOST = 'api.nukacrypt.com';
     private const FO76_SHORTNAME = 'FO76';
     private const DEFAULT_PATCH_ID = 'latest';
-    private const DEFAULT_FILE_ID = 'SeventySix.esm';
+    private const DEFAULT_FILE_ID = 'primary';
 
     public function __construct(
         private readonly HttpClientInterface $httpClient,
@@ -97,6 +97,14 @@ final class NukacryptRecordLookupRepository implements NukacryptRecordLookup
                 'editorId' => $editorId,
                 'signatures' => $this->normalizeSignatures($signatures),
                 'gameState' => $gameState,
+                'page' => [
+                    'offset' => 0,
+                    'limit' => 25,
+                    'sort' => [
+                        'attribute' => 'form_id',
+                        'direction' => 'ASC',
+                    ],
+                ],
             ],
         );
 
