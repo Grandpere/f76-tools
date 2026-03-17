@@ -48,6 +48,8 @@ final class ItemImportApplicationService
 
         /** @var list<string> $warnings */
         $warnings = [];
+        /** @var array<string, int> $ignoredMissingIdByFile */
+        $ignoredMissingIdByFile = [];
         /** @var array<string, ItemEntity> $dryRunMemory */
         $dryRunMemory = [];
         /** @var array<string, ItemEntity> $writeMemory */
@@ -89,6 +91,12 @@ final class ItemImportApplicationService
                 $row = $this->normalizeImportRow($row);
 
                 if (!isset($row['id']) || !is_numeric($row['id'])) {
+                    if ($this->shouldIgnoreMissingSourceId($context, $row)) {
+                        ++$stats['skipped'];
+                        $ignoredMissingIdByFile[basename($file)] = ($ignoredMissingIdByFile[basename($file)] ?? 0) + 1;
+                        continue;
+                    }
+
                     ++$stats['errors'];
                     continue;
                 }
@@ -175,6 +183,15 @@ final class ItemImportApplicationService
             }
         }
 
+        foreach ($ignoredMissingIdByFile as $fileName => $ignoredCount) {
+            $warnings[] = sprintf(
+                'Lignes ignorees dans %s: %d row(s) sans form_id exploitable',
+                $fileName,
+                $ignoredCount,
+            );
+            ++$stats['warnings'];
+        }
+
         if (!$dryRun && $pendingFlush > 0) {
             $this->persistence->flush();
         }
@@ -198,5 +215,17 @@ final class ItemImportApplicationService
     private function normalizeImportRow(array $row): array
     {
         return $this->itemHydrator->normalizeRow($row);
+    }
+
+    /**
+     * @param array<string, mixed> $row
+     */
+    private function shouldIgnoreMissingSourceId(ItemImportFileContext $context, array $row): bool
+    {
+        if (!in_array($context->sourceProvider, ['fandom', 'fallout_wiki'], true)) {
+            return false;
+        }
+
+        return isset($row['source_page'], $row['source_slug']);
     }
 }

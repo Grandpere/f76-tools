@@ -203,6 +203,63 @@ final class ItemImportApplicationServiceTest extends TestCase
         self::assertCount(2, $item->getExternalSources());
     }
 
+    public function testWriteModeSkipsFalloutWikiRowsWithoutUsableFormId(): void
+    {
+        $root = $this->createTempDir();
+        mkdir($root.'/data/sources/fallout_wiki/plan_recipes', 0o777, true);
+
+        file_put_contents($root.'/data/sources/fallout_wiki/plan_recipes/plans_workshop.json', (string) json_encode([
+            'page' => 'Fallout_76_Workshop_Plans',
+            'url' => 'https://fallout.wiki/wiki/Fallout_76_Workshop_Plans',
+            'resources' => [
+                [
+                    'type' => 'plan',
+                    'slug' => 'plan-valid-workbench',
+                    'name' => 'Plan: Valid Workbench',
+                    'section' => 'Workshop',
+                    'columns' => [
+                        'form_id' => '005D0095',
+                        'wiki_url' => 'https://fallout.wiki/wiki/Plan:Valid_Workbench',
+                    ],
+                    'availability' => [],
+                ],
+                [
+                    'type' => 'plan',
+                    'slug' => 'plan-missing-form-id',
+                    'name' => 'Plan: Missing Form ID',
+                    'section' => 'Workshop',
+                    'columns' => [
+                        'wiki_url' => 'https://fallout.wiki/wiki/Plan:Missing_Form_ID',
+                    ],
+                    'availability' => [],
+                ],
+            ],
+        ], JSON_THROW_ON_ERROR));
+
+        $this->repository
+            ->expects(self::once())
+            ->method('findOneByTypeAndSourceId')
+            ->willReturn(null);
+        $this->repository->expects(self::never())->method('deleteAllBookLists');
+
+        $this->persistence->expects(self::once())->method('persist');
+        $this->persistence->expects(self::once())->method('flush');
+
+        $projectDir = $this->createTempDir();
+        $service = $this->createService($this->createTranslationWriter($projectDir));
+        $result = $service->import($root, false, 100, false);
+        $stats = $result->getStats();
+
+        self::assertFalse($result->hasErrors());
+        self::assertSame(2, $stats['rows']);
+        self::assertSame(1, $stats['created']);
+        self::assertSame(1, $stats['skipped']);
+        self::assertSame(0, $stats['errors']);
+        self::assertSame(1, $stats['warnings']);
+        self::assertCount(1, $result->getWarnings());
+        self::assertStringContainsString('sans form_id exploitable', $result->getWarnings()[0]);
+    }
+
     private function createService(TranslationCatalogWriter $translationCatalogWriter): ItemImportApplicationService
     {
         $normalizer = new ItemImportValueNormalizer();
