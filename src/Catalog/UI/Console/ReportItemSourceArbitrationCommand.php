@@ -144,7 +144,7 @@ final class ReportItemSourceArbitrationCommand extends Command
 
             ++$conflictItems;
 
-            if (in_array($row['verdict'], ['confirmed_provider_a', 'confirmed_provider_b'], true)) {
+            if (in_array($row['verdict'], ['confirmed_provider_a', 'confirmed_provider_b', 'provider_a_more_specific_confirmed', 'provider_b_more_specific_confirmed'], true)) {
                 ++$resolvedItems;
             } else {
                 ++$unresolvedItems;
@@ -229,8 +229,10 @@ final class ReportItemSourceArbitrationCommand extends Command
         [$recordsA, $errorA] = $this->lookupCandidate($conflict['candidateA'], $signatures);
         [$recordsB, $errorB] = $this->lookupCandidate($conflict['candidateB'], $signatures);
 
-        $matchesA = $this->hasMatchingFormId($recordsA, $expectedFormId);
-        $matchesB = $this->hasMatchingFormId($recordsB, $expectedFormId);
+        $matchingRecordsA = $this->filterMatchingRecords($recordsA, $expectedFormId);
+        $matchingRecordsB = $this->filterMatchingRecords($recordsB, $expectedFormId);
+        $matchesA = [] !== $matchingRecordsA;
+        $matchesB = [] !== $matchingRecordsB;
 
         if (null !== $errorA || null !== $errorB) {
             $verdict = 'lookup_error';
@@ -238,6 +240,10 @@ final class ReportItemSourceArbitrationCommand extends Command
             $verdict = 'confirmed_provider_a';
         } elseif (!$matchesA && $matchesB) {
             $verdict = 'confirmed_provider_b';
+        } elseif ($this->isSpecificVariantPreferred($conflict['candidateA'], $conflict['candidateB']) && count($recordsB) > count($matchingRecordsB)) {
+            $verdict = 'provider_a_more_specific_confirmed';
+        } elseif ($this->isSpecificVariantPreferred($conflict['candidateB'], $conflict['candidateA']) && count($recordsA) > count($matchingRecordsA)) {
+            $verdict = 'provider_b_more_specific_confirmed';
         } elseif ($matchesA) {
             $verdict = 'both_match_expected';
         } elseif ([] === $recordsA && [] === $recordsB) {
@@ -249,6 +255,8 @@ final class ReportItemSourceArbitrationCommand extends Command
         $matchProvider = match ($verdict) {
             'confirmed_provider_a' => $providerA,
             'confirmed_provider_b' => $providerB,
+            'provider_a_more_specific_confirmed' => $providerA,
+            'provider_b_more_specific_confirmed' => $providerB,
             default => null,
         };
 
@@ -264,13 +272,17 @@ final class ReportItemSourceArbitrationCommand extends Command
             'candidateB' => $conflict['candidateB'],
             'verdict' => $verdict,
             'matchProvider' => $matchProvider,
+            'recordsATotal' => count($recordsA),
+            'recordsBTotal' => count($recordsB),
+            'matchingRecordsATotal' => count($matchingRecordsA),
+            'matchingRecordsBTotal' => count($matchingRecordsB),
             'recordsA' => array_map(
                 static fn (NukacryptRecord $record): array => $record->toArray(),
-                $recordsA,
+                $matchesA ? $matchingRecordsA : $recordsA,
             ),
             'recordsB' => array_map(
                 static fn (NukacryptRecord $record): array => $record->toArray(),
-                $recordsB,
+                $matchesB ? $matchingRecordsB : $recordsB,
             ),
             'errorA' => $errorA,
             'errorB' => $errorB,
@@ -331,16 +343,15 @@ final class ReportItemSourceArbitrationCommand extends Command
 
     /**
      * @param list<NukacryptRecord> $records
+     *
+     * @return list<NukacryptRecord>
      */
-    private function hasMatchingFormId(array $records, string $expectedFormId): bool
+    private function filterMatchingRecords(array $records, string $expectedFormId): array
     {
-        foreach ($records as $record) {
-            if (strtoupper($record->formId) === strtoupper($expectedFormId)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_values(array_filter(
+            $records,
+            static fn (NukacryptRecord $record): bool => strtoupper($record->formId) === strtoupper($expectedFormId),
+        ));
     }
 
     private function extractString(mixed $value): ?string
@@ -360,6 +371,21 @@ final class ReportItemSourceArbitrationCommand extends Command
         $normalized = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $normalized);
 
         return trim((string) $normalized);
+    }
+
+    private function isSpecificVariantPreferred(string $specificCandidate, string $genericCandidate): bool
+    {
+        $specificHasParenthetical = str_contains($specificCandidate, '(') && str_contains($specificCandidate, ')');
+        $genericHasParenthetical = str_contains($genericCandidate, '(') && str_contains($genericCandidate, ')');
+
+        if (!$specificHasParenthetical || $genericHasParenthetical) {
+            return false;
+        }
+
+        $normalizedSpecific = $this->normalizeText($specificCandidate);
+        $normalizedGeneric = $this->normalizeText($genericCandidate);
+
+        return '' !== $normalizedGeneric && str_starts_with($normalizedSpecific, $normalizedGeneric);
     }
 
     private function normalizeStringOption(mixed $value): ?string
