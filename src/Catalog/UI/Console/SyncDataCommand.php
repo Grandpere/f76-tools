@@ -170,6 +170,7 @@ class SyncDataCommand extends Command
             ->addOption('fandom-page', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Forwarded to app:data:sync:fandom --page')
             ->addOption('fandom-no-delay', null, InputOption::VALUE_NONE, 'Forwarded to app:data:sync:fandom --no-delay')
             ->addOption('fallout-wiki-output-dir', null, InputOption::VALUE_REQUIRED, 'Forwarded to app:data:sync:fallout-wiki --output-dir')
+            ->addOption('fallout-wiki-page', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Forwarded to app:data:sync:fallout-wiki --page')
             ->addOption('fallout-wiki-no-delay', null, InputOption::VALUE_NONE, 'Forwarded to app:data:sync:fallout-wiki --no-delay');
     }
 
@@ -434,6 +435,12 @@ class SyncDataCommand extends Command
         }
         if ('app:data:sync:fandom' === $commandName) {
             $pages = $input->getOption('fandom-page');
+            if (is_array($pages) && [] !== $pages) {
+                $arguments['--page'] = array_values(array_filter($pages, static fn (mixed $page): bool => is_scalar($page) && '' !== trim((string) $page)));
+            }
+        }
+        if ('app:data:sync:fallout-wiki' === $commandName) {
+            $pages = $input->getOption('fallout-wiki-page');
             if (is_array($pages) && [] !== $pages) {
                 $arguments['--page'] = array_values(array_filter($pages, static fn (mixed $page): bool => is_scalar($page) && '' !== trim((string) $page)));
             }

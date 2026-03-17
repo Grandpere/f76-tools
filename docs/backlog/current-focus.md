@@ -16,6 +16,7 @@
 - Done (slice 8): ajout d un rapport console `app:data:report:source-collisions` pour detecter les `external_ref` rattaches a plusieurs items.
 - Done (slice 9): `app:data:sync` produit maintenant un `index.json` cote Nukaknights et affiche une progression plus explicite par dataset (`Legendary mods`, `Minerva`).
 - Done (slice 10): le sync Fandom conserve les pages reussies en cas d erreur distante, ecrit un index partiel avec `page_errors` et permet une relance ciblee via `--fandom-page`.
+- Done (slice 11): le sync `fallout.wiki` applique le meme mode partiel que Fandom (`page_errors`, index partiel, relance ciblee via `--fallout-wiki-page`).
 - Note: les requetes item GraphQL Nukacrypt (`esmRecord` / `esmRecords`) repondent actuellement en HTTP 500 cote serveur, alors que l introspection et `nukeCodes` fonctionnent.
 - Remaining: source de sync Nukacrypt read-only (bloquee tant que l endpoint item renvoie 500) + politique de merge cross-source.
 

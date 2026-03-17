@@ -88,6 +88,28 @@ final class SyncDataCommandTest extends TestCase
         self::assertSame(1, $falloutWikiCommand->calls);
     }
 
+    public function testOnlyFalloutWikiForwardsSelectedPages(): void
+    {
+        $kernel = $this->createMock(KernelInterface::class);
+        $kernel->method('getProjectDir')->willReturn(sys_get_temp_dir());
+
+        $syncCommand = new SyncDataCommand($kernel);
+        $falloutWikiCommand = new TestDelegatedSyncCommand('app:data:sync:fallout-wiki', Command::SUCCESS);
+
+        $application = new Application();
+        $application->addCommand($syncCommand);
+        $application->addCommand($falloutWikiCommand);
+
+        $tester = new CommandTester($syncCommand);
+        $exitCode = $tester->execute([
+            '--only' => 'fallout-wiki',
+            '--fallout-wiki-page' => ['Fallout_76_Weapon_Plans'],
+        ]);
+
+        self::assertSame(Command::SUCCESS, $exitCode);
+        self::assertSame(['Fallout_76_Weapon_Plans'], $falloutWikiCommand->lastPages);
+    }
+
     public function testOnlyFandomJsonFormatReturnsMachineReadablePayload(): void
     {
         $kernel = $this->createMock(KernelInterface::class);

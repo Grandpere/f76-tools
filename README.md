@@ -133,6 +133,7 @@ docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=fandom --fandom-page='Fallout_76_plans/Weapons'
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync:fallout-wiki
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=fallout-wiki --fallout-wiki-no-delay
+docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=fallout-wiki --fallout-wiki-page='Fallout_76_Weapon_Plans'
 docker compose -f compose.yaml exec -T app php bin/console app:data:report:source-diff
 docker compose -f compose.yaml exec -T app php bin/console app:data:report:source-collisions
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=nukaknights
@@ -186,6 +187,7 @@ Notes:
 - Fallout Wiki ecrit par defaut dans `data/sources/fallout_wiki/plan_recipes/` (`recipes.json`, `plans_*.json`) + `index.json`.
 - `app:data:sync` affiche maintenant une progression explicite par dataset pour `Nukaknights` (`Legendary mods`, `Minerva`) afin d eviter l impression de blocage pendant les appels externes.
 - Le sync `Fandom` conserve maintenant les pages deja reussies et ecrit un `index.json` partiel si une page externe echoue. Pour une relance ciblee, utiliser `app:data:sync --only=fandom --fandom-page='...'`.
+- Le sync `fallout.wiki` applique maintenant la meme logique: pages reussies conservees, `index.json` partiel avec `page_errors`, et relance ciblee via `app:data:sync --only=fallout-wiki --fallout-wiki-page='...'`.
 
 ## Qualite et tests
 Commandes standard:

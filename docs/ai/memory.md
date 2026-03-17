@@ -30,7 +30,7 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 ## 2026-03-17 - External page sync should degrade to partial success instead of dropping the whole batch
 - Symptom: a single upstream Fandom 502 on one page could abort the whole sync, even though previous pages had already been scraped successfully.
 - Root cause: the page loop was wrapped in one global `try/catch`, so one remote page failure stopped index generation and hid successful partial work.
-- Fix: Fandom sync now catches failures per page, preserves successful page files, writes a partial `index.json` with `page_errors`, and supports targeted reruns via `app:data:sync --only=fandom --fandom-page='...'`.
+- Fix: Fandom and `fallout.wiki` syncs now catch failures per page, preserve successful page files, write a partial `index.json` with `page_errors`, and support targeted reruns via `app:data:sync --only=<provider> --<provider>-page='...'`.
 - Prevention: for third-party multi-page syncs, isolate failures per page/resource and always emit a machine-readable partial summary.
 
 ## 2026-03-16 - After dual-write stabilization, remove legacy source columns quickly
