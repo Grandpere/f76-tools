@@ -529,11 +529,22 @@ final class SyncFalloutWikiDataCommand extends Command
 
         $name = trim($nameRaw);
         $type = str_starts_with(strtolower($name), 'recipe:') ? 'recipe' : 'plan';
-        $slug = $this->slugify($name);
+
+        $nameCellIndex = array_search('name', $headers, true);
+        $nameCell = is_int($nameCellIndex) ? ($cells[$nameCellIndex] ?? null) : null;
+        $href = $nameCell instanceof DOMNode ? $this->extractFirstHref($nameCell) : null;
+        $hrefMetadata = $this->resolveWikiHrefMetadata($href);
+
+        if (null !== $hrefMetadata) {
+            $columns['wiki_url'] ??= $hrefMetadata['wiki_url'];
+            $columns['source_slug'] ??= $hrefMetadata['source_slug'];
+        }
 
         if (!isset($columns['wiki_url'])) {
             $columns['wiki_url'] = sprintf('https://fallout.wiki/wiki/%s', rawurlencode(str_replace(' ', '_', $name)));
         }
+
+        $slug = $this->resolveResourceSlug($name, $columns);
 
         return [
             'type' => $type,
@@ -636,6 +647,36 @@ final class SyncFalloutWikiDataCommand extends Command
     }
 
     /**
+     * @return array{wiki_url: string, source_slug: string}|null
+     */
+    private function resolveWikiHrefMetadata(?string $href): ?array
+    {
+        if (null === $href) {
+            return null;
+        }
+
+        $href = trim($href);
+        if ('' === $href) {
+            return null;
+        }
+
+        if (!str_starts_with($href, '/wiki/')) {
+            return null;
+        }
+
+        $sourceSlug = urldecode(substr($href, strlen('/wiki/')));
+        $sourceSlug = trim($sourceSlug);
+        if ('' === $sourceSlug) {
+            return null;
+        }
+
+        return [
+            'wiki_url' => 'https://fallout.wiki'.$href,
+            'source_slug' => $sourceSlug,
+        ];
+    }
+
+    /**
      * @param list<array{
      *     type:string,
      *     slug:string,
@@ -658,7 +699,10 @@ final class SyncFalloutWikiDataCommand extends Command
     {
         $indexed = [];
         foreach ($resources as $resource) {
-            $key = $resource['type'].'|'.$resource['slug'];
+            $formId = $resource['columns']['form_id'] ?? null;
+            $key = is_string($formId) && '' !== trim($formId)
+                ? $resource['type'].'|form_id|'.strtoupper(trim($formId))
+                : $resource['type'].'|slug|'.$resource['slug'];
             if (!isset($indexed[$key])) {
                 $indexed[$key] = $resource;
                 continue;
@@ -687,6 +731,24 @@ final class SyncFalloutWikiDataCommand extends Command
         $value = preg_replace('/[^a-z0-9]+/', '-', $value);
 
         return trim((string) $value, '-');
+    }
+
+    /**
+     * @param array<string, mixed> $columns
+     */
+    private function resolveResourceSlug(string $name, array $columns): string
+    {
+        $sourceSlug = $columns['source_slug'] ?? null;
+        if (is_string($sourceSlug) && '' !== trim($sourceSlug)) {
+            return $this->slugify($sourceSlug);
+        }
+
+        $formId = $columns['form_id'] ?? null;
+        if (is_string($formId) && '' !== trim($formId)) {
+            return $this->slugify($name.' '.$formId);
+        }
+
+        return $this->slugify($name);
     }
 
     private function naturalDelay(): void

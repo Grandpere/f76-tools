@@ -1,10 +1,10 @@
 {
-    "generated_at": "2026-03-17T14:18:46+00:00",
+    "generated_at": "2026-03-17T23:45:45+00:00",
     "source": "fallout.wiki",
     "page": "Fallout_76_Apparel_Plans",
     "url": "https://fallout.wiki/wiki/Fallout_76_Apparel_Plans",
     "sections_count": 6,
-    "resources_count": 139,
+    "resources_count": 138,
     "resources": [
         {
             "type": "plan",
@@ -27,7 +27,8 @@
                     ]
                 },
                 "form_id": "006E7358",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Apocalyptic_Farmer_Headwear"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Apocalyptic_Farmer_Headwear",
+                "source_slug": "Plan:_Apocalyptic_Farmer_Headwear"
             },
             "availability": []
         },
@@ -52,7 +53,8 @@
                     ]
                 },
                 "form_id": "006E7357",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Apocalyptic_Farmer_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Apocalyptic_Farmer_Outfit",
+                "source_slug": "Plan:_Apocalyptic_Farmer_Outfit"
             },
             "availability": []
         },
@@ -77,7 +79,8 @@
                     ]
                 },
                 "form_id": "0046A3A5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Backpack_armor_plated_mod"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Backpack_armor_plated_mod",
+                "source_slug": "Plan:_Backpack_armor_plated_mod"
             },
             "availability": []
         },
@@ -102,7 +105,8 @@
                     ]
                 },
                 "form_id": "0046A3A6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Backpack_high_capacity_mod"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Backpack_high_capacity_mod",
+                "source_slug": "Plan:_Backpack_high_capacity_mod"
             },
             "availability": []
         },
@@ -127,7 +131,8 @@
                     ]
                 },
                 "form_id": "0046A3A7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Backpack_insulated_mod"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Backpack_insulated_mod",
+                "source_slug": "Plan:_Backpack_insulated_mod"
             },
             "availability": []
         },
@@ -152,7 +157,8 @@
                     ]
                 },
                 "form_id": "0042C55E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Backpack_lead_lined_mod"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Backpack_lead_lined_mod",
+                "source_slug": "Plan:_Backpack_lead_lined_mod"
             },
             "availability": []
         },
@@ -177,7 +183,8 @@
                     ]
                 },
                 "form_id": "0046A3A8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Backpack_refrigerated_mod"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Backpack_refrigerated_mod",
+                "source_slug": "Plan:_Backpack_refrigerated_mod"
             },
             "availability": []
         },
@@ -202,7 +209,8 @@
                     ]
                 },
                 "form_id": "00692243",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Blue_Devil_Backpack_Flair"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Blue_Devil_Backpack_Flair",
+                "source_slug": "Plan:_Blue_Devil_Backpack_Flair"
             },
             "availability": []
         },
@@ -227,7 +235,8 @@
                     ]
                 },
                 "form_id": "006E177E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Blue_Devil_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Blue_Devil_Outfit",
+                "source_slug": "Plan:_Blue_Devil_Outfit"
             },
             "availability": []
         },
@@ -252,7 +261,8 @@
                     ]
                 },
                 "form_id": "006E177D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Blue_Devil_Pelt_Hood"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Blue_Devil_Pelt_Hood",
+                "source_slug": "Plan:_Blue_Devil_Pelt_Hood"
             },
             "availability": []
         },
@@ -277,7 +287,8 @@
                     ]
                 },
                 "form_id": "00691D05",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Blue_Ridge_Scout_Helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Blue_Ridge_Scout_Helmet",
+                "source_slug": "Plan:_Blue_Ridge_Scout_Helmet"
             },
             "availability": []
         },
@@ -302,7 +313,8 @@
                     ]
                 },
                 "form_id": "006E227A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Blue_Ridge_Scout_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Blue_Ridge_Scout_Outfit",
+                "source_slug": "Plan:_Blue_Ridge_Scout_Outfit"
             },
             "availability": []
         },
@@ -326,7 +338,8 @@
                         "The Mothman Equinox"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Bone_Chill_Skull_Mask"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Bone_Chill_Skull_Mask",
+                "source_slug": "Plan:_Bone_Chill_Skull_Mask"
             },
             "availability": []
         },
@@ -351,7 +364,8 @@
                     ]
                 },
                 "form_id": "0068210F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Bottle_Backpack_Flair"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Bottle_Backpack_Flair",
+                "source_slug": "Plan:_Bottle_Backpack_Flair"
             },
             "availability": []
         },
@@ -376,7 +390,8 @@
                     ]
                 },
                 "form_id": "00606C94",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_civvies"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_civvies",
+                "source_slug": "Plan:_Brotherhood_civvies"
             },
             "availability": []
         },
@@ -400,7 +415,8 @@
                         "Dangerous Pastimes"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Burnt_Vault_Chemist_Coat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Burnt_Vault_Chemist_Coat",
+                "source_slug": "Plan:_Burnt_Vault_Chemist_Coat"
             },
             "availability": []
         },
@@ -424,7 +440,8 @@
                         "Dangerous Pastimes"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Burnt_Vault_Lab_Coat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Burnt_Vault_Lab_Coat",
+                "source_slug": "Plan:_Burnt_Vault_Lab_Coat"
             },
             "availability": []
         },
@@ -449,7 +466,8 @@
                     ]
                 },
                 "form_id": "007BB06B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Canteen_Backpack_Mod"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Canteen_Backpack_Mod",
+                "source_slug": "Plan:_Canteen_Backpack_Mod"
             },
             "availability": []
         },
@@ -474,7 +492,8 @@
                     ]
                 },
                 "form_id": "0067F16E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cappy_Backpack_Flair"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cappy_Backpack_Flair",
+                "source_slug": "Plan:_Cappy_Backpack_Flair"
             },
             "availability": []
         },
@@ -499,7 +518,8 @@
                     ]
                 },
                 "form_id": "0062042B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Centurion_Helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Centurion_Helmet",
+                "source_slug": "Plan:_Centurion_Helmet"
             },
             "availability": []
         },
@@ -525,7 +545,8 @@
                     ]
                 },
                 "form_id": "005A0ED4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Chemist%27s_Backpack_Mod"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Chemist%27s_Backpack_Mod",
+                "source_slug": "Plan:_Chemist's_Backpack_Mod"
             },
             "availability": []
         },
@@ -550,7 +571,8 @@
                     ]
                 },
                 "form_id": "003A177F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Civil_War_Era_Dress"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Civil_War_Era_Dress",
+                "source_slug": "Plan:_Civil_War_Era_Dress"
             },
             "availability": []
         },
@@ -575,7 +597,8 @@
                     ]
                 },
                 "form_id": "003A1780",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Civil_War_Era_Suit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Civil_War_Era_Suit",
+                "source_slug": "Plan:_Civil_War_Era_Suit"
             },
             "availability": []
         },
@@ -600,7 +623,8 @@
                     ]
                 },
                 "form_id": "0050E3EF",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Civil_War_Era_Top_Hat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Civil_War_Era_Top_Hat",
+                "source_slug": "Plan:_Civil_War_Era_Top_Hat"
             },
             "availability": []
         },
@@ -625,7 +649,8 @@
                     ]
                 },
                 "form_id": "0050E3F0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Confederate_Hat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Confederate_Hat",
+                "source_slug": "Plan:_Confederate_Hat"
             },
             "availability": []
         },
@@ -650,7 +675,8 @@
                     ]
                 },
                 "form_id": "003A1782",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Confederate_Uniform"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Confederate_Uniform",
+                "source_slug": "Plan:_Confederate_Uniform"
             },
             "availability": []
         },
@@ -675,7 +701,8 @@
                     ]
                 },
                 "form_id": "0050E3F2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Costume_Witch_Hat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Costume_Witch_Hat",
+                "source_slug": "Plan:_Costume_Witch_Hat"
             },
             "availability": []
         },
@@ -700,7 +727,8 @@
                     ]
                 },
                 "form_id": "0068ADEC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cowboy_Chaps"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cowboy_Chaps",
+                "source_slug": "Plan:_Cowboy_Chaps"
             },
             "availability": []
         },
@@ -725,7 +753,8 @@
                     ]
                 },
                 "form_id": "00068ADE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cowboy_Duster"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cowboy_Duster",
+                "source_slug": "Plan:_Cowboy_Duster"
             },
             "availability": []
         },
@@ -750,7 +779,8 @@
                     ]
                 },
                 "form_id": "0068ADED",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cowboy_Hat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cowboy_Hat",
+                "source_slug": "Plan:_Cowboy_Hat"
             },
             "availability": []
         },
@@ -775,7 +805,8 @@
                     ]
                 },
                 "form_id": "0076EF99",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Crude_Skull_Mask"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Crude_Skull_Mask",
+                "source_slug": "Plan:_Crude_Skull_Mask"
             },
             "availability": []
         },
@@ -800,7 +831,8 @@
                     ]
                 },
                 "form_id": "006923AD",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cryptid_Hunter_Boonie_Hat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cryptid_Hunter_Boonie_Hat",
+                "source_slug": "Plan:_Cryptid_Hunter_Boonie_Hat"
             },
             "availability": []
         },
@@ -824,7 +856,8 @@
                         "The Mothman Equinox"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Adept_Hood"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cultist_Adept_Hood",
+                "source_slug": "Plan:_Cultist_Adept_Hood"
             },
             "availability": []
         },
@@ -848,7 +881,8 @@
                         "The Mothman Equinox"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Adept_Robes"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cultist_Adept_Robes",
+                "source_slug": "Plan:_Cultist_Adept_Robes"
             },
             "availability": []
         },
@@ -872,7 +906,8 @@
                         "The Mothman Equinox"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Enlightened_Hood"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cultist_Enlightened_Hood",
+                "source_slug": "Plan:_Cultist_Enlightened_Hood"
             },
             "availability": []
         },
@@ -896,7 +931,8 @@
                         "The Mothman Equinox"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Enlightened_Robes"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cultist_Enlightened_Robes",
+                "source_slug": "Plan:_Cultist_Enlightened_Robes"
             },
             "availability": []
         },
@@ -920,7 +956,8 @@
                         "The Mothman Equinox"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Eventide_Hood"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cultist_Eventide_Hood",
+                "source_slug": "Plan:_Cultist_Eventide_Hood"
             },
             "availability": []
         },
@@ -944,7 +981,8 @@
                         "The Mothman Equinox"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Eventide_Robes"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cultist_Eventide_Robes",
+                "source_slug": "Plan:_Cultist_Eventide_Robes"
             },
             "availability": []
         },
@@ -968,7 +1006,8 @@
                         "The Mothman Equinox"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Incarnate_Helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cultist_Incarnate_Helmet",
+                "source_slug": "Plan:_Cultist_Incarnate_Helmet"
             },
             "availability": []
         },
@@ -992,7 +1031,8 @@
                         "Skyline Valley"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Monarch_Mask"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cultist_Monarch_Mask",
+                "source_slug": "Plan:_Cultist_Monarch_Mask"
             },
             "availability": []
         },
@@ -1016,7 +1056,8 @@
                         "Skyline Valley"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Monarch_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cultist_Monarch_Outfit",
+                "source_slug": "Plan:_Cultist_Monarch_Outfit"
             },
             "availability": []
         },
@@ -1040,7 +1081,8 @@
                         "The Mothman Equinox"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Neophyte_Hood"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cultist_Neophyte_Hood",
+                "source_slug": "Plan:_Cultist_Neophyte_Hood"
             },
             "availability": []
         },
@@ -1064,7 +1106,8 @@
                         "The Mothman Equinox"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Neophyte_Robes"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cultist_Neophyte_Robes",
+                "source_slug": "Plan:_Cultist_Neophyte_Robes"
             },
             "availability": []
         },
@@ -1089,7 +1132,8 @@
                     ]
                 },
                 "form_id": "00745090",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deathclaw_Skin_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Deathclaw_Skin_Outfit",
+                "source_slug": "Plan:_Deathclaw_Skin_Outfit"
             },
             "availability": []
         },
@@ -1114,7 +1158,8 @@
                     ]
                 },
                 "form_id": "006828ED",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deputy%27s_Hat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Deputy%27s_Hat",
+                "source_slug": "Plan:_Deputy's_Hat"
             },
             "availability": []
         },
@@ -1138,7 +1183,8 @@
                         "The Human Condition"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Enforcer%27s_Headwear"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Enforcer%27s_Headwear",
+                "source_slug": "Plan:_Enforcer's_Headwear"
             },
             "availability": []
         },
@@ -1163,7 +1209,8 @@
                     ]
                 },
                 "form_id": "006E7359",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Enforcer%27s_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Enforcer%27s_Outfit",
+                "source_slug": "Plan:_Enforcer's_Outfit"
             },
             "availability": []
         },
@@ -1173,11 +1220,11 @@
             "name": "Plan: Executioner Mask",
             "section": "Headwear",
             "columns": {
-                "name": "Plan: Executioner Mask",
+                "name": "Plan: Trench Runner's Hood",
                 "unlocks": {
-                    "text": "Executioner Mask",
+                    "text": "Trench Runner's Hood",
                     "icons": [
-                        "Executioner Mask"
+                        "Trench Runner's Hood"
                     ]
                 },
                 "obtained": {
@@ -1190,7 +1237,8 @@
                     ]
                 },
                 "form_id": "0064934B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Executioner_Mask"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Trench_Runner%27s_Hood",
+                "source_slug": "Plan:_Trench_Runner's_Hood"
             },
             "availability": []
         },
@@ -1215,7 +1263,8 @@
                     ]
                 },
                 "form_id": "007ACE9B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Candykill"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flower_Crown_-_Candykill",
+                "source_slug": "Plan:_Flower_Crown_-_Candykill"
             },
             "availability": []
         },
@@ -1240,7 +1289,8 @@
                     ]
                 },
                 "form_id": "007ACE93",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Carnal_Weeper"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flower_Crown_-_Carnal_Weeper",
+                "source_slug": "Plan:_Flower_Crown_-_Carnal_Weeper"
             },
             "availability": []
         },
@@ -1265,7 +1315,8 @@
                     ]
                 },
                 "form_id": "007ACE95",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Crystalcup"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flower_Crown_-_Crystalcup",
+                "source_slug": "Plan:_Flower_Crown_-_Crystalcup"
             },
             "availability": []
         },
@@ -1290,7 +1341,8 @@
                     ]
                 },
                 "form_id": "007ACE96",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Embergold"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flower_Crown_-_Embergold",
+                "source_slug": "Plan:_Flower_Crown_-_Embergold"
             },
             "availability": []
         },
@@ -1315,7 +1367,8 @@
                     ]
                 },
                 "form_id": "007ACE9C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Gigablossom"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flower_Crown_-_Gigablossom",
+                "source_slug": "Plan:_Flower_Crown_-_Gigablossom"
             },
             "availability": []
         },
@@ -1340,7 +1393,8 @@
                     ]
                 },
                 "form_id": "007ACE99",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Glorybell"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flower_Crown_-_Glorybell",
+                "source_slug": "Plan:_Flower_Crown_-_Glorybell"
             },
             "availability": []
         },
@@ -1365,7 +1419,8 @@
                     ]
                 },
                 "form_id": "007ACE98",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Green_Invader"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flower_Crown_-_Green_Invader",
+                "source_slug": "Plan:_Flower_Crown_-_Green_Invader"
             },
             "availability": []
         },
@@ -1390,7 +1445,8 @@
                     ]
                 },
                 "form_id": "007ACE94",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Radlily"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flower_Crown_-_Radlily",
+                "source_slug": "Plan:_Flower_Crown_-_Radlily"
             },
             "availability": []
         },
@@ -1415,7 +1471,8 @@
                     ]
                 },
                 "form_id": "007ACE9A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Seesprout"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flower_Crown_-_Seesprout",
+                "source_slug": "Plan:_Flower_Crown_-_Seesprout"
             },
             "availability": []
         },
@@ -1440,7 +1497,8 @@
                     ]
                 },
                 "form_id": "007ACE97",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Starlace"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flower_Crown_-_Starlace",
+                "source_slug": "Plan:_Flower_Crown_-_Starlace"
             },
             "availability": []
         },
@@ -1465,7 +1523,8 @@
                     ]
                 },
                 "form_id": "007AD456",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower-Printed_Sundress"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flower-Printed_Sundress",
+                "source_slug": "Plan:_Flower-Printed_Sundress"
             },
             "availability": []
         },
@@ -1490,7 +1549,8 @@
                     ]
                 },
                 "form_id": "007AD459",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Suit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flower_Suit",
+                "source_slug": "Plan:_Flower_Suit"
             },
             "availability": []
         },
@@ -1515,7 +1575,8 @@
                     ]
                 },
                 "form_id": "0062042C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gladiator_mask"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Gladiator_mask",
+                "source_slug": "Plan:_Gladiator_mask"
             },
             "availability": []
         },
@@ -1541,7 +1602,8 @@
                     ]
                 },
                 "form_id": "005A0ED1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Grocer%27s_Backpack_Mod"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Grocer%27s_Backpack_Mod",
+                "source_slug": "Plan:_Grocer's_Backpack_Mod"
             },
             "availability": []
         },
@@ -1566,7 +1628,8 @@
                     ]
                 },
                 "form_id": "007734F1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gulper_Skin_Hood"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Gulper_Skin_Hood",
+                "source_slug": "Plan:_Gulper_Skin_Hood"
             },
             "availability": []
         },
@@ -1591,7 +1654,8 @@
                     ]
                 },
                 "form_id": "007734F2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gulper_Skin_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Gulper_Skin_Outfit",
+                "source_slug": "Plan:_Gulper_Skin_Outfit"
             },
             "availability": []
         },
@@ -1616,7 +1680,8 @@
                     ]
                 },
                 "form_id": "0050E3F3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Halloween_Skull_Mask"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Halloween_Skull_Mask",
+                "source_slug": "Plan:_Halloween_Skull_Mask"
             },
             "availability": []
         },
@@ -1641,7 +1706,8 @@
                     ]
                 },
                 "form_id": "0076EF9A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hammered_Skull_Mask"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hammered_Skull_Mask",
+                "source_slug": "Plan:_Hammered_Skull_Mask"
             },
             "availability": []
         },
@@ -1666,7 +1732,8 @@
                     ]
                 },
                 "form_id": "005698D6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hazmat_Suit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hazmat_Suit",
+                "source_slug": "Plan:_Hazmat_Suit"
             },
             "availability": []
         },
@@ -1691,7 +1758,8 @@
                     ]
                 },
                 "form_id": "0079648D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hazmat_Suit_-_Pink"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hazmat_Suit_-_Pink",
+                "source_slug": "Plan:_Hazmat_Suit_-_Pink"
             },
             "availability": []
         },
@@ -1716,7 +1784,8 @@
                     ]
                 },
                 "form_id": "0075FC09",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hazmat_Suit_-_Teal"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hazmat_Suit_-_Teal",
+                "source_slug": "Plan:_Hazmat_Suit_-_Teal"
             },
             "availability": []
         },
@@ -1741,7 +1810,8 @@
                     ]
                 },
                 "form_id": "0076DE20",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hunter%27s_Hanbok_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hunter%27s_Hanbok_Outfit",
+                "source_slug": "Plan:_Hunter's_Hanbok_Outfit"
             },
             "availability": []
         },
@@ -1766,7 +1836,8 @@
                     ]
                 },
                 "form_id": "005AD3FA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Insurgent_hat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Insurgent_hat",
+                "source_slug": "Plan:_Insurgent_hat"
             },
             "availability": []
         },
@@ -1791,7 +1862,8 @@
                     ]
                 },
                 "form_id": "005AD3F9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Insurgent_outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Insurgent_outfit",
+                "source_slug": "Plan:_Insurgent_outfit"
             },
             "availability": []
         },
@@ -1816,7 +1888,8 @@
                     ]
                 },
                 "form_id": "00773A2F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Jack-O%27-Lantern_Backpack_Flair"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Jack-O%27-Lantern_Backpack_Flair",
+                "source_slug": "Plan:_Jack-O'-Lantern_Backpack_Flair"
             },
             "availability": []
         },
@@ -1841,7 +1914,8 @@
                     ]
                 },
                 "form_id": "00773809",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lederhosen_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Lederhosen_Outfit",
+                "source_slug": "Plan:_Lederhosen_Outfit"
             },
             "availability": []
         },
@@ -1866,7 +1940,8 @@
                     ]
                 },
                 "form_id": "007858E5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lederhosen_Outfit_Hat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Lederhosen_Outfit_Hat",
+                "source_slug": "Plan:_Lederhosen_Outfit_Hat"
             },
             "availability": []
         },
@@ -1891,7 +1966,8 @@
                     ]
                 },
                 "form_id": "0062042D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Makeshift_Ronin_Helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Makeshift_Ronin_Helmet",
+                "source_slug": "Plan:_Makeshift_Ronin_Helmet"
             },
             "availability": []
         },
@@ -1916,7 +1992,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "0043701A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Marine_Tactical_Helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Marine_Tactical_Helmet",
+                "source_slug": "Plan:_Marine_Tactical_Helmet"
             },
             "availability": []
         },
@@ -1941,7 +2018,8 @@
                     ]
                 },
                 "form_id": "00606C95",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Mercenary_outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Mercenary_outfit",
+                "source_slug": "Plan:_Mercenary_outfit"
             },
             "availability": []
         },
@@ -1966,7 +2044,8 @@
                     ]
                 },
                 "form_id": "0069224F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Milkman_Hat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Milkman_Hat",
+                "source_slug": "Plan:_Milkman_Hat"
             },
             "availability": []
         },
@@ -1991,7 +2070,8 @@
                     ]
                 },
                 "form_id": "00692250",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Milkman_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Milkman_Outfit",
+                "source_slug": "Plan:_Milkman_Outfit"
             },
             "availability": []
         },
@@ -2015,7 +2095,8 @@
                         "The Human Condition"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Drudger_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Muni_Drudger_Outfit",
+                "source_slug": "Plan:_Muni_Drudger_Outfit"
             },
             "availability": []
         },
@@ -2039,7 +2120,8 @@
                         "The Human Condition"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Operator_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Muni_Operator_Outfit",
+                "source_slug": "Plan:_Muni_Operator_Outfit"
             },
             "availability": []
         },
@@ -2063,7 +2145,8 @@
                         "The Human Condition"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Worker_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Muni_Worker_Outfit",
+                "source_slug": "Plan:_Muni_Worker_Outfit"
             },
             "availability": []
         },
@@ -2086,7 +2169,8 @@
                         "Overview:Unused Content"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Nuclear_Winter_Tracksuit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Nuclear_Winter_Tracksuit",
+                "source_slug": "Plan:_Nuclear_Winter_Tracksuit"
             },
             "availability": []
         },
@@ -2111,7 +2195,8 @@
                     ]
                 },
                 "form_id": "0067F170",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Nuka-World_Cowboy_Duster"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Nuka-World_Cowboy_Duster",
+                "source_slug": "Plan:_Nuka-World_Cowboy_Duster"
             },
             "availability": []
         },
@@ -2136,7 +2221,8 @@
                     ]
                 },
                 "form_id": "0067F16F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Nuka-World_Cowboy_Hat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Nuka-World_Cowboy_Hat",
+                "source_slug": "Plan:_Nuka-World_Cowboy_Hat"
             },
             "availability": []
         },
@@ -2161,7 +2247,8 @@
                     ]
                 },
                 "form_id": "00691D45",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ogua_Backpack_Flair"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ogua_Backpack_Flair",
+                "source_slug": "Plan:_Ogua_Backpack_Flair"
             },
             "availability": []
         },
@@ -2186,7 +2273,8 @@
                     ]
                 },
                 "form_id": "006D7467",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ogua_Hunter_Hood"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ogua_Hunter_Hood",
+                "source_slug": "Plan:_Ogua_Hunter_Hood"
             },
             "availability": []
         },
@@ -2211,7 +2299,8 @@
                     ]
                 },
                 "form_id": "006D7468",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ogua_Hunter_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ogua_Hunter_Outfit",
+                "source_slug": "Plan:_Ogua_Hunter_Outfit"
             },
             "availability": []
         },
@@ -2236,7 +2325,8 @@
                     ]
                 },
                 "form_id": "007525E8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pheasant_Foot_Backpack_Flair"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pheasant_Foot_Backpack_Flair",
+                "source_slug": "Plan:_Pheasant_Foot_Backpack_Flair"
             },
             "availability": []
         },
@@ -2261,7 +2351,8 @@
                     ]
                 },
                 "form_id": "007720C2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Redcoat_Hat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Redcoat_Hat",
+                "source_slug": "Plan:_Redcoat_Hat"
             },
             "availability": []
         },
@@ -2286,7 +2377,8 @@
                     ]
                 },
                 "form_id": "007720C3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Redcoat_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Redcoat_Outfit",
+                "source_slug": "Plan:_Redcoat_Outfit"
             },
             "availability": []
         },
@@ -2311,7 +2403,8 @@
                     ]
                 },
                 "form_id": "00647C94",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Responders%27_Padded_Jacket"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Responders%27_Padded_Jacket",
+                "source_slug": "Plan:_Responders'_Padded_Jacket"
             },
             "availability": []
         },
@@ -2335,7 +2428,8 @@
                         "The Human Condition"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Saltwater_Taffy_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Saltwater_Taffy_Outfit",
+                "source_slug": "Plan:_Saltwater_Taffy_Outfit"
             },
             "availability": []
         },
@@ -2362,7 +2456,8 @@
                     ]
                 },
                 "form_id": "007398A1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Seasoned_Survivor_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Seasoned_Survivor_Outfit",
+                "source_slug": "Plan:_Seasoned_Survivor_Outfit"
             },
             "availability": []
         },
@@ -2386,7 +2481,8 @@
                         "Dangerous Pastimes"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shenandoah_T-Shirt_and_Slacks"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shenandoah_T-Shirt_and_Slacks",
+                "source_slug": "Plan:_Shenandoah_T-Shirt_and_Slacks"
             },
             "availability": []
         },
@@ -2411,7 +2507,8 @@
                     ]
                 },
                 "form_id": "006828EE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sheriff%27s_Hat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sheriff%27s_Hat",
+                "source_slug": "Plan:_Sheriff's_Hat"
             },
             "availability": []
         },
@@ -2436,7 +2533,8 @@
                     ]
                 },
                 "form_id": "003A1789",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Skeleton_Costume"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Skeleton_Costume",
+                "source_slug": "Plan:_Skeleton_Costume"
             },
             "availability": []
         },
@@ -2461,7 +2559,8 @@
                     ]
                 },
                 "form_id": "003A178D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Skiing_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Skiing_Outfit",
+                "source_slug": "Plan:_Skiing_Outfit"
             },
             "availability": []
         },
@@ -2488,7 +2587,8 @@
                     ]
                 },
                 "form_id": "0073989D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Snake_Wrangler_Hat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Snake_Wrangler_Hat",
+                "source_slug": "Plan:_Snake_Wrangler_Hat"
             },
             "availability": []
         },
@@ -2515,7 +2615,8 @@
                     ]
                 },
                 "form_id": "0073989F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Snake_Wrangler_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Snake_Wrangler_Outfit",
+                "source_slug": "Plan:_Snake_Wrangler_Outfit"
             },
             "availability": []
         },
@@ -2539,7 +2640,8 @@
                         "The Human Condition"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Socialite_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Socialite_Outfit",
+                "source_slug": "Plan:_Socialite_Outfit"
             },
             "availability": []
         },
@@ -2564,7 +2666,8 @@
                     ]
                 },
                 "form_id": "00769DF1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Spectacular_Performer%27s_Headwear"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Spectacular_Performer%27s_Headwear",
+                "source_slug": "Plan:_Spectacular_Performer's_Headwear"
             },
             "availability": []
         },
@@ -2588,7 +2691,8 @@
                         "The Human Condition"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Spectacular_Performer%27s_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Spectacular_Performer%27s_Outfit",
+                "source_slug": "Plan:_Spectacular_Performer's_Outfit"
             },
             "availability": []
         },
@@ -2613,7 +2717,8 @@
                     ]
                 },
                 "form_id": "0077ED50",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Spooky_Scarecrow_Headpiece"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Spooky_Scarecrow_Headpiece",
+                "source_slug": "Plan:_Spooky_Scarecrow_Headpiece"
             },
             "availability": []
         },
@@ -2638,7 +2743,8 @@
                     ]
                 },
                 "form_id": "0076DA7E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Spooky_Scarecrow_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Spooky_Scarecrow_Outfit",
+                "source_slug": "Plan:_Spooky_Scarecrow_Outfit"
             },
             "availability": []
         },
@@ -2665,7 +2771,8 @@
                     ]
                 },
                 "form_id": "0073E2F1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sunburst_Sequin_Dress"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sunburst_Sequin_Dress",
+                "source_slug": "Plan:_Sunburst_Sequin_Dress"
             },
             "availability": []
         },
@@ -2688,7 +2795,8 @@
                         "Overview:Unused Content"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Survivors_denim_underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Survivors_denim_underarmor",
+                "source_slug": "Plan:_Survivors_denim_underarmor"
             },
             "availability": []
         },
@@ -2715,7 +2823,8 @@
                     ]
                 },
                 "form_id": "00647BDA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Tinkerer%27s_Goggles"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Tinkerer%27s_Goggles",
+                "source_slug": "Plan:_Tinkerer's_Goggles"
             },
             "availability": []
         },
@@ -2742,7 +2851,8 @@
                     ]
                 },
                 "form_id": "00647BDE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Tinkerer%27s_Overalls"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Tinkerer%27s_Overalls",
+                "source_slug": "Plan:_Tinkerer's_Overalls"
             },
             "availability": []
         },
@@ -2767,7 +2877,8 @@
                     ]
                 },
                 "form_id": "005AD3FB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Treasure_hunter_outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Treasure_hunter_outfit",
+                "source_slug": "Plan:_Treasure_hunter_outfit"
             },
             "availability": []
         },
@@ -2792,7 +2903,8 @@
                     ]
                 },
                 "form_id": "005AD3F8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Treasure_hunter_outfit_hat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Treasure_hunter_outfit_hat",
+                "source_slug": "Plan:_Treasure_hunter_outfit_hat"
             },
             "availability": []
         },
@@ -2819,34 +2931,8 @@
                     ]
                 },
                 "form_id": "0064934C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Trench_Runner%27s_Coat"
-            },
-            "availability": []
-        },
-        {
-            "type": "plan",
-            "slug": "plan-trench-runner-s-hood",
-            "name": "Plan: Trench Runner's Hood",
-            "section": "Headwear",
-            "columns": {
-                "name": "Plan: Trench Runner's Hood",
-                "unlocks": {
-                    "text": "Trench Runner's Hood",
-                    "icons": [
-                        "Trench Runner's Hood"
-                    ]
-                },
-                "obtained": {
-                    "text": "From Ashes to Fire Giuseppe",
-                    "icons": [
-                        "Fallout 76 Events",
-                        "From Ashes to Fire",
-                        "Stamp",
-                        "Giuseppe"
-                    ]
-                },
-                "form_id": "0064934B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Trench_Runner%27s_Hood"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Trench_Runner%27s_Coat",
+                "source_slug": "Plan:_Trench_Runner's_Coat"
             },
             "availability": []
         },
@@ -2871,7 +2957,8 @@
                     ]
                 },
                 "form_id": "0069ED56",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Trucker_Uniform"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Trucker_Uniform",
+                "source_slug": "Plan:_Trucker_Uniform"
             },
             "availability": []
         },
@@ -2896,7 +2983,8 @@
                     ]
                 },
                 "form_id": "0067F16C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_Titan_Backpack_Flair"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_Titan_Backpack_Flair",
+                "source_slug": "Plan:_Ultracite_Titan_Backpack_Flair"
             },
             "availability": []
         },
@@ -2923,7 +3011,8 @@
                     ]
                 },
                 "form_id": "00691D09",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Umbrella_Hat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Umbrella_Hat",
+                "source_slug": "Plan:_Umbrella_Hat"
             },
             "availability": []
         },
@@ -2948,7 +3037,8 @@
                     ]
                 },
                 "form_id": "0050E3F1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_hat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_hat",
+                "source_slug": "Plan:_Union_hat"
             },
             "availability": []
         },
@@ -2973,7 +3063,8 @@
                     ]
                 },
                 "form_id": "003A1783",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_uniform"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_uniform",
+                "source_slug": "Plan:_Union_uniform"
             },
             "availability": []
         },
@@ -2997,7 +3088,8 @@
                         "Neurological Warfare"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Recon_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_V63_Recon_Outfit",
+                "source_slug": "Plan:_V63_Recon_Outfit"
             },
             "availability": []
         },
@@ -3021,7 +3113,8 @@
                         "Dangerous Pastimes"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Recon_Outfit_Burnt"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_V63_Recon_Outfit_Burnt",
+                "source_slug": "Plan:_V63_Recon_Outfit_Burnt"
             },
             "availability": []
         },
@@ -3045,7 +3138,8 @@
                         "Dangerous Pastimes"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Recon_Outfit_Helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_V63_Recon_Outfit_Helmet",
+                "source_slug": "Plan:_V63_Recon_Outfit_Helmet"
             },
             "availability": []
         },
@@ -3069,7 +3163,8 @@
                         "Neurological Warfare"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Recon_Outfit_Helmet_Burnt"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_V63_Recon_Outfit_Helmet_Burnt",
+                "source_slug": "Plan:_V63_Recon_Outfit_Helmet_Burnt"
             },
             "availability": []
         },
@@ -3093,7 +3188,8 @@
                         "Neurological Warfare"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Riot_Control_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_V63_Riot_Control_Outfit",
+                "source_slug": "Plan:_V63_Riot_Control_Outfit"
             },
             "availability": []
         },
@@ -3117,7 +3213,8 @@
                         "Dangerous Pastimes"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Riot_Control_Outfit_Burnt"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_V63_Riot_Control_Outfit_Burnt",
+                "source_slug": "Plan:_V63_Riot_Control_Outfit_Burnt"
             },
             "availability": []
         },
@@ -3141,7 +3238,8 @@
                         "Neurological Warfare"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Riot_Control_Outfit_Helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_V63_Riot_Control_Outfit_Helmet",
+                "source_slug": "Plan:_V63_Riot_Control_Outfit_Helmet"
             },
             "availability": []
         },
@@ -3165,7 +3263,8 @@
                         "Dangerous Pastimes"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Riot_Control_Outfit_Helmet_Burnt"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_V63_Riot_Control_Outfit_Helmet_Burnt",
+                "source_slug": "Plan:_V63_Riot_Control_Outfit_Helmet_Burnt"
             },
             "availability": []
         },
@@ -3189,7 +3288,8 @@
                         "Neurological Warfare"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Security_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_V63_Security_Outfit",
+                "source_slug": "Plan:_V63_Security_Outfit"
             },
             "availability": []
         },
@@ -3213,7 +3313,8 @@
                         "Dangerous Pastimes"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Security_Outfit_Burnt"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_V63_Security_Outfit_Burnt",
+                "source_slug": "Plan:_V63_Security_Outfit_Burnt"
             },
             "availability": []
         },
@@ -3237,7 +3338,8 @@
                         "Neurological Warfare"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Security_Outfit_Helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_V63_Security_Outfit_Helmet",
+                "source_slug": "Plan:_V63_Security_Outfit_Helmet"
             },
             "availability": []
         },
@@ -3261,7 +3363,8 @@
                         "Dangerous Pastimes"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Security_Outfit_Helmet_Burnt"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_V63_Security_Outfit_Helmet_Burnt",
+                "source_slug": "Plan:_V63_Security_Outfit_Helmet_Burnt"
             },
             "availability": []
         },
@@ -3286,7 +3389,8 @@
                     ]
                 },
                 "form_id": "0062042A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_51_Jumpsuit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vault_51_Jumpsuit",
+                "source_slug": "Plan:_Vault_51_Jumpsuit"
             },
             "availability": []
         },
@@ -3310,7 +3414,8 @@
                         "Skyline Valley"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_63_Burnt_Jumpsuit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vault_63_Burnt_Jumpsuit",
+                "source_slug": "Plan:_Vault_63_Burnt_Jumpsuit"
             },
             "availability": []
         },
@@ -3335,7 +3440,8 @@
                     ]
                 },
                 "form_id": "00748760",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_63_Hazmat_Suit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vault_63_Hazmat_Suit",
+                "source_slug": "Plan:_Vault_63_Hazmat_Suit"
             },
             "availability": []
         },
@@ -3360,7 +3466,8 @@
                     ]
                 },
                 "form_id": "0044D404",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault-Tec_jumpsuit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vault-Tec_jumpsuit",
+                "source_slug": "Plan:_Vault-Tec_jumpsuit"
             },
             "availability": []
         },
@@ -3385,7 +3492,8 @@
                     ]
                 },
                 "form_id": "00692A28",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vera%27s_Outfit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vera%27s_Outfit",
+                "source_slug": "Plan:_Vera's_Outfit"
             },
             "availability": []
         },
@@ -3410,7 +3518,8 @@
                     ]
                 },
                 "form_id": "007AD4B2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Wasteland_Florist_Apron"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Wasteland_Florist_Apron",
+                "source_slug": "Plan:_Wasteland_Florist_Apron"
             },
             "availability": []
         },
@@ -3435,7 +3544,8 @@
                     ]
                 },
                 "form_id": "007ACE9D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Wasteland_Florist_Sunhat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Wasteland_Florist_Sunhat",
+                "source_slug": "Plan:_Wasteland_Florist_Sunhat"
             },
             "availability": []
         },
@@ -3460,7 +3570,8 @@
                     ]
                 },
                 "form_id": "003A1788",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Witch_Costume"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Witch_Costume",
+                "source_slug": "Plan:_Witch_Costume"
             },
             "availability": []
         }

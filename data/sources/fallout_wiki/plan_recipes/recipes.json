@@ -1,10 +1,10 @@
 {
-    "generated_at": "2026-03-17T14:18:46+00:00",
+    "generated_at": "2026-03-17T23:45:45+00:00",
     "source": "fallout.wiki",
     "page": "Fallout_76_Recipes",
     "url": "https://fallout.wiki/wiki/Fallout_76_Recipes",
     "sections_count": 18,
-    "resources_count": 157,
+    "resources_count": 171,
     "resources": [
         {
             "type": "plan",
@@ -23,7 +23,8 @@
                 },
                 "value": "150",
                 "form_id": "003F5E9C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Stimpak_diffuser"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Stimpak_diffuser",
+                "source_slug": "Plan:_Stimpak_diffuser"
             },
             "availability": []
         },
@@ -44,7 +45,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D40",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Adrenal_Reaction_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Adrenal_Reaction_Serum",
+                "source_slug": "Recipe:_Adrenal_Reaction_Serum"
             },
             "availability": []
         },
@@ -63,7 +65,8 @@
                 ],
                 "value": "50",
                 "form_id": "003D74A9",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Aged_Mirelurk_Queen_Steak"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Aged_Mirelurk_Queen_Steak",
+                "source_slug": "Recipe:_Aged_Mirelurk_Queen_Steak"
             },
             "availability": []
         },
@@ -82,7 +85,8 @@
                 ],
                 "value": "50",
                 "form_id": "0048503B",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Antibiotics"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Antibiotics",
+                "source_slug": "Recipe:_Antibiotics"
             },
             "availability": []
         },
@@ -99,7 +103,8 @@
                 ],
                 "value": "105",
                 "form_id": "0045C4A3",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Appalachampagne"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Appalachampagne",
+                "source_slug": "Recipe:_Appalachampagne"
             },
             "availability": []
         },
@@ -118,7 +123,8 @@
                 ],
                 "value": "500",
                 "form_id": "002B8BBA",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Berry_Mentats"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Berry_Mentats",
+                "source_slug": "Recipe:_Berry_Mentats"
             },
             "availability": []
         },
@@ -139,7 +145,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D41",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Bird_Bones_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Bird_Bones_Serum",
+                "source_slug": "Recipe:_Bird_Bones_Serum"
             },
             "availability": []
         },
@@ -160,7 +167,8 @@
                 },
                 "value": "50",
                 "form_id": "007B26BC",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Black-Eyed_Susan%27s_Soothin%27"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Black-Eyed_Susan%27s_Soothin%27",
+                "source_slug": "Recipe:_Black-Eyed_Susan's_Soothin'"
             },
             "availability": []
         },
@@ -179,7 +187,8 @@
                 ],
                 "value": "50",
                 "form_id": "003D5F40",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Blackberry_Honey_Crisp"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Blackberry_Honey_Crisp",
+                "source_slug": "Recipe:_Blackberry_Honey_Crisp"
             },
             "availability": []
         },
@@ -200,7 +209,8 @@
                 },
                 "value": "50",
                 "form_id": "003F0B2D",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Blackwater_Brew"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Blackwater_Brew",
+                "source_slug": "Recipe:_Blackwater_Brew"
             },
             "availability": []
         },
@@ -219,7 +229,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FDF4",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Bloatfly_Loaf"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Bloatfly_Loaf",
+                "source_slug": "Recipe:_Bloatfly_Loaf"
             },
             "availability": []
         },
@@ -238,7 +249,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FDF5",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Bloodbug_Peppersteak"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Bloodbug_Peppersteak",
+                "source_slug": "Recipe:_Bloodbug_Peppersteak"
             },
             "availability": []
         },
@@ -259,7 +271,8 @@
                 },
                 "value": "50",
                 "form_id": "0068B8F0",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Brahmin_Burgers"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Brahmin_Burgers",
+                "source_slug": "Recipe:_Brahmin_Burgers"
             },
             "availability": []
         },
@@ -278,7 +291,8 @@
                 ],
                 "value": "50",
                 "form_id": "002B8BBB",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Brain_Bombs"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Brain_Bombs",
+                "source_slug": "Recipe:_Brain_Bombs"
             },
             "availability": []
         },
@@ -297,7 +311,8 @@
                 ],
                 "value": "50",
                 "form_id": "002B8BBC",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Bufftats"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Bufftats",
+                "source_slug": "Recipe:_Bufftats"
             },
             "availability": []
         },
@@ -318,7 +333,8 @@
                 },
                 "value": "50",
                 "form_id": "0068B8F1",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Caramel_Mutfruit"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Caramel_Mutfruit",
+                "source_slug": "Recipe:_Caramel_Mutfruit"
             },
             "availability": []
         },
@@ -339,7 +355,8 @@
                 },
                 "value": "50",
                 "form_id": "0068B8F2",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Carnival_Pie"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Carnival_Pie",
+                "source_slug": "Recipe:_Carnival_Pie"
             },
             "availability": []
         },
@@ -360,7 +377,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D42",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Carnivore_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Carnivore_Serum",
+                "source_slug": "Recipe:_Carnivore_Serum"
             },
             "availability": []
         },
@@ -378,7 +396,8 @@
                 ],
                 "value": "50",
                 "form_id": "005527BF",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Chally%27s_Feed"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Chally%27s_Feed",
+                "source_slug": "Recipe:_Chally's_Feed"
             },
             "availability": []
         },
@@ -399,7 +418,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D43",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Chameleon_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Chameleon_Serum",
+                "source_slug": "Recipe:_Chameleon_Serum"
             },
             "availability": []
         },
@@ -416,7 +436,8 @@
                 ],
                 "value": "50",
                 "form_id": "004304E0",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Cramburger"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Cramburger",
+                "source_slug": "Recipe:_Cramburger"
             },
             "availability": []
         },
@@ -435,7 +456,8 @@
                 ],
                 "value": "50",
                 "form_id": "003D5F31",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Cranberry_Jam"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Cranberry_Jam",
+                "source_slug": "Recipe:_Cranberry_Jam"
             },
             "availability": []
         },
@@ -454,7 +476,8 @@
                 ],
                 "value": "50",
                 "form_id": "003D5F2E",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Cranberry_Meatball_Grinder"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Cranberry_Meatball_Grinder",
+                "source_slug": "Recipe:_Cranberry_Meatball_Grinder"
             },
             "availability": []
         },
@@ -475,7 +498,8 @@
                 },
                 "value": "50",
                 "form_id": "003F0B32",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Cranberry_Moonshine"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Cranberry_Moonshine",
+                "source_slug": "Recipe:_Cranberry_Moonshine"
             },
             "availability": []
         },
@@ -494,7 +518,8 @@
                 ],
                 "value": "50",
                 "form_id": "003D5F34",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Cranberry_Relish"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Cranberry_Relish",
+                "source_slug": "Recipe:_Cranberry_Relish"
             },
             "availability": []
         },
@@ -515,7 +540,8 @@
                 },
                 "value": "50",
                 "form_id": "00510B77",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Cutting_Fluid"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Cutting_Fluid",
+                "source_slug": "Recipe:_Cutting_Fluid"
             },
             "availability": []
         },
@@ -534,7 +560,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FDF9",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Deathclaw_Wellington"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Deathclaw_Wellington",
+                "source_slug": "Recipe:_Deathclaw_Wellington"
             },
             "availability": []
         },
@@ -551,7 +578,8 @@
                 ],
                 "value": "0",
                 "form_id": "003DB3E6",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Appalachili"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Delbert%27s_Appalachili",
+                "source_slug": "Recipe:_Delbert's_Appalachili"
             },
             "availability": []
         },
@@ -568,7 +596,8 @@
                 ],
                 "value": "0",
                 "form_id": "003E9FA9",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Bunless_Cramburger"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Delbert%27s_Bunless_Cramburger",
+                "source_slug": "Recipe:_Delbert's_Bunless_Cramburger"
             },
             "availability": []
         },
@@ -585,7 +614,8 @@
                 ],
                 "value": "0",
                 "form_id": "003A2021",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Company_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Delbert%27s_Company_Tea",
+                "source_slug": "Recipe:_Delbert's_Company_Tea"
             },
             "availability": []
         },
@@ -602,7 +632,8 @@
                 ],
                 "value": "0",
                 "form_id": "003CD0E8",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Corn_Pone"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Delbert%27s_Corn_Pone",
+                "source_slug": "Recipe:_Delbert's_Corn_Pone"
             },
             "availability": []
         },
@@ -619,7 +650,8 @@
                 ],
                 "value": "0",
                 "form_id": "003E9FA7",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Delicious_Deerskins"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Delbert%27s_Delicious_Deerskins",
+                "source_slug": "Recipe:_Delbert's_Delicious_Deerskins"
             },
             "availability": []
         },
@@ -636,7 +668,8 @@
                 ],
                 "value": "0",
                 "form_id": "003A2025",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Granny%27s_Sweet_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Delbert%27s_Granny%27s_Sweet_Tea",
+                "source_slug": "Recipe:_Delbert's_Granny's_Sweet_Tea"
             },
             "availability": []
         },
@@ -653,7 +686,8 @@
                 ],
                 "value": "0",
                 "form_id": "003E9FA8",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Mountain_Hocks"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Delbert%27s_Mountain_Hocks",
+                "source_slug": "Recipe:_Delbert's_Mountain_Hocks"
             },
             "availability": []
         },
@@ -670,7 +704,8 @@
                 ],
                 "value": "0",
                 "form_id": "00529DE5",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Mud_Cookie"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Delbert%27s_Mud_Cookie",
+                "source_slug": "Recipe:_Delbert's_Mud_Cookie"
             },
             "availability": []
         },
@@ -687,7 +722,8 @@
                 ],
                 "value": "0",
                 "form_id": "003EAA35",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Pothole_Potpie"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Delbert%27s_Pothole_Potpie",
+                "source_slug": "Recipe:_Delbert's_Pothole_Potpie"
             },
             "availability": []
         },
@@ -704,7 +740,8 @@
                 ],
                 "value": "0",
                 "form_id": "00529DE6",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Sunshine_Oil"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Delbert%27s_Sunshine_Oil",
+                "source_slug": "Recipe:_Delbert's_Sunshine_Oil"
             },
             "availability": []
         },
@@ -721,7 +758,8 @@
                 ],
                 "value": "0",
                 "form_id": "003A201C",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Sweet_Labrador_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Delbert%27s_Sweet_Labrador_Tea",
+                "source_slug": "Recipe:_Delbert's_Sweet_Labrador_Tea"
             },
             "availability": []
         },
@@ -738,7 +776,8 @@
                 ],
                 "value": "0",
                 "form_id": "00529DE3",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Tato_Salad_Surprise"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Delbert%27s_Tato_Salad_Surprise",
+                "source_slug": "Recipe:_Delbert's_Tato_Salad_Surprise"
             },
             "availability": []
         },
@@ -755,7 +794,8 @@
                 ],
                 "value": "0",
                 "form_id": "00529DE4",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Traditional_Chitlins"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Delbert%27s_Traditional_Chitlins",
+                "source_slug": "Recipe:_Delbert's_Traditional_Chitlins"
             },
             "availability": []
         },
@@ -771,8 +811,117 @@
                     "Overview:Unused Content"
                 ],
                 "value": "50",
+                "form_id": "004333F0 (Ash Heap)004333F1 (Cranberry Bog)004333F2 (The Forest)004333F3 (The Mire)004333F4 (Savage Divide)004333F5 (Toxic Valley)",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Detoxing_Salve",
+                "source_slug": "Recipe:_Detoxing_Salve"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-detoxing-salve-ash-heap",
+            "name": "Recipe: Detoxing Salve",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Detoxing Salve",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "form_id": "004333F0",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Detoxing_Salve_(Ash_Heap)",
+                "source_slug": "Recipe:_Detoxing_Salve_(Ash_Heap)"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-detoxing-salve-cranberry-bog",
+            "name": "Recipe: Detoxing Salve",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Detoxing Salve",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "form_id": "004333F1",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Detoxing_Salve_(Cranberry_Bog)",
+                "source_slug": "Recipe:_Detoxing_Salve_(Cranberry_Bog)"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-detoxing-salve-forest",
+            "name": "Recipe: Detoxing Salve",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Detoxing Salve",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "form_id": "004333F2",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Detoxing_Salve_(Forest)",
+                "source_slug": "Recipe:_Detoxing_Salve_(Forest)"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-detoxing-salve-mire",
+            "name": "Recipe: Detoxing Salve",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Detoxing Salve",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "form_id": "004333F3",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Detoxing_Salve_(Mire)",
+                "source_slug": "Recipe:_Detoxing_Salve_(Mire)"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-detoxing-salve-savage-divide",
+            "name": "Recipe: Detoxing Salve",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Detoxing Salve",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "form_id": "004333F4",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Detoxing_Salve_(Savage_Divide)",
+                "source_slug": "Recipe:_Detoxing_Salve_(Savage_Divide)"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-detoxing-salve-toxic-valley",
+            "name": "Recipe: Detoxing Salve",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Detoxing Salve",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
                 "form_id": "004333F5",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Detoxing_Salve"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Detoxing_Salve_(Toxic_Valley)",
+                "source_slug": "Recipe:_Detoxing_Salve_(Toxic_Valley)"
             },
             "availability": []
         },
@@ -793,7 +942,8 @@
                 },
                 "value": "50",
                 "form_id": "003B7F2E",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Diluted_Rad-X"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Diluted_Rad-X",
+                "source_slug": "Recipe:_Diluted_Rad-X"
             },
             "availability": []
         },
@@ -814,13 +964,90 @@
                 },
                 "value": "50",
                 "form_id": "003B7F2D",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Diluted_RadAway"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Diluted_RadAway",
+                "source_slug": "Recipe:_Diluted_RadAway"
             },
             "availability": []
         },
         {
             "type": "recipe",
-            "slug": "recipe-disease-cure",
+            "slug": "recipe-disease-cure-ash-heap",
+            "name": "Recipe: Disease Cure",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Stimpak Defuser",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest"
+                ],
+                "value": "50",
+                "form_id": "00485035",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Stimpak_Defuser",
+                "source_slug": "Recipe:_Stimpak_Defuser"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-disease-cure-cranberry-bog",
+            "name": "Recipe: Disease Cure",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Disease Cure",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest"
+                ],
+                "value": "50",
+                "form_id": "00485036",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Disease_Cure_(Cranberry_Bog)",
+                "source_slug": "Recipe:_Disease_Cure_(Cranberry_Bog)"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-disease-cure-savage-divide",
+            "name": "Recipe: Disease Cure",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Disease Cure",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest"
+                ],
+                "value": "50",
+                "form_id": "00485038",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Disease_Cure_(Savage_Divide)",
+                "source_slug": "Recipe:_Disease_Cure_(Savage_Divide)"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-disease-cure-the-mire",
+            "name": "Recipe: Disease Cure",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Disease Cure",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest"
+                ],
+                "value": "50",
+                "form_id": "00485039",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Disease_Cure_(The_Mire)",
+                "source_slug": "Recipe:_Disease_Cure_(The_Mire)"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-disease-cure-toxic-valley",
             "name": "Recipe: Disease Cure",
             "section": "Recipes",
             "columns": {
@@ -832,7 +1059,8 @@
                 ],
                 "value": "50",
                 "form_id": "0048503A",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Disease_Cure"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Disease_Cure_(Toxic_Valley)",
+                "source_slug": "Recipe:_Disease_Cure_(Toxic_Valley)"
             },
             "availability": []
         },
@@ -851,7 +1079,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FDFA",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Dog_Meat_Steak"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Dog_Meat_Steak",
+                "source_slug": "Recipe:_Dog_Meat_Steak"
             },
             "availability": []
         },
@@ -872,7 +1101,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D44",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Eagle_Eyes_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Eagle_Eyes_Serum",
+                "source_slug": "Recipe:_Eagle_Eyes_Serum"
             },
             "availability": []
         },
@@ -893,7 +1123,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D56",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Egg_Head_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Egg_Head_Serum",
+                "source_slug": "Recipe:_Egg_Head_Serum"
             },
             "availability": []
         },
@@ -914,7 +1145,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D57",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Electrically_Charged_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Electrically_Charged_Serum",
+                "source_slug": "Recipe:_Electrically_Charged_Serum"
             },
             "availability": []
         },
@@ -935,7 +1167,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D58",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Empath_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Empath_Serum",
+                "source_slug": "Recipe:_Empath_Serum"
             },
             "availability": []
         },
@@ -956,7 +1189,8 @@
                 },
                 "value": "50",
                 "form_id": "003EEA42",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fasnacht_Donut"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Fasnacht_Donut",
+                "source_slug": "Recipe:_Fasnacht_Donut"
             },
             "availability": []
         },
@@ -977,7 +1211,8 @@
                 },
                 "value": "50",
                 "form_id": "003EEA44",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fasnacht_Sausage"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Fasnacht_Sausage",
+                "source_slug": "Recipe:_Fasnacht_Sausage"
             },
             "availability": []
         },
@@ -996,7 +1231,8 @@
                 ],
                 "value": "50",
                 "form_id": "003787C6",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Firecap_Souffle"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Firecap_Souffle",
+                "source_slug": "Recipe:_Firecap_Souffle"
             },
             "availability": []
         },
@@ -1013,7 +1249,8 @@
                 ],
                 "value": "50",
                 "form_id": "003F446B",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Firecracker_Whiskey_Manhattan"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Firecracker_Whiskey_Manhattan",
+                "source_slug": "Recipe:_Firecracker_Whiskey_Manhattan"
             },
             "availability": []
         },
@@ -1030,7 +1267,8 @@
                 ],
                 "value": "50",
                 "form_id": "003F446C",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Firecracker_Whiskey_Old_Fashioned"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Firecracker_Whiskey_Old_Fashioned",
+                "source_slug": "Recipe:_Firecracker_Whiskey_Old_Fashioned"
             },
             "availability": []
         },
@@ -1051,7 +1289,8 @@
                 },
                 "value": "1000",
                 "form_id": "007AED81",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fish_and_Tatos"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Fish_and_Tatos",
+                "source_slug": "Recipe:_Fish_and_Tatos"
             },
             "availability": []
         },
@@ -1072,7 +1311,8 @@
                 },
                 "value": "1000",
                 "form_id": "007B3FB7",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fish_Chowder"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Fish_Chowder",
+                "source_slug": "Recipe:_Fish_Chowder"
             },
             "availability": []
         },
@@ -1093,7 +1333,8 @@
                 },
                 "value": "50",
                 "form_id": "003EFC5F",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Formula_P"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Formula_P",
+                "source_slug": "Recipe:_Formula_P"
             },
             "availability": []
         },
@@ -1110,7 +1351,8 @@
                 ],
                 "value": "50",
                 "form_id": "00421217",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Formula_Q"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Formula_Q",
+                "source_slug": "Recipe:_Formula_Q"
             },
             "availability": []
         },
@@ -1129,7 +1371,8 @@
                 ],
                 "value": "50",
                 "form_id": "003D74AC",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fried_Deerskins"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Fried_Deerskins",
+                "source_slug": "Recipe:_Fried_Deerskins"
             },
             "availability": []
         },
@@ -1150,7 +1393,8 @@
                 },
                 "value": "50",
                 "form_id": "0068B8EE",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fried_Radroach_On_A_Stick"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Fried_Radroach_On_A_Stick",
+                "source_slug": "Recipe:_Fried_Radroach_On_A_Stick"
             },
             "availability": []
         },
@@ -1169,7 +1413,8 @@
                 ],
                 "value": "50",
                 "form_id": "003D74A5",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fried_Radtoad_Legs"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Fried_Radtoad_Legs",
+                "source_slug": "Recipe:_Fried_Radtoad_Legs"
             },
             "availability": []
         },
@@ -1190,7 +1435,8 @@
                 },
                 "value": "50",
                 "form_id": "0068B8EF",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fried_Scorpion_On_A_Stick"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Fried_Scorpion_On_A_Stick",
+                "source_slug": "Recipe:_Fried_Scorpion_On_A_Stick"
             },
             "availability": []
         },
@@ -1209,7 +1455,8 @@
                 ],
                 "value": "50",
                 "form_id": "002B8BBD",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fury"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Fury",
+                "source_slug": "Recipe:_Fury"
             },
             "availability": []
         },
@@ -1230,7 +1477,8 @@
                 },
                 "value": "0",
                 "form_id": "007B2737",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Gamma_Green_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Gamma_Green_Tea",
+                "source_slug": "Recipe:_Gamma_Green_Tea"
             },
             "availability": []
         },
@@ -1249,7 +1497,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FDFB",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Glowing_Fungus_Puree"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Glowing_Fungus_Puree",
+                "source_slug": "Recipe:_Glowing_Fungus_Puree"
             },
             "availability": []
         },
@@ -1268,7 +1517,8 @@
                 ],
                 "value": "50",
                 "form_id": "002B8BBE",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Grape_Mentats"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Grape_Mentats",
+                "source_slug": "Recipe:_Grape_Mentats"
             },
             "availability": []
         },
@@ -1289,7 +1539,8 @@
                 },
                 "value": "5",
                 "form_id": "007B2B9B",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Grilled_Fish"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Grilled_Fish",
+                "source_slug": "Recipe:_Grilled_Fish"
             },
             "availability": []
         },
@@ -1308,7 +1559,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FE00",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Ground_Molerat"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Ground_Molerat",
+                "source_slug": "Recipe:_Ground_Molerat"
             },
             "availability": []
         },
@@ -1329,7 +1581,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D59",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Grounded_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Grounded_Serum",
+                "source_slug": "Recipe:_Grounded_Serum"
             },
             "availability": []
         },
@@ -1350,7 +1603,8 @@
                 },
                 "value": "50",
                 "form_id": "0068B8ED",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Gulper_Stuffed_Foot"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Gulper_Stuffed_Foot",
+                "source_slug": "Recipe:_Gulper_Stuffed_Foot"
             },
             "availability": []
         },
@@ -1371,7 +1625,8 @@
                 },
                 "value": "50",
                 "form_id": "0046CF1C",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Hard_Lemonade"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Hard_Lemonade",
+                "source_slug": "Recipe:_Hard_Lemonade"
             },
             "availability": []
         },
@@ -1392,13 +1647,106 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D5A",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Healing_Factor_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Healing_Factor_Serum",
+                "source_slug": "Recipe:_Healing_Factor_Serum"
             },
             "availability": []
         },
         {
             "type": "recipe",
-            "slug": "recipe-healing-salve",
+            "slug": "recipe-healing-salve-ash-heap",
+            "name": "Recipe: Healing Salve",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Healing Salve",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest"
+                ],
+                "value": "200",
+                "form_id": "002B8BBF",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Healing_Salve_(Ash_Heap)",
+                "source_slug": "Recipe:_Healing_Salve_(Ash_Heap)"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-healing-salve-cranberry-bog",
+            "name": "Recipe: Healing Salve",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Healing Salve",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "200",
+                "form_id": "002B8BC0",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Healing_Salve_(Cranberry_Bog)",
+                "source_slug": "Recipe:_Healing_Salve_(Cranberry_Bog)"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-healing-salve-forest",
+            "name": "Recipe: Healing Salve",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Healing Salve",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest"
+                ],
+                "value": "200",
+                "form_id": "002B8BC1",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Healing_Salve_(Forest)",
+                "source_slug": "Recipe:_Healing_Salve_(Forest)"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-healing-salve-mire",
+            "name": "Recipe: Healing Salve",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Healing Salve",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "200",
+                "form_id": "002B8BC2",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Healing_Salve_(Mire)",
+                "source_slug": "Recipe:_Healing_Salve_(Mire)"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-healing-salve-savage-divide",
+            "name": "Recipe: Healing Salve",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Healing Salve",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "200",
+                "form_id": "002B8BC3",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Healing_Salve_(Savage_Divide)",
+                "source_slug": "Recipe:_Healing_Salve_(Savage_Divide)"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-healing-salve-toxic-valley",
             "name": "Recipe: Healing Salve",
             "section": "Recipes",
             "columns": {
@@ -1409,7 +1757,8 @@
                 ],
                 "value": "200",
                 "form_id": "002B8BC4",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Healing_Salve"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Healing_Salve_(Toxic_Valley)",
+                "source_slug": "Recipe:_Healing_Salve_(Toxic_Valley)"
             },
             "availability": []
         },
@@ -1430,7 +1779,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D5B",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Herbivore_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Herbivore_Serum",
+                "source_slug": "Recipe:_Herbivore_Serum"
             },
             "availability": []
         },
@@ -1451,7 +1801,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D5C",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Herd_Mentality_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Herd_Mentality_Serum",
+                "source_slug": "Recipe:_Herd_Mentality_Serum"
             },
             "availability": []
         },
@@ -1470,7 +1821,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FDFC",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Iguana_Soup"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Iguana_Soup",
+                "source_slug": "Recipe:_Iguana_Soup"
             },
             "availability": []
         },
@@ -1489,7 +1841,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FDF6",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Infused_Blood_Leaf_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Infused_Blood_Leaf_Tea",
+                "source_slug": "Recipe:_Infused_Blood_Leaf_Tea"
             },
             "availability": []
         },
@@ -1508,7 +1861,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FE04",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Infused_Soot_Flower_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Infused_Soot_Flower_Tea",
+                "source_slug": "Recipe:_Infused_Soot_Flower_Tea"
             },
             "availability": []
         },
@@ -1525,7 +1879,8 @@
                 ],
                 "value": "50",
                 "form_id": "004265FB",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Insect_Repellent"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Insect_Repellent",
+                "source_slug": "Recipe:_Insect_Repellent"
             },
             "availability": []
         },
@@ -1542,7 +1897,8 @@
                 ],
                 "value": "50",
                 "form_id": "002B8BC5",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Jet"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Jet",
+                "source_slug": "Recipe:_Jet"
             },
             "availability": []
         },
@@ -1563,7 +1919,8 @@
                 },
                 "value": "50",
                 "form_id": "003F446D",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Lead_Champagne_Bellini"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Lead_Champagne_Bellini",
+                "source_slug": "Recipe:_Lead_Champagne_Bellini"
             },
             "availability": []
         },
@@ -1584,7 +1941,8 @@
                 },
                 "value": "50",
                 "form_id": "003F446E",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Lead_Champagne_Mimosa"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Lead_Champagne_Mimosa",
+                "source_slug": "Recipe:_Lead_Champagne_Mimosa"
             },
             "availability": []
         },
@@ -1602,7 +1960,8 @@
                 ],
                 "value": "50",
                 "form_id": "0046CF1B",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Lemonade"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Lemonade",
+                "source_slug": "Recipe:_Lemonade"
             },
             "availability": []
         },
@@ -1623,7 +1982,8 @@
                 },
                 "value": "300",
                 "form_id": "00596E9A",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Liquid_Courage"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Liquid_Courage",
+                "source_slug": "Recipe:_Liquid_Courage"
             },
             "availability": []
         },
@@ -1644,7 +2004,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D5D",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Marsupial_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Marsupial_Serum",
+                "source_slug": "Recipe:_Marsupial_Serum"
             },
             "availability": []
         },
@@ -1663,7 +2024,8 @@
                 ],
                 "value": "50",
                 "form_id": "003D74A7",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Megasloth_Tenderloin"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Megasloth_Tenderloin",
+                "source_slug": "Recipe:_Megasloth_Tenderloin"
             },
             "availability": []
         },
@@ -1682,7 +2044,8 @@
                 ],
                 "value": "250",
                 "form_id": "002B8BC6",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Mentats"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Mentats",
+                "source_slug": "Recipe:_Mentats"
             },
             "availability": []
         },
@@ -1701,7 +2064,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FDFD",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Mirelurk_Cake"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Mirelurk_Cake",
+                "source_slug": "Recipe:_Mirelurk_Cake"
             },
             "availability": []
         },
@@ -1720,7 +2084,8 @@
                 ],
                 "value": "50",
                 "form_id": "003D5F3D",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Mirelurk_Cake_With_Bloodleaf_Aioli"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Mirelurk_Cake_With_Bloodleaf_Aioli",
+                "source_slug": "Recipe:_Mirelurk_Cake_With_Bloodleaf_Aioli"
             },
             "availability": []
         },
@@ -1739,7 +2104,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FDFE",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Mirelurk_Jerky"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Mirelurk_Jerky",
+                "source_slug": "Recipe:_Mirelurk_Jerky"
             },
             "availability": []
         },
@@ -1758,7 +2124,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FDFF",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Mirelurk_Softshell_Cake"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Mirelurk_Softshell_Cake",
+                "source_slug": "Recipe:_Mirelurk_Softshell_Cake"
             },
             "availability": []
         },
@@ -1779,7 +2146,8 @@
                 },
                 "value": "50",
                 "form_id": "003F0B33",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Mountain_Honey_Moonshine"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Mountain_Honey_Moonshine",
+                "source_slug": "Recipe:_Mountain_Honey_Moonshine"
             },
             "availability": []
         },
@@ -1800,7 +2168,8 @@
                 },
                 "value": "50",
                 "form_id": "003F5E97",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Mystery_Meat_Pie"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Mystery_Meat_Pie",
+                "source_slug": "Recipe:_Mystery_Meat_Pie"
             },
             "availability": []
         },
@@ -1821,7 +2190,8 @@
                 },
                 "value": "50",
                 "form_id": "003F0B2E",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_New_River_Red_Ale"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_New_River_Red_Ale",
+                "source_slug": "Recipe:_New_River_Red_Ale"
             },
             "availability": []
         },
@@ -1842,7 +2212,8 @@
                 },
                 "value": "50",
                 "form_id": "003F0B34",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Nuka-Cola_Dark"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Nuka-Cola_Dark",
+                "source_slug": "Recipe:_Nuka-Cola_Dark"
             },
             "availability": []
         },
@@ -1863,7 +2234,8 @@
                 },
                 "value": "",
                 "form_id": "0068B8EB",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Nuka-Dog"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Nuka-Dog",
+                "source_slug": "Recipe:_Nuka-Dog"
             },
             "availability": []
         },
@@ -1884,7 +2256,8 @@
                 },
                 "value": "50",
                 "form_id": "003F0B2F",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Oak_Holler_Lager"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Oak_Holler_Lager",
+                "source_slug": "Recipe:_Oak_Holler_Lager"
             },
             "availability": []
         },
@@ -1905,7 +2278,8 @@
                 },
                 "value": "50",
                 "form_id": "003F0B30",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Old_Possum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Old_Possum",
+                "source_slug": "Recipe:_Old_Possum"
             },
             "availability": []
         },
@@ -1924,7 +2298,8 @@
                 ],
                 "value": "500",
                 "form_id": "002B8BC7",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Orange_Mentats"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Orange_Mentats",
+                "source_slug": "Recipe:_Orange_Mentats"
             },
             "availability": []
         },
@@ -1943,7 +2318,8 @@
                 ],
                 "value": "300",
                 "form_id": "002B8BC8",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Overdrive"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Overdrive",
+                "source_slug": "Recipe:_Overdrive"
             },
             "availability": []
         },
@@ -1964,7 +2340,8 @@
                 },
                 "value": "50",
                 "form_id": "0058F9E2",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Pepperoni_Roll"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Pepperoni_Roll",
+                "source_slug": "Recipe:_Pepperoni_Roll"
             },
             "availability": []
         },
@@ -1985,7 +2362,8 @@
                 },
                 "value": "50",
                 "form_id": "003F0B31",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Pickaxe_Pilsner"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Pickaxe_Pilsner",
+                "source_slug": "Recipe:_Pickaxe_Pilsner"
             },
             "availability": []
         },
@@ -2006,7 +2384,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D5E",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Plague_Walker_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Plague_Walker_Serum",
+                "source_slug": "Recipe:_Plague_Walker_Serum"
             },
             "availability": []
         },
@@ -2025,7 +2404,8 @@
                 ],
                 "value": "250",
                 "form_id": "002B8BC9",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Psycho"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Psycho",
+                "source_slug": "Recipe:_Psycho"
             },
             "availability": []
         },
@@ -2044,7 +2424,8 @@
                 ],
                 "value": "300",
                 "form_id": "002B8BCA",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Psychobuff"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Psychobuff",
+                "source_slug": "Recipe:_Psychobuff"
             },
             "availability": []
         },
@@ -2063,7 +2444,8 @@
                 ],
                 "value": "50",
                 "form_id": "003E3CBD",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Pumpkin_Pie"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Pumpkin_Pie",
+                "source_slug": "Recipe:_Pumpkin_Pie"
             },
             "availability": []
         },
@@ -2082,7 +2464,8 @@
                 ],
                 "value": "300",
                 "form_id": "002B8BCB",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_RadAway"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_RadAway",
+                "source_slug": "Recipe:_RadAway"
             },
             "availability": []
         },
@@ -2101,7 +2484,8 @@
                 ],
                 "value": "50",
                 "form_id": "003D74A3",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Radscorpion_Fillet"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Radscorpion_Fillet",
+                "source_slug": "Recipe:_Radscorpion_Fillet"
             },
             "availability": []
         },
@@ -2122,7 +2506,8 @@
                 },
                 "value": "50",
                 "form_id": "0068B8F3",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Radscorpion_Kebab"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Radscorpion_Kebab",
+                "source_slug": "Recipe:_Radscorpion_Kebab"
             },
             "availability": []
         },
@@ -2141,7 +2526,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FE08",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Radstag_Stew"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Radstag_Stew",
+                "source_slug": "Recipe:_Radstag_Stew"
             },
             "availability": []
         },
@@ -2158,7 +2544,8 @@
                 ],
                 "value": "50",
                 "form_id": "002B8BCC",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Refreshing_Beverage"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Refreshing_Beverage",
+                "source_slug": "Recipe:_Refreshing_Beverage"
             },
             "availability": []
         },
@@ -2179,7 +2566,8 @@
                 },
                 "value": "50",
                 "form_id": "0046D291",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_S%27mores"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_S%27mores",
+                "source_slug": "Recipe:_S'mores"
             },
             "availability": []
         },
@@ -2200,7 +2588,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D5F",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Scaly_Skin_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Scaly_Skin_Serum",
+                "source_slug": "Recipe:_Scaly_Skin_Serum"
             },
             "availability": []
         },
@@ -2219,7 +2608,8 @@
                 ],
                 "value": "50",
                 "form_id": "003D74AB",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Scorchbeast_Mixed_Meat_Stew"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Scorchbeast_Mixed_Meat_Stew",
+                "source_slug": "Recipe:_Scorchbeast_Mixed_Meat_Stew"
             },
             "availability": []
         },
@@ -2238,7 +2628,8 @@
                 ],
                 "value": "50",
                 "form_id": "003D5F3A",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Seared_Venison_With_Berries"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Seared_Venison_With_Berries",
+                "source_slug": "Recipe:_Seared_Venison_With_Berries"
             },
             "availability": []
         },
@@ -2257,7 +2648,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FE09",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Silt_Bean_Puree"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Silt_Bean_Puree",
+                "source_slug": "Recipe:_Silt_Bean_Puree"
             },
             "availability": []
         },
@@ -2276,7 +2668,8 @@
                 ],
                 "value": "50",
                 "form_id": "002B8BCD",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Skeeto_Spit"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Skeeto_Spit",
+                "source_slug": "Recipe:_Skeeto_Spit"
             },
             "availability": []
         },
@@ -2295,7 +2688,8 @@
                 ],
                 "value": "50",
                 "form_id": "003D5F43",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Smoked_Mirelurk_Fillets"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Smoked_Mirelurk_Fillets",
+                "source_slug": "Recipe:_Smoked_Mirelurk_Fillets"
             },
             "availability": []
         },
@@ -2316,7 +2710,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D60",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Speed_Demon_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Speed_Demon_Serum",
+                "source_slug": "Recipe:_Speed_Demon_Serum"
             },
             "availability": []
         },
@@ -2335,7 +2730,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FE03",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Squirrel_on_a_stick"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Squirrel_on_a_stick",
+                "source_slug": "Recipe:_Squirrel_on_a_stick"
             },
             "availability": []
         },
@@ -2354,7 +2750,8 @@
                 ],
                 "value": "50",
                 "form_id": "0050DCBB",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Ash_Rose_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Steeped_Ash_Rose_Tea",
+                "source_slug": "Recipe:_Steeped_Ash_Rose_Tea"
             },
             "availability": []
         },
@@ -2373,7 +2770,8 @@
                 ],
                 "value": "50",
                 "form_id": "0050DCBC",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Aster_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Steeped_Aster_Tea",
+                "source_slug": "Recipe:_Steeped_Aster_Tea"
             },
             "availability": []
         },
@@ -2390,7 +2788,8 @@
                 ],
                 "value": "50",
                 "form_id": "0050DCBE",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Black_Bloodleaf_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Steeped_Black_Bloodleaf_Tea",
+                "source_slug": "Recipe:_Steeped_Black_Bloodleaf_Tea"
             },
             "availability": []
         },
@@ -2409,7 +2808,8 @@
                 ],
                 "value": "50",
                 "form_id": "0050DCBF",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Carrot_Flower_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Steeped_Carrot_Flower_Tea",
+                "source_slug": "Recipe:_Steeped_Carrot_Flower_Tea"
             },
             "availability": []
         },
@@ -2428,7 +2828,8 @@
                 ],
                 "value": "50",
                 "form_id": "0050DCC0",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Fern_Flower_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Steeped_Fern_Flower_Tea",
+                "source_slug": "Recipe:_Steeped_Fern_Flower_Tea"
             },
             "availability": []
         },
@@ -2447,7 +2848,8 @@
                 ],
                 "value": "50",
                 "form_id": "0050DCC1",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Fever_Blossom_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Steeped_Fever_Blossom_Tea",
+                "source_slug": "Recipe:_Steeped_Fever_Blossom_Tea"
             },
             "availability": []
         },
@@ -2466,7 +2868,8 @@
                 ],
                 "value": "50",
                 "form_id": "0050DCC2",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Gourd_Blossom_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Steeped_Gourd_Blossom_Tea",
+                "source_slug": "Recipe:_Steeped_Gourd_Blossom_Tea"
             },
             "availability": []
         },
@@ -2485,7 +2888,8 @@
                 ],
                 "value": "50",
                 "form_id": "0050DCC3",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Melon_Bloom_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Steeped_Melon_Bloom_Tea",
+                "source_slug": "Recipe:_Steeped_Melon_Bloom_Tea"
             },
             "availability": []
         },
@@ -2504,7 +2908,8 @@
                 ],
                 "value": "50",
                 "form_id": "0050DCC4",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Melon_Blossom_Chai"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Steeped_Melon_Blossom_Chai",
+                "source_slug": "Recipe:_Steeped_Melon_Blossom_Chai"
             },
             "availability": []
         },
@@ -2523,7 +2928,8 @@
                 ],
                 "value": "50",
                 "form_id": "0050DCC5",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Strangler_Bloom_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Steeped_Strangler_Bloom_Tea",
+                "source_slug": "Recipe:_Steeped_Strangler_Bloom_Tea"
             },
             "availability": []
         },
@@ -2542,7 +2948,8 @@
                 ],
                 "value": "50",
                 "form_id": "0050DCC6",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Strangler_Pod_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Steeped_Strangler_Pod_Tea",
+                "source_slug": "Recipe:_Steeped_Strangler_Pod_Tea"
             },
             "availability": []
         },
@@ -2561,7 +2968,8 @@
                 ],
                 "value": "50",
                 "form_id": "0050DCC7",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Tato_Flower_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Steeped_Tato_Flower_Tea",
+                "source_slug": "Recipe:_Steeped_Tato_Flower_Tea"
             },
             "availability": []
         },
@@ -2580,7 +2988,8 @@
                 ],
                 "value": "50",
                 "form_id": "0050DCC8",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Thistle_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Steeped_Thistle_Tea",
+                "source_slug": "Recipe:_Steeped_Thistle_Tea"
             },
             "availability": []
         },
@@ -2599,25 +3008,8 @@
                 ],
                 "value": "500",
                 "form_id": "002B8BCE",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Stimpak"
-            },
-            "availability": []
-        },
-        {
-            "type": "recipe",
-            "slug": "recipe-stimpak-defuser",
-            "name": "Recipe: Stimpak Defuser",
-            "section": "Recipes",
-            "columns": {
-                "image": [],
-                "name": "Recipe: Stimpak Defuser",
-                "obtained": [
-                    "Fallout 76 Locations",
-                    "Quest"
-                ],
-                "value": "50",
-                "form_id": "00485035",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Stimpak_Defuser"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Stimpak",
+                "source_slug": "Recipe:_Stimpak"
             },
             "availability": []
         },
@@ -2634,7 +3026,8 @@
                 ],
                 "value": "0",
                 "form_id": "00543E1F",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Sunny%27s_settler_stew"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Sunny%27s_settler_stew",
+                "source_slug": "Recipe:_Sunny's_settler_stew"
             },
             "availability": []
         },
@@ -2652,7 +3045,8 @@
                 ],
                 "value": "1000",
                 "form_id": "002B8BCF",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Super_Stimpak"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Super_Stimpak",
+                "source_slug": "Recipe:_Super_Stimpak"
             },
             "availability": []
         },
@@ -2671,7 +3065,8 @@
                 ],
                 "value": "50",
                 "form_id": "003D5F38",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Swamp_Tofu_Soup"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Swamp_Tofu_Soup",
+                "source_slug": "Recipe:_Swamp_Tofu_Soup"
             },
             "availability": []
         },
@@ -2690,7 +3085,8 @@
                 ],
                 "value": "50",
                 "form_id": "0050DCBD",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Sweet_Blackberry_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Sweet_Blackberry_Tea",
+                "source_slug": "Recipe:_Sweet_Blackberry_Tea"
             },
             "availability": []
         },
@@ -2709,7 +3105,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FE06",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Sweet_Mutfruit_Tea"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Sweet_Mutfruit_Tea",
+                "source_slug": "Recipe:_Sweet_Mutfruit_Tea"
             },
             "availability": []
         },
@@ -2728,7 +3125,8 @@
                 ],
                 "value": "50",
                 "form_id": "003CC136",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Sweet_Roll"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Sweet_Roll",
+                "source_slug": "Recipe:_Sweet_Roll"
             },
             "availability": []
         },
@@ -2747,7 +3145,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FDF8",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Sweet_Tato_Stew"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Sweet_Tato_Stew",
+                "source_slug": "Recipe:_Sweet_Tato_Stew"
             },
             "availability": []
         },
@@ -2768,7 +3167,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D61",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Talons_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Talons_Serum",
+                "source_slug": "Recipe:_Talons_Serum"
             },
             "availability": []
         },
@@ -2787,7 +3187,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FE01",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tasty_Mutant_Hound_Stew"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Tasty_Mutant_Hound_Stew",
+                "source_slug": "Recipe:_Tasty_Mutant_Hound_Stew"
             },
             "availability": []
         },
@@ -2808,7 +3209,8 @@
                 },
                 "value": "50",
                 "form_id": "0046ECB4",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tasty_Mutton_Meat_Pie"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Tasty_Mutton_Meat_Pie",
+                "source_slug": "Recipe:_Tasty_Mutton_Meat_Pie"
             },
             "availability": []
         },
@@ -2827,7 +3229,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FE07",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tasty_Radscorpion_Egg_Omelette"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Tasty_Radscorpion_Egg_Omelette",
+                "source_slug": "Recipe:_Tasty_Radscorpion_Egg_Omelette"
             },
             "availability": []
         },
@@ -2846,7 +3249,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FE02",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tasty_Squirrel_Stew"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Tasty_Squirrel_Stew",
+                "source_slug": "Recipe:_Tasty_Squirrel_Stew"
             },
             "availability": []
         },
@@ -2865,7 +3269,8 @@
                 ],
                 "value": "50",
                 "form_id": "003D74A1",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tasty_Stingwing_Stew"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Tasty_Stingwing_Stew",
+                "source_slug": "Recipe:_Tasty_Stingwing_Stew"
             },
             "availability": []
         },
@@ -2884,7 +3289,8 @@
                 ],
                 "value": "50",
                 "form_id": "0052FDF7",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tasty_Yao_Guai_Roast"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Tasty_Yao_Guai_Roast",
+                "source_slug": "Recipe:_Tasty_Yao_Guai_Roast"
             },
             "availability": []
         },
@@ -2905,7 +3311,8 @@
                 },
                 "value": "50",
                 "form_id": "005527C0",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tato_Salad"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Tato_Salad",
+                "source_slug": "Recipe:_Tato_Salad"
             },
             "availability": []
         },
@@ -2926,7 +3333,8 @@
                 },
                 "value": "50",
                 "form_id": "003F446F",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tick_Blood_Tequila_Margarita"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Tick_Blood_Tequila_Margarita",
+                "source_slug": "Recipe:_Tick_Blood_Tequila_Margarita"
             },
             "availability": []
         },
@@ -2947,7 +3355,8 @@
                 },
                 "value": "50",
                 "form_id": "003F4470",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tick_Blood_Tequila_Sunrise"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Tick_Blood_Tequila_Sunrise",
+                "source_slug": "Recipe:_Tick_Blood_Tequila_Sunrise"
             },
             "availability": []
         },
@@ -2964,7 +3373,8 @@
                 ],
                 "value": "300",
                 "form_id": "003FBB9C",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Toxic_Gin"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Toxic_Gin",
+                "source_slug": "Recipe:_Toxic_Gin"
             },
             "availability": []
         },
@@ -2985,7 +3395,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D62",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Twisted_Muscles_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Twisted_Muscles_Serum",
+                "source_slug": "Recipe:_Twisted_Muscles_Serum"
             },
             "availability": []
         },
@@ -3006,7 +3417,8 @@
                 },
                 "value": "10000",
                 "form_id": "003D0D63",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Unstable_Isotope_Serum"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Unstable_Isotope_Serum",
+                "source_slug": "Recipe:_Unstable_Isotope_Serum"
             },
             "availability": []
         },
@@ -3027,7 +3439,8 @@
                 },
                 "value": "50",
                 "form_id": "003F5C51",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_White_Russian"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_White_Russian",
+                "source_slug": "Recipe:_White_Russian"
             },
             "availability": []
         },
@@ -3048,7 +3461,8 @@
                 },
                 "value": "50",
                 "form_id": "0068B8EC",
-                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Yao_Guai_Pastry"
+                "wiki_url": "https://fallout.wiki/wiki/Recipe:_Yao_Guai_Pastry",
+                "source_slug": "Recipe:_Yao_Guai_Pastry"
             },
             "availability": []
         }

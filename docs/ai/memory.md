@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-03-18 - Fallout Wiki recipe rows must keep anchor href and dedupe by form_id
+- Symptom: `fallout.wiki` recipes with the same visible label (for example `Recipe: Healing Salve`) collapsed into one JSON row, and the stored `wiki_url` pointed to a generic 404 page instead of the variant page.
+- Root cause: the sync command built `slug` and fallback `wiki_url` from the visible `name`, while deduplication keyed rows by `type|slug`; generic labels therefore overwrote distinct variants even when each row had its own anchor `href` and `form_id`.
+- Fix: the Fallout Wiki sync now extracts `wiki_url` and `source_slug` from the row anchor `href`, derives the resource slug from that source slug when available, and deduplicates primarily by `form_id`.
+- Prevention: for wiki tables, never infer page identity only from visible cell text when the row already exposes a specific linked target and technical identifier.
+
 ## 2026-03-17 - Multi-source raw sync should always expose a provider index and visible progress
 - Symptom: `app:data:sync` felt inconsistent because Fandom/Fallout Wiki produced `index.json` while Nukaknights only wrote raw files, and long external syncs could look stalled in the terminal.
 - Root cause: Nukaknights kept its older endpoint-per-file flow without the same catalog summary and progress conventions as the newer wiki sources.

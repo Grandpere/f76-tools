@@ -24,6 +24,7 @@
 - Done (slice 16): ajout d un probe console Nukacrypt read-only (`app:data:probe:nukacrypt-record`) base sur `esmRecords(searchTerm + signatures)` pour arbitrage cible des conflits source par nom.
 - Done (slice 17): ajout d un probe d arbitrage `app:data:probe:nukacrypt-conflict` qui compare plusieurs noms candidats et/ou un `editorId` a un `form_id` attendu via la recherche publique Nukacrypt.
 - Done (slice 18): ajout d un rapport `app:data:report:source-arbitration` qui isole les conflits de noms entre deux providers et demande a Nukacrypt de trancher item par item.
+- Done (slice 19): correction du sync `fallout.wiki` pour conserver les vraies URLs issues des ancres `<a>` et ne plus ecraser les variantes a libelle generique (`Recipe: Healing Salve`) quand leurs `form_id`/liens sont distincts.
 - Note: le lookup public Nukacrypt direct par `form_id` via `esmRecord` reste non fiable depuis l app (HTTP 500 / corps vide). Un `curl` navigateur colle manuellement dans le shell du conteneur `app` peut repondre, mais le meme cas n est pas encore reproducible via le runtime PHP (`HttpClient`/probe). On garde donc Nukacrypt en outil opportuniste d arbitrage, pas en source serveur robuste.
 - Remaining: exploiter ce rapport pour confirmer les prochains conflits reels et, seulement si besoin, enrichir ensuite les rapports de merge avec le verdict Nukacrypt.
 

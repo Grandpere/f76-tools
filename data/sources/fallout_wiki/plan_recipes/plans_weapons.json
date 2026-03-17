@@ -1,10 +1,10 @@
 {
-    "generated_at": "2026-03-17T14:18:46+00:00",
+    "generated_at": "2026-03-17T23:45:45+00:00",
     "source": "fallout.wiki",
     "page": "Fallout_76_Weapon_Plans",
     "url": "https://fallout.wiki/wiki/Fallout_76_Weapon_Plans",
     "sections_count": 19,
-    "resources_count": 157,
+    "resources_count": 156,
     "resources": [
         {
             "type": "plan",
@@ -26,7 +26,8 @@
                 "value": "180",
                 "type": "caps",
                 "form_id": "0052E485",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_10mm_pistol"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_10mm_pistol",
+                "source_slug": "Plan:_10mm_pistol"
             },
             "availability": []
         },
@@ -54,7 +55,8 @@
                 "value": "420",
                 "type": "caps",
                 "form_id": "004F476A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_10mm_submachine_gun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_10mm_submachine_gun",
+                "source_slug": "Plan:_10mm_submachine_gun"
             },
             "availability": []
         },
@@ -82,7 +84,8 @@
                 "value": "180",
                 "type": "caps",
                 "form_id": "00437007",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_.44_Revolver"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_.44_Revolver",
+                "source_slug": "Plan:_.44_Revolver"
             },
             "availability": []
         },
@@ -110,7 +113,8 @@
                 "value": "1575",
                 "type": "caps",
                 "form_id": "0043700E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_.50_cal_machine_gun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_.50_cal_machine_gun",
+                "source_slug": "Plan:_.50_cal_machine_gun"
             },
             "availability": []
         },
@@ -133,7 +137,8 @@
                 "value": "50",
                 "type": "caps",
                 "form_id": "0043700C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Alien_Blaster"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Alien_Blaster",
+                "source_slug": "Plan:_Alien_Blaster"
             },
             "availability": []
         },
@@ -156,7 +161,8 @@
                 "value": "2667",
                 "type": "caps",
                 "form_id": "0062FE7E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Alien_Disintegrator"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Alien_Disintegrator",
+                "source_slug": "Plan:_Alien_Disintegrator"
             },
             "availability": []
         },
@@ -179,7 +185,8 @@
                 "value": "945",
                 "type": "caps",
                 "form_id": "004F4770",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Assault_Rifle"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Assault_Rifle",
+                "source_slug": "Plan:_Assault_Rifle"
             },
             "availability": []
         },
@@ -203,7 +210,8 @@
                 "value": "420",
                 "type": "caps",
                 "form_id": "00436FF3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Assaultron_blade"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Assaultron_blade",
+                "source_slug": "Plan:_Assaultron_blade"
             },
             "availability": []
         },
@@ -228,7 +236,8 @@
                 "value": "690",
                 "type": "caps",
                 "form_id": "00437010",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Assaultron_Head"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Assaultron_Head",
+                "source_slug": "Plan:_Assaultron_Head"
             },
             "availability": []
         },
@@ -238,11 +247,11 @@
             "name": "Plan: Auto Axe",
             "section": "Melee",
             "columns": {
-                "name": "Plan: Auto Axe",
+                "name": "Plan: Circuit Breaker",
                 "unlocks": {
-                    "text": "Auto Axe",
+                    "text": "Circuit Breaker",
                     "icons": [
-                        "Auto Axe (Fallout 76)"
+                        "Circuit Breaker"
                     ]
                 },
                 "obtained": {
@@ -255,7 +264,8 @@
                 "value": "500",
                 "type": "stamp",
                 "form_id": "0058935C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Auto_Axe"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Circuit_Breaker",
+                "source_slug": "Plan:_Circuit_Breaker"
             },
             "availability": []
         },
@@ -283,7 +293,8 @@
                 "value": "2025",
                 "type": "caps",
                 "form_id": "004F477E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Auto_Grenade_Launcher"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Auto_Grenade_Launcher",
+                "source_slug": "Plan:_Auto_Grenade_Launcher"
             },
             "availability": []
         },
@@ -312,7 +323,8 @@
                 "value": "75",
                 "type": "caps",
                 "form_id": "00436FEE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Baseball_bat"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Baseball_bat",
+                "source_slug": "Plan:_Baseball_bat"
             },
             "availability": []
         },
@@ -341,7 +353,8 @@
                 "value": "70",
                 "type": "caps",
                 "form_id": "00436FEF",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Baton"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Baton",
+                "source_slug": "Plan:_Baton"
             },
             "availability": []
         },
@@ -364,7 +377,8 @@
                 "value": "210",
                 "type": "caps",
                 "form_id": "003FFAE0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Bear_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Bear_Arm",
+                "source_slug": "Plan:_Bear_Arm"
             },
             "availability": []
         },
@@ -387,7 +401,8 @@
                 "value": "400",
                 "type": "caps",
                 "form_id": "004F476B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Blackpowder_pistol"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Blackpowder_pistol",
+                "source_slug": "Plan:_Blackpowder_pistol"
             },
             "availability": []
         },
@@ -410,7 +425,8 @@
                 "value": "660",
                 "type": "caps",
                 "form_id": "004F476F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Blackpowder_rifle"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Blackpowder_rifle",
+                "source_slug": "Plan:_Blackpowder_rifle"
             },
             "availability": []
         },
@@ -432,7 +448,8 @@
                 ],
                 "value": "150",
                 "type": "caps",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Blast_Mine"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Blast_Mine",
+                "source_slug": "Plan:_Blast_Mine"
             },
             "availability": []
         },
@@ -458,7 +475,8 @@
                 },
                 "value": "2667",
                 "type": "caps",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Boiling_Point"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Boiling_Point",
+                "source_slug": "Plan:_Boiling_Point"
             },
             "availability": []
         },
@@ -482,7 +500,8 @@
                 "value": "125",
                 "type": "caps",
                 "form_id": "00589362",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Bow"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Bow",
+                "source_slug": "Plan:_Bow"
             },
             "availability": []
         },
@@ -510,7 +529,8 @@
                 "value": "155",
                 "type": "caps",
                 "form_id": "00436FF0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Bowie_knife"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Bowie_knife",
+                "source_slug": "Plan:_Bowie_knife"
             },
             "availability": []
         },
@@ -539,7 +559,8 @@
                 "value": "70",
                 "type": "caps",
                 "form_id": "00436FF1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Boxing_glove"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Boxing_glove",
+                "source_slug": "Plan:_Boxing_glove"
             },
             "availability": []
         },
@@ -568,7 +589,8 @@
                 "value": "840",
                 "type": "caps",
                 "form_id": "0043700F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Broadsider"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Broadsider",
+                "source_slug": "Plan:_Broadsider"
             },
             "availability": []
         },
@@ -591,7 +613,8 @@
                 "value": "50",
                 "type": "caps",
                 "form_id": "00510B79",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_rifle"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_rifle",
+                "source_slug": "Plan:_Brotherhood_recon_rifle"
             },
             "availability": []
         },
@@ -614,7 +637,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "00589621",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cattle_Prod"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cattle_Prod",
+                "source_slug": "Plan:_Cattle_Prod"
             },
             "availability": []
         },
@@ -633,7 +657,8 @@
                 },
                 "value": "2667",
                 "type": "caps",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cauterizer"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cauterizer",
+                "source_slug": "Plan:_Cauterizer"
             },
             "availability": []
         },
@@ -661,34 +686,8 @@
                 "value": "225",
                 "type": "caps",
                 "form_id": "004EB73C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Chinese_Officer_Sword"
-            },
-            "availability": []
-        },
-        {
-            "type": "plan",
-            "slug": "plan-circuit-breaker",
-            "name": "Plan: Circuit Breaker",
-            "section": "Melee",
-            "columns": {
-                "name": "Plan: Circuit Breaker",
-                "unlocks": {
-                    "text": "Circuit Breaker",
-                    "icons": [
-                        "Circuit Breaker"
-                    ]
-                },
-                "obtained": {
-                    "text": "Giuseppe",
-                    "icons": [
-                        "Stamp",
-                        "Giuseppe"
-                    ]
-                },
-                "value": "500",
-                "type": "stamp",
-                "form_id": "0058935C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Circuit_Breaker"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Chinese_Officer_Sword",
+                "source_slug": "Plan:_Chinese_Officer_Sword"
             },
             "availability": []
         },
@@ -715,7 +714,8 @@
                 "value": "",
                 "type": "stamps",
                 "form_id": "006BE8D7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cold_Shoulder"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cold_Shoulder",
+                "source_slug": "Plan:_Cold_Shoulder"
             },
             "availability": []
         },
@@ -742,7 +742,8 @@
                 "value": "780",
                 "type": "caps",
                 "form_id": "0043700D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Combat_rifle"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Combat_rifle",
+                "source_slug": "Plan:_Combat_rifle"
             },
             "availability": []
         },
@@ -770,7 +771,8 @@
                 "value": "750",
                 "type": "caps",
                 "form_id": "004F477F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Combat_shotgun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Combat_shotgun",
+                "source_slug": "Plan:_Combat_shotgun"
             },
             "availability": []
         },
@@ -793,7 +795,8 @@
                 "value": "1000",
                 "type": "caps",
                 "form_id": "0058935D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Compound_bow"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Compound_bow",
+                "source_slug": "Plan:_Compound_bow"
             },
             "availability": []
         },
@@ -816,7 +819,8 @@
                 "value": "75",
                 "type": "caps",
                 "form_id": "00790FCF",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cremator"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cremator",
+                "source_slug": "Plan:_Cremator"
             },
             "availability": []
         },
@@ -844,7 +848,8 @@
                 "value": "150",
                 "type": "caps",
                 "form_id": "004F4780",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Crossbow"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Crossbow",
+                "source_slug": "Plan:_Crossbow"
             },
             "availability": []
         },
@@ -868,7 +873,8 @@
                 "value": "2000",
                 "type": "gold bullion",
                 "form_id": "005E65F5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Crusader_Pistol"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Crusader_Pistol",
+                "source_slug": "Plan:_Crusader_Pistol"
             },
             "availability": []
         },
@@ -893,7 +899,8 @@
                 "value": "100",
                 "type": "caps",
                 "form_id": "004E84E9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cryo_grenade"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cryo_grenade",
+                "source_slug": "Plan:_Cryo_grenade"
             },
             "availability": []
         },
@@ -918,7 +925,8 @@
                 "value": "50",
                 "type": "caps",
                 "form_id": "004E84EA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cryo_mine"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cryo_mine",
+                "source_slug": "Plan:_Cryo_mine"
             },
             "availability": []
         },
@@ -946,7 +954,8 @@
                 "value": "840",
                 "type": "caps",
                 "form_id": "004F4781",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cryolator"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cryolator",
+                "source_slug": "Plan:_Cryolator"
             },
             "availability": []
         },
@@ -970,7 +979,8 @@
                 "value": "210",
                 "type": "caps",
                 "form_id": "004EB73D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Blade"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cultist_Blade",
+                "source_slug": "Plan:_Cultist_Blade"
             },
             "availability": []
         },
@@ -998,7 +1008,8 @@
                 "value": "240",
                 "type": "caps",
                 "form_id": "004EB73E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Dagger"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cultist_Dagger",
+                "source_slug": "Plan:_Cultist_Dagger"
             },
             "availability": []
         },
@@ -1026,7 +1037,8 @@
                 "value": "720",
                 "type": "caps",
                 "form_id": "004F42E0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Death_tambo"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Death_tambo",
+                "source_slug": "Plan:_Death_tambo"
             },
             "availability": []
         },
@@ -1052,7 +1064,8 @@
                 "value": "765",
                 "type": "caps",
                 "form_id": "00436FF2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deathclaw_Gauntlet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Deathclaw_Gauntlet",
+                "source_slug": "Plan:_Deathclaw_Gauntlet"
             },
             "availability": []
         },
@@ -1079,7 +1092,8 @@
                 "value": "80",
                 "type": "caps",
                 "form_id": "004F4786",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Double_barrel_shotgun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Double_barrel_shotgun",
+                "source_slug": "Plan:_Double_barrel_shotgun"
             },
             "availability": []
         },
@@ -1101,7 +1115,8 @@
                 ],
                 "value": "180",
                 "type": "caps",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Drill_Fist"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Drill_Fist",
+                "source_slug": "Plan:_Drill_Fist"
             },
             "availability": []
         },
@@ -1124,7 +1139,8 @@
                 "value": "100",
                 "type": "gold bullion",
                 "form_id": "0058961C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Dynamite"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Dynamite",
+                "source_slug": "Plan:_Dynamite"
             },
             "availability": []
         },
@@ -1147,7 +1163,8 @@
                 "value": "200",
                 "type": "gold bullion",
                 "form_id": "0058961D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Dynamite_Bundle"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Dynamite_Bundle",
+                "source_slug": "Plan:_Dynamite_Bundle"
             },
             "availability": []
         },
@@ -1165,7 +1182,8 @@
                 "value": "100",
                 "type": "caps",
                 "form_id": "00589622",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Dynamite_spear"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Dynamite_spear",
+                "source_slug": "Plan:_Dynamite_spear"
             },
             "availability": []
         },
@@ -1188,7 +1206,8 @@
                 "value": "2667",
                 "type": "caps",
                 "form_id": "00630C6B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Electro_Enforcer"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Electro_Enforcer",
+                "source_slug": "Plan:_Electro_Enforcer"
             },
             "availability": []
         },
@@ -1211,7 +1230,8 @@
                 "value": "105",
                 "type": "caps",
                 "form_id": "0045C49C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Expensive_perfume"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Expensive_perfume",
+                "source_slug": "Plan:_Expensive_perfume"
             },
             "availability": []
         },
@@ -1234,7 +1254,8 @@
                 "value": "1000",
                 "type": "bullion",
                 "form_id": "0060A29A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Face_Breaker"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Face_Breaker",
+                "source_slug": "Plan:_Face_Breaker"
             },
             "availability": []
         },
@@ -1258,7 +1279,8 @@
                 "value": "1500",
                 "type": "caps",
                 "form_id": "00437011",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Fatman"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Fatman",
+                "source_slug": "Plan:_Fatman"
             },
             "availability": []
         },
@@ -1282,7 +1304,8 @@
                 "value": "45",
                 "type": "caps",
                 "form_id": "004EB73F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Fire_axe"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Fire_axe",
+                "source_slug": "Plan:_Fire_axe"
             },
             "availability": []
         },
@@ -1311,7 +1334,8 @@
                 "value": "1350",
                 "type": "caps",
                 "form_id": "004F4787",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flamer"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flamer",
+                "source_slug": "Plan:_Flamer"
             },
             "availability": []
         },
@@ -1331,7 +1355,8 @@
                 "value": "50",
                 "type": "gold bullion",
                 "form_id": "0058961E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flare"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flare",
+                "source_slug": "Plan:_Flare"
             },
             "availability": []
         },
@@ -1354,7 +1379,8 @@
                 "value": "50",
                 "type": "caps",
                 "form_id": "004F4768",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flare_gun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flare_gun",
+                "source_slug": "Plan:_Flare_gun"
             },
             "availability": []
         },
@@ -1377,7 +1403,8 @@
                 "value": "50",
                 "type": "caps",
                 "form_id": "0058961F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flashbang"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flashbang",
+                "source_slug": "Plan:_Flashbang"
             },
             "availability": []
         },
@@ -1403,7 +1430,8 @@
                 },
                 "value": "2667",
                 "type": "caps",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flatliner"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flatliner",
+                "source_slug": "Plan:_Flatliner"
             },
             "availability": []
         },
@@ -1426,7 +1454,8 @@
                 "value": "150",
                 "type": "gold bullion",
                 "form_id": "00592EB5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Floater_Flamer_Grenade"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Floater_Flamer_Grenade",
+                "source_slug": "Plan:_Floater_Flamer_Grenade"
             },
             "availability": []
         },
@@ -1449,7 +1478,8 @@
                 "value": "150",
                 "type": "gold bullion",
                 "form_id": "00592EB6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Floater_Freezer_Grenade"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Floater_Freezer_Grenade",
+                "source_slug": "Plan:_Floater_Freezer_Grenade"
             },
             "availability": []
         },
@@ -1472,7 +1502,8 @@
                 "value": "150",
                 "type": "gold bullion",
                 "form_id": "00592EB7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Floater_Gnasher_Grenade"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Floater_Gnasher_Grenade",
+                "source_slug": "Plan:_Floater_Gnasher_Grenade"
             },
             "availability": []
         },
@@ -1501,7 +1532,8 @@
                 "value": "400",
                 "type": "caps",
                 "form_id": "00437009",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gamma_gun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Gamma_gun",
+                "source_slug": "Plan:_Gamma_gun"
             },
             "availability": []
         },
@@ -1525,7 +1557,8 @@
                 "value": "1575",
                 "type": "caps",
                 "form_id": "004F478F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gatling_gun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Gatling_gun",
+                "source_slug": "Plan:_Gatling_gun"
             },
             "availability": []
         },
@@ -1553,7 +1586,8 @@
                 "value": "1800",
                 "type": "caps",
                 "form_id": "004F4788",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gatling_laser"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Gatling_laser",
+                "source_slug": "Plan:_Gatling_laser"
             },
             "availability": []
         },
@@ -1581,7 +1615,8 @@
                 "value": "2250",
                 "type": "caps",
                 "form_id": "004F4789",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gatling_plasma"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Gatling_plasma",
+                "source_slug": "Plan:_Gatling_plasma"
             },
             "availability": []
         },
@@ -1604,7 +1639,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "00589623",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gauntlet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Gauntlet",
+                "source_slug": "Plan:_Gauntlet"
             },
             "availability": []
         },
@@ -1627,7 +1663,8 @@
                 "value": "750",
                 "type": "gold bullion",
                 "form_id": "0058935E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gauss_Minigun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Gauss_Minigun",
+                "source_slug": "Plan:_Gauss_Minigun"
             },
             "availability": []
         },
@@ -1650,7 +1687,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "0058935F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gauss_Pistol"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Gauss_Pistol",
+                "source_slug": "Plan:_Gauss_Pistol"
             },
             "availability": []
         },
@@ -1678,7 +1716,8 @@
                 "value": "1800",
                 "type": "caps",
                 "form_id": "004F478A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gauss_rifle"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Gauss_rifle",
+                "source_slug": "Plan:_Gauss_rifle"
             },
             "availability": []
         },
@@ -1706,7 +1745,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "00589360",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gauss_Shotgun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Gauss_Shotgun",
+                "source_slug": "Plan:_Gauss_Shotgun"
             },
             "availability": []
         },
@@ -1734,7 +1774,8 @@
                 "value": "75",
                 "type": "caps",
                 "form_id": "00436FF5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Golf_Club"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Golf_Club",
+                "source_slug": "Plan:_Golf_Club"
             },
             "availability": []
         },
@@ -1762,7 +1803,8 @@
                 "value": "165",
                 "type": "caps",
                 "form_id": "00436FF6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Guitar_sword"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Guitar_sword",
+                "source_slug": "Plan:_Guitar_sword"
             },
             "availability": []
         },
@@ -1789,7 +1831,8 @@
                 "value": "100",
                 "type": "caps",
                 "form_id": "0063E378",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gulper_Smacker"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Gulper_Smacker",
+                "source_slug": "Plan:_Gulper_Smacker"
             },
             "availability": []
         },
@@ -1817,7 +1860,8 @@
                 "value": "810",
                 "type": "caps",
                 "form_id": "004F4784",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Handmade_Gun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Handmade_Gun",
+                "source_slug": "Plan:_Handmade_Gun"
             },
             "availability": []
         },
@@ -1846,7 +1890,8 @@
                 "value": "900",
                 "type": "caps",
                 "form_id": "00437012",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Harpoon_gun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Harpoon_gun",
+                "source_slug": "Plan:_Harpoon_gun"
             },
             "availability": []
         },
@@ -1870,7 +1915,8 @@
                 "value": "2667",
                 "type": "caps",
                 "form_id": "005E47CC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellstorm_Missile_Launcher"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellstorm_Missile_Launcher",
+                "source_slug": "Plan:_Hellstorm_Missile_Launcher"
             },
             "availability": []
         },
@@ -1894,7 +1940,8 @@
                 "value": "100",
                 "type": "caps",
                 "form_id": "00437005",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hunting_Rifle"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hunting_Rifle",
+                "source_slug": "Plan:_Hunting_Rifle"
             },
             "availability": []
         },
@@ -1922,7 +1969,8 @@
                 "value": "30",
                 "type": "caps",
                 "form_id": "00436FF7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Knuckles"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Knuckles",
+                "source_slug": "Plan:_Knuckles"
             },
             "availability": []
         },
@@ -1950,7 +1998,8 @@
                 "value": "270",
                 "type": "caps",
                 "form_id": "00437008",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Laser_gun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Laser_gun",
+                "source_slug": "Plan:_Laser_gun"
             },
             "availability": []
         },
@@ -1973,7 +2022,8 @@
                 "value": "150",
                 "type": "caps",
                 "form_id": "004F478B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Laser_musket"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Laser_musket",
+                "source_slug": "Plan:_Laser_musket"
             },
             "availability": []
         },
@@ -1997,7 +2047,8 @@
                 "value": "45",
                 "type": "caps",
                 "form_id": "00436FF8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lead_pipe"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Lead_pipe",
+                "source_slug": "Plan:_Lead_pipe"
             },
             "availability": []
         },
@@ -2025,7 +2076,8 @@
                 "value": "810",
                 "type": "caps",
                 "form_id": "004F4782",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lever_gun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Lever_gun",
+                "source_slug": "Plan:_Lever_gun"
             },
             "availability": []
         },
@@ -2047,7 +2099,8 @@
                 ],
                 "value": "2667",
                 "type": "caps",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lickety-Split"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Lickety-Split",
+                "source_slug": "Plan:_Lickety-Split"
             },
             "availability": []
         },
@@ -2075,7 +2128,8 @@
                 "value": "180",
                 "type": "caps",
                 "form_id": "004F478C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_M79_Grenade_Launcher"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_M79_Grenade_Launcher",
+                "source_slug": "Plan:_M79_Grenade_Launcher"
             },
             "availability": []
         },
@@ -2100,7 +2154,8 @@
                 "value": "50",
                 "type": "caps",
                 "form_id": "005532B1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Meat_Cleaver"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Meat_Cleaver",
+                "source_slug": "Plan:_Meat_Cleaver"
             },
             "availability": []
         },
@@ -2128,7 +2183,8 @@
                 "value": "90",
                 "type": "caps",
                 "form_id": "004EAEEC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Meat_Hook"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Meat_Hook",
+                "source_slug": "Plan:_Meat_Hook"
             },
             "availability": []
         },
@@ -2152,7 +2208,8 @@
                 "value": "180",
                 "type": "caps",
                 "form_id": "005528D6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Meat_Tenderizer"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Meat_Tenderizer",
+                "source_slug": "Plan:_Meat_Tenderizer"
             },
             "availability": []
         },
@@ -2176,7 +2233,8 @@
                 "value": "1333",
                 "type": "caps",
                 "form_id": "00613845",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Mechanic%27s_Best_Friend"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Mechanic%27s_Best_Friend",
+                "source_slug": "Plan:_Mechanic's_Best_Friend"
             },
             "availability": []
         },
@@ -2200,7 +2258,8 @@
                 "value": "1333",
                 "type": "caps",
                 "form_id": "005FE493",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Medical_Malpractice"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Medical_Malpractice",
+                "source_slug": "Plan:_Medical_Malpractice"
             },
             "availability": []
         },
@@ -2228,7 +2287,8 @@
                 "value": "1350",
                 "type": "caps",
                 "form_id": "004F478D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_MG42_light_machine_gun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_MG42_light_machine_gun",
+                "source_slug": "Plan:_MG42_light_machine_gun"
             },
             "availability": []
         },
@@ -2255,7 +2315,8 @@
                 "value": "1350",
                 "type": "caps",
                 "form_id": "00437014",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Minigun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Minigun",
+                "source_slug": "Plan:_Minigun"
             },
             "availability": []
         },
@@ -2280,7 +2341,8 @@
                 "value": "175",
                 "type": "caps",
                 "form_id": "004E84ED",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_MIRV_Frag_Grenade"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_MIRV_Frag_Grenade",
+                "source_slug": "Plan:_MIRV_Frag_Grenade"
             },
             "availability": []
         },
@@ -2303,7 +2365,8 @@
                 "value": "600",
                 "type": "caps",
                 "form_id": "004F478E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Missile_Launcher"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Missile_Launcher",
+                "source_slug": "Plan:_Missile_Launcher"
             },
             "availability": []
         },
@@ -2328,7 +2391,8 @@
                 "value": "450",
                 "type": "caps",
                 "form_id": "00436FF9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Mole_Miner_Gauntlet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Mole_Miner_Gauntlet",
+                "source_slug": "Plan:_Mole_Miner_Gauntlet"
             },
             "availability": []
         },
@@ -2351,7 +2415,8 @@
                 "value": "300",
                 "type": "caps",
                 "form_id": "004F42E5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Mr._Handy_buzz_blade"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Mr._Handy_buzz_blade",
+                "source_slug": "Plan:_Mr._Handy_buzz_blade"
             },
             "availability": []
         },
@@ -2374,7 +2439,8 @@
                 "value": "0",
                 "type": "caps",
                 "form_id": "004E84EB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Nuka_Cherry_Grenade"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Nuka_Cherry_Grenade",
+                "source_slug": "Plan:_Nuka_Cherry_Grenade"
             },
             "availability": []
         },
@@ -2399,7 +2465,8 @@
                 "value": "200",
                 "type": "caps",
                 "form_id": "004E84EF",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Nuka-Cola_grenade"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Nuka-Cola_grenade",
+                "source_slug": "Plan:_Nuka-Cola_grenade"
             },
             "availability": []
         },
@@ -2424,7 +2491,8 @@
                 "value": "225",
                 "type": "caps",
                 "form_id": "004E84EE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Nuka_Quantum_Grenade"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Nuka_Quantum_Grenade",
+                "source_slug": "Plan:_Nuka_Quantum_Grenade"
             },
             "availability": []
         },
@@ -2448,7 +2516,8 @@
                 ],
                 "value": "50",
                 "type": "caps",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Nuka_Shank"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Nuka_Shank",
+                "source_slug": "Plan:_Nuka_Shank"
             },
             "availability": []
         },
@@ -2473,7 +2542,8 @@
                 "value": "50",
                 "type": "caps",
                 "form_id": "004E84F0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Nuke_mine"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Nuke_mine",
+                "source_slug": "Plan:_Nuke_mine"
             },
             "availability": []
         },
@@ -2500,7 +2570,8 @@
                 "value": "100",
                 "type": "caps",
                 "form_id": "00611A5E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pepper_Shaker"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pepper_Shaker",
+                "source_slug": "Plan:_Pepper_Shaker"
             },
             "availability": []
         },
@@ -2524,7 +2595,8 @@
                 "value": "180",
                 "type": "caps",
                 "form_id": "004EB740",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pickaxe"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pickaxe",
+                "source_slug": "Plan:_Pickaxe"
             },
             "availability": []
         },
@@ -2552,7 +2624,8 @@
                 "value": "90",
                 "type": "caps",
                 "form_id": "00436FFA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pipe_Wrench"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pipe_Wrench",
+                "source_slug": "Plan:_Pipe_Wrench"
             },
             "availability": []
         },
@@ -2580,7 +2653,8 @@
                 "value": "45",
                 "type": "caps",
                 "form_id": "00436FFB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pitchfork"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pitchfork",
+                "source_slug": "Plan:_Pitchfork"
             },
             "availability": []
         },
@@ -2603,7 +2677,8 @@
                 "value": "750",
                 "type": "gold bullion",
                 "form_id": "00589361",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Plasma_Caster"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Plasma_Caster",
+                "source_slug": "Plan:_Plasma_Caster"
             },
             "availability": []
         },
@@ -2627,7 +2702,8 @@
                 "value": "2667",
                 "type": "caps",
                 "form_id": "005ECB83",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Plasma_cutter"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Plasma_cutter",
+                "source_slug": "Plan:_Plasma_cutter"
             },
             "availability": []
         },
@@ -2652,7 +2728,8 @@
                 "value": "150",
                 "type": "caps",
                 "form_id": "004E84F2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Plasma_Grenade"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Plasma_Grenade",
+                "source_slug": "Plan:_Plasma_Grenade"
             },
             "availability": []
         },
@@ -2680,7 +2757,8 @@
                 "value": "510",
                 "type": "caps",
                 "form_id": "0043700A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Plasma_gun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Plasma_gun",
+                "source_slug": "Plan:_Plasma_gun"
             },
             "availability": []
         },
@@ -2704,7 +2782,8 @@
                 "value": "50",
                 "type": "caps",
                 "form_id": "004E84F1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Plasma_mine"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Plasma_mine",
+                "source_slug": "Plan:_Plasma_mine"
             },
             "availability": []
         },
@@ -2732,7 +2811,8 @@
                 "value": "200",
                 "type": "caps",
                 "form_id": "00436FF4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pole_hook"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pole_hook",
+                "source_slug": "Plan:_Pole_hook"
             },
             "availability": []
         },
@@ -2760,7 +2840,8 @@
                 "value": "30",
                 "type": "caps",
                 "form_id": "00437004",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pool_Cue"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pool_Cue",
+                "source_slug": "Plan:_Pool_Cue"
             },
             "availability": []
         },
@@ -2788,7 +2869,8 @@
                 "value": "900",
                 "type": "caps",
                 "form_id": "004F42E2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Power_fist"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Power_fist",
+                "source_slug": "Plan:_Power_fist"
             },
             "availability": []
         },
@@ -2811,7 +2893,8 @@
                 "value": "105",
                 "type": "caps",
                 "form_id": "0045C492",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pretty_Floral_Bouquet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pretty_Floral_Bouquet",
+                "source_slug": "Plan:_Pretty_Floral_Bouquet"
             },
             "availability": []
         },
@@ -2836,7 +2919,8 @@
                 "value": "150",
                 "type": "caps",
                 "form_id": "004E84F4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pulse_Grenade"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pulse_Grenade",
+                "source_slug": "Plan:_Pulse_Grenade"
             },
             "availability": []
         },
@@ -2861,7 +2945,8 @@
                 "value": "50",
                 "type": "caps",
                 "form_id": "004E84F3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pulse_mine"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pulse_mine",
+                "source_slug": "Plan:_Pulse_mine"
             },
             "availability": []
         },
@@ -2889,7 +2974,8 @@
                 "value": "225",
                 "type": "caps",
                 "form_id": "004F4769",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pump-action_shotgun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pump-action_shotgun",
+                "source_slug": "Plan:_Pump-action_shotgun"
             },
             "availability": []
         },
@@ -2917,7 +3003,8 @@
                 "value": "540",
                 "type": "caps",
                 "form_id": "004F4783",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Radium_rifle"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Radium_rifle",
+                "source_slug": "Plan:_Radium_rifle"
             },
             "availability": []
         },
@@ -2945,7 +3032,8 @@
                 "value": "810",
                 "type": "caps",
                 "form_id": "00437013",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Railway_rifle"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Railway_rifle",
+                "source_slug": "Plan:_Railway_rifle"
             },
             "availability": []
         },
@@ -2969,7 +3057,8 @@
                 "value": "250",
                 "type": "caps",
                 "form_id": "004F42E1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Replica_Grognak%27s_axe"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Replica_Grognak%27s_axe",
+                "source_slug": "Plan:_Replica_Grognak's_axe"
             },
             "availability": []
         },
@@ -2995,7 +3084,8 @@
                 },
                 "value": "2667",
                 "type": "caps",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Resolve_Breaker"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Resolve_Breaker",
+                "source_slug": "Plan:_Resolve_Breaker"
             },
             "availability": []
         },
@@ -3023,7 +3113,8 @@
                 "value": "180",
                 "type": "caps",
                 "form_id": "004EB741",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Revolutionary_War_sword"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Revolutionary_War_sword",
+                "source_slug": "Plan:_Revolutionary_War_sword"
             },
             "availability": []
         },
@@ -3051,7 +3142,8 @@
                 "value": "720",
                 "type": "caps",
                 "form_id": "004F4785",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Revolver"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Revolver",
+                "source_slug": "Plan:_Revolver"
             },
             "availability": []
         },
@@ -3079,7 +3171,8 @@
                 "value": "1170",
                 "type": "caps",
                 "form_id": "004F42E3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ripper"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ripper",
+                "source_slug": "Plan:_Ripper"
             },
             "availability": []
         },
@@ -3107,7 +3200,8 @@
                 "value": "30",
                 "type": "caps",
                 "form_id": "00436FFC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Rolling_pin"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Rolling_pin",
+                "source_slug": "Plan:_Rolling_pin"
             },
             "availability": []
         },
@@ -3130,7 +3224,8 @@
                 "value": "180",
                 "type": "caps",
                 "form_id": "0045EC5D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sheepsquatch_club"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sheepsquatch_club",
+                "source_slug": "Plan:_Sheepsquatch_club"
             },
             "availability": []
         },
@@ -3153,7 +3248,8 @@
                 "value": "180",
                 "type": "caps",
                 "form_id": "0042101C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sheepsquatch_Shard"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sheepsquatch_Shard",
+                "source_slug": "Plan:_Sheepsquatch_Shard"
             },
             "availability": []
         },
@@ -3176,7 +3272,8 @@
                 "value": "180",
                 "type": "caps",
                 "form_id": "0045EC5E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sheepsquatch_staff"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sheepsquatch_staff",
+                "source_slug": "Plan:_Sheepsquatch_staff"
             },
             "availability": []
         },
@@ -3202,7 +3299,8 @@
                 "value": "180",
                 "type": "caps",
                 "form_id": "0045EC3E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shepherd%27s_Crook"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shepherd%27s_Crook",
+                "source_slug": "Plan:_Shepherd's_Crook"
             },
             "availability": []
         },
@@ -3231,7 +3329,8 @@
                 "value": "1000",
                 "type": "caps",
                 "form_id": "004F42E4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shishkebab"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shishkebab",
+                "source_slug": "Plan:_Shishkebab"
             },
             "availability": []
         },
@@ -3259,7 +3358,8 @@
                 "value": "45",
                 "type": "caps",
                 "form_id": "00436FFD",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sickle"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sickle",
+                "source_slug": "Plan:_Sickle"
             },
             "availability": []
         },
@@ -3287,7 +3387,8 @@
                 "value": "510",
                 "type": "caps",
                 "form_id": "004F476C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Single-action_revolver"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Single-action_revolver",
+                "source_slug": "Plan:_Single-action_revolver"
             },
             "availability": []
         },
@@ -3315,7 +3416,8 @@
                 "value": "240",
                 "type": "caps",
                 "form_id": "00436FFE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ski_Sword"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ski_Sword",
+                "source_slug": "Plan:_Ski_Sword"
             },
             "availability": []
         },
@@ -3343,7 +3445,8 @@
                 "value": "180",
                 "type": "caps",
                 "form_id": "00436FFF",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sledge_hammer"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sledge_hammer",
+                "source_slug": "Plan:_Sledge_hammer"
             },
             "availability": []
         },
@@ -3366,7 +3469,8 @@
                 "value": "0",
                 "type": "caps",
                 "form_id": "004E84EC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Smart_frag_grenade"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Smart_frag_grenade",
+                "source_slug": "Plan:_Smart_frag_grenade"
             },
             "availability": []
         },
@@ -3389,7 +3493,8 @@
                 "value": "25",
                 "type": "caps",
                 "form_id": "00467FC0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Smoke_Grenade"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Smoke_Grenade",
+                "source_slug": "Plan:_Smoke_Grenade"
             },
             "availability": []
         },
@@ -3413,7 +3518,8 @@
                 "value": "1333",
                 "type": "caps",
                 "form_id": "00613846",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sole_Survivor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sole_Survivor",
+                "source_slug": "Plan:_Sole_Survivor"
             },
             "availability": []
         },
@@ -3436,7 +3542,8 @@
                 "value": "50",
                 "type": "caps",
                 "form_id": "00589620",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Soundmaker"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Soundmaker",
+                "source_slug": "Plan:_Soundmaker"
             },
             "availability": []
         },
@@ -3463,7 +3570,8 @@
                 "value": "240",
                 "type": "caps",
                 "form_id": "004EAEED",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Spear"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Spear",
+                "source_slug": "Plan:_Spear"
             },
             "availability": []
         },
@@ -3491,7 +3599,8 @@
                 "value": "600",
                 "type": "caps",
                 "form_id": "0043700B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Submachine_gun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Submachine_gun",
+                "source_slug": "Plan:_Submachine_gun"
             },
             "availability": []
         },
@@ -3519,7 +3628,8 @@
                 "value": "630",
                 "type": "caps",
                 "form_id": "00437000",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Super_Sledge"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Super_Sledge",
+                "source_slug": "Plan:_Super_Sledge"
             },
             "availability": []
         },
@@ -3547,7 +3657,8 @@
                 "value": "90",
                 "type": "caps",
                 "form_id": "00437001",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Switchblade"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Switchblade",
+                "source_slug": "Plan:_Switchblade"
             },
             "availability": []
         },
@@ -3575,7 +3686,8 @@
                 "value": "1200",
                 "type": "caps",
                 "form_id": "00437015",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Tesla_rifle"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Tesla_rifle",
+                "source_slug": "Plan:_Tesla_rifle"
             },
             "availability": []
         },
@@ -3598,7 +3710,8 @@
                 "value": "180",
                 "type": "caps",
                 "form_id": "0046D299",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_The_Fixer"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_The_Fixer",
+                "source_slug": "Plan:_The_Fixer"
             },
             "availability": []
         },
@@ -3622,7 +3735,8 @@
                 "value": "1333",
                 "type": "gold bullion",
                 "form_id": "005D0F04",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_The_Gutter"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_The_Gutter",
+                "source_slug": "Plan:_The_Gutter"
             },
             "availability": []
         },
@@ -3645,7 +3759,8 @@
                 "value": "50",
                 "type": "caps",
                 "form_id": "004E84F6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Thrown_Bear_Trap"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Thrown_Bear_Trap",
+                "source_slug": "Plan:_Thrown_Bear_Trap"
             },
             "availability": []
         },
@@ -3668,7 +3783,8 @@
                 "value": "50",
                 "type": "caps",
                 "form_id": "004E84F5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Thrown_Bleeding_Bear_Trap"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Thrown_Bleeding_Bear_Trap",
+                "source_slug": "Plan:_Thrown_Bleeding_Bear_Trap"
             },
             "availability": []
         },
@@ -3696,7 +3812,8 @@
                 "value": "75",
                 "type": "caps",
                 "form_id": "00437002",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Tire_iron"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Tire_iron",
+                "source_slug": "Plan:_Tire_iron"
             },
             "availability": []
         },
@@ -3720,7 +3837,8 @@
                 "value": "50",
                 "type": "caps",
                 "form_id": "00437006",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Tomahawk"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Tomahawk",
+                "source_slug": "Plan:_Tomahawk"
             },
             "availability": []
         },
@@ -3744,7 +3862,8 @@
                 "value": "2700",
                 "type": "caps",
                 "form_id": "004F4791",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_Gatling_Laser"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_Gatling_Laser",
+                "source_slug": "Plan:_Ultracite_Gatling_Laser"
             },
             "availability": []
         },
@@ -3768,7 +3887,8 @@
                 "value": "1350",
                 "type": "caps",
                 "form_id": "004F4790",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_Laser_Gun"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_Laser_Gun",
+                "source_slug": "Plan:_Ultracite_Laser_Gun"
             },
             "availability": []
         },
@@ -3795,7 +3915,8 @@
                 "value": "2667",
                 "type": "caps",
                 "form_id": "00792EAD",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_Terror_Sword"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_Terror_Sword",
+                "source_slug": "Plan:_Ultracite_Terror_Sword"
             },
             "availability": []
         },
@@ -3820,7 +3941,8 @@
                 "value": "1333",
                 "type": "caps",
                 "form_id": "005FD186",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Unstoppable_Monster"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Unstoppable_Monster",
+                "source_slug": "Plan:_Unstoppable_Monster"
             },
             "availability": []
         },
@@ -3842,7 +3964,8 @@
                 ],
                 "value": "5",
                 "type": "caps",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Laser_Carbine"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_V63_Laser_Carbine",
+                "source_slug": "Plan:_V63_Laser_Carbine"
             },
             "availability": []
         },
@@ -3868,7 +3991,8 @@
                 },
                 "value": "2667",
                 "type": "caps",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Valkyrie"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Valkyrie",
+                "source_slug": "Plan:_Valkyrie"
             },
             "availability": []
         },
@@ -3896,7 +4020,8 @@
                 "value": "30",
                 "type": "caps",
                 "form_id": "004EAEEB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Walking_cane"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Walking_cane",
+                "source_slug": "Plan:_Walking_cane"
             },
             "availability": []
         },
@@ -3924,7 +4049,8 @@
                 "value": "1035",
                 "type": "caps",
                 "form_id": "00437003",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_War_Drum"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_War_Drum",
+                "source_slug": "Plan:_War_Drum"
             },
             "availability": []
         },
@@ -3948,7 +4074,8 @@
                 "value": "2000",
                 "type": "gold bullion",
                 "form_id": "005D0F05",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_War_Glaive"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_War_Glaive",
+                "source_slug": "Plan:_War_Glaive"
             },
             "availability": []
         },
@@ -3972,7 +4099,8 @@
                 "value": "1333",
                 "type": "gold bullion",
                 "form_id": "005D0F06",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Whistle_in_the_Dark"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Whistle_in_the_Dark",
+                "source_slug": "Plan:_Whistle_in_the_Dark"
             },
             "availability": []
         },
@@ -4000,7 +4128,8 @@
                 "value": "120",
                 "type": "caps",
                 "form_id": "004EAEEE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Wood_axe"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Wood_axe",
+                "source_slug": "Plan:_Wood_axe"
             },
             "availability": []
         }

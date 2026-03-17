@@ -1,10 +1,10 @@
 {
-    "generated_at": "2026-03-17T14:18:46+00:00",
+    "generated_at": "2026-03-17T23:45:45+00:00",
     "source": "fallout.wiki",
     "page": "Fallout_76_Armor_Plans",
     "url": "https://fallout.wiki/wiki/Fallout_76_Armor_Plans",
     "sections_count": 21,
-    "resources_count": 122,
+    "resources_count": 119,
     "resources": [
         {
             "type": "plan",
@@ -24,7 +24,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "0061E1E6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Arctic_Marine_Armor_Helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Arctic_Marine_Armor_Helmet",
+                "source_slug": "Plan:_Arctic_Marine_Armor_Helmet"
             },
             "availability": []
         },
@@ -46,7 +47,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "0061E1E9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Arctic_Marine_Left_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Arctic_Marine_Left_Arm",
+                "source_slug": "Plan:_Arctic_Marine_Left_Arm"
             },
             "availability": []
         },
@@ -68,7 +70,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "0061E1E8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Arctic_marine_left_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Arctic_marine_left_leg",
+                "source_slug": "Plan:_Arctic_marine_left_leg"
             },
             "availability": []
         },
@@ -90,7 +93,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "0061E1EB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Arctic_marine_right_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Arctic_marine_right_arm",
+                "source_slug": "Plan:_Arctic_marine_right_arm"
             },
             "availability": []
         },
@@ -112,7 +116,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "0061E1EA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Arctic_marine_right_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Arctic_marine_right_leg",
+                "source_slug": "Plan:_Arctic_marine_right_leg"
             },
             "availability": []
         },
@@ -134,7 +139,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "0061E1E7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Arctic_marine_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Arctic_marine_torso",
+                "source_slug": "Plan:_Arctic_marine_torso"
             },
             "availability": []
         },
@@ -159,7 +165,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "00313517",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_BOS_Knight_Uniform"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_BOS_Knight_Uniform",
+                "source_slug": "Plan:_BOS_Knight_Uniform"
             },
             "availability": []
         },
@@ -184,7 +191,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "00313516",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_BoS_officer_uniform"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_BoS_officer_uniform",
+                "source_slug": "Plan:_BoS_officer_uniform"
             },
             "availability": []
         },
@@ -209,7 +217,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "003132F8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_BOS_Soldier_Uniform"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_BOS_Soldier_Uniform",
+                "source_slug": "Plan:_BOS_Soldier_Uniform"
             },
             "availability": []
         },
@@ -234,7 +243,8 @@
                     ]
                 },
                 "form_id": "006361C3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Botsmith_Chest_Piece"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Botsmith_Chest_Piece",
+                "source_slug": "Plan:_Botsmith_Chest_Piece"
             },
             "availability": []
         },
@@ -259,7 +269,8 @@
                     ]
                 },
                 "form_id": "006361C6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Botsmith_Left_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Botsmith_Left_Arm",
+                "source_slug": "Plan:_Botsmith_Left_Arm"
             },
             "availability": []
         },
@@ -284,7 +295,8 @@
                     ]
                 },
                 "form_id": "006361C8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Botsmith_Left_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Botsmith_Left_Leg",
+                "source_slug": "Plan:_Botsmith_Left_Leg"
             },
             "availability": []
         },
@@ -309,7 +321,8 @@
                     ]
                 },
                 "form_id": "006361C7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Botsmith_Right_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Botsmith_Right_Arm",
+                "source_slug": "Plan:_Botsmith_Right_Arm"
             },
             "availability": []
         },
@@ -334,7 +347,8 @@
                     ]
                 },
                 "form_id": "006361C5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Botsmith_Right_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Botsmith_Right_Leg",
+                "source_slug": "Plan:_Botsmith_Right_Leg"
             },
             "availability": []
         },
@@ -359,7 +373,8 @@
                     ]
                 },
                 "form_id": "006361C4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Botsmith_Torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Botsmith_Torso",
+                "source_slug": "Plan:_Botsmith_Torso"
             },
             "availability": []
         },
@@ -381,7 +396,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "005DF02E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_Recon_Chest_Piece"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_Recon_Chest_Piece",
+                "source_slug": "Plan:_Brotherhood_Recon_Chest_Piece"
             },
             "availability": []
         },
@@ -403,7 +419,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "005DF02B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_Recon_Helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_Recon_Helmet",
+                "source_slug": "Plan:_Brotherhood_Recon_Helmet"
             },
             "availability": []
         },
@@ -425,7 +442,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "005DF029",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_Recon_Left_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_Recon_Left_Arm",
+                "source_slug": "Plan:_Brotherhood_Recon_Left_Arm"
             },
             "availability": []
         },
@@ -447,7 +465,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "005DF02C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_Recon_Left_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_Recon_Left_Leg",
+                "source_slug": "Plan:_Brotherhood_Recon_Left_Leg"
             },
             "availability": []
         },
@@ -469,7 +488,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "005DF02A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_Recon_Right_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_Recon_Right_Arm",
+                "source_slug": "Plan:_Brotherhood_Recon_Right_Arm"
             },
             "availability": []
         },
@@ -491,7 +511,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "005DF02D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_Recon_Right_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_Recon_Right_Leg",
+                "source_slug": "Plan:_Brotherhood_Recon_Right_Leg"
             },
             "availability": []
         },
@@ -513,7 +534,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "00595858",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Chinese_Stealth_Armor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Chinese_Stealth_Armor",
+                "source_slug": "Plan:_Chinese_Stealth_Armor"
             },
             "availability": []
         },
@@ -535,7 +557,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "00595857",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Chinese_Stealth_Helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Chinese_Stealth_Helmet",
+                "source_slug": "Plan:_Chinese_Stealth_Helmet"
             },
             "availability": []
         },
@@ -557,7 +580,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "005FC9AC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Covert_scout_armor_chest_piece"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Covert_scout_armor_chest_piece",
+                "source_slug": "Plan:_Covert_scout_armor_chest_piece"
             },
             "availability": []
         },
@@ -579,7 +603,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "005FC9B1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Covert_scout_armor_left_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Covert_scout_armor_left_arm",
+                "source_slug": "Plan:_Covert_scout_armor_left_arm"
             },
             "availability": []
         },
@@ -601,7 +626,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "005FC9AE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Covert_scout_armor_left_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Covert_scout_armor_left_leg",
+                "source_slug": "Plan:_Covert_scout_armor_left_leg"
             },
             "availability": []
         },
@@ -623,7 +649,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "005FC9AD",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Covert_scout_armor_mask"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Covert_scout_armor_mask",
+                "source_slug": "Plan:_Covert_scout_armor_mask"
             },
             "availability": []
         },
@@ -645,7 +672,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "005FC9B0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Covert_scout_armor_right_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Covert_scout_armor_right_arm",
+                "source_slug": "Plan:_Covert_scout_armor_right_arm"
             },
             "availability": []
         },
@@ -667,7 +695,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "005FC9AF",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Covert_scout_armor_right_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Covert_scout_armor_right_leg",
+                "source_slug": "Plan:_Covert_scout_armor_right_leg"
             },
             "availability": []
         },
@@ -692,7 +721,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "003132CB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flannel_shirt_and_jeans"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Flannel_shirt_and_jeans",
+                "source_slug": "Plan:_Flannel_shirt_and_jeans"
             },
             "availability": []
         },
@@ -717,7 +747,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "00437016",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Harness"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Harness",
+                "source_slug": "Plan:_Harness"
             },
             "availability": []
         },
@@ -740,7 +771,8 @@
                     "Bottle Cap"
                 ],
                 "form_id": "00438609",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_combat_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Heavy_combat_arms",
+                "source_slug": "Plan:_Heavy_combat_arms"
             },
             "availability": []
         },
@@ -763,7 +795,8 @@
                     "Bottle Cap"
                 ],
                 "form_id": "0043860A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_combat_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Heavy_combat_legs",
+                "source_slug": "Plan:_Heavy_combat_legs"
             },
             "availability": []
         },
@@ -786,7 +819,8 @@
                     "Bottle Cap"
                 ],
                 "form_id": "0043860B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_combat_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Heavy_combat_torso",
+                "source_slug": "Plan:_Heavy_combat_torso"
             },
             "availability": []
         },
@@ -808,7 +842,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "00438606",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_leather_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Heavy_leather_arms",
+                "source_slug": "Plan:_Heavy_leather_arms"
             },
             "availability": []
         },
@@ -830,7 +865,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "00438607",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_leather_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Heavy_leather_legs",
+                "source_slug": "Plan:_Heavy_leather_legs"
             },
             "availability": []
         },
@@ -852,7 +888,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "00438608",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_leather_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Heavy_leather_torso",
+                "source_slug": "Plan:_Heavy_leather_torso"
             },
             "availability": []
         },
@@ -874,7 +911,8 @@
                     "Quest"
                 ],
                 "form_id": "00438603",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Metal_Arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Heavy_Metal_Arms",
+                "source_slug": "Plan:_Heavy_Metal_Arms"
             },
             "availability": []
         },
@@ -896,7 +934,8 @@
                     "Quest"
                 ],
                 "form_id": "00438604",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Metal_Legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Heavy_Metal_Legs",
+                "source_slug": "Plan:_Heavy_Metal_Legs"
             },
             "availability": []
         },
@@ -918,7 +957,8 @@
                     "Quest"
                 ],
                 "form_id": "00438605",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Metal_Torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Heavy_Metal_Torso",
+                "source_slug": "Plan:_Heavy_Metal_Torso"
             },
             "availability": []
         },
@@ -940,7 +980,8 @@
                     "Quest"
                 ],
                 "form_id": "00438600",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Raider_Arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Heavy_Raider_Arms",
+                "source_slug": "Plan:_Heavy_Raider_Arms"
             },
             "availability": []
         },
@@ -962,7 +1003,8 @@
                     "Quest"
                 ],
                 "form_id": "00438601",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Raider_Legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Heavy_Raider_Legs",
+                "source_slug": "Plan:_Heavy_Raider_Legs"
             },
             "availability": []
         },
@@ -984,7 +1026,8 @@
                     "Quest"
                 ],
                 "form_id": "00438602",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Raider_Torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Heavy_Raider_Torso",
+                "source_slug": "Plan:_Heavy_Raider_Torso"
             },
             "availability": []
         },
@@ -992,31 +1035,6 @@
             "type": "plan",
             "slug": "plan-heavy-robot-arms",
             "name": "Plan: Heavy Robot Arms",
-            "section": "By Type",
-            "columns": {
-                "name": "Plan: Heavy Robot Arms",
-                "unlocks": {
-                    "text": "Heavy Robot Arms",
-                    "icons": [
-                        "Robot Armor (Fallout 76)"
-                    ]
-                },
-                "obtained": [
-                    "Fallout 76 Containers and Storage",
-                    "Fallout 76 Creatures",
-                    "Treasure Map",
-                    "Quest",
-                    "Fallout 76 Locations"
-                ],
-                "form_id": "004385FE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Robot_Arms"
-            },
-            "availability": []
-        },
-        {
-            "type": "plan",
-            "slug": "plan-heavy-robot-legs",
-            "name": "Plan: Heavy Robot Legs",
             "section": "By Type",
             "columns": {
                 "name": "Plan: Heavy Robot Legs",
@@ -1034,7 +1052,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004385FE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Robot_Legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Heavy_Robot_Legs",
+                "source_slug": "Plan:_Heavy_Robot_Legs"
             },
             "availability": []
         },
@@ -1059,7 +1078,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004385FD",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_robot_right_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Heavy_robot_right_arms",
+                "source_slug": "Plan:_Heavy_robot_right_arms"
             },
             "availability": []
         },
@@ -1084,7 +1104,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004385FF",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Robot_Torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Heavy_Robot_Torso",
+                "source_slug": "Plan:_Heavy_Robot_Torso"
             },
             "availability": []
         },
@@ -1111,7 +1132,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004F570F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_combat_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Light_combat_arms",
+                "source_slug": "Plan:_Light_combat_arms"
             },
             "availability": []
         },
@@ -1138,7 +1160,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004F5710",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_combat_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Light_combat_legs",
+                "source_slug": "Plan:_Light_combat_legs"
             },
             "availability": []
         },
@@ -1165,7 +1188,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004F5711",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_combat_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Light_combat_torso",
+                "source_slug": "Plan:_Light_combat_torso"
             },
             "availability": []
         },
@@ -1191,7 +1215,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004F570D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Metal_Arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Light_Metal_Arms",
+                "source_slug": "Plan:_Light_Metal_Arms"
             },
             "availability": []
         },
@@ -1217,7 +1242,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004F570C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Metal_Legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Light_Metal_Legs",
+                "source_slug": "Plan:_Light_Metal_Legs"
             },
             "availability": []
         },
@@ -1243,7 +1269,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004F5709",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Metal_Torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Light_Metal_Torso",
+                "source_slug": "Plan:_Light_Metal_Torso"
             },
             "availability": []
         },
@@ -1265,7 +1292,8 @@
                     "Quest"
                 ],
                 "form_id": "0043701B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Raider_Arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Light_Raider_Arms",
+                "source_slug": "Plan:_Light_Raider_Arms"
             },
             "availability": []
         },
@@ -1287,7 +1315,8 @@
                     "Quest"
                 ],
                 "form_id": "0043701C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Raider_Legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Light_Raider_Legs",
+                "source_slug": "Plan:_Light_Raider_Legs"
             },
             "availability": []
         },
@@ -1309,7 +1338,8 @@
                     "Quest"
                 ],
                 "form_id": "0043701D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Raider_Torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Light_Raider_Torso",
+                "source_slug": "Plan:_Light_Raider_Torso"
             },
             "availability": []
         },
@@ -1334,7 +1364,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004F5712",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Robot_Arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Light_Robot_Arms",
+                "source_slug": "Plan:_Light_Robot_Arms"
             },
             "availability": []
         },
@@ -1359,7 +1390,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004F5713",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Robot_Legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Light_Robot_Legs",
+                "source_slug": "Plan:_Light_Robot_Legs"
             },
             "availability": []
         },
@@ -1384,7 +1416,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004F5714",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Robot_Torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Light_Robot_Torso",
+                "source_slug": "Plan:_Light_Robot_Torso"
             },
             "availability": []
         },
@@ -1409,7 +1442,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "00437017",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Long_johns"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Long_johns",
+                "source_slug": "Plan:_Long_johns"
             },
             "availability": []
         },
@@ -1434,7 +1468,8 @@
                     ]
                 },
                 "form_id": "005B6FF1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Marine_armor_helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Marine_armor_helmet",
+                "source_slug": "Plan:_Marine_armor_helmet"
             },
             "availability": []
         },
@@ -1459,7 +1494,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004F5715",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Marine_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Marine_arms",
+                "source_slug": "Plan:_Marine_arms"
             },
             "availability": []
         },
@@ -1484,7 +1520,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004F5716",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Marine_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Marine_legs",
+                "source_slug": "Plan:_Marine_legs"
             },
             "availability": []
         },
@@ -1509,7 +1546,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004F5717",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Marine_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Marine_torso",
+                "source_slug": "Plan:_Marine_torso"
             },
             "availability": []
         },
@@ -1534,7 +1572,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "003132CC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Marine_Wetsuit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Marine_Wetsuit",
+                "source_slug": "Plan:_Marine_Wetsuit"
             },
             "availability": []
         },
@@ -1559,7 +1598,8 @@
                     ]
                 },
                 "form_id": "006F4D83",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Armor_Helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Muni_Armor_Helmet",
+                "source_slug": "Plan:_Muni_Armor_Helmet"
             },
             "availability": []
         },
@@ -1584,7 +1624,8 @@
                     ]
                 },
                 "form_id": "006F4D84",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Armor_Left_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Muni_Armor_Left_Arm",
+                "source_slug": "Plan:_Muni_Armor_Left_Arm"
             },
             "availability": []
         },
@@ -1609,7 +1650,8 @@
                     ]
                 },
                 "form_id": "006F4D85",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Armor_Left_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Muni_Armor_Left_Leg",
+                "source_slug": "Plan:_Muni_Armor_Left_Leg"
             },
             "availability": []
         },
@@ -1634,7 +1676,8 @@
                     ]
                 },
                 "form_id": "006F4D8A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Armor_Right_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Muni_Armor_Right_Arm",
+                "source_slug": "Plan:_Muni_Armor_Right_Arm"
             },
             "availability": []
         },
@@ -1659,7 +1702,8 @@
                     ]
                 },
                 "form_id": "006F4D8B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Armor_Right_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Muni_Armor_Right_Leg",
+                "source_slug": "Plan:_Muni_Armor_Right_Leg"
             },
             "availability": []
         },
@@ -1684,7 +1728,8 @@
                     ]
                 },
                 "form_id": "006F4D8C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Armor_Torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Muni_Armor_Torso",
+                "source_slug": "Plan:_Muni_Armor_Torso"
             },
             "availability": []
         },
@@ -1709,7 +1754,8 @@
                     ]
                 },
                 "form_id": "006E7356",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Muni_Underarmor",
+                "source_slug": "Plan:_Muni_Underarmor"
             },
             "availability": []
         },
@@ -1733,7 +1779,8 @@
                         "The Human Condition"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Protective_Lining_Muni_Underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Protective_Lining_Muni_Underarmor",
+                "source_slug": "Plan:_Protective_Lining_Muni_Underarmor"
             },
             "availability": []
         },
@@ -1758,7 +1805,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "00437018",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_leathers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_leathers",
+                "source_slug": "Plan:_Raider_leathers"
             },
             "availability": []
         },
@@ -1782,7 +1830,8 @@
                         "The Human Condition"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Resistant_Lining_Muni_Underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Resistant_Lining_Muni_Underarmor",
+                "source_slug": "Plan:_Resistant_Lining_Muni_Underarmor"
             },
             "availability": []
         },
@@ -1807,7 +1856,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "00437019",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Road_leathers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Road_leathers",
+                "source_slug": "Plan:_Road_leathers"
             },
             "availability": []
         },
@@ -1833,7 +1883,8 @@
                     ]
                 },
                 "form_id": "0058935B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Chest_Piece"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_Chest_Piece",
+                "source_slug": "Plan:_Secret_Service_Chest_Piece"
             },
             "availability": []
         },
@@ -1859,7 +1910,8 @@
                     ]
                 },
                 "form_id": "0058961B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_Helmet",
+                "source_slug": "Plan:_Secret_Service_Helmet"
             },
             "availability": []
         },
@@ -1885,7 +1937,8 @@
                     ]
                 },
                 "form_id": "0059D543",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Left_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_Left_Arm",
+                "source_slug": "Plan:_Secret_Service_Left_Arm"
             },
             "availability": []
         },
@@ -1911,7 +1964,8 @@
                     ]
                 },
                 "form_id": "0059D545",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Left_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_Left_Leg",
+                "source_slug": "Plan:_Secret_Service_Left_Leg"
             },
             "availability": []
         },
@@ -1937,7 +1991,8 @@
                     ]
                 },
                 "form_id": "0059D544",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Right_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_Right_Arm",
+                "source_slug": "Plan:_Secret_Service_Right_Arm"
             },
             "availability": []
         },
@@ -1963,7 +2018,8 @@
                     ]
                 },
                 "form_id": "0059D546",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Right_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_Right_Leg",
+                "source_slug": "Plan:_Secret_Service_Right_Leg"
             },
             "availability": []
         },
@@ -1989,7 +2045,8 @@
                     ]
                 },
                 "form_id": "0059D542",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_Underarmor",
+                "source_slug": "Plan:_Secret_Service_Underarmor"
             },
             "availability": []
         },
@@ -2013,7 +2070,8 @@
                         "The Human Condition"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shielded_Lining_Muni_Underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shielded_Lining_Muni_Underarmor",
+                "source_slug": "Plan:_Shielded_Lining_Muni_Underarmor"
             },
             "availability": []
         },
@@ -2039,7 +2097,8 @@
                     ]
                 },
                 "form_id": "005527E0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Solar_Armor_Chest_Piece"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Solar_Armor_Chest_Piece",
+                "source_slug": "Plan:_Solar_Armor_Chest_Piece"
             },
             "availability": []
         },
@@ -2065,7 +2124,8 @@
                     ]
                 },
                 "form_id": "005527DC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Solar_Armor_Left_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Solar_Armor_Left_Arm",
+                "source_slug": "Plan:_Solar_Armor_Left_Arm"
             },
             "availability": []
         },
@@ -2091,7 +2151,8 @@
                     ]
                 },
                 "form_id": "005527DE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Solar_Armor_Left_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Solar_Armor_Left_Leg",
+                "source_slug": "Plan:_Solar_Armor_Left_Leg"
             },
             "availability": []
         },
@@ -2117,7 +2178,8 @@
                     ]
                 },
                 "form_id": "00554652",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Solar_Armor_Right_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Solar_Armor_Right_Arm",
+                "source_slug": "Plan:_Solar_Armor_Right_Arm"
             },
             "availability": []
         },
@@ -2143,7 +2205,8 @@
                     ]
                 },
                 "form_id": "00554654",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Solar_Armor_Right_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Solar_Armor_Right_Leg",
+                "source_slug": "Plan:_Solar_Armor_Right_Leg"
             },
             "availability": []
         },
@@ -2166,7 +2229,8 @@
                     "Bottle Cap"
                 ],
                 "form_id": "00438612",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_combat_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sturdy_combat_arms",
+                "source_slug": "Plan:_Sturdy_combat_arms"
             },
             "availability": []
         },
@@ -2189,7 +2253,8 @@
                     "Bottle Cap"
                 ],
                 "form_id": "00438613",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_combat_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sturdy_combat_legs",
+                "source_slug": "Plan:_Sturdy_combat_legs"
             },
             "availability": []
         },
@@ -2212,7 +2277,8 @@
                     "Bottle Cap"
                 ],
                 "form_id": "00438614",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_combat_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sturdy_combat_torso",
+                "source_slug": "Plan:_Sturdy_combat_torso"
             },
             "availability": []
         },
@@ -2234,7 +2300,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "0043860F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_leather_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sturdy_leather_arms",
+                "source_slug": "Plan:_Sturdy_leather_arms"
             },
             "availability": []
         },
@@ -2256,7 +2323,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "00438610",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_leather_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sturdy_leather_legs",
+                "source_slug": "Plan:_Sturdy_leather_legs"
             },
             "availability": []
         },
@@ -2278,7 +2346,8 @@
                     "Gold Bullion"
                 ],
                 "form_id": "00438611",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_leather_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sturdy_leather_torso",
+                "source_slug": "Plan:_Sturdy_leather_torso"
             },
             "availability": []
         },
@@ -2300,7 +2369,8 @@
                     "Quest"
                 ],
                 "form_id": "0043860C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Metal_Arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sturdy_Metal_Arms",
+                "source_slug": "Plan:_Sturdy_Metal_Arms"
             },
             "availability": []
         },
@@ -2322,7 +2392,8 @@
                     "Quest"
                 ],
                 "form_id": "0043860D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Metal_Legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sturdy_Metal_Legs",
+                "source_slug": "Plan:_Sturdy_Metal_Legs"
             },
             "availability": []
         },
@@ -2344,7 +2415,8 @@
                     "Quest"
                 ],
                 "form_id": "0043860E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Metal_Torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sturdy_Metal_Torso",
+                "source_slug": "Plan:_Sturdy_Metal_Torso"
             },
             "availability": []
         },
@@ -2366,7 +2438,8 @@
                     "Quest"
                 ],
                 "form_id": "002B9FD1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Raider_Arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sturdy_Raider_Arms",
+                "source_slug": "Plan:_Sturdy_Raider_Arms"
             },
             "availability": []
         },
@@ -2388,7 +2461,8 @@
                     "Quest"
                 ],
                 "form_id": "002B9FD3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Raider_Legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sturdy_Raider_Legs",
+                "source_slug": "Plan:_Sturdy_Raider_Legs"
             },
             "availability": []
         },
@@ -2410,7 +2484,8 @@
                     "Quest"
                 ],
                 "form_id": "002B9FD5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Raider_Torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sturdy_Raider_Torso",
+                "source_slug": "Plan:_Sturdy_Raider_Torso"
             },
             "availability": []
         },
@@ -2418,31 +2493,6 @@
             "type": "plan",
             "slug": "plan-sturdy-robot-arms",
             "name": "Plan: Sturdy Robot Arms",
-            "section": "By Type",
-            "columns": {
-                "name": "Plan: Sturdy Robot Arms",
-                "unlocks": {
-                    "text": "Sturdy Robot Arms",
-                    "icons": [
-                        "Robot Armor (Fallout 76)"
-                    ]
-                },
-                "obtained": [
-                    "Fallout 76 Containers and Storage",
-                    "Fallout 76 Creatures",
-                    "Treasure Map",
-                    "Quest",
-                    "Fallout 76 Locations"
-                ],
-                "form_id": "004385FC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Robot_Arms"
-            },
-            "availability": []
-        },
-        {
-            "type": "plan",
-            "slug": "plan-sturdy-robot-legs",
-            "name": "Plan: Sturdy Robot Legs",
             "section": "By Type",
             "columns": {
                 "name": "Plan: Sturdy Robot Legs",
@@ -2460,7 +2510,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004385FC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Robot_Legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sturdy_Robot_Legs",
+                "source_slug": "Plan:_Sturdy_Robot_Legs"
             },
             "availability": []
         },
@@ -2485,7 +2536,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004385FB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_robot_right_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sturdy_robot_right_arms",
+                "source_slug": "Plan:_Sturdy_robot_right_arms"
             },
             "availability": []
         },
@@ -2510,7 +2562,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004385F7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Robot_Torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Sturdy_Robot_Torso",
+                "source_slug": "Plan:_Sturdy_Robot_Torso"
             },
             "availability": []
         },
@@ -2536,7 +2589,8 @@
                     ]
                 },
                 "form_id": "005527DF",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Thorn_Armor_Chest_Piece"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Thorn_Armor_Chest_Piece",
+                "source_slug": "Plan:_Thorn_Armor_Chest_Piece"
             },
             "availability": []
         },
@@ -2562,7 +2616,8 @@
                     ]
                 },
                 "form_id": "005527DB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Thorn_Armor_Left_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Thorn_Armor_Left_Arm",
+                "source_slug": "Plan:_Thorn_Armor_Left_Arm"
             },
             "availability": []
         },
@@ -2588,7 +2643,8 @@
                     ]
                 },
                 "form_id": "005527DD",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Thorn_Armor_Left_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Thorn_Armor_Left_Leg",
+                "source_slug": "Plan:_Thorn_Armor_Left_Leg"
             },
             "availability": []
         },
@@ -2614,7 +2670,8 @@
                     ]
                 },
                 "form_id": "00554651",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Thorn_Armor_Right_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Thorn_Armor_Right_Arm",
+                "source_slug": "Plan:_Thorn_Armor_Right_Arm"
             },
             "availability": []
         },
@@ -2640,7 +2697,8 @@
                     ]
                 },
                 "form_id": "00554653",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Thorn_Armor_Right_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Thorn_Armor_Right_Leg",
+                "source_slug": "Plan:_Thorn_Armor_Right_Leg"
             },
             "availability": []
         },
@@ -2665,7 +2723,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004F5718",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Trapper_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Trapper_arms",
+                "source_slug": "Plan:_Trapper_arms"
             },
             "availability": []
         },
@@ -2690,7 +2749,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004F5719",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Trapper_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Trapper_legs",
+                "source_slug": "Plan:_Trapper_legs"
             },
             "availability": []
         },
@@ -2715,7 +2775,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "004F571A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Trapper_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Trapper_torso",
+                "source_slug": "Plan:_Trapper_torso"
             },
             "availability": []
         },
@@ -2739,7 +2800,8 @@
                         "The Human Condition"
                     ]
                 },
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Treated_Lining_Muni_Underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Treated_Lining_Muni_Underarmor",
+                "source_slug": "Plan:_Treated_Lining_Muni_Underarmor"
             },
             "availability": []
         },
@@ -2764,7 +2826,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "003132F9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Undershirt_%26_jeans"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Undershirt_%26_jeans",
+                "source_slug": "Plan:_Undershirt_&_jeans"
             },
             "availability": []
         },
@@ -2789,7 +2852,8 @@
                     ]
                 },
                 "form_id": "0062042A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_51_Jumpsuit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vault_51_Jumpsuit",
+                "source_slug": "Plan:_Vault_51_Jumpsuit"
             },
             "availability": []
         },
@@ -2799,18 +2863,19 @@
             "name": "Plan: Vault 63 Jumpsuit",
             "section": "By Type",
             "columns": {
-                "name": "Plan: Vault 63 Jumpsuit",
+                "name": "Plan: Vault 96 Jumpsuit",
                 "unlocks": {
-                    "text": "Vault 63 Jumpsuit",
+                    "text": "Vault 96 jumpsuit",
                     "icons": [
-                        "Vault 63 Jumpsuit"
+                        "Vault 96 jumpsuit"
                     ]
                 },
                 "obtained": [
                     "Overview:Unused Content"
                 ],
                 "form_id": "00313390",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_63_Jumpsuit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vault_96_Jumpsuit",
+                "source_slug": "Plan:_Vault_96_Jumpsuit"
             },
             "availability": []
         },
@@ -2835,7 +2900,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "0031352A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_76_jumpsuit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vault_76_jumpsuit",
+                "source_slug": "Plan:_Vault_76_jumpsuit"
             },
             "availability": []
         },
@@ -2856,7 +2922,8 @@
                     "Quest"
                 ],
                 "form_id": "005D0F02",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_94_jumpsuit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vault_94_jumpsuit",
+                "source_slug": "Plan:_Vault_94_jumpsuit"
             },
             "availability": []
         },
@@ -2881,28 +2948,8 @@
                     ]
                 },
                 "form_id": "005A3329",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_94_scout_armor_mask"
-            },
-            "availability": []
-        },
-        {
-            "type": "plan",
-            "slug": "plan-vault-96-jumpsuit",
-            "name": "Plan: Vault 96 Jumpsuit",
-            "section": "By Type",
-            "columns": {
-                "name": "Plan: Vault 96 Jumpsuit",
-                "unlocks": {
-                    "text": "Vault 96 jumpsuit",
-                    "icons": [
-                        "Vault 96 jumpsuit"
-                    ]
-                },
-                "obtained": [
-                    "Overview:Unused Content"
-                ],
-                "form_id": "00313390",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_96_Jumpsuit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vault_94_scout_armor_mask",
+                "source_slug": "Plan:_Vault_94_scout_armor_mask"
             },
             "availability": []
         },
@@ -2927,7 +2974,8 @@
                     "Fallout 76 Locations"
                 ],
                 "form_id": "00313494",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_Tec_University_jumpsuit"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vault_Tec_University_jumpsuit",
+                "source_slug": "Plan:_Vault_Tec_University_jumpsuit"
             },
             "availability": []
         }

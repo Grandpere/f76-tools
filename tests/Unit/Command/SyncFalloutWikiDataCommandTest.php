@@ -119,6 +119,7 @@ final class SyncFalloutWikiDataCommandTest extends TestCase
         self::assertIsArray($firstResource);
         self::assertIsArray($firstResource['columns'] ?? null);
         self::assertArrayHasKey('wiki_url', $firstResource['columns']);
+        self::assertArrayHasKey('source_slug', $firstResource['columns']);
         self::assertArrayHasKey('form_id', $firstResource['columns']);
 
         $detectedImageMetadata = false;
@@ -139,6 +140,95 @@ final class SyncFalloutWikiDataCommandTest extends TestCase
 
         self::assertTrue($detectedImageMetadata);
         self::assertTrue($detectedValueCurrency);
+    }
+
+    public function testSyncKeepsDistinctRowsWhenWikiUsesGenericNamesWithDifferentLinksAndFormIds(): void
+    {
+        $projectDir = sys_get_temp_dir().'/f76-sync-fallout-wiki-'.bin2hex(random_bytes(5));
+        mkdir($projectDir, 0o777, true);
+
+        $client = new MockHttpClient(function (string $method, string $url, array $options): MockResponse {
+            $query = is_array($options['query'] ?? null) ? $options['query'] : [];
+
+            if ('sections' === ($query['prop'] ?? null)) {
+                return new MockResponse((string) json_encode([
+                    'parse' => [
+                        'sections' => [
+                            ['index' => '1', 'line' => 'Recipes'],
+                        ],
+                    ],
+                ]));
+            }
+
+            if ('text' === ($query['prop'] ?? null)) {
+                return new MockResponse((string) json_encode([
+                    'parse' => [
+                        'text' => <<<HTML
+                            <table>
+                              <tr><th>Image</th><th>Name</th><th>Acquired</th><th>Value</th><th>Form ID</th></tr>
+                              <tr>
+                                <td><span title="Recipe"></span></td>
+                                <td><a href="/wiki/Recipe:Healing_Salve_(Ash_Heap)">Recipe: Healing Salve</a></td>
+                                <td><span title="Fallout 76 Locations"></span></td>
+                                <td>200</td>
+                                <td>002B8BBF</td>
+                              </tr>
+                              <tr>
+                                <td><span title="Recipe"></span></td>
+                                <td><a href="/wiki/Recipe:Healing_Salve_(Toxic_Valley)">Recipe: Healing Salve</a></td>
+                                <td><span title="Fallout 76 Locations"></span></td>
+                                <td>200</td>
+                                <td>002B8BC4</td>
+                              </tr>
+                            </table>
+                            HTML,
+                    ],
+                ]));
+            }
+
+            return new MockResponse('{"error":"unexpected"}', ['http_code' => 400]);
+        });
+
+        $kernel = $this->createMock(KernelInterface::class);
+        $kernel->method('getProjectDir')->willReturn($projectDir);
+
+        $command = new SyncFalloutWikiDataCommand($kernel, $client);
+        $tester = new CommandTester($command);
+
+        $exitCode = $tester->execute([
+            '--page' => ['Fallout_76_Recipes'],
+            '--output-dir' => 'data/sources/fallout_wiki/plan_recipes/test_healing_salve',
+            '--no-delay' => true,
+        ]);
+
+        self::assertSame(Command::SUCCESS, $exitCode);
+
+        $recipesPath = $projectDir.'/data/sources/fallout_wiki/plan_recipes/test_healing_salve/recipes.json';
+        self::assertFileExists($recipesPath);
+
+        $pageDecoded = json_decode((string) file_get_contents($recipesPath), true, 512, \JSON_THROW_ON_ERROR);
+        self::assertIsArray($pageDecoded);
+        $resources = $pageDecoded['resources'] ?? null;
+        self::assertIsArray($resources);
+        self::assertCount(2, $resources);
+
+        $resourcesByFormId = [];
+        foreach ($resources as $resource) {
+            self::assertIsArray($resource);
+            self::assertIsArray($resource['columns'] ?? null);
+            $formId = $resource['columns']['form_id'] ?? null;
+            if (is_string($formId)) {
+                $resourcesByFormId[$formId] = $resource;
+            }
+        }
+
+        self::assertArrayHasKey('002B8BBF', $resourcesByFormId);
+        self::assertArrayHasKey('002B8BC4', $resourcesByFormId);
+        self::assertSame('https://fallout.wiki/wiki/Recipe:Healing_Salve_(Ash_Heap)', $resourcesByFormId['002B8BBF']['columns']['wiki_url']);
+        self::assertSame('Recipe:Healing_Salve_(Ash_Heap)', $resourcesByFormId['002B8BBF']['columns']['source_slug']);
+        self::assertSame('https://fallout.wiki/wiki/Recipe:Healing_Salve_(Toxic_Valley)', $resourcesByFormId['002B8BC4']['columns']['wiki_url']);
+        self::assertSame('Recipe:Healing_Salve_(Toxic_Valley)', $resourcesByFormId['002B8BC4']['columns']['source_slug']);
+        self::assertNotSame($resourcesByFormId['002B8BBF']['slug'], $resourcesByFormId['002B8BC4']['slug']);
     }
 
     public function testSyncFailsOnInvalidPayload(): void

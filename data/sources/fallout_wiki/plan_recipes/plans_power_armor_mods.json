@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-03-17T14:18:46+00:00",
+    "generated_at": "2026-03-17T23:45:45+00:00",
     "source": "fallout.wiki",
     "page": "Fallout_76_Power_Armor_Mod_Plans",
     "url": "https://fallout.wiki/wiki/Fallout_76_Power_Armor_Mod_Plans",
@@ -25,7 +25,8 @@
                 ],
                 "value": "1200",
                 "form_id": "005018B6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_blood_cleanser"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_blood_cleanser",
+                "source_slug": "Plan:_Excavator_blood_cleanser"
             },
             "availability": []
         },
@@ -48,7 +49,8 @@
                 ],
                 "value": "3000",
                 "form_id": "005018B1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_calibrated_shocks"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_calibrated_shocks",
+                "source_slug": "Plan:_Excavator_calibrated_shocks"
             },
             "availability": []
         },
@@ -74,7 +76,8 @@
                 ],
                 "value": "200",
                 "form_id": "005018B2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_cooling_vent"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_cooling_vent",
+                "source_slug": "Plan:_Excavator_cooling_vent"
             },
             "availability": []
         },
@@ -97,7 +100,8 @@
                 ],
                 "value": "1200",
                 "form_id": "005018B5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_core_assembly"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_core_assembly",
+                "source_slug": "Plan:_Excavator_core_assembly"
             },
             "availability": []
         },
@@ -120,7 +124,8 @@
                 ],
                 "value": "2000",
                 "form_id": "005018B8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_emergency_protocols"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_emergency_protocols",
+                "source_slug": "Plan:_Excavator_emergency_protocols"
             },
             "availability": []
         },
@@ -147,7 +152,8 @@
                 },
                 "value": "100",
                 "form_id": "005018AC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_headlamp"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_headlamp",
+                "source_slug": "Plan:_Excavator_headlamp"
             },
             "availability": []
         },
@@ -173,7 +179,8 @@
                 ],
                 "value": "600",
                 "form_id": "005018AB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_hydraulic_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_hydraulic_bracers",
+                "source_slug": "Plan:_Excavator_hydraulic_bracers"
             },
             "availability": []
         },
@@ -199,7 +206,8 @@
                 ],
                 "value": "200",
                 "form_id": "005018AE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_internal_database"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_internal_database",
+                "source_slug": "Plan:_Excavator_internal_database"
             },
             "availability": []
         },
@@ -222,7 +230,8 @@
                 ],
                 "value": "1200",
                 "form_id": "005018B9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_kinetic_dynamo"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_kinetic_dynamo",
+                "source_slug": "Plan:_Excavator_kinetic_dynamo"
             },
             "availability": []
         },
@@ -245,7 +254,8 @@
                 ],
                 "value": "1200",
                 "form_id": "005018B0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_kinetic_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_kinetic_servos",
+                "source_slug": "Plan:_Excavator_kinetic_servos"
             },
             "availability": []
         },
@@ -271,7 +281,8 @@
                 ],
                 "value": "600",
                 "form_id": "005018BA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_medic_pump"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_medic_pump",
+                "source_slug": "Plan:_Excavator_medic_pump"
             },
             "availability": []
         },
@@ -297,7 +308,8 @@
                 ],
                 "value": "200",
                 "form_id": "005018BC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_motion-assist_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_motion-assist_servos",
+                "source_slug": "Plan:_Excavator_motion-assist_servos"
             },
             "availability": []
         },
@@ -323,7 +335,8 @@
                 ],
                 "value": "200",
                 "form_id": "005018AA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_optimized_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_optimized_bracers",
+                "source_slug": "Plan:_Excavator_optimized_bracers"
             },
             "availability": []
         },
@@ -346,7 +359,8 @@
                 ],
                 "value": "2000",
                 "form_id": "005018B3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_optimized_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_optimized_servos",
+                "source_slug": "Plan:_Excavator_optimized_servos"
             },
             "availability": []
         },
@@ -369,7 +383,8 @@
                 ],
                 "value": "2000",
                 "form_id": "005018B4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_overdrive_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_overdrive_servos",
+                "source_slug": "Plan:_Excavator_overdrive_servos"
             },
             "availability": []
         },
@@ -392,7 +407,8 @@
                 ],
                 "value": "3000",
                 "form_id": "005018BB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_reactive_plates"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_reactive_plates",
+                "source_slug": "Plan:_Excavator_reactive_plates"
             },
             "availability": []
         },
@@ -418,7 +434,8 @@
                 ],
                 "value": "600",
                 "form_id": "005018A9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_rusty_knuckles"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_rusty_knuckles",
+                "source_slug": "Plan:_Excavator_rusty_knuckles"
             },
             "availability": []
         },
@@ -444,7 +461,8 @@
                 ],
                 "value": "200",
                 "form_id": "005018AF",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_sensor_array"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_sensor_array",
+                "source_slug": "Plan:_Excavator_sensor_array"
             },
             "availability": []
         },
@@ -467,7 +485,8 @@
                 ],
                 "value": "3000",
                 "form_id": "005018AD",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_targeting_HUD"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_targeting_HUD",
+                "source_slug": "Plan:_Excavator_targeting_HUD"
             },
             "availability": []
         },
@@ -490,7 +509,8 @@
                 ],
                 "value": "3000",
                 "form_id": "005018BD",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_Tesla_Coils"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_Tesla_Coils",
+                "source_slug": "Plan:_Excavator_Tesla_Coils"
             },
             "availability": []
         },
@@ -513,7 +533,8 @@
                 ],
                 "value": "1200",
                 "form_id": "005018B7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_welded_rebar"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_welded_rebar",
+                "source_slug": "Plan:_Excavator_welded_rebar"
             },
             "availability": []
         },
@@ -535,7 +556,8 @@
                 ],
                 "value": "1200",
                 "form_id": "0060DAED",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_blood_cleanser"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_blood_cleanser",
+                "source_slug": "Plan:_Hellcat_blood_cleanser"
             },
             "availability": []
         },
@@ -557,7 +579,8 @@
                 ],
                 "value": "3000",
                 "form_id": "0060DAEB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_calibrated_shocks"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_calibrated_shocks",
+                "source_slug": "Plan:_Hellcat_calibrated_shocks"
             },
             "availability": []
         },
@@ -579,7 +602,8 @@
                 ],
                 "value": "200",
                 "form_id": "0060DAE8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_cooling_vent"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_cooling_vent",
+                "source_slug": "Plan:_Hellcat_cooling_vent"
             },
             "availability": []
         },
@@ -601,7 +625,8 @@
                 ],
                 "value": "1200",
                 "form_id": "0060DAF0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_core_assembly"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_core_assembly",
+                "source_slug": "Plan:_Hellcat_core_assembly"
             },
             "availability": []
         },
@@ -623,7 +648,8 @@
                 ],
                 "value": "2000",
                 "form_id": "0060DAFB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_emergency_protocols"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_emergency_protocols",
+                "source_slug": "Plan:_Hellcat_emergency_protocols"
             },
             "availability": []
         },
@@ -645,7 +671,8 @@
                 ],
                 "value": "600",
                 "form_id": "0060DAFA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_hydraulic_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_hydraulic_bracers",
+                "source_slug": "Plan:_Hellcat_hydraulic_bracers"
             },
             "availability": []
         },
@@ -667,7 +694,8 @@
                 ],
                 "value": "200",
                 "form_id": "0060DAF2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_internal_database"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_internal_database",
+                "source_slug": "Plan:_Hellcat_internal_database"
             },
             "availability": []
         },
@@ -689,7 +717,8 @@
                 ],
                 "value": "3000",
                 "form_id": "0060DAF9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_jet_pack"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_jet_pack",
+                "source_slug": "Plan:_Hellcat_jet_pack"
             },
             "availability": []
         },
@@ -711,7 +740,8 @@
                 ],
                 "value": "1200",
                 "form_id": "0060DAF4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_kinetic_dynamo"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_kinetic_dynamo",
+                "source_slug": "Plan:_Hellcat_kinetic_dynamo"
             },
             "availability": []
         },
@@ -733,7 +763,8 @@
                 ],
                 "value": "1200",
                 "form_id": "0060DAE9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_kinetic_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_kinetic_servos",
+                "source_slug": "Plan:_Hellcat_kinetic_servos"
             },
             "availability": []
         },
@@ -755,7 +786,8 @@
                 ],
                 "value": "600",
                 "form_id": "0060DAF6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_medic_pump"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_medic_pump",
+                "source_slug": "Plan:_Hellcat_medic_pump"
             },
             "availability": []
         },
@@ -777,7 +809,8 @@
                 ],
                 "value": "200",
                 "form_id": "0060DAF1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_motion-assist_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_motion-assist_servos",
+                "source_slug": "Plan:_Hellcat_motion-assist_servos"
             },
             "availability": []
         },
@@ -799,7 +832,8 @@
                 ],
                 "value": "200",
                 "form_id": "0060DAE4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_optimized_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_optimized_bracers",
+                "source_slug": "Plan:_Hellcat_optimized_bracers"
             },
             "availability": []
         },
@@ -821,7 +855,8 @@
                 ],
                 "value": "2000",
                 "form_id": "0060DAE7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_optimized_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_optimized_servos",
+                "source_slug": "Plan:_Hellcat_optimized_servos"
             },
             "availability": []
         },
@@ -843,7 +878,8 @@
                 ],
                 "value": "2000",
                 "form_id": "0060DAEF",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_overdrive_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_overdrive_servos",
+                "source_slug": "Plan:_Hellcat_overdrive_servos"
             },
             "availability": []
         },
@@ -865,7 +901,8 @@
                 ],
                 "value": "3000",
                 "form_id": "0060DAF3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_reactive_plates"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_reactive_plates",
+                "source_slug": "Plan:_Hellcat_reactive_plates"
             },
             "availability": []
         },
@@ -887,7 +924,8 @@
                 ],
                 "value": "600",
                 "form_id": "0060DAF8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_recon_sensors"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_recon_sensors",
+                "source_slug": "Plan:_Hellcat_recon_sensors"
             },
             "availability": []
         },
@@ -909,7 +947,8 @@
                 ],
                 "value": "600",
                 "form_id": "0060DAE5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_rusty_knuckles"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_rusty_knuckles",
+                "source_slug": "Plan:_Hellcat_rusty_knuckles"
             },
             "availability": []
         },
@@ -931,7 +970,8 @@
                 ],
                 "value": "200",
                 "form_id": "0060DAEE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_sensor_array"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_sensor_array",
+                "source_slug": "Plan:_Hellcat_sensor_array"
             },
             "availability": []
         },
@@ -953,7 +993,8 @@
                 ],
                 "value": "3000",
                 "form_id": "0060DAF7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_Stealth_Boy"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_Stealth_Boy",
+                "source_slug": "Plan:_Hellcat_Stealth_Boy"
             },
             "availability": []
         },
@@ -975,7 +1016,8 @@
                 ],
                 "value": "3000",
                 "form_id": "0060DAF5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_targeting_HUD"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_targeting_HUD",
+                "source_slug": "Plan:_Hellcat_targeting_HUD"
             },
             "availability": []
         },
@@ -997,7 +1039,8 @@
                 ],
                 "value": "1200",
                 "form_id": "0060DAEA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_Tesla_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_Tesla_bracers",
+                "source_slug": "Plan:_Hellcat_Tesla_bracers"
             },
             "availability": []
         },
@@ -1019,7 +1062,8 @@
                 ],
                 "value": "3000",
                 "form_id": "0060DAE6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_Tesla_coils"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_Tesla_coils",
+                "source_slug": "Plan:_Hellcat_Tesla_coils"
             },
             "availability": []
         },
@@ -1041,7 +1085,8 @@
                 ],
                 "value": "200",
                 "form_id": "0060DAEC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_VATS_matrix_overlay"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_VATS_matrix_overlay",
+                "source_slug": "Plan:_Hellcat_VATS_matrix_overlay"
             },
             "availability": []
         },
@@ -1065,7 +1110,8 @@
                 ],
                 "value": "1200",
                 "form_id": "005018D3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_blood_cleanser"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_blood_cleanser",
+                "source_slug": "Plan:_Raider_blood_cleanser"
             },
             "availability": []
         },
@@ -1088,7 +1134,8 @@
                 ],
                 "value": "3000",
                 "form_id": "005018CE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_calibrated_shocks"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_calibrated_shocks",
+                "source_slug": "Plan:_Raider_calibrated_shocks"
             },
             "availability": []
         },
@@ -1115,7 +1162,8 @@
                 ],
                 "value": "200",
                 "form_id": "005018CF",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_cooling_vent"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_cooling_vent",
+                "source_slug": "Plan:_Raider_cooling_vent"
             },
             "availability": []
         },
@@ -1139,7 +1187,8 @@
                 ],
                 "value": "1200",
                 "form_id": "005018D2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_core_assembly"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_core_assembly",
+                "source_slug": "Plan:_Raider_core_assembly"
             },
             "availability": []
         },
@@ -1162,7 +1211,8 @@
                 ],
                 "value": "2000",
                 "form_id": "005018D5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_emergency_protocols"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_emergency_protocols",
+                "source_slug": "Plan:_Raider_emergency_protocols"
             },
             "availability": []
         },
@@ -1189,7 +1239,8 @@
                 },
                 "value": "100",
                 "form_id": "005018C4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_Headlamp"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_Headlamp",
+                "source_slug": "Plan:_Raider_Headlamp"
             },
             "availability": []
         },
@@ -1215,7 +1266,8 @@
                 },
                 "value": "100",
                 "form_id": "005018C5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_Headlamp_Blue"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_Headlamp_Blue",
+                "source_slug": "Plan:_Raider_Headlamp_Blue"
             },
             "availability": []
         },
@@ -1241,7 +1293,8 @@
                 },
                 "value": "100",
                 "form_id": "005018C6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_Headlamp_Bright"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_Headlamp_Bright",
+                "source_slug": "Plan:_Raider_Headlamp_Bright"
             },
             "availability": []
         },
@@ -1267,7 +1320,8 @@
                 },
                 "value": "100",
                 "form_id": "005018C7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_Headlamp_Purple"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_Headlamp_Purple",
+                "source_slug": "Plan:_Raider_Headlamp_Purple"
             },
             "availability": []
         },
@@ -1293,7 +1347,8 @@
                 },
                 "value": "100",
                 "form_id": "005018C8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_Headlamp_Red_Tactical"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_Headlamp_Red_Tactical",
+                "source_slug": "Plan:_Raider_Headlamp_Red_Tactical"
             },
             "availability": []
         },
@@ -1319,7 +1374,8 @@
                 },
                 "value": "100",
                 "form_id": "005018C9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_Headlamp_Vault_Boy"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_Headlamp_Vault_Boy",
+                "source_slug": "Plan:_Raider_Headlamp_Vault_Boy"
             },
             "availability": []
         },
@@ -1346,7 +1402,8 @@
                 ],
                 "value": "600",
                 "form_id": "005018C3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_hydraulic_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_hydraulic_bracers",
+                "source_slug": "Plan:_Raider_hydraulic_bracers"
             },
             "availability": []
         },
@@ -1373,7 +1430,8 @@
                 ],
                 "value": "200",
                 "form_id": "005018CB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_internal_database"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_internal_database",
+                "source_slug": "Plan:_Raider_internal_database"
             },
             "availability": []
         },
@@ -1397,7 +1455,8 @@
                 ],
                 "value": "3000",
                 "form_id": "0055AF01",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_jet_pack"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_jet_pack",
+                "source_slug": "Plan:_Raider_jet_pack"
             },
             "availability": []
         },
@@ -1421,7 +1480,8 @@
                 ],
                 "value": "1200",
                 "form_id": "005018D6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_kinetic_dynamo"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_kinetic_dynamo",
+                "source_slug": "Plan:_Raider_kinetic_dynamo"
             },
             "availability": []
         },
@@ -1445,7 +1505,8 @@
                 ],
                 "value": "1200",
                 "form_id": "005018CD",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_kinetic_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_kinetic_servos",
+                "source_slug": "Plan:_Raider_kinetic_servos"
             },
             "availability": []
         },
@@ -1472,7 +1533,8 @@
                 ],
                 "value": "600",
                 "form_id": "005018D7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_medic_pump"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_medic_pump",
+                "source_slug": "Plan:_Raider_medic_pump"
             },
             "availability": []
         },
@@ -1499,7 +1561,8 @@
                 ],
                 "value": "200",
                 "form_id": "005018D9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_motion-assist_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_motion-assist_servos",
+                "source_slug": "Plan:_Raider_motion-assist_servos"
             },
             "availability": []
         },
@@ -1526,7 +1589,8 @@
                 ],
                 "value": "200",
                 "form_id": "005018C2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_optimized_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_optimized_bracers",
+                "source_slug": "Plan:_Raider_optimized_bracers"
             },
             "availability": []
         },
@@ -1549,7 +1613,8 @@
                 ],
                 "value": "2000",
                 "form_id": "005018D0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_optimized_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_optimized_servos",
+                "source_slug": "Plan:_Raider_optimized_servos"
             },
             "availability": []
         },
@@ -1572,7 +1637,8 @@
                 ],
                 "value": "2000",
                 "form_id": "005018D1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_overdrive_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_overdrive_servos",
+                "source_slug": "Plan:_Raider_overdrive_servos"
             },
             "availability": []
         },
@@ -1595,7 +1661,8 @@
                 ],
                 "value": "3000",
                 "form_id": "005018D8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_reactive_plates"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_reactive_plates",
+                "source_slug": "Plan:_Raider_reactive_plates"
             },
             "availability": []
         },
@@ -1622,7 +1689,8 @@
                 ],
                 "value": "600",
                 "form_id": "005018C1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_rusty_knuckles"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_rusty_knuckles",
+                "source_slug": "Plan:_Raider_rusty_knuckles"
             },
             "availability": []
         },
@@ -1649,7 +1717,8 @@
                 ],
                 "value": "200",
                 "form_id": "005018CC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_sensor_array"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_sensor_array",
+                "source_slug": "Plan:_Raider_sensor_array"
             },
             "availability": []
         },
@@ -1672,7 +1741,8 @@
                 ],
                 "value": "3000",
                 "form_id": "005018CA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_targeting_HUD"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_targeting_HUD",
+                "source_slug": "Plan:_Raider_targeting_HUD"
             },
             "availability": []
         },
@@ -1695,7 +1765,8 @@
                 ],
                 "value": "3000",
                 "form_id": "005018DA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_Tesla_coils"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_Tesla_coils",
+                "source_slug": "Plan:_Raider_Tesla_coils"
             },
             "availability": []
         },
@@ -1719,7 +1790,8 @@
                 ],
                 "value": "1200",
                 "form_id": "005018D4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_welded_rebar"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_welded_rebar",
+                "source_slug": "Plan:_Raider_welded_rebar"
             },
             "availability": []
         },
@@ -1743,7 +1815,8 @@
                 ],
                 "value": "1200",
                 "form_id": "005018F2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_blood_cleanser"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_blood_cleanser",
+                "source_slug": "Plan:_T-45_blood_cleanser"
             },
             "availability": []
         },
@@ -1766,7 +1839,8 @@
                 ],
                 "value": "3000",
                 "form_id": "005018EB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_calibrated_shocks"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_calibrated_shocks",
+                "source_slug": "Plan:_T-45_calibrated_shocks"
             },
             "availability": []
         },
@@ -1793,7 +1867,8 @@
                 ],
                 "value": "200",
                 "form_id": "005018EC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_cooling_vent"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_cooling_vent",
+                "source_slug": "Plan:_T-45_cooling_vent"
             },
             "availability": []
         },
@@ -1817,7 +1892,8 @@
                 ],
                 "value": "1200",
                 "form_id": "005018F1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_core_assembly"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_core_assembly",
+                "source_slug": "Plan:_T-45_core_assembly"
             },
             "availability": []
         },
@@ -1840,7 +1916,8 @@
                 ],
                 "value": "2000",
                 "form_id": "005018F3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_emergency_protocols"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_emergency_protocols",
+                "source_slug": "Plan:_T-45_emergency_protocols"
             },
             "availability": []
         },
@@ -1861,7 +1938,8 @@
                     "Bottle Cap"
                 ],
                 "value": "100",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_Headlamp_Blue"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_Headlamp_Blue",
+                "source_slug": "Plan:_T-45_Headlamp_Blue"
             },
             "availability": []
         },
@@ -1886,7 +1964,8 @@
                     ]
                 },
                 "value": "100",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_Headlamp_Purple"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_Headlamp_Purple",
+                "source_slug": "Plan:_T-45_Headlamp_Purple"
             },
             "availability": []
         },
@@ -1913,7 +1992,8 @@
                 ],
                 "value": "600",
                 "form_id": "005018DE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_hydraulic_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_hydraulic_bracers",
+                "source_slug": "Plan:_T-45_hydraulic_bracers"
             },
             "availability": []
         },
@@ -1940,7 +2020,8 @@
                 ],
                 "value": "200",
                 "form_id": "005018E6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_internal_database"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_internal_database",
+                "source_slug": "Plan:_T-45_internal_database"
             },
             "availability": []
         },
@@ -1964,7 +2045,8 @@
                 ],
                 "value": "3000",
                 "form_id": "005018F4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_jet_pack"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_jet_pack",
+                "source_slug": "Plan:_T-45_jet_pack"
             },
             "availability": []
         },
@@ -1988,7 +2070,8 @@
                 ],
                 "value": "1200",
                 "form_id": "005018F5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_kinetic_dynamo"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_kinetic_dynamo",
+                "source_slug": "Plan:_T-45_kinetic_dynamo"
             },
             "availability": []
         },
@@ -2012,7 +2095,8 @@
                 ],
                 "value": "1200",
                 "form_id": "005018EA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_kinetic_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_kinetic_servos",
+                "source_slug": "Plan:_T-45_kinetic_servos"
             },
             "availability": []
         },
@@ -2039,7 +2123,8 @@
                 ],
                 "value": "600",
                 "form_id": "005018F6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_medic_pump"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_medic_pump",
+                "source_slug": "Plan:_T-45_medic_pump"
             },
             "availability": []
         },
@@ -2066,7 +2151,8 @@
                 },
                 "value": "100",
                 "form_id": "005018EF",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_military_paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_military_paint",
+                "source_slug": "Plan:_T-45_military_paint"
             },
             "availability": []
         },
@@ -2093,7 +2179,8 @@
                 ],
                 "value": "200",
                 "form_id": "005018F9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_motion-assist_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_motion-assist_servos",
+                "source_slug": "Plan:_T-45_motion-assist_servos"
             },
             "availability": []
         },
@@ -2120,7 +2207,8 @@
                 ],
                 "value": "200",
                 "form_id": "005018DC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_optimized_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_optimized_bracers",
+                "source_slug": "Plan:_T-45_optimized_bracers"
             },
             "availability": []
         },
@@ -2143,7 +2231,8 @@
                 ],
                 "value": "2000",
                 "form_id": "005018ED",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_optimized_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_optimized_servos",
+                "source_slug": "Plan:_T-45_optimized_servos"
             },
             "availability": []
         },
@@ -2166,7 +2255,8 @@
                 ],
                 "value": "2000",
                 "form_id": "005018EE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_overdrive_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_overdrive_servos",
+                "source_slug": "Plan:_T-45_overdrive_servos"
             },
             "availability": []
         },
@@ -2189,7 +2279,8 @@
                 ],
                 "value": "3000",
                 "form_id": "005018F7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_reactive_plates"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_reactive_plates",
+                "source_slug": "Plan:_T-45_reactive_plates"
             },
             "availability": []
         },
@@ -2216,7 +2307,8 @@
                 },
                 "value": "600",
                 "form_id": "005018E7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_recon_sensors"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_recon_sensors",
+                "source_slug": "Plan:_T-45_recon_sensors"
             },
             "availability": []
         },
@@ -2243,7 +2335,8 @@
                 ],
                 "value": "600",
                 "form_id": "005018DB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_rusty_knuckles"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_rusty_knuckles",
+                "source_slug": "Plan:_T-45_rusty_knuckles"
             },
             "availability": []
         },
@@ -2270,7 +2363,8 @@
                 ],
                 "value": "200",
                 "form_id": "005018E8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_sensor_array"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_sensor_array",
+                "source_slug": "Plan:_T-45_sensor_array"
             },
             "availability": []
         },
@@ -2293,7 +2387,8 @@
                 ],
                 "value": "3000",
                 "form_id": "005018F8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_Stealth_Boy"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_Stealth_Boy",
+                "source_slug": "Plan:_T-45_Stealth_Boy"
             },
             "availability": []
         },
@@ -2316,7 +2411,8 @@
                 ],
                 "value": "3000",
                 "form_id": "005018E5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_targeting_HUD"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_targeting_HUD",
+                "source_slug": "Plan:_T-45_targeting_HUD"
             },
             "availability": []
         },
@@ -2340,7 +2436,8 @@
                 ],
                 "value": "1200",
                 "form_id": "005018DD",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_Tesla_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_Tesla_bracers",
+                "source_slug": "Plan:_T-45_Tesla_bracers"
             },
             "availability": []
         },
@@ -2363,7 +2460,8 @@
                 ],
                 "value": "3000",
                 "form_id": "005018FA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_Tesla_coils"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_Tesla_coils",
+                "source_slug": "Plan:_T-45_Tesla_coils"
             },
             "availability": []
         },
@@ -2390,7 +2488,8 @@
                 },
                 "value": "200",
                 "form_id": "005018E9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_VATS_matrix_overlay"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_VATS_matrix_overlay",
+                "source_slug": "Plan:_T-45_VATS_matrix_overlay"
             },
             "availability": []
         },
@@ -2417,7 +2516,8 @@
                 },
                 "value": "1000",
                 "form_id": "005018F0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_winterized_paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_winterized_paint",
+                "source_slug": "Plan:_T-45_winterized_paint"
             },
             "availability": []
         },
@@ -2443,7 +2543,8 @@
                 },
                 "value": "100",
                 "form_id": "0065D139",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51_Power_Armor_Brotherhood_Knight_Paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51_Power_Armor_Brotherhood_Knight_Paint",
+                "source_slug": "Plan:_T-51_Power_Armor_Brotherhood_Knight_Paint"
             },
             "availability": []
         },
@@ -2469,7 +2570,8 @@
                 },
                 "value": "100",
                 "form_id": "0065D138",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51_Power_Armor_Brotherhood_Paladin_Paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51_Power_Armor_Brotherhood_Paladin_Paint",
+                "source_slug": "Plan:_T-51_Power_Armor_Brotherhood_Paladin_Paint"
             },
             "availability": []
         },
@@ -2491,7 +2593,8 @@
                 ],
                 "value": "100",
                 "form_id": "004969C6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51_Power_Armor_Nuka-Cola_Paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51_Power_Armor_Nuka-Cola_Paint",
+                "source_slug": "Plan:_T-51_Power_Armor_Nuka-Cola_Paint"
             },
             "availability": []
         },
@@ -2515,7 +2618,8 @@
                 ],
                 "value": "1200",
                 "form_id": "00501913",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_blood_cleanser"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_blood_cleanser",
+                "source_slug": "Plan:_T-51b_blood_cleanser"
             },
             "availability": []
         },
@@ -2538,7 +2642,8 @@
                 ],
                 "value": "3000",
                 "form_id": "0050190B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_calibrated_shocks"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_calibrated_shocks",
+                "source_slug": "Plan:_T-51b_calibrated_shocks"
             },
             "availability": []
         },
@@ -2565,7 +2670,8 @@
                 ],
                 "value": "200",
                 "form_id": "0050190C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_cooling_vent"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_cooling_vent",
+                "source_slug": "Plan:_T-51b_cooling_vent"
             },
             "availability": []
         },
@@ -2589,7 +2695,8 @@
                 ],
                 "value": "1200",
                 "form_id": "00501912",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_core_assembly"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_core_assembly",
+                "source_slug": "Plan:_T-51b_core_assembly"
             },
             "availability": []
         },
@@ -2612,7 +2719,8 @@
                 ],
                 "value": "2000",
                 "form_id": "00501914",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_emergency_protocols"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_emergency_protocols",
+                "source_slug": "Plan:_T-51b_emergency_protocols"
             },
             "availability": []
         },
@@ -2633,7 +2741,8 @@
                     "Bottle Cap"
                 ],
                 "value": "100",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_Headlamp_Blue"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_Headlamp_Blue",
+                "source_slug": "Plan:_T-51b_Headlamp_Blue"
             },
             "availability": []
         },
@@ -2658,7 +2767,8 @@
                     ]
                 },
                 "value": "100",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_Headlamp_Purple"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_Headlamp_Purple",
+                "source_slug": "Plan:_T-51b_Headlamp_Purple"
             },
             "availability": []
         },
@@ -2685,7 +2795,8 @@
                 ],
                 "value": "600",
                 "form_id": "005018FE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_hydraulic_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_hydraulic_bracers",
+                "source_slug": "Plan:_T-51b_hydraulic_bracers"
             },
             "availability": []
         },
@@ -2712,7 +2823,8 @@
                 ],
                 "value": "200",
                 "form_id": "00501906",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_internal_database"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_internal_database",
+                "source_slug": "Plan:_T-51b_internal_database"
             },
             "availability": []
         },
@@ -2736,7 +2848,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00501915",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_jet_pack"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_jet_pack",
+                "source_slug": "Plan:_T-51b_jet_pack"
             },
             "availability": []
         },
@@ -2760,7 +2873,8 @@
                 ],
                 "value": "12000",
                 "form_id": "00501916",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_kinetic_dynamo"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_kinetic_dynamo",
+                "source_slug": "Plan:_T-51b_kinetic_dynamo"
             },
             "availability": []
         },
@@ -2784,7 +2898,8 @@
                 ],
                 "value": "1200",
                 "form_id": "0050190A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_kinetic_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_kinetic_servos",
+                "source_slug": "Plan:_T-51b_kinetic_servos"
             },
             "availability": []
         },
@@ -2811,7 +2926,8 @@
                 ],
                 "value": "600",
                 "form_id": "00501917",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_medic_pump"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_medic_pump",
+                "source_slug": "Plan:_T-51b_medic_pump"
             },
             "availability": []
         },
@@ -2838,7 +2954,8 @@
                 },
                 "value": "100",
                 "form_id": "0050190F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_military_paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_military_paint",
+                "source_slug": "Plan:_T-51b_military_paint"
             },
             "availability": []
         },
@@ -2865,7 +2982,8 @@
                 ],
                 "value": "200",
                 "form_id": "0050191A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_motion-assist_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_motion-assist_servos",
+                "source_slug": "Plan:_T-51b_motion-assist_servos"
             },
             "availability": []
         },
@@ -2892,7 +3010,8 @@
                 ],
                 "value": "200",
                 "form_id": "005018FC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_optimized_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_optimized_bracers",
+                "source_slug": "Plan:_T-51b_optimized_bracers"
             },
             "availability": []
         },
@@ -2915,7 +3034,8 @@
                 ],
                 "value": "2000",
                 "form_id": "0050190D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_optimized_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_optimized_servos",
+                "source_slug": "Plan:_T-51b_optimized_servos"
             },
             "availability": []
         },
@@ -2938,7 +3058,8 @@
                 ],
                 "value": "2000",
                 "form_id": "0050190E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_overdrive_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_overdrive_servos",
+                "source_slug": "Plan:_T-51b_overdrive_servos"
             },
             "availability": []
         },
@@ -2961,7 +3082,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00501918",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_reactive_plates"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_reactive_plates",
+                "source_slug": "Plan:_T-51b_reactive_plates"
             },
             "availability": []
         },
@@ -2988,7 +3110,8 @@
                 },
                 "value": "600",
                 "form_id": "00501907",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_recon_sensors"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_recon_sensors",
+                "source_slug": "Plan:_T-51b_recon_sensors"
             },
             "availability": []
         },
@@ -3015,7 +3138,8 @@
                 ],
                 "value": "600",
                 "form_id": "005018FB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_rusty_knuckles"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_rusty_knuckles",
+                "source_slug": "Plan:_T-51b_rusty_knuckles"
             },
             "availability": []
         },
@@ -3042,7 +3166,8 @@
                 ],
                 "value": "200",
                 "form_id": "00501908",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_sensor_array"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_sensor_array",
+                "source_slug": "Plan:_T-51b_sensor_array"
             },
             "availability": []
         },
@@ -3065,7 +3190,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00501919",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_Stealth_Boy"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_Stealth_Boy",
+                "source_slug": "Plan:_T-51b_Stealth_Boy"
             },
             "availability": []
         },
@@ -3088,7 +3214,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00501905",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_targeting_HUD"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_targeting_HUD",
+                "source_slug": "Plan:_T-51b_targeting_HUD"
             },
             "availability": []
         },
@@ -3112,7 +3239,8 @@
                 ],
                 "value": "1200",
                 "form_id": "005018FD",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_Tesla_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_Tesla_bracers",
+                "source_slug": "Plan:_T-51b_Tesla_bracers"
             },
             "availability": []
         },
@@ -3135,7 +3263,8 @@
                 ],
                 "value": "3000",
                 "form_id": "0050191B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_Tesla_coils"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_Tesla_coils",
+                "source_slug": "Plan:_T-51b_Tesla_coils"
             },
             "availability": []
         },
@@ -3162,7 +3291,8 @@
                 },
                 "value": "200",
                 "form_id": "00501909",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_VATS_matrix_overlay"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_VATS_matrix_overlay",
+                "source_slug": "Plan:_T-51b_VATS_matrix_overlay"
             },
             "availability": []
         },
@@ -3189,7 +3319,8 @@
                 },
                 "value": "100",
                 "form_id": "00501910",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_Vim%21_paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_Vim!_paint",
+                "source_slug": "Plan:_T-51b_Vim!_paint"
             },
             "availability": []
         },
@@ -3216,7 +3347,8 @@
                 },
                 "value": "100",
                 "form_id": "00501911",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_winterized_coating"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_winterized_coating",
+                "source_slug": "Plan:_T-51b_winterized_coating"
             },
             "availability": []
         },
@@ -3243,7 +3375,8 @@
                 },
                 "value": "100",
                 "form_id": "00501930",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_Atom_Cat_paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_Atom_Cat_paint",
+                "source_slug": "Plan:_T-60_Atom_Cat_paint"
             },
             "availability": []
         },
@@ -3266,7 +3399,8 @@
                 ],
                 "value": "1200",
                 "form_id": "0050193D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_blood_cleanser"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_blood_cleanser",
+                "source_slug": "Plan:_T-60_blood_cleanser"
             },
             "availability": []
         },
@@ -3288,7 +3422,8 @@
                 ],
                 "value": "100",
                 "form_id": "00501931",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_BOS_Elder_Paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_BOS_Elder_Paint",
+                "source_slug": "Plan:_T-60_BOS_Elder_Paint"
             },
             "availability": []
         },
@@ -3310,7 +3445,8 @@
                 ],
                 "value": "100",
                 "form_id": "00501934",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_BOS_Knight_CPT_Paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_BOS_Knight_CPT_Paint",
+                "source_slug": "Plan:_T-60_BOS_Knight_CPT_Paint"
             },
             "availability": []
         },
@@ -3332,7 +3468,8 @@
                 ],
                 "value": "100",
                 "form_id": "00501933",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_BOS_Knight_Paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_BOS_Knight_Paint",
+                "source_slug": "Plan:_T-60_BOS_Knight_Paint"
             },
             "availability": []
         },
@@ -3354,7 +3491,8 @@
                 ],
                 "value": "100",
                 "form_id": "00501935",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_BOS_Knight_SGT_Paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_BOS_Knight_SGT_Paint",
+                "source_slug": "Plan:_T-60_BOS_Knight_SGT_Paint"
             },
             "availability": []
         },
@@ -3376,7 +3514,8 @@
                 ],
                 "value": "100",
                 "form_id": "00501936",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_BOS_Officer_Paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_BOS_Officer_Paint",
+                "source_slug": "Plan:_T-60_BOS_Officer_Paint"
             },
             "availability": []
         },
@@ -3398,7 +3537,8 @@
                 ],
                 "value": "100",
                 "form_id": "00501937",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_BOS_Paladin_Paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_BOS_Paladin_Paint",
+                "source_slug": "Plan:_T-60_BOS_Paladin_Paint"
             },
             "availability": []
         },
@@ -3421,7 +3561,8 @@
                 ],
                 "value": "3000",
                 "form_id": "0050192C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_calibrated_shocks"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_calibrated_shocks",
+                "source_slug": "Plan:_T-60_calibrated_shocks"
             },
             "availability": []
         },
@@ -3447,7 +3588,8 @@
                 ],
                 "value": "200",
                 "form_id": "0050192D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_cooling_vent"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_cooling_vent",
+                "source_slug": "Plan:_T-60_cooling_vent"
             },
             "availability": []
         },
@@ -3470,7 +3612,8 @@
                 ],
                 "value": "1200",
                 "form_id": "0050193C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_core_assembly"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_core_assembly",
+                "source_slug": "Plan:_T-60_core_assembly"
             },
             "availability": []
         },
@@ -3493,7 +3636,8 @@
                 ],
                 "value": "2000",
                 "form_id": "0050193E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_emergency_protocols"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_emergency_protocols",
+                "source_slug": "Plan:_T-60_emergency_protocols"
             },
             "availability": []
         },
@@ -3514,7 +3658,8 @@
                     "Bottle Cap"
                 ],
                 "value": "100",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_Headlamp_Blue"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_Headlamp_Blue",
+                "source_slug": "Plan:_T-60_Headlamp_Blue"
             },
             "availability": []
         },
@@ -3539,7 +3684,8 @@
                     ]
                 },
                 "value": "100",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_Headlamp_Purple"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_Headlamp_Purple",
+                "source_slug": "Plan:_T-60_Headlamp_Purple"
             },
             "availability": []
         },
@@ -3565,7 +3711,8 @@
                 ],
                 "value": "600",
                 "form_id": "0050191F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_hydraulic_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_hydraulic_bracers",
+                "source_slug": "Plan:_T-60_hydraulic_bracers"
             },
             "availability": []
         },
@@ -3591,7 +3738,8 @@
                 ],
                 "value": "200",
                 "form_id": "00501927",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_internal_database"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_internal_database",
+                "source_slug": "Plan:_T-60_internal_database"
             },
             "availability": []
         },
@@ -3615,7 +3763,8 @@
                 ],
                 "value": "3000",
                 "form_id": "0050193F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_jet_pack"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_jet_pack",
+                "source_slug": "Plan:_T-60_jet_pack"
             },
             "availability": []
         },
@@ -3638,7 +3787,8 @@
                 ],
                 "value": "1200",
                 "form_id": "00501940",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_kinetic_dynamo"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_kinetic_dynamo",
+                "source_slug": "Plan:_T-60_kinetic_dynamo"
             },
             "availability": []
         },
@@ -3661,7 +3811,8 @@
                 ],
                 "value": "1200",
                 "form_id": "0050192B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_kinetic_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_kinetic_servos",
+                "source_slug": "Plan:_T-60_kinetic_servos"
             },
             "availability": []
         },
@@ -3687,7 +3838,8 @@
                 ],
                 "value": "600",
                 "form_id": "00501941",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_medic_pump"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_medic_pump",
+                "source_slug": "Plan:_T-60_medic_pump"
             },
             "availability": []
         },
@@ -3714,7 +3866,8 @@
                 },
                 "value": "100",
                 "form_id": "0050193A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_military_paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_military_paint",
+                "source_slug": "Plan:_T-60_military_paint"
             },
             "availability": []
         },
@@ -3740,7 +3893,8 @@
                 ],
                 "value": "200",
                 "form_id": "00501944",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_motion-assist_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_motion-assist_servos",
+                "source_slug": "Plan:_T-60_motion-assist_servos"
             },
             "availability": []
         },
@@ -3766,7 +3920,8 @@
                 ],
                 "value": "200",
                 "form_id": "0050191D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_optimized_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_optimized_bracers",
+                "source_slug": "Plan:_T-60_optimized_bracers"
             },
             "availability": []
         },
@@ -3789,7 +3944,8 @@
                 ],
                 "value": "2000",
                 "form_id": "0050192E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_optimized_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_optimized_servos",
+                "source_slug": "Plan:_T-60_optimized_servos"
             },
             "availability": []
         },
@@ -3812,7 +3968,8 @@
                 ],
                 "value": "2000",
                 "form_id": "0050192F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_overdrive_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_overdrive_servos",
+                "source_slug": "Plan:_T-60_overdrive_servos"
             },
             "availability": []
         },
@@ -3835,7 +3992,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00501942",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_reactive_plates"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_reactive_plates",
+                "source_slug": "Plan:_T-60_reactive_plates"
             },
             "availability": []
         },
@@ -3862,7 +4020,8 @@
                 },
                 "value": "600",
                 "form_id": "00501928",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_recon_sensors"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_recon_sensors",
+                "source_slug": "Plan:_T-60_recon_sensors"
             },
             "availability": []
         },
@@ -3888,7 +4047,8 @@
                 ],
                 "value": "600",
                 "form_id": "0050191C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_rusty_knuckles"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_rusty_knuckles",
+                "source_slug": "Plan:_T-60_rusty_knuckles"
             },
             "availability": []
         },
@@ -3914,7 +4074,8 @@
                 ],
                 "value": "200",
                 "form_id": "00501929",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_sensor_array"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_sensor_array",
+                "source_slug": "Plan:_T-60_sensor_array"
             },
             "availability": []
         },
@@ -3937,7 +4098,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00501943",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_Stealth_Boy"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_Stealth_Boy",
+                "source_slug": "Plan:_T-60_Stealth_Boy"
             },
             "availability": []
         },
@@ -3960,7 +4122,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00501926",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_targeting_HUD"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_targeting_HUD",
+                "source_slug": "Plan:_T-60_targeting_HUD"
             },
             "availability": []
         },
@@ -3983,7 +4146,8 @@
                 ],
                 "value": "1200",
                 "form_id": "0050191E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_Tesla_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_Tesla_bracers",
+                "source_slug": "Plan:_T-60_Tesla_bracers"
             },
             "availability": []
         },
@@ -4006,7 +4170,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00501945",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_Tesla_coils"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_Tesla_coils",
+                "source_slug": "Plan:_T-60_Tesla_coils"
             },
             "availability": []
         },
@@ -4033,7 +4198,8 @@
                 },
                 "value": "200",
                 "form_id": "0050192A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_VATS_matrix_overlay"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_VATS_matrix_overlay",
+                "source_slug": "Plan:_T-60_VATS_matrix_overlay"
             },
             "availability": []
         },
@@ -4060,7 +4226,8 @@
                 },
                 "value": "100",
                 "form_id": "0050193B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_winterized_coating"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_winterized_coating",
+                "source_slug": "Plan:_T-60_winterized_coating"
             },
             "availability": []
         },
@@ -4082,7 +4249,8 @@
                 ],
                 "value": "500",
                 "form_id": "005A16C3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_blood_cleanser"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_blood_cleanser",
+                "source_slug": "Plan:_T-65_blood_cleanser"
             },
             "availability": []
         },
@@ -4104,7 +4272,8 @@
                 ],
                 "value": "750",
                 "form_id": "005A16BE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_Calibrated_Shocks"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_Calibrated_Shocks",
+                "source_slug": "Plan:_T-65_Calibrated_Shocks"
             },
             "availability": []
         },
@@ -4126,7 +4295,8 @@
                 ],
                 "value": "100",
                 "form_id": "005A16BF",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_cooling_vent"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_cooling_vent",
+                "source_slug": "Plan:_T-65_cooling_vent"
             },
             "availability": []
         },
@@ -4148,7 +4318,8 @@
                 ],
                 "value": "500",
                 "form_id": "005A16C2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_core_assembly"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_core_assembly",
+                "source_slug": "Plan:_T-65_core_assembly"
             },
             "availability": []
         },
@@ -4170,7 +4341,8 @@
                 ],
                 "value": "750",
                 "form_id": "005A16C4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_emergency_protocols"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_emergency_protocols",
+                "source_slug": "Plan:_T-65_emergency_protocols"
             },
             "availability": []
         },
@@ -4192,7 +4364,8 @@
                 ],
                 "value": "250",
                 "form_id": "005A16BC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_hydraulic_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_hydraulic_bracers",
+                "source_slug": "Plan:_T-65_hydraulic_bracers"
             },
             "availability": []
         },
@@ -4214,7 +4387,8 @@
                 ],
                 "value": "2000",
                 "form_id": "005A16C5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_Jet_Pack"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_Jet_Pack",
+                "source_slug": "Plan:_T-65_Jet_Pack"
             },
             "availability": []
         },
@@ -4236,7 +4410,8 @@
                 ],
                 "value": "500",
                 "form_id": "005A16C6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_kinetic_dynamo"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_kinetic_dynamo",
+                "source_slug": "Plan:_T-65_kinetic_dynamo"
             },
             "availability": []
         },
@@ -4258,7 +4433,8 @@
                 ],
                 "value": "500",
                 "form_id": "005A16BD",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_kinetic_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_kinetic_servos",
+                "source_slug": "Plan:_T-65_kinetic_servos"
             },
             "availability": []
         },
@@ -4280,7 +4456,8 @@
                 ],
                 "value": "250",
                 "form_id": "005A16C7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_Medic_Pump"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_Medic_Pump",
+                "source_slug": "Plan:_T-65_Medic_Pump"
             },
             "availability": []
         },
@@ -4302,7 +4479,8 @@
                 ],
                 "value": "100",
                 "form_id": "005A16CA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_motion-assist_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_motion-assist_servos",
+                "source_slug": "Plan:_T-65_motion-assist_servos"
             },
             "availability": []
         },
@@ -4324,7 +4502,8 @@
                 ],
                 "value": "100",
                 "form_id": "005A16B9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_optimized_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_optimized_bracers",
+                "source_slug": "Plan:_T-65_optimized_bracers"
             },
             "availability": []
         },
@@ -4346,7 +4525,8 @@
                 ],
                 "value": "750",
                 "form_id": "005A16C0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_optimized_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_optimized_servos",
+                "source_slug": "Plan:_T-65_optimized_servos"
             },
             "availability": []
         },
@@ -4368,7 +4548,8 @@
                 ],
                 "value": "750",
                 "form_id": "005A16C1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_Overdrive_Servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_Overdrive_Servos",
+                "source_slug": "Plan:_T-65_Overdrive_Servos"
             },
             "availability": []
         },
@@ -4390,7 +4571,8 @@
                 ],
                 "value": "750",
                 "form_id": "005A16C8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_reactive_plates"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_reactive_plates",
+                "source_slug": "Plan:_T-65_reactive_plates"
             },
             "availability": []
         },
@@ -4412,7 +4594,8 @@
                 ],
                 "value": "250",
                 "form_id": "005A16BA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_Rusty_Knuckles"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_Rusty_Knuckles",
+                "source_slug": "Plan:_T-65_Rusty_Knuckles"
             },
             "availability": []
         },
@@ -4434,7 +4617,8 @@
                 ],
                 "value": "750",
                 "form_id": "005A16C9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_Stealth_Boy"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_Stealth_Boy",
+                "source_slug": "Plan:_T-65_Stealth_Boy"
             },
             "availability": []
         },
@@ -4456,7 +4640,8 @@
                 ],
                 "value": "500",
                 "form_id": "005A16BB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_Tesla_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_Tesla_bracers",
+                "source_slug": "Plan:_T-65_Tesla_bracers"
             },
             "availability": []
         },
@@ -4478,7 +4663,8 @@
                 ],
                 "value": "750",
                 "form_id": "005A16CB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_Tesla_coils"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_Tesla_coils",
+                "source_slug": "Plan:_T-65_Tesla_coils"
             },
             "availability": []
         },
@@ -4500,7 +4686,8 @@
                 ],
                 "value": "1200",
                 "form_id": "00501952",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_blood_cleanser"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_blood_cleanser",
+                "source_slug": "Plan:_Ultracite_blood_cleanser"
             },
             "availability": []
         },
@@ -4522,7 +4709,8 @@
                 ],
                 "value": "3000",
                 "form_id": "0050194D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_calibrated_shocks"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_calibrated_shocks",
+                "source_slug": "Plan:_Ultracite_calibrated_shocks"
             },
             "availability": []
         },
@@ -4544,7 +4732,8 @@
                 ],
                 "value": "200",
                 "form_id": "0050194E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_cooling_vent"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_cooling_vent",
+                "source_slug": "Plan:_Ultracite_cooling_vent"
             },
             "availability": []
         },
@@ -4566,7 +4755,8 @@
                 ],
                 "value": "1200",
                 "form_id": "00501951",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_core_assembly"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_core_assembly",
+                "source_slug": "Plan:_Ultracite_core_assembly"
             },
             "availability": []
         },
@@ -4588,7 +4778,8 @@
                 ],
                 "value": "2000",
                 "form_id": "00501954",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_emergency_protocols"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_emergency_protocols",
+                "source_slug": "Plan:_Ultracite_emergency_protocols"
             },
             "availability": []
         },
@@ -4610,7 +4801,8 @@
                 ],
                 "value": "600",
                 "form_id": "00501948",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_hydraulic_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_hydraulic_bracers",
+                "source_slug": "Plan:_Ultracite_hydraulic_bracers"
             },
             "availability": []
         },
@@ -4632,7 +4824,8 @@
                 ],
                 "value": "200",
                 "form_id": "0050194A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_internal_database"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_internal_database",
+                "source_slug": "Plan:_Ultracite_internal_database"
             },
             "availability": []
         },
@@ -4654,7 +4847,8 @@
                 ],
                 "value": "3000",
                 "form_id": "0055AF02",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_jet_pack"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_jet_pack",
+                "source_slug": "Plan:_Ultracite_jet_pack"
             },
             "availability": []
         },
@@ -4676,7 +4870,8 @@
                 ],
                 "value": "1200",
                 "form_id": "00501955",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_kinetic_dynamo"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_kinetic_dynamo",
+                "source_slug": "Plan:_Ultracite_kinetic_dynamo"
             },
             "availability": []
         },
@@ -4698,7 +4893,8 @@
                 ],
                 "value": "1200",
                 "form_id": "0050194C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_kinetic_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_kinetic_servos",
+                "source_slug": "Plan:_Ultracite_kinetic_servos"
             },
             "availability": []
         },
@@ -4720,7 +4916,8 @@
                 ],
                 "value": "600",
                 "form_id": "00501956",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_medic_pump"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_medic_pump",
+                "source_slug": "Plan:_Ultracite_medic_pump"
             },
             "availability": []
         },
@@ -4742,7 +4939,8 @@
                 ],
                 "value": "200",
                 "form_id": "00501958",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_motion-assist_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_motion-assist_servos",
+                "source_slug": "Plan:_Ultracite_motion-assist_servos"
             },
             "availability": []
         },
@@ -4764,7 +4962,8 @@
                 ],
                 "value": "200",
                 "form_id": "00501947",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_optimized_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_optimized_bracers",
+                "source_slug": "Plan:_Ultracite_optimized_bracers"
             },
             "availability": []
         },
@@ -4786,7 +4985,8 @@
                 ],
                 "value": "2000",
                 "form_id": "0050194F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_optimized_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_optimized_servos",
+                "source_slug": "Plan:_Ultracite_optimized_servos"
             },
             "availability": []
         },
@@ -4808,7 +5008,8 @@
                 ],
                 "value": "2000",
                 "form_id": "00501950",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_overdrive_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_overdrive_servos",
+                "source_slug": "Plan:_Ultracite_overdrive_servos"
             },
             "availability": []
         },
@@ -4830,7 +5031,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00501957",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_reactive_plates"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_reactive_plates",
+                "source_slug": "Plan:_Ultracite_reactive_plates"
             },
             "availability": []
         },
@@ -4852,7 +5054,8 @@
                 ],
                 "value": "600",
                 "form_id": "00501946",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_rusty_knuckles"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_rusty_knuckles",
+                "source_slug": "Plan:_Ultracite_rusty_knuckles"
             },
             "availability": []
         },
@@ -4874,7 +5077,8 @@
                 ],
                 "value": "200",
                 "form_id": "0050194B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_sensor_array"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_sensor_array",
+                "source_slug": "Plan:_Ultracite_sensor_array"
             },
             "availability": []
         },
@@ -4896,7 +5100,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00501949",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_targeting_HUD"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_targeting_HUD",
+                "source_slug": "Plan:_Ultracite_targeting_HUD"
             },
             "availability": []
         },
@@ -4918,7 +5123,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00501959",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_Tesla_coils"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_Tesla_coils",
+                "source_slug": "Plan:_Ultracite_Tesla_coils"
             },
             "availability": []
         },
@@ -4940,7 +5146,8 @@
                 ],
                 "value": "1200",
                 "form_id": "00501953",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_welded_rebar"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_welded_rebar",
+                "source_slug": "Plan:_Ultracite_welded_rebar"
             },
             "availability": []
         },
@@ -4968,7 +5175,8 @@
                 },
                 "value": "20",
                 "form_id": "0064B944",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Blood_Cleanser"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Blood_Cleanser",
+                "source_slug": "Plan:_Union_Blood_Cleanser"
             },
             "availability": []
         },
@@ -4996,7 +5204,8 @@
                 },
                 "value": "50",
                 "form_id": "0064B933",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Calibrated_Shocks"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Calibrated_Shocks",
+                "source_slug": "Plan:_Union_Calibrated_Shocks"
             },
             "availability": []
         },
@@ -5024,7 +5233,8 @@
                 },
                 "value": "120",
                 "form_id": "0064B932",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Chest_Piece"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Chest_Piece",
+                "source_slug": "Plan:_Union_Chest_Piece"
             },
             "availability": []
         },
@@ -5052,7 +5262,8 @@
                 },
                 "value": "20",
                 "form_id": "0064B942",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Cooling_Vent"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Cooling_Vent",
+                "source_slug": "Plan:_Union_Cooling_Vent"
             },
             "availability": []
         },
@@ -5080,7 +5291,8 @@
                 },
                 "value": "40",
                 "form_id": "0064B937",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Core_Assembly"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Core_Assembly",
+                "source_slug": "Plan:_Union_Core_Assembly"
             },
             "availability": []
         },
@@ -5108,7 +5320,8 @@
                 },
                 "value": "50",
                 "form_id": "0064B929",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Emergency_Protocols"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Emergency_Protocols",
+                "source_slug": "Plan:_Union_Emergency_Protocols"
             },
             "availability": []
         },
@@ -5136,7 +5349,8 @@
                 },
                 "value": "85",
                 "form_id": "006C503C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Headlamp_Blue"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Headlamp_Blue",
+                "source_slug": "Plan:_Union_Headlamp_Blue"
             },
             "availability": []
         },
@@ -5164,7 +5378,8 @@
                 },
                 "value": "85",
                 "form_id": "006C503D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Headlamp_Bright"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Headlamp_Bright",
+                "source_slug": "Plan:_Union_Headlamp_Bright"
             },
             "availability": []
         },
@@ -5192,7 +5407,8 @@
                 },
                 "value": "85",
                 "form_id": "006C503E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Headlamp_Purple"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Headlamp_Purple",
+                "source_slug": "Plan:_Union_Headlamp_Purple"
             },
             "availability": []
         },
@@ -5220,7 +5436,8 @@
                 },
                 "value": "85",
                 "form_id": "006C503F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Headlamp_Red_Tactical"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Headlamp_Red_Tactical",
+                "source_slug": "Plan:_Union_Headlamp_Red_Tactical"
             },
             "availability": []
         },
@@ -5248,7 +5465,8 @@
                 },
                 "value": "85",
                 "form_id": "006C5040",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Headlamp_Vault_Boy"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Headlamp_Vault_Boy",
+                "source_slug": "Plan:_Union_Headlamp_Vault_Boy"
             },
             "availability": []
         },
@@ -5276,7 +5494,8 @@
                 },
                 "value": "120",
                 "form_id": "0064B93D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Helmet",
+                "source_slug": "Plan:_Union_Helmet"
             },
             "availability": []
         },
@@ -5304,7 +5523,8 @@
                 },
                 "value": "20",
                 "form_id": "0064B92C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Hydraulic_Bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Hydraulic_Bracers",
+                "source_slug": "Plan:_Union_Hydraulic_Bracers"
             },
             "availability": []
         },
@@ -5332,7 +5552,8 @@
                 },
                 "value": "40",
                 "form_id": "0064B92B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Internal_Database"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Internal_Database",
+                "source_slug": "Plan:_Union_Internal_Database"
             },
             "availability": []
         },
@@ -5360,7 +5581,8 @@
                 },
                 "value": "300",
                 "form_id": "0064B928",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Jet_Pack"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Jet_Pack",
+                "source_slug": "Plan:_Union_Jet_Pack"
             },
             "availability": []
         },
@@ -5388,7 +5610,8 @@
                 },
                 "value": "20",
                 "form_id": "0064B93C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Kinetic_Dynamo"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Kinetic_Dynamo",
+                "source_slug": "Plan:_Union_Kinetic_Dynamo"
             },
             "availability": []
         },
@@ -5416,7 +5639,8 @@
                 },
                 "value": "40",
                 "form_id": "0064B92A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Kinetic_Servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Kinetic_Servos",
+                "source_slug": "Plan:_Union_Kinetic_Servos"
             },
             "availability": []
         },
@@ -5444,7 +5668,8 @@
                 },
                 "value": "120",
                 "form_id": "0064B930",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Left_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Left_Arm",
+                "source_slug": "Plan:_Union_Left_Arm"
             },
             "availability": []
         },
@@ -5472,7 +5697,8 @@
                 },
                 "value": "120",
                 "form_id": "0064B934",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Left_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Left_Leg",
+                "source_slug": "Plan:_Union_Left_Leg"
             },
             "availability": []
         },
@@ -5500,7 +5726,8 @@
                 },
                 "value": "20",
                 "form_id": "0064B938",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Medic_Pump"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Medic_Pump",
+                "source_slug": "Plan:_Union_Medic_Pump"
             },
             "availability": []
         },
@@ -5528,7 +5755,8 @@
                 },
                 "value": "40",
                 "form_id": "0064B93F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Motion-Assist_Servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Motion-Assist_Servos",
+                "source_slug": "Plan:_Union_Motion-Assist_Servos"
             },
             "availability": []
         },
@@ -5556,7 +5784,8 @@
                 },
                 "value": "40",
                 "form_id": "0064B92F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Optimized_Bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Optimized_Bracers",
+                "source_slug": "Plan:_Union_Optimized_Bracers"
             },
             "availability": []
         },
@@ -5584,7 +5813,8 @@
                 },
                 "value": "20",
                 "form_id": "0064B935",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Optimized_Servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Optimized_Servos",
+                "source_slug": "Plan:_Union_Optimized_Servos"
             },
             "availability": []
         },
@@ -5612,7 +5842,8 @@
                 },
                 "value": "20",
                 "form_id": "0064B93A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Overdrive_Servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Overdrive_Servos",
+                "source_slug": "Plan:_Union_Overdrive_Servos"
             },
             "availability": []
         },
@@ -5640,7 +5871,8 @@
                 },
                 "value": "20",
                 "form_id": "0064B93E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Reactive_Plates"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Reactive_Plates",
+                "source_slug": "Plan:_Union_Reactive_Plates"
             },
             "availability": []
         },
@@ -5668,7 +5900,8 @@
                 },
                 "value": "20",
                 "form_id": "0064B931",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Recon_Sensors"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Recon_Sensors",
+                "source_slug": "Plan:_Union_Recon_Sensors"
             },
             "availability": []
         },
@@ -5696,7 +5929,8 @@
                 },
                 "value": "120",
                 "form_id": "0064B93B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Right_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Right_Arm",
+                "source_slug": "Plan:_Union_Right_Arm"
             },
             "availability": []
         },
@@ -5724,7 +5958,8 @@
                 },
                 "value": "120",
                 "form_id": "0064B92E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Right_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Right_Leg",
+                "source_slug": "Plan:_Union_Right_Leg"
             },
             "availability": []
         },
@@ -5752,7 +5987,8 @@
                 },
                 "value": "20",
                 "form_id": "0064B927",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Rusty_Knuckles"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Rusty_Knuckles",
+                "source_slug": "Plan:_Union_Rusty_Knuckles"
             },
             "availability": []
         },
@@ -5780,7 +6016,8 @@
                 },
                 "value": "20",
                 "form_id": "0064B940",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Sensor_Array"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Sensor_Array",
+                "source_slug": "Plan:_Union_Sensor_Array"
             },
             "availability": []
         },
@@ -5808,7 +6045,8 @@
                 },
                 "value": "20",
                 "form_id": "0064B941",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Stealth_Boy"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Stealth_Boy",
+                "source_slug": "Plan:_Union_Stealth_Boy"
             },
             "availability": []
         },
@@ -5836,7 +6074,8 @@
                 },
                 "value": "50",
                 "form_id": "0064B943",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Targeting_HUD"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Targeting_HUD",
+                "source_slug": "Plan:_Union_Targeting_HUD"
             },
             "availability": []
         },
@@ -5864,7 +6103,8 @@
                 },
                 "value": "40",
                 "form_id": "0064B939",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Tesla_Bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Tesla_Bracers",
+                "source_slug": "Plan:_Union_Tesla_Bracers"
             },
             "availability": []
         },
@@ -5892,7 +6132,8 @@
                 },
                 "value": "40",
                 "form_id": "0064B92D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Tesla_Coils"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Tesla_Coils",
+                "source_slug": "Plan:_Union_Tesla_Coils"
             },
             "availability": []
         },
@@ -5920,7 +6161,8 @@
                 },
                 "value": "40",
                 "form_id": "0064B936",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_VATS_Matrix_Overlay"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_VATS_Matrix_Overlay",
+                "source_slug": "Plan:_Union_VATS_Matrix_Overlay"
             },
             "availability": []
         },
@@ -5946,7 +6188,8 @@
                 },
                 "value": "1200",
                 "form_id": "00793E89",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Blood_Cleanser"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Blood_Cleanser",
+                "source_slug": "Plan:_Vulcan_Blood_Cleanser"
             },
             "availability": []
         },
@@ -5972,7 +6215,8 @@
                 },
                 "value": "3000",
                 "form_id": "00793E83",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Calibrated_Shocks"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Calibrated_Shocks",
+                "source_slug": "Plan:_Vulcan_Calibrated_Shocks"
             },
             "availability": []
         },
@@ -5998,7 +6242,8 @@
                 },
                 "value": "200",
                 "form_id": "00793E85",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Cooling_Vent"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Cooling_Vent",
+                "source_slug": "Plan:_Vulcan_Cooling_Vent"
             },
             "availability": []
         },
@@ -6020,7 +6265,8 @@
                 ],
                 "value": "1200",
                 "form_id": "00793E88",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Core_Assembly"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Core_Assembly",
+                "source_slug": "Plan:_Vulcan_Core_Assembly"
             },
             "availability": []
         },
@@ -6042,7 +6288,8 @@
                 ],
                 "value": "2000",
                 "form_id": "00793E84",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Elastic_Servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Elastic_Servos",
+                "source_slug": "Plan:_Vulcan_Elastic_Servos"
             },
             "availability": []
         },
@@ -6064,7 +6311,8 @@
                 ],
                 "value": "2000",
                 "form_id": "00793E8A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Emergency_Protocols"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Emergency_Protocols",
+                "source_slug": "Plan:_Vulcan_Emergency_Protocols"
             },
             "availability": []
         },
@@ -6086,7 +6334,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00793E8B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Jet_Pack"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Jet_Pack",
+                "source_slug": "Plan:_Vulcan_Jet_Pack"
             },
             "availability": []
         },
@@ -6108,7 +6357,8 @@
                 ],
                 "value": "1200",
                 "form_id": "00793E8C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Kinetic_Dynamo"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Kinetic_Dynamo",
+                "source_slug": "Plan:_Vulcan_Kinetic_Dynamo"
             },
             "availability": []
         },
@@ -6130,7 +6380,8 @@
                 ],
                 "value": "600",
                 "form_id": "00793E8D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Medic_Pump"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Medic_Pump",
+                "source_slug": "Plan:_Vulcan_Medic_Pump"
             },
             "availability": []
         },
@@ -6152,7 +6403,8 @@
                 ],
                 "value": "200",
                 "form_id": "00793E91",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Motion-Assist_Servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Motion-Assist_Servos",
+                "source_slug": "Plan:_Vulcan_Motion-Assist_Servos"
             },
             "availability": []
         },
@@ -6174,7 +6426,8 @@
                 ],
                 "value": "2000",
                 "form_id": "00793E86",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Optimized_Servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Optimized_Servos",
+                "source_slug": "Plan:_Vulcan_Optimized_Servos"
             },
             "availability": []
         },
@@ -6196,7 +6449,8 @@
                 ],
                 "value": "2000",
                 "form_id": "00793E87",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Overdrive_Servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Overdrive_Servos",
+                "source_slug": "Plan:_Vulcan_Overdrive_Servos"
             },
             "availability": []
         },
@@ -6218,7 +6472,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00793E8E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Reactive_Plates"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Reactive_Plates",
+                "source_slug": "Plan:_Vulcan_Reactive_Plates"
             },
             "availability": []
         },
@@ -6240,7 +6495,8 @@
                 ],
                 "value": "2000",
                 "form_id": "00793E8F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Reflection_Assembly"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Reflection_Assembly",
+                "source_slug": "Plan:_Vulcan_Reflection_Assembly"
             },
             "availability": []
         },
@@ -6262,7 +6518,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00793E90",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Stealth_Boy"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Stealth_Boy",
+                "source_slug": "Plan:_Vulcan_Stealth_Boy"
             },
             "availability": []
         },
@@ -6284,7 +6541,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00793E92",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Tesla_Coils"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Tesla_Coils",
+                "source_slug": "Plan:_Vulcan_Tesla_Coils"
             },
             "availability": []
         },
@@ -6306,7 +6564,8 @@
                 ],
                 "value": "1200",
                 "form_id": "00501970",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_blood_cleanser"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_blood_cleanser",
+                "source_slug": "Plan:_X-01_blood_cleanser"
             },
             "availability": []
         },
@@ -6328,7 +6587,8 @@
                 ],
                 "value": "3000",
                 "form_id": "0050196A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_calibrated_shocks"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_calibrated_shocks",
+                "source_slug": "Plan:_X-01_calibrated_shocks"
             },
             "availability": []
         },
@@ -6350,7 +6610,8 @@
                 ],
                 "value": "200",
                 "form_id": "0050196B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_cooling_vent"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_cooling_vent",
+                "source_slug": "Plan:_X-01_cooling_vent"
             },
             "availability": []
         },
@@ -6372,7 +6633,8 @@
                 ],
                 "value": "1200",
                 "form_id": "0050196F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_core_assembly"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_core_assembly",
+                "source_slug": "Plan:_X-01_core_assembly"
             },
             "availability": []
         },
@@ -6394,7 +6656,8 @@
                 ],
                 "value": "2000",
                 "form_id": "00501971",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_emergency_protocols"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_emergency_protocols",
+                "source_slug": "Plan:_X-01_emergency_protocols"
             },
             "availability": []
         },
@@ -6421,7 +6684,8 @@
                 },
                 "value": "100",
                 "form_id": "0050195E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_headlamp"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_headlamp",
+                "source_slug": "Plan:_X-01_headlamp"
             },
             "availability": []
         },
@@ -6443,7 +6707,8 @@
                 ],
                 "value": "100",
                 "form_id": "0050195F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_Headlamp_Blue"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_Headlamp_Blue",
+                "source_slug": "Plan:_X-01_Headlamp_Blue"
             },
             "availability": []
         },
@@ -6465,7 +6730,8 @@
                 ],
                 "value": "100",
                 "form_id": "00501960",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_headlamp_bright"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_headlamp_bright",
+                "source_slug": "Plan:_X-01_headlamp_bright"
             },
             "availability": []
         },
@@ -6487,7 +6753,8 @@
                 ],
                 "value": "100",
                 "form_id": "00501961",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_headlamp_purple"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_headlamp_purple",
+                "source_slug": "Plan:_X-01_headlamp_purple"
             },
             "availability": []
         },
@@ -6509,7 +6776,8 @@
                 ],
                 "value": "100",
                 "form_id": "00501962",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_headlamp_red_tactical"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_headlamp_red_tactical",
+                "source_slug": "Plan:_X-01_headlamp_red_tactical"
             },
             "availability": []
         },
@@ -6531,7 +6799,8 @@
                 ],
                 "value": "100",
                 "form_id": "00501963",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_headlamp_Vault_Boy"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_headlamp_Vault_Boy",
+                "source_slug": "Plan:_X-01_headlamp_Vault_Boy"
             },
             "availability": []
         },
@@ -6553,7 +6822,8 @@
                 ],
                 "value": "600",
                 "form_id": "0050195D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_hydraulic_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_hydraulic_bracers",
+                "source_slug": "Plan:_X-01_hydraulic_bracers"
             },
             "availability": []
         },
@@ -6575,7 +6845,8 @@
                 ],
                 "value": "200",
                 "form_id": "00501965",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_internal_database"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_internal_database",
+                "source_slug": "Plan:_X-01_internal_database"
             },
             "availability": []
         },
@@ -6597,7 +6868,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00501972",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_jet_pack"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_jet_pack",
+                "source_slug": "Plan:_X-01_jet_pack"
             },
             "availability": []
         },
@@ -6619,7 +6891,8 @@
                 ],
                 "value": "1200",
                 "form_id": "00501973",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_kinetic_dynamo"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_kinetic_dynamo",
+                "source_slug": "Plan:_X-01_kinetic_dynamo"
             },
             "availability": []
         },
@@ -6641,7 +6914,8 @@
                 ],
                 "value": "1200",
                 "form_id": "00501969",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_kinetic_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_kinetic_servos",
+                "source_slug": "Plan:_X-01_kinetic_servos"
             },
             "availability": []
         },
@@ -6663,7 +6937,8 @@
                 ],
                 "value": "600",
                 "form_id": "00501974",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_medic_pump"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_medic_pump",
+                "source_slug": "Plan:_X-01_medic_pump"
             },
             "availability": []
         },
@@ -6685,7 +6960,8 @@
                 ],
                 "value": "100",
                 "form_id": "0050196E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_Military_Paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_Military_Paint",
+                "source_slug": "Plan:_X-01_Military_Paint"
             },
             "availability": []
         },
@@ -6707,7 +6983,8 @@
                 ],
                 "value": "200",
                 "form_id": "00501977",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_motion-assist_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_motion-assist_servos",
+                "source_slug": "Plan:_X-01_motion-assist_servos"
             },
             "availability": []
         },
@@ -6729,7 +7006,8 @@
                 ],
                 "value": "2000",
                 "form_id": "0050196C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_optimized_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_optimized_servos",
+                "source_slug": "Plan:_X-01_optimized_servos"
             },
             "availability": []
         },
@@ -6751,7 +7029,8 @@
                 ],
                 "value": "2000",
                 "form_id": "0050196D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_overdrive_servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_overdrive_servos",
+                "source_slug": "Plan:_X-01_overdrive_servos"
             },
             "availability": []
         },
@@ -6773,7 +7052,8 @@
                 ],
                 "value": "100",
                 "form_id": "003FB9E4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_Power_Armor_Nuka-Cola_Quantum_Paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_Power_Armor_Nuka-Cola_Quantum_Paint",
+                "source_slug": "Plan:_X-01_Power_Armor_Nuka-Cola_Quantum_Paint"
             },
             "availability": []
         },
@@ -6795,7 +7075,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00501975",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_reactive_plates"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_reactive_plates",
+                "source_slug": "Plan:_X-01_reactive_plates"
             },
             "availability": []
         },
@@ -6817,7 +7098,8 @@
                 ],
                 "value": "600",
                 "form_id": "00501966",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_recon_sensors"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_recon_sensors",
+                "source_slug": "Plan:_X-01_recon_sensors"
             },
             "availability": []
         },
@@ -6839,7 +7121,8 @@
                 ],
                 "value": "600",
                 "form_id": "0050195A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_rusty_knuckles"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_rusty_knuckles",
+                "source_slug": "Plan:_X-01_rusty_knuckles"
             },
             "availability": []
         },
@@ -6861,7 +7144,8 @@
                 ],
                 "value": "2000",
                 "form_id": "005EE6B3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_Scorched_Paint"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_Scorched_Paint",
+                "source_slug": "Plan:_X-01_Scorched_Paint"
             },
             "availability": []
         },
@@ -6883,7 +7167,8 @@
                 ],
                 "value": "200",
                 "form_id": "00501967",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_sensor_array"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_sensor_array",
+                "source_slug": "Plan:_X-01_sensor_array"
             },
             "availability": []
         },
@@ -6905,7 +7190,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00501976",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_Stealth_Boy"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_Stealth_Boy",
+                "source_slug": "Plan:_X-01_Stealth_Boy"
             },
             "availability": []
         },
@@ -6927,7 +7213,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00501964",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_targeting_HUD"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_targeting_HUD",
+                "source_slug": "Plan:_X-01_targeting_HUD"
             },
             "availability": []
         },
@@ -6949,7 +7236,8 @@
                 ],
                 "value": "1200",
                 "form_id": "0050195C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_Tesla_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_Tesla_bracers",
+                "source_slug": "Plan:_X-01_Tesla_bracers"
             },
             "availability": []
         },
@@ -6971,7 +7259,8 @@
                 ],
                 "value": "3000",
                 "form_id": "00501978",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_Tesla_coils"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_Tesla_coils",
+                "source_slug": "Plan:_X-01_Tesla_coils"
             },
             "availability": []
         },
@@ -6993,7 +7282,8 @@
                 ],
                 "value": "200",
                 "form_id": "0050195B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_ultracite_optimized_bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_ultracite_optimized_bracers",
+                "source_slug": "Plan:_X-01_ultracite_optimized_bracers"
             },
             "availability": []
         },
@@ -7015,7 +7305,8 @@
                 ],
                 "value": "200",
                 "form_id": "00501968",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_X-01_VATS_matrix_overlay"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_X-01_VATS_matrix_overlay",
+                "source_slug": "Plan:_X-01_VATS_matrix_overlay"
             },
             "availability": []
         }

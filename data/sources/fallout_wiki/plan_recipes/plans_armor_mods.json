@@ -1,10 +1,10 @@
 {
-    "generated_at": "2026-03-17T14:18:46+00:00",
+    "generated_at": "2026-03-17T23:45:45+00:00",
     "source": "fallout.wiki",
     "page": "Fallout_76_Armor_Mod_Plans",
     "url": "https://fallout.wiki/wiki/Fallout_76_Armor_Mod_Plans",
     "sections_count": 16,
-    "resources_count": 202,
+    "resources_count": 201,
     "resources": [
         {
             "type": "plan",
@@ -30,7 +30,8 @@
                 ],
                 "value": "250",
                 "form_id": "000224FB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_BioCommMesh_combat_armor_lining"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_BioCommMesh_combat_armor_lining",
+                "source_slug": "Plan:_BioCommMesh_combat_armor_lining"
             },
             "availability": []
         },
@@ -58,7 +59,8 @@
                 ],
                 "value": "250",
                 "form_id": "000337B8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_BioCommMesh_leather_armor_lining"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_BioCommMesh_leather_armor_lining",
+                "source_slug": "Plan:_BioCommMesh_leather_armor_lining"
             },
             "availability": []
         },
@@ -86,7 +88,8 @@
                 ],
                 "value": "250",
                 "form_id": "00027DC5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_BioCommMesh_metal_armor_lining"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_BioCommMesh_metal_armor_lining",
+                "source_slug": "Plan:_BioCommMesh_metal_armor_lining"
             },
             "availability": []
         },
@@ -114,7 +117,8 @@
                 ],
                 "value": "250",
                 "form_id": "000269BE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_BioCommMesh_Raider_Armor_Lining"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_BioCommMesh_Raider_Armor_Lining",
+                "source_slug": "Plan:_BioCommMesh_Raider_Armor_Lining"
             },
             "availability": []
         },
@@ -141,7 +145,8 @@
                 ],
                 "value": "250",
                 "form_id": "0001BF31",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_BioCommMesh_robot_armor_lining"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_BioCommMesh_robot_armor_lining",
+                "source_slug": "Plan:_BioCommMesh_robot_armor_lining"
             },
             "availability": []
         },
@@ -168,7 +173,8 @@
                 ],
                 "value": "250",
                 "form_id": "000268BB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_BioCommMesh_trapper_armor_lining"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_BioCommMesh_trapper_armor_lining",
+                "source_slug": "Plan:_BioCommMesh_trapper_armor_lining"
             },
             "availability": []
         },
@@ -196,7 +202,8 @@
                 ],
                 "value": "50",
                 "form_id": "000268A3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_BoS_combat_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_BoS_combat_armor_arms",
+                "source_slug": "Plan:_BoS_combat_armor_arms"
             },
             "availability": []
         },
@@ -223,7 +230,8 @@
                 ],
                 "value": "50",
                 "form_id": "000224FD",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_BoS_combat_armor_chest_piece"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_BoS_combat_armor_chest_piece",
+                "source_slug": "Plan:_BoS_combat_armor_chest_piece"
             },
             "availability": []
         },
@@ -250,7 +258,8 @@
                 ],
                 "value": "50",
                 "form_id": "00026887",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_BoS_combat_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_BoS_combat_armor_legs",
+                "source_slug": "Plan:_BoS_combat_armor_legs"
             },
             "availability": []
         },
@@ -278,7 +287,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005DF03C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_aerodynamic_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_aerodynamic_armor_arms",
+                "source_slug": "Plan:_Brotherhood_recon_aerodynamic_armor_arms"
             },
             "availability": []
         },
@@ -306,7 +316,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005DF043",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_asbestos_lined_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_asbestos_lined_armor_torso",
+                "source_slug": "Plan:_Brotherhood_recon_asbestos_lined_armor_torso"
             },
             "availability": []
         },
@@ -334,7 +345,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005DF049",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_BioCommMesh_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_BioCommMesh_armor_torso",
+                "source_slug": "Plan:_Brotherhood_recon_BioCommMesh_armor_torso"
             },
             "availability": []
         },
@@ -362,7 +374,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005DF039",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_braced_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_braced_armor_arms",
+                "source_slug": "Plan:_Brotherhood_recon_braced_armor_arms"
             },
             "availability": []
         },
@@ -390,7 +403,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005DF03A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_brawling_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_brawling_armor_arms",
+                "source_slug": "Plan:_Brotherhood_recon_brawling_armor_arms"
             },
             "availability": []
         },
@@ -418,7 +432,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005DF032",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_buttressed_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_buttressed_armor_arms",
+                "source_slug": "Plan:_Brotherhood_recon_buttressed_armor_arms"
             },
             "availability": []
         },
@@ -446,7 +461,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005DF036",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_buttressed_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_buttressed_armor_legs",
+                "source_slug": "Plan:_Brotherhood_recon_buttressed_armor_legs"
             },
             "availability": []
         },
@@ -474,7 +490,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005DF04F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_buttressed_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_buttressed_armor_torso",
+                "source_slug": "Plan:_Brotherhood_recon_buttressed_armor_torso"
             },
             "availability": []
         },
@@ -502,7 +519,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005DF03E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_cushioned_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_cushioned_armor_legs",
+                "source_slug": "Plan:_Brotherhood_recon_cushioned_armor_legs"
             },
             "availability": []
         },
@@ -530,7 +548,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005DF03F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_custom_fitted_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_custom_fitted_armor_legs",
+                "source_slug": "Plan:_Brotherhood_recon_custom_fitted_armor_legs"
             },
             "availability": []
         },
@@ -558,7 +577,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005DF037",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_deep_pocketed_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_deep_pocketed_armor_limbs",
+                "source_slug": "Plan:_Brotherhood_recon_deep_pocketed_armor_limbs"
             },
             "availability": []
         },
@@ -586,7 +606,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005DF044",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_deep_pocketed_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_deep_pocketed_armor_torso",
+                "source_slug": "Plan:_Brotherhood_recon_deep_pocketed_armor_torso"
             },
             "availability": []
         },
@@ -614,7 +635,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005DF042",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_dense_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_dense_armor_torso",
+                "source_slug": "Plan:_Brotherhood_recon_dense_armor_torso"
             },
             "availability": []
         },
@@ -642,7 +664,8 @@
                 "value": "350",
                 "type": "gold bullion",
                 "form_id": "005DF031",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_hardened_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_hardened_armor_arms",
+                "source_slug": "Plan:_Brotherhood_recon_hardened_armor_arms"
             },
             "availability": []
         },
@@ -670,7 +693,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005DF035",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_hardened_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_hardened_armor_legs",
+                "source_slug": "Plan:_Brotherhood_recon_hardened_armor_legs"
             },
             "availability": []
         },
@@ -698,7 +722,8 @@
                 "value": "350",
                 "type": "gold bullion",
                 "form_id": "005DF04E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_hardened_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_hardened_armor_torso",
+                "source_slug": "Plan:_Brotherhood_recon_hardened_armor_torso"
             },
             "availability": []
         },
@@ -726,7 +751,8 @@
                 "value": "2000",
                 "type": "gold bullion",
                 "form_id": "005DF04B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_jet_pack"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_jet_pack",
+                "source_slug": "Plan:_Brotherhood_recon_jet_pack"
             },
             "availability": []
         },
@@ -754,7 +780,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005EFF8F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_lead_lined_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_lead_lined_armor_limbs",
+                "source_slug": "Plan:_Brotherhood_recon_lead_lined_armor_limbs"
             },
             "availability": []
         },
@@ -782,7 +809,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005DF04A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_lead_lined_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_lead_lined_armor_torso",
+                "source_slug": "Plan:_Brotherhood_recon_lead_lined_armor_torso"
             },
             "availability": []
         },
@@ -810,7 +838,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005E79B3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_lighter_build_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_lighter_build_armor_limbs",
+                "source_slug": "Plan:_Brotherhood_recon_lighter_build_armor_limbs"
             },
             "availability": []
         },
@@ -838,7 +867,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005DF048",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_lighter_build_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_lighter_build_armor_torso",
+                "source_slug": "Plan:_Brotherhood_recon_lighter_build_armor_torso"
             },
             "availability": []
         },
@@ -866,7 +896,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005EFF8D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_muffled_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_muffled_armor_limbs",
+                "source_slug": "Plan:_Brotherhood_recon_muffled_armor_limbs"
             },
             "availability": []
         },
@@ -894,7 +925,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005DF041",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_padded_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_padded_armor_torso",
+                "source_slug": "Plan:_Brotherhood_recon_padded_armor_torso"
             },
             "availability": []
         },
@@ -922,7 +954,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005DF046",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_pneumatic_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_pneumatic_armor_torso",
+                "source_slug": "Plan:_Brotherhood_recon_pneumatic_armor_torso"
             },
             "availability": []
         },
@@ -950,7 +983,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005DF038",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_pocketed_armor_limb"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_pocketed_armor_limb",
+                "source_slug": "Plan:_Brotherhood_recon_pocketed_armor_limb"
             },
             "availability": []
         },
@@ -978,7 +1012,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005DF045",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_pocketed_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_pocketed_armor_torso",
+                "source_slug": "Plan:_Brotherhood_recon_pocketed_armor_torso"
             },
             "availability": []
         },
@@ -1006,7 +1041,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005DF040",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_sleek_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_sleek_armor_legs",
+                "source_slug": "Plan:_Brotherhood_recon_sleek_armor_legs"
             },
             "availability": []
         },
@@ -1034,7 +1070,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005DF03D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_stabilized_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_stabilized_armor_arms",
+                "source_slug": "Plan:_Brotherhood_recon_stabilized_armor_arms"
             },
             "availability": []
         },
@@ -1062,7 +1099,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005EFF8E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_strengthened_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_strengthened_armor_limbs",
+                "source_slug": "Plan:_Brotherhood_recon_strengthened_armor_limbs"
             },
             "availability": []
         },
@@ -1090,7 +1128,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005DF030",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_tempered_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_tempered_armor_arms",
+                "source_slug": "Plan:_Brotherhood_recon_tempered_armor_arms"
             },
             "availability": []
         },
@@ -1118,7 +1157,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005DF034",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_tempered_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_tempered_armor_legs",
+                "source_slug": "Plan:_Brotherhood_recon_tempered_armor_legs"
             },
             "availability": []
         },
@@ -1146,7 +1186,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005DF04D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_tempered_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_tempered_armor_torso",
+                "source_slug": "Plan:_Brotherhood_recon_tempered_armor_torso"
             },
             "availability": []
         },
@@ -1174,7 +1215,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005DF047",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_ultra-light_build_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_ultra-light_build_armor_torso",
+                "source_slug": "Plan:_Brotherhood_recon_ultra-light_build_armor_torso"
             },
             "availability": []
         },
@@ -1202,7 +1244,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005E79B4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_ultra-light_build_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_ultra-light_build_limbs",
+                "source_slug": "Plan:_Brotherhood_recon_ultra-light_build_limbs"
             },
             "availability": []
         },
@@ -1230,7 +1273,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005DF03B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_weighted_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_weighted_armor_arms",
+                "source_slug": "Plan:_Brotherhood_recon_weighted_armor_arms"
             },
             "availability": []
         },
@@ -1258,7 +1302,8 @@
                 "value": "100",
                 "type": "gold bullion",
                 "form_id": "005DF02F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_welded_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_welded_armor_arms",
+                "source_slug": "Plan:_Brotherhood_recon_welded_armor_arms"
             },
             "availability": []
         },
@@ -1286,7 +1331,8 @@
                 "value": "100",
                 "type": "gold bullion",
                 "form_id": "005DF033",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_welded_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_welded_armor_legs",
+                "source_slug": "Plan:_Brotherhood_recon_welded_armor_legs"
             },
             "availability": []
         },
@@ -1314,7 +1360,8 @@
                 "value": "100",
                 "type": "gold bullion",
                 "form_id": "005DF04C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_welded_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Brotherhood_recon_welded_armor_torso",
+                "source_slug": "Plan:_Brotherhood_recon_welded_armor_torso"
             },
             "availability": []
         },
@@ -1342,7 +1389,8 @@
                 ],
                 "value": "250",
                 "form_id": "00022E98",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cushioned_combat_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cushioned_combat_armor_legs",
+                "source_slug": "Plan:_Cushioned_combat_armor_legs"
             },
             "availability": []
         },
@@ -1370,7 +1418,8 @@
                 ],
                 "value": "250",
                 "form_id": "0003546A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cushioned_leather_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cushioned_leather_armor_legs",
+                "source_slug": "Plan:_Cushioned_leather_armor_legs"
             },
             "availability": []
         },
@@ -1397,7 +1446,8 @@
                 ],
                 "value": "250",
                 "form_id": "000218C5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cushioned_marine_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cushioned_marine_armor_legs",
+                "source_slug": "Plan:_Cushioned_marine_armor_legs"
             },
             "availability": []
         },
@@ -1425,7 +1475,8 @@
                 ],
                 "value": "250",
                 "form_id": "0002B974",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cushioned_metal_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cushioned_metal_armor_legs",
+                "source_slug": "Plan:_Cushioned_metal_armor_legs"
             },
             "availability": []
         },
@@ -1453,7 +1504,8 @@
                 ],
                 "value": "250",
                 "form_id": "0002FC69",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cushioned_raider_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cushioned_raider_armor_legs",
+                "source_slug": "Plan:_Cushioned_raider_armor_legs"
             },
             "availability": []
         },
@@ -1480,7 +1532,8 @@
                 ],
                 "value": "250",
                 "form_id": "0001BF35",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cushioned_robot_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cushioned_robot_armor_legs",
+                "source_slug": "Plan:_Cushioned_robot_armor_legs"
             },
             "availability": []
         },
@@ -1507,7 +1560,8 @@
                 ],
                 "value": "250",
                 "form_id": "000268E5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cushioned_trapper_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Cushioned_trapper_armor_legs",
+                "source_slug": "Plan:_Cushioned_trapper_armor_legs"
             },
             "availability": []
         },
@@ -1535,7 +1589,8 @@
                 ],
                 "value": "500",
                 "form_id": "00022E9A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deep_pocketed_combat_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Deep_pocketed_combat_armor_chest",
+                "source_slug": "Plan:_Deep_pocketed_combat_armor_chest"
             },
             "availability": []
         },
@@ -1563,7 +1618,8 @@
                 ],
                 "value": "500",
                 "form_id": "0002321D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deep_pocketed_combat_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Deep_pocketed_combat_armor_limbs",
+                "source_slug": "Plan:_Deep_pocketed_combat_armor_limbs"
             },
             "availability": []
         },
@@ -1591,7 +1647,8 @@
                 ],
                 "value": "500",
                 "form_id": "000337B6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deep_pocketed_leather_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Deep_pocketed_leather_armor_chest",
+                "source_slug": "Plan:_Deep_pocketed_leather_armor_chest"
             },
             "availability": []
         },
@@ -1619,7 +1676,8 @@
                 ],
                 "value": "500",
                 "form_id": "0003546C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deep_pocketed_leather_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Deep_pocketed_leather_armor_limbs",
+                "source_slug": "Plan:_Deep_pocketed_leather_armor_limbs"
             },
             "availability": []
         },
@@ -1646,35 +1704,8 @@
                 ],
                 "value": "500",
                 "form_id": "00021910",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deep_pocketed_marine_armor_limbs"
-            },
-            "availability": []
-        },
-        {
-            "type": "plan",
-            "slug": "plan-deep-pocketed-metal-armor-chest",
-            "name": "Plan: Deep pocketed metal armor chest",
-            "section": "Metal Armor Mods",
-            "columns": {
-                "name": "Plan: Deep pocketed metal armor chest",
-                "unlocks": {
-                    "text": "Metal Armor torso deep pocketed mod",
-                    "icons": [
-                        "Metal Armor (Fallout 76)",
-                        "Deep pocketed"
-                    ]
-                },
-                "obtained": [
-                    "Fallout 76 Containers and Storage",
-                    "Fallout 76 Creatures",
-                    "Treasure Map",
-                    "Quest",
-                    "Bottle Cap",
-                    "Fallout 76 Locations"
-                ],
-                "value": "500",
-                "form_id": "00027DC3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deep_pocketed_metal_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Deep_pocketed_marine_armor_limbs",
+                "source_slug": "Plan:_Deep_pocketed_marine_armor_limbs"
             },
             "availability": []
         },
@@ -1702,7 +1733,8 @@
                 ],
                 "value": "500",
                 "form_id": "0002E8D7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deep_pocketed_metal_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Deep_pocketed_metal_armor_limbs",
+                "source_slug": "Plan:_Deep_pocketed_metal_armor_limbs"
             },
             "availability": []
         },
@@ -1730,7 +1762,8 @@
                 ],
                 "value": "500",
                 "form_id": "000269D2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deep_pocketed_raider_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Deep_pocketed_raider_armor_chest",
+                "source_slug": "Plan:_Deep_pocketed_raider_armor_chest"
             },
             "availability": []
         },
@@ -1758,7 +1791,8 @@
                 ],
                 "value": "500",
                 "form_id": "00026A20",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deep_pocketed_raider_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Deep_pocketed_raider_armor_limbs",
+                "source_slug": "Plan:_Deep_pocketed_raider_armor_limbs"
             },
             "availability": []
         },
@@ -1785,7 +1819,8 @@
                 ],
                 "value": "500",
                 "form_id": "0001BF36",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deep_pocketed_robot_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Deep_pocketed_robot_armor_chest",
+                "source_slug": "Plan:_Deep_pocketed_robot_armor_chest"
             },
             "availability": []
         },
@@ -1812,7 +1847,8 @@
                 ],
                 "value": "500",
                 "form_id": "0001BF49",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deep_pocketed_robot_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Deep_pocketed_robot_armor_limbs",
+                "source_slug": "Plan:_Deep_pocketed_robot_armor_limbs"
             },
             "availability": []
         },
@@ -1839,7 +1875,8 @@
                 ],
                 "value": "500",
                 "form_id": "000268B9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deep_pocketed_trapper_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Deep_pocketed_trapper_armor_chest",
+                "source_slug": "Plan:_Deep_pocketed_trapper_armor_chest"
             },
             "availability": []
         },
@@ -1866,7 +1903,8 @@
                 ],
                 "value": "500",
                 "form_id": "00026944",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deep_pocketed_trapper_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Deep_pocketed_trapper_armor_limbs",
+                "source_slug": "Plan:_Deep_pocketed_trapper_armor_limbs"
             },
             "availability": []
         },
@@ -1894,7 +1932,8 @@
                 ],
                 "value": "500",
                 "form_id": "00437035",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Dense_combat_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Dense_combat_armor_torso",
+                "source_slug": "Plan:_Dense_combat_armor_torso"
             },
             "availability": []
         },
@@ -1922,7 +1961,8 @@
                 ],
                 "value": "500",
                 "form_id": "00437036",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Dense_leather_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Dense_leather_armor_torso",
+                "source_slug": "Plan:_Dense_leather_armor_torso"
             },
             "availability": []
         },
@@ -1949,7 +1989,8 @@
                 ],
                 "value": "500",
                 "form_id": "00437029",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Dense_marine_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Dense_marine_armor_torso",
+                "source_slug": "Plan:_Dense_marine_armor_torso"
             },
             "availability": []
         },
@@ -1977,7 +2018,8 @@
                 ],
                 "value": "500",
                 "form_id": "00437037",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Dense_metal_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Dense_metal_armor_torso",
+                "source_slug": "Plan:_Dense_metal_armor_torso"
             },
             "availability": []
         },
@@ -2005,7 +2047,8 @@
                 ],
                 "value": "500",
                 "form_id": "0043703A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Dense_raider_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Dense_raider_armor_torso",
+                "source_slug": "Plan:_Dense_raider_armor_torso"
             },
             "availability": []
         },
@@ -2033,7 +2076,8 @@
                 ],
                 "value": "500",
                 "form_id": "0043703B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Dense_robot_armor_lining"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Dense_robot_armor_lining",
+                "source_slug": "Plan:_Dense_robot_armor_lining"
             },
             "availability": []
         },
@@ -2060,7 +2104,8 @@
                 ],
                 "value": "500",
                 "form_id": "0043702C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Dense_trapper_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Dense_trapper_armor_torso",
+                "source_slug": "Plan:_Dense_trapper_armor_torso"
             },
             "availability": []
         },
@@ -2088,7 +2133,8 @@
                 ],
                 "value": "250",
                 "form_id": "000224FC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lead_lined_combat_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Lead_lined_combat_armor_chest",
+                "source_slug": "Plan:_Lead_lined_combat_armor_chest"
             },
             "availability": []
         },
@@ -2116,7 +2162,8 @@
                 ],
                 "value": "250",
                 "form_id": "00030552",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lead_lined_leather_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Lead_lined_leather_armor_chest",
+                "source_slug": "Plan:_Lead_lined_leather_armor_chest"
             },
             "availability": []
         },
@@ -2143,7 +2190,8 @@
                 ],
                 "value": "250",
                 "form_id": "000218B4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lead_lined_marine_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Lead_lined_marine_armor_chest",
+                "source_slug": "Plan:_Lead_lined_marine_armor_chest"
             },
             "availability": []
         },
@@ -2171,7 +2219,8 @@
                 ],
                 "value": "250",
                 "form_id": "00026A1E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lead_lined_metal_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Lead_lined_metal_armor_chest",
+                "source_slug": "Plan:_Lead_lined_metal_armor_chest"
             },
             "availability": []
         },
@@ -2199,7 +2248,8 @@
                 ],
                 "value": "250",
                 "form_id": "0002F5EA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lead_lined_raider_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Lead_lined_raider_armor_chest",
+                "source_slug": "Plan:_Lead_lined_raider_armor_chest"
             },
             "availability": []
         },
@@ -2226,7 +2276,8 @@
                 ],
                 "value": "250",
                 "form_id": "000268A2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lead_lined_trapper_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Lead_lined_trapper_armor_chest",
+                "source_slug": "Plan:_Lead_lined_trapper_armor_chest"
             },
             "availability": []
         },
@@ -2255,7 +2306,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005DBD96",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lighter_Build_Secret_Service_Armor_Limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Lighter_Build_Secret_Service_Armor_Limbs",
+                "source_slug": "Plan:_Lighter_Build_Secret_Service_Armor_Limbs"
             },
             "availability": []
         },
@@ -2283,7 +2335,8 @@
                 ],
                 "value": "250",
                 "form_id": "00022E99",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pocketed_combat_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pocketed_combat_armor_chest",
+                "source_slug": "Plan:_Pocketed_combat_armor_chest"
             },
             "availability": []
         },
@@ -2311,7 +2364,8 @@
                 ],
                 "value": "250",
                 "form_id": "00026889",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pocketed_combat_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pocketed_combat_armor_limbs",
+                "source_slug": "Plan:_Pocketed_combat_armor_limbs"
             },
             "availability": []
         },
@@ -2339,7 +2393,8 @@
                 ],
                 "value": "250",
                 "form_id": "00035366",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pocketed_leather_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pocketed_leather_armor_chest",
+                "source_slug": "Plan:_Pocketed_leather_armor_chest"
             },
             "availability": []
         },
@@ -2367,7 +2422,8 @@
                 ],
                 "value": "250",
                 "form_id": "0003546B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pocketed_leather_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pocketed_leather_armor_limbs",
+                "source_slug": "Plan:_Pocketed_leather_armor_limbs"
             },
             "availability": []
         },
@@ -2377,7 +2433,7 @@
             "name": "Plan: Pocketed marine armor chest",
             "section": "Marine Armor Mods",
             "columns": {
-                "name": "Plan: Pocketed marine armor chest",
+                "name": "Plan: Deep pocketed metal armor chest",
                 "unlocks": {
                     "text": "Metal Armor torso deep pocketed mod",
                     "icons": [
@@ -2395,7 +2451,8 @@
                 ],
                 "value": "500",
                 "form_id": "00027DC3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pocketed_marine_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Deep_pocketed_metal_armor_chest",
+                "source_slug": "Plan:_Deep_pocketed_metal_armor_chest"
             },
             "availability": []
         },
@@ -2423,7 +2480,8 @@
                 ],
                 "value": "250",
                 "form_id": "0002B975",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pocketed_metal_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pocketed_metal_armor_chest",
+                "source_slug": "Plan:_Pocketed_metal_armor_chest"
             },
             "availability": []
         },
@@ -2451,7 +2509,8 @@
                 ],
                 "value": "250",
                 "form_id": "0002E8D6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pocketed_metal_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pocketed_metal_armor_limbs",
+                "source_slug": "Plan:_Pocketed_metal_armor_limbs"
             },
             "availability": []
         },
@@ -2480,7 +2539,8 @@
                 ],
                 "value": "250",
                 "form_id": "0002FC6A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pocketed_raider_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pocketed_raider_armor_chest",
+                "source_slug": "Plan:_Pocketed_raider_armor_chest"
             },
             "availability": []
         },
@@ -2509,7 +2569,8 @@
                 ],
                 "value": "250",
                 "form_id": "00030554",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pocketed_raider_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pocketed_raider_armor_limbs",
+                "source_slug": "Plan:_Pocketed_raider_armor_limbs"
             },
             "availability": []
         },
@@ -2537,7 +2598,8 @@
                 ],
                 "value": "250",
                 "form_id": "000269C0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pocketed_robot_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pocketed_robot_armor_chest",
+                "source_slug": "Plan:_Pocketed_robot_armor_chest"
             },
             "availability": []
         },
@@ -2565,7 +2627,8 @@
                 ],
                 "value": "250",
                 "form_id": "000269BF",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pocketed_robot_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pocketed_robot_armor_limbs",
+                "source_slug": "Plan:_Pocketed_robot_armor_limbs"
             },
             "availability": []
         },
@@ -2593,7 +2656,8 @@
                 ],
                 "value": "250",
                 "form_id": "000268E6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pocketed_Trapper_Armor_Chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pocketed_Trapper_Armor_Chest",
+                "source_slug": "Plan:_Pocketed_Trapper_Armor_Chest"
             },
             "availability": []
         },
@@ -2621,7 +2685,8 @@
                 ],
                 "value": "250",
                 "form_id": "00026943",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pocketed_trapper_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Pocketed_trapper_armor_limbs",
+                "source_slug": "Plan:_Pocketed_trapper_armor_limbs"
             },
             "availability": []
         },
@@ -2649,7 +2714,8 @@
                 "value": "300",
                 "type": "gold bullion",
                 "form_id": "003D6546",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Protective_lining_BoS_underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Protective_lining_BoS_underarmor",
+                "source_slug": "Plan:_Protective_lining_BoS_underarmor"
             },
             "availability": []
         },
@@ -2676,7 +2742,8 @@
                 "value": "300",
                 "type": "gold bullion",
                 "form_id": "003D6548",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Protective_lining_casual_underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Protective_lining_casual_underarmor",
+                "source_slug": "Plan:_Protective_lining_casual_underarmor"
             },
             "availability": []
         },
@@ -2704,7 +2771,8 @@
                 "value": "300",
                 "type": "gold bullion",
                 "form_id": "003D654A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Protective_Lining_Marine_Underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Protective_Lining_Marine_Underarmor",
+                "source_slug": "Plan:_Protective_Lining_Marine_Underarmor"
             },
             "availability": []
         },
@@ -2732,7 +2800,8 @@
                 "value": "300",
                 "type": "gold bullion",
                 "form_id": "003D7F9D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Protective_lining_operative_underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Protective_lining_operative_underarmor",
+                "source_slug": "Plan:_Protective_lining_operative_underarmor"
             },
             "availability": []
         },
@@ -2760,7 +2829,8 @@
                 "value": "300",
                 "type": "gold bullion",
                 "form_id": "003D654C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Protective_Lining_Raider_Underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Protective_Lining_Raider_Underarmor",
+                "source_slug": "Plan:_Protective_Lining_Raider_Underarmor"
             },
             "availability": []
         },
@@ -2789,7 +2859,8 @@
                 "value": "150",
                 "type": "gold bullion",
                 "form_id": "005C5E1E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Protective_Lining_Secret_Service_Underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Protective_Lining_Secret_Service_Underarmor",
+                "source_slug": "Plan:_Protective_Lining_Secret_Service_Underarmor"
             },
             "availability": []
         },
@@ -2816,7 +2887,8 @@
                 "value": "200",
                 "type": "caps",
                 "form_id": "003D7F98",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Resistant_lining_BoS_underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Resistant_lining_BoS_underarmor",
+                "source_slug": "Plan:_Resistant_lining_BoS_underarmor"
             },
             "availability": []
         },
@@ -2843,7 +2915,8 @@
                 "value": "200",
                 "type": "caps",
                 "form_id": "003D7F9A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Resistant_lining_casual_underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Resistant_lining_casual_underarmor",
+                "source_slug": "Plan:_Resistant_lining_casual_underarmor"
             },
             "availability": []
         },
@@ -2870,7 +2943,8 @@
                 "value": "200",
                 "type": "caps",
                 "form_id": "003D7FA1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Resistant_lining_marine_underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Resistant_lining_marine_underarmor",
+                "source_slug": "Plan:_Resistant_lining_marine_underarmor"
             },
             "availability": []
         },
@@ -2897,7 +2971,8 @@
                 "value": "200",
                 "type": "caps",
                 "form_id": "003D7F9C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Resistant_lining_operative_underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Resistant_lining_operative_underarmor",
+                "source_slug": "Plan:_Resistant_lining_operative_underarmor"
             },
             "availability": []
         },
@@ -2926,7 +3001,8 @@
                 "value": "200",
                 "type": "caps",
                 "form_id": "003D7FA3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Resistant_lining_raider_underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Resistant_lining_raider_underarmor",
+                "source_slug": "Plan:_Resistant_lining_raider_underarmor"
             },
             "availability": []
         },
@@ -2955,7 +3031,8 @@
                 "value": "100",
                 "type": "gold bullion",
                 "form_id": "005C5E20",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Resistant_Lining_Secret_Service_Underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Resistant_Lining_Secret_Service_Underarmor",
+                "source_slug": "Plan:_Resistant_Lining_Secret_Service_Underarmor"
             },
             "availability": []
         },
@@ -2984,7 +3061,8 @@
                 "value": "250",
                 "type": "caps",
                 "form_id": "005A1581",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_aerodynamic_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_aerodynamic_armor_arms",
+                "source_slug": "Plan:_Secret_Service_aerodynamic_armor_arms"
             },
             "availability": []
         },
@@ -3013,7 +3091,8 @@
                 "value": "250",
                 "type": "caps",
                 "form_id": "005A1589",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_asbestos_lined_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_asbestos_lined_armor_torso",
+                "source_slug": "Plan:_Secret_Service_asbestos_lined_armor_torso"
             },
             "availability": []
         },
@@ -3042,7 +3121,8 @@
                 "value": "250",
                 "type": "caps",
                 "form_id": "005A158F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_BioCommMesh_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_BioCommMesh_armor_torso",
+                "source_slug": "Plan:_Secret_Service_BioCommMesh_armor_torso"
             },
             "availability": []
         },
@@ -3071,7 +3151,8 @@
                 "value": "250",
                 "type": "caps",
                 "form_id": "005A157F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_braced_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_braced_armor_arms",
+                "source_slug": "Plan:_Secret_Service_braced_armor_arms"
             },
             "availability": []
         },
@@ -3100,7 +3181,8 @@
                 "value": "500",
                 "type": "caps",
                 "form_id": "005A1583",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_brawling_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_brawling_armor_arms",
+                "source_slug": "Plan:_Secret_Service_brawling_armor_arms"
             },
             "availability": []
         },
@@ -3129,7 +3211,8 @@
                 "value": "500",
                 "type": "caps",
                 "form_id": "005A157A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_buttressed_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_buttressed_armor_arms",
+                "source_slug": "Plan:_Secret_Service_buttressed_armor_arms"
             },
             "availability": []
         },
@@ -3158,7 +3241,8 @@
                 "value": "500",
                 "type": "caps",
                 "form_id": "005A157E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_buttressed_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_buttressed_armor_legs",
+                "source_slug": "Plan:_Secret_Service_buttressed_armor_legs"
             },
             "availability": []
         },
@@ -3187,7 +3271,8 @@
                 "value": "500",
                 "type": "caps",
                 "form_id": "005A1594",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_buttressed_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_buttressed_armor_torso",
+                "source_slug": "Plan:_Secret_Service_buttressed_armor_torso"
             },
             "availability": []
         },
@@ -3216,7 +3301,8 @@
                 "value": "250",
                 "type": "caps",
                 "form_id": "005A1584",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_cushioned_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_cushioned_armor_legs",
+                "source_slug": "Plan:_Secret_Service_cushioned_armor_legs"
             },
             "availability": []
         },
@@ -3245,7 +3331,8 @@
                 "value": "500",
                 "type": "caps",
                 "form_id": "005A1585",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_custom_fitted_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_custom_fitted_armor_legs",
+                "source_slug": "Plan:_Secret_Service_custom_fitted_armor_legs"
             },
             "availability": []
         },
@@ -3274,7 +3361,8 @@
                 "value": "500",
                 "type": "caps",
                 "form_id": "005CBEC7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_deep_pocketed_armor_limb"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_deep_pocketed_armor_limb",
+                "source_slug": "Plan:_Secret_Service_deep_pocketed_armor_limb"
             },
             "availability": []
         },
@@ -3303,7 +3391,8 @@
                 "value": "500",
                 "type": "caps",
                 "form_id": "005A158A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_deep_pocketed_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_deep_pocketed_armor_torso",
+                "source_slug": "Plan:_Secret_Service_deep_pocketed_armor_torso"
             },
             "availability": []
         },
@@ -3332,7 +3421,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005A1588",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_dense_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_dense_armor_torso",
+                "source_slug": "Plan:_Secret_Service_dense_armor_torso"
             },
             "availability": []
         },
@@ -3361,7 +3451,8 @@
                 "value": "350",
                 "type": "gold bullion",
                 "form_id": "005A1579",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_hardened_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_hardened_armor_arms",
+                "source_slug": "Plan:_Secret_Service_hardened_armor_arms"
             },
             "availability": []
         },
@@ -3390,7 +3481,8 @@
                 "value": "350",
                 "type": "gold bullion",
                 "form_id": "005A157D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_hardened_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_hardened_armor_legs",
+                "source_slug": "Plan:_Secret_Service_hardened_armor_legs"
             },
             "availability": []
         },
@@ -3419,7 +3511,8 @@
                 "value": "350",
                 "type": "gold bullion",
                 "form_id": "005A1593",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_hardened_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_hardened_armor_torso",
+                "source_slug": "Plan:_Secret_Service_hardened_armor_torso"
             },
             "availability": []
         },
@@ -3448,7 +3541,8 @@
                 "value": "2000",
                 "type": "gold bullion",
                 "form_id": "005A1595",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Jet_Pack_Armor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_Jet_Pack_Armor",
+                "source_slug": "Plan:_Secret_Service_Jet_Pack_Armor"
             },
             "availability": []
         },
@@ -3477,7 +3571,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005A1590",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_lead_lined_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_lead_lined_armor_torso",
+                "source_slug": "Plan:_Secret_Service_lead_lined_armor_torso"
             },
             "availability": []
         },
@@ -3506,7 +3601,8 @@
                 "value": "350",
                 "type": "gold bullion",
                 "form_id": "005A158D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_lighter_build_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_lighter_build_armor_torso",
+                "source_slug": "Plan:_Secret_Service_lighter_build_armor_torso"
             },
             "availability": []
         },
@@ -3535,7 +3631,8 @@
                 "value": "350",
                 "type": "gold bullion",
                 "form_id": "005A1587",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_padded_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_padded_armor_torso",
+                "source_slug": "Plan:_Secret_Service_padded_armor_torso"
             },
             "availability": []
         },
@@ -3564,7 +3661,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005A158C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_pneumatic_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_pneumatic_armor_torso",
+                "source_slug": "Plan:_Secret_Service_pneumatic_armor_torso"
             },
             "availability": []
         },
@@ -3593,7 +3691,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005CBEC6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Pocketed_Armor_Limb"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_Pocketed_Armor_Limb",
+                "source_slug": "Plan:_Secret_Service_Pocketed_Armor_Limb"
             },
             "availability": []
         },
@@ -3622,7 +3721,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005A158B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Pocketed_Armor_Torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_Pocketed_Armor_Torso",
+                "source_slug": "Plan:_Secret_Service_Pocketed_Armor_Torso"
             },
             "availability": []
         },
@@ -3651,7 +3751,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005A1586",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_sleek_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_sleek_armor_legs",
+                "source_slug": "Plan:_Secret_Service_sleek_armor_legs"
             },
             "availability": []
         },
@@ -3680,7 +3781,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005A1582",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_stabilized_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_stabilized_armor_arms",
+                "source_slug": "Plan:_Secret_Service_stabilized_armor_arms"
             },
             "availability": []
         },
@@ -3709,7 +3811,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005A1578",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_tempered_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_tempered_armor_arms",
+                "source_slug": "Plan:_Secret_Service_tempered_armor_arms"
             },
             "availability": []
         },
@@ -3738,7 +3841,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005A157C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_tempered_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_tempered_armor_legs",
+                "source_slug": "Plan:_Secret_Service_tempered_armor_legs"
             },
             "availability": []
         },
@@ -3767,7 +3871,8 @@
                 "value": "250",
                 "type": "gold bullion",
                 "form_id": "005A1592",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_tempered_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_tempered_armor_torso",
+                "source_slug": "Plan:_Secret_Service_tempered_armor_torso"
             },
             "availability": []
         },
@@ -3796,7 +3901,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005A158E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_ultra-light_build_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_ultra-light_build_armor_torso",
+                "source_slug": "Plan:_Secret_Service_ultra-light_build_armor_torso"
             },
             "availability": []
         },
@@ -3825,7 +3931,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005A1580",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_weighted_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_weighted_armor_arms",
+                "source_slug": "Plan:_Secret_Service_weighted_armor_arms"
             },
             "availability": []
         },
@@ -3854,7 +3961,8 @@
                 "value": "100",
                 "type": "gold bullion",
                 "form_id": "005A1577",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_welded_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_welded_armor_arms",
+                "source_slug": "Plan:_Secret_Service_welded_armor_arms"
             },
             "availability": []
         },
@@ -3883,7 +3991,8 @@
                 "value": "100",
                 "type": "gold bullion",
                 "form_id": "005A157B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_welded_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_welded_armor_legs",
+                "source_slug": "Plan:_Secret_Service_welded_armor_legs"
             },
             "availability": []
         },
@@ -3912,7 +4021,8 @@
                 "value": "100",
                 "type": "gold bullion",
                 "form_id": "005A1591",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_welded_armor_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Secret_Service_welded_armor_torso",
+                "source_slug": "Plan:_Secret_Service_welded_armor_torso"
             },
             "availability": []
         },
@@ -3940,7 +4050,8 @@
                 ],
                 "value": "300",
                 "form_id": "000268A4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shadowed_combat_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shadowed_combat_armor_arms",
+                "source_slug": "Plan:_Shadowed_combat_armor_arms"
             },
             "availability": []
         },
@@ -3968,7 +4079,8 @@
                 ],
                 "value": "300",
                 "form_id": "0002190F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shadowed_combat_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shadowed_combat_armor_chest",
+                "source_slug": "Plan:_Shadowed_combat_armor_chest"
             },
             "availability": []
         },
@@ -3996,7 +4108,8 @@
                 ],
                 "value": "300",
                 "form_id": "00026888",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shadowed_combat_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shadowed_combat_armor_legs",
+                "source_slug": "Plan:_Shadowed_combat_armor_legs"
             },
             "availability": []
         },
@@ -4024,7 +4137,8 @@
                 ],
                 "value": "300",
                 "form_id": "00035690",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shadowed_leather_armor_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shadowed_leather_armor_arm",
+                "source_slug": "Plan:_Shadowed_leather_armor_arm"
             },
             "availability": []
         },
@@ -4052,7 +4166,8 @@
                 ],
                 "value": "300",
                 "form_id": "00030553",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shadowed_leather_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shadowed_leather_armor_chest",
+                "source_slug": "Plan:_Shadowed_leather_armor_chest"
             },
             "availability": []
         },
@@ -4080,7 +4195,8 @@
                 ],
                 "value": "300",
                 "form_id": "00035691",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shadowed_leather_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shadowed_leather_armor_legs",
+                "source_slug": "Plan:_Shadowed_leather_armor_legs"
             },
             "availability": []
         },
@@ -4108,7 +4224,8 @@
                 ],
                 "value": "300",
                 "form_id": "0002F5EB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shadowed_metal_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shadowed_metal_armor_arms",
+                "source_slug": "Plan:_Shadowed_metal_armor_arms"
             },
             "availability": []
         },
@@ -4136,7 +4253,8 @@
                 ],
                 "value": "300",
                 "form_id": "00026A1F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shadowed_metal_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shadowed_metal_armor_chest",
+                "source_slug": "Plan:_Shadowed_metal_armor_chest"
             },
             "availability": []
         },
@@ -4164,7 +4282,8 @@
                 ],
                 "value": "300",
                 "form_id": "0002F5EC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shadowed_metal_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shadowed_metal_armor_legs",
+                "source_slug": "Plan:_Shadowed_metal_armor_legs"
             },
             "availability": []
         },
@@ -4191,7 +4310,8 @@
                 ],
                 "value": "300",
                 "form_id": "000218B5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shadowed_robot_armor_arms"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shadowed_robot_armor_arms",
+                "source_slug": "Plan:_Shadowed_robot_armor_arms"
             },
             "availability": []
         },
@@ -4218,7 +4338,8 @@
                 ],
                 "value": "300",
                 "form_id": "0001BF32",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shadowed_robot_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shadowed_robot_armor_chest",
+                "source_slug": "Plan:_Shadowed_robot_armor_chest"
             },
             "availability": []
         },
@@ -4245,7 +4366,8 @@
                 ],
                 "value": "300",
                 "form_id": "0001BF48",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shadowed_robot_armor_legs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shadowed_robot_armor_legs",
+                "source_slug": "Plan:_Shadowed_robot_armor_legs"
             },
             "availability": []
         },
@@ -4273,7 +4395,8 @@
                 "value": "500",
                 "type": "caps",
                 "form_id": "003D6547",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shielded_lining_BoS_underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shielded_lining_BoS_underarmor",
+                "source_slug": "Plan:_Shielded_lining_BoS_underarmor"
             },
             "availability": []
         },
@@ -4301,7 +4424,8 @@
                 "value": "500",
                 "type": "caps",
                 "form_id": "003D6549",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shielded_lining_casual_underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shielded_lining_casual_underarmor",
+                "source_slug": "Plan:_Shielded_lining_casual_underarmor"
             },
             "availability": []
         },
@@ -4329,7 +4453,8 @@
                 "value": "500",
                 "type": "caps",
                 "form_id": "003D654B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shielded_Lining_Marine_Underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shielded_Lining_Marine_Underarmor",
+                "source_slug": "Plan:_Shielded_Lining_Marine_Underarmor"
             },
             "availability": []
         },
@@ -4359,7 +4484,8 @@
                 "value": "500",
                 "type": "caps",
                 "form_id": "003D7F9E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shielded_lining_operative_underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shielded_lining_operative_underarmor",
+                "source_slug": "Plan:_Shielded_lining_operative_underarmor"
             },
             "availability": []
         },
@@ -4387,7 +4513,8 @@
                 "value": "500",
                 "type": "caps",
                 "form_id": "003D654D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shielded_Lining_Raider_Underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shielded_Lining_Raider_Underarmor",
+                "source_slug": "Plan:_Shielded_Lining_Raider_Underarmor"
             },
             "availability": []
         },
@@ -4416,7 +4543,8 @@
                 "value": "200",
                 "type": "gold bullion",
                 "form_id": "005C5E1F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shielded_Lining_Secret_Service_Underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shielded_Lining_Secret_Service_Underarmor",
+                "source_slug": "Plan:_Shielded_Lining_Secret_Service_Underarmor"
             },
             "availability": []
         },
@@ -4443,7 +4571,8 @@
                 },
                 "value": "100",
                 "form_id": "003D6174",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shrouded_Wood_Armor_Mod"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Shrouded_Wood_Armor_Mod",
+                "source_slug": "Plan:_Shrouded_Wood_Armor_Mod"
             },
             "availability": []
         },
@@ -4471,7 +4600,8 @@
                 ],
                 "value": "250",
                 "form_id": "0002321F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strengthened_combat_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Strengthened_combat_armor_limbs",
+                "source_slug": "Plan:_Strengthened_combat_armor_limbs"
             },
             "availability": []
         },
@@ -4499,7 +4629,8 @@
                 ],
                 "value": "250",
                 "form_id": "00035365",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strengthened_leather_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Strengthened_leather_armor_limbs",
+                "source_slug": "Plan:_Strengthened_leather_armor_limbs"
             },
             "availability": []
         },
@@ -4526,7 +4657,8 @@
                 ],
                 "value": "250",
                 "form_id": "000218C4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strengthened_marine_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Strengthened_marine_armor_limbs",
+                "source_slug": "Plan:_Strengthened_marine_armor_limbs"
             },
             "availability": []
         },
@@ -4554,7 +4686,8 @@
                 ],
                 "value": "250",
                 "form_id": "0002B973",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strengthened_metal_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Strengthened_metal_armor_limbs",
+                "source_slug": "Plan:_Strengthened_metal_armor_limbs"
             },
             "availability": []
         },
@@ -4582,7 +4715,8 @@
                 ],
                 "value": "250",
                 "form_id": "0002FC68",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strengthened_raider_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Strengthened_raider_armor_limbs",
+                "source_slug": "Plan:_Strengthened_raider_armor_limbs"
             },
             "availability": []
         },
@@ -4609,7 +4743,8 @@
                 ],
                 "value": "250",
                 "form_id": "0001BF34",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strengthened_robot_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Strengthened_robot_armor_limbs",
+                "source_slug": "Plan:_Strengthened_robot_armor_limbs"
             },
             "availability": []
         },
@@ -4636,7 +4771,8 @@
                 ],
                 "value": "250",
                 "form_id": "000268E4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strengthened_trapper_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Strengthened_trapper_armor_limbs",
+                "source_slug": "Plan:_Strengthened_trapper_armor_limbs"
             },
             "availability": []
         },
@@ -4663,7 +4799,8 @@
                 "value": "100",
                 "type": "caps",
                 "form_id": "003D7F97",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Treated_lining_BoS_underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Treated_lining_BoS_underarmor",
+                "source_slug": "Plan:_Treated_lining_BoS_underarmor"
             },
             "availability": []
         },
@@ -4690,7 +4827,8 @@
                 "value": "100",
                 "type": "caps",
                 "form_id": "003D7F99",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Treated_lining_casual_underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Treated_lining_casual_underarmor",
+                "source_slug": "Plan:_Treated_lining_casual_underarmor"
             },
             "availability": []
         },
@@ -4717,7 +4855,8 @@
                 "value": "100",
                 "type": "caps",
                 "form_id": "003D7FA0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Treated_lining_marine_underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Treated_lining_marine_underarmor",
+                "source_slug": "Plan:_Treated_lining_marine_underarmor"
             },
             "availability": []
         },
@@ -4744,7 +4883,8 @@
                 "value": "100",
                 "type": "caps",
                 "form_id": "003D7F9B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Treated_lining_operative_underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Treated_lining_operative_underarmor",
+                "source_slug": "Plan:_Treated_lining_operative_underarmor"
             },
             "availability": []
         },
@@ -4773,7 +4913,8 @@
                 "value": "100",
                 "type": "caps",
                 "form_id": "003D7FA2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Treated_Lining_Raider_Underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Treated_Lining_Raider_Underarmor",
+                "source_slug": "Plan:_Treated_Lining_Raider_Underarmor"
             },
             "availability": []
         },
@@ -4802,7 +4943,8 @@
                 "value": "50",
                 "type": "gold bullion",
                 "form_id": "005C5E21",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Treated_Lining_Secret_Service_Underarmor"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Treated_Lining_Secret_Service_Underarmor",
+                "source_slug": "Plan:_Treated_Lining_Secret_Service_Underarmor"
             },
             "availability": []
         },
@@ -4829,7 +4971,8 @@
                 ],
                 "value": "500",
                 "form_id": "0002321E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultra-light_build_combat_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultra-light_build_combat_armor_limbs",
+                "source_slug": "Plan:_Ultra-light_build_combat_armor_limbs"
             },
             "availability": []
         },
@@ -4858,7 +5001,8 @@
                 ],
                 "value": "500",
                 "form_id": "000337B7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultra-light_build_leather_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultra-light_build_leather_armor_chest",
+                "source_slug": "Plan:_Ultra-light_build_leather_armor_chest"
             },
             "availability": []
         },
@@ -4887,7 +5031,8 @@
                 ],
                 "value": "500",
                 "form_id": "00035364",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultra-light_build_leather_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultra-light_build_leather_armor_limbs",
+                "source_slug": "Plan:_Ultra-light_build_leather_armor_limbs"
             },
             "availability": []
         },
@@ -4914,7 +5059,8 @@
                 ],
                 "value": "500",
                 "form_id": "000218B3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultra-light_build_marine_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultra-light_build_marine_armor_chest",
+                "source_slug": "Plan:_Ultra-light_build_marine_armor_chest"
             },
             "availability": []
         },
@@ -4941,7 +5087,8 @@
                 ],
                 "value": "500",
                 "form_id": "00021911",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultra-light_build_marine_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultra-light_build_marine_armor_limbs",
+                "source_slug": "Plan:_Ultra-light_build_marine_armor_limbs"
             },
             "availability": []
         },
@@ -4970,7 +5117,8 @@
                 ],
                 "value": "500",
                 "form_id": "00027DC4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultra-light_build_metal_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultra-light_build_metal_armor_chest",
+                "source_slug": "Plan:_Ultra-light_build_metal_armor_chest"
             },
             "availability": []
         },
@@ -4999,7 +5147,8 @@
                 ],
                 "value": "500",
                 "form_id": "0002E8D8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultra-light_build_metal_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultra-light_build_metal_armor_limbs",
+                "source_slug": "Plan:_Ultra-light_build_metal_armor_limbs"
             },
             "availability": []
         },
@@ -5028,7 +5177,8 @@
                 ],
                 "value": "500",
                 "form_id": "000269D3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultra-light_build_raider_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultra-light_build_raider_armor_chest",
+                "source_slug": "Plan:_Ultra-light_build_raider_armor_chest"
             },
             "availability": []
         },
@@ -5057,7 +5207,8 @@
                 ],
                 "value": "500",
                 "form_id": "000269D1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultra-light_build_raider_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultra-light_build_raider_armor_limbs",
+                "source_slug": "Plan:_Ultra-light_build_raider_armor_limbs"
             },
             "availability": []
         },
@@ -5085,7 +5236,8 @@
                 ],
                 "value": "500",
                 "form_id": "0001BF30",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultra-light_build_robot_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultra-light_build_robot_armor_chest",
+                "source_slug": "Plan:_Ultra-light_build_robot_armor_chest"
             },
             "availability": []
         },
@@ -5113,7 +5265,8 @@
                 ],
                 "value": "500",
                 "form_id": "0001BF4A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultra-light_build_robot_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultra-light_build_robot_armor_limbs",
+                "source_slug": "Plan:_Ultra-light_build_robot_armor_limbs"
             },
             "availability": []
         },
@@ -5142,7 +5295,8 @@
                 "value": "500",
                 "type": "gold bullion",
                 "form_id": "005DBD95",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultra-Light_Build_Secret_Service_Armor_Limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultra-Light_Build_Secret_Service_Armor_Limbs",
+                "source_slug": "Plan:_Ultra-Light_Build_Secret_Service_Armor_Limbs"
             },
             "availability": []
         },
@@ -5170,7 +5324,8 @@
                 ],
                 "value": "500",
                 "form_id": "000268BA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultra-light_build_trapper_armor_chest"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultra-light_build_trapper_armor_chest",
+                "source_slug": "Plan:_Ultra-light_build_trapper_armor_chest"
             },
             "availability": []
         },
@@ -5198,7 +5353,8 @@
                 ],
                 "value": "500",
                 "form_id": "00026945",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultra-light_build_trapper_armor_limbs"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultra-light_build_trapper_armor_limbs",
+                "source_slug": "Plan:_Ultra-light_build_trapper_armor_limbs"
             },
             "availability": []
         },
@@ -5224,7 +5380,8 @@
                 },
                 "value": "1200",
                 "form_id": "00793E73",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Gimbal_Bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Gimbal_Bracers",
+                "source_slug": "Plan:_Vulcan_Gimbal_Bracers"
             },
             "availability": []
         },
@@ -5250,7 +5407,8 @@
                 },
                 "value": "100",
                 "form_id": "00793E77",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Headlamp_Blue"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Headlamp_Blue",
+                "source_slug": "Plan:_Vulcan_Headlamp_Blue"
             },
             "availability": []
         },
@@ -5276,7 +5434,8 @@
                 },
                 "value": "100",
                 "form_id": "00793E78",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Headlamp_Bright"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Headlamp_Bright",
+                "source_slug": "Plan:_Vulcan_Headlamp_Bright"
             },
             "availability": []
         },
@@ -5302,7 +5461,8 @@
                 },
                 "value": "100",
                 "form_id": "00793E7A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Headlamp_Purple"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Headlamp_Purple",
+                "source_slug": "Plan:_Vulcan_Headlamp_Purple"
             },
             "availability": []
         },
@@ -5328,7 +5488,8 @@
                 },
                 "value": "100",
                 "form_id": "00793E7B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Headlamp_Red_Tactical"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Headlamp_Red_Tactical",
+                "source_slug": "Plan:_Vulcan_Headlamp_Red_Tactical"
             },
             "availability": []
         },
@@ -5354,7 +5515,8 @@
                 },
                 "value": "100",
                 "form_id": "00793E7C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Headlamp_Vault_Boy"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Headlamp_Vault_Boy",
+                "source_slug": "Plan:_Vulcan_Headlamp_Vault_Boy"
             },
             "availability": []
         },
@@ -5380,7 +5542,8 @@
                 },
                 "value": "600",
                 "form_id": "00793E75",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Hydraulic_Bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Hydraulic_Bracers",
+                "source_slug": "Plan:_Vulcan_Hydraulic_Bracers"
             },
             "availability": []
         },
@@ -5406,7 +5569,8 @@
                 },
                 "value": "200",
                 "form_id": "00793E7E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Internal_Database"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Internal_Database",
+                "source_slug": "Plan:_Vulcan_Internal_Database"
             },
             "availability": []
         },
@@ -5432,7 +5596,8 @@
                 },
                 "value": "1200",
                 "form_id": "00793E82",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Kinetic_Servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Kinetic_Servos",
+                "source_slug": "Plan:_Vulcan_Kinetic_Servos"
             },
             "availability": []
         },
@@ -5458,7 +5623,8 @@
                 },
                 "value": "200",
                 "form_id": "00793E71",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Optimized_Bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Optimized_Bracers",
+                "source_slug": "Plan:_Vulcan_Optimized_Bracers"
             },
             "availability": []
         },
@@ -5484,7 +5650,8 @@
                 },
                 "value": "600",
                 "form_id": "00793E7F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Recon_Sensors"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Recon_Sensors",
+                "source_slug": "Plan:_Vulcan_Recon_Sensors"
             },
             "availability": []
         },
@@ -5510,7 +5677,8 @@
                 },
                 "value": "600",
                 "form_id": "00793E70",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Rusty_Knuckles"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Rusty_Knuckles",
+                "source_slug": "Plan:_Vulcan_Rusty_Knuckles"
             },
             "availability": []
         },
@@ -5536,7 +5704,8 @@
                 },
                 "value": "200",
                 "form_id": "00793E80",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Sensor_Array"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Sensor_Array",
+                "source_slug": "Plan:_Vulcan_Sensor_Array"
             },
             "availability": []
         },
@@ -5562,7 +5731,8 @@
                 },
                 "value": "3000",
                 "form_id": "00793E7D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Targeting_HUD"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Targeting_HUD",
+                "source_slug": "Plan:_Vulcan_Targeting_HUD"
             },
             "availability": []
         },
@@ -5588,7 +5758,8 @@
                 },
                 "value": "1200",
                 "form_id": "00793E72",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Tesla_Bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Tesla_Bracers",
+                "source_slug": "Plan:_Vulcan_Tesla_Bracers"
             },
             "availability": []
         },
@@ -5614,7 +5785,8 @@
                 },
                 "value": "1200",
                 "form_id": "00793E74",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Ultracite_Bracers"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Ultracite_Bracers",
+                "source_slug": "Plan:_Vulcan_Ultracite_Bracers"
             },
             "availability": []
         },
@@ -5640,7 +5812,8 @@
                 },
                 "value": "200",
                 "form_id": "00793E81",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_VATS_Matrix_Overlay"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_VATS_Matrix_Overlay",
+                "source_slug": "Plan:_Vulcan_VATS_Matrix_Overlay"
             },
             "availability": []
         }

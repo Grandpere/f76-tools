@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-03-17T14:18:46+00:00",
+    "generated_at": "2026-03-17T23:45:45+00:00",
     "source": "fallout.wiki",
     "page": "Fallout_76_Power_Armor_Plans",
     "url": "https://fallout.wiki/wiki/Fallout_76_Power_Armor_Plans",
@@ -24,7 +24,8 @@
                 ],
                 "value": "500",
                 "form_id": "00501887",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_helmet",
+                "source_slug": "Plan:_Excavator_helmet"
             },
             "availability": []
         },
@@ -46,7 +47,8 @@
                 ],
                 "value": "500",
                 "form_id": "00501885",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_left_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_left_arm",
+                "source_slug": "Plan:_Excavator_left_arm"
             },
             "availability": []
         },
@@ -68,7 +70,8 @@
                 ],
                 "value": "500",
                 "form_id": "00501888",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_left_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_left_leg",
+                "source_slug": "Plan:_Excavator_left_leg"
             },
             "availability": []
         },
@@ -90,7 +93,8 @@
                 ],
                 "value": "500",
                 "form_id": "00501886",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_right_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_right_arm",
+                "source_slug": "Plan:_Excavator_right_arm"
             },
             "availability": []
         },
@@ -112,7 +116,8 @@
                 ],
                 "value": "500",
                 "form_id": "00501889",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_right_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_right_leg",
+                "source_slug": "Plan:_Excavator_right_leg"
             },
             "availability": []
         },
@@ -134,7 +139,8 @@
                 ],
                 "value": "500",
                 "form_id": "0050188A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Excavator_torso",
+                "source_slug": "Plan:_Excavator_torso"
             },
             "availability": []
         },
@@ -156,7 +162,8 @@
                 ],
                 "value": "500",
                 "form_id": "0060D5BC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_chest_piece"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_chest_piece",
+                "source_slug": "Plan:_Hellcat_chest_piece"
             },
             "availability": []
         },
@@ -178,7 +185,8 @@
                 ],
                 "value": "500",
                 "form_id": "0060D5BE",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_helm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_helm",
+                "source_slug": "Plan:_Hellcat_helm"
             },
             "availability": []
         },
@@ -200,7 +208,8 @@
                 ],
                 "value": "500",
                 "form_id": "0060D5C0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_left_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_left_arm",
+                "source_slug": "Plan:_Hellcat_left_arm"
             },
             "availability": []
         },
@@ -222,7 +231,8 @@
                 ],
                 "value": "500",
                 "form_id": "0060D5BB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_left_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_left_leg",
+                "source_slug": "Plan:_Hellcat_left_leg"
             },
             "availability": []
         },
@@ -244,7 +254,8 @@
                 ],
                 "value": "500",
                 "form_id": "0060D5BD",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_right_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Hellcat_right_leg",
+                "source_slug": "Plan:_Hellcat_right_leg"
             },
             "availability": []
         },
@@ -269,7 +280,8 @@
                 ],
                 "value": "500",
                 "form_id": "00501890",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_power_chest_piece"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_power_chest_piece",
+                "source_slug": "Plan:_Raider_power_chest_piece"
             },
             "availability": []
         },
@@ -294,7 +306,8 @@
                 ],
                 "value": "500",
                 "form_id": "0050188D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_power_helm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_power_helm",
+                "source_slug": "Plan:_Raider_power_helm"
             },
             "availability": []
         },
@@ -319,7 +332,8 @@
                 ],
                 "value": "500",
                 "form_id": "0050188B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_power_left_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_power_left_arm",
+                "source_slug": "Plan:_Raider_power_left_arm"
             },
             "availability": []
         },
@@ -344,7 +358,8 @@
                 ],
                 "value": "500",
                 "form_id": "0050188E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_power_left_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_power_left_leg",
+                "source_slug": "Plan:_Raider_power_left_leg"
             },
             "availability": []
         },
@@ -369,7 +384,8 @@
                 ],
                 "value": "500",
                 "form_id": "0050188C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_power_right_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_power_right_arm",
+                "source_slug": "Plan:_Raider_power_right_arm"
             },
             "availability": []
         },
@@ -394,7 +410,8 @@
                 ],
                 "value": "500",
                 "form_id": "0050188F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_power_right_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Raider_power_right_leg",
+                "source_slug": "Plan:_Raider_power_right_leg"
             },
             "availability": []
         },
@@ -416,7 +433,8 @@
                 ],
                 "value": "1250",
                 "form_id": "005535FB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strangler_Heart_Chest_Piece"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Strangler_Heart_Chest_Piece",
+                "source_slug": "Plan:_Strangler_Heart_Chest_Piece"
             },
             "availability": []
         },
@@ -438,7 +456,8 @@
                 ],
                 "value": "1650",
                 "form_id": "00553BEA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strangler_Heart_Helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Strangler_Heart_Helmet",
+                "source_slug": "Plan:_Strangler_Heart_Helmet"
             },
             "availability": []
         },
@@ -460,7 +479,8 @@
                 ],
                 "value": "1000",
                 "form_id": "005535F9",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strangler_Heart_Left_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Strangler_Heart_Left_Arm",
+                "source_slug": "Plan:_Strangler_Heart_Left_Arm"
             },
             "availability": []
         },
@@ -482,7 +502,8 @@
                 ],
                 "value": "1000",
                 "form_id": "005535FA",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strangler_Heart_Left_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Strangler_Heart_Left_Leg",
+                "source_slug": "Plan:_Strangler_Heart_Left_Leg"
             },
             "availability": []
         },
@@ -504,7 +525,8 @@
                 ],
                 "value": "1000",
                 "form_id": "00553BEB",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strangler_Heart_Right_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Strangler_Heart_Right_Arm",
+                "source_slug": "Plan:_Strangler_Heart_Right_Arm"
             },
             "availability": []
         },
@@ -526,7 +548,8 @@
                 ],
                 "value": "1000",
                 "form_id": "00553BEC",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strangler_Heart_Right_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Strangler_Heart_Right_Leg",
+                "source_slug": "Plan:_Strangler_Heart_Right_Leg"
             },
             "availability": []
         },
@@ -551,7 +574,8 @@
                 ],
                 "value": "500",
                 "form_id": "00501896",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_chest_piece"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_chest_piece",
+                "source_slug": "Plan:_T-45_chest_piece"
             },
             "availability": []
         },
@@ -576,7 +600,8 @@
                 ],
                 "value": "500",
                 "form_id": "00501893",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_helm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_helm",
+                "source_slug": "Plan:_T-45_helm"
             },
             "availability": []
         },
@@ -601,7 +626,8 @@
                 ],
                 "value": "500",
                 "form_id": "00501891",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_left_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_left_arm",
+                "source_slug": "Plan:_T-45_left_arm"
             },
             "availability": []
         },
@@ -626,7 +652,8 @@
                 ],
                 "value": "500",
                 "form_id": "00501894",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_left_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_left_leg",
+                "source_slug": "Plan:_T-45_left_leg"
             },
             "availability": []
         },
@@ -651,7 +678,8 @@
                 ],
                 "value": "500",
                 "form_id": "00501892",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_right_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_right_arm",
+                "source_slug": "Plan:_T-45_right_arm"
             },
             "availability": []
         },
@@ -676,7 +704,8 @@
                 ],
                 "value": "500",
                 "form_id": "00501895",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_right_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-45_right_leg",
+                "source_slug": "Plan:_T-45_right_leg"
             },
             "availability": []
         },
@@ -701,7 +730,8 @@
                 ],
                 "value": "500",
                 "form_id": "0050189C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_chest_piece"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_chest_piece",
+                "source_slug": "Plan:_T-51b_chest_piece"
             },
             "availability": []
         },
@@ -726,7 +756,8 @@
                 ],
                 "value": "500",
                 "form_id": "00501899",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_helm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_helm",
+                "source_slug": "Plan:_T-51b_helm"
             },
             "availability": []
         },
@@ -751,7 +782,8 @@
                 ],
                 "value": "500",
                 "form_id": "00501897",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_left_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_left_arm",
+                "source_slug": "Plan:_T-51b_left_arm"
             },
             "availability": []
         },
@@ -776,7 +808,8 @@
                 ],
                 "value": "500",
                 "form_id": "0050189A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_left_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_left_leg",
+                "source_slug": "Plan:_T-51b_left_leg"
             },
             "availability": []
         },
@@ -801,7 +834,8 @@
                 ],
                 "value": "500",
                 "form_id": "00501898",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_right_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_right_arm",
+                "source_slug": "Plan:_T-51b_right_arm"
             },
             "availability": []
         },
@@ -826,7 +860,8 @@
                 ],
                 "value": "500",
                 "form_id": "0050189B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_right_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-51b_right_leg",
+                "source_slug": "Plan:_T-51b_right_leg"
             },
             "availability": []
         },
@@ -850,7 +885,8 @@
                 ],
                 "value": "500",
                 "form_id": "005018A2",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_chest_piece"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_chest_piece",
+                "source_slug": "Plan:_T-60_chest_piece"
             },
             "availability": []
         },
@@ -874,7 +910,8 @@
                 ],
                 "value": "500",
                 "form_id": "0050189F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_helm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_helm",
+                "source_slug": "Plan:_T-60_helm"
             },
             "availability": []
         },
@@ -898,7 +935,8 @@
                 ],
                 "value": "500",
                 "form_id": "0050189D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_left_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_left_arm",
+                "source_slug": "Plan:_T-60_left_arm"
             },
             "availability": []
         },
@@ -922,7 +960,8 @@
                 ],
                 "value": "500",
                 "form_id": "005018A0",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_left_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_left_leg",
+                "source_slug": "Plan:_T-60_left_leg"
             },
             "availability": []
         },
@@ -946,7 +985,8 @@
                 ],
                 "value": "500",
                 "form_id": "0050189E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_right_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_right_arm",
+                "source_slug": "Plan:_T-60_right_arm"
             },
             "availability": []
         },
@@ -970,7 +1010,8 @@
                 ],
                 "value": "500",
                 "form_id": "005018A1",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_right_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-60_right_leg",
+                "source_slug": "Plan:_T-60_right_leg"
             },
             "availability": []
         },
@@ -992,7 +1033,8 @@
                 ],
                 "value": "1650",
                 "form_id": "00589355",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_helm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_helm",
+                "source_slug": "Plan:_T-65_helm"
             },
             "availability": []
         },
@@ -1014,7 +1056,8 @@
                 ],
                 "value": "1000",
                 "form_id": "00589353",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_left_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_left_arm",
+                "source_slug": "Plan:_T-65_left_arm"
             },
             "availability": []
         },
@@ -1036,7 +1079,8 @@
                 ],
                 "value": "1000",
                 "form_id": "00589356",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_left_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_left_leg",
+                "source_slug": "Plan:_T-65_left_leg"
             },
             "availability": []
         },
@@ -1058,7 +1102,8 @@
                 ],
                 "value": "1000",
                 "form_id": "00589354",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_right_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_right_arm",
+                "source_slug": "Plan:_T-65_right_arm"
             },
             "availability": []
         },
@@ -1080,7 +1125,8 @@
                 ],
                 "value": "1000",
                 "form_id": "00589357",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_right_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_right_leg",
+                "source_slug": "Plan:_T-65_right_leg"
             },
             "availability": []
         },
@@ -1102,7 +1148,8 @@
                 ],
                 "value": "1250",
                 "form_id": "00589358",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_T-65_torso",
+                "source_slug": "Plan:_T-65_torso"
             },
             "availability": []
         },
@@ -1125,7 +1172,8 @@
                 ],
                 "value": "500",
                 "form_id": "005018A5",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_helm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_helm",
+                "source_slug": "Plan:_Ultracite_helm"
             },
             "availability": []
         },
@@ -1148,7 +1196,8 @@
                 ],
                 "value": "500",
                 "form_id": "005018A3",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_left_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_left_arm",
+                "source_slug": "Plan:_Ultracite_left_arm"
             },
             "availability": []
         },
@@ -1171,7 +1220,8 @@
                 ],
                 "value": "500",
                 "form_id": "005018A6",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_left_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_left_leg",
+                "source_slug": "Plan:_Ultracite_left_leg"
             },
             "availability": []
         },
@@ -1194,7 +1244,8 @@
                 ],
                 "value": "500",
                 "form_id": "005018A4",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_right_arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_right_arm",
+                "source_slug": "Plan:_Ultracite_right_arm"
             },
             "availability": []
         },
@@ -1217,7 +1268,8 @@
                 ],
                 "value": "500",
                 "form_id": "005018A7",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_right_leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_right_leg",
+                "source_slug": "Plan:_Ultracite_right_leg"
             },
             "availability": []
         },
@@ -1240,7 +1292,8 @@
                 ],
                 "value": "500",
                 "form_id": "005018A8",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_torso"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Ultracite_torso",
+                "source_slug": "Plan:_Ultracite_torso"
             },
             "availability": []
         },
@@ -1268,7 +1321,8 @@
                 },
                 "value": "120",
                 "form_id": "0064B932",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Chest_Piece"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Chest_Piece",
+                "source_slug": "Plan:_Union_Chest_Piece"
             },
             "availability": []
         },
@@ -1296,7 +1350,8 @@
                 },
                 "value": "120",
                 "form_id": "0064B93D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Helmet"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Helmet",
+                "source_slug": "Plan:_Union_Helmet"
             },
             "availability": []
         },
@@ -1324,7 +1379,8 @@
                 },
                 "value": "120",
                 "form_id": "0064B930",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Left_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Left_Arm",
+                "source_slug": "Plan:_Union_Left_Arm"
             },
             "availability": []
         },
@@ -1352,7 +1408,8 @@
                 },
                 "value": "120",
                 "form_id": "0064B934",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Left_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Left_Leg",
+                "source_slug": "Plan:_Union_Left_Leg"
             },
             "availability": []
         },
@@ -1380,7 +1437,8 @@
                 },
                 "value": "120",
                 "form_id": "0064B93B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Right_Arm"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Right_Arm",
+                "source_slug": "Plan:_Union_Right_Arm"
             },
             "availability": []
         },
@@ -1408,7 +1466,8 @@
                 },
                 "value": "120",
                 "form_id": "0064B92E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Right_Leg"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Union_Right_Leg",
+                "source_slug": "Plan:_Union_Right_Leg"
             },
             "availability": []
         },
@@ -1433,7 +1492,8 @@
                     ]
                 },
                 "form_id": "00793E89",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Blood_Cleanser"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Blood_Cleanser",
+                "source_slug": "Plan:_Vulcan_Blood_Cleanser"
             },
             "availability": []
         },
@@ -1458,7 +1518,8 @@
                     ]
                 },
                 "form_id": "00793E83",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Calibrated_Shocks"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Calibrated_Shocks",
+                "source_slug": "Plan:_Vulcan_Calibrated_Shocks"
             },
             "availability": []
         },
@@ -1483,7 +1544,8 @@
                     ]
                 },
                 "form_id": "00793E85",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Cooling_Vent"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Cooling_Vent",
+                "source_slug": "Plan:_Vulcan_Cooling_Vent"
             },
             "availability": []
         },
@@ -1504,7 +1566,8 @@
                     "Quest"
                 ],
                 "form_id": "00793E88",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Core_Assembly"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Core_Assembly",
+                "source_slug": "Plan:_Vulcan_Core_Assembly"
             },
             "availability": []
         },
@@ -1525,7 +1588,8 @@
                     "Quest"
                 ],
                 "form_id": "00793E84",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Elastic_Servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Elastic_Servos",
+                "source_slug": "Plan:_Vulcan_Elastic_Servos"
             },
             "availability": []
         },
@@ -1546,7 +1610,8 @@
                     "Quest"
                 ],
                 "form_id": "00793E8A",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Emergency_Protocols"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Emergency_Protocols",
+                "source_slug": "Plan:_Vulcan_Emergency_Protocols"
             },
             "availability": []
         },
@@ -1567,7 +1632,8 @@
                     "Quest"
                 ],
                 "form_id": "00793E8B",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Jet_Pack"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Jet_Pack",
+                "source_slug": "Plan:_Vulcan_Jet_Pack"
             },
             "availability": []
         },
@@ -1588,7 +1654,8 @@
                     "Quest"
                 ],
                 "form_id": "00793E8C",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Kinetic_Dynamo"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Kinetic_Dynamo",
+                "source_slug": "Plan:_Vulcan_Kinetic_Dynamo"
             },
             "availability": []
         },
@@ -1609,7 +1676,8 @@
                     "Quest"
                 ],
                 "form_id": "00793E8D",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Medic_Pump"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Medic_Pump",
+                "source_slug": "Plan:_Vulcan_Medic_Pump"
             },
             "availability": []
         },
@@ -1630,7 +1698,8 @@
                     "Quest"
                 ],
                 "form_id": "00793E91",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Motion-Assist_Servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Motion-Assist_Servos",
+                "source_slug": "Plan:_Vulcan_Motion-Assist_Servos"
             },
             "availability": []
         },
@@ -1651,7 +1720,8 @@
                     "Quest"
                 ],
                 "form_id": "00793E86",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Optimized_Servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Optimized_Servos",
+                "source_slug": "Plan:_Vulcan_Optimized_Servos"
             },
             "availability": []
         },
@@ -1672,7 +1742,8 @@
                     "Quest"
                 ],
                 "form_id": "00793E87",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Overdrive_Servos"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Overdrive_Servos",
+                "source_slug": "Plan:_Vulcan_Overdrive_Servos"
             },
             "availability": []
         },
@@ -1693,7 +1764,8 @@
                     "Quest"
                 ],
                 "form_id": "00793E8E",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Reactive_Plates"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Reactive_Plates",
+                "source_slug": "Plan:_Vulcan_Reactive_Plates"
             },
             "availability": []
         },
@@ -1714,7 +1786,8 @@
                     "Quest"
                 ],
                 "form_id": "00793E8F",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Reflection_Assembly"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Reflection_Assembly",
+                "source_slug": "Plan:_Vulcan_Reflection_Assembly"
             },
             "availability": []
         },
@@ -1735,7 +1808,8 @@
                     "Quest"
                 ],
                 "form_id": "00793E90",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Stealth_Boy"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Stealth_Boy",
+                "source_slug": "Plan:_Vulcan_Stealth_Boy"
             },
             "availability": []
         },
@@ -1756,7 +1830,8 @@
                     "Quest"
                 ],
                 "form_id": "00793E92",
-                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Tesla_Coils"
+                "wiki_url": "https://fallout.wiki/wiki/Plan:_Vulcan_Tesla_Coils",
+                "source_slug": "Plan:_Vulcan_Tesla_Coils"
             },
             "availability": []
         }
