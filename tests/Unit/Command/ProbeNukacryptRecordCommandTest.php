@@ -45,6 +45,11 @@ final class ProbeNukacryptRecordCommandTest extends TestCase
                     ),
                 ];
             }
+
+            public function searchByEditorId(string $editorId, array $signatures = ['BOOK']): array
+            {
+                return [];
+            }
         };
 
         $tester = new CommandTester(new ProbeNukacryptRecordCommand($lookup));
@@ -76,6 +81,11 @@ final class ProbeNukacryptRecordCommandTest extends TestCase
                     ),
                 ];
             }
+
+            public function searchByEditorId(string $editorId, array $signatures = ['BOOK']): array
+            {
+                return [];
+            }
         };
 
         $tester = new CommandTester(new ProbeNukacryptRecordCommand($lookup));
@@ -96,6 +106,11 @@ final class ProbeNukacryptRecordCommandTest extends TestCase
     {
         $lookup = new class implements NukacryptRecordLookup {
             public function search(string $searchTerm, array $signatures = ['BOOK']): array
+            {
+                throw new RuntimeException('boom');
+            }
+
+            public function searchByEditorId(string $editorId, array $signatures = ['BOOK']): array
             {
                 throw new RuntimeException('boom');
             }

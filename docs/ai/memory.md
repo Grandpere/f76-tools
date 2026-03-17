@@ -111,6 +111,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: replaced the attempted direct `formId` lookup slice with a targeted console probe built on `esmRecords(searchTerm, signatures)`, which is enough for semi-automatic conflict arbitration by candidate names.
 - Prevention: when integrating third-party GraphQL, validate the exact query shape live before designing abstractions; if only search works reliably, model the client as a search helper instead of a direct-ID repository.
 
+## 2026-03-17 - Nukacrypt conflict arbitration should search by candidate name or editorId, then validate by formId
+- Symptom: the user confirmed the public Nukacrypt search works with `name` or `editorId`, but not with `formId`, which matches our live API probes.
+- Root cause: on the public side, `formId` is a good validation field but not a dependable lookup input; treating it as a search key sends us back to the flaky GraphQL path.
+- Fix: added a dedicated conflict-probe command that searches one or more candidate names and an optional `editorId`, then reports which results match the expected `formId`.
+- Prevention: for external arbitration workflows, separate lookup keys (name/editorId) from validation keys (`formId`) instead of assuming one field can do both jobs.
+
 ## 2026-03-13 - Async messenger transport requires Doctrine table migration in prod DB
 - Symptom: roadmap OCR upload failed with `relation "messenger_messages" does not exist`.
 - Root cause: `MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0` disables runtime table auto-creation, and async feature shipped before creating `messenger_messages`.

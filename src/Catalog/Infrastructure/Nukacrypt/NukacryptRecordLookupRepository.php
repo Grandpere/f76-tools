@@ -46,6 +46,31 @@ final class NukacryptRecordLookupRepository implements NukacryptRecordLookup
             throw new RuntimeException('Search term cannot be empty.');
         }
 
+        return $this->searchInternal($normalizedSearchTerm, null, $signatures);
+    }
+
+    /**
+     * @param list<string> $signatures
+     *
+     * @return list<NukacryptRecord>
+     */
+    public function searchByEditorId(string $editorId, array $signatures = ['BOOK']): array
+    {
+        $normalizedEditorId = trim($editorId);
+        if ('' === $normalizedEditorId) {
+            throw new RuntimeException('Editor ID cannot be empty.');
+        }
+
+        return $this->searchInternal(null, $normalizedEditorId, $signatures);
+    }
+
+    /**
+     * @param list<string> $signatures
+     *
+     * @return list<NukacryptRecord>
+     */
+    private function searchInternal(?string $searchTerm, ?string $editorId, array $signatures): array
+    {
         $gameState = $this->fetchFo76GameState();
         $payload = $this->requestJson(
             <<<'GRAPHQL'
@@ -68,7 +93,8 @@ final class NukacryptRecordLookupRepository implements NukacryptRecordLookup
                     }
                 GRAPHQL,
             [
-                'searchTerm' => $normalizedSearchTerm,
+                'searchTerm' => $searchTerm,
+                'editorId' => $editorId,
                 'signatures' => $this->normalizeSignatures($signatures),
                 'gameState' => $gameState,
             ],
@@ -77,12 +103,12 @@ final class NukacryptRecordLookupRepository implements NukacryptRecordLookup
         $data = $payload['data'] ?? null;
         $recordsNode = is_array($data) ? ($data['esmRecords'] ?? null) : null;
         if (!is_array($recordsNode) || true !== ($recordsNode['success'] ?? false)) {
-            throw new RuntimeException(sprintf('Nukacrypt esmRecords search failed for "%s".%s', $normalizedSearchTerm, $this->describeGraphqlErrors($payload)));
+            throw new RuntimeException(sprintf('Nukacrypt esmRecords search failed for "%s".%s', $searchTerm ?? $editorId ?? 'unknown', $this->describeGraphqlErrors($payload)));
         }
 
         $records = $recordsNode['records'] ?? null;
         if (!is_array($records)) {
-            throw new RuntimeException(sprintf('Nukacrypt esmRecords payload is missing records for "%s".', $normalizedSearchTerm));
+            throw new RuntimeException(sprintf('Nukacrypt esmRecords payload is missing records for "%s".', $searchTerm ?? $editorId ?? 'unknown'));
         }
 
         $resolved = [];

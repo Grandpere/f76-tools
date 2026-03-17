@@ -21,4 +21,11 @@ interface NukacryptRecordLookup
      * @return list<NukacryptRecord>
      */
     public function search(string $searchTerm, array $signatures = ['BOOK']): array;
+
+    /**
+     * @param list<string> $signatures
+     *
+     * @return list<NukacryptRecord>
+     */
+    public function searchByEditorId(string $editorId, array $signatures = ['BOOK']): array;
 }

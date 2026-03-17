@@ -139,6 +139,7 @@ docker compose -f compose.yaml exec -T app php bin/console app:data:report:sourc
 docker compose -f compose.yaml exec -T app php bin/console app:data:report:source-merge-summary
 docker compose -f compose.yaml exec -T app php bin/console app:data:report:source-collisions
 docker compose -f compose.yaml exec -T app php bin/console app:data:probe:nukacrypt-record 'Plan: Vault 96 Jumpsuit' --signature=BOOK --format=json
+docker compose -f compose.yaml exec -T app php bin/console app:data:probe:nukacrypt-conflict --expected-form-id=002B42A4 --candidate='Plan: Bladed Commie Whacker' --candidate='Plan: Garden Trowel Knife' --signature=BOOK --format=json
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=nukaknights
 
 make minerva-refresh-dry-run
@@ -192,6 +193,7 @@ Notes:
 - Le sync `Fandom` conserve maintenant les pages deja reussies et ecrit un `index.json` partiel si une page externe echoue. Pour une relance ciblee, utiliser `app:data:sync --only=fandom --fandom-page='...'`.
 - Le sync `fallout.wiki` applique maintenant la meme logique: pages reussies conservees, `index.json` partiel avec `page_errors`, et relance ciblee via `app:data:sync --only=fallout-wiki --fallout-wiki-page='...'`.
 - Nukacrypt est actuellement exploite en recherche ciblee par nom (`app:data:probe:nukacrypt-record ... --signature=BOOK`) pour arbitrage ponctuel; le lookup direct public par `form_id` n est pas encore suffisamment fiable pour en faire un sync exhaustif.
+- Pour arbitrer un conflit entre deux noms candidats, utiliser `app:data:probe:nukacrypt-conflict` avec un `--expected-form-id` et un ou plusieurs `--candidate`; un `--editor-id` peut etre ajoute quand il est connu.
 
 ## Qualite et tests
 Commandes standard:

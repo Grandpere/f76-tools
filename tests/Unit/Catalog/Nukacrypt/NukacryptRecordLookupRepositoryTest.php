@@ -160,4 +160,55 @@ final class NukacryptRecordLookupRepositoryTest extends TestCase
 
         self::assertEquals(7, $capturedTimeout);
     }
+
+    public function testSearchByEditorIdReturnsResolvedRecords(): void
+    {
+        $client = new MockHttpClient([
+            new MockResponse(json_encode([
+                'data' => [
+                    'games' => [
+                        [
+                            'id' => 'dbdac593-fa03-4ad4-8251-36bc55d850b0',
+                            'name' => 'Fallout 76',
+                            'shortname' => 'FO76',
+                            'patches' => [],
+                        ],
+                    ],
+                ],
+            ], JSON_THROW_ON_ERROR)),
+            new MockResponse(json_encode([
+                'data' => [
+                    'esmRecords' => [
+                        'success' => true,
+                        'totalRecords' => 1,
+                        'records' => [
+                            [
+                                'id' => '1e4e2f30-29bd-4261-a14d-126f7f5f131d',
+                                'name' => 'Plan: Vault 96 Jumpsuit',
+                                'editorId' => 'recipe_Armor_VaultSuit96_Underarmor',
+                                'formId' => '0031338f',
+                                'signature' => 'BOOK',
+                                'description' => null,
+                                'esmFileName' => null,
+                                'updatedAt' => null,
+                                'recordData' => null,
+                            ],
+                        ],
+                    ],
+                ],
+            ], JSON_THROW_ON_ERROR)),
+        ]);
+
+        $repository = new NukacryptRecordLookupRepository(
+            $client,
+            'https://api.nukacrypt.com/graphql',
+            'f76-data-sync-experimentation/1.0',
+        );
+
+        $records = $repository->searchByEditorId('recipe_Armor_VaultSuit96_Underarmor');
+
+        self::assertCount(1, $records);
+        self::assertSame('0031338F', $records[0]->formId);
+        self::assertSame('recipe_Armor_VaultSuit96_Underarmor', $records[0]->editorId);
+    }
 }
