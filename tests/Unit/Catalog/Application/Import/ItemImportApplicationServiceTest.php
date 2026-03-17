@@ -133,6 +133,76 @@ final class ItemImportApplicationServiceTest extends TestCase
         self::assertStringContainsString('Doublon detecte', $result->getWarnings()[0]);
     }
 
+    public function testWriteModeMergesFandomAndFalloutWikiExternalSourcesOnSameFormId(): void
+    {
+        $root = $this->createTempDir();
+        mkdir($root.'/data/sources/fandom/plan_recipes', 0o777, true);
+        mkdir($root.'/data/sources/fallout_wiki/plan_recipes', 0o777, true);
+
+        file_put_contents($root.'/data/sources/fandom/plan_recipes/recipes.json', (string) json_encode([
+            'page' => 'Fallout_76_recipes',
+            'url' => 'https://fallout.fandom.com/wiki/Fallout_76_recipes',
+            'resources' => [
+                [
+                    'type' => 'recipe',
+                    'slug' => 'recipe-delbert-company-tea',
+                    'title' => "Recipe: Delbert's Company Tea",
+                    'section' => 'Recipes',
+                    'columns' => [
+                        'form_id' => '003A2021',
+                        'wiki_url' => 'https://fallout.fandom.com/wiki/Recipe:Delbert%27s_company_tea',
+                    ],
+                    'availability' => [
+                        'vendors' => false,
+                    ],
+                ],
+            ],
+        ], JSON_THROW_ON_ERROR));
+
+        file_put_contents($root.'/data/sources/fallout_wiki/plan_recipes/recipes.json', (string) json_encode([
+            'page' => 'Fallout_76_Recipes',
+            'url' => 'https://fallout.wiki/wiki/Fallout_76_Recipes',
+            'resources' => [
+                [
+                    'type' => 'recipe',
+                    'slug' => 'recipe-delbert-s-company-tea',
+                    'name' => "Recipe: Delbert's Company Tea",
+                    'section' => 'Recipes',
+                    'columns' => [
+                        'form_id' => '003A2021',
+                        'wiki_url' => 'https://fallout.wiki/wiki/Recipe:Delbert%27s_Company_Tea',
+                    ],
+                    'availability' => [],
+                ],
+            ],
+        ], JSON_THROW_ON_ERROR));
+
+        $this->repository
+            ->expects(self::once())
+            ->method('findOneByTypeAndSourceId')
+            ->willReturn(null);
+        $this->repository->expects(self::never())->method('deleteAllBookLists');
+
+        $persistedItems = [];
+        $this->persistence->expects(self::exactly(2))
+            ->method('persist')
+            ->willReturnCallback(static function (ItemEntity $item) use (&$persistedItems): void {
+                $persistedItems[] = $item;
+            });
+        $this->persistence->expects(self::once())->method('flush');
+
+        $projectDir = $this->createTempDir();
+        $service = $this->createService($this->createTranslationWriter($projectDir));
+        $result = $service->import($root, false, 100, false);
+
+        self::assertFalse($result->hasErrors());
+        self::assertSame(1, $result->getStats()['created']);
+        self::assertSame(1, $result->getStats()['updated']);
+        self::assertCount(2, $persistedItems);
+        $item = $persistedItems[1];
+        self::assertCount(2, $item->getExternalSources());
+    }
+
     private function createService(TranslationCatalogWriter $translationCatalogWriter): ItemImportApplicationService
     {
         $normalizer = new ItemImportValueNormalizer();

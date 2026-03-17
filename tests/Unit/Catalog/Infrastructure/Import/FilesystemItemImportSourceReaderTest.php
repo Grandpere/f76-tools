@@ -24,6 +24,7 @@ final class FilesystemItemImportSourceReaderTest extends TestCase
         file_put_contents($root.'/legendary_mods_1_alpha.json', '[]');
         file_put_contents($root.'/minerva_61_beta.json', '[]');
         file_put_contents($root.'/manifest.json', '{}');
+        file_put_contents($root.'/index.json', '{}');
 
         $reader = new FilesystemItemImportSourceReader();
         $files = $reader->findImportFiles($root);
@@ -68,6 +69,43 @@ final class FilesystemItemImportSourceReaderTest extends TestCase
         $reader = new FilesystemItemImportSourceReader();
 
         self::assertNull($reader->readRows($path));
+    }
+
+    public function testReadRowsReturnsNormalizedResourcesForObjectPayload(): void
+    {
+        $root = $this->createTempDir();
+        $path = $root.'/recipes.json';
+        file_put_contents($path, (string) json_encode([
+            'generated_at' => '2026-03-17T10:00:00+00:00',
+            'page' => 'Fallout_76_Recipes',
+            'url' => 'https://fallout.wiki/wiki/Fallout_76_Recipes',
+            'resources' => [
+                [
+                    'type' => 'recipe',
+                    'slug' => 'recipe-delbert-s-company-tea',
+                    'name' => "Recipe: Delbert's Company Tea",
+                    'section' => 'Recipes',
+                    'columns' => [
+                        'form_id' => '003A2021',
+                        'wiki_url' => 'https://fallout.wiki/wiki/Recipe:Delbert%27s_Company_Tea',
+                    ],
+                    'availability' => [
+                        'vendors' => true,
+                    ],
+                ],
+            ],
+        ], JSON_THROW_ON_ERROR));
+
+        $reader = new FilesystemItemImportSourceReader();
+        $rows = $reader->readRows($path);
+
+        self::assertIsArray($rows);
+        self::assertCount(1, $rows);
+        self::assertIsArray($rows[0]);
+        self::assertSame(3809313, $rows[0]['id'] ?? null);
+        self::assertSame("Recipe: Delbert's Company Tea", $rows[0]['name_en'] ?? null);
+        self::assertSame('Recipes', $rows[0]['source_section'] ?? null);
+        self::assertTrue((bool) ($rows[0]['vendors'] ?? false));
     }
 
     private function createTempDir(): string

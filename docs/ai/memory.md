@@ -45,6 +45,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: for `fallout-wiki`, the dedicated command was versioned, added to `app:data:sync`, covered with unit tests, and documented with its default `data/sources/<provider>/...` output path.
 - Prevention: every new data source must ship as one slice: dedicated command + orchestrator integration + tests + runbook/docs.
 
+## 2026-03-17 - External wiki sync payloads must be flattened before import
+- Symptom: Fandom/Fallout Wiki sync files are JSON objects with `resources`, while the legacy import expected a flat list of rows and silently skipped object payloads.
+- Root cause: the import reader was still tailored to older raw-array sources only.
+- Fix: `FilesystemItemImportSourceReader` now ignores `index.json`, unwraps `resources[*]`, flattens `columns`/`availability`, derives a stable numeric `id` from `form_id`, and feeds normalized rows into the existing import pipeline.
+- Prevention: every new raw source format must either match the flat-row contract or add a reader normalization test before import wiring.
+
 ## 2026-03-13 - Async messenger transport requires Doctrine table migration in prod DB
 - Symptom: roadmap OCR upload failed with `relation "messenger_messages" does not exist`.
 - Root cause: `MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0` disables runtime table auto-creation, and async feature shipped before creating `messenger_messages`.

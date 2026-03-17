@@ -46,7 +46,9 @@ final class ItemImportContextApplier
         $incomingListNumber = $context->listNumber;
         $incomingIsSpecial = $context->isSpecialList;
         if (!is_int($incomingListNumber)) {
-            return ItemImportContextApplyResult::invalid();
+            $item->setRank(null);
+
+            return ItemImportContextApplyResult::valid();
         }
 
         $item->setRank(null);

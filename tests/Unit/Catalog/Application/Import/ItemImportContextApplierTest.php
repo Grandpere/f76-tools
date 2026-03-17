@@ -87,15 +87,15 @@ final class ItemImportContextApplierTest extends TestCase
 
         self::assertFalse($miscResult->valid);
 
-        $invalidBookContext = new ItemImportFileContext(
+        $catalogBookContext = new ItemImportFileContext(
             ItemTypeEnum::BOOK,
             null,
             null,
             false,
-            'nukaknights',
+            'fandom',
         );
-        $bookResult = $this->applier->apply($item, 1, $invalidBookContext);
+        $bookResult = $this->applier->apply($item, 1, $catalogBookContext);
 
-        self::assertFalse($bookResult->valid);
+        self::assertTrue($bookResult->valid);
     }
 }

@@ -47,4 +47,15 @@ final readonly class ItemImportFileContext
             $sourceProvider,
         );
     }
+
+    public static function bookCatalog(string $sourceProvider): self
+    {
+        return new self(
+            ItemTypeEnum::BOOK,
+            null,
+            null,
+            false,
+            $sourceProvider,
+        );
+    }
 }

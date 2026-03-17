@@ -62,4 +62,25 @@ final class ItemImportFileContextResolverTest extends TestCase
 
         self::assertNull($resolver->resolve('/tmp/other_file.json'));
     }
+
+    public function testResolveReturnsBookCatalogContextForFandomAndFalloutWikiFiles(): void
+    {
+        $resolver = new ItemImportFileContextResolver();
+
+        $fandom = $resolver->resolve('/tmp/project/data/sources/fandom/plan_recipes/recipes.json');
+        self::assertNotNull($fandom);
+        self::assertSame(ItemTypeEnum::BOOK, $fandom->type);
+        self::assertNull($fandom->rank);
+        self::assertNull($fandom->listNumber);
+        self::assertFalse($fandom->isSpecialList);
+        self::assertSame('fandom', $fandom->sourceProvider);
+
+        $falloutWiki = $resolver->resolve('/tmp/project/data/sources/fallout_wiki/plan_recipes/plans_weapons.json');
+        self::assertNotNull($falloutWiki);
+        self::assertSame(ItemTypeEnum::BOOK, $falloutWiki->type);
+        self::assertNull($falloutWiki->rank);
+        self::assertNull($falloutWiki->listNumber);
+        self::assertFalse($falloutWiki->isSpecialList);
+        self::assertSame('fallout_wiki', $falloutWiki->sourceProvider);
+    }
 }
