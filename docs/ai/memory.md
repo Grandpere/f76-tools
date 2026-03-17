@@ -574,3 +574,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: the Dockerfile pins Alpine package revisions exactly, and upstream repositories had already moved PostgreSQL packages from `18.2-r0` to `18.3-r0`.
 - Fix: aligned `libpq` and `postgresql18-dev` pins to `18.3-r0`.
 - Prevention: when a rebuild suddenly fails on `apk` with `breaks: world[...]`, first check whether an exact package revision pin has drifted in Alpine repos before changing the wider build.
+
+## 2026-03-17 - Nukacrypt GraphQL search fails when unused variables are sent as null/empty
+- Symptom: the app-side Nukacrypt probe returned `HTTP 500` with an empty body for valid searches like `Plan: Bladed Commie Whacker`, while equivalent browser/curl lookups succeeded.
+- Root cause: the lookup repository sent a broader GraphQL variables payload than the browser request, including unused keys such as `editorId: null` and sometimes empty `signatures`; Nukacrypt's upstream search endpoint was sensitive to those extra null/empty variables.
+- Fix: switched the lookup to a dedicated `ext-curl` request path matching the successful browser shape more closely, with a static FO76 `gameState`, browser-like headers, and only the variables actually used for the current lookup.
+- Prevention: when mirroring a fragile third-party GraphQL endpoint, keep the payload shape as close as possible to a known-good browser request and omit null/empty variables instead of sending placeholder values.

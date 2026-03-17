@@ -15,22 +15,22 @@ namespace App\Catalog\Infrastructure\Nukacrypt;
 
 use App\Catalog\Application\Nukacrypt\NukacryptRecord;
 use App\Catalog\Application\Nukacrypt\NukacryptRecordLookup;
+use Closure;
 use RuntimeException;
-use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class NukacryptRecordLookupRepository implements NukacryptRecordLookup
 {
     private const ALLOWED_HOST = 'api.nukacrypt.com';
-    private const FO76_SHORTNAME = 'FO76';
+    private const FO76_GAME_ID = 'dbdac593-fa03-4ad4-8251-36bc55d850b0';
     private const DEFAULT_PATCH_ID = 'latest';
     private const DEFAULT_FILE_ID = 'primary';
+    private const DEFAULT_BROWSER_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36';
 
     public function __construct(
-        private readonly HttpClientInterface $httpClient,
         private readonly string $graphqlUrl,
         private readonly string $userAgent,
         private readonly int $timeoutSeconds = 10,
+        private readonly ?Closure $curlExecutor = null,
     ) {
     }
 
@@ -71,7 +71,35 @@ final class NukacryptRecordLookupRepository implements NukacryptRecordLookup
      */
     private function searchInternal(?string $searchTerm, ?string $editorId, array $signatures): array
     {
-        $gameState = $this->fetchFo76GameState();
+        $variables = [
+            'gameState' => [
+                'gameId' => self::FO76_GAME_ID,
+                'patchId' => self::DEFAULT_PATCH_ID,
+                'fileId' => self::DEFAULT_FILE_ID,
+            ],
+            'page' => [
+                'offset' => 0,
+                'limit' => 25,
+                'sort' => [
+                    'attribute' => 'form_id',
+                    'direction' => 'ASC',
+                ],
+            ],
+        ];
+
+        if (null !== $searchTerm) {
+            $variables['searchTerm'] = $searchTerm;
+        }
+
+        if (null !== $editorId) {
+            $variables['editorId'] = $editorId;
+        }
+
+        $normalizedSignatures = $this->normalizeSignatures($signatures);
+        if ([] !== $normalizedSignatures) {
+            $variables['signatures'] = $normalizedSignatures;
+        }
+
         $payload = $this->requestJson(
             <<<'GRAPHQL'
                     query ($gameState: GameStateArgs, $searchTerm: String, $editorId: String, $signatures: [String], $page: Criteria, $ids: [String]) {
@@ -87,25 +115,12 @@ final class NukacryptRecordLookupRepository implements NukacryptRecordLookup
                           formId
                           esmFileName
                           updatedAt
-                          recordData
+                          fileMeta
                         }
                       }
                     }
                 GRAPHQL,
-            [
-                'searchTerm' => $searchTerm,
-                'editorId' => $editorId,
-                'signatures' => $this->normalizeSignatures($signatures),
-                'gameState' => $gameState,
-                'page' => [
-                    'offset' => 0,
-                    'limit' => 25,
-                    'sort' => [
-                        'attribute' => 'form_id',
-                        'direction' => 'ASC',
-                    ],
-                ],
-            ],
+            $variables,
         );
 
         $data = $payload['data'] ?? null;
@@ -147,59 +162,6 @@ final class NukacryptRecordLookupRepository implements NukacryptRecordLookup
     }
 
     /**
-     * @return array{gameId:string, patchId:string, fileId:string}
-     */
-    private function fetchFo76GameState(): array
-    {
-        $payload = $this->requestJson(
-            <<<'GRAPHQL'
-                    query {
-                      games {
-                        id
-                        name
-                        shortname
-                        patches {
-                          esmFiles {
-                            fileName
-                          }
-                        }
-                      }
-                    }
-                GRAPHQL,
-            [],
-        );
-
-        $data = $payload['data'] ?? null;
-        $games = is_array($data) ? ($data['games'] ?? null) : null;
-        if (!is_array($games)) {
-            throw new RuntimeException(sprintf('Nukacrypt GraphQL payload is missing games field.%s', $this->describeGraphqlErrors($payload)));
-        }
-
-        foreach ($games as $game) {
-            if (!is_array($game)) {
-                continue;
-            }
-
-            if (self::FO76_SHORTNAME !== $this->normalizeNullableString($game['shortname'] ?? null)) {
-                continue;
-            }
-
-            $gameId = $this->normalizeNullableString($game['id'] ?? null);
-            if (null === $gameId) {
-                break;
-            }
-
-            return [
-                'gameId' => $gameId,
-                'patchId' => self::DEFAULT_PATCH_ID,
-                'fileId' => self::DEFAULT_FILE_ID,
-            ];
-        }
-
-        throw new RuntimeException('Unable to resolve FO76 game state from Nukacrypt GraphQL.');
-    }
-
-    /**
      * @param array<string, mixed> $variables
      *
      * @return array<string, mixed>
@@ -208,26 +170,116 @@ final class NukacryptRecordLookupRepository implements NukacryptRecordLookup
     {
         $this->assertGraphqlUrlAllowed();
 
-        try {
-            $response = $this->httpClient->request('POST', $this->graphqlUrl, [
-                'headers' => [
-                    'Content-Type' => 'application/json',
-                    'User-Agent' => $this->userAgent,
-                ],
-                'timeout' => max(1, $this->timeoutSeconds),
-                'json' => [
-                    'query' => $query,
-                    'variables' => [] === $variables ? (object) [] : $variables,
-                ],
-            ]);
+        $payloadJson = json_encode([
+            'query' => $query,
+            'variables' => [] === $variables ? (object) [] : $variables,
+        ], JSON_THROW_ON_ERROR);
 
-            /** @var array<string, mixed> $payload */
-            $payload = $response->toArray(false);
+        $result = $this->executeCurl(
+            $this->graphqlUrl,
+            $this->requestHeaders(),
+            $payloadJson,
+            max(1, $this->timeoutSeconds),
+        );
 
-            return $payload;
-        } catch (ExceptionInterface $exception) {
-            throw new RuntimeException('Unable to query Nukacrypt GraphQL: '.$exception->getMessage(), 0, $exception);
+        if ('' === $result['body']) {
+            throw new RuntimeException(sprintf('Nukacrypt GraphQL returned an empty body (HTTP %d).', $result['httpCode']));
         }
+
+        $decoded = json_decode($result['body'], true);
+        if (!is_array($decoded)) {
+            throw new RuntimeException(sprintf('Nukacrypt GraphQL returned invalid JSON (HTTP %d).', $result['httpCode']));
+        }
+
+        /** @var array<string, mixed> $payload */
+        $payload = $decoded;
+
+        return $payload;
+    }
+
+    /**
+     * @param list<string> $headers
+     *
+     * @return array{httpCode:int, body:string}
+     */
+    private function executeCurl(string $url, array $headers, string $payloadJson, int $timeoutSeconds): array
+    {
+        if ($this->curlExecutor instanceof Closure) {
+            /** @var array{httpCode:int, body:string} $result */
+            $result = ($this->curlExecutor)($url, $headers, $payloadJson, $timeoutSeconds);
+
+            return $result;
+        }
+
+        $curl = curl_init($url);
+        if (false === $curl) {
+            throw new RuntimeException('Unable to initialize cURL for Nukacrypt GraphQL.');
+        }
+
+        curl_setopt_array($curl, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $payloadJson,
+            CURLOPT_HTTPHEADER => $headers,
+            CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_ENCODING => '',
+            CURLOPT_TIMEOUT => $timeoutSeconds,
+        ]);
+
+        $body = curl_exec($curl);
+        $httpCode = (int) curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
+        $error = curl_error($curl);
+        curl_close($curl);
+
+        if (false === $body) {
+            throw new RuntimeException('Unable to query Nukacrypt GraphQL: '.$error);
+        }
+
+        if (!is_string($body)) {
+            throw new RuntimeException('Unable to query Nukacrypt GraphQL: unexpected cURL response type.');
+        }
+
+        return [
+            'httpCode' => $httpCode,
+            'body' => $body,
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function requestHeaders(): array
+    {
+        return [
+            'Content-Type: application/json',
+            'Accept: */*',
+            'Accept-Language: fr-FR,fr;q=0.6',
+            'Cache-Control: no-cache',
+            'Origin: https://nukacrypt.com',
+            'Pragma: no-cache',
+            'Priority: u=1, i',
+            'Referer: https://nukacrypt.com/',
+            'Sec-CH-UA: "Not(A:Brand";v="8", "Chromium";v="144", "Brave";v="144"',
+            'Sec-CH-UA-Mobile: ?0',
+            'Sec-CH-UA-Platform: "macOS"',
+            'Sec-Fetch-Dest: empty',
+            'Sec-Fetch-Mode: cors',
+            'Sec-Fetch-Site: same-site',
+            'Sec-GPC: 1',
+            'User-Agent: '.$this->resolveUserAgent(),
+        ];
+    }
+
+    private function resolveUserAgent(): string
+    {
+        $userAgent = trim($this->userAgent);
+
+        if ('' !== $userAgent && str_starts_with($userAgent, 'Mozilla/')) {
+            return $userAgent;
+        }
+
+        return self::DEFAULT_BROWSER_USER_AGENT;
     }
 
     /**
@@ -267,12 +319,12 @@ final class NukacryptRecordLookupRepository implements NukacryptRecordLookup
      */
     private function normalizeRecordData(mixed $value): ?array
     {
-        if (!is_array($value) || !$this->isStringKeyedArray($value)) {
-            return null;
+        if (is_array($value) && $this->isStringKeyedArray($value)) {
+            /** @var array<string, mixed> $value */
+            return $value;
         }
 
-        /** @var array<string, mixed> $value */
-        return $value;
+        return null;
     }
 
     private function normalizeNullableString(mixed $value): ?string
@@ -286,21 +338,6 @@ final class NukacryptRecordLookupRepository implements NukacryptRecordLookup
         return '' === $normalized ? null : $normalized;
     }
 
-    private function assertGraphqlUrlAllowed(): void
-    {
-        $url = trim($this->graphqlUrl);
-        $parts = parse_url($url);
-        if (!is_array($parts)) {
-            throw new RuntimeException('Nukacrypt GraphQL URL is invalid.');
-        }
-
-        $scheme = mb_strtolower((string) ($parts['scheme'] ?? ''));
-        $host = mb_strtolower((string) ($parts['host'] ?? ''));
-        if ('https' !== $scheme || self::ALLOWED_HOST !== $host) {
-            throw new RuntimeException('Nukacrypt GraphQL URL must target https://api.nukacrypt.com.');
-        }
-    }
-
     /**
      * @param array<string, mixed> $payload
      */
@@ -308,9 +345,7 @@ final class NukacryptRecordLookupRepository implements NukacryptRecordLookup
     {
         $errors = $payload['errors'] ?? null;
         if (!is_array($errors) || [] === $errors) {
-            $topLevelKeys = implode(', ', array_keys($payload));
-
-            return '' === $topLevelKeys ? '' : sprintf(' Top-level keys: %s.', $topLevelKeys);
+            return '';
         }
 
         $messages = [];
@@ -326,9 +361,23 @@ final class NukacryptRecordLookupRepository implements NukacryptRecordLookup
         }
 
         if ([] === $messages) {
-            return ' GraphQL returned errors without message.';
+            return '';
         }
 
-        return ' GraphQL errors: '.implode(' | ', $messages);
+        return ' Errors: '.implode(' | ', $messages);
+    }
+
+    private function assertGraphqlUrlAllowed(): void
+    {
+        $parts = parse_url($this->graphqlUrl);
+        if (!is_array($parts)) {
+            throw new RuntimeException('Nukacrypt GraphQL URL is invalid.');
+        }
+
+        $scheme = strtolower((string) ($parts['scheme'] ?? ''));
+        $host = strtolower((string) ($parts['host'] ?? ''));
+        if ('https' !== $scheme || self::ALLOWED_HOST !== $host) {
+            throw new RuntimeException('Nukacrypt GraphQL URL must target https://api.nukacrypt.com.');
+        }
     }
 }
