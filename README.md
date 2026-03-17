@@ -135,6 +135,7 @@ docker compose -f compose.yaml exec -T app php bin/console app:data:sync:fallout
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=fallout-wiki --fallout-wiki-no-delay
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=fallout-wiki --fallout-wiki-page='Fallout_76_Weapon_Plans'
 docker compose -f compose.yaml exec -T app php bin/console app:data:report:source-diff
+docker compose -f compose.yaml exec -T app php bin/console app:data:report:source-merge
 docker compose -f compose.yaml exec -T app php bin/console app:data:report:source-collisions
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=nukaknights
 

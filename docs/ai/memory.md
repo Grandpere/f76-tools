@@ -75,6 +75,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: added a read-only console report (`app:data:report:source-diff`) that lists per-item divergent fields between two providers.
 - Prevention: before implementing consolidation rules or admin merge UI, inspect real diffs from the report and decide field priorities from observed data.
 
+## 2026-03-17 - Cross-source catalog merge should be field-based, not provider-global
+- Symptom: `fandom` and `fallout.wiki` disagree on different kinds of fields for the same item, so choosing one provider globally would either lose availability booleans or lose useful `unlocks/obtained` details.
+- Root cause: the two wiki sources have complementary strengths rather than one uniformly better payload.
+- Fix: introduced a read-only merge policy + report (`app:data:report:source-merge`) with explicit per-field priorities: `fandom` for availability-style booleans/weight/currency, `fallout.wiki` for `unlocks`/`obtained`/`type`, and names consolidated only when values are equivalent after loose normalization.
+- Prevention: for future providers, add merge rules field by field and keep URLs/source-specific references out of the consolidated profile unless there is a clear single-source requirement.
+
 ## 2026-03-17 - Treat live third-party API 500s as an external blocker, not a mapping bug
 - Symptom: Nukacrypt GraphQL introspection and `nukeCodes` succeed, but item queries (`esmRecord`, `esmRecords`) return HTTP 500 even on simple `formId`/`searchTerm` probes.
 - Root cause: the remote item endpoint is unstable or expects undocumented constraints; the failure is server-side, not caused by local parsing code.
