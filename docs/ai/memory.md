@@ -562,3 +562,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: `deleteSnapshot()` unlinked any resolved in-project path, without restricting deletion scope to managed uploads.
 - Fix: added `resolveSnapshotDeletableImagePath()` and only allow unlink under `var/data/roadmap_uploads/`; source image preview still works from other locations.
 - Prevention: never `unlink` user/content paths unless explicitly scoped to a dedicated managed storage directory.
+
+## 2026-03-17 - Docker app false unhealthy due to strict php-fpm process name match
+- Symptom: `f76-app-1` showed `unhealthy` even though the app answered requests and `php-fpm` was running.
+- Root cause: Docker `HEALTHCHECK` used `pgrep -x php-fpm`, but Alpine/PHP-FPM exposes the master process as `php-fpm: master process (...)`, so the exact-name match always failed.
+- Fix: changed the healthcheck to `pgrep -f "php-fpm: master process"`.
+- Prevention: when healthchecking `php-fpm`, match the actual process command line observed inside the container instead of assuming the bare binary name.

@@ -40,7 +40,7 @@ RUN apk add --no-cache \
     && rm -rf /tmp/* /var/cache/apk/*
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD pgrep -x php-fpm > /dev/null || exit 1
+    CMD pgrep -f "php-fpm: master process" > /dev/null || exit 1
 
 COPY docker/php/conf.d/app.ini /usr/local/etc/php/conf.d/zz-app.ini
 COPY docker/php/entrypoint.sh /usr/local/bin/app-entrypoint
