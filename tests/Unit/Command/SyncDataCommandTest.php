@@ -29,7 +29,7 @@ final class SyncDataCommandTest extends TestCase
         $kernel->method('getProjectDir')->willReturn(sys_get_temp_dir());
 
         $syncCommand = new SyncDataCommand($kernel);
-        $fandomCommand = new TestFandomCommand(Command::SUCCESS);
+        $fandomCommand = new TestDelegatedSyncCommand('app:data:sync:fandom', Command::SUCCESS);
 
         $application = new \Symfony\Component\Console\Application();
         $application->addCommand($syncCommand);
@@ -44,13 +44,34 @@ final class SyncDataCommandTest extends TestCase
         self::assertSame(1, $fandomCommand->calls);
     }
 
+    public function testOnlyFalloutWikiDelegatesToFalloutWikiCommandAndSucceeds(): void
+    {
+        $kernel = $this->createMock(KernelInterface::class);
+        $kernel->method('getProjectDir')->willReturn(sys_get_temp_dir());
+
+        $syncCommand = new SyncDataCommand($kernel);
+        $falloutWikiCommand = new TestDelegatedSyncCommand('app:data:sync:fallout-wiki', Command::SUCCESS);
+
+        $application = new \Symfony\Component\Console\Application();
+        $application->addCommand($syncCommand);
+        $application->addCommand($falloutWikiCommand);
+
+        $tester = new CommandTester($syncCommand);
+        $exitCode = $tester->execute([
+            '--only' => 'fallout-wiki',
+        ]);
+
+        self::assertSame(Command::SUCCESS, $exitCode);
+        self::assertSame(1, $falloutWikiCommand->calls);
+    }
+
     public function testOnlyFandomJsonFormatReturnsMachineReadablePayload(): void
     {
         $kernel = $this->createMock(KernelInterface::class);
         $kernel->method('getProjectDir')->willReturn(sys_get_temp_dir());
 
         $syncCommand = new SyncDataCommand($kernel);
-        $fandomCommand = new TestFandomCommand(Command::SUCCESS);
+        $fandomCommand = new TestDelegatedSyncCommand('app:data:sync:fandom', Command::SUCCESS);
 
         $application = new \Symfony\Component\Console\Application();
         $application->addCommand($syncCommand);
@@ -69,13 +90,39 @@ final class SyncDataCommandTest extends TestCase
         self::assertSame('ok', $decoded['status'] ?? null);
     }
 
+    public function testOnlyFalloutWikiJsonFormatReturnsMachineReadablePayload(): void
+    {
+        $kernel = $this->createMock(KernelInterface::class);
+        $kernel->method('getProjectDir')->willReturn(sys_get_temp_dir());
+
+        $syncCommand = new SyncDataCommand($kernel);
+        $falloutWikiCommand = new TestDelegatedSyncCommand('app:data:sync:fallout-wiki', Command::SUCCESS);
+
+        $application = new \Symfony\Component\Console\Application();
+        $application->addCommand($syncCommand);
+        $application->addCommand($falloutWikiCommand);
+
+        $tester = new CommandTester($syncCommand);
+        $exitCode = $tester->execute([
+            '--only' => 'fallout-wiki',
+            '--format' => 'json',
+        ]);
+
+        self::assertSame(Command::SUCCESS, $exitCode);
+        /** @var array<string, mixed> $decoded */
+        $decoded = json_decode($tester->getDisplay(), true, 512, JSON_THROW_ON_ERROR);
+        self::assertSame('fallout-wiki', $decoded['scope'] ?? null);
+        self::assertSame('ok', $decoded['status'] ?? null);
+        self::assertSame('ok', $decoded['fallout_wiki_status'] ?? null);
+    }
+
     public function testOnlyFandomFailsWhenDelegatedCommandFails(): void
     {
         $kernel = $this->createMock(KernelInterface::class);
         $kernel->method('getProjectDir')->willReturn(sys_get_temp_dir());
 
         $syncCommand = new SyncDataCommand($kernel);
-        $fandomCommand = new TestFandomCommand(Command::FAILURE);
+        $fandomCommand = new TestDelegatedSyncCommand('app:data:sync:fandom', Command::FAILURE);
 
         $application = new \Symfony\Component\Console\Application();
         $application->addCommand($syncCommand);
@@ -98,7 +145,7 @@ final class SyncDataCommandTest extends TestCase
         $syncCommand = new SyncDataCommand($kernel);
         $application = new \Symfony\Component\Console\Application();
         $application->addCommand($syncCommand);
-        $application->addCommand(new TestFandomCommand(Command::SUCCESS));
+        $application->addCommand(new TestDelegatedSyncCommand('app:data:sync:fandom', Command::SUCCESS));
 
         $tester = new CommandTester($syncCommand);
         $exitCode = $tester->execute([
@@ -110,13 +157,13 @@ final class SyncDataCommandTest extends TestCase
     }
 }
 
-final class TestFandomCommand extends Command
+final class TestDelegatedSyncCommand extends Command
 {
     public int $calls = 0;
 
-    public function __construct(private readonly int $code)
+    public function __construct(string $name, private readonly int $code)
     {
-        parent::__construct('app:data:sync:fandom');
+        parent::__construct($name);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

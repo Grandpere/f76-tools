@@ -39,6 +39,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: decision recorded to move provider data into a dedicated per-item source metadata model (`provider`, `external_ref`, `external_url`, `metadata`) while keeping `item` as domain core.
 - Prevention: for any new external source, add mappings in source-metadata layer first; avoid adding provider-specific columns to `item`.
 
+## 2026-03-17 - A new sync source is not done until the orchestrator and docs know about it
+- Symptom: a source-specific command can exist locally but stay half-integrated, which makes the raw-data pipeline harder to reason about and easier to forget.
+- Root cause: adding a provider command before wiring `app:data:sync`, tests, and README leaves the feature in an in-between state.
+- Fix: for `fallout-wiki`, the dedicated command was versioned, added to `app:data:sync`, covered with unit tests, and documented with its default `data/sources/<provider>/...` output path.
+- Prevention: every new data source must ship as one slice: dedicated command + orchestrator integration + tests + runbook/docs.
+
 ## 2026-03-13 - Async messenger transport requires Doctrine table migration in prod DB
 - Symptom: roadmap OCR upload failed with `relation "messenger_messages" does not exist`.
 - Root cause: `MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0` disables runtime table auto-creation, and async feature shipped before creating `messenger_messages`.

@@ -10,7 +10,8 @@
 - Done (slice 2): generation d URL externe Nukacrypt en import (`form_id` -> URL standard) quand provider=`nukacrypt`.
 - Done (slice 3): reporting sync enrichi (`--format=json`, compteurs par source, validation options).
 - Done (slice 4): enrichissement metadata Nukacrypt depuis `keywords` (extraction noms + `UnsellableObject` => `derived.tradeable=false`).
-- Remaining: integrer la source de sync Nukacrypt read-only et le rapport de collisions.
+- Done (slice 5): `app:data:sync` orchestre aussi `fallout-wiki`, avec une commande dediee et des tests unitaires.
+- Remaining: integrer la source de sync Nukacrypt read-only, le rapport de collisions et la politique de merge cross-source.
 
 ## Termine recemment
 - F76-152: Catalog items multi-source (core item + source metadata table) (done).

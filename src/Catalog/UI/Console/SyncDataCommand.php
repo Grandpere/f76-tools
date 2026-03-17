@@ -53,6 +53,7 @@ final class SyncDataCommand extends Command
         $only = is_string($onlyRaw) ? strtolower(trim($onlyRaw)) : 'all';
         $runNukaknights = 'all' === $only || 'nukaknights' === $only;
         $runFandom = 'all' === $only || 'fandom' === $only;
+        $runFalloutWiki = 'all' === $only || 'fallout-wiki' === $only;
         $formatRaw = $input->getOption('format');
         $format = is_string($formatRaw) ? strtolower(trim($formatRaw)) : 'text';
         $isJson = 'json' === $format;
@@ -61,8 +62,8 @@ final class SyncDataCommand extends Command
             $io->title('Data sync');
         }
 
-        if ((!$runNukaknights && !$runFandom) || !in_array($format, ['text', 'json'], true)) {
-            $io->error('Options invalides. --only: all|nukaknights|fandom ; --format: text|json.');
+        if ((!$runNukaknights && !$runFandom && !$runFalloutWiki) || !in_array($format, ['text', 'json'], true)) {
+            $io->error('Options invalides. --only: all|nukaknights|fandom|fallout-wiki ; --format: text|json.');
 
             return Command::INVALID;
         }
@@ -73,6 +74,7 @@ final class SyncDataCommand extends Command
         $updated = 0;
         $updatedNukaknights = 0;
         $fandomCode = null;
+        $falloutWikiCode = null;
 
         if ($runNukaknights) {
             if (!$isJson) {
@@ -114,8 +116,18 @@ final class SyncDataCommand extends Command
             $fandomCode = $this->runFandomSync($input, $output, $io);
         }
 
-        $hasFailure = [] !== $errors || (null !== $fandomCode && Command::SUCCESS !== $fandomCode);
+        if ($runFalloutWiki) {
+            if (!$isJson) {
+                $io->section('Fallout Wiki');
+            }
+            $falloutWikiCode = $this->runFalloutWikiSync($input, $output, $io);
+        }
+
+        $hasFailure = [] !== $errors
+            || (null !== $fandomCode && Command::SUCCESS !== $fandomCode)
+            || (null !== $falloutWikiCode && Command::SUCCESS !== $falloutWikiCode);
         $fandomStatus = null === $fandomCode ? 'skipped' : (Command::SUCCESS === $fandomCode ? 'ok' : 'failed');
+        $falloutWikiStatus = null === $falloutWikiCode ? 'skipped' : (Command::SUCCESS === $falloutWikiCode ? 'ok' : 'failed');
         $exitCode = $hasFailure ? Command::FAILURE : Command::SUCCESS;
         if ('json' === $format) {
             $output->writeln((string) json_encode([
@@ -124,8 +136,10 @@ final class SyncDataCommand extends Command
                 'updated_by_source' => [
                     'nukaknights' => $updatedNukaknights,
                     'fandom' => Command::SUCCESS === $fandomCode ? 1 : 0,
+                    'fallout_wiki' => Command::SUCCESS === $falloutWikiCode ? 1 : 0,
                 ],
                 'fandom_status' => $fandomStatus,
+                'fallout_wiki_status' => $falloutWikiStatus,
                 'errors_count' => count($errors),
                 'errors' => $errors,
                 'status' => Command::SUCCESS === $exitCode ? 'ok' : 'failed',
@@ -139,6 +153,7 @@ final class SyncDataCommand extends Command
             ['Updated files' => (string) $updated],
             ['Updated Nukaknights' => (string) $updatedNukaknights],
             ['Fandom sync' => $fandomStatus],
+            ['Fallout Wiki sync' => $falloutWikiStatus],
             ['Errors' => (string) count($errors)],
         );
 
@@ -148,6 +163,9 @@ final class SyncDataCommand extends Command
             }
             if (null !== $fandomCode && Command::SUCCESS !== $fandomCode) {
                 $io->error('Fandom sync failed.');
+            }
+            if (null !== $falloutWikiCode && Command::SUCCESS !== $falloutWikiCode) {
+                $io->error('Fallout Wiki sync failed.');
             }
 
             return $exitCode;
@@ -161,10 +179,12 @@ final class SyncDataCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addOption('only', null, InputOption::VALUE_REQUIRED, 'Scope sync: all|nukaknights|fandom', 'all')
+            ->addOption('only', null, InputOption::VALUE_REQUIRED, 'Scope sync: all|nukaknights|fandom|fallout-wiki', 'all')
             ->addOption('format', null, InputOption::VALUE_REQUIRED, 'Output format: text|json', 'text')
             ->addOption('fandom-output-dir', null, InputOption::VALUE_REQUIRED, 'Forwarded to app:data:sync:fandom --output-dir')
-            ->addOption('fandom-no-delay', null, InputOption::VALUE_NONE, 'Forwarded to app:data:sync:fandom --no-delay');
+            ->addOption('fandom-no-delay', null, InputOption::VALUE_NONE, 'Forwarded to app:data:sync:fandom --no-delay')
+            ->addOption('fallout-wiki-output-dir', null, InputOption::VALUE_REQUIRED, 'Forwarded to app:data:sync:fallout-wiki --output-dir')
+            ->addOption('fallout-wiki-no-delay', null, InputOption::VALUE_NONE, 'Forwarded to app:data:sync:fallout-wiki --no-delay');
     }
 
     /**
@@ -243,31 +263,64 @@ final class SyncDataCommand extends Command
 
     private function runFandomSync(InputInterface $input, OutputInterface $output, SymfonyStyle $io): int
     {
+        return $this->runDelegatedSync(
+            $input,
+            $output,
+            $io,
+            'app:data:sync:fandom',
+            'Fandom',
+            'fandom-output-dir',
+            'fandom-no-delay',
+        );
+    }
+
+    private function runFalloutWikiSync(InputInterface $input, OutputInterface $output, SymfonyStyle $io): int
+    {
+        return $this->runDelegatedSync(
+            $input,
+            $output,
+            $io,
+            'app:data:sync:fallout-wiki',
+            'Fallout Wiki',
+            'fallout-wiki-output-dir',
+            'fallout-wiki-no-delay',
+        );
+    }
+
+    private function runDelegatedSync(
+        InputInterface $input,
+        OutputInterface $output,
+        SymfonyStyle $io,
+        string $commandName,
+        string $label,
+        string $outputDirOptionName,
+        string $noDelayOptionName,
+    ): int {
         $application = $this->getApplication();
         if (null === $application) {
-            $io->error('Console application is not available to run Fandom sync.');
+            $io->error(sprintf('Console application is not available to run %s sync.', $label));
 
             return Command::FAILURE;
         }
 
         try {
-            $fandomCommand = $application->find('app:data:sync:fandom');
+            $command = $application->find($commandName);
         } catch (Throwable $exception) {
-            $io->error(sprintf('Unable to find app:data:sync:fandom command: %s', $exception->getMessage()));
+            $io->error(sprintf('Unable to find %s command: %s', $commandName, $exception->getMessage()));
 
             return Command::FAILURE;
         }
 
         /** @var array<string, mixed> $arguments */
         $arguments = [];
-        $outputDir = $input->getOption('fandom-output-dir');
+        $outputDir = $input->getOption($outputDirOptionName);
         if (is_string($outputDir) && '' !== trim($outputDir)) {
             $arguments['--output-dir'] = trim($outputDir);
         }
-        if ((bool) $input->getOption('fandom-no-delay')) {
+        if ((bool) $input->getOption($noDelayOptionName)) {
             $arguments['--no-delay'] = true;
         }
 
-        return $fandomCommand->run(new ArrayInput($arguments), $output);
+        return $command->run(new ArrayInput($arguments), $output);
     }
 }

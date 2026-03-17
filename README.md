@@ -130,6 +130,8 @@ make data-sync
 make nuke-codes-warmup
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync:fandom
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=fandom --fandom-no-delay
+docker compose -f compose.yaml exec -T app php bin/console app:data:sync:fallout-wiki
+docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=fallout-wiki --fallout-wiki-no-delay
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=nukaknights
 
 make minerva-refresh-dry-run
@@ -178,6 +180,7 @@ Notes:
 - Les sources brutes sont organisees sous `data/sources/` par provider.
 - Nukaknights ecrit par defaut dans `data/sources/nukaknights/{legendary_mods,minerva}/`.
 - Fandom ecrit par defaut dans `data/sources/fandom/plan_recipes/` (`recipes.json`, `plans_*.json`) + `index.json`.
+- Fallout Wiki ecrit par defaut dans `data/sources/fallout_wiki/plan_recipes/` (`recipes.json`, `plans_*.json`) + `index.json`.
 
 ## Qualite et tests
 Commandes standard:
