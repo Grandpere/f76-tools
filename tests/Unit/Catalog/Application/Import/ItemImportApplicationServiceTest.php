@@ -15,6 +15,7 @@ namespace App\Tests\Unit\Catalog\Application\Import;
 
 use App\Catalog\Application\Import\ItemImportApplicationService;
 use App\Catalog\Application\Import\ItemImportContextApplier;
+use App\Catalog\Application\Import\ItemImportExternalMetadataEnricher;
 use App\Catalog\Application\Import\ItemImportExternalUrlResolver;
 use App\Catalog\Application\Import\ItemImportFileContextResolver;
 use App\Catalog\Application\Import\ItemImportItemHydrator;
@@ -142,7 +143,11 @@ final class ItemImportApplicationServiceTest extends TestCase
             $translationCatalogWriter,
             new ItemImportFileContextResolver(),
             new FilesystemItemImportSourceReader(),
-            new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer)),
+            new ItemImportItemHydrator(
+                $normalizer,
+                new ItemImportExternalUrlResolver($normalizer),
+                new ItemImportExternalMetadataEnricher(),
+            ),
             new ItemImportTranslationCatalogBuilder($normalizer),
             new ItemImportContextApplier(),
         );

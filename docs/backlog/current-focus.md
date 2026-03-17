@@ -9,6 +9,7 @@
 - Done (slice 1): tests unitaires ajoutés pour l orchestration Fandom (`only=fandom` success/failure).
 - Done (slice 2): generation d URL externe Nukacrypt en import (`form_id` -> URL standard) quand provider=`nukacrypt`.
 - Done (slice 3): reporting sync enrichi (`--format=json`, compteurs par source, validation options).
+- Done (slice 4): enrichissement metadata Nukacrypt depuis `keywords` (extraction noms + `UnsellableObject` => `derived.tradeable=false`).
 - Remaining: integrer la source de sync Nukacrypt read-only et le rapport de collisions.
 
 ## Termine recemment

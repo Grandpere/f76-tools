@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Catalog\Application\Import;
 
+use App\Catalog\Application\Import\ItemImportExternalMetadataEnricher;
 use App\Catalog\Application\Import\ItemImportExternalUrlResolver;
 use App\Catalog\Application\Import\ItemImportItemHydrator;
 use App\Catalog\Application\Import\ItemImportValueNormalizer;
@@ -29,7 +30,7 @@ final class ItemImportItemHydratorTest extends TestCase
             ->setSourceId(61);
 
         $normalizer = new ItemImportValueNormalizer();
-        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer));
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
         $hydrator->hydrate($item, [
             'form_id' => '0xabc',
             'editor_id' => 'ed_1',
@@ -66,7 +67,7 @@ final class ItemImportItemHydratorTest extends TestCase
     public function testBuildExternalSourceDataNormalizesZeroEditorIdToNull(): void
     {
         $normalizer = new ItemImportValueNormalizer();
-        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer));
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
         $data = $hydrator->buildExternalSourceData('nukaknights', [
             'editor_id' => '0',
         ], 62);
@@ -78,7 +79,7 @@ final class ItemImportItemHydratorTest extends TestCase
     public function testBuildExternalSourceDataUsesFormIdWhenAvailable(): void
     {
         $normalizer = new ItemImportValueNormalizer();
-        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer));
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
 
         $data = $hydrator->buildExternalSourceData('nukaknights', [
             'form_id' => '0052E485',
@@ -94,7 +95,7 @@ final class ItemImportItemHydratorTest extends TestCase
     public function testBuildExternalSourceDataFallsBackToSourceIdRef(): void
     {
         $normalizer = new ItemImportValueNormalizer();
-        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer));
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
 
         $data = $hydrator->buildExternalSourceData('nukaknights', [
             'wiki_url' => null,
@@ -107,7 +108,7 @@ final class ItemImportItemHydratorTest extends TestCase
     public function testBuildExternalSourceDataBuildsNukacryptUrlFromFormId(): void
     {
         $normalizer = new ItemImportValueNormalizer();
-        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer));
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
 
         $data = $hydrator->buildExternalSourceData('nukacrypt', [
             'form_id' => '004E9FCF',
@@ -115,5 +116,24 @@ final class ItemImportItemHydratorTest extends TestCase
 
         self::assertSame('004E9FCF', $data['externalRef']);
         self::assertSame('https://nukacrypt.com/FO76/w/latest/SeventySix.esm/004e9fcf', $data['externalUrl']);
+    }
+
+    public function testBuildExternalSourceDataExtractsNukacryptKeywordNamesAndTradeableHint(): void
+    {
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
+
+        $data = $hydrator->buildExternalSourceData('nukacrypt', [
+            'form_id' => '004E9FCF',
+            'keywords' => [
+                'KYWD - [003e1567] - ObjectTypeRecipe',
+                'KYWD - [003d4327] - UnsellableObject',
+            ],
+        ], 123);
+
+        self::assertSame(['ObjectTypeRecipe', 'UnsellableObject'], $data['metadata']['keyword_names'] ?? null);
+        $derived = $data['metadata']['derived'] ?? null;
+        self::assertIsArray($derived);
+        self::assertFalse($derived['tradeable'] ?? true);
     }
 }

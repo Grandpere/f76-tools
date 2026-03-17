@@ -27,6 +27,7 @@ Ajouter un pipeline de sync multi-sources coherent (sans duplication instable) e
 - Done (slice 1): tests unitaires ajoutes pour la delegation Fandom (`--only=fandom` success/failure).
 - Done (slice 2): preparation Nukacrypt cote import via resolver URL externe (`form_id` -> URL Nukacrypt standard) quand provider=`nukacrypt`.
 - Done (slice 3): reporting sync multi-sources (`--format=json`, compteurs par source, validation d options) + couverture unitaire.
+- Done (slice 4): enrichissement metadata Nukacrypt depuis `keywords` (noms de keywords + derive `tradeable=false` si `UnsellableObject`).
 - Remaining: source de sync Nukacrypt read-only + rapport de collisions.
 
 ## Hors scope

@@ -20,6 +20,7 @@ final class ItemImportItemHydrator
     public function __construct(
         private readonly ItemImportValueNormalizer $valueNormalizer,
         private readonly ItemImportExternalUrlResolver $externalUrlResolver,
+        private readonly ItemImportExternalMetadataEnricher $externalMetadataEnricher,
     ) {
     }
 
@@ -67,6 +68,7 @@ final class ItemImportItemHydrator
         if (is_scalar($editorId) && '0' === (string) $editorId) {
             $metadata['editor_id'] = null;
         }
+        $metadata = $this->externalMetadataEnricher->enrich($provider, $metadata);
 
         return [
             'externalRef' => $externalRef,
