@@ -270,6 +270,12 @@ final class ReportItemSourceArbitrationCommand extends Command
             'field' => $conflict['field'],
             'candidateA' => $conflict['candidateA'],
             'candidateB' => $conflict['candidateB'],
+            'sourceUrlA' => $this->resolveSourceUrl($sourceA),
+            'sourceUrlB' => $this->resolveSourceUrl($sourceB),
+            'sourceSlugA' => $this->extractString(($sourceA->getMetadata() ?? [])['source_slug'] ?? null),
+            'sourceSlugB' => $this->extractString(($sourceB->getMetadata() ?? [])['source_slug'] ?? null),
+            'sourceUrlAIsSpecific' => $this->urlLooksSpecific($this->resolveSourceUrl($sourceA)),
+            'sourceUrlBIsSpecific' => $this->urlLooksSpecific($this->resolveSourceUrl($sourceB)),
             'verdict' => $verdict,
             'matchProvider' => $matchProvider,
             'recordsATotal' => count($recordsA),
@@ -371,6 +377,35 @@ final class ReportItemSourceArbitrationCommand extends Command
         $normalized = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $normalized);
 
         return trim((string) $normalized);
+    }
+
+    private function resolveSourceUrl(ItemExternalSourceEntity $source): ?string
+    {
+        $externalUrl = $source->getExternalUrl();
+        if (is_string($externalUrl) && '' !== trim($externalUrl)) {
+            return trim($externalUrl);
+        }
+
+        $metadata = $source->getMetadata() ?? [];
+        $wikiUrl = $metadata['wiki_url'] ?? null;
+        if (!is_scalar($wikiUrl)) {
+            return null;
+        }
+
+        $normalized = trim((string) $wikiUrl);
+
+        return '' === $normalized ? null : $normalized;
+    }
+
+    private function urlLooksSpecific(?string $url): bool
+    {
+        if (null === $url || '' === $url) {
+            return false;
+        }
+
+        $decoded = urldecode($url);
+
+        return str_contains($decoded, '(') && str_contains($decoded, ')');
     }
 
     private function isSpecificVariantPreferred(string $specificCandidate, string $genericCandidate): bool

@@ -234,6 +234,7 @@ final class ReportItemSourceArbitrationCommandTest extends TestCase
         self::assertSame(1, $row['matchingRecordsATotal'] ?? null);
         self::assertSame(1, $row['matchingRecordsBTotal'] ?? null);
         self::assertSame(2, $row['recordsBTotal'] ?? null);
+        self::assertFalse($row['sourceUrlBIsSpecific'] ?? true);
         self::assertIsArray($row['recordsB'] ?? null);
         /** @var list<array<string, mixed>> $recordsB */
         $recordsB = $row['recordsB'];
