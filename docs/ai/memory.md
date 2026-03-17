@@ -117,6 +117,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: added a dedicated conflict-probe command that searches one or more candidate names and an optional `editorId`, then reports which results match the expected `formId`.
 - Prevention: for external arbitration workflows, separate lookup keys (name/editorId) from validation keys (`formId`) instead of assuming one field can do both jobs.
 
+## 2026-03-17 - Nukacrypt browser success does not imply server-side/container reliability
+- Symptom: the user could reproduce a working GraphQL search with browser `Copy as cURL` on the host, while the same search from the app still failed with `Response body is empty`.
+- Root cause: the remaining instability is tied to execution context (browser/host versus app container), not just to missing headers or GraphQL field shape; even a raw `curl` replay inside the container returned an empty body.
+- Fix: discarded the attempted server-side `curl` fallback and kept Nukacrypt in a read-only, opportunistic role for manual or semi-automatic arbitration only.
+- Prevention: when an external API behaves differently between browser/host and container, validate from the real runtime before shipping fallback complexity; if raw container requests still fail, treat it as an environment/upstream constraint rather than layering more client logic.
+
 ## 2026-03-13 - Async messenger transport requires Doctrine table migration in prod DB
 - Symptom: roadmap OCR upload failed with `relation "messenger_messages" does not exist`.
 - Root cause: `MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0` disables runtime table auto-creation, and async feature shipped before creating `messenger_messages`.

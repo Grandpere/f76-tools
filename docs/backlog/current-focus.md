@@ -23,7 +23,7 @@
 - Done (slice 15): les doublons intra-provider `fandom`/`fallout_wiki` sur un meme `form_id` sont maintenant ignores a l import (premiere occurrence conservee), et le merge de nom prefere la variante la plus specifique quand une source ajoute un suffixe parenthetique.
 - Done (slice 16): ajout d un probe console Nukacrypt read-only (`app:data:probe:nukacrypt-record`) base sur `esmRecords(searchTerm + signatures)` pour arbitrage cible des conflits source par nom.
 - Done (slice 17): ajout d un probe d arbitrage `app:data:probe:nukacrypt-conflict` qui compare plusieurs noms candidats et/ou un `editorId` a un `form_id` attendu via la recherche publique Nukacrypt.
-- Note: le lookup public Nukacrypt direct par `form_id` via `esmRecord` reste non fiable depuis l app (HTTP 500 / corps vide), mais la recherche ciblee `esmRecords(searchTerm + signature=BOOK)` fonctionne pour des arbitrages ponctuels.
+- Note: le lookup public Nukacrypt direct par `form_id` via `esmRecord` reste non fiable depuis l app (HTTP 500 / corps vide), et meme un `curl` brut rejoue dans le conteneur sur une recherche `esmRecords(searchTerm + signature=BOOK)` peut revenir vide alors que le navigateur/l hote repond. On garde donc Nukacrypt en outil opportuniste d arbitrage, pas en source serveur robuste.
 - Remaining: brancher ces probes Nukacrypt dans un rapport d arbitrage semi-automatique des conflits restants, sans tenter de sync exhaustif `BOOK`.
 
 ## Termine recemment
