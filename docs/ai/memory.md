@@ -568,3 +568,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: Docker `HEALTHCHECK` used `pgrep -x php-fpm`, but Alpine/PHP-FPM exposes the master process as `php-fpm: master process (...)`, so the exact-name match always failed.
 - Fix: changed the healthcheck to `pgrep -f "php-fpm: master process"`.
 - Prevention: when healthchecking `php-fpm`, match the actual process command line observed inside the container instead of assuming the bare binary name.
+
+## 2026-03-17 - Alpine package pin drift can break Docker rebuilds
+- Symptom: rebuilding `f76-app` failed with `libpq-18.3-r0 breaks: world[libpq=18.2-r0]`.
+- Root cause: the Dockerfile pins Alpine package revisions exactly, and upstream repositories had already moved PostgreSQL packages from `18.2-r0` to `18.3-r0`.
+- Fix: aligned `libpq` and `postgresql18-dev` pins to `18.3-r0`.
+- Prevention: when a rebuild suddenly fails on `apk` with `breaks: world[...]`, first check whether an exact package revision pin has drifted in Alpine repos before changing the wider build.

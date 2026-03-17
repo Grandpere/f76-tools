@@ -14,7 +14,7 @@ RUN apk add --no-cache \
         libjpeg-turbo=3.1.2-r0 \
         libpng=1.6.55-r0 \
         libzip=1.11.4-r1 \
-        libpq=18.2-r0 \
+        libpq=18.3-r0 \
         libwebp=1.6.0-r0 \
     && apk add --no-cache --virtual .build-deps \
         autoconf=2.72-r1 \
@@ -33,7 +33,7 @@ RUN apk add --no-cache \
         libpng-dev=1.6.55-r0 \
         libwebp-dev=1.6.0-r0 \
         libzip-dev=1.11.4-r1 \
-        postgresql18-dev=18.2-r0 \
+        postgresql18-dev=18.3-r0 \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j"$(nproc)" gd intl pdo_pgsql zip \
     && apk del .build-deps \
