@@ -133,6 +133,7 @@ docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync:fallout-wiki
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=fallout-wiki --fallout-wiki-no-delay
 docker compose -f compose.yaml exec -T app php bin/console app:data:report:source-diff
+docker compose -f compose.yaml exec -T app php bin/console app:data:report:source-collisions
 docker compose -f compose.yaml exec -T app php bin/console app:data:sync --only=nukaknights
 
 make minerva-refresh-dry-run

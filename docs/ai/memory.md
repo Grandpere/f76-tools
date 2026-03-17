@@ -57,6 +57,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: added a read-only console report (`app:data:report:source-diff`) that lists per-item divergent fields between two providers.
 - Prevention: before implementing consolidation rules or admin merge UI, inspect real diffs from the report and decide field priorities from observed data.
 
+## 2026-03-17 - Treat live third-party API 500s as an external blocker, not a mapping bug
+- Symptom: Nukacrypt GraphQL introspection and `nukeCodes` succeed, but item queries (`esmRecord`, `esmRecords`) return HTTP 500 even on simple `formId`/`searchTerm` probes.
+- Root cause: the remote item endpoint is unstable or expects undocumented constraints; the failure is server-side, not caused by local parsing code.
+- Fix: paused the read-only Nukacrypt item sync and continued with read-only collision reporting on local multi-source data instead.
+- Prevention: when a third-party API returns reproducible 5xx on minimal valid probes, record it as an upstream blocker and avoid shipping speculative client logic on top of it.
+
 ## 2026-03-13 - Async messenger transport requires Doctrine table migration in prod DB
 - Symptom: roadmap OCR upload failed with `relation "messenger_messages" does not exist`.
 - Root cause: `MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0` disables runtime table auto-creation, and async feature shipped before creating `messenger_messages`.

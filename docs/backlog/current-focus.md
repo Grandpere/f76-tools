@@ -13,7 +13,9 @@
 - Done (slice 5): `app:data:sync` orchestre aussi `fallout-wiki`, avec une commande dediee et des tests unitaires.
 - Done (slice 6): l import sait maintenant lire les payloads `resources` Fandom/Fallout Wiki, ignorer `index.json` et consolider un meme item cross-source via `form_id`.
 - Done (slice 7): ajout d un rapport console `app:data:report:source-diff` pour comparer Fandom/Fallout Wiki item par item avant de figer la politique de merge.
-- Remaining: integrer la source de sync Nukacrypt read-only, le rapport de collisions et la politique de merge cross-source.
+- Done (slice 8): ajout d un rapport console `app:data:report:source-collisions` pour detecter les `external_ref` rattaches a plusieurs items.
+- Note: les requetes item GraphQL Nukacrypt (`esmRecord` / `esmRecords`) repondent actuellement en HTTP 500 cote serveur, alors que l introspection et `nukeCodes` fonctionnent.
+- Remaining: source de sync Nukacrypt read-only (bloquee tant que l endpoint item renvoie 500) + politique de merge cross-source.
 
 ## Termine recemment
 - F76-152: Catalog items multi-source (core item + source metadata table) (done).

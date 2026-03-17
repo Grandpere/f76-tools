@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Catalog\Infrastructure\Persistence;
 
 use App\Catalog\Application\Import\ItemImportItemRepository;
+use App\Catalog\Application\Import\ItemSourceCollisionReadRepository;
 use App\Catalog\Application\Import\ItemSourceComparisonReadRepository;
 use App\Catalog\Application\Item\ItemCatalogTimestampReadRepository;
 use App\Catalog\Domain\Entity\ItemEntity;
@@ -29,7 +30,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<ItemEntity>
  */
-final class ItemEntityRepository extends ServiceEntityRepository implements ItemKnowledgeTransferRepository, ItemStatsReadRepository, ItemImportItemRepository, ItemKnowledgeCatalogReadRepository, ItemReadRepository, ItemCatalogTimestampReadRepository, ItemSourceComparisonReadRepository
+final class ItemEntityRepository extends ServiceEntityRepository implements ItemKnowledgeTransferRepository, ItemStatsReadRepository, ItemImportItemRepository, ItemKnowledgeCatalogReadRepository, ItemReadRepository, ItemCatalogTimestampReadRepository, ItemSourceComparisonReadRepository, ItemSourceCollisionReadRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -125,6 +126,116 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
 
         /** @var list<ItemEntity> $items */
         return $items;
+    }
+
+    /**
+     * @return list<array{
+     *     type:string,
+     *     externalRef:string,
+     *     itemCount:int,
+     *     providerCount:int,
+     *     providers:list<string>,
+     *     sourceIds:list<int>
+     * }>
+     */
+    public function findExternalRefCollisions(string $providerA, string $providerB, ?ItemTypeEnum $type, int $limit): array
+    {
+        $sql = <<<'SQL'
+                SELECT
+                    i.type AS type,
+                    ies.external_ref AS external_ref,
+                    COUNT(DISTINCT i.id) AS item_count,
+                    COUNT(DISTINCT ies.provider) AS provider_count,
+                    ARRAY_AGG(DISTINCT ies.provider ORDER BY ies.provider) AS providers,
+                    ARRAY_AGG(DISTINCT i.source_id ORDER BY i.source_id) AS source_ids
+                FROM item_external_source ies
+                INNER JOIN item i ON i.id = ies.item_id
+                WHERE ies.provider IN (:providers)
+            SQL;
+
+        $params = [
+            'providers' => [strtolower(trim($providerA)), strtolower(trim($providerB))],
+        ];
+        $types = [
+            'providers' => \Doctrine\DBAL\ArrayParameterType::STRING,
+        ];
+
+        if (null !== $type) {
+            $sql .= ' AND i.type = :type';
+            $params['type'] = $type->value;
+            $types['type'] = \Doctrine\DBAL\ParameterType::STRING;
+        }
+
+        $sql .= <<<'SQL'
+                 GROUP BY i.type, ies.external_ref
+                HAVING COUNT(DISTINCT i.id) > 1
+                ORDER BY COUNT(DISTINCT i.id) DESC, ies.external_ref ASC
+                LIMIT :limit
+            SQL;
+
+        $params['limit'] = max(1, $limit);
+        $types['limit'] = \Doctrine\DBAL\ParameterType::INTEGER;
+
+        $rows = $this->getEntityManager()->getConnection()->executeQuery($sql, $params, $types)->fetchAllAssociative();
+
+        $result = [];
+        foreach ($rows as $row) {
+            $typeValue = $row['type'] ?? null;
+            $externalRef = $row['external_ref'] ?? null;
+            $itemCount = $row['item_count'] ?? null;
+            $providerCount = $row['provider_count'] ?? null;
+
+            if (!is_string($typeValue) || !is_string($externalRef) || !is_scalar($itemCount) || !is_scalar($providerCount) || !is_numeric((string) $itemCount) || !is_numeric((string) $providerCount)) {
+                continue;
+            }
+
+            $providers = $this->normalizePgArrayStrings($row['providers'] ?? null);
+            $sourceIds = array_map('intval', $this->normalizePgArrayStrings($row['source_ids'] ?? null));
+
+            $result[] = [
+                'type' => $typeValue,
+                'externalRef' => $externalRef,
+                'itemCount' => (int) $itemCount,
+                'providerCount' => (int) $providerCount,
+                'providers' => $providers,
+                'sourceIds' => $sourceIds,
+            ];
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function normalizePgArrayStrings(mixed $value): array
+    {
+        if (is_array($value)) {
+            $normalized = [];
+            foreach ($value as $entry) {
+                if (!is_scalar($entry)) {
+                    continue;
+                }
+
+                $normalized[] = (string) $entry;
+            }
+
+            return $normalized;
+        }
+
+        if (!is_string($value)) {
+            return [];
+        }
+
+        $trimmed = trim($value, '{}');
+        if ('' === $trimmed) {
+            return [];
+        }
+
+        return array_map(
+            static fn (string $entry): string => trim($entry, '"'),
+            explode(',', $trimmed),
+        );
     }
 
     public function findOneByPublicId(string $publicId): ?ItemEntity
