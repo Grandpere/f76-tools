@@ -1,0 +1,71 @@
+{
+    "generated_at": "2026-03-17T14:18:46+00:00",
+    "source": "fallout.wiki",
+    "pages_count": 9,
+    "resources_total": 2227,
+    "pages": [
+        {
+            "page": "Fallout_76_Recipes",
+            "url": "https://fallout.wiki/wiki/Fallout_76_Recipes",
+            "file": "recipes.json",
+            "sections_count": 18,
+            "resources_count": 157
+        },
+        {
+            "page": "Fallout_76_Workshop_Plans",
+            "url": "https://fallout.wiki/wiki/Fallout_76_Workshop_Plans",
+            "file": "plans_workshop.json",
+            "sections_count": 31,
+            "resources_count": 706
+        },
+        {
+            "page": "Fallout_76_Armor_Plans",
+            "url": "https://fallout.wiki/wiki/Fallout_76_Armor_Plans",
+            "file": "plans_armor.json",
+            "sections_count": 21,
+            "resources_count": 122
+        },
+        {
+            "page": "Fallout_76_Apparel_Plans",
+            "url": "https://fallout.wiki/wiki/Fallout_76_Apparel_Plans",
+            "file": "plans_apparel.json",
+            "sections_count": 6,
+            "resources_count": 139
+        },
+        {
+            "page": "Fallout_76_Armor_Mod_Plans",
+            "url": "https://fallout.wiki/wiki/Fallout_76_Armor_Mod_Plans",
+            "file": "plans_armor_mods.json",
+            "sections_count": 16,
+            "resources_count": 202
+        },
+        {
+            "page": "Fallout_76_Power_Armor_Plans",
+            "url": "https://fallout.wiki/wiki/Fallout_76_Power_Armor_Plans",
+            "file": "plans_power_armor.json",
+            "sections_count": 14,
+            "resources_count": 75
+        },
+        {
+            "page": "Fallout_76_Power_Armor_Mod_Plans",
+            "url": "https://fallout.wiki/wiki/Fallout_76_Power_Armor_Mod_Plans",
+            "file": "plans_power_armor_mods.json",
+            "sections_count": 15,
+            "resources_count": 291
+        },
+        {
+            "page": "Fallout_76_Weapon_Plans",
+            "url": "https://fallout.wiki/wiki/Fallout_76_Weapon_Plans",
+            "file": "plans_weapons.json",
+            "sections_count": 19,
+            "resources_count": 157
+        },
+        {
+            "page": "Fallout_76_Weapon_Mod_Plans",
+            "url": "https://fallout.wiki/wiki/Fallout_76_Weapon_Mod_Plans",
+            "file": "plans_weapon_mods.json",
+            "sections_count": 18,
+            "resources_count": 378
+        }
+    ]
+}

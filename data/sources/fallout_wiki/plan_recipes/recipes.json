@@ -1,0 +1,3056 @@
+{
+    "generated_at": "2026-03-17T14:18:46+00:00",
+    "source": "fallout.wiki",
+    "page": "Fallout_76_Recipes",
+    "url": "https://fallout.wiki/wiki/Fallout_76_Recipes",
+    "sections_count": 18,
+    "resources_count": 157,
+    "resources": [
+        {
+            "type": "plan",
+            "slug": "plan-stimpak-diffuser",
+            "name": "Plan: Stimpak diffuser",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Plan: Stimpak diffuser",
+                "obtained": {
+                    "text": "Project Paradise",
+                    "icons": [
+                        "Quest",
+                        "Project Paradise"
+                    ]
+                },
+                "value": "150",
+                "form_id": "003F5E9C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Stimpak_diffuser"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-adrenal-reaction-serum",
+            "name": "Recipe: Adrenal Reaction Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Adrenal Reaction Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D40",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Adrenal_Reaction_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-aged-mirelurk-queen-steak",
+            "name": "Recipe: Aged Mirelurk Queen Steak",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Aged Mirelurk Queen Steak",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003D74A9",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Aged_Mirelurk_Queen_Steak"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-antibiotics",
+            "name": "Recipe: Antibiotics",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Antibiotics",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0048503B",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Antibiotics"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-appalachampagne",
+            "name": "Recipe: Appalachampagne",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Appalachampagne",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "105",
+                "form_id": "0045C4A3",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Appalachampagne"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-berry-mentats",
+            "name": "Recipe: Berry Mentats",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Berry Mentats",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "500",
+                "form_id": "002B8BBA",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Berry_Mentats"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-bird-bones-serum",
+            "name": "Recipe: Bird Bones Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Bird Bones Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D41",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Bird_Bones_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-black-eyed-susan-s-soothin",
+            "name": "Recipe: Black-Eyed Susan's Soothin'",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Black-Eyed Susan's Soothin'",
+                "obtained": {
+                    "text": "The Big Bloom",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Big Bloom"
+                    ]
+                },
+                "value": "50",
+                "form_id": "007B26BC",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Black-Eyed_Susan%27s_Soothin%27"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-blackberry-honey-crisp",
+            "name": "Recipe: Blackberry Honey Crisp",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Blackberry Honey Crisp",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003D5F40",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Blackberry_Honey_Crisp"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-blackwater-brew",
+            "name": "Recipe: Blackwater Brew",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Blackwater Brew",
+                "obtained": {
+                    "text": "Tipsy Taste-Test",
+                    "icons": [
+                        "Quest",
+                        "Tipsy Taste-Test"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003F0B2D",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Blackwater_Brew"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-bloatfly-loaf",
+            "name": "Recipe: Bloatfly Loaf",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Bloatfly Loaf",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FDF4",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Bloatfly_Loaf"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-bloodbug-peppersteak",
+            "name": "Recipe: Bloodbug Peppersteak",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Bloodbug Peppersteak",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FDF5",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Bloodbug_Peppersteak"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-brahmin-burgers",
+            "name": "Recipe: Brahmin Burgers",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Brahmin Burgers",
+                "obtained": {
+                    "text": "Tunnel Of Love",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Tunnel Of Love"
+                    ]
+                },
+                "value": "50",
+                "form_id": "0068B8F0",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Brahmin_Burgers"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-brain-bombs",
+            "name": "Recipe: Brain Bombs",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Brain Bombs",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "002B8BBB",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Brain_Bombs"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-bufftats",
+            "name": "Recipe: Bufftats",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Bufftats",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "002B8BBC",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Bufftats"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-caramel-mutfruit",
+            "name": "Recipe: Caramel Mutfruit",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Caramel Mutfruit",
+                "obtained": {
+                    "text": "Tunnel Of Love",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Tunnel Of Love"
+                    ]
+                },
+                "value": "50",
+                "form_id": "0068B8F1",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Caramel_Mutfruit"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-carnival-pie",
+            "name": "Recipe: Carnival Pie",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Carnival Pie",
+                "obtained": {
+                    "text": "Tunnel Of Love",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Tunnel Of Love"
+                    ]
+                },
+                "value": "50",
+                "form_id": "0068B8F2",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Carnival_Pie"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-carnivore-serum",
+            "name": "Recipe: Carnivore Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Carnivore Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D42",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Carnivore_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-chally-s-feed",
+            "name": "Recipe: Chally's Feed",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Chally's Feed",
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "005527BF",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Chally%27s_Feed"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-chameleon-serum",
+            "name": "Recipe: Chameleon Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Chameleon Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D43",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Chameleon_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-cramburger",
+            "name": "Recipe: Cramburger",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Cramburger",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "form_id": "004304E0",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Cramburger"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-cranberry-jam",
+            "name": "Recipe: Cranberry Jam",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Cranberry Jam",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003D5F31",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Cranberry_Jam"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-cranberry-meatball-grinder",
+            "name": "Recipe: Cranberry Meatball Grinder",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Cranberry Meatball Grinder",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003D5F2E",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Cranberry_Meatball_Grinder"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-cranberry-moonshine",
+            "name": "Recipe: Cranberry Moonshine",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Cranberry Moonshine",
+                "obtained": {
+                    "text": "Tipsy Taste-Test",
+                    "icons": [
+                        "Quest",
+                        "Tipsy Taste-Test"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003F0B32",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Cranberry_Moonshine"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-cranberry-relish",
+            "name": "Recipe: Cranberry Relish",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Cranberry Relish",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003D5F34",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Cranberry_Relish"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-cutting-fluid",
+            "name": "Recipe: Cutting Fluid",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Cutting Fluid",
+                "obtained": {
+                    "text": "Hunter for Hire",
+                    "icons": [
+                        "Quest",
+                        "Hunter for Hire"
+                    ]
+                },
+                "value": "50",
+                "form_id": "00510B77",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Cutting_Fluid"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-deathclaw-wellington",
+            "name": "Recipe: Deathclaw Wellington",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Deathclaw Wellington",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FDF9",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Deathclaw_Wellington"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-delbert-s-appalachili",
+            "name": "Recipe: Delbert's Appalachili",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Delbert's Appalachili",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "0",
+                "form_id": "003DB3E6",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Appalachili"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-delbert-s-bunless-cramburger",
+            "name": "Recipe: Delbert's Bunless Cramburger",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Delbert's Bunless Cramburger",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "0",
+                "form_id": "003E9FA9",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Bunless_Cramburger"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-delbert-s-company-tea",
+            "name": "Recipe: Delbert's Company Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Delbert's Company Tea",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "0",
+                "form_id": "003A2021",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Company_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-delbert-s-corn-pone",
+            "name": "Recipe: Delbert's Corn Pone",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Delbert's Corn Pone",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "0",
+                "form_id": "003CD0E8",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Corn_Pone"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-delbert-s-delicious-deerskins",
+            "name": "Recipe: Delbert's Delicious Deerskins",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Delbert's Delicious Deerskins",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "0",
+                "form_id": "003E9FA7",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Delicious_Deerskins"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-delbert-s-granny-s-sweet-tea",
+            "name": "Recipe: Delbert's Granny's Sweet Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Delbert's Granny's Sweet Tea",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "0",
+                "form_id": "003A2025",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Granny%27s_Sweet_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-delbert-s-mountain-hocks",
+            "name": "Recipe: Delbert's Mountain Hocks",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Delbert's Mountain Hocks",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "0",
+                "form_id": "003E9FA8",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Mountain_Hocks"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-delbert-s-mud-cookie",
+            "name": "Recipe: Delbert's Mud Cookie",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Delbert's Mud Cookie",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "0",
+                "form_id": "00529DE5",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Mud_Cookie"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-delbert-s-pothole-potpie",
+            "name": "Recipe: Delbert's Pothole Potpie",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Delbert's Pothole Potpie",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "0",
+                "form_id": "003EAA35",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Pothole_Potpie"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-delbert-s-sunshine-oil",
+            "name": "Recipe: Delbert's Sunshine Oil",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Delbert's Sunshine Oil",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "0",
+                "form_id": "00529DE6",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Sunshine_Oil"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-delbert-s-sweet-labrador-tea",
+            "name": "Recipe: Delbert's Sweet Labrador Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Delbert's Sweet Labrador Tea",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "0",
+                "form_id": "003A201C",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Sweet_Labrador_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-delbert-s-tato-salad-surprise",
+            "name": "Recipe: Delbert's Tato Salad Surprise",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Delbert's Tato Salad Surprise",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "0",
+                "form_id": "00529DE3",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Tato_Salad_Surprise"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-delbert-s-traditional-chitlins",
+            "name": "Recipe: Delbert's Traditional Chitlins",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Delbert's Traditional Chitlins",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "0",
+                "form_id": "00529DE4",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Delbert%27s_Traditional_Chitlins"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-detoxing-salve",
+            "name": "Recipe: Detoxing Salve",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Detoxing Salve",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "form_id": "004333F5",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Detoxing_Salve"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-diluted-rad-x",
+            "name": "Recipe: Diluted Rad-X",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Diluted Rad-X",
+                "obtained": {
+                    "text": "An Ounce of Prevention",
+                    "icons": [
+                        "Quest",
+                        "An Ounce of Prevention"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003B7F2E",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Diluted_Rad-X"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-diluted-radaway",
+            "name": "Recipe: Diluted RadAway",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Diluted RadAway",
+                "obtained": {
+                    "text": "An Ounce of Prevention",
+                    "icons": [
+                        "Quest",
+                        "An Ounce of Prevention"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003B7F2D",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Diluted_RadAway"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-disease-cure",
+            "name": "Recipe: Disease Cure",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Disease Cure",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest"
+                ],
+                "value": "50",
+                "form_id": "0048503A",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Disease_Cure"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-dog-meat-steak",
+            "name": "Recipe: Dog Meat Steak",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Dog Meat Steak",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FDFA",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Dog_Meat_Steak"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-eagle-eyes-serum",
+            "name": "Recipe: Eagle Eyes Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Eagle Eyes Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D44",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Eagle_Eyes_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-egg-head-serum",
+            "name": "Recipe: Egg Head Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Egg Head Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D56",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Egg_Head_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-electrically-charged-serum",
+            "name": "Recipe: Electrically Charged Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Electrically Charged Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D57",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Electrically_Charged_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-empath-serum",
+            "name": "Recipe: Empath Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Empath Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D58",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Empath_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-fasnacht-donut",
+            "name": "Recipe: Fasnacht Donut",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Fasnacht Donut",
+                "obtained": {
+                    "text": "Fasnacht Day",
+                    "icons": [
+                        "Fallout 76 Limited Time Content",
+                        "Fasnacht Day"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003EEA42",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fasnacht_Donut"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-fasnacht-sausage",
+            "name": "Recipe: Fasnacht Sausage",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Fasnacht Sausage",
+                "obtained": {
+                    "text": "Fasnacht Day",
+                    "icons": [
+                        "Fallout 76 Limited Time Content",
+                        "Fasnacht Day"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003EEA44",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fasnacht_Sausage"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-firecap-souffle",
+            "name": "Recipe: Firecap Souffle",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Firecap Souffle",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003787C6",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Firecap_Souffle"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-firecracker-whiskey-manhattan",
+            "name": "Recipe: Firecracker Whiskey Manhattan",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Firecracker Whiskey Manhattan",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "form_id": "003F446B",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Firecracker_Whiskey_Manhattan"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-firecracker-whiskey-old-fashioned",
+            "name": "Recipe: Firecracker Whiskey Old Fashioned",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Firecracker Whiskey Old Fashioned",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "form_id": "003F446C",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Firecracker_Whiskey_Old_Fashioned"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-fish-and-tatos",
+            "name": "Recipe: Fish and Tatos",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Fish and Tatos",
+                "obtained": {
+                    "text": "Big Fish in a Small Pond",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Big Fish in a Small Pond"
+                    ]
+                },
+                "value": "1000",
+                "form_id": "007AED81",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fish_and_Tatos"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-fish-chowder",
+            "name": "Recipe: Fish Chowder",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Fish Chowder",
+                "obtained": {
+                    "text": "Big Fish in a Small Pond",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Big Fish in a Small Pond"
+                    ]
+                },
+                "value": "1000",
+                "form_id": "007B3FB7",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fish_Chowder"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-formula-p",
+            "name": "Recipe: Formula P",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Formula P",
+                "obtained": {
+                    "text": "Project Paradise",
+                    "icons": [
+                        "Quest",
+                        "Project Paradise"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003EFC5F",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Formula_P"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-formula-q",
+            "name": "Recipe: Formula Q",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Formula Q",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "form_id": "00421217",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Formula_Q"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-fried-deerskins",
+            "name": "Recipe: Fried Deerskins",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Fried Deerskins",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003D74AC",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fried_Deerskins"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-fried-radroach-on-a-stick",
+            "name": "Recipe: Fried Radroach On A Stick",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Fried Radroach On A Stick",
+                "obtained": {
+                    "text": "Tunnel Of Love",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Tunnel Of Love"
+                    ]
+                },
+                "value": "50",
+                "form_id": "0068B8EE",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fried_Radroach_On_A_Stick"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-fried-radtoad-legs",
+            "name": "Recipe: Fried Radtoad Legs",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Fried Radtoad Legs",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003D74A5",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fried_Radtoad_Legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-fried-scorpion-on-a-stick",
+            "name": "Recipe: Fried Scorpion On A Stick",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Fried Scorpion On A Stick",
+                "obtained": {
+                    "text": "Tunnel Of Love",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Tunnel Of Love"
+                    ]
+                },
+                "value": "50",
+                "form_id": "0068B8EF",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fried_Scorpion_On_A_Stick"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-fury",
+            "name": "Recipe: Fury",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Fury",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "002B8BBD",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Fury"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-gamma-green-tea",
+            "name": "Recipe: Gamma Green Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Gamma Green Tea",
+                "obtained": {
+                    "text": "The Big Bloom",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Big Bloom"
+                    ]
+                },
+                "value": "0",
+                "form_id": "007B2737",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Gamma_Green_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-glowing-fungus-puree",
+            "name": "Recipe: Glowing Fungus Puree",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Glowing Fungus Puree",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FDFB",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Glowing_Fungus_Puree"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-grape-mentats",
+            "name": "Recipe: Grape Mentats",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Grape Mentats",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "002B8BBE",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Grape_Mentats"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-grilled-fish",
+            "name": "Recipe: Grilled Fish",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Grilled Fish",
+                "obtained": {
+                    "text": "Casting Off",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Casting Off"
+                    ]
+                },
+                "value": "5",
+                "form_id": "007B2B9B",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Grilled_Fish"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-ground-molerat",
+            "name": "Recipe: Ground Molerat",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Ground Molerat",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FE00",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Ground_Molerat"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-grounded-serum",
+            "name": "Recipe: Grounded Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Grounded Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D59",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Grounded_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-gulper-stuffed-foot",
+            "name": "Recipe: Gulper Stuffed Foot",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Gulper Stuffed Foot",
+                "obtained": {
+                    "text": "Tunnel Of Love",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Tunnel Of Love"
+                    ]
+                },
+                "value": "50",
+                "form_id": "0068B8ED",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Gulper_Stuffed_Foot"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-hard-lemonade",
+            "name": "Recipe: Hard Lemonade",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Hard Lemonade",
+                "obtained": {
+                    "text": "Mr. Squeeze",
+                    "icons": [
+                        "Bottle Cap",
+                        "Mr. Squeeze"
+                    ]
+                },
+                "value": "50",
+                "form_id": "0046CF1C",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Hard_Lemonade"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-healing-factor-serum",
+            "name": "Recipe: Healing Factor Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Healing Factor Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D5A",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Healing_Factor_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-healing-salve",
+            "name": "Recipe: Healing Salve",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Healing Salve",
+                "obtained": [
+                    "Fallout 76 Locations"
+                ],
+                "value": "200",
+                "form_id": "002B8BC4",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Healing_Salve"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-herbivore-serum",
+            "name": "Recipe: Herbivore Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Herbivore Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D5B",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Herbivore_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-herd-mentality-serum",
+            "name": "Recipe: Herd Mentality Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Herd Mentality Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D5C",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Herd_Mentality_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-iguana-soup",
+            "name": "Recipe: Iguana Soup",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Iguana Soup",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FDFC",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Iguana_Soup"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-infused-blood-leaf-tea",
+            "name": "Recipe: Infused Blood Leaf Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Infused Blood Leaf Tea",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FDF6",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Infused_Blood_Leaf_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-infused-soot-flower-tea",
+            "name": "Recipe: Infused Soot Flower Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Infused Soot Flower Tea",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FE04",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Infused_Soot_Flower_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-insect-repellent",
+            "name": "Recipe: Insect Repellent",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Insect Repellent",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "form_id": "004265FB",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Insect_Repellent"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-jet",
+            "name": "Recipe: Jet",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Jet",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "form_id": "002B8BC5",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Jet"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-lead-champagne-bellini",
+            "name": "Recipe: Lead Champagne Bellini",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Lead Champagne Bellini",
+                "obtained": {
+                    "text": "Tipsy Taste-Test",
+                    "icons": [
+                        "Quest",
+                        "Tipsy Taste-Test"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003F446D",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Lead_Champagne_Bellini"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-lead-champagne-mimosa",
+            "name": "Recipe: Lead Champagne Mimosa",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Lead Champagne Mimosa",
+                "obtained": {
+                    "text": "Tipsy Taste-Test",
+                    "icons": [
+                        "Quest",
+                        "Tipsy Taste-Test"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003F446E",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Lead_Champagne_Mimosa"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-lemonade",
+            "name": "Recipe: Lemonade",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Lemonade",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0046CF1B",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Lemonade"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-liquid-courage",
+            "name": "Recipe: Liquid Courage",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Liquid Courage",
+                "obtained": {
+                    "text": "Daily Ops",
+                    "icons": [
+                        "Quest",
+                        "Daily Ops"
+                    ]
+                },
+                "value": "300",
+                "form_id": "00596E9A",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Liquid_Courage"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-marsupial-serum",
+            "name": "Recipe: Marsupial Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Marsupial Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D5D",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Marsupial_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-megasloth-tenderloin",
+            "name": "Recipe: Megasloth Tenderloin",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Megasloth Tenderloin",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003D74A7",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Megasloth_Tenderloin"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-mentats",
+            "name": "Recipe: Mentats",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Mentats",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "250",
+                "form_id": "002B8BC6",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Mentats"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-mirelurk-cake",
+            "name": "Recipe: Mirelurk Cake",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Mirelurk Cake",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FDFD",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Mirelurk_Cake"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-mirelurk-cake-with-bloodleaf-aioli",
+            "name": "Recipe: Mirelurk Cake With Bloodleaf Aioli",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Mirelurk Cake With Bloodleaf Aioli",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003D5F3D",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Mirelurk_Cake_With_Bloodleaf_Aioli"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-mirelurk-jerky",
+            "name": "Recipe: Mirelurk Jerky",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Mirelurk Jerky",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FDFE",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Mirelurk_Jerky"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-mirelurk-softshell-cake",
+            "name": "Recipe: Mirelurk Softshell Cake",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Mirelurk Softshell Cake",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FDFF",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Mirelurk_Softshell_Cake"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-mountain-honey-moonshine",
+            "name": "Recipe: Mountain Honey Moonshine",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Mountain Honey Moonshine",
+                "obtained": {
+                    "text": "Tipsy Taste-Test",
+                    "icons": [
+                        "Quest",
+                        "Tipsy Taste-Test"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003F0B33",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Mountain_Honey_Moonshine"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-mystery-meat-pie",
+            "name": "Recipe: Mystery Meat Pie",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Mystery Meat Pie",
+                "obtained": {
+                    "text": "A Perfect Getaway",
+                    "icons": [
+                        "Quest",
+                        "A Perfect Getaway"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003F5E97",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Mystery_Meat_Pie"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-new-river-red-ale",
+            "name": "Recipe: New River Red Ale",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: New River Red Ale",
+                "obtained": {
+                    "text": "Tipsy Taste-Test",
+                    "icons": [
+                        "Quest",
+                        "Tipsy Taste-Test"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003F0B2E",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_New_River_Red_Ale"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-nuka-cola-dark",
+            "name": "Recipe: Nuka-Cola Dark",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Nuka-Cola Dark",
+                "obtained": {
+                    "text": "Tipsy Taste-Test",
+                    "icons": [
+                        "Quest",
+                        "Tipsy Taste-Test"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003F0B34",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Nuka-Cola_Dark"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-nuka-dog",
+            "name": "Recipe: Nuka-Dog",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Nuka-Dog",
+                "obtained": {
+                    "text": "Tunnel Of Love",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Tunnel Of Love"
+                    ]
+                },
+                "value": "",
+                "form_id": "0068B8EB",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Nuka-Dog"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-oak-holler-lager",
+            "name": "Recipe: Oak Holler Lager",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Oak Holler Lager",
+                "obtained": {
+                    "text": "Tipsy Taste-Test",
+                    "icons": [
+                        "Quest",
+                        "Tipsy Taste-Test"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003F0B2F",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Oak_Holler_Lager"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-old-possum",
+            "name": "Recipe: Old Possum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Old Possum",
+                "obtained": {
+                    "text": "Tipsy Taste-Test",
+                    "icons": [
+                        "Quest",
+                        "Tipsy Taste-Test"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003F0B30",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Old_Possum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-orange-mentats",
+            "name": "Recipe: Orange Mentats",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Orange Mentats",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "500",
+                "form_id": "002B8BC7",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Orange_Mentats"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-overdrive",
+            "name": "Recipe: Overdrive",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Overdrive",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "300",
+                "form_id": "002B8BC8",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Overdrive"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-pepperoni-roll",
+            "name": "Recipe: Pepperoni Roll",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Pepperoni Roll",
+                "obtained": {
+                    "text": "The Crater",
+                    "icons": [
+                        "Bottle Cap",
+                        "The Crater"
+                    ]
+                },
+                "value": "50",
+                "form_id": "0058F9E2",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Pepperoni_Roll"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-pickaxe-pilsner",
+            "name": "Recipe: Pickaxe Pilsner",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Pickaxe Pilsner",
+                "obtained": {
+                    "text": "Tipsy Taste-Test",
+                    "icons": [
+                        "Quest",
+                        "Tipsy Taste-Test"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003F0B31",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Pickaxe_Pilsner"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-plague-walker-serum",
+            "name": "Recipe: Plague Walker Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Plague Walker Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D5E",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Plague_Walker_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-psycho",
+            "name": "Recipe: Psycho",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Psycho",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "250",
+                "form_id": "002B8BC9",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Psycho"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-psychobuff",
+            "name": "Recipe: Psychobuff",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Psychobuff",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "300",
+                "form_id": "002B8BCA",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Psychobuff"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-pumpkin-pie",
+            "name": "Recipe: Pumpkin Pie",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Pumpkin Pie",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003E3CBD",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Pumpkin_Pie"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-radaway",
+            "name": "Recipe: RadAway",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: RadAway",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "300",
+                "form_id": "002B8BCB",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_RadAway"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-radscorpion-fillet",
+            "name": "Recipe: Radscorpion Fillet",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Radscorpion Fillet",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003D74A3",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Radscorpion_Fillet"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-radscorpion-kebab",
+            "name": "Recipe: Radscorpion Kebab",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Radscorpion Kebab",
+                "obtained": {
+                    "text": "Tunnel Of Love",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Tunnel Of Love"
+                    ]
+                },
+                "value": "50",
+                "form_id": "0068B8F3",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Radscorpion_Kebab"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-radstag-stew",
+            "name": "Recipe: Radstag Stew",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Radstag Stew",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FE08",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Radstag_Stew"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-refreshing-beverage",
+            "name": "Recipe: Refreshing Beverage",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Refreshing Beverage",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "form_id": "002B8BCC",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Refreshing_Beverage"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-s-mores",
+            "name": "Recipe: S'mores",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: S'mores",
+                "obtained": {
+                    "text": "Campfire Tales",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Campfire Tales"
+                    ]
+                },
+                "value": "50",
+                "form_id": "0046D291",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_S%27mores"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-scaly-skin-serum",
+            "name": "Recipe: Scaly Skin Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Scaly Skin Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D5F",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Scaly_Skin_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-scorchbeast-mixed-meat-stew",
+            "name": "Recipe: Scorchbeast Mixed Meat Stew",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Scorchbeast Mixed Meat Stew",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003D74AB",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Scorchbeast_Mixed_Meat_Stew"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-seared-venison-with-berries",
+            "name": "Recipe: Seared Venison With Berries",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Seared Venison With Berries",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003D5F3A",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Seared_Venison_With_Berries"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-silt-bean-puree",
+            "name": "Recipe: Silt Bean Puree",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Silt Bean Puree",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FE09",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Silt_Bean_Puree"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-skeeto-spit",
+            "name": "Recipe: Skeeto Spit",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Skeeto Spit",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "002B8BCD",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Skeeto_Spit"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-smoked-mirelurk-fillets",
+            "name": "Recipe: Smoked Mirelurk Fillets",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Smoked Mirelurk Fillets",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003D5F43",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Smoked_Mirelurk_Fillets"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-speed-demon-serum",
+            "name": "Recipe: Speed Demon Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Speed Demon Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D60",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Speed_Demon_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-squirrel-on-a-stick",
+            "name": "Recipe: Squirrel on a stick",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Squirrel on a stick",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FE03",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Squirrel_on_a_stick"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-steeped-ash-rose-tea",
+            "name": "Recipe: Steeped Ash Rose Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Steeped Ash Rose Tea",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0050DCBB",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Ash_Rose_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-steeped-aster-tea",
+            "name": "Recipe: Steeped Aster Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Steeped Aster Tea",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0050DCBC",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Aster_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-steeped-black-bloodleaf-tea",
+            "name": "Recipe: Steeped Black Bloodleaf Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Steeped Black Bloodleaf Tea",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "form_id": "0050DCBE",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Black_Bloodleaf_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-steeped-carrot-flower-tea",
+            "name": "Recipe: Steeped Carrot Flower Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Steeped Carrot Flower Tea",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0050DCBF",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Carrot_Flower_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-steeped-fern-flower-tea",
+            "name": "Recipe: Steeped Fern Flower Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Steeped Fern Flower Tea",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0050DCC0",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Fern_Flower_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-steeped-fever-blossom-tea",
+            "name": "Recipe: Steeped Fever Blossom Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Steeped Fever Blossom Tea",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0050DCC1",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Fever_Blossom_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-steeped-gourd-blossom-tea",
+            "name": "Recipe: Steeped Gourd Blossom Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Steeped Gourd Blossom Tea",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0050DCC2",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Gourd_Blossom_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-steeped-melon-bloom-tea",
+            "name": "Recipe: Steeped Melon Bloom Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Steeped Melon Bloom Tea",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0050DCC3",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Melon_Bloom_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-steeped-melon-blossom-chai",
+            "name": "Recipe: Steeped Melon Blossom Chai",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Steeped Melon Blossom Chai",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0050DCC4",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Melon_Blossom_Chai"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-steeped-strangler-bloom-tea",
+            "name": "Recipe: Steeped Strangler Bloom Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Steeped Strangler Bloom Tea",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0050DCC5",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Strangler_Bloom_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-steeped-strangler-pod-tea",
+            "name": "Recipe: Steeped Strangler Pod Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Steeped Strangler Pod Tea",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0050DCC6",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Strangler_Pod_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-steeped-tato-flower-tea",
+            "name": "Recipe: Steeped Tato Flower Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Steeped Tato Flower Tea",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0050DCC7",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Tato_Flower_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-steeped-thistle-tea",
+            "name": "Recipe: Steeped Thistle Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Steeped Thistle Tea",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0050DCC8",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Steeped_Thistle_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-stimpak",
+            "name": "Recipe: Stimpak",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Stimpak",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "500",
+                "form_id": "002B8BCE",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Stimpak"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-stimpak-defuser",
+            "name": "Recipe: Stimpak Defuser",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Stimpak Defuser",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest"
+                ],
+                "value": "50",
+                "form_id": "00485035",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Stimpak_Defuser"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-sunny-s-settler-stew",
+            "name": "Recipe: Sunny's settler stew",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Sunny's settler stew",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "0",
+                "form_id": "00543E1F",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Sunny%27s_settler_stew"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-super-stimpak",
+            "name": "Recipe: Super Stimpak",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Super Stimpak",
+                "obtained": [
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "1000",
+                "form_id": "002B8BCF",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Super_Stimpak"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-swamp-tofu-soup",
+            "name": "Recipe: Swamp Tofu Soup",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Swamp Tofu Soup",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003D5F38",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Swamp_Tofu_Soup"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-sweet-blackberry-tea",
+            "name": "Recipe: Sweet Blackberry Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Sweet Blackberry Tea",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0050DCBD",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Sweet_Blackberry_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-sweet-mutfruit-tea",
+            "name": "Recipe: Sweet Mutfruit Tea",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Sweet Mutfruit Tea",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FE06",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Sweet_Mutfruit_Tea"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-sweet-roll",
+            "name": "Recipe: Sweet Roll",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Sweet Roll",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003CC136",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Sweet_Roll"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-sweet-tato-stew",
+            "name": "Recipe: Sweet Tato Stew",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Sweet Tato Stew",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FDF8",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Sweet_Tato_Stew"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-talons-serum",
+            "name": "Recipe: Talons Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Talons Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D61",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Talons_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-tasty-mutant-hound-stew",
+            "name": "Recipe: Tasty Mutant Hound Stew",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Tasty Mutant Hound Stew",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FE01",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tasty_Mutant_Hound_Stew"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-tasty-mutton-meat-pie",
+            "name": "Recipe: Tasty Mutton Meat Pie",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Tasty Mutton Meat Pie",
+                "obtained": {
+                    "text": "Free Range",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Free Range"
+                    ]
+                },
+                "value": "50",
+                "form_id": "0046ECB4",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tasty_Mutton_Meat_Pie"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-tasty-radscorpion-egg-omelette",
+            "name": "Recipe: Tasty Radscorpion Egg Omelette",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Tasty Radscorpion Egg Omelette",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FE07",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tasty_Radscorpion_Egg_Omelette"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-tasty-squirrel-stew",
+            "name": "Recipe: Tasty Squirrel Stew",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Tasty Squirrel Stew",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FE02",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tasty_Squirrel_Stew"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-tasty-stingwing-stew",
+            "name": "Recipe: Tasty Stingwing Stew",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Tasty Stingwing Stew",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "003D74A1",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tasty_Stingwing_Stew"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-tasty-yao-guai-roast",
+            "name": "Recipe: Tasty Yao Guai Roast",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Tasty Yao Guai Roast",
+                "obtained": [
+                    "Fallout 76 Locations",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "form_id": "0052FDF7",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tasty_Yao_Guai_Roast"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-tato-salad",
+            "name": "Recipe: Tato Salad",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Tato Salad",
+                "obtained": {
+                    "text": "Grahm's Meat-Cook",
+                    "icons": [
+                        "Fallout 76 Legacy Content",
+                        "Grahm's Meat-Cook"
+                    ]
+                },
+                "value": "50",
+                "form_id": "005527C0",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tato_Salad"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-tick-blood-tequila-margarita",
+            "name": "Recipe: Tick Blood Tequila Margarita",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Tick Blood Tequila Margarita",
+                "obtained": {
+                    "text": "Tipsy Taste-Test",
+                    "icons": [
+                        "Quest",
+                        "Tipsy Taste-Test"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003F446F",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tick_Blood_Tequila_Margarita"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-tick-blood-tequila-sunrise",
+            "name": "Recipe: Tick Blood Tequila Sunrise",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Tick Blood Tequila Sunrise",
+                "obtained": {
+                    "text": "Tipsy Taste-Test",
+                    "icons": [
+                        "Quest",
+                        "Tipsy Taste-Test"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003F4470",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Tick_Blood_Tequila_Sunrise"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-toxic-gin",
+            "name": "Recipe: Toxic Gin",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Toxic Gin",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "300",
+                "form_id": "003FBB9C",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Toxic_Gin"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-twisted-muscles-serum",
+            "name": "Recipe: Twisted Muscles Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Twisted Muscles Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D62",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Twisted_Muscles_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-unstable-isotope-serum",
+            "name": "Recipe: Unstable Isotope Serum",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Unstable Isotope Serum",
+                "obtained": {
+                    "text": "MODUS Science Terminal",
+                    "icons": [
+                        "Bottle Cap",
+                        "MODUS Science Terminal"
+                    ]
+                },
+                "value": "10000",
+                "form_id": "003D0D63",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Unstable_Isotope_Serum"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-white-russian",
+            "name": "Recipe: White Russian",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: White Russian",
+                "obtained": {
+                    "text": "Tipsy Taste-Test",
+                    "icons": [
+                        "Quest",
+                        "Tipsy Taste-Test"
+                    ]
+                },
+                "value": "50",
+                "form_id": "003F5C51",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_White_Russian"
+            },
+            "availability": []
+        },
+        {
+            "type": "recipe",
+            "slug": "recipe-yao-guai-pastry",
+            "name": "Recipe: Yao Guai Pastry",
+            "section": "Recipes",
+            "columns": {
+                "image": [],
+                "name": "Recipe: Yao Guai Pastry",
+                "obtained": {
+                    "text": "Tunnel Of Love",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Tunnel Of Love"
+                    ]
+                },
+                "value": "50",
+                "form_id": "0068B8EC",
+                "wiki_url": "https://fallout.wiki/wiki/Recipe%3A_Yao_Guai_Pastry"
+            },
+            "availability": []
+        }
+    ]
+}

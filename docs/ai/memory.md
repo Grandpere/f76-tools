@@ -33,6 +33,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: Fandom and `fallout.wiki` syncs now catch failures per page, preserve successful page files, write a partial `index.json` with `page_errors`, and support targeted reruns via `app:data:sync --only=<provider> --<provider>-page='...'`.
 - Prevention: for third-party multi-page syncs, isolate failures per page/resource and always emit a machine-readable partial summary.
 
+## 2026-03-17 - Do not run integration and functional suites in parallel against the same test database
+- Symptom: functional tests exploded with missing tables such as `player_item_knowledge`, `contact_message`, and `auth_audit_log`, even though migrations were present and the suite passed when rerun alone.
+- Root cause: integration and functional Make targets both drop/create/migrate the shared `app_test` database, so running them in parallel creates race conditions and leaves one suite observing a half-reset schema.
+- Fix: rerun `make phpunit-functional` alone; the suite passed fully once no other test target was mutating the same test database.
+- Prevention: never run `make phpunit-integration` and `make phpunit-functional` concurrently unless test DB isolation is introduced first.
+
 ## 2026-03-16 - After dual-write stabilization, remove legacy source columns quickly
 - Symptom: keeping both `item_external_source` and legacy source columns in `item` prolongs drift risk and duplicate truth.
 - Root cause: split migrations often stop at dual-write, leaving cleanup postponed indefinitely.

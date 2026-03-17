@@ -1,0 +1,3468 @@
+{
+    "generated_at": "2026-03-17T14:18:46+00:00",
+    "source": "fallout.wiki",
+    "page": "Fallout_76_Apparel_Plans",
+    "url": "https://fallout.wiki/wiki/Fallout_76_Apparel_Plans",
+    "sections_count": 6,
+    "resources_count": 139,
+    "resources": [
+        {
+            "type": "plan",
+            "slug": "plan-apocalyptic-farmer-headwear",
+            "name": "Plan: Apocalyptic Farmer Headwear",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Apocalyptic Farmer Headwear",
+                "unlocks": {
+                    "text": "Apocalyptic Farmer Headwear",
+                    "icons": [
+                        "Apocalyptic Farmer Headwear"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Quest",
+                        "The Human Condition"
+                    ]
+                },
+                "form_id": "006E7358",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Apocalyptic_Farmer_Headwear"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-apocalyptic-farmer-outfit",
+            "name": "Plan: Apocalyptic Farmer Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Apocalyptic Farmer Outfit",
+                "unlocks": {
+                    "text": "Apocalyptic Farmer Outfit",
+                    "icons": [
+                        "Apocalyptic Farmer Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Human Condition"
+                    ]
+                },
+                "form_id": "006E7357",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Apocalyptic_Farmer_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-backpack-armor-plated-mod",
+            "name": "Plan: Backpack armor plated mod",
+            "section": "Backpacks",
+            "columns": {
+                "name": "Plan: Backpack armor plated mod",
+                "unlocks": {
+                    "text": "Armor Plated",
+                    "icons": [
+                        "Armor Plated"
+                    ]
+                },
+                "obtained": {
+                    "text": "Possum Vending Machine",
+                    "icons": [
+                        "Possum Badge",
+                        "Possum Vending Machine"
+                    ]
+                },
+                "form_id": "0046A3A5",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Backpack_armor_plated_mod"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-backpack-high-capacity-mod",
+            "name": "Plan: Backpack high capacity mod",
+            "section": "Backpacks",
+            "columns": {
+                "name": "Plan: Backpack high capacity mod",
+                "unlocks": {
+                    "text": "High Capacity",
+                    "icons": [
+                        "High Capacity"
+                    ]
+                },
+                "obtained": {
+                    "text": "Possum Vending Machine",
+                    "icons": [
+                        "Possum Badge",
+                        "Possum Vending Machine"
+                    ]
+                },
+                "form_id": "0046A3A6",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Backpack_high_capacity_mod"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-backpack-insulated-mod",
+            "name": "Plan: Backpack insulated mod",
+            "section": "Backpacks",
+            "columns": {
+                "name": "Plan: Backpack insulated mod",
+                "unlocks": {
+                    "text": "Insulated",
+                    "icons": [
+                        "Insulated"
+                    ]
+                },
+                "obtained": {
+                    "text": "Possum Vending Machine",
+                    "icons": [
+                        "Possum Badge",
+                        "Possum Vending Machine"
+                    ]
+                },
+                "form_id": "0046A3A7",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Backpack_insulated_mod"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-backpack-lead-lined-mod",
+            "name": "Plan: Backpack lead lined mod",
+            "section": "Backpacks",
+            "columns": {
+                "name": "Plan: Backpack lead lined mod",
+                "unlocks": {
+                    "text": "Lead Lined",
+                    "icons": [
+                        "Lead Lined (Fallout 76)"
+                    ]
+                },
+                "obtained": {
+                    "text": "Possum Vending Machine",
+                    "icons": [
+                        "Possum Badge",
+                        "Possum Vending Machine"
+                    ]
+                },
+                "form_id": "0042C55E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Backpack_lead_lined_mod"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-backpack-refrigerated-mod",
+            "name": "Plan: Backpack refrigerated mod",
+            "section": "Backpacks",
+            "columns": {
+                "name": "Plan: Backpack refrigerated mod",
+                "unlocks": {
+                    "text": "Refrigerated",
+                    "icons": [
+                        "Refrigerated"
+                    ]
+                },
+                "obtained": {
+                    "text": "Possum Vending Machine",
+                    "icons": [
+                        "Possum Badge",
+                        "Possum Vending Machine"
+                    ]
+                },
+                "form_id": "0046A3A8",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Backpack_refrigerated_mod"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-blue-devil-backpack-flair",
+            "name": "Plan: Blue Devil Backpack Flair",
+            "section": "Backpacks",
+            "columns": {
+                "name": "Plan: Blue Devil Backpack Flair",
+                "unlocks": {
+                    "text": "Blue Devil Backpack Flair",
+                    "icons": [
+                        "Blue Devil Backpack Flair"
+                    ]
+                },
+                "obtained": {
+                    "text": "Safe and Sound",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Safe and Sound"
+                    ]
+                },
+                "form_id": "00692243",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Blue_Devil_Backpack_Flair"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-blue-devil-outfit",
+            "name": "Plan: Blue Devil Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Blue Devil Outfit",
+                "unlocks": {
+                    "text": "Blue Devil Outfit",
+                    "icons": [
+                        "Blue Devil Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Safe and Sound",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Safe and Sound"
+                    ]
+                },
+                "form_id": "006E177E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Blue_Devil_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-blue-devil-pelt-hood",
+            "name": "Plan: Blue Devil Pelt Hood",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Blue Devil Pelt Hood",
+                "unlocks": {
+                    "text": "Blue Devil Pelt Hood",
+                    "icons": [
+                        "Blue Devil Pelt Hood"
+                    ]
+                },
+                "obtained": {
+                    "text": "Safe and Sound",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Safe and Sound"
+                    ]
+                },
+                "form_id": "006E177D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Blue_Devil_Pelt_Hood"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-blue-ridge-scout-helmet",
+            "name": "Plan: Blue Ridge Scout Helmet",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Blue Ridge Scout Helmet",
+                "unlocks": {
+                    "text": "Blue Ridge Scout Helmet",
+                    "icons": [
+                        "Blue Ridge Scout Helmet"
+                    ]
+                },
+                "obtained": {
+                    "text": "Costa Business: Herschel",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Costa Business: Herschel"
+                    ]
+                },
+                "form_id": "00691D05",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Blue_Ridge_Scout_Helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-blue-ridge-scout-outfit",
+            "name": "Plan: Blue Ridge Scout Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Blue Ridge Scout Outfit",
+                "unlocks": {
+                    "text": "Blue Ridge Scout Outfit",
+                    "icons": [
+                        "Blue Ridge Scout Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Beasts of Burden",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Beasts of Burden"
+                    ]
+                },
+                "form_id": "006E227A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Blue_Ridge_Scout_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-bone-chill-skull-mask",
+            "name": "Plan: Bone Chill Skull Mask",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Bone Chill Skull Mask",
+                "unlocks": {
+                    "text": "Bone Chill Skull Mask",
+                    "icons": [
+                        "Bone Chill Skull Mask"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Mothman Equinox",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Mothman Equinox"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Bone_Chill_Skull_Mask"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-bottle-backpack-flair",
+            "name": "Plan: Bottle Backpack Flair",
+            "section": "Backpacks",
+            "columns": {
+                "name": "Plan: Bottle Backpack Flair",
+                "unlocks": {
+                    "text": "Bottle Backpack Flair",
+                    "icons": [
+                        "Bottle Backpack Flair"
+                    ]
+                },
+                "obtained": {
+                    "text": "Event: Most Wanted",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Most Wanted (Fallout 76)"
+                    ]
+                },
+                "form_id": "0068210F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Bottle_Backpack_Flair"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-brotherhood-civvies",
+            "name": "Plan: Brotherhood civvies",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Brotherhood civvies",
+                "unlocks": {
+                    "text": "Brotherhood civvies",
+                    "icons": [
+                        "Brotherhood civvies"
+                    ]
+                },
+                "obtained": {
+                    "text": "Out of the Blue",
+                    "icons": [
+                        "Quest",
+                        "Out of the Blue"
+                    ]
+                },
+                "form_id": "00606C94",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_civvies"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-burnt-vault-chemist-coat",
+            "name": "Plan: Burnt Vault Chemist Coat",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Burnt Vault Chemist Coat",
+                "unlocks": {
+                    "text": "Burnt Vault Chemist Coat",
+                    "icons": [
+                        "Burnt Vault Chemist Coat"
+                    ]
+                },
+                "obtained": {
+                    "text": "Dangerous Pastimes",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Dangerous Pastimes"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Burnt_Vault_Chemist_Coat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-burnt-vault-lab-coat",
+            "name": "Plan: Burnt Vault Lab Coat",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Burnt Vault Lab Coat",
+                "unlocks": {
+                    "text": "Burnt Vault Lab Coat",
+                    "icons": [
+                        "Burnt Vault Lab Coat"
+                    ]
+                },
+                "obtained": {
+                    "text": "Dangerous Pastimes",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Dangerous Pastimes"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Burnt_Vault_Lab_Coat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-canteen-backpack-mod",
+            "name": "Plan: Canteen Backpack Mod",
+            "section": "Backpacks",
+            "columns": {
+                "name": "Plan: Canteen Backpack Mod",
+                "unlocks": {
+                    "text": "Canteen",
+                    "icons": [
+                        "Canteen (Fallout 76)"
+                    ]
+                },
+                "obtained": {
+                    "text": "Raid: Gleaming Depths",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Gleaming Depths (Raid)"
+                    ]
+                },
+                "form_id": "007BB06B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Canteen_Backpack_Mod"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cappy-backpack-flair",
+            "name": "Plan: Cappy Backpack Flair",
+            "section": "Backpacks",
+            "columns": {
+                "name": "Plan: Cappy Backpack Flair",
+                "unlocks": {
+                    "text": "Cappy Backpack Flair",
+                    "icons": [
+                        "Cappy Backpack Flair"
+                    ]
+                },
+                "obtained": {
+                    "text": "Event: Most Wanted",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Most Wanted (Fallout 76)"
+                    ]
+                },
+                "form_id": "0067F16E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cappy_Backpack_Flair"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-centurion-helmet",
+            "name": "Plan: Centurion Helmet",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Centurion Helmet",
+                "unlocks": {
+                    "text": "Centurion Helmet",
+                    "icons": [
+                        "Centurion Helmet (Fallout 76)"
+                    ]
+                },
+                "obtained": {
+                    "text": "A Colossal Problem",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "A Colossal Problem"
+                    ]
+                },
+                "form_id": "0062042B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Centurion_Helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-chemist-s-backpack-mod",
+            "name": "Plan: Chemist's Backpack Mod",
+            "section": "Backpacks",
+            "columns": {
+                "name": "Plan: Chemist's Backpack Mod",
+                "unlocks": {
+                    "text": "Chemist Mod",
+                    "icons": [
+                        "Chemist Mod"
+                    ]
+                },
+                "obtained": {
+                    "text": "Mortimer or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Mortimer (Fallout 76)",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "005A0ED4",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Chemist%27s_Backpack_Mod"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-civil-war-era-dress",
+            "name": "Plan: Civil War Era Dress",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Civil War Era Dress",
+                "unlocks": {
+                    "text": "Civil War Era Dress",
+                    "icons": [
+                        "Civil War Era Dress"
+                    ]
+                },
+                "obtained": {
+                    "text": "Philippi's Cemetery Battlefield Revealed",
+                    "icons": [
+                        "Spawned",
+                        "Philippi's Cemetery Battlefield Revealed"
+                    ]
+                },
+                "form_id": "003A177F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Civil_War_Era_Dress"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-civil-war-era-suit",
+            "name": "Plan: Civil War Era Suit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Civil War Era Suit",
+                "unlocks": {
+                    "text": "Civil War Era Suit",
+                    "icons": [
+                        "Civil War Era Suit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Philippi's Cemetery Battlefield Revealed",
+                    "icons": [
+                        "Spawned",
+                        "Philippi's Cemetery Battlefield Revealed"
+                    ]
+                },
+                "form_id": "003A1780",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Civil_War_Era_Suit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-civil-war-era-top-hat",
+            "name": "Plan: Civil War Era Top Hat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Civil War Era Top Hat",
+                "unlocks": {
+                    "text": "Civil War Era Top Hat",
+                    "icons": [
+                        "Civil War Era Top Hat"
+                    ]
+                },
+                "obtained": {
+                    "text": "Philippi's Cemetery Battlefield Revealed",
+                    "icons": [
+                        "Spawned",
+                        "Philippi's Cemetery Battlefield Revealed"
+                    ]
+                },
+                "form_id": "0050E3EF",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Civil_War_Era_Top_Hat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-confederate-hat",
+            "name": "Plan: Confederate Hat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Confederate Hat",
+                "unlocks": {
+                    "text": "Confederate Hat",
+                    "icons": [
+                        "Confederate Hat (Fallout 76)"
+                    ]
+                },
+                "obtained": {
+                    "text": "Philippi's Cemetery Battlefield Revealed",
+                    "icons": [
+                        "Spawned",
+                        "Philippi's Cemetery Battlefield Revealed"
+                    ]
+                },
+                "form_id": "0050E3F0",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Confederate_Hat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-confederate-uniform",
+            "name": "Plan: Confederate Uniform",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Confederate Uniform",
+                "unlocks": {
+                    "text": "Confederate uniform",
+                    "icons": [
+                        "Confederate uniform"
+                    ]
+                },
+                "obtained": {
+                    "text": "Philippi's Cemetery Battlefield Revealed",
+                    "icons": [
+                        "Spawned",
+                        "Philippi's Cemetery Battlefield Revealed"
+                    ]
+                },
+                "form_id": "003A1782",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Confederate_Uniform"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-costume-witch-hat",
+            "name": "Plan: Costume Witch Hat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Costume Witch Hat",
+                "unlocks": {
+                    "text": "Halloween Costume Witch Hat",
+                    "icons": [
+                        "Halloween Costume Witch Hat"
+                    ]
+                },
+                "obtained": {
+                    "text": "Location Revealed - Pumpkin House",
+                    "icons": [
+                        "Spawned",
+                        "Fallout 76 random encounters"
+                    ]
+                },
+                "form_id": "0050E3F2",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Costume_Witch_Hat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cowboy-chaps",
+            "name": "Plan: Cowboy Chaps",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Cowboy Chaps",
+                "unlocks": {
+                    "text": "Cowboy Chaps",
+                    "icons": [
+                        "Cowboy Chaps"
+                    ]
+                },
+                "obtained": {
+                    "text": "Daily Ops",
+                    "icons": [
+                        "Quest",
+                        "Daily Ops"
+                    ]
+                },
+                "form_id": "0068ADEC",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cowboy_Chaps"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cowboy-duster",
+            "name": "Plan: Cowboy Duster",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Cowboy Duster",
+                "unlocks": {
+                    "text": "Cowboy Duster",
+                    "icons": [
+                        "Cowboy Duster"
+                    ]
+                },
+                "obtained": {
+                    "text": "Daily Ops",
+                    "icons": [
+                        "Quest",
+                        "Daily Ops"
+                    ]
+                },
+                "form_id": "00068ADE",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cowboy_Duster"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cowboy-hat",
+            "name": "Plan: Cowboy Hat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Cowboy Hat",
+                "unlocks": {
+                    "text": "Cowboy Hat",
+                    "icons": [
+                        "Cowboy Hat"
+                    ]
+                },
+                "obtained": {
+                    "text": "Daily Ops",
+                    "icons": [
+                        "Quest",
+                        "Daily Ops"
+                    ]
+                },
+                "form_id": "0068ADED",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cowboy_Hat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-crude-skull-mask",
+            "name": "Plan: Crude Skull Mask",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Crude Skull Mask",
+                "unlocks": {
+                    "text": "Crude Skull Mask",
+                    "icons": [
+                        "Crude Skull Mask"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Mothman Equinox",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Mothman Equinox"
+                    ]
+                },
+                "form_id": "0076EF99",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Crude_Skull_Mask"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cryptid-hunter-boonie-hat",
+            "name": "Plan: Cryptid Hunter Boonie Hat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Cryptid Hunter Boonie Hat",
+                "unlocks": {
+                    "text": "Cryptid Hunter Boonie Hat",
+                    "icons": [
+                        "Cryptid Hunter Boonie Hat"
+                    ]
+                },
+                "obtained": {
+                    "text": "Beasts of Burden",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Beasts of Burden"
+                    ]
+                },
+                "form_id": "006923AD",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cryptid_Hunter_Boonie_Hat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cultist-adept-hood",
+            "name": "Plan: Cultist Adept Hood",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Cultist Adept Hood",
+                "unlocks": {
+                    "text": "Cultist Adept Hood",
+                    "icons": [
+                        "Cultist Adept Hood"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Mothman Equinox",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Mothman Equinox"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Adept_Hood"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cultist-adept-robes",
+            "name": "Plan: Cultist Adept Robes",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Cultist Adept Robes",
+                "unlocks": {
+                    "text": "Cultist Adept Robes",
+                    "icons": [
+                        "Cultist Adept Robes"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Mothman Equinox",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Mothman Equinox"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Adept_Robes"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cultist-enlightened-hood",
+            "name": "Plan: Cultist Enlightened Hood",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Cultist Enlightened Hood",
+                "unlocks": {
+                    "text": "Cultist Enlightened Hood",
+                    "icons": [
+                        "Cultist Enlightened Hood"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Mothman Equinox",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Mothman Equinox"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Enlightened_Hood"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cultist-enlightened-robes",
+            "name": "Plan: Cultist Enlightened Robes",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Cultist Enlightened Robes",
+                "unlocks": {
+                    "text": "Cultist Enlightened Robes",
+                    "icons": [
+                        "Cultist Enlightened Robes"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Mothman Equinox",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Mothman Equinox"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Enlightened_Robes"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cultist-eventide-hood",
+            "name": "Plan: Cultist Eventide Hood",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Cultist Eventide Hood",
+                "unlocks": {
+                    "text": "Cultist Eventide Hood",
+                    "icons": [
+                        "Cultist Eventide Hood"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Mothman Equinox",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Mothman Equinox"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Eventide_Hood"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cultist-eventide-robes",
+            "name": "Plan: Cultist Eventide Robes",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Cultist Eventide Robes",
+                "unlocks": {
+                    "text": "Cultist Eventide Robes",
+                    "icons": [
+                        "Cultist Eventide Robes"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Mothman Equinox",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Mothman Equinox"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Eventide_Robes"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cultist-incarnate-helmet",
+            "name": "Plan: Cultist Incarnate Helmet",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Cultist Incarnate Helmet",
+                "unlocks": {
+                    "text": "Cultist Incarnate Helmet",
+                    "icons": [
+                        "Cultist Incarnate Helmet"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Mothman Equinox",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Mothman Equinox"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Incarnate_Helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cultist-monarch-mask",
+            "name": "Plan: Cultist Monarch Mask",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Cultist Monarch Mask",
+                "unlocks": {
+                    "text": "Cultist Monarch Mask",
+                    "icons": [
+                        "Cultist Monarch Mask"
+                    ]
+                },
+                "obtained": {
+                    "text": "Skyline Valley",
+                    "icons": [
+                        "Fallout 76 Limited Time Content",
+                        "Skyline Valley"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Monarch_Mask"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cultist-monarch-outfit",
+            "name": "Plan: Cultist Monarch Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Cultist Monarch Outfit",
+                "unlocks": {
+                    "text": "Cultist Monarch Outfit",
+                    "icons": [
+                        "Cultist Monarch Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Skyline Valley",
+                    "icons": [
+                        "Fallout 76 Limited Time Content",
+                        "Skyline Valley"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Monarch_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cultist-neophyte-hood",
+            "name": "Plan: Cultist Neophyte Hood",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Cultist Neophyte Hood",
+                "unlocks": {
+                    "text": "Cultist Neophyte Hood",
+                    "icons": [
+                        "Cultist Neophyte Hood"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Mothman Equinox",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Mothman Equinox"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Neophyte_Hood"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cultist-neophyte-robes",
+            "name": "Plan: Cultist Neophyte Robes",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Cultist Neophyte Robes",
+                "unlocks": {
+                    "text": "Cultist Neophyte Robes",
+                    "icons": [
+                        "Cultist Neophyte Robes"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Mothman Equinox",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Mothman Equinox"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Neophyte_Robes"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-deathclaw-skin-outfit",
+            "name": "Plan: Deathclaw Skin Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Deathclaw Skin Outfit",
+                "unlocks": {
+                    "text": "Deathclaw Skin Outfit",
+                    "icons": [
+                        "Deathclaw Skin Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Windy",
+                    "icons": [
+                        "Bottle Cap",
+                        "Windy"
+                    ]
+                },
+                "form_id": "00745090",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deathclaw_Skin_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-deputy-s-hat",
+            "name": "Plan: Deputy's Hat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Deputy's Hat",
+                "unlocks": {
+                    "text": "Deputy's Hat",
+                    "icons": [
+                        "Deputy's Hat"
+                    ]
+                },
+                "obtained": {
+                    "text": "Event: Most Wanted",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Most Wanted (Fallout 76)"
+                    ]
+                },
+                "form_id": "006828ED",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deputy%27s_Hat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-enforcer-s-headwear",
+            "name": "Plan: Enforcer's Headwear",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Enforcer's Headwear",
+                "unlocks": {
+                    "text": "Enforcer's Headwear",
+                    "icons": [
+                        "Enforcer's Headwear"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Human Condition"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Enforcer%27s_Headwear"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-enforcer-s-outfit",
+            "name": "Plan: Enforcer's Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Enforcer's Outfit",
+                "unlocks": {
+                    "text": "Enforcer's Outfit",
+                    "icons": [
+                        "Enforcer's Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Human Condition"
+                    ]
+                },
+                "form_id": "006E7359",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Enforcer%27s_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-executioner-mask",
+            "name": "Plan: Executioner Mask",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Executioner Mask",
+                "unlocks": {
+                    "text": "Executioner Mask",
+                    "icons": [
+                        "Executioner Mask"
+                    ]
+                },
+                "obtained": {
+                    "text": "From Ashes to Fire Giuseppe",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "From Ashes to Fire",
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "form_id": "0064934B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Executioner_Mask"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flower-crown-candykill",
+            "name": "Plan: Flower Crown - Candykill",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Flower Crown - Candykill",
+                "unlocks": {
+                    "text": "Flower Crown - Candykill",
+                    "icons": [
+                        "Flower Crown - Candykill"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Big Bloom",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Big Bloom"
+                    ]
+                },
+                "form_id": "007ACE9B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Candykill"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flower-crown-carnal-weeper",
+            "name": "Plan: Flower Crown - Carnal Weeper",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Flower Crown - Carnal Weeper",
+                "unlocks": {
+                    "text": "Flower Crown - Carnal Weeper",
+                    "icons": [
+                        "Flower Crown - Carnal Weeper"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Big Bloom",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Big Bloom"
+                    ]
+                },
+                "form_id": "007ACE93",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Carnal_Weeper"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flower-crown-crystalcup",
+            "name": "Plan: Flower Crown - Crystalcup",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Flower Crown - Crystalcup",
+                "unlocks": {
+                    "text": "Flower Crown - Crystalcup",
+                    "icons": [
+                        "Flower Crown - Crystalcup"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Big Bloom",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Big Bloom"
+                    ]
+                },
+                "form_id": "007ACE95",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Crystalcup"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flower-crown-embergold",
+            "name": "Plan: Flower Crown - Embergold",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Flower Crown - Embergold",
+                "unlocks": {
+                    "text": "Flower Crown - Embergold",
+                    "icons": [
+                        "Flower Crown - Embergold"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Big Bloom",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Big Bloom"
+                    ]
+                },
+                "form_id": "007ACE96",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Embergold"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flower-crown-gigablossom",
+            "name": "Plan: Flower Crown - Gigablossom",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Flower Crown - Gigablossom",
+                "unlocks": {
+                    "text": "Flower Crown - Gigablossom",
+                    "icons": [
+                        "Flower Crown - Gigablossom"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Big Bloom",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Big Bloom"
+                    ]
+                },
+                "form_id": "007ACE9C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Gigablossom"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flower-crown-glorybell",
+            "name": "Plan: Flower Crown - Glorybell",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Flower Crown - Glorybell",
+                "unlocks": {
+                    "text": "Flower Crown - Glorybell",
+                    "icons": [
+                        "Flower Crown - Glorybell"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Big Bloom",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Big Bloom"
+                    ]
+                },
+                "form_id": "007ACE99",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Glorybell"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flower-crown-green-invader",
+            "name": "Plan: Flower Crown - Green Invader",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Flower Crown - Green Invader",
+                "unlocks": {
+                    "text": "Flower Crown - Green Invader",
+                    "icons": [
+                        "Flower Crown - Green Invader"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Big Bloom",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Big Bloom"
+                    ]
+                },
+                "form_id": "007ACE98",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Green_Invader"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flower-crown-radlily",
+            "name": "Plan: Flower Crown - Radlily",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Flower Crown - Radlily",
+                "unlocks": {
+                    "text": "Flower Crown - Radlily",
+                    "icons": [
+                        "Flower Crown - Radlily"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Big Bloom",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Big Bloom"
+                    ]
+                },
+                "form_id": "007ACE94",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Radlily"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flower-crown-seesprout",
+            "name": "Plan: Flower Crown - Seesprout",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Flower Crown - Seesprout",
+                "unlocks": {
+                    "text": "Flower Crown - Seesprout",
+                    "icons": [
+                        "Flower Crown - Seesprout"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Big Bloom",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Big Bloom"
+                    ]
+                },
+                "form_id": "007ACE9A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Seesprout"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flower-crown-starlace",
+            "name": "Plan: Flower Crown - Starlace",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Flower Crown - Starlace",
+                "unlocks": {
+                    "text": "Flower Crown - Starlace",
+                    "icons": [
+                        "Flower Crown - Starlace"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Big Bloom",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Big Bloom"
+                    ]
+                },
+                "form_id": "007ACE97",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Crown_-_Starlace"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flower-printed-sundress",
+            "name": "Plan: Flower-Printed Sundress",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Flower-Printed Sundress",
+                "unlocks": {
+                    "text": "Flower-Printed Sundress",
+                    "icons": [
+                        "Flower-Printed Sundress"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Big Bloom",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Big Bloom"
+                    ]
+                },
+                "form_id": "007AD456",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower-Printed_Sundress"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flower-suit",
+            "name": "Plan: Flower Suit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Flower Suit",
+                "unlocks": {
+                    "text": "Flower Suit",
+                    "icons": [
+                        "Flower Suit"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Big Bloom",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Big Bloom"
+                    ]
+                },
+                "form_id": "007AD459",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flower_Suit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-gladiator-mask",
+            "name": "Plan: Gladiator mask",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Gladiator mask",
+                "unlocks": {
+                    "text": "Gladiator Mask",
+                    "icons": [
+                        "Gladiator Mask"
+                    ]
+                },
+                "obtained": {
+                    "text": "Project Paradise",
+                    "icons": [
+                        "Quest",
+                        "Project Paradise"
+                    ]
+                },
+                "form_id": "0062042C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gladiator_mask"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-grocer-s-backpack-mod",
+            "name": "Plan: Grocer's Backpack Mod",
+            "section": "Backpacks",
+            "columns": {
+                "name": "Plan: Grocer's Backpack Mod",
+                "unlocks": {
+                    "text": "Grocer",
+                    "icons": [
+                        "Grocer"
+                    ]
+                },
+                "obtained": {
+                    "text": "Samuel or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Samuel (Wastelanders)",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "005A0ED1",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Grocer%27s_Backpack_Mod"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-gulper-skin-hood",
+            "name": "Plan: Gulper Skin Hood",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Gulper Skin Hood",
+                "unlocks": {
+                    "text": "Gulper Skin Hood",
+                    "icons": [
+                        "Gulper Skin Hood"
+                    ]
+                },
+                "obtained": {
+                    "text": "Windy",
+                    "icons": [
+                        "Bottle Cap",
+                        "Windy"
+                    ]
+                },
+                "form_id": "007734F1",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gulper_Skin_Hood"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-gulper-skin-outfit",
+            "name": "Plan: Gulper Skin Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Gulper Skin Outfit",
+                "unlocks": {
+                    "text": "Gulper Skin Outfit",
+                    "icons": [
+                        "Gulper Skin Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Windy",
+                    "icons": [
+                        "Bottle Cap",
+                        "Windy"
+                    ]
+                },
+                "form_id": "007734F2",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gulper_Skin_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-halloween-skull-mask",
+            "name": "Plan: Halloween Skull Mask",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Halloween Skull Mask",
+                "unlocks": {
+                    "text": "Halloween Costume Skull",
+                    "icons": [
+                        "Halloween Costume Skull"
+                    ]
+                },
+                "obtained": {
+                    "text": "Location Revealed - Pumpkin House",
+                    "icons": [
+                        "Spawned",
+                        "Fallout 76 random encounters"
+                    ]
+                },
+                "form_id": "0050E3F3",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Halloween_Skull_Mask"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-hammered-skull-mask",
+            "name": "Plan: Hammered Skull Mask",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Hammered Skull Mask",
+                "unlocks": {
+                    "text": "Hammered Skull Mask",
+                    "icons": [
+                        "Hammered Skull Mask"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Mothman Equinox",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Mothman Equinox"
+                    ]
+                },
+                "form_id": "0076EF9A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hammered_Skull_Mask"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-hazmat-suit",
+            "name": "Plan: Hazmat Suit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Hazmat Suit",
+                "unlocks": {
+                    "text": "Hazmat Suit",
+                    "icons": [
+                        "Hazmat Suit (Fallout 76)"
+                    ]
+                },
+                "obtained": {
+                    "text": "Responders Vendor",
+                    "icons": [
+                        "Bottle Cap",
+                        "Responders Vendor"
+                    ]
+                },
+                "form_id": "005698D6",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hazmat_Suit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-hazmat-suit-pink",
+            "name": "Plan: Hazmat Suit - Pink",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Hazmat Suit - Pink",
+                "unlocks": {
+                    "text": "Hazmat Suit - Pink",
+                    "icons": [
+                        "Hazmat Suit - Pink"
+                    ]
+                },
+                "obtained": {
+                    "text": "Invaders from Beyond",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Invaders from Beyond (event)"
+                    ]
+                },
+                "form_id": "0079648D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hazmat_Suit_-_Pink"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-hazmat-suit-teal",
+            "name": "Plan: Hazmat Suit - Teal",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Hazmat Suit - Teal",
+                "unlocks": {
+                    "text": "Hazmat Suit - Teal",
+                    "icons": [
+                        "Hazmat Suit - Teal"
+                    ]
+                },
+                "obtained": {
+                    "text": "Invaders from Beyond",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Invaders from Beyond (event)"
+                    ]
+                },
+                "form_id": "0075FC09",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hazmat_Suit_-_Teal"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-hunter-s-hanbok-outfit",
+            "name": "Plan: Hunter's Hanbok Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Hunter's Hanbok Outfit",
+                "unlocks": {
+                    "text": "Hunter's Hanbok Outfit",
+                    "icons": [
+                        "Hunter's Hanbok Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Windy",
+                    "icons": [
+                        "Bottle Cap",
+                        "Windy"
+                    ]
+                },
+                "form_id": "0076DE20",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hunter%27s_Hanbok_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-insurgent-hat",
+            "name": "Plan: Insurgent hat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Insurgent hat",
+                "unlocks": {
+                    "text": "Insurgent Hat",
+                    "icons": [
+                        "Insurgent Hat"
+                    ]
+                },
+                "obtained": {
+                    "text": "Treasure Hunter",
+                    "icons": [
+                        "Mole Miner Pail",
+                        "Treasure Hunter"
+                    ]
+                },
+                "form_id": "005AD3FA",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Insurgent_hat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-insurgent-outfit",
+            "name": "Plan: Insurgent outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Insurgent outfit",
+                "unlocks": {
+                    "text": "Insurgent Outfit",
+                    "icons": [
+                        "Insurgent Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Treasure Hunter",
+                    "icons": [
+                        "Mole Miner Pail",
+                        "Treasure Hunter"
+                    ]
+                },
+                "form_id": "005AD3F9",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Insurgent_outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-jack-o-lantern-backpack-flair",
+            "name": "Plan: Jack-O'-Lantern Backpack Flair",
+            "section": "Backpacks",
+            "columns": {
+                "name": "Plan: Jack-O'-Lantern Backpack Flair",
+                "unlocks": {
+                    "text": "Jack-O'-Lantern Backpack Flair",
+                    "icons": [
+                        "Jack-O'-Lantern Backpack Flair"
+                    ]
+                },
+                "obtained": {
+                    "text": "Mischief Night",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Mischief Night (C.A.M.P. Revamp)"
+                    ]
+                },
+                "form_id": "00773A2F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Jack-O%27-Lantern_Backpack_Flair"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-lederhosen-outfit",
+            "name": "Plan: Lederhosen Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Lederhosen Outfit",
+                "unlocks": {
+                    "text": "Lederhosen Outfit",
+                    "icons": [
+                        "Lederhosen Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Ineke",
+                    "icons": [
+                        "Bottle Cap",
+                        "Ineke"
+                    ]
+                },
+                "form_id": "00773809",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lederhosen_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-lederhosen-outfit-hat",
+            "name": "Plan: Lederhosen Outfit Hat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Lederhosen Outfit Hat",
+                "unlocks": {
+                    "text": "Lederhosen Outfit Hat",
+                    "icons": [
+                        "Lederhosen Outfit Hat"
+                    ]
+                },
+                "obtained": {
+                    "text": "Ineke",
+                    "icons": [
+                        "Bottle Cap",
+                        "Ineke"
+                    ]
+                },
+                "form_id": "007858E5",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lederhosen_Outfit_Hat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-makeshift-ronin-helmet",
+            "name": "Plan: Makeshift Ronin Helmet",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Makeshift Ronin Helmet",
+                "unlocks": {
+                    "text": "Makeshift Ronin Helmet",
+                    "icons": [
+                        "Makeshift Ronin Helmet"
+                    ]
+                },
+                "obtained": {
+                    "text": "Encryptid",
+                    "icons": [
+                        "Quest",
+                        "Encryptid"
+                    ]
+                },
+                "form_id": "0062042D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Makeshift_Ronin_Helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-marine-tactical-helmet",
+            "name": "Plan: Marine Tactical Helmet",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Marine Tactical Helmet",
+                "unlocks": {
+                    "text": "Marine Tactical Helmet",
+                    "icons": [
+                        "Marine Tactical Helmet (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "0043701A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Marine_Tactical_Helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-mercenary-outfit",
+            "name": "Plan: Mercenary outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Mercenary outfit",
+                "unlocks": {
+                    "text": "Mercenary Outfit",
+                    "icons": [
+                        "Mercenary Outfit (Fallout 76)"
+                    ]
+                },
+                "obtained": {
+                    "text": "Missing Persons",
+                    "icons": [
+                        "Quest",
+                        "Missing Persons"
+                    ]
+                },
+                "form_id": "00606C95",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Mercenary_outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-milkman-hat",
+            "name": "Plan: Milkman Hat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Milkman Hat",
+                "unlocks": {
+                    "text": "Milkman Hat",
+                    "icons": [
+                        "Milkman Hat"
+                    ]
+                },
+                "obtained": {
+                    "text": "Safe and Sound",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Safe and Sound"
+                    ]
+                },
+                "form_id": "0069224F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Milkman_Hat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-milkman-outfit",
+            "name": "Plan: Milkman Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Milkman Outfit",
+                "unlocks": {
+                    "text": "Milkman Outfit",
+                    "icons": [
+                        "Milkman Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Safe and Sound",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Safe and Sound"
+                    ]
+                },
+                "form_id": "00692250",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Milkman_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-muni-drudger-outfit",
+            "name": "Plan: Muni Drudger Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Muni Drudger Outfit",
+                "unlocks": {
+                    "text": "Muni Drudger Outfit",
+                    "icons": [
+                        "Muni Drudger Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Human Condition"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Drudger_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-muni-operator-outfit",
+            "name": "Plan: Muni Operator Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Muni Operator Outfit",
+                "unlocks": {
+                    "text": "Muni Operator Outfit",
+                    "icons": [
+                        "Muni Operator Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Human Condition"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Operator_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-muni-worker-outfit",
+            "name": "Plan: Muni Worker Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Muni Worker Outfit",
+                "unlocks": {
+                    "text": "Muni Worker Outfit",
+                    "icons": [
+                        "Muni Worker Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Human Condition"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Worker_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-nuclear-winter-tracksuit",
+            "name": "Plan: Nuclear Winter Tracksuit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Nuclear Winter Tracksuit",
+                "unlocks": {
+                    "text": "Nuclear Winter Tracksuit",
+                    "icons": [
+                        "Nuclear Winter Tracksuit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Unused Content",
+                    "icons": [
+                        "Overview:Unused Content"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Nuclear_Winter_Tracksuit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-nuka-world-cowboy-duster",
+            "name": "Plan: Nuka-World Cowboy Duster",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Nuka-World Cowboy Duster",
+                "unlocks": {
+                    "text": "Nuka World Cowboy Duster",
+                    "icons": [
+                        "Nuka World Cowboy Duster"
+                    ]
+                },
+                "obtained": {
+                    "text": "Event: Most Wanted",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Most Wanted (Fallout 76)"
+                    ]
+                },
+                "form_id": "0067F170",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Nuka-World_Cowboy_Duster"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-nuka-world-cowboy-hat",
+            "name": "Plan: Nuka-World Cowboy Hat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Nuka-World Cowboy Hat",
+                "unlocks": {
+                    "text": "Nuka-World Cowboy Hat",
+                    "icons": [
+                        "Nuka-World Cowboy Hat"
+                    ]
+                },
+                "obtained": {
+                    "text": "Event: Most Wanted",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Most Wanted (Fallout 76)"
+                    ]
+                },
+                "form_id": "0067F16F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Nuka-World_Cowboy_Hat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-ogua-backpack-flair",
+            "name": "Plan: Ogua Backpack Flair",
+            "section": "Backpacks",
+            "columns": {
+                "name": "Plan: Ogua Backpack Flair",
+                "unlocks": {
+                    "text": "Ogua Backpack Flair",
+                    "icons": [
+                        "Ogua Backpack Flair"
+                    ]
+                },
+                "obtained": {
+                    "text": "Beasts of Burden",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Beasts of Burden"
+                    ]
+                },
+                "form_id": "00691D45",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ogua_Backpack_Flair"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-ogua-hunter-hood",
+            "name": "Plan: Ogua Hunter Hood",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Ogua Hunter Hood",
+                "unlocks": {
+                    "text": "Ogua Hunter Hood",
+                    "icons": [
+                        "Ogua Hunter Hood"
+                    ]
+                },
+                "obtained": {
+                    "text": "Beasts of Burden",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Beasts of Burden"
+                    ]
+                },
+                "form_id": "006D7467",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ogua_Hunter_Hood"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-ogua-hunter-outfit",
+            "name": "Plan: Ogua Hunter Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Ogua Hunter Outfit",
+                "unlocks": {
+                    "text": "Ogua Hunter Outfit",
+                    "icons": [
+                        "Ogua Hunter Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Beasts of Burden",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Beasts of Burden"
+                    ]
+                },
+                "form_id": "006D7468",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ogua_Hunter_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-pheasant-foot-backpack-flair",
+            "name": "Plan: Pheasant Foot Backpack Flair",
+            "section": "Backpacks",
+            "columns": {
+                "name": "Plan: Pheasant Foot Backpack Flair",
+                "unlocks": {
+                    "text": "Pheasant Foot Backpack Flair",
+                    "icons": [
+                        "Pheasant Foot Backpack Flair"
+                    ]
+                },
+                "obtained": {
+                    "text": "Windy",
+                    "icons": [
+                        "Bottle Cap",
+                        "Windy"
+                    ]
+                },
+                "form_id": "007525E8",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pheasant_Foot_Backpack_Flair"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-redcoat-hat",
+            "name": "Plan: Redcoat Hat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Redcoat Hat",
+                "unlocks": {
+                    "text": "Redcoat Hat",
+                    "icons": [
+                        "Redcoat Hat"
+                    ]
+                },
+                "obtained": {
+                    "text": "Ineke",
+                    "icons": [
+                        "Bottle Cap",
+                        "Ineke"
+                    ]
+                },
+                "form_id": "007720C2",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Redcoat_Hat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-redcoat-outfit",
+            "name": "Plan: Redcoat Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Redcoat Outfit",
+                "unlocks": {
+                    "text": "Redcoat Outfit",
+                    "icons": [
+                        "Redcoat Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Ineke",
+                    "icons": [
+                        "Bottle Cap",
+                        "Ineke"
+                    ]
+                },
+                "form_id": "007720C3",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Redcoat_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-responders-padded-jacket",
+            "name": "Plan: Responders' Padded Jacket",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Responders' Padded Jacket",
+                "unlocks": {
+                    "text": "Responders' Padded Jacket",
+                    "icons": [
+                        "Responders' Padded Jacket"
+                    ]
+                },
+                "obtained": {
+                    "text": "Responders Reborn",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Responders Reborn"
+                    ]
+                },
+                "form_id": "00647C94",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Responders%27_Padded_Jacket"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-saltwater-taffy-outfit",
+            "name": "Plan: Saltwater Taffy Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Saltwater Taffy Outfit",
+                "unlocks": {
+                    "text": "Saltwater Taffy Outfit",
+                    "icons": [
+                        "Saltwater Taffy Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Human Condition"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Saltwater_Taffy_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-seasoned-survivor-outfit",
+            "name": "Plan: Seasoned Survivor Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Seasoned Survivor Outfit",
+                "unlocks": {
+                    "text": "Seasoned Survivor Outfit",
+                    "icons": [
+                        "Seasoned Survivor Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Most Sensational Game Giuseppe",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Most Sensational Game",
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "form_id": "007398A1",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Seasoned_Survivor_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-shenandoah-t-shirt-and-slacks",
+            "name": "Plan: Shenandoah T-Shirt and Slacks",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Shenandoah T-Shirt and Slacks",
+                "unlocks": {
+                    "text": "Shenandoah T-Shirt and Slacks",
+                    "icons": [
+                        "Shenandoah T-Shirt and Slacks"
+                    ]
+                },
+                "obtained": {
+                    "text": "Dangerous Pastimes",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Dangerous Pastimes"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shenandoah_T-Shirt_and_Slacks"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sheriff-s-hat",
+            "name": "Plan: Sheriff's Hat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Sheriff's Hat",
+                "unlocks": {
+                    "text": "Sheriff's Hat",
+                    "icons": [
+                        "Sheriff's Hat (Fallout 76)"
+                    ]
+                },
+                "obtained": {
+                    "text": "Event: Most Wanted",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Most Wanted (Fallout 76)"
+                    ]
+                },
+                "form_id": "006828EE",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sheriff%27s_Hat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-skeleton-costume",
+            "name": "Plan: Skeleton Costume",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Skeleton Costume",
+                "unlocks": {
+                    "text": "Halloween Costume Skeleton",
+                    "icons": [
+                        "Halloween Costume Skeleton"
+                    ]
+                },
+                "obtained": {
+                    "text": "Location Revealed - Pumpkin House",
+                    "icons": [
+                        "Spawned",
+                        "Fallout 76 random encounters"
+                    ]
+                },
+                "form_id": "003A1789",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Skeleton_Costume"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-skiing-outfit",
+            "name": "Plan: Skiing Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Skiing Outfit",
+                "unlocks": {
+                    "text": "Skiing Outfit",
+                    "icons": [
+                        "Skiing Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Location Revealed - Hawke's Refuge",
+                    "icons": [
+                        "Spawned",
+                        "Fallout 76 random encounters"
+                    ]
+                },
+                "form_id": "003A178D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Skiing_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-snake-wrangler-hat",
+            "name": "Plan: Snake Wrangler Hat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Snake Wrangler Hat",
+                "unlocks": {
+                    "text": "Snake Wrangler Hat",
+                    "icons": [
+                        "Snake Wrangler Hat"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Most Sensational Game Giuseppe",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Most Sensational Game",
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "form_id": "0073989D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Snake_Wrangler_Hat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-snake-wrangler-outfit",
+            "name": "Plan: Snake Wrangler Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Snake Wrangler Outfit",
+                "unlocks": {
+                    "text": "Snake Wrangler Outfit",
+                    "icons": [
+                        "Snake Wrangler Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Most Sensational Game Giuseppe",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Most Sensational Game",
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "form_id": "0073989F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Snake_Wrangler_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-socialite-outfit",
+            "name": "Plan: Socialite Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Socialite Outfit",
+                "unlocks": {
+                    "text": "Socialite Outfit",
+                    "icons": [
+                        "Socialite Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Human Condition"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Socialite_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-spectacular-performer-s-headwear",
+            "name": "Plan: Spectacular Performer's Headwear",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Spectacular Performer's Headwear",
+                "unlocks": {
+                    "text": "Spectacular Performer's Headwear",
+                    "icons": [
+                        "Spectacular Performer's Headwear"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Human Condition"
+                    ]
+                },
+                "form_id": "00769DF1",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Spectacular_Performer%27s_Headwear"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-spectacular-performer-s-outfit",
+            "name": "Plan: Spectacular Performer's Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Spectacular Performer's Outfit",
+                "unlocks": {
+                    "text": "Spectacular Performer's Outfit",
+                    "icons": [
+                        "Spectacular Performer's Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Human Condition"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Spectacular_Performer%27s_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-spooky-scarecrow-headpiece",
+            "name": "Plan: Spooky Scarecrow Headpiece",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Spooky Scarecrow Headpiece",
+                "unlocks": {
+                    "text": "Spooky Scarecrow Headpiece",
+                    "icons": [
+                        "Spooky Scarecrow Headpiece"
+                    ]
+                },
+                "obtained": {
+                    "text": "Mischief Night",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Mischief Night (C.A.M.P. Revamp)"
+                    ]
+                },
+                "form_id": "0077ED50",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Spooky_Scarecrow_Headpiece"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-spooky-scarecrow-outfit",
+            "name": "Plan: Spooky Scarecrow Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Spooky Scarecrow Outfit",
+                "unlocks": {
+                    "text": "Spooky Scarecrow Outfit",
+                    "icons": [
+                        "Spooky Scarecrow Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Mischief Night",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Mischief Night (C.A.M.P. Revamp)"
+                    ]
+                },
+                "form_id": "0076DA7E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Spooky_Scarecrow_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sunburst-sequin-dress",
+            "name": "Plan: Sunburst Sequin Dress",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Sunburst Sequin Dress",
+                "unlocks": {
+                    "text": "Sunburst Sequin Dress",
+                    "icons": [
+                        "Sunburst Sequin Dress"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Most Sensational Game Giuseppe",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Most Sensational Game",
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "form_id": "0073E2F1",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sunburst_Sequin_Dress"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-survivors-denim-underarmor",
+            "name": "Plan: Survivors denim underarmor",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Survivors denim underarmor",
+                "unlocks": {
+                    "text": "Survivor's Denim",
+                    "icons": [
+                        "Survivor's Denim"
+                    ]
+                },
+                "obtained": {
+                    "text": "Unused Content",
+                    "icons": [
+                        "Overview:Unused Content"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Survivors_denim_underarmor"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-tinkerer-s-goggles",
+            "name": "Plan: Tinkerer's Goggles",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Tinkerer's Goggles",
+                "unlocks": {
+                    "text": "Tinkerer's Goggles",
+                    "icons": [
+                        "Tinkerer's Goggles"
+                    ]
+                },
+                "obtained": {
+                    "text": "Union Dues Giuseppe",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Union Dues",
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "form_id": "00647BDA",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Tinkerer%27s_Goggles"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-tinkerer-s-overalls",
+            "name": "Plan: Tinkerer's Overalls",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Tinkerer's Overalls",
+                "unlocks": {
+                    "text": "Tinkerer's Overalls",
+                    "icons": [
+                        "Tinkerer's Overalls"
+                    ]
+                },
+                "obtained": {
+                    "text": "Union Dues Giuseppe",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Union Dues",
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "form_id": "00647BDE",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Tinkerer%27s_Overalls"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-treasure-hunter-outfit",
+            "name": "Plan: Treasure hunter outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Treasure hunter outfit",
+                "unlocks": {
+                    "text": "Treasure hunter outfit",
+                    "icons": [
+                        "Treasure hunter outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Treasure Hunter",
+                    "icons": [
+                        "Mole Miner Pail",
+                        "Treasure Hunter"
+                    ]
+                },
+                "form_id": "005AD3FB",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Treasure_hunter_outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-treasure-hunter-outfit-hat",
+            "name": "Plan: Treasure hunter outfit hat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Treasure hunter outfit hat",
+                "unlocks": {
+                    "text": "Treasure Hunter Hat",
+                    "icons": [
+                        "Treasure Hunter Hat"
+                    ]
+                },
+                "obtained": {
+                    "text": "Treasure Hunter",
+                    "icons": [
+                        "Mole Miner Pail",
+                        "Treasure Hunter"
+                    ]
+                },
+                "form_id": "005AD3F8",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Treasure_hunter_outfit_hat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-trench-runner-s-coat",
+            "name": "Plan: Trench Runner's Coat",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Trench Runner's Coat",
+                "unlocks": {
+                    "text": "Trench Runner's Coat",
+                    "icons": [
+                        "Trench Runner's Coat"
+                    ]
+                },
+                "obtained": {
+                    "text": "From Ashes to Fire Giuseppe",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "From Ashes to Fire",
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "form_id": "0064934C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Trench_Runner%27s_Coat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-trench-runner-s-hood",
+            "name": "Plan: Trench Runner's Hood",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Trench Runner's Hood",
+                "unlocks": {
+                    "text": "Trench Runner's Hood",
+                    "icons": [
+                        "Trench Runner's Hood"
+                    ]
+                },
+                "obtained": {
+                    "text": "From Ashes to Fire Giuseppe",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "From Ashes to Fire",
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "form_id": "0064934B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Trench_Runner%27s_Hood"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-trucker-uniform",
+            "name": "Plan: Trucker Uniform",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Trucker Uniform",
+                "unlocks": {
+                    "text": "Trucker Uniform",
+                    "icons": [
+                        "Trucker Uniform"
+                    ]
+                },
+                "obtained": {
+                    "text": "Costa Business: Carver",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Costa Business: Carver"
+                    ]
+                },
+                "form_id": "0069ED56",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Trucker_Uniform"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-ultracite-titan-backpack-flair",
+            "name": "Plan: Ultracite Titan Backpack Flair",
+            "section": "Backpacks",
+            "columns": {
+                "name": "Plan: Ultracite Titan Backpack Flair",
+                "unlocks": {
+                    "text": "Ultracite Titan Backpack Flair",
+                    "icons": [
+                        "Ultracite Titan Backpack Flair"
+                    ]
+                },
+                "obtained": {
+                    "text": "Event: Seismic Activity",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Seismic Activity"
+                    ]
+                },
+                "form_id": "0067F16C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_Titan_Backpack_Flair"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-umbrella-hat",
+            "name": "Plan: Umbrella Hat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Umbrella Hat",
+                "unlocks": {
+                    "text": "Umbrella Hat",
+                    "icons": [
+                        "Umbrella Hat"
+                    ]
+                },
+                "obtained": {
+                    "text": "Samuel Daily Ops",
+                    "icons": [
+                        "Gold Bullion",
+                        "Samuel (Wastelanders)",
+                        "Quest",
+                        "Daily Ops"
+                    ]
+                },
+                "form_id": "00691D09",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Umbrella_Hat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-union-hat",
+            "name": "Plan: Union hat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Union hat",
+                "unlocks": {
+                    "text": "Union hat",
+                    "icons": [
+                        "Union hat"
+                    ]
+                },
+                "obtained": {
+                    "text": "Philippi's Cemetery Battlefield Revealed",
+                    "icons": [
+                        "Spawned",
+                        "Philippi's Cemetery Battlefield Revealed"
+                    ]
+                },
+                "form_id": "0050E3F1",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_hat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-union-uniform",
+            "name": "Plan: Union uniform",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Union uniform",
+                "unlocks": {
+                    "text": "Union uniform",
+                    "icons": [
+                        "Union uniform"
+                    ]
+                },
+                "obtained": {
+                    "text": "Philippi's Cemetery Battlefield Revealed",
+                    "icons": [
+                        "Spawned",
+                        "Philippi's Cemetery Battlefield Revealed"
+                    ]
+                },
+                "form_id": "003A1783",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_uniform"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-v63-recon-outfit",
+            "name": "Plan: V63 Recon Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: V63 Recon Outfit",
+                "unlocks": {
+                    "text": "V63 Recon Outfit Burnt",
+                    "icons": [
+                        "V63 Recon Outfit Burnt"
+                    ]
+                },
+                "obtained": {
+                    "text": "Neurological Warfare",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Neurological Warfare"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Recon_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-v63-recon-outfit-burnt",
+            "name": "Plan: V63 Recon Outfit Burnt",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: V63 Recon Outfit Burnt",
+                "unlocks": {
+                    "text": "V63 Recon Outfit Helmet Burnt",
+                    "icons": [
+                        "V63 Recon Outfit Helmet Burnt"
+                    ]
+                },
+                "obtained": {
+                    "text": "Dangerous Pastimes",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Dangerous Pastimes"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Recon_Outfit_Burnt"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-v63-recon-outfit-helmet",
+            "name": "Plan: V63 Recon Outfit Helmet",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: V63 Recon Outfit Helmet",
+                "unlocks": {
+                    "text": "V63 Recon Outfit Helmet",
+                    "icons": [
+                        "V63 Recon Outfit Helmet"
+                    ]
+                },
+                "obtained": {
+                    "text": "Dangerous Pastimes",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Dangerous Pastimes"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Recon_Outfit_Helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-v63-recon-outfit-helmet-burnt",
+            "name": "Plan: V63 Recon Outfit Helmet Burnt",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: V63 Recon Outfit Helmet Burnt",
+                "unlocks": {
+                    "text": "V63 Recon Outfit Helmet Burnt",
+                    "icons": [
+                        "V63 Recon Outfit Helmet Burnt"
+                    ]
+                },
+                "obtained": {
+                    "text": "Neurological Warfare",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Neurological Warfare"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Recon_Outfit_Helmet_Burnt"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-v63-riot-control-outfit",
+            "name": "Plan: V63 Riot Control Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: V63 Riot Control Outfit",
+                "unlocks": {
+                    "text": "V63 Riot Control Outfit",
+                    "icons": [
+                        "V63 Riot Control Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Neurological Warfare",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Neurological Warfare"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Riot_Control_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-v63-riot-control-outfit-burnt",
+            "name": "Plan: V63 Riot Control Outfit Burnt",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: V63 Riot Control Outfit Burnt",
+                "unlocks": {
+                    "text": "V63 Riot Control Outfit Burnt",
+                    "icons": [
+                        "V63 Riot Control Outfit Burnt"
+                    ]
+                },
+                "obtained": {
+                    "text": "Dangerous Pastimes",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Dangerous Pastimes"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Riot_Control_Outfit_Burnt"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-v63-riot-control-outfit-helmet",
+            "name": "Plan: V63 Riot Control Outfit Helmet",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: V63 Riot Control Outfit Helmet",
+                "unlocks": {
+                    "text": "V63 Riot Control Outfit Helmet",
+                    "icons": [
+                        "V63 Riot Control Outfit Helmet"
+                    ]
+                },
+                "obtained": {
+                    "text": "Neurological Warfare",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Neurological Warfare"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Riot_Control_Outfit_Helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-v63-riot-control-outfit-helmet-burnt",
+            "name": "Plan: V63 Riot Control Outfit Helmet Burnt",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: V63 Riot Control Outfit Helmet Burnt",
+                "unlocks": {
+                    "text": "V63 Riot Control Outfit Helmet Burnt",
+                    "icons": [
+                        "V63 Riot Control Outfit Helmet Burnt"
+                    ]
+                },
+                "obtained": {
+                    "text": "Dangerous Pastimes",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Dangerous Pastimes"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Riot_Control_Outfit_Helmet_Burnt"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-v63-security-outfit",
+            "name": "Plan: V63 Security Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: V63 Security Outfit",
+                "unlocks": {
+                    "text": "V63 Security Outfit",
+                    "icons": [
+                        "V63 Security Outfit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Neurological Warfare",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Neurological Warfare"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Security_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-v63-security-outfit-burnt",
+            "name": "Plan: V63 Security Outfit Burnt",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: V63 Security Outfit Burnt",
+                "unlocks": {
+                    "text": "V63 Security Outfit Burnt",
+                    "icons": [
+                        "V63 Security Outfit Burnt"
+                    ]
+                },
+                "obtained": {
+                    "text": "Dangerous Pastimes",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Dangerous Pastimes"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Security_Outfit_Burnt"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-v63-security-outfit-helmet",
+            "name": "Plan: V63 Security Outfit Helmet",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: V63 Security Outfit Helmet",
+                "unlocks": {
+                    "text": "V63 Security Outfit Helmet",
+                    "icons": [
+                        "V63 Security Outfit Helmet"
+                    ]
+                },
+                "obtained": {
+                    "text": "Neurological Warfare",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Neurological Warfare"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Security_Outfit_Helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-v63-security-outfit-helmet-burnt",
+            "name": "Plan: V63 Security Outfit Helmet Burnt",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: V63 Security Outfit Helmet Burnt",
+                "unlocks": {
+                    "text": "V63 Security Outfit Helmet Burnt",
+                    "icons": [
+                        "V63 Security Outfit Helmet Burnt"
+                    ]
+                },
+                "obtained": {
+                    "text": "Dangerous Pastimes",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Dangerous Pastimes"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Security_Outfit_Helmet_Burnt"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vault-51-jumpsuit",
+            "name": "Plan: Vault 51 Jumpsuit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Vault 51 Jumpsuit",
+                "unlocks": {
+                    "text": "Vault 51 Jumpsuit",
+                    "icons": [
+                        "Vault 51 Jumpsuit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Holiday Scorched",
+                    "icons": [
+                        "Fallout 76 Limited Time Content",
+                        "Holiday Scorched"
+                    ]
+                },
+                "form_id": "0062042A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_51_Jumpsuit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vault-63-burnt-jumpsuit",
+            "name": "Plan: Vault 63 Burnt Jumpsuit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Vault 63 Burnt Jumpsuit",
+                "unlocks": {
+                    "text": "Vault 63 Burnt Jumpsuit",
+                    "icons": [
+                        "Vault 63 Burnt Jumpsuit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Skyline Valley",
+                    "icons": [
+                        "Quest",
+                        "Skyline Valley"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_63_Burnt_Jumpsuit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vault-63-hazmat-suit",
+            "name": "Plan: Vault 63 Hazmat Suit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Vault 63 Hazmat Suit",
+                "unlocks": {
+                    "text": "Vault 63 Hazmat Suit",
+                    "icons": [
+                        "Vault 63 Hazmat Suit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Gathering Clouds",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Gathering Clouds"
+                    ]
+                },
+                "form_id": "00748760",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_63_Hazmat_Suit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vault-tec-jumpsuit",
+            "name": "Plan: Vault-Tec jumpsuit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Vault-Tec jumpsuit",
+                "unlocks": {
+                    "text": "Vault-Tec jumpsuit",
+                    "icons": [
+                        "Vault-Tec jumpsuit (Fallout 76)"
+                    ]
+                },
+                "obtained": {
+                    "text": "Overseer's Cache",
+                    "icons": [
+                        "Fallout 76 Containers and Storage",
+                        "Overseer's Cache"
+                    ]
+                },
+                "form_id": "0044D404",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault-Tec_jumpsuit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vera-s-outfit",
+            "name": "Plan: Vera's Outfit",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Vera's Outfit",
+                "unlocks": {
+                    "text": "Vera's Outfit",
+                    "icons": [
+                        "Vera's Outfit (Fallout 76)"
+                    ]
+                },
+                "obtained": {
+                    "text": "Costa Business: Vera",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Costa Business: Vera"
+                    ]
+                },
+                "form_id": "00692A28",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vera%27s_Outfit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-wasteland-florist-apron",
+            "name": "Plan: Wasteland Florist Apron",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Wasteland Florist Apron",
+                "unlocks": {
+                    "text": "Wasteland Florist Apron",
+                    "icons": [
+                        "Wasteland Florist Apron"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Big Bloom",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Big Bloom"
+                    ]
+                },
+                "form_id": "007AD4B2",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Wasteland_Florist_Apron"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-wasteland-florist-sunhat",
+            "name": "Plan: Wasteland Florist Sunhat",
+            "section": "Headwear",
+            "columns": {
+                "name": "Plan: Wasteland Florist Sunhat",
+                "unlocks": {
+                    "text": "Wasteland Florist Sunhat",
+                    "icons": [
+                        "Wasteland Florist Sunhat"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Big Bloom",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Big Bloom"
+                    ]
+                },
+                "form_id": "007ACE9D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Wasteland_Florist_Sunhat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-witch-costume",
+            "name": "Plan: Witch Costume",
+            "section": "Outfits",
+            "columns": {
+                "name": "Plan: Witch Costume",
+                "unlocks": {
+                    "text": "Halloween Costume Witch",
+                    "icons": [
+                        "Halloween Costume Witch"
+                    ]
+                },
+                "obtained": {
+                    "text": "Location Revealed - Pumpkin House",
+                    "icons": [
+                        "Spawned",
+                        "Fallout 76 random encounters"
+                    ]
+                },
+                "form_id": "003A1788",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Witch_Costume"
+            },
+            "availability": []
+        }
+    ]
+}

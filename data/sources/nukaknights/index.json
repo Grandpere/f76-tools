@@ -1,0 +1,136 @@
+{
+    "generated_at": "2026-03-17T14:16:46+00:00",
+    "source": "nukaknights.com",
+    "datasets_count": 2,
+    "files_total": 28,
+    "datasets": [
+        {
+            "dataset": "legendary_mods",
+            "directory": "data/sources/nukaknights/legendary_mods",
+            "files_synced": 4,
+            "files_total": 4,
+            "files": [
+                {
+                    "file": "legendary_mods_1_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?legendary_mods=1&lang=en"
+                },
+                {
+                    "file": "legendary_mods_2_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?legendary_mods=2&lang=en"
+                },
+                {
+                    "file": "legendary_mods_3_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?legendary_mods=3&lang=en"
+                },
+                {
+                    "file": "legendary_mods_4_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?legendary_mods=4&lang=en"
+                }
+            ]
+        },
+        {
+            "dataset": "minerva",
+            "directory": "data/sources/nukaknights/minerva",
+            "files_synced": 24,
+            "files_total": 24,
+            "files": [
+                {
+                    "file": "minerva_61_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=61&lang=en"
+                },
+                {
+                    "file": "minerva_62_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=62&lang=en"
+                },
+                {
+                    "file": "minerva_63_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=63&lang=en"
+                },
+                {
+                    "file": "minerva_64_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=64&lang=en"
+                },
+                {
+                    "file": "minerva_65_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=65&lang=en"
+                },
+                {
+                    "file": "minerva_66_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=66&lang=en"
+                },
+                {
+                    "file": "minerva_67_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=67&lang=en"
+                },
+                {
+                    "file": "minerva_68_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=68&lang=en"
+                },
+                {
+                    "file": "minerva_69_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=69&lang=en"
+                },
+                {
+                    "file": "minerva_70_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=70&lang=en"
+                },
+                {
+                    "file": "minerva_71_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=71&lang=en"
+                },
+                {
+                    "file": "minerva_72_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=72&lang=en"
+                },
+                {
+                    "file": "minerva_73_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=73&lang=en"
+                },
+                {
+                    "file": "minerva_74_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=74&lang=en"
+                },
+                {
+                    "file": "minerva_75_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=75&lang=en"
+                },
+                {
+                    "file": "minerva_76_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=76&lang=en"
+                },
+                {
+                    "file": "minerva_77_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=77&lang=en"
+                },
+                {
+                    "file": "minerva_78_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=78&lang=en"
+                },
+                {
+                    "file": "minerva_79_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=79&lang=en"
+                },
+                {
+                    "file": "minerva_80_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=80&lang=en"
+                },
+                {
+                    "file": "minerva_81_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=81&lang=en"
+                },
+                {
+                    "file": "minerva_82_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=82&lang=en"
+                },
+                {
+                    "file": "minerva_83_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=83&lang=en"
+                },
+                {
+                    "file": "minerva_84_en.json",
+                    "url": "https://nukaknights.com/ajax/home.html?minerva=84&lang=en"
+                }
+            ]
+        }
+    ]
+}

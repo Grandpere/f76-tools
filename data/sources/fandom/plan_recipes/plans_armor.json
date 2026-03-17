@@ -1,0 +1,5209 @@
+{
+    "generated_at": "2026-03-17T14:16:58+00:00",
+    "source": "fallout.fandom.com",
+    "page": "Fallout_76_plans/Armor",
+    "url": "https://fallout.fandom.com/wiki/Fallout_76_plans/Armor",
+    "sections_count": 18,
+    "resources_count": 138,
+    "resources": [
+        {
+            "type": "plan",
+            "slug": "Plan:_Arctic_marine_armor_helmet",
+            "title": "Plan: Arctic marine armor helmet",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Arctic marine armor helmet",
+                "weight": "0.25",
+                "value": "2667",
+                "form_id": "0061E1E6",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Arctic_marine_armor_helmet"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 12,
+                    "row_index": 7
+                },
+                {
+                    "section": "Arctic marine armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Arctic_marine_left_arm",
+            "title": "Plan: Arctic marine left arm",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Arctic marine left arm",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "0061E1E9",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Arctic_marine_left_arm"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 12,
+                    "row_index": 2
+                },
+                {
+                    "section": "Arctic marine armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Arctic_marine_left_leg",
+            "title": "Plan: Arctic marine left leg",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Arctic marine left leg",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "0061E1E8",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Arctic_marine_left_leg"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 12,
+                    "row_index": 4
+                },
+                {
+                    "section": "Arctic marine armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Arctic_marine_right_arm",
+            "title": "Plan: Arctic marine right arm",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Arctic marine right arm",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "0061E1EB",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Arctic_marine_right_arm"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 12,
+                    "row_index": 3
+                },
+                {
+                    "section": "Arctic marine armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Arctic_marine_right_leg",
+            "title": "Plan: Arctic marine right leg",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Arctic marine right leg",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "0061E1EA",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Arctic_marine_right_leg"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 12,
+                    "row_index": 5
+                },
+                {
+                    "section": "Arctic marine armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Arctic_marine_torso",
+            "title": "Plan: Arctic marine torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Arctic marine torso",
+                "weight": "0.25",
+                "value": "2000",
+                "form_id": "0061E1E7",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Arctic_marine_torso"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 12,
+                    "row_index": 6
+                },
+                {
+                    "section": "Arctic marine armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_BoS_knight_uniform",
+            "title": "Plan: BoS knight uniform",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: BoS knight uniform",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "00313517",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_BoS_knight_uniform"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 2
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_BoS_officer_uniform",
+            "title": "Plan: BoS officer uniform",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: BoS officer uniform",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "00313516",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_BoS_officer_uniform"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 3
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_BoS_soldier_uniform",
+            "title": "Plan: BoS soldier uniform",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: BoS soldier uniform",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "003132F8",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_BoS_soldier_uniform"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 4
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Botsmith_left_arm",
+            "title": "Plan: Botsmith left arm",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Botsmith left arm",
+                "weight": "0.25",
+                "form_id": "006361C0",
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Botsmith_left_arm"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 13,
+                    "row_index": 2
+                },
+                {
+                    "section": "Botsmith armor (Test Your Metal)",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Botsmith_left_leg",
+            "title": "Plan: Botsmith left leg",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Botsmith left leg",
+                "weight": "0.25",
+                "form_id": "006361BF",
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Botsmith_left_leg"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 13,
+                    "row_index": 4
+                },
+                {
+                    "section": "Botsmith armor (Test Your Metal)",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Botsmith_right_arm",
+            "title": "Plan: Botsmith right arm",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Botsmith right arm",
+                "weight": "0.25",
+                "form_id": "006361C1",
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Botsmith_right_arm"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 13,
+                    "row_index": 3
+                },
+                {
+                    "section": "Botsmith armor (Test Your Metal)",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Botsmith_right_leg",
+            "title": "Plan: Botsmith right leg",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Botsmith right leg",
+                "weight": "0.25",
+                "form_id": "006361C3",
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Botsmith_right_leg"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 13,
+                    "row_index": 5
+                },
+                {
+                    "section": "Botsmith armor (Test Your Metal)",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Botsmith_torso",
+            "title": "Plan: Botsmith torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Botsmith torso",
+                "weight": "0.25",
+                "form_id": "006361C2",
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Botsmith_torso"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 13,
+                    "row_index": 6
+                },
+                {
+                    "section": "Botsmith armor (Test Your Metal)",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Brotherhood_civvies",
+            "title": "Plan: Brotherhood civvies",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Brotherhood civvies",
+                "weight": "0.25",
+                "value": "100",
+                "form_id": "00606C94",
+                "name_tags": [
+                    "Steel Reign"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Brotherhood_civvies"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 24
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Brotherhood_recon_chest_piece",
+            "title": "Plan: Brotherhood recon chest piece",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Brotherhood recon chest piece",
+                "weight": "0.25",
+                "value": "2000",
+                "form_id": "005DF02E",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Brotherhood_recon_chest_piece"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 10,
+                    "row_index": 6
+                },
+                {
+                    "section": "Brotherhood recon armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Brotherhood_recon_helmet",
+            "title": "Plan: Brotherhood recon helmet",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Brotherhood recon helmet",
+                "weight": "0.25",
+                "value": "2667",
+                "form_id": "005DF02B",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Brotherhood_recon_helmet"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 10,
+                    "row_index": 7
+                },
+                {
+                    "section": "Brotherhood recon armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Brotherhood_recon_left_arm",
+            "title": "Plan: Brotherhood recon left arm",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Brotherhood recon left arm",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "005DF029",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Brotherhood_recon_left_arm"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 10,
+                    "row_index": 2
+                },
+                {
+                    "section": "Brotherhood recon armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Brotherhood_recon_left_leg",
+            "title": "Plan: Brotherhood recon left leg",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Brotherhood recon left leg",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "005DF02C",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Brotherhood_recon_left_leg"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 10,
+                    "row_index": 4
+                },
+                {
+                    "section": "Brotherhood recon armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Brotherhood_recon_right_arm",
+            "title": "Plan: Brotherhood recon right arm",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Brotherhood recon right arm",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "005DF02A",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Brotherhood_recon_right_arm"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 10,
+                    "row_index": 3
+                },
+                {
+                    "section": "Brotherhood recon armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Brotherhood_recon_right_leg",
+            "title": "Plan: Brotherhood recon right leg",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Brotherhood recon right leg",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "005DF02D",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Brotherhood_recon_right_leg"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 10,
+                    "row_index": 5
+                },
+                {
+                    "section": "Brotherhood recon armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Centurion_helmet",
+            "title": "Plan: Centurion helmet",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Centurion helmet",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0062042B",
+                "name_tags": [
+                    "Fallout Worlds"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Centurion_helmet"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 26
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Chinese_stealth_armor",
+            "title": "Plan: Chinese stealth armor",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Chinese stealth armor",
+                "weight": "0.25",
+                "value": "4000",
+                "form_id": "00595858",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Chinese_stealth_armor"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 16,
+                    "row_index": 2
+                },
+                {
+                    "section": "Chinese stealth armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Chinese_stealth_helmet",
+            "title": "Plan: Chinese stealth helmet",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Chinese stealth helmet",
+                "weight": "0.25",
+                "value": "1650",
+                "form_id": "00595857",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Chinese_stealth_helmet"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 16,
+                    "row_index": 3
+                },
+                {
+                    "section": "Chinese stealth armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Civil_war_era_dress",
+            "title": "Plan: Civil war era dress",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Civil war era dress",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "003A177F",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Civil_war_era_dress"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": true,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 2
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Civil_war_era_suit",
+            "title": "Plan: Civil war era suit",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Civil war era suit",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "003A1780",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Civil_war_era_suit"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": true,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 3
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Civil_war_era_top_hat",
+            "title": "Plan: Civil war era top hat",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Civil war era top hat",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0050E3EF",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Civil_war_era_top_hat"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": true,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 4
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Confederate_hat",
+            "title": "Plan: Confederate hat",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Confederate hat",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0050E3F0",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Confederate_hat"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": true,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 9
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Confederate_uniform",
+            "title": "Plan: Confederate uniform",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Confederate uniform",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "003A1782",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Confederate_uniform"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": true,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 8
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Costume_witch_hat",
+            "title": "Plan: Costume witch hat",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Costume witch hat",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0050E3F2",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Costume_witch_hat"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": true,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 11
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Covert_scout_armor_chest_piece",
+            "title": "Plan: Covert scout armor chest piece",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Covert scout armor chest piece",
+                "weight": "0.25",
+                "value": "2000",
+                "form_id": "005FC9AC",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Covert_scout_armor_chest_piece"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 11,
+                    "row_index": 6
+                },
+                {
+                    "section": "Covert scout armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Covert_scout_armor_left_arm",
+            "title": "Plan: Covert scout armor left arm",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Covert scout armor left arm",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "005FC9B1",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Covert_scout_armor_left_arm"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 11,
+                    "row_index": 2
+                },
+                {
+                    "section": "Covert scout armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Covert_scout_armor_left_leg",
+            "title": "Plan: Covert scout armor left leg",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Covert scout armor left leg",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "005FC9AE",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Covert_scout_armor_left_leg"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 11,
+                    "row_index": 4
+                },
+                {
+                    "section": "Covert scout armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Covert_scout_armor_mask",
+            "title": "Plan: Covert scout armor mask",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Covert scout armor mask",
+                "weight": "0.25",
+                "value": "2667",
+                "form_id": "005FC9AD",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Covert_scout_armor_mask"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 11,
+                    "row_index": 7
+                },
+                {
+                    "section": "Covert scout armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Covert_scout_armor_right_arm",
+            "title": "Plan: Covert scout armor right arm",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Covert scout armor right arm",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "005FC9B0",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Covert_scout_armor_right_arm"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 11,
+                    "row_index": 3
+                },
+                {
+                    "section": "Covert scout armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Covert_scout_armor_right_leg",
+            "title": "Plan: Covert scout armor right leg",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Covert scout armor right leg",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "005FC9AF",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Covert_scout_armor_right_leg"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 11,
+                    "row_index": 5
+                },
+                {
+                    "section": "Covert scout armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Fasnacht_beret",
+            "title": "Plan: Fasnacht beret",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Fasnacht beret",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "003F4B2C",
+                "name_tags": [
+                    "Cut content",
+                    "Wild Appalachia"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Fasnacht_beret"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 16
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Flannel_shirt_and_jeans",
+            "title": "Plan: Flannel shirt and jeans",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Flannel shirt and jeans",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "003132CB",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Flannel_shirt_and_jeans"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 5
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Frame_backpack",
+            "title": "Plan: Frame backpack",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Frame backpack",
+                "weight": "0.25",
+                "value": "120",
+                "form_id": "0046A3A4",
+                "name_tags": [
+                    "Cut content",
+                    "Wild Appalachia"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Frame_backpack"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 17,
+                    "row_index": 3
+                },
+                {
+                    "section": "Backpacks",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Gladiator_mask",
+            "title": "Plan: Gladiator mask",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Gladiator mask",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0062042C",
+                "name_tags": [
+                    "Fallout Worlds"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Gladiator_mask"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 25
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Halloween_skull_mask",
+            "title": "Plan: Halloween skull mask",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Halloween skull mask",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0050E3F3",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Halloween_skull_mask"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": true,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 13
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Harness",
+            "title": "Plan: Harness",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Harness",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "00437016",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Harness"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 9
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Hazmat_suit",
+            "title": "Plan: Hazmat suit",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Hazmat suit",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "005698D6",
+                "name_tags": [
+                    "Nuclear Winter"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Hazmat_suit"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 21
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Heavy_combat_arms",
+            "title": "Plan: Heavy combat arms",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Heavy combat arms",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00438609",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Heavy_combat_arms"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 5,
+                    "row_index": 8
+                },
+                {
+                    "section": "Combat armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Heavy_combat_legs",
+            "title": "Plan: Heavy combat legs",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Heavy combat legs",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0043860A",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Heavy_combat_legs"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 5,
+                    "row_index": 9
+                },
+                {
+                    "section": "Combat armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Heavy_combat_torso",
+            "title": "Plan: Heavy combat torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Heavy combat torso",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "0043860B",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Heavy_combat_torso"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 5,
+                    "row_index": 10
+                },
+                {
+                    "section": "Combat armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Heavy_leather_arms",
+            "title": "Plan: Heavy leather arms",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Heavy leather arms",
+                "weight": "0.25",
+                "value": "175",
+                "form_id": "00438606",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Heavy_leather_arms"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 2,
+                    "row_index": 5
+                },
+                {
+                    "section": "Leather armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Heavy_leather_legs",
+            "title": "Plan: Heavy leather legs",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Heavy leather legs",
+                "weight": "0.25",
+                "value": "175",
+                "form_id": "00438607",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Heavy_leather_legs"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 2,
+                    "row_index": 6
+                },
+                {
+                    "section": "Leather armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Heavy_leather_torso",
+            "title": "Plan: Heavy leather torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Heavy leather torso",
+                "weight": "0.25",
+                "value": "175",
+                "form_id": "00438608",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Heavy_leather_torso"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 2,
+                    "row_index": 7
+                },
+                {
+                    "section": "Leather armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Heavy_metal_arms",
+            "title": "Plan: Heavy metal arms",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Heavy metal arms",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "00438603",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Heavy_metal_arms"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 3,
+                    "row_index": 8
+                },
+                {
+                    "section": "Metal armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Heavy_metal_legs",
+            "title": "Plan: Heavy metal legs",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Heavy metal legs",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "00438604",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Heavy_metal_legs"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 3,
+                    "row_index": 9
+                },
+                {
+                    "section": "Metal armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Heavy_metal_torso",
+            "title": "Plan: Heavy metal torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Heavy metal torso",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "00438605",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Heavy_metal_torso"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 3,
+                    "row_index": 10
+                },
+                {
+                    "section": "Metal armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Heavy_raider_arms",
+            "title": "Plan: Heavy raider arms",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Heavy raider arms",
+                "weight": "0.25",
+                "value": "400",
+                "form_id": "00438600",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Heavy_raider_arms"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 1,
+                    "row_index": 8
+                },
+                {
+                    "section": "Raider armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Heavy_raider_legs",
+            "title": "Plan: Heavy raider legs",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Heavy raider legs",
+                "weight": "0.25",
+                "value": "400",
+                "form_id": "00438601",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Heavy_raider_legs"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 1,
+                    "row_index": 9
+                },
+                {
+                    "section": "Raider armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Heavy_raider_torso",
+            "title": "Plan: Heavy raider torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Heavy raider torso",
+                "weight": "0.25",
+                "value": "400",
+                "form_id": "00438602",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Heavy_raider_torso"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 1,
+                    "row_index": 10
+                },
+                {
+                    "section": "Raider armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Heavy_robot_legs",
+            "title": "Plan: Heavy robot legs",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Heavy robot legs",
+                "weight": "0.25",
+                "value": "700",
+                "form_id": "004385FE",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Heavy_robot_legs"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 6,
+                    "row_index": 9
+                },
+                {
+                    "section": "Robot armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Heavy_robot_right_arms",
+            "title": "Plan: Heavy robot right arms",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Heavy robot right arms",
+                "weight": "0.25",
+                "value": "700",
+                "form_id": "004385FD",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Heavy_robot_right_arms"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 6,
+                    "row_index": 8
+                },
+                {
+                    "section": "Robot armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Heavy_robot_torso",
+            "title": "Plan: Heavy robot torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Heavy robot torso",
+                "weight": "0.25",
+                "value": "700",
+                "form_id": "004385FF",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Heavy_robot_torso"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 6,
+                    "row_index": 10
+                },
+                {
+                    "section": "Robot armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Insurgent_hat",
+            "title": "Plan: Insurgent hat",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Insurgent hat",
+                "weight": "0.25",
+                "value": "100",
+                "form_id": "005AD3FA",
+                "name_tags": [
+                    "Seasonal content",
+                    "Wastelanders"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Insurgent_hat"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 20
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Insurgent_outfit",
+            "title": "Plan: Insurgent outfit",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Insurgent outfit",
+                "weight": "0.25",
+                "value": "100",
+                "form_id": "005AD3F9",
+                "name_tags": [
+                    "Seasonal content",
+                    "Wastelanders"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Insurgent_outfit"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 19
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Light_combat_arms",
+            "title": "Plan: Light combat arms",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Light combat arms",
+                "weight": "0.25",
+                "value": "300",
+                "form_id": "004F570F",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Light_combat_arms"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 5,
+                    "row_index": 2
+                },
+                {
+                    "section": "Combat armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Light_combat_legs",
+            "title": "Plan: Light combat legs",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Light combat legs",
+                "weight": "0.25",
+                "value": "300",
+                "form_id": "004F5710",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Light_combat_legs"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 5,
+                    "row_index": 3
+                },
+                {
+                    "section": "Combat armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Light_combat_torso",
+            "title": "Plan: Light combat torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Light combat torso",
+                "weight": "0.25",
+                "value": "300",
+                "form_id": "004F5711",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Light_combat_torso"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 5,
+                    "row_index": 4
+                },
+                {
+                    "section": "Combat armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Light_metal_arms",
+            "title": "Plan: Light metal arms",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Light metal arms",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "004F570D",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Light_metal_arms"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 3,
+                    "row_index": 2
+                },
+                {
+                    "section": "Metal armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Light_metal_legs",
+            "title": "Plan: Light metal legs",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Light metal legs",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "004F570C",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Light_metal_legs"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 3,
+                    "row_index": 3
+                },
+                {
+                    "section": "Metal armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Light_metal_torso",
+            "title": "Plan: Light metal torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Light metal torso",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "004F5709",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Light_metal_torso"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 3,
+                    "row_index": 4
+                },
+                {
+                    "section": "Metal armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Light_raider_arms",
+            "title": "Plan: Light raider arms",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Light raider arms",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "0043701B",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Light_raider_arms"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 1,
+                    "row_index": 2
+                },
+                {
+                    "section": "Raider armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Light_raider_legs",
+            "title": "Plan: Light raider legs",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Light raider legs",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "0043701C",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Light_raider_legs"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 1,
+                    "row_index": 3
+                },
+                {
+                    "section": "Raider armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Light_raider_torso",
+            "title": "Plan: Light raider torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Light raider torso",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "0043701D",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Light_raider_torso"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 1,
+                    "row_index": 4
+                },
+                {
+                    "section": "Raider armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Light_robot_arms",
+            "title": "Plan: Light robot arms",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Light robot arms",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "004F5712",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Light_robot_arms"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 6,
+                    "row_index": 2
+                },
+                {
+                    "section": "Robot armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Light_robot_legs",
+            "title": "Plan: Light robot legs",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Light robot legs",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "004F5713",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Light_robot_legs"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 6,
+                    "row_index": 3
+                },
+                {
+                    "section": "Robot armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Light_robot_torso",
+            "title": "Plan: Light robot torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Light robot torso",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "004F5714",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Light_robot_torso"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 6,
+                    "row_index": 4
+                },
+                {
+                    "section": "Robot armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Long_johns",
+            "title": "Plan: Long johns",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Long johns",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "00437017",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Long_johns"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 10
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Makeshift_ronin_helmet",
+            "title": "Plan: Makeshift ronin helmet",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Makeshift ronin helmet",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0062042D",
+                "name_tags": [
+                    "Fallout Worlds"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Makeshift_ronin_helmet"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 27
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Marine_armor_helmet",
+            "title": "Plan: Marine armor helmet",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Marine armor helmet",
+                "weight": "0.25",
+                "value": "120",
+                "form_id": "005B6FF1",
+                "name_tags": [
+                    "Seasonal content",
+                    "Wastelanders"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Marine_armor_helmet"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 7,
+                    "row_index": 5
+                },
+                {
+                    "section": "Marine armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Marine_arms",
+            "title": "Plan: Marine arms",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Marine arms",
+                "weight": "0.25",
+                "value": "1200",
+                "form_id": "004F5715",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Marine_arms"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 7,
+                    "row_index": 2
+                },
+                {
+                    "section": "Marine armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Marine_legs",
+            "title": "Plan: Marine legs",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Marine legs",
+                "weight": "0.25",
+                "value": "1200",
+                "form_id": "004F5716",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Marine_legs"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 7,
+                    "row_index": 3
+                },
+                {
+                    "section": "Marine armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Marine_tactical_helmet",
+            "title": "Plan: Marine tactical helmet",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Marine tactical helmet",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0043701A",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Marine_tactical_helmet"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 8
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Marine_torso",
+            "title": "Plan: Marine torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Marine torso",
+                "weight": "0.25",
+                "value": "1200",
+                "form_id": "004F5717",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Marine_torso"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 7,
+                    "row_index": 4
+                },
+                {
+                    "section": "Marine armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Marine_wetsuit",
+            "title": "Plan: Marine wetsuit",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Marine wetsuit",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "003132CC",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Marine_wetsuit"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 7
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Mercenary_outfit",
+            "title": "Plan: Mercenary outfit",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Mercenary outfit",
+                "weight": "0.25",
+                "value": "100",
+                "form_id": "00606C95",
+                "name_tags": [
+                    "Steel Reign"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Mercenary_outfit"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 23
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Raider_leathers",
+            "title": "Plan: Raider leathers",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Raider leathers",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "00437018",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Raider_leathers"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 11
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Road_leathers",
+            "title": "Plan: Road leathers",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Road leathers",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "00437019",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Road_leathers"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 12
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Secret_Service_chest_piece",
+            "title": "Plan: Secret Service chest piece",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Secret Service chest piece",
+                "weight": "0.25",
+                "value": "1250",
+                "form_id": "0058935B",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Secret_Service_chest_piece"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 9,
+                    "row_index": 6
+                },
+                {
+                    "section": "Secret Service armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Secret_Service_helmet",
+            "title": "Plan: Secret Service helmet",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Secret Service helmet",
+                "weight": "0.25",
+                "value": "1650",
+                "form_id": "0058961B",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Secret_Service_helmet"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 9,
+                    "row_index": 7
+                },
+                {
+                    "section": "Secret Service armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Secret_Service_left_arm",
+            "title": "Plan: Secret Service left arm",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Secret Service left arm",
+                "weight": "0.25",
+                "value": "750",
+                "form_id": "0059D543",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Secret_Service_left_arm"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 9,
+                    "row_index": 2
+                },
+                {
+                    "section": "Secret Service armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Secret_Service_left_leg",
+            "title": "Plan: Secret Service left leg",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Secret Service left leg",
+                "weight": "0.25",
+                "value": "750",
+                "form_id": "0059D545",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Secret_Service_left_leg"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 9,
+                    "row_index": 4
+                },
+                {
+                    "section": "Secret Service armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Secret_Service_right_arm",
+            "title": "Plan: Secret Service right arm",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Secret Service right arm",
+                "weight": "0.25",
+                "value": "750",
+                "form_id": "0059D544",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Secret_Service_right_arm"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 9,
+                    "row_index": 3
+                },
+                {
+                    "section": "Secret Service armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Secret_Service_right_leg",
+            "title": "Plan: Secret Service right leg",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Secret Service right leg",
+                "weight": "0.25",
+                "value": "750",
+                "form_id": "0059D546",
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Secret_Service_right_leg"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 9,
+                    "row_index": 5
+                },
+                {
+                    "section": "Secret Service armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Secret_Service_underarmor",
+            "title": "Plan: Secret Service underarmor",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Secret Service underarmor",
+                "weight": "0.25",
+                "value": "250",
+                "form_id": "0059D542",
+                "name_tags": [
+                    "Wastelanders"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Secret_Service_underarmor"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 18
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Skeleton_costume",
+            "title": "Plan: Skeleton costume",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Skeleton costume",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "003A1789",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Skeleton_costume"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": true,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 12
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Skiing_outfit",
+            "title": "Plan: Skiing outfit",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Skiing outfit",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "003A178D",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Skiing_outfit"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": true,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 14
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Small_backpack",
+            "title": "Plan: Small backpack",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Small backpack",
+                "weight": "0.25",
+                "value": "5",
+                "form_id": "00564078",
+                "name_tags": [
+                    "Nuclear Winter"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Small_backpack"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 17,
+                    "row_index": 2
+                },
+                {
+                    "section": "Backpacks",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Solar_armor_chest_piece",
+            "title": "Plan: Solar armor chest piece",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Solar armor chest piece",
+                "weight": "0.25",
+                "value": "1000",
+                "form_id": "005527E0",
+                "name_tags": [
+                    "Nuclear Winter"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Solar_armor_chest_piece"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 8,
+                    "row_index": 6
+                },
+                {
+                    "section": "Solar armor and Thorn armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Solar_armor_left_arm",
+            "title": "Plan: Solar armor left arm",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Solar armor left arm",
+                "weight": "0.25",
+                "value": "750",
+                "form_id": "005527DC",
+                "name_tags": [
+                    "Nuclear Winter"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Solar_armor_left_arm"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 8,
+                    "row_index": 2
+                },
+                {
+                    "section": "Solar armor and Thorn armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Solar_armor_left_leg",
+            "title": "Plan: Solar armor left leg",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Solar armor left leg",
+                "weight": "0.25",
+                "value": "750",
+                "form_id": "005527DE",
+                "name_tags": [
+                    "Nuclear Winter"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Solar_armor_left_leg"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 8,
+                    "row_index": 4
+                },
+                {
+                    "section": "Solar armor and Thorn armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Solar_armor_right_arm",
+            "title": "Plan: Solar armor right arm",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Solar armor right arm",
+                "weight": "0.25",
+                "value": "750",
+                "form_id": "00554652",
+                "name_tags": [
+                    "Nuclear Winter"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Solar_armor_right_arm"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 8,
+                    "row_index": 3
+                },
+                {
+                    "section": "Solar armor and Thorn armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Solar_armor_right_leg",
+            "title": "Plan: Solar armor right leg",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Solar armor right leg",
+                "weight": "0.25",
+                "value": "750",
+                "form_id": "00554654",
+                "name_tags": [
+                    "Nuclear Winter"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Solar_armor_right_leg"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 8,
+                    "row_index": 5
+                },
+                {
+                    "section": "Solar armor and Thorn armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Spy_outfit",
+            "title": "Plan: Spy outfit",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Spy outfit",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0046D2A4",
+                "name_tags": [
+                    "Cut content"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Spy_outfit"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 22
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Standard_backpack",
+            "title": "Plan: Standard backpack",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Standard backpack",
+                "weight": "0.25",
+                "value": "120",
+                "form_id": "0046A36C",
+                "name_tags": [
+                    "Cut content",
+                    "Wild Appalachia"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Standard_backpack"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 17,
+                    "row_index": 4
+                },
+                {
+                    "section": "Backpacks",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sturdy_combat_arms",
+            "title": "Plan: Sturdy combat arms",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Sturdy combat arms",
+                "weight": "0.25",
+                "value": "400",
+                "form_id": "00438612",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sturdy_combat_arms"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 5,
+                    "row_index": 5
+                },
+                {
+                    "section": "Combat armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sturdy_combat_legs",
+            "title": "Plan: Sturdy combat legs",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Sturdy combat legs",
+                "weight": "0.25",
+                "value": "400",
+                "form_id": "00438613",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sturdy_combat_legs"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 5,
+                    "row_index": 6
+                },
+                {
+                    "section": "Combat armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sturdy_combat_torso",
+            "title": "Plan: Sturdy combat torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Sturdy combat torso",
+                "weight": "0.25",
+                "value": "400",
+                "form_id": "00438614",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sturdy_combat_torso"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 5,
+                    "row_index": 7
+                },
+                {
+                    "section": "Combat armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sturdy_leather_arms",
+            "title": "Plan: Sturdy leather arms",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Sturdy leather arms",
+                "weight": "0.25",
+                "value": "100",
+                "form_id": "0043860F",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sturdy_leather_arms"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 2,
+                    "row_index": 2
+                },
+                {
+                    "section": "Leather armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sturdy_leather_legs",
+            "title": "Plan: Sturdy leather legs",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Sturdy leather legs",
+                "weight": "0.25",
+                "value": "100",
+                "form_id": "00438610",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sturdy_leather_legs"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 2,
+                    "row_index": 3
+                },
+                {
+                    "section": "Leather armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sturdy_leather_torso",
+            "title": "Plan: Sturdy leather torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Sturdy leather torso",
+                "weight": "0.25",
+                "value": "100",
+                "form_id": "00438611",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sturdy_leather_torso"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 2,
+                    "row_index": 4
+                },
+                {
+                    "section": "Leather armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sturdy_metal_arms",
+            "title": "Plan: Sturdy metal arms",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Sturdy metal arms",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "0043860C",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sturdy_metal_arms"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 3,
+                    "row_index": 5
+                },
+                {
+                    "section": "Metal armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sturdy_metal_legs",
+            "title": "Plan: Sturdy metal legs",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Sturdy metal legs",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "0043860D",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sturdy_metal_legs"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 3,
+                    "row_index": 6
+                },
+                {
+                    "section": "Metal armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sturdy_metal_torso",
+            "title": "Plan: Sturdy metal torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Sturdy metal torso",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "0043860E",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sturdy_metal_torso"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 3,
+                    "row_index": 7
+                },
+                {
+                    "section": "Metal armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sturdy_raider_arms",
+            "title": "Plan: Sturdy raider arms",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Sturdy raider arms",
+                "weight": "0.25",
+                "value": "300",
+                "form_id": "002B9FD1",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sturdy_raider_arms"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 1,
+                    "row_index": 5
+                },
+                {
+                    "section": "Raider armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sturdy_raider_legs",
+            "title": "Plan: Sturdy raider legs",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Sturdy raider legs",
+                "weight": "0.25",
+                "value": "300",
+                "form_id": "002B9FD3",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sturdy_raider_legs"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 1,
+                    "row_index": 6
+                },
+                {
+                    "section": "Raider armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sturdy_raider_torso",
+            "title": "Plan: Sturdy raider torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Sturdy raider torso",
+                "weight": "0.25",
+                "value": "300",
+                "form_id": "002B9FD5",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sturdy_raider_torso"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 1,
+                    "row_index": 7
+                },
+                {
+                    "section": "Raider armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sturdy_robot_legs",
+            "title": "Plan: Sturdy robot legs",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Sturdy robot legs",
+                "weight": "0.25",
+                "value": "600",
+                "form_id": "004385FC",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sturdy_robot_legs"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 6,
+                    "row_index": 6
+                },
+                {
+                    "section": "Robot armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sturdy_robot_right_arms",
+            "title": "Plan: Sturdy robot right arms",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Sturdy robot right arms",
+                "weight": "0.25",
+                "value": "600",
+                "form_id": "004385FB",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sturdy_robot_right_arms"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 6,
+                    "row_index": 5
+                },
+                {
+                    "section": "Robot armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sturdy_robot_torso",
+            "title": "Plan: Sturdy robot torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Sturdy robot torso",
+                "weight": "0.25",
+                "value": "600",
+                "form_id": "004385F7",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sturdy_robot_torso"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 6,
+                    "row_index": 7
+                },
+                {
+                    "section": "Robot armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Thorn_armor_chest_piece",
+            "title": "Plan: Thorn armor chest piece",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Thorn armor chest piece",
+                "weight": "0.25",
+                "value": "1000",
+                "form_id": "005527DF",
+                "name_tags": [
+                    "Nuclear Winter"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Thorn_armor_chest_piece"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 8,
+                    "row_index": 11
+                },
+                {
+                    "section": "Solar armor and Thorn armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Thorn_armor_left_arm",
+            "title": "Plan: Thorn armor left arm",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Thorn armor left arm",
+                "weight": "0.25",
+                "value": "750",
+                "form_id": "005527DB",
+                "name_tags": [
+                    "Nuclear Winter"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Thorn_armor_left_arm"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 8,
+                    "row_index": 7
+                },
+                {
+                    "section": "Solar armor and Thorn armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Thorn_armor_left_leg",
+            "title": "Plan: Thorn armor left leg",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Thorn armor left leg",
+                "weight": "0.25",
+                "value": "750",
+                "form_id": "005527DD",
+                "name_tags": [
+                    "Nuclear Winter"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Thorn_armor_left_leg"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 8,
+                    "row_index": 9
+                },
+                {
+                    "section": "Solar armor and Thorn armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Thorn_armor_right_arm",
+            "title": "Plan: Thorn armor right arm",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Thorn armor right arm",
+                "weight": "0.25",
+                "value": "750",
+                "form_id": "00554651",
+                "name_tags": [
+                    "Nuclear Winter"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Thorn_armor_right_arm"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 8,
+                    "row_index": 8
+                },
+                {
+                    "section": "Solar armor and Thorn armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Thorn_armor_right_leg",
+            "title": "Plan: Thorn armor right leg",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Thorn armor right leg",
+                "weight": "0.25",
+                "value": "750",
+                "form_id": "00554653",
+                "name_tags": [
+                    "Nuclear Winter"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Thorn_armor_right_leg"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 8,
+                    "row_index": 10
+                },
+                {
+                    "section": "Solar armor and Thorn armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Trapper_arms",
+            "title": "Plan: Trapper arms",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Trapper arms",
+                "weight": "0.25",
+                "value": "225",
+                "form_id": "004F5718",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Trapper_arms"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 4,
+                    "row_index": 2
+                },
+                {
+                    "section": "Trapper armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Trapper_legs",
+            "title": "Plan: Trapper legs",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Trapper legs",
+                "weight": "0.25",
+                "value": "225",
+                "form_id": "004F5719",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Trapper_legs"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 4,
+                    "row_index": 3
+                },
+                {
+                    "section": "Trapper armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Trapper_torso",
+            "title": "Plan: Trapper torso",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Trapper torso",
+                "weight": "0.25",
+                "value": "225",
+                "form_id": "004F571A",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Trapper_torso"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 4,
+                    "row_index": 4
+                },
+                {
+                    "section": "Trapper armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Treasure_hunter_outfit",
+            "title": "Plan: Treasure hunter outfit",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Treasure hunter outfit",
+                "weight": "0.25",
+                "value": "120",
+                "form_id": "005AD3FB",
+                "name_tags": [
+                    "Seasonal content",
+                    "Wastelanders"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Treasure_hunter_outfit"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 17
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Treasure_hunter_outfit_hat",
+            "title": "Plan: Treasure hunter outfit hat",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Treasure hunter outfit hat",
+                "weight": "0.25",
+                "value": "120",
+                "form_id": "005AD3F8",
+                "name_tags": [
+                    "Seasonal content",
+                    "Wastelanders"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Treasure_hunter_outfit_hat"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 18
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Undershirt_&_jeans",
+            "title": "Plan: Undershirt & jeans",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Undershirt & jeans",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "003132F9",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Undershirt_%26_jeans"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 6
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Union_hat",
+            "title": "Plan: Union hat",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Union hat",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0050E3F1",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Union_hat"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": true,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 7
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Union_outfit",
+            "title": "Plan: Union outfit",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Union outfit",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "003A1781",
+                "name_tags": [
+                    "Cut content"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Union_outfit"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 6
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Union_uniform",
+            "title": "Plan: Union uniform",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Union uniform",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "003A1783",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Union_uniform"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": true,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 5
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Vault-Tec_jumpsuit",
+            "title": "Plan: Vault-Tec jumpsuit",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Vault-Tec jumpsuit",
+                "weight": "0.25",
+                "value": "0",
+                "form_id": "0044D404",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Vault-Tec_jumpsuit"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 15
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Vault_51_jumpsuit",
+            "title": "Plan: Vault 51 jumpsuit",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Vault 51 jumpsuit",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0062042A",
+                "name_tags": [
+                    "Seasonal content",
+                    "Fallout Worlds"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Vault_51_jumpsuit"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 19
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Vault_63_jumpsuit",
+            "title": "Plan: Vault 63 jumpsuit",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Vault 63 jumpsuit",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "00313390",
+                "name_tags": [
+                    "Cut content"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Vault_63_jumpsuit"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 13
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Vault_76_jumpsuit",
+            "title": "Plan: Vault 76 jumpsuit",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Vault 76 jumpsuit",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0031352A",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Vault_76_jumpsuit"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 14
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Vault_94_jumpsuit",
+            "title": "Plan: Vault 94 jumpsuit",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Vault 94 jumpsuit",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "005D0F02",
+                "name_tags": [
+                    "One Wasteland For All"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Vault_94_jumpsuit"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 15
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Vault_94_scout_armor_mask",
+            "title": "Plan: Vault 94 scout armor mask",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Vault 94 scout armor mask",
+                "weight": "0.25",
+                "value": "1650",
+                "form_id": "005A3329",
+                "name_tags": [
+                    "Wastelanders"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Vault_94_scout_armor_mask"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 8,
+                    "row_index": 12
+                },
+                {
+                    "section": "Solar armor and Thorn armor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Vault_96_jumpsuit",
+            "title": "Plan: Vault 96 jumpsuit",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Vault 96 jumpsuit",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0031338F",
+                "name_tags": [
+                    "Fallout 76 unused content"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Vault_96_jumpsuit"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 16
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Vault_Tec_university_jumpsuit",
+            "title": "Plan: Vault Tec university jumpsuit",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Vault Tec university jumpsuit",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "00313494",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Vault_Tec_university_jumpsuit"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 14,
+                    "row_index": 17
+                },
+                {
+                    "section": "Underarmor",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Witch_costume",
+            "title": "Plan: Witch costume",
+            "section": "Armor, apparel and backpacks",
+            "columns": {
+                "name": "Plan: Witch costume",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "003A1788",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Witch_costume"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": true,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Armor, apparel and backpacks",
+                    "table_index": 15,
+                    "row_index": 10
+                },
+                {
+                    "section": "Outfits and headwear",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        }
+    ]
+}

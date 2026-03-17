@@ -1,0 +1,1764 @@
+{
+    "generated_at": "2026-03-17T14:18:46+00:00",
+    "source": "fallout.wiki",
+    "page": "Fallout_76_Power_Armor_Plans",
+    "url": "https://fallout.wiki/wiki/Fallout_76_Power_Armor_Plans",
+    "sections_count": 14,
+    "resources_count": 75,
+    "resources": [
+        {
+            "type": "plan",
+            "slug": "plan-excavator-helmet",
+            "name": "Plan: Excavator helmet",
+            "section": "Excavator Power Armor",
+            "columns": {
+                "name": "Plan: Excavator helmet",
+                "unlocks": {
+                    "text": "Excavator power armor helm",
+                    "icons": [
+                        "Excavator Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "500",
+                "form_id": "00501887",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-excavator-left-arm",
+            "name": "Plan: Excavator left arm",
+            "section": "Excavator Power Armor",
+            "columns": {
+                "name": "Plan: Excavator left arm",
+                "unlocks": {
+                    "text": "Excavator power armor left arm",
+                    "icons": [
+                        "Excavator Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "500",
+                "form_id": "00501885",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_left_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-excavator-left-leg",
+            "name": "Plan: Excavator left leg",
+            "section": "Excavator Power Armor",
+            "columns": {
+                "name": "Plan: Excavator left leg",
+                "unlocks": {
+                    "text": "Excavator power armor left leg",
+                    "icons": [
+                        "Excavator Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "500",
+                "form_id": "00501888",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_left_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-excavator-right-arm",
+            "name": "Plan: Excavator right arm",
+            "section": "Excavator Power Armor",
+            "columns": {
+                "name": "Plan: Excavator right arm",
+                "unlocks": {
+                    "text": "Excavator power armor right arm",
+                    "icons": [
+                        "Excavator Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "500",
+                "form_id": "00501886",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_right_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-excavator-right-leg",
+            "name": "Plan: Excavator right leg",
+            "section": "Excavator Power Armor",
+            "columns": {
+                "name": "Plan: Excavator right leg",
+                "unlocks": {
+                    "text": "Excavator power armor right leg",
+                    "icons": [
+                        "Excavator Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "500",
+                "form_id": "00501889",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_right_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-excavator-torso",
+            "name": "Plan: Excavator torso",
+            "section": "Excavator Power Armor",
+            "columns": {
+                "name": "Plan: Excavator torso",
+                "unlocks": {
+                    "text": "Excavator power armor torso",
+                    "icons": [
+                        "Excavator Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "500",
+                "form_id": "0050188A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Excavator_torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-hellcat-chest-piece",
+            "name": "Plan: Hellcat chest piece",
+            "section": "Hellcat Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: Hellcat chest piece",
+                "unlocks": {
+                    "text": "Hellcat Power Armor torso",
+                    "icons": [
+                        "Hellcat Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "500",
+                "form_id": "0060D5BC",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_chest_piece"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-hellcat-helm",
+            "name": "Plan: Hellcat helm",
+            "section": "Hellcat Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: Hellcat helm",
+                "unlocks": {
+                    "text": "Hellcat Power Armor helm",
+                    "icons": [
+                        "Hellcat Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "500",
+                "form_id": "0060D5BE",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_helm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-hellcat-left-arm",
+            "name": "Plan: Hellcat left arm",
+            "section": "Hellcat Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: Hellcat left arm",
+                "unlocks": {
+                    "text": "Hellcat Power Armor left arm",
+                    "icons": [
+                        "Hellcat Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "500",
+                "form_id": "0060D5C0",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_left_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-hellcat-left-leg",
+            "name": "Plan: Hellcat left leg",
+            "section": "Hellcat Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: Hellcat left leg",
+                "unlocks": {
+                    "text": "Hellcat Power Armor left leg",
+                    "icons": [
+                        "Hellcat Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "500",
+                "form_id": "0060D5BB",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_left_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-hellcat-right-leg",
+            "name": "Plan: Hellcat right leg",
+            "section": "Hellcat Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: Hellcat right leg",
+                "unlocks": {
+                    "text": "Hellcat Power Armor right leg",
+                    "icons": [
+                        "Hellcat Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "500",
+                "form_id": "0060D5BD",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellcat_right_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-raider-power-chest-piece",
+            "name": "Plan: Raider power chest piece",
+            "section": "Raider Power Armor",
+            "columns": {
+                "name": "Plan: Raider power chest piece",
+                "unlocks": {
+                    "text": "Raider power armor torso",
+                    "icons": [
+                        "Raider Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "00501890",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_power_chest_piece"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-raider-power-helm",
+            "name": "Plan: Raider power helm",
+            "section": "Raider Power Armor",
+            "columns": {
+                "name": "Plan: Raider power helm",
+                "unlocks": {
+                    "text": "Raider power armor helm",
+                    "icons": [
+                        "Raider Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "0050188D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_power_helm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-raider-power-left-arm",
+            "name": "Plan: Raider power left arm",
+            "section": "Raider Power Armor",
+            "columns": {
+                "name": "Plan: Raider power left arm",
+                "unlocks": {
+                    "text": "Raider power armor left arm",
+                    "icons": [
+                        "Raider Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "0050188B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_power_left_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-raider-power-left-leg",
+            "name": "Plan: Raider power left leg",
+            "section": "Raider Power Armor",
+            "columns": {
+                "name": "Plan: Raider power left leg",
+                "unlocks": {
+                    "text": "Raider power armor left leg",
+                    "icons": [
+                        "Raider Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "0050188E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_power_left_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-raider-power-right-arm",
+            "name": "Plan: Raider power right arm",
+            "section": "Raider Power Armor",
+            "columns": {
+                "name": "Plan: Raider power right arm",
+                "unlocks": {
+                    "text": "Raider power armor right arm",
+                    "icons": [
+                        "Raider Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "0050188C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_power_right_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-raider-power-right-leg",
+            "name": "Plan: Raider power right leg",
+            "section": "Raider Power Armor",
+            "columns": {
+                "name": "Plan: Raider power right leg",
+                "unlocks": {
+                    "text": "Raider power armor right leg",
+                    "icons": [
+                        "Raider Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "0050188F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_power_right_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-strangler-heart-chest-piece",
+            "name": "Plan: Strangler Heart Chest Piece",
+            "section": "Strangler Heart Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: Strangler Heart Chest Piece",
+                "unlocks": {
+                    "text": "Strangler Heart Power Armor Torso",
+                    "icons": [
+                        "Strangler Heart Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "1250",
+                "form_id": "005535FB",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strangler_Heart_Chest_Piece"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-strangler-heart-helmet",
+            "name": "Plan: Strangler Heart Helmet",
+            "section": "Strangler Heart Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: Strangler Heart Helmet",
+                "unlocks": {
+                    "text": "Strangler Heart Power Armor Helm",
+                    "icons": [
+                        "Strangler Heart Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "1650",
+                "form_id": "00553BEA",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strangler_Heart_Helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-strangler-heart-left-arm",
+            "name": "Plan: Strangler Heart Left Arm",
+            "section": "Strangler Heart Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: Strangler Heart Left Arm",
+                "unlocks": {
+                    "text": "Strangler Heart Power Armor Left Arm",
+                    "icons": [
+                        "Strangler Heart Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "1000",
+                "form_id": "005535F9",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strangler_Heart_Left_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-strangler-heart-left-leg",
+            "name": "Plan: Strangler Heart Left Leg",
+            "section": "Strangler Heart Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: Strangler Heart Left Leg",
+                "unlocks": {
+                    "text": "Strangler Heart Power Armor left Leg",
+                    "icons": [
+                        "Strangler Heart Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "1000",
+                "form_id": "005535FA",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strangler_Heart_Left_Leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-strangler-heart-right-arm",
+            "name": "Plan: Strangler Heart Right Arm",
+            "section": "Strangler Heart Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: Strangler Heart Right Arm",
+                "unlocks": {
+                    "text": "Strangler Heart Power Armor Right Arm",
+                    "icons": [
+                        "Strangler Heart Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "1000",
+                "form_id": "00553BEB",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strangler_Heart_Right_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-strangler-heart-right-leg",
+            "name": "Plan: Strangler Heart Right Leg",
+            "section": "Strangler Heart Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: Strangler Heart Right Leg",
+                "unlocks": {
+                    "text": "Strangler Heart Power Armor Right Leg",
+                    "icons": [
+                        "Strangler Heart Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "1000",
+                "form_id": "00553BEC",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Strangler_Heart_Right_Leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-45-chest-piece",
+            "name": "Plan: T-45 chest piece",
+            "section": "T-45 Power Armor",
+            "columns": {
+                "name": "Plan: T-45 chest piece",
+                "unlocks": {
+                    "text": "T-45 power armor torso",
+                    "icons": [
+                        "T-45 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "00501896",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_chest_piece"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-45-helm",
+            "name": "Plan: T-45 helm",
+            "section": "T-45 Power Armor",
+            "columns": {
+                "name": "Plan: T-45 helm",
+                "unlocks": {
+                    "text": "T-45 power armor helm",
+                    "icons": [
+                        "T-45 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "00501893",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_helm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-45-left-arm",
+            "name": "Plan: T-45 left arm",
+            "section": "T-45 Power Armor",
+            "columns": {
+                "name": "Plan: T-45 left arm",
+                "unlocks": {
+                    "text": "T-45 power armor left arm",
+                    "icons": [
+                        "T-45 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "00501891",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_left_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-45-left-leg",
+            "name": "Plan: T-45 left leg",
+            "section": "T-45 Power Armor",
+            "columns": {
+                "name": "Plan: T-45 left leg",
+                "unlocks": {
+                    "text": "T-45 power armor left leg",
+                    "icons": [
+                        "T-45 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "00501894",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_left_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-45-right-arm",
+            "name": "Plan: T-45 right arm",
+            "section": "T-45 Power Armor",
+            "columns": {
+                "name": "Plan: T-45 right arm",
+                "unlocks": {
+                    "text": "T-45 power armor right arm",
+                    "icons": [
+                        "T-45 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "00501892",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_right_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-45-right-leg",
+            "name": "Plan: T-45 right leg",
+            "section": "T-45 Power Armor",
+            "columns": {
+                "name": "Plan: T-45 right leg",
+                "unlocks": {
+                    "text": "T-45 power armor right leg",
+                    "icons": [
+                        "T-45 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "00501895",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-45_right_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-51b-chest-piece",
+            "name": "Plan: T-51b chest piece",
+            "section": "T-51b Power Armor",
+            "columns": {
+                "name": "Plan: T-51b chest piece",
+                "unlocks": {
+                    "text": "T-51b power armor torso",
+                    "icons": [
+                        "T-51 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "0050189C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_chest_piece"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-51b-helm",
+            "name": "Plan: T-51b helm",
+            "section": "T-51b Power Armor",
+            "columns": {
+                "name": "Plan: T-51b helm",
+                "unlocks": {
+                    "text": "T-51b power armor helm",
+                    "icons": [
+                        "T-51 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "00501899",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_helm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-51b-left-arm",
+            "name": "Plan: T-51b left arm",
+            "section": "T-51b Power Armor",
+            "columns": {
+                "name": "Plan: T-51b left arm",
+                "unlocks": {
+                    "text": "T-51b power armor left arm",
+                    "icons": [
+                        "T-51 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "00501897",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_left_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-51b-left-leg",
+            "name": "Plan: T-51b left leg",
+            "section": "T-51b Power Armor",
+            "columns": {
+                "name": "Plan: T-51b left leg",
+                "unlocks": {
+                    "text": "T-51b power armor left leg",
+                    "icons": [
+                        "T-51 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "0050189A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_left_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-51b-right-arm",
+            "name": "Plan: T-51b right arm",
+            "section": "T-51b Power Armor",
+            "columns": {
+                "name": "Plan: T-51b right arm",
+                "unlocks": {
+                    "text": "T-51b power armor right arm",
+                    "icons": [
+                        "T-51 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "00501898",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_right_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-51b-right-leg",
+            "name": "Plan: T-51b right leg",
+            "section": "T-51b Power Armor",
+            "columns": {
+                "name": "Plan: T-51b right leg",
+                "unlocks": {
+                    "text": "T-51b power armor right leg",
+                    "icons": [
+                        "T-51 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "0050189B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-51b_right_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-60-chest-piece",
+            "name": "Plan: T-60 chest piece",
+            "section": "T-60 Power Armor",
+            "columns": {
+                "name": "Plan: T-60 chest piece",
+                "unlocks": {
+                    "text": "T-60 Power Armor torso",
+                    "icons": [
+                        "T-60 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "005018A2",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_chest_piece"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-60-helm",
+            "name": "Plan: T-60 helm",
+            "section": "T-60 Power Armor",
+            "columns": {
+                "name": "Plan: T-60 helm",
+                "unlocks": {
+                    "text": "T-60 Power Armor helm",
+                    "icons": [
+                        "T-60 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "0050189F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_helm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-60-left-arm",
+            "name": "Plan: T-60 left arm",
+            "section": "T-60 Power Armor",
+            "columns": {
+                "name": "Plan: T-60 left arm",
+                "unlocks": {
+                    "text": "T-60 Power Armor left arm",
+                    "icons": [
+                        "T-60 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "0050189D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_left_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-60-left-leg",
+            "name": "Plan: T-60 left leg",
+            "section": "T-60 Power Armor",
+            "columns": {
+                "name": "Plan: T-60 left leg",
+                "unlocks": {
+                    "text": "T-60 Power Armor left leg",
+                    "icons": [
+                        "T-60 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "005018A0",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_left_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-60-right-arm",
+            "name": "Plan: T-60 right arm",
+            "section": "T-60 Power Armor",
+            "columns": {
+                "name": "Plan: T-60 right arm",
+                "unlocks": {
+                    "text": "T-60 Power Armor right arm",
+                    "icons": [
+                        "T-60 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "0050189E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_right_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-60-right-leg",
+            "name": "Plan: T-60 right leg",
+            "section": "T-60 Power Armor",
+            "columns": {
+                "name": "Plan: T-60 right leg",
+                "unlocks": {
+                    "text": "T-60 Power Armor right leg",
+                    "icons": [
+                        "T-60 Power Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Treasure Map",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "005018A1",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-60_right_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-65-helm",
+            "name": "Plan: T-65 helm",
+            "section": "T-65 Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: T-65 helm",
+                "unlocks": {
+                    "text": "T-65 Power Armor helm",
+                    "icons": [
+                        "T-65 Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "1650",
+                "form_id": "00589355",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_helm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-65-left-arm",
+            "name": "Plan: T-65 left arm",
+            "section": "T-65 Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: T-65 left arm",
+                "unlocks": {
+                    "text": "T-65 Power Armor left arm",
+                    "icons": [
+                        "T-65 Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "1000",
+                "form_id": "00589353",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_left_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-65-left-leg",
+            "name": "Plan: T-65 left leg",
+            "section": "T-65 Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: T-65 left leg",
+                "unlocks": {
+                    "text": "T-65 Power Armor left leg",
+                    "icons": [
+                        "T-65 Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "1000",
+                "form_id": "00589356",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_left_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-65-right-arm",
+            "name": "Plan: T-65 right arm",
+            "section": "T-65 Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: T-65 right arm",
+                "unlocks": {
+                    "text": "T-65 Power Armor right arm",
+                    "icons": [
+                        "T-65 Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "1000",
+                "form_id": "00589354",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_right_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-65-right-leg",
+            "name": "Plan: T-65 right leg",
+            "section": "T-65 Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: T-65 right leg",
+                "unlocks": {
+                    "text": "T-65 Power Armor right leg",
+                    "icons": [
+                        "T-65 Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "1000",
+                "form_id": "00589357",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_right_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-t-65-torso",
+            "name": "Plan: T-65 torso",
+            "section": "T-65 Power Armor <span></span>",
+            "columns": {
+                "name": "Plan: T-65 torso",
+                "unlocks": {
+                    "text": "T-65 Power Armor torso",
+                    "icons": [
+                        "T-65 Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "1250",
+                "form_id": "00589358",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_T-65_torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-ultracite-helm",
+            "name": "Plan: Ultracite helm",
+            "section": "Ultracite Power Armor",
+            "columns": {
+                "name": "Plan: Ultracite helm",
+                "unlocks": {
+                    "text": "Ultracite Power Armor helm",
+                    "icons": [
+                        "Ultracite Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Creatures",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "005018A5",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_helm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-ultracite-left-arm",
+            "name": "Plan: Ultracite left arm",
+            "section": "Ultracite Power Armor",
+            "columns": {
+                "name": "Plan: Ultracite left arm",
+                "unlocks": {
+                    "text": "Ultracite Power Armor left arm",
+                    "icons": [
+                        "Ultracite Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Creatures",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "005018A3",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_left_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-ultracite-left-leg",
+            "name": "Plan: Ultracite left leg",
+            "section": "Ultracite Power Armor",
+            "columns": {
+                "name": "Plan: Ultracite left leg",
+                "unlocks": {
+                    "text": "Ultracite Power Armor left leg",
+                    "icons": [
+                        "Ultracite Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Creatures",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "005018A6",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_left_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-ultracite-right-arm",
+            "name": "Plan: Ultracite right arm",
+            "section": "Ultracite Power Armor",
+            "columns": {
+                "name": "Plan: Ultracite right arm",
+                "unlocks": {
+                    "text": "Ultracite Power Armor right arm",
+                    "icons": [
+                        "Ultracite Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Creatures",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "005018A4",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_right_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-ultracite-right-leg",
+            "name": "Plan: Ultracite right leg",
+            "section": "Ultracite Power Armor",
+            "columns": {
+                "name": "Plan: Ultracite right leg",
+                "unlocks": {
+                    "text": "Ultracite Power Armor right leg",
+                    "icons": [
+                        "Ultracite Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Creatures",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "005018A7",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_right_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-ultracite-torso",
+            "name": "Plan: Ultracite torso",
+            "section": "Ultracite Power Armor",
+            "columns": {
+                "name": "Plan: Ultracite torso",
+                "unlocks": {
+                    "text": "Ultracite Power Armor torso",
+                    "icons": [
+                        "Ultracite Power Armor"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Creatures",
+                    "Quest"
+                ],
+                "value": "500",
+                "form_id": "005018A8",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-union-chest-piece",
+            "name": "Plan: Union Chest Piece",
+            "section": "Union Power Armor",
+            "columns": {
+                "name": "Plan: Union Chest Piece",
+                "unlocks": {
+                    "text": "Union Chest Piece",
+                    "icons": [
+                        "Union Chest Piece"
+                    ]
+                },
+                "obtained": {
+                    "text": "Expeditions Giuseppe",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Expeditions: The Pitt",
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "value": "120",
+                "form_id": "0064B932",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Chest_Piece"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-union-helmet",
+            "name": "Plan: Union Helmet",
+            "section": "Union Power Armor",
+            "columns": {
+                "name": "Plan: Union Helmet",
+                "unlocks": {
+                    "text": "Union Helmet",
+                    "icons": [
+                        "Union Helmet"
+                    ]
+                },
+                "obtained": {
+                    "text": "Expeditions Giuseppe",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Expeditions: The Pitt",
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "value": "120",
+                "form_id": "0064B93D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-union-left-arm",
+            "name": "Plan: Union Left Arm",
+            "section": "Union Power Armor",
+            "columns": {
+                "name": "Plan: Union Left Arm",
+                "unlocks": {
+                    "text": "Union Left Arm",
+                    "icons": [
+                        "Union Left Arm"
+                    ]
+                },
+                "obtained": {
+                    "text": "Expeditions Giuseppe",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Expeditions: The Pitt",
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "value": "120",
+                "form_id": "0064B930",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Left_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-union-left-leg",
+            "name": "Plan: Union Left Leg",
+            "section": "Union Power Armor",
+            "columns": {
+                "name": "Plan: Union Left Leg",
+                "unlocks": {
+                    "text": "Union Left Leg",
+                    "icons": [
+                        "Union Left Leg"
+                    ]
+                },
+                "obtained": {
+                    "text": "Expeditions Giuseppe",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Expeditions: The Pitt",
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "value": "120",
+                "form_id": "0064B934",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Left_Leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-union-right-arm",
+            "name": "Plan: Union Right Arm",
+            "section": "Union Power Armor",
+            "columns": {
+                "name": "Plan: Union Right Arm",
+                "unlocks": {
+                    "text": "Union Right Arm",
+                    "icons": [
+                        "Union Right Arm"
+                    ]
+                },
+                "obtained": {
+                    "text": "Expeditions Giuseppe",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Expeditions: The Pitt",
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "value": "120",
+                "form_id": "0064B93B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Right_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-union-right-leg",
+            "name": "Plan: Union Right Leg",
+            "section": "Union Power Armor",
+            "columns": {
+                "name": "Plan: Union Right Leg",
+                "unlocks": {
+                    "text": "Union Right Leg",
+                    "icons": [
+                        "Union Right Leg"
+                    ]
+                },
+                "obtained": {
+                    "text": "Expeditions Giuseppe",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Expeditions: The Pitt",
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "value": "120",
+                "form_id": "0064B92E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Union_Right_Leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vulcan-blood-cleanser",
+            "name": "Plan: Vulcan Blood Cleanser",
+            "section": "Vulcan",
+            "columns": {
+                "name": "Plan: Vulcan Blood Cleanser",
+                "unlocks": {
+                    "text": "Blood Cleanser",
+                    "icons": [
+                        "Blood Cleanser (Fallout 76)"
+                    ]
+                },
+                "obtained": {
+                    "text": "Raid: Gleaming Depths",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Gleaming Depths (Raid)"
+                    ]
+                },
+                "form_id": "00793E89",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Blood_Cleanser"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vulcan-calibrated-shocks",
+            "name": "Plan: Vulcan Calibrated Shocks",
+            "section": "Vulcan",
+            "columns": {
+                "name": "Plan: Vulcan Calibrated Shocks",
+                "unlocks": {
+                    "text": "Calibrated Shocks",
+                    "icons": [
+                        "Calibrated Shocks (Fallout 76)"
+                    ]
+                },
+                "obtained": {
+                    "text": "Raid: Gleaming Depths",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Gleaming Depths (Raid)"
+                    ]
+                },
+                "form_id": "00793E83",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Calibrated_Shocks"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vulcan-cooling-vent",
+            "name": "Plan: Vulcan Cooling Vent",
+            "section": "Vulcan",
+            "columns": {
+                "name": "Plan: Vulcan Cooling Vent",
+                "unlocks": {
+                    "text": "Cooling Vent",
+                    "icons": [
+                        "Cooling Vent"
+                    ]
+                },
+                "obtained": {
+                    "text": "Raid: Gleaming Depths",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Gleaming Depths (Raid)"
+                    ]
+                },
+                "form_id": "00793E85",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Cooling_Vent"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vulcan-core-assembly",
+            "name": "Plan: Vulcan Core Assembly",
+            "section": "Vulcan",
+            "columns": {
+                "name": "Plan: Vulcan Core Assembly",
+                "unlocks": {
+                    "text": "Core Assembly",
+                    "icons": [
+                        "Core Assembly (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "form_id": "00793E88",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Core_Assembly"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vulcan-elastic-servos",
+            "name": "Plan: Vulcan Elastic Servos",
+            "section": "Vulcan",
+            "columns": {
+                "name": "Plan: Vulcan Elastic Servos",
+                "unlocks": {
+                    "text": "Elastic Servos",
+                    "icons": [
+                        "Elastic Servos (page does not exist)"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "form_id": "00793E84",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Elastic_Servos"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vulcan-emergency-protocols",
+            "name": "Plan: Vulcan Emergency Protocols",
+            "section": "Vulcan",
+            "columns": {
+                "name": "Plan: Vulcan Emergency Protocols",
+                "unlocks": {
+                    "text": "Emergency Protocols",
+                    "icons": [
+                        "Emergency Protocols (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "form_id": "00793E8A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Emergency_Protocols"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vulcan-jet-pack",
+            "name": "Plan: Vulcan Jet Pack",
+            "section": "Vulcan",
+            "columns": {
+                "name": "Plan: Vulcan Jet Pack",
+                "unlocks": {
+                    "text": "Jet Pack",
+                    "icons": [
+                        "Jet Pack (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "form_id": "00793E8B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Jet_Pack"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vulcan-kinetic-dynamo",
+            "name": "Plan: Vulcan Kinetic Dynamo",
+            "section": "Vulcan",
+            "columns": {
+                "name": "Plan: Vulcan Kinetic Dynamo",
+                "unlocks": {
+                    "text": "Kinetic Dynamo",
+                    "icons": [
+                        "Kinetic Dynamo (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "form_id": "00793E8C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Kinetic_Dynamo"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vulcan-medic-pump",
+            "name": "Plan: Vulcan Medic Pump",
+            "section": "Vulcan",
+            "columns": {
+                "name": "Plan: Vulcan Medic Pump",
+                "unlocks": {
+                    "text": "Medic Pump",
+                    "icons": [
+                        "Medic Pump (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "form_id": "00793E8D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Medic_Pump"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vulcan-motion-assist-servos",
+            "name": "Plan: Vulcan Motion-Assist Servos",
+            "section": "Vulcan",
+            "columns": {
+                "name": "Plan: Vulcan Motion-Assist Servos",
+                "unlocks": {
+                    "text": "Motion-Assist Servos",
+                    "icons": [
+                        "Motion-Assist Servos (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "form_id": "00793E91",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Motion-Assist_Servos"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vulcan-optimized-servos",
+            "name": "Plan: Vulcan Optimized Servos",
+            "section": "Vulcan",
+            "columns": {
+                "name": "Plan: Vulcan Optimized Servos",
+                "unlocks": {
+                    "text": "Optimized Servos",
+                    "icons": [
+                        "Optimized Servos (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "form_id": "00793E86",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Optimized_Servos"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vulcan-overdrive-servos",
+            "name": "Plan: Vulcan Overdrive Servos",
+            "section": "Vulcan",
+            "columns": {
+                "name": "Plan: Vulcan Overdrive Servos",
+                "unlocks": {
+                    "text": "Overdrive Servos",
+                    "icons": [
+                        "Overdrive Servos (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "form_id": "00793E87",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Overdrive_Servos"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vulcan-reactive-plates",
+            "name": "Plan: Vulcan Reactive Plates",
+            "section": "Vulcan",
+            "columns": {
+                "name": "Plan: Vulcan Reactive Plates",
+                "unlocks": {
+                    "text": "Reactive Plates",
+                    "icons": [
+                        "Reactive Plates (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "form_id": "00793E8E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Reactive_Plates"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vulcan-reflection-assembly",
+            "name": "Plan: Vulcan Reflection Assembly",
+            "section": "Vulcan",
+            "columns": {
+                "name": "Plan: Vulcan Reflection Assembly",
+                "unlocks": {
+                    "text": "Reflection Assembly",
+                    "icons": [
+                        "Reflection Assembly (page does not exist)"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "form_id": "00793E8F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Reflection_Assembly"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vulcan-stealth-boy",
+            "name": "Plan: Vulcan Stealth Boy",
+            "section": "Vulcan",
+            "columns": {
+                "name": "Plan: Vulcan Stealth Boy",
+                "unlocks": {
+                    "text": "Stealth Boy",
+                    "icons": [
+                        "Stealth Boy Mod (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "form_id": "00793E90",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Stealth_Boy"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vulcan-tesla-coils",
+            "name": "Plan: Vulcan Tesla Coils",
+            "section": "Vulcan",
+            "columns": {
+                "name": "Plan: Vulcan Tesla Coils",
+                "unlocks": {
+                    "text": "Tesla Coils",
+                    "icons": [
+                        "Tesla Coils (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "form_id": "00793E92",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vulcan_Tesla_Coils"
+            },
+            "availability": []
+        }
+    ]
+}

@@ -1,0 +1,2935 @@
+{
+    "generated_at": "2026-03-17T14:18:46+00:00",
+    "source": "fallout.wiki",
+    "page": "Fallout_76_Armor_Plans",
+    "url": "https://fallout.wiki/wiki/Fallout_76_Armor_Plans",
+    "sections_count": 21,
+    "resources_count": 122,
+    "resources": [
+        {
+            "type": "plan",
+            "slug": "plan-arctic-marine-armor-helmet",
+            "name": "Plan: Arctic Marine Armor Helmet",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Arctic Marine Armor Helmet",
+                "unlocks": {
+                    "text": "Arctic Marine Armor Helmet",
+                    "icons": [
+                        "Arctic Marine Armor Helmet"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "0061E1E6",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Arctic_Marine_Armor_Helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-arctic-marine-left-arm",
+            "name": "Plan: Arctic Marine Left Arm",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Arctic Marine Left Arm",
+                "unlocks": {
+                    "text": "Arctic Marine Armor Left Arm",
+                    "icons": [
+                        "Arctic Marine Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "0061E1E9",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Arctic_Marine_Left_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-arctic-marine-left-leg",
+            "name": "Plan: Arctic marine left leg",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Arctic marine left leg",
+                "unlocks": {
+                    "text": "Arctic Marine Armor Left Leg",
+                    "icons": [
+                        "Arctic Marine Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "0061E1E8",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Arctic_marine_left_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-arctic-marine-right-arm",
+            "name": "Plan: Arctic marine right arm",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Arctic marine right arm",
+                "unlocks": {
+                    "text": "Arctic Marine Armor Right Arm",
+                    "icons": [
+                        "Arctic Marine Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "0061E1EB",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Arctic_marine_right_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-arctic-marine-right-leg",
+            "name": "Plan: Arctic marine right leg",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Arctic marine right leg",
+                "unlocks": {
+                    "text": "Arctic Marine Armor Right Leg",
+                    "icons": [
+                        "Arctic Marine Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "0061E1EA",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Arctic_marine_right_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-arctic-marine-torso",
+            "name": "Plan: Arctic marine torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Arctic marine torso",
+                "unlocks": {
+                    "text": "Arctic Marine Armor Torso",
+                    "icons": [
+                        "Arctic Marine Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "0061E1E7",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Arctic_marine_torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-bos-knight-uniform",
+            "name": "Plan: BOS Knight Uniform",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: BOS Knight Uniform",
+                "unlocks": {
+                    "text": "Brotherhood Knight Suit",
+                    "icons": [
+                        "Brotherhood Knight Suit"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "00313517",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_BOS_Knight_Uniform"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-bos-officer-uniform",
+            "name": "Plan: BoS officer uniform",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: BoS officer uniform",
+                "unlocks": {
+                    "text": "Brotherhood Officer Suit",
+                    "icons": [
+                        "Brotherhood Officer Suit"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "00313516",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_BoS_officer_uniform"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-bos-soldier-uniform",
+            "name": "Plan: BOS Soldier Uniform",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: BOS Soldier Uniform",
+                "unlocks": {
+                    "text": "Brotherhood Soldier Suit",
+                    "icons": [
+                        "Brotherhood Soldier Suit"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "003132F8",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_BOS_Soldier_Uniform"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-botsmith-chest-piece",
+            "name": "Plan: Botsmith Chest Piece",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Botsmith Chest Piece",
+                "unlocks": {
+                    "text": "Botsmith Chest Piece",
+                    "icons": [
+                        "Botsmith Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Test Your Metal",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Test Your Metal"
+                    ]
+                },
+                "form_id": "006361C3",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Botsmith_Chest_Piece"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-botsmith-left-arm",
+            "name": "Plan: Botsmith Left Arm",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Botsmith Left Arm",
+                "unlocks": {
+                    "text": "Botsmith Left Arm",
+                    "icons": [
+                        "Botsmith Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Test Your Metal",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Test Your Metal"
+                    ]
+                },
+                "form_id": "006361C6",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Botsmith_Left_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-botsmith-left-leg",
+            "name": "Plan: Botsmith Left Leg",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Botsmith Left Leg",
+                "unlocks": {
+                    "text": "Botsmith Left Leg",
+                    "icons": [
+                        "Botsmith Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Test Your Metal",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Test Your Metal"
+                    ]
+                },
+                "form_id": "006361C8",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Botsmith_Left_Leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-botsmith-right-arm",
+            "name": "Plan: Botsmith Right Arm",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Botsmith Right Arm",
+                "unlocks": {
+                    "text": "Botsmith Right Arm",
+                    "icons": [
+                        "Botsmith Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Test Your Metal",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Test Your Metal"
+                    ]
+                },
+                "form_id": "006361C7",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Botsmith_Right_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-botsmith-right-leg",
+            "name": "Plan: Botsmith Right Leg",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Botsmith Right Leg",
+                "unlocks": {
+                    "text": "Botsmith Right Leg",
+                    "icons": [
+                        "Botsmith Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Test Your Metal",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Test Your Metal"
+                    ]
+                },
+                "form_id": "006361C5",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Botsmith_Right_Leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-botsmith-torso",
+            "name": "Plan: Botsmith Torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Botsmith Torso",
+                "unlocks": {
+                    "text": "Botsmith Chest Piece",
+                    "icons": [
+                        "Botsmith Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Test Your Metal",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Test Your Metal"
+                    ]
+                },
+                "form_id": "006361C4",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Botsmith_Torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-brotherhood-recon-chest-piece",
+            "name": "Plan: Brotherhood Recon Chest Piece",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Brotherhood Recon Chest Piece",
+                "unlocks": {
+                    "text": "Brotherhood Recon Chest Piece",
+                    "icons": [
+                        "Brotherhood Recon Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "005DF02E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_Recon_Chest_Piece"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-brotherhood-recon-helmet",
+            "name": "Plan: Brotherhood Recon Helmet",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Brotherhood Recon Helmet",
+                "unlocks": {
+                    "text": "Brotherhood Recon Helmet",
+                    "icons": [
+                        "Brotherhood Recon Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "005DF02B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_Recon_Helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-brotherhood-recon-left-arm",
+            "name": "Plan: Brotherhood Recon Left Arm",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Brotherhood Recon Left Arm",
+                "unlocks": {
+                    "text": "Brotherhood Recon Left Arm",
+                    "icons": [
+                        "Brotherhood Recon Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "005DF029",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_Recon_Left_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-brotherhood-recon-left-leg",
+            "name": "Plan: Brotherhood Recon Left Leg",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Brotherhood Recon Left Leg",
+                "unlocks": {
+                    "text": "Brotherhood Recon Left Leg",
+                    "icons": [
+                        "Brotherhood Recon Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "005DF02C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_Recon_Left_Leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-brotherhood-recon-right-arm",
+            "name": "Plan: Brotherhood Recon Right Arm",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Brotherhood Recon Right Arm",
+                "unlocks": {
+                    "text": "Brotherhood Recon Right Arm",
+                    "icons": [
+                        "Brotherhood Recon Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "005DF02A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_Recon_Right_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-brotherhood-recon-right-leg",
+            "name": "Plan: Brotherhood Recon Right Leg",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Brotherhood Recon Right Leg",
+                "unlocks": {
+                    "text": "Brotherhood Recon Right Leg",
+                    "icons": [
+                        "Brotherhood Recon Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "005DF02D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_Recon_Right_Leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-chinese-stealth-armor",
+            "name": "Plan: Chinese Stealth Armor",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Chinese Stealth Armor",
+                "unlocks": {
+                    "text": "Chinese Stealth Armor",
+                    "icons": [
+                        "Chinese Stealth Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "00595858",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Chinese_Stealth_Armor"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-chinese-stealth-helmet",
+            "name": "Plan: Chinese Stealth Helmet",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Chinese Stealth Helmet",
+                "unlocks": {
+                    "text": "Chinese Stealth Armor Helmet",
+                    "icons": [
+                        "Chinese Stealth Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "00595857",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Chinese_Stealth_Helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-covert-scout-armor-chest-piece",
+            "name": "Plan: Covert scout armor chest piece",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Covert scout armor chest piece",
+                "unlocks": {
+                    "text": "Covert scout armor chest piece",
+                    "icons": [
+                        "Covert Scout Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "005FC9AC",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Covert_scout_armor_chest_piece"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-covert-scout-armor-left-arm",
+            "name": "Plan: Covert scout armor left arm",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Covert scout armor left arm",
+                "unlocks": {
+                    "text": "Covert scout armor left arm",
+                    "icons": [
+                        "Covert Scout Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "005FC9B1",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Covert_scout_armor_left_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-covert-scout-armor-left-leg",
+            "name": "Plan: Covert scout armor left leg",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Covert scout armor left leg",
+                "unlocks": {
+                    "text": "Covert scout armor left leg",
+                    "icons": [
+                        "Covert Scout Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "005FC9AE",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Covert_scout_armor_left_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-covert-scout-armor-mask",
+            "name": "Plan: Covert scout armor mask",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Covert scout armor mask",
+                "unlocks": {
+                    "text": "Covert scout armor mask",
+                    "icons": [
+                        "Covert Scout Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "005FC9AD",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Covert_scout_armor_mask"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-covert-scout-armor-right-arm",
+            "name": "Plan: Covert scout armor right arm",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Covert scout armor right arm",
+                "unlocks": {
+                    "text": "Covert scout armor right arm",
+                    "icons": [
+                        "Covert Scout Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "005FC9B0",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Covert_scout_armor_right_arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-covert-scout-armor-right-leg",
+            "name": "Plan: Covert scout armor right leg",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Covert scout armor right leg",
+                "unlocks": {
+                    "text": "Covert scout armor right leg",
+                    "icons": [
+                        "Covert Scout Armor"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "005FC9AF",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Covert_scout_armor_right_leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flannel-shirt-and-jeans",
+            "name": "Plan: Flannel shirt and jeans",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Flannel shirt and jeans",
+                "unlocks": {
+                    "text": "Flannel Shirt and Jeans",
+                    "icons": [
+                        "Flannel Shirt and Jeans (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "003132CB",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flannel_shirt_and_jeans"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-harness",
+            "name": "Plan: Harness",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Harness",
+                "unlocks": {
+                    "text": "Harness",
+                    "icons": [
+                        "Harness (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "00437016",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Harness"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-heavy-combat-arms",
+            "name": "Plan: Heavy combat arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Heavy combat arms",
+                "unlocks": {
+                    "text": "Heavy combat armor left and right arms",
+                    "icons": [
+                        "Combat Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "form_id": "00438609",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_combat_arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-heavy-combat-legs",
+            "name": "Plan: Heavy combat legs",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Heavy combat legs",
+                "unlocks": {
+                    "text": "Heavy combat armor left and right legs",
+                    "icons": [
+                        "Combat Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "form_id": "0043860A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_combat_legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-heavy-combat-torso",
+            "name": "Plan: Heavy combat torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Heavy combat torso",
+                "unlocks": {
+                    "text": "Heavy combat armor chest piece",
+                    "icons": [
+                        "Combat Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "form_id": "0043860B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_combat_torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-heavy-leather-arms",
+            "name": "Plan: Heavy leather arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Heavy leather arms",
+                "unlocks": {
+                    "text": "Heavy leather armor left and right arms",
+                    "icons": [
+                        "Leather Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "00438606",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_leather_arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-heavy-leather-legs",
+            "name": "Plan: Heavy leather legs",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Heavy leather legs",
+                "unlocks": {
+                    "text": "Heavy leather armor left and right legs",
+                    "icons": [
+                        "Leather Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "00438607",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_leather_legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-heavy-leather-torso",
+            "name": "Plan: Heavy leather torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Heavy leather torso",
+                "unlocks": {
+                    "text": "Heavy leather armor chest piece",
+                    "icons": [
+                        "Leather Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "00438608",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_leather_torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-heavy-metal-arms",
+            "name": "Plan: Heavy Metal Arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Heavy Metal Arms",
+                "unlocks": {
+                    "text": "Heavy Metal Arms",
+                    "icons": [
+                        "Metal Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "form_id": "00438603",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Metal_Arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-heavy-metal-legs",
+            "name": "Plan: Heavy Metal Legs",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Heavy Metal Legs",
+                "unlocks": {
+                    "text": "Heavy Metal Legs",
+                    "icons": [
+                        "Metal Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "form_id": "00438604",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Metal_Legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-heavy-metal-torso",
+            "name": "Plan: Heavy Metal Torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Heavy Metal Torso",
+                "unlocks": {
+                    "text": "Heavy Metal Torso",
+                    "icons": [
+                        "Metal Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "form_id": "00438605",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Metal_Torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-heavy-raider-arms",
+            "name": "Plan: Heavy Raider Arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Heavy Raider Arms",
+                "unlocks": {
+                    "text": "Heavy Raider Arms",
+                    "icons": [
+                        "Raider Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "form_id": "00438600",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Raider_Arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-heavy-raider-legs",
+            "name": "Plan: Heavy Raider Legs",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Heavy Raider Legs",
+                "unlocks": {
+                    "text": "Heavy Raider Legs",
+                    "icons": [
+                        "Raider Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "form_id": "00438601",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Raider_Legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-heavy-raider-torso",
+            "name": "Plan: Heavy Raider Torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Heavy Raider Torso",
+                "unlocks": {
+                    "text": "Heavy Raider Torso",
+                    "icons": [
+                        "Raider Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "form_id": "00438602",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Raider_Torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-heavy-robot-arms",
+            "name": "Plan: Heavy Robot Arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Heavy Robot Arms",
+                "unlocks": {
+                    "text": "Heavy Robot Arms",
+                    "icons": [
+                        "Robot Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004385FE",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Robot_Arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-heavy-robot-legs",
+            "name": "Plan: Heavy Robot Legs",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Heavy Robot Legs",
+                "unlocks": {
+                    "text": "Heavy Robot Legs",
+                    "icons": [
+                        "Robot Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004385FE",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Robot_Legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-heavy-robot-right-arms",
+            "name": "Plan: Heavy robot right arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Heavy robot right arms",
+                "unlocks": {
+                    "text": "Heavy robot armor left and right arms",
+                    "icons": [
+                        "Robot Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004385FD",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_robot_right_arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-heavy-robot-torso",
+            "name": "Plan: Heavy Robot Torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Heavy Robot Torso",
+                "unlocks": {
+                    "text": "Heavy Robot Torso",
+                    "icons": [
+                        "Robot Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004385FF",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Heavy_Robot_Torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-light-combat-arms",
+            "name": "Plan: Light combat arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Light combat arms",
+                "unlocks": {
+                    "text": "Light combat armor left and right arms",
+                    "icons": [
+                        "Combat Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004F570F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_combat_arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-light-combat-legs",
+            "name": "Plan: Light combat legs",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Light combat legs",
+                "unlocks": {
+                    "text": "Light combat armor left and right legs",
+                    "icons": [
+                        "Combat Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004F5710",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_combat_legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-light-combat-torso",
+            "name": "Plan: Light combat torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Light combat torso",
+                "unlocks": {
+                    "text": "Light combat armor chest piece",
+                    "icons": [
+                        "Combat Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004F5711",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_combat_torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-light-metal-arms",
+            "name": "Plan: Light Metal Arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Light Metal Arms",
+                "unlocks": {
+                    "text": "Light Metal Arms",
+                    "icons": [
+                        "Metal Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004F570D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Metal_Arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-light-metal-legs",
+            "name": "Plan: Light Metal Legs",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Light Metal Legs",
+                "unlocks": {
+                    "text": "Light Metal Legs",
+                    "icons": [
+                        "Metal Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004F570C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Metal_Legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-light-metal-torso",
+            "name": "Plan: Light Metal Torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Light Metal Torso",
+                "unlocks": {
+                    "text": "Light Metal Torso",
+                    "icons": [
+                        "Metal Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004F5709",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Metal_Torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-light-raider-arms",
+            "name": "Plan: Light Raider Arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Light Raider Arms",
+                "unlocks": {
+                    "text": "Light Raider Arms",
+                    "icons": [
+                        "Raider Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "form_id": "0043701B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Raider_Arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-light-raider-legs",
+            "name": "Plan: Light Raider Legs",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Light Raider Legs",
+                "unlocks": {
+                    "text": "Light Raider Legs",
+                    "icons": [
+                        "Raider Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "form_id": "0043701C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Raider_Legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-light-raider-torso",
+            "name": "Plan: Light Raider Torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Light Raider Torso",
+                "unlocks": {
+                    "text": "Light Raider Torso",
+                    "icons": [
+                        "Raider Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "form_id": "0043701D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Raider_Torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-light-robot-arms",
+            "name": "Plan: Light Robot Arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Light Robot Arms",
+                "unlocks": {
+                    "text": "Light Robot Arms",
+                    "icons": [
+                        "Robot Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004F5712",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Robot_Arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-light-robot-legs",
+            "name": "Plan: Light Robot Legs",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Light Robot Legs",
+                "unlocks": {
+                    "text": "Light Robot Legs",
+                    "icons": [
+                        "Robot Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004F5713",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Robot_Legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-light-robot-torso",
+            "name": "Plan: Light Robot Torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Light Robot Torso",
+                "unlocks": {
+                    "text": "Light Robot Torso",
+                    "icons": [
+                        "Robot Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004F5714",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Light_Robot_Torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-long-johns",
+            "name": "Plan: Long johns",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Long johns",
+                "unlocks": {
+                    "text": "Long Johns",
+                    "icons": [
+                        "Long Johns (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "00437017",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Long_johns"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-marine-armor-helmet",
+            "name": "Plan: Marine armor helmet",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Marine armor helmet",
+                "unlocks": {
+                    "text": "Marine Armor helmet",
+                    "icons": [
+                        "Marine Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": {
+                    "text": "Treasure Hunter",
+                    "icons": [
+                        "Mole Miner Pail",
+                        "Hunt for the Treasure Hunter"
+                    ]
+                },
+                "form_id": "005B6FF1",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Marine_armor_helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-marine-arms",
+            "name": "Plan: Marine arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Marine arms",
+                "unlocks": {
+                    "text": "Marine Armor left and right arms",
+                    "icons": [
+                        "Marine Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004F5715",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Marine_arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-marine-legs",
+            "name": "Plan: Marine legs",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Marine legs",
+                "unlocks": {
+                    "text": "Marine Armor left and right legs",
+                    "icons": [
+                        "Marine Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004F5716",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Marine_legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-marine-torso",
+            "name": "Plan: Marine torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Marine torso",
+                "unlocks": {
+                    "text": "Marine Armor chest piece",
+                    "icons": [
+                        "Marine Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004F5717",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Marine_torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-marine-wetsuit",
+            "name": "Plan: Marine Wetsuit",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Marine Wetsuit",
+                "unlocks": {
+                    "text": "Marine Wetsuit",
+                    "icons": [
+                        "Marine Wetsuit (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "003132CC",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Marine_Wetsuit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-muni-armor-helmet",
+            "name": "Plan: Muni Armor Helmet",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Muni Armor Helmet",
+                "unlocks": {
+                    "text": "Muni Armor Helmet",
+                    "icons": [
+                        "Muni Armor Helmet"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Quest",
+                        "The Human Condition"
+                    ]
+                },
+                "form_id": "006F4D83",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Armor_Helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-muni-armor-left-arm",
+            "name": "Plan: Muni Armor Left Arm",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Muni Armor Left Arm",
+                "unlocks": {
+                    "text": "Muni Armor Left Arm",
+                    "icons": [
+                        "Muni Armor Left Arm"
+                    ]
+                },
+                "obtained": {
+                    "text": "Opportunity Knocking",
+                    "icons": [
+                        "Quest",
+                        "Opportunity Knocking"
+                    ]
+                },
+                "form_id": "006F4D84",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Armor_Left_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-muni-armor-left-leg",
+            "name": "Plan: Muni Armor Left Leg",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Muni Armor Left Leg",
+                "unlocks": {
+                    "text": "Muni Armor Left Leg",
+                    "icons": [
+                        "Muni Armor Left Leg"
+                    ]
+                },
+                "obtained": {
+                    "text": "All the World's a Stage",
+                    "icons": [
+                        "Quest",
+                        "All the World's a Stage"
+                    ]
+                },
+                "form_id": "006F4D85",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Armor_Left_Leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-muni-armor-right-arm",
+            "name": "Plan: Muni Armor Right Arm",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Muni Armor Right Arm",
+                "unlocks": {
+                    "text": "Muni Armor Right Arm",
+                    "icons": [
+                        "Muni Armor Right Arm"
+                    ]
+                },
+                "obtained": {
+                    "text": "Sins of the Father",
+                    "icons": [
+                        "Quest",
+                        "Sins of the Father"
+                    ]
+                },
+                "form_id": "006F4D8A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Armor_Right_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-muni-armor-right-leg",
+            "name": "Plan: Muni Armor Right Leg",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Muni Armor Right Leg",
+                "unlocks": {
+                    "text": "Muni Armor Right Leg",
+                    "icons": [
+                        "Muni Armor Right Leg"
+                    ]
+                },
+                "obtained": {
+                    "text": "Sins of the Father",
+                    "icons": [
+                        "Quest",
+                        "Sins of the Father"
+                    ]
+                },
+                "form_id": "006F4D8B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Armor_Right_Leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-muni-armor-torso",
+            "name": "Plan: Muni Armor Torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Muni Armor Torso",
+                "unlocks": {
+                    "text": "Muni Armor Chest Piece",
+                    "icons": [
+                        "Muni Armor Chest Piece"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Quest",
+                        "The Human Condition"
+                    ]
+                },
+                "form_id": "006F4D8C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Armor_Torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-muni-underarmor",
+            "name": "Plan: Muni Underarmor",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Muni Underarmor",
+                "unlocks": {
+                    "text": "Muni Underarmor",
+                    "icons": [
+                        "Muni Underarmor"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Human Condition"
+                    ]
+                },
+                "form_id": "006E7356",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Muni_Underarmor"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-protective-lining-muni-underarmor",
+            "name": "Plan: Protective Lining Muni Underarmor",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Protective Lining Muni Underarmor",
+                "unlocks": {
+                    "text": "Protective Lining Muni Underarmor",
+                    "icons": [
+                        "Protective Lining Muni Underarmor"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Human Condition"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Protective_Lining_Muni_Underarmor"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-raider-leathers",
+            "name": "Plan: Raider leathers",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Raider leathers",
+                "unlocks": {
+                    "text": "Raider Leathers",
+                    "icons": [
+                        "Raider Leathers (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "00437018",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Raider_leathers"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-resistant-lining-muni-underarmor",
+            "name": "Plan: Resistant Lining Muni Underarmor",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Resistant Lining Muni Underarmor",
+                "unlocks": {
+                    "text": "Resistant Lining Muni Underarmor",
+                    "icons": [
+                        "Resistant Lining Muni Underarmor"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Human Condition"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Resistant_Lining_Muni_Underarmor"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-road-leathers",
+            "name": "Plan: Road leathers",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Road leathers",
+                "unlocks": {
+                    "text": "Road Leathers",
+                    "icons": [
+                        "Road Leathers (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "00437019",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Road_leathers"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-secret-service-chest-piece",
+            "name": "Plan: Secret Service Chest Piece",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Secret Service Chest Piece",
+                "unlocks": {
+                    "text": "Secret Service Armor Chest Piece",
+                    "icons": [
+                        "Secret Service Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "0058935B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Chest_Piece"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-secret-service-helmet",
+            "name": "Plan: Secret Service Helmet",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Secret Service Helmet",
+                "unlocks": {
+                    "text": "Secret Service Armor Helmet",
+                    "icons": [
+                        "Secret Service Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "0058961B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Helmet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-secret-service-left-arm",
+            "name": "Plan: Secret Service Left Arm",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Secret Service Left Arm",
+                "unlocks": {
+                    "text": "Secret Service Armor Left Arm",
+                    "icons": [
+                        "Secret Service Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "0059D543",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Left_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-secret-service-left-leg",
+            "name": "Plan: Secret Service Left Leg",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Secret Service Left Leg",
+                "unlocks": {
+                    "text": "Secret Service Armor Left Leg",
+                    "icons": [
+                        "Secret Service Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "0059D545",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Left_Leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-secret-service-right-arm",
+            "name": "Plan: Secret Service Right Arm",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Secret Service Right Arm",
+                "unlocks": {
+                    "text": "Secret Service Armor Right Arm",
+                    "icons": [
+                        "Secret Service Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "0059D544",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Right_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-secret-service-right-leg",
+            "name": "Plan: Secret Service Right Leg",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Secret Service Right Leg",
+                "unlocks": {
+                    "text": "Secret Service Armor Right Leg",
+                    "icons": [
+                        "Secret Service Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "0059D546",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Right_Leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-secret-service-underarmor",
+            "name": "Plan: Secret Service Underarmor",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Secret Service Underarmor",
+                "unlocks": {
+                    "text": "Secret Service Underarmor",
+                    "icons": [
+                        "Secret Service Underarmor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "0059D542",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Secret_Service_Underarmor"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-shielded-lining-muni-underarmor",
+            "name": "Plan: Shielded Lining Muni Underarmor",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Shielded Lining Muni Underarmor",
+                "unlocks": {
+                    "text": "Shielded Lining Muni Underarmor",
+                    "icons": [
+                        "Shielded Lining Muni Underarmor"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Human Condition"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shielded_Lining_Muni_Underarmor"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-solar-armor-chest-piece",
+            "name": "Plan: Solar Armor Chest Piece",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Solar Armor Chest Piece",
+                "unlocks": {
+                    "text": "Solar Armor chest piece",
+                    "icons": [
+                        "Solar Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "005527E0",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Solar_Armor_Chest_Piece"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-solar-armor-left-arm",
+            "name": "Plan: Solar Armor Left Arm",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Solar Armor Left Arm",
+                "unlocks": {
+                    "text": "Solar Armor left arm",
+                    "icons": [
+                        "Solar Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "005527DC",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Solar_Armor_Left_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-solar-armor-left-leg",
+            "name": "Plan: Solar Armor Left Leg",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Solar Armor Left Leg",
+                "unlocks": {
+                    "text": "Solar Armor left leg",
+                    "icons": [
+                        "Solar Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "005527DE",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Solar_Armor_Left_Leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-solar-armor-right-arm",
+            "name": "Plan: Solar Armor Right Arm",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Solar Armor Right Arm",
+                "unlocks": {
+                    "text": "Solar Armor right arm",
+                    "icons": [
+                        "Solar Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "00554652",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Solar_Armor_Right_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-solar-armor-right-leg",
+            "name": "Plan: Solar Armor Right Leg",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Solar Armor Right Leg",
+                "unlocks": {
+                    "text": "Solar Armor right leg",
+                    "icons": [
+                        "Solar Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "00554654",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Solar_Armor_Right_Leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sturdy-combat-arms",
+            "name": "Plan: Sturdy combat arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Sturdy combat arms",
+                "unlocks": {
+                    "text": "Sturdy combat armor left and right arms",
+                    "icons": [
+                        "Combat Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "form_id": "00438612",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_combat_arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sturdy-combat-legs",
+            "name": "Plan: Sturdy combat legs",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Sturdy combat legs",
+                "unlocks": {
+                    "text": "Sturdy combat armor left and right legs",
+                    "icons": [
+                        "Combat Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "form_id": "00438613",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_combat_legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sturdy-combat-torso",
+            "name": "Plan: Sturdy combat torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Sturdy combat torso",
+                "unlocks": {
+                    "text": "Sturdy combat armor chest piece",
+                    "icons": [
+                        "Combat Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "form_id": "00438614",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_combat_torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sturdy-leather-arms",
+            "name": "Plan: Sturdy leather arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Sturdy leather arms",
+                "unlocks": {
+                    "text": "Sturdy leather armor left and right arms",
+                    "icons": [
+                        "Leather Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "0043860F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_leather_arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sturdy-leather-legs",
+            "name": "Plan: Sturdy leather legs",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Sturdy leather legs",
+                "unlocks": {
+                    "text": "Sturdy leather armor left and right legs",
+                    "icons": [
+                        "Leather Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "00438610",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_leather_legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sturdy-leather-torso",
+            "name": "Plan: Sturdy leather torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Sturdy leather torso",
+                "unlocks": {
+                    "text": "Sturdy leather armor chest piece",
+                    "icons": [
+                        "Leather Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "form_id": "00438611",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_leather_torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sturdy-metal-arms",
+            "name": "Plan: Sturdy Metal Arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Sturdy Metal Arms",
+                "unlocks": {
+                    "text": "Sturdy Metal Arms",
+                    "icons": [
+                        "Metal Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "form_id": "0043860C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Metal_Arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sturdy-metal-legs",
+            "name": "Plan: Sturdy Metal Legs",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Sturdy Metal Legs",
+                "unlocks": {
+                    "text": "Sturdy Metal Legs",
+                    "icons": [
+                        "Metal Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "form_id": "0043860D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Metal_Legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sturdy-metal-torso",
+            "name": "Plan: Sturdy Metal Torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Sturdy Metal Torso",
+                "unlocks": {
+                    "text": "Sturdy Metal Torso",
+                    "icons": [
+                        "Metal Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "form_id": "0043860E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Metal_Torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sturdy-raider-arms",
+            "name": "Plan: Sturdy Raider Arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Sturdy Raider Arms",
+                "unlocks": {
+                    "text": "Sturdy Raider Arms",
+                    "icons": [
+                        "Raider Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "form_id": "002B9FD1",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Raider_Arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sturdy-raider-legs",
+            "name": "Plan: Sturdy Raider Legs",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Sturdy Raider Legs",
+                "unlocks": {
+                    "text": "Sturdy Raider Legs",
+                    "icons": [
+                        "Raider Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "form_id": "002B9FD3",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Raider_Legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sturdy-raider-torso",
+            "name": "Plan: Sturdy Raider Torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Sturdy Raider Torso",
+                "unlocks": {
+                    "text": "Sturdy Raider Torso",
+                    "icons": [
+                        "Raider Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "form_id": "002B9FD5",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Raider_Torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sturdy-robot-arms",
+            "name": "Plan: Sturdy Robot Arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Sturdy Robot Arms",
+                "unlocks": {
+                    "text": "Sturdy Robot Arms",
+                    "icons": [
+                        "Robot Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004385FC",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Robot_Arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sturdy-robot-legs",
+            "name": "Plan: Sturdy Robot Legs",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Sturdy Robot Legs",
+                "unlocks": {
+                    "text": "Sturdy Robot Legs",
+                    "icons": [
+                        "Robot Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004385FC",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Robot_Legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sturdy-robot-right-arms",
+            "name": "Plan: Sturdy robot right arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Sturdy robot right arms",
+                "unlocks": {
+                    "text": "Sturdy robot armor left and right arms",
+                    "icons": [
+                        "Robot Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004385FB",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_robot_right_arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sturdy-robot-torso",
+            "name": "Plan: Sturdy Robot Torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Sturdy Robot Torso",
+                "unlocks": {
+                    "text": "Sturdy Robot Torso",
+                    "icons": [
+                        "Robot Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004385F7",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sturdy_Robot_Torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-thorn-armor-chest-piece",
+            "name": "Plan: Thorn Armor Chest Piece",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Thorn Armor Chest Piece",
+                "unlocks": {
+                    "text": "Thorn Armor Chest Piece",
+                    "icons": [
+                        "Thorn Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "005527DF",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Thorn_Armor_Chest_Piece"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-thorn-armor-left-arm",
+            "name": "Plan: Thorn Armor Left Arm",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Thorn Armor Left Arm",
+                "unlocks": {
+                    "text": "Thorn Armor Left Arm",
+                    "icons": [
+                        "Thorn Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "005527DB",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Thorn_Armor_Left_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-thorn-armor-left-leg",
+            "name": "Plan: Thorn Armor Left Leg",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Thorn Armor Left Leg",
+                "unlocks": {
+                    "text": "Thorn Armor Left Leg",
+                    "icons": [
+                        "Thorn Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "005527DD",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Thorn_Armor_Left_Leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-thorn-armor-right-arm",
+            "name": "Plan: Thorn Armor Right Arm",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Thorn Armor Right Arm",
+                "unlocks": {
+                    "text": "Thorn Armor Right Arm",
+                    "icons": [
+                        "Thorn Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "00554651",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Thorn_Armor_Right_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-thorn-armor-right-leg",
+            "name": "Plan: Thorn Armor Right Leg",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Thorn Armor Right Leg",
+                "unlocks": {
+                    "text": "Thorn Armor Right Leg",
+                    "icons": [
+                        "Thorn Armor"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone",
+                        "Minerva"
+                    ]
+                },
+                "form_id": "00554653",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Thorn_Armor_Right_Leg"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-trapper-arms",
+            "name": "Plan: Trapper arms",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Trapper arms",
+                "unlocks": {
+                    "text": "Trapper Armor left and right arms",
+                    "icons": [
+                        "Trapper Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004F5718",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Trapper_arms"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-trapper-legs",
+            "name": "Plan: Trapper legs",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Trapper legs",
+                "unlocks": {
+                    "text": "Trapper Armor left and right legs",
+                    "icons": [
+                        "Trapper Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004F5719",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Trapper_legs"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-trapper-torso",
+            "name": "Plan: Trapper torso",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Trapper torso",
+                "unlocks": {
+                    "text": "Trapper Armor chest piece",
+                    "icons": [
+                        "Trapper Armor (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "004F571A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Trapper_torso"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-treated-lining-muni-underarmor",
+            "name": "Plan: Treated Lining Muni Underarmor",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Treated Lining Muni Underarmor",
+                "unlocks": {
+                    "text": "Treated Lining Muni Underarmor",
+                    "icons": [
+                        "Treated Lining Muni Underarmor"
+                    ]
+                },
+                "obtained": {
+                    "text": "The Human Condition",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "The Human Condition"
+                    ]
+                },
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Treated_Lining_Muni_Underarmor"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-undershirt-jeans",
+            "name": "Plan: Undershirt & jeans",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Undershirt & jeans",
+                "unlocks": {
+                    "text": "Undershirt & jeans",
+                    "icons": [
+                        "Undershirt & Jeans (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "003132F9",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Undershirt_%26_jeans"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vault-51-jumpsuit",
+            "name": "Plan: Vault 51 Jumpsuit",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Vault 51 Jumpsuit",
+                "unlocks": {
+                    "text": "Vault 51 Jumpsuit",
+                    "icons": [
+                        "Vault 51 Jumpsuit"
+                    ]
+                },
+                "obtained": {
+                    "text": "Holiday Scorched",
+                    "icons": [
+                        "Fallout 76 Limited Time Content",
+                        "Holiday Scorched"
+                    ]
+                },
+                "form_id": "0062042A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_51_Jumpsuit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vault-63-jumpsuit",
+            "name": "Plan: Vault 63 Jumpsuit",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Vault 63 Jumpsuit",
+                "unlocks": {
+                    "text": "Vault 63 Jumpsuit",
+                    "icons": [
+                        "Vault 63 Jumpsuit"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "form_id": "00313390",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_63_Jumpsuit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vault-76-jumpsuit",
+            "name": "Plan: Vault 76 jumpsuit",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Vault 76 jumpsuit",
+                "unlocks": {
+                    "text": "Vault 76 Jumpsuit",
+                    "icons": [
+                        "Vault 76 Jumpsuit"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "0031352A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_76_jumpsuit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vault-94-jumpsuit",
+            "name": "Plan: Vault 94 jumpsuit",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Vault 94 jumpsuit",
+                "unlocks": {
+                    "text": "Vault 94 jumpsuit",
+                    "icons": [
+                        "Vault 94 jumpsuit"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "form_id": "005D0F02",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_94_jumpsuit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vault-94-scout-armor-mask",
+            "name": "Plan: Vault 94 scout armor mask",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Vault 94 scout armor mask",
+                "unlocks": {
+                    "text": "Vault 94 Scout Armor Mask",
+                    "icons": [
+                        "Vault 94 Scout Armor Mask"
+                    ]
+                },
+                "obtained": {
+                    "text": "Regs",
+                    "icons": [
+                        "Gold Bullion",
+                        "Reginald Stone"
+                    ]
+                },
+                "form_id": "005A3329",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_94_scout_armor_mask"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vault-96-jumpsuit",
+            "name": "Plan: Vault 96 Jumpsuit",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Vault 96 Jumpsuit",
+                "unlocks": {
+                    "text": "Vault 96 jumpsuit",
+                    "icons": [
+                        "Vault 96 jumpsuit"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "form_id": "00313390",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_96_Jumpsuit"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-vault-tec-university-jumpsuit",
+            "name": "Plan: Vault Tec University jumpsuit",
+            "section": "By Type",
+            "columns": {
+                "name": "Plan: Vault Tec University jumpsuit",
+                "unlocks": {
+                    "text": "Vault Tec University jumpsuit",
+                    "icons": [
+                        "Vault Tec University jumpsuit"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "form_id": "00313494",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Vault_Tec_University_jumpsuit"
+            },
+            "availability": []
+        }
+    ]
+}

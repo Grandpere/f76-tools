@@ -1,0 +1,5374 @@
+{
+    "generated_at": "2026-03-17T14:32:58+00:00",
+    "source": "fallout.fandom.com",
+    "page": "Fallout_76_plans/Weapons",
+    "url": "https://fallout.fandom.com/wiki/Fallout_76_plans/Weapons",
+    "sections_count": 15,
+    "resources_count": 141,
+    "resources": [
+        {
+            "type": "plan",
+            "slug": "Plan:_.44_revolver",
+            "title": "Plan: .44 revolver",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: .44 revolver",
+                "weight": "0.25",
+                "value": "180",
+                "form_id": "00437007",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_.44_revolver"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 2,
+                    "row_index": 2
+                },
+                {
+                    "section": "Pistols",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_.50_cal_machine_gun",
+            "title": "Plan: .50 cal machine gun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: .50 cal machine gun",
+                "weight": "0.25",
+                "value": "1575",
+                "form_id": "0043700E",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_.50_cal_machine_gun"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 6,
+                    "row_index": 2
+                },
+                {
+                    "section": "Heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_10mm_pistol",
+            "title": "Plan: 10mm pistol",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: 10mm pistol",
+                "weight": "0.25",
+                "value": "180",
+                "form_id": "0052E485",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_10mm_pistol"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 2,
+                    "row_index": 10
+                },
+                {
+                    "section": "Pistols",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_10mm_submachine_gun",
+            "title": "Plan: 10mm submachine gun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: 10mm submachine gun",
+                "weight": "0.25",
+                "value": "420",
+                "form_id": "004F476A",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_10mm_submachine_gun"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 8
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Alien_blaster",
+            "title": "Plan: Alien blaster",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Alien blaster",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0043700C",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Alien_blaster"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 2,
+                    "row_index": 4
+                },
+                {
+                    "section": "Pistols",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Alien_disintegrator",
+            "title": "Plan: Alien disintegrator",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Alien disintegrator",
+                "weight": "0.25",
+                "value": "2267",
+                "form_id": "0062FE7E",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Alien_disintegrator"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 19
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Assault_rifle",
+            "title": "Plan: Assault rifle",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Assault rifle",
+                "weight": "0.25",
+                "value": "945",
+                "form_id": "004F4770",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Assault_rifle"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 10
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Assaultron_blade",
+            "title": "Plan: Assaultron blade",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Assaultron blade",
+                "weight": "0.25",
+                "value": "420",
+                "form_id": "00436FF3",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Assaultron_blade"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 5
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Assaultron_head",
+            "title": "Plan: Assaultron head",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Assaultron head",
+                "weight": "0.25",
+                "value": "690",
+                "form_id": "00437010",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Assaultron_head"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 2,
+                    "row_index": 5
+                },
+                {
+                    "section": "Pistols",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Auto_axe",
+            "title": "Plan: Auto axe",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Auto axe",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0058935C",
+                "name_tags": [
+                    "Expeditions: The Pitt"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Auto_axe"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 18
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Auto_grenade_launcher",
+            "title": "Plan: Auto grenade launcher",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Auto grenade launcher",
+                "weight": "0.25",
+                "value": "2025",
+                "form_id": "004F477E",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Auto_grenade_launcher"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 7,
+                    "row_index": 4
+                },
+                {
+                    "section": "Explosive heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Baseball_bat",
+            "title": "Plan: Baseball bat",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Baseball bat",
+                "weight": "0.25",
+                "value": "75",
+                "form_id": "00436FEE",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Baseball_bat"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 2
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Baton",
+            "title": "Plan: Baton",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Baton",
+                "weight": "0.25",
+                "value": "70",
+                "form_id": "00436FEF",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Baton"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 3
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Bear_Arm",
+            "title": "Plan: Bear Arm",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Bear Arm",
+                "weight": "0.25",
+                "value": "210",
+                "form_id": "003FFAE0",
+                "name_tags": [
+                    "Wild Appalachia"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Bear_Arm"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 10,
+                    "row_index": 2
+                },
+                {
+                    "section": "Unarmed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Blackpowder_pistol",
+            "title": "Plan: Blackpowder pistol",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Blackpowder pistol",
+                "weight": "0.25",
+                "value": "400",
+                "form_id": "004F476B",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Blackpowder_pistol"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 2,
+                    "row_index": 7
+                },
+                {
+                    "section": "Pistols",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Blackpowder_rifle",
+            "title": "Plan: Blackpowder rifle",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Blackpowder rifle",
+                "weight": "0.25",
+                "value": "660",
+                "form_id": "004F476F",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Blackpowder_rifle"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 9
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Bow",
+            "title": "Plan: Bow",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Bow",
+                "weight": "0.25",
+                "value": "125",
+                "form_id": "00589362",
+                "name_tags": [
+                    "Wastelanders"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Bow"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 5,
+                    "row_index": 4
+                },
+                {
+                    "section": "Bows",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Bowie_knife",
+            "title": "Plan: Bowie knife",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Bowie knife",
+                "weight": "0.25",
+                "value": "155",
+                "form_id": "00436FF0",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Bowie_knife"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 4
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Boxing_glove",
+            "title": "Plan: Boxing glove",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Boxing glove",
+                "weight": "0.25",
+                "value": "70",
+                "form_id": "00436FF1",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Boxing_glove"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 10,
+                    "row_index": 3
+                },
+                {
+                    "section": "Unarmed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Broadsider",
+            "title": "Plan: Broadsider",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Broadsider",
+                "weight": "0.25",
+                "value": "840",
+                "form_id": "0043700F",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Broadsider"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 7,
+                    "row_index": 2
+                },
+                {
+                    "section": "Explosive heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Brotherhood_recon_rifle",
+            "title": "Plan: Brotherhood recon rifle",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Brotherhood recon rifle",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "00510B79",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Brotherhood_recon_rifle"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 16
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Cattle_prod",
+            "title": "Plan: Cattle prod",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Cattle prod",
+                "weight": "0.25",
+                "value": "250",
+                "form_id": "00589621",
+                "name_tags": [
+                    "Wastelanders"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Cattle_prod"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 23
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Chinese_officer_sword",
+            "title": "Plan: Chinese officer sword",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Chinese officer sword",
+                "weight": "0.25",
+                "value": "225",
+                "form_id": "004EB73C",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Chinese_officer_sword"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 17
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Combat_rifle",
+            "title": "Plan: Combat rifle",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Combat rifle",
+                "weight": "0.25",
+                "value": "780",
+                "form_id": "0043700D",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Combat_rifle"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 4
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Combat_shotgun",
+            "title": "Plan: Combat shotgun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Combat shotgun",
+                "weight": "0.25",
+                "value": "750",
+                "form_id": "004F477F",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Combat_shotgun"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 4,
+                    "row_index": 3
+                },
+                {
+                    "section": "Shotguns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Compound_bow",
+            "title": "Plan: Compound bow",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Compound bow",
+                "weight": "0.25",
+                "value": "1000",
+                "form_id": "0058935D",
+                "name_tags": [
+                    "Wastelanders"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Compound_bow"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 5,
+                    "row_index": 3
+                },
+                {
+                    "section": "Bows",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Crossbow",
+            "title": "Plan: Crossbow",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Crossbow",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "004F4780",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Crossbow"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 5,
+                    "row_index": 2
+                },
+                {
+                    "section": "Bows",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Crusader_pistol",
+            "title": "Plan: Crusader pistol",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Crusader pistol",
+                "weight": "0.25",
+                "value": "2667",
+                "form_id": "005E65F5",
+                "name_tags": [
+                    "Steel Dawn"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Crusader_pistol"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 2,
+                    "row_index": 12
+                },
+                {
+                    "section": "Pistols",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Cryo_grenade",
+            "title": "Plan: Cryo grenade",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Cryo grenade",
+                "weight": "0.25",
+                "value": "100",
+                "form_id": "004E84E9",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Cryo_grenade"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 4
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Cryo_mine",
+            "title": "Plan: Cryo mine",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Cryo mine",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "004E84EA",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Cryo_mine"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 12,
+                    "row_index": 2
+                },
+                {
+                    "section": "Mines",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Cryolator",
+            "title": "Plan: Cryolator",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Cryolator",
+                "weight": "0.25",
+                "value": "840",
+                "form_id": "004F4781",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Cryolator"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 6,
+                    "row_index": 5
+                },
+                {
+                    "section": "Heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Cultist_blade",
+            "title": "Plan: Cultist blade",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Cultist blade",
+                "weight": "0.25",
+                "value": "210",
+                "form_id": "004EB73D",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Cultist_blade"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 18
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Cultist_dagger",
+            "title": "Plan: Cultist dagger",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Cultist dagger",
+                "weight": "0.25",
+                "value": "240",
+                "form_id": "004EB73E",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Cultist_dagger"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 19
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Death_tambo",
+            "title": "Plan: Death tambo",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Death tambo",
+                "weight": "0.25",
+                "value": "720",
+                "form_id": "004F42E0",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Death_tambo"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 10,
+                    "row_index": 8
+                },
+                {
+                    "section": "Unarmed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Deathclaw_gauntlet",
+            "title": "Plan: Deathclaw gauntlet",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Deathclaw gauntlet",
+                "weight": "0.25",
+                "value": "765",
+                "form_id": "00436FF2",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Deathclaw_gauntlet"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 10,
+                    "row_index": 4
+                },
+                {
+                    "section": "Unarmed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Double_barrel_shotgun",
+            "title": "Plan: Double barrel shotgun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Double barrel shotgun",
+                "weight": "0.25",
+                "value": "80",
+                "form_id": "004F4786",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Double_barrel_shotgun"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 4,
+                    "row_index": 4
+                },
+                {
+                    "section": "Shotguns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Dynamite",
+            "title": "Plan: Dynamite",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Dynamite",
+                "weight": "0.25",
+                "value": "100",
+                "form_id": "0058961C",
+                "name_tags": [
+                    "Wastelanders"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Dynamite"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 12
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Dynamite_bundle",
+            "title": "Plan: Dynamite bundle",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Dynamite bundle",
+                "weight": "0.25",
+                "value": "200",
+                "form_id": "0058961D",
+                "name_tags": [
+                    "Wastelanders"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Dynamite_bundle"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 13
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Dynamite_spear",
+            "title": "Plan: Dynamite spear",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Dynamite spear",
+                "weight": "0.25",
+                "value": "100",
+                "form_id": "00589622",
+                "name_tags": [
+                    "Cut content",
+                    "Wastelanders"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Dynamite_spear"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 19
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Expensive_perfume",
+            "title": "Plan: Expensive perfume",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Expensive perfume",
+                "weight": "0.25",
+                "value": "105",
+                "form_id": "0045C49C",
+                "name_tags": [
+                    "Fallout 76 unused content"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Expensive_perfume"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 2
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Face_Breaker",
+            "title": "Plan: Face Breaker",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Face Breaker",
+                "weight": "0.25",
+                "value": "900",
+                "form_id": "0060A29A",
+                "name_tags": [
+                    "Steel Reign"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Face_Breaker"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 10,
+                    "row_index": 12
+                },
+                {
+                    "section": "Unarmed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Fatman",
+            "title": "Plan: Fatman",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Fatman",
+                "weight": "0.25",
+                "value": "1500",
+                "form_id": "00437011",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Fatman"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 7,
+                    "row_index": 3
+                },
+                {
+                    "section": "Explosive heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Fire_axe",
+            "title": "Plan: Fire axe",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Fire axe",
+                "weight": "0.25",
+                "value": "45",
+                "form_id": "004EB73F",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Fire_axe"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 13
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Flamer",
+            "title": "Plan: Flamer",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Flamer",
+                "weight": "0.25",
+                "value": "1350",
+                "form_id": "004F4787",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Flamer"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 6,
+                    "row_index": 6
+                },
+                {
+                    "section": "Heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Flare",
+            "title": "Plan: Flare",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Flare",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0058961E",
+                "name_tags": [
+                    "Wastelanders"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Flare"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 14
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Flare_gun",
+            "title": "Plan: Flare gun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Flare gun",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "004F4768",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Flare_gun"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 2,
+                    "row_index": 6
+                },
+                {
+                    "section": "Pistols",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Flashbang",
+            "title": "Plan: Flashbang",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Flashbang",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "0058961F",
+                "name_tags": [
+                    "Cut content",
+                    "Wastelanders"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Flashbang"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 15
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Floater_flamer_grenade",
+            "title": "Plan: Floater flamer grenade",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Floater flamer grenade",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "00592EB5",
+                "name_tags": [
+                    "Wastelanders"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Floater_flamer_grenade"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 17
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Floater_freezer_grenade",
+            "title": "Plan: Floater freezer grenade",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Floater freezer grenade",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "00592EB6",
+                "name_tags": [
+                    "Wastelanders"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Floater_freezer_grenade"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 18
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Floater_gnasher_grenade",
+            "title": "Plan: Floater gnasher grenade",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Floater gnasher grenade",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "00592EB7",
+                "name_tags": [
+                    "Wastelanders"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Floater_gnasher_grenade"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 19
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Gamma_gun",
+            "title": "Plan: Gamma gun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Gamma gun",
+                "weight": "0.25",
+                "value": "400",
+                "form_id": "00437009",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Gamma_gun"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 2,
+                    "row_index": 3
+                },
+                {
+                    "section": "Pistols",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Gatling_gun",
+            "title": "Plan: Gatling gun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Gatling gun",
+                "weight": "0.25",
+                "value": "1575",
+                "form_id": "004F478F",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Gatling_gun"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 6,
+                    "row_index": 10
+                },
+                {
+                    "section": "Heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Gatling_laser",
+            "title": "Plan: Gatling laser",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Gatling laser",
+                "weight": "0.25",
+                "value": "1800",
+                "form_id": "004F4788",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Gatling_laser"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 6,
+                    "row_index": 7
+                },
+                {
+                    "section": "Heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Gatling_plasma",
+            "title": "Plan: Gatling plasma",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Gatling plasma",
+                "weight": "0.25",
+                "value": "2250",
+                "form_id": "004F4789",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Gatling_plasma"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 6,
+                    "row_index": 8
+                },
+                {
+                    "section": "Heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Gauntlet",
+            "title": "Plan: Gauntlet",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Gauntlet",
+                "weight": "0.25",
+                "value": "250",
+                "form_id": "00589623",
+                "name_tags": [
+                    "Wastelanders"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Gauntlet"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 10,
+                    "row_index": 10
+                },
+                {
+                    "section": "Unarmed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Gauss_minigun",
+            "title": "Plan: Gauss minigun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Gauss minigun",
+                "weight": "0.25",
+                "value": "750",
+                "form_id": "0058935E",
+                "name_tags": [
+                    "Wastelanders"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Gauss_minigun"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 6,
+                    "row_index": 12
+                },
+                {
+                    "section": "Heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Gauss_pistol",
+            "title": "Plan: Gauss pistol",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Gauss pistol",
+                "weight": "0.25",
+                "value": "250",
+                "form_id": "0058935F",
+                "name_tags": [
+                    "Wastelanders"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Gauss_pistol"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 2,
+                    "row_index": 11
+                },
+                {
+                    "section": "Pistols",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Gauss_rifle",
+            "title": "Plan: Gauss rifle",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Gauss rifle",
+                "weight": "0.25",
+                "value": "1800",
+                "form_id": "004F478A",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Gauss_rifle"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 14
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Gauss_shotgun",
+            "title": "Plan: Gauss shotgun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Gauss shotgun",
+                "weight": "0.25",
+                "value": "500",
+                "form_id": "00589360",
+                "name_tags": [
+                    "Wastelanders"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Gauss_shotgun"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 4,
+                    "row_index": 5
+                },
+                {
+                    "section": "Shotguns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Golf_club",
+            "title": "Plan: Golf club",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Golf club",
+                "weight": "0.25",
+                "value": "75",
+                "form_id": "00436FF5",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Golf_club"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 3
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Guitar_sword",
+            "title": "Plan: Guitar sword",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Guitar sword",
+                "weight": "0.25",
+                "value": "165",
+                "form_id": "00436FF6",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Guitar_sword"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 6
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Handmade_gun",
+            "title": "Plan: Handmade gun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Handmade gun",
+                "weight": "0.25",
+                "value": "810",
+                "form_id": "004F4784",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Handmade_gun"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 13
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Harpoon_gun",
+            "title": "Plan: Harpoon gun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Harpoon gun",
+                "weight": "0.25",
+                "value": "900",
+                "form_id": "00437012",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Harpoon_gun"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 6,
+                    "row_index": 3
+                },
+                {
+                    "section": "Heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Hellstorm_missile_launcher",
+            "title": "Plan: Hellstorm missile launcher",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Hellstorm missile launcher",
+                "weight": "0.25",
+                "value": "2667",
+                "form_id": "005E47CC",
+                "name_tags": [
+                    "Steel Dawn"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Hellstorm_missile_launcher"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 7,
+                    "row_index": 7
+                },
+                {
+                    "section": "Explosive heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Hunting_rifle",
+            "title": "Plan: Hunting rifle",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Hunting rifle",
+                "weight": "0.25",
+                "value": "100",
+                "form_id": "00437005",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Hunting_rifle"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 2
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Knuckles",
+            "title": "Plan: Knuckles",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Knuckles",
+                "weight": "0.25",
+                "value": "30",
+                "form_id": "00436FF7",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Knuckles"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 10,
+                    "row_index": 5
+                },
+                {
+                    "section": "Unarmed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Laser_gun",
+            "title": "Plan: Laser gun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Laser gun",
+                "weight": "0.25",
+                "value": "270",
+                "form_id": "00437008",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Laser_gun"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 1,
+                    "row_index": 2
+                },
+                {
+                    "section": "Pistol/rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Laser_musket",
+            "title": "Plan: Laser musket",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Laser musket",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "004F478B",
+                "name_tags": [
+                    "Cut content"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Laser_musket"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 15
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Lead_pipe",
+            "title": "Plan: Lead pipe",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Lead pipe",
+                "weight": "0.25",
+                "value": "45",
+                "form_id": "00436FF8",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Lead_pipe"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 7
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Lever_gun",
+            "title": "Plan: Lever gun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Lever gun",
+                "weight": "0.25",
+                "value": "810",
+                "form_id": "004F4782",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Lever_gun"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 11
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_M79_grenade_launcher",
+            "title": "Plan: M79 grenade launcher",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: M79 grenade launcher",
+                "weight": "0.25",
+                "value": "180",
+                "form_id": "004F478C",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_M79_grenade_launcher"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 7,
+                    "row_index": 5
+                },
+                {
+                    "section": "Explosive heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_MG42_light_machine_gun",
+            "title": "Plan: MG42 light machine gun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: MG42 light machine gun",
+                "weight": "0.25",
+                "value": "1350",
+                "form_id": "004F478D",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_MG42_light_machine_gun"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 6,
+                    "row_index": 9
+                },
+                {
+                    "section": "Heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_MIRV_frag_grenade",
+            "title": "Plan: MIRV frag grenade",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: MIRV frag grenade",
+                "weight": "0.25",
+                "value": "175",
+                "form_id": "004E84ED",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_MIRV_frag_grenade"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 7
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Meat_Tenderizer",
+            "title": "Plan: Meat Tenderizer",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Meat Tenderizer",
+                "weight": "0.25",
+                "value": "180",
+                "form_id": "005528D6",
+                "name_tags": [
+                    "Seasonal content",
+                    "The Legendary Run"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Meat_Tenderizer"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 17
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Meat_cleaver",
+            "title": "Plan: Meat cleaver",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Meat cleaver",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "005532B1",
+                "name_tags": [
+                    "Seasonal content",
+                    "Nuclear Winter"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Meat_cleaver"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 13,
+                    "row_index": 4
+                },
+                {
+                    "section": "Throwing weapons",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Meat_hook",
+            "title": "Plan: Meat hook",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Meat hook",
+                "weight": "0.25",
+                "value": "90",
+                "form_id": "004EAEEC",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Meat_hook"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 10,
+                    "row_index": 7
+                },
+                {
+                    "section": "Unarmed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Mechanic's_Best_Friend",
+            "title": "Plan: Mechanic's Best Friend",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Mechanic's Best Friend",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "00613845",
+                "name_tags": [
+                    "Fallout Worlds"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Mechanic%27s_Best_Friend"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 26
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Medical_Malpractice",
+            "title": "Plan: Medical Malpractice",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Medical Malpractice",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "005FE493",
+                "name_tags": [
+                    "Locked & Loaded"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Medical_Malpractice"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 2,
+                    "row_index": 13
+                },
+                {
+                    "section": "Pistols",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Minigun",
+            "title": "Plan: Minigun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Minigun",
+                "weight": "0.25",
+                "value": "1350",
+                "form_id": "00437014",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Minigun"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 6,
+                    "row_index": 4
+                },
+                {
+                    "section": "Heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Missile_launcher",
+            "title": "Plan: Missile launcher",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Missile launcher",
+                "weight": "0.25",
+                "value": "600",
+                "form_id": "004F478E",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Missile_launcher"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 7,
+                    "row_index": 6
+                },
+                {
+                    "section": "Explosive heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Mole_miner_gauntlet",
+            "title": "Plan: Mole miner gauntlet",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Mole miner gauntlet",
+                "weight": "0.25",
+                "value": "450",
+                "form_id": "00436FF9",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Mole_miner_gauntlet"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 10,
+                    "row_index": 6
+                },
+                {
+                    "section": "Unarmed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Mr._Handy_buzz_blade",
+            "title": "Plan: Mr. Handy buzz blade",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Mr. Handy buzz blade",
+                "weight": "0.25",
+                "value": "300",
+                "form_id": "004F42E5",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Mr._Handy_buzz_blade"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 16
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Nuka-Cola_grenade",
+            "title": "Plan: Nuka-Cola grenade",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Nuka-Cola grenade",
+                "weight": "0.25",
+                "value": "200",
+                "form_id": "004E84EF",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Nuka-Cola_grenade"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 9
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Nuka_Cherry_grenade",
+            "title": "Plan: Nuka Cherry grenade",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Nuka Cherry grenade",
+                "weight": "0.25",
+                "value": "0",
+                "form_id": "004E84EB",
+                "name_tags": [
+                    "Cut content"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Nuka_Cherry_grenade"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 5
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Nuka_Quantum_grenade",
+            "title": "Plan: Nuka Quantum grenade",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Nuka Quantum grenade",
+                "weight": "0.25",
+                "value": "225",
+                "form_id": "004E84EE",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Nuka_Quantum_grenade"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 8
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Nuke_mine",
+            "title": "Plan: Nuke mine",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Nuke mine",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "004E84F0",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Nuke_mine"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 12,
+                    "row_index": 3
+                },
+                {
+                    "section": "Mines",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Pepper_Shaker",
+            "title": "Plan: Pepper Shaker",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Pepper Shaker",
+                "weight": "0.25",
+                "value": "180",
+                "form_id": "00611A5E",
+                "name_tags": [
+                    "Seasonal content",
+                    "Steel Dawn"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Pepper_Shaker"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 4,
+                    "row_index": 6
+                },
+                {
+                    "section": "Shotguns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Pickaxe",
+            "title": "Plan: Pickaxe",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Pickaxe",
+                "weight": "0.25",
+                "value": "180",
+                "form_id": "004EB740",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Pickaxe"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 14
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Pipe_wrench",
+            "title": "Plan: Pipe wrench",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Pipe wrench",
+                "weight": "0.25",
+                "value": "90",
+                "form_id": "00436FFA",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Pipe_wrench"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 8
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Pitchfork",
+            "title": "Plan: Pitchfork",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Pitchfork",
+                "weight": "0.25",
+                "value": "45",
+                "form_id": "00436FFB",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Pitchfork"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 4
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Plasma_caster",
+            "title": "Plan: Plasma caster",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Plasma caster",
+                "weight": "0.25",
+                "value": "750",
+                "form_id": "00589361",
+                "name_tags": [
+                    "Wastelanders"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Plasma_caster"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 6,
+                    "row_index": 13
+                },
+                {
+                    "section": "Heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Plasma_cutter",
+            "title": "Plan: Plasma cutter",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Plasma cutter",
+                "weight": "0.25",
+                "value": "2667",
+                "form_id": "005ECB83",
+                "name_tags": [
+                    "Steel Dawn"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Plasma_cutter"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 25
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Plasma_grenade",
+            "title": "Plan: Plasma grenade",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Plasma grenade",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "004E84F2",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Plasma_grenade"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 10
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Plasma_gun",
+            "title": "Plan: Plasma gun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Plasma gun",
+                "weight": "0.25",
+                "value": "510",
+                "form_id": "0043700A",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Plasma_gun"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 1,
+                    "row_index": 3
+                },
+                {
+                    "section": "Pistol/rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Plasma_mine",
+            "title": "Plan: Plasma mine",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Plasma mine",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "004E84F1",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Plasma_mine"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 12,
+                    "row_index": 4
+                },
+                {
+                    "section": "Mines",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Pole_hook",
+            "title": "Plan: Pole hook",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Pole hook",
+                "weight": "0.25",
+                "value": "200",
+                "form_id": "00436FF4",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Pole_hook"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 2
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Pool_cue",
+            "title": "Plan: Pool cue",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Pool cue",
+                "weight": "0.25",
+                "value": "30",
+                "form_id": "00437004",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Pool_cue"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 8
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Power_fist",
+            "title": "Plan: Power fist",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Power fist",
+                "weight": "0.25",
+                "value": "900",
+                "form_id": "004F42E2",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Power_fist"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 10,
+                    "row_index": 9
+                },
+                {
+                    "section": "Unarmed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Pretty_floral_bouquet",
+            "title": "Plan: Pretty floral bouquet",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Pretty floral bouquet",
+                "weight": "0.25",
+                "value": "105",
+                "form_id": "0045C492",
+                "name_tags": [
+                    "Fallout 76 unused content"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Pretty_floral_bouquet"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 14
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Pulse_grenade",
+            "title": "Plan: Pulse grenade",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Pulse grenade",
+                "weight": "0.25",
+                "value": "150",
+                "form_id": "004E84F4",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Pulse_grenade"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 11
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Pulse_mine",
+            "title": "Plan: Pulse mine",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Pulse mine",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "004E84F3",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Pulse_mine"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 12,
+                    "row_index": 5
+                },
+                {
+                    "section": "Mines",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Pump-action_shotgun",
+            "title": "Plan: Pump-action shotgun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Pump-action shotgun",
+                "weight": "0.25",
+                "value": "225",
+                "form_id": "004F4769",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Pump-action_shotgun"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 4,
+                    "row_index": 2
+                },
+                {
+                    "section": "Shotguns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Radium_rifle",
+            "title": "Plan: Radium rifle",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Radium rifle",
+                "weight": "0.25",
+                "value": "540",
+                "form_id": "004F4783",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Radium_rifle"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 12
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Railway_rifle",
+            "title": "Plan: Railway rifle",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Railway rifle",
+                "weight": "0.25",
+                "value": "810",
+                "form_id": "00437013",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Railway_rifle"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 5
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Replica_Grognak's_axe",
+            "title": "Plan: Replica Grognak's axe",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Replica Grognak's axe",
+                "weight": "0.25",
+                "value": "250",
+                "form_id": "004F42E1",
+                "name_tags": [
+                    "Nuclear Winter"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Replica_Grognak%27s_axe"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 15
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Revolutionary_war_sword",
+            "title": "Plan: Revolutionary war sword",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Revolutionary war sword",
+                "weight": "0.25",
+                "value": "225",
+                "form_id": "004EB741",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Revolutionary_war_sword"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 20
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Revolver",
+            "title": "Plan: Revolver",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Revolver",
+                "weight": "0.25",
+                "value": "720",
+                "form_id": "004F4785",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Revolver"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 2,
+                    "row_index": 9
+                },
+                {
+                    "section": "Pistols",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Ripper",
+            "title": "Plan: Ripper",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Ripper",
+                "weight": "0.25",
+                "value": "1170",
+                "form_id": "004F42E3",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Ripper"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 21
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Rolling_pin",
+            "title": "Plan: Rolling pin",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Rolling pin",
+                "weight": "0.25",
+                "value": "30",
+                "form_id": "00436FFC",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Rolling_pin"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 9
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sheepsquatch_club",
+            "title": "Plan: Sheepsquatch club",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Sheepsquatch club",
+                "weight": "0.25",
+                "value": "180",
+                "form_id": "0045EC5D",
+                "name_tags": [
+                    "Wild Appalachia"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sheepsquatch_club"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 15
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sheepsquatch_shard",
+            "title": "Plan: Sheepsquatch shard",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Sheepsquatch shard",
+                "weight": "0.25",
+                "value": "180",
+                "form_id": "0042101C",
+                "name_tags": [
+                    "Wild Appalachia"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sheepsquatch_shard"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 13,
+                    "row_index": 2
+                },
+                {
+                    "section": "Throwing weapons",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sheepsquatch_staff",
+            "title": "Plan: Sheepsquatch staff",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Sheepsquatch staff",
+                "weight": "0.25",
+                "value": "180",
+                "form_id": "0045EC5E",
+                "name_tags": [
+                    "Wild Appalachia"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sheepsquatch_staff"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 10
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Shepherd's_crook",
+            "title": "Plan: Shepherd's crook",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Shepherd's crook",
+                "weight": "0.25",
+                "value": "180",
+                "form_id": "0045EC3E",
+                "name_tags": [
+                    "Wild Appalachia"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Shepherd%27s_crook"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 9
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Shishkebab",
+            "title": "Plan: Shishkebab",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Shishkebab",
+                "weight": "0.25",
+                "value": "1080",
+                "form_id": "004F42E4",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Shishkebab"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": true,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 22
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sickle",
+            "title": "Plan: Sickle",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Sickle",
+                "weight": "0.25",
+                "value": "45",
+                "form_id": "00436FFD",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sickle"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 10
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Single-action_revolver",
+            "title": "Plan: Single-action revolver",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Single-action revolver",
+                "weight": "0.25",
+                "value": "510",
+                "form_id": "004F476C",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Single-action_revolver"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 2,
+                    "row_index": 8
+                },
+                {
+                    "section": "Pistols",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Ski_sword",
+            "title": "Plan: Ski sword",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Ski sword",
+                "weight": "0.25",
+                "value": "240",
+                "form_id": "00436FFE",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Ski_sword"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 11
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sledge_hammer",
+            "title": "Plan: Sledge hammer",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Sledge hammer",
+                "weight": "0.25",
+                "value": "180",
+                "form_id": "00436FFF",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sledge_hammer"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 5
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Smart_frag_grenade",
+            "title": "Plan: Smart frag grenade",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Smart frag grenade",
+                "weight": "0.25",
+                "value": "0",
+                "form_id": "004E84EC",
+                "name_tags": [
+                    "Cut content"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Smart_frag_grenade"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 6
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Smoke_grenade",
+            "title": "Plan: Smoke grenade",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Smoke grenade",
+                "weight": "0.25",
+                "value": "25",
+                "form_id": "00467FC0",
+                "name_tags": [
+                    "Fallout 76 unused content"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Smoke_grenade"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 3
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Sole_Survivor",
+            "title": "Plan: Sole Survivor",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Sole Survivor",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "00613846",
+                "name_tags": [
+                    "Fallout Worlds"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Sole_Survivor"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 18
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Soundmaker",
+            "title": "Plan: Soundmaker",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Soundmaker",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "00589620",
+                "name_tags": [
+                    "Cut content",
+                    "Wastelanders"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Soundmaker"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 11,
+                    "row_index": 16
+                },
+                {
+                    "section": "Grenades",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Spear",
+            "title": "Plan: Spear",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Spear",
+                "weight": "0.25",
+                "value": "240",
+                "form_id": "004EAEED",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Spear"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 11
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Submachine_gun",
+            "title": "Plan: Submachine gun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Submachine gun",
+                "weight": "0.25",
+                "value": "600",
+                "form_id": "0043700B",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Submachine_gun"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 3
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Super_sledge",
+            "title": "Plan: Super sledge",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Super sledge",
+                "weight": "0.25",
+                "value": "630",
+                "form_id": "00437000",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Super_sledge"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 6
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Switchblade",
+            "title": "Plan: Switchblade",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Switchblade",
+                "weight": "0.25",
+                "value": "90",
+                "form_id": "00437001",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Switchblade"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 12
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Tesla_rifle",
+            "title": "Plan: Tesla rifle",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Tesla rifle",
+                "weight": "0.25",
+                "value": "1200",
+                "form_id": "00437015",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Tesla_rifle"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 6
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_The_Fixer",
+            "title": "Plan: The Fixer",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: The Fixer",
+                "weight": "0.25",
+                "value": "180",
+                "form_id": "0046D299",
+                "name_tags": [
+                    "Wild Appalachia"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_The_Fixer"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 7
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_The_Gutter",
+            "title": "Plan: The Gutter",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: The Gutter",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "005D0F04",
+                "name_tags": [
+                    "One Wasteland For All"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_The_Gutter"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 24
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Thrown_bear_trap",
+            "title": "Plan: Thrown bear trap",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Thrown bear trap",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "004E84F6",
+                "name_tags": [
+                    "Cut content"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Thrown_bear_trap"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 14,
+                    "row_index": 3
+                },
+                {
+                    "section": "Traps",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Thrown_bleeding_bear_trap",
+            "title": "Plan: Thrown bleeding bear trap",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Thrown bleeding bear trap",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "004E84F5",
+                "name_tags": [
+                    "Cut content"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Thrown_bleeding_bear_trap"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": false,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 14,
+                    "row_index": 2
+                },
+                {
+                    "section": "Traps",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Tire_iron",
+            "title": "Plan: Tire iron",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Tire iron",
+                "weight": "0.25",
+                "value": "75",
+                "form_id": "00437002",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Tire_iron"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 13
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Tomahawk",
+            "title": "Plan: Tomahawk",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Tomahawk",
+                "weight": "0.25",
+                "value": "50",
+                "form_id": "00437006",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Tomahawk"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 13,
+                    "row_index": 3
+                },
+                {
+                    "section": "Throwing weapons",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Ultracite_Gatling_laser",
+            "title": "Plan: Ultracite Gatling laser",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Ultracite Gatling laser",
+                "weight": "0.25",
+                "value": "2700",
+                "form_id": "004F4791",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Ultracite_Gatling_laser"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": true,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": false,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 6,
+                    "row_index": 11
+                },
+                {
+                    "section": "Heavy guns",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Ultracite_laser_gun",
+            "title": "Plan: Ultracite laser gun",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Ultracite laser gun",
+                "weight": "0.25",
+                "value": "1350",
+                "form_id": "004F4790",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Ultracite_laser_gun"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 1,
+                    "row_index": 4
+                },
+                {
+                    "section": "Pistol/rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Unstoppable_Monster",
+            "title": "Plan: Unstoppable Monster",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Unstoppable Monster",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "005FD186",
+                "name_tags": [
+                    "Locked & Loaded"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Unstoppable_Monster"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 10,
+                    "row_index": 11
+                },
+                {
+                    "section": "Unarmed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Walking_cane",
+            "title": "Plan: Walking cane",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Walking cane",
+                "weight": "0.25",
+                "value": "30",
+                "form_id": "004EAEEB",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Walking_cane"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 8,
+                    "row_index": 16
+                },
+                {
+                    "section": "One-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_War_drum",
+            "title": "Plan: War drum",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: War drum",
+                "weight": "0.25",
+                "value": "1035",
+                "form_id": "00437003",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_War_drum"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 7
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_War_glaive",
+            "title": "Plan: War glaive",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: War glaive",
+                "weight": "0.25",
+                "value": "2667",
+                "form_id": "005D0F05",
+                "name_tags": [
+                    "One Wasteland For All"
+                ],
+                "value_currency": "Gold bullion",
+                "likely_minerva_source": true,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_War_glaive"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 20
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Whistle_in_the_Dark",
+            "title": "Plan: Whistle in the Dark",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Whistle in the Dark",
+                "weight": "0.25",
+                "value": "1333",
+                "form_id": "005D0F06",
+                "name_tags": [
+                    "One Wasteland For All"
+                ],
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Whistle_in_the_Dark"
+            },
+            "availability": {
+                "containers": false,
+                "random_encounters": false,
+                "enemies": false,
+                "seasonal_content": false,
+                "treasure_maps": false,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": false
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 3,
+                    "row_index": 17
+                },
+                {
+                    "section": "Rifles",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        },
+        {
+            "type": "plan",
+            "slug": "Plan:_Wood_axe",
+            "title": "Plan: Wood axe",
+            "section": "Weapons",
+            "columns": {
+                "name": "Plan: Wood axe",
+                "weight": "0.25",
+                "value": "120",
+                "form_id": "004EAEEE",
+                "value_currency": "Bottle cap",
+                "likely_minerva_source": false,
+                "wiki_url": "https://fallout.fandom.com/wiki/Plan:_Wood_axe"
+            },
+            "availability": {
+                "containers": true,
+                "random_encounters": false,
+                "enemies": true,
+                "seasonal_content": false,
+                "treasure_maps": true,
+                "quests": true,
+                "vendors": true,
+                "world_spawns": true
+            },
+            "sources": [
+                {
+                    "section": "Weapons",
+                    "table_index": 9,
+                    "row_index": 12
+                },
+                {
+                    "section": "Two-handed melee",
+                    "table_index": 0,
+                    "row_index": 0
+                }
+            ]
+        }
+    ]
+}

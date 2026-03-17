@@ -1,0 +1,4008 @@
+{
+    "generated_at": "2026-03-17T14:18:46+00:00",
+    "source": "fallout.wiki",
+    "page": "Fallout_76_Weapon_Plans",
+    "url": "https://fallout.wiki/wiki/Fallout_76_Weapon_Plans",
+    "sections_count": 19,
+    "resources_count": 157,
+    "resources": [
+        {
+            "type": "plan",
+            "slug": "plan-10mm-pistol",
+            "name": "Plan: 10mm pistol",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: 10mm pistol",
+                "unlocks": {
+                    "text": "10mm Pistol",
+                    "icons": [
+                        "10mm Pistol (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "180",
+                "type": "caps",
+                "form_id": "0052E485",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_10mm_pistol"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-10mm-submachine-gun",
+            "name": "Plan: 10mm submachine gun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: 10mm submachine gun",
+                "unlocks": {
+                    "text": "10mm Submachine Gun",
+                    "icons": [
+                        "10mm Submachine Gun (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "420",
+                "type": "caps",
+                "form_id": "004F476A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_10mm_submachine_gun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-44-revolver",
+            "name": "Plan: .44 Revolver",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: .44 Revolver",
+                "unlocks": {
+                    "text": ".44 Pistol",
+                    "icons": [
+                        ".44 Pistol (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "180",
+                "type": "caps",
+                "form_id": "00437007",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_.44_Revolver"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-50-cal-machine-gun",
+            "name": "Plan: .50 cal machine gun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: .50 cal machine gun",
+                "unlocks": {
+                    "text": ".50 Cal Machine Gun",
+                    "icons": [
+                        ".50 Cal Machine Gun"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "1575",
+                "type": "caps",
+                "form_id": "0043700E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_.50_cal_machine_gun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-alien-blaster",
+            "name": "Plan: Alien Blaster",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Alien Blaster",
+                "unlocks": {
+                    "text": "Alien Blaster",
+                    "icons": [
+                        "Alien Blaster (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content"
+                ],
+                "value": "50",
+                "type": "caps",
+                "form_id": "0043700C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Alien_Blaster"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-alien-disintegrator",
+            "name": "Plan: Alien Disintegrator",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Alien Disintegrator",
+                "unlocks": {
+                    "text": "Alien Disintegrator",
+                    "icons": [
+                        "Alien Disintegrator (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content"
+                ],
+                "value": "2667",
+                "type": "caps",
+                "form_id": "0062FE7E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Alien_Disintegrator"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-assault-rifle",
+            "name": "Plan: Assault Rifle",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Assault Rifle",
+                "unlocks": {
+                    "text": "Assault Rifle",
+                    "icons": [
+                        "Assault Rifle (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "value": "945",
+                "type": "caps",
+                "form_id": "004F4770",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Assault_Rifle"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-assaultron-blade",
+            "name": "Plan: Assaultron blade",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Assaultron blade",
+                "unlocks": {
+                    "text": "Assaultron Blade",
+                    "icons": [
+                        "Assaultron Blade (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Creatures",
+                    "Bottle Cap"
+                ],
+                "value": "420",
+                "type": "caps",
+                "form_id": "00436FF3",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Assaultron_blade"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-assaultron-head",
+            "name": "Plan: Assaultron Head",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Assaultron Head",
+                "unlocks": {
+                    "text": "Salvaged Assaultron Head",
+                    "icons": [
+                        "Salvaged Assaultron Head (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Creatures",
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "690",
+                "type": "caps",
+                "form_id": "00437010",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Assaultron_Head"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-auto-axe",
+            "name": "Plan: Auto Axe",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Auto Axe",
+                "unlocks": {
+                    "text": "Auto Axe",
+                    "icons": [
+                        "Auto Axe (Fallout 76)"
+                    ]
+                },
+                "obtained": {
+                    "text": "Giuseppe",
+                    "icons": [
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "value": "500",
+                "type": "stamp",
+                "form_id": "0058935C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Auto_Axe"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-auto-grenade-launcher",
+            "name": "Plan: Auto Grenade Launcher",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Auto Grenade Launcher",
+                "unlocks": {
+                    "text": "Auto Grenade Launcher",
+                    "icons": [
+                        "Auto Grenade Launcher"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "2025",
+                "type": "caps",
+                "form_id": "004F477E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Auto_Grenade_Launcher"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-baseball-bat",
+            "name": "Plan: Baseball bat",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Baseball bat",
+                "unlocks": {
+                    "text": "Baseball bat",
+                    "icons": [
+                        "Baseball Bat (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "75",
+                "type": "caps",
+                "form_id": "00436FEE",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Baseball_bat"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-baton",
+            "name": "Plan: Baton",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Baton",
+                "unlocks": {
+                    "text": "Baton",
+                    "icons": [
+                        "Baton (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "70",
+                "type": "caps",
+                "form_id": "00436FEF",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Baton"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-bear-arm",
+            "name": "Plan: Bear Arm",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Bear Arm",
+                "unlocks": {
+                    "text": "Bear Arm",
+                    "icons": [
+                        "Bear Arm"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "value": "210",
+                "type": "caps",
+                "form_id": "003FFAE0",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Bear_Arm"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-blackpowder-pistol",
+            "name": "Plan: Blackpowder pistol",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Blackpowder pistol",
+                "unlocks": {
+                    "text": "Black Powder Pistol",
+                    "icons": [
+                        "Black Powder Pistol"
+                    ]
+                },
+                "obtained": [
+                    "Bottle Cap"
+                ],
+                "value": "400",
+                "type": "caps",
+                "form_id": "004F476B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Blackpowder_pistol"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-blackpowder-rifle",
+            "name": "Plan: Blackpowder rifle",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Blackpowder rifle",
+                "unlocks": {
+                    "text": "Black Powder Rifle",
+                    "icons": [
+                        "Black Powder Rifle"
+                    ]
+                },
+                "obtained": [
+                    "Bottle Cap"
+                ],
+                "value": "660",
+                "type": "caps",
+                "form_id": "004F476F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Blackpowder_rifle"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-blast-mine",
+            "name": "Plan: Blast Mine",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Blast Mine",
+                "unlocks": {
+                    "text": "Blast Mine",
+                    "icons": [
+                        "Blast Mine"
+                    ]
+                },
+                "obtained": [
+                    "Bottle Cap"
+                ],
+                "value": "150",
+                "type": "caps",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Blast_Mine"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-boiling-point",
+            "name": "Plan: Boiling Point",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Boiling Point",
+                "unlocks": {
+                    "text": "Boiling Point",
+                    "icons": [
+                        "Boiling Point"
+                    ]
+                },
+                "obtained": {
+                    "text": "Scorchtongue Module Raid",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Scorchtongue Module Raid"
+                    ]
+                },
+                "value": "2667",
+                "type": "caps",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Boiling_Point"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-bow",
+            "name": "Plan: Bow",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Bow",
+                "unlocks": {
+                    "text": "Bow",
+                    "icons": [
+                        "Bow (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "125",
+                "type": "caps",
+                "form_id": "00589362",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Bow"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-bowie-knife",
+            "name": "Plan: Bowie knife",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Bowie knife",
+                "unlocks": {
+                    "text": "Bowie Knife",
+                    "icons": [
+                        "Bowie Knife (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "155",
+                "type": "caps",
+                "form_id": "00436FF0",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Bowie_knife"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-boxing-glove",
+            "name": "Plan: Boxing glove",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Boxing glove",
+                "unlocks": {
+                    "text": "Boxing Glove",
+                    "icons": [
+                        "Boxing Glove (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "70",
+                "type": "caps",
+                "form_id": "00436FF1",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Boxing_glove"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-broadsider",
+            "name": "Plan: Broadsider",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Broadsider",
+                "unlocks": {
+                    "text": "Broadsider",
+                    "icons": [
+                        "Broadsider (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "840",
+                "type": "caps",
+                "form_id": "0043700F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Broadsider"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-brotherhood-recon-rifle",
+            "name": "Plan: Brotherhood recon rifle",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Brotherhood recon rifle",
+                "unlocks": {
+                    "text": "Brotherhood Recon Rifle",
+                    "icons": [
+                        "Brotherhood Recon Rifle"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "value": "50",
+                "type": "caps",
+                "form_id": "00510B79",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Brotherhood_recon_rifle"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cattle-prod",
+            "name": "Plan: Cattle Prod",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Cattle Prod",
+                "unlocks": {
+                    "text": "Cattleprod",
+                    "icons": [
+                        "Cattleprod (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "250",
+                "type": "gold bullion",
+                "form_id": "00589621",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cattle_Prod"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cauterizer",
+            "name": "Plan: Cauterizer",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Cauterizer",
+                "unlocks": {
+                    "text": "Cauterizer",
+                    "icons": [
+                        "Cauterizer (Fallout 76)"
+                    ]
+                },
+                "value": "2667",
+                "type": "caps",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cauterizer"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-chinese-officer-sword",
+            "name": "Plan: Chinese Officer Sword",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Chinese Officer Sword",
+                "unlocks": {
+                    "text": "Chinese Officer Sword",
+                    "icons": [
+                        "Chinese Officer Sword (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "225",
+                "type": "caps",
+                "form_id": "004EB73C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Chinese_Officer_Sword"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-circuit-breaker",
+            "name": "Plan: Circuit Breaker",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Circuit Breaker",
+                "unlocks": {
+                    "text": "Circuit Breaker",
+                    "icons": [
+                        "Circuit Breaker"
+                    ]
+                },
+                "obtained": {
+                    "text": "Giuseppe",
+                    "icons": [
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "value": "500",
+                "type": "stamp",
+                "form_id": "0058935C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Circuit_Breaker"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cold-shoulder",
+            "name": "Plan: Cold Shoulder",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Cold Shoulder",
+                "unlocks": {
+                    "text": "Cold Shoulder",
+                    "icons": [
+                        "Cold Shoulder"
+                    ]
+                },
+                "obtained": {
+                    "text": "Giuseppe",
+                    "icons": [
+                        "Stamp",
+                        "Giuseppe"
+                    ]
+                },
+                "value": "",
+                "type": "stamps",
+                "form_id": "006BE8D7",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cold_Shoulder"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-combat-rifle",
+            "name": "Plan: Combat rifle",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Combat rifle",
+                "unlocks": {
+                    "text": "Combat rifle",
+                    "icons": [
+                        "Combat Rifle (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "value": "780",
+                "type": "caps",
+                "form_id": "0043700D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Combat_rifle"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-combat-shotgun",
+            "name": "Plan: Combat shotgun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Combat shotgun",
+                "unlocks": {
+                    "text": "Combat Shotgun",
+                    "icons": [
+                        "Combat Shotgun (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "750",
+                "type": "caps",
+                "form_id": "004F477F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Combat_shotgun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-compound-bow",
+            "name": "Plan: Compound bow",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Compound bow",
+                "unlocks": {
+                    "text": "Compound Bow",
+                    "icons": [
+                        "Compound Bow (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Bottle Cap"
+                ],
+                "value": "1000",
+                "type": "caps",
+                "form_id": "0058935D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Compound_bow"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cremator",
+            "name": "Plan: Cremator",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Cremator",
+                "unlocks": {
+                    "text": "Cremator",
+                    "icons": [
+                        "Cremator"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "75",
+                "type": "caps",
+                "form_id": "00790FCF",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cremator"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-crossbow",
+            "name": "Plan: Crossbow",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Crossbow",
+                "unlocks": {
+                    "text": "Crossbow",
+                    "icons": [
+                        "Crossbow (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "150",
+                "type": "caps",
+                "form_id": "004F4780",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Crossbow"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-crusader-pistol",
+            "name": "Plan: Crusader Pistol",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Crusader Pistol",
+                "unlocks": {
+                    "text": "Crusader Pistol",
+                    "icons": [
+                        "Crusader Pistol"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "value": "2000",
+                "type": "gold bullion",
+                "form_id": "005E65F5",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Crusader_Pistol"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cryo-grenade",
+            "name": "Plan: Cryo grenade",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Cryo grenade",
+                "unlocks": {
+                    "text": "Cryo grenade",
+                    "icons": [
+                        "Cryogenic Grenade (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Quest"
+                ],
+                "value": "100",
+                "type": "caps",
+                "form_id": "004E84E9",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cryo_grenade"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cryo-mine",
+            "name": "Plan: Cryo mine",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Cryo mine",
+                "unlocks": {
+                    "text": "Cryo mine",
+                    "icons": [
+                        "Cryo mine (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Quest"
+                ],
+                "value": "50",
+                "type": "caps",
+                "form_id": "004E84EA",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cryo_mine"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cryolator",
+            "name": "Plan: Cryolator",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Cryolator",
+                "unlocks": {
+                    "text": "Cryolator",
+                    "icons": [
+                        "Cryolator (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "840",
+                "type": "caps",
+                "form_id": "004F4781",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cryolator"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cultist-blade",
+            "name": "Plan: Cultist Blade",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Cultist Blade",
+                "unlocks": {
+                    "text": "Cultist Blade",
+                    "icons": [
+                        "Cultist Blade"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "210",
+                "type": "caps",
+                "form_id": "004EB73D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Blade"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-cultist-dagger",
+            "name": "Plan: Cultist Dagger",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Cultist Dagger",
+                "unlocks": {
+                    "text": "Cultist Dagger",
+                    "icons": [
+                        "Cultist Dagger"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "240",
+                "type": "caps",
+                "form_id": "004EB73E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Cultist_Dagger"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-death-tambo",
+            "name": "Plan: Death tambo",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Death tambo",
+                "unlocks": {
+                    "text": "Death Tambo",
+                    "icons": [
+                        "Death Tambo"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "720",
+                "type": "caps",
+                "form_id": "004F42E0",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Death_tambo"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-deathclaw-gauntlet",
+            "name": "Plan: Deathclaw Gauntlet",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Deathclaw Gauntlet",
+                "unlocks": {
+                    "text": "Deathclaw Gauntlet",
+                    "icons": [
+                        "Deathclaw Gauntlet (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Fallout 76 Locations"
+                ],
+                "value": "765",
+                "type": "caps",
+                "form_id": "00436FF2",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Deathclaw_Gauntlet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-double-barrel-shotgun",
+            "name": "Plan: Double barrel shotgun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Double barrel shotgun",
+                "unlocks": {
+                    "text": "Double-Barrel Shotgun",
+                    "icons": [
+                        "Double-Barrel Shotgun (Fallout 76)"
+                    ]
+                },
+                "obtained": {
+                    "text": "Flavors of Mayhem",
+                    "icons": [
+                        "Quest",
+                        "Flavors of Mayhem"
+                    ]
+                },
+                "value": "80",
+                "type": "caps",
+                "form_id": "004F4786",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Double_barrel_shotgun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-drill-fist",
+            "name": "Plan: Drill Fist",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Drill Fist",
+                "unlocks": {
+                    "text": "Drill Fist",
+                    "icons": [
+                        "Drill Fist"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "value": "180",
+                "type": "caps",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Drill_Fist"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-dynamite",
+            "name": "Plan: Dynamite",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Dynamite",
+                "unlocks": {
+                    "text": "Dynamite",
+                    "icons": [
+                        "Dynamite (Wastelanders)"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "100",
+                "type": "gold bullion",
+                "form_id": "0058961C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Dynamite"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-dynamite-bundle",
+            "name": "Plan: Dynamite Bundle",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Dynamite Bundle",
+                "unlocks": {
+                    "text": "Dynamite Bundle",
+                    "icons": [
+                        "Dynamite Bundle"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "200",
+                "type": "gold bullion",
+                "form_id": "0058961D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Dynamite_Bundle"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-dynamite-spear",
+            "name": "Plan: Dynamite spear",
+            "section": "Unused",
+            "columns": {
+                "name": "Plan: Dynamite spear",
+                "unlocks": "Dynamite spear",
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "100",
+                "type": "caps",
+                "form_id": "00589622",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Dynamite_spear"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-electro-enforcer",
+            "name": "Plan: Electro Enforcer",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Electro Enforcer",
+                "unlocks": {
+                    "text": "Electro Enforcer",
+                    "icons": [
+                        "Electro Enforcer"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content"
+                ],
+                "value": "2667",
+                "type": "caps",
+                "form_id": "00630C6B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Electro_Enforcer"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-expensive-perfume",
+            "name": "Plan: Expensive perfume",
+            "section": "Unused",
+            "columns": {
+                "name": "Plan: Expensive perfume",
+                "unlocks": {
+                    "text": "Expensive perfume",
+                    "icons": [
+                        "Expensive perfume"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "105",
+                "type": "caps",
+                "form_id": "0045C49C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Expensive_perfume"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-face-breaker",
+            "name": "Plan: Face Breaker",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Face Breaker",
+                "unlocks": {
+                    "text": "Face Breaker",
+                    "icons": [
+                        "Face Breaker"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "value": "1000",
+                "type": "bullion",
+                "form_id": "0060A29A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Face_Breaker"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-fatman",
+            "name": "Plan: Fatman",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Fatman",
+                "unlocks": {
+                    "text": "Fat Man",
+                    "icons": [
+                        "Fat Man (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "value": "1500",
+                "type": "caps",
+                "form_id": "00437011",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Fatman"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-fire-axe",
+            "name": "Plan: Fire axe",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Fire axe",
+                "unlocks": {
+                    "text": "Fire Axe",
+                    "icons": [
+                        "Fire Axe (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "45",
+                "type": "caps",
+                "form_id": "004EB73F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Fire_axe"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flamer",
+            "name": "Plan: Flamer",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Flamer",
+                "unlocks": {
+                    "text": "Flamer",
+                    "icons": [
+                        "Flamer (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "1350",
+                "type": "caps",
+                "form_id": "004F4787",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flamer"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flare",
+            "name": "Plan: Flare",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Flare",
+                "unlocks": {
+                    "text": "Flare",
+                    "icons": [
+                        "Flare (Wastelanders)"
+                    ]
+                },
+                "value": "50",
+                "type": "gold bullion",
+                "form_id": "0058961E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flare"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flare-gun",
+            "name": "Plan: Flare gun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Flare gun",
+                "unlocks": {
+                    "text": "Flare Gun",
+                    "icons": [
+                        "Flare Gun (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "type": "caps",
+                "form_id": "004F4768",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flare_gun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flashbang",
+            "name": "Plan: Flashbang",
+            "section": "Unused",
+            "columns": {
+                "name": "Plan: Flashbang",
+                "unlocks": {
+                    "text": "Flashbang",
+                    "icons": [
+                        "Flashbang (Wastelanders)"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "type": "caps",
+                "form_id": "0058961F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flashbang"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-flatliner",
+            "name": "Plan: Flatliner",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Flatliner",
+                "unlocks": {
+                    "text": "Flatliner",
+                    "icons": [
+                        "Flatliner"
+                    ]
+                },
+                "obtained": {
+                    "text": "Scorchtongue Module Raid",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Scorchtongue Module Raid"
+                    ]
+                },
+                "value": "2667",
+                "type": "caps",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Flatliner"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-floater-flamer-grenade",
+            "name": "Plan: Floater Flamer Grenade",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Floater Flamer Grenade",
+                "unlocks": {
+                    "text": "Floater Flamer Grenade",
+                    "icons": [
+                        "Floater Flamer Grenade"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "150",
+                "type": "gold bullion",
+                "form_id": "00592EB5",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Floater_Flamer_Grenade"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-floater-freezer-grenade",
+            "name": "Plan: Floater Freezer Grenade",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Floater Freezer Grenade",
+                "unlocks": {
+                    "text": "Floater Freezer Grenade",
+                    "icons": [
+                        "Floater Freezer Grenade"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "150",
+                "type": "gold bullion",
+                "form_id": "00592EB6",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Floater_Freezer_Grenade"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-floater-gnasher-grenade",
+            "name": "Plan: Floater Gnasher Grenade",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Floater Gnasher Grenade",
+                "unlocks": {
+                    "text": "Floater Gnasher Grenade",
+                    "icons": [
+                        "Floater Gnasher Grenade"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "150",
+                "type": "gold bullion",
+                "form_id": "00592EB7",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Floater_Gnasher_Grenade"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-gamma-gun",
+            "name": "Plan: Gamma gun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Gamma gun",
+                "unlocks": {
+                    "text": "Gamma Gun",
+                    "icons": [
+                        "Gamma Gun (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "400",
+                "type": "caps",
+                "form_id": "00437009",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gamma_gun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-gatling-gun",
+            "name": "Plan: Gatling gun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Gatling gun",
+                "unlocks": {
+                    "text": "Gatling Gun",
+                    "icons": [
+                        "Gatling Gun"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "1575",
+                "type": "caps",
+                "form_id": "004F478F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gatling_gun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-gatling-laser",
+            "name": "Plan: Gatling laser",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Gatling laser",
+                "unlocks": {
+                    "text": "Gatling Laser",
+                    "icons": [
+                        "Gatling Laser (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "1800",
+                "type": "caps",
+                "form_id": "004F4788",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gatling_laser"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-gatling-plasma",
+            "name": "Plan: Gatling plasma",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Gatling plasma",
+                "unlocks": {
+                    "text": "Gatling Plasma",
+                    "icons": [
+                        "Gatling Plasma"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "2250",
+                "type": "caps",
+                "form_id": "004F4789",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gatling_plasma"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-gauntlet",
+            "name": "Plan: Gauntlet",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Gauntlet",
+                "unlocks": {
+                    "text": "Gauntlet",
+                    "icons": [
+                        "Gauntlet (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "250",
+                "type": "gold bullion",
+                "form_id": "00589623",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gauntlet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-gauss-minigun",
+            "name": "Plan: Gauss Minigun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Gauss Minigun",
+                "unlocks": {
+                    "text": "Gauss Minigun",
+                    "icons": [
+                        "Gauss Minigun (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "750",
+                "type": "gold bullion",
+                "form_id": "0058935E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gauss_Minigun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-gauss-pistol",
+            "name": "Plan: Gauss Pistol",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Gauss Pistol",
+                "unlocks": {
+                    "text": "Gauss Pistol",
+                    "icons": [
+                        "Gauss Pistol (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "250",
+                "type": "gold bullion",
+                "form_id": "0058935F",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gauss_Pistol"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-gauss-rifle",
+            "name": "Plan: Gauss rifle",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Gauss rifle",
+                "unlocks": {
+                    "text": "Gauss Rifle",
+                    "icons": [
+                        "Gauss Rifle (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "1800",
+                "type": "caps",
+                "form_id": "004F478A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gauss_rifle"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-gauss-shotgun",
+            "name": "Plan: Gauss Shotgun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Gauss Shotgun",
+                "unlocks": {
+                    "text": "Gauss Shotgun",
+                    "icons": [
+                        "Gauss Shotgun (Fallout 76)"
+                    ]
+                },
+                "obtained": {
+                    "text": "Samuel or Minerva",
+                    "icons": [
+                        "Gold Bullion",
+                        "Samuel (Wastelanders)",
+                        "Minerva"
+                    ]
+                },
+                "value": "500",
+                "type": "gold bullion",
+                "form_id": "00589360",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gauss_Shotgun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-golf-club",
+            "name": "Plan: Golf Club",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Golf Club",
+                "unlocks": {
+                    "text": "Golf Club",
+                    "icons": [
+                        "Golf Club"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "75",
+                "type": "caps",
+                "form_id": "00436FF5",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Golf_Club"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-guitar-sword",
+            "name": "Plan: Guitar sword",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Guitar sword",
+                "unlocks": {
+                    "text": "Guitar Sword",
+                    "icons": [
+                        "Guitar Sword"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "value": "165",
+                "type": "caps",
+                "form_id": "00436FF6",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Guitar_sword"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-gulper-smacker",
+            "name": "Plan: Gulper Smacker",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Gulper Smacker",
+                "unlocks": {
+                    "text": "Gulper Smacker",
+                    "icons": [
+                        "Gulper Smacker"
+                    ]
+                },
+                "obtained": {
+                    "text": "Moonshine Jamboree",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Moonshine Jamboree"
+                    ]
+                },
+                "value": "100",
+                "type": "caps",
+                "form_id": "0063E378",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Gulper_Smacker"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-handmade-gun",
+            "name": "Plan: Handmade Gun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Handmade Gun",
+                "unlocks": {
+                    "text": "Handmade Rifle",
+                    "icons": [
+                        "Handmade Rifle (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "810",
+                "type": "caps",
+                "form_id": "004F4784",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Handmade_Gun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-harpoon-gun",
+            "name": "Plan: Harpoon gun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Harpoon gun",
+                "unlocks": {
+                    "text": "Harpoon Gun",
+                    "icons": [
+                        "Harpoon Gun (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "900",
+                "type": "caps",
+                "form_id": "00437012",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Harpoon_gun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-hellstorm-missile-launcher",
+            "name": "Plan: Hellstorm Missile Launcher",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Hellstorm Missile Launcher",
+                "unlocks": {
+                    "text": "Hellstorm Missile Launcher",
+                    "icons": [
+                        "Hellstorm Missile Launcher"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "2667",
+                "type": "caps",
+                "form_id": "005E47CC",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hellstorm_Missile_Launcher"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-hunting-rifle",
+            "name": "Plan: Hunting Rifle",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Hunting Rifle",
+                "unlocks": {
+                    "text": "Hunting Rifle",
+                    "icons": [
+                        "Hunting Rifle (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "100",
+                "type": "caps",
+                "form_id": "00437005",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Hunting_Rifle"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-knuckles",
+            "name": "Plan: Knuckles",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Knuckles",
+                "unlocks": {
+                    "text": "Knuckles",
+                    "icons": [
+                        "Knuckles (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "30",
+                "type": "caps",
+                "form_id": "00436FF7",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Knuckles"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-laser-gun",
+            "name": "Plan: Laser gun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Laser gun",
+                "unlocks": {
+                    "text": "Laser Gun",
+                    "icons": [
+                        "Laser Gun (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "value": "270",
+                "type": "caps",
+                "form_id": "00437008",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Laser_gun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-laser-musket",
+            "name": "Plan: Laser musket",
+            "section": "Unused",
+            "columns": {
+                "name": "Plan: Laser musket",
+                "unlocks": {
+                    "text": "Laser musket",
+                    "icons": [
+                        "Laser musket (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "150",
+                "type": "caps",
+                "form_id": "004F478B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Laser_musket"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-lead-pipe",
+            "name": "Plan: Lead pipe",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Lead pipe",
+                "unlocks": {
+                    "text": "Lead Pipe",
+                    "icons": [
+                        "Lead Pipe (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "value": "45",
+                "type": "caps",
+                "form_id": "00436FF8",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lead_pipe"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-lever-gun",
+            "name": "Plan: Lever gun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Lever gun",
+                "unlocks": {
+                    "text": "Lever Action Rifle",
+                    "icons": [
+                        "Lever Action Rifle (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "810",
+                "type": "caps",
+                "form_id": "004F4782",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lever_gun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-lickety-split",
+            "name": "Plan: Lickety-Split",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Lickety-Split",
+                "unlocks": {
+                    "text": "Lickety-Split",
+                    "icons": [
+                        "Lickety-Split"
+                    ]
+                },
+                "obtained": [
+                    "Bottle Cap"
+                ],
+                "value": "2667",
+                "type": "caps",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Lickety-Split"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-m79-grenade-launcher",
+            "name": "Plan: M79 Grenade Launcher",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: M79 Grenade Launcher",
+                "unlocks": {
+                    "text": "M79 Grenade Launcher",
+                    "icons": [
+                        "M79 Grenade Launcher (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "180",
+                "type": "caps",
+                "form_id": "004F478C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_M79_Grenade_Launcher"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-meat-cleaver",
+            "name": "Plan: Meat Cleaver",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Meat Cleaver",
+                "unlocks": {
+                    "text": "Meat Cleaver",
+                    "icons": [
+                        "Meat Cleaver"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Fallout 76 Limited Time Content",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "type": "caps",
+                "form_id": "005532B1",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Meat_Cleaver"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-meat-hook",
+            "name": "Plan: Meat Hook",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Meat Hook",
+                "unlocks": {
+                    "text": "Meat Hook",
+                    "icons": [
+                        "Meat Hook (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "90",
+                "type": "caps",
+                "form_id": "004EAEEC",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Meat_Hook"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-meat-tenderizer",
+            "name": "Plan: Meat Tenderizer",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Meat Tenderizer",
+                "unlocks": {
+                    "text": "The Tenderizer",
+                    "icons": [
+                        "The Tenderizer (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Fallout 76 Limited Time Content"
+                ],
+                "value": "180",
+                "type": "caps",
+                "form_id": "005528D6",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Meat_Tenderizer"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-mechanic-s-best-friend",
+            "name": "Plan: Mechanic's Best Friend",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Mechanic's Best Friend",
+                "unlocks": {
+                    "text": "Mechanic's Best Friend",
+                    "icons": [
+                        "Mechanic's Best Friend"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "1333",
+                "type": "caps",
+                "form_id": "00613845",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Mechanic%27s_Best_Friend"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-medical-malpractice",
+            "name": "Plan: Medical Malpractice",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Medical Malpractice",
+                "unlocks": {
+                    "text": "Medical Malpractice",
+                    "icons": [
+                        "Medical Malpractice"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "value": "1333",
+                "type": "caps",
+                "form_id": "005FE493",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Medical_Malpractice"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-mg42-light-machine-gun",
+            "name": "Plan: MG42 light machine gun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: MG42 light machine gun",
+                "unlocks": {
+                    "text": "Light Machine Gun",
+                    "icons": [
+                        "Light Machine Gun (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "1350",
+                "type": "caps",
+                "form_id": "004F478D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_MG42_light_machine_gun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-minigun",
+            "name": "Plan: Minigun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Minigun",
+                "unlocks": {
+                    "text": "Minigun",
+                    "icons": [
+                        "Minigun (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "value": "1350",
+                "type": "caps",
+                "form_id": "00437014",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Minigun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-mirv-frag-grenade",
+            "name": "Plan: MIRV Frag Grenade",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: MIRV Frag Grenade",
+                "unlocks": {
+                    "text": "Fragmentation Grenade MIRV",
+                    "icons": [
+                        "Fragmentation Grenade MIRV (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Quest"
+                ],
+                "value": "175",
+                "type": "caps",
+                "form_id": "004E84ED",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_MIRV_Frag_Grenade"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-missile-launcher",
+            "name": "Plan: Missile Launcher",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Missile Launcher",
+                "unlocks": {
+                    "text": "Missile Launcher",
+                    "icons": [
+                        "Missile Launcher (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "value": "600",
+                "type": "caps",
+                "form_id": "004F478E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Missile_Launcher"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-mole-miner-gauntlet",
+            "name": "Plan: Mole Miner Gauntlet",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Mole Miner Gauntlet",
+                "unlocks": {
+                    "text": "Mole Miner Gauntlet",
+                    "icons": [
+                        "Mole Miner Gauntlet"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "value": "450",
+                "type": "caps",
+                "form_id": "00436FF9",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Mole_Miner_Gauntlet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-mr-handy-buzz-blade",
+            "name": "Plan: Mr. Handy buzz blade",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Mr. Handy buzz blade",
+                "unlocks": {
+                    "text": "Mr. Handy Buzz Blade",
+                    "icons": [
+                        "Mr. Handy Buzz Blade (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Creatures"
+                ],
+                "value": "300",
+                "type": "caps",
+                "form_id": "004F42E5",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Mr._Handy_buzz_blade"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-nuka-cherry-grenade",
+            "name": "Plan: Nuka Cherry Grenade",
+            "section": "Unused",
+            "columns": {
+                "name": "Plan: Nuka Cherry Grenade",
+                "unlocks": {
+                    "text": "Nuka Cherry grenade",
+                    "icons": [
+                        "Nuka Cherry Grenade (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "0",
+                "type": "caps",
+                "form_id": "004E84EB",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Nuka_Cherry_Grenade"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-nuka-cola-grenade",
+            "name": "Plan: Nuka-Cola grenade",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Nuka-Cola grenade",
+                "unlocks": {
+                    "text": "Nuka Grenade",
+                    "icons": [
+                        "Nuka Grenade (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Quest"
+                ],
+                "value": "200",
+                "type": "caps",
+                "form_id": "004E84EF",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Nuka-Cola_grenade"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-nuka-quantum-grenade",
+            "name": "Plan: Nuka Quantum Grenade",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Nuka Quantum Grenade",
+                "unlocks": {
+                    "text": "Nuka Quantum grenade",
+                    "icons": [
+                        "Nuka Quantum grenade (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Quest"
+                ],
+                "value": "225",
+                "type": "caps",
+                "form_id": "004E84EE",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Nuka_Quantum_Grenade"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-nuka-shank",
+            "name": "Plan: Nuka Shank",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Nuka Shank",
+                "unlocks": {
+                    "text": "Nuka Shank",
+                    "icons": [
+                        "Nuka Shank"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Fallout 76 Limited Time Content",
+                    "Bottle Cap"
+                ],
+                "value": "50",
+                "type": "caps",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Nuka_Shank"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-nuke-mine",
+            "name": "Plan: Nuke mine",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Nuke mine",
+                "unlocks": {
+                    "text": "Nuke Mine",
+                    "icons": [
+                        "Nuke Mine (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Quest"
+                ],
+                "value": "50",
+                "type": "caps",
+                "form_id": "004E84F0",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Nuke_mine"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-pepper-shaker",
+            "name": "Plan: Pepper Shaker",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Pepper Shaker",
+                "unlocks": {
+                    "text": "Pepper Shaker",
+                    "icons": [
+                        "Pepper Shaker"
+                    ]
+                },
+                "obtained": {
+                    "text": "Grahm's Meat Cook",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Grahm's Meat Cook"
+                    ]
+                },
+                "value": "100",
+                "type": "caps",
+                "form_id": "00611A5E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pepper_Shaker"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-pickaxe",
+            "name": "Plan: Pickaxe",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Pickaxe",
+                "unlocks": {
+                    "text": "Pickaxe",
+                    "icons": [
+                        "Pickaxe"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "180",
+                "type": "caps",
+                "form_id": "004EB740",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pickaxe"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-pipe-wrench",
+            "name": "Plan: Pipe Wrench",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Pipe Wrench",
+                "unlocks": {
+                    "text": "Pipe wrench",
+                    "icons": [
+                        "Pipe Wrench (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "90",
+                "type": "caps",
+                "form_id": "00436FFA",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pipe_Wrench"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-pitchfork",
+            "name": "Plan: Pitchfork",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Pitchfork",
+                "unlocks": {
+                    "text": "Pitchfork",
+                    "icons": [
+                        "Pitchfork"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "45",
+                "type": "caps",
+                "form_id": "00436FFB",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pitchfork"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-plasma-caster",
+            "name": "Plan: Plasma Caster",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Plasma Caster",
+                "unlocks": {
+                    "text": "Plasma Caster",
+                    "icons": [
+                        "Plasma Caster (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Gold Bullion"
+                ],
+                "value": "750",
+                "type": "gold bullion",
+                "form_id": "00589361",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Plasma_Caster"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-plasma-cutter",
+            "name": "Plan: Plasma cutter",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Plasma cutter",
+                "unlocks": {
+                    "text": "Plasma Cutter",
+                    "icons": [
+                        "Plasma Cutter"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "2667",
+                "type": "caps",
+                "form_id": "005ECB83",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Plasma_cutter"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-plasma-grenade",
+            "name": "Plan: Plasma Grenade",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Plasma Grenade",
+                "unlocks": {
+                    "text": "Plasma Grenade",
+                    "icons": [
+                        "Plasma Grenade (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "value": "150",
+                "type": "caps",
+                "form_id": "004E84F2",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Plasma_Grenade"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-plasma-gun",
+            "name": "Plan: Plasma gun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Plasma gun",
+                "unlocks": {
+                    "text": "Plasma Gun",
+                    "icons": [
+                        "Plasma Gun (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "510",
+                "type": "caps",
+                "form_id": "0043700A",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Plasma_gun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-plasma-mine",
+            "name": "Plan: Plasma mine",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Plasma mine",
+                "unlocks": {
+                    "text": "Plasma Mine",
+                    "icons": [
+                        "Plasma Mine (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "value": "50",
+                "type": "caps",
+                "form_id": "004E84F1",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Plasma_mine"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-pole-hook",
+            "name": "Plan: Pole hook",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Pole hook",
+                "unlocks": {
+                    "text": "Pole Hook",
+                    "icons": [
+                        "Pole Hook (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "value": "200",
+                "type": "caps",
+                "form_id": "00436FF4",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pole_hook"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-pool-cue",
+            "name": "Plan: Pool Cue",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Pool Cue",
+                "unlocks": {
+                    "text": "Pool Cue",
+                    "icons": [
+                        "Pool Cue (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "30",
+                "type": "caps",
+                "form_id": "00437004",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pool_Cue"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-power-fist",
+            "name": "Plan: Power fist",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Power fist",
+                "unlocks": {
+                    "text": "Power Fist",
+                    "icons": [
+                        "Power Fist (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "900",
+                "type": "caps",
+                "form_id": "004F42E2",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Power_fist"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-pretty-floral-bouquet",
+            "name": "Plan: Pretty Floral Bouquet",
+            "section": "Unused",
+            "columns": {
+                "name": "Plan: Pretty Floral Bouquet",
+                "unlocks": {
+                    "text": "Pretty Floral Bouquet",
+                    "icons": [
+                        "Pretty Floral Bouquet"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "105",
+                "type": "caps",
+                "form_id": "0045C492",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pretty_Floral_Bouquet"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-pulse-grenade",
+            "name": "Plan: Pulse Grenade",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Pulse Grenade",
+                "unlocks": {
+                    "text": "Pulse Grenade",
+                    "icons": [
+                        "Pulse Grenade (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Quest"
+                ],
+                "value": "150",
+                "type": "caps",
+                "form_id": "004E84F4",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pulse_Grenade"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-pulse-mine",
+            "name": "Plan: Pulse mine",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Pulse mine",
+                "unlocks": {
+                    "text": "Pulse Mine",
+                    "icons": [
+                        "Pulse Mine (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Quest"
+                ],
+                "value": "50",
+                "type": "caps",
+                "form_id": "004E84F3",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pulse_mine"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-pump-action-shotgun",
+            "name": "Plan: Pump-action shotgun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Pump-action shotgun",
+                "unlocks": {
+                    "text": "Pump Action Shotgun",
+                    "icons": [
+                        "Pump Action Shotgun (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "value": "225",
+                "type": "caps",
+                "form_id": "004F4769",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Pump-action_shotgun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-radium-rifle",
+            "name": "Plan: Radium rifle",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Radium rifle",
+                "unlocks": {
+                    "text": "Radium Rifle",
+                    "icons": [
+                        "Radium Rifle (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "540",
+                "type": "caps",
+                "form_id": "004F4783",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Radium_rifle"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-railway-rifle",
+            "name": "Plan: Railway rifle",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Railway rifle",
+                "unlocks": {
+                    "text": "Railway Rifle",
+                    "icons": [
+                        "Railway Rifle (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "810",
+                "type": "caps",
+                "form_id": "00437013",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Railway_rifle"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-replica-grognak-s-axe",
+            "name": "Plan: Replica Grognak's axe",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Replica Grognak's axe",
+                "unlocks": {
+                    "text": "Grognak's Axe",
+                    "icons": [
+                        "Grognak's Axe (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "value": "250",
+                "type": "caps",
+                "form_id": "004F42E1",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Replica_Grognak%27s_axe"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-resolve-breaker",
+            "name": "Plan: Resolve Breaker",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Resolve Breaker",
+                "unlocks": {
+                    "text": "Resolve Breaker",
+                    "icons": [
+                        "Resolve Breaker"
+                    ]
+                },
+                "obtained": {
+                    "text": "Enclave Squad Module Raid",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Enclave Squad Module Raid"
+                    ]
+                },
+                "value": "2667",
+                "type": "caps",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Resolve_Breaker"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-revolutionary-war-sword",
+            "name": "Plan: Revolutionary War sword",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Revolutionary War sword",
+                "unlocks": {
+                    "text": "Revolutionary Sword",
+                    "icons": [
+                        "Revolutionary Sword (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "180",
+                "type": "caps",
+                "form_id": "004EB741",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Revolutionary_War_sword"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-revolver",
+            "name": "Plan: Revolver",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Revolver",
+                "unlocks": {
+                    "text": "Western Revolver",
+                    "icons": [
+                        "Western Revolver (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "720",
+                "type": "caps",
+                "form_id": "004F4785",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Revolver"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-ripper",
+            "name": "Plan: Ripper",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Ripper",
+                "unlocks": {
+                    "text": "Ripper",
+                    "icons": [
+                        "Ripper (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "1170",
+                "type": "caps",
+                "form_id": "004F42E3",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ripper"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-rolling-pin",
+            "name": "Plan: Rolling pin",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Rolling pin",
+                "unlocks": {
+                    "text": "Rolling pin",
+                    "icons": [
+                        "Rolling pin (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "30",
+                "type": "caps",
+                "form_id": "00436FFC",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Rolling_pin"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sheepsquatch-club",
+            "name": "Plan: Sheepsquatch club",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Sheepsquatch club",
+                "unlocks": {
+                    "text": "Sheepsquatch Club",
+                    "icons": [
+                        "Sheepsquatch Club"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "value": "180",
+                "type": "caps",
+                "form_id": "0045EC5D",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sheepsquatch_club"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sheepsquatch-shard",
+            "name": "Plan: Sheepsquatch Shard",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Sheepsquatch Shard",
+                "unlocks": {
+                    "text": "Sheepsquatch Shard",
+                    "icons": [
+                        "Sheepsquatch Shard"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "value": "180",
+                "type": "caps",
+                "form_id": "0042101C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sheepsquatch_Shard"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sheepsquatch-staff",
+            "name": "Plan: Sheepsquatch staff",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Sheepsquatch staff",
+                "unlocks": {
+                    "text": "Sheepsquatch Staff",
+                    "icons": [
+                        "Sheepsquatch Staff"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "value": "180",
+                "type": "caps",
+                "form_id": "0045EC5E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sheepsquatch_staff"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-shepherd-s-crook",
+            "name": "Plan: Shepherd's Crook",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Shepherd's Crook",
+                "unlocks": {
+                    "text": "Shepherd's Crook",
+                    "icons": [
+                        "Shepherd's Crook"
+                    ]
+                },
+                "obtained": {
+                    "text": "Quests",
+                    "icons": [
+                        "Fallout 76 Quests"
+                    ]
+                },
+                "value": "180",
+                "type": "caps",
+                "form_id": "0045EC3E",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shepherd%27s_Crook"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-shishkebab",
+            "name": "Plan: Shishkebab",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Shishkebab",
+                "unlocks": {
+                    "text": "Shishkebab",
+                    "icons": [
+                        "Shishkebab (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Fallout 76 Limited Time Content",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "1000",
+                "type": "caps",
+                "form_id": "004F42E4",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Shishkebab"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sickle",
+            "name": "Plan: Sickle",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Sickle",
+                "unlocks": {
+                    "text": "Sickle",
+                    "icons": [
+                        "Sickle"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "45",
+                "type": "caps",
+                "form_id": "00436FFD",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sickle"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-single-action-revolver",
+            "name": "Plan: Single-action revolver",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Single-action revolver",
+                "unlocks": {
+                    "text": "Single Action Revolver",
+                    "icons": [
+                        "Single Action Revolver"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "510",
+                "type": "caps",
+                "form_id": "004F476C",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Single-action_revolver"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-ski-sword",
+            "name": "Plan: Ski Sword",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Ski Sword",
+                "unlocks": {
+                    "text": "Ski Sword",
+                    "icons": [
+                        "Ski Sword"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "240",
+                "type": "caps",
+                "form_id": "00436FFE",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ski_Sword"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sledge-hammer",
+            "name": "Plan: Sledge hammer",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Sledge hammer",
+                "unlocks": {
+                    "text": "Sledgehammer",
+                    "icons": [
+                        "Sledgehammer (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "180",
+                "type": "caps",
+                "form_id": "00436FFF",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sledge_hammer"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-smart-frag-grenade",
+            "name": "Plan: Smart frag grenade",
+            "section": "Unused",
+            "columns": {
+                "name": "Plan: Smart frag grenade",
+                "unlocks": {
+                    "text": "Smart Fragmentation Grenade",
+                    "icons": [
+                        "Smart Fragmentation Grenade (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "0",
+                "type": "caps",
+                "form_id": "004E84EC",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Smart_frag_grenade"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-smoke-grenade",
+            "name": "Plan: Smoke Grenade",
+            "section": "Unused",
+            "columns": {
+                "name": "Plan: Smoke Grenade",
+                "unlocks": {
+                    "text": "Smoke Grenade",
+                    "icons": [
+                        "Smoke Grenade (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "25",
+                "type": "caps",
+                "form_id": "00467FC0",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Smoke_Grenade"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-sole-survivor",
+            "name": "Plan: Sole Survivor",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Sole Survivor",
+                "unlocks": {
+                    "text": "Sole Survivor (weapon)",
+                    "icons": [
+                        "Sole Survivor (weapon)"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "value": "1333",
+                "type": "caps",
+                "form_id": "00613846",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Sole_Survivor"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-soundmaker",
+            "name": "Plan: Soundmaker",
+            "section": "Unused",
+            "columns": {
+                "name": "Plan: Soundmaker",
+                "unlocks": {
+                    "text": "Soundmaker",
+                    "icons": [
+                        "Soundmaker"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "type": "caps",
+                "form_id": "00589620",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Soundmaker"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-spear",
+            "name": "Plan: Spear",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Spear",
+                "unlocks": {
+                    "text": "Spear",
+                    "icons": [
+                        "Spear (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Fallout 76 Locations"
+                ],
+                "value": "240",
+                "type": "caps",
+                "form_id": "004EAEED",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Spear"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-submachine-gun",
+            "name": "Plan: Submachine gun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Submachine gun",
+                "unlocks": {
+                    "text": "Submachine Gun",
+                    "icons": [
+                        "Submachine Gun (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "600",
+                "type": "caps",
+                "form_id": "0043700B",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Submachine_gun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-super-sledge",
+            "name": "Plan: Super Sledge",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Super Sledge",
+                "unlocks": {
+                    "text": "Super Sledge",
+                    "icons": [
+                        "Super Sledge (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "630",
+                "type": "caps",
+                "form_id": "00437000",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Super_Sledge"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-switchblade",
+            "name": "Plan: Switchblade",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Switchblade",
+                "unlocks": {
+                    "text": "Switchblade",
+                    "icons": [
+                        "Switchblade (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "90",
+                "type": "caps",
+                "form_id": "00437001",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Switchblade"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-tesla-rifle",
+            "name": "Plan: Tesla rifle",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Tesla rifle",
+                "unlocks": {
+                    "text": "Tesla Rifle",
+                    "icons": [
+                        "Tesla Rifle (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "1200",
+                "type": "caps",
+                "form_id": "00437015",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Tesla_rifle"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-the-fixer",
+            "name": "Plan: The Fixer",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: The Fixer",
+                "unlocks": {
+                    "text": "The Fixer",
+                    "icons": [
+                        "The Fixer"
+                    ]
+                },
+                "obtained": [
+                    "Quest"
+                ],
+                "value": "180",
+                "type": "caps",
+                "form_id": "0046D299",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_The_Fixer"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-the-gutter",
+            "name": "Plan: The Gutter",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: The Gutter",
+                "unlocks": {
+                    "text": "The Gutter",
+                    "icons": [
+                        "The Gutter"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "value": "1333",
+                "type": "gold bullion",
+                "form_id": "005D0F04",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_The_Gutter"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-thrown-bear-trap",
+            "name": "Plan: Thrown Bear Trap",
+            "section": "Unused",
+            "columns": {
+                "name": "Plan: Thrown Bear Trap",
+                "unlocks": {
+                    "text": "Bear Trap",
+                    "icons": [
+                        "Bear Trap (Unused Weapon)"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "type": "caps",
+                "form_id": "004E84F6",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Thrown_Bear_Trap"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-thrown-bleeding-bear-trap",
+            "name": "Plan: Thrown Bleeding Bear Trap",
+            "section": "Unused",
+            "columns": {
+                "name": "Plan: Thrown Bleeding Bear Trap",
+                "unlocks": {
+                    "text": "Bleeding Bear Trap",
+                    "icons": [
+                        "Bleeding Bear Trap (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Overview:Unused Content"
+                ],
+                "value": "50",
+                "type": "caps",
+                "form_id": "004E84F5",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Thrown_Bleeding_Bear_Trap"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-tire-iron",
+            "name": "Plan: Tire iron",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Tire iron",
+                "unlocks": {
+                    "text": "Tire Iron",
+                    "icons": [
+                        "Tire Iron (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "75",
+                "type": "caps",
+                "form_id": "00437002",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Tire_iron"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-tomahawk",
+            "name": "Plan: Tomahawk",
+            "section": "Thrown",
+            "columns": {
+                "name": "Plan: Tomahawk",
+                "unlocks": {
+                    "text": "Tomahawk",
+                    "icons": [
+                        "Tomahawk (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Fallout 76 Limited Time Content"
+                ],
+                "value": "50",
+                "type": "caps",
+                "form_id": "00437006",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Tomahawk"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-ultracite-gatling-laser",
+            "name": "Plan: Ultracite Gatling Laser",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Ultracite Gatling Laser",
+                "unlocks": {
+                    "text": "Ultracite Gatling Laser",
+                    "icons": [
+                        "Ultracite Gatling Laser"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Limited Time Content",
+                    "Quest"
+                ],
+                "value": "2700",
+                "type": "caps",
+                "form_id": "004F4791",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_Gatling_Laser"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-ultracite-laser-gun",
+            "name": "Plan: Ultracite Laser Gun",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Ultracite Laser Gun",
+                "unlocks": {
+                    "text": "Ultracite Laser Gun",
+                    "icons": [
+                        "Ultracite Laser Gun"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "1350",
+                "type": "caps",
+                "form_id": "004F4790",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_Laser_Gun"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-ultracite-terror-sword",
+            "name": "Plan: Ultracite Terror Sword",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Ultracite Terror Sword",
+                "unlocks": {
+                    "text": "Ultracite Terror Sword",
+                    "icons": [
+                        "Ultracite Terror Sword"
+                    ]
+                },
+                "obtained": {
+                    "text": "Raid: Gleaming Depths",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Gleaming Depths (Raid)"
+                    ]
+                },
+                "value": "2667",
+                "type": "caps",
+                "form_id": "00792EAD",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Ultracite_Terror_Sword"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-unstoppable-monster",
+            "name": "Plan: Unstoppable Monster",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Unstoppable Monster",
+                "unlocks": {
+                    "text": "Unstoppable Monster",
+                    "icons": [
+                        "Unstoppable Monster"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Bottle Cap",
+                    "Gold Bullion"
+                ],
+                "value": "1333",
+                "type": "caps",
+                "form_id": "005FD186",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Unstoppable_Monster"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-v63-laser-carbine",
+            "name": "Plan: V63 Laser Carbine",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: V63 Laser Carbine",
+                "unlocks": {
+                    "text": "V63 Laser Carbine",
+                    "icons": [
+                        "V63 Laser Carbine"
+                    ]
+                },
+                "obtained": [
+                    "Bottle Cap"
+                ],
+                "value": "5",
+                "type": "caps",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_V63_Laser_Carbine"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-valkyrie",
+            "name": "Plan: Valkyrie",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Valkyrie",
+                "unlocks": {
+                    "text": "Valkyrie",
+                    "icons": [
+                        "Valkyrie"
+                    ]
+                },
+                "obtained": {
+                    "text": "Guardian Bot Module Raid",
+                    "icons": [
+                        "Fallout 76 Events",
+                        "Guardian Bot Module Raid"
+                    ]
+                },
+                "value": "2667",
+                "type": "caps",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Valkyrie"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-walking-cane",
+            "name": "Plan: Walking cane",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Walking cane",
+                "unlocks": {
+                    "text": "Walking Cane",
+                    "icons": [
+                        "Walking Cane (Fallout 76)"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "30",
+                "type": "caps",
+                "form_id": "004EAEEB",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Walking_cane"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-war-drum",
+            "name": "Plan: War Drum",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: War Drum",
+                "unlocks": {
+                    "text": "War Drum",
+                    "icons": [
+                        "War Drum"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "1035",
+                "type": "caps",
+                "form_id": "00437003",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_War_Drum"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-war-glaive",
+            "name": "Plan: War Glaive",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: War Glaive",
+                "unlocks": {
+                    "text": "War Glaive",
+                    "icons": [
+                        "War Glaive"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Bottle Cap"
+                ],
+                "value": "2000",
+                "type": "gold bullion",
+                "form_id": "005D0F05",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_War_Glaive"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-whistle-in-the-dark",
+            "name": "Plan: Whistle in the Dark",
+            "section": "Ballistic",
+            "columns": {
+                "name": "Plan: Whistle in the Dark",
+                "unlocks": {
+                    "text": "Whistle in the Dark",
+                    "icons": [
+                        "Whistle in the Dark"
+                    ]
+                },
+                "obtained": [
+                    "Quest",
+                    "Gold Bullion"
+                ],
+                "value": "1333",
+                "type": "gold bullion",
+                "form_id": "005D0F06",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Whistle_in_the_Dark"
+            },
+            "availability": []
+        },
+        {
+            "type": "plan",
+            "slug": "plan-wood-axe",
+            "name": "Plan: Wood axe",
+            "section": "Melee",
+            "columns": {
+                "name": "Plan: Wood axe",
+                "unlocks": {
+                    "text": "Multi-purpose axe",
+                    "icons": [
+                        "Multi-purpose axe"
+                    ]
+                },
+                "obtained": [
+                    "Fallout 76 Containers and Storage",
+                    "Fallout 76 Creatures",
+                    "Treasure Map",
+                    "Quest",
+                    "Bottle Cap",
+                    "Fallout 76 Locations"
+                ],
+                "value": "120",
+                "type": "caps",
+                "form_id": "004EAEEE",
+                "wiki_url": "https://fallout.wiki/wiki/Plan%3A_Wood_axe"
+            },
+            "availability": []
+        }
+    ]
+}
