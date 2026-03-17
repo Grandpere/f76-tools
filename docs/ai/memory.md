@@ -87,6 +87,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: added an additive `sourceMerge` block to the player item API payload, leaving existing fields unchanged while surfacing retained decisions and remaining conflicts.
 - Prevention: when introducing a new read-side consolidation rule, expose it as additive metadata first so consumers can adopt it gradually without breaking current UX.
 
+## 2026-03-17 - Merge policy needs both item-level and field-level reporting
+- Symptom: item-by-item merge reports are useful for debugging one record, but they do not show whether a field rule is globally healthy across the catalog.
+- Root cause: the first merge report only exposed per-item retained fields/conflicts.
+- Fix: added `app:data:report:source-merge-summary`, which aggregates retained-provider counts and conflict counts by field across scanned items.
+- Prevention: when a merge policy grows beyond a few fields, always keep both views: item-level for debugging and field-level for steering policy changes.
+
 ## 2026-03-17 - Treat live third-party API 500s as an external blocker, not a mapping bug
 - Symptom: Nukacrypt GraphQL introspection and `nukeCodes` succeed, but item queries (`esmRecord`, `esmRecords`) return HTTP 500 even on simple `formId`/`searchTerm` probes.
 - Root cause: the remote item endpoint is unstable or expects undocumented constraints; the failure is server-side, not caused by local parsing code.

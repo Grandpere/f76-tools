@@ -37,6 +37,7 @@ Ajouter un pipeline de sync multi-sources coherent (sans duplication instable) e
 - Done (slice 11): le sync `fallout.wiki` applique la meme strategie de resilience partielle que Fandom, avec index partiel et relance ciblee via `--fallout-wiki-page`.
 - Done (slice 12): premiere politique de merge cross-source en lecture (`fandom` prioritaire pour disponibilite/availability, `fallout.wiki` prioritaire pour `unlocks`/`obtained`/`type`, noms consolides seulement s ils sont equivalentes) + rapport `app:data:report:source-merge`.
 - Done (slice 13): le payload API `PlayerItemKnowledge` expose maintenant un bloc additif `sourceMerge` (retained/conflicts) afin de rendre la consolidation cross-source disponible aux futurs usages UI sans modifier le comportement front courant.
+- Done (slice 14): ajout d une synthese `app:data:report:source-merge-summary` pour suivre la politique de merge au niveau catalogue (par champ, provider retenu, conflits restants).
 - Note: verification live du GraphQL Nukacrypt le 2026-03-17 : `nukeCodes` et l introspection repondent, mais `esmRecord` / `esmRecords` renvoient HTTP 500 cote serveur.
 - Remaining: source de sync Nukacrypt read-only (bloquee tant que l endpoint item renvoie 500) + branchement progressif de la consolidation cross-source dans les lectures metier/UI si la politique se confirme.
 
