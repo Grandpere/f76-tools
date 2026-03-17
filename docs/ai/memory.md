@@ -93,6 +93,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: added `app:data:report:source-merge-summary`, which aggregates retained-provider counts and conflict counts by field across scanned items.
 - Prevention: when a merge policy grows beyond a few fields, always keep both views: item-level for debugging and field-level for steering policy changes.
 
+## 2026-03-17 - Some wiki name conflicts were source duplicates, not merge-policy mistakes
+- Symptom: merge reports showed a few severe `name` conflicts (`Bladed Commie Whacker` vs `Garden Trowel Knife`, `Vault 63` vs `Vault 96`, etc.) on the same `form_id`.
+- Root cause: `fallout.wiki` raw snapshots contained duplicated rows with the same `form_id` but different names/URLs; the import kept the last one and overwrote the correct first occurrence.
+- Fix: import now ignores later duplicate rows for `fandom`/`fallout_wiki` when the same provider repeats the same `form_id`, keeping the first occurrence and emitting a warning. Name merge also prefers the more specific parenthetical variant when one source has the generic label and the other has the full regional/item variant.
+- Prevention: for wiki-like sources keyed by `form_id`, treat intra-provider duplicate `form_id` rows as source-quality issues to ignore at import time instead of trying to solve them later in merge logic.
+
 ## 2026-03-17 - Treat live third-party API 500s as an external blocker, not a mapping bug
 - Symptom: Nukacrypt GraphQL introspection and `nukeCodes` succeed, but item queries (`esmRecord`, `esmRecords`) return HTTP 500 even on simple `formId`/`searchTerm` probes.
 - Root cause: the remote item endpoint is unstable or expects undocumented constraints; the failure is server-side, not caused by local parsing code.

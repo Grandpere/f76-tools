@@ -260,6 +260,69 @@ final class ItemImportApplicationServiceTest extends TestCase
         self::assertStringContainsString('sans form_id exploitable', $result->getWarnings()[0]);
     }
 
+    public function testWriteModeSkipsDuplicateWikiProviderRowsForSameFormId(): void
+    {
+        $root = $this->createTempDir();
+        mkdir($root.'/data/sources/fallout_wiki/plan_recipes', 0o777, true);
+
+        file_put_contents($root.'/data/sources/fallout_wiki/plan_recipes/plans_weapon_mods.json', (string) json_encode([
+            'page' => 'Fallout_76_Weapon_Mod_Plans',
+            'url' => 'https://fallout.wiki/wiki/Fallout_76_Weapon_Mod_Plans',
+            'resources' => [
+                [
+                    'type' => 'plan',
+                    'slug' => 'plan-bladed-commie-whacker',
+                    'name' => 'Plan: Bladed Commie Whacker',
+                    'section' => 'Melee',
+                    'columns' => [
+                        'form_id' => '002B42A4',
+                        'wiki_url' => 'https://fallout.wiki/wiki/Plan%3A_Bladed_Commie_Whacker',
+                    ],
+                    'availability' => [],
+                ],
+                [
+                    'type' => 'plan',
+                    'slug' => 'plan-garden-trowel-knife',
+                    'name' => 'Plan: Garden Trowel Knife',
+                    'section' => 'Melee',
+                    'columns' => [
+                        'form_id' => '002B42A4',
+                        'wiki_url' => 'https://fallout.wiki/wiki/Plan%3A_Garden_Trowel_Knife',
+                    ],
+                    'availability' => [],
+                ],
+            ],
+        ], JSON_THROW_ON_ERROR));
+
+        $this->repository
+            ->expects(self::once())
+            ->method('findOneByTypeAndSourceId')
+            ->willReturn(null);
+        $this->repository->expects(self::never())->method('deleteAllBookLists');
+
+        $persistedItems = [];
+        $this->persistence->expects(self::once())
+            ->method('persist')
+            ->willReturnCallback(static function (ItemEntity $item) use (&$persistedItems): void {
+                $persistedItems[] = $item;
+            });
+        $this->persistence->expects(self::once())->method('flush');
+
+        $projectDir = $this->createTempDir();
+        $service = $this->createService($this->createTranslationWriter($projectDir));
+        $result = $service->import($root, false, 100, false);
+        $stats = $result->getStats();
+
+        self::assertFalse($result->hasErrors());
+        self::assertSame(2, $stats['rows']);
+        self::assertSame(1, $stats['created']);
+        self::assertSame(1, $stats['skipped']);
+        self::assertSame(1, $stats['warnings']);
+        self::assertCount(1, $persistedItems);
+        self::assertSame('item.book.2835108.name', $persistedItems[0]->getNameKey());
+        self::assertStringContainsString('Doublon form_id detecte', $result->getWarnings()[0]);
+    }
+
     private function createService(TranslationCatalogWriter $translationCatalogWriter): ItemImportApplicationService
     {
         $normalizer = new ItemImportValueNormalizer();

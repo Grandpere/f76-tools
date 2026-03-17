@@ -120,6 +120,11 @@ final class ItemSourceMergePolicy
             );
         }
 
+        $specificDecision = $this->mergeSpecificVariantName($field, $sourceA, $sourceB, $valueA, $valueB);
+        if (null !== $specificDecision) {
+            return $specificDecision;
+        }
+
         if ($hasA && !$hasB) {
             return new ItemSourceFieldMergeDecision($field, $sourceA->getProvider(), $valueA, 'fallback_single_source');
         }
@@ -227,5 +232,45 @@ final class ItemSourceMergePolicy
         $normalized = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $normalized);
 
         return trim((string) $normalized);
+    }
+
+    private function mergeSpecificVariantName(
+        string $field,
+        ItemExternalSourceEntity $sourceA,
+        ItemExternalSourceEntity $sourceB,
+        mixed $valueA,
+        mixed $valueB,
+    ): ?ItemSourceFieldMergeDecision {
+        if (!is_string($valueA) || !is_string($valueB)) {
+            return null;
+        }
+
+        $normalizedA = $this->normalizeLooseText($valueA);
+        $normalizedB = $this->normalizeLooseText($valueB);
+
+        $aHasParenthetical = str_contains($valueA, '(') && str_contains($valueA, ')');
+        $bHasParenthetical = str_contains($valueB, '(') && str_contains($valueB, ')');
+
+        if ($aHasParenthetical && !$bHasParenthetical && str_starts_with($normalizedA, $normalizedB)) {
+            return new ItemSourceFieldMergeDecision(
+                $field,
+                $sourceA->getProvider(),
+                $valueA,
+                'specific_variant_preferred',
+                $valueB,
+            );
+        }
+
+        if ($bHasParenthetical && !$aHasParenthetical && str_starts_with($normalizedB, $normalizedA)) {
+            return new ItemSourceFieldMergeDecision(
+                $field,
+                $sourceB->getProvider(),
+                $valueB,
+                'specific_variant_preferred',
+                $valueA,
+            );
+        }
+
+        return null;
     }
 }

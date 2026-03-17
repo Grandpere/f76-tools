@@ -82,4 +82,33 @@ final class ItemSourceMergePolicyTest extends TestCase
         self::assertSame('name_en', $result->conflicts[0]->field);
         self::assertSame('name_values_diverge', $result->conflicts[0]->reason);
     }
+
+    public function testMergePrefersSpecificParentheticalNameVariant(): void
+    {
+        $item = new ItemEntity();
+        $item
+            ->setType(ItemTypeEnum::BOOK)
+            ->setSourceId(2853828)
+            ->setNameKey('item.book.2853828.name');
+        $item->upsertExternalSource('fandom', '002B8BC4', null, [
+            'name_en' => 'Recipe: Healing salve (Toxic Valley)',
+        ]);
+        $item->upsertExternalSource('fallout_wiki', '002B8BC4', null, [
+            'name_en' => 'Recipe: Healing Salve',
+        ]);
+
+        $policy = new ItemSourceMergePolicy();
+        $result = $policy->merge($item, 'fandom', 'fallout_wiki');
+
+        self::assertNotNull($result);
+        self::assertCount(0, $result->conflicts);
+
+        $decisions = [];
+        foreach ($result->decisions as $decision) {
+            $decisions[$decision->field] = $decision;
+        }
+
+        self::assertSame('fandom', $decisions['name_en']->provider);
+        self::assertSame('specific_variant_preferred', $decisions['name_en']->reason);
+    }
 }

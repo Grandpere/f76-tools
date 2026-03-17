@@ -20,6 +20,7 @@
 - Done (slice 12): premiere politique de merge cross-source en lecture + rapport console `app:data:report:source-merge` pour rendre visibles les champs retenus et les conflits restants entre `fandom` et `fallout.wiki`.
 - Done (slice 13): le payload API des items expose maintenant `sourceMerge` de facon additive, pour rendre la consolidation cross-source consommable sans casser le front existant.
 - Done (slice 14): ajout d un rapport de synthese `app:data:report:source-merge-summary` pour voir, par champ, combien de fois la politique retient chaque provider et combien de conflits subsistent.
+- Done (slice 15): les doublons intra-provider `fandom`/`fallout_wiki` sur un meme `form_id` sont maintenant ignores a l import (premiere occurrence conservee), et le merge de nom prefere la variante la plus specifique quand une source ajoute un suffixe parenthetique.
 - Note: les requetes item GraphQL Nukacrypt (`esmRecord` / `esmRecords`) repondent actuellement en HTTP 500 cote serveur, alors que l introspection et `nukeCodes` fonctionnent.
 - Remaining: source de sync Nukacrypt read-only (bloquee tant que l endpoint item renvoie 500) + branchement progressif de la consolidation cross-source dans les lectures metier si la politique actuelle se confirme.
 

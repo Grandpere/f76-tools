@@ -58,6 +58,8 @@ final class ItemImportApplicationService
         $catalogEn = [];
         /** @var array<string, string> $catalogDe */
         $catalogDe = [];
+        /** @var array<string, true> $seenProviderRefs */
+        $seenProviderRefs = [];
 
         $pendingFlush = 0;
 
@@ -102,8 +104,22 @@ final class ItemImportApplicationService
                 }
 
                 $sourceId = (int) $row['id'];
+                $formIdLabel = is_scalar($row['form_id'] ?? null) ? (string) $row['form_id'] : 'unknown';
                 $seenKey = sprintf('%s:%d', $context->type->value, $sourceId);
                 if (isset($seenInCurrentFile[$seenKey])) {
+                    if ($this->shouldSkipDuplicateSourceRow($context, $row, $seenProviderRefs)) {
+                        $warnings[] = sprintf(
+                            'Doublon form_id detecte dans %s pour provider=%s form_id=%s (ignore)',
+                            basename($file),
+                            $context->sourceProvider,
+                            $formIdLabel,
+                        );
+                        ++$stats['warnings'];
+                        ++$stats['skipped'];
+
+                        continue;
+                    }
+
                     $warnings[] = sprintf(
                         'Doublon detecte dans %s pour %s id=%d (conserve)',
                         basename($file),
@@ -113,6 +129,23 @@ final class ItemImportApplicationService
                     ++$stats['warnings'];
                 }
                 $seenInCurrentFile[$seenKey] = true;
+
+                $providerRefKey = $this->buildProviderRefKey($context, $row);
+                if (null !== $providerRefKey) {
+                    if (isset($seenProviderRefs[$providerRefKey])) {
+                        $warnings[] = sprintf(
+                            'Doublon form_id detecte pour provider=%s form_id=%s (ignore)',
+                            $context->sourceProvider,
+                            $formIdLabel,
+                        );
+                        ++$stats['warnings'];
+                        ++$stats['skipped'];
+
+                        continue;
+                    }
+
+                    $seenProviderRefs[$providerRefKey] = true;
+                }
 
                 $type = $context->type;
                 $memoryKey = sprintf('%s:%d', $type->value, $sourceId);
@@ -227,5 +260,36 @@ final class ItemImportApplicationService
         }
 
         return isset($row['source_page'], $row['source_slug']);
+    }
+
+    /**
+     * @param array<string, mixed> $row
+     * @param array<string, true>  $seenProviderRefs
+     */
+    private function shouldSkipDuplicateSourceRow(ItemImportFileContext $context, array $row, array $seenProviderRefs): bool
+    {
+        $providerRefKey = $this->buildProviderRefKey($context, $row);
+        if (null === $providerRefKey) {
+            return false;
+        }
+
+        return isset($seenProviderRefs[$providerRefKey]);
+    }
+
+    /**
+     * @param array<string, mixed> $row
+     */
+    private function buildProviderRefKey(ItemImportFileContext $context, array $row): ?string
+    {
+        if (!in_array($context->sourceProvider, ['fandom', 'fallout_wiki'], true)) {
+            return null;
+        }
+
+        $formId = $row['form_id'] ?? null;
+        if (!is_scalar($formId) || '' === trim((string) $formId)) {
+            return null;
+        }
+
+        return sprintf('%s:%s', $context->sourceProvider, strtoupper(trim((string) $formId)));
     }
 }
