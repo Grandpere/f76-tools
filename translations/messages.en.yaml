@@ -98,7 +98,7 @@ catalog_books.special_lists: Special
 catalog_books.special_lists_help: Items that also belong to a special list
 catalog_books.visible_items: '%count% items shown out of %total%'
 catalog_books.list_title: Catalog
-catalog_books.list_help: This page focuses on the player-facing result: names, prices, list numbers, and useful activity tags.
+catalog_books.list_help: 'This page focuses on the player-facing result: names, prices, list numbers, and useful activity tags.'
 catalog_books.new: New
 catalog_books.rank: 'Rank %rank%'
 catalog_books.book_lists: 'Lists: %lists%'
