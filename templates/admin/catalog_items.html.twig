@@ -75,9 +75,16 @@
                 nextUrl: nextUrl
             } %}
 
-            <div class="translations-table-wrap">
-                <table class="translations-table">
+            <div class="translations-table-wrap admin-catalog-table-wrap">
+                <table class="translations-table admin-catalog-list-table">
                     <caption class="visually-hidden">{{ 'admin_catalog.table_caption'|trans }}</caption>
+                    <colgroup>
+                        <col class="admin-catalog-col-item">
+                        <col class="admin-catalog-col-source-id">
+                        <col class="admin-catalog-col-type">
+                        <col class="admin-catalog-col-merge-status">
+                        <col class="admin-catalog-col-providers">
+                    </colgroup>
                     <thead>
                     <tr>
                         <th>{{ 'admin_catalog.item'|trans }}</th>
@@ -91,7 +98,7 @@
                     {% for row in items %}
                         <tr class="{{ selectedPublicId == row.publicId ? 'translations-section-row' : '' }}">
                             <td>
-                                <a href="{{ path('app_admin_catalog_items', {
+                                <a class="admin-catalog-list-link" href="{{ path('app_admin_catalog_items', {
                                     _locale: app.request.locale,
                                     type: type ?: null,
                                     mergeStatus: mergeStatus ?: null,
@@ -182,7 +189,13 @@
 
                 <h3 class="admin-catalog-subtitle">{{ 'admin_catalog.external_sources'|trans }}</h3>
                 <div class="translations-table-wrap admin-catalog-table-wrap">
-                    <table class="translations-table admin-catalog-detail-table">
+                    <table class="translations-table admin-catalog-detail-table admin-catalog-sources-table">
+                        <colgroup>
+                            <col class="admin-catalog-col-source-provider">
+                            <col class="admin-catalog-col-source-ref">
+                            <col class="admin-catalog-col-source-url">
+                            <col class="admin-catalog-col-source-metadata">
+                        </colgroup>
                         <thead>
                         <tr>
                             <th>{{ 'admin_catalog.provider'|trans }}</th>
@@ -237,7 +250,14 @@
                         {% endif %}
                     </div>
                     <div class="translations-table-wrap admin-catalog-table-wrap">
-                        <table class="translations-table admin-catalog-detail-table">
+                        <table class="translations-table admin-catalog-detail-table admin-catalog-merge-table">
+                            <colgroup>
+                                <col class="admin-catalog-col-merge-field">
+                                <col class="admin-catalog-col-merge-provider">
+                                <col class="admin-catalog-col-merge-reason">
+                                <col class="admin-catalog-col-merge-value">
+                                <col class="admin-catalog-col-merge-other-value">
+                            </colgroup>
                             <thead>
                             <tr>
                                 <th>{{ 'admin_catalog.field'|trans }}</th>
@@ -267,7 +287,13 @@
 
                     <h4 class="admin-catalog-subtitle admin-catalog-subtitle-small">{{ 'admin_catalog.canonical_signals'|trans }}</h4>
                     <div class="translations-table-wrap admin-catalog-table-wrap">
-                        <table class="translations-table admin-catalog-detail-table">
+                        <table class="translations-table admin-catalog-detail-table admin-catalog-signals-table">
+                            <colgroup>
+                                <col class="admin-catalog-col-signal-field">
+                                <col class="admin-catalog-col-signal-provider">
+                                <col class="admin-catalog-col-signal-value">
+                                <col class="admin-catalog-col-signal-reason">
+                            </colgroup>
                             <thead>
                             <tr>
                                 <th>{{ 'admin_catalog.field'|trans }}</th>
