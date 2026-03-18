@@ -263,4 +263,19 @@ final class ItemImportItemHydratorTest extends TestCase
 
         self::assertTrue($data['metadata']['unused_content'] ?? false);
     }
+
+    public function testBuildExternalSourceDataDerivesRaidFromFalloutWikiLabels(): void
+    {
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
+
+        $data = $hydrator->buildExternalSourceData('fallout_wiki', [
+            'obtained' => [
+                'Gleaming Depths (Raid)',
+                'Raid: Gleaming Depths',
+            ],
+        ], 1005);
+
+        self::assertTrue($data['metadata']['raid'] ?? false);
+    }
 }

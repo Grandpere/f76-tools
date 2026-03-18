@@ -89,6 +89,7 @@ final class ItemImportExternalMetadataEnricher
         $metadata['daily_ops'] ??= $this->labelsContainAny($normalizedLabels, [
             'daily ops',
         ]);
+        $metadata['raid'] ??= $this->labelsContainToken($normalizedLabels, 'raid');
         $metadata['unused_content'] ??= $this->labelsContainAny($normalizedLabels, [
             'overview unused content',
             'unused content',
@@ -236,6 +237,25 @@ final class ItemImportExternalMetadataEnricher
     {
         foreach ($needles as $needle) {
             if (in_array($needle, $labels, true)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param list<string> $labels
+     */
+    private function labelsContainToken(array $labels, string $token): bool
+    {
+        foreach ($labels as $label) {
+            $tokens = preg_split('/\s+/', trim($label));
+            if (!is_array($tokens)) {
+                continue;
+            }
+
+            if (in_array($token, $tokens, true)) {
                 return true;
             }
         }

@@ -27,6 +27,7 @@ final class ItemSourceMergePolicy
             'enemies',
             'events',
             'daily_ops',
+            'raid',
             'unused_content',
             'seasonal_content',
             'treasure_maps',

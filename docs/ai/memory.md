@@ -45,6 +45,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: `unused_content` was introduced only from clear generic labels (`Overview:Unused Content`, `Unused Content`, `Fallout 76 Unused Content`) and then propagated through merge/reporting like the other canonical flags.
 - Prevention: extend canonical taxonomy incrementally from generic, repeatable source labels first; keep named NPCs/activities in raw metadata until there is an explicit product need for a new canonical concept.
 
+## 2026-03-18 - Generic activity markers sometimes need token matching, not exact-label matching
+- Symptom: raw `fallout_wiki.obtained` labels such as `Gleaming Depths (Raid)` and `Raid: Gleaming Depths` clearly described raid content, but an exact-label matcher would miss them unless every wording variant was enumerated.
+- Root cause: some source labels encode the same taxonomy concept as a reusable token inside longer titles rather than as one stable exact string.
+- Fix: the importer now derives `raid` through normalized token matching, so both `Raid: ...` and `... (Raid)` feed the same canonical flag without cataloguing every concrete raid title.
+- Prevention: when a concept appears as a stable token embedded in multiple labels, prefer normalized token matching over brittle exact-string lists.
+
 ## 2026-03-18 - Fallout Wiki recipe rows must keep anchor href and dedupe by form_id
 - Symptom: `fallout.wiki` recipes with the same visible label (for example `Recipe: Healing Salve`) collapsed into one JSON row, and the stored `wiki_url` pointed to a generic 404 page instead of the variant page.
 - Root cause: the sync command built `slug` and fallback `wiki_url` from the visible `name`, while deduplication keyed rows by `type|slug`; generic labels therefore overwrote distinct variants even when each row had its own anchor `href` and `form_id`.
