@@ -640,3 +640,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: the import normalization flattens boolean availability keys and later derives canonical booleans, which is correct for app behavior but no longer reflects the original snapshot vocabulary faithfully.
 - Fix: added `app:data:report:source-vocabulary`, which reads the raw JSON snapshots directly and reports observed values from `fandom.availability`, `fallout_wiki.obtained`, and `fallout_wiki.type`.
 - Prevention: when auditing source taxonomies or expanding source-label mappings, start from the raw sync snapshots rather than imported metadata or UI output.
+
+## 2026-03-18 - Fallout Wiki uses both generic and provider-prefixed taxonomy labels
+- Symptom: some raw `fallout_wiki` labels looked unmapped even though they expressed already-known concepts, for example `Fallout 76 Quests`, `Caps`, `bullion`, or `Scoreboard`.
+- Root cause: the initial alias mapping covered the obvious generic forms (`Quest`, `Bottle Cap`, `Gold Bullion`, `Seasonal content`) but not all provider-prefixed or shortened variants exposed by the real snapshots.
+- Fix: expanded the importer alias mapping so `Fallout 76 Quests` feeds `quests`, `Caps`/`bullion` feed vendor/currency derivation, and `Scoreboard` feeds `seasonal_content`.
+- Prevention: after adding a raw-vocabulary audit, use it to normalize provider-specific label variants before introducing new business fields.

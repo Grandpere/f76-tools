@@ -213,4 +213,23 @@ final class ItemImportItemHydratorTest extends TestCase
         self::assertTrue($data['metadata']['seasonal_content'] ?? false);
         self::assertSame('caps', $data['metadata']['purchase_currency'] ?? null);
     }
+
+    public function testBuildExternalSourceDataRecognizesAdditionalObservedFalloutWikiAliases(): void
+    {
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
+
+        $data = $hydrator->buildExternalSourceData('fallout_wiki', [
+            'obtained' => [
+                'Fallout 76 Quests',
+                'Scoreboard',
+            ],
+            'type' => 'bullion',
+        ], 1002);
+
+        self::assertTrue($data['metadata']['quests'] ?? false);
+        self::assertTrue($data['metadata']['seasonal_content'] ?? false);
+        self::assertTrue($data['metadata']['vendors'] ?? false);
+        self::assertSame('gold_bullion', $data['metadata']['purchase_currency'] ?? null);
+    }
 }

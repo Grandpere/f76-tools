@@ -88,6 +88,7 @@ final class ItemImportExternalMetadataEnricher
             'fallout 76 limited time content',
             'limited time item',
             'seasonal content',
+            'scoreboard',
         ]);
         $metadata['treasure_maps'] ??= $this->labelsContainAny($normalizedLabels, [
             'treasure map',
@@ -95,12 +96,16 @@ final class ItemImportExternalMetadataEnricher
         $metadata['quests'] ??= $this->labelsContainAny($normalizedLabels, [
             'quest',
             'quests',
+            'fallout 76 quests',
             'acquired via quest',
         ]);
         $metadata['vendors'] ??= $this->labelsContainAny($normalizedLabels, [
             'bottle cap',
+            'caps',
             'purchased with caps',
+            'gold',
             'gold bullion',
+            'bullion',
             'purchased with bullion',
             'stamp',
             'stamps',
