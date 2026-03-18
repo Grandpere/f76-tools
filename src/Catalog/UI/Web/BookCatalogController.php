@@ -32,13 +32,14 @@ final class BookCatalogController extends AbstractController
         'containers' => '/assets/icons/FO76_Lunchbox_Icon.svg',
         'enemies' => '/assets/icons/FO76_ui_workshopraid_team.png',
         'events' => '/assets/icons/FO76_icon_map_event.png',
-        'expeditions' => '/assets/icons/FO76_collections_stamps.png',
+        'expeditions' => '/assets/icons/FO76_collections_stamps01.webp',
         'quests' => '/assets/icons/FO76_ui_icon_quest.png',
         'daily_ops' => '/assets/icons/FO76_dailyops_uplink.png',
         'raid' => '/assets/icons/GleamingDepthsMarker.svg',
+        'seasonal_content' => '/assets/icons/FO76_scoresprite_seasons.png',
         'treasure_maps' => '/assets/icons/Icon_note_small.png',
-        'unused_content' => '/assets/icons/Icon_unused.png',
-        'world_spawns' => '/assets/icons/FO76_ui_roleplay_team.png',
+        'unused_content' => '/assets/icons/Icon_unused_wiki.png',
+        'world_spawns' => '/assets/icons/FO76_ui_exploration_team.png',
     ];
 
     /**
@@ -47,7 +48,7 @@ final class BookCatalogController extends AbstractController
     private const CURRENCY_ICON_MAP = [
         'caps' => '/assets/icons/Caps.png',
         'gold_bullion' => '/assets/icons/Fo76_Icon_Gold_Bullion.png',
-        'stamps' => '/assets/icons/FO76_collections_stamps.png',
+        'stamps' => '/assets/icons/FO76_collections_stamps01.webp',
         'tickets' => '/assets/icons/Tickets_Icon.webp',
     ];
 

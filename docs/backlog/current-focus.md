@@ -12,6 +12,7 @@
 - Done (slice 6): branchement des icones gameplay/devises deja presentes sur `/plans-recipes` pour les filtres, les tags de cartes et certains prix (`caps`, `gold bullion`, `Daily Ops`, `Raid`, `Unused content`), avec fallback texte pour le reste.
 - Done (slice 7): alignement du rendu des icones de cartes sur le pattern Minerva (footer inline) et extension prudente de la couverture a `enemies`; `expeditions` reste volontairement en texte tant qu un vrai pictogramme `stamp` n est pas disponible.
 - Done (slice 8): recuperation d un lot coherent d icones Fallout Wiki depuis les legendes/colonnes `Obtained` (`stamp`, `ticket`, `quest`, `event`, `containers`, `treasure map`, `spawned`, etc.) et branchement des cas les plus solides sur `/plans-recipes`, avec `expeditions` maintenant illustre par le vrai pictogramme `stamp`.
+- Done (slice 9): ajustement des choix d icones selon le retour visuel reel: `expeditions/stamps` utilisent la petite vignette wiki `stamp`, `world_spawns` passe sur `exploration team`, `unused_content` sur la version wiki plus lisible et `seasonal_content` est maintenant iconifie.
 
 ### Avancement F76-153
 - Done (slice 1): `app:data:sync` devient orchestrateur (`all|nukaknights|fandom`) avec delegation a `app:data:sync:fandom`.

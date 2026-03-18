@@ -59,6 +59,8 @@ final class BookCatalogControllerTest extends WebTestCase
             'daily_ops' => true,
             'expeditions' => true,
             'enemies' => true,
+            'seasonal_content' => true,
+            'world_spawns' => true,
         ]);
         $this->createBook(654, 'catalog.book.front.bravo', 'Recipe: Bravo Soup');
 
@@ -73,7 +75,9 @@ final class BookCatalogControllerTest extends WebTestCase
         self::assertSame('Plans & Recipes', trim($crawler->filter('.app-primary-nav-link.is-active')->text()));
         self::assertStringContainsString('/assets/icons/FO76_dailyops_uplink.png', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('/assets/icons/FO76_ui_workshopraid_team.png', (string) $this->browser()->getResponse()->getContent());
-        self::assertStringContainsString('/assets/icons/FO76_collections_stamps.png', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('/assets/icons/FO76_collections_stamps01.webp', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('/assets/icons/FO76_scoresprite_seasons.png', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('/assets/icons/FO76_ui_exploration_team.png', (string) $this->browser()->getResponse()->getContent());
     }
 
     private function createUser(string $email): UserEntity
