@@ -124,7 +124,7 @@
                                 <div class="item-icons-footer">
                                     <p class="item-source-icons">
                                         {% for signal in item.canonicalSignals %}
-                                            {% if (selectedSignals is empty or signal.field in selectedSignals) and signalIconMap[signal.field] is defined %}
+                                            {% if signalIconMap[signal.field] is defined %}
                                                 <img
                                                     src="{{ asset(signalIconMap[signal.field]) }}"
                                                     alt="{{ signal.label }}"
@@ -137,7 +137,7 @@
                                 </div>
                                 <div class="catalog-book-signal-list">
                                     {% for signal in item.canonicalSignals %}
-                                        {% if (selectedSignals is empty or signal.field in selectedSignals) and signalIconMap[signal.field] is not defined %}
+                                        {% if signalIconMap[signal.field] is not defined %}
                                             <span class="item-pill">
                                                 {{ signal.label }}
                                             </span>
