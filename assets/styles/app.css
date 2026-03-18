@@ -180,6 +180,7 @@ body::before {
 :root[data-theme='terminal'] .field select,
 :root[data-theme='terminal'] .field textarea,
 :root[data-theme='terminal'] .source-filters input[type='checkbox'],
+:root[data-theme='terminal'] .source-filters input[type='radio'],
 :root[data-theme='terminal'] .header-locale select,
 :root[data-theme='terminal'] .header-theme-toggle,
 :root[data-theme='terminal'] .translations-table textarea {
@@ -213,6 +214,7 @@ body::before {
 }
 
 :root[data-theme='terminal'] .source-filters input[type='checkbox']:checked,
+:root[data-theme='terminal'] .source-filters input[type='radio']:checked,
 :root[data-theme='terminal'] .item-learned-checkbox:checked {
     background: linear-gradient(180deg, #6ddd87, #9cffb1);
     border-color: rgba(156, 255, 177, 0.85);
@@ -1277,6 +1279,10 @@ body::before {
     color: var(--text-0);
 }
 
+.catalog-books-list-filters {
+    grid-column: 1 / -1;
+}
+
 .source-filter-groups {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1313,6 +1319,7 @@ body::before {
 }
 
 .source-filters input[type='checkbox'],
+.source-filters input[type='radio'],
 .item-learned-checkbox {
     appearance: none;
     width: 1rem;
@@ -1326,17 +1333,20 @@ body::before {
 }
 
 .source-filters input[type='checkbox']:hover,
+.source-filters input[type='radio']:hover,
 .item-learned-checkbox:hover {
     border-color: rgba(230, 185, 0, 0.8);
 }
 
 .source-filters input[type='checkbox']:checked,
+.source-filters input[type='radio']:checked,
 .item-learned-checkbox:checked {
     border-color: rgba(205, 160, 20, 0.95);
     background: linear-gradient(180deg, #ffe387, #f4c52b);
 }
 
 .source-filters input[type='checkbox']:checked::after,
+.source-filters input[type='radio']:checked::after,
 .item-learned-checkbox:checked::after {
     content: '';
     position: absolute;

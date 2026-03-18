@@ -67,7 +67,7 @@ final class BookCatalogFrontApplicationService
      *     currentPage:int,
      *     listOptions:list<int>,
      *     totalLists:int,
-     *     specialListItems:int
+     *     minervaItems:int
      * }
      */
     public function browse(?string $query, ?string $listFilter, int $page, int $perPage): array
@@ -75,7 +75,7 @@ final class BookCatalogFrontApplicationService
         $items = $this->bookCatalogFrontReadRepository->findAllBooksDetailedOrdered();
         $rows = array_map($this->mapRow(...), $items);
         $listOptions = $this->extractListOptions($rows);
-        $specialListItems = count(array_filter($rows, static fn (array $row): bool => true === $row['isSpecialList']));
+        $minervaItems = count(array_filter($rows, static fn (array $row): bool => null !== $row['priceMinerva']));
 
         $normalizedQuery = $this->normalize($query);
         if ('' !== $normalizedQuery) {
@@ -85,12 +85,7 @@ final class BookCatalogFrontApplicationService
             ));
         }
 
-        if ('special' === $listFilter) {
-            $rows = array_values(array_filter(
-                $rows,
-                static fn (array $row): bool => true === $row['isSpecialList'],
-            ));
-        } elseif (is_string($listFilter) && ctype_digit($listFilter)) {
+        if (is_string($listFilter) && ctype_digit($listFilter)) {
             $selectedList = (int) $listFilter;
             $rows = array_values(array_filter(
                 $rows,
@@ -110,7 +105,7 @@ final class BookCatalogFrontApplicationService
             'currentPage' => $currentPage,
             'listOptions' => $listOptions,
             'totalLists' => count($listOptions),
-            'specialListItems' => $specialListItems,
+            'minervaItems' => $minervaItems,
         ];
     }
 

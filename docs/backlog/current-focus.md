@@ -8,6 +8,7 @@
 - Done (slice 2): nouvelle page front authentifiee `/plans-recipes` avec pagination, recherche, filtre de statut de merge, cartes catalogue et navigation principale.
 - Done (slice 3): tests unitaires/fonctionnels cibles pour le read model et le controleur front, plus traduction/navigation/styling associes.
 - Done (slice 4): recentrage de `/plans-recipes` sur une lecture orientee joueur (suppression des infos de merge/source visibles, filtre par liste de plans, stats metier simples) et correction du front Minerva qui rangeait les livres sans liste dans la liste 1.
+- Done (slice 5): suppression de la notion front de `liste speciale` au profit d un indicateur Minerva plus parlant, repositionnement du menu `Plans et recettes` en 3e position et filtre de listes visuellement aligne sur les autres pages joueur.
 
 ### Avancement F76-153
 - Done (slice 1): `app:data:sync` devient orchestrateur (`all|nukaknights|fandom`) avec delegation a `app:data:sync:fandom`.

@@ -27,20 +27,6 @@
                         <input type="search" name="q" value="{{ query }}" placeholder="{{ 'catalog_books.search_placeholder'|trans }}">
                     </label>
                     <label class="field">
-                        <span>{{ 'catalog_books.list_filter'|trans }}</span>
-                        <select name="list">
-                            <option value="">{{ 'catalog_books.list_filter_all'|trans }}</option>
-                            {% for option in listOptions %}
-                                <option value="{{ option }}" {% if selectedList == (option ~ '') %}selected{% endif %}>
-                                    {{ 'catalog_books.list_option'|trans({'%list%': option}) }}
-                                </option>
-                            {% endfor %}
-                            <option value="special" {% if selectedList == 'special' %}selected{% endif %}>
-                                {{ 'catalog_books.list_filter_special'|trans }}
-                            </option>
-                        </select>
-                    </label>
-                    <label class="field">
                         <span>{{ 'catalog_books.per_page'|trans }}</span>
                         <select name="perPage">
                             {% for option in [24, 48, 72, 96] %}
@@ -51,6 +37,20 @@
                     <div class="field field-inline">
                         <button type="submit">{{ 'catalog_books.apply_filters'|trans }}</button>
                     </div>
+
+                    <fieldset class="source-filters catalog-books-list-filters">
+                        <legend>{{ 'catalog_books.list_filter'|trans }}</legend>
+                        <label>
+                            <input type="radio" name="list" value="" {% if selectedList is empty %}checked{% endif %}>
+                            {{ 'catalog_books.list_filter_all'|trans }}
+                        </label>
+                        {% for option in listOptions %}
+                            <label>
+                                <input type="radio" name="list" value="{{ option }}" {% if selectedList == (option ~ '') %}checked{% endif %}>
+                                {{ 'catalog_books.list_option'|trans({'%list%': option}) }}
+                            </label>
+                        {% endfor %}
+                    </fieldset>
                 </form>
 
                 <div class="stats-cards catalog-books-stats">
@@ -65,9 +65,9 @@
                         <p class="stats-card-sub">{{ 'catalog_books.total_lists_help'|trans }}</p>
                     </article>
                     <article class="stats-card">
-                        <p class="stats-card-title">{{ 'catalog_books.special_lists'|trans }}</p>
-                        <p class="stats-card-main">{{ specialListItems }}</p>
-                        <p class="stats-card-sub">{{ 'catalog_books.special_lists_help'|trans }}</p>
+                        <p class="stats-card-title">{{ 'catalog_books.minerva_items'|trans }}</p>
+                        <p class="stats-card-main">{{ minervaItems }}</p>
+                        <p class="stats-card-sub">{{ 'catalog_books.minerva_items_help'|trans }}</p>
                     </article>
                 </div>
 
@@ -110,9 +110,6 @@
                                     <span class="item-pill">
                                         {{ 'catalog_books.book_lists'|trans({'%lists%': item.bookListNumbers|join(', ')}) }}
                                     </span>
-                                {% endif %}
-                                {% if item.isSpecialList %}
-                                    <span class="item-pill">{{ 'catalog_books.special_list'|trans }}</span>
                                 {% endif %}
                             </div>
 

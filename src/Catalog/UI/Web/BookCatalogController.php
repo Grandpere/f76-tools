@@ -65,7 +65,7 @@ final class BookCatalogController extends AbstractController
             'totalPages' => $result['totalPages'],
             'perPage' => $perPage,
             'totalLists' => $result['totalLists'],
-            'specialListItems' => $result['specialListItems'],
+            'minervaItems' => $result['minervaItems'],
             'catalogUpdatedAt' => $catalogUpdatedAt,
         ]);
     }

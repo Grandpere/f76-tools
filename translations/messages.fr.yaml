@@ -78,7 +78,7 @@ nuke_codes.page_title: 'F76 - Codes nucléaires'
 nuke_codes.title: Codes nucléaires
 catalog_books.page_title: 'F76 - Plans et recettes'
 catalog_books.title: Plans et recettes
-catalog_books.description: Parcourez les plans et recettes avec les informations utiles réellement affichées aux joueurs.
+catalog_books.description: Liste des plans et recettes disponibles
 catalog_books.last_updated: 'Catalogue mis à jour: %date%'
 catalog_books.last_updated_unknown: 'Date de mise à jour du catalogue inconnue'
 catalog_books.filters_title: Parcourir
@@ -94,15 +94,14 @@ catalog_books.total_items: Items
 catalog_books.total_items_help: Plans et recettes correspondants
 catalog_books.total_lists: Listes
 catalog_books.total_lists_help: Listes de plans disponibles dans le catalogue
-catalog_books.special_lists: Spéciales
-catalog_books.special_lists_help: Items présents aussi dans une liste spéciale
+catalog_books.minerva_items: Minerva
+catalog_books.minerva_items_help: Items qui ont actuellement un prix Minerva
 catalog_books.visible_items: '%count% items affichés sur %total%'
 catalog_books.list_title: Catalogue
 catalog_books.list_help: 'Cette page se concentre sur le résultat côté joueur: noms, prix, numéros de liste et tags d activité utiles.'
 catalog_books.new: Nouveau
 catalog_books.rank: 'Rang %rank%'
 catalog_books.book_lists: 'Listes: %lists%'
-catalog_books.special_list: Liste spéciale
 catalog_books.price: '%currency%: %value%'
 catalog_books.price_minerva: 'Minerva: %value%'
 catalog_books.empty: Aucun plan ou recette ne correspond aux filtres actuels.
