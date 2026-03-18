@@ -74,22 +74,27 @@ final class ItemImportExternalMetadataEnricher
         $metadata['containers'] ??= $this->labelsContainAny($normalizedLabels, [
             'fallout 76 containers and storage',
             'container spawn',
+            'containers',
         ]);
         $metadata['enemies'] ??= $this->labelsContainAny($normalizedLabels, [
             'fallout 76 creatures',
             'looted from enemy',
+            'enemy drop',
         ]);
         $metadata['seasonal_content'] ??= $this->labelsContainAny($normalizedLabels, [
             'fallout 76 seasons',
             'gained during season',
             'fallout 76 legacy content',
+            'fallout 76 limited time content',
             'limited time item',
+            'seasonal content',
         ]);
         $metadata['treasure_maps'] ??= $this->labelsContainAny($normalizedLabels, [
             'treasure map',
         ]);
         $metadata['quests'] ??= $this->labelsContainAny($normalizedLabels, [
             'quest',
+            'quests',
             'acquired via quest',
         ]);
         $metadata['vendors'] ??= $this->labelsContainAny($normalizedLabels, [
@@ -101,10 +106,14 @@ final class ItemImportExternalMetadataEnricher
             'stamps',
             'ticket',
             'tickets',
+            'merchants',
+            'fallout 76 merchants',
         ]);
         $metadata['world_spawns'] ??= $this->labelsContainAny($normalizedLabels, [
             'fallout 76 locations',
             'world spawn',
+            'world spawns',
+            'spawned',
         ]);
 
         $purchaseCurrency = $this->normalizePurchaseCurrencyFromLabels($normalizedLabels);

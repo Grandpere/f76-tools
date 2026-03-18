@@ -33,6 +33,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: the admin catalog list keeps the existing paginated SQL path by default, and only switches to a full admin read + in-memory filtering when a merge-status filter is explicitly selected.
 - Prevention: for internal screens that filter on computed merge semantics, prefer one trusted policy implementation plus an explicit in-memory path over duplicating the policy in brittle SQL conditions.
 
+## 2026-03-18 - Derive wiki booleans from observed raw labels, not copied website vocabulary
+- Symptom: admin/source-merge screens could show `obtained` labels that clearly implied an acquisition path (`Enemy Drop`, `Spawned`, `Merchants`) while the derived boolean flags still showed `false`.
+- Root cause: the initial `fallout_wiki` mapping covered only a subset of labels seen in the real JSON snapshots, and some manual vocabulary examples had mixed in alt-text/site artifacts instead of the exact stored values.
+- Fix: the import enricher now recognizes the observed aliases from local snapshots, including `Enemy Drop`, `Spawned`, `Merchants`, `Quests`, `Containers`, and `Fallout 76 Limited Time Content`.
+- Prevention: when refining source mappings, extract the vocabulary from committed raw snapshots first and only then update canonical flag derivation.
+
 ## 2026-03-18 - Fallout Wiki recipe rows must keep anchor href and dedupe by form_id
 - Symptom: `fallout.wiki` recipes with the same visible label (for example `Recipe: Healing Salve`) collapsed into one JSON row, and the stored `wiki_url` pointed to a generic 404 page instead of the variant page.
 - Root cause: the sync command built `slug` and fallback `wiki_url` from the visible `name`, while deduplication keyed rows by `type|slug`; generic labels therefore overwrote distinct variants even when each row had its own anchor `href` and `form_id`.

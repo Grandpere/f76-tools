@@ -187,4 +187,30 @@ final class ItemImportItemHydratorTest extends TestCase
         self::assertTrue($data['metadata']['quests'] ?? false);
         self::assertSame('gold_bullion', $data['metadata']['purchase_currency'] ?? null);
     }
+
+    public function testBuildExternalSourceDataRecognizesObservedFalloutWikiAliases(): void
+    {
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
+
+        $data = $hydrator->buildExternalSourceData('fallout_wiki', [
+            'obtained' => [
+                'Containers',
+                'Enemy Drop',
+                'Quests',
+                'Merchants',
+                'Spawned',
+                'Fallout 76 Limited Time Content',
+            ],
+            'type' => 'Caps',
+        ], 1001);
+
+        self::assertTrue($data['metadata']['containers'] ?? false);
+        self::assertTrue($data['metadata']['enemies'] ?? false);
+        self::assertTrue($data['metadata']['quests'] ?? false);
+        self::assertTrue($data['metadata']['vendors'] ?? false);
+        self::assertTrue($data['metadata']['world_spawns'] ?? false);
+        self::assertTrue($data['metadata']['seasonal_content'] ?? false);
+        self::assertSame('caps', $data['metadata']['purchase_currency'] ?? null);
+    }
 }
