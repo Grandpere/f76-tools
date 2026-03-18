@@ -598,3 +598,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: the lookup repository sent a broader GraphQL variables payload than the browser request, including unused keys such as `editorId: null` and sometimes empty `signatures`; Nukacrypt's upstream search endpoint was sensitive to those extra null/empty variables.
 - Fix: switched the lookup to a dedicated `ext-curl` request path matching the successful browser shape more closely, with a static FO76 `gameState`, browser-like headers, and only the variables actually used for the current lookup.
 - Prevention: when mirroring a fragile third-party GraphQL endpoint, keep the payload shape as close as possible to a known-good browser request and omit null/empty variables instead of sending placeholder values.
+
+## 2026-03-18 - Admin paginated fetch with PostgreSQL JSON relations needs a two-step query
+- Symptom: the new admin catalog page failed under integration tests when a paginated Doctrine query used `DISTINCT` together with a fetch-join on `item_external_source.metadata` (JSON), causing PostgreSQL errors on `DISTINCT`/`ORDER BY` and JSON equality.
+- Root cause: a single paginated fetch-join query tried to deduplicate joined external-source rows at SQL level while also ordering by item columns; PostgreSQL cannot compare JSON for `DISTINCT` deduplication in that shape, and `ORDER BY` with `SELECT DISTINCT` must stay inside the selected columns.
+- Fix: switched the admin list read to a two-step approach: first fetch ordered distinct item IDs, then load the selected items with their external sources in a second query and reapply the ID order in PHP.
+- Prevention: for paginated admin/search screens over entities that fetch-join JSON-backed relations, prefer a two-step `IDs first, graph second` query instead of a single `DISTINCT` fetch-join.

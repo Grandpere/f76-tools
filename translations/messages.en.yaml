@@ -24,6 +24,7 @@ common.no: No
 
 dashboard.page_title: 'F76 - Legendary mods'
 dashboard.header.translation_management: Translations
+dashboard.header.catalog_sources: Catalog sources
 dashboard.header.user_management: Users
 dashboard.header.minerva_rotation: Minerva
 dashboard.header.roadmap_calendar: Calendar
@@ -689,3 +690,53 @@ admin_minerva.last_refresh_action_minerva_refresh_performed: Executed refresh
 admin_minerva.last_refresh_action_minerva_refresh_not_needed: No refresh needed
 admin_minerva.freshness_alert_missing: Coverage has missing windows. Use refresh or regenerate to recover full coverage.
 admin_minerva.view_minerva_audit_logs: View Minerva audit logs
+
+admin_catalog.page_title: Catalog sources admin
+admin_catalog.kicker: Backoffice
+admin_catalog.title: Catalog sources
+admin_catalog.description: Inspect item source snapshots, retained merge fields and raw external metadata.
+admin_catalog.back_to_dashboard: Back to dashboard
+admin_catalog.type: Type
+admin_catalog.type_all: All types
+admin_catalog.search: Search
+admin_catalog.search_placeholder: 'publicId, name key, provider, external ref'
+admin_catalog.per_page: Rows per page
+admin_catalog.filter: Filter
+admin_catalog.visible_rows: '%count% rows visible.'
+admin_catalog.visible_page_rows: '%count% rows on this page'
+admin_catalog.table_caption: Catalog item source table
+admin_catalog.item: Item
+admin_catalog.source_id: Source ID
+admin_catalog.providers: Providers
+admin_catalog.no_items: No catalog item found.
+admin_catalog.selected_item: Selected item
+admin_catalog.name_key: Name key
+admin_catalog.desc_key: Description key
+admin_catalog.note_key: Note key
+admin_catalog.price: Price
+admin_catalog.price_minerva: Minerva price
+admin_catalog.rank: Rank
+admin_catalog.is_new: New
+admin_catalog.book_lists: Book lists
+admin_catalog.special_list: Special list
+admin_catalog.flags: Flags
+admin_catalog.yes: Yes
+admin_catalog.no: No
+admin_catalog.empty: Empty
+admin_catalog.external_sources: External sources
+admin_catalog.provider: Provider
+admin_catalog.external_ref: External ref
+admin_catalog.external_url: External URL
+admin_catalog.metadata: Metadata
+admin_catalog.no_external_sources: No external source attached.
+admin_catalog.source_merge: Source merge
+admin_catalog.field: Field
+admin_catalog.reason: Reason
+admin_catalog.value: Retained value
+admin_catalog.other_value: Other value
+admin_catalog.value_a: Provider A
+admin_catalog.value_b: Provider B
+admin_catalog.no_merge_decisions: No retained merge field.
+admin_catalog.no_merge_conflicts: No merge conflict.
+admin_catalog.no_source_merge: No cross-source merge is available for this item.
+admin_catalog.no_selected_item: Select an item to inspect its source details.

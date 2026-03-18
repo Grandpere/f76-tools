@@ -27,8 +27,9 @@
 - Done (slice 19): correction du sync `fallout.wiki` pour conserver les vraies URLs issues des ancres `<a>` et ne plus ecraser les variantes a libelle generique (`Recipe: Healing Salve`) quand leurs `form_id`/liens sont distincts.
 - Done (slice 20): le rapport d arbitrage distingue maintenant les libelles generiques confirmes par URL cible/form_id (`provider_*_generic_label_confirmed`) des vrais conflits materiels, avec compteurs `generic_label_items` et `material_conflict_items`.
 - Done (slice 21): la politique de merge et ses rapports (`source-merge`, `source-merge-summary`) propagent aussi cette distinction via la raison `generic_label_confirmed_by_specific_target` et des compteurs dedies.
+- Done (slice 22): ajout d une UI admin read-only `admin/catalog/items` pour consulter les items catalogue, leurs sources externes et le detail `sourceMerge` sans dependre des rapports console en environnement deploye.
 - Note: le lookup public Nukacrypt direct par `form_id` via `esmRecord` reste non fiable depuis l app (HTTP 500 / corps vide). Un `curl` navigateur colle manuellement dans le shell du conteneur `app` peut repondre, mais le meme cas n est pas encore reproducible via le runtime PHP (`HttpClient`/probe). On garde donc Nukacrypt en outil opportuniste d arbitrage, pas en source serveur robuste.
-- Remaining: exploiter ce rapport pour confirmer les prochains conflits reels et, seulement si besoin, enrichir ensuite les rapports de merge avec le verdict Nukacrypt.
+- Remaining: capitaliser sur l UI admin pour confirmer les prochains conflits reels en environnement deploye, puis seulement si besoin enrichir les vues de merge avec davantage d aide a l arbitrage Nukacrypt.
 
 ## Termine recemment
 - F76-152: Catalog items multi-source (core item + source metadata table) (done).

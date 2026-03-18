@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Catalog\Infrastructure\Persistence;
 
+use App\Catalog\Application\Admin\AdminCatalogItemReadRepository;
 use App\Catalog\Application\Import\ItemImportItemRepository;
 use App\Catalog\Application\Import\ItemSourceCollisionReadRepository;
 use App\Catalog\Application\Import\ItemSourceComparisonReadRepository;
@@ -25,12 +26,13 @@ use App\Progression\Application\Knowledge\ItemReadRepository;
 use App\Progression\Application\Knowledge\ItemStatsReadRepository;
 use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<ItemEntity>
  */
-final class ItemEntityRepository extends ServiceEntityRepository implements ItemKnowledgeTransferRepository, ItemStatsReadRepository, ItemImportItemRepository, ItemKnowledgeCatalogReadRepository, ItemReadRepository, ItemCatalogTimestampReadRepository, ItemSourceComparisonReadRepository, ItemSourceCollisionReadRepository
+final class ItemEntityRepository extends ServiceEntityRepository implements ItemKnowledgeTransferRepository, ItemStatsReadRepository, ItemImportItemRepository, ItemKnowledgeCatalogReadRepository, ItemReadRepository, ItemCatalogTimestampReadRepository, ItemSourceComparisonReadRepository, ItemSourceCollisionReadRepository, AdminCatalogItemReadRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -245,6 +247,94 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
         return $item instanceof ItemEntity ? $item : null;
     }
 
+    public function countByAdminQuery(?ItemTypeEnum $type, ?string $query): int
+    {
+        $count = $this->createAdminCatalogQueryBuilder($type, $query)
+            ->select('COUNT(DISTINCT i.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return (int) $count;
+    }
+
+    /**
+     * @return list<ItemEntity>
+     */
+    public function findByAdminQuery(?ItemTypeEnum $type, ?string $query, int $page, int $perPage): array
+    {
+        $idRows = $this->createAdminCatalogQueryBuilder($type, $query)
+            ->select('i.id AS id', 'i.type AS sortType', 'i.sourceId AS sortSourceId')
+            ->orderBy('sortType', 'ASC')
+            ->addOrderBy('sortSourceId', 'ASC')
+            ->setFirstResult(max(0, ($page - 1) * $perPage))
+            ->setMaxResults(max(1, $perPage))
+            ->getQuery()
+            ->getScalarResult();
+
+        $ids = [];
+        foreach ($idRows as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+
+            $idRaw = $row['id'] ?? null;
+            if (!is_scalar($idRaw) || !is_numeric((string) $idRaw)) {
+                continue;
+            }
+
+            $ids[] = (int) $idRaw;
+        }
+
+        if ([] === $ids) {
+            return [];
+        }
+
+        $items = $this->createQueryBuilder('i')
+            ->addSelect('src')
+            ->leftJoin('i.externalSources', 'src')
+            ->andWhere('i.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->getQuery()
+            ->getResult();
+
+        if (!is_array($items)) {
+            return [];
+        }
+
+        $byId = [];
+        foreach ($items as $item) {
+            if (!$item instanceof ItemEntity || null === $item->getId()) {
+                continue;
+            }
+
+            $byId[$item->getId()] = $item;
+        }
+
+        $orderedItems = [];
+        foreach ($ids as $id) {
+            if (isset($byId[$id])) {
+                $orderedItems[] = $byId[$id];
+            }
+        }
+
+        /** @var list<ItemEntity> $orderedItems */
+        return $orderedItems;
+    }
+
+    public function findOneDetailedByPublicId(string $publicId): ?ItemEntity
+    {
+        $item = $this->createQueryBuilder('i')
+            ->addSelect('src', 'bl')
+            ->leftJoin('i.externalSources', 'src')
+            ->leftJoin('i.bookLists', 'bl')
+            ->andWhere('i.publicId = :publicId')
+            ->setParameter('publicId', trim($publicId))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $item instanceof ItemEntity ? $item : null;
+    }
+
     /**
      * @param list<int> $ids
      *
@@ -410,5 +500,39 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
 
         /** @var list<ItemEntity> $items */
         return $items;
+    }
+
+    private function createAdminCatalogQueryBuilder(?ItemTypeEnum $type, ?string $query): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->distinct();
+
+        if (null !== $type) {
+            $qb->andWhere('i.type = :type')
+                ->setParameter('type', $type);
+        }
+
+        $normalizedQuery = is_string($query) ? trim(mb_strtolower($query)) : '';
+        if ('' === $normalizedQuery) {
+            return $qb;
+        }
+
+        $conditions = [
+            'LOWER(i.publicId) LIKE :query',
+            'LOWER(i.nameKey) LIKE :query',
+            'LOWER(src_search.provider) LIKE :query',
+            'LOWER(src_search.externalRef) LIKE :query',
+        ];
+
+        if (ctype_digit($normalizedQuery)) {
+            $conditions[] = 'i.sourceId = :sourceIdExact';
+            $qb->setParameter('sourceIdExact', (int) $normalizedQuery);
+        }
+
+        $qb->leftJoin('i.externalSources', 'src_search')
+            ->andWhere($qb->expr()->orX(...$conditions))
+            ->setParameter('query', '%'.$normalizedQuery.'%');
+
+        return $qb;
     }
 }

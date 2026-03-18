@@ -24,6 +24,7 @@ common.no: Non
 
 dashboard.page_title: 'F76 - Mods légendaires'
 dashboard.header.translation_management: Traductions
+dashboard.header.catalog_sources: Sources catalogue
 dashboard.header.user_management: Utilisateurs
 dashboard.header.minerva_rotation: Minerva
 dashboard.header.roadmap_calendar: Calendrier
@@ -691,3 +692,53 @@ admin_minerva.last_refresh_action_minerva_refresh_performed: Refresh exécuté
 admin_minerva.last_refresh_action_minerva_refresh_not_needed: Aucun refresh nécessaire
 admin_minerva.freshness_alert_missing: La couverture contient des fenêtres manquantes. Lance un refresh ou une régénération.
 admin_minerva.view_minerva_audit_logs: Voir les logs d'audit Minerva
+
+admin_catalog.page_title: Admin sources catalogue
+admin_catalog.kicker: Backoffice
+admin_catalog.title: Sources catalogue
+admin_catalog.description: Consulte les snapshots source des items, les champs retenus par le merge et les métadonnées externes brutes.
+admin_catalog.back_to_dashboard: Retour au tableau de bord
+admin_catalog.type: Type
+admin_catalog.type_all: Tous les types
+admin_catalog.search: Recherche
+admin_catalog.search_placeholder: 'publicId, name key, provider, external ref'
+admin_catalog.per_page: Lignes par page
+admin_catalog.filter: Filtrer
+admin_catalog.visible_rows: '%count% lignes visibles.'
+admin_catalog.visible_page_rows: '%count% lignes sur cette page'
+admin_catalog.table_caption: Table des sources catalogue
+admin_catalog.item: Item
+admin_catalog.source_id: ID source
+admin_catalog.providers: Providers
+admin_catalog.no_items: Aucun item catalogue trouvé.
+admin_catalog.selected_item: Item sélectionné
+admin_catalog.name_key: Clé du nom
+admin_catalog.desc_key: Clé de description
+admin_catalog.note_key: Clé de note
+admin_catalog.price: Prix
+admin_catalog.price_minerva: Prix Minerva
+admin_catalog.rank: Rang
+admin_catalog.is_new: Nouveau
+admin_catalog.book_lists: Listes book
+admin_catalog.special_list: Liste spéciale
+admin_catalog.flags: Flags
+admin_catalog.yes: Oui
+admin_catalog.no: Non
+admin_catalog.empty: Vide
+admin_catalog.external_sources: Sources externes
+admin_catalog.provider: Provider
+admin_catalog.external_ref: Réf externe
+admin_catalog.external_url: URL externe
+admin_catalog.metadata: Métadonnées
+admin_catalog.no_external_sources: Aucune source externe attachée.
+admin_catalog.source_merge: Merge des sources
+admin_catalog.field: Champ
+admin_catalog.reason: Raison
+admin_catalog.value: Valeur retenue
+admin_catalog.other_value: Autre valeur
+admin_catalog.value_a: Provider A
+admin_catalog.value_b: Provider B
+admin_catalog.no_merge_decisions: Aucun champ retenu.
+admin_catalog.no_merge_conflicts: Aucun conflit de merge.
+admin_catalog.no_source_merge: Aucun merge cross-source n'est disponible pour cet item.
+admin_catalog.no_selected_item: Sélectionne un item pour inspecter ses détails de source.

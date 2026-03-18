@@ -59,6 +59,7 @@ services:
     App\Identity\Application\Security\AuthAuditLogReader: '@App\Identity\Infrastructure\Persistence\AuthAuditLogEntityRepository'
     App\Support\Application\Audit\AuditLogReadRepository: '@App\Support\Infrastructure\Persistence\AdminAuditLogEntityRepository'
     App\Support\Application\AdminUser\AdminUserManagementReadRepository: '@App\Identity\Infrastructure\Persistence\UserEntityRepository'
+    App\Catalog\Application\Admin\AdminCatalogItemReadRepository: '@App\Catalog\Infrastructure\Persistence\ItemEntityRepository'
     App\Support\Application\Contact\ContactMessageEmailSender: '@App\Support\Infrastructure\Contact\ContactMessageEmailSender'
     App\Support\Application\Contact\ContactMessageReadRepository: '@App\Support\Infrastructure\Persistence\ContactMessageEntityRepository'
     App\Support\Application\Contact\ContactMessageStatusWriteRepository: '@App\Support\Infrastructure\Persistence\ContactMessageEntityRepository'
