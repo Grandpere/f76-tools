@@ -48,6 +48,9 @@ final class BookCatalogFrontApplicationService
     }
 
     /**
+     * @param list<string> $selectedLists
+     * @param list<string> $selectedSignals
+     *
      * @return array{
      *     rows:list<array{
      *         name:string,
@@ -59,23 +62,21 @@ final class BookCatalogFrontApplicationService
      *         priceCurrencyLabel:string,
      *         isNew:bool,
      *         bookListNumbers:list<int>,
-     *         isSpecialList:bool,
      *         canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
      *     }>,
      *     totalItems:int,
      *     totalPages:int,
      *     currentPage:int,
      *     listOptions:list<int>,
-     *     totalLists:int,
-     *     minervaItems:int
+     *     signalOptions:list<string>
      * }
      */
-    public function browse(?string $query, ?string $listFilter, int $page, int $perPage): array
+    public function browse(?string $query, array $selectedLists, array $selectedSignals, int $page, int $perPage): array
     {
         $items = $this->bookCatalogFrontReadRepository->findAllBooksDetailedOrdered();
         $rows = array_map($this->mapRow(...), $items);
         $listOptions = $this->extractListOptions($rows);
-        $minervaItems = count(array_filter($rows, static fn (array $row): bool => null !== $row['priceMinerva']));
+        $signalOptions = $this->extractSignalOptions($rows);
 
         $normalizedQuery = $this->normalize($query);
         if ('' !== $normalizedQuery) {
@@ -85,11 +86,40 @@ final class BookCatalogFrontApplicationService
             ));
         }
 
-        if (is_string($listFilter) && ctype_digit($listFilter)) {
-            $selectedList = (int) $listFilter;
+        $selectedListNumbers = array_values(array_filter(
+            array_map(
+                static fn (string $value): ?int => ctype_digit($value) ? (int) $value : null,
+                $selectedLists,
+            ),
+            static fn (?int $value): bool => null !== $value,
+        ));
+
+        if ([] !== $selectedListNumbers) {
             $rows = array_values(array_filter(
                 $rows,
-                static fn (array $row): bool => in_array($selectedList, $row['bookListNumbers'], true),
+                static fn (array $row): bool => [] !== array_intersect($selectedListNumbers, $row['bookListNumbers']),
+            ));
+        }
+
+        $normalizedSignals = array_filter(
+            array_map(
+                fn (string $value): string => $this->normalize($value),
+                $selectedSignals,
+            ),
+            static fn (string $value): bool => '' !== $value,
+        );
+
+        if ([] !== $normalizedSignals) {
+            $rows = array_values(array_filter(
+                $rows,
+                static function (array $row) use ($normalizedSignals): bool {
+                    $rowSignals = array_map(
+                        static fn (array $signal): string => $signal['field'],
+                        $row['canonicalSignals'],
+                    );
+
+                    return [] !== array_intersect($normalizedSignals, $rowSignals);
+                },
             ));
         }
 
@@ -104,8 +134,7 @@ final class BookCatalogFrontApplicationService
             'totalPages' => $totalPages,
             'currentPage' => $currentPage,
             'listOptions' => $listOptions,
-            'totalLists' => count($listOptions),
-            'minervaItems' => $minervaItems,
+            'signalOptions' => $signalOptions,
         ];
     }
 
@@ -120,7 +149,6 @@ final class BookCatalogFrontApplicationService
      *     priceCurrencyLabel:string,
      *     isNew:bool,
      *     bookListNumbers:list<int>,
-     *     isSpecialList:bool,
      *     canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
      * }
      */
@@ -130,10 +158,8 @@ final class BookCatalogFrontApplicationService
         $canonicalSignals = null !== $mergeResult ? $this->extractCanonicalSignals($mergeResult) : [];
 
         $bookListNumbers = [];
-        $isSpecialList = false;
         foreach ($item->getBookLists() as $bookList) {
             $bookListNumbers[] = $bookList->getListNumber();
-            $isSpecialList = $isSpecialList || $bookList->isSpecialList();
         }
         sort($bookListNumbers);
 
@@ -155,7 +181,6 @@ final class BookCatalogFrontApplicationService
             'priceCurrencyLabel' => $priceCurrencyLabel,
             'isNew' => $item->isNew(),
             'bookListNumbers' => array_values(array_unique($bookListNumbers)),
-            'isSpecialList' => $isSpecialList,
             'canonicalSignals' => array_values(array_filter(
                 $canonicalSignals,
                 static fn (array $signal): bool => 'purchase_currency' !== $signal['field'],
@@ -258,5 +283,22 @@ final class BookCatalogFrontApplicationService
         sort($numbers);
 
         return $numbers;
+    }
+
+    /**
+     * @param list<array{canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>}> $rows
+     *
+     * @return list<string>
+     */
+    private function extractSignalOptions(array $rows): array
+    {
+        $signalOptions = [];
+        foreach ($rows as $row) {
+            foreach ($row['canonicalSignals'] as $signal) {
+                $signalOptions[$signal['field']] = true;
+            }
+        }
+
+        return array_keys($signalOptions);
     }
 }

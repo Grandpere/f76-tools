@@ -65,7 +65,7 @@ final class BookCatalogControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter('.catalog-books-grid'));
         self::assertGreaterThanOrEqual(1, $crawler->filter('.catalog-book-card')->count());
         self::assertStringContainsString('catalog.book.front.alpha', (string) $this->browser()->getResponse()->getContent());
-        self::assertGreaterThanOrEqual(1, $crawler->filter('select[name="list"] option')->count());
+        self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="lists[]"]')->count());
         self::assertSame('Plans & Recipes', trim($crawler->filter('.app-primary-nav-link.is-active')->text()));
     }
 

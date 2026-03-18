@@ -41,13 +41,17 @@ final class BookCatalogController extends AbstractController
         }
 
         $query = trim((string) $request->query->get('q', ''));
-        $list = trim((string) $request->query->get('list', ''));
+        /** @var list<string> $selectedLists */
+        $selectedLists = $request->query->all('lists');
+        /** @var list<string> $selectedSignals */
+        $selectedSignals = $request->query->all('signals');
         $perPage = max(12, min(96, (int) $request->query->get('perPage', 24)));
         $page = max(1, (int) $request->query->get('page', 1));
 
         $result = $this->bookCatalogFrontApplicationService->browse(
             '' !== $query ? $query : null,
-            '' !== $list ? $list : null,
+            $selectedLists,
+            $selectedSignals,
             $page,
             $perPage,
         );
@@ -57,15 +61,15 @@ final class BookCatalogController extends AbstractController
         return $this->render('catalog/books.html.twig', [
             'username' => $user->getEmail(),
             'query' => $query,
-            'selectedList' => '' !== $list ? $list : null,
+            'selectedLists' => $selectedLists,
+            'selectedSignals' => $selectedSignals,
             'listOptions' => $result['listOptions'],
+            'signalOptions' => $result['signalOptions'],
             'items' => $result['rows'],
             'totalItems' => $result['totalItems'],
             'page' => $result['currentPage'],
             'totalPages' => $result['totalPages'],
             'perPage' => $perPage,
-            'totalLists' => $result['totalLists'],
-            'minervaItems' => $result['minervaItems'],
             'catalogUpdatedAt' => $catalogUpdatedAt,
         ]);
     }

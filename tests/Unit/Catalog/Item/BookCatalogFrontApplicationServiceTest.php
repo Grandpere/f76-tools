@@ -44,7 +44,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             $this->createTranslator(),
         );
 
-        $result = $service->browse('alpha', '4', 1, 24);
+        $result = $service->browse('alpha', ['4'], [], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertSame('Plan: Alpha Receiver', $result['rows'][0]['name']);
@@ -72,8 +72,9 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             $this->createTranslator(),
         );
 
-        $result = $service->browse(null, null, 1, 24);
+        $result = $service->browse(null, [], ['events'], 1, 24);
 
+        self::assertSame(1, $result['totalItems']);
         self::assertCount(2, $result['rows'][0]['canonicalSignals']);
         self::assertSame('Caps', $result['rows'][0]['priceCurrencyLabel']);
         self::assertSame('Containers', $result['rows'][0]['canonicalSignals'][0]['label']);

@@ -110,7 +110,7 @@ export default class extends Controller {
     }
 
     renderItems() {
-        const visibleItems = this.getVisibleItems();
+        const visibleItems = this.getRenderableBooks();
         if (visibleItems.length === 0) {
             this.bookListTarget.innerHTML = `<p>${this.escape(this.t('noBookFound'))}</p>`;
             return;
@@ -122,6 +122,10 @@ export default class extends Controller {
 
     getVisibleItems() {
         return this.items.filter((item) => this.matchesSourceFilters(item));
+    }
+
+    getRenderableBooks() {
+        return this.getVisibleItems().filter((item) => Array.isArray(item.listNumbers) && item.listNumbers.length > 0);
     }
 
     matchesSourceFilters(item) {
@@ -470,7 +474,7 @@ export default class extends Controller {
     }
 
     updateStateCounter() {
-        const visibleCount = this.getVisibleItems().length;
+        const visibleCount = this.getRenderableBooks().length;
         const searchSuffix = this.searchQuery !== '' ? `, ${this.t('searchFilterPrefix')}: "${this.searchQuery}"` : '';
         const translatedFilters = this.activeSourceFilters.map((key) => this.t(`source_${key}`));
         const sourceSuffix = this.activeSourceFilters.length > 0

@@ -40,36 +40,24 @@
 
                     <fieldset class="source-filters catalog-books-list-filters">
                         <legend>{{ 'catalog_books.list_filter'|trans }}</legend>
-                        <label>
-                            <input type="radio" name="list" value="" {% if selectedList is empty %}checked{% endif %}>
-                            {{ 'catalog_books.list_filter_all'|trans }}
-                        </label>
                         {% for option in listOptions %}
                             <label>
-                                <input type="radio" name="list" value="{{ option }}" {% if selectedList == (option ~ '') %}checked{% endif %}>
+                                <input type="checkbox" name="lists[]" value="{{ option }}" {% if (option ~ '') in selectedLists %}checked{% endif %}>
                                 {{ 'catalog_books.list_option'|trans({'%list%': option}) }}
                             </label>
                         {% endfor %}
                     </fieldset>
-                </form>
 
-                <div class="stats-cards catalog-books-stats">
-                    <article class="stats-card">
-                        <p class="stats-card-title">{{ 'catalog_books.total_items'|trans }}</p>
-                        <p class="stats-card-main">{{ totalItems }}</p>
-                        <p class="stats-card-sub">{{ 'catalog_books.total_items_help'|trans }}</p>
-                    </article>
-                    <article class="stats-card">
-                        <p class="stats-card-title">{{ 'catalog_books.total_lists'|trans }}</p>
-                        <p class="stats-card-main">{{ totalLists }}</p>
-                        <p class="stats-card-sub">{{ 'catalog_books.total_lists_help'|trans }}</p>
-                    </article>
-                    <article class="stats-card">
-                        <p class="stats-card-title">{{ 'catalog_books.minerva_items'|trans }}</p>
-                        <p class="stats-card-main">{{ minervaItems }}</p>
-                        <p class="stats-card-sub">{{ 'catalog_books.minerva_items_help'|trans }}</p>
-                    </article>
-                </div>
+                    <fieldset class="source-filters catalog-books-list-filters">
+                        <legend>{{ 'catalog_books.signal_filters'|trans }}</legend>
+                        {% for option in signalOptions %}
+                            <label>
+                                <input type="checkbox" name="signals[]" value="{{ option }}" {% if option in selectedSignals %}checked{% endif %}>
+                                {{ ('catalog_books.signal_' ~ option)|trans }}
+                            </label>
+                        {% endfor %}
+                    </fieldset>
+                </form>
 
                 <p class="catalog-state">
                     {{ 'catalog_books.visible_items'|trans({'%count%': items|length, '%total%': totalItems}) }}
@@ -106,17 +94,16 @@
                                 {% if item.rank %}
                                     <span class="item-pill">{{ 'catalog_books.rank'|trans({'%rank%': item.rank}) }}</span>
                                 {% endif %}
-                                {% if item.bookListNumbers %}
-                                    <span class="item-pill">
-                                        {{ 'catalog_books.book_lists'|trans({'%lists%': item.bookListNumbers|join(', ')}) }}
-                                    </span>
-                                {% endif %}
                             </div>
 
                             {% if item.price or item.priceMinerva %}
                                 <div class="item-prices">
                                     {% if item.price %}
-                                        <span>{{ 'catalog_books.price'|trans({'%value%': item.price, '%currency%': item.priceCurrencyLabel}) }}</span>
+                                        {% if item.priceMinerva %}
+                                            <span>{{ 'catalog_books.price_bullion'|trans({'%value%': item.price}) }}</span>
+                                        {% else %}
+                                            <span>{{ 'catalog_books.price'|trans({'%value%': item.price, '%currency%': item.priceCurrencyLabel}) }}</span>
+                                        {% endif %}
                                     {% endif %}
                                     {% if item.priceMinerva %}
                                         <span class="price-new">{{ 'catalog_books.price_minerva'|trans({'%value%': item.priceMinerva}) }}</span>
@@ -149,7 +136,8 @@
                                 href="{{ path('app_book_catalog', {
                                     _locale: app.request.locale,
                                     q: query ?: null,
-                                    list: selectedList ?: null,
+                                    lists: selectedLists,
+                                    signals: selectedSignals,
                                     perPage: perPage,
                                     page: page - 1
                                 }) }}"
@@ -170,7 +158,8 @@
                                 href="{{ path('app_book_catalog', {
                                     _locale: app.request.locale,
                                     q: query ?: null,
-                                    list: selectedList ?: null,
+                                    lists: selectedLists,
+                                    signals: selectedSignals,
                                     perPage: perPage,
                                     page: page + 1
                                 }) }}"

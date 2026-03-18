@@ -84,18 +84,11 @@ catalog_books.last_updated_unknown: 'Catalog update time unknown'
 catalog_books.filters_title: Browse
 catalog_books.search: Search
 catalog_books.search_placeholder: Search by displayed name, note, list, or activity
-catalog_books.list_filter: Plan list
-catalog_books.list_filter_all: All lists
-catalog_books.list_filter_special: Special lists
+catalog_books.list_filter: Minerva list
 catalog_books.list_option: List %list%
+catalog_books.signal_filters: Filters
 catalog_books.per_page: Per page
 catalog_books.apply_filters: Apply
-catalog_books.total_items: Items
-catalog_books.total_items_help: Matching plans and recipes
-catalog_books.total_lists: Lists
-catalog_books.total_lists_help: Available plan lists in the catalog
-catalog_books.minerva_items: Minerva
-catalog_books.minerva_items_help: Items currently carrying a Minerva price
 catalog_books.visible_items: '%count% items shown out of %total%'
 catalog_books.list_title: Catalog
 catalog_books.list_help: 'This page focuses on the player-facing result: names, prices, list numbers, and useful activity tags.'
@@ -103,6 +96,7 @@ catalog_books.new: New
 catalog_books.rank: 'Rank %rank%'
 catalog_books.book_lists: 'Lists: %lists%'
 catalog_books.price: '%currency%: %value%'
+catalog_books.price_bullion: 'Bullion: %value%'
 catalog_books.price_minerva: 'Minerva: %value%'
 catalog_books.empty: No plan or recipe matches the current filters.
 catalog_books.pagination: Plans and recipes pagination

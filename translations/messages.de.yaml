@@ -84,18 +84,11 @@ catalog_books.last_updated_unknown: 'Zeitpunkt der Katalogaktualisierung unbekan
 catalog_books.filters_title: Durchsuchen
 catalog_books.search: Suche
 catalog_books.search_placeholder: Nach angezeigtem Namen, Hinweis, Liste oder Aktivität suchen
-catalog_books.list_filter: Bauplanliste
-catalog_books.list_filter_all: Alle Listen
-catalog_books.list_filter_special: Speziallisten
+catalog_books.list_filter: Minerva-Liste
 catalog_books.list_option: Liste %list%
+catalog_books.signal_filters: Filter
 catalog_books.per_page: Pro Seite
 catalog_books.apply_filters: Anwenden
-catalog_books.total_items: Items
-catalog_books.total_items_help: Passende Baupläne und Rezepte
-catalog_books.total_lists: Listen
-catalog_books.total_lists_help: Verfügbare Bauplanlisten im Katalog
-catalog_books.minerva_items: Minerva
-catalog_books.minerva_items_help: Items mit aktuell vorhandenem Minerva-Preis
 catalog_books.visible_items: '%count% Items angezeigt von %total%'
 catalog_books.list_title: Katalog
 catalog_books.list_help: 'Diese Seite konzentriert sich auf das Spieler-Ergebnis: Namen, Preise, Listennummern und nützliche Aktivitäts-Tags.'
@@ -103,6 +96,7 @@ catalog_books.new: Neu
 catalog_books.rank: 'Rang %rank%'
 catalog_books.book_lists: 'Listen: %lists%'
 catalog_books.price: '%currency%: %value%'
+catalog_books.price_bullion: 'Goldbarren: %value%'
 catalog_books.price_minerva: 'Minerva: %value%'
 catalog_books.empty: Kein Bauplan oder Rezept entspricht den aktuellen Filtern.
 catalog_books.pagination: Seitennavigation für Baupläne und Rezepte
