@@ -27,6 +27,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: the Fallout Wiki sync now extracts `wiki_url` and `source_slug` from the row anchor `href`, derives the resource slug from that source slug when available, and deduplicates primarily by `form_id`.
 - Prevention: for wiki tables, never infer page identity only from visible cell text when the row already exposes a specific linked target and technical identifier.
 
+## 2026-03-18 - Arbitration reports should separate generic labels from material source conflicts
+- Symptom: after fixing specific Fallout Wiki links, `Healing Salve` still appeared as a standard name conflict even though both sources targeted the same region-specific record and only one label stayed generic.
+- Root cause: the arbitration report classified all differing visible names as conflicts, without distinguishing a generic label confirmed by a specific target URL/form_id from a real naming disagreement.
+- Fix: the report now emits `provider_*_generic_label_confirmed` verdicts and exposes `generic_label_items` vs `material_conflict_items` counts.
+- Prevention: when one provider keeps a generic visible label but the stored source URL and `form_id` are specific, classify it as a resolved labeling issue rather than a true source conflict.
+
 ## 2026-03-17 - Multi-source raw sync should always expose a provider index and visible progress
 - Symptom: `app:data:sync` felt inconsistent because Fandom/Fallout Wiki produced `index.json` while Nukaknights only wrote raw files, and long external syncs could look stalled in the terminal.
 - Root cause: Nukaknights kept its older endpoint-per-file flow without the same catalog summary and progress conventions as the newer wiki sources.

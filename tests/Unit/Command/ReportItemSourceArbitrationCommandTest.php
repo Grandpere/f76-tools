@@ -158,9 +158,13 @@ final class ReportItemSourceArbitrationCommandTest extends TestCase
             ->setNameKey('item.book.2853828.name');
         $item->upsertExternalSource('fandom', '002B8BC4', null, [
             'name_en' => 'Recipe: Healing Salve (Toxic Valley)',
+            'wiki_url' => 'https://fallout.fandom.com/wiki/Recipe:_Healing_salve_(Toxic_Valley)',
+            'source_slug' => 'Recipe:_Healing_salve_(Toxic_Valley)',
         ]);
         $item->upsertExternalSource('fallout_wiki', '002B8BC4', null, [
             'name_en' => 'Recipe: Healing Salve',
+            'wiki_url' => 'https://fallout.wiki/wiki/Recipe:_Healing_Salve_(Toxic_Valley)',
+            'source_slug' => 'recipe-healing-salve-toxic-valley',
         ]);
 
         $repository = $this->createMock(ItemSourceComparisonReadRepository::class);
@@ -228,13 +232,16 @@ final class ReportItemSourceArbitrationCommandTest extends TestCase
         /** @var array<string, mixed> $decoded */
         $decoded = json_decode($tester->getDisplay(), true, 512, JSON_THROW_ON_ERROR);
         self::assertIsArray($decoded['rows'] ?? null);
+        self::assertSame(1, $decoded['generic_label_items'] ?? null);
+        self::assertSame(0, $decoded['material_conflict_items'] ?? null);
         /** @var array<string, mixed> $row */
         $row = $decoded['rows'][0];
-        self::assertSame('provider_a_more_specific_confirmed', $row['verdict'] ?? null);
+        self::assertSame('provider_b_generic_label_confirmed', $row['verdict'] ?? null);
+        self::assertSame('fallout_wiki', $row['matchProvider'] ?? null);
         self::assertSame(1, $row['matchingRecordsATotal'] ?? null);
         self::assertSame(1, $row['matchingRecordsBTotal'] ?? null);
         self::assertSame(2, $row['recordsBTotal'] ?? null);
-        self::assertFalse($row['sourceUrlBIsSpecific'] ?? true);
+        self::assertTrue($row['sourceUrlBIsSpecific'] ?? false);
         self::assertIsArray($row['recordsB'] ?? null);
         /** @var list<array<string, mixed>> $recordsB */
         $recordsB = $row['recordsB'];

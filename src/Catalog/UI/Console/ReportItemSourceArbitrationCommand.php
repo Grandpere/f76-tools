@@ -113,6 +113,7 @@ final class ReportItemSourceArbitrationCommand extends Command
 
         $rows = [];
         $conflictItems = 0;
+        $genericLabelItems = 0;
         $resolvedItems = 0;
         $unresolvedItems = 0;
 
@@ -144,7 +145,18 @@ final class ReportItemSourceArbitrationCommand extends Command
 
             ++$conflictItems;
 
-            if (in_array($row['verdict'], ['confirmed_provider_a', 'confirmed_provider_b', 'provider_a_more_specific_confirmed', 'provider_b_more_specific_confirmed'], true)) {
+            if (in_array($row['verdict'], ['provider_a_generic_label_confirmed', 'provider_b_generic_label_confirmed'], true)) {
+                ++$genericLabelItems;
+            }
+
+            if (in_array($row['verdict'], [
+                'confirmed_provider_a',
+                'confirmed_provider_b',
+                'provider_a_more_specific_confirmed',
+                'provider_b_more_specific_confirmed',
+                'provider_a_generic_label_confirmed',
+                'provider_b_generic_label_confirmed',
+            ], true)) {
                 ++$resolvedItems;
             } else {
                 ++$unresolvedItems;
@@ -160,6 +172,8 @@ final class ReportItemSourceArbitrationCommand extends Command
                 'type' => $type?->value,
                 'items_scanned' => count($items),
                 'items_with_name_conflicts' => $conflictItems,
+                'generic_label_items' => $genericLabelItems,
+                'material_conflict_items' => $conflictItems - $genericLabelItems,
                 'resolved_items' => $resolvedItems,
                 'unresolved_items' => $unresolvedItems,
                 'rows' => $rows,
@@ -175,6 +189,8 @@ final class ReportItemSourceArbitrationCommand extends Command
             ['Type' => null !== $type ? $type->value : 'all'],
             ['Items scanned' => (string) count($items)],
             ['Items with name conflicts' => (string) $conflictItems],
+            ['Generic label items' => (string) $genericLabelItems],
+            ['Material conflict items' => (string) ($conflictItems - $genericLabelItems)],
             ['Resolved items' => (string) $resolvedItems],
             ['Unresolved items' => (string) $unresolvedItems],
             ['Rows shown' => (string) count($rows)],
@@ -233,6 +249,10 @@ final class ReportItemSourceArbitrationCommand extends Command
         $matchingRecordsB = $this->filterMatchingRecords($recordsB, $expectedFormId);
         $matchesA = [] !== $matchingRecordsA;
         $matchesB = [] !== $matchingRecordsB;
+        $sourceUrlA = $this->resolveSourceUrl($sourceA);
+        $sourceUrlB = $this->resolveSourceUrl($sourceB);
+        $sourceUrlAIsSpecific = $this->urlLooksSpecific($sourceUrlA);
+        $sourceUrlBIsSpecific = $this->urlLooksSpecific($sourceUrlB);
 
         if (null !== $errorA || null !== $errorB) {
             $verdict = 'lookup_error';
@@ -240,6 +260,10 @@ final class ReportItemSourceArbitrationCommand extends Command
             $verdict = 'confirmed_provider_a';
         } elseif (!$matchesA && $matchesB) {
             $verdict = 'confirmed_provider_b';
+        } elseif ($this->isGenericLabelConfirmedBySpecificTarget($conflict['candidateA'], $conflict['candidateB'], $sourceUrlAIsSpecific, $matchesA)) {
+            $verdict = 'provider_a_generic_label_confirmed';
+        } elseif ($this->isGenericLabelConfirmedBySpecificTarget($conflict['candidateB'], $conflict['candidateA'], $sourceUrlBIsSpecific, $matchesB)) {
+            $verdict = 'provider_b_generic_label_confirmed';
         } elseif ($this->isSpecificVariantPreferred($conflict['candidateA'], $conflict['candidateB']) && count($recordsB) > count($matchingRecordsB)) {
             $verdict = 'provider_a_more_specific_confirmed';
         } elseif ($this->isSpecificVariantPreferred($conflict['candidateB'], $conflict['candidateA']) && count($recordsA) > count($matchingRecordsA)) {
@@ -257,6 +281,8 @@ final class ReportItemSourceArbitrationCommand extends Command
             'confirmed_provider_b' => $providerB,
             'provider_a_more_specific_confirmed' => $providerA,
             'provider_b_more_specific_confirmed' => $providerB,
+            'provider_a_generic_label_confirmed' => $providerA,
+            'provider_b_generic_label_confirmed' => $providerB,
             default => null,
         };
 
@@ -270,12 +296,12 @@ final class ReportItemSourceArbitrationCommand extends Command
             'field' => $conflict['field'],
             'candidateA' => $conflict['candidateA'],
             'candidateB' => $conflict['candidateB'],
-            'sourceUrlA' => $this->resolveSourceUrl($sourceA),
-            'sourceUrlB' => $this->resolveSourceUrl($sourceB),
+            'sourceUrlA' => $sourceUrlA,
+            'sourceUrlB' => $sourceUrlB,
             'sourceSlugA' => $this->extractString(($sourceA->getMetadata() ?? [])['source_slug'] ?? null),
             'sourceSlugB' => $this->extractString(($sourceB->getMetadata() ?? [])['source_slug'] ?? null),
-            'sourceUrlAIsSpecific' => $this->urlLooksSpecific($this->resolveSourceUrl($sourceA)),
-            'sourceUrlBIsSpecific' => $this->urlLooksSpecific($this->resolveSourceUrl($sourceB)),
+            'sourceUrlAIsSpecific' => $sourceUrlAIsSpecific,
+            'sourceUrlBIsSpecific' => $sourceUrlBIsSpecific,
             'verdict' => $verdict,
             'matchProvider' => $matchProvider,
             'recordsATotal' => count($recordsA),
@@ -421,6 +447,19 @@ final class ReportItemSourceArbitrationCommand extends Command
         $normalizedGeneric = $this->normalizeText($genericCandidate);
 
         return '' !== $normalizedGeneric && str_starts_with($normalizedSpecific, $normalizedGeneric);
+    }
+
+    private function isGenericLabelConfirmedBySpecificTarget(
+        string $genericCandidate,
+        string $specificCandidate,
+        bool $genericSourceUrlIsSpecific,
+        bool $genericCandidateMatchesExpected,
+    ): bool {
+        if (!$genericSourceUrlIsSpecific || !$genericCandidateMatchesExpected) {
+            return false;
+        }
+
+        return $this->isSpecificVariantPreferred($specificCandidate, $genericCandidate);
     }
 
     private function normalizeStringOption(mixed $value): ?string
