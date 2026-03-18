@@ -145,6 +145,7 @@ final class ItemImportItemHydratorTest extends TestCase
         $data = $hydrator->buildExternalSourceData('fallout_wiki', [
             'obtained' => [
                 'Fallout 76 Locations',
+                'Fallout 76 random encounters',
                 'Quest',
                 'Bottle Cap',
                 'Treasure Map',
@@ -156,6 +157,7 @@ final class ItemImportItemHydratorTest extends TestCase
         ], 999);
 
         self::assertTrue($data['metadata']['world_spawns'] ?? false);
+        self::assertTrue($data['metadata']['random_encounters'] ?? false);
         self::assertTrue($data['metadata']['quests'] ?? false);
         self::assertTrue($data['metadata']['vendors'] ?? false);
         self::assertTrue($data['metadata']['treasure_maps'] ?? false);

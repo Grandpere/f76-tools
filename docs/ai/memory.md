@@ -69,6 +69,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: the vocabulary report now splits text-only obtained values with a bounded glossary of observed segments, while the importer separately recognizes the safe named aliases that carry real business meaning (`Union Dues`, `Samuel (Wastelanders)`, `Bullion vendors`).
 - Prevention: when repairing concatenated third-party text, use a short, explicit glossary tied to observed source data instead of generic NLP-style splitting.
 
+## 2026-03-18 - Add low-risk cross-source flags from explicit labels before named event heuristics
+- Symptom: after the major taxonomy cleanup, the remaining `fallout_wiki.obtained` backlog was dominated by named activities/events, but a few still-used acquisition paths were exposed as explicit generic labels.
+- Root cause: not every useful concept needs fuzzy matching; some fields stay worth adding simply because the source already names them directly.
+- Fix: `random_encounters` is now derived from explicit labels (`Fallout 76 random encounters`, `Random Encounters`) and flows through merge/reporting like the other acquisition flags.
+- Prevention: when extending taxonomy late in the cleanup, prefer explicit generic labels first and leave named event inference for a separate, higher-risk pass.
+
 ## 2026-03-18 - Fallout Wiki recipe rows must keep anchor href and dedupe by form_id
 - Symptom: `fallout.wiki` recipes with the same visible label (for example `Recipe: Healing Salve`) collapsed into one JSON row, and the stored `wiki_url` pointed to a generic 404 page instead of the variant page.
 - Root cause: the sync command built `slug` and fallback `wiki_url` from the visible `name`, while deduplication keyed rows by `type|slug`; generic labels therefore overwrote distinct variants even when each row had its own anchor `href` and `form_id`.

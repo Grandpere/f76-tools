@@ -76,6 +76,10 @@ final class ItemImportExternalMetadataEnricher
             'container spawn',
             'containers',
         ]);
+        $metadata['random_encounters'] ??= $this->labelsContainAny($normalizedLabels, [
+            'fallout 76 random encounters',
+            'random encounters',
+        ]);
         $metadata['enemies'] ??= $this->labelsContainAny($normalizedLabels, [
             'fallout 76 creatures',
             'looted from enemy',
