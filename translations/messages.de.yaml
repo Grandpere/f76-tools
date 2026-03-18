@@ -76,7 +76,6 @@ progression.quick_link_minerva: minerva
 progression.character_help_extended: 'der Fortschritt wird aktualisiert, indem Objekte auf den dedizierten Seiten als gelernt markiert werden: %modsLink% und %minervaLink%.'
 nuke_codes.page_title: 'F76 - Nukecodes'
 nuke_codes.title: Nukecodes
-nuke_codes.description: Diese Seite zeigt die aktuellen Silo-Startcodes an.
 catalog_books.page_title: 'F76 - Baupläne & Rezepte'
 catalog_books.title: Baupläne & Rezepte
 catalog_books.description: Durchsuche den zusammengeführten Katalog der im Produkt sichtbaren Baupläne und Rezepte.
