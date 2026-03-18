@@ -21,7 +21,7 @@
             activeNav: 'catalog'
         } %}
 
-        <section class="translations-panel">
+        <section class="translations-panel admin-catalog-panel">
             <form method="get" class="translations-filters">
                 <label class="field">
                     <span>{{ 'admin_catalog.type'|trans }}</span>
@@ -139,12 +139,12 @@
             </div>
         </section>
 
-        <section class="translations-panel">
-            <h2>{{ 'admin_catalog.selected_item'|trans }}</h2>
+        <section class="translations-panel admin-catalog-panel">
+            <h2 class="admin-catalog-section-title">{{ 'admin_catalog.selected_item'|trans }}</h2>
 
             {% if selectedItem %}
-                <p class="catalog-state">{{ selectedItem.name }} · <code>{{ selectedItem.publicId }}</code></p>
-                <div class="translations-table-wrap">
+                <p class="catalog-state admin-catalog-selected-headline">{{ selectedItem.name }} · <code>{{ selectedItem.publicId }}</code></p>
+                <div class="translations-table-wrap admin-catalog-table-wrap">
                     <table class="translations-table">
                         <tbody>
                         <tr><th>{{ 'admin_catalog.source_id'|trans }}</th><td>{{ selectedItem.sourceId }}</td></tr>
@@ -180,9 +180,9 @@
                     </table>
                 </div>
 
-                <h3>{{ 'admin_catalog.external_sources'|trans }}</h3>
-                <div class="translations-table-wrap">
-                    <table class="translations-table">
+                <h3 class="admin-catalog-subtitle">{{ 'admin_catalog.external_sources'|trans }}</h3>
+                <div class="translations-table-wrap admin-catalog-table-wrap">
+                    <table class="translations-table admin-catalog-detail-table">
                         <thead>
                         <tr>
                             <th>{{ 'admin_catalog.provider'|trans }}</th>
@@ -198,12 +198,12 @@
                                 <td><code>{{ source.externalRef }}</code></td>
                                 <td>
                                     {% if source.externalUrl %}
-                                        <a href="{{ source.externalUrl }}" target="_blank" rel="noreferrer noopener">{{ source.externalUrl }}</a>
+                                        <a class="admin-catalog-link" href="{{ source.externalUrl }}" target="_blank" rel="noreferrer noopener">{{ source.externalUrl }}</a>
                                     {% else %}
                                         {{ 'admin_catalog.empty'|trans }}
                                     {% endif %}
                                 </td>
-                                <td><pre>{{ source.metadataJson }}</pre></td>
+                                <td><pre class="admin-catalog-code-block">{{ source.metadataJson }}</pre></td>
                             </tr>
                         {% else %}
                             <tr>
@@ -214,7 +214,7 @@
                     </table>
                 </div>
 
-                <h3>{{ 'admin_catalog.source_merge'|trans }}</h3>
+                <h3 class="admin-catalog-subtitle">{{ 'admin_catalog.source_merge'|trans }}</h3>
                 {% if selectedItem.sourceMerge %}
                     <p class="catalog-state">{{ selectedItem.sourceMerge.label }}</p>
                     <div class="admin-catalog-badge-stack">
@@ -236,8 +236,8 @@
                             <span class="item-pill">{{ 'admin_catalog.material_conflict_count'|trans({'%count%': summary.materialConflictCount}) }}</span>
                         {% endif %}
                     </div>
-                    <div class="translations-table-wrap">
-                        <table class="translations-table">
+                    <div class="translations-table-wrap admin-catalog-table-wrap">
+                        <table class="translations-table admin-catalog-detail-table">
                             <thead>
                             <tr>
                                 <th>{{ 'admin_catalog.field'|trans }}</th>
@@ -253,8 +253,8 @@
                                     <td><code>{{ decision.field }}</code></td>
                                     <td><code>{{ decision.provider }}</code></td>
                                     <td><code>{{ decision.reason }}</code></td>
-                                    <td><pre>{{ decision.value|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre></td>
-                                    <td><pre>{{ decision.other_value|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre></td>
+                                    <td><pre class="admin-catalog-code-block">{{ decision.value|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre></td>
+                                    <td><pre class="admin-catalog-code-block">{{ decision.other_value|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre></td>
                                 </tr>
                             {% else %}
                                 <tr>
@@ -265,9 +265,9 @@
                         </table>
                     </div>
 
-                    <h4>{{ 'admin_catalog.canonical_signals'|trans }}</h4>
-                    <div class="translations-table-wrap">
-                        <table class="translations-table">
+                    <h4 class="admin-catalog-subtitle admin-catalog-subtitle-small">{{ 'admin_catalog.canonical_signals'|trans }}</h4>
+                    <div class="translations-table-wrap admin-catalog-table-wrap">
+                        <table class="translations-table admin-catalog-detail-table">
                             <thead>
                             <tr>
                                 <th>{{ 'admin_catalog.field'|trans }}</th>
@@ -284,7 +284,7 @@
                                         {{ fieldKey|trans({}, 'messages') == fieldKey ? signal.field : fieldKey|trans }}
                                     </td>
                                     <td><code>{{ signal.provider }}</code></td>
-                                    <td><pre>{{ signal.value|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre></td>
+                                    <td><pre class="admin-catalog-code-block">{{ signal.value|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre></td>
                                     <td><code>{{ signal.reason }}</code></td>
                                 </tr>
                             {% else %}
@@ -296,9 +296,9 @@
                         </table>
                     </div>
 
-                    <h4>{{ 'admin_catalog.merge_conflicts'|trans }}</h4>
-                    <div class="translations-table-wrap">
-                        <table class="translations-table">
+                    <h4 class="admin-catalog-subtitle admin-catalog-subtitle-small">{{ 'admin_catalog.merge_conflicts'|trans }}</h4>
+                    <div class="translations-table-wrap admin-catalog-table-wrap">
+                        <table class="translations-table admin-catalog-detail-table">
                             <thead>
                             <tr>
                                 <th>{{ 'admin_catalog.field'|trans }}</th>
@@ -312,8 +312,8 @@
                                 <tr>
                                     <td><code>{{ conflict.field }}</code></td>
                                     <td><code>{{ conflict.reason }}</code></td>
-                                    <td><pre>{{ conflict.value_a|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre></td>
-                                    <td><pre>{{ conflict.value_b|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre></td>
+                                    <td><pre class="admin-catalog-code-block">{{ conflict.value_a|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre></td>
+                                    <td><pre class="admin-catalog-code-block">{{ conflict.value_b|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre></td>
                                 </tr>
                             {% else %}
                                 <tr>
