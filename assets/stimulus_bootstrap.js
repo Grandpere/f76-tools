@@ -1,5 +1,6 @@
 import { startStimulusApp } from '@symfony/stimulus-bundle';
 import ApiFeedController from './controllers/api_feed_controller.js';
+import CatalogFiltersController from './controllers/catalog_filters_controller.js';
 import ItemCatalogController from './controllers/item_catalog_controller.js';
 import MinervaCountdownController from './controllers/minerva_countdown_controller.js';
 import MinervaKnowledgeController from './controllers/minerva_knowledge_controller.js';
@@ -15,6 +16,7 @@ const app = startStimulusApp();
 // register any custom, 3rd party controllers here
 // app.register('some_controller_name', SomeImportedController);
 app.register('api-feed', ApiFeedController);
+app.register('catalog-filters', CatalogFiltersController);
 app.register('item-catalog', ItemCatalogController);
 app.register('minerva-countdown', MinervaCountdownController);
 app.register('minerva-knowledge', MinervaKnowledgeController);

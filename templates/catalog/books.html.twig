@@ -21,10 +21,10 @@
         <section class="catalog-shell">
             <section class="catalog-panel filters-panel">
                 <h2>{{ 'catalog_books.filters_title'|trans }}</h2>
-                <form method="get" class="catalog-toolbar">
+                <form method="get" class="catalog-toolbar" data-controller="catalog-filters">
                     <label class="field">
                         <span>{{ 'catalog_books.search'|trans }}</span>
-                        <input type="search" name="q" value="{{ query }}" placeholder="{{ 'catalog_books.search_placeholder'|trans }}">
+                        <input type="search" name="q" value="{{ query }}" placeholder="{{ 'catalog_books.search_placeholder'|trans }}" data-catalog-filters-target="searchInput">
                     </label>
                     <label class="field">
                         <span>{{ 'catalog_books.per_page'|trans }}</span>
@@ -34,10 +34,6 @@
                             {% endfor %}
                         </select>
                     </label>
-                    <div class="field field-inline">
-                        <button type="submit">{{ 'catalog_books.apply_filters'|trans }}</button>
-                    </div>
-
                     <fieldset class="source-filters catalog-books-list-filters">
                         <legend>{{ 'catalog_books.list_filter'|trans }}</legend>
                         {% for option in listOptions %}
@@ -114,9 +110,11 @@
                             {% if item.canonicalSignals %}
                                 <div class="catalog-book-signal-list">
                                     {% for signal in item.canonicalSignals %}
-                                        <span class="item-pill">
-                                            {{ signal.label }}
-                                        </span>
+                                        {% if selectedSignals is empty or signal.field in selectedSignals %}
+                                            <span class="item-pill">
+                                                {{ signal.label }}
+                                            </span>
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             {% endif %}
