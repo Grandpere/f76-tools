@@ -4024,16 +4024,16 @@ span.flatpickr-weekday {
 
 .translations-table.admin-catalog-list-table th:first-child,
 .translations-table.admin-catalog-list-table td:first-child {
-    width: 41%;
+    width: 47%;
 }
 
 .translations-table.admin-catalog-list-table th:last-child,
 .translations-table.admin-catalog-list-table td:last-child {
-    width: 14%;
+    width: 13%;
 }
 
 .admin-catalog-col-item {
-    width: 41%;
+    width: 47%;
 }
 
 .admin-catalog-col-source-id {
@@ -4041,15 +4041,15 @@ span.flatpickr-weekday {
 }
 
 .admin-catalog-col-type {
-    width: 12%;
+    width: 11%;
 }
 
 .admin-catalog-col-merge-status {
-    width: 25%;
+    width: 21%;
 }
 
 .admin-catalog-col-providers {
-    width: 14%;
+    width: 13%;
 }
 
 .admin-catalog-list-link {
@@ -4071,28 +4071,28 @@ span.flatpickr-weekday {
 
 .translations-table.admin-catalog-sources-table th:first-child,
 .translations-table.admin-catalog-sources-table td:first-child {
-    width: 5%;
+    width: 7%;
 }
 
 .translations-table.admin-catalog-sources-table th:last-child,
 .translations-table.admin-catalog-sources-table td:last-child {
-    width: 42%;
+    width: 46%;
 }
 
 .admin-catalog-col-source-provider {
-    width: 5%;
+    width: 7%;
 }
 
 .admin-catalog-col-source-ref {
-    width: 13%;
+    width: 12%;
 }
 
 .admin-catalog-col-source-url {
-    width: 40%;
+    width: 35%;
 }
 
 .admin-catalog-col-source-metadata {
-    width: 42%;
+    width: 46%;
 }
 
 .admin-catalog-merge-table {
@@ -4213,22 +4213,22 @@ span.flatpickr-weekday {
 
 .admin-catalog-list-table th:nth-child(3),
 .admin-catalog-list-table td:nth-child(3) {
-    width: 12%;
+    width: 11%;
 }
 
 .admin-catalog-list-table th:nth-child(4),
 .admin-catalog-list-table td:nth-child(4) {
-    width: 25%;
+    width: 21%;
 }
 
 .admin-catalog-sources-table th:nth-child(2),
 .admin-catalog-sources-table td:nth-child(2) {
-    width: 13%;
+    width: 12%;
 }
 
 .admin-catalog-sources-table th:nth-child(3),
 .admin-catalog-sources-table td:nth-child(3) {
-    width: 40%;
+    width: 35%;
 }
 
 .admin-catalog-merge-table th:nth-child(2),
