@@ -29,10 +29,16 @@ final class BookCatalogController extends AbstractController
      * @var array<string, string>
      */
     private const SIGNAL_ICON_MAP = [
-        'enemies' => '/assets/icons/bounty_hunter_ghoul_icon_128.png',
+        'containers' => '/assets/icons/FO76_Lunchbox_Icon.svg',
+        'enemies' => '/assets/icons/FO76_ui_workshopraid_team.png',
+        'events' => '/assets/icons/FO76_icon_map_event.png',
+        'expeditions' => '/assets/icons/FO76_collections_stamps.png',
+        'quests' => '/assets/icons/FO76_ui_icon_quest.png',
         'daily_ops' => '/assets/icons/FO76_dailyops_uplink.png',
         'raid' => '/assets/icons/GleamingDepthsMarker.svg',
+        'treasure_maps' => '/assets/icons/Icon_note_small.png',
         'unused_content' => '/assets/icons/Icon_unused.png',
+        'world_spawns' => '/assets/icons/FO76_ui_roleplay_team.png',
     ];
 
     /**
@@ -41,6 +47,8 @@ final class BookCatalogController extends AbstractController
     private const CURRENCY_ICON_MAP = [
         'caps' => '/assets/icons/Caps.png',
         'gold_bullion' => '/assets/icons/Fo76_Icon_Gold_Bullion.png',
+        'stamps' => '/assets/icons/FO76_collections_stamps.png',
+        'tickets' => '/assets/icons/Tickets_Icon.webp',
     ];
 
     public function __construct(
