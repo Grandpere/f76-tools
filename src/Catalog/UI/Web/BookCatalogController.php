@@ -30,7 +30,6 @@ final class BookCatalogController extends AbstractController
      */
     private const SIGNAL_ICON_MAP = [
         'enemies' => '/assets/icons/bounty_hunter_ghoul_icon_128.png',
-        'expeditions' => '/assets/icons/FO76_TP.png',
         'daily_ops' => '/assets/icons/FO76_dailyops_uplink.png',
         'raid' => '/assets/icons/GleamingDepthsMarker.svg',
         'unused_content' => '/assets/icons/Icon_unused.png',
