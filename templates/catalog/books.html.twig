@@ -1,0 +1,228 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'catalog_books.page_title'|trans }}{% endblock %}
+
+{% block body %}
+    {% if catalogUpdatedAt %}
+        {% set updatedLabel = 'catalog_books.last_updated'|trans({'%date%': catalogUpdatedAt|date('d/m/Y H:i')}) %}
+    {% else %}
+        {% set updatedLabel = 'catalog_books.last_updated_unknown'|trans %}
+    {% endif %}
+
+    <main class="catalog-page">
+        {% include '_app_page_header.html.twig' with {
+            localeSelectId: 'catalog-books-header-locale-select',
+            title: 'catalog_books.title',
+            subtitle: 'catalog_books.description',
+            activeNav: 'plans-recipes',
+            extraState: updatedLabel
+        } %}
+
+        <section class="catalog-shell">
+            <section class="catalog-panel filters-panel">
+                <h2>{{ 'catalog_books.filters_title'|trans }}</h2>
+                <form method="get" class="catalog-toolbar">
+                    <label class="field">
+                        <span>{{ 'catalog_books.search'|trans }}</span>
+                        <input type="search" name="q" value="{{ query }}" placeholder="{{ 'catalog_books.search_placeholder'|trans }}">
+                    </label>
+                    <label class="field">
+                        <span>{{ 'catalog_books.merge_status'|trans }}</span>
+                        <select name="mergeStatus">
+                            <option value="">{{ 'catalog_books.merge_status_all'|trans }}</option>
+                            {% for option in mergeStatusOptions %}
+                                <option value="{{ option }}" {% if mergeStatus == option %}selected{% endif %}>{{ ('admin_catalog.merge_status_' ~ option)|trans }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                    <label class="field">
+                        <span>{{ 'catalog_books.per_page'|trans }}</span>
+                        <select name="perPage">
+                            {% for option in [24, 48, 72, 96] %}
+                                <option value="{{ option }}" {% if perPage == option %}selected{% endif %}>{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                    <div class="field field-inline">
+                        <button type="submit">{{ 'catalog_books.apply_filters'|trans }}</button>
+                    </div>
+                </form>
+
+                <div class="stats-cards catalog-books-stats">
+                    <article class="stats-card">
+                        <p class="stats-card-title">{{ 'catalog_books.total_items'|trans }}</p>
+                        <p class="stats-card-main">{{ totalItems }}</p>
+                        <p class="stats-card-sub">{{ 'catalog_books.total_items_help'|trans }}</p>
+                    </article>
+                    <article class="stats-card">
+                        <p class="stats-card-title">{{ 'catalog_books.generic_labels'|trans }}</p>
+                        <p class="stats-card-main">{{ stats.generic_label }}</p>
+                        <p class="stats-card-sub">{{ 'catalog_books.generic_labels_help'|trans }}</p>
+                    </article>
+                    <article class="stats-card">
+                        <p class="stats-card-title">{{ 'catalog_books.material_conflicts'|trans }}</p>
+                        <p class="stats-card-main">{{ stats.material_conflict }}</p>
+                        <p class="stats-card-sub">{{ 'catalog_books.material_conflicts_help'|trans }}</p>
+                    </article>
+                </div>
+
+                <p class="catalog-state">
+                    {{ 'catalog_books.visible_items'|trans({'%count%': items|length, '%total%': totalItems}) }}
+                </p>
+            </section>
+
+            <section class="catalog-panel catalog-block">
+                <h2>{{ 'catalog_books.list_title'|trans }}</h2>
+                <p class="catalog-note">{{ 'catalog_books.list_help'|trans }}</p>
+
+                <div class="item-grid catalog-books-grid">
+                    {% for item in items %}
+                        <article class="item-card catalog-book-card">
+                            <div class="item-card-head catalog-book-head">
+                                <div class="catalog-book-title-stack">
+                                    <strong>{{ item.name }}</strong>
+                                    <div class="catalog-book-id-line">
+                                        <code>{{ item.publicId }}</code>
+                                        <span>#{{ item.sourceId }}</span>
+                                    </div>
+                                </div>
+                                <div class="catalog-book-head-badges">
+                                    {% set statusClass = item.mergeStatus == 'material_conflict'
+                                        ? 'admin-security-badge-warn'
+                                        : (item.mergeStatus == 'aligned' ? 'admin-security-badge-ok' : 'admin-catalog-badge-info') %}
+                                    <span class="admin-security-badge {{ statusClass }}">
+                                        {{ ('admin_catalog.merge_status_' ~ item.mergeStatus)|trans }}
+                                    </span>
+                                    {% if item.isNew %}
+                                        <span class="item-badge-new">{{ 'catalog_books.new'|trans }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            {% if item.description %}
+                                <p>{{ item.description }}</p>
+                            {% endif %}
+
+                            {% if item.note %}
+                                <p class="item-note-line">{{ item.note }}</p>
+                            {% endif %}
+
+                            <div class="catalog-book-meta">
+                                {% if item.rank %}
+                                    <span class="item-pill">{{ 'catalog_books.rank'|trans({'%rank%': item.rank}) }}</span>
+                                {% endif %}
+                                {% if item.bookListNumbers %}
+                                    <span class="item-pill">
+                                        {{ 'catalog_books.book_lists'|trans({'%lists%': item.bookListNumbers|join(', ')}) }}
+                                    </span>
+                                {% endif %}
+                                {% if item.isSpecialList %}
+                                    <span class="item-pill">{{ 'catalog_books.special_list'|trans }}</span>
+                                {% endif %}
+                            </div>
+
+                            {% if item.price or item.priceMinerva %}
+                                <div class="item-prices">
+                                    {% if item.price %}
+                                        <span>{{ 'catalog_books.price'|trans({'%value%': item.price}) }}</span>
+                                    {% endif %}
+                                    {% if item.priceMinerva %}
+                                        <span class="price-new">{{ 'catalog_books.price_minerva'|trans({'%value%': item.priceMinerva}) }}</span>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+
+                            {% if item.mergeLabel and item.mergeLabel != item.name %}
+                                <p class="catalog-book-merge-label">{{ 'catalog_books.merge_label'|trans({'%label%': item.mergeLabel}) }}</p>
+                            {% endif %}
+
+                            <div class="catalog-book-provider-list">
+                                {% for source in item.externalSources %}
+                                    {% if source.externalUrl %}
+                                        <a class="catalog-book-provider-link" href="{{ source.externalUrl }}" target="_blank" rel="noreferrer noopener">
+                                            {{ source.provider }}
+                                        </a>
+                                    {% else %}
+                                        <span class="item-pill">{{ source.provider }}</span>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
+                            {% if item.canonicalSignals %}
+                                <div class="catalog-book-signal-list">
+                                    {% for signal in item.canonicalSignals %}
+                                        <span class="item-pill">
+                                            {{ signal.label }}{% if signal.field == 'purchase_currency' %}: {{ signal.displayValue }}{% endif %}
+                                        </span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+
+                            {% if item.mergeGenericLabelCount > 0 or item.mergeSourceIssueCount > 0 or item.mergeMaterialConflictCount > 0 %}
+                                <p class="item-extra-line">
+                                    {% if item.mergeGenericLabelCount > 0 %}
+                                        {{ 'catalog_books.generic_label_count'|trans({'%count%': item.mergeGenericLabelCount}) }}
+                                    {% endif %}
+                                    {% if item.mergeSourceIssueCount > 0 %}
+                                        {% if item.mergeGenericLabelCount > 0 %} · {% endif %}
+                                        {{ 'catalog_books.source_issue_count'|trans({'%count%': item.mergeSourceIssueCount}) }}
+                                    {% endif %}
+                                    {% if item.mergeMaterialConflictCount > 0 %}
+                                        {% if item.mergeGenericLabelCount > 0 or item.mergeSourceIssueCount > 0 %} · {% endif %}
+                                        {{ 'catalog_books.material_conflict_count'|trans({'%count%': item.mergeMaterialConflictCount}) }}
+                                    {% endif %}
+                                </p>
+                            {% endif %}
+                        </article>
+                    {% else %}
+                        <article class="catalog-panel">
+                            <p class="catalog-state">{{ 'catalog_books.empty'|trans }}</p>
+                        </article>
+                    {% endfor %}
+                </div>
+
+                {% if totalPages > 1 %}
+                    <nav class="catalog-pagination" aria-label="{{ 'catalog_books.pagination'|trans }}">
+                        {% if page > 1 %}
+                            <a
+                                class="catalog-pagination-link"
+                                href="{{ path('app_book_catalog', {
+                                    _locale: app.request.locale,
+                                    q: query ?: null,
+                                    mergeStatus: mergeStatus ?: null,
+                                    perPage: perPage,
+                                    page: page - 1
+                                }) }}"
+                            >
+                                {{ 'catalog_books.previous'|trans }}
+                            </a>
+                        {% else %}
+                            <span class="catalog-pagination-link is-disabled">{{ 'catalog_books.previous'|trans }}</span>
+                        {% endif %}
+
+                        <span class="catalog-pagination-current">
+                            {{ 'catalog_books.page'|trans({'%page%': page, '%total%': totalPages}) }}
+                        </span>
+
+                        {% if page < totalPages %}
+                            <a
+                                class="catalog-pagination-link"
+                                href="{{ path('app_book_catalog', {
+                                    _locale: app.request.locale,
+                                    q: query ?: null,
+                                    mergeStatus: mergeStatus ?: null,
+                                    perPage: perPage,
+                                    page: page + 1
+                                }) }}"
+                            >
+                                {{ 'catalog_books.next'|trans }}
+                            </a>
+                        {% else %}
+                            <span class="catalog-pagination-link is-disabled">{{ 'catalog_books.next'|trans }}</span>
+                        {% endif %}
+                    </nav>
+                {% endif %}
+            </section>
+        </section>
+    </main>
+{% endblock %}

@@ -28,6 +28,7 @@ dashboard.header.catalog_sources: Katalogquellen
 dashboard.header.user_management: Benutzer
 dashboard.header.minerva_rotation: Minerva
 dashboard.header.roadmap_calendar: Kalender
+dashboard.header.plans_recipes: Baupläne & Rezepte
 dashboard.header.nuke_codes: Nukecodes
 dashboard.header.progression: Fortschritt
 dashboard.header.admin: Administration
@@ -75,6 +76,62 @@ progression.quick_link_minerva: minerva
 progression.character_help_extended: 'der Fortschritt wird aktualisiert, indem Objekte auf den dedizierten Seiten als gelernt markiert werden: %modsLink% und %minervaLink%.'
 nuke_codes.page_title: 'F76 - Nukecodes'
 nuke_codes.title: Nukecodes
+nuke_codes.description: Diese Seite zeigt die aktuellen Silo-Startcodes an.
+catalog_books.page_title: 'F76 - Baupläne & Rezepte'
+catalog_books.title: Baupläne & Rezepte
+catalog_books.description: Durchsuche den zusammengeführten Katalog der im Produkt sichtbaren Baupläne und Rezepte.
+catalog_books.last_updated: 'Katalog aktualisiert: %date%'
+catalog_books.last_updated_unknown: 'Zeitpunkt der Katalogaktualisierung unbekannt'
+catalog_books.filters_title: Durchsuchen
+catalog_books.search: Suche
+catalog_books.search_placeholder: Nach angezeigtem Namen, Source-ID, Provider oder Signal suchen
+catalog_books.merge_status: Merge-Status
+catalog_books.merge_status_all: Alle Status
+catalog_books.per_page: Pro Seite
+catalog_books.apply_filters: Anwenden
+catalog_books.total_items: Items
+catalog_books.total_items_help: Passende Baupläne und Rezepte
+catalog_books.generic_labels: Generische Labels
+catalog_books.generic_labels_help: Bereits aufgelöste Naming-Abweichungen
+catalog_books.material_conflicts: Materielle Konflikte
+catalog_books.material_conflicts_help: Items mit weiterem Klärungsbedarf
+catalog_books.visible_items: '%count% Items angezeigt von %total%'
+catalog_books.list_title: Katalog
+catalog_books.list_help: Diese Front-Seite zeigt den tatsächlich sichtbaren Namen zusammen mit den zusammengeführten Signalen, die ihn speisen.
+catalog_books.new: Neu
+catalog_books.rank: 'Rang %rank%'
+catalog_books.book_lists: 'Listen: %lists%'
+catalog_books.special_list: Spezialliste
+catalog_books.price: 'Caps: %value%'
+catalog_books.price_minerva: 'Minerva: %value%'
+catalog_books.merge_label: 'Zusammengeführtes Label: %label%'
+catalog_books.generic_label_count: '%count% generisches Label'
+catalog_books.source_issue_count: '%count% Quellproblem'
+catalog_books.material_conflict_count: '%count% materieller Konflikt'
+catalog_books.empty: Kein Bauplan oder Rezept entspricht den aktuellen Filtern.
+catalog_books.pagination: Seitennavigation für Baupläne und Rezepte
+catalog_books.previous: Zurück
+catalog_books.next: Weiter
+catalog_books.page: 'Seite %page% / %total%'
+catalog_books.signal_purchase_currency: Währung
+catalog_books.signal_containers: Container
+catalog_books.signal_random_encounters: Zufallsbegegnungen
+catalog_books.signal_enemies: Gegner
+catalog_books.signal_events: Events
+catalog_books.signal_expeditions: Expeditionen
+catalog_books.signal_daily_ops: Daily Ops
+catalog_books.signal_raid: Raid
+catalog_books.signal_unused_content: Ungenutzter Inhalt
+catalog_books.signal_seasonal_content: Saisoninhalt
+catalog_books.signal_treasure_maps: Schatzkarten
+catalog_books.signal_quests: Quests
+catalog_books.signal_vendors: Händler
+catalog_books.signal_world_spawns: Welt-Spawns
+catalog_books.signal_enabled: Aktiv
+catalog_books.currency_caps: Caps
+catalog_books.currency_gold_bullion: Goldbarren
+catalog_books.currency_stamps: Stempel
+catalog_books.currency_tickets: Tickets
 nuke_codes.description: Verfolge Alpha-, Bravo- und Charlie-Codes mit ihrem Gultigkeitszeitraum.
 nuke_codes.timezone: 'Zeitzone: %timezone%'
 nuke_codes.state.loading: Nukecodes werden geladen...

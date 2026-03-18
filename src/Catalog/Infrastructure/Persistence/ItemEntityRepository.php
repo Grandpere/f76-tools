@@ -17,6 +17,7 @@ use App\Catalog\Application\Admin\AdminCatalogItemReadRepository;
 use App\Catalog\Application\Import\ItemImportItemRepository;
 use App\Catalog\Application\Import\ItemSourceCollisionReadRepository;
 use App\Catalog\Application\Import\ItemSourceComparisonReadRepository;
+use App\Catalog\Application\Item\BookCatalogFrontReadRepository;
 use App\Catalog\Application\Item\ItemCatalogTimestampReadRepository;
 use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
@@ -32,7 +33,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<ItemEntity>
  */
-final class ItemEntityRepository extends ServiceEntityRepository implements ItemKnowledgeTransferRepository, ItemStatsReadRepository, ItemImportItemRepository, ItemKnowledgeCatalogReadRepository, ItemReadRepository, ItemCatalogTimestampReadRepository, ItemSourceComparisonReadRepository, ItemSourceCollisionReadRepository, AdminCatalogItemReadRepository
+final class ItemEntityRepository extends ServiceEntityRepository implements ItemKnowledgeTransferRepository, ItemStatsReadRepository, ItemImportItemRepository, ItemKnowledgeCatalogReadRepository, ItemReadRepository, ItemCatalogTimestampReadRepository, ItemSourceComparisonReadRepository, ItemSourceCollisionReadRepository, AdminCatalogItemReadRepository, BookCatalogFrontReadRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -559,6 +560,28 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
         }
 
         $items = $qb->getQuery()->getResult();
+
+        /** @var list<ItemEntity> $items */
+        return $items;
+    }
+
+    /**
+     * @return list<ItemEntity>
+     */
+    public function findAllBooksDetailedOrdered(): array
+    {
+        $items = $this->createQueryBuilder('i')
+            ->leftJoin('i.bookLists', 'bl')
+            ->addSelect('bl')
+            ->leftJoin('i.externalSources', 'src')
+            ->addSelect('src')
+            ->andWhere('i.type = :type')
+            ->setParameter('type', ItemTypeEnum::BOOK)
+            ->orderBy('i.sourceId', 'ASC')
+            ->addOrderBy('bl.listNumber', 'ASC')
+            ->addOrderBy('src.provider', 'ASC')
+            ->getQuery()
+            ->getResult();
 
         /** @var list<ItemEntity> $items */
         return $items;

@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-03-18 - Front catalog browse can filter in memory first when the visible name is translated
+- Symptom: a new front page for plans/recipes needs search on the displayed item name and merge-derived signals, but those values do not live in one SQL column.
+- Root cause: the real user-facing name comes from translation keys, and the merge status/signals are computed in PHP from source metadata, so a naive SQL filter would diverge from what the page actually shows.
+- Fix: the first `BOOK` browse page loads the detailed book catalog, maps the translated/merged front rows in PHP, then applies search and merge-status filtering in memory before paginating.
+- Prevention: when a front filter depends on translated labels or computed merge semantics, prefer one trusted PHP read model first and optimize the query path only after real usage proves it necessary.
+
 ## 2026-03-18 - Internal Fallout Wiki name contradictions should downgrade that provider for merge
 - Symptom: after the latest import enrichment, three previously resolved name conflicts (`Deep pocketed metal armor chest`, `Bladed Commie Whacker`, `Vault 63 Jumpsuit`) came back in `source-merge`.
 - Root cause: some `fallout.wiki` rows carry two materially different names at once (`resource.name` and `columns.name`). Preserving only one imported name without tracking the contradiction made the merge policy trust an internally inconsistent source again.

@@ -3,6 +3,11 @@
 ## Priorite active
 - F76-150: OCR microservice Python optionnel - `Deferred` (remplace par flux JSON manuel pour roadmap).
 
+### Avancement F76-154
+- Done (slice 1): nouveau read model front `BOOK` qui charge les plans/recettes detailles, derive les statuts/signaux de merge utiles et applique recherche + filtre de statut en memoire sur les noms visibles/traduits.
+- Done (slice 2): nouvelle page front authentifiee `/plans-recipes` avec pagination, recherche, filtre de statut de merge, cartes catalogue et navigation principale.
+- Done (slice 3): tests unitaires/fonctionnels cibles pour le read model et le controleur front, plus traduction/navigation/styling associes.
+
 ### Avancement F76-153
 - Done (slice 1): `app:data:sync` devient orchestrateur (`all|nukaknights|fandom`) avec delegation a `app:data:sync:fandom`.
 - Done (slice 1): tests unitaires ajoutés pour l orchestration Fandom (`only=fandom` success/failure).
@@ -56,6 +61,7 @@
 - Remaining: capitaliser sur l UI admin pour confirmer les prochains conflits reels en environnement deploye ; si de nouveaux cas limites apparaissent, les traiter a la demande plutot que d etendre la taxonomie par anticipation.
 
 ## Termine recemment
+- F76-154: page front de lecture des plans/recettes fusionnes (done).
 - F76-153: pipeline de sync multi-sources + preparation Nukacrypt (done).
 - F76-152: Catalog items multi-source (core item + source metadata table) (done).
 - F76-147: upload roadmap OCR via backoffice (done).

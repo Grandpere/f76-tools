@@ -1741,6 +1741,15 @@ body::before {
     gap: 0.7rem;
 }
 
+.catalog-books-grid {
+    margin-top: 0.95rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.catalog-books-stats {
+    margin-top: 0.9rem;
+}
+
 .item-card {
     position: relative;
     display: flex;
@@ -1757,11 +1766,86 @@ body::before {
     border-color: rgba(230, 185, 0, 0.65);
 }
 
+.catalog-book-card {
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 244, 235, 0.98)),
+        linear-gradient(150deg, rgba(255, 210, 74, 0.08), rgba(255, 210, 74, 0));
+}
+
 .item-card-head {
     display: flex;
     justify-content: flex-start;
     gap: 0.52rem;
     align-items: center;
+}
+
+.catalog-book-head {
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.catalog-book-title-stack {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.catalog-book-title-stack strong {
+    display: block;
+    font-size: 1.04rem;
+    line-height: 1.22;
+}
+
+.catalog-book-id-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.42rem;
+    align-items: center;
+    font-size: 0.78rem;
+    color: var(--text-2);
+}
+
+.catalog-book-head-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.34rem;
+    margin-left: 0.7rem;
+}
+
+.catalog-book-meta,
+.catalog-book-provider-list,
+.catalog-book-signal-list {
+    margin-top: 0.58rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.38rem;
+}
+
+.catalog-book-provider-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.18rem;
+    padding: 0.2rem 0.48rem;
+    border-radius: 999px;
+    border: 1px solid rgba(160, 119, 0, 0.22);
+    background: rgba(255, 249, 223, 0.88);
+    color: #6b5200;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.catalog-book-provider-link:hover {
+    border-color: rgba(160, 119, 0, 0.42);
+    color: #8c6d00;
+}
+
+.catalog-book-merge-label {
+    margin-top: 0.56rem;
+    font-size: 0.8rem;
+    color: var(--text-1);
 }
 
 .item-card-head strong {
