@@ -29,6 +29,7 @@
 - Done (slice 21): la politique de merge et ses rapports (`source-merge`, `source-merge-summary`) propagent aussi cette distinction via la raison `generic_label_confirmed_by_specific_target` et des compteurs dedies.
 - Done (slice 22): ajout d une UI admin read-only `admin/catalog/items` pour consulter les items catalogue, leurs sources externes et le detail `sourceMerge` sans dependre des rapports console en environnement deploye.
 - Done (slice 23): normalisation cross-source de la devise d achat via un champ merge canonique `purchase_currency`, pour aligner `fandom.value_currency` et `fallout_wiki.type` quand ils decrivent la meme monnaie du jeu.
+- Done (slice 24): enrichissement des metadata `fallout_wiki` a l import avec des flags canoniques derives (`containers`, `enemies`, `quests`, `vendors`, `world_spawns`, `seasonal_content`, `treasure_maps`) et une `purchase_currency` derivee afin de rendre le filtrage et le merge plus coherents avec Fandom.
 - Note: le lookup public Nukacrypt direct par `form_id` via `esmRecord` reste non fiable depuis l app (HTTP 500 / corps vide). Un `curl` navigateur colle manuellement dans le shell du conteneur `app` peut repondre, mais le meme cas n est pas encore reproducible via le runtime PHP (`HttpClient`/probe). On garde donc Nukacrypt en outil opportuniste d arbitrage, pas en source serveur robuste.
 - Remaining: capitaliser sur l UI admin pour confirmer les prochains conflits reels en environnement deploye, puis seulement si besoin enrichir les vues de merge avec davantage d aide a l arbitrage Nukacrypt.
 

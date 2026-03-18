@@ -136,4 +136,55 @@ final class ItemImportItemHydratorTest extends TestCase
         self::assertIsArray($derived);
         self::assertFalse($derived['tradeable'] ?? true);
     }
+
+    public function testBuildExternalSourceDataDerivesCanonicalFalloutWikiAvailabilityFlags(): void
+    {
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
+
+        $data = $hydrator->buildExternalSourceData('fallout_wiki', [
+            'obtained' => [
+                'Fallout 76 Locations',
+                'Quest',
+                'Bottle Cap',
+                'Treasure Map',
+                'Fallout 76 Containers and Storage',
+                'Fallout 76 Creatures',
+                'Fallout 76 Seasons',
+            ],
+            'type' => 'Purchased With Caps',
+        ], 999);
+
+        self::assertTrue($data['metadata']['world_spawns'] ?? false);
+        self::assertTrue($data['metadata']['quests'] ?? false);
+        self::assertTrue($data['metadata']['vendors'] ?? false);
+        self::assertTrue($data['metadata']['treasure_maps'] ?? false);
+        self::assertTrue($data['metadata']['containers'] ?? false);
+        self::assertTrue($data['metadata']['enemies'] ?? false);
+        self::assertTrue($data['metadata']['seasonal_content'] ?? false);
+        self::assertSame('caps', $data['metadata']['purchase_currency'] ?? null);
+    }
+
+    public function testBuildExternalSourceDataDerivesCanonicalFlagsFromFalloutWikiIconPayload(): void
+    {
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
+
+        $data = $hydrator->buildExternalSourceData('fallout_wiki', [
+            'obtained' => [
+                'text' => 'MODUS Science Terminal',
+                'icons' => [
+                    'Quest',
+                ],
+            ],
+            'type' => [
+                'text' => 'Purchased With Bullion',
+                'icons' => ['Gold Bullion'],
+            ],
+        ], 1000);
+
+        self::assertTrue($data['metadata']['vendors'] ?? false);
+        self::assertTrue($data['metadata']['quests'] ?? false);
+        self::assertSame('gold_bullion', $data['metadata']['purchase_currency'] ?? null);
+    }
 }

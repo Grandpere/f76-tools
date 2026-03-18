@@ -22,10 +22,26 @@ final class ItemImportExternalMetadataEnricher
      */
     public function enrich(string $provider, array $metadata): array
     {
-        if ('nukacrypt' !== strtolower(trim($provider))) {
-            return $metadata;
+        $normalizedProvider = strtolower(trim($provider));
+
+        if ('nukacrypt' === $normalizedProvider) {
+            return $this->enrichNukacrypt($metadata);
         }
 
+        if ('fallout_wiki' === $normalizedProvider) {
+            return $this->enrichFalloutWiki($metadata);
+        }
+
+        return $metadata;
+    }
+
+    /**
+     * @param array<string, mixed> $metadata
+     *
+     * @return array<string, mixed>
+     */
+    private function enrichNukacrypt(array $metadata): array
+    {
         $keywordNames = $this->extractKeywordNames($metadata['keywords'] ?? null);
         if ([] === $keywordNames) {
             return $metadata;
@@ -36,6 +52,64 @@ final class ItemImportExternalMetadataEnricher
         if (in_array('UnsellableObject', $keywordNames, true)) {
             $metadata['derived'] = is_array($metadata['derived'] ?? null) ? $metadata['derived'] : [];
             $metadata['derived']['tradeable'] = false;
+        }
+
+        return $metadata;
+    }
+
+    /**
+     * @param array<string, mixed> $metadata
+     *
+     * @return array<string, mixed>
+     */
+    private function enrichFalloutWiki(array $metadata): array
+    {
+        $labels = $this->extractFalloutWikiLabels($metadata);
+        if ([] === $labels) {
+            return $metadata;
+        }
+
+        $normalizedLabels = array_map($this->normalizeLooseText(...), $labels);
+
+        $metadata['containers'] ??= $this->labelsContainAny($normalizedLabels, [
+            'fallout 76 containers and storage',
+            'container spawn',
+        ]);
+        $metadata['enemies'] ??= $this->labelsContainAny($normalizedLabels, [
+            'fallout 76 creatures',
+            'looted from enemy',
+        ]);
+        $metadata['seasonal_content'] ??= $this->labelsContainAny($normalizedLabels, [
+            'fallout 76 seasons',
+            'gained during season',
+            'fallout 76 legacy content',
+            'limited time item',
+        ]);
+        $metadata['treasure_maps'] ??= $this->labelsContainAny($normalizedLabels, [
+            'treasure map',
+        ]);
+        $metadata['quests'] ??= $this->labelsContainAny($normalizedLabels, [
+            'quest',
+            'acquired via quest',
+        ]);
+        $metadata['vendors'] ??= $this->labelsContainAny($normalizedLabels, [
+            'bottle cap',
+            'purchased with caps',
+            'gold bullion',
+            'purchased with bullion',
+            'stamp',
+            'stamps',
+            'ticket',
+            'tickets',
+        ]);
+        $metadata['world_spawns'] ??= $this->labelsContainAny($normalizedLabels, [
+            'fallout 76 locations',
+            'world spawn',
+        ]);
+
+        $purchaseCurrency = $this->normalizePurchaseCurrencyFromLabels($normalizedLabels);
+        if (null !== $purchaseCurrency) {
+            $metadata['purchase_currency'] ??= $purchaseCurrency;
         }
 
         return $metadata;
@@ -78,5 +152,97 @@ final class ItemImportExternalMetadataEnricher
         $uniqueNames = array_values(array_unique($names));
 
         return $uniqueNames;
+    }
+
+    /**
+     * @param array<string, mixed> $metadata
+     *
+     * @return list<string>
+     */
+    private function extractFalloutWikiLabels(array $metadata): array
+    {
+        $labels = [];
+
+        foreach (['obtained', 'type'] as $field) {
+            $value = $metadata[$field] ?? null;
+            $labels = array_merge($labels, $this->extractScalarLabels($value));
+        }
+
+        /** @var list<string> $unique */
+        $unique = array_values(array_unique(array_filter(array_map('trim', $labels), static fn (string $value): bool => '' !== $value)));
+
+        return $unique;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function extractScalarLabels(mixed $value): array
+    {
+        if (is_scalar($value)) {
+            return [trim((string) $value)];
+        }
+
+        if (!is_array($value)) {
+            return [];
+        }
+
+        $labels = [];
+        foreach ($value as $key => $entry) {
+            if (is_string($key) && in_array($key, ['text', 'icons'], true)) {
+                $labels = array_merge($labels, $this->extractScalarLabels($entry));
+
+                continue;
+            }
+
+            $labels = array_merge($labels, $this->extractScalarLabels($entry));
+        }
+
+        return $labels;
+    }
+
+    /**
+     * @param list<string> $labels
+     * @param list<string> $needles
+     */
+    private function labelsContainAny(array $labels, array $needles): bool
+    {
+        foreach ($needles as $needle) {
+            if (in_array($needle, $labels, true)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function normalizeLooseText(string $value): string
+    {
+        $normalized = mb_strtolower(trim($value));
+        $normalized = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $normalized);
+
+        return trim((string) $normalized);
+    }
+
+    /**
+     * @param list<string> $labels
+     */
+    private function normalizePurchaseCurrencyFromLabels(array $labels): ?string
+    {
+        foreach ($labels as $label) {
+            $normalized = match ($label) {
+                'bottle cap', 'bottle caps', 'cap', 'caps', 'purchased with caps' => 'caps',
+                'gold', 'gold bullion', 'bullion', 'purchased with bullion' => 'gold_bullion',
+                'stamp', 'stamps' => 'stamps',
+                'ticket', 'tickets' => 'tickets',
+                default => null,
+            };
+
+            if (null !== $normalized) {
+                return $normalized;
+            }
+        }
+
+        return null;
     }
 }

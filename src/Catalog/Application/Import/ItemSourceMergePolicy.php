@@ -287,8 +287,8 @@ final class ItemSourceMergePolicy
         array $metadataA,
         array $metadataB,
     ): ?ItemSourceFieldMergeDecision {
-        $rawValueA = $metadataA['value_currency'] ?? null;
-        $rawValueB = $metadataB['type'] ?? null;
+        $rawValueA = $metadataA['purchase_currency'] ?? $metadataA['value_currency'] ?? null;
+        $rawValueB = $metadataB['purchase_currency'] ?? $metadataB['type'] ?? null;
 
         $normalizedA = $this->normalizePurchaseCurrency($rawValueA);
         $normalizedB = $this->normalizePurchaseCurrency($rawValueB);

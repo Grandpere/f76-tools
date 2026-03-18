@@ -610,3 +610,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: the cross-source merge treated raw source column names literally instead of recognizing that some providers encode the same business concept under different metadata keys and labels.
 - Fix: added a canonical merge field `purchase_currency` and normalized known currency labels (`caps`, `gold_bullion`, `stamps`, `tickets`) before comparing or reporting them.
 - Prevention: when two providers expose equivalent business meaning under different raw keys, prefer a derived canonical field in merge/reporting and keep raw labels only in source metadata.
+
+## 2026-03-18 - Fallout Wiki acquisition taxonomies need derived boolean flags for practical filtering
+- Symptom: `fallout_wiki` stored acquisition hints mostly as raw label arrays/objects (`Fallout 76 Locations`, `Quest`, `Bottle Cap`, etc.), which made filtering and field-by-field merge much less practical than Fandom's boolean availability flags.
+- Root cause: the sync preserved wiki labels faithfully, but the import layer did not derive any canonical booleans from those labels.
+- Fix: enriched `fallout_wiki` metadata during import with derived canonical flags (`containers`, `enemies`, `quests`, `vendors`, `world_spawns`, `seasonal_content`, `treasure_maps`) plus a derived `purchase_currency`, while keeping the raw `obtained` / `type` labels intact.
+- Prevention: when a provider exposes categorical labels instead of direct booleans, derive canonical filterable flags at import time rather than forcing downstream code to reverse-engineer label arrays repeatedly.
