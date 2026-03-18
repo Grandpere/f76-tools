@@ -112,7 +112,14 @@ final class FilesystemItemImportSourceReader implements ItemImportSourceReader
 
         $name = $resource['title'] ?? $resource['name'] ?? null;
         if (is_scalar($name) && '' !== trim((string) $name)) {
-            $row['name_en'] = trim((string) $name);
+            $normalizedName = trim((string) $name);
+            $rawName = $row['name'] ?? null;
+            if (is_scalar($rawName) && '' !== trim((string) $rawName) && trim((string) $rawName) !== $normalizedName) {
+                $row['source_name_raw'] = trim((string) $rawName);
+            }
+
+            $row['name'] = $normalizedName;
+            $row['name_en'] = $normalizedName;
         }
 
         $type = $resource['type'] ?? null;

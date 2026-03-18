@@ -21,6 +21,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-03-18 - Internal Fallout Wiki name contradictions should downgrade that provider for merge
+- Symptom: after the latest import enrichment, three previously resolved name conflicts (`Deep pocketed metal armor chest`, `Bladed Commie Whacker`, `Vault 63 Jumpsuit`) came back in `source-merge`.
+- Root cause: some `fallout.wiki` rows carry two materially different names at once (`resource.name` and `columns.name`). Preserving only one imported name without tracking the contradiction made the merge policy trust an internally inconsistent source again.
+- Fix: the filesystem reader now stores the divergent column value in `source_name_raw`, and the merge policy prefers the other provider for `name` / `name_en` whenever one source shows that internal contradiction.
+- Prevention: when a third-party row contains contradictory naming signals, keep both for audit and treat that source as lower-trust for merged names instead of forcing one arbitrary “canonical” value too early.
+
 ## 2026-03-18 - Fallout Wiki recipe rows must keep anchor href and dedupe by form_id
 - Symptom: `fallout.wiki` recipes with the same visible label (for example `Recipe: Healing Salve`) collapsed into one JSON row, and the stored `wiki_url` pointed to a generic 404 page instead of the variant page.
 - Root cause: the sync command built `slug` and fallback `wiki_url` from the visible `name`, while deduplication keyed rows by `type|slug`; generic labels therefore overwrote distinct variants even when each row had its own anchor `href` and `form_id`.

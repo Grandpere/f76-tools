@@ -113,6 +113,26 @@ final class ItemSourceMergePolicy
             return null;
         }
 
+        if ($hasA && $this->sourceHasInternalNameConflict($metadataB, $field)) {
+            return new ItemSourceFieldMergeDecision(
+                $field,
+                $sourceA->getProvider(),
+                $valueA,
+                'preferred_other_source_internal_name_conflict',
+                $valueB,
+            );
+        }
+
+        if ($hasB && $this->sourceHasInternalNameConflict($metadataA, $field)) {
+            return new ItemSourceFieldMergeDecision(
+                $field,
+                $sourceB->getProvider(),
+                $valueB,
+                'preferred_other_source_internal_name_conflict',
+                $valueA,
+            );
+        }
+
         if ($this->normalizeLooseText($valueA) === $this->normalizeLooseText($valueB)) {
             return new ItemSourceFieldMergeDecision(
                 $field,
@@ -235,6 +255,21 @@ final class ItemSourceMergePolicy
         $normalized = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $normalized);
 
         return trim((string) $normalized);
+    }
+
+    /**
+     * @param array<string, mixed> $metadata
+     */
+    private function sourceHasInternalNameConflict(array $metadata, string $field): bool
+    {
+        $rawValue = $metadata['source_name_raw'] ?? null;
+        $currentValue = $metadata[$field] ?? null;
+        if (!is_scalar($rawValue) || !is_scalar($currentValue)) {
+            return false;
+        }
+
+        return '' !== $this->normalizeLooseText($rawValue)
+            && $this->normalizeLooseText($rawValue) !== $this->normalizeLooseText($currentValue);
     }
 
     private function mergeSpecificVariantName(

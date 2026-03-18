@@ -112,6 +112,40 @@ final class ItemSourceMergePolicyTest extends TestCase
         self::assertSame('generic_label_confirmed_by_specific_target', $decisions['name_en']->reason);
     }
 
+    public function testMergePrefersOtherProviderWhenSourceHasInternalNameConflict(): void
+    {
+        $item = new ItemEntity();
+        $item
+            ->setType(ItemTypeEnum::BOOK)
+            ->setSourceId(163267)
+            ->setNameKey('item.book.163267.name');
+        $item->upsertExternalSource('fandom', '00027DC3', null, [
+            'name' => 'Plan: Deep pocketed metal armor chest',
+            'name_en' => 'Plan: Deep pocketed metal armor chest',
+        ]);
+        $item->upsertExternalSource('fallout_wiki', '00027DC3', 'https://fallout.wiki/wiki/Plan:_Deep_pocketed_metal_armor_chest', [
+            'name' => 'Plan: Pocketed marine armor chest',
+            'name_en' => 'Plan: Pocketed marine armor chest',
+            'source_name_raw' => 'Plan: Deep pocketed metal armor chest',
+        ]);
+
+        $policy = new ItemSourceMergePolicy();
+        $result = $policy->merge($item, 'fandom', 'fallout_wiki');
+
+        self::assertNotNull($result);
+        self::assertCount(0, $result->conflicts);
+
+        $decisions = [];
+        foreach ($result->decisions as $decision) {
+            $decisions[$decision->field] = $decision;
+        }
+
+        self::assertSame('fandom', $decisions['name']->provider);
+        self::assertSame('preferred_other_source_internal_name_conflict', $decisions['name']->reason);
+        self::assertSame('fandom', $decisions['name_en']->provider);
+        self::assertSame('preferred_other_source_internal_name_conflict', $decisions['name_en']->reason);
+    }
+
     public function testMergeNormalizesPurchaseCurrencyAcrossProviders(): void
     {
         $item = new ItemEntity();

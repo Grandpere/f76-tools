@@ -108,6 +108,42 @@ final class FilesystemItemImportSourceReaderTest extends TestCase
         self::assertTrue((bool) ($rows[0]['vendors'] ?? false));
     }
 
+    public function testReadRowsPrefersCanonicalResourceNameOverConflictingColumnName(): void
+    {
+        $root = $this->createTempDir();
+        $path = $root.'/plans_weapon_mods.json';
+        file_put_contents($path, (string) json_encode([
+            'generated_at' => '2026-03-18T10:00:00+00:00',
+            'page' => 'Fallout_76_Weapon_Mod_Plans',
+            'url' => 'https://fallout.wiki/wiki/Fallout_76_Weapon_Mod_Plans',
+            'resources' => [
+                [
+                    'type' => 'plan',
+                    'slug' => 'plan-bladed-commie-whacker',
+                    'name' => 'Plan: Bladed Commie Whacker',
+                    'section' => 'Melee',
+                    'columns' => [
+                        'name' => 'Plan: Garden Trowel Knife',
+                        'form_id' => '002B42A4',
+                        'wiki_url' => 'https://fallout.wiki/wiki/Plan:_Garden_Trowel_Knife',
+                    ],
+                ],
+            ],
+        ], JSON_THROW_ON_ERROR));
+
+        $reader = new FilesystemItemImportSourceReader();
+        $rows = $reader->readRows($path);
+
+        self::assertIsArray($rows);
+        self::assertCount(1, $rows);
+        self::assertIsArray($rows[0]);
+        /** @var array<string, mixed> $row */
+        $row = $rows[0];
+        self::assertSame('Plan: Bladed Commie Whacker', $row['name'] ?? null);
+        self::assertSame('Plan: Bladed Commie Whacker', $row['name_en'] ?? null);
+        self::assertSame('Plan: Garden Trowel Knife', $row['source_name_raw'] ?? null);
+    }
+
     private function createTempDir(): string
     {
         $path = sys_get_temp_dir().'/item-import-reader-'.bin2hex(random_bytes(8));
