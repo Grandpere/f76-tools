@@ -40,6 +40,7 @@ final class BookCatalogController extends AbstractController
         'seasonal_content' => '/assets/icons/FO76_scoresprite_seasons.png',
         'treasure_maps' => '/assets/icons/Icon_note_small.png',
         'unused_content' => '/assets/icons/Icon_unused_wiki.png',
+        'vendors' => '/assets/icons/Caps.png',
         'world_spawns' => '/assets/icons/FO76_ui_exploration_team.png',
     ];
 
