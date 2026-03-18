@@ -511,7 +511,7 @@ final class ReportItemSourceVocabularyCommand extends Command
         $enriched = $this->externalMetadataEnricher->enrich('fallout_wiki', $metadata);
         $mappedFields = [];
 
-        foreach (['containers', 'enemies', 'events', 'daily_ops', 'raid', 'unused_content', 'seasonal_content', 'treasure_maps', 'quests', 'vendors', 'world_spawns'] as $candidateField) {
+        foreach (['containers', 'enemies', 'events', 'expeditions', 'daily_ops', 'raid', 'unused_content', 'seasonal_content', 'treasure_maps', 'quests', 'vendors', 'world_spawns'] as $candidateField) {
             if (true === ($enriched[$candidateField] ?? false)) {
                 $mappedFields[] = $candidateField;
             }

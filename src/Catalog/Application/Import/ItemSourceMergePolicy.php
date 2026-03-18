@@ -26,6 +26,7 @@ final class ItemSourceMergePolicy
             'random_encounters',
             'enemies',
             'events',
+            'expeditions',
             'daily_ops',
             'raid',
             'unused_content',

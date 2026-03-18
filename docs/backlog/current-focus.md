@@ -42,6 +42,7 @@
 - Done (slice 34): le rapport `app:data:report:source-vocabulary` accepte maintenant aussi `--only-mapped`, mutuellement exclusif avec `--only-unmapped`, pour visualiser rapidement la couverture canonique deja en place sans le bruit du residuel.
 - Done (slice 35): la taxonomie canonique derivee couvre maintenant aussi `unused_content` pour `fallout_wiki` a partir des labels bruts `Overview:Unused Content`, `Unused Content` et `Fallout 76 Unused Content`, avec propagation dans le merge/reporting.
 - Done (slice 36): la taxonomie canonique derivee couvre maintenant aussi `raid` pour `fallout_wiki` via un matching par token normalise (`Raid: ...`, `... (Raid)`), avec propagation dans le merge/reporting et le rapport de vocabulaire.
+- Done (slice 37): la taxonomie canonique derivee couvre maintenant aussi `expeditions` pour `fallout_wiki` a partir du token generique `Expeditions`, afin de capter les labels de categorie sans mapper trop tot les activites nommees.
 - Note: le lookup public Nukacrypt direct par `form_id` via `esmRecord` reste non fiable depuis l app (HTTP 500 / corps vide). Un `curl` navigateur colle manuellement dans le shell du conteneur `app` peut repondre, mais le meme cas n est pas encore reproducible via le runtime PHP (`HttpClient`/probe). On garde donc Nukacrypt en outil opportuniste d arbitrage, pas en source serveur robuste.
 - Remaining: capitaliser sur l UI admin pour confirmer les prochains conflits reels en environnement deploye, puis seulement si besoin enrichir les vues de merge avec davantage d aide a l arbitrage Nukacrypt.
 

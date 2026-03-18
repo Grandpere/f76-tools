@@ -278,4 +278,19 @@ final class ItemImportItemHydratorTest extends TestCase
 
         self::assertTrue($data['metadata']['raid'] ?? false);
     }
+
+    public function testBuildExternalSourceDataDerivesExpeditionsFromFalloutWikiLabels(): void
+    {
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
+
+        $data = $hydrator->buildExternalSourceData('fallout_wiki', [
+            'obtained' => [
+                'Expeditions: The Pitt',
+                'Expeditions Giuseppe',
+            ],
+        ], 1006);
+
+        self::assertTrue($data['metadata']['expeditions'] ?? false);
+    }
 }

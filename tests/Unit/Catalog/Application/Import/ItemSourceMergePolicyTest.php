@@ -271,4 +271,34 @@ final class ItemSourceMergePolicyTest extends TestCase
         self::assertSame('fallback_provider_b', $decisions['raid']->reason);
         self::assertTrue($decisions['raid']->value);
     }
+
+    public function testMergeFallsBackToFalloutWikiForExpeditionsWhenOnlyWikiHasIt(): void
+    {
+        $item = new ItemEntity();
+        $item
+            ->setType(ItemTypeEnum::BOOK)
+            ->setSourceId(9103)
+            ->setNameKey('item.book.9103.name');
+        $item->upsertExternalSource('fandom', '9103', null, [
+            'name_en' => 'Plan: Example',
+        ]);
+        $item->upsertExternalSource('fallout_wiki', '9103', null, [
+            'name_en' => 'Plan: Example',
+            'expeditions' => true,
+        ]);
+
+        $policy = new ItemSourceMergePolicy();
+        $result = $policy->merge($item, 'fandom', 'fallout_wiki');
+
+        self::assertNotNull($result);
+
+        $decisions = [];
+        foreach ($result->decisions as $decision) {
+            $decisions[$decision->field] = $decision;
+        }
+
+        self::assertSame('fallout_wiki', $decisions['expeditions']->provider);
+        self::assertSame('fallback_provider_b', $decisions['expeditions']->reason);
+        self::assertTrue($decisions['expeditions']->value);
+    }
 }

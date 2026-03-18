@@ -86,6 +86,7 @@ final class ItemImportExternalMetadataEnricher
             'event',
             'mutated public events',
         ]);
+        $metadata['expeditions'] ??= $this->labelsContainToken($normalizedLabels, 'expeditions');
         $metadata['daily_ops'] ??= $this->labelsContainAny($normalizedLabels, [
             'daily ops',
         ]);

@@ -51,6 +51,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: the importer now derives `raid` through normalized token matching, so both `Raid: ...` and `... (Raid)` feed the same canonical flag without cataloguing every concrete raid title.
 - Prevention: when a concept appears as a stable token embedded in multiple labels, prefer normalized token matching over brittle exact-string lists.
 
+## 2026-03-18 - Prefer generic category tokens over named activities for new expedition taxonomy
+- Symptom: the `fallout_wiki.obtained` backlog contained both a reusable category marker (`Expeditions: The Pitt`, `Expeditions Giuseppe`) and many named expedition activities (`Tax Evasion`, `The Human Condition`) that would be unsafe to normalize wholesale.
+- Root cause: expedition-related labels mix stable taxonomy prefixes with one-off mission names and vendor references.
+- Fix: `expeditions` was introduced only from the generic `Expeditions` token, leaving named mission labels in raw metadata until there is an explicit need to classify them further.
+- Prevention: when a source blends category labels with named activities, normalize the shared category token first and keep the named content raw until the product model needs a finer distinction.
+
 ## 2026-03-18 - Fallout Wiki recipe rows must keep anchor href and dedupe by form_id
 - Symptom: `fallout.wiki` recipes with the same visible label (for example `Recipe: Healing Salve`) collapsed into one JSON row, and the stored `wiki_url` pointed to a generic 404 page instead of the variant page.
 - Root cause: the sync command built `slug` and fallback `wiki_url` from the visible `name`, while deduplication keyed rows by `type|slug`; generic labels therefore overwrote distinct variants even when each row had its own anchor `href` and `form_id`.
