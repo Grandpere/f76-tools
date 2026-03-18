@@ -43,6 +43,7 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
         $decoded = json_decode($tester->getDisplay(), true, 512, JSON_THROW_ON_ERROR);
         self::assertNull($decoded['provider'] ?? null);
         self::assertNull($decoded['field'] ?? null);
+        self::assertFalse($decoded['only_mapped'] ?? true);
         self::assertFalse($decoded['only_unmapped'] ?? true);
         self::assertIsArray($decoded['sections'] ?? null);
         self::assertCount(3, $decoded['sections']);
@@ -121,6 +122,7 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
         $decoded = json_decode($tester->getDisplay(), true, 512, JSON_THROW_ON_ERROR);
         self::assertSame('fallout_wiki', $decoded['provider'] ?? null);
         self::assertSame('obtained', $decoded['field'] ?? null);
+        self::assertFalse($decoded['only_mapped'] ?? true);
         self::assertFalse($decoded['only_unmapped'] ?? true);
         self::assertIsArray($decoded['sections'] ?? null);
         self::assertCount(1, $decoded['sections']);
@@ -146,6 +148,46 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
         ]);
 
         self::assertSame(Command::INVALID, $exitCode);
+    }
+
+    public function testOnlyMappedFilterKeepsOnlyCoveredRows(): void
+    {
+        $projectDir = $this->createFixtureProjectDir();
+
+        $kernel = $this->createMock(KernelInterface::class);
+        $kernel->method('getProjectDir')->willReturn($projectDir);
+
+        $command = new ReportItemSourceVocabularyCommand(new FilesystemItemImportSourceReader(), new ItemImportExternalMetadataEnricher(), $kernel);
+        $tester = new CommandTester($command);
+
+        $exitCode = $tester->execute([
+            '--provider' => 'fallout_wiki',
+            '--field' => 'obtained',
+            '--only-mapped' => true,
+            '--format' => 'json',
+        ]);
+
+        self::assertSame(Command::SUCCESS, $exitCode);
+        /** @var array<string, mixed> $decoded */
+        $decoded = json_decode($tester->getDisplay(), true, 512, JSON_THROW_ON_ERROR);
+        self::assertTrue($decoded['only_mapped'] ?? false);
+        self::assertFalse($decoded['only_unmapped'] ?? true);
+
+        /** @var list<array<string, mixed>> $sections */
+        $sections = $decoded['sections'];
+        $obtained = $this->findSection($sections, 'fallout_wiki', 'obtained');
+        /** @var list<array<string, mixed>> $rows */
+        $rows = is_array($obtained['rows'] ?? null) ? $obtained['rows'] : [];
+
+        $values = array_map(
+            static fn (array $row): mixed => $row['value'] ?? null,
+            $rows,
+        );
+
+        self::assertContains('Enemy Drop', $values);
+        self::assertContains('Bottle Cap', $values);
+        self::assertContains('Fallout 76 Locations', $values);
+        self::assertNotContains('Project Paradise', $values);
     }
 
     public function testOnlyUnmappedFilterKeepsOnlyResidualRows(): void
@@ -186,6 +228,24 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
             'falsy_count' => null,
             'mapped_fields' => [],
         ], $rows[0]);
+    }
+
+    public function testOnlyMappedAndOnlyUnmappedTogetherReturnInvalidCode(): void
+    {
+        $projectDir = $this->createFixtureProjectDir();
+
+        $kernel = $this->createMock(KernelInterface::class);
+        $kernel->method('getProjectDir')->willReturn($projectDir);
+
+        $command = new ReportItemSourceVocabularyCommand(new FilesystemItemImportSourceReader(), new ItemImportExternalMetadataEnricher(), $kernel);
+        $tester = new CommandTester($command);
+
+        $exitCode = $tester->execute([
+            '--only-mapped' => true,
+            '--only-unmapped' => true,
+        ]);
+
+        self::assertSame(Command::INVALID, $exitCode);
     }
 
     private function createFixtureProjectDir(): string

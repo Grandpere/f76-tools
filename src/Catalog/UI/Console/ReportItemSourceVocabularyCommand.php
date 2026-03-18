@@ -52,6 +52,7 @@ final class ReportItemSourceVocabularyCommand extends Command
         $this
             ->addOption('provider', null, InputOption::VALUE_REQUIRED, 'Provider: fandom|fallout_wiki')
             ->addOption('field', null, InputOption::VALUE_REQUIRED, 'Champ brut: availability|obtained|type')
+            ->addOption('only-mapped', null, InputOption::VALUE_NONE, 'N affiche que les labels qui alimentent deja au moins un champ canonique.')
             ->addOption('only-unmapped', null, InputOption::VALUE_NONE, 'N affiche que les labels qui n alimentent encore aucun champ canonique.')
             ->addOption('format', null, InputOption::VALUE_REQUIRED, 'Format de sortie: text|json', 'text');
     }
@@ -63,10 +64,17 @@ final class ReportItemSourceVocabularyCommand extends Command
         $provider = $this->normalizeStringOption($input->getOption('provider'));
         $field = $this->normalizeStringOption($input->getOption('field'));
         $format = $this->normalizeStringOption($input->getOption('format'));
+        $onlyMapped = (bool) $input->getOption('only-mapped');
         $onlyUnmapped = (bool) $input->getOption('only-unmapped');
 
         if (!in_array($format, ['text', 'json'], true)) {
             $io->error('Format invalide. Utilise text ou json.');
+
+            return Command::INVALID;
+        }
+
+        if ($onlyMapped && $onlyUnmapped) {
+            $io->error('Utilise soit --only-mapped soit --only-unmapped, pas les deux.');
 
             return Command::INVALID;
         }
@@ -82,13 +90,14 @@ final class ReportItemSourceVocabularyCommand extends Command
         $sections = [];
 
         foreach ($targets as $target) {
-            $sections[] = $this->buildSection($projectDir, $target['provider'], $target['field'], $onlyUnmapped);
+            $sections[] = $this->buildSection($projectDir, $target['provider'], $target['field'], $onlyMapped, $onlyUnmapped);
         }
 
         if ('json' === $format) {
             $output->writeln((string) json_encode([
                 'provider' => $provider,
                 'field' => $field,
+                'only_mapped' => $onlyMapped,
                 'only_unmapped' => $onlyUnmapped,
                 'sections' => $sections,
             ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
@@ -100,6 +109,7 @@ final class ReportItemSourceVocabularyCommand extends Command
         $io->definitionList(
             ['Provider filter' => $provider ?? 'all'],
             ['Field filter' => $field ?? 'all'],
+            ['Only mapped' => $onlyMapped ? 'yes' : 'no'],
             ['Only unmapped' => $onlyUnmapped ? 'yes' : 'no'],
             ['Sections' => (string) count($sections)],
         );
@@ -213,7 +223,7 @@ final class ReportItemSourceVocabularyCommand extends Command
      *     }>
      * }
      */
-    private function buildSection(string $projectDir, string $provider, string $field, bool $onlyUnmapped): array
+    private function buildSection(string $projectDir, string $provider, string $field, bool $onlyMapped, bool $onlyUnmapped): array
     {
         $rootPath = $projectDir.'/data/sources/'.$provider;
         $files = is_dir($rootPath) ? $this->sourceReader->findImportFiles($rootPath) : [];
@@ -267,7 +277,12 @@ final class ReportItemSourceVocabularyCommand extends Command
             $entries,
         ));
 
-        if ($onlyUnmapped) {
+        if ($onlyMapped) {
+            $rows = array_values(array_filter(
+                $rows,
+                static fn (array $row): bool => [] !== $row['mapped_fields'],
+            ));
+        } elseif ($onlyUnmapped) {
             $rows = array_values(array_filter(
                 $rows,
                 static fn (array $row): bool => [] === $row['mapped_fields'],

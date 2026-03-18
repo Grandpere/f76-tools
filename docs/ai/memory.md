@@ -659,6 +659,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: added `--only-unmapped` to `app:data:report:source-vocabulary`, so the report can be used directly as a backlog of labels that still do not feed any canonical field.
 - Prevention: when an audit report is used to guide follow-up cleanup, provide a filtered “actionable residue only” mode instead of forcing manual scanning through already-covered entries.
 
+## 2026-03-18 - Coverage audits also need a mapped-only view
+- Symptom: once `mapped_fields` and `--only-unmapped` existed, it was still awkward to review just the already-covered taxonomy surface without scanning the full mixed report.
+- Root cause: the report had a residue-only mode but no symmetrical “coverage-only” mode.
+- Fix: added `--only-mapped` to `app:data:report:source-vocabulary` and made it mutually exclusive with `--only-unmapped`.
+- Prevention: when an audit command supports a residue-only filter, add the symmetric covered-only view too so validation and backlog triage use the same command shape.
+
 ## 2026-03-18 - Add new canonical flags only from generic, low-risk source labels first
 - Symptom: the unmapped fallout.wiki residue includes many specific activity names (`The Big Bloom`, `Neurological Warfare`, `Giuseppe`, etc.), but not all of them are safe to classify automatically without inventing or overfitting taxonomy rules.
 - Root cause: raw source labels mix generic categories (`Fallout 76 Events`, `Daily Ops`) with named activities, NPCs, and noisy concatenations.
