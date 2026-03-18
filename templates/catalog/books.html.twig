@@ -49,7 +49,10 @@
                         {% for option in signalOptions %}
                             <label>
                                 <input type="checkbox" name="signals[]" value="{{ option }}" {% if option in selectedSignals %}checked{% endif %}>
-                                {{ ('catalog_books.signal_' ~ option)|trans }}
+                                {% if signalIconMap[option] is defined %}
+                                    <img src="{{ asset(signalIconMap[option]) }}" alt="" aria-hidden="true">
+                                {% endif %}
+                                <span>{{ ('catalog_books.signal_' ~ option)|trans }}</span>
                             </label>
                         {% endfor %}
                     </fieldset>
@@ -96,9 +99,19 @@
                                 <div class="item-prices">
                                     {% if item.price %}
                                         {% if item.priceMinerva %}
-                                            <span>{{ 'catalog_books.price_bullion'|trans({'%value%': item.price}) }}</span>
+                                            <span>
+                                                {% if currencyIconMap.gold_bullion is defined %}
+                                                    <img src="{{ asset(currencyIconMap.gold_bullion) }}" alt="" aria-hidden="true">
+                                                {% endif %}
+                                                {{ 'catalog_books.price_bullion'|trans({'%value%': item.price}) }}
+                                            </span>
                                         {% else %}
-                                            <span>{{ 'catalog_books.price'|trans({'%value%': item.price, '%currency%': item.priceCurrencyLabel}) }}</span>
+                                            <span>
+                                                {% if currencyIconMap[item.priceCurrencyCode] is defined %}
+                                                    <img src="{{ asset(currencyIconMap[item.priceCurrencyCode]) }}" alt="" aria-hidden="true">
+                                                {% endif %}
+                                                {{ 'catalog_books.price'|trans({'%value%': item.price, '%currency%': item.priceCurrencyLabel}) }}
+                                            </span>
                                         {% endif %}
                                     {% endif %}
                                     {% if item.priceMinerva %}
@@ -111,8 +124,15 @@
                                 <div class="catalog-book-signal-list">
                                     {% for signal in item.canonicalSignals %}
                                         {% if selectedSignals is empty or signal.field in selectedSignals %}
-                                            <span class="item-pill">
-                                                {{ signal.label }}
+                                            <span class="catalog-book-signal" title="{{ signal.label }}">
+                                                {% if signalIconMap[signal.field] is defined %}
+                                                    <img src="{{ asset(signalIconMap[signal.field]) }}" alt="" aria-hidden="true">
+                                                    <span class="visually-hidden">{{ signal.label }}</span>
+                                                {% else %}
+                                                    <span class="item-pill">
+                                                        {{ signal.label }}
+                                                    </span>
+                                                {% endif %}
                                             </span>
                                         {% endif %}
                                     {% endfor %}

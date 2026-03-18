@@ -1279,6 +1279,10 @@ body::before {
     color: var(--text-0);
 }
 
+.source-filters label span {
+    line-height: 1.15;
+}
+
 .catalog-books-list-filters {
     grid-column: 1 / -1;
 }
@@ -1963,6 +1967,7 @@ body::before {
 .item-prices {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 0.46rem;
     margin-top: 0.5rem;
     font-size: 0.82rem;
@@ -1972,6 +1977,44 @@ body::before {
 .item-prices img {
     width: 18px;
     height: 18px;
+    object-fit: contain;
+}
+
+.item-prices span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38rem;
+}
+
+.item-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.7rem;
+    padding: 0.2rem 0.52rem;
+    border-radius: 999px;
+    border: 1px solid rgba(160, 119, 0, 0.22);
+    background: rgba(255, 249, 223, 0.88);
+    color: #6b5200;
+    font-size: 0.76rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.catalog-book-signal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.9rem;
+    min-height: 1.9rem;
+    padding: 0.2rem;
+    border-radius: 999px;
+    border: 1px solid rgba(160, 119, 0, 0.22);
+    background: rgba(255, 249, 223, 0.88);
+}
+
+.catalog-book-signal img {
+    width: 20px;
+    height: 20px;
     object-fit: contain;
 }
 

@@ -59,6 +59,7 @@ final class BookCatalogFrontApplicationService
      *         rank:?int,
      *         price:?int,
      *         priceMinerva:?int,
+     *         priceCurrencyCode:string,
      *         priceCurrencyLabel:string,
      *         isNew:bool,
      *         bookListNumbers:list<int>,
@@ -146,6 +147,7 @@ final class BookCatalogFrontApplicationService
      *     rank:?int,
      *     price:?int,
      *     priceMinerva:?int,
+     *     priceCurrencyCode:string,
      *     priceCurrencyLabel:string,
      *     isNew:bool,
      *     bookListNumbers:list<int>,
@@ -163,13 +165,8 @@ final class BookCatalogFrontApplicationService
         }
         sort($bookListNumbers);
 
-        $priceCurrencyLabel = $this->translator->trans('catalog_books.currency_caps');
-        foreach ($canonicalSignals as $signal) {
-            if ('purchase_currency' === $signal['field']) {
-                $priceCurrencyLabel = $signal['displayValue'];
-                break;
-            }
-        }
+        $priceCurrencyCode = $this->extractPurchaseCurrencyCode($mergeResult);
+        $priceCurrencyLabel = $this->translator->trans('catalog_books.currency_'.$priceCurrencyCode);
 
         return [
             'name' => $this->translator->trans($item->getNameKey(), domain: 'items'),
@@ -178,6 +175,7 @@ final class BookCatalogFrontApplicationService
             'rank' => $item->getRank(),
             'price' => $item->getPrice(),
             'priceMinerva' => $item->getPriceMinerva(),
+            'priceCurrencyCode' => $priceCurrencyCode,
             'priceCurrencyLabel' => $priceCurrencyLabel,
             'isNew' => $item->isNew(),
             'bookListNumbers' => array_values(array_unique($bookListNumbers)),
@@ -263,6 +261,26 @@ final class BookCatalogFrontApplicationService
         }
 
         return null;
+    }
+
+    private function extractPurchaseCurrencyCode(?ItemSourceMergeResult $result): string
+    {
+        if (null === $result) {
+            return 'caps';
+        }
+
+        foreach ($result->decisions as $decision) {
+            if ('purchase_currency' !== $decision->field || !is_string($decision->value)) {
+                continue;
+            }
+
+            $currency = trim($decision->value);
+            if ('' !== $currency) {
+                return $currency;
+            }
+        }
+
+        return 'caps';
     }
 
     /**

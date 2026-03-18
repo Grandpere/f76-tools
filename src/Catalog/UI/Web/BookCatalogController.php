@@ -25,6 +25,23 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 final class BookCatalogController extends AbstractController
 {
+    /**
+     * @var array<string, string>
+     */
+    private const SIGNAL_ICON_MAP = [
+        'daily_ops' => '/assets/icons/FO76_dailyops_uplink.png',
+        'raid' => '/assets/icons/GleamingDepthsMarker.svg',
+        'unused_content' => '/assets/icons/Icon_unused.png',
+    ];
+
+    /**
+     * @var array<string, string>
+     */
+    private const CURRENCY_ICON_MAP = [
+        'caps' => '/assets/icons/Caps.png',
+        'gold_bullion' => '/assets/icons/Fo76_Icon_Gold_Bullion.png',
+    ];
+
     public function __construct(
         private readonly BookCatalogFrontApplicationService $bookCatalogFrontApplicationService,
         private readonly ItemCatalogTimestampReadRepository $itemCatalogTimestampReadRepository,
@@ -65,6 +82,8 @@ final class BookCatalogController extends AbstractController
             'selectedSignals' => $selectedSignals,
             'listOptions' => $result['listOptions'],
             'signalOptions' => $result['signalOptions'],
+            'signalIconMap' => self::SIGNAL_ICON_MAP,
+            'currencyIconMap' => self::CURRENCY_ICON_MAP,
             'items' => $result['rows'],
             'totalItems' => $result['totalItems'],
             'page' => $result['currentPage'],
