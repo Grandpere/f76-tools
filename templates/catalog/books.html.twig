@@ -27,12 +27,17 @@
                         <input type="search" name="q" value="{{ query }}" placeholder="{{ 'catalog_books.search_placeholder'|trans }}">
                     </label>
                     <label class="field">
-                        <span>{{ 'catalog_books.merge_status'|trans }}</span>
-                        <select name="mergeStatus">
-                            <option value="">{{ 'catalog_books.merge_status_all'|trans }}</option>
-                            {% for option in mergeStatusOptions %}
-                                <option value="{{ option }}" {% if mergeStatus == option %}selected{% endif %}>{{ ('admin_catalog.merge_status_' ~ option)|trans }}</option>
+                        <span>{{ 'catalog_books.list_filter'|trans }}</span>
+                        <select name="list">
+                            <option value="">{{ 'catalog_books.list_filter_all'|trans }}</option>
+                            {% for option in listOptions %}
+                                <option value="{{ option }}" {% if selectedList == (option ~ '') %}selected{% endif %}>
+                                    {{ 'catalog_books.list_option'|trans({'%list%': option}) }}
+                                </option>
                             {% endfor %}
+                            <option value="special" {% if selectedList == 'special' %}selected{% endif %}>
+                                {{ 'catalog_books.list_filter_special'|trans }}
+                            </option>
                         </select>
                     </label>
                     <label class="field">
@@ -55,14 +60,14 @@
                         <p class="stats-card-sub">{{ 'catalog_books.total_items_help'|trans }}</p>
                     </article>
                     <article class="stats-card">
-                        <p class="stats-card-title">{{ 'catalog_books.generic_labels'|trans }}</p>
-                        <p class="stats-card-main">{{ stats.generic_label }}</p>
-                        <p class="stats-card-sub">{{ 'catalog_books.generic_labels_help'|trans }}</p>
+                        <p class="stats-card-title">{{ 'catalog_books.total_lists'|trans }}</p>
+                        <p class="stats-card-main">{{ totalLists }}</p>
+                        <p class="stats-card-sub">{{ 'catalog_books.total_lists_help'|trans }}</p>
                     </article>
                     <article class="stats-card">
-                        <p class="stats-card-title">{{ 'catalog_books.material_conflicts'|trans }}</p>
-                        <p class="stats-card-main">{{ stats.material_conflict }}</p>
-                        <p class="stats-card-sub">{{ 'catalog_books.material_conflicts_help'|trans }}</p>
+                        <p class="stats-card-title">{{ 'catalog_books.special_lists'|trans }}</p>
+                        <p class="stats-card-main">{{ specialListItems }}</p>
+                        <p class="stats-card-sub">{{ 'catalog_books.special_lists_help'|trans }}</p>
                     </article>
                 </div>
 
@@ -81,18 +86,8 @@
                             <div class="item-card-head catalog-book-head">
                                 <div class="catalog-book-title-stack">
                                     <strong>{{ item.name }}</strong>
-                                    <div class="catalog-book-id-line">
-                                        <code>{{ item.publicId }}</code>
-                                        <span>#{{ item.sourceId }}</span>
-                                    </div>
                                 </div>
                                 <div class="catalog-book-head-badges">
-                                    {% set statusClass = item.mergeStatus == 'material_conflict'
-                                        ? 'admin-security-badge-warn'
-                                        : (item.mergeStatus == 'aligned' ? 'admin-security-badge-ok' : 'admin-catalog-badge-info') %}
-                                    <span class="admin-security-badge {{ statusClass }}">
-                                        {{ ('admin_catalog.merge_status_' ~ item.mergeStatus)|trans }}
-                                    </span>
                                     {% if item.isNew %}
                                         <span class="item-badge-new">{{ 'catalog_books.new'|trans }}</span>
                                     {% endif %}
@@ -124,7 +119,7 @@
                             {% if item.price or item.priceMinerva %}
                                 <div class="item-prices">
                                     {% if item.price %}
-                                        <span>{{ 'catalog_books.price'|trans({'%value%': item.price}) }}</span>
+                                        <span>{{ 'catalog_books.price'|trans({'%value%': item.price, '%currency%': item.priceCurrencyLabel}) }}</span>
                                     {% endif %}
                                     {% if item.priceMinerva %}
                                         <span class="price-new">{{ 'catalog_books.price_minerva'|trans({'%value%': item.priceMinerva}) }}</span>
@@ -132,46 +127,14 @@
                                 </div>
                             {% endif %}
 
-                            {% if item.mergeLabel and item.mergeLabel != item.name %}
-                                <p class="catalog-book-merge-label">{{ 'catalog_books.merge_label'|trans({'%label%': item.mergeLabel}) }}</p>
-                            {% endif %}
-
-                            <div class="catalog-book-provider-list">
-                                {% for source in item.externalSources %}
-                                    {% if source.externalUrl %}
-                                        <a class="catalog-book-provider-link" href="{{ source.externalUrl }}" target="_blank" rel="noreferrer noopener">
-                                            {{ source.provider }}
-                                        </a>
-                                    {% else %}
-                                        <span class="item-pill">{{ source.provider }}</span>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-
                             {% if item.canonicalSignals %}
                                 <div class="catalog-book-signal-list">
                                     {% for signal in item.canonicalSignals %}
                                         <span class="item-pill">
-                                            {{ signal.label }}{% if signal.field == 'purchase_currency' %}: {{ signal.displayValue }}{% endif %}
+                                            {{ signal.label }}
                                         </span>
                                     {% endfor %}
                                 </div>
-                            {% endif %}
-
-                            {% if item.mergeGenericLabelCount > 0 or item.mergeSourceIssueCount > 0 or item.mergeMaterialConflictCount > 0 %}
-                                <p class="item-extra-line">
-                                    {% if item.mergeGenericLabelCount > 0 %}
-                                        {{ 'catalog_books.generic_label_count'|trans({'%count%': item.mergeGenericLabelCount}) }}
-                                    {% endif %}
-                                    {% if item.mergeSourceIssueCount > 0 %}
-                                        {% if item.mergeGenericLabelCount > 0 %} · {% endif %}
-                                        {{ 'catalog_books.source_issue_count'|trans({'%count%': item.mergeSourceIssueCount}) }}
-                                    {% endif %}
-                                    {% if item.mergeMaterialConflictCount > 0 %}
-                                        {% if item.mergeGenericLabelCount > 0 or item.mergeSourceIssueCount > 0 %} · {% endif %}
-                                        {{ 'catalog_books.material_conflict_count'|trans({'%count%': item.mergeMaterialConflictCount}) }}
-                                    {% endif %}
-                                </p>
                             {% endif %}
                         </article>
                     {% else %}
@@ -189,7 +152,7 @@
                                 href="{{ path('app_book_catalog', {
                                     _locale: app.request.locale,
                                     q: query ?: null,
-                                    mergeStatus: mergeStatus ?: null,
+                                    list: selectedList ?: null,
                                     perPage: perPage,
                                     page: page - 1
                                 }) }}"
@@ -210,7 +173,7 @@
                                 href="{{ path('app_book_catalog', {
                                     _locale: app.request.locale,
                                     q: query ?: null,
-                                    mergeStatus: mergeStatus ?: null,
+                                    list: selectedList ?: null,
                                     perPage: perPage,
                                     page: page + 1
                                 }) }}"

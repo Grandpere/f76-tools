@@ -78,35 +78,33 @@ nuke_codes.page_title: 'F76 - Nuke codes'
 nuke_codes.title: Nuke codes
 catalog_books.page_title: 'F76 - Plans & Recipes'
 catalog_books.title: Plans & Recipes
-catalog_books.description: Browse the merged catalog of plans and recipes visible in the product.
+catalog_books.description: Browse plans and recipes with the useful in-game information we expose to players.
 catalog_books.last_updated: 'Catalog updated: %date%'
 catalog_books.last_updated_unknown: 'Catalog update time unknown'
 catalog_books.filters_title: Browse
 catalog_books.search: Search
-catalog_books.search_placeholder: Search by displayed name, source ID, provider or signal
-catalog_books.merge_status: Merge status
-catalog_books.merge_status_all: All statuses
+catalog_books.search_placeholder: Search by displayed name, note, list, or activity
+catalog_books.list_filter: Plan list
+catalog_books.list_filter_all: All lists
+catalog_books.list_filter_special: Special lists
+catalog_books.list_option: List %list%
 catalog_books.per_page: Per page
 catalog_books.apply_filters: Apply
 catalog_books.total_items: Items
 catalog_books.total_items_help: Matching plans and recipes
-catalog_books.generic_labels: Generic labels
-catalog_books.generic_labels_help: Resolved naming gaps
-catalog_books.material_conflicts: Material conflicts
-catalog_books.material_conflicts_help: Items still needing arbitration
+catalog_books.total_lists: Lists
+catalog_books.total_lists_help: Available plan lists in the catalog
+catalog_books.special_lists: Special
+catalog_books.special_lists_help: Items that also belong to a special list
 catalog_books.visible_items: '%count% items shown out of %total%'
 catalog_books.list_title: Catalog
-catalog_books.list_help: This front page shows the current display name together with the merged source signals that feed it.
+catalog_books.list_help: This page focuses on the player-facing result: names, prices, list numbers, and useful activity tags.
 catalog_books.new: New
 catalog_books.rank: 'Rank %rank%'
 catalog_books.book_lists: 'Lists: %lists%'
 catalog_books.special_list: Special list
-catalog_books.price: 'Caps: %value%'
+catalog_books.price: '%currency%: %value%'
 catalog_books.price_minerva: 'Minerva: %value%'
-catalog_books.merge_label: 'Merged source label: %label%'
-catalog_books.generic_label_count: '%count% generic label'
-catalog_books.source_issue_count: '%count% source issue'
-catalog_books.material_conflict_count: '%count% material conflict'
 catalog_books.empty: No plan or recipe matches the current filters.
 catalog_books.pagination: Plans and recipes pagination
 catalog_books.previous: Previous

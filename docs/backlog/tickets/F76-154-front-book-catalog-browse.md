@@ -8,23 +8,22 @@
 - Il manque encore une vraie page front de lecture des plans/recettes pour valider ce qui est effectivement visible cote produit, au-dela des rapports console et de l admin.
 
 ## Objectif
-Ajouter une page front authentifiee qui liste les plans et recettes (`BOOK`) avec les informations fusionnees utiles, afin de verifier visuellement le rendu du merge et des signaux canoniques sur de vraies donnees.
+Ajouter une page front authentifiee qui liste les plans et recettes (`BOOK`) avec une presentation orientee joueur, afin de verifier ce qui est reellement affiche dans le produit sans exposer les details internes du merge.
 
 ## Scope
 - Nouvelle route front read-only pour parcourir les items `BOOK`.
-- Recherche textuelle sur le nom affiche et filtres simples (statut de merge, pagination).
+- Recherche textuelle sur le nom affiche et filtres simples (liste de plans, pagination).
 - Affichage des infos front principales:
 - nom affiche,
 - prix / prix Minerva / listes,
-- providers disponibles,
-- statut de merge,
 - signaux canoniques utiles.
 - Tests unitaires et fonctionnels cibles.
 
 ### Progress
 - Done (slice 1): read model front pour lister les `BOOK` fusionnes, deriver les statuts/signaux de merge utiles et appliquer recherche + pagination en memoire sur le rendu visible.
-- Done (slice 2): route + template front `/plans-recipes` au format catalogue, avec cartes, pagination, recherche et filtre de statut de merge.
+- Done (slice 2): route + template front `/plans-recipes` au format catalogue, avec cartes, pagination, recherche et premier filtre de statut interne.
 - Done (slice 3): tests unitaires/fonctionnels cibles + traductions/navigation/styling + doc projet.
+- Done (slice 4): recentrage de la page front sur l experience joueur (suppression des infos de source/merge visibles, filtre par liste de plans, stats metier utiles) et correction du rendu Minerva qui injectait a tort les livres sans liste dans la liste 1.
 
 ## Hors scope
 - Edition front des items.
@@ -33,7 +32,7 @@ Ajouter une page front authentifiee qui liste les plans et recettes (`BOOK`) ave
 
 ## Criteres d acceptance
 - Une page front authentifiee permet de parcourir les plans/recettes.
-- Les informations affichees suffisent a voir si le merge produit les bons champs visibles.
+- Les informations affichees sont comprehensibles cote joueur et ne montrent pas la mecanique interne du merge.
 - La page reste exploitable sans ouvrir l admin pour chaque item.
 
 ## Tests

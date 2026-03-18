@@ -23,7 +23,6 @@ final class BookCatalogFrontApplicationService
 {
     private const MERGE_PROVIDER_A = 'fandom';
     private const MERGE_PROVIDER_B = 'fallout_wiki';
-    private const MERGE_STATUS_OPTIONS = ['aligned', 'generic_label', 'source_issue', 'material_conflict', 'no_merge'];
     private const CANONICAL_SIGNAL_FIELDS = [
         'purchase_currency',
         'containers',
@@ -51,43 +50,32 @@ final class BookCatalogFrontApplicationService
     /**
      * @return array{
      *     rows:list<array{
-     *         publicId:string,
-     *         sourceId:int,
      *         name:string,
      *         description:?string,
      *         note:?string,
      *         rank:?int,
      *         price:?int,
      *         priceMinerva:?int,
+     *         priceCurrencyLabel:string,
      *         isNew:bool,
      *         bookListNumbers:list<int>,
      *         isSpecialList:bool,
-     *         providers:list<string>,
-     *         externalSources:list<array{provider:string,externalUrl:?string,externalRef:string}>,
-     *         mergeLabel:?string,
-     *         mergeStatus:string,
-     *         mergeGenericLabelCount:int,
-     *         mergeMaterialConflictCount:int,
-     *         mergeSourceIssueCount:int,
      *         canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
      *     }>,
      *     totalItems:int,
      *     totalPages:int,
      *     currentPage:int,
-     *     mergeStatusOptions:list<string>,
-     *     stats:array{
-     *         aligned:int,
-     *         generic_label:int,
-     *         source_issue:int,
-     *         material_conflict:int,
-     *         no_merge:int
-     *     }
+     *     listOptions:list<int>,
+     *     totalLists:int,
+     *     specialListItems:int
      * }
      */
-    public function browse(?string $query, ?string $mergeStatus, int $page, int $perPage): array
+    public function browse(?string $query, ?string $listFilter, int $page, int $perPage): array
     {
         $items = $this->bookCatalogFrontReadRepository->findAllBooksDetailedOrdered();
         $rows = array_map($this->mapRow(...), $items);
+        $listOptions = $this->extractListOptions($rows);
+        $specialListItems = count(array_filter($rows, static fn (array $row): bool => true === $row['isSpecialList']));
 
         $normalizedQuery = $this->normalize($query);
         if ('' !== $normalizedQuery) {
@@ -97,24 +85,17 @@ final class BookCatalogFrontApplicationService
             ));
         }
 
-        if (is_string($mergeStatus) && in_array($mergeStatus, self::MERGE_STATUS_OPTIONS, true)) {
+        if ('special' === $listFilter) {
             $rows = array_values(array_filter(
                 $rows,
-                static fn (array $row): bool => $row['mergeStatus'] === $mergeStatus,
+                static fn (array $row): bool => true === $row['isSpecialList'],
             ));
-        }
-
-        /** @var array{aligned:int,generic_label:int,source_issue:int,material_conflict:int,no_merge:int} $stats */
-        $stats = [
-            'aligned' => 0,
-            'generic_label' => 0,
-            'source_issue' => 0,
-            'material_conflict' => 0,
-            'no_merge' => 0,
-        ];
-
-        foreach ($rows as $row) {
-            ++$stats[$row['mergeStatus']];
+        } elseif (is_string($listFilter) && ctype_digit($listFilter)) {
+            $selectedList = (int) $listFilter;
+            $rows = array_values(array_filter(
+                $rows,
+                static fn (array $row): bool => in_array($selectedList, $row['bookListNumbers'], true),
+            ));
         }
 
         $totalItems = count($rows);
@@ -122,91 +103,36 @@ final class BookCatalogFrontApplicationService
         $currentPage = min(max(1, $page), $totalPages);
         $offset = ($currentPage - 1) * max(1, $perPage);
 
-        /** @var array{
-         *     rows:list<array{
-         *         publicId:string,
-         *         sourceId:int,
-         *         name:string,
-         *         description:?string,
-         *         note:?string,
-         *         rank:?int,
-         *         price:?int,
-         *         priceMinerva:?int,
-         *         isNew:bool,
-         *         bookListNumbers:list<int>,
-         *         isSpecialList:bool,
-         *         providers:list<string>,
-         *         externalSources:list<array{provider:string,externalUrl:?string,externalRef:string}>,
-         *         mergeLabel:?string,
-         *         mergeStatus:string,
-         *         mergeGenericLabelCount:int,
-         *         mergeMaterialConflictCount:int,
-         *         mergeSourceIssueCount:int,
-         *         canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
-         *     }>,
-         *     totalItems:int,
-         *     totalPages:int,
-         *     currentPage:int,
-         *     mergeStatusOptions:list<string>,
-         *     stats:array{aligned:int,generic_label:int,source_issue:int,material_conflict:int,no_merge:int}
-         * } $result
-         */
-        $result = [
+        return [
             'rows' => array_slice($rows, $offset, max(1, $perPage)),
             'totalItems' => $totalItems,
             'totalPages' => $totalPages,
             'currentPage' => $currentPage,
-            'mergeStatusOptions' => self::MERGE_STATUS_OPTIONS,
-            'stats' => $stats,
+            'listOptions' => $listOptions,
+            'totalLists' => count($listOptions),
+            'specialListItems' => $specialListItems,
         ];
-
-        return $result;
     }
 
     /**
      * @return array{
-     *     publicId:string,
-     *     sourceId:int,
      *     name:string,
      *     description:?string,
      *     note:?string,
      *     rank:?int,
      *     price:?int,
      *     priceMinerva:?int,
+     *     priceCurrencyLabel:string,
      *     isNew:bool,
      *     bookListNumbers:list<int>,
      *     isSpecialList:bool,
-     *     providers:list<string>,
-     *     externalSources:list<array{provider:string,externalUrl:?string,externalRef:string}>,
-     *     mergeLabel:?string,
-     *     mergeStatus:string,
-     *     mergeGenericLabelCount:int,
-     *     mergeMaterialConflictCount:int,
-     *     mergeSourceIssueCount:int,
      *     canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
      * }
      */
     private function mapRow(ItemEntity $item): array
     {
-        $externalSources = [];
-        $providers = [];
-        foreach ($item->getExternalSources() as $externalSource) {
-            $providers[] = $externalSource->getProvider();
-            $externalSources[] = [
-                'provider' => $externalSource->getProvider(),
-                'externalUrl' => $externalSource->getExternalUrl(),
-                'externalRef' => $externalSource->getExternalRef(),
-            ];
-        }
-
-        sort($providers);
-        usort(
-            $externalSources,
-            static fn (array $left, array $right): int => [$left['provider'], $left['externalRef']] <=> [$right['provider'], $right['externalRef']],
-        );
-
         $mergeResult = $this->itemSourceMergePolicy->merge($item, self::MERGE_PROVIDER_A, self::MERGE_PROVIDER_B);
-        $mergeSummary = $this->buildMergeSummary($mergeResult);
+        $canonicalSignals = null !== $mergeResult ? $this->extractCanonicalSignals($mergeResult) : [];
 
         $bookListNumbers = [];
         $isSpecialList = false;
@@ -216,53 +142,53 @@ final class BookCatalogFrontApplicationService
         }
         sort($bookListNumbers);
 
+        $priceCurrencyLabel = $this->translator->trans('catalog_books.currency_caps');
+        foreach ($canonicalSignals as $signal) {
+            if ('purchase_currency' === $signal['field']) {
+                $priceCurrencyLabel = $signal['displayValue'];
+                break;
+            }
+        }
+
         return [
-            'publicId' => $item->getPublicId(),
-            'sourceId' => $item->getSourceId(),
             'name' => $this->translator->trans($item->getNameKey(), domain: 'items'),
             'description' => null !== $item->getDescKey() ? $this->translator->trans($item->getDescKey(), domain: 'items') : null,
             'note' => null !== $item->getNoteKey() ? $this->translator->trans($item->getNoteKey(), domain: 'items') : null,
             'rank' => $item->getRank(),
             'price' => $item->getPrice(),
             'priceMinerva' => $item->getPriceMinerva(),
+            'priceCurrencyLabel' => $priceCurrencyLabel,
             'isNew' => $item->isNew(),
             'bookListNumbers' => array_values(array_unique($bookListNumbers)),
             'isSpecialList' => $isSpecialList,
-            'providers' => array_values(array_unique($providers)),
-            'externalSources' => $externalSources,
-            'mergeLabel' => $mergeResult?->label,
-            'mergeStatus' => $mergeSummary['status'],
-            'mergeGenericLabelCount' => $mergeSummary['genericLabelCount'],
-            'mergeMaterialConflictCount' => $mergeSummary['materialConflictCount'],
-            'mergeSourceIssueCount' => $mergeSummary['sourceIssueCount'],
-            'canonicalSignals' => null !== $mergeResult ? $this->extractCanonicalSignals($mergeResult) : [],
+            'canonicalSignals' => array_values(array_filter(
+                $canonicalSignals,
+                static fn (array $signal): bool => 'purchase_currency' !== $signal['field'],
+            )),
         ];
     }
 
     /**
      * @param array{
-     *     publicId:string,
-     *     sourceId:int,
      *     name:string,
-     *     providers:list<string>,
-     *     mergeLabel:?string,
+     *     description:?string,
+     *     note:?string,
+     *     bookListNumbers:list<int>,
      *     canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
      * } $row
      */
     private function buildSearchHaystack(array $row): string
     {
         $parts = [
-            $row['publicId'],
-            (string) $row['sourceId'],
             $row['name'],
-            (string) ($row['mergeLabel'] ?? ''),
-            implode(' ', $row['providers']),
+            (string) ($row['description'] ?? ''),
+            (string) ($row['note'] ?? ''),
+            implode(' ', array_map(static fn (int $list): string => (string) $list, $row['bookListNumbers'])),
         ];
 
         foreach ($row['canonicalSignals'] as $signal) {
             $parts[] = $signal['label'];
             $parts[] = $signal['displayValue'];
-            $parts[] = $signal['provider'];
         }
 
         return $this->normalize(implode(' ', $parts));
@@ -271,56 +197,6 @@ final class BookCatalogFrontApplicationService
     private function normalize(?string $value): string
     {
         return mb_strtolower(trim((string) $value));
-    }
-
-    /**
-     * @return array{
-     *     status:string,
-     *     genericLabelCount:int,
-     *     materialConflictCount:int,
-     *     sourceIssueCount:int
-     * }
-     */
-    private function buildMergeSummary(?ItemSourceMergeResult $result): array
-    {
-        if (null === $result) {
-            return [
-                'status' => 'no_merge',
-                'genericLabelCount' => 0,
-                'materialConflictCount' => 0,
-                'sourceIssueCount' => 0,
-            ];
-        }
-
-        $genericLabelCount = 0;
-        $sourceIssueCount = 0;
-        foreach ($result->decisions as $decision) {
-            if (str_contains($decision->reason, 'generic_label')) {
-                ++$genericLabelCount;
-            }
-
-            if (str_contains($decision->reason, 'internal_name_conflict')) {
-                ++$sourceIssueCount;
-            }
-        }
-
-        $materialConflictCount = count($result->conflicts);
-
-        $status = 'aligned';
-        if ($materialConflictCount > 0) {
-            $status = 'material_conflict';
-        } elseif ($sourceIssueCount > 0) {
-            $status = 'source_issue';
-        } elseif ($genericLabelCount > 0) {
-            $status = 'generic_label';
-        }
-
-        return [
-            'status' => $status,
-            'genericLabelCount' => $genericLabelCount,
-            'materialConflictCount' => $materialConflictCount,
-            'sourceIssueCount' => $sourceIssueCount,
-        ];
     }
 
     /**
@@ -340,10 +216,9 @@ final class BookCatalogFrontApplicationService
                 continue;
             }
 
-            $labelKey = 'catalog_books.signal_'.$decision->field;
             $signals[] = [
                 'field' => $decision->field,
-                'label' => $this->translator->trans($labelKey),
+                'label' => $this->translator->trans('catalog_books.signal_'.$decision->field),
                 'displayValue' => $displayValue,
                 'provider' => $decision->provider,
             ];
@@ -368,5 +243,25 @@ final class BookCatalogFrontApplicationService
         }
 
         return null;
+    }
+
+    /**
+     * @param list<array{bookListNumbers:list<int>}> $rows
+     *
+     * @return list<int>
+     */
+    private function extractListOptions(array $rows): array
+    {
+        $listOptions = [];
+        foreach ($rows as $row) {
+            foreach ($row['bookListNumbers'] as $listNumber) {
+                $listOptions[$listNumber] = true;
+            }
+        }
+
+        $numbers = array_map('intval', array_keys($listOptions));
+        sort($numbers);
+
+        return $numbers;
     }
 }

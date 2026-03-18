@@ -78,35 +78,33 @@ nuke_codes.page_title: 'F76 - Nukecodes'
 nuke_codes.title: Nukecodes
 catalog_books.page_title: 'F76 - Baupläne & Rezepte'
 catalog_books.title: Baupläne & Rezepte
-catalog_books.description: Durchsuche den zusammengeführten Katalog der im Produkt sichtbaren Baupläne und Rezepte.
+catalog_books.description: Durchsuche Baupläne und Rezepte mit den nützlichen Ingame-Infos, die Spieler tatsächlich sehen.
 catalog_books.last_updated: 'Katalog aktualisiert: %date%'
 catalog_books.last_updated_unknown: 'Zeitpunkt der Katalogaktualisierung unbekannt'
 catalog_books.filters_title: Durchsuchen
 catalog_books.search: Suche
-catalog_books.search_placeholder: Nach angezeigtem Namen, Source-ID, Provider oder Signal suchen
-catalog_books.merge_status: Merge-Status
-catalog_books.merge_status_all: Alle Status
+catalog_books.search_placeholder: Nach angezeigtem Namen, Hinweis, Liste oder Aktivität suchen
+catalog_books.list_filter: Bauplanliste
+catalog_books.list_filter_all: Alle Listen
+catalog_books.list_filter_special: Speziallisten
+catalog_books.list_option: Liste %list%
 catalog_books.per_page: Pro Seite
 catalog_books.apply_filters: Anwenden
 catalog_books.total_items: Items
 catalog_books.total_items_help: Passende Baupläne und Rezepte
-catalog_books.generic_labels: Generische Labels
-catalog_books.generic_labels_help: Bereits aufgelöste Naming-Abweichungen
-catalog_books.material_conflicts: Materielle Konflikte
-catalog_books.material_conflicts_help: Items mit weiterem Klärungsbedarf
+catalog_books.total_lists: Listen
+catalog_books.total_lists_help: Verfügbare Bauplanlisten im Katalog
+catalog_books.special_lists: Spezial
+catalog_books.special_lists_help: Items, die auch zu einer Spezialliste gehören
 catalog_books.visible_items: '%count% Items angezeigt von %total%'
 catalog_books.list_title: Katalog
-catalog_books.list_help: Diese Front-Seite zeigt den tatsächlich sichtbaren Namen zusammen mit den zusammengeführten Signalen, die ihn speisen.
+catalog_books.list_help: Diese Seite konzentriert sich auf das Spieler-Ergebnis: Namen, Preise, Listennummern und nützliche Aktivitäts-Tags.
 catalog_books.new: Neu
 catalog_books.rank: 'Rang %rank%'
 catalog_books.book_lists: 'Listen: %lists%'
 catalog_books.special_list: Spezialliste
-catalog_books.price: 'Caps: %value%'
+catalog_books.price: '%currency%: %value%'
 catalog_books.price_minerva: 'Minerva: %value%'
-catalog_books.merge_label: 'Zusammengeführtes Label: %label%'
-catalog_books.generic_label_count: '%count% generisches Label'
-catalog_books.source_issue_count: '%count% Quellproblem'
-catalog_books.material_conflict_count: '%count% materieller Konflikt'
 catalog_books.empty: Kein Bauplan oder Rezept entspricht den aktuellen Filtern.
 catalog_books.pagination: Seitennavigation für Baupläne und Rezepte
 catalog_books.previous: Zurück

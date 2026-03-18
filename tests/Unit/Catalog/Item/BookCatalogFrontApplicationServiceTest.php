@@ -24,7 +24,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class BookCatalogFrontApplicationServiceTest extends TestCase
 {
-    public function testBrowseFiltersByVisibleNameAndMergeStatus(): void
+    public function testBrowseFiltersByVisibleNameAndList(): void
     {
         $service = new BookCatalogFrontApplicationService(
             new class([$this->createBookItem(101, 'pub-alpha', 'catalog.book.alpha.name', 'Plan: Alpha Receiver', 'no_merge'), $this->createBookItem(102, 'pub-bravo', 'catalog.book.bravo.name', 'Recipe: Bravo Soup', 'aligned')]) implements BookCatalogFrontReadRepository {
@@ -44,12 +44,12 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             $this->createTranslator(),
         );
 
-        $result = $service->browse('alpha', 'no_merge', 1, 24);
+        $result = $service->browse('alpha', '4', 1, 24);
 
         self::assertSame(1, $result['totalItems']);
-        self::assertSame('pub-alpha', $result['rows'][0]['publicId']);
-        self::assertSame('no_merge', $result['rows'][0]['mergeStatus']);
-        self::assertSame(1, $result['stats']['no_merge']);
+        self::assertSame('Plan: Alpha Receiver', $result['rows'][0]['name']);
+        self::assertSame([4], $result['rows'][0]['bookListNumbers']);
+        self::assertSame([4, 7], $result['listOptions']);
     }
 
     public function testBrowseExposesCanonicalSignals(): void
@@ -74,10 +74,10 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
 
         $result = $service->browse(null, null, 1, 24);
 
-        self::assertCount(3, $result['rows'][0]['canonicalSignals']);
-        self::assertSame('Currency', $result['rows'][0]['canonicalSignals'][0]['label']);
-        self::assertSame('Caps', $result['rows'][0]['canonicalSignals'][0]['displayValue']);
-        self::assertSame('Events', $result['rows'][0]['canonicalSignals'][2]['label']);
+        self::assertCount(2, $result['rows'][0]['canonicalSignals']);
+        self::assertSame('Caps', $result['rows'][0]['priceCurrencyLabel']);
+        self::assertSame('Containers', $result['rows'][0]['canonicalSignals'][0]['label']);
+        self::assertSame('Events', $result['rows'][0]['canonicalSignals'][1]['label']);
     }
 
     /**
@@ -90,6 +90,8 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             ->setSourceId($sourceId)
             ->setNameKey($nameKey)
             ->setIsNew('generic_label' === $mergeStatus);
+
+        $item->addBookList(101 === $sourceId ? 4 : 7, 101 === $sourceId);
 
         $this->setItemPublicId($item, $publicId);
 
@@ -125,6 +127,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
                     'catalog.book.bravo.name' => 'Recipe: Bravo Soup',
                     'catalog.book.currency.name' => 'Plan: Currency Test',
                     'catalog_books.signal_purchase_currency' => 'Currency',
+                    'catalog_books.signal_containers' => 'Containers',
                     'catalog_books.signal_events' => 'Events',
                     'catalog_books.signal_enabled' => 'Enabled',
                     'catalog_books.currency_caps' => 'Caps',

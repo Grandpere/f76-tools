@@ -21,6 +21,18 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 
 ## Incident Log
 
+## 2026-03-18 - Player-facing catalog pages should consume merge results, not explain them
+- Symptom: the first `/plans-recipes` page exposed merge status, provider names, IDs, and source-level details that were useful for us but confusing for players.
+- Root cause: the initial slice optimized for validating the merge output visually and reused too much of the admin/audit mental model in the front UI.
+- Fix: kept the merge as an internal read-model dependency for choosing labels and canonical signals, but removed merge/source/internal identifiers from the player page and replaced them with player-facing filters and metadata (lists, prices, activity tags).
+- Prevention: when a feature is front-facing, treat merge/source provenance as implementation detail unless the user-facing product explicitly needs provenance.
+
+## 2026-03-18 - Minerva front must ignore books without list numbers
+- Symptom: the Minerva front could show too many books and make it look like list 1 contained almost everything.
+- Root cause: the front controller grouped books with no `listNumbers` into list `1` as a fallback, which is acceptable for a generic catalog but wrong for Minerva list browsing.
+- Fix: the Minerva Stimulus controller now skips books without `listNumbers` instead of injecting them into list `1`.
+- Prevention: pages that browse Minerva by list must treat missing list numbers as “not in Minerva lists”, never as a default first-list fallback.
+
 ## 2026-03-18 - Front catalog browse can filter in memory first when the visible name is translated
 - Symptom: a new front page for plans/recipes needs search on the displayed item name and merge-derived signals, but those values do not live in one SQL column.
 - Root cause: the real user-facing name comes from translation keys, and the merge status/signals are computed in PHP from source metadata, so a naive SQL filter would diverge from what the page actually shows.

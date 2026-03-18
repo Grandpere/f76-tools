@@ -41,13 +41,13 @@ final class BookCatalogController extends AbstractController
         }
 
         $query = trim((string) $request->query->get('q', ''));
-        $mergeStatus = trim((string) $request->query->get('mergeStatus', ''));
+        $list = trim((string) $request->query->get('list', ''));
         $perPage = max(12, min(96, (int) $request->query->get('perPage', 24)));
         $page = max(1, (int) $request->query->get('page', 1));
 
         $result = $this->bookCatalogFrontApplicationService->browse(
             '' !== $query ? $query : null,
-            '' !== $mergeStatus ? $mergeStatus : null,
+            '' !== $list ? $list : null,
             $page,
             $perPage,
         );
@@ -57,14 +57,15 @@ final class BookCatalogController extends AbstractController
         return $this->render('catalog/books.html.twig', [
             'username' => $user->getEmail(),
             'query' => $query,
-            'mergeStatus' => '' !== $mergeStatus ? $mergeStatus : null,
-            'mergeStatusOptions' => $result['mergeStatusOptions'],
+            'selectedList' => '' !== $list ? $list : null,
+            'listOptions' => $result['listOptions'],
             'items' => $result['rows'],
             'totalItems' => $result['totalItems'],
             'page' => $result['currentPage'],
             'totalPages' => $result['totalPages'],
             'perPage' => $perPage,
-            'stats' => $result['stats'],
+            'totalLists' => $result['totalLists'],
+            'specialListItems' => $result['specialListItems'],
             'catalogUpdatedAt' => $catalogUpdatedAt,
         ]);
     }

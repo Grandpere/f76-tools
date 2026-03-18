@@ -141,10 +141,6 @@ export default class extends Controller {
         books.forEach((item) => {
             const listNumbers = Array.isArray(item.listNumbers) ? item.listNumbers : [];
             if (listNumbers.length === 0) {
-                if (!listMap.has(1)) {
-                    listMap.set(1, []);
-                }
-                listMap.get(1).push(item);
                 return;
             }
             listNumbers.forEach((listNumber) => {

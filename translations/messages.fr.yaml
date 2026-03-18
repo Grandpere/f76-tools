@@ -78,35 +78,33 @@ nuke_codes.page_title: 'F76 - Codes nucléaires'
 nuke_codes.title: Codes nucléaires
 catalog_books.page_title: 'F76 - Plans et recettes'
 catalog_books.title: Plans et recettes
-catalog_books.description: Parcourez le catalogue fusionné des plans et recettes visibles dans le produit.
+catalog_books.description: Parcourez les plans et recettes avec les informations utiles réellement affichées aux joueurs.
 catalog_books.last_updated: 'Catalogue mis à jour: %date%'
 catalog_books.last_updated_unknown: 'Date de mise à jour du catalogue inconnue'
 catalog_books.filters_title: Parcourir
 catalog_books.search: Recherche
-catalog_books.search_placeholder: Rechercher par nom affiché, source ID, provider ou signal
-catalog_books.merge_status: Statut de merge
-catalog_books.merge_status_all: Tous les statuts
+catalog_books.search_placeholder: Rechercher par nom affiché, note, liste ou activité
+catalog_books.list_filter: Liste de plans
+catalog_books.list_filter_all: Toutes les listes
+catalog_books.list_filter_special: Listes spéciales
+catalog_books.list_option: Liste %list%
 catalog_books.per_page: Par page
 catalog_books.apply_filters: Appliquer
 catalog_books.total_items: Items
 catalog_books.total_items_help: Plans et recettes correspondants
-catalog_books.generic_labels: Libellés génériques
-catalog_books.generic_labels_help: Écarts de naming déjà résolus
-catalog_books.material_conflicts: Conflits matériels
-catalog_books.material_conflicts_help: Items encore à arbitrer
+catalog_books.total_lists: Listes
+catalog_books.total_lists_help: Listes de plans disponibles dans le catalogue
+catalog_books.special_lists: Spéciales
+catalog_books.special_lists_help: Items présents aussi dans une liste spéciale
 catalog_books.visible_items: '%count% items affichés sur %total%'
 catalog_books.list_title: Catalogue
-catalog_books.list_help: Cette page front montre le nom réellement affiché, avec les signaux fusionnés qui l alimentent.
+catalog_books.list_help: Cette page se concentre sur le résultat côté joueur: noms, prix, numéros de liste et tags d activité utiles.
 catalog_books.new: Nouveau
 catalog_books.rank: 'Rang %rank%'
 catalog_books.book_lists: 'Listes: %lists%'
 catalog_books.special_list: Liste spéciale
-catalog_books.price: 'Caps: %value%'
+catalog_books.price: '%currency%: %value%'
 catalog_books.price_minerva: 'Minerva: %value%'
-catalog_books.merge_label: 'Libellé fusionné: %label%'
-catalog_books.generic_label_count: '%count% libellé générique'
-catalog_books.source_issue_count: '%count% problème source'
-catalog_books.material_conflict_count: '%count% conflit matériel'
 catalog_books.empty: Aucun plan ou recette ne correspond aux filtres actuels.
 catalog_books.pagination: Pagination des plans et recettes
 catalog_books.previous: Précédent
