@@ -136,4 +136,46 @@ final class ReportItemSourceMergeSummaryCommandTest extends TestCase
         self::assertSame(1, $nameField['generic_label_retained'] ?? null);
         self::assertSame(0, $nameField['conflicts'] ?? null);
     }
+
+    public function testJsonOutputUsesCanonicalPurchaseCurrencyField(): void
+    {
+        $item = new ItemEntity();
+        $item
+            ->setType(ItemTypeEnum::BOOK)
+            ->setSourceId(9001)
+            ->setNameKey('item.book.9001.name');
+        $item->upsertExternalSource('fandom', '9001', null, [
+            'value_currency' => 'Bottle cap',
+        ]);
+        $item->upsertExternalSource('fallout_wiki', '9001', null, [
+            'type' => 'caps',
+        ]);
+
+        $repository = $this->createMock(ItemSourceComparisonReadRepository::class);
+        $repository
+            ->method('findItemsWithProviders')
+            ->willReturn([$item]);
+
+        $command = new ReportItemSourceMergeSummaryCommand($repository, new ItemSourceMergePolicy());
+        $tester = new CommandTester($command);
+
+        $exitCode = $tester->execute([
+            '--format' => 'json',
+        ]);
+
+        self::assertSame(Command::SUCCESS, $exitCode);
+
+        /** @var array<string, mixed> $decoded */
+        $decoded = json_decode($tester->getDisplay(), true, 512, JSON_THROW_ON_ERROR);
+        /** @var array<string, mixed> $fields */
+        $fields = $decoded['fields'];
+        self::assertArrayHasKey('purchase_currency', $fields);
+        self::assertArrayNotHasKey('value_currency', $fields);
+        self::assertArrayNotHasKey('type', $fields);
+        /** @var array<string, mixed> $purchaseField */
+        $purchaseField = $fields['purchase_currency'];
+        self::assertSame(1, $purchaseField['retained_total'] ?? null);
+        self::assertSame(['fandom' => 1], $purchaseField['retained_by_provider'] ?? null);
+        self::assertSame(0, $purchaseField['conflicts'] ?? null);
+    }
 }

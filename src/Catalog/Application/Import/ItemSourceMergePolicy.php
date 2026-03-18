@@ -21,7 +21,6 @@ final class ItemSourceMergePolicy
     private const PREFERRED_PROVIDER_FIELDS = [
         'a' => [
             'weight',
-            'value_currency',
             'likely_minerva_source',
             'containers',
             'random_encounters',
@@ -35,7 +34,6 @@ final class ItemSourceMergePolicy
         'b' => [
             'unlocks',
             'obtained',
-            'type',
         ],
     ];
 
@@ -66,6 +64,11 @@ final class ItemSourceMergePolicy
             if ($decision instanceof ItemSourceMergeConflict) {
                 $conflicts[] = $decision;
             }
+        }
+
+        $purchaseCurrencyDecision = $this->mergePurchaseCurrencyField($sourceA, $sourceB, $metadataA, $metadataB);
+        if (null !== $purchaseCurrencyDecision) {
+            $decisions[] = $purchaseCurrencyDecision;
         }
 
         foreach (self::PREFERRED_PROVIDER_FIELDS['a'] as $field) {
@@ -274,6 +277,55 @@ final class ItemSourceMergePolicy
         return null;
     }
 
+    /**
+     * @param array<string, mixed> $metadataA
+     * @param array<string, mixed> $metadataB
+     */
+    private function mergePurchaseCurrencyField(
+        ItemExternalSourceEntity $sourceA,
+        ItemExternalSourceEntity $sourceB,
+        array $metadataA,
+        array $metadataB,
+    ): ?ItemSourceFieldMergeDecision {
+        $rawValueA = $metadataA['value_currency'] ?? null;
+        $rawValueB = $metadataB['type'] ?? null;
+
+        $normalizedA = $this->normalizePurchaseCurrency($rawValueA);
+        $normalizedB = $this->normalizePurchaseCurrency($rawValueB);
+
+        if (null === $normalizedA && null === $normalizedB) {
+            return null;
+        }
+
+        if (null !== $normalizedA && null !== $normalizedB && $normalizedA === $normalizedB) {
+            return new ItemSourceFieldMergeDecision(
+                'purchase_currency',
+                $sourceA->getProvider(),
+                $normalizedA,
+                'equivalent_purchase_currency_prefer_provider_a',
+                $rawValueB,
+            );
+        }
+
+        if (null !== $normalizedA) {
+            return new ItemSourceFieldMergeDecision(
+                'purchase_currency',
+                $sourceA->getProvider(),
+                $normalizedA,
+                null !== $normalizedB ? 'preferred_provider_a' : 'fallback_single_source',
+                $rawValueB,
+            );
+        }
+
+        return new ItemSourceFieldMergeDecision(
+            'purchase_currency',
+            $sourceB->getProvider(),
+            $normalizedB,
+            'fallback_provider_b',
+            $rawValueA,
+        );
+    }
+
     private function sourceHasSpecificTarget(ItemExternalSourceEntity $source): bool
     {
         $url = $source->getExternalUrl();
@@ -290,5 +342,25 @@ final class ItemSourceMergePolicy
         $decoded = urldecode($url);
 
         return str_contains($decoded, '(') && str_contains($decoded, ')');
+    }
+
+    private function normalizePurchaseCurrency(mixed $value): ?string
+    {
+        if (!is_scalar($value)) {
+            return null;
+        }
+
+        $normalized = $this->normalizeLooseText($value);
+        if ('' === $normalized) {
+            return null;
+        }
+
+        return match ($normalized) {
+            'bottle cap', 'bottle caps', 'cap', 'caps' => 'caps',
+            'gold', 'gold bullion', 'bullion' => 'gold_bullion',
+            'stamp', 'stamps' => 'stamps',
+            'ticket', 'tickets' => 'tickets',
+            default => $normalized,
+        };
     }
 }

@@ -604,3 +604,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: a single paginated fetch-join query tried to deduplicate joined external-source rows at SQL level while also ordering by item columns; PostgreSQL cannot compare JSON for `DISTINCT` deduplication in that shape, and `ORDER BY` with `SELECT DISTINCT` must stay inside the selected columns.
 - Fix: switched the admin list read to a two-step approach: first fetch ordered distinct item IDs, then load the selected items with their external sources in a second query and reapply the ID order in PHP.
 - Prevention: for paginated admin/search screens over entities that fetch-join JSON-backed relations, prefer a two-step `IDs first, graph second` query instead of a single `DISTINCT` fetch-join.
+
+## 2026-03-18 - Source fields can describe the same business concept with different labels
+- Symptom: merge/reporting showed `fandom.value_currency` and `fallout_wiki.type` as separate retained fields even when both described the same purchase currency (for example `Bottle cap` vs `caps`).
+- Root cause: the cross-source merge treated raw source column names literally instead of recognizing that some providers encode the same business concept under different metadata keys and labels.
+- Fix: added a canonical merge field `purchase_currency` and normalized known currency labels (`caps`, `gold_bullion`, `stamps`, `tickets`) before comparing or reporting them.
+- Prevention: when two providers expose equivalent business meaning under different raw keys, prefer a derived canonical field in merge/reporting and keep raw labels only in source metadata.

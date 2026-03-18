@@ -111,4 +111,36 @@ final class ItemSourceMergePolicyTest extends TestCase
         self::assertSame('fandom', $decisions['name_en']->provider);
         self::assertSame('generic_label_confirmed_by_specific_target', $decisions['name_en']->reason);
     }
+
+    public function testMergeNormalizesPurchaseCurrencyAcrossProviders(): void
+    {
+        $item = new ItemEntity();
+        $item
+            ->setType(ItemTypeEnum::BOOK)
+            ->setSourceId(9001)
+            ->setNameKey('item.book.9001.name');
+        $item->upsertExternalSource('fandom', '9001', null, [
+            'value_currency' => 'Bottle cap',
+        ]);
+        $item->upsertExternalSource('fallout_wiki', '9001', null, [
+            'type' => 'caps',
+        ]);
+
+        $policy = new ItemSourceMergePolicy();
+        $result = $policy->merge($item, 'fandom', 'fallout_wiki');
+
+        self::assertNotNull($result);
+
+        $decisions = [];
+        foreach ($result->decisions as $decision) {
+            $decisions[$decision->field] = $decision;
+        }
+
+        self::assertArrayHasKey('purchase_currency', $decisions);
+        self::assertSame('fandom', $decisions['purchase_currency']->provider);
+        self::assertSame('caps', $decisions['purchase_currency']->value);
+        self::assertSame('equivalent_purchase_currency_prefer_provider_a', $decisions['purchase_currency']->reason);
+        self::assertArrayNotHasKey('value_currency', $decisions);
+        self::assertArrayNotHasKey('type', $decisions);
+    }
 }
