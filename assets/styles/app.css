@@ -2000,22 +2000,9 @@ body::before {
     line-height: 1.1;
 }
 
-.catalog-book-signal {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 1.9rem;
-    min-height: 1.9rem;
-    padding: 0.2rem;
-    border-radius: 999px;
-    border: 1px solid rgba(160, 119, 0, 0.22);
-    background: rgba(255, 249, 223, 0.88);
-}
-
-.catalog-book-signal img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
+.catalog-book-signal-list:empty,
+.item-source-icons:empty {
+    display: none;
 }
 
 .item-prices .price-old {

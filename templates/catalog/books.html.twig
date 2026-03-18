@@ -121,18 +121,20 @@
                             {% endif %}
 
                             {% if item.canonicalSignals %}
+                                <div class="item-icons-footer">
+                                    <p class="item-source-icons">
+                                        {% for signal in item.canonicalSignals %}
+                                            {% if (selectedSignals is empty or signal.field in selectedSignals) and signalIconMap[signal.field] is defined %}
+                                                <img src="{{ asset(signalIconMap[signal.field]) }}" alt="{{ signal.label }}" title="{{ signal.label }}">
+                                            {% endif %}
+                                        {% endfor %}
+                                    </p>
+                                </div>
                                 <div class="catalog-book-signal-list">
                                     {% for signal in item.canonicalSignals %}
-                                        {% if selectedSignals is empty or signal.field in selectedSignals %}
-                                            <span class="catalog-book-signal" title="{{ signal.label }}">
-                                                {% if signalIconMap[signal.field] is defined %}
-                                                    <img src="{{ asset(signalIconMap[signal.field]) }}" alt="" aria-hidden="true">
-                                                    <span class="visually-hidden">{{ signal.label }}</span>
-                                                {% else %}
-                                                    <span class="item-pill">
-                                                        {{ signal.label }}
-                                                    </span>
-                                                {% endif %}
+                                        {% if (selectedSignals is empty or signal.field in selectedSignals) and signalIconMap[signal.field] is not defined %}
+                                            <span class="item-pill">
+                                                {{ signal.label }}
                                             </span>
                                         {% endif %}
                                     {% endfor %}
