@@ -646,3 +646,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: the initial alias mapping covered the obvious generic forms (`Quest`, `Bottle Cap`, `Gold Bullion`, `Seasonal content`) but not all provider-prefixed or shortened variants exposed by the real snapshots.
 - Fix: expanded the importer alias mapping so `Fallout 76 Quests` feeds `quests`, `Caps`/`bullion` feed vendor/currency derivation, and `Scoreboard` feeds `seasonal_content`.
 - Prevention: after adding a raw-vocabulary audit, use it to normalize provider-specific label variants before introducing new business fields.
+
+## 2026-03-18 - Raw vocabulary reports are much more useful when they show canonical coverage
+- Symptom: a plain frequency list of raw labels was helpful, but it still required manual reasoning to tell whether a given label was already covered by current importer mappings.
+- Root cause: the first version of `app:data:report:source-vocabulary` only showed observed labels and counts, not whether those labels already fed a canonical field such as `vendors`, `quests`, or `purchase_currency`.
+- Fix: the report now computes `mapped_fields` for each raw label by passing it through the current enrichment rules, so covered labels and genuinely unmapped residue are immediately distinguishable.
+- Prevention: when building source-audit reports meant to guide taxonomy cleanup, include both frequency and current canonical coverage in the output.

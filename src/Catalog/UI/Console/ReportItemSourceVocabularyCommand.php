@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Catalog\UI\Console;
 
+use App\Catalog\Application\Import\ItemImportExternalMetadataEnricher;
 use App\Catalog\Application\Import\ItemImportSourceReader;
 use JsonException;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -40,6 +41,7 @@ final class ReportItemSourceVocabularyCommand extends Command
 
     public function __construct(
         private readonly ItemImportSourceReader $sourceReader,
+        private readonly ItemImportExternalMetadataEnricher $externalMetadataEnricher,
         private readonly KernelInterface $kernel,
     ) {
         parent::__construct();
@@ -117,7 +119,7 @@ final class ReportItemSourceVocabularyCommand extends Command
             }
 
             $table = new Table($output);
-            $table->setHeaders(['Kind', 'Value', 'Count', 'Files', 'Truthy', 'Falsy']);
+            $table->setHeaders(['Kind', 'Value', 'Count', 'Files', 'Truthy', 'Falsy', 'Mapped']);
 
             foreach ($section['rows'] as $row) {
                 $table->addRow([
@@ -127,6 +129,7 @@ final class ReportItemSourceVocabularyCommand extends Command
                     (string) $row['file_count'],
                     null !== $row['truthy_count'] ? (string) $row['truthy_count'] : '-',
                     null !== $row['falsy_count'] ? (string) $row['falsy_count'] : '-',
+                    [] !== $row['mapped_fields'] ? implode(', ', $row['mapped_fields']) : '-',
                 ]);
             }
 
@@ -201,7 +204,8 @@ final class ReportItemSourceVocabularyCommand extends Command
      *         count:int,
      *         file_count:int,
      *         truthy_count:int|null,
-     *         falsy_count:int|null
+     *         falsy_count:int|null,
+     *         mapped_fields:list<string>
      *     }>
      * }
      */
@@ -217,7 +221,8 @@ final class ReportItemSourceVocabularyCommand extends Command
          *     count:int,
          *     files:array<string,true>,
          *     truthy_count:int|null,
-         *     falsy_count:int|null
+         *     falsy_count:int|null,
+         *     mapped_fields:list<string>
          * }> $entries
          */
         $entries = [];
@@ -239,7 +244,7 @@ final class ReportItemSourceVocabularyCommand extends Command
                 match ($field) {
                     'availability' => $this->collectAvailability($entries, $path, $resource['availability'] ?? null),
                     'obtained' => $this->collectObtained($entries, $path, $columns['obtained'] ?? null),
-                    'type' => $this->collectScalarValue($entries, $path, 'value', $columns['type'] ?? null),
+                    'type' => $this->collectScalarValue($entries, $path, 'value', $columns['type'] ?? null, $provider, $field),
                     default => null,
                 };
             }
@@ -253,6 +258,7 @@ final class ReportItemSourceVocabularyCommand extends Command
                 'file_count' => count($entry['files']),
                 'truthy_count' => $entry['truthy_count'],
                 'falsy_count' => $entry['falsy_count'],
+                'mapped_fields' => $entry['mapped_fields'],
             ],
             $entries,
         ));
@@ -324,7 +330,8 @@ final class ReportItemSourceVocabularyCommand extends Command
      *     count:int,
      *     files:array<string,true>,
      *     truthy_count:int|null,
-     *     falsy_count:int|null
+     *     falsy_count:int|null,
+     *     mapped_fields:list<string>
      * }> $entries
      */
     private function collectAvailability(array &$entries, string $path, mixed $availability): void
@@ -347,6 +354,7 @@ final class ReportItemSourceVocabularyCommand extends Command
                 'files' => [],
                 'truthy_count' => 0,
                 'falsy_count' => 0,
+                'mapped_fields' => [$name],
             ];
 
             ++$entries[$entryKey]['count'];
@@ -367,20 +375,21 @@ final class ReportItemSourceVocabularyCommand extends Command
      *     count:int,
      *     files:array<string,true>,
      *     truthy_count:int|null,
-     *     falsy_count:int|null
+     *     falsy_count:int|null,
+     *     mapped_fields:list<string>
      * }> $entries
      */
     private function collectObtained(array &$entries, string $path, mixed $obtained): void
     {
         if (is_scalar($obtained) || null === $obtained) {
-            $this->collectScalarValue($entries, $path, 'value', $obtained);
+            $this->collectScalarValue($entries, $path, 'value', $obtained, 'fallout_wiki', 'obtained');
 
             return;
         }
 
         if (is_array($obtained) && array_is_list($obtained)) {
             foreach ($obtained as $value) {
-                $this->collectScalarValue($entries, $path, 'icon', $value);
+                $this->collectScalarValue($entries, $path, 'icon', $value, 'fallout_wiki', 'obtained');
             }
 
             return;
@@ -391,7 +400,7 @@ final class ReportItemSourceVocabularyCommand extends Command
         }
 
         $text = $obtained['text'] ?? null;
-        $this->collectScalarValue($entries, $path, 'text', $text);
+        $this->collectScalarValue($entries, $path, 'text', $text, 'fallout_wiki', 'obtained');
 
         $icons = $obtained['icons'] ?? null;
         if (!is_array($icons) || !array_is_list($icons)) {
@@ -399,7 +408,7 @@ final class ReportItemSourceVocabularyCommand extends Command
         }
 
         foreach ($icons as $icon) {
-            $this->collectScalarValue($entries, $path, 'icon', $icon);
+            $this->collectScalarValue($entries, $path, 'icon', $icon, 'fallout_wiki', 'obtained');
         }
     }
 
@@ -410,10 +419,11 @@ final class ReportItemSourceVocabularyCommand extends Command
      *     count:int,
      *     files:array<string,true>,
      *     truthy_count:int|null,
-     *     falsy_count:int|null
+     *     falsy_count:int|null,
+     *     mapped_fields:list<string>
      * }> $entries
      */
-    private function collectScalarValue(array &$entries, string $path, string $kind, mixed $value): void
+    private function collectScalarValue(array &$entries, string $path, string $kind, mixed $value, string $provider, string $field): void
     {
         if (!is_scalar($value)) {
             return;
@@ -432,6 +442,7 @@ final class ReportItemSourceVocabularyCommand extends Command
             'files' => [],
             'truthy_count' => null,
             'falsy_count' => null,
+            'mapped_fields' => $this->resolveMappedFields($provider, $field, $normalized),
         ];
 
         ++$entries[$entryKey]['count'];
@@ -446,5 +457,47 @@ final class ReportItemSourceVocabularyCommand extends Command
             is_string($value) => in_array(strtolower(trim($value)), ['1', 'true', 'yes'], true),
             default => false,
         };
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function resolveMappedFields(string $provider, string $field, string $value): array
+    {
+        if ('fandom' === $provider && 'availability' === $field) {
+            return [$value];
+        }
+
+        if ('fallout_wiki' !== $provider) {
+            return [];
+        }
+
+        $metadata = match ($field) {
+            'obtained' => ['obtained' => [$value]],
+            'type' => ['type' => $value],
+            default => [],
+        };
+
+        if ([] === $metadata) {
+            return [];
+        }
+
+        $enriched = $this->externalMetadataEnricher->enrich('fallout_wiki', $metadata);
+        $mappedFields = [];
+
+        foreach (['containers', 'enemies', 'seasonal_content', 'treasure_maps', 'quests', 'vendors', 'world_spawns'] as $candidateField) {
+            if (true === ($enriched[$candidateField] ?? false)) {
+                $mappedFields[] = $candidateField;
+            }
+        }
+
+        $purchaseCurrency = $enriched['purchase_currency'] ?? null;
+        if (is_string($purchaseCurrency) && '' !== $purchaseCurrency) {
+            $mappedFields[] = 'purchase_currency';
+        }
+
+        sort($mappedFields);
+
+        return $mappedFields;
     }
 }

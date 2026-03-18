@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Command;
 
+use App\Catalog\Application\Import\ItemImportExternalMetadataEnricher;
 use App\Catalog\Infrastructure\Import\FilesystemItemImportSourceReader;
 use App\Catalog\UI\Console\ReportItemSourceVocabularyCommand;
 use PHPUnit\Framework\TestCase;
@@ -29,7 +30,7 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
         $kernel = $this->createMock(KernelInterface::class);
         $kernel->method('getProjectDir')->willReturn($projectDir);
 
-        $command = new ReportItemSourceVocabularyCommand(new FilesystemItemImportSourceReader(), $kernel);
+        $command = new ReportItemSourceVocabularyCommand(new FilesystemItemImportSourceReader(), new ItemImportExternalMetadataEnricher(), $kernel);
         $tester = new CommandTester($command);
 
         $exitCode = $tester->execute([
@@ -59,6 +60,7 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
             'file_count' => 1,
             'truthy_count' => 1,
             'falsy_count' => 1,
+            'mapped_fields' => ['enemies'],
         ], $this->findRow($availabilityRows, 'flag', 'enemies'));
 
         $obtained = $this->findSection($sections, 'fallout_wiki', 'obtained');
@@ -71,6 +73,7 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
             'file_count' => 1,
             'truthy_count' => null,
             'falsy_count' => null,
+            'mapped_fields' => ['enemies'],
         ], $this->findRow($obtainedRows, 'icon', 'Enemy Drop'));
         self::assertSame([
             'kind' => 'text',
@@ -79,6 +82,7 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
             'file_count' => 1,
             'truthy_count' => null,
             'falsy_count' => null,
+            'mapped_fields' => [],
         ], $this->findRow($obtainedRows, 'text', 'Project Paradise'));
 
         $type = $this->findSection($sections, 'fallout_wiki', 'type');
@@ -91,6 +95,7 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
             'file_count' => 1,
             'truthy_count' => null,
             'falsy_count' => null,
+            'mapped_fields' => ['purchase_currency', 'vendors'],
         ], $this->findRow($typeRows, 'value', 'caps'));
     }
 
@@ -101,7 +106,7 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
         $kernel = $this->createMock(KernelInterface::class);
         $kernel->method('getProjectDir')->willReturn($projectDir);
 
-        $command = new ReportItemSourceVocabularyCommand(new FilesystemItemImportSourceReader(), $kernel);
+        $command = new ReportItemSourceVocabularyCommand(new FilesystemItemImportSourceReader(), new ItemImportExternalMetadataEnricher(), $kernel);
         $tester = new CommandTester($command);
 
         $exitCode = $tester->execute([
@@ -130,7 +135,7 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
         $kernel = $this->createMock(KernelInterface::class);
         $kernel->method('getProjectDir')->willReturn($projectDir);
 
-        $command = new ReportItemSourceVocabularyCommand(new FilesystemItemImportSourceReader(), $kernel);
+        $command = new ReportItemSourceVocabularyCommand(new FilesystemItemImportSourceReader(), new ItemImportExternalMetadataEnricher(), $kernel);
         $tester = new CommandTester($command);
 
         $exitCode = $tester->execute([
