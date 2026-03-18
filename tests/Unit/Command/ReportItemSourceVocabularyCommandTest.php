@@ -43,6 +43,7 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
         $decoded = json_decode($tester->getDisplay(), true, 512, JSON_THROW_ON_ERROR);
         self::assertNull($decoded['provider'] ?? null);
         self::assertNull($decoded['field'] ?? null);
+        self::assertFalse($decoded['only_unmapped'] ?? true);
         self::assertIsArray($decoded['sections'] ?? null);
         self::assertCount(3, $decoded['sections']);
 
@@ -120,6 +121,7 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
         $decoded = json_decode($tester->getDisplay(), true, 512, JSON_THROW_ON_ERROR);
         self::assertSame('fallout_wiki', $decoded['provider'] ?? null);
         self::assertSame('obtained', $decoded['field'] ?? null);
+        self::assertFalse($decoded['only_unmapped'] ?? true);
         self::assertIsArray($decoded['sections'] ?? null);
         self::assertCount(1, $decoded['sections']);
         /** @var list<array<string, mixed>> $sections */
@@ -144,6 +146,46 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
         ]);
 
         self::assertSame(Command::INVALID, $exitCode);
+    }
+
+    public function testOnlyUnmappedFilterKeepsOnlyResidualRows(): void
+    {
+        $projectDir = $this->createFixtureProjectDir();
+
+        $kernel = $this->createMock(KernelInterface::class);
+        $kernel->method('getProjectDir')->willReturn($projectDir);
+
+        $command = new ReportItemSourceVocabularyCommand(new FilesystemItemImportSourceReader(), new ItemImportExternalMetadataEnricher(), $kernel);
+        $tester = new CommandTester($command);
+
+        $exitCode = $tester->execute([
+            '--provider' => 'fallout_wiki',
+            '--field' => 'obtained',
+            '--only-unmapped' => true,
+            '--format' => 'json',
+        ]);
+
+        self::assertSame(Command::SUCCESS, $exitCode);
+        /** @var array<string, mixed> $decoded */
+        $decoded = json_decode($tester->getDisplay(), true, 512, JSON_THROW_ON_ERROR);
+        self::assertTrue($decoded['only_unmapped'] ?? false);
+
+        /** @var list<array<string, mixed>> $sections */
+        $sections = $decoded['sections'];
+        $obtained = $this->findSection($sections, 'fallout_wiki', 'obtained');
+        /** @var list<array<string, mixed>> $rows */
+        $rows = is_array($obtained['rows'] ?? null) ? $obtained['rows'] : [];
+
+        self::assertCount(1, $rows);
+        self::assertSame([
+            'kind' => 'text',
+            'value' => 'Project Paradise',
+            'count' => 1,
+            'file_count' => 1,
+            'truthy_count' => null,
+            'falsy_count' => null,
+            'mapped_fields' => [],
+        ], $rows[0]);
     }
 
     private function createFixtureProjectDir(): string

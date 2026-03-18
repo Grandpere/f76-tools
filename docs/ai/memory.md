@@ -652,3 +652,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: the first version of `app:data:report:source-vocabulary` only showed observed labels and counts, not whether those labels already fed a canonical field such as `vendors`, `quests`, or `purchase_currency`.
 - Fix: the report now computes `mapped_fields` for each raw label by passing it through the current enrichment rules, so covered labels and genuinely unmapped residue are immediately distinguishable.
 - Prevention: when building source-audit reports meant to guide taxonomy cleanup, include both frequency and current canonical coverage in the output.
+
+## 2026-03-18 - Taxonomy audit reports need an unmapped-only mode to stay actionable
+- Symptom: even with `mapped_fields`, the full raw-vocabulary report remained noisy because the already-covered high-frequency labels dominated the top of the list.
+- Root cause: the audit output mixed two goals: documenting the full raw vocabulary and prioritizing the next taxonomy work.
+- Fix: added `--only-unmapped` to `app:data:report:source-vocabulary`, so the report can be used directly as a backlog of labels that still do not feed any canonical field.
+- Prevention: when an audit report is used to guide follow-up cleanup, provide a filtered “actionable residue only” mode instead of forcing manual scanning through already-covered entries.
