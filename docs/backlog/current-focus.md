@@ -51,6 +51,7 @@
 - Done (slice 44): second passage de layout sur `admin/catalog/items` pour faire dominer les colonnes metier (nom item, URL, valeurs retenues/conflits) et donner au tableau des conflits sa propre grille de colonnes au lieu d un partage trop generique.
 - Done (slice 45): correction de la cascade CSS sur `admin/catalog/items` en surchargeant explicitement la grille generique `translations-table first/last-child`, afin que les largeurs dediees des tableaux admin s appliquent enfin visuellement.
 - Done (slice 46): dernier reequilibrage cible des colonnes de la liste et de `Sources externes` pour pousser encore le nom d item et les metadata au premier plan, tout en reduisant le poids visuel du statut et de l URL.
+- Done (slice 47): reduction supplementaire de la colonne `merge status` dans la liste admin catalogue, afin que le nom d item reste la dominante visuelle nette sur la ligne.
 - Note: le lookup public Nukacrypt direct par `form_id` via `esmRecord` reste non fiable depuis l app (HTTP 500 / corps vide). Un `curl` navigateur colle manuellement dans le shell du conteneur `app` peut repondre, mais le meme cas n est pas encore reproducible via le runtime PHP (`HttpClient`/probe). On garde donc Nukacrypt en outil opportuniste d arbitrage, pas en source serveur robuste.
 - Remaining: capitaliser sur l UI admin pour confirmer les prochains conflits reels en environnement deploye ; si de nouveaux cas limites apparaissent, les traiter a la demande plutot que d etendre la taxonomie par anticipation.
 

@@ -4024,7 +4024,7 @@ span.flatpickr-weekday {
 
 .translations-table.admin-catalog-list-table th:first-child,
 .translations-table.admin-catalog-list-table td:first-child {
-    width: 47%;
+    width: 51%;
 }
 
 .translations-table.admin-catalog-list-table th:last-child,
@@ -4033,7 +4033,7 @@ span.flatpickr-weekday {
 }
 
 .admin-catalog-col-item {
-    width: 47%;
+    width: 51%;
 }
 
 .admin-catalog-col-source-id {
@@ -4041,11 +4041,11 @@ span.flatpickr-weekday {
 }
 
 .admin-catalog-col-type {
-    width: 11%;
+    width: 10%;
 }
 
 .admin-catalog-col-merge-status {
-    width: 21%;
+    width: 17%;
 }
 
 .admin-catalog-col-providers {
@@ -4213,12 +4213,12 @@ span.flatpickr-weekday {
 
 .admin-catalog-list-table th:nth-child(3),
 .admin-catalog-list-table td:nth-child(3) {
-    width: 11%;
+    width: 10%;
 }
 
 .admin-catalog-list-table th:nth-child(4),
 .admin-catalog-list-table td:nth-child(4) {
-    width: 21%;
+    width: 17%;
 }
 
 .admin-catalog-sources-table th:nth-child(2),
