@@ -39,6 +39,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: the import enricher now recognizes the observed aliases from local snapshots, including `Enemy Drop`, `Spawned`, `Merchants`, `Quests`, `Containers`, and `Fallout 76 Limited Time Content`.
 - Prevention: when refining source mappings, extract the vocabulary from committed raw snapshots first and only then update canonical flag derivation.
 
+## 2026-03-18 - Add new canonical acquisition flags only from generic raw labels first
+- Symptom: the `fallout_wiki.obtained` residual backlog still contained useful concepts like `Overview:Unused Content`, but many other remaining labels were specific NPC/event names that would be risky to normalize too aggressively.
+- Root cause: once a raw vocabulary report exists, it is tempting to map everything left in one pass even when some labels are generic taxonomy and others are one-off content references.
+- Fix: `unused_content` was introduced only from clear generic labels (`Overview:Unused Content`, `Unused Content`, `Fallout 76 Unused Content`) and then propagated through merge/reporting like the other canonical flags.
+- Prevention: extend canonical taxonomy incrementally from generic, repeatable source labels first; keep named NPCs/activities in raw metadata until there is an explicit product need for a new canonical concept.
+
 ## 2026-03-18 - Fallout Wiki recipe rows must keep anchor href and dedupe by form_id
 - Symptom: `fallout.wiki` recipes with the same visible label (for example `Recipe: Healing Salve`) collapsed into one JSON row, and the stored `wiki_url` pointed to a generic 404 page instead of the variant page.
 - Root cause: the sync command built `slug` and fallback `wiki_url` from the visible `name`, while deduplication keyed rows by `type|slug`; generic labels therefore overwrote distinct variants even when each row had its own anchor `href` and `form_id`.

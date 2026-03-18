@@ -89,6 +89,11 @@ final class ItemImportExternalMetadataEnricher
         $metadata['daily_ops'] ??= $this->labelsContainAny($normalizedLabels, [
             'daily ops',
         ]);
+        $metadata['unused_content'] ??= $this->labelsContainAny($normalizedLabels, [
+            'overview unused content',
+            'unused content',
+            'fallout 76 unused content',
+        ]);
         $metadata['seasonal_content'] ??= $this->labelsContainAny($normalizedLabels, [
             'fallout 76 seasons',
             'gained during season',

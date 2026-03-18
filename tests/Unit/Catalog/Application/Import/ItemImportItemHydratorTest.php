@@ -248,4 +248,19 @@ final class ItemImportItemHydratorTest extends TestCase
         self::assertTrue($data['metadata']['events'] ?? false);
         self::assertTrue($data['metadata']['daily_ops'] ?? false);
     }
+
+    public function testBuildExternalSourceDataDerivesUnusedContentFromFalloutWikiLabels(): void
+    {
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
+
+        $data = $hydrator->buildExternalSourceData('fallout_wiki', [
+            'obtained' => [
+                'Overview:Unused Content',
+                'Fallout 76 Unused Content',
+            ],
+        ], 1004);
+
+        self::assertTrue($data['metadata']['unused_content'] ?? false);
+    }
 }
