@@ -98,7 +98,7 @@ final class CatalogItemControllerTest extends WebTestCase
         $this->entityManager?->persist($item);
         $this->entityManager?->persist(new ItemBookListEntity()
             ->setItem($item)
-            ->setListNumber(84)
+            ->setListNumber(24)
             ->setIsSpecialList(true));
         $this->entityManager?->flush();
 
