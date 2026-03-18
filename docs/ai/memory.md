@@ -634,3 +634,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: the sync preserved wiki labels faithfully, but the import layer did not derive any canonical booleans from those labels.
 - Fix: enriched `fallout_wiki` metadata during import with derived canonical flags (`containers`, `enemies`, `quests`, `vendors`, `world_spawns`, `seasonal_content`, `treasure_maps`) plus a derived `purchase_currency`, while keeping the raw `obtained` / `type` labels intact.
 - Prevention: when a provider exposes categorical labels instead of direct booleans, derive canonical filterable flags at import time rather than forcing downstream code to reverse-engineer label arrays repeatedly.
+
+## 2026-03-18 - Vocabulary audits must inspect raw source snapshots, not normalized import rows
+- Symptom: it was tempting to inventory possible source values from already normalized import rows, but that loses the structure of fields like `fandom.availability` and collapses `fallout_wiki.obtained` objects into downstream derived flags.
+- Root cause: the import normalization flattens boolean availability keys and later derives canonical booleans, which is correct for app behavior but no longer reflects the original snapshot vocabulary faithfully.
+- Fix: added `app:data:report:source-vocabulary`, which reads the raw JSON snapshots directly and reports observed values from `fandom.availability`, `fallout_wiki.obtained`, and `fallout_wiki.type`.
+- Prevention: when auditing source taxonomies or expanding source-label mappings, start from the raw sync snapshots rather than imported metadata or UI output.
