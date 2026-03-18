@@ -81,6 +81,14 @@ final class ItemImportExternalMetadataEnricher
             'looted from enemy',
             'enemy drop',
         ]);
+        $metadata['events'] ??= $this->labelsContainAny($normalizedLabels, [
+            'fallout 76 events',
+            'event',
+            'mutated public events',
+        ]);
+        $metadata['daily_ops'] ??= $this->labelsContainAny($normalizedLabels, [
+            'daily ops',
+        ]);
         $metadata['seasonal_content'] ??= $this->labelsContainAny($normalizedLabels, [
             'fallout 76 seasons',
             'gained during season',

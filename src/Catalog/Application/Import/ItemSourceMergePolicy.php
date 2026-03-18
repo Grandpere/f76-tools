@@ -25,6 +25,8 @@ final class ItemSourceMergePolicy
             'containers',
             'random_encounters',
             'enemies',
+            'events',
+            'daily_ops',
             'seasonal_content',
             'treasure_maps',
             'quests',

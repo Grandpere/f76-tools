@@ -658,3 +658,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: the audit output mixed two goals: documenting the full raw vocabulary and prioritizing the next taxonomy work.
 - Fix: added `--only-unmapped` to `app:data:report:source-vocabulary`, so the report can be used directly as a backlog of labels that still do not feed any canonical field.
 - Prevention: when an audit report is used to guide follow-up cleanup, provide a filtered “actionable residue only” mode instead of forcing manual scanning through already-covered entries.
+
+## 2026-03-18 - Add new canonical flags only from generic, low-risk source labels first
+- Symptom: the unmapped fallout.wiki residue includes many specific activity names (`The Big Bloom`, `Neurological Warfare`, `Giuseppe`, etc.), but not all of them are safe to classify automatically without inventing or overfitting taxonomy rules.
+- Root cause: raw source labels mix generic categories (`Fallout 76 Events`, `Daily Ops`) with named activities, NPCs, and noisy concatenations.
+- Fix: introduced canonical `events` and `daily_ops` only from generic, low-risk markers first (`Fallout 76 Events`, `Event`, `Mutated Public Events`, `Daily Ops`) and propagated them through merge/reporting.
+- Prevention: extend taxonomy incrementally from generic labels first; only map specific named activities once the business concept and matching rules are clear enough to avoid false positives.

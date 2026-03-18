@@ -232,4 +232,20 @@ final class ItemImportItemHydratorTest extends TestCase
         self::assertTrue($data['metadata']['vendors'] ?? false);
         self::assertSame('gold_bullion', $data['metadata']['purchase_currency'] ?? null);
     }
+
+    public function testBuildExternalSourceDataDerivesEventsAndDailyOpsFromFalloutWikiLabels(): void
+    {
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
+
+        $data = $hydrator->buildExternalSourceData('fallout_wiki', [
+            'obtained' => [
+                'Fallout 76 Events',
+                'Daily Ops',
+            ],
+        ], 1003);
+
+        self::assertTrue($data['metadata']['events'] ?? false);
+        self::assertTrue($data['metadata']['daily_ops'] ?? false);
+    }
 }

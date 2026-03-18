@@ -177,4 +177,38 @@ final class ItemSourceMergePolicyTest extends TestCase
         self::assertArrayNotHasKey('value_currency', $decisions);
         self::assertArrayNotHasKey('type', $decisions);
     }
+
+    public function testMergeFallsBackToFalloutWikiForEventsAndDailyOpsWhenOnlyWikiHasThem(): void
+    {
+        $item = new ItemEntity();
+        $item
+            ->setType(ItemTypeEnum::BOOK)
+            ->setSourceId(9100)
+            ->setNameKey('item.book.9100.name');
+        $item->upsertExternalSource('fandom', '9100', null, [
+            'name_en' => 'Plan: Example',
+        ]);
+        $item->upsertExternalSource('fallout_wiki', '9100', null, [
+            'name_en' => 'Plan: Example',
+            'events' => true,
+            'daily_ops' => true,
+        ]);
+
+        $policy = new ItemSourceMergePolicy();
+        $result = $policy->merge($item, 'fandom', 'fallout_wiki');
+
+        self::assertNotNull($result);
+
+        $decisions = [];
+        foreach ($result->decisions as $decision) {
+            $decisions[$decision->field] = $decision;
+        }
+
+        self::assertSame('fallout_wiki', $decisions['events']->provider);
+        self::assertSame('fallback_provider_b', $decisions['events']->reason);
+        self::assertTrue($decisions['events']->value);
+        self::assertSame('fallout_wiki', $decisions['daily_ops']->provider);
+        self::assertSame('fallback_provider_b', $decisions['daily_ops']->reason);
+        self::assertTrue($decisions['daily_ops']->value);
+    }
 }
