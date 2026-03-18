@@ -81,7 +81,7 @@ catalog_books.title: Plans & Recipes
 catalog_books.description: List of available plans and recipes
 catalog_books.last_updated: 'Catalog updated: %date%'
 catalog_books.last_updated_unknown: 'Catalog update time unknown'
-catalog_books.filters_title: Browse
+catalog_books.filters_title: Filters
 catalog_books.search: Search
 catalog_books.search_placeholder: Search by displayed name, note, list, or activity
 catalog_books.list_filter: Minerva list
