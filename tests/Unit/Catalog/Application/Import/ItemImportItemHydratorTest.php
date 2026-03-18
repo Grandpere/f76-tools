@@ -293,4 +293,65 @@ final class ItemImportItemHydratorTest extends TestCase
 
         self::assertTrue($data['metadata']['expeditions'] ?? false);
     }
+
+    public function testBuildExternalSourceDataPrefersFalloutWikiIconsOverConcatenatedText(): void
+    {
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
+
+        $data = $hydrator->buildExternalSourceData('fallout_wiki', [
+            'obtained' => [
+                'text' => 'ContainersTreasure MapsQuestsMerchantsWorld spawns',
+                'icons' => [
+                    'Containers',
+                    'Treasure Map',
+                    'Quests',
+                    'Merchants',
+                    'World spawns',
+                ],
+            ],
+        ], 1007);
+
+        self::assertTrue($data['metadata']['containers'] ?? false);
+        self::assertTrue($data['metadata']['treasure_maps'] ?? false);
+        self::assertTrue($data['metadata']['quests'] ?? false);
+        self::assertTrue($data['metadata']['vendors'] ?? false);
+        self::assertTrue($data['metadata']['world_spawns'] ?? false);
+    }
+
+    public function testBuildExternalSourceDataDerivesNamedVendorsAndExpeditionHintsFromFalloutWikiIcons(): void
+    {
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
+
+        $data = $hydrator->buildExternalSourceData('fallout_wiki', [
+            'obtained' => [
+                'text' => 'Tax EvasionGiuseppe',
+                'icons' => [
+                    'Tax Evasion',
+                    'Giuseppe',
+                ],
+            ],
+        ], 1008);
+
+        self::assertTrue($data['metadata']['vendors'] ?? false);
+        self::assertTrue($data['metadata']['expeditions'] ?? false);
+        self::assertSame('stamps', $data['metadata']['purchase_currency'] ?? null);
+    }
+
+    public function testBuildExternalSourceDataDerivesGoldBullionVendorFromRegsAndMinervaLabels(): void
+    {
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
+
+        $data = $hydrator->buildExternalSourceData('fallout_wiki', [
+            'obtained' => [
+                'Reginald Stone',
+                'Regs or Minerva',
+            ],
+        ], 1009);
+
+        self::assertTrue($data['metadata']['vendors'] ?? false);
+        self::assertSame('gold_bullion', $data['metadata']['purchase_currency'] ?? null);
+    }
 }

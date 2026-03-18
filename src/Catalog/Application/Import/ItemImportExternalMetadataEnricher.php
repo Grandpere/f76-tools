@@ -86,7 +86,15 @@ final class ItemImportExternalMetadataEnricher
             'event',
             'mutated public events',
         ]);
-        $metadata['expeditions'] ??= $this->labelsContainToken($normalizedLabels, 'expeditions');
+        $metadata['expeditions'] ??= $this->labelsContainToken($normalizedLabels, 'expeditions')
+            || $this->labelsContainAny($normalizedLabels, [
+                'giuseppe',
+                'tax evasion',
+                'the human condition',
+                'the most sensational game',
+                'atlantic city',
+                'the pitt',
+            ]);
         $metadata['daily_ops'] ??= $this->labelsContainAny($normalizedLabels, [
             'daily ops',
         ]);
@@ -128,6 +136,11 @@ final class ItemImportExternalMetadataEnricher
             'tickets',
             'merchants',
             'fallout 76 merchants',
+            'giuseppe',
+            'minerva',
+            'regs',
+            'regs or minerva',
+            'reginald stone',
         ]);
         $metadata['world_spawns'] ??= $this->labelsContainAny($normalizedLabels, [
             'fallout 76 locations',
@@ -216,6 +229,15 @@ final class ItemImportExternalMetadataEnricher
             return [];
         }
 
+        $hasIcons = array_key_exists('icons', $value) && is_array($value['icons']) && [] !== $value['icons'];
+        if ($hasIcons) {
+            return $this->extractScalarLabels($value['icons']);
+        }
+
+        if (array_key_exists('text', $value)) {
+            return $this->extractScalarLabels($value['text']);
+        }
+
         $labels = [];
         foreach ($value as $key => $entry) {
             if (is_string($key) && in_array($key, ['text', 'icons'], true)) {
@@ -283,6 +305,8 @@ final class ItemImportExternalMetadataEnricher
                 'gold', 'gold bullion', 'bullion', 'purchased with bullion' => 'gold_bullion',
                 'stamp', 'stamps' => 'stamps',
                 'ticket', 'tickets' => 'tickets',
+                'minerva', 'regs', 'regs or minerva', 'reginald stone' => 'gold_bullion',
+                'giuseppe' => 'stamps',
                 default => null,
             };
 
