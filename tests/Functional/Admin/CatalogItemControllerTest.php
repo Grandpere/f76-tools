@@ -59,7 +59,7 @@ final class CatalogItemControllerTest extends WebTestCase
         $item = $this->createCatalogItem();
         $this->browser()->loginUser($admin);
 
-        $crawler = $this->browser()->request('GET', '/en/admin/catalog/items?type=BOOK&q=fandom&item='.$item->getPublicId());
+        $crawler = $this->getAndFollowRedirect('/en/admin/catalog/items?type=BOOK&q=fandom&item='.$item->getPublicId());
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('002B8BC4', (string) $this->browser()->getResponse()->getContent());
@@ -117,5 +117,15 @@ final class CatalogItemControllerTest extends WebTestCase
         }
 
         return $this->client;
+    }
+
+    private function getAndFollowRedirect(string $uri): \Symfony\Component\DomCrawler\Crawler
+    {
+        $crawler = $this->browser()->request('GET', $uri);
+        if (302 === $this->browser()->getResponse()->getStatusCode()) {
+            return $this->browser()->followRedirect();
+        }
+
+        return $crawler;
     }
 }
