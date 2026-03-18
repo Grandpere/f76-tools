@@ -4022,6 +4022,16 @@ span.flatpickr-weekday {
     table-layout: fixed;
 }
 
+.translations-table.admin-catalog-list-table th:first-child,
+.translations-table.admin-catalog-list-table td:first-child {
+    width: 41%;
+}
+
+.translations-table.admin-catalog-list-table th:last-child,
+.translations-table.admin-catalog-list-table td:last-child {
+    width: 14%;
+}
+
 .admin-catalog-col-item {
     width: 41%;
 }
@@ -4059,6 +4069,16 @@ span.flatpickr-weekday {
     table-layout: fixed;
 }
 
+.translations-table.admin-catalog-sources-table th:first-child,
+.translations-table.admin-catalog-sources-table td:first-child {
+    width: 5%;
+}
+
+.translations-table.admin-catalog-sources-table th:last-child,
+.translations-table.admin-catalog-sources-table td:last-child {
+    width: 42%;
+}
+
 .admin-catalog-col-source-provider {
     width: 5%;
 }
@@ -4077,6 +4097,16 @@ span.flatpickr-weekday {
 
 .admin-catalog-merge-table {
     table-layout: fixed;
+}
+
+.translations-table.admin-catalog-merge-table th:first-child,
+.translations-table.admin-catalog-merge-table td:first-child {
+    width: 9%;
+}
+
+.translations-table.admin-catalog-merge-table th:last-child,
+.translations-table.admin-catalog-merge-table td:last-child {
+    width: 30%;
 }
 
 .admin-catalog-col-merge-field {
@@ -4100,6 +4130,16 @@ span.flatpickr-weekday {
     table-layout: fixed;
 }
 
+.translations-table.admin-catalog-signals-table th:first-child,
+.translations-table.admin-catalog-signals-table td:first-child {
+    width: 20%;
+}
+
+.translations-table.admin-catalog-signals-table th:last-child,
+.translations-table.admin-catalog-signals-table td:last-child {
+    width: 34%;
+}
+
 .admin-catalog-col-signal-field {
     width: 20%;
 }
@@ -4118,6 +4158,16 @@ span.flatpickr-weekday {
 
 .admin-catalog-conflicts-table {
     table-layout: fixed;
+}
+
+.translations-table.admin-catalog-conflicts-table th:first-child,
+.translations-table.admin-catalog-conflicts-table td:first-child {
+    width: 11%;
+}
+
+.translations-table.admin-catalog-conflicts-table th:last-child,
+.translations-table.admin-catalog-conflicts-table td:last-child {
+    width: 35%;
 }
 
 .admin-catalog-col-conflict-field {
@@ -4154,6 +4204,66 @@ span.flatpickr-weekday {
 .admin-catalog-list-table td:nth-child(5),
 .admin-catalog-list-table th:nth-child(5) {
     word-break: break-word;
+}
+
+.admin-catalog-list-table th:nth-child(2),
+.admin-catalog-list-table td:nth-child(2) {
+    width: 8%;
+}
+
+.admin-catalog-list-table th:nth-child(3),
+.admin-catalog-list-table td:nth-child(3) {
+    width: 12%;
+}
+
+.admin-catalog-list-table th:nth-child(4),
+.admin-catalog-list-table td:nth-child(4) {
+    width: 25%;
+}
+
+.admin-catalog-sources-table th:nth-child(2),
+.admin-catalog-sources-table td:nth-child(2) {
+    width: 13%;
+}
+
+.admin-catalog-sources-table th:nth-child(3),
+.admin-catalog-sources-table td:nth-child(3) {
+    width: 40%;
+}
+
+.admin-catalog-merge-table th:nth-child(2),
+.admin-catalog-merge-table td:nth-child(2) {
+    width: 12%;
+}
+
+.admin-catalog-merge-table th:nth-child(3),
+.admin-catalog-merge-table td:nth-child(3) {
+    width: 19%;
+}
+
+.admin-catalog-merge-table th:nth-child(4),
+.admin-catalog-merge-table td:nth-child(4) {
+    width: 30%;
+}
+
+.admin-catalog-signals-table th:nth-child(2),
+.admin-catalog-signals-table td:nth-child(2) {
+    width: 16%;
+}
+
+.admin-catalog-signals-table th:nth-child(3),
+.admin-catalog-signals-table td:nth-child(3) {
+    width: 30%;
+}
+
+.admin-catalog-conflicts-table th:nth-child(2),
+.admin-catalog-conflicts-table td:nth-child(2) {
+    width: 19%;
+}
+
+.admin-catalog-conflicts-table th:nth-child(3),
+.admin-catalog-conflicts-table td:nth-child(3) {
+    width: 35%;
 }
 
 .admin-catalog-sources-table td:nth-child(1),
