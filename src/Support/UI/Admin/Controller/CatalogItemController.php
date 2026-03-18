@@ -34,6 +34,22 @@ final class CatalogItemController extends AbstractController
     private const MERGE_PROVIDER_A = 'fandom';
     private const MERGE_PROVIDER_B = 'fallout_wiki';
     private const MERGE_STATUS_OPTIONS = ['aligned', 'generic_label', 'source_issue', 'material_conflict', 'no_merge'];
+    private const CANONICAL_SIGNAL_FIELDS = [
+        'purchase_currency',
+        'containers',
+        'random_encounters',
+        'enemies',
+        'events',
+        'expeditions',
+        'daily_ops',
+        'raid',
+        'unused_content',
+        'seasonal_content',
+        'treasure_maps',
+        'quests',
+        'vendors',
+        'world_spawns',
+    ];
 
     public function __construct(
         private readonly AdminCatalogItemReadRepository $adminCatalogItemReadRepository,
@@ -183,7 +199,13 @@ final class CatalogItemController extends AbstractController
      *             value_b:mixed,
      *             reason:string
      *         }>
-     *     }
+     *     },
+     *     canonicalSignals:list<array{
+     *         field:string,
+     *         provider:string,
+     *         value:mixed,
+     *         reason:string
+     *     }>
      * }
      */
     private function mapSelectedItem(ItemEntity $item): array
@@ -234,6 +256,7 @@ final class CatalogItemController extends AbstractController
             'bookLists' => $bookLists,
             'externalSources' => $externalSources,
             'sourceMerge' => null !== $mergeResult ? $this->mapMergeResult($mergeResult) : null,
+            'canonicalSignals' => null !== $mergeResult ? $this->extractCanonicalSignals($mergeResult) : [],
         ];
     }
 
@@ -363,6 +386,39 @@ final class CatalogItemController extends AbstractController
             'materialConflictCount' => $materialConflictCount,
             'sourceIssueCount' => $sourceIssueCount,
         ];
+    }
+
+    /**
+     * @return list<array{
+     *     field:string,
+     *     provider:string,
+     *     value:mixed,
+     *     reason:string
+     * }>
+     */
+    private function extractCanonicalSignals(\App\Catalog\Application\Import\ItemSourceMergeResult $result): array
+    {
+        $signals = [];
+
+        foreach ($result->decisions as $decision) {
+            if (!in_array($decision->field, self::CANONICAL_SIGNAL_FIELDS, true)) {
+                continue;
+            }
+
+            $signals[] = [
+                'field' => $decision->field,
+                'provider' => $decision->provider,
+                'value' => $decision->value,
+                'reason' => $decision->reason,
+            ];
+        }
+
+        usort(
+            $signals,
+            static fn (array $left, array $right): int => [$left['field'], $left['provider']] <=> [$right['field'], $right['provider']],
+        );
+
+        return $signals;
     }
 
     private function optionalItemType(mixed $value): ?ItemTypeEnum

@@ -66,6 +66,9 @@ final class CatalogItemControllerTest extends WebTestCase
         self::assertStringContainsString('Generic label', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('1 generic label', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('generic_label_confirmed_by_specific_target', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('Canonical signals', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('Purchase currency', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('gold_bullion', (string) $this->browser()->getResponse()->getContent());
         self::assertCount(1, $crawler->filter(sprintf('a[href*="item=%s"]', $item->getPublicId())));
     }
 
@@ -103,9 +106,13 @@ final class CatalogItemControllerTest extends WebTestCase
             ->setNameKey('item.book.2853828.name');
         $item->upsertExternalSource('fandom', '002B8BC4', 'https://fallout.fandom.com/wiki/Recipe:_Healing_salve_(Toxic_Valley)', [
             'name_en' => 'Recipe: Healing Salve (Toxic Valley)',
+            'vendors' => true,
+            'purchase_currency' => 'gold_bullion',
         ]);
         $item->upsertExternalSource('fallout_wiki', '002B8BC4', 'https://fallout.wiki/wiki/Recipe:_Healing_Salve_(Toxic_Valley)', [
             'name_en' => 'Recipe: Healing Salve',
+            'vendors' => true,
+            'purchase_currency' => 'gold_bullion',
         ]);
 
         $this->entityManager?->persist($item);

@@ -741,6 +741,22 @@ admin_catalog.external_url: Externe URL
 admin_catalog.metadata: Metadaten
 admin_catalog.no_external_sources: Keine externe Quelle verknupft.
 admin_catalog.source_merge: Source-Merge
+admin_catalog.canonical_signals: Kanonische Signale
+admin_catalog.no_canonical_signals: Kein kanonisches Signal ubernommen.
+admin_catalog.canonical_field_purchase_currency: Kaufwahrung
+admin_catalog.canonical_field_containers: Container
+admin_catalog.canonical_field_random_encounters: Zufallsbegegnungen
+admin_catalog.canonical_field_enemies: Gegner
+admin_catalog.canonical_field_events: Events
+admin_catalog.canonical_field_expeditions: Expeditionen
+admin_catalog.canonical_field_daily_ops: Daily Ops
+admin_catalog.canonical_field_raid: Raid
+admin_catalog.canonical_field_unused_content: Ungenutzter Inhalt
+admin_catalog.canonical_field_seasonal_content: Saisoninhalt
+admin_catalog.canonical_field_treasure_maps: Schatzkarten
+admin_catalog.canonical_field_quests: Quests
+admin_catalog.canonical_field_vendors: Handler
+admin_catalog.canonical_field_world_spawns: Welt-Spawns
 admin_catalog.field: Feld
 admin_catalog.reason: Grund
 admin_catalog.value: Ubernommener Wert

@@ -75,6 +75,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: `random_encounters` is now derived from explicit labels (`Fallout 76 random encounters`, `Random Encounters`) and flows through merge/reporting like the other acquisition flags.
 - Prevention: when extending taxonomy late in the cleanup, prefer explicit generic labels first and leave named event inference for a separate, higher-risk pass.
 
+## 2026-03-18 - Admin inspection gets more usable when canonical signals are separated from raw metadata
+- Symptom: once source normalization covered currencies and acquisition flags, the admin catalog screen still forced operators to read raw JSON blobs or full merge decision tables to understand the retained canonical state.
+- Root cause: the screen exposed raw metadata and full merge internals, but no concise view dedicated to the normalized signals that matter most for day-to-day review.
+- Fix: the admin item detail now exposes a `Canonical signals` block sourced from merge decisions for canonical fields such as `purchase_currency`, `events`, `expeditions`, `daily_ops`, `raid`, and related flags.
+- Prevention: when a data-cleanup effort introduces stable canonical fields, add a compact back-office read model for those fields instead of expecting operators to inspect raw metadata every time.
+
 ## 2026-03-18 - Fallout Wiki recipe rows must keep anchor href and dedupe by form_id
 - Symptom: `fallout.wiki` recipes with the same visible label (for example `Recipe: Healing Salve`) collapsed into one JSON row, and the stored `wiki_url` pointed to a generic 404 page instead of the variant page.
 - Root cause: the sync command built `slug` and fallback `wiki_url` from the visible `name`, while deduplication keyed rows by `type|slug`; generic labels therefore overwrote distinct variants even when each row had its own anchor `href` and `form_id`.

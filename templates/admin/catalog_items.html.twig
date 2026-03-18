@@ -265,6 +265,37 @@
                         </table>
                     </div>
 
+                    <h4>{{ 'admin_catalog.canonical_signals'|trans }}</h4>
+                    <div class="translations-table-wrap">
+                        <table class="translations-table">
+                            <thead>
+                            <tr>
+                                <th>{{ 'admin_catalog.field'|trans }}</th>
+                                <th>{{ 'admin_catalog.provider'|trans }}</th>
+                                <th>{{ 'admin_catalog.value'|trans }}</th>
+                                <th>{{ 'admin_catalog.reason'|trans }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for signal in selectedItem.canonicalSignals %}
+                                <tr>
+                                    <td>
+                                        {% set fieldKey = 'admin_catalog.canonical_field_' ~ signal.field %}
+                                        {{ fieldKey|trans({}, 'messages') == fieldKey ? signal.field : fieldKey|trans }}
+                                    </td>
+                                    <td><code>{{ signal.provider }}</code></td>
+                                    <td><pre>{{ signal.value|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre></td>
+                                    <td><code>{{ signal.reason }}</code></td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td class="admin-empty-cell" colspan="4">{{ 'admin_catalog.no_canonical_signals'|trans }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
                     <h4>{{ 'admin_catalog.merge_conflicts'|trans }}</h4>
                     <div class="translations-table-wrap">
                         <table class="translations-table">

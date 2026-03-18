@@ -1,7 +1,6 @@
 # Current Focus
 
 ## Priorite active
-- F76-153: pipeline de sync multi-sources + preparation Nukacrypt (apres F76-152) - `In progress`.
 - F76-150: OCR microservice Python optionnel - `Deferred` (remplace par flux JSON manuel pour roadmap).
 
 ### Avancement F76-153
@@ -46,10 +45,12 @@
 - Done (slice 38): l extraction des labels `fallout_wiki` privilegie maintenant `icons` quand ils sont presents, ce qui elimine les textes concaténes parasites (`ContainersTreasure Maps...`) et permet de deriver correctement `vendors`, `purchase_currency` et `expeditions` depuis des labels nommes comme `Giuseppe`, `Regs`, `Minerva`, `Tax Evasion`, `Atlantic City`, `The Pitt`.
 - Done (slice 39): le rapport de vocabulaire sait maintenant aussi decouper certains `obtained.text` concaténes quand `icons` sont absents, a partir d un glossaire borne, et la normalisation couvre aussi `Union Dues`, `Samuel (Wastelanders)` et `Bullion vendors`.
 - Done (slice 40): la taxonomie canonique derivee couvre maintenant aussi `random_encounters` pour `fallout_wiki` a partir des labels explicites `Fallout 76 random encounters` / `Random Encounters`, avec propagation dans le merge/reporting.
+- Done (slice 41): l admin `catalog/items` expose maintenant un bloc de lecture `Canonical signals` pour les champs derives retenus (`purchase_currency`, `events`, `expeditions`, `raid`, etc.), afin d exploiter le merge sans lire le JSON brut.
 - Note: le lookup public Nukacrypt direct par `form_id` via `esmRecord` reste non fiable depuis l app (HTTP 500 / corps vide). Un `curl` navigateur colle manuellement dans le shell du conteneur `app` peut repondre, mais le meme cas n est pas encore reproducible via le runtime PHP (`HttpClient`/probe). On garde donc Nukacrypt en outil opportuniste d arbitrage, pas en source serveur robuste.
-- Remaining: capitaliser sur l UI admin pour confirmer les prochains conflits reels en environnement deploye, puis seulement si besoin enrichir les vues de merge avec davantage d aide a l arbitrage Nukacrypt.
+- Remaining: capitaliser sur l UI admin pour confirmer les prochains conflits reels en environnement deploye ; si de nouveaux cas limites apparaissent, les traiter a la demande plutot que d etendre la taxonomie par anticipation.
 
 ## Termine recemment
+- F76-153: pipeline de sync multi-sources + preparation Nukacrypt (done).
 - F76-152: Catalog items multi-source (core item + source metadata table) (done).
 - F76-147: upload roadmap OCR via backoffice (done).
 - F76-151: OCR roadmap upload en asynchrone (messenger + statut admin snapshot) (done).

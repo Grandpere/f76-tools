@@ -743,6 +743,22 @@ admin_catalog.external_url: URL externe
 admin_catalog.metadata: Métadonnées
 admin_catalog.no_external_sources: Aucune source externe attachée.
 admin_catalog.source_merge: Merge des sources
+admin_catalog.canonical_signals: Signaux canoniques
+admin_catalog.no_canonical_signals: Aucun signal canonique retenu.
+admin_catalog.canonical_field_purchase_currency: Devise d achat
+admin_catalog.canonical_field_containers: Conteneurs
+admin_catalog.canonical_field_random_encounters: Rencontres aleatoires
+admin_catalog.canonical_field_enemies: Ennemis
+admin_catalog.canonical_field_events: Evenements
+admin_catalog.canonical_field_expeditions: Expeditions
+admin_catalog.canonical_field_daily_ops: Daily Ops
+admin_catalog.canonical_field_raid: Raid
+admin_catalog.canonical_field_unused_content: Contenu inutilise
+admin_catalog.canonical_field_seasonal_content: Contenu saisonnier
+admin_catalog.canonical_field_treasure_maps: Cartes au tresor
+admin_catalog.canonical_field_quests: Quetes
+admin_catalog.canonical_field_vendors: Vendeurs
+admin_catalog.canonical_field_world_spawns: Spawns monde
 admin_catalog.field: Champ
 admin_catalog.reason: Raison
 admin_catalog.value: Valeur retenue

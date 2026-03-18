@@ -741,6 +741,22 @@ admin_catalog.external_url: External URL
 admin_catalog.metadata: Metadata
 admin_catalog.no_external_sources: No external source attached.
 admin_catalog.source_merge: Source merge
+admin_catalog.canonical_signals: Canonical signals
+admin_catalog.no_canonical_signals: No canonical signal retained.
+admin_catalog.canonical_field_purchase_currency: Purchase currency
+admin_catalog.canonical_field_containers: Containers
+admin_catalog.canonical_field_random_encounters: Random encounters
+admin_catalog.canonical_field_enemies: Enemies
+admin_catalog.canonical_field_events: Events
+admin_catalog.canonical_field_expeditions: Expeditions
+admin_catalog.canonical_field_daily_ops: Daily Ops
+admin_catalog.canonical_field_raid: Raid
+admin_catalog.canonical_field_unused_content: Unused content
+admin_catalog.canonical_field_seasonal_content: Seasonal content
+admin_catalog.canonical_field_treasure_maps: Treasure maps
+admin_catalog.canonical_field_quests: Quests
+admin_catalog.canonical_field_vendors: Vendors
+admin_catalog.canonical_field_world_spawns: World spawns
 admin_catalog.field: Field
 admin_catalog.reason: Reason
 admin_catalog.value: Retained value
