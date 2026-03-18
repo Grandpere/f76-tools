@@ -32,6 +32,36 @@ use Symfony\Component\HttpKernel\KernelInterface;
 final class ReportItemSourceVocabularyCommand extends Command
 {
     /**
+     * @var list<string>
+     */
+    private const FALLOUT_WIKI_OBTAINED_TEXT_SEGMENTS = [
+        'Random Encounters',
+        'Treasure Maps',
+        'Treasure Map',
+        'Seasonal content',
+        'World spawns',
+        'World Spawn',
+        'Daily Ops',
+        'Bullion vendors',
+        'Reginald Stone',
+        'Regs or Minerva',
+        'Samuel (Wastelanders)',
+        'The Most Sensational Game',
+        'The Human Condition',
+        'Atlantic City',
+        'Gleaming Depths',
+        'Tax Evasion',
+        'Union Dues',
+        'Containers',
+        'Quests',
+        'Merchants',
+        'Giuseppe',
+        'Samuel',
+        'Regs',
+        'Minerva',
+    ];
+
+    /**
      * @var array<string, list<string>>
      */
     private const SUPPORTED_FIELDS = [
@@ -408,7 +438,7 @@ final class ReportItemSourceVocabularyCommand extends Command
     private function collectObtained(array &$entries, string $path, mixed $obtained): void
     {
         if (is_scalar($obtained) || null === $obtained) {
-            $this->collectScalarValue($entries, $path, 'value', $obtained, 'fallout_wiki', 'obtained');
+            $this->collectObtainedScalarValue($entries, $path, 'value', $obtained);
 
             return;
         }
@@ -425,17 +455,89 @@ final class ReportItemSourceVocabularyCommand extends Command
             return;
         }
 
-        $text = $obtained['text'] ?? null;
-        $this->collectScalarValue($entries, $path, 'text', $text, 'fallout_wiki', 'obtained');
-
         $icons = $obtained['icons'] ?? null;
-        if (!is_array($icons) || !array_is_list($icons)) {
+        if (is_array($icons) && array_is_list($icons) && [] !== $icons) {
+            foreach ($icons as $icon) {
+                $this->collectScalarValue($entries, $path, 'icon', $icon, 'fallout_wiki', 'obtained');
+            }
+
             return;
         }
 
-        foreach ($icons as $icon) {
-            $this->collectScalarValue($entries, $path, 'icon', $icon, 'fallout_wiki', 'obtained');
+        $text = $obtained['text'] ?? null;
+        $this->collectObtainedScalarValue($entries, $path, 'text', $text);
+    }
+
+    /**
+     * @param array<string, array{
+     *     kind:string,
+     *     value:string,
+     *     count:int,
+     *     files:array<string,true>,
+     *     truthy_count:int|null,
+     *     falsy_count:int|null,
+     *     mapped_fields:list<string>
+     * }> $entries
+     */
+    private function collectObtainedScalarValue(array &$entries, string $path, string $kind, mixed $value): void
+    {
+        foreach ($this->splitObservedObtainedValue($value) as $segment) {
+            $this->collectScalarValue($entries, $path, $kind, $segment, 'fallout_wiki', 'obtained');
         }
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function splitObservedObtainedValue(mixed $value): array
+    {
+        if (!is_scalar($value)) {
+            return [];
+        }
+
+        $normalized = trim((string) $value);
+        if ('' === $normalized) {
+            return [];
+        }
+
+        $collapsed = $this->collapseLabelForMatching($normalized);
+        $remaining = $collapsed;
+        $segments = [];
+
+        /** @var array<string, string> $dictionary */
+        $dictionary = [];
+        foreach (self::FALLOUT_WIKI_OBTAINED_TEXT_SEGMENTS as $segment) {
+            $dictionary[$this->collapseLabelForMatching($segment)] = $segment;
+        }
+
+        while ('' !== $remaining) {
+            $matched = false;
+
+            foreach ($dictionary as $collapsedSegment => $segment) {
+                if (!str_starts_with($remaining, $collapsedSegment)) {
+                    continue;
+                }
+
+                $segments[] = $segment;
+                $remaining = substr($remaining, strlen($collapsedSegment));
+                $matched = true;
+
+                break;
+            }
+
+            if (!$matched) {
+                return [$normalized];
+            }
+        }
+
+        return [] !== $segments ? array_values(array_unique($segments)) : [$normalized];
+    }
+
+    private function collapseLabelForMatching(string $value): string
+    {
+        $normalized = preg_replace('/[^\p{L}\p{N}]+/u', '', mb_strtolower(trim($value)));
+
+        return (string) $normalized;
     }
 
     /**

@@ -79,13 +79,22 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
         ], $this->findRow($obtainedRows, 'icon', 'Enemy Drop'));
         self::assertSame([
             'kind' => 'text',
-            'value' => 'Project Paradise',
+            'value' => 'Containers',
             'count' => 1,
             'file_count' => 1,
             'truthy_count' => null,
             'falsy_count' => null,
-            'mapped_fields' => [],
-        ], $this->findRow($obtainedRows, 'text', 'Project Paradise'));
+            'mapped_fields' => ['containers'],
+        ], $this->findRow($obtainedRows, 'text', 'Containers'));
+        self::assertSame([
+            'kind' => 'text',
+            'value' => 'Giuseppe',
+            'count' => 1,
+            'file_count' => 1,
+            'truthy_count' => null,
+            'falsy_count' => null,
+            'mapped_fields' => ['expeditions', 'purchase_currency', 'vendors'],
+        ], $this->findRow($obtainedRows, 'text', 'Giuseppe'));
 
         $type = $this->findSection($sections, 'fallout_wiki', 'type');
         /** @var list<array<string, mixed>> $typeRows */
@@ -187,6 +196,8 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
         self::assertContains('Enemy Drop', $values);
         self::assertContains('Bottle Cap', $values);
         self::assertContains('Fallout 76 Locations', $values);
+        self::assertContains('Containers', $values);
+        self::assertContains('Giuseppe', $values);
         self::assertNotContains('Project Paradise', $values);
     }
 
@@ -218,16 +229,7 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
         /** @var list<array<string, mixed>> $rows */
         $rows = is_array($obtained['rows'] ?? null) ? $obtained['rows'] : [];
 
-        self::assertCount(1, $rows);
-        self::assertSame([
-            'kind' => 'text',
-            'value' => 'Project Paradise',
-            'count' => 1,
-            'file_count' => 1,
-            'truthy_count' => null,
-            'falsy_count' => null,
-            'mapped_fields' => [],
-        ], $rows[0]);
+        self::assertCount(0, $rows);
     }
 
     public function testOnlyMappedAndOnlyUnmappedTogetherReturnInvalidCode(): void
@@ -287,6 +289,20 @@ final class ReportItemSourceVocabularyCommandTest extends TestCase
                     'columns' => [
                         'obtained' => ['Fallout 76 Locations', 'Bottle Cap'],
                         'type' => 'gold bullion',
+                    ],
+                ],
+                [
+                    'columns' => [
+                        'obtained' => [
+                            'text' => 'ContainersWorld spawns',
+                        ],
+                    ],
+                ],
+                [
+                    'columns' => [
+                        'obtained' => [
+                            'text' => 'Tax EvasionGiuseppe',
+                        ],
                     ],
                 ],
             ],

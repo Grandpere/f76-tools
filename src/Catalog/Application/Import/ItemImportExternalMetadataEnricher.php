@@ -90,6 +90,8 @@ final class ItemImportExternalMetadataEnricher
             || $this->labelsContainAny($normalizedLabels, [
                 'giuseppe',
                 'tax evasion',
+                'union dues',
+                'from ashes to fire',
                 'the human condition',
                 'the most sensational game',
                 'atlantic city',
@@ -141,6 +143,9 @@ final class ItemImportExternalMetadataEnricher
             'regs',
             'regs or minerva',
             'reginald stone',
+            'samuel',
+            'samuel wastelanders',
+            'bullion vendors',
         ]);
         $metadata['world_spawns'] ??= $this->labelsContainAny($normalizedLabels, [
             'fallout 76 locations',
@@ -305,7 +310,7 @@ final class ItemImportExternalMetadataEnricher
                 'gold', 'gold bullion', 'bullion', 'purchased with bullion' => 'gold_bullion',
                 'stamp', 'stamps' => 'stamps',
                 'ticket', 'tickets' => 'tickets',
-                'minerva', 'regs', 'regs or minerva', 'reginald stone' => 'gold_bullion',
+                'minerva', 'regs', 'regs or minerva', 'reginald stone', 'samuel', 'samuel wastelanders', 'bullion vendors' => 'gold_bullion',
                 'giuseppe' => 'stamps',
                 default => null,
             };

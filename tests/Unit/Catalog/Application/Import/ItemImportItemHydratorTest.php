@@ -354,4 +354,30 @@ final class ItemImportItemHydratorTest extends TestCase
         self::assertTrue($data['metadata']['vendors'] ?? false);
         self::assertSame('gold_bullion', $data['metadata']['purchase_currency'] ?? null);
     }
+
+    public function testBuildExternalSourceDataDerivesBullionVendorAndExpeditionAliasesFromObservedFallbackText(): void
+    {
+        $normalizer = new ItemImportValueNormalizer();
+        $hydrator = new ItemImportItemHydrator($normalizer, new ItemImportExternalUrlResolver($normalizer), new ItemImportExternalMetadataEnricher());
+
+        $samuelData = $hydrator->buildExternalSourceData('fallout_wiki', [
+            'obtained' => [
+                'Samuel (Wastelanders)',
+                'Daily Ops',
+                'Bullion vendors',
+            ],
+        ], 1010);
+
+        self::assertTrue($samuelData['metadata']['vendors'] ?? false);
+        self::assertTrue($samuelData['metadata']['daily_ops'] ?? false);
+        self::assertSame('gold_bullion', $samuelData['metadata']['purchase_currency'] ?? null);
+
+        $unionDuesData = $hydrator->buildExternalSourceData('fallout_wiki', [
+            'obtained' => [
+                'Union Dues',
+            ],
+        ], 1011);
+
+        self::assertTrue($unionDuesData['metadata']['expeditions'] ?? false);
+    }
 }

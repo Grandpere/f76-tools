@@ -63,6 +63,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: Fallout Wiki label extraction now prefers `icons` whenever they are present, falls back to `text` only when no icons exist, and uses those clean labels to derive named vendor currencies (`Giuseppe` -> `stamps`, `Regs`/`Minerva`/`Reginald Stone` -> `gold_bullion`) plus expedition hints (`Tax Evasion`, `The Human Condition`, `The Most Sensational Game`, `Atlantic City`, `The Pitt`).
 - Prevention: when a third-party payload provides both a human-readable fallback string and a structured label/icon list, use the structured list as the canonical extraction source and treat the raw text as fallback only.
 
+## 2026-03-18 - Concatenated fallback text should be split only with a bounded glossary
+- Symptom: some `fallout_wiki.obtained.text` values still appeared as merged strings (`ContainersWorld spawns`, `Tax EvasionGiuseppe`) when no structured `icons` array was available.
+- Root cause: certain source rows expose only a concatenated fallback string, so preferring `icons` is not enough to keep the vocabulary audit readable.
+- Fix: the vocabulary report now splits text-only obtained values with a bounded glossary of observed segments, while the importer separately recognizes the safe named aliases that carry real business meaning (`Union Dues`, `Samuel (Wastelanders)`, `Bullion vendors`).
+- Prevention: when repairing concatenated third-party text, use a short, explicit glossary tied to observed source data instead of generic NLP-style splitting.
+
 ## 2026-03-18 - Fallout Wiki recipe rows must keep anchor href and dedupe by form_id
 - Symptom: `fallout.wiki` recipes with the same visible label (for example `Recipe: Healing Salve`) collapsed into one JSON row, and the stored `wiki_url` pointed to a generic 404 page instead of the variant page.
 - Root cause: the sync command built `slug` and fallback `wiki_url` from the visible `name`, while deduplication keyed rows by `type|slug`; generic labels therefore overwrote distinct variants even when each row had its own anchor `href` and `form_id`.
