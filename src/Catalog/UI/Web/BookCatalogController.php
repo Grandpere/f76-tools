@@ -35,6 +35,7 @@ final class BookCatalogController extends AbstractController
         'expeditions' => '/assets/icons/FO76_collections_stamps01.webp',
         'quests' => '/assets/icons/FO76_ui_icon_quest.png',
         'daily_ops' => '/assets/icons/FO76_dailyops_uplink.png',
+        'random_encounters' => '/assets/icons/Icon_question_random_encounter.webp',
         'raid' => '/assets/icons/GleamingDepthsMarker.svg',
         'seasonal_content' => '/assets/icons/FO76_scoresprite_seasons.png',
         'treasure_maps' => '/assets/icons/Icon_note_small.png',

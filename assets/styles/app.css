@@ -1964,6 +1964,12 @@ body::before {
     margin-right: 0.24rem;
 }
 
+.catalog-icon-random-encounter {
+    background: rgba(22, 26, 33, 0.92);
+    border-radius: 999px;
+    padding: 1px;
+}
+
 .item-prices {
     display: flex;
     align-items: center;

@@ -125,7 +125,12 @@
                                     <p class="item-source-icons">
                                         {% for signal in item.canonicalSignals %}
                                             {% if (selectedSignals is empty or signal.field in selectedSignals) and signalIconMap[signal.field] is defined %}
-                                                <img src="{{ asset(signalIconMap[signal.field]) }}" alt="{{ signal.label }}" title="{{ signal.label }}">
+                                                <img
+                                                    src="{{ asset(signalIconMap[signal.field]) }}"
+                                                    alt="{{ signal.label }}"
+                                                    title="{{ signal.label }}"
+                                                    class="{% if signal.field == 'random_encounters' %}catalog-icon-random-encounter{% endif %}"
+                                                >
                                             {% endif %}
                                         {% endfor %}
                                     </p>
