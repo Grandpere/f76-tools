@@ -91,6 +91,33 @@ final class AdminCatalogItemReadRepositoryIntegrationTest extends KernelTestCase
         self::assertSame('fandom', $detailed->findExternalSourceByProvider('fandom')?->getProvider());
     }
 
+    public function testFindAllDetailedByAdminQueryLoadsExternalSourcesForAllMatchingItems(): void
+    {
+        $first = $this->createItem(1001, ItemTypeEnum::BOOK, 'item.book.1001.name');
+        $first->upsertExternalSource('fandom', 'F1001', null, [
+            'name_en' => 'Alpha source',
+        ]);
+
+        $second = $this->createItem(1002, ItemTypeEnum::BOOK, 'item.book.1002.name');
+        $second->upsertExternalSource('fallout_wiki', 'W1002', null, [
+            'name_en' => 'Beta source',
+        ]);
+
+        $misc = $this->createItem(2001, ItemTypeEnum::MISC, 'item.misc.2001.name', 1);
+        $misc->upsertExternalSource('nukaknights', 'N2001', null, [
+            'name_en' => 'Gamma source',
+        ]);
+        $this->flush();
+
+        $rows = $this->itemRepository()->findAllDetailedByAdminQuery(ItemTypeEnum::BOOK, null);
+
+        self::assertCount(2, $rows);
+        self::assertSame($first->getPublicId(), $rows[0]->getPublicId());
+        self::assertSame($second->getPublicId(), $rows[1]->getPublicId());
+        self::assertCount(1, $rows[0]->getExternalSources());
+        self::assertCount(1, $rows[1]->getExternalSources());
+    }
+
     private function truncateTables(): void
     {
         $this->entityManager()?->getConnection()->executeStatement('TRUNCATE TABLE item_book_list, item_external_source, item RESTART IDENTITY CASCADE');

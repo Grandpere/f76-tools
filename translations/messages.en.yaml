@@ -709,6 +709,7 @@ admin_catalog.item: Item
 admin_catalog.source_id: Source ID
 admin_catalog.providers: Providers
 admin_catalog.merge_status: Merge status
+admin_catalog.merge_status_all: All statuses
 admin_catalog.merge_status_no_merge: No merge
 admin_catalog.merge_status_aligned: Aligned
 admin_catalog.merge_status_generic_label: Generic label

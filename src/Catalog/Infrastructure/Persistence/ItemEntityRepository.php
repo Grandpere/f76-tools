@@ -321,6 +321,68 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
         return $orderedItems;
     }
 
+    /**
+     * @return list<ItemEntity>
+     */
+    public function findAllDetailedByAdminQuery(?ItemTypeEnum $type, ?string $query): array
+    {
+        $idRows = $this->createAdminCatalogQueryBuilder($type, $query)
+            ->select('i.id AS id', 'i.type AS sortType', 'i.sourceId AS sortSourceId')
+            ->orderBy('sortType', 'ASC')
+            ->addOrderBy('sortSourceId', 'ASC')
+            ->getQuery()
+            ->getScalarResult();
+
+        $ids = [];
+        foreach ($idRows as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+
+            $idRaw = $row['id'] ?? null;
+            if (!is_scalar($idRaw) || !is_numeric((string) $idRaw)) {
+                continue;
+            }
+
+            $ids[] = (int) $idRaw;
+        }
+
+        if ([] === $ids) {
+            return [];
+        }
+
+        $items = $this->createQueryBuilder('i')
+            ->addSelect('src')
+            ->leftJoin('i.externalSources', 'src')
+            ->andWhere('i.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->getQuery()
+            ->getResult();
+
+        if (!is_array($items)) {
+            return [];
+        }
+
+        $byId = [];
+        foreach ($items as $item) {
+            if (!$item instanceof ItemEntity || null === $item->getId()) {
+                continue;
+            }
+
+            $byId[$item->getId()] = $item;
+        }
+
+        $orderedItems = [];
+        foreach ($ids as $id) {
+            if (isset($byId[$id])) {
+                $orderedItems[] = $byId[$id];
+            }
+        }
+
+        /** @var list<ItemEntity> $orderedItems */
+        return $orderedItems;
+    }
+
     public function findOneDetailedByPublicId(string $publicId): ?ItemEntity
     {
         $item = $this->createQueryBuilder('i')

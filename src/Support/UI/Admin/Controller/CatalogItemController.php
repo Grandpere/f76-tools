@@ -33,6 +33,7 @@ final class CatalogItemController extends AbstractController
 
     private const MERGE_PROVIDER_A = 'fandom';
     private const MERGE_PROVIDER_B = 'fallout_wiki';
+    private const MERGE_STATUS_OPTIONS = ['aligned', 'generic_label', 'source_issue', 'material_conflict', 'no_merge'];
 
     public function __construct(
         private readonly AdminCatalogItemReadRepository $adminCatalogItemReadRepository,
@@ -47,16 +48,34 @@ final class CatalogItemController extends AbstractController
         $this->ensureAdminAccess();
 
         $type = $this->optionalItemType($request->query->get('type'));
+        $mergeStatus = $this->optionalMergeStatus($request->query->get('mergeStatus'));
         $query = $this->normalizeQuery($this->optionalString($request->query->get('q')));
         $perPage = $this->sanitizePositiveInt($request->query->get('perPage'), 20, 100);
-        $totalItems = $this->adminCatalogItemReadRepository->countByAdminQuery($type, $query);
-        $totalPages = max(1, (int) ceil($totalItems / $perPage));
-        $page = min($this->sanitizePositiveInt($request->query->get('page'), 1), $totalPages);
+        $page = $this->sanitizePositiveInt($request->query->get('page'), 1);
 
-        $items = $this->adminCatalogItemReadRepository->findByAdminQuery($type, $query, $page, $perPage);
+        if (null === $mergeStatus) {
+            $totalItems = $this->adminCatalogItemReadRepository->countByAdminQuery($type, $query);
+            $totalPages = max(1, (int) ceil($totalItems / $perPage));
+            $page = min($page, $totalPages);
+            $items = $this->adminCatalogItemReadRepository->findByAdminQuery($type, $query, $page, $perPage);
+            $mappedItems = array_map($this->mapListRow(...), $items);
+        } else {
+            $items = $this->adminCatalogItemReadRepository->findAllDetailedByAdminQuery($type, $query);
+            $filteredItems = array_values(array_filter(
+                array_map($this->mapListRow(...), $items),
+                static fn (array $row): bool => $row['mergeStatus'] === $mergeStatus,
+            ));
+
+            $totalItems = count($filteredItems);
+            $totalPages = max(1, (int) ceil($totalItems / $perPage));
+            $page = min($page, $totalPages);
+            $mappedItems = array_slice($filteredItems, max(0, ($page - 1) * $perPage), $perPage);
+        }
+
         $selectedPublicId = $this->optionalString($request->query->get('item'));
-        if ((null === $selectedPublicId || '' === trim($selectedPublicId)) && [] !== $items) {
-            $selectedPublicId = $items[0]->getPublicId();
+        $visiblePublicIds = array_map(static fn (array $row): string => $row['publicId'], $mappedItems);
+        if ((null === $selectedPublicId || '' === trim($selectedPublicId) || !in_array($selectedPublicId, $visiblePublicIds, true)) && [] !== $mappedItems) {
+            $selectedPublicId = $mappedItems[0]['publicId'];
         }
 
         $selectedItem = null;
@@ -66,13 +85,15 @@ final class CatalogItemController extends AbstractController
 
         return $this->render('admin/catalog_items.html.twig', [
             'type' => $type?->value,
+            'mergeStatus' => $mergeStatus,
+            'mergeStatusOptions' => self::MERGE_STATUS_OPTIONS,
             'typeOptions' => ItemTypeEnum::cases(),
             'query' => $query ?? '',
-            'items' => array_map($this->mapListRow(...), $items),
+            'items' => $mappedItems,
             'selectedItem' => $selectedItem instanceof ItemEntity ? $this->mapSelectedItem($selectedItem) : null,
             'selectedPublicId' => $selectedItem?->getPublicId(),
             'totalItems' => $totalItems,
-            'pageRows' => count($items),
+            'pageRows' => count($mappedItems),
             'perPage' => $perPage,
             'page' => $page,
             'totalPages' => $totalPages,
@@ -367,5 +388,19 @@ final class CatalogItemController extends AbstractController
         $normalized = trim($value);
 
         return '' !== $normalized ? $normalized : null;
+    }
+
+    private function optionalMergeStatus(mixed $value): ?string
+    {
+        if (!is_string($value)) {
+            return null;
+        }
+
+        $normalized = trim($value);
+        if ('' === $normalized || !in_array($normalized, self::MERGE_STATUS_OPTIONS, true)) {
+            return null;
+        }
+
+        return $normalized;
     }
 }

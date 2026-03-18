@@ -27,6 +27,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: the filesystem reader now stores the divergent column value in `source_name_raw`, and the merge policy prefers the other provider for `name` / `name_en` whenever one source shows that internal contradiction.
 - Prevention: when a third-party row contains contradictory naming signals, keep both for audit and treat that source as lower-trust for merged names instead of forcing one arbitrary “canonical” value too early.
 
+## 2026-03-18 - Admin merge-status filters should reuse the PHP merge policy, not reimplement it in SQL
+- Symptom: adding a back-office filter for `aligned` / `generic_label` / `source_issue` / `material_conflict` could tempt us to encode the whole merge policy in Doctrine queries.
+- Root cause: merge status is derived from `ItemSourceMergePolicy` reasons and conflicts, not from one stable persisted column.
+- Fix: the admin catalog list keeps the existing paginated SQL path by default, and only switches to a full admin read + in-memory filtering when a merge-status filter is explicitly selected.
+- Prevention: for internal screens that filter on computed merge semantics, prefer one trusted policy implementation plus an explicit in-memory path over duplicating the policy in brittle SQL conditions.
+
 ## 2026-03-18 - Fallout Wiki recipe rows must keep anchor href and dedupe by form_id
 - Symptom: `fallout.wiki` recipes with the same visible label (for example `Recipe: Healing Salve`) collapsed into one JSON row, and the stored `wiki_url` pointed to a generic 404 page instead of the variant page.
 - Root cause: the sync command built `slug` and fallback `wiki_url` from the visible `name`, while deduplication keyed rows by `type|slug`; generic labels therefore overwrote distinct variants even when each row had its own anchor `href` and `form_id`.

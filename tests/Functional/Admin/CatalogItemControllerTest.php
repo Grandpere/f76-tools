@@ -69,6 +69,19 @@ final class CatalogItemControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter(sprintf('a[href*="item=%s"]', $item->getPublicId())));
     }
 
+    public function testAdminCanFilterCatalogItemsByMergeStatus(): void
+    {
+        $admin = $this->createUser('catalog-admin-filter@example.com');
+        $item = $this->createCatalogItem();
+        $this->browser()->loginUser($admin);
+
+        $crawler = $this->getAndFollowRedirect('/en/admin/catalog/items?mergeStatus=generic_label');
+
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        self::assertStringContainsString('All statuses', (string) $this->browser()->getResponse()->getContent());
+        self::assertCount(1, $crawler->filter(sprintf('a[href*="item=%s"]', $item->getPublicId())));
+    }
+
     private function createUser(string $email): UserEntity
     {
         $user = new UserEntity()

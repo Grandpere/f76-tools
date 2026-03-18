@@ -25,5 +25,10 @@ interface AdminCatalogItemReadRepository
      */
     public function findByAdminQuery(?ItemTypeEnum $type, ?string $query, int $page, int $perPage): array;
 
+    /**
+     * @return list<ItemEntity>
+     */
+    public function findAllDetailedByAdminQuery(?ItemTypeEnum $type, ?string $query): array;
+
     public function findOneDetailedByPublicId(string $publicId): ?ItemEntity;
 }

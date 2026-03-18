@@ -9,6 +9,7 @@
             localeSelectId: 'admin-header-locale-select',
             localeHiddenFields: {
                 type: type,
+                mergeStatus: mergeStatus,
                 q: query,
                 perPage: perPage,
                 page: page,
@@ -28,6 +29,15 @@
                         <option value="">{{ 'admin_catalog.type_all'|trans }}</option>
                         {% for option in typeOptions %}
                             <option value="{{ option.value }}" {% if type == option.value %}selected{% endif %}>{{ option.value }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+                <label class="field">
+                    <span>{{ 'admin_catalog.merge_status'|trans }}</span>
+                    <select name="mergeStatus">
+                        <option value="">{{ 'admin_catalog.merge_status_all'|trans }}</option>
+                        {% for option in mergeStatusOptions %}
+                            <option value="{{ option }}" {% if mergeStatus == option %}selected{% endif %}>{{ ('admin_catalog.merge_status_' ~ option)|trans }}</option>
                         {% endfor %}
                     </select>
                 </label>
@@ -51,6 +61,7 @@
             {% set baseParams = {
                 _locale: app.request.locale,
                 type: type ?: null,
+                mergeStatus: mergeStatus ?: null,
                 q: query ?: null,
                 perPage: perPage,
                 item: selectedPublicId
@@ -83,6 +94,7 @@
                                 <a href="{{ path('app_admin_catalog_items', {
                                     _locale: app.request.locale,
                                     type: type ?: null,
+                                    mergeStatus: mergeStatus ?: null,
                                     q: query ?: null,
                                     perPage: perPage,
                                     page: page,

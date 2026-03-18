@@ -711,6 +711,7 @@ admin_catalog.item: Item
 admin_catalog.source_id: ID source
 admin_catalog.providers: Providers
 admin_catalog.merge_status: Statut du merge
+admin_catalog.merge_status_all: Tous les statuts
 admin_catalog.merge_status_no_merge: Pas de merge
 admin_catalog.merge_status_aligned: Aligné
 admin_catalog.merge_status_generic_label: Libellé générique
