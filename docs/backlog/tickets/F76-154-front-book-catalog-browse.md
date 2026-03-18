@@ -26,6 +26,7 @@ Ajouter une page front authentifiee qui liste les plans et recettes (`BOOK`) ave
 - Done (slice 4): recentrage de la page front sur l experience joueur (suppression des infos de source/merge visibles, filtre par liste de plans, stats metier utiles) et correction du rendu Minerva qui injectait a tort les livres sans liste dans la liste 1.
 - Done (slice 5): retrait de la notion trompeuse de `liste speciale` du front joueur, remplacement par un indicateur Minerva plus parlant, deplacement du menu `Plans et recettes` en 3e position et adoption d un filtre de listes au style des autres pages joueur.
 - Done (slice 6): branchement des icones gameplay/devises deja presentes dans le repo (`Daily Ops`, `Raid`, `Unused content`, `caps`, `gold bullion`) sur les filtres et cartes `/plans-recipes`, avec fallback texte pour les signaux sans asset dedie.
+- Done (slice 7): alignement du rendu d icones des cartes sur le pattern Minerva (footer inline) et extension prudente de la couverture a `enemies` et `expeditions` via les assets Fallout deja disponibles.
 
 ## Hors scope
 - Edition front des items.

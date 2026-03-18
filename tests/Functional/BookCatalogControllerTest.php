@@ -55,7 +55,11 @@ final class BookCatalogControllerTest extends WebTestCase
     public function testPageRendersMergedBookCardsForAuthenticatedUser(): void
     {
         $user = $this->createUser('books@example.com');
-        $this->createBook(321, 'catalog.book.front.alpha', 'Plan: Alpha Receiver');
+        $this->createBook(321, 'catalog.book.front.alpha', 'Plan: Alpha Receiver', [
+            'daily_ops' => true,
+            'expeditions' => true,
+            'enemies' => true,
+        ]);
         $this->createBook(654, 'catalog.book.front.bravo', 'Recipe: Bravo Soup');
 
         $this->browser()->loginUser($user);
@@ -67,6 +71,9 @@ final class BookCatalogControllerTest extends WebTestCase
         self::assertStringContainsString('catalog.book.front.alpha', (string) $this->browser()->getResponse()->getContent());
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="lists[]"]')->count());
         self::assertSame('Plans & Recipes', trim($crawler->filter('.app-primary-nav-link.is-active')->text()));
+        self::assertStringContainsString('/assets/icons/FO76_dailyops_uplink.png', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('/assets/icons/FO76_TP.png', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('/assets/icons/bounty_hunter_ghoul_icon_128.png', (string) $this->browser()->getResponse()->getContent());
     }
 
     private function createUser(string $email): UserEntity
@@ -82,7 +89,10 @@ final class BookCatalogControllerTest extends WebTestCase
         return $user;
     }
 
-    private function createBook(int $sourceId, string $nameKey, string $displayName): void
+    /**
+     * @param array<string, mixed> $providerBExtra
+     */
+    private function createBook(int $sourceId, string $nameKey, string $displayName, array $providerBExtra = []): void
     {
         $item = new ItemEntity()
             ->setType(ItemTypeEnum::BOOK)
@@ -94,11 +104,11 @@ final class BookCatalogControllerTest extends WebTestCase
             'name_en' => $displayName,
             'containers' => true,
         ]);
-        $item->upsertExternalSource('fallout_wiki', sprintf('%08X', $sourceId), 'https://example.test/wiki/'.$sourceId, [
+        $item->upsertExternalSource('fallout_wiki', sprintf('%08X', $sourceId), 'https://example.test/wiki/'.$sourceId, array_merge([
             'name' => $displayName,
             'name_en' => $displayName,
             'unlocks' => ['text' => 'Unlock test'],
-        ]);
+        ], $providerBExtra));
 
         $this->entityManager?->persist($item);
         $this->entityManager?->flush();

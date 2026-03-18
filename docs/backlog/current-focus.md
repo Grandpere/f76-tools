@@ -10,6 +10,7 @@
 - Done (slice 4): recentrage de `/plans-recipes` sur une lecture orientee joueur (suppression des infos de merge/source visibles, filtre par liste de plans, stats metier simples) et correction du front Minerva qui rangeait les livres sans liste dans la liste 1.
 - Done (slice 5): suppression de la notion front de `liste speciale` au profit d un indicateur Minerva plus parlant, repositionnement du menu `Plans et recettes` en 3e position et filtre de listes visuellement aligne sur les autres pages joueur.
 - Done (slice 6): branchement des icones gameplay/devises deja presentes sur `/plans-recipes` pour les filtres, les tags de cartes et certains prix (`caps`, `gold bullion`, `Daily Ops`, `Raid`, `Unused content`), avec fallback texte pour le reste.
+- Done (slice 7): alignement du rendu des icones de cartes sur le pattern Minerva (footer inline) et extension prudente de la couverture a `enemies` et `expeditions` a partir des assets Fallout deja presents.
 
 ### Avancement F76-153
 - Done (slice 1): `app:data:sync` devient orchestrateur (`all|nukaknights|fandom`) avec delegation a `app:data:sync:fandom`.
