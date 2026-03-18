@@ -708,6 +708,16 @@ admin_catalog.table_caption: Katalogquellen-Tabelle
 admin_catalog.item: Item
 admin_catalog.source_id: Quellen-ID
 admin_catalog.providers: Provider
+admin_catalog.merge_status: Merge-Status
+admin_catalog.merge_status_no_merge: Kein Merge
+admin_catalog.merge_status_aligned: Konsistent
+admin_catalog.merge_status_generic_label: Generisches Label
+admin_catalog.merge_status_source_issue: Quellenproblem
+admin_catalog.merge_status_material_conflict: Materieller Konflikt
+admin_catalog.generic_label_count: '%count% generisches Label'
+admin_catalog.source_issue_count: '%count% Quellenproblem'
+admin_catalog.material_conflict_count: '%count% materieller Konflikt'
+admin_catalog.retained_fields_count: '%count% ubernommenes Feld'
 admin_catalog.no_items: Kein Katalog-Item gefunden.
 admin_catalog.selected_item: Ausgewahltes Item
 admin_catalog.name_key: Name-Key
@@ -736,6 +746,7 @@ admin_catalog.value: Ubernommener Wert
 admin_catalog.other_value: Anderer Wert
 admin_catalog.value_a: Provider A
 admin_catalog.value_b: Provider B
+admin_catalog.merge_conflicts: Merge-Konflikte
 admin_catalog.no_merge_decisions: Kein ubernommenes Merge-Feld.
 admin_catalog.no_merge_conflicts: Kein Merge-Konflikt.
 admin_catalog.no_source_merge: Fur dieses Item ist kein Cross-Source-Merge verfugbar.

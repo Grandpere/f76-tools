@@ -708,6 +708,16 @@ admin_catalog.table_caption: Catalog item source table
 admin_catalog.item: Item
 admin_catalog.source_id: Source ID
 admin_catalog.providers: Providers
+admin_catalog.merge_status: Merge status
+admin_catalog.merge_status_no_merge: No merge
+admin_catalog.merge_status_aligned: Aligned
+admin_catalog.merge_status_generic_label: Generic label
+admin_catalog.merge_status_source_issue: Source issue
+admin_catalog.merge_status_material_conflict: Material conflict
+admin_catalog.generic_label_count: '%count% generic label'
+admin_catalog.source_issue_count: '%count% source issue'
+admin_catalog.material_conflict_count: '%count% material conflict'
+admin_catalog.retained_fields_count: '%count% retained field'
 admin_catalog.no_items: No catalog item found.
 admin_catalog.selected_item: Selected item
 admin_catalog.name_key: Name key
@@ -736,6 +746,7 @@ admin_catalog.value: Retained value
 admin_catalog.other_value: Other value
 admin_catalog.value_a: Provider A
 admin_catalog.value_b: Provider B
+admin_catalog.merge_conflicts: Merge conflicts
 admin_catalog.no_merge_decisions: No retained merge field.
 admin_catalog.no_merge_conflicts: No merge conflict.
 admin_catalog.no_source_merge: No cross-source merge is available for this item.

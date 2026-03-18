@@ -710,6 +710,16 @@ admin_catalog.table_caption: Table des sources catalogue
 admin_catalog.item: Item
 admin_catalog.source_id: ID source
 admin_catalog.providers: Providers
+admin_catalog.merge_status: Statut du merge
+admin_catalog.merge_status_no_merge: Pas de merge
+admin_catalog.merge_status_aligned: Aligné
+admin_catalog.merge_status_generic_label: Libellé générique
+admin_catalog.merge_status_source_issue: Source incohérente
+admin_catalog.merge_status_material_conflict: Conflit matériel
+admin_catalog.generic_label_count: '%count% libellé générique'
+admin_catalog.source_issue_count: '%count% incohérence source'
+admin_catalog.material_conflict_count: '%count% conflit matériel'
+admin_catalog.retained_fields_count: '%count% champ retenu'
 admin_catalog.no_items: Aucun item catalogue trouvé.
 admin_catalog.selected_item: Item sélectionné
 admin_catalog.name_key: Clé du nom
@@ -738,6 +748,7 @@ admin_catalog.value: Valeur retenue
 admin_catalog.other_value: Autre valeur
 admin_catalog.value_a: Provider A
 admin_catalog.value_b: Provider B
+admin_catalog.merge_conflicts: Conflits de merge
 admin_catalog.no_merge_decisions: Aucun champ retenu.
 admin_catalog.no_merge_conflicts: Aucun conflit de merge.
 admin_catalog.no_source_merge: Aucun merge cross-source n'est disponible pour cet item.

@@ -3937,6 +3937,33 @@ span.flatpickr-weekday {
     border: 1px solid rgba(193, 76, 63, 0.36);
 }
 
+.admin-catalog-badge-info {
+    background: rgba(58, 92, 146, 0.1);
+    color: #294a7b;
+    border: 1px solid rgba(58, 92, 146, 0.28);
+}
+
+.admin-catalog-badge-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    align-items: center;
+}
+
+.admin-catalog-badge-stack .item-pill {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid rgba(108, 118, 132, 0.25);
+    background: rgba(108, 118, 132, 0.08);
+    color: var(--text-1);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0.2rem 0.5rem;
+    white-space: nowrap;
+}
+
 .admin-users-summary {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));

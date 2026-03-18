@@ -85,7 +85,11 @@ final class CatalogItemController extends AbstractController
      *     sourceId:int,
      *     type:string,
      *     name:string,
-     *     providerSummary:string
+     *     providerSummary:string,
+     *     mergeStatus:string,
+     *     mergeGenericLabelCount:int,
+     *     mergeMaterialConflictCount:int,
+     *     mergeSourceIssueCount:int
      * }
      */
     private function mapListRow(ItemEntity $item): array
@@ -96,6 +100,8 @@ final class CatalogItemController extends AbstractController
         }
 
         sort($providers);
+        $mergeResult = $this->itemSourceMergePolicy->merge($item, self::MERGE_PROVIDER_A, self::MERGE_PROVIDER_B);
+        $mergeSummary = $this->buildMergeSummary($mergeResult);
 
         return [
             'publicId' => $item->getPublicId(),
@@ -103,6 +109,10 @@ final class CatalogItemController extends AbstractController
             'type' => $item->getType()->value,
             'name' => $this->translator->trans($item->getNameKey(), domain: 'items'),
             'providerSummary' => implode(', ', array_values(array_unique($providers))),
+            'mergeStatus' => $mergeSummary['status'],
+            'mergeGenericLabelCount' => $mergeSummary['genericLabelCount'],
+            'mergeMaterialConflictCount' => $mergeSummary['materialConflictCount'],
+            'mergeSourceIssueCount' => $mergeSummary['sourceIssueCount'],
         ];
     }
 
@@ -132,6 +142,13 @@ final class CatalogItemController extends AbstractController
      *     }>,
      *     sourceMerge:?array{
      *         label:string,
+     *         summary:array{
+     *             status:string,
+     *             retainedFields:int,
+     *             genericLabelCount:int,
+     *             materialConflictCount:int,
+     *             sourceIssueCount:int
+     *         },
      *         decisions:list<array{
      *             field:string,
      *             provider:string,
@@ -225,6 +242,13 @@ final class CatalogItemController extends AbstractController
     /**
      * @return array{
      *     label:string,
+     *     summary:array{
+     *         status:string,
+     *         retainedFields:int,
+     *         genericLabelCount:int,
+     *         materialConflictCount:int,
+     *         sourceIssueCount:int
+     *     },
      *     decisions:list<array{
      *         field:string,
      *         provider:string,
@@ -244,6 +268,7 @@ final class CatalogItemController extends AbstractController
     {
         return [
             'label' => $result->label,
+            'summary' => $this->buildMergeSummary($result),
             'decisions' => array_map(
                 static fn (\App\Catalog\Application\Import\ItemSourceFieldMergeDecision $decision): array => [
                     'field' => $decision->field,
@@ -263,6 +288,59 @@ final class CatalogItemController extends AbstractController
                 ],
                 $result->conflicts,
             ),
+        ];
+    }
+
+    /**
+     * @return array{
+     *     status:string,
+     *     retainedFields:int,
+     *     genericLabelCount:int,
+     *     materialConflictCount:int,
+     *     sourceIssueCount:int
+     * }
+     */
+    private function buildMergeSummary(?\App\Catalog\Application\Import\ItemSourceMergeResult $result): array
+    {
+        if (null === $result) {
+            return [
+                'status' => 'no_merge',
+                'retainedFields' => 0,
+                'genericLabelCount' => 0,
+                'materialConflictCount' => 0,
+                'sourceIssueCount' => 0,
+            ];
+        }
+
+        $genericLabelCount = 0;
+        $sourceIssueCount = 0;
+        foreach ($result->decisions as $decision) {
+            if ('generic_label_confirmed_by_specific_target' === $decision->reason) {
+                ++$genericLabelCount;
+            }
+
+            if ('preferred_other_source_internal_name_conflict' === $decision->reason) {
+                ++$sourceIssueCount;
+            }
+        }
+
+        $materialConflictCount = count($result->conflicts);
+
+        $status = 'aligned';
+        if ($materialConflictCount > 0) {
+            $status = 'material_conflict';
+        } elseif ($sourceIssueCount > 0) {
+            $status = 'source_issue';
+        } elseif ($genericLabelCount > 0) {
+            $status = 'generic_label';
+        }
+
+        return [
+            'status' => $status,
+            'retainedFields' => count($result->decisions),
+            'genericLabelCount' => $genericLabelCount,
+            'materialConflictCount' => $materialConflictCount,
+            'sourceIssueCount' => $sourceIssueCount,
         ];
     }
 

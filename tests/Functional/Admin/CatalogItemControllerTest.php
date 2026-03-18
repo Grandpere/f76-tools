@@ -63,6 +63,8 @@ final class CatalogItemControllerTest extends WebTestCase
 
         self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
         self::assertStringContainsString('002B8BC4', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('Generic label', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('1 generic label', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('generic_label_confirmed_by_specific_target', (string) $this->browser()->getResponse()->getContent());
         self::assertCount(1, $crawler->filter(sprintf('a[href*="item=%s"]', $item->getPublicId())));
     }

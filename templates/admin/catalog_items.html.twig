@@ -72,6 +72,7 @@
                         <th>{{ 'admin_catalog.item'|trans }}</th>
                         <th>{{ 'admin_catalog.source_id'|trans }}</th>
                         <th>{{ 'admin_catalog.type'|trans }}</th>
+                        <th>{{ 'admin_catalog.merge_status'|trans }}</th>
                         <th>{{ 'admin_catalog.providers'|trans }}</th>
                     </tr>
                     </thead>
@@ -91,11 +92,30 @@
                             </td>
                             <td>{{ row.sourceId }}</td>
                             <td><code>{{ row.type }}</code></td>
+                            <td>
+                                <div class="admin-catalog-badge-stack">
+                                    {% set statusClass = row.mergeStatus == 'material_conflict'
+                                        ? 'admin-security-badge-warn'
+                                        : (row.mergeStatus == 'aligned' ? 'admin-security-badge-ok' : 'admin-catalog-badge-info') %}
+                                    <span class="admin-security-badge {{ statusClass }}">
+                                        {{ ('admin_catalog.merge_status_' ~ row.mergeStatus)|trans }}
+                                    </span>
+                                    {% if row.mergeGenericLabelCount > 0 %}
+                                        <span class="item-pill">{{ 'admin_catalog.generic_label_count'|trans({'%count%': row.mergeGenericLabelCount}) }}</span>
+                                    {% endif %}
+                                    {% if row.mergeSourceIssueCount > 0 %}
+                                        <span class="item-pill">{{ 'admin_catalog.source_issue_count'|trans({'%count%': row.mergeSourceIssueCount}) }}</span>
+                                    {% endif %}
+                                    {% if row.mergeMaterialConflictCount > 0 %}
+                                        <span class="item-pill">{{ 'admin_catalog.material_conflict_count'|trans({'%count%': row.mergeMaterialConflictCount}) }}</span>
+                                    {% endif %}
+                                </div>
+                            </td>
                             <td>{{ row.providerSummary }}</td>
                         </tr>
                     {% else %}
                         <tr>
-                            <td class="admin-empty-cell" colspan="4">{{ 'admin_catalog.no_items'|trans }}</td>
+                            <td class="admin-empty-cell" colspan="5">{{ 'admin_catalog.no_items'|trans }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -185,6 +205,25 @@
                 <h3>{{ 'admin_catalog.source_merge'|trans }}</h3>
                 {% if selectedItem.sourceMerge %}
                     <p class="catalog-state">{{ selectedItem.sourceMerge.label }}</p>
+                    <div class="admin-catalog-badge-stack">
+                        {% set summary = selectedItem.sourceMerge.summary %}
+                        {% set summaryClass = summary.status == 'material_conflict'
+                            ? 'admin-security-badge-warn'
+                            : (summary.status == 'aligned' ? 'admin-security-badge-ok' : 'admin-catalog-badge-info') %}
+                        <span class="admin-security-badge {{ summaryClass }}">
+                            {{ ('admin_catalog.merge_status_' ~ summary.status)|trans }}
+                        </span>
+                        <span class="item-pill">{{ 'admin_catalog.retained_fields_count'|trans({'%count%': summary.retainedFields}) }}</span>
+                        {% if summary.genericLabelCount > 0 %}
+                            <span class="item-pill">{{ 'admin_catalog.generic_label_count'|trans({'%count%': summary.genericLabelCount}) }}</span>
+                        {% endif %}
+                        {% if summary.sourceIssueCount > 0 %}
+                            <span class="item-pill">{{ 'admin_catalog.source_issue_count'|trans({'%count%': summary.sourceIssueCount}) }}</span>
+                        {% endif %}
+                        {% if summary.materialConflictCount > 0 %}
+                            <span class="item-pill">{{ 'admin_catalog.material_conflict_count'|trans({'%count%': summary.materialConflictCount}) }}</span>
+                        {% endif %}
+                    </div>
                     <div class="translations-table-wrap">
                         <table class="translations-table">
                             <thead>
@@ -214,6 +253,7 @@
                         </table>
                     </div>
 
+                    <h4>{{ 'admin_catalog.merge_conflicts'|trans }}</h4>
                     <div class="translations-table-wrap">
                         <table class="translations-table">
                             <thead>
