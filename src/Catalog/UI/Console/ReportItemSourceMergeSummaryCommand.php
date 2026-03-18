@@ -84,9 +84,11 @@ final class ReportItemSourceMergeSummaryCommand extends Command
 
         $items = $this->comparisonReadRepository->findItemsWithProviders($providerA, $providerB, $type, $limit);
 
-        /** @var array<string, array{retained_total:int, retained_by_provider:array<string,int>, conflicts:int}> $summary */
+        /** @var array<string, array{retained_total:int, retained_by_provider:array<string,int>, conflicts:int, generic_label_retained:int}> $summary */
         $summary = [];
         $itemsWithMerge = 0;
+        $genericLabelItems = 0;
+        $materialConflictItems = 0;
 
         foreach ($items as $item) {
             $result = $this->itemSourceMergePolicy->merge($item, $providerA, $providerB);
@@ -95,6 +97,7 @@ final class ReportItemSourceMergeSummaryCommand extends Command
             }
 
             ++$itemsWithMerge;
+            $itemHasGenericLabelDecision = false;
 
             foreach ($result->decisions as $decision) {
                 if (!isset($summary[$decision->field])) {
@@ -102,12 +105,18 @@ final class ReportItemSourceMergeSummaryCommand extends Command
                         'retained_total' => 0,
                         'retained_by_provider' => [],
                         'conflicts' => 0,
+                        'generic_label_retained' => 0,
                     ];
                 }
 
                 ++$summary[$decision->field]['retained_total'];
                 $summary[$decision->field]['retained_by_provider'][$decision->provider] ??= 0;
                 ++$summary[$decision->field]['retained_by_provider'][$decision->provider];
+
+                if ('generic_label_confirmed_by_specific_target' === $decision->reason) {
+                    ++$summary[$decision->field]['generic_label_retained'];
+                    $itemHasGenericLabelDecision = true;
+                }
             }
 
             foreach ($result->conflicts as $conflict) {
@@ -116,10 +125,19 @@ final class ReportItemSourceMergeSummaryCommand extends Command
                         'retained_total' => 0,
                         'retained_by_provider' => [],
                         'conflicts' => 0,
+                        'generic_label_retained' => 0,
                     ];
                 }
 
                 ++$summary[$conflict->field]['conflicts'];
+            }
+
+            if ($itemHasGenericLabelDecision) {
+                ++$genericLabelItems;
+            }
+
+            if ([] !== $result->conflicts) {
+                ++$materialConflictItems;
             }
         }
 
@@ -132,6 +150,8 @@ final class ReportItemSourceMergeSummaryCommand extends Command
                 'type' => $type?->value,
                 'items_scanned' => count($items),
                 'items_with_merge' => $itemsWithMerge,
+                'items_with_generic_labels' => $genericLabelItems,
+                'items_with_material_conflicts' => $materialConflictItems,
                 'fields' => $summary,
             ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
 
@@ -145,6 +165,8 @@ final class ReportItemSourceMergeSummaryCommand extends Command
             ['Type' => null !== $type ? $type->value : 'all'],
             ['Items scanned' => (string) count($items)],
             ['Items with merge' => (string) $itemsWithMerge],
+            ['Items with generic labels' => (string) $genericLabelItems],
+            ['Items with material conflicts' => (string) $materialConflictItems],
             ['Fields' => (string) count($summary)],
         );
 
@@ -155,7 +177,7 @@ final class ReportItemSourceMergeSummaryCommand extends Command
         }
 
         $table = new Table($output);
-        $table->setHeaders(['Field', 'Retained', 'Provider A', 'Provider B', 'Conflicts']);
+        $table->setHeaders(['Field', 'Retained', 'Provider A', 'Provider B', 'Generic labels', 'Conflicts']);
 
         foreach ($summary as $field => $row) {
             $table->addRow([
@@ -163,6 +185,7 @@ final class ReportItemSourceMergeSummaryCommand extends Command
                 (string) $row['retained_total'],
                 (string) ($row['retained_by_provider'][$providerA] ?? 0),
                 (string) ($row['retained_by_provider'][$providerB] ?? 0),
+                (string) $row['generic_label_retained'],
                 (string) $row['conflicts'],
             ]);
         }

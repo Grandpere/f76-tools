@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Catalog\UI\Console;
 
 use App\Catalog\Application\Import\ItemSourceComparisonReadRepository;
+use App\Catalog\Application\Import\ItemSourceFieldMergeDecision;
 use App\Catalog\Application\Import\ItemSourceMergePolicy;
 use App\Catalog\Domain\Item\ItemTypeEnum;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -88,6 +89,7 @@ final class ReportItemSourceMergeCommand extends Command
 
         $rows = [];
         $conflictedItems = 0;
+        $genericLabelItems = 0;
         $decisionCount = 0;
         $conflictCount = 0;
 
@@ -99,6 +101,10 @@ final class ReportItemSourceMergeCommand extends Command
 
             $decisionCount += count($result->decisions);
             $conflictCount += count($result->conflicts);
+
+            if ($this->hasGenericLabelDecision($result->decisions)) {
+                ++$genericLabelItems;
+            }
 
             if ([] !== $result->conflicts) {
                 ++$conflictedItems;
@@ -132,6 +138,8 @@ final class ReportItemSourceMergeCommand extends Command
                 'type' => $type?->value,
                 'items_scanned' => count($items),
                 'items_with_conflicts' => $conflictedItems,
+                'items_with_generic_labels' => $genericLabelItems,
+                'items_with_material_conflicts' => $conflictedItems,
                 'decisions_total' => $decisionCount,
                 'conflicts_total' => $conflictCount,
                 'rows' => $rows,
@@ -147,6 +155,8 @@ final class ReportItemSourceMergeCommand extends Command
             ['Type' => null !== $type ? $type->value : 'all'],
             ['Items scanned' => (string) count($items)],
             ['Items with conflicts' => (string) $conflictedItems],
+            ['Items with generic labels' => (string) $genericLabelItems],
+            ['Items with material conflicts' => (string) $conflictedItems],
             ['Decisions total' => (string) $decisionCount],
             ['Conflicts total' => (string) $conflictCount],
             ['Rows shown' => (string) count($rows)],
@@ -199,5 +209,19 @@ final class ReportItemSourceMergeCommand extends Command
             'misc' => ItemTypeEnum::MISC,
             default => false,
         };
+    }
+
+    /**
+     * @param list<ItemSourceFieldMergeDecision> $decisions
+     */
+    private function hasGenericLabelDecision(array $decisions): bool
+    {
+        foreach ($decisions as $decision) {
+            if ('generic_label_confirmed_by_specific_target' === $decision->reason) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

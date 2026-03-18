@@ -26,6 +26,7 @@
 - Done (slice 18): ajout d un rapport `app:data:report:source-arbitration` qui isole les conflits de noms entre deux providers et demande a Nukacrypt de trancher item par item.
 - Done (slice 19): correction du sync `fallout.wiki` pour conserver les vraies URLs issues des ancres `<a>` et ne plus ecraser les variantes a libelle generique (`Recipe: Healing Salve`) quand leurs `form_id`/liens sont distincts.
 - Done (slice 20): le rapport d arbitrage distingue maintenant les libelles generiques confirmes par URL cible/form_id (`provider_*_generic_label_confirmed`) des vrais conflits materiels, avec compteurs `generic_label_items` et `material_conflict_items`.
+- Done (slice 21): la politique de merge et ses rapports (`source-merge`, `source-merge-summary`) propagent aussi cette distinction via la raison `generic_label_confirmed_by_specific_target` et des compteurs dedies.
 - Note: le lookup public Nukacrypt direct par `form_id` via `esmRecord` reste non fiable depuis l app (HTTP 500 / corps vide). Un `curl` navigateur colle manuellement dans le shell du conteneur `app` peut repondre, mais le meme cas n est pas encore reproducible via le runtime PHP (`HttpClient`/probe). On garde donc Nukacrypt en outil opportuniste d arbitrage, pas en source serveur robuste.
 - Remaining: exploiter ce rapport pour confirmer les prochains conflits reels et, seulement si besoin, enrichir ensuite les rapports de merge avec le verdict Nukacrypt.
 

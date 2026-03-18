@@ -33,6 +33,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: the report now emits `provider_*_generic_label_confirmed` verdicts and exposes `generic_label_items` vs `material_conflict_items` counts.
 - Prevention: when one provider keeps a generic visible label but the stored source URL and `form_id` are specific, classify it as a resolved labeling issue rather than a true source conflict.
 
+## 2026-03-18 - Merge policy should retain specific names but tag generic-label resolutions explicitly
+- Symptom: `source-merge` and `source-merge-summary` still treated resolved generic-label cases as plain `specific_variant_preferred`, which hid the fact that the losing source was still technically aligned through a specific target URL.
+- Root cause: the merge policy only looked at visible names and parenthetical variants, not at whether the generic source already carried a specific linked target.
+- Fix: the merge policy now emits `generic_label_confirmed_by_specific_target` when it keeps the specific name while the generic source URL is already variant-specific; merge reports/summaries count these cases separately from material conflicts.
+- Prevention: when a merge keeps the more specific label but both sources already point to the same specific target, store that as an explicit resolution reason instead of a generic variant preference.
+
 ## 2026-03-17 - Multi-source raw sync should always expose a provider index and visible progress
 - Symptom: `app:data:sync` felt inconsistent because Fandom/Fallout Wiki produced `index.json` while Nukaknights only wrote raw files, and long external syncs could look stalled in the terminal.
 - Root cause: Nukaknights kept its older endpoint-per-file flow without the same catalog summary and progress conventions as the newer wiki sources.

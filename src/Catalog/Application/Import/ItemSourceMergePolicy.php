@@ -256,7 +256,7 @@ final class ItemSourceMergePolicy
                 $field,
                 $sourceA->getProvider(),
                 $valueA,
-                'specific_variant_preferred',
+                $this->sourceHasSpecificTarget($sourceB) ? 'generic_label_confirmed_by_specific_target' : 'specific_variant_preferred',
                 $valueB,
             );
         }
@@ -266,11 +266,29 @@ final class ItemSourceMergePolicy
                 $field,
                 $sourceB->getProvider(),
                 $valueB,
-                'specific_variant_preferred',
+                $this->sourceHasSpecificTarget($sourceA) ? 'generic_label_confirmed_by_specific_target' : 'specific_variant_preferred',
                 $valueA,
             );
         }
 
         return null;
+    }
+
+    private function sourceHasSpecificTarget(ItemExternalSourceEntity $source): bool
+    {
+        $url = $source->getExternalUrl();
+        if (!is_string($url) || '' === trim($url)) {
+            $metadata = $source->getMetadata() ?? [];
+            $wikiUrl = $metadata['wiki_url'] ?? null;
+            $url = is_scalar($wikiUrl) ? (string) $wikiUrl : null;
+        }
+
+        if (!is_string($url) || '' === trim($url)) {
+            return false;
+        }
+
+        $decoded = urldecode($url);
+
+        return str_contains($decoded, '(') && str_contains($decoded, ')');
     }
 }

@@ -90,10 +90,10 @@ final class ItemSourceMergePolicyTest extends TestCase
             ->setType(ItemTypeEnum::BOOK)
             ->setSourceId(2853828)
             ->setNameKey('item.book.2853828.name');
-        $item->upsertExternalSource('fandom', '002B8BC4', null, [
+        $item->upsertExternalSource('fandom', '002B8BC4', 'https://fallout.fandom.com/wiki/Recipe:_Healing_salve_(Toxic_Valley)', [
             'name_en' => 'Recipe: Healing salve (Toxic Valley)',
         ]);
-        $item->upsertExternalSource('fallout_wiki', '002B8BC4', null, [
+        $item->upsertExternalSource('fallout_wiki', '002B8BC4', 'https://fallout.wiki/wiki/Recipe:_Healing_Salve_(Toxic_Valley)', [
             'name_en' => 'Recipe: Healing Salve',
         ]);
 
@@ -109,6 +109,6 @@ final class ItemSourceMergePolicyTest extends TestCase
         }
 
         self::assertSame('fandom', $decisions['name_en']->provider);
-        self::assertSame('specific_variant_preferred', $decisions['name_en']->reason);
+        self::assertSame('generic_label_confirmed_by_specific_target', $decisions['name_en']->reason);
     }
 }
