@@ -4023,7 +4023,7 @@ span.flatpickr-weekday {
 }
 
 .admin-catalog-col-item {
-    width: 34%;
+    width: 41%;
 }
 
 .admin-catalog-col-source-id {
@@ -4031,15 +4031,15 @@ span.flatpickr-weekday {
 }
 
 .admin-catalog-col-type {
-    width: 15%;
+    width: 12%;
 }
 
 .admin-catalog-col-merge-status {
-    width: 31%;
+    width: 25%;
 }
 
 .admin-catalog-col-providers {
-    width: 12%;
+    width: 14%;
 }
 
 .admin-catalog-list-link {
@@ -4060,19 +4060,19 @@ span.flatpickr-weekday {
 }
 
 .admin-catalog-col-source-provider {
-    width: 6%;
+    width: 5%;
 }
 
 .admin-catalog-col-source-ref {
-    width: 15%;
+    width: 13%;
 }
 
 .admin-catalog-col-source-url {
-    width: 34%;
+    width: 40%;
 }
 
 .admin-catalog-col-source-metadata {
-    width: 45%;
+    width: 42%;
 }
 
 .admin-catalog-merge-table {
@@ -4080,7 +4080,7 @@ span.flatpickr-weekday {
 }
 
 .admin-catalog-col-merge-field {
-    width: 11%;
+    width: 9%;
 }
 
 .admin-catalog-col-merge-provider {
@@ -4088,12 +4088,12 @@ span.flatpickr-weekday {
 }
 
 .admin-catalog-col-merge-reason {
-    width: 27%;
+    width: 19%;
 }
 
 .admin-catalog-col-merge-value,
 .admin-catalog-col-merge-other-value {
-    width: 25%;
+    width: 30%;
 }
 
 .admin-catalog-signals-table {
@@ -4114,6 +4114,23 @@ span.flatpickr-weekday {
 
 .admin-catalog-col-signal-reason {
     width: 34%;
+}
+
+.admin-catalog-conflicts-table {
+    table-layout: fixed;
+}
+
+.admin-catalog-col-conflict-field {
+    width: 11%;
+}
+
+.admin-catalog-col-conflict-reason {
+    width: 19%;
+}
+
+.admin-catalog-col-conflict-value-a,
+.admin-catalog-col-conflict-value-b {
+    width: 35%;
 }
 
 .admin-catalog-detail-table th {
@@ -4148,6 +4165,8 @@ span.flatpickr-weekday {
 
 .admin-catalog-merge-table td:nth-child(1) code,
 .admin-catalog-merge-table td:nth-child(3) code,
+.admin-catalog-conflicts-table td:nth-child(1) code,
+.admin-catalog-conflicts-table td:nth-child(2) code,
 .admin-catalog-signals-table td:nth-child(4) code {
     white-space: normal;
     overflow-wrap: anywhere;

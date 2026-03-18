@@ -324,7 +324,13 @@
 
                     <h4 class="admin-catalog-subtitle admin-catalog-subtitle-small">{{ 'admin_catalog.merge_conflicts'|trans }}</h4>
                     <div class="translations-table-wrap admin-catalog-table-wrap">
-                        <table class="translations-table admin-catalog-detail-table">
+                        <table class="translations-table admin-catalog-detail-table admin-catalog-conflicts-table">
+                            <colgroup>
+                                <col class="admin-catalog-col-conflict-field">
+                                <col class="admin-catalog-col-conflict-reason">
+                                <col class="admin-catalog-col-conflict-value-a">
+                                <col class="admin-catalog-col-conflict-value-b">
+                            </colgroup>
                             <thead>
                             <tr>
                                 <th>{{ 'admin_catalog.field'|trans }}</th>
