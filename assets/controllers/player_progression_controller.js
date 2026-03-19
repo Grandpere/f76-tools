@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    static targets = ['playerSelect', 'createNameInput', 'createButton', 'state', 'statsPanel', 'bookPanel', 'backupState', 'exportButton', 'importFileInput', 'importMergeCheckbox', 'importButton', 'importUnknownPanel'];
+    static targets = ['playerSelect', 'createNameInput', 'createButton', 'state', 'statsPanel', 'backupState', 'exportButton', 'importFileInput', 'importMergeCheckbox', 'importButton', 'importUnknownPanel'];
     static values = {
         playersUrl: String,
         playersBaseUrl: String,
@@ -325,7 +325,6 @@ export default class extends Controller {
     renderStats() {
         if (!this.stats || typeof this.stats !== 'object') {
             this.statsPanelTarget.replaceChildren();
-            this.bookPanelTarget.replaceChildren();
             return;
         }
 
@@ -350,37 +349,28 @@ export default class extends Controller {
 
         this.statsPanelTarget.innerHTML = `
             <div class="stats-cards">${cards}</div>
+            <div class="stats-cards progression-book-summary">
+                ${this.renderStatsCard(this.t('bookCatalogLearned'), book)}
+                ${this.renderStatsCard(this.t('bookCatalogPlans'), bookPlans)}
+                ${this.renderStatsCard(this.t('bookCatalogRecipes'), bookRecipes)}
+            </div>
             <div class="stats-split">
                 <section class="stats-group">
                     <h3>${this.escape(this.t('statsByRank'))}</h3>
-                    <div class="stats-group-summary">
-                        ${this.renderStatsCard(this.t('statsMisc'), misc)}
-                    </div>
                     ${rankRows || '<p class="catalog-note">-</p>'}
                 </section>
                 <section class="stats-group">
                     <h3>${this.escape(this.t('statsByList'))}</h3>
-                    <div class="stats-group-summary">
-                        ${this.renderStatsCard(this.t('statsBook'), book)}
-                    </div>
                     ${listRows || '<p class="catalog-note">-</p>'}
                 </section>
             </div>
         `;
-
-        const bookCards = [
-            this.renderStatsCard(this.t('bookCatalogLearned'), book),
-            this.renderStatsCard(this.t('bookCatalogPlans'), bookPlans),
-            this.renderStatsCard(this.t('bookCatalogRecipes'), bookRecipes),
-        ].join('');
-
-        this.bookPanelTarget.innerHTML = `<div class="stats-cards progression-book-summary">${bookCards}</div>`;
+        this.bookPanelTarget.replaceChildren();
     }
 
     renderLoadingPanels() {
         const placeholder = `<p class="catalog-state">${this.escape(this.t('loadingItems'))}</p>`;
         this.statsPanelTarget.innerHTML = placeholder;
-        this.bookPanelTarget.innerHTML = placeholder;
     }
 
     renderStatsCard(title, stat) {

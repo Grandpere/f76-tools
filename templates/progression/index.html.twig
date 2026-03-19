@@ -115,16 +115,6 @@
             <section class="catalog-panel catalog-block">
                 <div data-player-progression-target="statsPanel"></div>
             </section>
-            <section class="catalog-panel catalog-block progression-book-panel">
-                <div class="progression-book-panel-head">
-                    <div>
-                        <h2>{{ 'progression.book_catalog_title'|trans }}</h2>
-                        <p class="catalog-note">{{ 'progression.book_catalog_description'|trans }}</p>
-                    </div>
-                    <a class="catalog-cta-link" href="{{ path('app_book_catalog', { _locale: app.request.locale }) }}">{{ 'progression.book_catalog_open'|trans }}</a>
-                </div>
-                <div data-player-progression-target="bookPanel"></div>
-            </section>
         </section>
     </main>
 {% endblock %}
