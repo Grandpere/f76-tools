@@ -30,6 +30,7 @@ Ajouter une page front authentifiee qui liste les plans et recettes (`BOOK`) ave
 - Done (slice 8): recuperation depuis Fallout Wiki d un premier lot d icones `Obtained/Legend` manquantes (`stamp`, `ticket`, `quest`, `event`, `containers`, `treasure map`, `spawned`, etc.) avec renommage coherent, puis branchement des cas les plus fiables sur `/plans-recipes` (`expeditions`, `quests`, `events`, `containers`, `treasure_maps`, `world_spawns`, `tickets`).
 - Done (slice 9): affinage des choix d icones front selon le retour visuel reel: `expeditions` et `stamps` passent sur la vignette wiki `stamp` plus lisible, `world_spawns` adopte l icone `exploration team`, `unused_content` adopte la version wiki, et `seasonal_content` est maintenant illustre explicitement.
 - Done (slice 10): le bloc `Marchands` de `/plans-recipes` couvre maintenant aussi les vendeurs exacts detectes dans les metadata wiki (`Minerva`, `Giuseppe`, `Regs/Reginald Stone`, `Samuel`, `Mortimer`), fait matcher les cas mixtes (`X or Minerva`) dans les deux filtres concernes, renomme l icone Giuseppe en `WhitespringResortMarker.svg` et expose `Bullion vendors` comme indice non filtrant dans un sous-bloc dedie.
+- Done (slice 11): les cards `/plans-recipes` exposent maintenant aussi `unlocks` comme information joueur de premier niveau, derivee du merge quand disponible puis des metadata source en fallback, afin d identifier plus vite ce que debloque un plan/une recette sans ouvrir l admin.
 
 ## Hors scope
 - Edition front des items.

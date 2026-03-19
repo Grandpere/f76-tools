@@ -14,6 +14,7 @@
 - Done (slice 8): recuperation d un lot coherent d icones Fallout Wiki depuis les legendes/colonnes `Obtained` (`stamp`, `ticket`, `quest`, `event`, `containers`, `treasure map`, `spawned`, etc.) et branchement des cas les plus solides sur `/plans-recipes`, avec `expeditions` maintenant illustre par le vrai pictogramme `stamp`.
 - Done (slice 9): ajustement des choix d icones selon le retour visuel reel: `expeditions/stamps` utilisent la petite vignette wiki `stamp`, `world_spawns` passe sur `exploration team`, `unused_content` sur la version wiki plus lisible et `seasonal_content` est maintenant iconifie.
 - Done (slice 10): le groupe `Marchands` de `/plans-recipes` sait maintenant filtrer aussi les vendeurs exacts detectes dans les metadata wiki (`Minerva`, `Giuseppe`, `Regs/Reginald Stone`, `Samuel`, `Mortimer`), les cas mixtes (`X or Minerva`) matchent les deux filtres concernes, l icone Giuseppe suit la convention `*Marker`, et `Bullion vendors` reste visible comme indice de source non filtrant dans un sous-bloc dedie.
+- Done (slice 11): les cartes `/plans-recipes` affichent maintenant aussi `unlocks`, derive depuis le merge puis en fallback depuis les metadata source, pour rendre le catalogue plus utile sans exposer l admin.
 
 ### Avancement F76-153
 - Done (slice 1): `app:data:sync` devient orchestrateur (`all|nukaknights|fandom`) avec delegation a `app:data:sync:fandom`.

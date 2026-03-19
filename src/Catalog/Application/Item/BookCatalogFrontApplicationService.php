@@ -59,6 +59,7 @@ final class BookCatalogFrontApplicationService
      *         bookKind:string,
      *         description:?string,
      *         note:?string,
+     *         unlocks:?string,
      *         rank:?int,
      *         price:?int,
      *         priceMinerva:?int,
@@ -198,6 +199,7 @@ final class BookCatalogFrontApplicationService
      *     bookKind:string,
      *     description:?string,
      *     note:?string,
+     *     unlocks:?string,
      *     rank:?int,
      *     price:?int,
      *     priceMinerva:?int,
@@ -217,6 +219,7 @@ final class BookCatalogFrontApplicationService
         $canonicalSignals = null !== $mergeResult ? $this->extractCanonicalSignals($mergeResult) : [];
         $canonicalSignals = $this->appendItemDerivedSignals($item, $canonicalSignals);
         $bookKind = $this->extractBookKind($item);
+        $unlocks = $this->extractUnlocks($item, $mergeResult);
         $vendorLabels = $this->extractVendorLabels($item);
         $vendorFlags = $this->extractVendorFlags($item);
         $vendorInfoLabels = $this->extractVendorInfoLabels($item);
@@ -235,6 +238,7 @@ final class BookCatalogFrontApplicationService
             'bookKind' => $bookKind,
             'description' => null !== $item->getDescKey() ? $this->translator->trans($item->getDescKey(), domain: 'items') : null,
             'note' => null !== $item->getNoteKey() ? $this->translator->trans($item->getNoteKey(), domain: 'items') : null,
+            'unlocks' => $unlocks,
             'rank' => $item->getRank(),
             'price' => $item->getPrice(),
             'priceMinerva' => $item->getPriceMinerva(),
@@ -291,6 +295,7 @@ final class BookCatalogFrontApplicationService
      *     bookKind:string,
      *     description:?string,
      *     note:?string,
+     *     unlocks:?string,
      *     vendorLabels:list<string>,
      *     vendorFlags:array{vendors:bool,vendor_minerva:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool},
      *     vendorInfoLabels:list<string>,
@@ -305,6 +310,7 @@ final class BookCatalogFrontApplicationService
             $row['bookKind'],
             (string) ($row['description'] ?? ''),
             (string) ($row['note'] ?? ''),
+            (string) ($row['unlocks'] ?? ''),
             implode(' ', array_map(static fn (int $list): string => (string) $list, $row['bookListNumbers'])),
         ];
 
@@ -350,6 +356,80 @@ final class BookCatalogFrontApplicationService
         }
 
         return 'plan';
+    }
+
+    private function extractUnlocks(ItemEntity $item, ?ItemSourceMergeResult $mergeResult): ?string
+    {
+        if (null !== $mergeResult) {
+            foreach ($mergeResult->decisions as $decision) {
+                if ('unlocks' !== $decision->field) {
+                    continue;
+                }
+
+                $unlocks = $this->normalizeUnlockValue($decision->value);
+                if (null !== $unlocks) {
+                    return $unlocks;
+                }
+            }
+        }
+
+        foreach ($item->getExternalSources() as $externalSource) {
+            $metadata = $externalSource->getMetadata();
+            if (!is_array($metadata)) {
+                continue;
+            }
+
+            $unlocks = $this->normalizeUnlockValue($metadata['unlocks'] ?? null);
+            if (null !== $unlocks) {
+                return $unlocks;
+            }
+        }
+
+        return null;
+    }
+
+    private function normalizeUnlockValue(mixed $value): ?string
+    {
+        if (is_string($value)) {
+            $value = trim($value);
+
+            return '' !== $value ? $value : null;
+        }
+
+        if (!is_array($value)) {
+            return null;
+        }
+
+        $text = $value['text'] ?? null;
+        if (is_string($text)) {
+            $text = trim($text);
+            if ('' !== $text) {
+                return $text;
+            }
+        }
+
+        $icons = $value['icons'] ?? null;
+        if (!is_array($icons)) {
+            return null;
+        }
+
+        $labels = [];
+        foreach ($icons as $icon) {
+            if (!is_string($icon)) {
+                continue;
+            }
+
+            $icon = trim($icon);
+            if ('' === $icon) {
+                continue;
+            }
+
+            $labels[] = $icon;
+        }
+
+        $labels = array_values(array_unique($labels));
+
+        return [] !== $labels ? implode(', ', $labels) : null;
     }
 
     /**

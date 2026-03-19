@@ -241,6 +241,37 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
         self::assertSame(['Giuseppe'], $result['rows'][0]['vendorLabels']);
     }
 
+    public function testBrowseExposesUnlocksFromSourceMetadata(): void
+    {
+        $item = $this->createBookItem(113, 'pub-unlocks', 'catalog.book.unlocks', 'Plan: Unlock Test', 'aligned', [
+            'type' => 'plan',
+            'unlocks' => ['text' => 'Atlantic City Poker Table'],
+        ]);
+
+        $service = new BookCatalogFrontApplicationService(
+            new class([$item]) implements BookCatalogFrontReadRepository {
+                /**
+                 * @param list<ItemEntity> $items
+                 */
+                public function __construct(private readonly array $items)
+                {
+                }
+
+                public function findAllBooksDetailedOrdered(): array
+                {
+                    return $this->items;
+                }
+            },
+            new ItemSourceMergePolicy(),
+            $this->createTranslator(),
+        );
+
+        $result = $service->browse('poker', [], [], [], [], 1, 24);
+
+        self::assertSame(1, $result['totalItems']);
+        self::assertSame('Atlantic City Poker Table', $result['rows'][0]['unlocks']);
+    }
+
     public function testBrowseMatchesMixedVendorMetadataAcrossExactFilters(): void
     {
         $mixed = $this->createBookItem(111, 'pub-vendor-mixed', 'catalog.book.vendor.mixed', 'Plan: Mixed Vendor Plan', 'aligned', [
@@ -365,6 +396,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
                     'catalog.book.vendor.samuel' => 'Plan: Samuel Plan',
                     'catalog.book.vendor.regs' => 'Plan: Regs Plan',
                     'catalog.book.vendor.giuseppe' => 'Plan: Giuseppe Plan',
+                    'catalog.book.unlocks' => 'Plan: Unlock Test',
                     'catalog.book.vendor.mixed' => 'Plan: Mixed Vendor Plan',
                     'catalog.book.vendor.bullion' => 'Plan: Bullion Vendor Plan',
                     'catalog_books.signal_purchase_currency' => 'Currency',
@@ -377,6 +409,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
                     'catalog_books.vendor_minerva' => 'Minerva',
                     'catalog_books.vendor_samuel' => 'Samuel',
                     'catalog_books.vendor_giuseppe' => 'Giuseppe',
+                    'catalog_books.unlocks' => 'Unlocks',
                     'catalog_books.vendor_info_bullion_vendors' => 'Bullion vendors',
                     default => $id,
                 };

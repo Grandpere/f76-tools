@@ -209,6 +209,13 @@
                                 <p class="item-note-line">{{ item.note }}</p>
                             {% endif %}
 
+                            {% if item.unlocks %}
+                                <p class="item-unlocks-line">
+                                    <span class="item-unlocks-label">{{ 'catalog_books.unlocks'|trans }}</span>
+                                    <span>{{ item.unlocks }}</span>
+                                </p>
+                            {% endif %}
+
                             <div class="catalog-book-meta">
                                 <span class="item-pill">{{ ('catalog_books.kind_' ~ item.bookKind)|trans }}</span>
                                 {% if item.rank %}

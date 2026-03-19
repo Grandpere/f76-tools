@@ -1961,6 +1961,24 @@ body::before {
     margin-top: 0.02rem;
 }
 
+.item-unlocks-line {
+    margin-top: 0.46rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    align-items: baseline;
+    font-size: 0.84rem;
+    color: var(--text-1);
+}
+
+.item-unlocks-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-2);
+    font-weight: 700;
+}
+
 .item-note-gap {
     height: 0.7rem;
 }

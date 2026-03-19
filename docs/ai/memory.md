@@ -736,3 +736,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: exact vendor filters were derived from inconsistent sources: some from persistent item booleans (`vendorSamuel`, `vendorRegs`, `vendorMortimer`), some from raw wiki metadata, and mixed wiki labels (`X or Minerva`) were not normalized into both relevant vendor filters.
 - Fix: the front read model now derives exact vendor flags from both local booleans and wiki metadata aliases (`Minerva`, `Regs/Reginald Stone`, `Samuel`, `Mortimer`, `Giuseppe`), so mixed labels match every relevant vendor filter; generic `Bullion vendors` is exposed separately as a non-filtering vendor hint, and the Giuseppe asset was renamed to `WhitespringResortMarker.svg` to stay consistent with the other vendor marker names.
 - Prevention: for player-facing vendor filters, treat raw wiki vendor names as first-class signals alongside local Minerva booleans, and keep generic marketplace labels (`Bullion vendors`) out of exact filter options.
+
+## 2026-03-19 - Player-facing book cards need unlock text from merge/source metadata
+- Symptom: `/plans-recipes` was becoming easier to filter, but many plans were still hard to recognize quickly because the card only showed the item name, not what the plan actually unlocks.
+- Root cause: the front read model ignored the `unlocks` field even though the merge pipeline already carried it from `fallout_wiki` and the raw source metadata often exposed a clean `text` value.
+- Fix: the front read model now extracts `unlocks` from the merge result when available, with a fallback to raw external-source metadata, normalizes object/string values, includes it in search, and renders it directly on the player-facing card.
+- Prevention: for player-facing catalog cards, prefer compact fields that describe the practical outcome (`unlocks`) over exposing only internal or source-oriented metadata.

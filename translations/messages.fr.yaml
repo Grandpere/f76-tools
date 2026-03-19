@@ -110,6 +110,7 @@ catalog_books.visible_items: '%count% items affichés sur %total%'
 catalog_books.list_title: Catalogue
 catalog_books.list_help: 'Cette page se concentre sur le résultat côté joueur: noms, prix, numéros de liste et tags d activité utiles.'
 catalog_books.new: Nouveau
+catalog_books.unlocks: Débloque
 catalog_books.rank: 'Rang %rank%'
 catalog_books.book_lists: 'Listes: %lists%'
 catalog_books.price: '%currency%: %value%'

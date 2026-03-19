@@ -87,8 +87,8 @@ final class BookCatalogControllerTest extends WebTestCase
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="vendorFilters[]"]')->count());
         self::assertStringContainsString('vendorFilters[]', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('vendor_minerva', (string) $this->browser()->getResponse()->getContent());
-        self::assertStringContainsString('Source hints', (string) $this->browser()->getResponse()->getContent());
-        self::assertStringContainsString('Bullion vendors', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('Gold bullion vendors', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('Unlock test', (string) $this->browser()->getResponse()->getContent());
         self::assertCount(1, $crawler->filter('[data-catalog-filters-target="summary"]'));
         self::assertCount(1, $crawler->filter('[data-catalog-filters-target="results"]'));
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="lists[]"]')->count());
