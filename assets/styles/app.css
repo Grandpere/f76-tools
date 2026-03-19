@@ -1421,6 +1421,10 @@ body::before {
 
 .catalog-icon-legend {
     margin-top: 1rem;
+    padding: 0.72rem 0.78rem 0.82rem;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(250, 248, 241, 0.96));
 }
 
 .catalog-icon-legend h3 {
@@ -1428,6 +1432,14 @@ body::before {
     font-family: 'Rajdhani', 'Inter', sans-serif;
     font-size: 1.1rem;
     letter-spacing: 0.02em;
+}
+
+.catalog-icon-legend .catalog-note {
+    margin-top: 0.38rem;
+}
+
+.catalog-icon-legend .source-filter-groups {
+    margin-top: 0.68rem;
 }
 
 .catalog-legend-list {
