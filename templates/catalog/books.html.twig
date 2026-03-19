@@ -155,6 +155,15 @@
                             {% endif %}
 
                             {% if item.canonicalSignals %}
+                                <div class="catalog-book-signal-list">
+                                    {% for signal in item.canonicalSignals %}
+                                        {% if signalIconMap[signal.field] is not defined %}
+                                            <span class="item-pill">
+                                                {{ signal.label }}
+                                            </span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
                                 <div class="item-icons-footer">
                                     <p class="item-source-icons">
                                         {% if item.vendorFlags.vendor_regs %}
@@ -177,15 +186,6 @@
                                             {% endif %}
                                         {% endfor %}
                                     </p>
-                                </div>
-                                <div class="catalog-book-signal-list">
-                                    {% for signal in item.canonicalSignals %}
-                                        {% if signalIconMap[signal.field] is not defined %}
-                                            <span class="item-pill">
-                                                {{ signal.label }}
-                                            </span>
-                                        {% endif %}
-                                    {% endfor %}
                                 </div>
                             {% endif %}
                         </article>
