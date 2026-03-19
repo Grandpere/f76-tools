@@ -260,7 +260,7 @@
                                                 {% if currencyIconMap.gold_bullion is defined %}
                                                     <img src="{{ asset(currencyIconMap.gold_bullion) }}" alt="" aria-hidden="true">
                                                 {% endif %}
-                                                {{ 'catalog_books.price_bullion'|trans({'%value%': item.price}) }}
+                                                {{ item.price }}
                                             </span>
                                         {% else %}
                                             <span>
@@ -272,7 +272,10 @@
                                         {% endif %}
                                     {% endif %}
                                     {% if item.priceMinerva %}
-                                        <span class="price-new">{{ 'catalog_books.price_minerva'|trans({'%value%': item.priceMinerva}) }}</span>
+                                        <span class="price-new">
+                                            <span class="catalog-vendor-text-icon" title="{{ 'catalog_books.vendor_minerva'|trans }}">M</span>
+                                            {{ item.priceMinerva }}
+                                        </span>
                                     {% endif %}
                                 </div>
                             {% endif %}

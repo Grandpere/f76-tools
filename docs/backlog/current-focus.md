@@ -16,6 +16,7 @@
 - Done (slice 10): le groupe `Marchands` de `/plans-recipes` sait maintenant filtrer aussi les vendeurs exacts detectes dans les metadata wiki (`Minerva`, `Giuseppe`, `Regs/Reginald Stone`, `Samuel`, `Mortimer`), les cas mixtes (`X or Minerva`) matchent les deux filtres concernes, l icone Giuseppe suit la convention `*Marker`, et `Bullion vendors` reste visible comme indice de source non filtrant dans un sous-bloc dedie.
 - Done (slice 11): les cartes `/plans-recipes` affichent maintenant aussi `unlocks`, derive depuis le merge puis en fallback depuis les metadata source, pour rendre le catalogue plus utile sans exposer l admin.
 - Done (slice 12): `/plans-recipes` partage desormais la meme progression `BOOK` que Minerva via l API joueur existante (select personnage + checkbox appris/non appris sur les cards), avec reapplication automatique de l etat appris apres chaque refresh AJAX des filtres.
+- Done (slice 13): la ligne de prix des cards `/plans-recipes` est maintenant plus compacte pour les items Minerva: prix de base en lingots = logo + valeur, prix remisé = marqueur Minerva + valeur, sans repetition textuelle inutile.
 
 ### Avancement F76-153
 - Done (slice 1): `app:data:sync` devient orchestrateur (`all|nukaknights|fandom`) avec delegation a `app:data:sync:fandom`.
