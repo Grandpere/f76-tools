@@ -1917,6 +1917,30 @@ body::before {
         linear-gradient(150deg, rgba(255, 210, 74, 0.08), rgba(255, 210, 74, 0));
 }
 
+.catalog-book-section {
+    margin-top: 0.56rem;
+    padding: 0.55rem 0.62rem;
+    border: 1px solid rgba(29, 37, 49, 0.1);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.58);
+}
+
+.catalog-book-section-meta {
+    padding-top: 0.48rem;
+    padding-bottom: 0.48rem;
+}
+
+.catalog-book-section-details {
+    display: grid;
+    gap: 0.46rem;
+}
+
+.catalog-book-section-details p,
+.catalog-book-section-prices .item-prices,
+.catalog-book-section-signals .catalog-book-footer {
+    margin-top: 0;
+}
+
 .item-card-head {
     display: flex;
     justify-content: flex-start;
@@ -1943,7 +1967,7 @@ body::before {
 }
 
 .catalog-book-category-line {
-    margin: 0.48rem 0 0;
+    margin: 0;
     display: inline-flex;
     align-items: center;
     gap: 0.42rem;
@@ -2174,7 +2198,8 @@ body::before {
 
 .catalog-book-footer {
     width: 100%;
-    margin-top: auto;
+    margin-top: 0;
+    padding-top: 0;
     align-items: flex-end;
 }
 

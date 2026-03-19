@@ -318,10 +318,6 @@
                     </div>
                 </section>
 
-                <p class="catalog-note info-note">
-                    <span class="info-note-content">{{ 'dashboard.help.shared_book_learning'|trans }}</span>
-                </p>
-
                 <p class="catalog-state" data-book-catalog-knowledge-target="state" hidden></p>
                 {% if selectedPlayerId %}
                     <p class="catalog-state catalog-progress-summary">
@@ -341,6 +337,9 @@
 
             <section class="catalog-panel catalog-block" data-catalog-filters-target="results" data-book-catalog-knowledge-target="results">
                 <h2>{{ 'catalog_books.list_title'|trans }}</h2>
+                <p class="catalog-note info-note">
+                    <span class="info-note-content">{{ 'dashboard.help.shared_book_learning'|trans }}</span>
+                </p>
                 <p class="catalog-note">{{ 'catalog_books.list_help'|trans }}</p>
 
                 <div class="item-grid catalog-books-grid">
@@ -366,89 +365,99 @@
                                 </div>
                             </div>
 
-                            <p class="catalog-book-category-line">
-                                {% if categoryIconMap[item.bookCategory] is defined %}
-                                    <img src="{{ asset(categoryIconMap[item.bookCategory]) }}" alt="" aria-hidden="true" class="catalog-category-icon">
-                                {% endif %}
-                                <span>{{ ('catalog_books.category_' ~ item.bookCategory)|trans }}</span>
-                            </p>
-
-                            {% if item.description %}
-                                <p>{{ item.description }}</p>
-                            {% endif %}
-
-                            {% if item.note %}
-                                <p class="item-note-line">{{ item.note }}</p>
-                            {% endif %}
-
-                            {% if item.unlocks %}
-                                <p class="item-unlocks-line">
-                                    <span class="item-unlocks-label">{{ 'catalog_books.unlocks'|trans }}</span>
-                                    <span>{{ item.unlocks }}</span>
+                            <div class="catalog-book-section catalog-book-section-meta">
+                                <p class="catalog-book-category-line">
+                                    {% if categoryIconMap[item.bookCategory] is defined %}
+                                        <img src="{{ asset(categoryIconMap[item.bookCategory]) }}" alt="" aria-hidden="true" class="catalog-category-icon">
+                                    {% endif %}
+                                    <span>{{ ('catalog_books.category_' ~ item.bookCategory)|trans }}</span>
                                 </p>
+                            </div>
+
+                            {% if item.description or item.note or item.unlocks %}
+                                <div class="catalog-book-section catalog-book-section-details">
+                                    {% if item.description %}
+                                        <p>{{ item.description }}</p>
+                                    {% endif %}
+
+                                    {% if item.note %}
+                                        <p class="item-note-line">{{ item.note }}</p>
+                                    {% endif %}
+
+                                    {% if item.unlocks %}
+                                        <p class="item-unlocks-line">
+                                            <span class="item-unlocks-label">{{ 'catalog_books.unlocks'|trans }}</span>
+                                            <span>{{ item.unlocks }}</span>
+                                        </p>
+                                    {% endif %}
+                                </div>
                             {% endif %}
 
                             {% if item.price or item.priceMinerva %}
-                                <div class="item-prices">
-                                    {% if item.price %}
+                                <div class="catalog-book-section catalog-book-section-prices">
+                                    <div class="item-prices">
+                                        {% if item.price %}
+                                            {% if item.priceMinerva %}
+                                                <span>
+                                                    {% if currencyIconMap.gold_bullion is defined %}
+                                                        <img src="{{ asset(currencyIconMap.gold_bullion) }}" alt="" aria-hidden="true">
+                                                    {% endif %}
+                                                    {{ item.price }}
+                                                </span>
+                                            {% else %}
+                                                <span>
+                                                    {% if currencyIconMap[item.priceCurrencyCode] is defined %}
+                                                        <img src="{{ asset(currencyIconMap[item.priceCurrencyCode]) }}" alt="" aria-hidden="true">
+                                                    {% endif %}
+                                                    {{ 'catalog_books.price'|trans({'%value%': item.price, '%currency%': item.priceCurrencyLabel}) }}
+                                                </span>
+                                            {% endif %}
+                                        {% endif %}
                                         {% if item.priceMinerva %}
-                                            <span>
-                                                {% if currencyIconMap.gold_bullion is defined %}
-                                                    <img src="{{ asset(currencyIconMap.gold_bullion) }}" alt="" aria-hidden="true">
-                                                {% endif %}
-                                                {{ item.price }}
-                                            </span>
-                                        {% else %}
-                                            <span>
-                                                {% if currencyIconMap[item.priceCurrencyCode] is defined %}
-                                                    <img src="{{ asset(currencyIconMap[item.priceCurrencyCode]) }}" alt="" aria-hidden="true">
-                                                {% endif %}
-                                                {{ 'catalog_books.price'|trans({'%value%': item.price, '%currency%': item.priceCurrencyLabel}) }}
+                                            <span class="price-new">
+                                                <span class="catalog-vendor-text-icon" title="{{ 'catalog_books.vendor_minerva'|trans }}">M</span>
+                                                {{ item.priceMinerva }}
                                             </span>
                                         {% endif %}
-                                    {% endif %}
-                                    {% if item.priceMinerva %}
-                                        <span class="price-new">
-                                            <span class="catalog-vendor-text-icon" title="{{ 'catalog_books.vendor_minerva'|trans }}">M</span>
-                                            {{ item.priceMinerva }}
-                                        </span>
-                                    {% endif %}
+                                    </div>
                                 </div>
                             {% endif %}
 
                             {% set hasVendorFooterIcons = item.vendorFlags.vendor_regs or item.vendorFlags.vendor_samuel or item.vendorFlags.vendor_mortimer or item.vendorFlags.vendor_giuseppe or item.vendorFlags.vendor_minerva %}
                             {% if hasVendorFooterIcons or item.canonicalSignals %}
-                                <div class="item-icons-footer catalog-book-footer">
-                                    <div class="catalog-book-footer-signals">
-                                        {% if item.vendorFlags.vendor_minerva %}
-                                            <span class="catalog-vendor-text-icon" title="{{ 'catalog_books.vendor_minerva'|trans }}">M</span>
-                                        {% endif %}
-                                        {% if item.vendorFlags.vendor_regs %}
-                                            <img src="{{ asset('/assets/icons/Vault79Marker.svg') }}" alt="{{ 'catalog_books.vendor_regs'|trans }}" title="{{ 'catalog_books.vendor_regs'|trans }}">
-                                        {% endif %}
-                                        {% if item.vendorFlags.vendor_samuel %}
-                                            <img src="{{ asset('/assets/icons/HammerWingMarker.svg') }}" alt="{{ 'catalog_books.vendor_samuel'|trans }}" title="{{ 'catalog_books.vendor_samuel'|trans }}">
-                                        {% endif %}
-                                        {% if item.vendorFlags.vendor_mortimer %}
-                                            <img src="{{ asset('/assets/icons/SkullRingMarker.svg') }}" alt="{{ 'catalog_books.vendor_mortimer'|trans }}" title="{{ 'catalog_books.vendor_mortimer'|trans }}">
-                                        {% endif %}
-                                        {% if item.vendorFlags.vendor_giuseppe %}
-                                            <img src="{{ asset('/assets/icons/WhitespringResortMarker.svg') }}" alt="{{ 'catalog_books.vendor_giuseppe'|trans }}" title="{{ 'catalog_books.vendor_giuseppe'|trans }}">
-                                        {% endif %}
-                                        {% for signal in item.canonicalSignals %}
-                                            {% if signalIconMap[signal.field] is defined %}
-                                                <img
-                                                    src="{{ asset(signalIconMap[signal.field]) }}"
-                                                    alt="{{ signal.label }}"
-                                                    title="{{ signal.label }}"
-                                                    class="{% if signal.field == 'random_encounters' %}catalog-icon-random-encounter{% endif %}"
-                                                >
-                                            {% else %}
-                                                <span class="item-pill">
-                                                    {{ signal.label }}
-                                                </span>
+                                <div class="catalog-book-section catalog-book-section-signals">
+                                    <div class="item-icons-footer catalog-book-footer">
+                                        <div class="catalog-book-footer-signals">
+                                            {% if item.vendorFlags.vendor_minerva %}
+                                                <span class="catalog-vendor-text-icon" title="{{ 'catalog_books.vendor_minerva'|trans }}">M</span>
                                             {% endif %}
-                                        {% endfor %}
+                                            {% if item.vendorFlags.vendor_regs %}
+                                                <img src="{{ asset('/assets/icons/Vault79Marker.svg') }}" alt="{{ 'catalog_books.vendor_regs'|trans }}" title="{{ 'catalog_books.vendor_regs'|trans }}">
+                                            {% endif %}
+                                            {% if item.vendorFlags.vendor_samuel %}
+                                                <img src="{{ asset('/assets/icons/HammerWingMarker.svg') }}" alt="{{ 'catalog_books.vendor_samuel'|trans }}" title="{{ 'catalog_books.vendor_samuel'|trans }}">
+                                            {% endif %}
+                                            {% if item.vendorFlags.vendor_mortimer %}
+                                                <img src="{{ asset('/assets/icons/SkullRingMarker.svg') }}" alt="{{ 'catalog_books.vendor_mortimer'|trans }}" title="{{ 'catalog_books.vendor_mortimer'|trans }}">
+                                            {% endif %}
+                                            {% if item.vendorFlags.vendor_giuseppe %}
+                                                <img src="{{ asset('/assets/icons/WhitespringResortMarker.svg') }}" alt="{{ 'catalog_books.vendor_giuseppe'|trans }}" title="{{ 'catalog_books.vendor_giuseppe'|trans }}">
+                                            {% endif %}
+                                            {% for signal in item.canonicalSignals %}
+                                                {% if signalIconMap[signal.field] is defined %}
+                                                    <img
+                                                        src="{{ asset(signalIconMap[signal.field]) }}"
+                                                        alt="{{ signal.label }}"
+                                                        title="{{ signal.label }}"
+                                                        class="{% if signal.field == 'random_encounters' %}catalog-icon-random-encounter{% endif %}"
+                                                    >
+                                                {% else %}
+                                                    <span class="item-pill">
+                                                        {{ signal.label }}
+                                                    </span>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
                                     </div>
                                 </div>
                             {% endif %}
