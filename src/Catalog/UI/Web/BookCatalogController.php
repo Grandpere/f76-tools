@@ -72,6 +72,8 @@ final class BookCatalogController extends AbstractController
         $query = trim((string) $request->query->get('q', ''));
         /** @var list<string> $selectedLists */
         $selectedLists = $request->query->all('lists');
+        /** @var list<string> $selectedKinds */
+        $selectedKinds = $request->query->all('kinds');
         /** @var list<string> $selectedSignals */
         $selectedSignals = $request->query->all('signals');
         $perPage = max(12, min(96, (int) $request->query->get('perPage', 24)));
@@ -80,6 +82,7 @@ final class BookCatalogController extends AbstractController
         $result = $this->bookCatalogFrontApplicationService->browse(
             '' !== $query ? $query : null,
             $selectedLists,
+            $selectedKinds,
             $selectedSignals,
             $page,
             $perPage,
@@ -91,8 +94,10 @@ final class BookCatalogController extends AbstractController
             'username' => $user->getEmail(),
             'query' => $query,
             'selectedLists' => $selectedLists,
+            'selectedKinds' => $selectedKinds,
             'selectedSignals' => $selectedSignals,
             'listOptions' => $result['listOptions'],
+            'kindOptions' => $result['kindOptions'],
             'signalOptions' => $result['signalOptions'],
             'signalIconMap' => self::SIGNAL_ICON_MAP,
             'currencyIconMap' => self::CURRENCY_ICON_MAP,

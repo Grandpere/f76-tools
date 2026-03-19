@@ -46,6 +46,16 @@
                     </fieldset>
 
                     <fieldset class="source-filters catalog-books-list-filters">
+                        <legend>{{ 'catalog_books.kind_filters'|trans }}</legend>
+                        {% for option in kindOptions %}
+                            <label>
+                                <input type="checkbox" name="kinds[]" value="{{ option }}" {% if option in selectedKinds %}checked{% endif %}>
+                                {{ ('catalog_books.kind_' ~ option)|trans }}
+                            </label>
+                        {% endfor %}
+                    </fieldset>
+
+                    <fieldset class="source-filters catalog-books-list-filters">
                         <legend>{{ 'catalog_books.signal_filters'|trans }}</legend>
                         {% for option in signalOptions %}
                             <label>
@@ -91,9 +101,13 @@
                             {% endif %}
 
                             <div class="catalog-book-meta">
+                                <span class="item-pill">{{ ('catalog_books.kind_' ~ item.bookKind)|trans }}</span>
                                 {% if item.rank %}
                                     <span class="item-pill">{{ 'catalog_books.rank'|trans({'%rank%': item.rank}) }}</span>
                                 {% endif %}
+                                {% for vendorLabel in item.vendorLabels %}
+                                    <span class="item-pill">{{ vendorLabel }}</span>
+                                {% endfor %}
                             </div>
 
                             {% if item.price or item.priceMinerva %}
@@ -163,6 +177,7 @@
                                     _locale: app.request.locale,
                                     q: query ?: null,
                                     lists: selectedLists,
+                                    kinds: selectedKinds,
                                     signals: selectedSignals,
                                     perPage: perPage,
                                     page: page - 1
@@ -185,6 +200,7 @@
                                     _locale: app.request.locale,
                                     q: query ?: null,
                                     lists: selectedLists,
+                                    kinds: selectedKinds,
                                     signals: selectedSignals,
                                     perPage: perPage,
                                     page: page + 1

@@ -49,11 +49,13 @@ final class BookCatalogFrontApplicationService
 
     /**
      * @param list<string> $selectedLists
+     * @param list<string> $selectedKinds
      * @param list<string> $selectedSignals
      *
      * @return array{
      *     rows:list<array{
      *         name:string,
+     *         bookKind:string,
      *         description:?string,
      *         note:?string,
      *         rank:?int,
@@ -61,6 +63,7 @@ final class BookCatalogFrontApplicationService
      *         priceMinerva:?int,
      *         priceCurrencyCode:string,
      *         priceCurrencyLabel:string,
+     *         vendorLabels:list<string>,
      *         isNew:bool,
      *         bookListNumbers:list<int>,
      *         canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
@@ -69,14 +72,16 @@ final class BookCatalogFrontApplicationService
      *     totalPages:int,
      *     currentPage:int,
      *     listOptions:list<int>,
+     *     kindOptions:list<string>,
      *     signalOptions:list<string>
      * }
      */
-    public function browse(?string $query, array $selectedLists, array $selectedSignals, int $page, int $perPage): array
+    public function browse(?string $query, array $selectedLists, array $selectedKinds, array $selectedSignals, int $page, int $perPage): array
     {
         $items = $this->bookCatalogFrontReadRepository->findAllBooksDetailedOrdered();
         $rows = array_map($this->mapRow(...), $items);
         $listOptions = $this->extractListOptions($rows);
+        $kindOptions = $this->extractKindOptions($rows);
         $signalOptions = $this->extractSignalOptions($rows);
 
         $normalizedQuery = $this->normalize($query);
@@ -99,6 +104,21 @@ final class BookCatalogFrontApplicationService
             $rows = array_values(array_filter(
                 $rows,
                 static fn (array $row): bool => [] !== array_intersect($selectedListNumbers, $row['bookListNumbers']),
+            ));
+        }
+
+        $normalizedKinds = array_filter(
+            array_map(
+                fn (string $value): string => $this->normalize($value),
+                $selectedKinds,
+            ),
+            static fn (string $value): bool => '' !== $value,
+        );
+
+        if ([] !== $normalizedKinds) {
+            $rows = array_values(array_filter(
+                $rows,
+                static fn (array $row): bool => in_array($row['bookKind'], $normalizedKinds, true),
             ));
         }
 
@@ -135,6 +155,7 @@ final class BookCatalogFrontApplicationService
             'totalPages' => $totalPages,
             'currentPage' => $currentPage,
             'listOptions' => $listOptions,
+            'kindOptions' => $kindOptions,
             'signalOptions' => $signalOptions,
         ];
     }
@@ -142,6 +163,7 @@ final class BookCatalogFrontApplicationService
     /**
      * @return array{
      *     name:string,
+     *     bookKind:string,
      *     description:?string,
      *     note:?string,
      *     rank:?int,
@@ -149,6 +171,7 @@ final class BookCatalogFrontApplicationService
      *     priceMinerva:?int,
      *     priceCurrencyCode:string,
      *     priceCurrencyLabel:string,
+     *     vendorLabels:list<string>,
      *     isNew:bool,
      *     bookListNumbers:list<int>,
      *     canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
@@ -159,6 +182,8 @@ final class BookCatalogFrontApplicationService
         $mergeResult = $this->itemSourceMergePolicy->merge($item, self::MERGE_PROVIDER_A, self::MERGE_PROVIDER_B);
         $canonicalSignals = null !== $mergeResult ? $this->extractCanonicalSignals($mergeResult) : [];
         $canonicalSignals = $this->appendItemDerivedSignals($item, $canonicalSignals);
+        $bookKind = $this->extractBookKind($item);
+        $vendorLabels = $this->extractVendorLabels($item);
 
         $bookListNumbers = [];
         foreach ($item->getBookLists() as $bookList) {
@@ -171,6 +196,7 @@ final class BookCatalogFrontApplicationService
 
         return [
             'name' => $this->translator->trans($item->getNameKey(), domain: 'items'),
+            'bookKind' => $bookKind,
             'description' => null !== $item->getDescKey() ? $this->translator->trans($item->getDescKey(), domain: 'items') : null,
             'note' => null !== $item->getNoteKey() ? $this->translator->trans($item->getNoteKey(), domain: 'items') : null,
             'rank' => $item->getRank(),
@@ -178,6 +204,7 @@ final class BookCatalogFrontApplicationService
             'priceMinerva' => $item->getPriceMinerva(),
             'priceCurrencyCode' => $priceCurrencyCode,
             'priceCurrencyLabel' => $priceCurrencyLabel,
+            'vendorLabels' => $vendorLabels,
             'isNew' => $item->isNew(),
             'bookListNumbers' => array_values(array_unique($bookListNumbers)),
             'canonicalSignals' => array_values(array_filter(
@@ -223,8 +250,10 @@ final class BookCatalogFrontApplicationService
     /**
      * @param array{
      *     name:string,
+     *     bookKind:string,
      *     description:?string,
      *     note:?string,
+     *     vendorLabels:list<string>,
      *     bookListNumbers:list<int>,
      *     canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
      * } $row
@@ -233,10 +262,15 @@ final class BookCatalogFrontApplicationService
     {
         $parts = [
             $row['name'],
+            $row['bookKind'],
             (string) ($row['description'] ?? ''),
             (string) ($row['note'] ?? ''),
             implode(' ', array_map(static fn (int $list): string => (string) $list, $row['bookListNumbers'])),
         ];
+
+        foreach ($row['vendorLabels'] as $vendorLabel) {
+            $parts[] = $vendorLabel;
+        }
 
         foreach ($row['canonicalSignals'] as $signal) {
             $parts[] = $signal['label'];
@@ -244,6 +278,56 @@ final class BookCatalogFrontApplicationService
         }
 
         return $this->normalize(implode(' ', $parts));
+    }
+
+    private function extractBookKind(ItemEntity $item): string
+    {
+        foreach ($item->getExternalSources() as $externalSource) {
+            $metadata = $externalSource->getMetadata();
+            if (!is_array($metadata)) {
+                continue;
+            }
+
+            $rawType = $metadata['type'] ?? null;
+            if (!is_scalar($rawType)) {
+                continue;
+            }
+
+            $type = strtolower(trim((string) $rawType));
+            if (in_array($type, ['plan', 'recipe'], true)) {
+                return $type;
+            }
+        }
+
+        $name = $this->normalize($this->translator->trans($item->getNameKey(), domain: 'items'));
+
+        if (str_starts_with($name, 'recipe:')) {
+            return 'recipe';
+        }
+
+        return 'plan';
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function extractVendorLabels(ItemEntity $item): array
+    {
+        $labels = [];
+
+        if ($item->isVendorRegs()) {
+            $labels[] = $this->translator->trans('catalog_books.vendor_regs');
+        }
+
+        if ($item->isVendorSamuel()) {
+            $labels[] = $this->translator->trans('catalog_books.vendor_samuel');
+        }
+
+        if ($item->isVendorMortimer()) {
+            $labels[] = $this->translator->trans('catalog_books.vendor_mortimer');
+        }
+
+        return $labels;
     }
 
     private function normalize(?string $value): string
@@ -352,5 +436,20 @@ final class BookCatalogFrontApplicationService
         }
 
         return array_keys($signalOptions);
+    }
+
+    /**
+     * @param list<array{bookKind:string}> $rows
+     *
+     * @return list<string>
+     */
+    private function extractKindOptions(array $rows): array
+    {
+        $kinds = [];
+        foreach ($rows as $row) {
+            $kinds[$row['bookKind']] = true;
+        }
+
+        return array_keys($kinds);
     }
 }

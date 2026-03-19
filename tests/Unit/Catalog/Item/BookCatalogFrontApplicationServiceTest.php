@@ -44,7 +44,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             $this->createTranslator(),
         );
 
-        $result = $service->browse('alpha', ['4'], [], 1, 24);
+        $result = $service->browse('alpha', ['4'], [], [], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertSame('Plan: Alpha Receiver', $result['rows'][0]['name']);
@@ -72,7 +72,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             $this->createTranslator(),
         );
 
-        $result = $service->browse(null, [], ['events'], 1, 24);
+        $result = $service->browse(null, [], [], ['events'], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertCount(2, $result['rows'][0]['canonicalSignals']);
@@ -104,7 +104,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             $this->createTranslator(),
         );
 
-        $result = $service->browse(null, [], ['vendors'], 1, 24);
+        $result = $service->browse(null, [], [], ['vendors'], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertContains('vendors', array_column($result['rows'][0]['canonicalSignals'], 'field'));
@@ -133,10 +133,43 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             $this->createTranslator(),
         );
 
-        $result = $service->browse(null, [], ['daily_ops'], 1, 24);
+        $result = $service->browse(null, [], [], ['daily_ops'], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertContains('daily_ops', array_column($result['rows'][0]['canonicalSignals'], 'field'));
+    }
+
+    public function testBrowseFiltersByBookKindAndExposesVendorLabels(): void
+    {
+        $plan = $this->createBookItem(106, 'pub-plan', 'catalog.book.plan.name', 'Plan: Plan Test', 'aligned', ['type' => 'plan']);
+        $plan->setVendorSamuel(true);
+
+        $recipe = $this->createBookItem(107, 'pub-recipe', 'catalog.book.recipe.name', 'Recipe: Recipe Test', 'aligned', ['type' => 'recipe']);
+
+        $service = new BookCatalogFrontApplicationService(
+            new class([$plan, $recipe]) implements BookCatalogFrontReadRepository {
+                /**
+                 * @param list<ItemEntity> $items
+                 */
+                public function __construct(private readonly array $items)
+                {
+                }
+
+                public function findAllBooksDetailedOrdered(): array
+                {
+                    return $this->items;
+                }
+            },
+            new ItemSourceMergePolicy(),
+            $this->createTranslator(),
+        );
+
+        $result = $service->browse(null, [], ['plan'], [], 1, 24);
+
+        self::assertSame(1, $result['totalItems']);
+        self::assertSame(['plan', 'recipe'], $result['kindOptions']);
+        self::assertSame('plan', $result['rows'][0]['bookKind']);
+        self::assertSame(['Samuel'], $result['rows'][0]['vendorLabels']);
     }
 
     /**
@@ -187,6 +220,8 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
                     'catalog.book.currency.name' => 'Plan: Currency Test',
                     'catalog.book.samuel.name' => 'Plan: Cattle prod',
                     'catalog.book.dailyops.name' => 'Plan: Daily Ops Test',
+                    'catalog.book.plan.name' => 'Plan: Plan Test',
+                    'catalog.book.recipe.name' => 'Recipe: Recipe Test',
                     'catalog_books.signal_purchase_currency' => 'Currency',
                     'catalog_books.signal_containers' => 'Containers',
                     'catalog_books.signal_daily_ops' => 'Daily Ops',
@@ -194,6 +229,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
                     'catalog_books.signal_vendors' => 'Vendors',
                     'catalog_books.signal_enabled' => 'Enabled',
                     'catalog_books.currency_caps' => 'Caps',
+                    'catalog_books.vendor_samuel' => 'Samuel',
                     default => $id,
                 };
             },

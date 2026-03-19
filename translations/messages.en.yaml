@@ -86,6 +86,9 @@ catalog_books.search: Search
 catalog_books.search_placeholder: Search by displayed name, note, list, or activity
 catalog_books.list_filter: Minerva list
 catalog_books.list_option: List %list%
+catalog_books.kind_filters: Type
+catalog_books.kind_plan: Plan
+catalog_books.kind_recipe: Recipe
 catalog_books.signal_filters: Filters
 catalog_books.per_page: Per page
 catalog_books.apply_filters: Apply
@@ -122,6 +125,9 @@ catalog_books.currency_caps: Caps
 catalog_books.currency_gold_bullion: Gold bullion
 catalog_books.currency_stamps: Stamps
 catalog_books.currency_tickets: Tickets
+catalog_books.vendor_regs: Regs
+catalog_books.vendor_samuel: Samuel
+catalog_books.vendor_mortimer: Mortimer
 nuke_codes.description: Track Alpha, Bravo and Charlie codes with their validity window.
 nuke_codes.timezone: 'Timezone: %timezone%'
 nuke_codes.state.loading: Loading nuke codes...
