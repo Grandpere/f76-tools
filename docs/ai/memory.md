@@ -766,3 +766,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: the front read model ignored the `unlocks` field even though the merge pipeline already carried it from `fallout_wiki` and the raw source metadata often exposed a clean `text` value.
 - Fix: the front read model now extracts `unlocks` from the merge result when available, with a fallback to raw external-source metadata, normalizes object/string values, includes it in search, and renders it directly on the player-facing card.
 - Prevention: for player-facing catalog cards, prefer compact fields that describe the practical outcome (`unlocks`) over exposing only internal or source-oriented metadata.
+
+## 2026-03-19 - Generic `plan` category needs an explicit player-facing fallback
+- Symptom: some `/plans-recipes` cards rendered the raw translation key `catalog_books.category_plan` instead of a human label.
+- Root cause: the canonical `BOOK` taxonomy intentionally falls back to a generic `plan` when no finer family can be inferred, but translations and icon mapping initially covered only the more specific categories.
+- Fix: added an explicit `plan` category label/icon and included it in the category order so both cards and filters stay readable even when a book cannot yet be classified more finely.
+- Prevention: whenever a front taxonomy has a generic fallback bucket, add its label and icon at the same time as the specific categories instead of assuming only the refined cases will surface.

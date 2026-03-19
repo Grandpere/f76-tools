@@ -106,6 +106,7 @@ catalog_books.kind_filters: Typ
 catalog_books.kind_plan: Bauplan
 catalog_books.kind_recipe: Rezept
 catalog_books.category_filters: Kategorie
+catalog_books.category_plan: Baupläne
 catalog_books.category_weapon_plan: Waffenbaupläne
 catalog_books.category_weapon_mod_plan: Waffenmod-Baupläne
 catalog_books.category_armor_plan: Rüstungsbaupläne

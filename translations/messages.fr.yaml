@@ -106,6 +106,7 @@ catalog_books.kind_filters: Type
 catalog_books.kind_plan: Plan
 catalog_books.kind_recipe: Recette
 catalog_books.category_filters: Catégorie
+catalog_books.category_plan: Plans
 catalog_books.category_weapon_plan: Plans d armes
 catalog_books.category_weapon_mod_plan: Plans de mods d armes
 catalog_books.category_armor_plan: Plans d armures

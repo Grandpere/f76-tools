@@ -69,6 +69,7 @@ final class BookCatalogController extends AbstractController
      * @var array<string, string>
      */
     private const CATEGORY_ICON_MAP = [
+        'plan' => '/assets/icons/FO76_Plan_equipment.webp',
         'weapon_plan' => '/assets/icons/FO76_Plan_equipment.webp',
         'weapon_mod_plan' => '/assets/icons/FO76_Plan_equipment.webp',
         'armor_plan' => '/assets/icons/FO76_Plan_equipment.webp',

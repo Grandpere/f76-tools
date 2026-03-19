@@ -1931,15 +1931,13 @@ body::before {
 
 .catalog-book-section {
     margin-top: 0.56rem;
-    padding: 0.55rem 0.62rem;
-    border: 1px solid rgba(29, 37, 49, 0.1);
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.58);
+    padding-top: 0.56rem;
+    border-top: 1px solid rgba(29, 37, 49, 0.08);
 }
 
 .catalog-book-section-meta {
-    padding-top: 0.48rem;
-    padding-bottom: 0.48rem;
+    padding-top: 0;
+    border-top: 0;
 }
 
 .catalog-book-section-details {
@@ -2098,7 +2096,7 @@ body::before {
 }
 
 .item-unlocks-line {
-    margin-top: 0.46rem;
+    margin-top: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 0.35rem;

@@ -27,6 +27,7 @@ final class BookCatalogFrontApplicationService
     private const MERGE_PROVIDER_A = 'fandom';
     private const MERGE_PROVIDER_B = 'fallout_wiki';
     private const BOOK_CATEGORY_ORDER = [
+        'plan',
         'weapon_plan',
         'weapon_mod_plan',
         'armor_plan',
