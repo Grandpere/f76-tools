@@ -117,10 +117,10 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: the second-level taxonomy now derives subcategories only for the stable families, exposes them as `/plans-recipes` filter options, and adds a matching `/progression` breakdown instead of forcing every first-level category into an unreliable sub-split.
 - Prevention: when extending a user-facing taxonomy beyond the first level, audit raw `source_section` values per family first and keep categories without stable sections at one level rather than inventing heuristics.
 
-## 2026-03-19 - Fine workshop/recipe drilldowns should come from nested fandom source sections
-- Symptom: once the first two taxonomy levels were in place, `workshop_plan` and `recipe` still stayed too broad to answer "what exactly is left?" directly from `/progression`.
+## 2026-03-19 - Fine workshop/recipe drilldowns should start by preserving nested fandom source sections
+- Symptom: once the first two taxonomy levels were in place, `workshop_plan` and `recipe` still stayed too broad to answer "what exactly is left?" directly from the player UI.
 - Root cause: their top-level imported `source_section` is too generic (`Workshop Plans`, `Recipes`), but the Fandom payload already embeds a more precise nested `sources[].section` list (`Beds`, `Water`, `Chems`, `Brewing`, etc.) that was not being preserved at import time.
-- Fix: the import reader now stores `source_sections`, and progression uses that nested list only for trusted `workshop` / `recipe` drilldowns instead of trying to infer a third level from names or from the too-generic top-level section.
+- Fix: the import reader now stores `source_sections`, so the finer signal is available for a future drilldown without relying on fragile name heuristics or on the too-generic top-level section.
 - Prevention: when a source has both a page-level section and a nested per-row section list, preserve the nested sections during import before attempting any deeper user-facing taxonomy.
 
 ## 2026-03-18 - Add low-risk cross-source flags from explicit labels before named event heuristics
