@@ -2073,6 +2073,8 @@ body::before {
 }
 
 .catalog-book-footer {
+    width: 100%;
+    margin-top: auto;
     align-items: flex-end;
 }
 
@@ -2081,6 +2083,17 @@ body::before {
     flex-wrap: wrap;
     align-items: center;
     gap: 0.35rem;
+}
+
+.catalog-book-footer-signals img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    flex: 0 0 auto;
+}
+
+.catalog-book-footer-signals .catalog-vendor-text-icon {
+    flex: 0 0 auto;
 }
 
 .item-prices .price-old {
