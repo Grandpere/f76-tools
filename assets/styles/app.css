@@ -1368,14 +1368,13 @@ body::before {
 
 .catalog-taxonomy-subcategory-row {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.42rem 0.7rem;
+    flex-direction: column;
+    gap: 0.34rem;
 }
 
 .catalog-taxonomy-subcategory-row label {
-    width: auto;
-    min-width: max-content;
+    width: 100%;
+    min-width: 0;
 }
 
 .source-filters label img {
