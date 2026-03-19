@@ -94,6 +94,7 @@ catalog_books.vendors: Tous les marchands
 catalog_books.vendor_regs: Regs
 catalog_books.vendor_samuel: Samuel
 catalog_books.vendor_mortimer: Mortimer
+catalog_books.vendor_giuseppe: Giuseppe
 catalog_books.signal_filters: Filtres
 catalog_books.per_page: Par page
 catalog_books.apply_filters: Appliquer

@@ -205,6 +205,42 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
         self::assertSame(['Samuel'], $result['rows'][0]['vendorLabels']);
     }
 
+    public function testBrowseDetectsGiuseppeFromWikiMetadata(): void
+    {
+        $giuseppe = $this->createBookItem(110, 'pub-vendor-giuseppe', 'catalog.book.vendor.giuseppe', 'Plan: Giuseppe Plan', 'aligned', [
+            'type' => 'plan',
+            'obtained' => [
+                'text' => 'Tax EvasionGiuseppe',
+                'icons' => ['Tax Evasion', 'Giuseppe'],
+            ],
+            'purchase_currency' => 'stamps',
+        ]);
+
+        $service = new BookCatalogFrontApplicationService(
+            new class([$giuseppe]) implements BookCatalogFrontReadRepository {
+                /**
+                 * @param list<ItemEntity> $items
+                 */
+                public function __construct(private readonly array $items)
+                {
+                }
+
+                public function findAllBooksDetailedOrdered(): array
+                {
+                    return $this->items;
+                }
+            },
+            new ItemSourceMergePolicy(),
+            $this->createTranslator(),
+        );
+
+        $result = $service->browse(null, [], [], ['vendor_giuseppe'], [], 1, 24);
+
+        self::assertSame(1, $result['totalItems']);
+        self::assertContains('vendor_giuseppe', $result['vendorFilterOptions']);
+        self::assertSame(['Giuseppe'], $result['rows'][0]['vendorLabels']);
+    }
+
     /**
      * @param array<string, mixed> $providerBExtra
      */
@@ -257,6 +293,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
                     'catalog.book.recipe.name' => 'Recipe: Recipe Test',
                     'catalog.book.vendor.samuel' => 'Plan: Samuel Plan',
                     'catalog.book.vendor.regs' => 'Plan: Regs Plan',
+                    'catalog.book.vendor.giuseppe' => 'Plan: Giuseppe Plan',
                     'catalog_books.signal_purchase_currency' => 'Currency',
                     'catalog_books.signal_containers' => 'Containers',
                     'catalog_books.signal_daily_ops' => 'Daily Ops',
@@ -265,6 +302,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
                     'catalog_books.signal_enabled' => 'Enabled',
                     'catalog_books.currency_caps' => 'Caps',
                     'catalog_books.vendor_samuel' => 'Samuel',
+                    'catalog_books.vendor_giuseppe' => 'Giuseppe',
                     default => $id,
                 };
             },

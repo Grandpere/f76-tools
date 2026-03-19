@@ -72,6 +72,9 @@
                                 {% if option == 'vendor_mortimer' %}
                                     <img src="{{ asset('/assets/icons/SkullRingMarker.svg') }}" alt="" aria-hidden="true">
                                 {% endif %}
+                                {% if option == 'vendor_giuseppe' %}
+                                    <img src="{{ asset('/assets/icons/FO76_collections_stamps01.webp') }}" alt="" aria-hidden="true">
+                                {% endif %}
                                 <span>{{ ('catalog_books.' ~ option)|trans }}</span>
                             </label>
                         {% endfor %}
@@ -174,6 +177,9 @@
                                         {% endif %}
                                         {% if item.vendorFlags.vendor_mortimer %}
                                             <img src="{{ asset('/assets/icons/SkullRingMarker.svg') }}" alt="{{ 'catalog_books.vendor_mortimer'|trans }}" title="{{ 'catalog_books.vendor_mortimer'|trans }}">
+                                        {% endif %}
+                                        {% if item.vendorFlags.vendor_giuseppe %}
+                                            <img src="{{ asset('/assets/icons/FO76_collections_stamps01.webp') }}" alt="{{ 'catalog_books.vendor_giuseppe'|trans }}" title="{{ 'catalog_books.vendor_giuseppe'|trans }}">
                                         {% endif %}
                                         {% for signal in item.canonicalSignals %}
                                             {% if signalIconMap[signal.field] is defined %}

@@ -65,7 +65,7 @@ final class BookCatalogFrontApplicationService
      *         priceCurrencyCode:string,
      *         priceCurrencyLabel:string,
      *         vendorLabels:list<string>,
-     *         vendorFlags:array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool},
+     *         vendorFlags:array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool},
      *         isNew:bool,
      *         bookListNumbers:list<int>,
      *         canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
@@ -200,7 +200,7 @@ final class BookCatalogFrontApplicationService
      *     priceCurrencyCode:string,
      *     priceCurrencyLabel:string,
      *     vendorLabels:list<string>,
-     *     vendorFlags:array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool},
+     *     vendorFlags:array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool},
      *     isNew:bool,
      *     bookListNumbers:list<int>,
      *     canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
@@ -285,7 +285,7 @@ final class BookCatalogFrontApplicationService
      *     description:?string,
      *     note:?string,
      *     vendorLabels:list<string>,
-     *     vendorFlags:array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool},
+     *     vendorFlags:array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool},
      *     bookListNumbers:list<int>,
      *     canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
      * } $row
@@ -359,24 +359,80 @@ final class BookCatalogFrontApplicationService
             $labels[] = $this->translator->trans('catalog_books.vendor_mortimer');
         }
 
+        if ($this->hasGiuseppeVendorMetadata($item)) {
+            $labels[] = $this->translator->trans('catalog_books.vendor_giuseppe');
+        }
+
         return $labels;
     }
 
     /**
-     * @return array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool}
+     * @return array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool}
      */
     private function extractVendorFlags(ItemEntity $item): array
     {
         $vendorRegs = $item->isVendorRegs();
         $vendorSamuel = $item->isVendorSamuel();
         $vendorMortimer = $item->isVendorMortimer();
+        $vendorGiuseppe = $this->hasGiuseppeVendorMetadata($item);
 
         return [
-            'vendors' => $vendorRegs || $vendorSamuel || $vendorMortimer,
+            'vendors' => $vendorRegs || $vendorSamuel || $vendorMortimer || $vendorGiuseppe,
             'vendor_regs' => $vendorRegs,
             'vendor_samuel' => $vendorSamuel,
             'vendor_mortimer' => $vendorMortimer,
+            'vendor_giuseppe' => $vendorGiuseppe,
         ];
+    }
+
+    private function hasGiuseppeVendorMetadata(ItemEntity $item): bool
+    {
+        foreach ($item->getExternalSources() as $externalSource) {
+            $metadata = $externalSource->getMetadata();
+            if (!is_array($metadata)) {
+                continue;
+            }
+
+            if ($this->metadataContainsGiuseppe($metadata)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param array<string, mixed> $metadata
+     */
+    private function metadataContainsGiuseppe(array $metadata): bool
+    {
+        foreach (['obtained', 'type', 'purchase_currency'] as $field) {
+            $value = $metadata[$field] ?? null;
+            if ($this->valueContainsGiuseppe($value)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function valueContainsGiuseppe(mixed $value): bool
+    {
+        if (is_scalar($value)) {
+            return str_contains($this->normalize((string) $value), 'giuseppe');
+        }
+
+        if (!is_array($value)) {
+            return false;
+        }
+
+        foreach ($value as $entry) {
+            if ($this->valueContainsGiuseppe($entry)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function normalize(?string $value): string
@@ -507,7 +563,7 @@ final class BookCatalogFrontApplicationService
     }
 
     /**
-     * @param list<array{vendorFlags:array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool}}> $rows
+     * @param list<array{vendorFlags:array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool}}> $rows
      *
      * @return list<string>
      */
