@@ -1738,6 +1738,12 @@ body::before {
     font-size: 0.9rem;
 }
 
+.stats-subsection + .stats-subsection {
+    margin-top: 0.95rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--line);
+}
+
 .stats-group-summary {
     margin: 0 0 0.65rem;
 }
