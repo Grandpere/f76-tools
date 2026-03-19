@@ -1365,6 +1365,13 @@ body::before {
     object-fit: contain;
 }
 
+.catalog-category-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    flex: 0 0 auto;
+}
+
 .source-filters input[type='checkbox'],
 .source-filters input[type='radio'],
 .item-learned-checkbox {
@@ -1899,6 +1906,18 @@ body::before {
     display: block;
     font-size: 1.04rem;
     line-height: 1.22;
+}
+
+.catalog-book-category-line {
+    margin: 0.48rem 0 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    font-size: 0.78rem;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
 }
 
 .catalog-book-id-line {

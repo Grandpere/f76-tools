@@ -40,6 +40,7 @@ Ajouter une page front authentifiee qui liste les plans et recettes (`BOOK`) ave
 - Done (slice 18): ajout d un bloc `Plans et recettes` sur la page `/progression`, branche sur les stats du personnage courant et reliant directement au catalogue joueur `/plans-recipes`, afin d exposer la progression `BOOK` sans dupliquer un second catalogue dans la page.
 - Done (slice 19): les stats progression distinguent maintenant aussi `plan` vs `recipe` pour les `BOOK`, ce qui permet au bloc `/progression` d afficher trois cartes de progression (`total`, `plans`, `recettes`) et renomme les sections de detail en vocabulaire joueur (`Mods légendaires`, `Listes Minerva`).
 - Done (slice 20): ajout d une premiere taxonomie canonique `BOOK` basee sur les familles de pages source (`weapon_plan`, `weapon_mod_plan`, `armor_plan`, `armor_mod_plan`, `power_armor_plan`, `power_armor_mod_plan`, `workshop_plan`, `recipe`), exposee comme filtre de categorie sur `/plans-recipes` et comme nouveau detail de progression par categorie sur `/progression`.
+- Done (slice 21): branchement d icones de categorie `BOOK` dans `/plans-recipes` avec trois assets legers (`plan`, `workshop`, `recipe`) visibles a la fois dans le filtre `Categorie` et dans une ligne de categorie discrete sur les cards, sans surcharger le footer de signaux deja utilise pour les activites/vendeurs.
 
 ## Hors scope
 - Edition front des items.

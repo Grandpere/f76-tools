@@ -55,6 +55,20 @@ final class BookCatalogController extends AbstractController
         'tickets' => '/assets/icons/Tickets_Icon.webp',
     ];
 
+    /**
+     * @var array<string, string>
+     */
+    private const CATEGORY_ICON_MAP = [
+        'weapon_plan' => '/assets/icons/FO76_Plan_equipment.webp',
+        'weapon_mod_plan' => '/assets/icons/FO76_Plan_equipment.webp',
+        'armor_plan' => '/assets/icons/FO76_Plan_equipment.webp',
+        'armor_mod_plan' => '/assets/icons/FO76_Plan_equipment.webp',
+        'power_armor_plan' => '/assets/icons/FO76_Plan_equipment.webp',
+        'power_armor_mod_plan' => '/assets/icons/FO76_Plan_equipment.webp',
+        'workshop_plan' => '/assets/icons/FO76_Plan_CAMP.webp',
+        'recipe' => '/assets/icons/FO76_recipe.webp',
+    ];
+
     public function __construct(
         private readonly BookCatalogFrontApplicationService $bookCatalogFrontApplicationService,
         private readonly PlayerReadApplicationService $playerReadApplicationService,
@@ -132,6 +146,7 @@ final class BookCatalogController extends AbstractController
             'progressSummary' => $result['progressSummary'],
             'signalIconMap' => self::SIGNAL_ICON_MAP,
             'currencyIconMap' => self::CURRENCY_ICON_MAP,
+            'categoryIconMap' => self::CATEGORY_ICON_MAP,
             'items' => $result['rows'],
             'totalItems' => $result['totalItems'],
             'page' => $result['currentPage'],
