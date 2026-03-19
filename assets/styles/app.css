@@ -2067,9 +2067,20 @@ body::before {
     line-height: 1.1;
 }
 
-.catalog-book-signal-list:empty,
+.catalog-book-footer-signals:empty,
 .item-source-icons:empty {
     display: none;
+}
+
+.catalog-book-footer {
+    align-items: flex-end;
+}
+
+.catalog-book-footer-signals {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
 }
 
 .item-prices .price-old {

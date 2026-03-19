@@ -280,22 +280,10 @@
                                 </div>
                             {% endif %}
 
-                            {% set hasVendorFooterIcons = item.vendorFlags.vendor_regs or item.vendorFlags.vendor_samuel or item.vendorFlags.vendor_mortimer or item.vendorFlags.vendor_giuseppe %}
-                            {% if item.canonicalSignals %}
-                                <div class="catalog-book-signal-list">
-                                    {% for signal in item.canonicalSignals %}
-                                        {% if signalIconMap[signal.field] is not defined %}
-                                            <span class="item-pill">
-                                                {{ signal.label }}
-                                            </span>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
-
+                            {% set hasVendorFooterIcons = item.vendorFlags.vendor_regs or item.vendorFlags.vendor_samuel or item.vendorFlags.vendor_mortimer or item.vendorFlags.vendor_giuseppe or item.vendorFlags.vendor_minerva %}
                             {% if hasVendorFooterIcons or item.canonicalSignals %}
-                                <div class="item-icons-footer">
-                                    <p class="item-source-icons">
+                                <div class="item-icons-footer catalog-book-footer">
+                                    <div class="catalog-book-footer-signals">
                                         {% if item.vendorFlags.vendor_minerva %}
                                             <span class="catalog-vendor-text-icon" title="{{ 'catalog_books.vendor_minerva'|trans }}">M</span>
                                         {% endif %}
@@ -319,9 +307,13 @@
                                                     title="{{ signal.label }}"
                                                     class="{% if signal.field == 'random_encounters' %}catalog-icon-random-encounter{% endif %}"
                                                 >
+                                            {% else %}
+                                                <span class="item-pill">
+                                                    {{ signal.label }}
+                                                </span>
                                             {% endif %}
                                         {% endfor %}
-                                    </p>
+                                    </div>
                                 </div>
                             {% endif %}
                         </article>

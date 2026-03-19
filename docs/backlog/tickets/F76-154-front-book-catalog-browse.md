@@ -33,6 +33,7 @@ Ajouter une page front authentifiee qui liste les plans et recettes (`BOOK`) ave
 - Done (slice 11): les cards `/plans-recipes` exposent maintenant aussi `unlocks` comme information joueur de premier niveau, derivee du merge quand disponible puis des metadata source en fallback, afin d identifier plus vite ce que debloque un plan/une recette sans ouvrir l admin.
 - Done (slice 12): `/plans-recipes` partage maintenant la meme progression `BOOK` que Minerva via l API `player_item_knowledge` existante (select personnage + checkbox appris/non appris sur les cards), avec reapplication automatique de l etat appris apres chaque refresh AJAX des filtres.
 - Done (slice 13): la ligne de prix des cards `/plans-recipes` est maintenant plus compacte pour les items Minerva: prix de base en lingots = logo + valeur, prix remisé = marqueur Minerva + valeur, sans redondance textuelle `Lingots/Minerva`.
+- Done (slice 14): les cards `/plans-recipes` utilisent maintenant un footer unique de signaux en bas (icones vendeurs + signaux iconifies + pills texte fallback) au lieu de multiplier des lignes distinctes selon l item.
 
 ## Hors scope
 - Edition front des items.
