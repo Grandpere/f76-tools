@@ -81,6 +81,35 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
         self::assertSame('Events', $result['rows'][0]['canonicalSignals'][1]['label']);
     }
 
+    public function testBrowseTreatsMinervaVendorsAsVendorSignal(): void
+    {
+        $item = $this->createBookItem(104, 'pub-samuel', 'catalog.book.samuel.name', 'Plan: Cattle prod', 'aligned');
+        $item->setVendorSamuel(true);
+
+        $service = new BookCatalogFrontApplicationService(
+            new class([$item]) implements BookCatalogFrontReadRepository {
+                /**
+                 * @param list<ItemEntity> $items
+                 */
+                public function __construct(private readonly array $items)
+                {
+                }
+
+                public function findAllBooksDetailedOrdered(): array
+                {
+                    return $this->items;
+                }
+            },
+            new ItemSourceMergePolicy(),
+            $this->createTranslator(),
+        );
+
+        $result = $service->browse(null, [], ['vendors'], 1, 24);
+
+        self::assertSame(1, $result['totalItems']);
+        self::assertContains('vendors', array_column($result['rows'][0]['canonicalSignals'], 'field'));
+    }
+
     /**
      * @param array<string, mixed> $providerBExtra
      */
@@ -127,9 +156,11 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
                     'catalog.book.alpha.name' => 'Plan: Alpha Receiver',
                     'catalog.book.bravo.name' => 'Recipe: Bravo Soup',
                     'catalog.book.currency.name' => 'Plan: Currency Test',
+                    'catalog.book.samuel.name' => 'Plan: Cattle prod',
                     'catalog_books.signal_purchase_currency' => 'Currency',
                     'catalog_books.signal_containers' => 'Containers',
                     'catalog_books.signal_events' => 'Events',
+                    'catalog_books.signal_vendors' => 'Vendors',
                     'catalog_books.signal_enabled' => 'Enabled',
                     'catalog_books.currency_caps' => 'Caps',
                     default => $id,

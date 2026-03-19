@@ -158,6 +158,7 @@ final class BookCatalogFrontApplicationService
     {
         $mergeResult = $this->itemSourceMergePolicy->merge($item, self::MERGE_PROVIDER_A, self::MERGE_PROVIDER_B);
         $canonicalSignals = null !== $mergeResult ? $this->extractCanonicalSignals($mergeResult) : [];
+        $canonicalSignals = $this->appendItemDerivedSignals($item, $canonicalSignals);
 
         $bookListNumbers = [];
         foreach ($item->getBookLists() as $bookList) {
@@ -184,6 +185,30 @@ final class BookCatalogFrontApplicationService
                 static fn (array $signal): bool => 'purchase_currency' !== $signal['field'],
             )),
         ];
+    }
+
+    /**
+     * @param list<array{field:string,label:string,displayValue:string,provider:string}> $signals
+     *
+     * @return list<array{field:string,label:string,displayValue:string,provider:string}>
+     */
+    private function appendItemDerivedSignals(ItemEntity $item, array $signals): array
+    {
+        $existingFields = array_map(
+            static fn (array $signal): string => $signal['field'],
+            $signals,
+        );
+
+        if (($item->isVendorRegs() || $item->isVendorSamuel() || $item->isVendorMortimer()) && !in_array('vendors', $existingFields, true)) {
+            $signals[] = [
+                'field' => 'vendors',
+                'label' => $this->translator->trans('catalog_books.signal_vendors'),
+                'displayValue' => $this->translator->trans('catalog_books.signal_enabled'),
+                'provider' => 'minerva',
+            ];
+        }
+
+        return $signals;
     }
 
     /**
