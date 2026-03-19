@@ -243,6 +243,81 @@
                     </fieldset>
                 </form>
 
+                {% set legendCategoryOptions = categoryOptions %}
+                {% set legendVendorOptions = ['vendor_minerva', 'vendor_regs', 'vendor_samuel', 'vendor_mortimer', 'vendor_giuseppe'] %}
+                {% set legendSignalOptions = ['daily_ops', 'expeditions', 'raid', 'events', 'world_spawns', 'containers', 'enemies', 'random_encounters', 'treasure_maps', 'quests', 'seasonal_content', 'unused_content'] %}
+                {% set legendCurrencyOptions = ['caps', 'gold_bullion', 'stamps', 'tickets'] %}
+
+                <section class="catalog-icon-legend">
+                    <h3>{{ 'catalog_books.legend_title'|trans }}</h3>
+                    <p class="catalog-note">{{ 'catalog_books.legend_help'|trans }}</p>
+
+                    <div class="source-filter-groups">
+                        <div class="source-filter-group">
+                            <p class="source-filter-group-title">{{ 'catalog_books.legend_group_categories'|trans }}</p>
+                            <div class="catalog-legend-list">
+                                {% for option in legendCategoryOptions %}
+                                    <div class="catalog-legend-item">
+                                        {% if categoryIconMap[option] is defined %}
+                                            <img src="{{ asset(categoryIconMap[option]) }}" alt="" aria-hidden="true" class="catalog-category-icon">
+                                        {% endif %}
+                                        <span>{{ ('catalog_books.category_' ~ option)|trans }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="source-filter-group">
+                            <p class="source-filter-group-title">{{ 'catalog_books.legend_group_vendors'|trans }}</p>
+                            <div class="catalog-legend-list">
+                                {% for option in legendVendorOptions %}
+                                    <div class="catalog-legend-item">
+                                        {% if option == 'vendor_minerva' %}
+                                            <span class="catalog-vendor-text-icon" aria-hidden="true">M</span>
+                                        {% elseif vendorIconMap[option] is defined %}
+                                            <img src="{{ asset(vendorIconMap[option]) }}" alt="" aria-hidden="true">
+                                        {% endif %}
+                                        <span>{{ ('catalog_books.' ~ option)|trans }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="source-filter-group">
+                            <p class="source-filter-group-title">{{ 'catalog_books.legend_group_sources'|trans }}</p>
+                            <div class="catalog-legend-list">
+                                {% for option in legendSignalOptions %}
+                                    {% if signalIconMap[option] is defined %}
+                                        <div class="catalog-legend-item">
+                                            <img
+                                                src="{{ asset(signalIconMap[option]) }}"
+                                                alt=""
+                                                aria-hidden="true"
+                                                class="{% if option == 'random_encounters' %}catalog-icon-random-encounter{% endif %}"
+                                            >
+                                            <span>{{ ('catalog_books.signal_' ~ option)|trans }}</span>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="source-filter-group">
+                            <p class="source-filter-group-title">{{ 'catalog_books.legend_group_currencies'|trans }}</p>
+                            <div class="catalog-legend-list">
+                                {% for option in legendCurrencyOptions %}
+                                    {% if currencyIconMap[option] is defined %}
+                                        <div class="catalog-legend-item">
+                                            <img src="{{ asset(currencyIconMap[option]) }}" alt="" aria-hidden="true">
+                                            <span>{{ ('catalog_books.currency_' ~ option)|trans }}</span>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <p class="catalog-note info-note">
                     <span class="info-note-content">{{ 'dashboard.help.shared_book_learning'|trans }}</span>
                 </p>

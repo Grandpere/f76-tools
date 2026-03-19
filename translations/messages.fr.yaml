@@ -166,6 +166,12 @@ catalog_books.currency_caps: Caps
 catalog_books.currency_gold_bullion: Lingots d or
 catalog_books.currency_stamps: Timbres
 catalog_books.currency_tickets: Tickets
+catalog_books.legend_title: Légende des icônes
+catalog_books.legend_help: Repère rapide des pictogrammes utilisés dans les filtres, les prix et les cartes.
+catalog_books.legend_group_categories: Catégories
+catalog_books.legend_group_vendors: Marchands
+catalog_books.legend_group_sources: Activités et obtention
+catalog_books.legend_group_currencies: Devises
 nuke_codes.description: Suivi des codes Alpha, Bravo et Charlie avec leur fenêtre de validité.
 nuke_codes.timezone: 'Fuseau horaire: %timezone%'
 nuke_codes.state.loading: Chargement des codes nucléaires...

@@ -1419,6 +1419,40 @@ body::before {
     font-size: 0.88rem;
 }
 
+.catalog-icon-legend {
+    margin-top: 1rem;
+}
+
+.catalog-icon-legend h3 {
+    margin: 0;
+    font-family: 'Rajdhani', 'Inter', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+}
+
+.catalog-legend-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.7rem;
+}
+
+.catalog-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38rem;
+    min-height: 1.65rem;
+    color: var(--text-1);
+    font-size: 0.79rem;
+    line-height: 1.2;
+}
+
+.catalog-legend-item img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    flex: 0 0 auto;
+}
+
 .catalog-block {
     margin-top: 1.1rem;
 }

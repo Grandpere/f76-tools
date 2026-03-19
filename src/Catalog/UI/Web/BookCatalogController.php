@@ -58,6 +58,16 @@ final class BookCatalogController extends AbstractController
     /**
      * @var array<string, string>
      */
+    private const VENDOR_ICON_MAP = [
+        'vendor_regs' => '/assets/icons/Vault79Marker.svg',
+        'vendor_samuel' => '/assets/icons/HammerWingMarker.svg',
+        'vendor_mortimer' => '/assets/icons/SkullRingMarker.svg',
+        'vendor_giuseppe' => '/assets/icons/WhitespringResortMarker.svg',
+    ];
+
+    /**
+     * @var array<string, string>
+     */
     private const CATEGORY_ICON_MAP = [
         'weapon_plan' => '/assets/icons/FO76_Plan_equipment.webp',
         'weapon_mod_plan' => '/assets/icons/FO76_Plan_equipment.webp',
@@ -147,6 +157,7 @@ final class BookCatalogController extends AbstractController
             'signalIconMap' => self::SIGNAL_ICON_MAP,
             'currencyIconMap' => self::CURRENCY_ICON_MAP,
             'categoryIconMap' => self::CATEGORY_ICON_MAP,
+            'vendorIconMap' => self::VENDOR_ICON_MAP,
             'items' => $result['rows'],
             'totalItems' => $result['totalItems'],
             'page' => $result['currentPage'],

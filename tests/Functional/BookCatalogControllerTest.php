@@ -104,6 +104,7 @@ final class BookCatalogControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter('[data-catalog-filters-target="summary"]'));
         self::assertCount(1, $crawler->filter('[data-catalog-filters-target="results"]'));
         self::assertStringContainsString('0 / 1 learned', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('Icon legend', (string) $this->browser()->getResponse()->getContent());
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="lists[]"]')->count());
         self::assertSame('Plans & Recipes', trim($crawler->filter('.app-primary-nav-link.is-active')->text()));
         self::assertStringContainsString('/assets/icons/FO76_dailyops_uplink.png', (string) $this->browser()->getResponse()->getContent());

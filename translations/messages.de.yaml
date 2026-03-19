@@ -166,6 +166,12 @@ catalog_books.currency_caps: Caps
 catalog_books.currency_gold_bullion: Goldbarren
 catalog_books.currency_stamps: Stempel
 catalog_books.currency_tickets: Tickets
+catalog_books.legend_title: Symbollegende
+catalog_books.legend_help: Schnellübersicht der Piktogramme in Filtern, Preisen und Karten.
+catalog_books.legend_group_categories: Kategorien
+catalog_books.legend_group_vendors: Händler
+catalog_books.legend_group_sources: Aktivitäten & Quellen
+catalog_books.legend_group_currencies: Währungen
 nuke_codes.description: Verfolge Alpha-, Bravo- und Charlie-Codes mit ihrem Gultigkeitszeitraum.
 nuke_codes.timezone: 'Zeitzone: %timezone%'
 nuke_codes.state.loading: Nukecodes werden geladen...
