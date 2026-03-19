@@ -29,6 +29,7 @@ use App\Catalog\Infrastructure\Import\FilesystemItemImportSourceReader;
 use App\Catalog\Infrastructure\Translation\TranslationCatalogWriter as YamlTranslationCatalogWriter;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use ReflectionProperty;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 final class ItemImportApplicationServiceTest extends TestCase
@@ -51,6 +52,7 @@ final class ItemImportApplicationServiceTest extends TestCase
         $this->persistence->expects(self::never())->method('persist');
         $this->persistence->expects(self::never())->method('flush');
         $this->repository->expects(self::never())->method('findOneByTypeAndSourceId');
+        $this->repository->expects(self::never())->method('findBooksByExternalRef');
         $this->repository->expects(self::never())->method('deleteAllBookLists');
 
         $service = $this->createService($this->createTranslationWriter($this->createTempDir()));
@@ -76,6 +78,10 @@ final class ItemImportApplicationServiceTest extends TestCase
             ->expects(self::once())
             ->method('findOneByTypeAndSourceId')
             ->willReturn(null);
+        $this->repository
+            ->expects(self::never())
+            ->method('findBooksByExternalRef')
+            ->willReturn([]);
         $this->repository
             ->expects(self::once())
             ->method('deleteAllBookLists')
@@ -114,6 +120,10 @@ final class ItemImportApplicationServiceTest extends TestCase
             ->expects(self::once())
             ->method('findOneByTypeAndSourceId')
             ->willReturn(null);
+        $this->repository
+            ->expects(self::never())
+            ->method('findBooksByExternalRef')
+            ->willReturn([]);
         $this->repository->expects(self::never())->method('deleteAllBookLists');
 
         $this->persistence->expects(self::exactly(2))->method('persist');
@@ -181,6 +191,10 @@ final class ItemImportApplicationServiceTest extends TestCase
             ->expects(self::once())
             ->method('findOneByTypeAndSourceId')
             ->willReturn(null);
+        $this->repository
+            ->expects(self::once())
+            ->method('findBooksByExternalRef')
+            ->willReturn([]);
         $this->repository->expects(self::never())->method('deleteAllBookLists');
 
         $persistedItems = [];
@@ -240,6 +254,10 @@ final class ItemImportApplicationServiceTest extends TestCase
             ->expects(self::once())
             ->method('findOneByTypeAndSourceId')
             ->willReturn(null);
+        $this->repository
+            ->expects(self::once())
+            ->method('findBooksByExternalRef')
+            ->willReturn([]);
         $this->repository->expects(self::never())->method('deleteAllBookLists');
 
         $this->persistence->expects(self::once())->method('persist');
@@ -298,6 +316,10 @@ final class ItemImportApplicationServiceTest extends TestCase
             ->expects(self::once())
             ->method('findOneByTypeAndSourceId')
             ->willReturn(null);
+        $this->repository
+            ->expects(self::once())
+            ->method('findBooksByExternalRef')
+            ->willReturn([]);
         $this->repository->expects(self::never())->method('deleteAllBookLists');
 
         $persistedItems = [];
@@ -321,6 +343,72 @@ final class ItemImportApplicationServiceTest extends TestCase
         self::assertCount(1, $persistedItems);
         self::assertSame('item.book.2835108.name', $persistedItems[0]->getNameKey());
         self::assertStringContainsString('Doublon form_id detecte', $result->getWarnings()[0]);
+    }
+
+    public function testWriteModeReconcilesBookDuplicatesBySharedFormId(): void
+    {
+        $root = $this->createTempDir();
+        file_put_contents($root.'/minerva_77_alpha.json', '[{"id":889,"type":"BOOK","form_id":"00589621","name_en":"Plan: Cattle prod","vendor_samuel":1,"price":250,"price_minerva":188,"wiki_url":"https://example.test/wiki/cattle-prod"}]');
+
+        $keeper = new ItemEntity()
+            ->setType(\App\Catalog\Domain\Item\ItemTypeEnum::BOOK)
+            ->setSourceId(5805601)
+            ->setNameKey('item.book.5805601.name');
+        $this->setEntityId($keeper, 101);
+        $keeper->upsertExternalSource('fandom', '00589621', 'https://example.test/fandom/cattle-prod', [
+            'name' => 'Plan: Cattle prod',
+        ]);
+
+        $duplicate = new ItemEntity()
+            ->setType(\App\Catalog\Domain\Item\ItemTypeEnum::BOOK)
+            ->setSourceId(889)
+            ->setNameKey('item.book.889.name')
+            ->setVendorSamuel(true)
+            ->setPrice(250)
+            ->setPriceMinerva(188);
+        $this->setEntityId($duplicate, 202);
+        $duplicate->addBookList(1, false);
+        $duplicate->upsertExternalSource('nukaknights', '00589621', 'https://example.test/wiki/cattle-prod', [
+            'name_en' => 'Plan: Cattle prod',
+        ]);
+
+        $this->repository
+            ->expects(self::once())
+            ->method('findOneByTypeAndSourceId')
+            ->willReturn($duplicate);
+        $this->repository
+            ->expects(self::once())
+            ->method('findBooksByExternalRef')
+            ->with('00589621')
+            ->willReturn([$duplicate, $keeper]);
+        $this->repository->expects(self::never())->method('deleteAllBookLists');
+
+        $this->persistence->expects(self::once())
+            ->method('mergeBookDuplicate')
+            ->with($duplicate, $keeper);
+        $persistedItem = null;
+        $this->persistence->expects(self::once())
+            ->method('persist')
+            ->willReturnCallback(static function (ItemEntity $item) use (&$persistedItem): void {
+                $persistedItem = $item;
+            });
+        $this->persistence->expects(self::once())->method('flush');
+
+        $projectDir = $this->createTempDir();
+        $service = $this->createService($this->createTranslationWriter($projectDir));
+        $result = $service->import($root, false, 100, false);
+
+        self::assertFalse($result->hasErrors());
+        self::assertSame(0, $result->getStats()['created']);
+        self::assertSame(1, $result->getStats()['updated']);
+        self::assertSame($keeper, $persistedItem);
+        self::assertSame('item.book.5805601.name', $keeper->getNameKey());
+        self::assertTrue($keeper->isVendorSamuel());
+        self::assertSame([1, 17], array_map(
+            static fn ($bookList): int => $bookList->getListNumber(),
+            $keeper->getBookLists()->toArray(),
+        ));
+        self::assertCount(2, $keeper->getExternalSources());
     }
 
     private function createService(TranslationCatalogWriter $translationCatalogWriter): ItemImportApplicationService
@@ -357,5 +445,11 @@ final class ItemImportApplicationServiceTest extends TestCase
         mkdir($path, 0o777, true);
 
         return $path;
+    }
+
+    private function setEntityId(ItemEntity $item, int $id): void
+    {
+        $reflection = new ReflectionProperty($item, 'id');
+        $reflection->setValue($item, $id);
     }
 }

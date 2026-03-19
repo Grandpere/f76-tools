@@ -15,6 +15,7 @@ namespace App\Catalog\Application\Import;
 
 use App\Catalog\Application\Translation\TranslationCatalogWriter;
 use App\Catalog\Domain\Entity\ItemEntity;
+use App\Catalog\Domain\Item\ItemTypeEnum;
 
 final class ItemImportApplicationService
 {
@@ -149,6 +150,7 @@ final class ItemImportApplicationService
 
                 $type = $context->type;
                 $memoryKey = sprintf('%s:%d', $type->value, $sourceId);
+                $externalSource = $this->itemHydrator->buildExternalSourceData($context->sourceProvider, $row, $sourceId);
 
                 if ($dryRun) {
                     $item = $dryRunMemory[$memoryKey] ?? null;
@@ -158,22 +160,21 @@ final class ItemImportApplicationService
                         ->setSourceId($sourceId);
                     $dryRunMemory[$memoryKey] = $item;
                 } else {
-                    $item = $writeMemory[$memoryKey] ?? null;
+                    [$item, $isNew, $duplicate] = $this->resolveWriteTarget($type, $sourceId, $externalSource['externalRef'], $writeMemory);
 
-                    if (null === $item) {
-                        $item = $this->itemRepository->findOneByTypeAndSourceId($type, $sourceId);
-                        $isNew = null === $item;
-                        $item ??= new ItemEntity()
-                            ->setType($type)
-                            ->setSourceId($sourceId);
-                        $writeMemory[$memoryKey] = $item;
-                    } else {
-                        $isNew = false;
+                    if ($duplicate instanceof ItemEntity) {
+                        $this->mergeDuplicateBookItem($item, $duplicate);
+
+                        foreach ($writeMemory as $cachedKey => $cachedItem) {
+                            if ($cachedItem === $duplicate) {
+                                $writeMemory[$cachedKey] = $item;
+                            }
+                        }
+                        $writeMemory[sprintf('%s:%d', $duplicate->getType()->value, $duplicate->getSourceId())] = $item;
                     }
                 }
 
                 $this->itemHydrator->hydrate($item, $row);
-                $externalSource = $this->itemHydrator->buildExternalSourceData($context->sourceProvider, $row, $sourceId);
                 $item->upsertExternalSource(
                     $context->sourceProvider,
                     $externalSource['externalRef'],
@@ -181,7 +182,7 @@ final class ItemImportApplicationService
                     $externalSource['metadata'],
                 );
 
-                $translationData = $this->translationCatalogBuilder->build($type, $sourceId, $row);
+                $translationData = $this->translationCatalogBuilder->build($type, $item->getSourceId(), $row);
                 $item->setNameKey($translationData->nameKey);
                 $item->setDescKey($translationData->descKey);
                 $item->setNoteKey($translationData->noteKey);
@@ -238,6 +239,168 @@ final class ItemImportApplicationService
         }
 
         return new ItemImportResult($stats, $warnings);
+    }
+
+    /**
+     * @param array<string, ItemEntity> $writeMemory
+     *
+     * @return array{0:ItemEntity,1:bool,2:?ItemEntity}
+     */
+    private function resolveWriteTarget(ItemTypeEnum $type, int $sourceId, string $externalRef, array &$writeMemory): array
+    {
+        $memoryKey = sprintf('%s:%d', $type->value, $sourceId);
+        $item = $writeMemory[$memoryKey] ?? null;
+        if ($item instanceof ItemEntity) {
+            return [$item, false, null];
+        }
+
+        $itemBySourceId = $this->itemRepository->findOneByTypeAndSourceId($type, $sourceId);
+        $candidateItems = [];
+        if ($itemBySourceId instanceof ItemEntity) {
+            $candidateItems[] = $itemBySourceId;
+        }
+
+        if (ItemTypeEnum::BOOK === $type && '' !== $externalRef && !str_starts_with($externalRef, 'source_id:')) {
+            foreach ($this->itemRepository->findBooksByExternalRef($externalRef) as $candidateItem) {
+                if (!in_array($candidateItem, $candidateItems, true)) {
+                    $candidateItems[] = $candidateItem;
+                }
+            }
+        }
+
+        if ([] === $candidateItems) {
+            $item = new ItemEntity()
+                ->setType($type)
+                ->setSourceId($sourceId);
+            $writeMemory[$memoryKey] = $item;
+
+            return [$item, true, null];
+        }
+
+        $preferredCatalogCandidate = null;
+        foreach ($candidateItems as $candidateItem) {
+            if ($this->hasNonNukaknightsExternalSource($candidateItem)) {
+                $preferredCatalogCandidate = $candidateItem;
+                break;
+            }
+        }
+
+        $item = $preferredCatalogCandidate ?? $this->choosePreferredImportItem($candidateItems);
+        $duplicate = null;
+        foreach ($candidateItems as $candidateItem) {
+            if ($candidateItem !== $item) {
+                $duplicate = $candidateItem;
+                break;
+            }
+        }
+
+        $writeMemory[$memoryKey] = $item;
+
+        return [$item, false, $duplicate];
+    }
+
+    /**
+     * @param list<ItemEntity> $candidateItems
+     */
+    private function choosePreferredImportItem(array $candidateItems): ItemEntity
+    {
+        $nonNukaknightsCandidates = array_values(array_filter(
+            $candidateItems,
+            fn (ItemEntity $item): bool => $this->hasNonNukaknightsExternalSource($item),
+        ));
+        if ([] !== $nonNukaknightsCandidates) {
+            $candidateItems = $nonNukaknightsCandidates;
+        }
+
+        usort($candidateItems, function (ItemEntity $left, ItemEntity $right): int {
+            $leftScore = $this->scoreImportCandidate($left);
+            $rightScore = $this->scoreImportCandidate($right);
+            if ($leftScore !== $rightScore) {
+                return $rightScore <=> $leftScore;
+            }
+
+            return ($left->getId() ?? PHP_INT_MAX) <=> ($right->getId() ?? PHP_INT_MAX);
+        });
+
+        return $candidateItems[0];
+    }
+
+    private function scoreImportCandidate(ItemEntity $item): int
+    {
+        $score = 0;
+        $providerCount = 0;
+        foreach ($item->getExternalSources() as $externalSource) {
+            ++$providerCount;
+        }
+
+        $score += $providerCount * 10;
+        if ($this->hasNonNukaknightsExternalSource($item)) {
+            $score += 100;
+        }
+        if (!$item->getBookLists()->isEmpty()) {
+            $score += 5;
+        }
+
+        return $score;
+    }
+
+    private function hasNonNukaknightsExternalSource(ItemEntity $item): bool
+    {
+        foreach ($item->getExternalSources() as $externalSource) {
+            if ('nukaknights' !== $externalSource->getProvider()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function mergeDuplicateBookItem(ItemEntity $keeper, ItemEntity $duplicate): void
+    {
+        if ($keeper === $duplicate) {
+            return;
+        }
+
+        foreach ($duplicate->getBookLists() as $bookList) {
+            $keeper->addBookList($bookList->getListNumber(), $bookList->isSpecialList());
+        }
+
+        foreach ($duplicate->getExternalSources() as $externalSource) {
+            $keeper->upsertExternalSource(
+                $externalSource->getProvider(),
+                $externalSource->getExternalRef(),
+                $externalSource->getExternalUrl(),
+                $externalSource->getMetadata(),
+            );
+        }
+
+        if (null === $keeper->getPrice()) {
+            $keeper->setPrice($duplicate->getPrice());
+        }
+        if (null === $keeper->getPriceMinerva()) {
+            $keeper->setPriceMinerva($duplicate->getPriceMinerva());
+        }
+
+        $keeper->setIsNew($keeper->isNew() || $duplicate->isNew());
+        $keeper->setDropRaid($keeper->isDropRaid() || $duplicate->isDropRaid());
+        $keeper->setDropBurningSprings($keeper->isDropBurningSprings() || $duplicate->isDropBurningSprings());
+        $keeper->setDropDailyOps($keeper->isDropDailyOps() || $duplicate->isDropDailyOps());
+        $keeper->setDropBigfoot($keeper->isDropBigfoot() || $duplicate->isDropBigfoot());
+        $keeper->setVendorRegs($keeper->isVendorRegs() || $duplicate->isVendorRegs());
+        $keeper->setVendorSamuel($keeper->isVendorSamuel() || $duplicate->isVendorSamuel());
+        $keeper->setVendorMortimer($keeper->isVendorMortimer() || $duplicate->isVendorMortimer());
+
+        if (null === $keeper->getInfoHtml()) {
+            $keeper->setInfoHtml($duplicate->getInfoHtml());
+        }
+        if (null === $keeper->getDropSourcesHtml()) {
+            $keeper->setDropSourcesHtml($duplicate->getDropSourcesHtml());
+        }
+        if (null === $keeper->getRelationsHtml()) {
+            $keeper->setRelationsHtml($duplicate->getRelationsHtml());
+        }
+
+        $this->persistence->mergeBookDuplicate($duplicate, $keeper);
     }
 
     /**

@@ -48,6 +48,33 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
         ]);
     }
 
+    public function findBooksByExternalRef(string $externalRef): array
+    {
+        $normalizedRef = strtoupper(trim($externalRef));
+        if ('' === $normalizedRef) {
+            return [];
+        }
+
+        $items = $this->createQueryBuilder('i')
+            ->addSelect('src')
+            ->leftJoin('i.externalSources', 'src')
+            ->andWhere('i.type = :type')
+            ->andWhere('EXISTS (
+                SELECT 1
+                FROM App\\Catalog\\Domain\\Entity\\ItemExternalSourceEntity src_match
+                WHERE src_match.item = i
+                  AND UPPER(src_match.externalRef) = :externalRef
+            )')
+            ->setParameter('type', ItemTypeEnum::BOOK)
+            ->setParameter('externalRef', $normalizedRef)
+            ->orderBy('i.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        /** @var list<ItemEntity> $items */
+        return $items;
+    }
+
     public function findLatestUpdatedAtByType(ItemTypeEnum $type): ?DateTimeImmutable
     {
         $value = $this->createQueryBuilder('i')

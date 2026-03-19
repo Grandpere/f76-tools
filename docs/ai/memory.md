@@ -772,3 +772,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: the canonical `BOOK` taxonomy intentionally falls back to a generic `plan` when no finer family can be inferred, but translations and icon mapping initially covered only the more specific categories.
 - Fix: added an explicit `plan` category label/icon and included it in the category order so both cards and filters stay readable even when a book cannot yet be classified more finely.
 - Prevention: whenever a front taxonomy has a generic fallback bucket, add its label and icon at the same time as the specific categories instead of assuming only the refined cases will surface.
+
+## 2026-03-19 - `BOOK` import must reconcile cross-source duplicates on shared `form_id`
+- Symptom: the same plan could exist twice in `item`, once from `nukaknights/minerva` and once from the merged wiki catalog, as seen with `Plan: Cattle prod`.
+- Root cause: write-mode import resolved persistence identity on `(type, sourceId)` only, even though cross-source `BOOK` rows already shared a stable business key through `form_id` stored as `externalRef`.
+- Fix: `BOOK` import now resolves write targets by shared `form_id` when available, prefers the existing catalog item already anchored on `fandom`/`fallout_wiki`, merges Minerva-only lists/flags/external sources into that keeper, migrates `player_item_knowledge`, then removes the duplicate row.
+- Prevention: for `BOOK` reconciliation, treat `form_id`/`externalRef` as the cross-source identity first and use `sourceId` only as a provider-local fallback.

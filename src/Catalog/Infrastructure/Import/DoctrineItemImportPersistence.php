@@ -29,6 +29,38 @@ final class DoctrineItemImportPersistence implements ItemImportPersistence
         $this->entityManager->persist($item);
     }
 
+    public function mergeBookDuplicate(ItemEntity $duplicate, ItemEntity $keeper): void
+    {
+        $duplicateId = $duplicate->getId();
+        $keeperId = $keeper->getId();
+        if (null === $duplicateId || null === $keeperId || $duplicateId === $keeperId) {
+            return;
+        }
+
+        $connection = $this->entityManager->getConnection();
+
+        $connection->executeStatement(
+            'DELETE FROM player_item_knowledge duplicate USING player_item_knowledge keeper
+             WHERE duplicate.item_id = :duplicateId
+               AND keeper.item_id = :keeperId
+               AND keeper.player_id = duplicate.player_id',
+            [
+                'duplicateId' => $duplicateId,
+                'keeperId' => $keeperId,
+            ],
+        );
+
+        $connection->executeStatement(
+            'UPDATE player_item_knowledge SET item_id = :keeperId WHERE item_id = :duplicateId',
+            [
+                'duplicateId' => $duplicateId,
+                'keeperId' => $keeperId,
+            ],
+        );
+
+        $this->entityManager->remove($duplicate);
+    }
+
     public function flush(): void
     {
         $this->entityManager->flush();

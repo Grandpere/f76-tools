@@ -19,5 +19,7 @@ interface ItemImportPersistence
 {
     public function persist(ItemEntity $item): void;
 
+    public function mergeBookDuplicate(ItemEntity $duplicate, ItemEntity $keeper): void;
+
     public function flush(): void;
 }

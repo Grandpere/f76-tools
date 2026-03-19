@@ -20,5 +20,10 @@ interface ItemImportItemRepository
 {
     public function findOneByTypeAndSourceId(ItemTypeEnum $type, int $sourceId): ?ItemEntity;
 
+    /**
+     * @return list<ItemEntity>
+     */
+    public function findBooksByExternalRef(string $externalRef): array;
+
     public function deleteAllBookLists(): int;
 }
