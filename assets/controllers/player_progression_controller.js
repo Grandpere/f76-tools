@@ -342,7 +342,7 @@ export default class extends Controller {
         const cards = [
             this.renderStatsCard(this.t('statsOverall'), overall),
             this.renderStatsCard(this.t('statsMisc'), misc),
-            this.renderStatsCard(this.t('statsBook'), minervaBooks),
+            this.renderStatsCard(this.t('bookCatalogLearned'), book),
         ].join('');
 
         const rankRows = miscByRank.map((row) => this.renderStatsRow(`${this.t('statsRankPrefix')} ${row.rank}`, row)).join('');
@@ -351,7 +351,7 @@ export default class extends Controller {
         this.statsPanelTarget.innerHTML = `
             <div class="stats-cards">${cards}</div>
             <div class="stats-cards progression-book-summary">
-                ${this.renderStatsCard(this.t('bookCatalogLearned'), book)}
+                ${this.renderStatsCard(this.t('statsBook'), minervaBooks)}
                 ${this.renderStatsCard(this.t('bookCatalogPlans'), bookPlans)}
                 ${this.renderStatsCard(this.t('bookCatalogRecipes'), bookRecipes)}
             </div>
