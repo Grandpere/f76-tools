@@ -123,6 +123,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: the import reader now stores `source_sections`, so the finer signal is available for a future drilldown without relying on fragile name heuristics or on the too-generic top-level section.
 - Prevention: when a source has both a page-level section and a nested per-row section list, preserve the nested sections during import before attempting any deeper user-facing taxonomy.
 
+## 2026-03-20 - Re-expose fine workshop/recipe drilldowns with server-side labels, not extra front heuristics
+- Symptom: after preserving `source_sections`, the remaining ask was to show the finer `workshop` / `recipe` families both in `/progression` and `/plans-recipes`, but a first attempt had broken the progression render.
+- Root cause: the fine-detail SQL layer already existed, but the live UI had no stable payload/label contract for that third level, so reintroducing it too directly made the front brittle.
+- Fix: the progression service now emits a dedicated `bookByDetail` payload with ready-to-render labels, and `/plans-recipes` derives matching `bookDetail` / `detailOptions` server-side from `source_sections` only for `recipe` and `workshop_plan`; the UI simply renders/filter those values without inventing a new generic taxonomy in JavaScript.
+- Prevention: when reviving a deferred taxonomy level, keep the new level narrowly scoped to the families with stable raw signals, and ship labels from the application layer so the front only renders data instead of rebuilding taxonomy logic.
+
 ## 2026-03-18 - Add low-risk cross-source flags from explicit labels before named event heuristics
 - Symptom: after the major taxonomy cleanup, the remaining `fallout_wiki.obtained` backlog was dominated by named activities/events, but a few still-used acquisition paths were exposed as explicit generic labels.
 - Root cause: not every useful concept needs fuzzy matching; some fields stay worth adding simply because the source already names them directly.

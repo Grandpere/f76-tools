@@ -95,6 +95,44 @@ final class PlayerKnowledgeStatsApplicationService
             'defenses' => 'Defenses',
         ],
     ];
+    /**
+     * @var array<string, array<string, string>>
+     */
+    private const BOOK_DETAIL_LABELS = [
+        'recipe' => [
+            'brewing' => 'Brewing',
+            'chems' => 'Chems',
+            'cooking_drinks' => 'Cooking (Drinks)',
+            'cooking_food' => 'Cooking (Food)',
+            'junk' => 'Junk',
+            'serums' => 'Serums',
+        ],
+        'workshop_plan' => [
+            'appliances' => 'Appliances',
+            'beds' => 'Beds',
+            'chairs' => 'Chairs',
+            'crafting' => 'Crafting',
+            'defenses' => 'Defenses',
+            'displays' => 'Displays',
+            'doors' => 'Doors',
+            'floor_decor' => 'Floor Decor',
+            'floors' => 'Floors',
+            'food' => 'Food',
+            'generators' => 'Generators',
+            'lights' => 'Lights',
+            'misc_structures' => 'Misc. Structures',
+            'power_connectors' => 'Power Connectors',
+            'resources' => 'Resources',
+            'shelves' => 'Shelves',
+            'stash_boxes' => 'Stash Boxes',
+            'tables' => 'Tables',
+            'turrets_traps' => 'Turrets & Traps',
+            'vendors' => 'Vendors',
+            'wall_decor' => 'Wall Decor',
+            'walls' => 'Walls',
+            'water' => 'Water',
+        ],
+    ];
 
     public function __construct(
         private readonly ItemStatsReadRepository $itemRepository,
@@ -117,6 +155,7 @@ final class PlayerKnowledgeStatsApplicationService
      *     },
      *     bookByCategory: list<array{category: string, learned: int, total: int, percent: int}>,
      *     bookBySubcategory: list<array{category: string, subcategory: string, label: string, learned: int, total: int, percent: int}>,
+     *     bookByDetail: list<array{category: string, detail: string, label: string, learned: int, total: int, percent: int}>,
      *     miscByRank: list<array{rank: int, learned: int, total: int, percent: int}>,
      *     bookByList: list<array{listNumber: int, learned: int, total: int, percent: int}>
      * }
@@ -145,6 +184,8 @@ final class PlayerKnowledgeStatsApplicationService
         $bookLearnedByCategory = $this->knowledgeRepository->findLearnedBookCountsByCategory($player);
         $bookTotalsBySubcategory = $this->itemRepository->findBookTotalsBySubcategory();
         $bookLearnedBySubcategory = $this->knowledgeRepository->findLearnedBookCountsBySubcategory($player);
+        $bookTotalsByDetail = $this->itemRepository->findBookTotalsByDetail();
+        $bookLearnedByDetail = $this->knowledgeRepository->findLearnedBookCountsByDetail($player);
 
         $miscByRank = [];
         foreach ($miscTotals as $rank => $total) {
@@ -204,6 +245,26 @@ final class PlayerKnowledgeStatsApplicationService
             }
         }
 
+        $bookByDetail = [];
+        foreach (self::BOOK_DETAIL_LABELS as $category => $details) {
+            foreach ($details as $detail => $label) {
+                $total = $bookTotalsByDetail[$category][$detail] ?? 0;
+                $learned = $bookLearnedByDetail[$category][$detail] ?? 0;
+                if (0 === $total && 0 === $learned) {
+                    continue;
+                }
+
+                $bookByDetail[] = [
+                    'category' => $category,
+                    'detail' => $detail,
+                    'label' => $label,
+                    'learned' => $learned,
+                    'total' => $total,
+                    'percent' => $this->toPercent($learned, $total),
+                ];
+            }
+        }
+
         return [
             'playerId' => $player->getPublicId(),
             'overall' => [
@@ -242,6 +303,7 @@ final class PlayerKnowledgeStatsApplicationService
             ],
             'bookByCategory' => $bookByCategory,
             'bookBySubcategory' => $bookBySubcategory,
+            'bookByDetail' => $bookByDetail,
             'miscByRank' => $miscByRank,
             'bookByList' => $bookByList,
         ];

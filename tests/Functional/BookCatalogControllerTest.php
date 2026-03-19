@@ -98,11 +98,13 @@ final class BookCatalogControllerTest extends WebTestCase
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="kinds[]"]')->count());
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="categories[]"]')->count());
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="subcategories[]"]')->count());
+        self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="details[]"]')->count());
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="vendorFilters[]"]')->count());
         self::assertStringContainsString('vendorFilters[]', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('vendor_minerva', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('Gold bullion vendors', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('Unlock test', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('Beds', (string) $this->browser()->getResponse()->getContent());
         self::assertCount(1, $crawler->filter('[data-catalog-filters-target="summary"]'));
         self::assertCount(1, $crawler->filter('[data-catalog-filters-target="results"]'));
         self::assertStringContainsString('0 / 1 learned', (string) $this->browser()->getResponse()->getContent());
@@ -162,6 +164,7 @@ final class BookCatalogControllerTest extends WebTestCase
             'name' => $displayName,
             'name_en' => $displayName,
             'source_page' => 'Fallout_76_Weapon_Plans',
+            'source_sections' => ['Workshop plans', 'Beds'],
             'unlocks' => ['text' => 'Unlock test'],
         ], $providerBExtra));
         $item->addBookList(4, false);

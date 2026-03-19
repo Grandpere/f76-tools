@@ -119,6 +119,15 @@ final class PlayerStatsControllerTest extends WebTestCase
         self::assertSame(1, $this->readInt($floorDecor, 'total'));
         self::assertSame(1, $this->readInt($floorDecor, 'learned'));
         self::assertSame(100, $this->readInt($floorDecor, 'percent'));
+        $bookByDetail = $this->readList($payload, 'bookByDetail');
+        $beds = $this->findByStringKeyValue($bookByDetail, 'detail', 'beds');
+        $chems = $this->findByStringKeyValue($bookByDetail, 'detail', 'chems');
+        self::assertSame(1, $this->readInt($beds, 'total'));
+        self::assertSame(1, $this->readInt($beds, 'learned'));
+        self::assertSame(100, $this->readInt($beds, 'percent'));
+        self::assertSame(1, $this->readInt($chems, 'total'));
+        self::assertSame(0, $this->readInt($chems, 'learned'));
+        self::assertSame(0, $this->readInt($chems, 'percent'));
 
         $miscByRank = $this->readList($payload, 'miscByRank');
         $rank1 = $this->findByKeyValue($miscByRank, 'rank', 1);

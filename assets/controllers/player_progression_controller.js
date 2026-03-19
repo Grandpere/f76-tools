@@ -340,6 +340,7 @@ export default class extends Controller {
         const bookByList = Array.isArray(this.stats.bookByList) ? this.stats.bookByList : [];
         const bookByCategory = Array.isArray(this.stats.bookByCategory) ? this.stats.bookByCategory : [];
         const bookBySubcategory = Array.isArray(this.stats.bookBySubcategory) ? this.stats.bookBySubcategory : [];
+        const bookByDetail = Array.isArray(this.stats.bookByDetail) ? this.stats.bookByDetail : [];
 
         const cards = [
             this.renderStatsCard(this.t('statsOverall'), overall),
@@ -351,6 +352,7 @@ export default class extends Controller {
         const listRows = bookByList.map((row) => this.renderStatsRow(`${this.t('statsListPrefix')} ${row.listNumber}`, row)).join('');
         const categoryRows = bookByCategory.map((row) => this.renderStatsRow(this.t(`bookCategory_${row.category}`), row)).join('');
         const subcategoryRows = bookBySubcategory.map((row) => this.renderStatsRow(`${this.t(`bookCategory_${row.category}`)} - ${row.label}`, row)).join('');
+        const detailRows = bookByDetail.map((row) => this.renderStatsRow(`${this.t(`bookCategory_${row.category}`)} - ${row.label}`, row)).join('');
 
         this.statsPanelTarget.innerHTML = `
             <div class="stats-cards">${cards}</div>
@@ -368,6 +370,10 @@ export default class extends Controller {
                     <section class="stats-group">
                         <h3>${this.escape(this.t('statsByBookSubcategory'))}</h3>
                         ${subcategoryRows || '<p class="catalog-note">-</p>'}
+                    </section>
+                    <section class="stats-group">
+                        <h3>${this.escape(this.t('statsByBookDetail'))}</h3>
+                        ${detailRows || '<p class="catalog-note">-</p>'}
                     </section>
                 </div>
                 <div class="stats-stack">

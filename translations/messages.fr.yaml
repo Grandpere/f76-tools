@@ -118,6 +118,7 @@ catalog_books.category_power_armor_mod_plan: Plans de mods d armures assistées
 catalog_books.category_workshop_plan: Plans d atelier
 catalog_books.category_recipe: Recettes
 catalog_books.subcategory_filters: Sous-catégories
+catalog_books.detail_filters: Détails fins
 catalog_books.vendor_filters: Marchands
 catalog_books.vendor_group_all: Tous
 catalog_books.vendors: Tous les marchands
@@ -217,6 +218,7 @@ dashboard.stats.by_rank: Mods légendaires
 dashboard.stats.by_list: Listes Minerva
 dashboard.stats.by_book_category: Plans et recettes par catégorie
 dashboard.stats.by_book_subcategory: Plans et recettes par sous-catégorie
+dashboard.stats.by_book_detail: Plans et recettes par détail fin
 dashboard.stats.learned_on_total: '%learned% / %total%'
 dashboard.stats.percent_suffix: '%'
 dashboard.stats.rank_prefix: Rang

@@ -85,6 +85,66 @@ final class BookCatalogFrontApplicationService
         'crafting' => 'Crafting',
         'defenses' => 'Defenses',
     ];
+    /**
+     * @var array<string, list<string>>
+     */
+    private const BOOK_DETAIL_ORDER = [
+        'recipe' => ['brewing', 'chems', 'cooking_drinks', 'cooking_food', 'junk', 'serums'],
+        'workshop_plan' => [
+            'appliances',
+            'beds',
+            'chairs',
+            'crafting',
+            'defenses',
+            'displays',
+            'doors',
+            'floor_decor',
+            'floors',
+            'food',
+            'generators',
+            'lights',
+            'misc_structures',
+            'power_connectors',
+            'resources',
+            'shelves',
+            'stash_boxes',
+            'tables',
+            'turrets_traps',
+            'vendors',
+            'wall_decor',
+            'walls',
+            'water',
+        ],
+    ];
+    /**
+     * @var array<string, string>
+     */
+    private const BOOK_DETAIL_LABELS = [
+        'brewing' => 'Brewing',
+        'chems' => 'Chems',
+        'cooking_drinks' => 'Cooking (Drinks)',
+        'cooking_food' => 'Cooking (Food)',
+        'junk' => 'Junk',
+        'serums' => 'Serums',
+        'appliances' => 'Appliances',
+        'beds' => 'Beds',
+        'chairs' => 'Chairs',
+        'displays' => 'Displays',
+        'doors' => 'Doors',
+        'floors' => 'Floors',
+        'food' => 'Food',
+        'generators' => 'Generators',
+        'misc_structures' => 'Misc. Structures',
+        'power_connectors' => 'Power Connectors',
+        'resources' => 'Resources',
+        'shelves' => 'Shelves',
+        'stash_boxes' => 'Stash Boxes',
+        'tables' => 'Tables',
+        'turrets_traps' => 'Turrets & Traps',
+        'vendors' => 'Vendors',
+        'walls' => 'Walls',
+        'water' => 'Water',
+    ];
     private const CANONICAL_SIGNAL_FIELDS = [
         'purchase_currency',
         'containers',
@@ -115,6 +175,7 @@ final class BookCatalogFrontApplicationService
      * @param list<string> $selectedKinds
      * @param list<string> $selectedCategories
      * @param list<string> $selectedSubcategories
+     * @param list<string> $selectedDetails
      * @param list<string> $selectedVendorFilters
      * @param list<string> $selectedSignals
      *
@@ -126,6 +187,8 @@ final class BookCatalogFrontApplicationService
      *         bookCategory:string,
      *         bookSubcategory:?string,
      *         bookSubcategoryLabel:?string,
+     *         bookDetail:?string,
+     *         bookDetailLabel:?string,
      *         description:?string,
      *         note:?string,
      *         unlocks:?string,
@@ -149,13 +212,14 @@ final class BookCatalogFrontApplicationService
      *     kindOptions:list<string>,
      *     categoryOptions:list<string>,
      *     subcategoryOptions:list<array{category:string,id:string,label:string}>,
+     *     detailOptions:list<array{category:string,id:string,label:string}>,
      *     sortOptions:list<string>,
      *     vendorFilterOptions:list<string>,
      *     vendorInfoOptions:list<string>,
      *     signalOptions:list<string>
      * }
      */
-    public function browse(?string $query, array $selectedLists, array $selectedKinds, array $selectedCategories, array $selectedSubcategories, array $selectedVendorFilters, array $selectedSignals, int $page, int $perPage, ?PlayerEntity $player = null, string $knowledgeFilter = 'all', string $sort = 'name_asc'): array
+    public function browse(?string $query, array $selectedLists, array $selectedKinds, array $selectedCategories, array $selectedSubcategories, array $selectedDetails, array $selectedVendorFilters, array $selectedSignals, int $page, int $perPage, ?PlayerEntity $player = null, string $knowledgeFilter = 'all', string $sort = 'name_asc'): array
     {
         $items = $this->bookCatalogFrontReadRepository->findAllBooksDetailedOrdered();
         $learnedItemIds = [];
@@ -171,6 +235,7 @@ final class BookCatalogFrontApplicationService
         $kindOptions = $this->extractKindOptions($rows);
         $categoryOptions = $this->extractCategoryOptions($rows);
         $subcategoryOptions = $this->extractSubcategoryOptions($rows);
+        $detailOptions = $this->extractDetailOptions($rows);
         $sortOptions = $this->extractSortOptions();
         $vendorFilterOptions = $this->extractVendorFilterOptions($rows);
         $vendorInfoOptions = $this->extractVendorInfoOptions($rows);
@@ -241,6 +306,21 @@ final class BookCatalogFrontApplicationService
             $rows = array_values(array_filter(
                 $rows,
                 static fn (array $row): bool => null !== $row['bookSubcategory'] && in_array($row['bookSubcategory'], $normalizedSubcategories, true),
+            ));
+        }
+
+        $normalizedDetails = array_filter(
+            array_map(
+                fn (string $value): string => $this->normalize($value),
+                $selectedDetails,
+            ),
+            static fn (string $value): bool => '' !== $value,
+        );
+
+        if ([] !== $normalizedDetails) {
+            $rows = array_values(array_filter(
+                $rows,
+                static fn (array $row): bool => null !== $row['bookDetail'] && in_array($row['bookDetail'], $normalizedDetails, true),
             ));
         }
 
@@ -320,6 +400,8 @@ final class BookCatalogFrontApplicationService
          *     bookCategory:string,
          *     bookSubcategory:?string,
          *     bookSubcategoryLabel:?string,
+         *     bookDetail:?string,
+         *     bookDetailLabel:?string,
          *     description:?string,
          *     note:?string,
          *     unlocks:?string,
@@ -353,6 +435,7 @@ final class BookCatalogFrontApplicationService
             'kindOptions' => $kindOptions,
             'categoryOptions' => $categoryOptions,
             'subcategoryOptions' => $subcategoryOptions,
+            'detailOptions' => $detailOptions,
             'sortOptions' => $sortOptions,
             'vendorFilterOptions' => $vendorFilterOptions,
             'vendorInfoOptions' => $vendorInfoOptions,
@@ -368,6 +451,8 @@ final class BookCatalogFrontApplicationService
      *     bookCategory:string,
      *     bookSubcategory:?string,
      *     bookSubcategoryLabel:?string,
+     *     bookDetail:?string,
+     *     bookDetailLabel:?string,
      *     description:?string,
      *     note:?string,
      *     unlocks:?string,
@@ -392,6 +477,7 @@ final class BookCatalogFrontApplicationService
         $bookKind = $this->extractBookKind($item);
         $bookCategory = $this->extractBookCategory($item, $bookKind);
         $bookSubcategory = $this->extractBookSubcategory($item, $bookCategory);
+        $bookDetail = $this->extractBookDetail($item, $bookCategory);
         $unlocks = $this->extractUnlocks($item, $mergeResult);
         $vendorLabels = $this->extractVendorLabels($item);
         $vendorFlags = $this->extractVendorFlags($item);
@@ -413,6 +499,8 @@ final class BookCatalogFrontApplicationService
             'bookCategory' => $bookCategory,
             'bookSubcategory' => $bookSubcategory,
             'bookSubcategoryLabel' => null !== $bookSubcategory ? (self::BOOK_SUBCATEGORY_LABELS[$bookSubcategory] ?? $bookSubcategory) : null,
+            'bookDetail' => $bookDetail,
+            'bookDetailLabel' => null !== $bookDetail ? (self::BOOK_DETAIL_LABELS[$bookDetail] ?? $bookDetail) : null,
             'description' => null !== $item->getDescKey() ? $this->translator->trans($item->getDescKey(), domain: 'items') : null,
             'note' => null !== $item->getNoteKey() ? $this->translator->trans($item->getNoteKey(), domain: 'items') : null,
             'unlocks' => $unlocks,
@@ -473,6 +561,8 @@ final class BookCatalogFrontApplicationService
      *     bookCategory:string,
      *     bookSubcategory:?string,
      *     bookSubcategoryLabel:?string,
+     *     bookDetail:?string,
+     *     bookDetailLabel:?string,
      *     description:?string,
      *     note:?string,
      *     unlocks:?string,
@@ -490,6 +580,7 @@ final class BookCatalogFrontApplicationService
             $row['bookKind'],
             $this->translator->trans('catalog_books.category_'.$row['bookCategory']),
             (string) ($row['bookSubcategoryLabel'] ?? ''),
+            (string) ($row['bookDetailLabel'] ?? ''),
             (string) ($row['description'] ?? ''),
             (string) ($row['note'] ?? ''),
             (string) ($row['unlocks'] ?? ''),
@@ -617,6 +708,38 @@ final class BookCatalogFrontApplicationService
         return null;
     }
 
+    private function extractBookDetail(ItemEntity $item, string $bookCategory): ?string
+    {
+        if (!array_key_exists($bookCategory, self::BOOK_DETAIL_ORDER)) {
+            return null;
+        }
+
+        foreach ($this->sortSourcesForTaxonomy($item) as $metadata) {
+            $sourceSections = $metadata['source_sections'] ?? null;
+            if (!is_array($sourceSections)) {
+                continue;
+            }
+
+            $normalizedSections = array_map(
+                fn (mixed $value): string => $this->normalize(is_scalar($value) ? (string) $value : ''),
+                $sourceSections,
+            );
+            $normalizedSections = array_values($normalizedSections);
+
+            if ('recipe' === $bookCategory) {
+                $detail = $this->matchRecipeDetail($normalizedSections);
+            } else {
+                $detail = $this->matchWorkshopDetail($normalizedSections);
+            }
+
+            if (null !== $detail) {
+                return $detail;
+            }
+        }
+
+        return null;
+    }
+
     /**
      * @param array<string, mixed> $metadata
      */
@@ -727,6 +850,59 @@ final class BookCatalogFrontApplicationService
             str_contains($section, 'allies') => 'allies',
             str_contains($section, 'crafting') => 'crafting',
             str_contains($section, 'defenses') => 'defenses',
+            default => null,
+        };
+    }
+
+    /**
+     * @param list<string> $sections
+     */
+    private function matchRecipeDetail(array $sections): ?string
+    {
+        $haystack = implode(' ', $sections);
+
+        return match (true) {
+            str_contains($haystack, 'brewing') => 'brewing',
+            str_contains($haystack, 'chems') => 'chems',
+            str_contains($haystack, 'cooking (drinks)') => 'cooking_drinks',
+            str_contains($haystack, 'cooking (food)') => 'cooking_food',
+            str_contains($haystack, 'junk') => 'junk',
+            str_contains($haystack, 'serums') => 'serums',
+            default => null,
+        };
+    }
+
+    /**
+     * @param list<string> $sections
+     */
+    private function matchWorkshopDetail(array $sections): ?string
+    {
+        $haystack = implode(' ', $sections);
+
+        return match (true) {
+            str_contains($haystack, 'appliances') => 'appliances',
+            str_contains($haystack, 'beds') => 'beds',
+            str_contains($haystack, 'chairs') => 'chairs',
+            str_contains($haystack, 'crafting') => 'crafting',
+            str_contains($haystack, 'defenses') => 'defenses',
+            str_contains($haystack, 'displays') => 'displays',
+            str_contains($haystack, 'doors') => 'doors',
+            str_contains($haystack, 'floor decor') => 'floor_decor',
+            str_contains($haystack, 'floors') => 'floors',
+            str_contains($haystack, 'food') => 'food',
+            str_contains($haystack, 'generators') => 'generators',
+            str_contains($haystack, 'lights') => 'lights',
+            str_contains($haystack, 'misc. structures') => 'misc_structures',
+            str_contains($haystack, 'power connectors') => 'power_connectors',
+            str_contains($haystack, 'resources') => 'resources',
+            str_contains($haystack, 'shelves') => 'shelves',
+            str_contains($haystack, 'stash boxes') => 'stash_boxes',
+            str_contains($haystack, 'tables') => 'tables',
+            str_contains($haystack, 'turrets &amp; traps'), str_contains($haystack, 'turrets & traps') => 'turrets_traps',
+            str_contains($haystack, 'vendors') => 'vendors',
+            str_contains($haystack, 'wall decor') => 'wall_decor',
+            str_contains($haystack, 'walls') => 'walls',
+            str_contains($haystack, 'water') => 'water',
             default => null,
         };
     }
@@ -1226,6 +1402,48 @@ final class BookCatalogFrontApplicationService
 
             return strnatcasecmp($left['label'], $right['label']);
         });
+
+        return $options;
+    }
+
+    /**
+     * @param list<array{
+     *     bookCategory:string,
+     *     bookDetail:?string,
+     *     bookDetailLabel:?string
+     * }> $rows
+     *
+     * @return list<array{category:string,id:string,label:string}>
+     */
+    private function extractDetailOptions(array $rows): array
+    {
+        $seen = [];
+        $options = [];
+
+        foreach (self::BOOK_DETAIL_ORDER as $category => $details) {
+            foreach ($details as $detail) {
+                foreach ($rows as $row) {
+                    if ($row['bookCategory'] !== $category || ($row['bookDetail'] ?? null) !== $detail) {
+                        continue;
+                    }
+
+                    $label = $row['bookDetailLabel'] ?? self::BOOK_DETAIL_LABELS[$detail] ?? $detail;
+                    $key = $category.'|'.$detail;
+                    if (isset($seen[$key])) {
+                        continue 2;
+                    }
+
+                    $seen[$key] = true;
+                    $options[] = [
+                        'category' => $category,
+                        'id' => $detail,
+                        'label' => (string) $label,
+                    ];
+
+                    continue 2;
+                }
+            }
+        }
 
         return $options;
     }

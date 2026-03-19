@@ -111,6 +111,8 @@ final class BookCatalogController extends AbstractController
         $selectedCategories = $request->query->all('categories');
         /** @var list<string> $selectedSubcategories */
         $selectedSubcategories = $request->query->all('subcategories');
+        /** @var list<string> $selectedDetails */
+        $selectedDetails = $request->query->all('details');
         /** @var list<string> $selectedVendorFilters */
         $selectedVendorFilters = $request->query->all('vendorFilters');
         /** @var list<string> $selectedSignals */
@@ -125,6 +127,7 @@ final class BookCatalogController extends AbstractController
             $selectedKinds,
             $selectedCategories,
             $selectedSubcategories,
+            $selectedDetails,
             $selectedVendorFilters,
             $selectedSignals,
             $page,
@@ -149,6 +152,7 @@ final class BookCatalogController extends AbstractController
             'selectedKinds' => $selectedKinds,
             'selectedCategories' => $selectedCategories,
             'selectedSubcategories' => $selectedSubcategories,
+            'selectedDetails' => $selectedDetails,
             'selectedVendorFilters' => $selectedVendorFilters,
             'selectedSignals' => $selectedSignals,
             'selectedSort' => $selectedSort,
@@ -156,6 +160,7 @@ final class BookCatalogController extends AbstractController
             'kindOptions' => $result['kindOptions'],
             'categoryOptions' => $result['categoryOptions'],
             'subcategoryOptions' => $result['subcategoryOptions'],
+            'detailOptions' => $result['detailOptions'],
             'sortOptions' => $result['sortOptions'],
             'vendorFilterOptions' => $result['vendorFilterOptions'],
             'vendorInfoOptions' => $result['vendorInfoOptions'],

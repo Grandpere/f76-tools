@@ -118,6 +118,7 @@ catalog_books.category_power_armor_mod_plan: Powerrüstungsmod-Baupläne
 catalog_books.category_workshop_plan: Werkstatt-Baupläne
 catalog_books.category_recipe: Rezepte
 catalog_books.subcategory_filters: Unterkategorien
+catalog_books.detail_filters: Feindetails
 catalog_books.vendor_filters: Händler
 catalog_books.vendor_group_all: Alle
 catalog_books.vendors: Alle Händler
@@ -217,6 +218,7 @@ dashboard.stats.by_rank: Legendäre Mods
 dashboard.stats.by_list: Minerva-Listen
 dashboard.stats.by_book_category: Baupläne & Rezepte nach Kategorie
 dashboard.stats.by_book_subcategory: Baupläne & Rezepte nach Unterkategorie
+dashboard.stats.by_book_detail: Baupläne & Rezepte nach Feindetail
 dashboard.stats.learned_on_total: '%learned% / %total%'
 dashboard.stats.percent_suffix: '%'
 dashboard.stats.rank_prefix: Rang

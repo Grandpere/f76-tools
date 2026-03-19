@@ -45,6 +45,7 @@ Ajouter une page front authentifiee qui liste les plans et recettes (`BOOK`) ave
 - Done (slice 23): alignement du message d info de partage d apprentissage avec la page Minerva (deplace dans le panneau catalogue) et redecoupage visuel des cards `/plans-recipes` en sous-blocs (`categorie`, `details`, `prix`, `signaux`) pour preparer d eventuels regroupements futurs d icones sans rendre la carte confuse.
 - Done (slice 24): ajout d un second niveau de taxonomie `BOOK` base sur les `source_section` stables (`ballistic`, `floor_decor`, `union`, `outfits`, etc.), avec nouveau filtre `Sous-categories` sur `/plans-recipes`, ajout de `apparel_plan` au premier niveau et nouveau detail `Plans et recettes par sous-categorie` sur `/progression`.
 - Done (slice 25): reequilibrage du panneau filtres `/plans-recipes` en regroupant `Categorie + Sous-categorie` dans un bloc separe de `Progression + Type`, et conservation des `source_sections` `fandom` imbriquees a l import pour preparer un futur niveau plus fin sur `workshop` et `recipe` sans heuristiques de nom fragiles.
+- Done (slice 26): reactivation prudente d un troisieme niveau fin pour `recipe` et `workshop_plan`, base sur `source_sections`, expose comme detail supplementaire dans `/progression` et comme filtre `Details fins` sur `/plans-recipes`, sans ajouter de nouvelle taxonomie generique aux autres familles.
 
 ## Hors scope
 - Edition front des items.

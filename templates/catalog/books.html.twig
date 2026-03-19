@@ -141,6 +141,34 @@
                                 </div>
                             {% endif %}
                         </div>
+                        {% if detailOptions is not empty %}
+                            <div class="source-filter-group catalog-taxonomy-subcategory-block">
+                                <p class="source-filter-group-title">{{ 'catalog_books.detail_filters'|trans }}</p>
+                                <div class="source-filter-groups catalog-taxonomy-subcategory-groups">
+                                    {% for category in categoryOptions %}
+                                        {% set optionsForCategory = [] %}
+                                        {% for option in detailOptions %}
+                                            {% if option.category == category %}
+                                                {% set optionsForCategory = optionsForCategory|merge([option]) %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if optionsForCategory is not empty %}
+                                            <div class="source-filter-group">
+                                                <p class="source-filter-group-title">{{ ('catalog_books.category_' ~ category)|trans }}</p>
+                                                <div class="source-filter-options catalog-taxonomy-subcategory-row">
+                                                    {% for option in optionsForCategory %}
+                                                        <label>
+                                                            <input type="checkbox" name="details[]" value="{{ option.id }}" {% if option.id in selectedDetails %}checked{% endif %}>
+                                                            <span>{{ option.label }}</span>
+                                                        </label>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
                     </fieldset>
 
                     <fieldset class="source-filters catalog-books-list-filters">
@@ -407,6 +435,10 @@
                                     {% if item.bookSubcategoryLabel %}
                                         <span class="catalog-book-category-separator">•</span>
                                         <span>{{ item.bookSubcategoryLabel }}</span>
+                                    {% endif %}
+                                    {% if item.bookDetailLabel %}
+                                        <span class="catalog-book-category-separator">•</span>
+                                        <span>{{ item.bookDetailLabel }}</span>
                                     {% endif %}
                                 </p>
                             </div>

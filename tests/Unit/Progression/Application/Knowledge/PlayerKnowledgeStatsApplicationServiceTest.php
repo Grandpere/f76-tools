@@ -52,6 +52,10 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
             'weapon_plan' => ['ballistic' => 2],
             'workshop_plan' => ['floor_decor' => 2],
         ]);
+        $itemRepository->method('findBookTotalsByDetail')->willReturn([
+            'recipe' => ['chems' => 2],
+            'workshop_plan' => ['beds' => 1],
+        ]);
 
         $knowledgeRepository->method('countLearnedByPlayerByType')->willReturn([
             'all' => 5,
@@ -70,6 +74,10 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
         $knowledgeRepository->method('findLearnedBookCountsBySubcategory')->willReturn([
             'weapon_plan' => ['ballistic' => 1],
             'workshop_plan' => ['floor_decor' => 2],
+        ]);
+        $knowledgeRepository->method('findLearnedBookCountsByDetail')->willReturn([
+            'recipe' => ['chems' => 1],
+            'workshop_plan' => ['beds' => 1],
         ]);
 
         $payload = $service->getStats($player);
@@ -95,6 +103,13 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
                 ['category' => 'workshop_plan', 'subcategory' => 'floor_decor', 'label' => 'Floor Decor', 'learned' => 2, 'total' => 2, 'percent' => 100],
             ],
             $payload['bookBySubcategory'],
+        );
+        self::assertSame(
+            [
+                ['category' => 'recipe', 'detail' => 'chems', 'label' => 'Chems', 'learned' => 1, 'total' => 2, 'percent' => 50],
+                ['category' => 'workshop_plan', 'detail' => 'beds', 'label' => 'Beds', 'learned' => 1, 'total' => 1, 'percent' => 100],
+            ],
+            $payload['bookByDetail'],
         );
 
         self::assertSame(
