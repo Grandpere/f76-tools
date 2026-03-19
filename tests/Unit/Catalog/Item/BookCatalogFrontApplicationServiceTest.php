@@ -110,6 +110,35 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
         self::assertContains('vendors', array_column($result['rows'][0]['canonicalSignals'], 'field'));
     }
 
+    public function testBrowseTreatsMinervaDailyOpsFlagAsSignal(): void
+    {
+        $item = $this->createBookItem(105, 'pub-dailyops', 'catalog.book.dailyops.name', 'Plan: Daily Ops Test', 'aligned');
+        $item->setDropDailyOps(true);
+
+        $service = new BookCatalogFrontApplicationService(
+            new class([$item]) implements BookCatalogFrontReadRepository {
+                /**
+                 * @param list<ItemEntity> $items
+                 */
+                public function __construct(private readonly array $items)
+                {
+                }
+
+                public function findAllBooksDetailedOrdered(): array
+                {
+                    return $this->items;
+                }
+            },
+            new ItemSourceMergePolicy(),
+            $this->createTranslator(),
+        );
+
+        $result = $service->browse(null, [], ['daily_ops'], 1, 24);
+
+        self::assertSame(1, $result['totalItems']);
+        self::assertContains('daily_ops', array_column($result['rows'][0]['canonicalSignals'], 'field'));
+    }
+
     /**
      * @param array<string, mixed> $providerBExtra
      */
@@ -157,8 +186,10 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
                     'catalog.book.bravo.name' => 'Recipe: Bravo Soup',
                     'catalog.book.currency.name' => 'Plan: Currency Test',
                     'catalog.book.samuel.name' => 'Plan: Cattle prod',
+                    'catalog.book.dailyops.name' => 'Plan: Daily Ops Test',
                     'catalog_books.signal_purchase_currency' => 'Currency',
                     'catalog_books.signal_containers' => 'Containers',
+                    'catalog_books.signal_daily_ops' => 'Daily Ops',
                     'catalog_books.signal_events' => 'Events',
                     'catalog_books.signal_vendors' => 'Vendors',
                     'catalog_books.signal_enabled' => 'Enabled',

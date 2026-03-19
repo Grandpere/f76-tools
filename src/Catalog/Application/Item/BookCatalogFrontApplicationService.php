@@ -208,6 +208,15 @@ final class BookCatalogFrontApplicationService
             ];
         }
 
+        if ($item->isDropDailyOps() && !in_array('daily_ops', $existingFields, true)) {
+            $signals[] = [
+                'field' => 'daily_ops',
+                'label' => $this->translator->trans('catalog_books.signal_daily_ops'),
+                'displayValue' => $this->translator->trans('catalog_books.signal_enabled'),
+                'provider' => 'minerva',
+            ];
+        }
+
         return $signals;
     }
 
