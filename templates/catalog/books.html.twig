@@ -127,9 +127,19 @@
                                 {% if item.rank %}
                                     <span class="item-pill">{{ 'catalog_books.rank'|trans({'%rank%': item.rank}) }}</span>
                                 {% endif %}
-                                {% for vendorLabel in item.vendorLabels %}
-                                    <span class="item-pill">{{ vendorLabel }}</span>
-                                {% endfor %}
+                                {% if item.vendorFlags.vendor_regs or item.vendorFlags.vendor_samuel or item.vendorFlags.vendor_mortimer %}
+                                    <span class="item-source-icons catalog-book-vendor-icons">
+                                        {% if item.vendorFlags.vendor_regs %}
+                                            <img src="{{ asset('/assets/icons/Vault79Marker.svg') }}" alt="{{ 'catalog_books.vendor_regs'|trans }}" title="{{ 'catalog_books.vendor_regs'|trans }}">
+                                        {% endif %}
+                                        {% if item.vendorFlags.vendor_samuel %}
+                                            <img src="{{ asset('/assets/icons/HammerWingMarker.svg') }}" alt="{{ 'catalog_books.vendor_samuel'|trans }}" title="{{ 'catalog_books.vendor_samuel'|trans }}">
+                                        {% endif %}
+                                        {% if item.vendorFlags.vendor_mortimer %}
+                                            <img src="{{ asset('/assets/icons/SkullRingMarker.svg') }}" alt="{{ 'catalog_books.vendor_mortimer'|trans }}" title="{{ 'catalog_books.vendor_mortimer'|trans }}">
+                                        {% endif %}
+                                    </span>
+                                {% endif %}
                             </div>
 
                             {% if item.price or item.priceMinerva %}
