@@ -331,8 +331,11 @@ export default class extends Controller {
 
         const overall = this.stats.overall || { learned: 0, total: 0, percent: 0 };
         const byType = this.stats.byType || {};
+        const byBookKind = this.stats.byBookKind || {};
         const misc = byType.misc || { learned: 0, total: 0, percent: 0 };
         const book = byType.book || { learned: 0, total: 0, percent: 0 };
+        const bookPlans = byBookKind.plan || { learned: 0, total: 0, percent: 0 };
+        const bookRecipes = byBookKind.recipe || { learned: 0, total: 0, percent: 0 };
         const miscByRank = Array.isArray(this.stats.miscByRank) ? this.stats.miscByRank : [];
         const bookByList = Array.isArray(this.stats.bookByList) ? this.stats.bookByList : [];
 
@@ -359,16 +362,10 @@ export default class extends Controller {
             </div>
         `;
 
-        const bookRemaining = Math.max(0, Number(book.total || 0) - Number(book.learned || 0));
-        const bookCompletedLists = bookByList.filter((row) => Number(row.total || 0) > 0 && Number(row.learned || 0) >= Number(row.total || 0)).length;
-        const bookTrackedLists = bookByList.filter((row) => Number(row.total || 0) > 0).length;
         const bookCards = [
             this.renderStatsCard(this.t('bookCatalogLearned'), book),
-            this.renderCompactStatsCard(this.t('bookCatalogRemaining'), bookRemaining),
-            this.renderCompactStatsCard(
-                this.t('bookCatalogLists'),
-                this.t('bookCatalogListsDone', { '%done%': bookCompletedLists, '%total%': bookTrackedLists }),
-            ),
+            this.renderStatsCard(this.t('bookCatalogPlans'), bookPlans),
+            this.renderStatsCard(this.t('bookCatalogRecipes'), bookRecipes),
         ].join('');
 
         this.bookPanelTarget.innerHTML = `<div class="stats-cards progression-book-summary">${bookCards}</div>`;
@@ -385,15 +382,6 @@ export default class extends Controller {
                 <p class="stats-card-main">${this.escape(percent)}${this.escape(this.t('statsPercentSuffix'))}</p>
                 <p class="stats-card-sub">${this.escape(this.t('statsLearnedOnTotal', { '%learned%': learned, '%total%': total }))}</p>
                 <div class="stats-bar"><span style="width:${Math.max(0, Math.min(100, percent))}%"></span></div>
-            </article>
-        `;
-    }
-
-    renderCompactStatsCard(title, value) {
-        return `
-            <article class="stats-card">
-                <p class="stats-card-title">${this.escape(title)}</p>
-                <p class="stats-card-main">${this.escape(value)}</p>
             </article>
         `;
     }

@@ -543,6 +543,46 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
     }
 
     /**
+     * @return array{plan: int, recipe: int}
+     */
+    public function findBookTotalsByKind(): array
+    {
+        $sql = <<<'SQL'
+                SELECT
+                    CASE
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
+                        ) THEN 'recipe'
+                        ELSE 'plan'
+                    END AS book_kind,
+                    COUNT(*) AS total_count
+                FROM item i
+                WHERE i.type = :type
+                GROUP BY book_kind
+            SQL;
+
+        $rows = $this->getEntityManager()->getConnection()->executeQuery($sql, [
+            'type' => ItemTypeEnum::BOOK->value,
+        ])->fetchAllAssociative();
+
+        $totals = ['plan' => 0, 'recipe' => 0];
+        foreach ($rows as $row) {
+            $kind = $row['book_kind'] ?? null;
+            $countRaw = $row['total_count'] ?? null;
+            if (!is_string($kind) || !array_key_exists($kind, $totals) || (!is_int($countRaw) && !is_numeric($countRaw))) {
+                continue;
+            }
+
+            $totals[$kind] = (int) $countRaw;
+        }
+
+        return $totals;
+    }
+
+    /**
      * @return list<ItemEntity>
      */
     public function findAllOrdered(?ItemTypeEnum $type = null): array

@@ -69,6 +69,7 @@ final class ProgressionControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter('[data-player-progression-target="bookPanel"]'));
         self::assertCount(1, $crawler->filter(sprintf('a.catalog-cta-link[href="%s"]', '/en/plans-recipes')));
         self::assertCount(1, $crawler->filter('.progression-book-panel'));
+        self::assertStringContainsString('Plans & Recipes', (string) $this->browser()->getResponse()->getContent());
         self::assertCount(1, $crawler->filter('.app-primary-nav-link.is-active'));
     }
 

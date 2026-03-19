@@ -78,10 +78,9 @@ progression.character_help_extended: 'la mise à jour de la progression se fait 
 progression.book_catalog_title: Plans et recettes
 progression.book_catalog_description: Suivez la progression des plans et recettes puis ouvrez le catalogue joueur pour filtrer par liste Minerva, marchand ou activité.
 progression.book_catalog_open: Ouvrir le catalogue
-progression.book_catalog_learned: Plans/recettes appris
-progression.book_catalog_remaining: Restants
-progression.book_catalog_lists: Listes Minerva
-progression.book_catalog_lists_done: '%done% / %total% terminées'
+progression.book_catalog_learned: Total plans/recettes
+progression.book_catalog_plans: Plans
+progression.book_catalog_recipes: Recettes
 nuke_codes.page_title: 'F76 - Codes nucléaires'
 nuke_codes.title: Codes nucléaires
 catalog_books.page_title: 'F76 - Plans et recettes'
@@ -195,8 +194,8 @@ dashboard.stats.title: Progression du personnage
 dashboard.stats.overall: Global
 dashboard.stats.misc: Mods légendaires
 dashboard.stats.book: Plans Minerva
-dashboard.stats.by_rank: Détail par rang
-dashboard.stats.by_list: Détail par liste
+dashboard.stats.by_rank: Mods légendaires
+dashboard.stats.by_list: Listes Minerva
 dashboard.stats.learned_on_total: '%learned% / %total%'
 dashboard.stats.percent_suffix: '%'
 dashboard.stats.rank_prefix: Rang

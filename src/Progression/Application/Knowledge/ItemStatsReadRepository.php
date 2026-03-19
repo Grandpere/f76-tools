@@ -35,4 +35,9 @@ interface ItemStatsReadRepository
      * @return array<int, int>
      */
     public function findBookTotalsByListNumber(): array;
+
+    /**
+     * @return array{plan: int, recipe: int}
+     */
+    public function findBookTotalsByKind(): array;
 }

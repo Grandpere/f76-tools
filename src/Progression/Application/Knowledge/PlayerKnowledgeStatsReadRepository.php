@@ -36,4 +36,9 @@ interface PlayerKnowledgeStatsReadRepository
      * @return array<int, int>
      */
     public function findLearnedBookCountsByListNumber(PlayerEntity $player): array;
+
+    /**
+     * @return array{plan: int, recipe: int}
+     */
+    public function findLearnedBookCountsByKind(PlayerEntity $player): array;
 }

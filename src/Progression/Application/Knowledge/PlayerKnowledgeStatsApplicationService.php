@@ -31,6 +31,10 @@ final class PlayerKnowledgeStatsApplicationService
      *         misc: array{learned: int, total: int, percent: int},
      *         book: array{learned: int, total: int, percent: int}
      *     },
+     *     byBookKind: array{
+     *         plan: array{learned: int, total: int, percent: int},
+     *         recipe: array{learned: int, total: int, percent: int}
+     *     },
      *     miscByRank: list<array{rank: int, learned: int, total: int, percent: int}>,
      *     bookByList: list<array{listNumber: int, learned: int, total: int, percent: int}>
      * }
@@ -51,6 +55,8 @@ final class PlayerKnowledgeStatsApplicationService
         $miscLearned = $this->knowledgeRepository->findLearnedMiscCountsByRank($player);
         $bookTotals = $this->itemRepository->findBookTotalsByListNumber();
         $bookLearned = $this->knowledgeRepository->findLearnedBookCountsByListNumber($player);
+        $bookTotalsByKind = $this->itemRepository->findBookTotalsByKind();
+        $bookLearnedByKind = $this->knowledgeRepository->findLearnedBookCountsByKind($player);
 
         $miscByRank = [];
         foreach ($miscTotals as $rank => $total) {
@@ -91,6 +97,18 @@ final class PlayerKnowledgeStatsApplicationService
                     'learned' => $learnedBook,
                     'total' => $totalBook,
                     'percent' => $this->toPercent($learnedBook, $totalBook),
+                ],
+            ],
+            'byBookKind' => [
+                'plan' => [
+                    'learned' => $bookLearnedByKind['plan'],
+                    'total' => $bookTotalsByKind['plan'],
+                    'percent' => $this->toPercent($bookLearnedByKind['plan'], $bookTotalsByKind['plan']),
+                ],
+                'recipe' => [
+                    'learned' => $bookLearnedByKind['recipe'],
+                    'total' => $bookTotalsByKind['recipe'],
+                    'percent' => $this->toPercent($bookLearnedByKind['recipe'], $bookTotalsByKind['recipe']),
                 ],
             ],
             'miscByRank' => $miscByRank,

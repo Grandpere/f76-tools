@@ -271,4 +271,47 @@ final class PlayerItemKnowledgeEntityRepository extends ServiceEntityRepository 
 
         return $counts;
     }
+
+    /**
+     * @return array{plan: int, recipe: int}
+     */
+    public function findLearnedBookCountsByKind(PlayerEntity $player): array
+    {
+        $sql = <<<'SQL'
+                SELECT
+                    CASE
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
+                        ) THEN 'recipe'
+                        ELSE 'plan'
+                    END AS book_kind,
+                    COUNT(DISTINCT i.id) AS learned_count
+                FROM player_item_knowledge k
+                INNER JOIN item i ON i.id = k.item_id
+                WHERE k.player_id = :playerId
+                  AND i.type = :type
+                GROUP BY book_kind
+            SQL;
+
+        $rows = $this->getEntityManager()->getConnection()->executeQuery($sql, [
+            'playerId' => $player->getId(),
+            'type' => ItemTypeEnum::BOOK->value,
+        ])->fetchAllAssociative();
+
+        $counts = ['plan' => 0, 'recipe' => 0];
+        foreach ($rows as $row) {
+            $kind = $row['book_kind'] ?? null;
+            $countRaw = $row['learned_count'] ?? null;
+            if (!is_string($kind) || !array_key_exists($kind, $counts) || (!is_int($countRaw) && !is_numeric($countRaw))) {
+                continue;
+            }
+
+            $counts[$kind] = (int) $countRaw;
+        }
+
+        return $counts;
+    }
 }
