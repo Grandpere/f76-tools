@@ -37,12 +37,22 @@
                     </label>
                     <fieldset class="source-filters catalog-books-list-filters">
                         <legend>{{ 'catalog_books.list_filter'|trans }}</legend>
-                        {% for option in listOptions %}
-                            <label>
-                                <input type="checkbox" name="lists[]" value="{{ option }}" {% if (option ~ '') in selectedLists %}checked{% endif %}>
-                                {{ 'catalog_books.list_option'|trans({'%list%': option}) }}
-                            </label>
-                        {% endfor %}
+                        <div class="source-filter-groups">
+                            {% for optionGroup in listOptions|batch(4, null) %}
+                                <div class="source-filter-group">
+                                    <div class="source-filter-options">
+                                        {% for option in optionGroup %}
+                                            {% if option is not null %}
+                                                <label class="{% if option is divisible by(4) %}catalog-list-option-special{% endif %}">
+                                                    <input type="checkbox" name="lists[]" value="{{ option }}" {% if (option ~ '') in selectedLists %}checked{% endif %}>
+                                                    {{ 'catalog_books.list_option'|trans({'%list%': option}) }}
+                                                </label>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </fieldset>
 
                     <fieldset class="source-filters catalog-books-list-filters">
@@ -104,9 +114,6 @@
                                                     <span>{{ ('catalog_books.' ~ option)|trans }}</span>
                                                 </label>
                                             {% endif %}
-                                        {% endfor %}
-                                        {% for infoLabel in vendorInfoOptions %}
-                                            <span class="item-pill">{{ infoLabel }}</span>
                                         {% endfor %}
                                     </div>
                                 </div>

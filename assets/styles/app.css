@@ -1320,6 +1320,12 @@ body::before {
     line-height: 1;
 }
 
+.catalog-list-option-special {
+    padding-top: 0.3rem;
+    border-top: 1px dashed rgba(29, 37, 49, 0.12);
+    margin-top: 0.15rem;
+}
+
 .catalog-books-list-filters {
     grid-column: 1 / -1;
 }
