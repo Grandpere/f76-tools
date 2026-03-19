@@ -52,8 +52,7 @@ export default class extends Controller {
 
     async loadPlayers() {
         this.setState(this.t('loadingPlayers'));
-        this.statsPanelTarget.replaceChildren();
-        this.bookPanelTarget.replaceChildren();
+        this.renderLoadingPanels();
 
         const response = await fetch(this.appendLocaleToUrl(this.playersUrlValue), {
             headers: { Accept: 'application/json' },
@@ -132,6 +131,7 @@ export default class extends Controller {
         }
 
         this.setState('');
+        this.renderLoadingPanels();
         const url = `${this.playersBaseUrlValue}/${this.activePlayerId}/stats`;
         const response = await fetch(this.appendLocaleToUrl(url), {
             headers: { Accept: 'application/json' },
@@ -375,6 +375,12 @@ export default class extends Controller {
         ].join('');
 
         this.bookPanelTarget.innerHTML = `<div class="stats-cards progression-book-summary">${bookCards}</div>`;
+    }
+
+    renderLoadingPanels() {
+        const placeholder = `<p class="catalog-state">${this.escape(this.t('loadingItems'))}</p>`;
+        this.statsPanelTarget.innerHTML = placeholder;
+        this.bookPanelTarget.innerHTML = placeholder;
     }
 
     renderStatsCard(title, stat) {
