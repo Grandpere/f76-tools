@@ -18,10 +18,10 @@
             extraState: updatedLabel
         } %}
 
-        <section class="catalog-shell">
+        <section class="catalog-shell" data-controller="catalog-filters">
             <section class="catalog-panel filters-panel">
                 <h2>{{ 'catalog_books.filters_title'|trans }}</h2>
-                <form method="get" action="{{ path('app_book_catalog', { _locale: app.request.locale }) }}" class="catalog-toolbar" data-controller="catalog-filters">
+                <form method="get" action="{{ path('app_book_catalog', { _locale: app.request.locale }) }}" class="catalog-toolbar" data-catalog-filters-target="form">
                     <input type="hidden" name="page" value="{{ page }}" data-catalog-filters-target="pageInput">
                     <label class="field">
                         <span>{{ 'catalog_books.search'|trans }}</span>

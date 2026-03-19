@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    static targets = ['searchInput', 'results', 'summary', 'pageInput'];
+    static targets = ['form', 'searchInput', 'results', 'summary', 'pageInput'];
 
     connect() {
         this.searchDebounceId = null;
@@ -20,12 +20,12 @@ export default class extends Controller {
     }
 
     bindEvents() {
-        this.element.addEventListener('submit', (event) => {
+        this.formTarget.addEventListener('submit', (event) => {
             event.preventDefault();
             this.submit();
         });
 
-        this.element.querySelectorAll('input[type="checkbox"], input[type="radio"], select').forEach((field) => {
+        this.formTarget.querySelectorAll('input[type="checkbox"], input[type="radio"], select').forEach((field) => {
             field.addEventListener('change', () => {
                 this.resetPage();
                 this.submit();
@@ -75,13 +75,13 @@ export default class extends Controller {
 
         this.abortController = new AbortController();
 
-        const formData = new FormData(this.element);
+        const formData = new FormData(this.formTarget);
         const params = new URLSearchParams();
         for (const [key, value] of formData.entries()) {
             params.append(key, String(value));
         }
 
-        const requestUrl = new URL(this.element.getAttribute('action') || window.location.pathname, window.location.origin);
+        const requestUrl = new URL(this.formTarget.getAttribute('action') || window.location.pathname, window.location.origin);
         requestUrl.search = params.toString();
 
         const response = await fetch(requestUrl.toString(), {
