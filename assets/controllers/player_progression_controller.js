@@ -358,16 +358,16 @@ export default class extends Controller {
                 ${this.renderStatsCard(this.t('bookCatalogRecipes'), bookRecipes)}
             </div>
             <div class="stats-split">
-                <section class="stats-group">
-                    <div class="stats-subsection">
+                <div class="stats-stack">
+                    <section class="stats-group">
                         <h3>${this.escape(this.t('statsByRank'))}</h3>
                         ${rankRows || '<p class="catalog-note">-</p>'}
-                    </div>
-                    <div class="stats-subsection">
+                    </section>
+                    <section class="stats-group">
                         <h3>${this.escape(this.t('statsByBookCategory'))}</h3>
                         ${categoryRows || '<p class="catalog-note">-</p>'}
-                    </div>
-                </section>
+                    </section>
+                </div>
                 <section class="stats-group">
                     <h3>${this.escape(this.t('statsByList'))}</h3>
                     ${listRows || '<p class="catalog-note">-</p>'}
