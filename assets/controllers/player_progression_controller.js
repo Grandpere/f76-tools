@@ -351,8 +351,8 @@ export default class extends Controller {
         this.statsPanelTarget.innerHTML = `
             <div class="stats-cards">${cards}</div>
             <div class="stats-cards progression-book-summary">
-                ${this.renderStatsCard(this.t('statsBook'), minervaBooks)}
                 ${this.renderStatsCard(this.t('bookCatalogPlans'), bookPlans)}
+                ${this.renderStatsCard(this.t('statsBook'), minervaBooks)}
                 ${this.renderStatsCard(this.t('bookCatalogRecipes'), bookRecipes)}
             </div>
             <div class="stats-split">
