@@ -57,37 +57,66 @@
 
                     <fieldset class="source-filters catalog-books-list-filters">
                         <legend>{{ 'catalog_books.vendor_filters'|trans }}</legend>
-                        {% for option in vendorFilterOptions %}
+                        {% if 'vendors' in vendorFilterOptions %}
                             <label>
-                                <input type="checkbox" name="vendorFilters[]" value="{{ option }}" {% if option in selectedVendorFilters %}checked{% endif %}>
-                                {% if option == 'vendors' and signalIconMap.vendors is defined %}
+                                <input type="checkbox" name="vendorFilters[]" value="vendors" {% if 'vendors' in selectedVendorFilters %}checked{% endif %}>
+                                {% if signalIconMap.vendors is defined %}
                                     <img src="{{ asset(signalIconMap.vendors) }}" alt="" aria-hidden="true">
                                 {% endif %}
-                                {% if option == 'vendor_minerva' %}
-                                    <span class="catalog-vendor-text-icon" aria-hidden="true">M</span>
-                                {% endif %}
-                                {% if option == 'vendor_regs' %}
-                                    <img src="{{ asset('/assets/icons/Vault79Marker.svg') }}" alt="" aria-hidden="true">
-                                {% endif %}
-                                {% if option == 'vendor_samuel' %}
-                                    <img src="{{ asset('/assets/icons/HammerWingMarker.svg') }}" alt="" aria-hidden="true">
-                                {% endif %}
-                                {% if option == 'vendor_mortimer' %}
-                                    <img src="{{ asset('/assets/icons/SkullRingMarker.svg') }}" alt="" aria-hidden="true">
-                                {% endif %}
-                                {% if option == 'vendor_giuseppe' %}
-                                    <img src="{{ asset('/assets/icons/WhitespringResortMarker.svg') }}" alt="" aria-hidden="true">
-                                {% endif %}
-                                <span>{{ ('catalog_books.' ~ option)|trans }}</span>
+                                <span>{{ 'catalog_books.vendors'|trans }}</span>
                             </label>
+                        {% endif %}
+
+                        {% set bullionVendorOptions = ['vendor_minerva', 'vendor_regs', 'vendor_samuel', 'vendor_mortimer'] %}
+                        {% set hasBullionVendorOptions = false %}
+                        {% for option in bullionVendorOptions %}
+                            {% if option in vendorFilterOptions %}
+                                {% set hasBullionVendorOptions = true %}
+                            {% endif %}
                         {% endfor %}
-                        {% if vendorInfoOptions is not empty %}
+
+                        {% if hasBullionVendorOptions %}
                             <div class="catalog-filters-subgroup">
-                                <span class="catalog-filters-subgroup-title">{{ 'catalog_books.vendor_info_title'|trans }}</span>
+                                <span class="catalog-filters-subgroup-title">{{ 'catalog_books.vendor_group_bullion'|trans }}</span>
                                 <div class="catalog-filters-subgroup-list">
-                                    {% for infoLabel in vendorInfoOptions %}
-                                        <span class="item-pill">{{ infoLabel }}</span>
+                                    {% for option in bullionVendorOptions %}
+                                        {% if option in vendorFilterOptions %}
+                                            <label>
+                                                <input type="checkbox" name="vendorFilters[]" value="{{ option }}" {% if option in selectedVendorFilters %}checked{% endif %}>
+                                                {% if option == 'vendor_minerva' %}
+                                                    <span class="catalog-vendor-text-icon" aria-hidden="true">M</span>
+                                                {% endif %}
+                                                {% if option == 'vendor_regs' %}
+                                                    <img src="{{ asset('/assets/icons/Vault79Marker.svg') }}" alt="" aria-hidden="true">
+                                                {% endif %}
+                                                {% if option == 'vendor_samuel' %}
+                                                    <img src="{{ asset('/assets/icons/HammerWingMarker.svg') }}" alt="" aria-hidden="true">
+                                                {% endif %}
+                                                {% if option == 'vendor_mortimer' %}
+                                                    <img src="{{ asset('/assets/icons/SkullRingMarker.svg') }}" alt="" aria-hidden="true">
+                                                {% endif %}
+                                                <span>{{ ('catalog_books.' ~ option)|trans }}</span>
+                                            </label>
+                                        {% endif %}
                                     {% endfor %}
+                                    {% if vendorInfoOptions is not empty %}
+                                        {% for infoLabel in vendorInfoOptions %}
+                                            <span class="item-pill">{{ infoLabel }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if 'vendor_giuseppe' in vendorFilterOptions %}
+                            <div class="catalog-filters-subgroup">
+                                <span class="catalog-filters-subgroup-title">{{ 'catalog_books.vendor_group_stamps'|trans }}</span>
+                                <div class="catalog-filters-subgroup-list">
+                                    <label>
+                                        <input type="checkbox" name="vendorFilters[]" value="vendor_giuseppe" {% if 'vendor_giuseppe' in selectedVendorFilters %}checked{% endif %}>
+                                        <img src="{{ asset('/assets/icons/WhitespringResortMarker.svg') }}" alt="" aria-hidden="true">
+                                        <span>{{ 'catalog_books.vendor_giuseppe'|trans }}</span>
+                                    </label>
                                 </div>
                             </div>
                         {% endif %}
