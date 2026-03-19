@@ -363,14 +363,14 @@ export default class extends Controller {
                     ${rankRows || '<p class="catalog-note">-</p>'}
                 </section>
                 <section class="stats-group">
-                    <h3>${this.escape(this.t('statsByList'))}</h3>
-                    ${listRows || '<p class="catalog-note">-</p>'}
+                    <h3>${this.escape(this.t('statsByBookCategory'))}</h3>
+                    ${categoryRows || '<p class="catalog-note">-</p>'}
                 </section>
             </div>
             <div class="stats-split">
                 <section class="stats-group">
-                    <h3>${this.escape(this.t('statsByBookCategory'))}</h3>
-                    ${categoryRows || '<p class="catalog-note">-</p>'}
+                    <h3>${this.escape(this.t('statsByList'))}</h3>
+                    ${listRows || '<p class="catalog-note">-</p>'}
                 </section>
             </div>
         `;
