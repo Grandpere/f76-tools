@@ -68,7 +68,7 @@
                     </label>
                     <fieldset class="source-filters catalog-books-list-filters">
                         <legend>{{ 'catalog_books.progress_and_type_filters'|trans }}</legend>
-                        <div class="source-filter-groups catalog-taxonomy-groups">
+                        <div class="source-filter-groups">
                             <div class="source-filter-group">
                                 <p class="source-filter-group-title">{{ 'catalog_books.knowledge_filters'|trans }}</p>
                                 <div class="source-filter-options">
@@ -123,13 +123,42 @@
                                                     {% set optionsForCategory = optionsForCategory|merge([option]) %}
                                                 {% endif %}
                                             {% endfor %}
+                                            {% for option in detailOptions %}
+                                                {% if option.category == category %}
+                                                    {% set optionsForCategory = optionsForCategory|merge([{
+                                                        id: option.id,
+                                                        label: option.label,
+                                                        isDetail: true
+                                                    }]) %}
+                                                {% endif %}
+                                            {% endfor %}
                                             {% if optionsForCategory is not empty %}
                                                 <div class="source-filter-group">
-                                                    <p class="source-filter-group-title">{{ ('catalog_books.category_' ~ category)|trans }}</p>
+                                                    {% set hasDetailOptions = false %}
+                                                    {% for option in optionsForCategory %}
+                                                        {% if option.isDetail is defined and option.isDetail %}
+                                                            {% set hasDetailOptions = true %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    <p class="source-filter-group-title">
+                                                        {{ ('catalog_books.category_' ~ category)|trans }}
+                                                        {% if hasDetailOptions %}
+                                                            · {{ 'catalog_books.detail_filters'|trans }}
+                                                        {% endif %}
+                                                    </p>
                                                     <div class="source-filter-options catalog-taxonomy-subcategory-row">
                                                         {% for option in optionsForCategory %}
                                                             <label>
-                                                                <input type="checkbox" name="subcategories[]" value="{{ option.id }}" {% if option.id in selectedSubcategories %}checked{% endif %}>
+                                                                <input
+                                                                    type="checkbox"
+                                                                    name="{% if option.isDetail is defined and option.isDetail %}details[]{% else %}subcategories[]{% endif %}"
+                                                                    value="{{ option.id }}"
+                                                                    {% if option.isDetail is defined and option.isDetail %}
+                                                                        {% if option.id in selectedDetails %}checked{% endif %}
+                                                                    {% else %}
+                                                                        {% if option.id in selectedSubcategories %}checked{% endif %}
+                                                                    {% endif %}
+                                                                >
                                                                 <span>{{ option.label }}</span>
                                                             </label>
                                                         {% endfor %}
@@ -141,34 +170,6 @@
                                 </div>
                             {% endif %}
                         </div>
-                        {% if detailOptions is not empty %}
-                            <div class="source-filter-group catalog-taxonomy-subcategory-block">
-                                <p class="source-filter-group-title">{{ 'catalog_books.detail_filters'|trans }}</p>
-                                <div class="source-filter-groups catalog-taxonomy-subcategory-groups">
-                                    {% for category in categoryOptions %}
-                                        {% set optionsForCategory = [] %}
-                                        {% for option in detailOptions %}
-                                            {% if option.category == category %}
-                                                {% set optionsForCategory = optionsForCategory|merge([option]) %}
-                                            {% endif %}
-                                        {% endfor %}
-                                        {% if optionsForCategory is not empty %}
-                                            <div class="source-filter-group">
-                                                <p class="source-filter-group-title">{{ ('catalog_books.category_' ~ category)|trans }}</p>
-                                                <div class="source-filter-options catalog-taxonomy-subcategory-row">
-                                                    {% for option in optionsForCategory %}
-                                                        <label>
-                                                            <input type="checkbox" name="details[]" value="{{ option.id }}" {% if option.id in selectedDetails %}checked{% endif %}>
-                                                            <span>{{ option.label }}</span>
-                                                        </label>
-                                                    {% endfor %}
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        {% endif %}
                     </fieldset>
 
                     <fieldset class="source-filters catalog-books-list-filters">
