@@ -32,7 +32,11 @@
         statsLearnedOnTotal: 'dashboard.stats.learned_on_total'|trans,
         statsPercentSuffix: 'dashboard.stats.percent_suffix'|trans,
         statsRankPrefix: 'dashboard.stats.rank_prefix'|trans,
-        statsListPrefix: 'dashboard.stats.list_prefix'|trans
+        statsListPrefix: 'dashboard.stats.list_prefix'|trans,
+        bookCatalogLearned: 'progression.book_catalog_learned'|trans,
+        bookCatalogRemaining: 'progression.book_catalog_remaining'|trans,
+        bookCatalogLists: 'progression.book_catalog_lists'|trans,
+        bookCatalogListsDone: 'progression.book_catalog_lists_done'|trans
     } %}
     <main class="catalog-page">
         {% include '_app_page_header.html.twig' with {
@@ -69,10 +73,11 @@
                 </div>
                 {% set modsLink %}<a href="{{ path('app_dashboard', { _locale: app.request.locale }) }}">{{ 'progression.quick_link_mods'|trans }}</a>{% endset %}
                 {% set minervaLink %}<a href="{{ path('app_minerva_rotation', { _locale: app.request.locale }) }}">{{ 'progression.quick_link_minerva'|trans }}</a>{% endset %}
+                {% set booksLink %}<a href="{{ path('app_book_catalog', { _locale: app.request.locale }) }}">{{ 'progression.quick_link_books'|trans }}</a>{% endset %}
                 <p class="catalog-note info-note">
                     <span class="info-note-content">
                         {{ 'dashboard.create_player.help'|trans }}
-                        {{ 'progression.character_help_extended'|trans({'%modsLink%': modsLink, '%minervaLink%': minervaLink})|raw }}
+                        {{ 'progression.character_help_extended'|trans({'%modsLink%': modsLink, '%minervaLink%': minervaLink, '%booksLink%': booksLink})|raw }}
                     </span>
                 </p>
                 {% include '_catalog_state_line.html.twig' with { targetPrefix: 'player-progression' } %}
@@ -109,6 +114,16 @@
             </section>
             <section class="catalog-panel catalog-block">
                 <div data-player-progression-target="statsPanel"></div>
+            </section>
+            <section class="catalog-panel catalog-block progression-book-panel">
+                <div class="progression-book-panel-head">
+                    <div>
+                        <h2>{{ 'progression.book_catalog_title'|trans }}</h2>
+                        <p class="catalog-note">{{ 'progression.book_catalog_description'|trans }}</p>
+                    </div>
+                    <a class="catalog-cta-link" href="{{ path('app_book_catalog', { _locale: app.request.locale }) }}">{{ 'progression.book_catalog_open'|trans }}</a>
+                </div>
+                <div data-player-progression-target="bookPanel"></div>
             </section>
         </section>
     </main>

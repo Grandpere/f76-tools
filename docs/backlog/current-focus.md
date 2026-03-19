@@ -21,6 +21,7 @@
 - Done (slice 15): `/plans-recipes` propose maintenant un vrai filtre `Progression` (`Tout afficher`, `À apprendre`, `Appris`) branche au personnage actif et applique cote serveur sur tout le catalogue pagine via `player_item_knowledge`, sans casser la synchronisation partagee avec Minerva.
 - Done (slice 16): `/plans-recipes` affiche maintenant un resume `appris / total` calcule cote serveur a partir du personnage actif et des filtres actifs, pour rendre la progression visible sans quitter la page catalogue.
 - Done (slice 17): `/plans-recipes` propose maintenant un tri simple (`nom`, `prix`, `prix Minerva`) applique apres filtres et avant pagination, avec un select front dedie et la meme UX AJAX que les autres filtres.
+- Done (slice 18): la page `/progression` expose maintenant un bloc `Plans et recettes` alimente par les stats `BOOK` du personnage courant et un lien direct vers `/plans-recipes`, pour rendre la progression `BOOK` visible depuis la page centrale sans dupliquer le catalogue filtre.
 
 ### Avancement F76-153
 - Done (slice 1): `app:data:sync` devient orchestrateur (`all|nukaknights|fandom`) avec delegation a `app:data:sync:fandom`.

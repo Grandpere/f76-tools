@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    static targets = ['playerSelect', 'createNameInput', 'createButton', 'state', 'statsPanel', 'backupState', 'exportButton', 'importFileInput', 'importMergeCheckbox', 'importButton', 'importUnknownPanel'];
+    static targets = ['playerSelect', 'createNameInput', 'createButton', 'state', 'statsPanel', 'bookPanel', 'backupState', 'exportButton', 'importFileInput', 'importMergeCheckbox', 'importButton', 'importUnknownPanel'];
     static values = {
         playersUrl: String,
         playersBaseUrl: String,
@@ -53,6 +53,7 @@ export default class extends Controller {
     async loadPlayers() {
         this.setState(this.t('loadingPlayers'));
         this.statsPanelTarget.replaceChildren();
+        this.bookPanelTarget.replaceChildren();
 
         const response = await fetch(this.appendLocaleToUrl(this.playersUrlValue), {
             headers: { Accept: 'application/json' },
@@ -324,6 +325,7 @@ export default class extends Controller {
     renderStats() {
         if (!this.stats || typeof this.stats !== 'object') {
             this.statsPanelTarget.replaceChildren();
+            this.bookPanelTarget.replaceChildren();
             return;
         }
 
@@ -356,6 +358,20 @@ export default class extends Controller {
                 </section>
             </div>
         `;
+
+        const bookRemaining = Math.max(0, Number(book.total || 0) - Number(book.learned || 0));
+        const bookCompletedLists = bookByList.filter((row) => Number(row.total || 0) > 0 && Number(row.learned || 0) >= Number(row.total || 0)).length;
+        const bookTrackedLists = bookByList.filter((row) => Number(row.total || 0) > 0).length;
+        const bookCards = [
+            this.renderStatsCard(this.t('bookCatalogLearned'), book),
+            this.renderCompactStatsCard(this.t('bookCatalogRemaining'), bookRemaining),
+            this.renderCompactStatsCard(
+                this.t('bookCatalogLists'),
+                this.t('bookCatalogListsDone', { '%done%': bookCompletedLists, '%total%': bookTrackedLists }),
+            ),
+        ].join('');
+
+        this.bookPanelTarget.innerHTML = `<div class="stats-cards progression-book-summary">${bookCards}</div>`;
     }
 
     renderStatsCard(title, stat) {
@@ -369,6 +385,15 @@ export default class extends Controller {
                 <p class="stats-card-main">${this.escape(percent)}${this.escape(this.t('statsPercentSuffix'))}</p>
                 <p class="stats-card-sub">${this.escape(this.t('statsLearnedOnTotal', { '%learned%': learned, '%total%': total }))}</p>
                 <div class="stats-bar"><span style="width:${Math.max(0, Math.min(100, percent))}%"></span></div>
+            </article>
+        `;
+    }
+
+    renderCompactStatsCard(title, value) {
+        return `
+            <article class="stats-card">
+                <p class="stats-card-title">${this.escape(title)}</p>
+                <p class="stats-card-main">${this.escape(value)}</p>
             </article>
         `;
     }

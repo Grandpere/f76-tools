@@ -73,7 +73,15 @@ progression.backup_title: Sauvegarde
 progression.player_list_label: Liste des personnages
 progression.quick_link_mods: mods légendaires
 progression.quick_link_minerva: minerva
-progression.character_help_extended: 'la mise à jour de la progression se fait en marquant les objets comme appris sur les pages dédiées %modsLink% et %minervaLink%.'
+progression.quick_link_books: plans et recettes
+progression.character_help_extended: 'la mise à jour de la progression se fait en marquant les objets comme appris sur les pages dédiées %modsLink%, %minervaLink% et %booksLink%.'
+progression.book_catalog_title: Plans et recettes
+progression.book_catalog_description: Suivez la progression des plans et recettes puis ouvrez le catalogue joueur pour filtrer par liste Minerva, marchand ou activité.
+progression.book_catalog_open: Ouvrir le catalogue
+progression.book_catalog_learned: Plans/recettes appris
+progression.book_catalog_remaining: Restants
+progression.book_catalog_lists: Listes Minerva
+progression.book_catalog_lists_done: '%done% / %total% terminées'
 nuke_codes.page_title: 'F76 - Codes nucléaires'
 nuke_codes.title: Codes nucléaires
 catalog_books.page_title: 'F76 - Plans et recettes'

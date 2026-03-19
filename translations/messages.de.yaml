@@ -73,7 +73,15 @@ progression.backup_title: Sicherung
 progression.player_list_label: Charakterliste
 progression.quick_link_mods: legendare mods
 progression.quick_link_minerva: minerva
-progression.character_help_extended: 'der Fortschritt wird aktualisiert, indem Objekte auf den dedizierten Seiten als gelernt markiert werden: %modsLink% und %minervaLink%.'
+progression.quick_link_books: Baupläne und Rezepte
+progression.character_help_extended: 'der Fortschritt wird aktualisiert, indem Objekte auf den dedizierten Seiten als gelernt markiert werden: %modsLink%, %minervaLink% und %booksLink%.'
+progression.book_catalog_title: Baupläne & Rezepte
+progression.book_catalog_description: Verfolge hier den Fortschritt der Baupläne und Rezepte und öffne dann den Spielerkatalog, um nach Minerva-Liste, Händler oder Aktivität zu filtern.
+progression.book_catalog_open: Katalog öffnen
+progression.book_catalog_learned: Gelernte Baupläne/Rezepte
+progression.book_catalog_remaining: Verbleibend
+progression.book_catalog_lists: Minerva-Listen
+progression.book_catalog_lists_done: '%done% / %total% abgeschlossen'
 nuke_codes.page_title: 'F76 - Nukecodes'
 nuke_codes.title: Nukecodes
 catalog_books.page_title: 'F76 - Baupläne & Rezepte'

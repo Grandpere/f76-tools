@@ -73,7 +73,15 @@ progression.backup_title: Backup
 progression.player_list_label: Character list
 progression.quick_link_mods: legendary mods
 progression.quick_link_minerva: minerva
-progression.character_help_extended: 'progression is updated by marking items as learned on dedicated pages: %modsLink% and %minervaLink%.'
+progression.quick_link_books: plans & recipes
+progression.character_help_extended: 'progression is updated by marking items as learned on dedicated pages: %modsLink%, %minervaLink%, and %booksLink%.'
+progression.book_catalog_title: Plans & Recipes
+progression.book_catalog_description: Track plan and recipe progression here, then open the player catalog to filter by Minerva list, vendor, or activity.
+progression.book_catalog_open: Open catalog
+progression.book_catalog_learned: Learned plans/recipes
+progression.book_catalog_remaining: Remaining
+progression.book_catalog_lists: Minerva lists
+progression.book_catalog_lists_done: '%done% / %total% completed'
 nuke_codes.page_title: 'F76 - Nuke codes'
 nuke_codes.title: Nuke codes
 catalog_books.page_title: 'F76 - Plans & Recipes'

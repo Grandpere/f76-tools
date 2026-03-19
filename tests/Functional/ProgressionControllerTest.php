@@ -66,6 +66,9 @@ final class ProgressionControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter('[data-player-progression-players-base-url-value="/api/players"]'));
         self::assertCount(1, $crawler->filter(sprintf('[data-player-progression-initial-player-id-value="%s"]', $alpha->getPublicId())));
         self::assertCount(1, $crawler->filter('[data-player-progression-target="statsPanel"]'));
+        self::assertCount(1, $crawler->filter('[data-player-progression-target="bookPanel"]'));
+        self::assertCount(1, $crawler->filter(sprintf('a.catalog-cta-link[href="%s"]', '/en/plans-recipes')));
+        self::assertCount(1, $crawler->filter('.progression-book-panel'));
         self::assertCount(1, $crawler->filter('.app-primary-nav-link.is-active'));
     }
 
