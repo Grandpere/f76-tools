@@ -155,6 +155,7 @@ final class BookCatalogControllerTest extends WebTestCase
             'name_en' => $displayName,
             'unlocks' => ['text' => 'Unlock test'],
         ], $providerBExtra));
+        $item->addBookList(4, false);
 
         $this->entityManager?->persist($item);
         $this->entityManager?->flush();
