@@ -87,7 +87,8 @@ final class BookCatalogControllerTest extends WebTestCase
         self::assertSame('1', (string) $crawler->filter('input[name="page"]')->attr('value'));
         self::assertCount(1, $crawler->filter('input[name="player"]'));
         self::assertSame('all', (string) $crawler->filter('input[name="knowledge"]:checked')->attr('value'));
-        self::assertSame('name_asc', (string) $crawler->filter('select[name="sort"] option:checked')->attr('value'));
+        self::assertCount(1, $crawler->filter('select[name="sort"]'));
+        self::assertStringContainsString('<option value="name_asc" selected>', (string) $this->browser()->getResponse()->getContent());
         self::assertCount(1, $crawler->filter('[data-controller*="book-catalog-knowledge"]'));
         self::assertCount(1, $crawler->filter('[data-book-catalog-knowledge-target="playerSelect"]'));
         self::assertCount(1, $crawler->filter('[data-book-catalog-knowledge-target="playerInput"]'));
