@@ -336,4 +336,116 @@ final class PlayerItemKnowledgeEntityRepository extends ServiceEntityRepository 
 
         return $counts;
     }
+
+    /**
+     * @return array<string, int>
+     */
+    public function findLearnedBookCountsByCategory(PlayerEntity $player): array
+    {
+        $sql = <<<'SQL'
+                SELECT
+                    CASE
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_item_type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'name_en', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'name', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_slug', '')) LIKE 'recipe:%'
+                              )
+                        ) THEN 'recipe'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%power_armor_mod%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%power_armor_mod%'
+                              )
+                        ) THEN 'power_armor_mod_plan'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%power_armor%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%power_armor%'
+                              )
+                        ) THEN 'power_armor_plan'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%weapon_mod%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%weapon_mod%'
+                              )
+                        ) THEN 'weapon_mod_plan'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%weapon%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%weapon%'
+                              )
+                        ) THEN 'weapon_plan'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor_mod%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%armor_mod%'
+                              )
+                        ) THEN 'armor_mod_plan'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%armor%'
+                              )
+                        ) THEN 'armor_plan'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%'
+                              )
+                        ) THEN 'workshop_plan'
+                        ELSE 'plan'
+                    END AS book_category,
+                    COUNT(DISTINCT i.id) AS learned_count
+                FROM player_item_knowledge k
+                INNER JOIN item i ON i.id = k.item_id
+                WHERE k.player_id = :playerId
+                  AND i.type = :type
+                GROUP BY book_category
+            SQL;
+
+        $rows = $this->getEntityManager()->getConnection()->executeQuery($sql, [
+            'playerId' => $player->getId(),
+            'type' => ItemTypeEnum::BOOK->value,
+        ])->fetchAllAssociative();
+
+        $counts = [];
+        foreach ($rows as $row) {
+            $category = $row['book_category'] ?? null;
+            $countRaw = $row['learned_count'] ?? null;
+            if (!is_string($category) || (!is_int($countRaw) && !is_numeric($countRaw))) {
+                continue;
+            }
+
+            $counts[$category] = (int) $countRaw;
+        }
+
+        return $counts;
+    }
 }

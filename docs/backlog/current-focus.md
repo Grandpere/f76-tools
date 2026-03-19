@@ -25,6 +25,7 @@
 - Done (slice 19): les stats progression exposent maintenant aussi un split `plan` / `recipe` pour les `BOOK`; le bloc `Plans et recettes` de `/progression` peut donc afficher `total`, `plans` et `recettes`, tandis que les sections de detail sont renommees `Mods légendaires` et `Listes Minerva`.
 - Done (slice 20): correction du split progression `plan` / `recipe` pour les `BOOK` importes reels: les stats et le front reconnaissent maintenant `source_item_type` (et des fallbacks de nom/slug) au lieu de ne lire que `metadata.type`, ce qui supprime le faux `Recettes: 0 / 0`.
 - Done (slice 21): la carte de progression du haut `Plans Minerva` utilise maintenant un compteur dedie des `BOOK` rattaches a au moins une liste Minerva, au lieu de reafficher le total global du catalogue `BOOK`.
+- Done (slice 22): ajout d une premiere taxonomie canonique `BOOK` derivee des familles de pages source (`weapon_plan`, `weapon_mod_plan`, `armor_plan`, `armor_mod_plan`, `power_armor_plan`, `power_armor_mod_plan`, `workshop_plan`, `recipe`), branchee a la fois comme filtre sur `/plans-recipes` et comme detail de progression par categorie sur `/progression`.
 
 ### Avancement F76-153
 - Done (slice 1): `app:data:sync` devient orchestrateur (`all|nukaknights|fandom`) avec delegation a `app:data:sync:fandom`.

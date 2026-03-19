@@ -95,6 +95,7 @@ final class BookCatalogControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter('[data-book-catalog-knowledge-target="results"]'));
         self::assertCount(1, $crawler->filter('.item-learned-checkbox[data-book-checkbox="1"]'));
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="kinds[]"]')->count());
+        self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="categories[]"]')->count());
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="vendorFilters[]"]')->count());
         self::assertStringContainsString('vendorFilters[]', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('vendor_minerva', (string) $this->browser()->getResponse()->getContent());
@@ -155,6 +156,7 @@ final class BookCatalogControllerTest extends WebTestCase
         $item->upsertExternalSource('fallout_wiki', sprintf('%08X', $sourceId), 'https://example.test/wiki/'.$sourceId, array_merge([
             'name' => $displayName,
             'name_en' => $displayName,
+            'source_page' => 'Fallout_76_Weapon_Plans',
             'unlocks' => ['text' => 'Unlock test'],
         ], $providerBExtra));
         $item->addBookList(4, false);

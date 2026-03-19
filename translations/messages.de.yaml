@@ -105,6 +105,15 @@ catalog_books.list_option: Liste %list%
 catalog_books.kind_filters: Typ
 catalog_books.kind_plan: Bauplan
 catalog_books.kind_recipe: Rezept
+catalog_books.category_filters: Kategorie
+catalog_books.category_weapon_plan: Waffenbaupläne
+catalog_books.category_weapon_mod_plan: Waffenmod-Baupläne
+catalog_books.category_armor_plan: Rüstungsbaupläne
+catalog_books.category_armor_mod_plan: Rüstungsmod-Baupläne
+catalog_books.category_power_armor_plan: Powerrüstungs-Baupläne
+catalog_books.category_power_armor_mod_plan: Powerrüstungsmod-Baupläne
+catalog_books.category_workshop_plan: Werkstatt-Baupläne
+catalog_books.category_recipe: Rezepte
 catalog_books.vendor_filters: Händler
 catalog_books.vendor_group_all: Alle
 catalog_books.vendors: Alle Händler
@@ -196,6 +205,7 @@ dashboard.stats.misc: Legendare Mods
 dashboard.stats.book: Minerva-Plane
 dashboard.stats.by_rank: Legendäre Mods
 dashboard.stats.by_list: Minerva-Listen
+dashboard.stats.by_book_category: Baupläne & Rezepte nach Kategorie
 dashboard.stats.learned_on_total: '%learned% / %total%'
 dashboard.stats.percent_suffix: '%'
 dashboard.stats.rank_prefix: Rang

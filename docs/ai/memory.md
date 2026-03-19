@@ -105,6 +105,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: the stats payload now exposes a separate `minervaBooks` summary computed from items joined to `bookLists`, and the progression page uses that summary for the `Plans Minerva` card while keeping the global `BOOK` counters intact.
 - Prevention: when a UI card is scoped to a curated subset such as Minerva lists, expose a dedicated repository/service counter for that subset instead of reusing the broader type-level totals.
 
+## 2026-03-19 - BOOK subcategories should start from source-page families, not fragile item-name heuristics
+- Symptom: once the merged plans/recipes catalog became usable, the next valuable step was filtering and tracking meaningful families such as weapon plans, armor plans, workshop plans, and recipes across both `/plans-recipes` and `/progression`.
+- Root cause: names alone are too noisy for a stable first taxonomy, while the imported source metadata already carries more reliable grouping signals (`source_page`, `source_page_url`, `source_item_type`) coming from the raw JSON family files.
+- Fix: the first canonical BOOK taxonomy now derives short categories from source-page families (`weapon_plan`, `weapon_mod_plan`, `armor_plan`, `armor_mod_plan`, `power_armor_plan`, `power_armor_mod_plan`, `workshop_plan`, `recipe`) and reuses them for the catalog filters and progression breakdown.
+- Prevention: when adding a first user-facing taxonomy over imported source data, prefer stable source-family metadata first and postpone finer section/name-based subcategories until usage proves they are worth the added complexity.
+
 ## 2026-03-18 - Add low-risk cross-source flags from explicit labels before named event heuristics
 - Symptom: after the major taxonomy cleanup, the remaining `fallout_wiki.obtained` backlog was dominated by named activities/events, but a few still-used acquisition paths were exposed as explicit generic labels.
 - Root cause: not every useful concept needs fuzzy matching; some fields stay worth adding simply because the source already names them directly.

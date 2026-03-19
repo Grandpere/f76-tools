@@ -56,9 +56,9 @@ final class PlayerStatsControllerTest extends WebTestCase
         $miscRank1A = $this->createItem(701, ItemTypeEnum::MISC, 1, 'item.misc.701.name');
         $miscRank1B = $this->createItem(702, ItemTypeEnum::MISC, 1, 'item.misc.702.name');
         $miscRank2 = $this->createItem(703, ItemTypeEnum::MISC, 2, 'item.misc.703.name');
-        $bookList1 = $this->createBookItem(801, 'item.book.801.name', [1], 'plan');
-        $bookList1And4 = $this->createBookItem(802, 'item.book.802.name', [1, 4], 'plan');
-        $bookList2 = $this->createBookItem(803, 'item.book.803.name', [2], 'recipe');
+        $bookList1 = $this->createBookItem(801, 'item.book.801.name', [1], 'plan', 'Fallout_76_Weapon_Plans');
+        $bookList1And4 = $this->createBookItem(802, 'item.book.802.name', [1, 4], 'plan', 'Fallout_76_Workshop_Plans');
+        $bookList2 = $this->createBookItem(803, 'item.book.803.name', [2], 'recipe', 'Fallout_76_Recipes');
 
         $this->learn($player, $miscRank1A);
         $this->learn($player, $miscRank2);
@@ -97,6 +97,19 @@ final class PlayerStatsControllerTest extends WebTestCase
         self::assertSame(1, $this->readInt($recipe, 'total'));
         self::assertSame(0, $this->readInt($recipe, 'learned'));
         self::assertSame(0, $this->readInt($recipe, 'percent'));
+        $bookByCategory = $this->readList($payload, 'bookByCategory');
+        $weaponPlans = $this->findByStringKeyValue($bookByCategory, 'category', 'weapon_plan');
+        $workshopPlans = $this->findByStringKeyValue($bookByCategory, 'category', 'workshop_plan');
+        $recipeCategory = $this->findByStringKeyValue($bookByCategory, 'category', 'recipe');
+        self::assertSame(1, $this->readInt($weaponPlans, 'total'));
+        self::assertSame(0, $this->readInt($weaponPlans, 'learned'));
+        self::assertSame(0, $this->readInt($weaponPlans, 'percent'));
+        self::assertSame(1, $this->readInt($workshopPlans, 'total'));
+        self::assertSame(1, $this->readInt($workshopPlans, 'learned'));
+        self::assertSame(100, $this->readInt($workshopPlans, 'percent'));
+        self::assertSame(1, $this->readInt($recipeCategory, 'total'));
+        self::assertSame(0, $this->readInt($recipeCategory, 'learned'));
+        self::assertSame(0, $this->readInt($recipeCategory, 'percent'));
 
         $miscByRank = $this->readList($payload, 'miscByRank');
         $rank1 = $this->findByKeyValue($miscByRank, 'rank', 1);
@@ -177,12 +190,13 @@ final class PlayerStatsControllerTest extends WebTestCase
     /**
      * @param list<int> $listNumbers
      */
-    private function createBookItem(int $sourceId, string $nameKey, array $listNumbers, string $bookKind = 'plan'): ItemEntity
+    private function createBookItem(int $sourceId, string $nameKey, array $listNumbers, string $bookKind = 'plan', string $sourcePage = 'Fallout_76_Weapon_Plans'): ItemEntity
     {
         $item = $this->createItem($sourceId, ItemTypeEnum::BOOK, null, $nameKey);
         $item->upsertExternalSource('fallout_wiki', sprintf('%08X', $sourceId), 'https://example.test/wiki/'.$sourceId, [
             'source_item_type' => $bookKind,
             'name_en' => 'recipe' === $bookKind ? 'Recipe: Example test' : 'Plan: Example test',
+            'source_page' => $sourcePage,
         ]);
         foreach ($listNumbers as $listNumber) {
             $this->entityManager?->persist(new ItemBookListEntity()
@@ -313,5 +327,30 @@ final class PlayerStatsControllerTest extends WebTestCase
         }
 
         self::fail(sprintf('Row not found for %s=%d.', $key, $expected));
+    }
+
+    /**
+     * @param array<int, mixed> $rows
+     *
+     * @return array<string, mixed>
+     */
+    private function findByStringKeyValue(array $rows, string $key, string $expected): array
+    {
+        foreach ($rows as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+            $value = $row[$key] ?? null;
+            if (is_string($value) && $value === $expected) {
+                $normalized = [];
+                foreach ($row as $rowKey => $rowValue) {
+                    $normalized[(string) $rowKey] = $rowValue;
+                }
+
+                return $normalized;
+            }
+        }
+
+        self::fail(sprintf('Row not found for %s=%s.', $key, $expected));
     }
 }

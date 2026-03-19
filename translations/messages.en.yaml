@@ -105,6 +105,15 @@ catalog_books.list_option: List %list%
 catalog_books.kind_filters: Type
 catalog_books.kind_plan: Plan
 catalog_books.kind_recipe: Recipe
+catalog_books.category_filters: Category
+catalog_books.category_weapon_plan: Weapon plans
+catalog_books.category_weapon_mod_plan: Weapon mod plans
+catalog_books.category_armor_plan: Armor plans
+catalog_books.category_armor_mod_plan: Armor mod plans
+catalog_books.category_power_armor_plan: Power armor plans
+catalog_books.category_power_armor_mod_plan: Power armor mod plans
+catalog_books.category_workshop_plan: Workshop plans
+catalog_books.category_recipe: Recipes
 catalog_books.vendor_filters: Vendors
 catalog_books.vendor_group_all: All vendors
 catalog_books.vendors: Any vendor
@@ -196,6 +205,7 @@ dashboard.stats.misc: Legendary mods
 dashboard.stats.book: Minerva plans
 dashboard.stats.by_rank: Legendary mods
 dashboard.stats.by_list: Minerva lists
+dashboard.stats.by_book_category: Plans & recipes by category
 dashboard.stats.learned_on_total: '%learned% / %total%'
 dashboard.stats.percent_suffix: '%'
 dashboard.stats.rank_prefix: Rank

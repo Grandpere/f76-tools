@@ -17,6 +17,17 @@ use App\Progression\Domain\Entity\PlayerEntity;
 
 final class PlayerKnowledgeStatsApplicationService
 {
+    private const BOOK_CATEGORY_ORDER = [
+        'weapon_plan',
+        'weapon_mod_plan',
+        'armor_plan',
+        'armor_mod_plan',
+        'power_armor_plan',
+        'power_armor_mod_plan',
+        'workshop_plan',
+        'recipe',
+    ];
+
     public function __construct(
         private readonly ItemStatsReadRepository $itemRepository,
         private readonly PlayerKnowledgeStatsReadRepository $knowledgeRepository,
@@ -36,6 +47,7 @@ final class PlayerKnowledgeStatsApplicationService
      *         plan: array{learned: int, total: int, percent: int},
      *         recipe: array{learned: int, total: int, percent: int}
      *     },
+     *     bookByCategory: list<array{category: string, learned: int, total: int, percent: int}>,
      *     miscByRank: list<array{rank: int, learned: int, total: int, percent: int}>,
      *     bookByList: list<array{listNumber: int, learned: int, total: int, percent: int}>
      * }
@@ -60,6 +72,8 @@ final class PlayerKnowledgeStatsApplicationService
         $listedBookLearned = $this->knowledgeRepository->countLearnedBooksWithListNumber($player);
         $bookTotalsByKind = $this->itemRepository->findBookTotalsByKind();
         $bookLearnedByKind = $this->knowledgeRepository->findLearnedBookCountsByKind($player);
+        $bookTotalsByCategory = $this->itemRepository->findBookTotalsByCategory();
+        $bookLearnedByCategory = $this->knowledgeRepository->findLearnedBookCountsByCategory($player);
 
         $miscByRank = [];
         foreach ($miscTotals as $rank => $total) {
@@ -77,6 +91,22 @@ final class PlayerKnowledgeStatsApplicationService
             $learned = $bookLearned[$listNumber] ?? 0;
             $bookByList[] = [
                 'listNumber' => $listNumber,
+                'learned' => $learned,
+                'total' => $total,
+                'percent' => $this->toPercent($learned, $total),
+            ];
+        }
+
+        $bookByCategory = [];
+        foreach (self::BOOK_CATEGORY_ORDER as $category) {
+            $total = $bookTotalsByCategory[$category] ?? 0;
+            $learned = $bookLearnedByCategory[$category] ?? 0;
+            if (0 === $total && 0 === $learned) {
+                continue;
+            }
+
+            $bookByCategory[] = [
+                'category' => $category,
                 'learned' => $learned,
                 'total' => $total,
                 'percent' => $this->toPercent($learned, $total),
@@ -119,6 +149,7 @@ final class PlayerKnowledgeStatsApplicationService
                     'percent' => $this->toPercent($bookLearnedByKind['recipe'], $bookTotalsByKind['recipe']),
                 ],
             ],
+            'bookByCategory' => $bookByCategory,
             'miscByRank' => $miscByRank,
             'bookByList' => $bookByList,
         ];

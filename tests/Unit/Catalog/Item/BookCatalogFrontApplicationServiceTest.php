@@ -33,7 +33,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             $this->createBookItem(102, 'pub-bravo', 'catalog.book.bravo.name', 'Recipe: Bravo Soup', 'aligned'),
         ]);
 
-        $result = $service->browse('alpha', ['4'], [], [], [], 1, 24);
+        $result = $service->browse('alpha', ['4'], [], [], [], [], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertSame('pub-alpha', $result['rows'][0]['id']);
@@ -48,7 +48,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             $this->createBookItem(103, 'pub-currency', 'catalog.book.currency.name', 'Plan: Currency Test', 'aligned', ['purchase_currency' => 'caps', 'events' => true]),
         ]);
 
-        $result = $service->browse(null, [], [], [], ['events'], 1, 24);
+        $result = $service->browse(null, [], [], [], [], ['events'], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertCount(2, $result['rows'][0]['canonicalSignals']);
@@ -64,7 +64,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
 
         $service = $this->createService([$item]);
 
-        $result = $service->browse(null, [], [], ['vendors'], [], 1, 24);
+        $result = $service->browse(null, [], [], [], ['vendors'], [], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertContains('vendors', array_column($result['rows'][0]['canonicalSignals'], 'field'));
@@ -77,7 +77,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
 
         $service = $this->createService([$item]);
 
-        $result = $service->browse(null, [], [], [], ['daily_ops'], 1, 24);
+        $result = $service->browse(null, [], [], [], [], ['daily_ops'], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertContains('daily_ops', array_column($result['rows'][0]['canonicalSignals'], 'field'));
@@ -85,19 +85,21 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
 
     public function testBrowseFiltersByBookKindAndExposesVendorLabels(): void
     {
-        $plan = $this->createBookItem(106, 'pub-plan', 'catalog.book.plan.name', 'Plan: Plan Test', 'aligned', ['source_item_type' => 'plan']);
+        $plan = $this->createBookItem(106, 'pub-plan', 'catalog.book.plan.name', 'Plan: Plan Test', 'aligned', ['source_item_type' => 'plan', 'source_page' => 'Fallout_76_Weapon_Plans']);
         $plan->setVendorSamuel(true);
 
-        $recipe = $this->createBookItem(107, 'pub-recipe', 'catalog.book.recipe.name', 'Recipe: Recipe Test', 'aligned', ['source_item_type' => 'recipe']);
+        $recipe = $this->createBookItem(107, 'pub-recipe', 'catalog.book.recipe.name', 'Recipe: Recipe Test', 'aligned', ['source_item_type' => 'recipe', 'source_page' => 'Fallout_76_Recipes']);
 
         $service = $this->createService([$plan, $recipe]);
 
-        $result = $service->browse(null, [], ['plan'], [], [], 1, 24);
+        $result = $service->browse(null, [], ['plan'], ['weapon_plan'], [], [], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertSame(['plan', 'recipe'], $result['kindOptions']);
+        self::assertSame(['weapon_plan', 'recipe'], $result['categoryOptions']);
         self::assertSame(['vendors', 'vendor_samuel'], $result['vendorFilterOptions']);
         self::assertSame('plan', $result['rows'][0]['bookKind']);
+        self::assertSame('weapon_plan', $result['rows'][0]['bookCategory']);
         self::assertSame(['Samuel'], $result['rows'][0]['vendorLabels']);
     }
 
@@ -111,7 +113,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
 
         $service = $this->createService([$samuel, $regs]);
 
-        $result = $service->browse(null, [], [], ['vendor_samuel'], [], 1, 24);
+        $result = $service->browse(null, [], [], [], ['vendor_samuel'], [], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertSame(['Samuel'], $result['rows'][0]['vendorLabels']);
@@ -130,7 +132,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
 
         $service = $this->createService([$giuseppe]);
 
-        $result = $service->browse(null, [], [], ['vendor_giuseppe'], [], 1, 24);
+        $result = $service->browse(null, [], [], [], ['vendor_giuseppe'], [], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertContains('vendor_giuseppe', $result['vendorFilterOptions']);
@@ -146,7 +148,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
 
         $service = $this->createService([$item]);
 
-        $result = $service->browse('poker', [], [], [], [], 1, 24);
+        $result = $service->browse('poker', [], [], [], [], [], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertSame('Atlantic City Poker Table', $result['rows'][0]['unlocks']);
@@ -165,8 +167,8 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
 
         $service = $this->createService([$mixed]);
 
-        $minervaResult = $service->browse(null, [], [], ['vendor_minerva'], [], 1, 24);
-        $samuelResult = $service->browse(null, [], [], ['vendor_samuel'], [], 1, 24);
+        $minervaResult = $service->browse(null, [], [], [], ['vendor_minerva'], [], 1, 24);
+        $samuelResult = $service->browse(null, [], [], [], ['vendor_samuel'], [], 1, 24);
 
         self::assertSame(1, $minervaResult['totalItems']);
         self::assertSame(1, $samuelResult['totalItems']);
@@ -184,7 +186,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
 
         $service = $this->createService([$item]);
 
-        $result = $service->browse(null, [], [], [], [], 1, 24);
+        $result = $service->browse(null, [], [], [], [], [], 1, 24);
 
         self::assertSame(['Bullion vendors'], $result['vendorInfoOptions']);
         self::assertTrue($result['rows'][0]['vendorFlags']['vendors']);
@@ -199,8 +201,8 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
 
         $service = $this->createService([$learned, $unlearned], [$learned->getId() ?? 0]);
 
-        $learnedResult = $service->browse(null, [], [], [], [], 1, 24, $player, 'learned');
-        $unlearnedResult = $service->browse(null, [], [], [], [], 1, 24, $player, 'unlearned');
+        $learnedResult = $service->browse(null, [], [], [], [], [], 1, 24, $player, 'learned');
+        $unlearnedResult = $service->browse(null, [], [], [], [], [], 1, 24, $player, 'unlearned');
 
         self::assertSame(1, $learnedResult['totalItems']);
         self::assertSame('pub-learned', $learnedResult['rows'][0]['id']);
@@ -219,7 +221,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
         $player = new PlayerEntity();
 
         $service = $this->createService([$learned, $alsoLearned, $unlearned], [$learned->getId() ?? 0, $alsoLearned->getId() ?? 0]);
-        $result = $service->browse(null, [], ['plan'], [], [], 1, 24, $player, 'all');
+        $result = $service->browse(null, [], ['plan'], [], [], [], 1, 24, $player, 'all');
 
         self::assertSame(2, $result['progressSummary']['learned']);
         self::assertSame(2, $result['progressSummary']['total']);
@@ -242,8 +244,8 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
 
         $service = $this->createService([$alpha, $bravo, $charlie]);
 
-        $priceResult = $service->browse(null, [], [], [], [], 1, 24, null, 'all', 'price_asc');
-        $minervaResult = $service->browse(null, [], [], [], [], 1, 24, null, 'all', 'price_minerva_asc');
+        $priceResult = $service->browse(null, [], [], [], [], [], 1, 24, null, 'all', 'price_asc');
+        $minervaResult = $service->browse(null, [], [], [], [], [], 1, 24, null, 'all', 'price_minerva_asc');
 
         self::assertSame(['name_asc', 'price_asc', 'price_minerva_asc'], $priceResult['sortOptions']);
         self::assertSame(['pub-sort-bravo', 'pub-sort-alpha', 'pub-sort-charlie'], array_column($priceResult['rows'], 'id'));

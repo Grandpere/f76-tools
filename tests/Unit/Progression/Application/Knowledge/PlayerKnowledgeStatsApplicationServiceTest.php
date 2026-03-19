@@ -43,6 +43,11 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
         $itemRepository->method('findBookTotalsByListNumber')->willReturn([1 => 3, 4 => 3]);
         $itemRepository->method('countBooksWithListNumber')->willReturn(4);
         $itemRepository->method('findBookTotalsByKind')->willReturn(['plan' => 4, 'recipe' => 2]);
+        $itemRepository->method('findBookTotalsByCategory')->willReturn([
+            'weapon_plan' => 2,
+            'workshop_plan' => 2,
+            'recipe' => 2,
+        ]);
 
         $knowledgeRepository->method('countLearnedByPlayerByType')->willReturn([
             'all' => 5,
@@ -53,6 +58,11 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
         $knowledgeRepository->method('findLearnedBookCountsByListNumber')->willReturn([1 => 2, 4 => 2]);
         $knowledgeRepository->method('countLearnedBooksWithListNumber')->willReturn(2);
         $knowledgeRepository->method('findLearnedBookCountsByKind')->willReturn(['plan' => 3, 'recipe' => 1]);
+        $knowledgeRepository->method('findLearnedBookCountsByCategory')->willReturn([
+            'weapon_plan' => 1,
+            'workshop_plan' => 2,
+            'recipe' => 1,
+        ]);
 
         $payload = $service->getStats($player);
 
@@ -63,6 +73,14 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
         self::assertSame(['learned' => 2, 'total' => 4, 'percent' => 50], $payload['minervaBooks']);
         self::assertSame(['learned' => 3, 'total' => 4, 'percent' => 75], $payload['byBookKind']['plan']);
         self::assertSame(['learned' => 1, 'total' => 2, 'percent' => 50], $payload['byBookKind']['recipe']);
+        self::assertSame(
+            [
+                ['category' => 'weapon_plan', 'learned' => 1, 'total' => 2, 'percent' => 50],
+                ['category' => 'workshop_plan', 'learned' => 2, 'total' => 2, 'percent' => 100],
+                ['category' => 'recipe', 'learned' => 1, 'total' => 2, 'percent' => 50],
+            ],
+            $payload['bookByCategory'],
+        );
 
         self::assertSame(
             [
