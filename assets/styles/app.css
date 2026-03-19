@@ -1738,6 +1738,15 @@ body::before {
     font-size: 0.9rem;
 }
 
+.stats-group-summary {
+    margin: 0 0 0.65rem;
+}
+
+.stats-group-summary .stats-cards,
+.stats-group-summary .stats-card {
+    margin-top: 0;
+}
+
 .progression-book-panel-head {
     display: flex;
     justify-content: space-between;

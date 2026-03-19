@@ -339,11 +339,7 @@ export default class extends Controller {
         const miscByRank = Array.isArray(this.stats.miscByRank) ? this.stats.miscByRank : [];
         const bookByList = Array.isArray(this.stats.bookByList) ? this.stats.bookByList : [];
 
-        const cards = [
-            this.renderStatsCard(this.t('statsOverall'), overall),
-            this.renderStatsCard(this.t('statsMisc'), misc),
-            this.renderStatsCard(this.t('statsBook'), book),
-        ].join('');
+        const cards = [this.renderStatsCard(this.t('statsOverall'), overall)].join('');
 
         const rankRows = miscByRank.map((row) => this.renderStatsRow(`${this.t('statsRankPrefix')} ${row.rank}`, row)).join('');
         const listRows = bookByList.map((row) => this.renderStatsRow(`${this.t('statsListPrefix')} ${row.listNumber}`, row)).join('');
@@ -353,10 +349,16 @@ export default class extends Controller {
             <div class="stats-split">
                 <section class="stats-group">
                     <h3>${this.escape(this.t('statsByRank'))}</h3>
+                    <div class="stats-group-summary">
+                        ${this.renderStatsCard(this.t('statsMisc'), misc)}
+                    </div>
                     ${rankRows || '<p class="catalog-note">-</p>'}
                 </section>
                 <section class="stats-group">
                     <h3>${this.escape(this.t('statsByList'))}</h3>
+                    <div class="stats-group-summary">
+                        ${this.renderStatsCard(this.t('statsBook'), book)}
+                    </div>
                     ${listRows || '<p class="catalog-note">-</p>'}
                 </section>
             </div>
