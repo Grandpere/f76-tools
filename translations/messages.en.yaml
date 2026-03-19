@@ -90,6 +90,7 @@ catalog_books.kind_filters: Type
 catalog_books.kind_plan: Plan
 catalog_books.kind_recipe: Recipe
 catalog_books.vendor_filters: Vendors
+catalog_books.vendor_group_all: All vendors
 catalog_books.vendors: Any vendor
 catalog_books.vendor_group_bullion: Gold bullion vendors
 catalog_books.vendor_group_stamps: Stamp vendors

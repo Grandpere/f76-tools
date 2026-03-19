@@ -90,6 +90,7 @@ catalog_books.kind_filters: Type
 catalog_books.kind_plan: Plan
 catalog_books.kind_recipe: Recette
 catalog_books.vendor_filters: Marchands
+catalog_books.vendor_group_all: Tous
 catalog_books.vendors: Tous les marchands
 catalog_books.vendor_group_bullion: Marchands en lingots
 catalog_books.vendor_group_stamps: Marchands en timbres

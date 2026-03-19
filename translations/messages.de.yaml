@@ -90,6 +90,7 @@ catalog_books.kind_filters: Typ
 catalog_books.kind_plan: Bauplan
 catalog_books.kind_recipe: Rezept
 catalog_books.vendor_filters: Händler
+catalog_books.vendor_group_all: Alle
 catalog_books.vendors: Alle Händler
 catalog_books.vendor_group_bullion: Goldbarren-Händler
 catalog_books.vendor_group_stamps: Stempel-Händler
