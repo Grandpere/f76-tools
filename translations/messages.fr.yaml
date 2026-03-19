@@ -101,6 +101,9 @@ catalog_books.vendor_mortimer: Mortimer
 catalog_books.vendor_giuseppe: Giuseppe
 catalog_books.vendor_info_bullion_vendors: Marchands en lingots
 catalog_books.signal_filters: Filtres
+catalog_books.signal_group_repeatable: Contenu répétable
+catalog_books.signal_group_world: Sources monde
+catalog_books.signal_group_progression: Progression & spécial
 catalog_books.per_page: Par page
 catalog_books.apply_filters: Appliquer
 catalog_books.visible_items: '%count% items affichés sur %total%'

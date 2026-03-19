@@ -36,6 +36,16 @@
                         </select>
                     </label>
                     <fieldset class="source-filters catalog-books-list-filters">
+                        <legend>{{ 'catalog_books.kind_filters'|trans }}</legend>
+                        {% for option in kindOptions %}
+                            <label>
+                                <input type="checkbox" name="kinds[]" value="{{ option }}" {% if option in selectedKinds %}checked{% endif %}>
+                                {{ ('catalog_books.kind_' ~ option)|trans }}
+                            </label>
+                        {% endfor %}
+                    </fieldset>
+
+                    <fieldset class="source-filters catalog-books-list-filters">
                         <legend>{{ 'catalog_books.list_filter'|trans }}</legend>
                         <div class="source-filter-groups">
                             {% for optionGroup in listOptions|batch(4, null) %}
@@ -53,16 +63,6 @@
                                 </div>
                             {% endfor %}
                         </div>
-                    </fieldset>
-
-                    <fieldset class="source-filters catalog-books-list-filters">
-                        <legend>{{ 'catalog_books.kind_filters'|trans }}</legend>
-                        {% for option in kindOptions %}
-                            <label>
-                                <input type="checkbox" name="kinds[]" value="{{ option }}" {% if option in selectedKinds %}checked{% endif %}>
-                                {{ ('catalog_books.kind_' ~ option)|trans }}
-                            </label>
-                        {% endfor %}
                     </fieldset>
 
                     <fieldset class="source-filters catalog-books-list-filters">
@@ -136,15 +136,45 @@
 
                     <fieldset class="source-filters catalog-books-list-filters">
                         <legend>{{ 'catalog_books.signal_filters'|trans }}</legend>
-                        {% for option in signalOptions %}
-                            <label>
-                                <input type="checkbox" name="signals[]" value="{{ option }}" {% if option in selectedSignals %}checked{% endif %}>
-                                {% if signalIconMap[option] is defined %}
-                                    <img src="{{ asset(signalIconMap[option]) }}" alt="" aria-hidden="true">
+                        <div class="source-filter-groups">
+                            {% set repeatableSignalOptions = ['daily_ops', 'expeditions', 'raid', 'events'] %}
+                            {% set worldSignalOptions = ['world_spawns', 'containers', 'enemies', 'random_encounters', 'treasure_maps'] %}
+                            {% set progressionSignalOptions = ['quests', 'seasonal_content', 'unused_content'] %}
+
+                            {% set signalGroups = [
+                                { title: 'catalog_books.signal_group_repeatable', options: repeatableSignalOptions },
+                                { title: 'catalog_books.signal_group_world', options: worldSignalOptions },
+                                { title: 'catalog_books.signal_group_progression', options: progressionSignalOptions },
+                            ] %}
+
+                            {% for group in signalGroups %}
+                                {% set hasGroupOptions = false %}
+                                {% for option in group.options %}
+                                    {% if option in signalOptions %}
+                                        {% set hasGroupOptions = true %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if hasGroupOptions %}
+                                    <div class="source-filter-group">
+                                        <p class="source-filter-group-title">{{ group.title|trans }}</p>
+                                        <div class="source-filter-options">
+                                            {% for option in group.options %}
+                                                {% if option in signalOptions %}
+                                                    <label>
+                                                        <input type="checkbox" name="signals[]" value="{{ option }}" {% if option in selectedSignals %}checked{% endif %}>
+                                                        {% if signalIconMap[option] is defined %}
+                                                            <img src="{{ asset(signalIconMap[option]) }}" alt="" aria-hidden="true">
+                                                        {% endif %}
+                                                        <span>{{ ('catalog_books.signal_' ~ option)|trans }}</span>
+                                                    </label>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
                                 {% endif %}
-                                <span>{{ ('catalog_books.signal_' ~ option)|trans }}</span>
-                            </label>
-                        {% endfor %}
+                            {% endfor %}
+                        </div>
                     </fieldset>
                 </form>
 

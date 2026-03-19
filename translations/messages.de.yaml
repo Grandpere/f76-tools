@@ -101,6 +101,9 @@ catalog_books.vendor_mortimer: Mortimer
 catalog_books.vendor_giuseppe: Giuseppe
 catalog_books.vendor_info_bullion_vendors: Goldbarren-Händler
 catalog_books.signal_filters: Filter
+catalog_books.signal_group_repeatable: Wiederholbare Inhalte
+catalog_books.signal_group_world: Weltquellen
+catalog_books.signal_group_progression: Fortschritt & Spezial
 catalog_books.per_page: Pro Seite
 catalog_books.apply_filters: Anwenden
 catalog_books.visible_items: '%count% Items angezeigt von %total%'
