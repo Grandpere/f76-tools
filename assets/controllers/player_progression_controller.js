@@ -332,6 +332,7 @@ export default class extends Controller {
         const byType = this.stats.byType || {};
         const byBookKind = this.stats.byBookKind || {};
         const misc = byType.misc || { learned: 0, total: 0, percent: 0 };
+        const minervaBooks = this.stats.minervaBooks || { learned: 0, total: 0, percent: 0 };
         const book = byType.book || { learned: 0, total: 0, percent: 0 };
         const bookPlans = byBookKind.plan || { learned: 0, total: 0, percent: 0 };
         const bookRecipes = byBookKind.recipe || { learned: 0, total: 0, percent: 0 };
@@ -341,7 +342,7 @@ export default class extends Controller {
         const cards = [
             this.renderStatsCard(this.t('statsOverall'), overall),
             this.renderStatsCard(this.t('statsMisc'), misc),
-            this.renderStatsCard(this.t('statsBook'), book),
+            this.renderStatsCard(this.t('statsBook'), minervaBooks),
         ].join('');
 
         const rankRows = miscByRank.map((row) => this.renderStatsRow(`${this.t('statsRankPrefix')} ${row.rank}`, row)).join('');

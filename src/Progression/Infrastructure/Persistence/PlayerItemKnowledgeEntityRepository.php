@@ -272,6 +272,22 @@ final class PlayerItemKnowledgeEntityRepository extends ServiceEntityRepository 
         return $counts;
     }
 
+    public function countLearnedBooksWithListNumber(PlayerEntity $player): int
+    {
+        $count = $this->createQueryBuilder('k')
+            ->select('COUNT(DISTINCT i.id)')
+            ->join('k.item', 'i')
+            ->join('i.bookLists', 'bl')
+            ->andWhere('k.player = :player')
+            ->andWhere('i.type = :type')
+            ->setParameter('player', $player)
+            ->setParameter('type', ItemTypeEnum::BOOK)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return (int) $count;
+    }
+
     /**
      * @return array{plan: int, recipe: int}
      */

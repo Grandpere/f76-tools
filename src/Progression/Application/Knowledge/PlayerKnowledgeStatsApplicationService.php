@@ -31,6 +31,7 @@ final class PlayerKnowledgeStatsApplicationService
      *         misc: array{learned: int, total: int, percent: int},
      *         book: array{learned: int, total: int, percent: int}
      *     },
+     *     minervaBooks: array{learned: int, total: int, percent: int},
      *     byBookKind: array{
      *         plan: array{learned: int, total: int, percent: int},
      *         recipe: array{learned: int, total: int, percent: int}
@@ -55,6 +56,8 @@ final class PlayerKnowledgeStatsApplicationService
         $miscLearned = $this->knowledgeRepository->findLearnedMiscCountsByRank($player);
         $bookTotals = $this->itemRepository->findBookTotalsByListNumber();
         $bookLearned = $this->knowledgeRepository->findLearnedBookCountsByListNumber($player);
+        $listedBookTotal = $this->itemRepository->countBooksWithListNumber();
+        $listedBookLearned = $this->knowledgeRepository->countLearnedBooksWithListNumber($player);
         $bookTotalsByKind = $this->itemRepository->findBookTotalsByKind();
         $bookLearnedByKind = $this->knowledgeRepository->findLearnedBookCountsByKind($player);
 
@@ -98,6 +101,11 @@ final class PlayerKnowledgeStatsApplicationService
                     'total' => $totalBook,
                     'percent' => $this->toPercent($learnedBook, $totalBook),
                 ],
+            ],
+            'minervaBooks' => [
+                'learned' => $listedBookLearned,
+                'total' => $listedBookTotal,
+                'percent' => $this->toPercent($listedBookLearned, $listedBookTotal),
             ],
             'byBookKind' => [
                 'plan' => [

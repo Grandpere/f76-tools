@@ -41,6 +41,7 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
         ]);
         $itemRepository->method('findMiscTotalsByRank')->willReturn([1 => 2, 2 => 2]);
         $itemRepository->method('findBookTotalsByListNumber')->willReturn([1 => 3, 4 => 3]);
+        $itemRepository->method('countBooksWithListNumber')->willReturn(4);
         $itemRepository->method('findBookTotalsByKind')->willReturn(['plan' => 4, 'recipe' => 2]);
 
         $knowledgeRepository->method('countLearnedByPlayerByType')->willReturn([
@@ -50,6 +51,7 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
         ]);
         $knowledgeRepository->method('findLearnedMiscCountsByRank')->willReturn([1 => 1, 2 => 0]);
         $knowledgeRepository->method('findLearnedBookCountsByListNumber')->willReturn([1 => 2, 4 => 2]);
+        $knowledgeRepository->method('countLearnedBooksWithListNumber')->willReturn(2);
         $knowledgeRepository->method('findLearnedBookCountsByKind')->willReturn(['plan' => 3, 'recipe' => 1]);
 
         $payload = $service->getStats($player);
@@ -58,6 +60,7 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
         self::assertSame(['learned' => 5, 'total' => 10, 'percent' => 50], $payload['overall']);
         self::assertSame(['learned' => 1, 'total' => 4, 'percent' => 25], $payload['byType']['misc']);
         self::assertSame(['learned' => 4, 'total' => 6, 'percent' => 67], $payload['byType']['book']);
+        self::assertSame(['learned' => 2, 'total' => 4, 'percent' => 50], $payload['minervaBooks']);
         self::assertSame(['learned' => 3, 'total' => 4, 'percent' => 75], $payload['byBookKind']['plan']);
         self::assertSame(['learned' => 1, 'total' => 2, 'percent' => 50], $payload['byBookKind']['recipe']);
 

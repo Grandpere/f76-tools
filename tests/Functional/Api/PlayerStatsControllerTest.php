@@ -78,12 +78,16 @@ final class PlayerStatsControllerTest extends WebTestCase
         $byType = $this->readMap($payload, 'byType');
         $misc = $this->readMap($byType, 'misc');
         $book = $this->readMap($byType, 'book');
+        $minervaBooks = $this->readMap($payload, 'minervaBooks');
         self::assertSame(3, $this->readInt($misc, 'total'));
         self::assertSame(2, $this->readInt($misc, 'learned'));
         self::assertSame(67, $this->readInt($misc, 'percent'));
         self::assertSame(3, $this->readInt($book, 'total'));
         self::assertSame(1, $this->readInt($book, 'learned'));
         self::assertSame(33, $this->readInt($book, 'percent'));
+        self::assertSame(3, $this->readInt($minervaBooks, 'total'));
+        self::assertSame(1, $this->readInt($minervaBooks, 'learned'));
+        self::assertSame(33, $this->readInt($minervaBooks, 'percent'));
         $byBookKind = $this->readMap($payload, 'byBookKind');
         $plan = $this->readMap($byBookKind, 'plan');
         $recipe = $this->readMap($byBookKind, 'recipe');

@@ -542,6 +542,19 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
         return $totals;
     }
 
+    public function countBooksWithListNumber(): int
+    {
+        $count = $this->createQueryBuilder('i')
+            ->select('COUNT(DISTINCT i.id)')
+            ->join('i.bookLists', 'bl')
+            ->andWhere('i.type = :type')
+            ->setParameter('type', ItemTypeEnum::BOOK)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return (int) $count;
+    }
+
     /**
      * @return array{plan: int, recipe: int}
      */

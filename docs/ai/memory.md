@@ -99,6 +99,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: progression stats now classify recipes from either `metadata.type` or `metadata.source_item_type`, with extra fallbacks on recipe-prefixed source names/slugs, and the front book-kind extraction plus functional tests now cover `source_item_type`.
 - Prevention: when a read-side query classifies imported source records directly from JSON metadata, verify it against the real imported key names and mirror them in tests instead of using cleaner synthetic aliases.
 
+## 2026-03-19 - The top "Plans Minerva" progression card must count listed books only
+- Symptom: the top progression card labeled `Plans Minerva` could show totals identical to all `BOOK` items (for example `2290`), which made the UI internally inconsistent with the Minerva list details below.
+- Root cause: the card reused `byType.book`, i.e. the full `BOOK` catalog count, instead of a dedicated counter for books that actually belong to at least one Minerva list.
+- Fix: the stats payload now exposes a separate `minervaBooks` summary computed from items joined to `bookLists`, and the progression page uses that summary for the `Plans Minerva` card while keeping the global `BOOK` counters intact.
+- Prevention: when a UI card is scoped to a curated subset such as Minerva lists, expose a dedicated repository/service counter for that subset instead of reusing the broader type-level totals.
+
 ## 2026-03-18 - Add low-risk cross-source flags from explicit labels before named event heuristics
 - Symptom: after the major taxonomy cleanup, the remaining `fallout_wiki.obtained` backlog was dominated by named activities/events, but a few still-used acquisition paths were exposed as explicit generic labels.
 - Root cause: not every useful concept needs fuzzy matching; some fields stay worth adding simply because the source already names them directly.
