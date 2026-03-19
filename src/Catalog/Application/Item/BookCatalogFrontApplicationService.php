@@ -65,7 +65,8 @@ final class BookCatalogFrontApplicationService
      *         priceCurrencyCode:string,
      *         priceCurrencyLabel:string,
      *         vendorLabels:list<string>,
-     *         vendorFlags:array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool},
+     *         vendorFlags:array{vendors:bool,vendor_minerva:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool},
+     *         vendorInfoLabels:list<string>,
      *         isNew:bool,
      *         bookListNumbers:list<int>,
      *         canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
@@ -76,6 +77,7 @@ final class BookCatalogFrontApplicationService
      *     listOptions:list<int>,
      *     kindOptions:list<string>,
      *     vendorFilterOptions:list<string>,
+     *     vendorInfoOptions:list<string>,
      *     signalOptions:list<string>
      * }
      */
@@ -86,6 +88,7 @@ final class BookCatalogFrontApplicationService
         $listOptions = $this->extractListOptions($rows);
         $kindOptions = $this->extractKindOptions($rows);
         $vendorFilterOptions = $this->extractVendorFilterOptions($rows);
+        $vendorInfoOptions = $this->extractVendorInfoOptions($rows);
         $signalOptions = $this->extractSignalOptions($rows);
 
         $normalizedQuery = $this->normalize($query);
@@ -184,6 +187,7 @@ final class BookCatalogFrontApplicationService
             'listOptions' => $listOptions,
             'kindOptions' => $kindOptions,
             'vendorFilterOptions' => $vendorFilterOptions,
+            'vendorInfoOptions' => $vendorInfoOptions,
             'signalOptions' => $signalOptions,
         ];
     }
@@ -200,7 +204,8 @@ final class BookCatalogFrontApplicationService
      *     priceCurrencyCode:string,
      *     priceCurrencyLabel:string,
      *     vendorLabels:list<string>,
-     *     vendorFlags:array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool},
+     *     vendorFlags:array{vendors:bool,vendor_minerva:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool},
+     *     vendorInfoLabels:list<string>,
      *     isNew:bool,
      *     bookListNumbers:list<int>,
      *     canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
@@ -214,6 +219,7 @@ final class BookCatalogFrontApplicationService
         $bookKind = $this->extractBookKind($item);
         $vendorLabels = $this->extractVendorLabels($item);
         $vendorFlags = $this->extractVendorFlags($item);
+        $vendorInfoLabels = $this->extractVendorInfoLabels($item);
 
         $bookListNumbers = [];
         foreach ($item->getBookLists() as $bookList) {
@@ -236,6 +242,7 @@ final class BookCatalogFrontApplicationService
             'priceCurrencyLabel' => $priceCurrencyLabel,
             'vendorLabels' => $vendorLabels,
             'vendorFlags' => $vendorFlags,
+            'vendorInfoLabels' => $vendorInfoLabels,
             'isNew' => $item->isNew(),
             'bookListNumbers' => array_values(array_unique($bookListNumbers)),
             'canonicalSignals' => array_values(array_filter(
@@ -257,7 +264,7 @@ final class BookCatalogFrontApplicationService
             $signals,
         );
 
-        if (($item->isVendorRegs() || $item->isVendorSamuel() || $item->isVendorMortimer()) && !in_array('vendors', $existingFields, true)) {
+        if (($item->isVendorRegs() || $item->isVendorSamuel() || $item->isVendorMortimer() || $this->hasAnyVendorMetadata($item)) && !in_array('vendors', $existingFields, true)) {
             $signals[] = [
                 'field' => 'vendors',
                 'label' => $this->translator->trans('catalog_books.signal_vendors'),
@@ -285,7 +292,8 @@ final class BookCatalogFrontApplicationService
      *     description:?string,
      *     note:?string,
      *     vendorLabels:list<string>,
-     *     vendorFlags:array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool},
+     *     vendorFlags:array{vendors:bool,vendor_minerva:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool},
+     *     vendorInfoLabels:list<string>,
      *     bookListNumbers:list<int>,
      *     canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
      * } $row
@@ -302,6 +310,10 @@ final class BookCatalogFrontApplicationService
 
         foreach ($row['vendorLabels'] as $vendorLabel) {
             $parts[] = $vendorLabel;
+        }
+
+        foreach ($row['vendorInfoLabels'] as $vendorInfoLabel) {
+            $parts[] = $vendorInfoLabel;
         }
 
         foreach ($row['canonicalSignals'] as $signal) {
@@ -347,37 +359,57 @@ final class BookCatalogFrontApplicationService
     {
         $labels = [];
 
-        if ($item->isVendorRegs()) {
+        if ($this->hasMinervaVendor($item)) {
+            $labels[] = $this->translator->trans('catalog_books.vendor_minerva');
+        }
+
+        if ($this->hasRegsVendor($item)) {
             $labels[] = $this->translator->trans('catalog_books.vendor_regs');
         }
 
-        if ($item->isVendorSamuel()) {
+        if ($this->hasSamuelVendor($item)) {
             $labels[] = $this->translator->trans('catalog_books.vendor_samuel');
         }
 
-        if ($item->isVendorMortimer()) {
+        if ($this->hasMortimerVendor($item)) {
             $labels[] = $this->translator->trans('catalog_books.vendor_mortimer');
         }
 
-        if ($this->hasGiuseppeVendorMetadata($item)) {
+        if ($this->hasGiuseppeVendor($item)) {
             $labels[] = $this->translator->trans('catalog_books.vendor_giuseppe');
+        }
+
+        return array_values(array_unique($labels));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function extractVendorInfoLabels(ItemEntity $item): array
+    {
+        $labels = [];
+
+        if ($this->hasBullionVendorsMetadata($item)) {
+            $labels[] = $this->translator->trans('catalog_books.vendor_info_bullion_vendors');
         }
 
         return $labels;
     }
 
     /**
-     * @return array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool}
+     * @return array{vendors:bool,vendor_minerva:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool}
      */
     private function extractVendorFlags(ItemEntity $item): array
     {
-        $vendorRegs = $item->isVendorRegs();
-        $vendorSamuel = $item->isVendorSamuel();
-        $vendorMortimer = $item->isVendorMortimer();
-        $vendorGiuseppe = $this->hasGiuseppeVendorMetadata($item);
+        $vendorMinerva = $this->hasMinervaVendor($item);
+        $vendorRegs = $this->hasRegsVendor($item);
+        $vendorSamuel = $this->hasSamuelVendor($item);
+        $vendorMortimer = $this->hasMortimerVendor($item);
+        $vendorGiuseppe = $this->hasGiuseppeVendor($item);
 
         return [
-            'vendors' => $vendorRegs || $vendorSamuel || $vendorMortimer || $vendorGiuseppe,
+            'vendors' => $vendorMinerva || $vendorRegs || $vendorSamuel || $vendorMortimer || $vendorGiuseppe || $this->hasBullionVendorsMetadata($item),
+            'vendor_minerva' => $vendorMinerva,
             'vendor_regs' => $vendorRegs,
             'vendor_samuel' => $vendorSamuel,
             'vendor_mortimer' => $vendorMortimer,
@@ -385,7 +417,50 @@ final class BookCatalogFrontApplicationService
         ];
     }
 
-    private function hasGiuseppeVendorMetadata(ItemEntity $item): bool
+    private function hasAnyVendorMetadata(ItemEntity $item): bool
+    {
+        return $this->hasMinervaVendor($item)
+            || $this->hasRegsVendor($item)
+            || $this->hasSamuelVendor($item)
+            || $this->hasMortimerVendor($item)
+            || $this->hasGiuseppeVendor($item)
+            || $this->hasBullionVendorsMetadata($item);
+    }
+
+    private function hasMinervaVendor(ItemEntity $item): bool
+    {
+        return $this->hasVendorMetadata($item, ['minerva']);
+    }
+
+    private function hasRegsVendor(ItemEntity $item): bool
+    {
+        return $item->isVendorRegs() || $this->hasVendorMetadata($item, ['regs', 'reginald stone']);
+    }
+
+    private function hasSamuelVendor(ItemEntity $item): bool
+    {
+        return $item->isVendorSamuel() || $this->hasVendorMetadata($item, ['samuel', 'samuel (wastelanders)']);
+    }
+
+    private function hasMortimerVendor(ItemEntity $item): bool
+    {
+        return $item->isVendorMortimer() || $this->hasVendorMetadata($item, ['mortimer']);
+    }
+
+    private function hasGiuseppeVendor(ItemEntity $item): bool
+    {
+        return $this->hasVendorMetadata($item, ['giuseppe']);
+    }
+
+    private function hasBullionVendorsMetadata(ItemEntity $item): bool
+    {
+        return $this->hasVendorMetadata($item, ['bullion vendors']);
+    }
+
+    /**
+     * @param list<string> $needles
+     */
+    private function hasVendorMetadata(ItemEntity $item, array $needles): bool
     {
         foreach ($item->getExternalSources() as $externalSource) {
             $metadata = $externalSource->getMetadata();
@@ -393,7 +468,7 @@ final class BookCatalogFrontApplicationService
                 continue;
             }
 
-            if ($this->metadataContainsGiuseppe($metadata)) {
+            if ($this->metadataContainsVendor($metadata, $needles)) {
                 return true;
             }
         }
@@ -403,12 +478,13 @@ final class BookCatalogFrontApplicationService
 
     /**
      * @param array<string, mixed> $metadata
+     * @param list<string>         $needles
      */
-    private function metadataContainsGiuseppe(array $metadata): bool
+    private function metadataContainsVendor(array $metadata, array $needles): bool
     {
         foreach (['obtained', 'type', 'purchase_currency'] as $field) {
             $value = $metadata[$field] ?? null;
-            if ($this->valueContainsGiuseppe($value)) {
+            if ($this->valueContainsAnyNeedle($value, $needles)) {
                 return true;
             }
         }
@@ -416,10 +492,21 @@ final class BookCatalogFrontApplicationService
         return false;
     }
 
-    private function valueContainsGiuseppe(mixed $value): bool
+    /**
+     * @param list<string> $needles
+     */
+    private function valueContainsAnyNeedle(mixed $value, array $needles): bool
     {
         if (is_scalar($value)) {
-            return str_contains($this->normalize((string) $value), 'giuseppe');
+            $normalized = $this->normalize((string) $value);
+
+            foreach ($needles as $needle) {
+                if (str_contains($normalized, $needle)) {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         if (!is_array($value)) {
@@ -427,7 +514,7 @@ final class BookCatalogFrontApplicationService
         }
 
         foreach ($value as $entry) {
-            if ($this->valueContainsGiuseppe($entry)) {
+            if ($this->valueContainsAnyNeedle($entry, $needles)) {
                 return true;
             }
         }
@@ -563,7 +650,7 @@ final class BookCatalogFrontApplicationService
     }
 
     /**
-     * @param list<array{vendorFlags:array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool}}> $rows
+     * @param list<array{vendorFlags:array{vendors:bool,vendor_minerva:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool}}> $rows
      *
      * @return list<string>
      */
@@ -575,6 +662,35 @@ final class BookCatalogFrontApplicationService
                 if ($enabled) {
                     $options[$key] = true;
                 }
+            }
+        }
+
+        $orderedOptions = [
+            'vendors',
+            'vendor_minerva',
+            'vendor_regs',
+            'vendor_samuel',
+            'vendor_mortimer',
+            'vendor_giuseppe',
+        ];
+
+        return array_values(array_filter(
+            $orderedOptions,
+            static fn (string $option): bool => isset($options[$option]),
+        ));
+    }
+
+    /**
+     * @param list<array{vendorInfoLabels:list<string>}> $rows
+     *
+     * @return list<string>
+     */
+    private function extractVendorInfoOptions(array $rows): array
+    {
+        $options = [];
+        foreach ($rows as $row) {
+            foreach ($row['vendorInfoLabels'] as $label) {
+                $options[$label] = true;
             }
         }
 

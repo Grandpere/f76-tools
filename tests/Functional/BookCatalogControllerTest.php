@@ -61,8 +61,16 @@ final class BookCatalogControllerTest extends WebTestCase
             'enemies' => true,
             'seasonal_content' => true,
             'world_spawns' => true,
+            'obtained' => [
+                'text' => 'Samuel or Minerva',
+                'icons' => ['Samuel (Wastelanders)', 'Minerva'],
+            ],
         ]);
         $this->createBook(654, 'catalog.book.front.bravo', 'Recipe: Bravo Soup');
+        $this->createBook(777, 'catalog.book.front.charlie', 'Plan: Charlie Receiver', [
+            'obtained' => 'Bullion vendors',
+            'purchase_currency' => 'gold_bullion',
+        ]);
 
         $this->browser()->loginUser($user);
         $crawler = $this->browser()->request('GET', '/plans-recipes?q=alpha');
@@ -78,6 +86,9 @@ final class BookCatalogControllerTest extends WebTestCase
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="kinds[]"]')->count());
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="vendorFilters[]"]')->count());
         self::assertStringContainsString('vendorFilters[]', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('vendor_minerva', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('Source hints', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('Bullion vendors', (string) $this->browser()->getResponse()->getContent());
         self::assertCount(1, $crawler->filter('[data-catalog-filters-target="summary"]'));
         self::assertCount(1, $crawler->filter('[data-catalog-filters-target="results"]'));
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="lists[]"]')->count());
@@ -87,6 +98,7 @@ final class BookCatalogControllerTest extends WebTestCase
         self::assertStringContainsString('/assets/icons/FO76_collections_stamps01.webp', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('/assets/icons/FO76_scoresprite_seasons.png', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('/assets/icons/FO76_ui_exploration_team.png', (string) $this->browser()->getResponse()->getContent());
+        self::assertStringContainsString('/assets/icons/WhitespringResortMarker.svg', (string) $this->browser()->getResponse()->getContent());
     }
 
     private function createUser(string $email): UserEntity

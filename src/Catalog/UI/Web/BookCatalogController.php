@@ -103,6 +103,7 @@ final class BookCatalogController extends AbstractController
             'listOptions' => $result['listOptions'],
             'kindOptions' => $result['kindOptions'],
             'vendorFilterOptions' => $result['vendorFilterOptions'],
+            'vendorInfoOptions' => $result['vendorInfoOptions'],
             'signalOptions' => $result['signalOptions'],
             'signalIconMap' => self::SIGNAL_ICON_MAP,
             'currencyIconMap' => self::CURRENCY_ICON_MAP,

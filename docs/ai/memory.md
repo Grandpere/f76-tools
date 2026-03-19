@@ -730,3 +730,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: raw source labels mix generic categories (`Fallout 76 Events`, `Daily Ops`) with named activities, NPCs, and noisy concatenations.
 - Fix: introduced canonical `events` and `daily_ops` only from generic, low-risk markers first (`Fallout 76 Events`, `Event`, `Mutated Public Events`, `Daily Ops`) and propagated them through merge/reporting.
 - Prevention: extend taxonomy incrementally from generic labels first; only map specific named activities once the business concept and matching rules are clear enough to avoid false positives.
+
+## 2026-03-19 - Front vendor filters must combine local item flags with wiki vendor aliases
+- Symptom: `/plans-recipes` initially missed valid vendor matches such as `Giuseppe`, `Samuel or Minerva`, or `Regs or Minerva`, because the front only trusted local Minerva flags for some vendors and a one-off metadata check for Giuseppe.
+- Root cause: exact vendor filters were derived from inconsistent sources: some from persistent item booleans (`vendorSamuel`, `vendorRegs`, `vendorMortimer`), some from raw wiki metadata, and mixed wiki labels (`X or Minerva`) were not normalized into both relevant vendor filters.
+- Fix: the front read model now derives exact vendor flags from both local booleans and wiki metadata aliases (`Minerva`, `Regs/Reginald Stone`, `Samuel`, `Mortimer`, `Giuseppe`), so mixed labels match every relevant vendor filter; generic `Bullion vendors` is exposed separately as a non-filtering vendor hint, and the Giuseppe asset was renamed to `WhitespringResortMarker.svg` to stay consistent with the other vendor marker names.
+- Prevention: for player-facing vendor filters, treat raw wiki vendor names as first-class signals alongside local Minerva booleans, and keep generic marketplace labels (`Bullion vendors`) out of exact filter options.

@@ -63,6 +63,9 @@
                                 {% if option == 'vendors' and signalIconMap.vendors is defined %}
                                     <img src="{{ asset(signalIconMap.vendors) }}" alt="" aria-hidden="true">
                                 {% endif %}
+                                {% if option == 'vendor_minerva' %}
+                                    <span class="catalog-vendor-text-icon" aria-hidden="true">M</span>
+                                {% endif %}
                                 {% if option == 'vendor_regs' %}
                                     <img src="{{ asset('/assets/icons/Vault79Marker.svg') }}" alt="" aria-hidden="true">
                                 {% endif %}
@@ -73,11 +76,21 @@
                                     <img src="{{ asset('/assets/icons/SkullRingMarker.svg') }}" alt="" aria-hidden="true">
                                 {% endif %}
                                 {% if option == 'vendor_giuseppe' %}
-                                    <img src="{{ asset('/assets/icons/WhitespringResort.svg') }}" alt="" aria-hidden="true">
+                                    <img src="{{ asset('/assets/icons/WhitespringResortMarker.svg') }}" alt="" aria-hidden="true">
                                 {% endif %}
                                 <span>{{ ('catalog_books.' ~ option)|trans }}</span>
                             </label>
                         {% endfor %}
+                        {% if vendorInfoOptions is not empty %}
+                            <div class="catalog-filters-subgroup">
+                                <span class="catalog-filters-subgroup-title">{{ 'catalog_books.vendor_info_title'|trans }}</span>
+                                <div class="catalog-filters-subgroup-list">
+                                    {% for infoLabel in vendorInfoOptions %}
+                                        <span class="item-pill">{{ infoLabel }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
                     </fieldset>
 
                     <fieldset class="source-filters catalog-books-list-filters">
@@ -157,6 +170,7 @@
                                 </div>
                             {% endif %}
 
+                            {% set hasVendorFooterIcons = item.vendorFlags.vendor_regs or item.vendorFlags.vendor_samuel or item.vendorFlags.vendor_mortimer or item.vendorFlags.vendor_giuseppe %}
                             {% if item.canonicalSignals %}
                                 <div class="catalog-book-signal-list">
                                     {% for signal in item.canonicalSignals %}
@@ -167,8 +181,14 @@
                                         {% endif %}
                                     {% endfor %}
                                 </div>
+                            {% endif %}
+
+                            {% if hasVendorFooterIcons or item.canonicalSignals %}
                                 <div class="item-icons-footer">
                                     <p class="item-source-icons">
+                                        {% if item.vendorFlags.vendor_minerva %}
+                                            <span class="catalog-vendor-text-icon" title="{{ 'catalog_books.vendor_minerva'|trans }}">M</span>
+                                        {% endif %}
                                         {% if item.vendorFlags.vendor_regs %}
                                             <img src="{{ asset('/assets/icons/Vault79Marker.svg') }}" alt="{{ 'catalog_books.vendor_regs'|trans }}" title="{{ 'catalog_books.vendor_regs'|trans }}">
                                         {% endif %}
@@ -179,7 +199,7 @@
                                             <img src="{{ asset('/assets/icons/SkullRingMarker.svg') }}" alt="{{ 'catalog_books.vendor_mortimer'|trans }}" title="{{ 'catalog_books.vendor_mortimer'|trans }}">
                                         {% endif %}
                                         {% if item.vendorFlags.vendor_giuseppe %}
-                                            <img src="{{ asset('/assets/icons/WhitespringResort.svg') }}" alt="{{ 'catalog_books.vendor_giuseppe'|trans }}" title="{{ 'catalog_books.vendor_giuseppe'|trans }}">
+                                            <img src="{{ asset('/assets/icons/WhitespringResortMarker.svg') }}" alt="{{ 'catalog_books.vendor_giuseppe'|trans }}" title="{{ 'catalog_books.vendor_giuseppe'|trans }}">
                                         {% endif %}
                                         {% for signal in item.canonicalSignals %}
                                             {% if signalIconMap[signal.field] is defined %}

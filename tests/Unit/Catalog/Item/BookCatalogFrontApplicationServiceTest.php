@@ -241,6 +241,77 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
         self::assertSame(['Giuseppe'], $result['rows'][0]['vendorLabels']);
     }
 
+    public function testBrowseMatchesMixedVendorMetadataAcrossExactFilters(): void
+    {
+        $mixed = $this->createBookItem(111, 'pub-vendor-mixed', 'catalog.book.vendor.mixed', 'Plan: Mixed Vendor Plan', 'aligned', [
+            'type' => 'plan',
+            'obtained' => [
+                'text' => 'Samuel or Minerva',
+                'icons' => ['Samuel (Wastelanders)', 'Minerva'],
+            ],
+            'purchase_currency' => 'gold_bullion',
+        ]);
+
+        $service = new BookCatalogFrontApplicationService(
+            new class([$mixed]) implements BookCatalogFrontReadRepository {
+                /**
+                 * @param list<ItemEntity> $items
+                 */
+                public function __construct(private readonly array $items)
+                {
+                }
+
+                public function findAllBooksDetailedOrdered(): array
+                {
+                    return $this->items;
+                }
+            },
+            new ItemSourceMergePolicy(),
+            $this->createTranslator(),
+        );
+
+        $minervaResult = $service->browse(null, [], [], ['vendor_minerva'], [], 1, 24);
+        $samuelResult = $service->browse(null, [], [], ['vendor_samuel'], [], 1, 24);
+
+        self::assertSame(1, $minervaResult['totalItems']);
+        self::assertSame(1, $samuelResult['totalItems']);
+        self::assertContains('vendor_minerva', $minervaResult['vendorFilterOptions']);
+        self::assertSame(['Minerva', 'Samuel'], $minervaResult['rows'][0]['vendorLabels']);
+    }
+
+    public function testBrowseExposesBullionVendorsAsInformationalVendorHint(): void
+    {
+        $item = $this->createBookItem(112, 'pub-vendor-bullion', 'catalog.book.vendor.bullion', 'Plan: Bullion Vendor Plan', 'aligned', [
+            'type' => 'plan',
+            'obtained' => 'Bullion vendors',
+            'purchase_currency' => 'gold_bullion',
+        ]);
+
+        $service = new BookCatalogFrontApplicationService(
+            new class([$item]) implements BookCatalogFrontReadRepository {
+                /**
+                 * @param list<ItemEntity> $items
+                 */
+                public function __construct(private readonly array $items)
+                {
+                }
+
+                public function findAllBooksDetailedOrdered(): array
+                {
+                    return $this->items;
+                }
+            },
+            new ItemSourceMergePolicy(),
+            $this->createTranslator(),
+        );
+
+        $result = $service->browse(null, [], [], [], [], 1, 24);
+
+        self::assertSame(['Bullion vendors'], $result['vendorInfoOptions']);
+        self::assertTrue($result['rows'][0]['vendorFlags']['vendors']);
+        self::assertSame(['Bullion vendors'], $result['rows'][0]['vendorInfoLabels']);
+    }
+
     /**
      * @param array<string, mixed> $providerBExtra
      */
@@ -294,6 +365,8 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
                     'catalog.book.vendor.samuel' => 'Plan: Samuel Plan',
                     'catalog.book.vendor.regs' => 'Plan: Regs Plan',
                     'catalog.book.vendor.giuseppe' => 'Plan: Giuseppe Plan',
+                    'catalog.book.vendor.mixed' => 'Plan: Mixed Vendor Plan',
+                    'catalog.book.vendor.bullion' => 'Plan: Bullion Vendor Plan',
                     'catalog_books.signal_purchase_currency' => 'Currency',
                     'catalog_books.signal_containers' => 'Containers',
                     'catalog_books.signal_daily_ops' => 'Daily Ops',
@@ -301,8 +374,10 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
                     'catalog_books.signal_vendors' => 'Vendors',
                     'catalog_books.signal_enabled' => 'Enabled',
                     'catalog_books.currency_caps' => 'Caps',
+                    'catalog_books.vendor_minerva' => 'Minerva',
                     'catalog_books.vendor_samuel' => 'Samuel',
                     'catalog_books.vendor_giuseppe' => 'Giuseppe',
+                    'catalog_books.vendor_info_bullion_vendors' => 'Bullion vendors',
                     default => $id,
                 };
             },
