@@ -21,7 +21,8 @@
         <section class="catalog-shell">
             <section class="catalog-panel filters-panel">
                 <h2>{{ 'catalog_books.filters_title'|trans }}</h2>
-                <form method="get" class="catalog-toolbar" data-controller="catalog-filters">
+                <form method="get" action="{{ path('app_book_catalog', { _locale: app.request.locale }) }}" class="catalog-toolbar" data-controller="catalog-filters">
+                    <input type="hidden" name="page" value="{{ page }}" data-catalog-filters-target="pageInput">
                     <label class="field">
                         <span>{{ 'catalog_books.search'|trans }}</span>
                         <input type="search" name="q" value="{{ query }}" placeholder="{{ 'catalog_books.search_placeholder'|trans }}" data-catalog-filters-target="searchInput">
@@ -58,12 +59,12 @@
                     </fieldset>
                 </form>
 
-                <p class="catalog-state">
+                <p class="catalog-state" data-catalog-filters-target="summary">
                     {{ 'catalog_books.visible_items'|trans({'%count%': items|length, '%total%': totalItems}) }}
                 </p>
             </section>
 
-            <section class="catalog-panel catalog-block">
+            <section class="catalog-panel catalog-block" data-catalog-filters-target="results">
                 <h2>{{ 'catalog_books.list_title'|trans }}</h2>
                 <p class="catalog-note">{{ 'catalog_books.list_help'|trans }}</p>
 
