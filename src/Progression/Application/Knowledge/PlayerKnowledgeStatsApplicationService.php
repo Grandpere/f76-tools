@@ -21,11 +21,79 @@ final class PlayerKnowledgeStatsApplicationService
         'weapon_plan',
         'weapon_mod_plan',
         'armor_plan',
+        'apparel_plan',
         'armor_mod_plan',
         'power_armor_plan',
         'power_armor_mod_plan',
         'workshop_plan',
         'recipe',
+    ];
+    /**
+     * @var array<string, array<string, string>>
+     */
+    private const BOOK_SUBCATEGORY_LABELS = [
+        'weapon_plan' => [
+            'ballistic' => 'Ballistic',
+            'melee' => 'Melee',
+            'thrown' => 'Thrown',
+            'bows' => 'Bows',
+            'alien' => 'Alien',
+            'camera' => 'Camera',
+            'unused' => 'Unused',
+        ],
+        'weapon_mod_plan' => [
+            'ballistic' => 'Ballistic',
+            'melee' => 'Melee',
+            'bows' => 'Bows',
+            'alien' => 'Alien',
+            'camera' => 'Camera',
+            'unused' => 'Unused',
+        ],
+        'apparel_plan' => [
+            'outfits' => 'Outfits',
+            'headwear' => 'Headwear',
+            'backpacks' => 'Backpacks',
+        ],
+        'power_armor_plan' => [
+            'union' => 'Union',
+            'vulcan' => 'Vulcan',
+            'hellcat' => 'Hellcat',
+            'excavator' => 'Excavator',
+            'raider' => 'Raider',
+            'strangler_heart' => 'Strangler Heart',
+            't_45' => 'T-45',
+            't_51' => 'T-51',
+            't_60' => 'T-60',
+            't_65' => 'T-65',
+            'ultracite' => 'Ultracite',
+            'x_01' => 'X-01',
+        ],
+        'power_armor_mod_plan' => [
+            'union' => 'Union',
+            'vulcan' => 'Vulcan',
+            'hellcat' => 'Hellcat',
+            'excavator' => 'Excavator',
+            'raider' => 'Raider',
+            'strangler_heart' => 'Strangler Heart',
+            't_45' => 'T-45',
+            't_51' => 'T-51',
+            't_60' => 'T-60',
+            't_65' => 'T-65',
+            'ultracite' => 'Ultracite',
+            'x_01' => 'X-01',
+            'unused' => 'Unused',
+        ],
+        'workshop_plan' => [
+            'floor_decor' => 'Floor Decor',
+            'wall_decor' => 'Wall Decor',
+            'lights' => 'Lights',
+            'utility' => 'Utility',
+            'structures' => 'Structures',
+            'display' => 'Display',
+            'allies' => 'Allies',
+            'crafting' => 'Crafting',
+            'defenses' => 'Defenses',
+        ],
     ];
 
     public function __construct(
@@ -48,6 +116,7 @@ final class PlayerKnowledgeStatsApplicationService
      *         recipe: array{learned: int, total: int, percent: int}
      *     },
      *     bookByCategory: list<array{category: string, learned: int, total: int, percent: int}>,
+     *     bookBySubcategory: list<array{category: string, subcategory: string, label: string, learned: int, total: int, percent: int}>,
      *     miscByRank: list<array{rank: int, learned: int, total: int, percent: int}>,
      *     bookByList: list<array{listNumber: int, learned: int, total: int, percent: int}>
      * }
@@ -74,6 +143,8 @@ final class PlayerKnowledgeStatsApplicationService
         $bookLearnedByKind = $this->knowledgeRepository->findLearnedBookCountsByKind($player);
         $bookTotalsByCategory = $this->itemRepository->findBookTotalsByCategory();
         $bookLearnedByCategory = $this->knowledgeRepository->findLearnedBookCountsByCategory($player);
+        $bookTotalsBySubcategory = $this->itemRepository->findBookTotalsBySubcategory();
+        $bookLearnedBySubcategory = $this->knowledgeRepository->findLearnedBookCountsBySubcategory($player);
 
         $miscByRank = [];
         foreach ($miscTotals as $rank => $total) {
@@ -113,6 +184,26 @@ final class PlayerKnowledgeStatsApplicationService
             ];
         }
 
+        $bookBySubcategory = [];
+        foreach (self::BOOK_SUBCATEGORY_LABELS as $category => $subcategories) {
+            foreach ($subcategories as $subcategory => $label) {
+                $total = $bookTotalsBySubcategory[$category][$subcategory] ?? 0;
+                $learned = $bookLearnedBySubcategory[$category][$subcategory] ?? 0;
+                if (0 === $total && 0 === $learned) {
+                    continue;
+                }
+
+                $bookBySubcategory[] = [
+                    'category' => $category,
+                    'subcategory' => $subcategory,
+                    'label' => $label,
+                    'learned' => $learned,
+                    'total' => $total,
+                    'percent' => $this->toPercent($learned, $total),
+                ];
+            }
+        }
+
         return [
             'playerId' => $player->getPublicId(),
             'overall' => [
@@ -150,6 +241,7 @@ final class PlayerKnowledgeStatsApplicationService
                 ],
             ],
             'bookByCategory' => $bookByCategory,
+            'bookBySubcategory' => $bookBySubcategory,
             'miscByRank' => $miscByRank,
             'bookByList' => $bookByList,
         ];

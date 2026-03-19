@@ -58,6 +58,7 @@ final class BookCatalogControllerTest extends WebTestCase
         $user = $this->createUser('books@example.com');
         $this->createPlayer($user, 'Main dweller');
         $this->createBook(321, 'catalog.book.front.alpha', 'Plan: Alpha Receiver', [
+            'source_section' => 'Ballistic',
             'daily_ops' => true,
             'expeditions' => true,
             'enemies' => true,
@@ -96,6 +97,7 @@ final class BookCatalogControllerTest extends WebTestCase
         self::assertCount(1, $crawler->filter('.item-learned-checkbox[data-book-checkbox="1"]'));
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="kinds[]"]')->count());
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="categories[]"]')->count());
+        self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="subcategories[]"]')->count());
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="vendorFilters[]"]')->count());
         self::assertStringContainsString('vendorFilters[]', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('vendor_minerva', (string) $this->browser()->getResponse()->getContent());

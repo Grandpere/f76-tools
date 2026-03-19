@@ -111,6 +111,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: the first canonical BOOK taxonomy now derives short categories from source-page families (`weapon_plan`, `weapon_mod_plan`, `armor_plan`, `armor_mod_plan`, `power_armor_plan`, `power_armor_mod_plan`, `workshop_plan`, `recipe`) and reuses them for the catalog filters and progression breakdown.
 - Prevention: when adding a first user-facing taxonomy over imported source data, prefer stable source-family metadata first and postpone finer section/name-based subcategories until usage proves they are worth the added complexity.
 
+## 2026-03-19 - Second-level BOOK taxonomy should use only source sections that stay stable across imports
+- Symptom: after adding first-level `BOOK` families, the next useful step was to expose finer progress slices such as `Ballistic`, `Floor Decor`, `Union`, or `Outfits`, but only where the raw sources consistently express those buckets.
+- Root cause: some imported families (`weapon`, `workshop`, `power armor`, `apparel`) ship stable `source_section` values, while others (`armor`, `recipes`) are still too generic to support a trustworthy second-level split.
+- Fix: the second-level taxonomy now derives subcategories only for the stable families, exposes them as `/plans-recipes` filter options, and adds a matching `/progression` breakdown instead of forcing every first-level category into an unreliable sub-split.
+- Prevention: when extending a user-facing taxonomy beyond the first level, audit raw `source_section` values per family first and keep categories without stable sections at one level rather than inventing heuristics.
+
 ## 2026-03-18 - Add low-risk cross-source flags from explicit labels before named event heuristics
 - Symptom: after the major taxonomy cleanup, the remaining `fallout_wiki.obtained` backlog was dominated by named activities/events, but a few still-used acquisition paths were exposed as explicit generic labels.
 - Root cause: not every useful concept needs fuzzy matching; some fields stay worth adding simply because the source already names them directly.

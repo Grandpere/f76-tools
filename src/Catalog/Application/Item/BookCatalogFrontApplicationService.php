@@ -31,11 +31,59 @@ final class BookCatalogFrontApplicationService
         'weapon_plan',
         'weapon_mod_plan',
         'armor_plan',
+        'apparel_plan',
         'armor_mod_plan',
         'power_armor_plan',
         'power_armor_mod_plan',
         'workshop_plan',
         'recipe',
+    ];
+    /**
+     * @var array<string, list<string>>
+     */
+    private const BOOK_SUBCATEGORY_ORDER = [
+        'weapon_plan' => ['ballistic', 'melee', 'thrown', 'bows', 'alien', 'camera', 'unused'],
+        'weapon_mod_plan' => ['ballistic', 'melee', 'bows', 'alien', 'camera', 'unused'],
+        'apparel_plan' => ['outfits', 'headwear', 'backpacks'],
+        'power_armor_plan' => ['union', 'vulcan', 'hellcat', 'excavator', 'raider', 'strangler_heart', 't_45', 't_51', 't_60', 't_65', 'ultracite', 'x_01'],
+        'power_armor_mod_plan' => ['union', 'vulcan', 'hellcat', 'excavator', 'raider', 'strangler_heart', 't_45', 't_51', 't_60', 't_65', 'ultracite', 'x_01', 'unused'],
+        'workshop_plan' => ['floor_decor', 'wall_decor', 'lights', 'utility', 'structures', 'display', 'allies', 'crafting', 'defenses'],
+    ];
+    /**
+     * @var array<string, string>
+     */
+    private const BOOK_SUBCATEGORY_LABELS = [
+        'ballistic' => 'Ballistic',
+        'melee' => 'Melee',
+        'thrown' => 'Thrown',
+        'bows' => 'Bows',
+        'alien' => 'Alien',
+        'camera' => 'Camera',
+        'unused' => 'Unused',
+        'outfits' => 'Outfits',
+        'headwear' => 'Headwear',
+        'backpacks' => 'Backpacks',
+        'union' => 'Union',
+        'vulcan' => 'Vulcan',
+        'hellcat' => 'Hellcat',
+        'excavator' => 'Excavator',
+        'raider' => 'Raider',
+        'strangler_heart' => 'Strangler Heart',
+        't_45' => 'T-45',
+        't_51' => 'T-51',
+        't_60' => 'T-60',
+        't_65' => 'T-65',
+        'ultracite' => 'Ultracite',
+        'x_01' => 'X-01',
+        'floor_decor' => 'Floor Decor',
+        'wall_decor' => 'Wall Decor',
+        'lights' => 'Lights',
+        'utility' => 'Utility',
+        'structures' => 'Structures',
+        'display' => 'Display',
+        'allies' => 'Allies',
+        'crafting' => 'Crafting',
+        'defenses' => 'Defenses',
     ];
     private const CANONICAL_SIGNAL_FIELDS = [
         'purchase_currency',
@@ -66,6 +114,7 @@ final class BookCatalogFrontApplicationService
      * @param list<string> $selectedLists
      * @param list<string> $selectedKinds
      * @param list<string> $selectedCategories
+     * @param list<string> $selectedSubcategories
      * @param list<string> $selectedVendorFilters
      * @param list<string> $selectedSignals
      *
@@ -75,6 +124,8 @@ final class BookCatalogFrontApplicationService
      *         name:string,
      *         bookKind:string,
      *         bookCategory:string,
+     *         bookSubcategory:?string,
+     *         bookSubcategoryLabel:?string,
      *         description:?string,
      *         note:?string,
      *         unlocks:?string,
@@ -97,13 +148,14 @@ final class BookCatalogFrontApplicationService
      *     listOptions:list<int>,
      *     kindOptions:list<string>,
      *     categoryOptions:list<string>,
+     *     subcategoryOptions:list<array{category:string,id:string,label:string}>,
      *     sortOptions:list<string>,
      *     vendorFilterOptions:list<string>,
      *     vendorInfoOptions:list<string>,
      *     signalOptions:list<string>
      * }
      */
-    public function browse(?string $query, array $selectedLists, array $selectedKinds, array $selectedCategories, array $selectedVendorFilters, array $selectedSignals, int $page, int $perPage, ?PlayerEntity $player = null, string $knowledgeFilter = 'all', string $sort = 'name_asc'): array
+    public function browse(?string $query, array $selectedLists, array $selectedKinds, array $selectedCategories, array $selectedSubcategories, array $selectedVendorFilters, array $selectedSignals, int $page, int $perPage, ?PlayerEntity $player = null, string $knowledgeFilter = 'all', string $sort = 'name_asc'): array
     {
         $items = $this->bookCatalogFrontReadRepository->findAllBooksDetailedOrdered();
         $learnedItemIds = [];
@@ -118,6 +170,7 @@ final class BookCatalogFrontApplicationService
         $listOptions = $this->extractListOptions($rows);
         $kindOptions = $this->extractKindOptions($rows);
         $categoryOptions = $this->extractCategoryOptions($rows);
+        $subcategoryOptions = $this->extractSubcategoryOptions($rows);
         $sortOptions = $this->extractSortOptions();
         $vendorFilterOptions = $this->extractVendorFilterOptions($rows);
         $vendorInfoOptions = $this->extractVendorInfoOptions($rows);
@@ -173,6 +226,21 @@ final class BookCatalogFrontApplicationService
             $rows = array_values(array_filter(
                 $rows,
                 static fn (array $row): bool => in_array($row['bookCategory'], $normalizedCategories, true),
+            ));
+        }
+
+        $normalizedSubcategories = array_filter(
+            array_map(
+                fn (string $value): string => $this->normalize($value),
+                $selectedSubcategories,
+            ),
+            static fn (string $value): bool => '' !== $value,
+        );
+
+        if ([] !== $normalizedSubcategories) {
+            $rows = array_values(array_filter(
+                $rows,
+                static fn (array $row): bool => null !== $row['bookSubcategory'] && in_array($row['bookSubcategory'], $normalizedSubcategories, true),
             ));
         }
 
@@ -245,8 +313,33 @@ final class BookCatalogFrontApplicationService
         $currentPage = min(max(1, $page), $totalPages);
         $offset = ($currentPage - 1) * max(1, $perPage);
 
+        /** @var list<array{
+         *     id:string,
+         *     name:string,
+         *     bookKind:string,
+         *     bookCategory:string,
+         *     bookSubcategory:?string,
+         *     bookSubcategoryLabel:?string,
+         *     description:?string,
+         *     note:?string,
+         *     unlocks:?string,
+         *     price:?int,
+         *     priceMinerva:?int,
+         *     priceCurrencyCode:string,
+         *     priceCurrencyLabel:string,
+         *     vendorLabels:list<string>,
+         *     vendorFlags:array{vendors:bool,vendor_minerva:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool},
+         *     vendorInfoLabels:list<string>,
+         *     learned:bool,
+         *     isNew:bool,
+         *     bookListNumbers:list<int>,
+         *     canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
+         * }> $paginatedRows
+         */
+        $paginatedRows = array_slice($rows, $offset, max(1, $perPage));
+
         return [
-            'rows' => array_slice($rows, $offset, max(1, $perPage)),
+            'rows' => $paginatedRows,
             'totalItems' => $totalItems,
             'totalPages' => $totalPages,
             'currentPage' => $currentPage,
@@ -259,6 +352,7 @@ final class BookCatalogFrontApplicationService
             'listOptions' => $listOptions,
             'kindOptions' => $kindOptions,
             'categoryOptions' => $categoryOptions,
+            'subcategoryOptions' => $subcategoryOptions,
             'sortOptions' => $sortOptions,
             'vendorFilterOptions' => $vendorFilterOptions,
             'vendorInfoOptions' => $vendorInfoOptions,
@@ -272,6 +366,8 @@ final class BookCatalogFrontApplicationService
      *     name:string,
      *     bookKind:string,
      *     bookCategory:string,
+     *     bookSubcategory:?string,
+     *     bookSubcategoryLabel:?string,
      *     description:?string,
      *     note:?string,
      *     unlocks:?string,
@@ -295,6 +391,7 @@ final class BookCatalogFrontApplicationService
         $canonicalSignals = $this->appendItemDerivedSignals($item, $canonicalSignals);
         $bookKind = $this->extractBookKind($item);
         $bookCategory = $this->extractBookCategory($item, $bookKind);
+        $bookSubcategory = $this->extractBookSubcategory($item, $bookCategory);
         $unlocks = $this->extractUnlocks($item, $mergeResult);
         $vendorLabels = $this->extractVendorLabels($item);
         $vendorFlags = $this->extractVendorFlags($item);
@@ -314,6 +411,8 @@ final class BookCatalogFrontApplicationService
             'name' => $this->translator->trans($item->getNameKey(), domain: 'items'),
             'bookKind' => $bookKind,
             'bookCategory' => $bookCategory,
+            'bookSubcategory' => $bookSubcategory,
+            'bookSubcategoryLabel' => null !== $bookSubcategory ? (self::BOOK_SUBCATEGORY_LABELS[$bookSubcategory] ?? $bookSubcategory) : null,
             'description' => null !== $item->getDescKey() ? $this->translator->trans($item->getDescKey(), domain: 'items') : null,
             'note' => null !== $item->getNoteKey() ? $this->translator->trans($item->getNoteKey(), domain: 'items') : null,
             'unlocks' => $unlocks,
@@ -372,6 +471,8 @@ final class BookCatalogFrontApplicationService
      *     name:string,
      *     bookKind:string,
      *     bookCategory:string,
+     *     bookSubcategory:?string,
+     *     bookSubcategoryLabel:?string,
      *     description:?string,
      *     note:?string,
      *     unlocks:?string,
@@ -388,6 +489,7 @@ final class BookCatalogFrontApplicationService
             $row['name'],
             $row['bookKind'],
             $this->translator->trans('catalog_books.category_'.$row['bookCategory']),
+            (string) ($row['bookSubcategoryLabel'] ?? ''),
             (string) ($row['description'] ?? ''),
             (string) ($row['note'] ?? ''),
             (string) ($row['unlocks'] ?? ''),
@@ -468,6 +570,9 @@ final class BookCatalogFrontApplicationService
             if (str_contains($haystack, 'weapon')) {
                 return 'weapon_plan';
             }
+            if (str_contains($haystack, 'apparel')) {
+                return 'apparel_plan';
+            }
             if (str_contains($haystack, 'armor_mod')) {
                 return 'armor_mod_plan';
             }
@@ -480,6 +585,36 @@ final class BookCatalogFrontApplicationService
         }
 
         return 'plan';
+    }
+
+    private function extractBookSubcategory(ItemEntity $item, string $bookCategory): ?string
+    {
+        if (!array_key_exists($bookCategory, self::BOOK_SUBCATEGORY_ORDER)) {
+            return null;
+        }
+
+        foreach ($this->sortSourcesForTaxonomy($item) as $metadata) {
+            $section = $this->normalize($this->stringFromMetadata($metadata, 'source_section'));
+            if ('' === $section) {
+                continue;
+            }
+
+            if (in_array($bookCategory, ['weapon_plan', 'weapon_mod_plan'], true)) {
+                $subcategory = $this->matchWeaponSubcategory($section);
+            } elseif ('apparel_plan' === $bookCategory) {
+                $subcategory = $this->matchApparelSubcategory($section);
+            } elseif (in_array($bookCategory, ['power_armor_plan', 'power_armor_mod_plan'], true)) {
+                $subcategory = $this->matchPowerArmorSubcategory($section);
+            } else {
+                $subcategory = $this->matchWorkshopSubcategory($section);
+            }
+
+            if (null !== $subcategory) {
+                return $subcategory;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -495,6 +630,105 @@ final class BookCatalogFrontApplicationService
         $normalized = trim((string) $value);
 
         return '' !== $normalized ? $normalized : null;
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    private function sortSourcesForTaxonomy(ItemEntity $item): array
+    {
+        $sources = [];
+        foreach ($item->getExternalSources() as $externalSource) {
+            $metadata = $externalSource->getMetadata();
+            if (!is_array($metadata)) {
+                continue;
+            }
+
+            $sources[] = [
+                'provider' => $externalSource->getProvider(),
+                'metadata' => $metadata,
+            ];
+        }
+
+        usort($sources, static function (array $left, array $right): int {
+            $leftWeight = match ($left['provider']) {
+                'fallout_wiki' => 0,
+                'fandom' => 1,
+                default => 2,
+            };
+            $rightWeight = match ($right['provider']) {
+                'fallout_wiki' => 0,
+                'fandom' => 1,
+                default => 2,
+            };
+
+            return $leftWeight <=> $rightWeight;
+        });
+
+        return array_map(
+            static fn (array $source): array => $source['metadata'],
+            $sources,
+        );
+    }
+
+    private function matchWeaponSubcategory(string $section): ?string
+    {
+        foreach (self::BOOK_SUBCATEGORY_ORDER['weapon_plan'] as $subcategory) {
+            if (str_contains($section, str_replace('_', ' ', $subcategory))) {
+                return $subcategory;
+            }
+        }
+
+        return null;
+    }
+
+    private function matchApparelSubcategory(string $section): ?string
+    {
+        return match (true) {
+            str_contains($section, 'headwear') => 'headwear',
+            str_contains($section, 'backpacks') => 'backpacks',
+            str_contains($section, 'outfits') => 'outfits',
+            default => null,
+        };
+    }
+
+    private function matchPowerArmorSubcategory(string $section): ?string
+    {
+        $normalized = str_replace(['<span></span>', 'power armor'], '', $section);
+        $normalized = trim(preg_replace('/\s+/', ' ', $normalized) ?? $normalized);
+
+        return match (true) {
+            str_contains($normalized, 'strangler heart') => 'strangler_heart',
+            str_contains($normalized, 'excavator') => 'excavator',
+            str_contains($normalized, 'raider') => 'raider',
+            str_contains($normalized, 't-45') => 't_45',
+            str_contains($normalized, 't-51') => 't_51',
+            str_contains($normalized, 't-60') => 't_60',
+            str_contains($normalized, 't-65') => 't_65',
+            str_contains($normalized, 'ultracite') => 'ultracite',
+            str_contains($normalized, 'union') => 'union',
+            str_contains($normalized, 'hellcat') => 'hellcat',
+            str_contains($normalized, 'x-01') => 'x_01',
+            str_contains($normalized, 'vulcan') => 'vulcan',
+            str_contains($normalized, 'unused') => 'unused',
+            default => null,
+        };
+    }
+
+    private function matchWorkshopSubcategory(string $section): ?string
+    {
+        return match (true) {
+            str_contains($section, 'floor decor') => 'floor_decor',
+            str_contains($section, 'wall decor') => 'wall_decor',
+            str_contains($section, 'lights') => 'lights',
+            str_contains($section, 'utility') => 'utility',
+            str_contains($section, 'structures') => 'structures',
+            str_contains($section, 'display') => 'display',
+            str_contains($section, 'allies') => 'allies',
+            str_contains($section, 'crafting') => 'crafting',
+            str_contains($section, 'defenses') => 'defenses',
+            default => null,
+        };
     }
 
     private function extractUnlocks(ItemEntity $item, ?ItemSourceMergeResult $mergeResult): ?string
@@ -948,6 +1182,52 @@ final class BookCatalogFrontApplicationService
             self::BOOK_CATEGORY_ORDER,
             static fn (string $category): bool => isset($presentCategories[$category]),
         ));
+    }
+
+    /**
+     * @param list<array{bookCategory:string,bookSubcategory:?string,bookSubcategoryLabel:?string}> $rows
+     *
+     * @return list<array{category:string,id:string,label:string}>
+     */
+    private function extractSubcategoryOptions(array $rows): array
+    {
+        $present = [];
+        foreach ($rows as $row) {
+            if (null === $row['bookSubcategory'] || null === $row['bookSubcategoryLabel']) {
+                continue;
+            }
+
+            $key = $row['bookCategory'].':'.$row['bookSubcategory'];
+            $present[$key] = [
+                'category' => $row['bookCategory'],
+                'id' => $row['bookSubcategory'],
+                'label' => $row['bookSubcategoryLabel'],
+            ];
+        }
+
+        $options = array_values($present);
+        usort($options, function (array $left, array $right): int {
+            $leftCategoryIndex = array_search($left['category'], self::BOOK_CATEGORY_ORDER, true);
+            $rightCategoryIndex = array_search($right['category'], self::BOOK_CATEGORY_ORDER, true);
+            $leftCategoryIndex = false === $leftCategoryIndex ? PHP_INT_MAX : $leftCategoryIndex;
+            $rightCategoryIndex = false === $rightCategoryIndex ? PHP_INT_MAX : $rightCategoryIndex;
+            if ($leftCategoryIndex !== $rightCategoryIndex) {
+                return $leftCategoryIndex <=> $rightCategoryIndex;
+            }
+
+            $orderedSubcategories = self::BOOK_SUBCATEGORY_ORDER[$left['category']] ?? [];
+            $leftSubcategoryIndex = array_search($left['id'], $orderedSubcategories, true);
+            $rightSubcategoryIndex = array_search($right['id'], $orderedSubcategories, true);
+            $leftSubcategoryIndex = false === $leftSubcategoryIndex ? PHP_INT_MAX : $leftSubcategoryIndex;
+            $rightSubcategoryIndex = false === $rightSubcategoryIndex ? PHP_INT_MAX : $rightSubcategoryIndex;
+            if ($leftSubcategoryIndex !== $rightSubcategoryIndex) {
+                return $leftSubcategoryIndex <=> $rightSubcategoryIndex;
+            }
+
+            return strnatcasecmp($left['label'], $right['label']);
+        });
+
+        return $options;
     }
 
     /**

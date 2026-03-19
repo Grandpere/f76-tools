@@ -689,6 +689,15 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%apparel%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%apparel%'
+                              )
+                        ) THEN 'apparel_plan'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
                                   LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor_mod%'
                                   OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%armor_mod%'
                               )
@@ -732,6 +741,231 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
             }
 
             $totals[$category] = (int) $countRaw;
+        }
+
+        return $totals;
+    }
+
+    /**
+     * @return array<string, array<string, int>>
+     */
+    public function findBookTotalsBySubcategory(): array
+    {
+        $sql = <<<'SQL'
+                SELECT
+                    CASE
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_item_type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'name_en', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'name', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_slug', '')) LIKE 'recipe:%'
+                              )
+                        ) THEN 'recipe'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%power_armor_mod%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%power_armor_mod%'
+                              )
+                        ) THEN 'power_armor_mod_plan'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%power_armor%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%power_armor%'
+                              )
+                        ) THEN 'power_armor_plan'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%weapon_mod%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%weapon_mod%'
+                              )
+                        ) THEN 'weapon_mod_plan'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%weapon%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%weapon%'
+                              )
+                        ) THEN 'weapon_plan'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%apparel%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%apparel%'
+                              )
+                        ) THEN 'apparel_plan'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor_mod%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%armor_mod%'
+                              )
+                        ) THEN 'armor_mod_plan'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%armor%'
+                              )
+                        ) THEN 'armor_plan'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%'
+                              )
+                        ) THEN 'workshop_plan'
+                        ELSE 'plan'
+                    END AS book_category,
+                    CASE
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%weapon%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%weapon%'
+                              )
+                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%ballistic%'
+                        ) THEN 'ballistic'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%weapon%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%weapon%'
+                              )
+                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%melee%'
+                        ) THEN 'melee'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%plans_weapons%'
+                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%thrown%'
+                        ) THEN 'thrown'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%weapon%'
+                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%bows%'
+                        ) THEN 'bows'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%weapon%'
+                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%alien%'
+                        ) THEN 'alien'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%weapon%'
+                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%camera%'
+                        ) THEN 'camera'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%weapon%'
+                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%unused%'
+                        ) THEN 'unused'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%apparel%'
+                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%headwear%'
+                        ) THEN 'headwear'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%apparel%'
+                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%backpacks%'
+                        ) THEN 'backpacks'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%apparel%'
+                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%outfits%'
+                        ) THEN 'outfits'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%power_armor%'
+                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%strangler heart%'
+                        ) THEN 'strangler_heart'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%power_armor%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%excavator%') THEN 'excavator'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%power_armor%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%raider%') THEN 'raider'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%power_armor%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%t-45%') THEN 't_45'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%power_armor%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%t-51%') THEN 't_51'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%power_armor%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%t-60%') THEN 't_60'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%power_armor%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%t-65%') THEN 't_65'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%power_armor%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%ultracite%') THEN 'ultracite'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%power_armor%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%union%') THEN 'union'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%power_armor%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%hellcat%') THEN 'hellcat'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%power_armor%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%x-01%') THEN 'x_01'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%power_armor%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%vulcan%') THEN 'vulcan'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%floor decor%') THEN 'floor_decor'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%wall decor%') THEN 'wall_decor'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%lights%') THEN 'lights'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%utility%') THEN 'utility'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%structures%') THEN 'structures'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%display%') THEN 'display'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%allies%') THEN 'allies'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%crafting%') THEN 'crafting'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies WHERE ies.item_id = i.id AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%defenses%') THEN 'defenses'
+                        ELSE NULL
+                    END AS book_subcategory,
+                    COUNT(*) AS total_count
+                FROM item i
+                WHERE i.type = :type
+                GROUP BY book_category, book_subcategory
+            SQL;
+
+        $rows = $this->getEntityManager()->getConnection()->executeQuery($sql, [
+            'type' => ItemTypeEnum::BOOK->value,
+        ])->fetchAllAssociative();
+
+        $totals = [];
+        foreach ($rows as $row) {
+            $category = $row['book_category'] ?? null;
+            $subcategory = $row['book_subcategory'] ?? null;
+            $countRaw = $row['total_count'] ?? null;
+            if (!is_string($category) || !is_string($subcategory) || '' === $subcategory || (!is_int($countRaw) && !is_numeric($countRaw))) {
+                continue;
+            }
+
+            $totals[$category][$subcategory] = (int) $countRaw;
         }
 
         return $totals;

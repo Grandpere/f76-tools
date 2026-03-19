@@ -48,4 +48,9 @@ interface PlayerKnowledgeStatsReadRepository
      * @return array<string, int>
      */
     public function findLearnedBookCountsByCategory(PlayerEntity $player): array;
+
+    /**
+     * @return array<string, array<string, int>>
+     */
+    public function findLearnedBookCountsBySubcategory(PlayerEntity $player): array;
 }

@@ -73,6 +73,7 @@ final class BookCatalogController extends AbstractController
         'weapon_plan' => '/assets/icons/FO76_Plan_equipment.webp',
         'weapon_mod_plan' => '/assets/icons/FO76_Plan_equipment.webp',
         'armor_plan' => '/assets/icons/FO76_Plan_equipment.webp',
+        'apparel_plan' => '/assets/icons/FO76_Plan_equipment.webp',
         'armor_mod_plan' => '/assets/icons/FO76_Plan_equipment.webp',
         'power_armor_plan' => '/assets/icons/FO76_Plan_equipment.webp',
         'power_armor_mod_plan' => '/assets/icons/FO76_Plan_equipment.webp',
@@ -108,6 +109,8 @@ final class BookCatalogController extends AbstractController
         $selectedKinds = $request->query->all('kinds');
         /** @var list<string> $selectedCategories */
         $selectedCategories = $request->query->all('categories');
+        /** @var list<string> $selectedSubcategories */
+        $selectedSubcategories = $request->query->all('subcategories');
         /** @var list<string> $selectedVendorFilters */
         $selectedVendorFilters = $request->query->all('vendorFilters');
         /** @var list<string> $selectedSignals */
@@ -121,6 +124,7 @@ final class BookCatalogController extends AbstractController
             $selectedLists,
             $selectedKinds,
             $selectedCategories,
+            $selectedSubcategories,
             $selectedVendorFilters,
             $selectedSignals,
             $page,
@@ -144,12 +148,14 @@ final class BookCatalogController extends AbstractController
             'selectedLists' => $selectedLists,
             'selectedKinds' => $selectedKinds,
             'selectedCategories' => $selectedCategories,
+            'selectedSubcategories' => $selectedSubcategories,
             'selectedVendorFilters' => $selectedVendorFilters,
             'selectedSignals' => $selectedSignals,
             'selectedSort' => $selectedSort,
             'listOptions' => $result['listOptions'],
             'kindOptions' => $result['kindOptions'],
             'categoryOptions' => $result['categoryOptions'],
+            'subcategoryOptions' => $result['subcategoryOptions'],
             'sortOptions' => $result['sortOptions'],
             'vendorFilterOptions' => $result['vendorFilterOptions'],
             'vendorInfoOptions' => $result['vendorInfoOptions'],

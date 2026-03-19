@@ -43,6 +43,7 @@ Ajouter une page front authentifiee qui liste les plans et recettes (`BOOK`) ave
 - Done (slice 21): branchement d icones de categorie `BOOK` dans `/plans-recipes` avec trois assets legers (`plan`, `workshop`, `recipe`) visibles a la fois dans le filtre `Categorie` et dans une ligne de categorie discrete sur les cards, sans surcharger le footer de signaux deja utilise pour les activites/vendeurs.
 - Done (slice 22): ajout d une vraie legende d icones sur `/plans-recipes`, organisee en sous-blocs (`Categories`, `Marchands`, `Activites & obtention`, `Devises`) dans le style des filtres, pour rendre les pictogrammes lisibles sans dependre des infobulles ou du survol.
 - Done (slice 23): alignement du message d info de partage d apprentissage avec la page Minerva (deplace dans le panneau catalogue) et redecoupage visuel des cards `/plans-recipes` en sous-blocs (`categorie`, `details`, `prix`, `signaux`) pour preparer d eventuels regroupements futurs d icones sans rendre la carte confuse.
+- Done (slice 24): ajout d un second niveau de taxonomie `BOOK` base sur les `source_section` stables (`ballistic`, `floor_decor`, `union`, `outfits`, etc.), avec nouveau filtre `Sous-categories` sur `/plans-recipes`, ajout de `apparel_plan` au premier niveau et nouveau detail `Plans et recettes par sous-categorie` sur `/progression`.
 
 ## Hors scope
 - Edition front des items.

@@ -107,6 +107,35 @@
                                     {% endfor %}
                                 </div>
                             </div>
+
+                            {% if subcategoryOptions is not empty %}
+                                <div class="source-filter-group">
+                                    <p class="source-filter-group-title">{{ 'catalog_books.subcategory_filters'|trans }}</p>
+                                    <div class="source-filter-groups">
+                                        {% for category in categoryOptions %}
+                                            {% set optionsForCategory = [] %}
+                                            {% for option in subcategoryOptions %}
+                                                {% if option.category == category %}
+                                                    {% set optionsForCategory = optionsForCategory|merge([option]) %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if optionsForCategory is not empty %}
+                                                <div class="source-filter-group">
+                                                    <p class="source-filter-group-title">{{ ('catalog_books.category_' ~ category)|trans }}</p>
+                                                    <div class="source-filter-options">
+                                                        {% for option in optionsForCategory %}
+                                                            <label>
+                                                                <input type="checkbox" name="subcategories[]" value="{{ option.id }}" {% if option.id in selectedSubcategories %}checked{% endif %}>
+                                                                <span>{{ option.label }}</span>
+                                                            </label>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
                         </div>
                     </fieldset>
 
@@ -371,6 +400,10 @@
                                         <img src="{{ asset(categoryIconMap[item.bookCategory]) }}" alt="" aria-hidden="true" class="catalog-category-icon">
                                     {% endif %}
                                     <span>{{ ('catalog_books.category_' ~ item.bookCategory)|trans }}</span>
+                                    {% if item.bookSubcategoryLabel %}
+                                        <span class="catalog-book-category-separator">•</span>
+                                        <span>{{ item.bookSubcategoryLabel }}</span>
+                                    {% endif %}
                                 </p>
                             </div>
 
@@ -480,6 +513,8 @@
                                     lists: selectedLists,
                                     kinds: selectedKinds,
                                     vendorFilters: selectedVendorFilters,
+                                    categories: selectedCategories,
+                                    subcategories: selectedSubcategories,
                                     signals: selectedSignals,
                                     player: selectedPlayerId ?: null,
                                     knowledge: selectedKnowledge,
@@ -507,6 +542,8 @@
                                     lists: selectedLists,
                                     kinds: selectedKinds,
                                     vendorFilters: selectedVendorFilters,
+                                    categories: selectedCategories,
+                                    subcategories: selectedSubcategories,
                                     signals: selectedSignals,
                                     player: selectedPlayerId ?: null,
                                     knowledge: selectedKnowledge,
