@@ -177,7 +177,8 @@ final class PlayerStatsControllerTest extends WebTestCase
     {
         $item = $this->createItem($sourceId, ItemTypeEnum::BOOK, null, $nameKey);
         $item->upsertExternalSource('fallout_wiki', sprintf('%08X', $sourceId), 'https://example.test/wiki/'.$sourceId, [
-            'type' => $bookKind,
+            'source_item_type' => $bookKind,
+            'name_en' => 'recipe' === $bookKind ? 'Recipe: Example test' : 'Plan: Example test',
         ]);
         foreach ($listNumbers as $listNumber) {
             $this->entityManager?->persist(new ItemBookListEntity()

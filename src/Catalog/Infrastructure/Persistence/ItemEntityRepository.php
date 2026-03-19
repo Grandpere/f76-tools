@@ -554,7 +554,13 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                             SELECT 1
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
-                              AND LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_item_type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'name_en', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'name', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_slug', '')) LIKE 'recipe:%'
+                              )
                         ) THEN 'recipe'
                         ELSE 'plan'
                     END AS book_kind,

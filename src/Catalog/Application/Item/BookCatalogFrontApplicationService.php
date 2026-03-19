@@ -382,14 +382,16 @@ final class BookCatalogFrontApplicationService
                 continue;
             }
 
-            $rawType = $metadata['type'] ?? null;
-            if (!is_scalar($rawType)) {
-                continue;
-            }
+            foreach (['type', 'source_item_type'] as $typeKey) {
+                $rawType = $metadata[$typeKey] ?? null;
+                if (!is_scalar($rawType)) {
+                    continue;
+                }
 
-            $type = strtolower(trim((string) $rawType));
-            if (in_array($type, ['plan', 'recipe'], true)) {
-                return $type;
+                $type = strtolower(trim((string) $rawType));
+                if (in_array($type, ['plan', 'recipe'], true)) {
+                    return $type;
+                }
             }
         }
 

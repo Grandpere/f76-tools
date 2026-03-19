@@ -85,10 +85,10 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
 
     public function testBrowseFiltersByBookKindAndExposesVendorLabels(): void
     {
-        $plan = $this->createBookItem(106, 'pub-plan', 'catalog.book.plan.name', 'Plan: Plan Test', 'aligned', ['type' => 'plan']);
+        $plan = $this->createBookItem(106, 'pub-plan', 'catalog.book.plan.name', 'Plan: Plan Test', 'aligned', ['source_item_type' => 'plan']);
         $plan->setVendorSamuel(true);
 
-        $recipe = $this->createBookItem(107, 'pub-recipe', 'catalog.book.recipe.name', 'Recipe: Recipe Test', 'aligned', ['type' => 'recipe']);
+        $recipe = $this->createBookItem(107, 'pub-recipe', 'catalog.book.recipe.name', 'Recipe: Recipe Test', 'aligned', ['source_item_type' => 'recipe']);
 
         $service = $this->createService([$plan, $recipe]);
 

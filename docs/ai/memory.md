@@ -93,6 +93,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: the filter controller now emits a `catalog-filters:updated` event after replacing the results block, and the plans catalog knowledge controller listens to it to reapply the shared `player_item_knowledge` state to the new DOM.
 - Prevention: whenever a page combines server-rendered cards with client-side state and AJAX block replacement, emit an explicit post-refresh event and make the stateful controller rehydrate the new markup.
 
+## 2026-03-19 - BOOK progression kind split must read imported `source_item_type`, not only synthetic test `type`
+- Symptom: the progression page could show `Recettes: 0 / 0` on real imported data even though recipe snapshots existed and the front catalog could still classify some rows as recipes.
+- Root cause: the new `plan` / `recipe` stats queries looked only at `item_external_source.metadata.type`, while the real import persists the raw source kind under `metadata.source_item_type`; unit/functional tests had been creating synthetic rows with `type`, which masked the mismatch.
+- Fix: progression stats now classify recipes from either `metadata.type` or `metadata.source_item_type`, with extra fallbacks on recipe-prefixed source names/slugs, and the front book-kind extraction plus functional tests now cover `source_item_type`.
+- Prevention: when a read-side query classifies imported source records directly from JSON metadata, verify it against the real imported key names and mirror them in tests instead of using cleaner synthetic aliases.
+
 ## 2026-03-18 - Add low-risk cross-source flags from explicit labels before named event heuristics
 - Symptom: after the major taxonomy cleanup, the remaining `fallout_wiki.obtained` backlog was dominated by named activities/events, but a few still-used acquisition paths were exposed as explicit generic labels.
 - Root cause: not every useful concept needs fuzzy matching; some fields stay worth adding simply because the source already names them directly.
