@@ -1337,6 +1337,10 @@ body::before {
     width: 100%;
 }
 
+.catalog-taxonomy-groups {
+    grid-template-columns: 1fr;
+}
+
 .source-filter-group {
     border: 1px solid rgba(29, 37, 49, 0.12);
     border-radius: 10px;
