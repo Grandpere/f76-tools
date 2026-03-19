@@ -216,12 +216,11 @@
                                 </p>
                             {% endif %}
 
-                            <div class="catalog-book-meta">
-                                <span class="item-pill">{{ ('catalog_books.kind_' ~ item.bookKind)|trans }}</span>
-                                {% if item.rank %}
+                            {% if item.rank %}
+                                <div class="catalog-book-meta">
                                     <span class="item-pill">{{ 'catalog_books.rank'|trans({'%rank%': item.rank}) }}</span>
-                                {% endif %}
-                            </div>
+                                </div>
+                            {% endif %}
 
                             {% if item.price or item.priceMinerva %}
                                 <div class="item-prices">
