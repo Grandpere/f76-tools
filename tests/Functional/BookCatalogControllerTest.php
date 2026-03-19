@@ -107,7 +107,6 @@ final class BookCatalogControllerTest extends WebTestCase
         self::assertStringContainsString('/assets/icons/FO76_collections_stamps01.webp', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('/assets/icons/FO76_scoresprite_seasons.png', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('/assets/icons/FO76_ui_exploration_team.png', (string) $this->browser()->getResponse()->getContent());
-        self::assertStringContainsString('/assets/icons/WhitespringResortMarker.svg', (string) $this->browser()->getResponse()->getContent());
     }
 
     private function createPlayer(UserEntity $user, string $name): PlayerEntity

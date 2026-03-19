@@ -82,6 +82,7 @@ catalog_books.description: Liste der verfügbaren Baupläne und Rezepte
 catalog_books.last_updated: 'Katalog aktualisiert: %date%'
 catalog_books.last_updated_unknown: 'Zeitpunkt der Katalogaktualisierung unbekannt'
 catalog_books.filters_title: Filter
+catalog_books.progress_and_type_filters: Fortschritt und Typ
 catalog_books.search: Suche
 catalog_books.search_placeholder: Nach angezeigtem Namen, Hinweis, Liste oder Aktivität suchen
 catalog_books.knowledge_filters: Fortschritt

@@ -82,6 +82,7 @@ catalog_books.description: List of available plans and recipes
 catalog_books.last_updated: 'Catalog updated: %date%'
 catalog_books.last_updated_unknown: 'Catalog update time unknown'
 catalog_books.filters_title: Filters
+catalog_books.progress_and_type_filters: Progress & type
 catalog_books.search: Search
 catalog_books.search_placeholder: Search by displayed name, note, list, or activity
 catalog_books.knowledge_filters: Progress

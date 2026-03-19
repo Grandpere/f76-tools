@@ -59,9 +59,10 @@
                         </select>
                     </label>
                     <fieldset class="source-filters catalog-books-list-filters">
-                        <legend>{{ 'catalog_books.knowledge_filters'|trans }}</legend>
+                        <legend>{{ 'catalog_books.progress_and_type_filters'|trans }}</legend>
                         <div class="source-filter-groups">
                             <div class="source-filter-group">
+                                <p class="source-filter-group-title">{{ 'catalog_books.knowledge_filters'|trans }}</p>
                                 <div class="source-filter-options">
                                     {% for option in ['all', 'unlearned', 'learned'] %}
                                         <label>
@@ -71,17 +72,19 @@
                                     {% endfor %}
                                 </div>
                             </div>
-                        </div>
-                    </fieldset>
 
-                    <fieldset class="source-filters catalog-books-list-filters">
-                        <legend>{{ 'catalog_books.kind_filters'|trans }}</legend>
-                        {% for option in kindOptions %}
-                            <label>
-                                <input type="checkbox" name="kinds[]" value="{{ option }}" {% if option in selectedKinds %}checked{% endif %}>
-                                {{ ('catalog_books.kind_' ~ option)|trans }}
-                            </label>
-                        {% endfor %}
+                            <div class="source-filter-group">
+                                <p class="source-filter-group-title">{{ 'catalog_books.kind_filters'|trans }}</p>
+                                <div class="source-filter-options">
+                                    {% for option in kindOptions %}
+                                        <label>
+                                            <input type="checkbox" name="kinds[]" value="{{ option }}" {% if option in selectedKinds %}checked{% endif %}>
+                                            <span>{{ ('catalog_books.kind_' ~ option)|trans }}</span>
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
                     </fieldset>
 
                     <fieldset class="source-filters catalog-books-list-filters">
