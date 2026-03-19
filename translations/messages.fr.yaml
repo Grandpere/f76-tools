@@ -112,6 +112,7 @@ catalog_books.signal_group_progression: Progression & spécial
 catalog_books.per_page: Par page
 catalog_books.apply_filters: Appliquer
 catalog_books.visible_items: '%count% items affichés sur %total%'
+catalog_books.progress_summary: '%learned% / %total% appris (%percent%%, reste %unlearned%)'
 catalog_books.list_title: Catalogue
 catalog_books.list_help: 'Cette page se concentre sur le résultat côté joueur: noms, prix, numéros de liste et tags d activité utiles.'
 catalog_books.new: Nouveau

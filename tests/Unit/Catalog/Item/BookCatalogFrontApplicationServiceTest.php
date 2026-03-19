@@ -211,6 +211,22 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
         self::assertFalse($unlearnedResult['rows'][0]['learned']);
     }
 
+    public function testBrowseExposesProgressSummaryForFilteredRows(): void
+    {
+        $learned = $this->createBookItem(116, 'pub-summary-a', 'catalog.book.summary.a', 'Plan: Summary A', 'aligned', ['type' => 'plan']);
+        $alsoLearned = $this->createBookItem(117, 'pub-summary-b', 'catalog.book.summary.b', 'Plan: Summary B', 'aligned', ['type' => 'plan']);
+        $unlearned = $this->createBookItem(118, 'pub-summary-c', 'catalog.book.summary.c', 'Recipe: Summary C', 'aligned', ['type' => 'recipe']);
+        $player = new PlayerEntity();
+
+        $service = $this->createService([$learned, $alsoLearned, $unlearned], [$learned->getId() ?? 0, $alsoLearned->getId() ?? 0]);
+        $result = $service->browse(null, [], ['plan'], [], [], 1, 24, $player, 'all');
+
+        self::assertSame(2, $result['progressSummary']['learned']);
+        self::assertSame(2, $result['progressSummary']['total']);
+        self::assertSame(0, $result['progressSummary']['unlearned']);
+        self::assertSame(100, $result['progressSummary']['percent']);
+    }
+
     /**
      * @param list<ItemEntity> $items
      * @param list<int>        $learnedItemIds
@@ -308,6 +324,9 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
                     'catalog.book.vendor.bullion' => 'Plan: Bullion Vendor Plan',
                     'catalog.book.learned' => 'Plan: Learned Plan',
                     'catalog.book.unlearned' => 'Plan: Unlearned Plan',
+                    'catalog.book.summary.a' => 'Plan: Summary A',
+                    'catalog.book.summary.b' => 'Plan: Summary B',
+                    'catalog.book.summary.c' => 'Recipe: Summary C',
                     'catalog_books.signal_purchase_currency' => 'Currency',
                     'catalog_books.signal_containers' => 'Containers',
                     'catalog_books.signal_daily_ops' => 'Daily Ops',

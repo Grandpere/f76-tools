@@ -80,6 +80,7 @@ final class BookCatalogFrontApplicationService
      *     totalItems:int,
      *     totalPages:int,
      *     currentPage:int,
+     *     progressSummary:array{learned:int,total:int,unlearned:int,percent:int},
      *     listOptions:list<int>,
      *     kindOptions:list<string>,
      *     vendorFilterOptions:list<string>,
@@ -201,6 +202,10 @@ final class BookCatalogFrontApplicationService
             ));
         }
 
+        $learnedCount = count(array_filter(
+            $rows,
+            static fn (array $row): bool => true === $row['learned'],
+        ));
         $totalItems = count($rows);
         $totalPages = max(1, (int) ceil($totalItems / max(1, $perPage)));
         $currentPage = min(max(1, $page), $totalPages);
@@ -211,6 +216,12 @@ final class BookCatalogFrontApplicationService
             'totalItems' => $totalItems,
             'totalPages' => $totalPages,
             'currentPage' => $currentPage,
+            'progressSummary' => [
+                'learned' => $learnedCount,
+                'total' => $totalItems,
+                'unlearned' => max(0, $totalItems - $learnedCount),
+                'percent' => $totalItems > 0 ? (int) round(($learnedCount / $totalItems) * 100) : 0,
+            ],
             'listOptions' => $listOptions,
             'kindOptions' => $kindOptions,
             'vendorFilterOptions' => $vendorFilterOptions,

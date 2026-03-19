@@ -225,6 +225,16 @@
                 </p>
 
                 <p class="catalog-state" data-book-catalog-knowledge-target="state" hidden></p>
+                {% if selectedPlayerId %}
+                    <p class="catalog-state catalog-progress-summary">
+                        {{ 'catalog_books.progress_summary'|trans({
+                            '%learned%': progressSummary.learned,
+                            '%total%': progressSummary.total,
+                            '%unlearned%': progressSummary.unlearned,
+                            '%percent%': progressSummary.percent
+                        }) }}
+                    </p>
+                {% endif %}
 
                 <p class="catalog-state" data-catalog-filters-target="summary">
                     {{ 'catalog_books.visible_items'|trans({'%count%': items|length, '%total%': totalItems}) }}
