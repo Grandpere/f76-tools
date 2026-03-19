@@ -100,7 +100,7 @@
                         <div class="source-filter-groups">
                             <div class="source-filter-group">
                                 <p class="source-filter-group-title">{{ 'catalog_books.category_filters'|trans }}</p>
-                                <div class="source-filter-options">
+                                <div class="source-filter-options catalog-taxonomy-category-grid">
                                     {% for option in categoryOptions %}
                                         <label>
                                             <input type="checkbox" name="categories[]" value="{{ option }}" {% if option in selectedCategories %}checked{% endif %}>
@@ -127,7 +127,7 @@
                                         {% if optionsForCategory is not empty %}
                                             <div class="source-filter-group">
                                                 <p class="source-filter-group-title">{{ ('catalog_books.category_' ~ category)|trans }}</p>
-                                                <div class="source-filter-options">
+                                                <div class="source-filter-options catalog-taxonomy-subcategory-row">
                                                     {% for option in optionsForCategory %}
                                                         <label>
                                                             <input type="checkbox" name="subcategories[]" value="{{ option.id }}" {% if option.id in selectedSubcategories %}checked{% endif %}>
