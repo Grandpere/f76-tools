@@ -85,6 +85,7 @@ final class BookCatalogController extends AbstractController
         $selectedVendorFilters = $request->query->all('vendorFilters');
         /** @var list<string> $selectedSignals */
         $selectedSignals = $request->query->all('signals');
+        $selectedSort = trim((string) $request->query->get('sort', 'name_asc'));
         $perPage = max(12, min(96, (int) $request->query->get('perPage', 24)));
         $page = max(1, (int) $request->query->get('page', 1));
 
@@ -98,6 +99,7 @@ final class BookCatalogController extends AbstractController
             $perPage,
             $player,
             $selectedKnowledge,
+            $selectedSort,
         );
 
         $catalogUpdatedAt = $this->itemCatalogTimestampReadRepository->findLatestUpdatedAtByType(ItemTypeEnum::BOOK);
@@ -115,8 +117,10 @@ final class BookCatalogController extends AbstractController
             'selectedKinds' => $selectedKinds,
             'selectedVendorFilters' => $selectedVendorFilters,
             'selectedSignals' => $selectedSignals,
+            'selectedSort' => $selectedSort,
             'listOptions' => $result['listOptions'],
             'kindOptions' => $result['kindOptions'],
+            'sortOptions' => $result['sortOptions'],
             'vendorFilterOptions' => $result['vendorFilterOptions'],
             'vendorInfoOptions' => $result['vendorInfoOptions'],
             'signalOptions' => $result['signalOptions'],

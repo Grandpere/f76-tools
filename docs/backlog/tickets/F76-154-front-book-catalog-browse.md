@@ -36,6 +36,7 @@ Ajouter une page front authentifiee qui liste les plans et recettes (`BOOK`) ave
 - Done (slice 14): les cards `/plans-recipes` utilisent maintenant un footer unique de signaux en bas (icones vendeurs + signaux iconifies + pills texte fallback) au lieu de multiplier des lignes distinctes selon l item.
 - Done (slice 15): ajout d un vrai filtre `Progression` (`Tout afficher`, `À apprendre`, `Appris`) sur `/plans-recipes`, branche serveur sur le personnage actif pour filtrer tout le catalogue pagine selon `player_item_knowledge`, tout en gardant la synchronisation front partagee avec Minerva.
 - Done (slice 16): ajout d un resume de progression `appris / total` sur `/plans-recipes`, calcule cote serveur a partir du personnage actif et des filtres en cours, pour rendre la page plus utile comme outil de suivi sans dupliquer la logique Minerva.
+- Done (slice 17): ajout d un tri simple sur `/plans-recipes` (`nom`, `prix`, `prix Minerva`), applique cote service apres filtres et avant pagination, avec select front dedie et persistance dans la pagination.
 
 ## Hors scope
 - Edition front des items.

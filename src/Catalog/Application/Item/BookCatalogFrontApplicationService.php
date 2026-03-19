@@ -83,12 +83,13 @@ final class BookCatalogFrontApplicationService
      *     progressSummary:array{learned:int,total:int,unlearned:int,percent:int},
      *     listOptions:list<int>,
      *     kindOptions:list<string>,
+     *     sortOptions:list<string>,
      *     vendorFilterOptions:list<string>,
      *     vendorInfoOptions:list<string>,
      *     signalOptions:list<string>
      * }
      */
-    public function browse(?string $query, array $selectedLists, array $selectedKinds, array $selectedVendorFilters, array $selectedSignals, int $page, int $perPage, ?PlayerEntity $player = null, string $knowledgeFilter = 'all'): array
+    public function browse(?string $query, array $selectedLists, array $selectedKinds, array $selectedVendorFilters, array $selectedSignals, int $page, int $perPage, ?PlayerEntity $player = null, string $knowledgeFilter = 'all', string $sort = 'name_asc'): array
     {
         $items = $this->bookCatalogFrontReadRepository->findAllBooksDetailedOrdered();
         $learnedItemIds = [];
@@ -102,6 +103,7 @@ final class BookCatalogFrontApplicationService
         );
         $listOptions = $this->extractListOptions($rows);
         $kindOptions = $this->extractKindOptions($rows);
+        $sortOptions = $this->extractSortOptions();
         $vendorFilterOptions = $this->extractVendorFilterOptions($rows);
         $vendorInfoOptions = $this->extractVendorInfoOptions($rows);
         $signalOptions = $this->extractSignalOptions($rows);
@@ -202,6 +204,8 @@ final class BookCatalogFrontApplicationService
             ));
         }
 
+        $this->sortRows($rows, $sort);
+
         $learnedCount = count(array_filter(
             $rows,
             static fn (array $row): bool => true === $row['learned'],
@@ -224,6 +228,7 @@ final class BookCatalogFrontApplicationService
             ],
             'listOptions' => $listOptions,
             'kindOptions' => $kindOptions,
+            'sortOptions' => $sortOptions,
             'vendorFilterOptions' => $vendorFilterOptions,
             'vendorInfoOptions' => $vendorInfoOptions,
             'signalOptions' => $signalOptions,
@@ -647,6 +652,69 @@ final class BookCatalogFrontApplicationService
     }
 
     /**
+     * @param list<array{
+     *     id:string,
+     *     name:string,
+     *     bookKind:string,
+     *     description:?string,
+     *     note:?string,
+     *     unlocks:?string,
+     *     price:?int,
+     *     priceMinerva:?int,
+     *     priceCurrencyCode:string,
+     *     priceCurrencyLabel:string,
+     *     vendorLabels:list<string>,
+     *     vendorFlags:array{vendors:bool,vendor_minerva:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool},
+     *     vendorInfoLabels:list<string>,
+     *     learned:bool,
+     *     isNew:bool,
+     *     bookListNumbers:list<int>,
+     *     canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
+     * }>$rows
+     */
+    private function sortRows(array &$rows, string $sort): void
+    {
+        $normalizedSort = $this->normalize($sort);
+        if (!in_array($normalizedSort, $this->extractSortOptions(), true)) {
+            $normalizedSort = 'name_asc';
+        }
+
+        usort($rows, function (array $left, array $right) use ($normalizedSort): int {
+            return match ($normalizedSort) {
+                'price_asc' => $this->compareNullableIntThenName($left['price'], $right['price'], $left['name'], $right['name']),
+                'price_minerva_asc' => $this->compareNullableIntThenName($left['priceMinerva'], $right['priceMinerva'], $left['name'], $right['name']),
+                default => $this->compareNames($left['name'], $right['name']),
+            };
+        });
+    }
+
+    private function compareNames(string $left, string $right): int
+    {
+        return strnatcasecmp($left, $right);
+    }
+
+    private function compareNullableIntThenName(?int $leftValue, ?int $rightValue, string $leftName, string $rightName): int
+    {
+        if (null === $leftValue && null === $rightValue) {
+            return $this->compareNames($leftName, $rightName);
+        }
+
+        if (null === $leftValue) {
+            return 1;
+        }
+
+        if (null === $rightValue) {
+            return -1;
+        }
+
+        if ($leftValue !== $rightValue) {
+            return $leftValue <=> $rightValue;
+        }
+
+        return $this->compareNames($leftName, $rightName);
+    }
+
+    /**
      * @return list<array{field:string,label:string,displayValue:string,provider:string}>
      */
     private function extractCanonicalSignals(ItemSourceMergeResult $result): array
@@ -766,6 +834,18 @@ final class BookCatalogFrontApplicationService
         }
 
         return array_keys($kinds);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function extractSortOptions(): array
+    {
+        return [
+            'name_asc',
+            'price_asc',
+            'price_minerva_asc',
+        ];
     }
 
     /**

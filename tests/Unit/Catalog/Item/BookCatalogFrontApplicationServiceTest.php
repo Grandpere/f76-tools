@@ -227,6 +227,29 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
         self::assertSame(100, $result['progressSummary']['percent']);
     }
 
+    public function testBrowseCanSortByPriceAndMinervaPrice(): void
+    {
+        $alpha = $this->createBookItem(119, 'pub-sort-alpha', 'catalog.book.sort.alpha', 'Plan: Sort Alpha', 'aligned', ['type' => 'plan']);
+        $alpha->setPrice(450);
+        $alpha->setPriceMinerva(338);
+
+        $bravo = $this->createBookItem(120, 'pub-sort-bravo', 'catalog.book.sort.bravo', 'Plan: Sort Bravo', 'aligned', ['type' => 'plan']);
+        $bravo->setPrice(250);
+        $bravo->setPriceMinerva(188);
+
+        $charlie = $this->createBookItem(121, 'pub-sort-charlie', 'catalog.book.sort.charlie', 'Plan: Sort Charlie', 'aligned', ['type' => 'plan']);
+        $charlie->setPrice(1000);
+
+        $service = $this->createService([$alpha, $bravo, $charlie]);
+
+        $priceResult = $service->browse(null, [], [], [], [], 1, 24, null, 'all', 'price_asc');
+        $minervaResult = $service->browse(null, [], [], [], [], 1, 24, null, 'all', 'price_minerva_asc');
+
+        self::assertSame(['name_asc', 'price_asc', 'price_minerva_asc'], $priceResult['sortOptions']);
+        self::assertSame(['pub-sort-bravo', 'pub-sort-alpha', 'pub-sort-charlie'], array_column($priceResult['rows'], 'id'));
+        self::assertSame(['pub-sort-bravo', 'pub-sort-alpha', 'pub-sort-charlie'], array_column($minervaResult['rows'], 'id'));
+    }
+
     /**
      * @param list<ItemEntity> $items
      * @param list<int>        $learnedItemIds

@@ -85,6 +85,10 @@ catalog_books.filters_title: Filtres
 catalog_books.progress_and_type_filters: Progression et type
 catalog_books.search: Recherche
 catalog_books.search_placeholder: Rechercher par nom affiché, note, liste ou activité
+catalog_books.sort: Tri
+catalog_books.sort_name_asc: Nom (A-Z)
+catalog_books.sort_price_asc: Prix (croissant)
+catalog_books.sort_price_minerva_asc: Prix Minerva (croissant)
 catalog_books.knowledge_filters: Progression
 catalog_books.knowledge_all: Tout afficher
 catalog_books.knowledge_unlearned: À apprendre
