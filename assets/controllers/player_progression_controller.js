@@ -339,7 +339,11 @@ export default class extends Controller {
         const miscByRank = Array.isArray(this.stats.miscByRank) ? this.stats.miscByRank : [];
         const bookByList = Array.isArray(this.stats.bookByList) ? this.stats.bookByList : [];
 
-        const cards = [this.renderStatsCard(this.t('statsOverall'), overall)].join('');
+        const cards = [
+            this.renderStatsCard(this.t('statsOverall'), overall),
+            this.renderStatsCard(this.t('statsMisc'), misc),
+            this.renderStatsCard(this.t('statsBook'), book),
+        ].join('');
 
         const rankRows = miscByRank.map((row) => this.renderStatsRow(`${this.t('statsRankPrefix')} ${row.rank}`, row)).join('');
         const listRows = bookByList.map((row) => this.renderStatsRow(`${this.t('statsListPrefix')} ${row.listNumber}`, row)).join('');
