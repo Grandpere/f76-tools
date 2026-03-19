@@ -50,6 +50,7 @@ final class BookCatalogFrontApplicationService
     /**
      * @param list<string> $selectedLists
      * @param list<string> $selectedKinds
+     * @param list<string> $selectedVendorFilters
      * @param list<string> $selectedSignals
      *
      * @return array{
@@ -64,6 +65,7 @@ final class BookCatalogFrontApplicationService
      *         priceCurrencyCode:string,
      *         priceCurrencyLabel:string,
      *         vendorLabels:list<string>,
+     *         vendorFlags:array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool},
      *         isNew:bool,
      *         bookListNumbers:list<int>,
      *         canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
@@ -73,15 +75,17 @@ final class BookCatalogFrontApplicationService
      *     currentPage:int,
      *     listOptions:list<int>,
      *     kindOptions:list<string>,
+     *     vendorFilterOptions:list<string>,
      *     signalOptions:list<string>
      * }
      */
-    public function browse(?string $query, array $selectedLists, array $selectedKinds, array $selectedSignals, int $page, int $perPage): array
+    public function browse(?string $query, array $selectedLists, array $selectedKinds, array $selectedVendorFilters, array $selectedSignals, int $page, int $perPage): array
     {
         $items = $this->bookCatalogFrontReadRepository->findAllBooksDetailedOrdered();
         $rows = array_map($this->mapRow(...), $items);
         $listOptions = $this->extractListOptions($rows);
         $kindOptions = $this->extractKindOptions($rows);
+        $vendorFilterOptions = $this->extractVendorFilterOptions($rows);
         $signalOptions = $this->extractSignalOptions($rows);
 
         $normalizedQuery = $this->normalize($query);
@@ -122,6 +126,29 @@ final class BookCatalogFrontApplicationService
             ));
         }
 
+        $normalizedVendorFilters = array_filter(
+            array_map(
+                fn (string $value): string => $this->normalize($value),
+                $selectedVendorFilters,
+            ),
+            static fn (string $value): bool => '' !== $value,
+        );
+
+        if ([] !== $normalizedVendorFilters) {
+            $rows = array_values(array_filter(
+                $rows,
+                static function (array $row) use ($normalizedVendorFilters): bool {
+                    foreach ($normalizedVendorFilters as $filter) {
+                        if (($row['vendorFlags'][$filter] ?? false) === true) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                },
+            ));
+        }
+
         $normalizedSignals = array_filter(
             array_map(
                 fn (string $value): string => $this->normalize($value),
@@ -156,6 +183,7 @@ final class BookCatalogFrontApplicationService
             'currentPage' => $currentPage,
             'listOptions' => $listOptions,
             'kindOptions' => $kindOptions,
+            'vendorFilterOptions' => $vendorFilterOptions,
             'signalOptions' => $signalOptions,
         ];
     }
@@ -172,6 +200,7 @@ final class BookCatalogFrontApplicationService
      *     priceCurrencyCode:string,
      *     priceCurrencyLabel:string,
      *     vendorLabels:list<string>,
+     *     vendorFlags:array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool},
      *     isNew:bool,
      *     bookListNumbers:list<int>,
      *     canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
@@ -184,6 +213,7 @@ final class BookCatalogFrontApplicationService
         $canonicalSignals = $this->appendItemDerivedSignals($item, $canonicalSignals);
         $bookKind = $this->extractBookKind($item);
         $vendorLabels = $this->extractVendorLabels($item);
+        $vendorFlags = $this->extractVendorFlags($item);
 
         $bookListNumbers = [];
         foreach ($item->getBookLists() as $bookList) {
@@ -205,6 +235,7 @@ final class BookCatalogFrontApplicationService
             'priceCurrencyCode' => $priceCurrencyCode,
             'priceCurrencyLabel' => $priceCurrencyLabel,
             'vendorLabels' => $vendorLabels,
+            'vendorFlags' => $vendorFlags,
             'isNew' => $item->isNew(),
             'bookListNumbers' => array_values(array_unique($bookListNumbers)),
             'canonicalSignals' => array_values(array_filter(
@@ -254,6 +285,7 @@ final class BookCatalogFrontApplicationService
      *     description:?string,
      *     note:?string,
      *     vendorLabels:list<string>,
+     *     vendorFlags:array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool},
      *     bookListNumbers:list<int>,
      *     canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
      * } $row
@@ -328,6 +360,23 @@ final class BookCatalogFrontApplicationService
         }
 
         return $labels;
+    }
+
+    /**
+     * @return array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool}
+     */
+    private function extractVendorFlags(ItemEntity $item): array
+    {
+        $vendorRegs = $item->isVendorRegs();
+        $vendorSamuel = $item->isVendorSamuel();
+        $vendorMortimer = $item->isVendorMortimer();
+
+        return [
+            'vendors' => $vendorRegs || $vendorSamuel || $vendorMortimer,
+            'vendor_regs' => $vendorRegs,
+            'vendor_samuel' => $vendorSamuel,
+            'vendor_mortimer' => $vendorMortimer,
+        ];
     }
 
     private function normalize(?string $value): string
@@ -431,6 +480,10 @@ final class BookCatalogFrontApplicationService
         $signalOptions = [];
         foreach ($rows as $row) {
             foreach ($row['canonicalSignals'] as $signal) {
+                if ('vendors' === $signal['field']) {
+                    continue;
+                }
+
                 $signalOptions[$signal['field']] = true;
             }
         }
@@ -451,5 +504,24 @@ final class BookCatalogFrontApplicationService
         }
 
         return array_keys($kinds);
+    }
+
+    /**
+     * @param list<array{vendorFlags:array{vendors:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool}}> $rows
+     *
+     * @return list<string>
+     */
+    private function extractVendorFilterOptions(array $rows): array
+    {
+        $options = [];
+        foreach ($rows as $row) {
+            foreach ($row['vendorFlags'] as $key => $enabled) {
+                if ($enabled) {
+                    $options[$key] = true;
+                }
+            }
+        }
+
+        return array_keys($options);
     }
 }

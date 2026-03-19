@@ -89,6 +89,11 @@ catalog_books.list_option: Liste %list%
 catalog_books.kind_filters: Typ
 catalog_books.kind_plan: Bauplan
 catalog_books.kind_recipe: Rezept
+catalog_books.vendor_filters: Händler
+catalog_books.vendors: Alle Händler
+catalog_books.vendor_regs: Regs
+catalog_books.vendor_samuel: Samuel
+catalog_books.vendor_mortimer: Mortimer
 catalog_books.signal_filters: Filter
 catalog_books.per_page: Pro Seite
 catalog_books.apply_filters: Anwenden
@@ -125,9 +130,6 @@ catalog_books.currency_caps: Caps
 catalog_books.currency_gold_bullion: Goldbarren
 catalog_books.currency_stamps: Stempel
 catalog_books.currency_tickets: Tickets
-catalog_books.vendor_regs: Regs
-catalog_books.vendor_samuel: Samuel
-catalog_books.vendor_mortimer: Mortimer
 nuke_codes.description: Verfolge Alpha-, Bravo- und Charlie-Codes mit ihrem Gultigkeitszeitraum.
 nuke_codes.timezone: 'Zeitzone: %timezone%'
 nuke_codes.state.loading: Nukecodes werden geladen...

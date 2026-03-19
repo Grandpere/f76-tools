@@ -44,7 +44,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             $this->createTranslator(),
         );
 
-        $result = $service->browse('alpha', ['4'], [], [], 1, 24);
+        $result = $service->browse('alpha', ['4'], [], [], [], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertSame('Plan: Alpha Receiver', $result['rows'][0]['name']);
@@ -72,7 +72,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             $this->createTranslator(),
         );
 
-        $result = $service->browse(null, [], [], ['events'], 1, 24);
+        $result = $service->browse(null, [], [], [], ['events'], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertCount(2, $result['rows'][0]['canonicalSignals']);
@@ -104,7 +104,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             $this->createTranslator(),
         );
 
-        $result = $service->browse(null, [], [], ['vendors'], 1, 24);
+        $result = $service->browse(null, [], [], ['vendors'], [], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertContains('vendors', array_column($result['rows'][0]['canonicalSignals'], 'field'));
@@ -133,7 +133,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             $this->createTranslator(),
         );
 
-        $result = $service->browse(null, [], [], ['daily_ops'], 1, 24);
+        $result = $service->browse(null, [], [], [], ['daily_ops'], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertContains('daily_ops', array_column($result['rows'][0]['canonicalSignals'], 'field'));
@@ -164,11 +164,44 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             $this->createTranslator(),
         );
 
-        $result = $service->browse(null, [], ['plan'], [], 1, 24);
+        $result = $service->browse(null, [], ['plan'], [], [], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
         self::assertSame(['plan', 'recipe'], $result['kindOptions']);
+        self::assertSame(['vendors', 'vendor_samuel'], $result['vendorFilterOptions']);
         self::assertSame('plan', $result['rows'][0]['bookKind']);
+        self::assertSame(['Samuel'], $result['rows'][0]['vendorLabels']);
+    }
+
+    public function testBrowseFiltersByExactVendor(): void
+    {
+        $samuel = $this->createBookItem(108, 'pub-vendor-samuel', 'catalog.book.vendor.samuel', 'Plan: Samuel Plan', 'aligned', ['type' => 'plan']);
+        $samuel->setVendorSamuel(true);
+
+        $regs = $this->createBookItem(109, 'pub-vendor-regs', 'catalog.book.vendor.regs', 'Plan: Regs Plan', 'aligned', ['type' => 'plan']);
+        $regs->setVendorRegs(true);
+
+        $service = new BookCatalogFrontApplicationService(
+            new class([$samuel, $regs]) implements BookCatalogFrontReadRepository {
+                /**
+                 * @param list<ItemEntity> $items
+                 */
+                public function __construct(private readonly array $items)
+                {
+                }
+
+                public function findAllBooksDetailedOrdered(): array
+                {
+                    return $this->items;
+                }
+            },
+            new ItemSourceMergePolicy(),
+            $this->createTranslator(),
+        );
+
+        $result = $service->browse(null, [], [], ['vendor_samuel'], [], 1, 24);
+
+        self::assertSame(1, $result['totalItems']);
         self::assertSame(['Samuel'], $result['rows'][0]['vendorLabels']);
     }
 
@@ -222,6 +255,8 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
                     'catalog.book.dailyops.name' => 'Plan: Daily Ops Test',
                     'catalog.book.plan.name' => 'Plan: Plan Test',
                     'catalog.book.recipe.name' => 'Recipe: Recipe Test',
+                    'catalog.book.vendor.samuel' => 'Plan: Samuel Plan',
+                    'catalog.book.vendor.regs' => 'Plan: Regs Plan',
                     'catalog_books.signal_purchase_currency' => 'Currency',
                     'catalog_books.signal_containers' => 'Containers',
                     'catalog_books.signal_daily_ops' => 'Daily Ops',
