@@ -1372,6 +1372,14 @@ body::before {
     gap: 0.34rem;
 }
 
+.catalog-taxonomy-subcategory-title {
+    margin-top: 0.75rem;
+}
+
+.catalog-taxonomy-subcategory-groups {
+    margin-top: 0.38rem;
+}
+
 .catalog-taxonomy-subcategory-row label {
     width: 100%;
     min-width: 0;
