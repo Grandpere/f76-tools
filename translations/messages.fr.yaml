@@ -84,6 +84,10 @@ catalog_books.last_updated_unknown: 'Date de mise à jour du catalogue inconnue'
 catalog_books.filters_title: Filtres
 catalog_books.search: Recherche
 catalog_books.search_placeholder: Rechercher par nom affiché, note, liste ou activité
+catalog_books.knowledge_filters: Progression
+catalog_books.knowledge_all: Tout afficher
+catalog_books.knowledge_unlearned: À apprendre
+catalog_books.knowledge_learned: Appris
 catalog_books.list_filter: Liste de Minerva
 catalog_books.list_option: Liste %list%
 catalog_books.kind_filters: Type

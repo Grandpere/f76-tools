@@ -18,6 +18,8 @@ use App\Catalog\Application\Item\BookCatalogFrontApplicationService;
 use App\Catalog\Application\Item\BookCatalogFrontReadRepository;
 use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
+use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogReadRepository;
+use App\Progression\Domain\Entity\PlayerEntity;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -26,23 +28,10 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
 {
     public function testBrowseFiltersByVisibleNameAndList(): void
     {
-        $service = new BookCatalogFrontApplicationService(
-            new class([$this->createBookItem(101, 'pub-alpha', 'catalog.book.alpha.name', 'Plan: Alpha Receiver', 'no_merge'), $this->createBookItem(102, 'pub-bravo', 'catalog.book.bravo.name', 'Recipe: Bravo Soup', 'aligned')]) implements BookCatalogFrontReadRepository {
-                /**
-                 * @param list<ItemEntity> $items
-                 */
-                public function __construct(private readonly array $items)
-                {
-                }
-
-                public function findAllBooksDetailedOrdered(): array
-                {
-                    return $this->items;
-                }
-            },
-            new ItemSourceMergePolicy(),
-            $this->createTranslator(),
-        );
+        $service = $this->createService([
+            $this->createBookItem(101, 'pub-alpha', 'catalog.book.alpha.name', 'Plan: Alpha Receiver', 'no_merge'),
+            $this->createBookItem(102, 'pub-bravo', 'catalog.book.bravo.name', 'Recipe: Bravo Soup', 'aligned'),
+        ]);
 
         $result = $service->browse('alpha', ['4'], [], [], [], 1, 24);
 
@@ -55,23 +44,9 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
 
     public function testBrowseExposesCanonicalSignals(): void
     {
-        $service = new BookCatalogFrontApplicationService(
-            new class([$this->createBookItem(103, 'pub-currency', 'catalog.book.currency.name', 'Plan: Currency Test', 'aligned', ['purchase_currency' => 'caps', 'events' => true])]) implements BookCatalogFrontReadRepository {
-                /**
-                 * @param list<ItemEntity> $items
-                 */
-                public function __construct(private readonly array $items)
-                {
-                }
-
-                public function findAllBooksDetailedOrdered(): array
-                {
-                    return $this->items;
-                }
-            },
-            new ItemSourceMergePolicy(),
-            $this->createTranslator(),
-        );
+        $service = $this->createService([
+            $this->createBookItem(103, 'pub-currency', 'catalog.book.currency.name', 'Plan: Currency Test', 'aligned', ['purchase_currency' => 'caps', 'events' => true]),
+        ]);
 
         $result = $service->browse(null, [], [], [], ['events'], 1, 24);
 
@@ -87,23 +62,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
         $item = $this->createBookItem(104, 'pub-samuel', 'catalog.book.samuel.name', 'Plan: Cattle prod', 'aligned');
         $item->setVendorSamuel(true);
 
-        $service = new BookCatalogFrontApplicationService(
-            new class([$item]) implements BookCatalogFrontReadRepository {
-                /**
-                 * @param list<ItemEntity> $items
-                 */
-                public function __construct(private readonly array $items)
-                {
-                }
-
-                public function findAllBooksDetailedOrdered(): array
-                {
-                    return $this->items;
-                }
-            },
-            new ItemSourceMergePolicy(),
-            $this->createTranslator(),
-        );
+        $service = $this->createService([$item]);
 
         $result = $service->browse(null, [], [], ['vendors'], [], 1, 24);
 
@@ -116,23 +75,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
         $item = $this->createBookItem(105, 'pub-dailyops', 'catalog.book.dailyops.name', 'Plan: Daily Ops Test', 'aligned');
         $item->setDropDailyOps(true);
 
-        $service = new BookCatalogFrontApplicationService(
-            new class([$item]) implements BookCatalogFrontReadRepository {
-                /**
-                 * @param list<ItemEntity> $items
-                 */
-                public function __construct(private readonly array $items)
-                {
-                }
-
-                public function findAllBooksDetailedOrdered(): array
-                {
-                    return $this->items;
-                }
-            },
-            new ItemSourceMergePolicy(),
-            $this->createTranslator(),
-        );
+        $service = $this->createService([$item]);
 
         $result = $service->browse(null, [], [], [], ['daily_ops'], 1, 24);
 
@@ -147,23 +90,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
 
         $recipe = $this->createBookItem(107, 'pub-recipe', 'catalog.book.recipe.name', 'Recipe: Recipe Test', 'aligned', ['type' => 'recipe']);
 
-        $service = new BookCatalogFrontApplicationService(
-            new class([$plan, $recipe]) implements BookCatalogFrontReadRepository {
-                /**
-                 * @param list<ItemEntity> $items
-                 */
-                public function __construct(private readonly array $items)
-                {
-                }
-
-                public function findAllBooksDetailedOrdered(): array
-                {
-                    return $this->items;
-                }
-            },
-            new ItemSourceMergePolicy(),
-            $this->createTranslator(),
-        );
+        $service = $this->createService([$plan, $recipe]);
 
         $result = $service->browse(null, [], ['plan'], [], [], 1, 24);
 
@@ -182,23 +109,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
         $regs = $this->createBookItem(109, 'pub-vendor-regs', 'catalog.book.vendor.regs', 'Plan: Regs Plan', 'aligned', ['type' => 'plan']);
         $regs->setVendorRegs(true);
 
-        $service = new BookCatalogFrontApplicationService(
-            new class([$samuel, $regs]) implements BookCatalogFrontReadRepository {
-                /**
-                 * @param list<ItemEntity> $items
-                 */
-                public function __construct(private readonly array $items)
-                {
-                }
-
-                public function findAllBooksDetailedOrdered(): array
-                {
-                    return $this->items;
-                }
-            },
-            new ItemSourceMergePolicy(),
-            $this->createTranslator(),
-        );
+        $service = $this->createService([$samuel, $regs]);
 
         $result = $service->browse(null, [], [], ['vendor_samuel'], [], 1, 24);
 
@@ -217,23 +128,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             'purchase_currency' => 'stamps',
         ]);
 
-        $service = new BookCatalogFrontApplicationService(
-            new class([$giuseppe]) implements BookCatalogFrontReadRepository {
-                /**
-                 * @param list<ItemEntity> $items
-                 */
-                public function __construct(private readonly array $items)
-                {
-                }
-
-                public function findAllBooksDetailedOrdered(): array
-                {
-                    return $this->items;
-                }
-            },
-            new ItemSourceMergePolicy(),
-            $this->createTranslator(),
-        );
+        $service = $this->createService([$giuseppe]);
 
         $result = $service->browse(null, [], [], ['vendor_giuseppe'], [], 1, 24);
 
@@ -249,23 +144,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             'unlocks' => ['text' => 'Atlantic City Poker Table'],
         ]);
 
-        $service = new BookCatalogFrontApplicationService(
-            new class([$item]) implements BookCatalogFrontReadRepository {
-                /**
-                 * @param list<ItemEntity> $items
-                 */
-                public function __construct(private readonly array $items)
-                {
-                }
-
-                public function findAllBooksDetailedOrdered(): array
-                {
-                    return $this->items;
-                }
-            },
-            new ItemSourceMergePolicy(),
-            $this->createTranslator(),
-        );
+        $service = $this->createService([$item]);
 
         $result = $service->browse('poker', [], [], [], [], 1, 24);
 
@@ -284,23 +163,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             'purchase_currency' => 'gold_bullion',
         ]);
 
-        $service = new BookCatalogFrontApplicationService(
-            new class([$mixed]) implements BookCatalogFrontReadRepository {
-                /**
-                 * @param list<ItemEntity> $items
-                 */
-                public function __construct(private readonly array $items)
-                {
-                }
-
-                public function findAllBooksDetailedOrdered(): array
-                {
-                    return $this->items;
-                }
-            },
-            new ItemSourceMergePolicy(),
-            $this->createTranslator(),
-        );
+        $service = $this->createService([$mixed]);
 
         $minervaResult = $service->browse(null, [], [], ['vendor_minerva'], [], 1, 24);
         $samuelResult = $service->browse(null, [], [], ['vendor_samuel'], [], 1, 24);
@@ -319,8 +182,43 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
             'purchase_currency' => 'gold_bullion',
         ]);
 
-        $service = new BookCatalogFrontApplicationService(
-            new class([$item]) implements BookCatalogFrontReadRepository {
+        $service = $this->createService([$item]);
+
+        $result = $service->browse(null, [], [], [], [], 1, 24);
+
+        self::assertSame(['Bullion vendors'], $result['vendorInfoOptions']);
+        self::assertTrue($result['rows'][0]['vendorFlags']['vendors']);
+        self::assertSame(['Bullion vendors'], $result['rows'][0]['vendorInfoLabels']);
+    }
+
+    public function testBrowseCanFilterLearnedAndUnlearnedForPlayer(): void
+    {
+        $learned = $this->createBookItem(114, 'pub-learned', 'catalog.book.learned', 'Plan: Learned Plan', 'aligned');
+        $unlearned = $this->createBookItem(115, 'pub-unlearned', 'catalog.book.unlearned', 'Plan: Unlearned Plan', 'aligned');
+        $player = new PlayerEntity();
+
+        $service = $this->createService([$learned, $unlearned], [$learned->getId() ?? 0]);
+
+        $learnedResult = $service->browse(null, [], [], [], [], 1, 24, $player, 'learned');
+        $unlearnedResult = $service->browse(null, [], [], [], [], 1, 24, $player, 'unlearned');
+
+        self::assertSame(1, $learnedResult['totalItems']);
+        self::assertSame('pub-learned', $learnedResult['rows'][0]['id']);
+        self::assertTrue($learnedResult['rows'][0]['learned']);
+
+        self::assertSame(1, $unlearnedResult['totalItems']);
+        self::assertSame('pub-unlearned', $unlearnedResult['rows'][0]['id']);
+        self::assertFalse($unlearnedResult['rows'][0]['learned']);
+    }
+
+    /**
+     * @param list<ItemEntity> $items
+     * @param list<int>        $learnedItemIds
+     */
+    private function createService(array $items, array $learnedItemIds = []): BookCatalogFrontApplicationService
+    {
+        return new BookCatalogFrontApplicationService(
+            new class($items) implements BookCatalogFrontReadRepository {
                 /**
                  * @param list<ItemEntity> $items
                  */
@@ -334,14 +232,21 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
                 }
             },
             new ItemSourceMergePolicy(),
+            new class($learnedItemIds) implements PlayerKnowledgeCatalogReadRepository {
+                /**
+                 * @param list<int> $learnedItemIds
+                 */
+                public function __construct(private readonly array $learnedItemIds)
+                {
+                }
+
+                public function findLearnedItemIdsByPlayer(PlayerEntity $player, ?ItemTypeEnum $type = null): array
+                {
+                    return $this->learnedItemIds;
+                }
+            },
             $this->createTranslator(),
         );
-
-        $result = $service->browse(null, [], [], [], [], 1, 24);
-
-        self::assertSame(['Bullion vendors'], $result['vendorInfoOptions']);
-        self::assertTrue($result['rows'][0]['vendorFlags']['vendors']);
-        self::assertSame(['Bullion vendors'], $result['rows'][0]['vendorInfoLabels']);
     }
 
     /**
@@ -358,6 +263,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
         $item->addBookList(101 === $sourceId ? 4 : 7, 101 === $sourceId);
 
         $this->setItemPublicId($item, $publicId);
+        $this->setItemId($item, $sourceId);
 
         $item->upsertExternalSource('fandom', sprintf('%08X', $sourceId), 'https://example.test/fandom/'.$sourceId, [
             'name' => $displayName,
@@ -400,6 +306,8 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
                     'catalog.book.unlocks' => 'Plan: Unlock Test',
                     'catalog.book.vendor.mixed' => 'Plan: Mixed Vendor Plan',
                     'catalog.book.vendor.bullion' => 'Plan: Bullion Vendor Plan',
+                    'catalog.book.learned' => 'Plan: Learned Plan',
+                    'catalog.book.unlearned' => 'Plan: Unlearned Plan',
                     'catalog_books.signal_purchase_currency' => 'Currency',
                     'catalog_books.signal_containers' => 'Containers',
                     'catalog_books.signal_daily_ops' => 'Daily Ops',
@@ -424,5 +332,11 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
     {
         $reflection = new ReflectionProperty(ItemEntity::class, 'publicId');
         $reflection->setValue($item, $publicId);
+    }
+
+    private function setItemId(ItemEntity $item, int $id): void
+    {
+        $reflection = new ReflectionProperty(ItemEntity::class, 'id');
+        $reflection->setValue($item, $id);
     }
 }

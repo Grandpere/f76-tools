@@ -18,6 +18,7 @@
 - Done (slice 12): `/plans-recipes` partage desormais la meme progression `BOOK` que Minerva via l API joueur existante (select personnage + checkbox appris/non appris sur les cards), avec reapplication automatique de l etat appris apres chaque refresh AJAX des filtres.
 - Done (slice 13): la ligne de prix des cards `/plans-recipes` est maintenant plus compacte pour les items Minerva: prix de base en lingots = logo + valeur, prix remisé = marqueur Minerva + valeur, sans repetition textuelle inutile.
 - Done (slice 14): les cards `/plans-recipes` ont maintenant un footer unique de signaux en bas (icones vendeurs + signaux iconifies + pills texte fallback), ce qui evite les variations visuelles en 2 ou 3 lignes basses selon les items.
+- Done (slice 15): `/plans-recipes` propose maintenant un vrai filtre `Progression` (`Tout afficher`, `À apprendre`, `Appris`) branche au personnage actif et applique cote serveur sur tout le catalogue pagine via `player_item_knowledge`, sans casser la synchronisation partagee avec Minerva.
 
 ### Avancement F76-153
 - Done (slice 1): `app:data:sync` devient orchestrateur (`all|nukaknights|fandom`) avec delegation a `app:data:sync:fandom`.

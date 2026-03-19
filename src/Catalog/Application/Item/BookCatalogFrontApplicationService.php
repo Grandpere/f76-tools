@@ -17,6 +17,9 @@ use App\Catalog\Application\Import\ItemSourceFieldMergeDecision;
 use App\Catalog\Application\Import\ItemSourceMergePolicy;
 use App\Catalog\Application\Import\ItemSourceMergeResult;
 use App\Catalog\Domain\Entity\ItemEntity;
+use App\Catalog\Domain\Item\ItemTypeEnum;
+use App\Progression\Application\Knowledge\PlayerKnowledgeCatalogReadRepository;
+use App\Progression\Domain\Entity\PlayerEntity;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class BookCatalogFrontApplicationService
@@ -43,6 +46,7 @@ final class BookCatalogFrontApplicationService
     public function __construct(
         private readonly BookCatalogFrontReadRepository $bookCatalogFrontReadRepository,
         private readonly ItemSourceMergePolicy $itemSourceMergePolicy,
+        private readonly PlayerKnowledgeCatalogReadRepository $playerKnowledgeCatalogReadRepository,
         private readonly TranslatorInterface $translator,
     ) {
     }
@@ -68,6 +72,7 @@ final class BookCatalogFrontApplicationService
      *         vendorLabels:list<string>,
      *         vendorFlags:array{vendors:bool,vendor_minerva:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool},
      *         vendorInfoLabels:list<string>,
+     *         learned:bool,
      *         isNew:bool,
      *         bookListNumbers:list<int>,
      *         canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
@@ -82,10 +87,18 @@ final class BookCatalogFrontApplicationService
      *     signalOptions:list<string>
      * }
      */
-    public function browse(?string $query, array $selectedLists, array $selectedKinds, array $selectedVendorFilters, array $selectedSignals, int $page, int $perPage): array
+    public function browse(?string $query, array $selectedLists, array $selectedKinds, array $selectedVendorFilters, array $selectedSignals, int $page, int $perPage, ?PlayerEntity $player = null, string $knowledgeFilter = 'all'): array
     {
         $items = $this->bookCatalogFrontReadRepository->findAllBooksDetailedOrdered();
-        $rows = array_map($this->mapRow(...), $items);
+        $learnedItemIds = [];
+        if ($player instanceof PlayerEntity) {
+            $learnedItemIds = $this->playerKnowledgeCatalogReadRepository->findLearnedItemIdsByPlayer($player, ItemTypeEnum::BOOK);
+        }
+        $learnedMap = array_fill_keys($learnedItemIds, true);
+        $rows = array_map(
+            fn (ItemEntity $item): array => $this->mapRow($item, isset($learnedMap[$item->getId() ?? 0])),
+            $items,
+        );
         $listOptions = $this->extractListOptions($rows);
         $kindOptions = $this->extractKindOptions($rows);
         $vendorFilterOptions = $this->extractVendorFilterOptions($rows);
@@ -175,6 +188,19 @@ final class BookCatalogFrontApplicationService
             ));
         }
 
+        $normalizedKnowledgeFilter = $this->normalize($knowledgeFilter);
+        if ('learned' === $normalizedKnowledgeFilter) {
+            $rows = array_values(array_filter(
+                $rows,
+                static fn (array $row): bool => true === $row['learned'],
+            ));
+        } elseif ('unlearned' === $normalizedKnowledgeFilter) {
+            $rows = array_values(array_filter(
+                $rows,
+                static fn (array $row): bool => false === $row['learned'],
+            ));
+        }
+
         $totalItems = count($rows);
         $totalPages = max(1, (int) ceil($totalItems / max(1, $perPage)));
         $currentPage = min(max(1, $page), $totalPages);
@@ -208,12 +234,13 @@ final class BookCatalogFrontApplicationService
      *     vendorLabels:list<string>,
      *     vendorFlags:array{vendors:bool,vendor_minerva:bool,vendor_regs:bool,vendor_samuel:bool,vendor_mortimer:bool,vendor_giuseppe:bool},
      *     vendorInfoLabels:list<string>,
+     *     learned:bool,
      *     isNew:bool,
      *     bookListNumbers:list<int>,
      *     canonicalSignals:list<array{field:string,label:string,displayValue:string,provider:string}>
      * }
      */
-    private function mapRow(ItemEntity $item): array
+    private function mapRow(ItemEntity $item, bool $learned): array
     {
         $mergeResult = $this->itemSourceMergePolicy->merge($item, self::MERGE_PROVIDER_A, self::MERGE_PROVIDER_B);
         $canonicalSignals = null !== $mergeResult ? $this->extractCanonicalSignals($mergeResult) : [];
@@ -247,6 +274,7 @@ final class BookCatalogFrontApplicationService
             'vendorLabels' => $vendorLabels,
             'vendorFlags' => $vendorFlags,
             'vendorInfoLabels' => $vendorInfoLabels,
+            'learned' => $learned,
             'isNew' => $item->isNew(),
             'bookListNumbers' => array_values(array_unique($bookListNumbers)),
             'canonicalSignals' => array_values(array_filter(

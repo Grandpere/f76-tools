@@ -72,6 +72,9 @@ final class BookCatalogController extends AbstractController
         }
 
         $activePlayerId = $this->playerReadApplicationService->findFirstPublicIdForUser($user);
+        $selectedPlayerId = trim((string) $request->query->get('player', $activePlayerId ?? ''));
+        $selectedKnowledge = trim((string) $request->query->get('knowledge', 'all'));
+        $player = '' !== $selectedPlayerId ? $this->playerReadApplicationService->findOwnedByPublicId($user, $selectedPlayerId) : null;
 
         $query = trim((string) $request->query->get('q', ''));
         /** @var list<string> $selectedLists */
@@ -93,6 +96,8 @@ final class BookCatalogController extends AbstractController
             $selectedSignals,
             $page,
             $perPage,
+            $player,
+            $selectedKnowledge,
         );
 
         $catalogUpdatedAt = $this->itemCatalogTimestampReadRepository->findLatestUpdatedAtByType(ItemTypeEnum::BOOK);
@@ -104,6 +109,8 @@ final class BookCatalogController extends AbstractController
             'activePlayerId' => $activePlayerId,
             'storageKey' => sprintf('f76:item-catalog:ui:%d', (int) ($user->getId() ?? 0)),
             'query' => $query,
+            'selectedPlayerId' => $selectedPlayerId,
+            'selectedKnowledge' => $selectedKnowledge,
             'selectedLists' => $selectedLists,
             'selectedKinds' => $selectedKinds,
             'selectedVendorFilters' => $selectedVendorFilters,

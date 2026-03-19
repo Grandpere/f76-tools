@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    static targets = ['playerSelect', 'state', 'results'];
+    static targets = ['playerSelect', 'playerInput', 'state', 'results'];
     static values = {
         playersUrl: String,
         playersBaseUrl: String,
@@ -37,6 +37,15 @@ export default class extends Controller {
         this.playerSelectTarget.addEventListener('change', async () => {
             this.activePlayerId = this.playerSelectTarget.value;
             this.saveActivePlayerId(this.activePlayerId);
+            if (this.hasPlayerInputTarget) {
+                this.playerInputTarget.value = this.activePlayerId;
+            }
+
+            if (this.shouldSubmitOnPlayerChange()) {
+                this.resetCatalogPage();
+                this.submitCatalogFilters();
+            }
+
             await this.loadLearnedItems();
         });
 
@@ -127,6 +136,9 @@ export default class extends Controller {
         this.activePlayerId = String(selected.id);
         this.saveActivePlayerId(this.activePlayerId);
         this.playerSelectTarget.value = this.activePlayerId;
+        if (this.hasPlayerInputTarget) {
+            this.playerInputTarget.value = this.activePlayerId;
+        }
     }
 
     async loadLearnedItems() {
@@ -323,6 +335,29 @@ export default class extends Controller {
         }
 
         return url.toString();
+    }
+
+    shouldSubmitOnPlayerChange() {
+        const checkedKnowledge = this.element.querySelector('input[name="knowledge"]:checked');
+        if (!(checkedKnowledge instanceof HTMLInputElement)) {
+            return false;
+        }
+
+        return checkedKnowledge.value !== 'all';
+    }
+
+    resetCatalogPage() {
+        const pageInput = this.element.querySelector('[data-catalog-filters-target="pageInput"]');
+        if (pageInput instanceof HTMLInputElement) {
+            pageInput.value = '1';
+        }
+    }
+
+    submitCatalogFilters() {
+        const form = this.element.querySelector('[data-catalog-filters-target="form"]');
+        if (form instanceof HTMLFormElement) {
+            form.requestSubmit();
+        }
     }
 
     escape(value) {

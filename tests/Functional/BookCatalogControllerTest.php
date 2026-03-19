@@ -85,8 +85,11 @@ final class BookCatalogControllerTest extends WebTestCase
         self::assertStringEndsWith('/en/plans-recipes', (string) $crawler->filter('form.catalog-toolbar')->attr('action'));
         self::assertSame('alpha', (string) $crawler->filter('input[name="q"]')->attr('value'));
         self::assertSame('1', (string) $crawler->filter('input[name="page"]')->attr('value'));
+        self::assertCount(1, $crawler->filter('input[name="player"]'));
+        self::assertSame('all', (string) $crawler->filter('input[name="knowledge"]:checked')->attr('value'));
         self::assertCount(1, $crawler->filter('[data-controller*="book-catalog-knowledge"]'));
         self::assertCount(1, $crawler->filter('[data-book-catalog-knowledge-target="playerSelect"]'));
+        self::assertCount(1, $crawler->filter('[data-book-catalog-knowledge-target="playerInput"]'));
         self::assertCount(1, $crawler->filter('[data-book-catalog-knowledge-target="results"]'));
         self::assertCount(1, $crawler->filter('.item-learned-checkbox[data-book-checkbox="1"]'));
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="kinds[]"]')->count());

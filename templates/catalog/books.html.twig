@@ -41,6 +41,7 @@
                 <h2>{{ 'catalog_books.filters_title'|trans }}</h2>
                 <form method="get" action="{{ path('app_book_catalog', { _locale: app.request.locale }) }}" class="catalog-toolbar" data-catalog-filters-target="form">
                     <input type="hidden" name="page" value="{{ page }}" data-catalog-filters-target="pageInput">
+                    <input type="hidden" name="player" value="{{ selectedPlayerId }}" data-book-catalog-knowledge-target="playerInput">
                     <label class="field">
                         <span>{{ 'dashboard.filters.player'|trans }}</span>
                         <select data-book-catalog-knowledge-target="playerSelect"></select>
@@ -57,6 +58,23 @@
                             {% endfor %}
                         </select>
                     </label>
+                    <fieldset class="source-filters catalog-books-list-filters">
+                        <legend>{{ 'catalog_books.knowledge_filters'|trans }}</legend>
+                        <div class="source-filter-groups">
+                            <div class="source-filter-group">
+                                <p class="source-filter-group-title">{{ 'catalog_books.knowledge_filters'|trans }}</p>
+                                <div class="source-filter-options">
+                                    {% for option in ['all', 'unlearned', 'learned'] %}
+                                        <label>
+                                            <input type="radio" name="knowledge" value="{{ option }}" {% if selectedKnowledge == option %}checked{% endif %}>
+                                            <span>{{ ('catalog_books.knowledge_' ~ option)|trans }}</span>
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
                     <fieldset class="source-filters catalog-books-list-filters">
                         <legend>{{ 'catalog_books.kind_filters'|trans }}</legend>
                         {% for option in kindOptions %}
@@ -217,13 +235,14 @@
 
                 <div class="item-grid catalog-books-grid">
                     {% for item in items %}
-                        <article class="item-card catalog-book-card is-unlearned" data-book-id="{{ item.id }}">
+                        <article class="item-card catalog-book-card {{ item.learned ? 'is-learned' : 'is-unlearned' }}" data-book-id="{{ item.id }}">
                             <input
                                 class="item-learned-checkbox"
                                 type="checkbox"
                                 aria-label="{{ 'dashboard.aria.item_learned'|trans }}"
                                 data-book-checkbox="1"
                                 data-book-id="{{ item.id }}"
+                                {% if item.learned %}checked{% endif %}
                                 disabled
                             >
                             <div class="item-card-head catalog-book-head">
