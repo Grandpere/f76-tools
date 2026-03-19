@@ -3,6 +3,15 @@
 {% block title %}{{ 'catalog_books.page_title'|trans }}{% endblock %}
 
 {% block body %}
+    {% set uiTranslations = {
+        loadingPlayers: 'dashboard.state.loading_players'|trans,
+        cannotLoadPlayers: 'dashboard.state.cannot_load_players'|trans,
+        noPlayers: 'dashboard.state.no_players'|trans,
+        noSelectedPlayer: 'dashboard.state.no_selected_player'|trans,
+        loadingItems: 'dashboard.state.loading_items'|trans,
+        updateFailed: 'dashboard.state.update_failed'|trans,
+        ariaItemLearned: 'dashboard.aria.item_learned'|trans
+    } %}
     {% if catalogUpdatedAt %}
         {% set updatedLabel = 'catalog_books.last_updated'|trans({'%date%': catalogUpdatedAt|date('d/m/Y H:i')}) %}
     {% else %}
@@ -18,11 +27,24 @@
             extraState: updatedLabel
         } %}
 
-        <section class="catalog-shell" data-controller="catalog-filters">
+        <section
+            class="catalog-shell"
+            data-controller="catalog-filters book-catalog-knowledge"
+            data-book-catalog-knowledge-players-url-value="{{ apiPlayersUrl }}"
+            data-book-catalog-knowledge-players-base-url-value="{{ apiPlayersBaseUrl }}"
+            data-book-catalog-knowledge-initial-player-id-value="{{ activePlayerId ?? '' }}"
+            data-book-catalog-knowledge-storage-key-value="{{ storageKey }}"
+            data-book-catalog-knowledge-locale-value="{{ app.request.locale }}"
+            data-book-catalog-knowledge-ui-translations-value="{{ uiTranslations|json_encode|e('html_attr') }}"
+        >
             <section class="catalog-panel filters-panel">
                 <h2>{{ 'catalog_books.filters_title'|trans }}</h2>
                 <form method="get" action="{{ path('app_book_catalog', { _locale: app.request.locale }) }}" class="catalog-toolbar" data-catalog-filters-target="form">
                     <input type="hidden" name="page" value="{{ page }}" data-catalog-filters-target="pageInput">
+                    <label class="field">
+                        <span>{{ 'dashboard.filters.player'|trans }}</span>
+                        <select data-book-catalog-knowledge-target="playerSelect"></select>
+                    </label>
                     <label class="field">
                         <span>{{ 'catalog_books.search'|trans }}</span>
                         <input type="search" name="q" value="{{ query }}" placeholder="{{ 'catalog_books.search_placeholder'|trans }}" data-catalog-filters-target="searchInput">
@@ -178,18 +200,32 @@
                     </fieldset>
                 </form>
 
+                <p class="catalog-note info-note">
+                    <span class="info-note-content">{{ 'dashboard.help.shared_book_learning'|trans }}</span>
+                </p>
+
+                <p class="catalog-state" data-book-catalog-knowledge-target="state" hidden></p>
+
                 <p class="catalog-state" data-catalog-filters-target="summary">
                     {{ 'catalog_books.visible_items'|trans({'%count%': items|length, '%total%': totalItems}) }}
                 </p>
             </section>
 
-            <section class="catalog-panel catalog-block" data-catalog-filters-target="results">
+            <section class="catalog-panel catalog-block" data-catalog-filters-target="results" data-book-catalog-knowledge-target="results">
                 <h2>{{ 'catalog_books.list_title'|trans }}</h2>
                 <p class="catalog-note">{{ 'catalog_books.list_help'|trans }}</p>
 
                 <div class="item-grid catalog-books-grid">
                     {% for item in items %}
-                        <article class="item-card catalog-book-card">
+                        <article class="item-card catalog-book-card is-unlearned" data-book-id="{{ item.id }}">
+                            <input
+                                class="item-learned-checkbox"
+                                type="checkbox"
+                                aria-label="{{ 'dashboard.aria.item_learned'|trans }}"
+                                data-book-checkbox="1"
+                                data-book-id="{{ item.id }}"
+                                disabled
+                            >
                             <div class="item-card-head catalog-book-head">
                                 <div class="catalog-book-title-stack">
                                     <strong>{{ item.name }}</strong>

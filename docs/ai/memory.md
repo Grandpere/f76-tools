@@ -87,6 +87,12 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Fix: the vocabulary report now splits text-only obtained values with a bounded glossary of observed segments, while the importer separately recognizes the safe named aliases that carry real business meaning (`Union Dues`, `Samuel (Wastelanders)`, `Bullion vendors`).
 - Prevention: when repairing concatenated third-party text, use a short, explicit glossary tied to observed source data instead of generic NLP-style splitting.
 
+## 2026-03-19 - AJAX-refreshed catalog results must reapply shared learned state after DOM replacement
+- Symptom: `/plans-recipes` can refresh its result grid in place when filters/pagination/search change, which would otherwise drop any JS-applied learned/unlearned state and checkbox bindings on the new cards.
+- Root cause: the page uses server-rendered cards plus a separate AJAX filter controller, so progression state is not part of the HTML response itself.
+- Fix: the filter controller now emits a `catalog-filters:updated` event after replacing the results block, and the plans catalog knowledge controller listens to it to reapply the shared `player_item_knowledge` state to the new DOM.
+- Prevention: whenever a page combines server-rendered cards with client-side state and AJAX block replacement, emit an explicit post-refresh event and make the stateful controller rehydrate the new markup.
+
 ## 2026-03-18 - Add low-risk cross-source flags from explicit labels before named event heuristics
 - Symptom: after the major taxonomy cleanup, the remaining `fallout_wiki.obtained` backlog was dominated by named activities/events, but a few still-used acquisition paths were exposed as explicit generic labels.
 - Root cause: not every useful concept needs fuzzy matching; some fields stay worth adding simply because the source already names them directly.

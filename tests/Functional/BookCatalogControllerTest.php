@@ -16,6 +16,7 @@ namespace App\Tests\Functional;
 use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
 use App\Identity\Domain\Entity\UserEntity;
+use App\Progression\Domain\Entity\PlayerEntity;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -55,6 +56,7 @@ final class BookCatalogControllerTest extends WebTestCase
     public function testPageRendersMergedBookCardsForAuthenticatedUser(): void
     {
         $user = $this->createUser('books@example.com');
+        $this->createPlayer($user, 'Main dweller');
         $this->createBook(321, 'catalog.book.front.alpha', 'Plan: Alpha Receiver', [
             'daily_ops' => true,
             'expeditions' => true,
@@ -83,6 +85,10 @@ final class BookCatalogControllerTest extends WebTestCase
         self::assertStringEndsWith('/en/plans-recipes', (string) $crawler->filter('form.catalog-toolbar')->attr('action'));
         self::assertSame('alpha', (string) $crawler->filter('input[name="q"]')->attr('value'));
         self::assertSame('1', (string) $crawler->filter('input[name="page"]')->attr('value'));
+        self::assertCount(1, $crawler->filter('[data-controller*="book-catalog-knowledge"]'));
+        self::assertCount(1, $crawler->filter('[data-book-catalog-knowledge-target="playerSelect"]'));
+        self::assertCount(1, $crawler->filter('[data-book-catalog-knowledge-target="results"]'));
+        self::assertCount(1, $crawler->filter('.item-learned-checkbox[data-book-checkbox="1"]'));
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="kinds[]"]')->count());
         self::assertGreaterThanOrEqual(1, $crawler->filter('input[name="vendorFilters[]"]')->count());
         self::assertStringContainsString('vendorFilters[]', (string) $this->browser()->getResponse()->getContent());
@@ -99,6 +105,18 @@ final class BookCatalogControllerTest extends WebTestCase
         self::assertStringContainsString('/assets/icons/FO76_scoresprite_seasons.png', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('/assets/icons/FO76_ui_exploration_team.png', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('/assets/icons/WhitespringResortMarker.svg', (string) $this->browser()->getResponse()->getContent());
+    }
+
+    private function createPlayer(UserEntity $user, string $name): PlayerEntity
+    {
+        $player = new PlayerEntity()
+            ->setUser($user)
+            ->setName($name);
+
+        $this->entityManager?->persist($player);
+        $this->entityManager?->flush();
+
+        return $player;
     }
 
     private function createUser(string $email): UserEntity

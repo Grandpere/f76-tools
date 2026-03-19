@@ -118,5 +118,9 @@ export default class extends Controller {
                 this.pageInputTarget.value = nextPageInput.value;
             }
         }
+
+        this.element.dispatchEvent(new CustomEvent('catalog-filters:updated', {
+            bubbles: true,
+        }));
     }
 }

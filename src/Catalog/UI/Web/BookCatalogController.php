@@ -17,6 +17,7 @@ use App\Catalog\Application\Item\BookCatalogFrontApplicationService;
 use App\Catalog\Application\Item\ItemCatalogTimestampReadRepository;
 use App\Catalog\Domain\Item\ItemTypeEnum;
 use App\Identity\Domain\Entity\UserEntity;
+use App\Progression\Application\Player\PlayerReadApplicationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,6 +57,7 @@ final class BookCatalogController extends AbstractController
 
     public function __construct(
         private readonly BookCatalogFrontApplicationService $bookCatalogFrontApplicationService,
+        private readonly PlayerReadApplicationService $playerReadApplicationService,
         private readonly ItemCatalogTimestampReadRepository $itemCatalogTimestampReadRepository,
     ) {
     }
@@ -68,6 +70,8 @@ final class BookCatalogController extends AbstractController
         if (!$user instanceof UserEntity) {
             throw new AccessDeniedException('User must be authenticated.');
         }
+
+        $activePlayerId = $this->playerReadApplicationService->findFirstPublicIdForUser($user);
 
         $query = trim((string) $request->query->get('q', ''));
         /** @var list<string> $selectedLists */
@@ -95,6 +99,10 @@ final class BookCatalogController extends AbstractController
 
         return $this->render('catalog/books.html.twig', [
             'username' => $user->getEmail(),
+            'apiPlayersUrl' => $this->generateUrl('api_players_index'),
+            'apiPlayersBaseUrl' => $this->generateUrl('api_players_index'),
+            'activePlayerId' => $activePlayerId,
+            'storageKey' => sprintf('f76:item-catalog:ui:%d', (int) ($user->getId() ?? 0)),
             'query' => $query,
             'selectedLists' => $selectedLists,
             'selectedKinds' => $selectedKinds,

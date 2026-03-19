@@ -55,6 +55,7 @@ final class BookCatalogFrontApplicationService
      *
      * @return array{
      *     rows:list<array{
+     *         id:string,
      *         name:string,
      *         bookKind:string,
      *         description:?string,
@@ -194,6 +195,7 @@ final class BookCatalogFrontApplicationService
 
     /**
      * @return array{
+     *     id:string,
      *     name:string,
      *     bookKind:string,
      *     description:?string,
@@ -232,6 +234,7 @@ final class BookCatalogFrontApplicationService
         $priceCurrencyLabel = $this->translator->trans('catalog_books.currency_'.$priceCurrencyCode);
 
         return [
+            'id' => $item->getPublicId(),
             'name' => $this->translator->trans($item->getNameKey(), domain: 'items'),
             'bookKind' => $bookKind,
             'description' => null !== $item->getDescKey() ? $this->translator->trans($item->getDescKey(), domain: 'items') : null,

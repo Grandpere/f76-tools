@@ -47,6 +47,7 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
         $result = $service->browse('alpha', ['4'], [], [], [], 1, 24);
 
         self::assertSame(1, $result['totalItems']);
+        self::assertSame('pub-alpha', $result['rows'][0]['id']);
         self::assertSame('Plan: Alpha Receiver', $result['rows'][0]['name']);
         self::assertSame([4], $result['rows'][0]['bookListNumbers']);
         self::assertSame([4, 7], $result['listOptions']);
