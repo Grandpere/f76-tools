@@ -1373,7 +1373,7 @@ body::before {
 }
 
 .catalog-taxonomy-subcategory-block {
-    margin-top: 0.75rem;
+    min-width: 0;
 }
 
 .catalog-taxonomy-subcategory-groups {
