@@ -57,8 +57,8 @@ final class PlayerStatsControllerTest extends WebTestCase
         $miscRank1B = $this->createItem(702, ItemTypeEnum::MISC, 1, 'item.misc.702.name');
         $miscRank2 = $this->createItem(703, ItemTypeEnum::MISC, 2, 'item.misc.703.name');
         $bookList1 = $this->createBookItem(801, 'item.book.801.name', [1], 'plan', 'Fallout_76_Weapon_Plans', 'Ballistic');
-        $bookList1And4 = $this->createBookItem(802, 'item.book.802.name', [1, 4], 'plan', 'Fallout_76_Workshop_Plans', 'Floor Decor');
-        $bookList2 = $this->createBookItem(803, 'item.book.803.name', [2], 'recipe', 'Fallout_76_Recipes');
+        $bookList1And4 = $this->createBookItem(802, 'item.book.802.name', [1, 4], 'plan', 'Fallout_76_Workshop_Plans', 'Floor Decor', ['Workshop plans', 'Beds']);
+        $bookList2 = $this->createBookItem(803, 'item.book.803.name', [2], 'recipe', 'Fallout_76_Recipes', null, ['Recipes', 'Chems']);
 
         $this->learn($player, $miscRank1A);
         $this->learn($player, $miscRank2);
@@ -119,6 +119,15 @@ final class PlayerStatsControllerTest extends WebTestCase
         self::assertSame(1, $this->readInt($floorDecor, 'total'));
         self::assertSame(1, $this->readInt($floorDecor, 'learned'));
         self::assertSame(100, $this->readInt($floorDecor, 'percent'));
+        $bookByDetail = $this->readList($payload, 'bookByDetail');
+        $beds = $this->findByStringKeyValue($bookByDetail, 'detail', 'beds');
+        $chems = $this->findByStringKeyValue($bookByDetail, 'detail', 'chems');
+        self::assertSame(1, $this->readInt($beds, 'total'));
+        self::assertSame(1, $this->readInt($beds, 'learned'));
+        self::assertSame(100, $this->readInt($beds, 'percent'));
+        self::assertSame(1, $this->readInt($chems, 'total'));
+        self::assertSame(0, $this->readInt($chems, 'learned'));
+        self::assertSame(0, $this->readInt($chems, 'percent'));
 
         $miscByRank = $this->readList($payload, 'miscByRank');
         $rank1 = $this->findByKeyValue($miscByRank, 'rank', 1);
@@ -197,9 +206,10 @@ final class PlayerStatsControllerTest extends WebTestCase
     }
 
     /**
-     * @param list<int> $listNumbers
+     * @param list<int>    $listNumbers
+     * @param list<string> $sourceSections
      */
-    private function createBookItem(int $sourceId, string $nameKey, array $listNumbers, string $bookKind = 'plan', string $sourcePage = 'Fallout_76_Weapon_Plans', ?string $sourceSection = null): ItemEntity
+    private function createBookItem(int $sourceId, string $nameKey, array $listNumbers, string $bookKind = 'plan', string $sourcePage = 'Fallout_76_Weapon_Plans', ?string $sourceSection = null, array $sourceSections = []): ItemEntity
     {
         $item = $this->createItem($sourceId, ItemTypeEnum::BOOK, null, $nameKey);
         $item->upsertExternalSource('fallout_wiki', sprintf('%08X', $sourceId), 'https://example.test/wiki/'.$sourceId, [
@@ -207,6 +217,7 @@ final class PlayerStatsControllerTest extends WebTestCase
             'name_en' => 'recipe' === $bookKind ? 'Recipe: Example test' : 'Plan: Example test',
             'source_page' => $sourcePage,
             'source_section' => $sourceSection,
+            'source_sections' => $sourceSections,
         ]);
         foreach ($listNumbers as $listNumber) {
             $this->entityManager?->persist(new ItemBookListEntity()

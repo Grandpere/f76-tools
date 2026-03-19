@@ -613,4 +613,183 @@ final class PlayerItemKnowledgeEntityRepository extends ServiceEntityRepository 
 
         return $counts;
     }
+
+    /**
+     * @return array<string, array<string, int>>
+     */
+    public function findLearnedBookCountsByDetail(PlayerEntity $player): array
+    {
+        $sql = <<<'SQL'
+                SELECT
+                    CASE
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_item_type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'name_en', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'name', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_slug', '')) LIKE 'recipe:%'
+                              )
+                        ) THEN 'recipe'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%'
+                              )
+                        ) THEN 'workshop_plan'
+                        ELSE NULL
+                    END AS book_category,
+                    CASE
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_item_type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'name_en', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'name', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_slug', '')) LIKE 'recipe:%'
+                              )
+                              AND LOWER(section.value) LIKE '%brewing%'
+                        ) THEN 'brewing'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_item_type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'name_en', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'name', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_slug', '')) LIKE 'recipe:%'
+                              )
+                              AND LOWER(section.value) LIKE '%chems%'
+                        ) THEN 'chems'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_item_type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'name_en', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'name', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_slug', '')) LIKE 'recipe:%'
+                              )
+                              AND LOWER(section.value) LIKE '%cooking (drinks)%'
+                        ) THEN 'cooking_drinks'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_item_type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'name_en', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'name', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_slug', '')) LIKE 'recipe:%'
+                              )
+                              AND LOWER(section.value) LIKE '%cooking (food)%'
+                        ) THEN 'cooking_food'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_item_type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'name_en', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'name', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_slug', '')) LIKE 'recipe:%'
+                              )
+                              AND LOWER(section.value) LIKE '%junk%'
+                        ) THEN 'junk'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_item_type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'name_en', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'name', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_slug', '')) LIKE 'recipe:%'
+                              )
+                              AND LOWER(section.value) LIKE '%serums%'
+                        ) THEN 'serums'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%'
+                              )
+                              AND LOWER(section.value) LIKE '%appliances%'
+                        ) THEN 'appliances'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%beds%') THEN 'beds'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%chairs%') THEN 'chairs'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%crafting%') THEN 'crafting'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%defenses%') THEN 'defenses'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%displays%') THEN 'displays'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%doors%') THEN 'doors'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%floor decor%') THEN 'floor_decor'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%floors%') THEN 'floors'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%food%') THEN 'food'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%generators%') THEN 'generators'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%lights%') THEN 'lights'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%misc. structures%') THEN 'misc_structures'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%power connectors%') THEN 'power_connectors'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%resources%') THEN 'resources'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%shelves%') THEN 'shelves'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%stash boxes%') THEN 'stash_boxes'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%tables%') THEN 'tables'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%turrets &amp; traps%') THEN 'turrets_traps'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%vendors%') THEN 'vendors'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%wall decor%') THEN 'wall_decor'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%walls%') THEN 'walls'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%water%') THEN 'water'
+                        ELSE NULL
+                    END AS book_detail,
+                    COUNT(DISTINCT i.id) AS learned_count
+                FROM player_item_knowledge k
+                INNER JOIN item i ON i.id = k.item_id
+                WHERE k.player_id = :playerId
+                  AND i.type = :type
+                GROUP BY book_category, book_detail
+            SQL;
+
+        $rows = $this->getEntityManager()->getConnection()->executeQuery($sql, [
+            'playerId' => $player->getId(),
+            'type' => ItemTypeEnum::BOOK->value,
+        ])->fetchAllAssociative();
+
+        $counts = [];
+        foreach ($rows as $row) {
+            $category = $row['book_category'] ?? null;
+            $detail = $row['book_detail'] ?? null;
+            $countRaw = $row['learned_count'] ?? null;
+            if (!is_string($category) || !is_string($detail) || '' === $detail || (!is_int($countRaw) && !is_numeric($countRaw))) {
+                continue;
+            }
+
+            $counts[$category][$detail] = (int) $countRaw;
+        }
+
+        return $counts;
+    }
 }

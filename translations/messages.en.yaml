@@ -105,6 +105,7 @@ catalog_books.list_option: List %list%
 catalog_books.kind_filters: Type
 catalog_books.kind_plan: Plan
 catalog_books.kind_recipe: Recipe
+catalog_books.taxonomy_filters: Categories
 catalog_books.category_filters: Category
 catalog_books.category_plan: Plans
 catalog_books.category_weapon_plan: Weapon plans
@@ -216,6 +217,7 @@ dashboard.stats.by_rank: Legendary mods
 dashboard.stats.by_list: Minerva lists
 dashboard.stats.by_book_category: Plans & recipes by category
 dashboard.stats.by_book_subcategory: Plans & recipes by subcategory
+dashboard.stats.by_book_detail: Workshop & recipe detail
 dashboard.stats.learned_on_total: '%learned% / %total%'
 dashboard.stats.percent_suffix: '%'
 dashboard.stats.rank_prefix: Rank

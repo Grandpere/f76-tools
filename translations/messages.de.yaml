@@ -105,6 +105,7 @@ catalog_books.list_option: Liste %list%
 catalog_books.kind_filters: Typ
 catalog_books.kind_plan: Bauplan
 catalog_books.kind_recipe: Rezept
+catalog_books.taxonomy_filters: Kategorien
 catalog_books.category_filters: Kategorie
 catalog_books.category_plan: Baupläne
 catalog_books.category_weapon_plan: Waffenbaupläne
@@ -216,6 +217,7 @@ dashboard.stats.by_rank: Legendäre Mods
 dashboard.stats.by_list: Minerva-Listen
 dashboard.stats.by_book_category: Baupläne & Rezepte nach Kategorie
 dashboard.stats.by_book_subcategory: Baupläne & Rezepte nach Unterkategorie
+dashboard.stats.by_book_detail: Werkstatt- & Rezeptdetails
 dashboard.stats.learned_on_total: '%learned% / %total%'
 dashboard.stats.percent_suffix: '%'
 dashboard.stats.rank_prefix: Rang

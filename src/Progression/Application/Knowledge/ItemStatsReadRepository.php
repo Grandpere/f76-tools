@@ -52,4 +52,9 @@ interface ItemStatsReadRepository
      * @return array<string, array<string, int>>
      */
     public function findBookTotalsBySubcategory(): array;
+
+    /**
+     * @return array<string, array<string, int>>
+     */
+    public function findBookTotalsByDetail(): array;
 }

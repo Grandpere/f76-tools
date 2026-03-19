@@ -136,6 +136,10 @@ final class FilesystemItemImportSourceReader implements ItemImportSourceReader
         if (is_scalar($section)) {
             $row['source_section'] = (string) $section;
         }
+        $sourceSections = $this->extractSourceSections($resource);
+        if ([] !== $sourceSections) {
+            $row['source_sections'] = $sourceSections;
+        }
 
         $page = $payload['page'] ?? null;
         if (is_scalar($page)) {
@@ -160,6 +164,40 @@ final class FilesystemItemImportSourceReader implements ItemImportSourceReader
         }
 
         return $row;
+    }
+
+    /**
+     * @param array<string, mixed> $resource
+     *
+     * @return list<string>
+     */
+    private function extractSourceSections(array $resource): array
+    {
+        $sources = $resource['sources'] ?? null;
+        if (!is_array($sources) || !array_is_list($sources)) {
+            return [];
+        }
+
+        $sections = [];
+        foreach ($sources as $source) {
+            if (!is_array($source)) {
+                continue;
+            }
+
+            $section = $source['section'] ?? null;
+            if (!is_scalar($section)) {
+                continue;
+            }
+
+            $normalized = trim((string) $section);
+            if ('' === $normalized || in_array($normalized, $sections, true)) {
+                continue;
+            }
+
+            $sections[] = $normalized;
+        }
+
+        return $sections;
     }
 
     private function deriveIdFromFormId(string $formId): ?int

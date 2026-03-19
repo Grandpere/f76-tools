@@ -108,6 +108,43 @@ final class FilesystemItemImportSourceReaderTest extends TestCase
         self::assertTrue((bool) ($rows[0]['vendors'] ?? false));
     }
 
+    public function testReadRowsKeepsNestedSourceSectionsWhenAvailable(): void
+    {
+        $root = $this->createTempDir();
+        $path = $root.'/plans_workshop.json';
+        file_put_contents($path, (string) json_encode([
+            'generated_at' => '2026-03-19T10:00:00+00:00',
+            'page' => 'Fallout_76_Workshop_Plans',
+            'url' => 'https://fallout.fandom.com/wiki/Fallout_76_Workshop_Plans',
+            'resources' => [
+                [
+                    'type' => 'plan',
+                    'slug' => 'Plan:_Example',
+                    'title' => 'Plan: Example',
+                    'section' => 'Workshop plans',
+                    'columns' => [
+                        'form_id' => '0000ABCD',
+                    ],
+                    'sources' => [
+                        ['section' => 'Workshop plans'],
+                        ['section' => 'Beds'],
+                        ['section' => 'Beds'],
+                        ['section' => 'Water'],
+                    ],
+                ],
+            ],
+        ], JSON_THROW_ON_ERROR));
+
+        $reader = new FilesystemItemImportSourceReader();
+        $rows = $reader->readRows($path);
+
+        self::assertIsArray($rows);
+        self::assertIsArray($rows[0]);
+        /** @var array<string, mixed> $row */
+        $row = $rows[0];
+        self::assertSame(['Workshop plans', 'Beds', 'Water'], $row['source_sections'] ?? null);
+    }
+
     public function testReadRowsPrefersCanonicalResourceNameOverConflictingColumnName(): void
     {
         $root = $this->createTempDir();
