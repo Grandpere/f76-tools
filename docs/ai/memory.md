@@ -778,3 +778,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: write-mode import resolved persistence identity on `(type, sourceId)` only, even though cross-source `BOOK` rows already shared a stable business key through `form_id` stored as `externalRef`.
 - Fix: `BOOK` import now resolves write targets by shared `form_id` when available, prefers the existing catalog item already anchored on `fandom`/`fallout_wiki`, merges Minerva-only lists/flags/external sources into that keeper, migrates `player_item_knowledge`, then removes the duplicate row.
 - Prevention: for `BOOK` reconciliation, treat `form_id`/`externalRef` as the cross-source identity first and use `sourceId` only as a provider-local fallback.
+
+## 2026-03-19 - Cross-source `BOOK` dedupe must also remap orphan translation keys
+- Symptom: after reconciling duplicate `BOOK` rows on a shared `form_id`, the database kept only the keeper item but `translations/items.*.yaml` still contained entries for the removed source ID (for example both `item.book.5805601.name` and `item.book.889.name`).
+- Root cause: the translation writer only supported upserts, so import could move persistence identity to the keeper without ever cleaning or remapping the duplicate translation keys.
+- Fix: the import now remaps old `item.book.<duplicate>.{name,desc,note}` keys onto the keeper key after dedupe, preserves stronger local translations over English fallback values, then deletes the orphaned keys from the translation catalogs.
+- Prevention: when an import flow can merge two provider-local IDs into one canonical item, translation catalogs must be reconciled in the same slice instead of relying on future full rewrites.

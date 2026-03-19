@@ -19,4 +19,9 @@ interface TranslationCatalogWriter
      * @param array<string, string> $entries
      */
     public function upsert(string $locale, string $domain, array $entries): void;
+
+    /**
+     * @param list<string> $keys
+     */
+    public function delete(string $locale, string $domain, array $keys): void;
 }

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Catalog\Application\Import;
 
+use App\Catalog\Application\Translation\TranslationCatalogReader;
 use App\Catalog\Application\Translation\TranslationCatalogWriter;
 use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Domain\Item\ItemTypeEnum;
@@ -22,6 +23,7 @@ final class ItemImportApplicationService
     public function __construct(
         private readonly ItemImportPersistence $persistence,
         private readonly ItemImportItemRepository $itemRepository,
+        private readonly TranslationCatalogReader $translationCatalogReader,
         private readonly TranslationCatalogWriter $translationCatalogWriter,
         private readonly ItemImportFileContextResolver $fileContextResolver,
         private readonly ItemImportSourceReader $sourceReader,
@@ -61,6 +63,8 @@ final class ItemImportApplicationService
         $catalogDe = [];
         /** @var array<string, true> $seenProviderRefs */
         $seenProviderRefs = [];
+        /** @var list<array{old:int,new:int}> $translationRemaps */
+        $translationRemaps = [];
 
         $pendingFlush = 0;
 
@@ -163,6 +167,10 @@ final class ItemImportApplicationService
                     [$item, $isNew, $duplicate] = $this->resolveWriteTarget($type, $sourceId, $externalSource['externalRef'], $writeMemory);
 
                     if ($duplicate instanceof ItemEntity) {
+                        $translationRemaps[] = [
+                            'old' => $duplicate->getSourceId(),
+                            'new' => $item->getSourceId(),
+                        ];
                         $this->mergeDuplicateBookItem($item, $duplicate);
 
                         foreach ($writeMemory as $cachedKey => $cachedItem) {
@@ -236,6 +244,9 @@ final class ItemImportApplicationService
         if (!$dryRun) {
             $this->translationCatalogWriter->upsert('en', 'items', $catalogEn);
             $this->translationCatalogWriter->upsert('de', 'items', $catalogDe);
+            if ([] !== $translationRemaps) {
+                $this->reconcileBookTranslationKeys($translationRemaps);
+            }
         }
 
         return new ItemImportResult($stats, $warnings);
@@ -401,6 +412,62 @@ final class ItemImportApplicationService
         }
 
         $this->persistence->mergeBookDuplicate($duplicate, $keeper);
+    }
+
+    /**
+     * @param list<array{old:int,new:int}> $translationRemaps
+     */
+    private function reconcileBookTranslationKeys(array $translationRemaps): void
+    {
+        $uniqueRemaps = [];
+        foreach ($translationRemaps as $remap) {
+            if ($remap['old'] === $remap['new']) {
+                continue;
+            }
+
+            $uniqueRemaps[sprintf('%d:%d', $remap['old'], $remap['new'])] = $remap;
+        }
+
+        $englishCatalog = $this->translationCatalogReader->load('en', 'items');
+        foreach (['en', 'de', 'fr'] as $locale) {
+            $catalog = $this->translationCatalogReader->load($locale, 'items');
+            $upserts = [];
+            $deletes = [];
+
+            foreach ($uniqueRemaps as $remap) {
+                foreach (['name', 'desc', 'note'] as $suffix) {
+                    $oldKey = sprintf('item.book.%d.%s', $remap['old'], $suffix);
+                    $newKey = sprintf('item.book.%d.%s', $remap['new'], $suffix);
+
+                    $oldValue = $catalog[$oldKey] ?? null;
+                    $newValue = $catalog[$newKey] ?? null;
+                    $shouldPromoteOldValue = is_string($oldValue) && '' !== trim($oldValue) && (
+                        null === $newValue
+                        || '' === trim((string) $newValue)
+                        || (
+                            'en' !== $locale
+                            && $newValue === ($englishCatalog[$newKey] ?? null)
+                            && $oldValue !== $newValue
+                        )
+                    );
+                    if ($shouldPromoteOldValue) {
+                        $upserts[$newKey] = $oldValue;
+                    }
+
+                    if (array_key_exists($oldKey, $catalog)) {
+                        $deletes[] = $oldKey;
+                    }
+                }
+            }
+
+            if ([] !== $upserts) {
+                $this->translationCatalogWriter->upsert($locale, 'items', $upserts);
+            }
+
+            if ([] !== $deletes) {
+                $this->translationCatalogWriter->delete($locale, 'items', array_values(array_unique($deletes)));
+            }
+        }
     }
 
     /**

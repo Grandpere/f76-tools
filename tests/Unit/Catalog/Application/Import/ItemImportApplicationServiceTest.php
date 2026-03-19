@@ -23,9 +23,11 @@ use App\Catalog\Application\Import\ItemImportItemRepository;
 use App\Catalog\Application\Import\ItemImportPersistence;
 use App\Catalog\Application\Import\ItemImportTranslationCatalogBuilder;
 use App\Catalog\Application\Import\ItemImportValueNormalizer;
+use App\Catalog\Application\Translation\TranslationCatalogReader;
 use App\Catalog\Application\Translation\TranslationCatalogWriter;
 use App\Catalog\Domain\Entity\ItemEntity;
 use App\Catalog\Infrastructure\Import\FilesystemItemImportSourceReader;
+use App\Catalog\Infrastructure\Translation\TranslationCatalogReader as YamlTranslationCatalogReader;
 use App\Catalog\Infrastructure\Translation\TranslationCatalogWriter as YamlTranslationCatalogWriter;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -55,7 +57,8 @@ final class ItemImportApplicationServiceTest extends TestCase
         $this->repository->expects(self::never())->method('findBooksByExternalRef');
         $this->repository->expects(self::never())->method('deleteAllBookLists');
 
-        $service = $this->createService($this->createTranslationWriter($this->createTempDir()));
+        $projectDir = $this->createTempDir();
+        $service = $this->createService($this->createTranslationReader($projectDir), $this->createTranslationWriter($projectDir));
         $result = $service->import($root, true, 100, true);
         $stats = $result->getStats();
 
@@ -95,7 +98,7 @@ final class ItemImportApplicationServiceTest extends TestCase
             });
         $this->persistence->expects(self::once())->method('flush');
         $projectDir = $this->createTempDir();
-        $service = $this->createService($this->createTranslationWriter($projectDir));
+        $service = $this->createService($this->createTranslationReader($projectDir), $this->createTranslationWriter($projectDir));
         $result = $service->import($root, false, 100, true);
 
         self::assertFalse($result->hasErrors());
@@ -130,7 +133,7 @@ final class ItemImportApplicationServiceTest extends TestCase
         $this->persistence->expects(self::once())->method('flush');
 
         $projectDir = $this->createTempDir();
-        $service = $this->createService($this->createTranslationWriter($projectDir));
+        $service = $this->createService($this->createTranslationReader($projectDir), $this->createTranslationWriter($projectDir));
         $result = $service->import($root, false, 100, false);
         $stats = $result->getStats();
 
@@ -206,7 +209,7 @@ final class ItemImportApplicationServiceTest extends TestCase
         $this->persistence->expects(self::once())->method('flush');
 
         $projectDir = $this->createTempDir();
-        $service = $this->createService($this->createTranslationWriter($projectDir));
+        $service = $this->createService($this->createTranslationReader($projectDir), $this->createTranslationWriter($projectDir));
         $result = $service->import($root, false, 100, false);
 
         self::assertFalse($result->hasErrors());
@@ -264,7 +267,7 @@ final class ItemImportApplicationServiceTest extends TestCase
         $this->persistence->expects(self::once())->method('flush');
 
         $projectDir = $this->createTempDir();
-        $service = $this->createService($this->createTranslationWriter($projectDir));
+        $service = $this->createService($this->createTranslationReader($projectDir), $this->createTranslationWriter($projectDir));
         $result = $service->import($root, false, 100, false);
         $stats = $result->getStats();
 
@@ -331,7 +334,7 @@ final class ItemImportApplicationServiceTest extends TestCase
         $this->persistence->expects(self::once())->method('flush');
 
         $projectDir = $this->createTempDir();
-        $service = $this->createService($this->createTranslationWriter($projectDir));
+        $service = $this->createService($this->createTranslationReader($projectDir), $this->createTranslationWriter($projectDir));
         $result = $service->import($root, false, 100, false);
         $stats = $result->getStats();
 
@@ -395,7 +398,15 @@ final class ItemImportApplicationServiceTest extends TestCase
         $this->persistence->expects(self::once())->method('flush');
 
         $projectDir = $this->createTempDir();
-        $service = $this->createService($this->createTranslationWriter($projectDir));
+        $translationWriter = $this->createTranslationWriter($projectDir);
+        $translationReader = $this->createTranslationReader($projectDir);
+        $translationWriter->upsert('en', 'items', [
+            'item.book.889.name' => 'Plan: Cattle prod',
+        ]);
+        $translationWriter->upsert('de', 'items', [
+            'item.book.889.name' => 'Bauplan: Viehtreiber',
+        ]);
+        $service = $this->createService($translationReader, $translationWriter);
         $result = $service->import($root, false, 100, false);
 
         self::assertFalse($result->hasErrors());
@@ -409,15 +420,20 @@ final class ItemImportApplicationServiceTest extends TestCase
             $keeper->getBookLists()->toArray(),
         ));
         self::assertCount(2, $keeper->getExternalSources());
+        self::assertSame('Plan: Cattle prod', $translationReader->load('en', 'items')['item.book.5805601.name'] ?? null);
+        self::assertSame('Bauplan: Viehtreiber', $translationReader->load('de', 'items')['item.book.5805601.name'] ?? null);
+        self::assertArrayNotHasKey('item.book.889.name', $translationReader->load('en', 'items'));
+        self::assertArrayNotHasKey('item.book.889.name', $translationReader->load('de', 'items'));
     }
 
-    private function createService(TranslationCatalogWriter $translationCatalogWriter): ItemImportApplicationService
+    private function createService(TranslationCatalogReader $translationCatalogReader, TranslationCatalogWriter $translationCatalogWriter): ItemImportApplicationService
     {
         $normalizer = new ItemImportValueNormalizer();
 
         return new ItemImportApplicationService(
             $this->persistence,
             $this->repository,
+            $translationCatalogReader,
             $translationCatalogWriter,
             new ItemImportFileContextResolver(),
             new FilesystemItemImportSourceReader(),
@@ -437,6 +453,14 @@ final class ItemImportApplicationServiceTest extends TestCase
         $kernel->method('getProjectDir')->willReturn($projectDir);
 
         return new YamlTranslationCatalogWriter($kernel);
+    }
+
+    private function createTranslationReader(string $projectDir): TranslationCatalogReader
+    {
+        $kernel = $this->createMock(KernelInterface::class);
+        $kernel->method('getProjectDir')->willReturn($projectDir);
+
+        return new YamlTranslationCatalogReader($kernel);
     }
 
     private function createTempDir(): string

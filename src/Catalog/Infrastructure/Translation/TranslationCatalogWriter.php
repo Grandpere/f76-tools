@@ -60,6 +60,38 @@ final class TranslationCatalogWriter implements TranslationCatalogWriterPort
         $this->filesystem->rename($tmpFile, $file, true);
     }
 
+    public function delete(string $locale, string $domain, array $keys): void
+    {
+        if ([] === $keys) {
+            return;
+        }
+
+        $translationDir = rtrim($this->kernel->getProjectDir(), '/').'/translations';
+        $file = sprintf('%s/%s.%s.yaml', $translationDir, $domain, $locale);
+        $current = $this->loadCatalog($file);
+
+        $changed = false;
+        foreach ($keys as $key) {
+            $normalizedKey = trim($key);
+            if ('' === $normalizedKey || !array_key_exists($normalizedKey, $current)) {
+                continue;
+            }
+
+            unset($current[$normalizedKey]);
+            $changed = true;
+        }
+
+        if (!$changed) {
+            return;
+        }
+
+        $yaml = $this->renderStructuredYaml($current);
+
+        $tmpFile = $file.'.tmp';
+        $this->filesystem->dumpFile($tmpFile, $yaml);
+        $this->filesystem->rename($tmpFile, $file, true);
+    }
+
     /**
      * @return array<string, string>
      */
