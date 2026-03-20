@@ -382,7 +382,26 @@ export default class extends Controller {
             })
             .map((row) => this.renderStatsCard(this.t(`bookCategory_${row.category}`), row))
             .join('');
-        const subcategoryRows = bookBySubcategory.map((row) => this.renderStatsRow(`${this.t(`bookCategory_${row.category}`)} - ${row.label}`, row)).join('');
+        const subcategorySections = this.constructor.categoryCardOrder
+            .map((category) => {
+                const rows = bookBySubcategory
+                    .filter((row) => row.category === category)
+                    .map((row) => this.renderStatsRow(row.label, row))
+                    .join('');
+
+                if (!rows) {
+                    return '';
+                }
+
+                return `
+                    <section class="stats-group">
+                        <h3>${this.escape(this.t(`bookCategory_${category}`))}</h3>
+                        ${rows}
+                    </section>
+                `;
+            })
+            .filter((section) => section !== '')
+            .join('');
         const workshopDetailRows = bookByDetail
             .filter((row) => row.category === 'workshop_plan')
             .map((row) => this.renderStatsRow(row.label, row))
@@ -408,10 +427,7 @@ export default class extends Controller {
             </div>
             <div class="stats-split">
                 <div class="stats-stack">
-                    <section class="stats-group">
-                        <h3>${this.escape(this.t('statsByBookSubcategory'))}</h3>
-                        ${subcategoryRows || '<p class="catalog-note">-</p>'}
-                    </section>
+                    ${subcategorySections || `<section class="stats-group"><h3>${this.escape(this.t('statsByBookSubcategory'))}</h3><p class="catalog-note">-</p></section>`}
                     <section class="stats-group">
                         <h3>${this.escape(this.t('statsByWorkshopDetail'))}</h3>
                         ${workshopDetailRows || '<p class="catalog-note">-</p>'}
