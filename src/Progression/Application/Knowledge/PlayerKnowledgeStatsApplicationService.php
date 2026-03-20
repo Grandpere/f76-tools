@@ -59,6 +59,7 @@ final class PlayerKnowledgeStatsApplicationService
             'leather' => 'Leather',
             'marine' => 'Marine',
             'metal' => 'Metal',
+            'muni' => 'Muni',
             'raider' => 'Raider',
             'robot' => 'Robot',
             'secret_service' => 'Secret Service',

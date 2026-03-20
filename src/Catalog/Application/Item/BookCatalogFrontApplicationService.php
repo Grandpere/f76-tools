@@ -44,7 +44,7 @@ final class BookCatalogFrontApplicationService
     private const BOOK_SUBCATEGORY_ORDER = [
         'weapon_plan' => ['ballistic', 'melee', 'thrown', 'bows', 'alien', 'camera', 'unused'],
         'weapon_mod_plan' => ['ballistic', 'melee', 'bows', 'alien', 'camera', 'unused'],
-        'armor_plan' => ['arctic_marine', 'botsmith', 'brotherhood_recon', 'chinese_stealth', 'combat', 'covert_scout', 'leather', 'marine', 'metal', 'raider', 'robot', 'secret_service', 'solar_thorn', 'trapper', 'underarmor'],
+        'armor_plan' => ['arctic_marine', 'botsmith', 'brotherhood_recon', 'chinese_stealth', 'combat', 'covert_scout', 'leather', 'marine', 'metal', 'muni', 'raider', 'robot', 'secret_service', 'solar_thorn', 'trapper', 'underarmor'],
         'apparel_plan' => ['outfits', 'headwear', 'backpacks'],
         'armor_mod_plan' => ['brotherhood_recon', 'combat', 'leather', 'marine', 'metal', 'pip_boy', 'raider', 'robot', 'secret_service', 'trapper', 'underarmor', 'wood'],
         'power_armor_plan' => ['union', 'vulcan', 'hellcat', 'excavator', 'raider', 'strangler_heart', 't_45', 't_51', 't_60', 't_65', 'ultracite', 'x_01'],
@@ -71,6 +71,7 @@ final class BookCatalogFrontApplicationService
         'leather' => 'Leather',
         'marine' => 'Marine',
         'metal' => 'Metal',
+        'muni' => 'Muni',
         'pip_boy' => 'Pip-Boy',
         'robot' => 'Robot',
         'secret_service' => 'Secret Service',
@@ -720,6 +721,13 @@ final class BookCatalogFrontApplicationService
                     return $subcategory;
                 }
             }
+
+            if ('armor_plan' === $bookCategory) {
+                $fallbackSubcategory = $this->matchArmorFallbackSubcategory($metadata);
+                if (null !== $fallbackSubcategory) {
+                    return $fallbackSubcategory;
+                }
+            }
         }
 
         return null;
@@ -852,6 +860,24 @@ final class BookCatalogFrontApplicationService
             str_contains($section, 'trapper armor') => 'trapper',
             str_contains($section, 'underarmor') => 'underarmor',
             str_contains($section, 'wood armor') => 'wood',
+            default => null,
+        };
+    }
+
+    /**
+     * @param array<string, mixed> $metadata
+     */
+    private function matchArmorFallbackSubcategory(array $metadata): ?string
+    {
+        $haystack = implode(' ', array_filter([
+            $this->normalize($this->stringFromMetadata($metadata, 'name')),
+            $this->normalize($this->stringFromMetadata($metadata, 'name_en')),
+            $this->normalize($this->stringFromMetadata($metadata, 'source_slug')),
+            $this->normalize($this->stringFromMetadata($metadata, 'source_name_raw')),
+        ]));
+
+        return match (true) {
+            str_contains($haystack, 'muni armor'), str_contains($haystack, 'muni underarmor') => 'muni',
             default => null,
         };
     }

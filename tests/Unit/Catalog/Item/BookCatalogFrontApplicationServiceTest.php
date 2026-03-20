@@ -349,6 +349,23 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
         );
     }
 
+    public function testBrowseExposesMuniArmorWithoutStableSection(): void
+    {
+        $muni = $this->createBookItem(128, 'pub-armor-subcategory-muni', 'catalog.book.armor.subcategory.muni', 'Plan: Muni Armor Helmet', 'aligned', [
+            'source_item_type' => 'plan',
+            'source_page' => 'Fallout_76_Armor_Plans',
+            'source_slug' => 'Plan:_Muni_Armor_Helmet',
+        ]);
+
+        $service = $this->createService([$muni]);
+
+        $result = $service->browse(null, [], [], ['armor_plan'], ['muni'], [], [], [], 1, 24);
+
+        self::assertSame(1, $result['totalItems']);
+        self::assertSame('muni', $result['rows'][0]['bookSubcategory']);
+        self::assertSame('Muni', $result['rows'][0]['bookSubcategoryLabel']);
+    }
+
     /**
      * @param list<ItemEntity> $items
      * @param list<int>        $learnedItemIds

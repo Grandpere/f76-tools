@@ -1049,6 +1049,20 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
                               AND (
+                                  LOWER(COALESCE(ies.metadata->>'name_en', '')) LIKE '%muni armor%'
+                                  OR LOWER(COALESCE(ies.metadata->>'name_en', '')) LIKE '%muni underarmor%'
+                                  OR LOWER(COALESCE(ies.metadata->>'name', '')) LIKE '%muni armor%'
+                                  OR LOWER(COALESCE(ies.metadata->>'name', '')) LIKE '%muni underarmor%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_slug', '')) LIKE '%muni_armor%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_slug', '')) LIKE '%muni_underarmor%'
+                              )
+                        ) THEN 'muni'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
+                              AND (
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%pip-boy%'
                                   OR EXISTS (
                                       SELECT 1
