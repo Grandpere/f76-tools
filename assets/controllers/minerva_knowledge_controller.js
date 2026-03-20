@@ -21,8 +21,20 @@ export default class extends Controller {
         this.activeSourceFilters = [];
         this.translations = this.readUiTranslations();
         this.playerUiState = this.readPersistedState();
+        this.playersAbortController = null;
+        this.itemsAbortController = null;
         this.bindEvents();
         await this.loadPlayers();
+    }
+
+    disconnect() {
+        if (this.playersAbortController) {
+            this.playersAbortController.abort();
+        }
+
+        if (this.itemsAbortController) {
+            this.itemsAbortController.abort();
+        }
     }
 
     bindEvents() {
@@ -57,14 +69,26 @@ export default class extends Controller {
 
     async loadPlayers() {
         this.setState(this.t('loadingPlayers'));
-        this.bookListTarget.replaceChildren();
+        this.bookListTarget.innerHTML = `<p class="catalog-state">${this.escape(this.t('loadingItems'))}</p>`;
+
+        if (this.playersAbortController) {
+            this.playersAbortController.abort();
+        }
+        this.playersAbortController = new AbortController();
 
         const response = await fetch(this.appendLocaleToUrl(this.playersUrlValue), {
             headers: { Accept: 'application/json' },
             credentials: 'same-origin',
-        });
+            signal: this.playersAbortController.signal,
+        }).catch(() => null);
+        if (!(response instanceof Response)) {
+            this.setState(this.t('cannotLoadPlayers'));
+            this.bookListTarget.innerHTML = `<p class="catalog-note info-note"><span class="info-note-content">${this.escape(this.t('cannotLoadPlayers'))}</span></p>`;
+            return;
+        }
         if (!response.ok) {
             this.setState(`${this.t('cannotLoadPlayers')} (${response.status}).`);
+            this.bookListTarget.innerHTML = `<p class="catalog-note info-note"><span class="info-note-content">${this.escape(this.t('cannotLoadPlayers'))} (${response.status}).</span></p>`;
             return;
         }
 
@@ -83,10 +107,17 @@ export default class extends Controller {
     async loadItems() {
         if (!this.activePlayerId) {
             this.setState(this.t('noSelectedPlayer'));
+            this.bookListTarget.innerHTML = `<p>${this.escape(this.t('noSelectedPlayer'))}</p>`;
             return;
         }
 
         this.setState(this.t('loadingItems'));
+        this.bookListTarget.innerHTML = `<p class="catalog-state">${this.escape(this.t('loadingItems'))}</p>`;
+
+        if (this.itemsAbortController) {
+            this.itemsAbortController.abort();
+        }
+        this.itemsAbortController = new AbortController();
 
         const params = new URLSearchParams();
         params.set('type', 'BOOK');
@@ -97,9 +128,16 @@ export default class extends Controller {
         const response = await fetch(this.appendLocaleToUrl(itemsUrl), {
             headers: { Accept: 'application/json' },
             credentials: 'same-origin',
-        });
+            signal: this.itemsAbortController.signal,
+        }).catch(() => null);
+        if (!(response instanceof Response)) {
+            this.setState(this.t('loadItemsError'));
+            this.bookListTarget.innerHTML = `<p class="catalog-note info-note"><span class="info-note-content">${this.escape(this.t('loadItemsError'))}</span></p>`;
+            return;
+        }
         if (!response.ok) {
             this.setState(`${this.t('loadItemsError')} (${response.status}).`);
+            this.bookListTarget.innerHTML = `<p class="catalog-note info-note"><span class="info-note-content">${this.escape(this.t('loadItemsError'))} (${response.status}).</span></p>`;
             return;
         }
 
