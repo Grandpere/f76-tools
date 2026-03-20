@@ -383,15 +383,14 @@ export default class extends Controller {
             .map((row) => this.renderStatsCard(this.t(`bookCategory_${row.category}`), row))
             .join('');
         const subcategoryRows = bookBySubcategory.map((row) => this.renderStatsRow(`${this.t(`bookCategory_${row.category}`)} - ${row.label}`, row)).join('');
-        const detailRows = bookByDetail.map((row) => this.renderStatsRow(`${this.t(`bookCategory_${row.category}`)} - ${row.label}`, row)).join('');
-        const detailSection = detailRows
-            ? `
-                    <section class="stats-group">
-                        <h3>${this.escape(this.t('statsByBookDetail'))}</h3>
-                        ${detailRows}
-                    </section>
-                `
-            : '';
+        const workshopDetailRows = bookByDetail
+            .filter((row) => row.category === 'workshop_plan')
+            .map((row) => this.renderStatsRow(row.label, row))
+            .join('');
+        const recipeDetailRows = bookByDetail
+            .filter((row) => row.category === 'recipe')
+            .map((row) => this.renderStatsRow(row.label, row))
+            .join('');
         const remainingCards = [
             this.renderStatsCard(this.t('statsBook'), minervaBooks),
             categoryCards,
@@ -413,7 +412,14 @@ export default class extends Controller {
                         <h3>${this.escape(this.t('statsByBookSubcategory'))}</h3>
                         ${subcategoryRows || '<p class="catalog-note">-</p>'}
                     </section>
-                    ${detailSection}
+                    <section class="stats-group">
+                        <h3>${this.escape(this.t('statsByWorkshopDetail'))}</h3>
+                        ${workshopDetailRows || '<p class="catalog-note">-</p>'}
+                    </section>
+                    <section class="stats-group">
+                        <h3>${this.escape(this.t('statsByRecipeDetail'))}</h3>
+                        ${recipeDetailRows || '<p class="catalog-note">-</p>'}
+                    </section>
                 </div>
                 <div class="stats-stack">
                     <section class="stats-group">
