@@ -16,8 +16,8 @@ export default class extends Controller {
         'apparel_plan',
         'armor_plan',
         'armor_mod_plan',
-        'power_armor_plan',
         'workshop_plan',
+        'power_armor_plan',
         'power_armor_mod_plan',
     ];
 
