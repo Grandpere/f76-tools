@@ -138,6 +138,7 @@ final class PlayerKnowledgeStatsApplicationService
             'cooking_food' => 'Cooking (Food)',
             'junk' => 'Junk',
             'serums' => 'Serums',
+            'general' => 'General',
         ],
         'workshop_plan' => [
             'appliances' => 'Appliances',
@@ -163,6 +164,7 @@ final class PlayerKnowledgeStatsApplicationService
             'wall_decor' => 'Wall Decor',
             'walls' => 'Walls',
             'water' => 'Water',
+            'general' => 'General',
         ],
     ];
 

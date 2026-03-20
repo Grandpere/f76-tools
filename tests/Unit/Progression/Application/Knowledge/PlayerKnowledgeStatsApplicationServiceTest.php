@@ -55,8 +55,8 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
             'workshop_plan' => ['floor_decor' => 2],
         ]);
         $itemRepository->method('findBookTotalsByDetail')->willReturn([
-            'recipe' => ['chems' => 2],
-            'workshop_plan' => ['beds' => 1],
+            'recipe' => ['chems' => 2, 'general' => 1],
+            'workshop_plan' => ['beds' => 1, 'general' => 3],
         ]);
 
         $knowledgeRepository->method('countLearnedByPlayerByType')->willReturn([
@@ -80,8 +80,8 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
             'workshop_plan' => ['floor_decor' => 2],
         ]);
         $knowledgeRepository->method('findLearnedBookCountsByDetail')->willReturn([
-            'recipe' => ['chems' => 1],
-            'workshop_plan' => ['beds' => 1],
+            'recipe' => ['chems' => 1, 'general' => 0],
+            'workshop_plan' => ['beds' => 1, 'general' => 1],
         ]);
 
         $payload = $service->getStats($player);
@@ -113,7 +113,9 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
         self::assertSame(
             [
                 ['category' => 'recipe', 'detail' => 'chems', 'label' => 'Chems', 'learned' => 1, 'total' => 2, 'percent' => 50],
+                ['category' => 'recipe', 'detail' => 'general', 'label' => 'General', 'learned' => 0, 'total' => 1, 'percent' => 0],
                 ['category' => 'workshop_plan', 'detail' => 'beds', 'label' => 'Beds', 'learned' => 1, 'total' => 1, 'percent' => 100],
+                ['category' => 'workshop_plan', 'detail' => 'general', 'label' => 'General', 'learned' => 1, 'total' => 3, 'percent' => 33],
             ],
             $payload['bookByDetail'],
         );

@@ -108,7 +108,7 @@ final class BookCatalogFrontApplicationService
      * @var array<string, list<string>>
      */
     private const BOOK_DETAIL_ORDER = [
-        'recipe' => ['brewing', 'chems', 'cooking_drinks', 'cooking_food', 'junk', 'serums'],
+        'recipe' => ['brewing', 'chems', 'cooking_drinks', 'cooking_food', 'junk', 'serums', 'general'],
         'workshop_plan' => [
             'appliances',
             'beds',
@@ -133,6 +133,7 @@ final class BookCatalogFrontApplicationService
             'wall_decor',
             'walls',
             'water',
+            'general',
         ],
     ];
     /**
@@ -145,6 +146,7 @@ final class BookCatalogFrontApplicationService
         'cooking_food' => 'Cooking (Food)',
         'junk' => 'Junk',
         'serums' => 'Serums',
+        'general' => 'General',
         'appliances' => 'Appliances',
         'beds' => 'Beds',
         'chairs' => 'Chairs',
@@ -757,9 +759,7 @@ final class BookCatalogFrontApplicationService
                 $detail = $this->matchWorkshopDetail($normalizedSections);
             }
 
-            if (null !== $detail) {
-                return $detail;
-            }
+            return $detail;
         }
 
         return null;
@@ -957,7 +957,7 @@ final class BookCatalogFrontApplicationService
     /**
      * @param list<string> $sections
      */
-    private function matchRecipeDetail(array $sections): ?string
+    private function matchRecipeDetail(array $sections): string
     {
         $haystack = implode(' ', $sections);
 
@@ -968,14 +968,14 @@ final class BookCatalogFrontApplicationService
             str_contains($haystack, 'cooking (food)') => 'cooking_food',
             str_contains($haystack, 'junk') => 'junk',
             str_contains($haystack, 'serums') => 'serums',
-            default => null,
+            default => 'general',
         };
     }
 
     /**
      * @param list<string> $sections
      */
-    private function matchWorkshopDetail(array $sections): ?string
+    private function matchWorkshopDetail(array $sections): string
     {
         $haystack = implode(' ', $sections);
 
@@ -1003,7 +1003,7 @@ final class BookCatalogFrontApplicationService
             str_contains($haystack, 'wall decor') => 'wall_decor',
             str_contains($haystack, 'walls') => 'walls',
             str_contains($haystack, 'water') => 'water',
-            default => null,
+            default => 'general',
         };
     }
 

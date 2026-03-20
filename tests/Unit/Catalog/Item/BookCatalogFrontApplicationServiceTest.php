@@ -284,6 +284,27 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
         );
     }
 
+    public function testBrowseFallsBackToGeneralBookDetailForGenericRecipeSections(): void
+    {
+        $recipe = $this->createBookItem(130, 'pub-recipe-general', 'catalog.book.recipe.general', 'Recipe: General Test', 'aligned', [
+            'source_item_type' => 'recipe',
+            'source_page' => 'Fallout_76_Recipes',
+            'source_sections' => ['Recipes'],
+        ]);
+
+        $service = $this->createService([$recipe]);
+
+        $result = $service->browse(null, [], [], ['recipe'], [], ['general'], [], [], 1, 24);
+
+        self::assertSame(1, $result['totalItems']);
+        self::assertSame('general', $result['rows'][0]['bookDetail']);
+        self::assertSame('General', $result['rows'][0]['bookDetailLabel']);
+        self::assertContains(
+            ['category' => 'recipe', 'id' => 'general', 'label' => 'General'],
+            $result['detailOptions'],
+        );
+    }
+
     public function testBrowseExposesAndFiltersBookDetails(): void
     {
         $recipe = $this->createBookItem(124, 'pub-recipe-detail', 'catalog.book.recipe.detail', 'Recipe: Chem Test', 'aligned', [

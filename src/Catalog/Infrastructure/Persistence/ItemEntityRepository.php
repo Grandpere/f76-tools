@@ -1374,6 +1374,27 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                         WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%wall decor%') THEN 'wall_decor'
                         WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%walls%') THEN 'walls'
                         WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%water%') THEN 'water'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_item_type', '')) = 'recipe'
+                                  OR LOWER(COALESCE(ies.metadata->>'name_en', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'name', '')) LIKE 'recipe:%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_slug', '')) LIKE 'recipe:%'
+                              )
+                        ) THEN 'general'
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM item_external_source ies
+                            WHERE ies.item_id = i.id
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%'
+                                  OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%'
+                              )
+                        ) THEN 'general'
                         ELSE NULL
                     END AS book_detail,
                     COUNT(*) AS total_count
