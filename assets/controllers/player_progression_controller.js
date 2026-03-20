@@ -435,6 +435,8 @@ export default class extends Controller {
         const secondColumnSections = [
             subcategorySectionMap.get('armor_plan') ?? '',
             subcategorySectionMap.get('armor_mod_plan') ?? '',
+        ].filter((section) => section !== '').join('');
+        const thirdColumnSections = [
             subcategorySectionMap.get('power_armor_plan') ?? '',
             subcategorySectionMap.get('power_armor_mod_plan') ?? '',
         ].filter((section) => section !== '').join('');
@@ -447,12 +449,15 @@ export default class extends Controller {
             <div class="stats-cards progression-book-categories">
                 ${remainingCards}
             </div>
-            <div class="stats-split" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
+            <div class="stats-split" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
                 <div class="stats-stack">
                     ${firstColumnSections || `<section class="stats-group"><h3>${this.escape(this.t('statsByBookSubcategory'))}</h3><p class="catalog-note">-</p></section>`}
                 </div>
                 <div class="stats-stack">
                     ${secondColumnSections || `<section class="stats-group"><h3>${this.escape(this.t('statsByBookSubcategory'))}</h3><p class="catalog-note">-</p></section>`}
+                </div>
+                <div class="stats-stack">
+                    ${thirdColumnSections || `<section class="stats-group"><h3>${this.escape(this.t('statsByBookSubcategory'))}</h3><p class="catalog-note">-</p></section>`}
                 </div>
                 <div class="stats-stack">
                     <section class="stats-group">
