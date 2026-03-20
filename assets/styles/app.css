@@ -1382,6 +1382,7 @@ body::before {
 
 .catalog-taxonomy-subcategory-groups {
     margin-top: 0.38rem;
+    align-items: start;
 }
 
 .catalog-taxonomy-subcategory-row label {

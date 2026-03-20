@@ -353,6 +353,14 @@ export default class extends Controller {
         const categoryRows = bookByCategory.map((row) => this.renderStatsRow(this.t(`bookCategory_${row.category}`), row)).join('');
         const subcategoryRows = bookBySubcategory.map((row) => this.renderStatsRow(`${this.t(`bookCategory_${row.category}`)} - ${row.label}`, row)).join('');
         const detailRows = bookByDetail.map((row) => this.renderStatsRow(`${this.t(`bookCategory_${row.category}`)} - ${row.label}`, row)).join('');
+        const detailSection = detailRows
+            ? `
+                    <section class="stats-group">
+                        <h3>${this.escape(this.t('statsByBookDetail'))}</h3>
+                        ${detailRows}
+                    </section>
+                `
+            : '';
 
         this.statsPanelTarget.innerHTML = `
             <div class="stats-cards">${cards}</div>
@@ -371,10 +379,7 @@ export default class extends Controller {
                         <h3>${this.escape(this.t('statsByBookSubcategory'))}</h3>
                         ${subcategoryRows || '<p class="catalog-note">-</p>'}
                     </section>
-                    <section class="stats-group">
-                        <h3>${this.escape(this.t('statsByBookDetail'))}</h3>
-                        ${detailRows || '<p class="catalog-note">-</p>'}
-                    </section>
+                    ${detailSection}
                 </div>
                 <div class="stats-stack">
                     <section class="stats-group">
