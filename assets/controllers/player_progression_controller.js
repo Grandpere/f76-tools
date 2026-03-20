@@ -444,14 +444,14 @@ export default class extends Controller {
         ].filter((section) => section !== '').join('');
 
         this.statsPanelTarget.innerHTML = `
-            <div class="stats-cards" style="grid-template-columns: repeat(2, minmax(0, 1fr));">${topCards}</div>
+            <div class="stats-cards stats-cards-top">${topCards}</div>
             <div class="stats-cards progression-book-summary">
                 ${secondRowCards}
             </div>
             <div class="stats-cards progression-book-categories">
                 ${remainingCards}
             </div>
-            <div class="stats-split" style="grid-template-columns: repeat(5, minmax(0, 1fr));">
+            <div class="stats-split progression-detail-grid">
                 <div class="stats-stack">
                     ${firstColumnSections || `<section class="stats-group"><h3>${this.escape(this.t('statsByBookSubcategory'))}</h3><p class="catalog-note">-</p></section>`}
                 </div>

@@ -1810,11 +1810,17 @@ body::before {
     margin-top: 0.72rem;
 }
 
+.stats-cards-top {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 0.2rem;
+}
+
 .stats-card {
     border: 1px solid var(--line);
     border-radius: 12px;
-    background: #ffffff;
-    padding: 0.65rem;
+    background: linear-gradient(180deg, #ffffff, #fbfaf5);
+    padding: 0.72rem 0.74rem;
+    box-shadow: 0 10px 24px rgba(24, 29, 35, 0.04);
 }
 
 .stats-card-title {
@@ -1826,41 +1832,47 @@ body::before {
 }
 
 .stats-card-main {
-    margin: 0.28rem 0 0;
+    margin: 0.34rem 0 0;
     font-family: 'Rajdhani', 'Inter', sans-serif;
-    font-size: 1.55rem;
+    font-size: 1.72rem;
     line-height: 1;
 }
 
 .stats-card-sub {
-    margin: 0.25rem 0 0.42rem;
+    margin: 0.3rem 0 0.5rem;
     color: var(--text-1);
     font-size: 0.82rem;
 }
 
 .stats-split {
-    margin-top: 0.72rem;
+    margin-top: 0.92rem;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.72rem;
+    gap: 0.88rem;
     align-items: start;
+}
+
+.progression-detail-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .stats-group {
     border: 1px solid var(--line);
     border-radius: 12px;
-    background: #ffffff;
-    padding: 0.65rem;
+    background: linear-gradient(180deg, #ffffff, #fcfbf7);
+    padding: 0.7rem 0.74rem 0.74rem;
+    box-shadow: 0 10px 24px rgba(24, 29, 35, 0.035);
 }
 
 .stats-group h3 {
-    margin: 0 0 0.45rem;
+    margin: 0 0 0.52rem;
     font-size: 0.9rem;
+    line-height: 1.2;
 }
 
 .stats-stack {
     display: grid;
-    gap: 0.72rem;
+    gap: 0.88rem;
     align-content: start;
 }
 
@@ -1903,15 +1915,19 @@ body::before {
 }
 
 .progression-book-summary {
-    margin-top: 0.2rem;
+    margin-top: 0.34rem;
+}
+
+.progression-book-categories {
+    margin-top: 0.34rem;
 }
 
 .stats-row + .stats-row {
-    margin-top: 0.52rem;
+    margin-top: 0.58rem;
 }
 
 .stats-row-head {
-    margin: 0 0 0.3rem;
+    margin: 0 0 0.34rem;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
