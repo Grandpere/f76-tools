@@ -141,9 +141,13 @@
                                                         {% endif %}
                                                     {% endfor %}
                                                     <p class="source-filter-group-title">
-                                                        {{ ('catalog_books.category_' ~ category)|trans }}
-                                                        {% if hasDetailOptions %}
-                                                            · {{ 'catalog_books.detail_filters'|trans }}
+                                                        {% if hasDetailOptions and category in ['workshop_plan', 'recipe'] %}
+                                                            {{ ('catalog_books.category_' ~ category)|trans }}
+                                                        {% else %}
+                                                            {{ ('catalog_books.category_' ~ category)|trans }}
+                                                            {% if hasDetailOptions %}
+                                                                · {{ 'catalog_books.detail_filters'|trans }}
+                                                            {% endif %}
                                                         {% endif %}
                                                     </p>
                                                     <div class="source-filter-options catalog-taxonomy-subcategory-row">
