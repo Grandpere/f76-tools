@@ -382,26 +382,24 @@ export default class extends Controller {
             })
             .map((row) => this.renderStatsCard(this.t(`bookCategory_${row.category}`), row))
             .join('');
-        const subcategorySections = this.constructor.categoryCardOrder
-            .map((category) => {
-                const rows = bookBySubcategory
-                    .filter((row) => row.category === category)
-                    .map((row) => this.renderStatsRow(row.label, row))
-                    .join('');
+        const subcategorySectionMap = new Map();
+        this.constructor.categoryCardOrder.forEach((category) => {
+            const rows = bookBySubcategory
+                .filter((row) => row.category === category)
+                .map((row) => this.renderStatsRow(row.label, row))
+                .join('');
 
-                if (!rows) {
-                    return '';
-                }
+            if (!rows) {
+                return;
+            }
 
-                return `
-                    <section class="stats-group">
-                        <h3>${this.escape(this.t(`bookCategory_${category}`))}</h3>
-                        ${rows}
-                    </section>
-                `;
-            })
-            .filter((section) => section !== '')
-            .join('');
+            subcategorySectionMap.set(category, `
+                <section class="stats-group">
+                    <h3>${this.escape(this.t(`bookCategory_${category}`))}</h3>
+                    ${rows}
+                </section>
+            `);
+        });
         const workshopDetailRows = bookByDetail
             .filter((row) => row.category === 'workshop_plan')
             .map((row) => this.renderStatsRow(row.label, row))
@@ -416,6 +414,30 @@ export default class extends Controller {
         ]
             .filter((chunk) => chunk && chunk !== '')
             .join('');
+        const firstColumnSections = [
+            subcategorySectionMap.get('weapon_plan') ?? '',
+            subcategorySectionMap.get('weapon_mod_plan') ?? '',
+            subcategorySectionMap.get('apparel_plan') ?? '',
+            subcategorySectionMap.get('power_armor_plan') ?? '',
+            subcategorySectionMap.get('workshop_plan') ?? '',
+            subcategorySectionMap.get('power_armor_mod_plan') ?? '',
+            `
+                <section class="stats-group">
+                    <h3>${this.escape(this.t('statsByWorkshopDetail'))}</h3>
+                    ${workshopDetailRows || '<p class="catalog-note">-</p>'}
+                </section>
+            `,
+            `
+                <section class="stats-group">
+                    <h3>${this.escape(this.t('statsByRecipeDetail'))}</h3>
+                    ${recipeDetailRows || '<p class="catalog-note">-</p>'}
+                </section>
+            `,
+        ].filter((section) => section !== '').join('');
+        const secondColumnSections = [
+            subcategorySectionMap.get('armor_plan') ?? '',
+            subcategorySectionMap.get('armor_mod_plan') ?? '',
+        ].filter((section) => section !== '').join('');
 
         this.statsPanelTarget.innerHTML = `
             <div class="stats-cards" style="grid-template-columns: repeat(2, minmax(0, 1fr));">${topCards}</div>
@@ -425,17 +447,12 @@ export default class extends Controller {
             <div class="stats-cards progression-book-categories">
                 ${remainingCards}
             </div>
-            <div class="stats-split">
+            <div class="stats-split" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
                 <div class="stats-stack">
-                    ${subcategorySections || `<section class="stats-group"><h3>${this.escape(this.t('statsByBookSubcategory'))}</h3><p class="catalog-note">-</p></section>`}
-                    <section class="stats-group">
-                        <h3>${this.escape(this.t('statsByWorkshopDetail'))}</h3>
-                        ${workshopDetailRows || '<p class="catalog-note">-</p>'}
-                    </section>
-                    <section class="stats-group">
-                        <h3>${this.escape(this.t('statsByRecipeDetail'))}</h3>
-                        ${recipeDetailRows || '<p class="catalog-note">-</p>'}
-                    </section>
+                    ${firstColumnSections || `<section class="stats-group"><h3>${this.escape(this.t('statsByBookSubcategory'))}</h3><p class="catalog-note">-</p></section>`}
+                </div>
+                <div class="stats-stack">
+                    ${secondColumnSections || `<section class="stats-group"><h3>${this.escape(this.t('statsByBookSubcategory'))}</h3><p class="catalog-note">-</p></section>`}
                 </div>
                 <div class="stats-stack">
                     <section class="stats-group">
