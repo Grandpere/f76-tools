@@ -348,10 +348,14 @@ export default class extends Controller {
         const bookBySubcategory = Array.isArray(this.stats.bookBySubcategory) ? this.stats.bookBySubcategory : [];
         const bookByDetail = Array.isArray(this.stats.bookByDetail) ? this.stats.bookByDetail : [];
 
-        const cards = [
+        const topCards = [
             this.renderStatsCard(this.t('statsOverall'), overall),
             this.renderStatsCard(this.t('statsMisc'), misc),
+        ].join('');
+        const secondRowCards = [
             this.renderStatsCard(this.t('bookCatalogLearned'), book),
+            this.renderStatsCard(this.t('bookCatalogRecipes'), bookRecipes),
+            this.renderStatsCard(this.t('bookCatalogPlans'), bookPlans),
         ].join('');
 
         const rankRows = miscByRank.map((row) => this.renderStatsRow(`${this.t('statsRankPrefix')} ${row.rank}`, row)).join('');
@@ -370,16 +374,21 @@ export default class extends Controller {
                     </section>
                 `
             : '';
-        const categoryCardsRow = categoryCards ? `<div class="stats-cards progression-book-categories">${categoryCards}</div>` : '';
+        const remainingCards = [
+            this.renderStatsCard(this.t('statsBook'), minervaBooks),
+            categoryCards,
+        ]
+            .filter((chunk) => chunk && chunk !== '')
+            .join('');
 
         this.statsPanelTarget.innerHTML = `
-            <div class="stats-cards">${cards}</div>
+            <div class="stats-cards" style="grid-template-columns: repeat(2, minmax(0, 1fr));">${topCards}</div>
             <div class="stats-cards progression-book-summary">
-                ${this.renderStatsCard(this.t('bookCatalogPlans'), bookPlans)}
-                ${this.renderStatsCard(this.t('statsBook'), minervaBooks)}
-                ${this.renderStatsCard(this.t('bookCatalogRecipes'), bookRecipes)}
+                ${secondRowCards}
             </div>
-            ${categoryCardsRow}
+            <div class="stats-cards progression-book-categories">
+                ${remainingCards}
+            </div>
             <div class="stats-split">
                 <div class="stats-stack">
                     <section class="stats-group">

@@ -78,7 +78,7 @@ progression.character_help_extended: 'der Fortschritt wird aktualisiert, indem O
 progression.book_catalog_title: Baupläne & Rezepte
 progression.book_catalog_description: Verfolge hier den Fortschritt der Baupläne und Rezepte und öffne dann den Spielerkatalog, um nach Minerva-Liste, Händler oder Aktivität zu filtern.
 progression.book_catalog_open: Katalog öffnen
-progression.book_catalog_learned: Baupläne/Rezepte gesamt
+progression.book_catalog_learned: Rezepte/Baupläne gesamt
 progression.book_catalog_plans: Baupläne
 progression.book_catalog_recipes: Rezepte
 nuke_codes.page_title: 'F76 - Nukecodes'
@@ -213,7 +213,7 @@ dashboard.transfer.merge_mode: Zusammenfuhren
 dashboard.catalog.misc_title: Legendare Mods
 dashboard.catalog.book_title: Minerva-Plane
 dashboard.stats.title: Charakterfortschritt
-dashboard.stats.overall: Gesamt
+dashboard.stats.overall: Summe
 dashboard.stats.misc: Legendare Mods
 dashboard.stats.book: Minerva-Plane
 dashboard.stats.by_rank: Legendäre Mods
