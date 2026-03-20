@@ -115,11 +115,16 @@
                             {% if subcategoryOptions is not empty %}
                                 <div class="source-filter-group catalog-taxonomy-subcategory-block">
                                     <p class="source-filter-group-title">{{ 'catalog_books.subcategory_filters'|trans }}</p>
+                                    <div class="catalog-note info-note catalog-taxonomy-info-note">
+                                        <span class="info-note-content">
+                                            {{ 'catalog_books.category_armor_plan_hint'|trans }}
+                                            {{ 'catalog_books.category_armor_mod_plan_hint'|trans }}
+                                        </span>
+                                    </div>
                                     {% set taxonomyDisplayGroups = [
-                                        ['weapon_plan', 'weapon_mod_plan'],
+                                        ['weapon_plan', 'weapon_mod_plan', 'apparel_plan'],
                                         ['armor_plan', 'armor_mod_plan'],
                                         ['power_armor_plan', 'power_armor_mod_plan'],
-                                        ['apparel_plan'],
                                         ['workshop_plan'],
                                         ['recipe']
                                     ] %}
@@ -153,11 +158,6 @@
                                                             <p class="source-filter-group-title">
                                                                 {{ ('catalog_books.category_' ~ category)|trans }}
                                                             </p>
-                                                            {% if category == 'armor_plan' %}
-                                                                <p class="catalog-taxonomy-hint">{{ 'catalog_books.category_armor_plan_hint'|trans }}</p>
-                                                            {% elseif category == 'armor_mod_plan' %}
-                                                                <p class="catalog-taxonomy-hint">{{ 'catalog_books.category_armor_mod_plan_hint'|trans }}</p>
-                                                            {% endif %}
                                                             {% if optionsForCategory is not empty %}
                                                                 <div class="source-filter-options catalog-taxonomy-subcategory-row">
                                                                     {% for option in optionsForCategory %}
