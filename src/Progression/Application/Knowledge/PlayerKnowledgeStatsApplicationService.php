@@ -64,6 +64,7 @@ final class PlayerKnowledgeStatsApplicationService
             'secret_service' => 'Secret Service',
             'solar_thorn' => 'Solar / Thorn',
             'trapper' => 'Trapper',
+            'underarmor' => 'Underarmor',
         ],
         'apparel_plan' => [
             'outfits' => 'Outfits',

@@ -44,7 +44,7 @@ final class BookCatalogFrontApplicationService
     private const BOOK_SUBCATEGORY_ORDER = [
         'weapon_plan' => ['ballistic', 'melee', 'thrown', 'bows', 'alien', 'camera', 'unused'],
         'weapon_mod_plan' => ['ballistic', 'melee', 'bows', 'alien', 'camera', 'unused'],
-        'armor_plan' => ['arctic_marine', 'botsmith', 'brotherhood_recon', 'chinese_stealth', 'combat', 'covert_scout', 'leather', 'marine', 'metal', 'raider', 'robot', 'secret_service', 'solar_thorn', 'trapper'],
+        'armor_plan' => ['arctic_marine', 'botsmith', 'brotherhood_recon', 'chinese_stealth', 'combat', 'covert_scout', 'leather', 'marine', 'metal', 'raider', 'robot', 'secret_service', 'solar_thorn', 'trapper', 'underarmor'],
         'apparel_plan' => ['outfits', 'headwear', 'backpacks'],
         'armor_mod_plan' => ['brotherhood_recon', 'combat', 'leather', 'marine', 'metal', 'pip_boy', 'raider', 'robot', 'secret_service', 'trapper', 'underarmor', 'wood'],
         'power_armor_plan' => ['union', 'vulcan', 'hellcat', 'excavator', 'raider', 'strangler_heart', 't_45', 't_51', 't_60', 't_65', 'ultracite', 'x_01'],
