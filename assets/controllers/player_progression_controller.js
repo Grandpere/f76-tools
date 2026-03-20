@@ -417,13 +417,6 @@ export default class extends Controller {
         const firstColumnSections = [
             subcategorySectionMap.get('weapon_plan') ?? '',
             subcategorySectionMap.get('weapon_mod_plan') ?? '',
-            subcategorySectionMap.get('workshop_plan') ?? '',
-            `
-                <section class="stats-group">
-                    <h3>${this.escape(this.t('statsByWorkshopDetail'))}</h3>
-                    ${workshopDetailRows || '<p class="catalog-note">-</p>'}
-                </section>
-            `,
         ].filter((section) => section !== '').join('');
         const secondColumnSections = [
             subcategorySectionMap.get('armor_plan') ?? '',
@@ -440,6 +433,15 @@ export default class extends Controller {
                 </section>
             `,
         ].filter((section) => section !== '').join('');
+        const fourthColumnSections = [
+            subcategorySectionMap.get('workshop_plan') ?? '',
+            `
+                <section class="stats-group">
+                    <h3>${this.escape(this.t('statsByWorkshopDetail'))}</h3>
+                    ${workshopDetailRows || '<p class="catalog-note">-</p>'}
+                </section>
+            `,
+        ].filter((section) => section !== '').join('');
 
         this.statsPanelTarget.innerHTML = `
             <div class="stats-cards" style="grid-template-columns: repeat(2, minmax(0, 1fr));">${topCards}</div>
@@ -449,7 +451,7 @@ export default class extends Controller {
             <div class="stats-cards progression-book-categories">
                 ${remainingCards}
             </div>
-            <div class="stats-split" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
+            <div class="stats-split" style="grid-template-columns: repeat(5, minmax(0, 1fr));">
                 <div class="stats-stack">
                     ${firstColumnSections || `<section class="stats-group"><h3>${this.escape(this.t('statsByBookSubcategory'))}</h3><p class="catalog-note">-</p></section>`}
                 </div>
@@ -458,6 +460,9 @@ export default class extends Controller {
                 </div>
                 <div class="stats-stack">
                     ${thirdColumnSections || `<section class="stats-group"><h3>${this.escape(this.t('statsByBookSubcategory'))}</h3><p class="catalog-note">-</p></section>`}
+                </div>
+                <div class="stats-stack">
+                    ${fourthColumnSections || `<section class="stats-group"><h3>${this.escape(this.t('statsByBookSubcategory'))}</h3><p class="catalog-note">-</p></section>`}
                 </div>
                 <div class="stats-stack">
                     <section class="stats-group">
