@@ -417,7 +417,6 @@ export default class extends Controller {
         const firstColumnSections = [
             subcategorySectionMap.get('weapon_plan') ?? '',
             subcategorySectionMap.get('weapon_mod_plan') ?? '',
-            subcategorySectionMap.get('apparel_plan') ?? '',
             subcategorySectionMap.get('workshop_plan') ?? '',
             `
                 <section class="stats-group">
@@ -425,20 +424,21 @@ export default class extends Controller {
                     ${workshopDetailRows || '<p class="catalog-note">-</p>'}
                 </section>
             `,
+        ].filter((section) => section !== '').join('');
+        const secondColumnSections = [
+            subcategorySectionMap.get('armor_plan') ?? '',
+            subcategorySectionMap.get('armor_mod_plan') ?? '',
+            subcategorySectionMap.get('apparel_plan') ?? '',
+        ].filter((section) => section !== '').join('');
+        const thirdColumnSections = [
+            subcategorySectionMap.get('power_armor_plan') ?? '',
+            subcategorySectionMap.get('power_armor_mod_plan') ?? '',
             `
                 <section class="stats-group">
                     <h3>${this.escape(this.t('statsByRecipeDetail'))}</h3>
                     ${recipeDetailRows || '<p class="catalog-note">-</p>'}
                 </section>
             `,
-        ].filter((section) => section !== '').join('');
-        const secondColumnSections = [
-            subcategorySectionMap.get('armor_plan') ?? '',
-            subcategorySectionMap.get('armor_mod_plan') ?? '',
-        ].filter((section) => section !== '').join('');
-        const thirdColumnSections = [
-            subcategorySectionMap.get('power_armor_plan') ?? '',
-            subcategorySectionMap.get('power_armor_mod_plan') ?? '',
         ].filter((section) => section !== '').join('');
 
         this.statsPanelTarget.innerHTML = `
