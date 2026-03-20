@@ -418,9 +418,7 @@ export default class extends Controller {
             subcategorySectionMap.get('weapon_plan') ?? '',
             subcategorySectionMap.get('weapon_mod_plan') ?? '',
             subcategorySectionMap.get('apparel_plan') ?? '',
-            subcategorySectionMap.get('power_armor_plan') ?? '',
             subcategorySectionMap.get('workshop_plan') ?? '',
-            subcategorySectionMap.get('power_armor_mod_plan') ?? '',
             `
                 <section class="stats-group">
                     <h3>${this.escape(this.t('statsByWorkshopDetail'))}</h3>
@@ -437,6 +435,8 @@ export default class extends Controller {
         const secondColumnSections = [
             subcategorySectionMap.get('armor_plan') ?? '',
             subcategorySectionMap.get('armor_mod_plan') ?? '',
+            subcategorySectionMap.get('power_armor_plan') ?? '',
+            subcategorySectionMap.get('power_armor_mod_plan') ?? '',
         ].filter((section) => section !== '').join('');
 
         this.statsPanelTarget.innerHTML = `
