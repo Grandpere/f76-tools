@@ -1383,19 +1383,23 @@ body::before {
 
 .catalog-taxonomy-subcategory-groups {
     margin-top: 0.52rem;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.78rem;
     align-items: start;
 }
 
 .catalog-taxonomy-subcategory-column {
     display: grid;
+    flex: 1 1 210px;
+    max-width: 260px;
     gap: 0.62rem;
     align-content: start;
 }
 
 .catalog-taxonomy-subcategory-column > .source-filter-group {
     padding: 0.48rem 0.52rem 0.54rem;
+    height: auto;
 }
 
 .catalog-taxonomy-subcategory-row label {
@@ -1405,8 +1409,10 @@ body::before {
 
 .catalog-taxonomy-info-note {
     margin: 0.28rem 0 0.72rem;
-    padding: 0.46rem 0.56rem 0.46rem 0.54rem;
-    background: linear-gradient(180deg, rgba(255, 249, 223, 0.98), rgba(255, 252, 239, 0.96));
+    max-width: 72ch;
+    padding: 0.42rem 0.54rem 0.44rem 0.52rem;
+    border-color: rgba(244, 197, 43, 0.28);
+    background: linear-gradient(180deg, rgba(255, 251, 233, 0.98), rgba(255, 253, 244, 0.96));
 }
 
 .catalog-taxonomy-info-note .info-note-content {
