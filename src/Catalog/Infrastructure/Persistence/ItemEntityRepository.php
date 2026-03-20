@@ -922,91 +922,182 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
-                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%arctic marine armor%'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%arctic marine armor%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%arctic marine armor%'
+                                  )
+                              )
                         ) THEN 'arctic_marine'
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
-                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%botsmith armor%'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%botsmith armor%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%botsmith armor%'
+                                  )
+                              )
                         ) THEN 'botsmith'
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
-                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%brotherhood recon armor%'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%brotherhood recon armor%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%brotherhood recon armor%'
+                                  )
+                              )
                         ) THEN 'brotherhood_recon'
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
-                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%chinese stealth armor%'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%chinese stealth armor%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%chinese stealth armor%'
+                                  )
+                              )
                         ) THEN 'chinese_stealth'
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
-                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%combat armor%'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%combat armor%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%combat armor%'
+                                  )
+                              )
                         ) THEN 'combat'
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
-                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%covert scout armor%'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%covert scout armor%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%covert scout armor%'
+                                  )
+                              )
                         ) THEN 'covert_scout'
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
-                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%leather armor%'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%leather armor%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%leather armor%'
+                                  )
+                              )
                         ) THEN 'leather'
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
-                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%marine armor%'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%marine armor%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%marine armor%'
+                                  )
+                              )
                         ) THEN 'marine'
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
-                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%metal armor%'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%metal armor%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%metal armor%'
+                                  )
+                              )
                         ) THEN 'metal'
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
-                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%pip-boy%'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%pip-boy%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%pip-boy%'
+                                  )
+                              )
                         ) THEN 'pip_boy'
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
-                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%raider armor%'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%raider armor%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%raider armor%'
+                                  )
+                              )
                         ) THEN 'raider'
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
-                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%robot armor%'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%robot armor%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%robot armor%'
+                                  )
+                              )
                         ) THEN 'robot'
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
-                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%secret service armor%'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%secret service armor%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%secret service armor%'
+                                  )
+                              )
                         ) THEN 'secret_service'
                         WHEN EXISTS (
                             SELECT 1
@@ -1016,6 +1107,12 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                               AND (
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%solar armor%'
                                   OR LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%thorn armor%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%solar armor%'
+                                         OR LOWER(section.value) LIKE '%thorn armor%'
+                                  )
                               )
                         ) THEN 'solar_thorn'
                         WHEN EXISTS (
@@ -1023,21 +1120,42 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
-                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%trapper armor%'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%trapper armor%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%trapper armor%'
+                                  )
+                              )
                         ) THEN 'trapper'
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
-                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%underarmor%'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%underarmor%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%underarmor%'
+                                  )
+                              )
                         ) THEN 'underarmor'
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
                             WHERE ies.item_id = i.id
                               AND LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%armor%'
-                              AND LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%wood armor%'
+                              AND (
+                                  LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%wood armor%'
+                                  OR EXISTS (
+                                      SELECT 1
+                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      WHERE LOWER(section.value) LIKE '%wood armor%'
+                                  )
+                              )
                         ) THEN 'wood'
                         WHEN EXISTS (
                             SELECT 1

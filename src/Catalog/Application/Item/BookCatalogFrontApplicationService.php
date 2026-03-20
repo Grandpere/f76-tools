@@ -703,25 +703,22 @@ final class BookCatalogFrontApplicationService
         }
 
         foreach ($this->sortSourcesForTaxonomy($item) as $metadata) {
-            $section = $this->normalize($this->stringFromMetadata($metadata, 'source_section'));
-            if ('' === $section) {
-                continue;
-            }
+            foreach ($this->extractNormalizedSourceSections($metadata) as $section) {
+                if (in_array($bookCategory, ['weapon_plan', 'weapon_mod_plan'], true)) {
+                    $subcategory = $this->matchWeaponSubcategory($section);
+                } elseif (in_array($bookCategory, ['armor_plan', 'armor_mod_plan'], true)) {
+                    $subcategory = $this->matchArmorSubcategory($section);
+                } elseif ('apparel_plan' === $bookCategory) {
+                    $subcategory = $this->matchApparelSubcategory($section);
+                } elseif (in_array($bookCategory, ['power_armor_plan', 'power_armor_mod_plan'], true)) {
+                    $subcategory = $this->matchPowerArmorSubcategory($section);
+                } else {
+                    $subcategory = $this->matchWorkshopSubcategory($section);
+                }
 
-            if (in_array($bookCategory, ['weapon_plan', 'weapon_mod_plan'], true)) {
-                $subcategory = $this->matchWeaponSubcategory($section);
-            } elseif (in_array($bookCategory, ['armor_plan', 'armor_mod_plan'], true)) {
-                $subcategory = $this->matchArmorSubcategory($section);
-            } elseif ('apparel_plan' === $bookCategory) {
-                $subcategory = $this->matchApparelSubcategory($section);
-            } elseif (in_array($bookCategory, ['power_armor_plan', 'power_armor_mod_plan'], true)) {
-                $subcategory = $this->matchPowerArmorSubcategory($section);
-            } else {
-                $subcategory = $this->matchWorkshopSubcategory($section);
-            }
-
-            if (null !== $subcategory) {
-                return $subcategory;
+                if (null !== $subcategory) {
+                    return $subcategory;
+                }
             }
         }
 
@@ -896,6 +893,39 @@ final class BookCatalogFrontApplicationService
             str_contains($section, 'defenses') => 'defenses',
             default => null,
         };
+    }
+
+    /**
+     * @param array<string, mixed> $metadata
+     *
+     * @return list<string>
+     */
+    private function extractNormalizedSourceSections(array $metadata): array
+    {
+        $sections = [];
+
+        $sourceSections = $metadata['source_sections'] ?? null;
+        if (is_array($sourceSections)) {
+            foreach ($sourceSections as $value) {
+                if (!is_scalar($value)) {
+                    continue;
+                }
+
+                $normalized = $this->normalize((string) $value);
+                if ('' === $normalized || in_array($normalized, $sections, true)) {
+                    continue;
+                }
+
+                $sections[] = $normalized;
+            }
+        }
+
+        $sourceSection = $this->normalize($this->stringFromMetadata($metadata, 'source_section'));
+        if ('' !== $sourceSection && !in_array($sourceSection, $sections, true)) {
+            $sections[] = $sourceSection;
+        }
+
+        return $sections;
     }
 
     /**

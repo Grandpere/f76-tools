@@ -808,3 +808,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: the front read model had started recognizing those armor families, but the SQL-backed progression aggregations still only knew weapons, apparel, power armor, and workshop, so the shared taxonomy stopped at the application layer.
 - Fix: both the front taxonomy and the progression/count SQL now map stable armor-family `source_section` values (`Brotherhood Recon`, `Secret Service`, `Combat`, `Marine`, etc.) into `armor_plan` / `armor_mod_plan` subcategories, matching the same player-facing grouping pattern already used for power armor.
 - Prevention: when a source family is visibly organized by stable table headings, reuse those headings consistently in both browse filters and progression aggregates instead of leaving the family as an empty second-level bucket.
+
+## 2026-03-20 - Some Fandom armor families only expose their useful subgroup in `source_sections`
+- Symptom: after the first armor-subcategory pass, `armor_mod_plan` started filling correctly but plain `armor_plan` still appeared empty in `/plans-recipes`.
+- Root cause: many Fandom armor rows keep a generic top-level `source_section` such as `Armor, apparel and backpacks`, while the real family heading (`Brotherhood recon armor`, `Arctic marine armor`, etc.) only appears in the nested `source_sections` list gathered from table sources.
+- Fix: subcategory extraction now iterates over normalized `source_sections` first and falls back to `source_section`; the SQL aggregation used for `/progression` now checks both fields for armor-family matches as well.
+- Prevention: whenever source exports contain both a generic page section and nested table sections, taxonomy code should inspect the nested list before assuming the single `source_section` string is enough.
