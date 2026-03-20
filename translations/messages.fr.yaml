@@ -220,7 +220,7 @@ dashboard.stats.by_rank: Mods légendaires
 dashboard.stats.by_list: Listes Minerva
 dashboard.stats.by_book_category: Plans et recettes par catégorie
 dashboard.stats.by_book_subcategory: Plans par sous-catégorie
-dashboard.stats.by_workshop_detail: Objets d'atelier
+dashboard.stats.by_workshop_detail: Types de plans d'atelier
 dashboard.stats.by_recipe_detail: Type de recettes
 dashboard.stats.learned_on_total: '%learned% / %total%'
 dashboard.stats.percent_suffix: '%'
