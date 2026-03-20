@@ -370,6 +370,7 @@ export default class extends Controller {
                     </section>
                 `
             : '';
+        const categoryCardsRow = categoryCards ? `<div class="stats-cards progression-book-categories">${categoryCards}</div>` : '';
 
         this.statsPanelTarget.innerHTML = `
             <div class="stats-cards">${cards}</div>
@@ -378,12 +379,9 @@ export default class extends Controller {
                 ${this.renderStatsCard(this.t('statsBook'), minervaBooks)}
                 ${this.renderStatsCard(this.t('bookCatalogRecipes'), bookRecipes)}
             </div>
+            ${categoryCardsRow}
             <div class="stats-split">
                 <div class="stats-stack">
-                    <section class="stats-group">
-                        <h3>${this.escape(this.t('statsByBookCategory'))}</h3>
-                        ${categoryCards ? `<div class="stats-group-summary"><div class="stats-cards">${categoryCards}</div></div>` : '<p class="catalog-note">-</p>'}
-                    </section>
                     <section class="stats-group">
                         <h3>${this.escape(this.t('statsByBookSubcategory'))}</h3>
                         ${subcategoryRows || '<p class="catalog-note">-</p>'}
