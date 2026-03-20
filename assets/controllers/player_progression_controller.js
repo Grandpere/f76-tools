@@ -356,7 +356,10 @@ export default class extends Controller {
 
         const rankRows = miscByRank.map((row) => this.renderStatsRow(`${this.t('statsRankPrefix')} ${row.rank}`, row)).join('');
         const listRows = bookByList.map((row) => this.renderStatsRow(`${this.t('statsListPrefix')} ${row.listNumber}`, row)).join('');
-        const categoryRows = bookByCategory.map((row) => this.renderStatsRow(this.t(`bookCategory_${row.category}`), row)).join('');
+        const categoryCards = bookByCategory
+            .filter((row) => row.category !== 'recipe')
+            .map((row) => this.renderStatsCard(this.t(`bookCategory_${row.category}`), row))
+            .join('');
         const subcategoryRows = bookBySubcategory.map((row) => this.renderStatsRow(`${this.t(`bookCategory_${row.category}`)} - ${row.label}`, row)).join('');
         const detailRows = bookByDetail.map((row) => this.renderStatsRow(`${this.t(`bookCategory_${row.category}`)} - ${row.label}`, row)).join('');
         const detailSection = detailRows
@@ -379,7 +382,7 @@ export default class extends Controller {
                 <div class="stats-stack">
                     <section class="stats-group">
                         <h3>${this.escape(this.t('statsByBookCategory'))}</h3>
-                        ${categoryRows || '<p class="catalog-note">-</p>'}
+                        ${categoryCards ? `<div class="stats-group-summary"><div class="stats-cards">${categoryCards}</div></div>` : '<p class="catalog-note">-</p>'}
                     </section>
                     <section class="stats-group">
                         <h3>${this.escape(this.t('statsByBookSubcategory'))}</h3>
