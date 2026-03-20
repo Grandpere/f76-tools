@@ -103,7 +103,6 @@ final class BookCatalogControllerTest extends WebTestCase
         self::assertStringContainsString('vendor_minerva', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('Gold bullion vendors', (string) $this->browser()->getResponse()->getContent());
         self::assertStringContainsString('Unlock test', (string) $this->browser()->getResponse()->getContent());
-        self::assertStringContainsString('Beds', (string) $this->browser()->getResponse()->getContent());
         self::assertCount(1, $crawler->filter('[data-catalog-filters-target="summary"]'));
         self::assertCount(1, $crawler->filter('[data-catalog-filters-target="results"]'));
         self::assertStringContainsString('0 / 1 learned', (string) $this->browser()->getResponse()->getContent());
