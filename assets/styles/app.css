@@ -1409,7 +1409,6 @@ body::before {
 
 .catalog-taxonomy-info-note {
     margin: 0.28rem 0 0.72rem;
-    max-width: 72ch;
     padding: 0.42rem 0.54rem 0.44rem 0.52rem;
     border-color: rgba(244, 197, 43, 0.28);
     background: linear-gradient(180deg, rgba(255, 251, 233, 0.98), rgba(255, 253, 244, 0.96));
