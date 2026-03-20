@@ -113,6 +113,8 @@ catalog_books.category_weapon_mod_plan: Weapon mod plans
 catalog_books.category_armor_plan: Armor plans
 catalog_books.category_apparel_plan: Apparel plans
 catalog_books.category_armor_mod_plan: Armor mod plans
+catalog_books.category_armor_plan_hint: Backpacks and outfits stay under Apparel plans.
+catalog_books.category_armor_mod_plan_hint: Backpacks stay under Apparel plans and Vulcan stays under Power armor mod plans.
 catalog_books.category_power_armor_plan: Power armor plans
 catalog_books.category_power_armor_mod_plan: Power armor mod plans
 catalog_books.category_workshop_plan: Workshop plans

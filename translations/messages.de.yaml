@@ -113,6 +113,8 @@ catalog_books.category_weapon_mod_plan: Waffenmod-Baupläne
 catalog_books.category_armor_plan: Rüstungsbaupläne
 catalog_books.category_apparel_plan: Bekleidungspläne
 catalog_books.category_armor_mod_plan: Rüstungsmod-Baupläne
+catalog_books.category_armor_plan_hint: Rucksäcke und Outfits bleiben bei den Bekleidungsplänen.
+catalog_books.category_armor_mod_plan_hint: Rucksäcke bleiben bei den Bekleidungsplänen und Vulcan bei den Powerrüstungsmod-Bauplänen.
 catalog_books.category_power_armor_plan: Powerrüstungs-Baupläne
 catalog_books.category_power_armor_mod_plan: Powerrüstungsmod-Baupläne
 catalog_books.category_workshop_plan: Werkstatt-Baupläne

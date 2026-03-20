@@ -153,6 +153,11 @@
                                                             <p class="source-filter-group-title">
                                                                 {{ ('catalog_books.category_' ~ category)|trans }}
                                                             </p>
+                                                            {% if category == 'armor_plan' %}
+                                                                <p class="catalog-taxonomy-hint">{{ 'catalog_books.category_armor_plan_hint'|trans }}</p>
+                                                            {% elseif category == 'armor_mod_plan' %}
+                                                                <p class="catalog-taxonomy-hint">{{ 'catalog_books.category_armor_mod_plan_hint'|trans }}</p>
+                                                            {% endif %}
                                                             {% if optionsForCategory is not empty %}
                                                                 <div class="source-filter-options catalog-taxonomy-subcategory-row">
                                                                     {% for option in optionsForCategory %}

@@ -113,6 +113,8 @@ catalog_books.category_weapon_mod_plan: Plans de mods d armes
 catalog_books.category_armor_plan: Plans d armures
 catalog_books.category_apparel_plan: Plans de tenues
 catalog_books.category_armor_mod_plan: Plans de mods d armures
+catalog_books.category_armor_plan_hint: Les sacs a dos et les tenues sont ranges dans Plans de tenues.
+catalog_books.category_armor_mod_plan_hint: Les sacs a dos restent dans Plans de tenues et Vulcan dans les mods d armures assistees.
 catalog_books.category_power_armor_plan: Plans d armures assistées
 catalog_books.category_power_armor_mod_plan: Plans de mods d armures assistées
 catalog_books.category_workshop_plan: Plans d atelier
