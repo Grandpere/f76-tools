@@ -10,6 +10,16 @@ export default class extends Controller {
         locale: String,
         uiTranslations: String,
     };
+    static categoryCardOrder = [
+        'weapon_plan',
+        'weapon_mod_plan',
+        'apparel_plan',
+        'armor_plan',
+        'armor_mod_plan',
+        'power_armor_plan',
+        'workshop_plan',
+        'power_armor_mod_plan',
+    ];
 
     async connect() {
         this.players = [];
@@ -362,6 +372,14 @@ export default class extends Controller {
         const listRows = bookByList.map((row) => this.renderStatsRow(`${this.t('statsListPrefix')} ${row.listNumber}`, row)).join('');
         const categoryCards = bookByCategory
             .filter((row) => row.category !== 'recipe')
+            .sort((left, right) => {
+                const leftIndex = this.constructor.categoryCardOrder.indexOf(left.category);
+                const rightIndex = this.constructor.categoryCardOrder.indexOf(right.category);
+                const safeLeftIndex = leftIndex === -1 ? Number.MAX_SAFE_INTEGER : leftIndex;
+                const safeRightIndex = rightIndex === -1 ? Number.MAX_SAFE_INTEGER : rightIndex;
+
+                return safeLeftIndex - safeRightIndex;
+            })
             .map((row) => this.renderStatsCard(this.t(`bookCategory_${row.category}`), row))
             .join('');
         const subcategoryRows = bookBySubcategory.map((row) => this.renderStatsRow(`${this.t(`bookCategory_${row.category}`)} - ${row.label}`, row)).join('');
