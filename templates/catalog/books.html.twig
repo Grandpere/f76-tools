@@ -115,60 +115,69 @@
                             {% if subcategoryOptions is not empty %}
                                 <div class="source-filter-group catalog-taxonomy-subcategory-block">
                                     <p class="source-filter-group-title">{{ 'catalog_books.subcategory_filters'|trans }}</p>
+                                    {% set taxonomyDisplayGroups = [
+                                        ['weapon_plan', 'weapon_mod_plan'],
+                                        ['armor_plan', 'armor_mod_plan'],
+                                        ['power_armor_plan', 'power_armor_mod_plan'],
+                                        ['apparel_plan'],
+                                        ['workshop_plan'],
+                                        ['recipe']
+                                    ] %}
                                     <div class="source-filter-groups catalog-taxonomy-subcategory-groups">
-                                        {% for category in categoryOptions %}
-                                            {% set optionsForCategory = [] %}
-                                            {% for option in subcategoryOptions %}
-                                                {% if option.category == category %}
-                                                    {% set optionsForCategory = optionsForCategory|merge([option]) %}
-                                                {% endif %}
-                                            {% endfor %}
-                                            {% for option in detailOptions %}
-                                                {% if option.category == category %}
-                                                    {% set optionsForCategory = optionsForCategory|merge([{
-                                                        id: option.id,
-                                                        label: option.label,
-                                                        isDetail: true
-                                                    }]) %}
-                                                {% endif %}
-                                            {% endfor %}
-                                            {% if optionsForCategory is not empty %}
-                                                <div class="source-filter-group">
-                                                    {% set hasDetailOptions = false %}
-                                                    {% for option in optionsForCategory %}
-                                                        {% if option.isDetail is defined and option.isDetail %}
-                                                            {% set hasDetailOptions = true %}
+                                        {% for categoryGroup in taxonomyDisplayGroups %}
+                                            <div class="catalog-taxonomy-subcategory-column">
+                                                {% for category in categoryGroup %}
+                                                    {% set optionsForCategory = [] %}
+                                                    {% for option in subcategoryOptions %}
+                                                        {% if option.category == category %}
+                                                            {% set optionsForCategory = optionsForCategory|merge([option]) %}
                                                         {% endif %}
                                                     {% endfor %}
-                                                    <p class="source-filter-group-title">
-                                                        {% if hasDetailOptions and category in ['workshop_plan', 'recipe'] %}
-                                                            {{ ('catalog_books.category_' ~ category)|trans }}
-                                                        {% else %}
-                                                            {{ ('catalog_books.category_' ~ category)|trans }}
-                                                            {% if hasDetailOptions %}
-                                                                · {{ 'catalog_books.detail_filters'|trans }}
-                                                            {% endif %}
+                                                    {% for option in detailOptions %}
+                                                        {% if option.category == category %}
+                                                            {% set optionsForCategory = optionsForCategory|merge([{
+                                                                id: option.id,
+                                                                label: option.label,
+                                                                isDetail: true
+                                                            }]) %}
                                                         {% endif %}
-                                                    </p>
-                                                    <div class="source-filter-options catalog-taxonomy-subcategory-row">
-                                                        {% for option in optionsForCategory %}
-                                                            <label>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    name="{% if option.isDetail is defined and option.isDetail %}details[]{% else %}subcategories[]{% endif %}"
-                                                                    value="{{ option.id }}"
-                                                                    {% if option.isDetail is defined and option.isDetail %}
-                                                                        {% if option.id in selectedDetails %}checked{% endif %}
-                                                                    {% else %}
-                                                                        {% if option.id in selectedSubcategories %}checked{% endif %}
-                                                                    {% endif %}
-                                                                >
-                                                                <span>{{ option.label }}</span>
-                                                            </label>
-                                                        {% endfor %}
-                                                    </div>
-                                                </div>
-                                            {% endif %}
+                                                    {% endfor %}
+                                                    {% if category in categoryOptions %}
+                                                        <div class="source-filter-group">
+                                                            {% set hasDetailOptions = false %}
+                                                            {% for option in optionsForCategory %}
+                                                                {% if option.isDetail is defined and option.isDetail %}
+                                                                    {% set hasDetailOptions = true %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            <p class="source-filter-group-title">
+                                                                {{ ('catalog_books.category_' ~ category)|trans }}
+                                                            </p>
+                                                            {% if optionsForCategory is not empty %}
+                                                                <div class="source-filter-options catalog-taxonomy-subcategory-row">
+                                                                    {% for option in optionsForCategory %}
+                                                                        <label>
+                                                                            <input
+                                                                                type="checkbox"
+                                                                                name="{% if option.isDetail is defined and option.isDetail %}details[]{% else %}subcategories[]{% endif %}"
+                                                                                value="{{ option.id }}"
+                                                                                {% if option.isDetail is defined and option.isDetail %}
+                                                                                    {% if option.id in selectedDetails %}checked{% endif %}
+                                                                                {% else %}
+                                                                                    {% if option.id in selectedSubcategories %}checked{% endif %}
+                                                                                {% endif %}
+                                                                            >
+                                                                            <span>{{ option.label }}</span>
+                                                                        </label>
+                                                                    {% endfor %}
+                                                                </div>
+                                                            {% else %}
+                                                                <p class="catalog-taxonomy-empty">—</p>
+                                                            {% endif %}
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
                                         {% endfor %}
                                     </div>
                                 </div>

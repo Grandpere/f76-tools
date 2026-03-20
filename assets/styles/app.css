@@ -1385,9 +1385,21 @@ body::before {
     align-items: start;
 }
 
+.catalog-taxonomy-subcategory-column {
+    display: grid;
+    gap: 0.7rem;
+    align-content: start;
+}
+
 .catalog-taxonomy-subcategory-row label {
     width: 100%;
     min-width: 0;
+}
+
+.catalog-taxonomy-empty {
+    margin: 0;
+    color: var(--text-2);
+    font-size: 0.85rem;
 }
 
 .source-filters label img {
