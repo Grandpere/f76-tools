@@ -139,13 +139,19 @@ export default class extends Controller {
         });
         if (!response.ok) {
             this.stats = null;
-            this.renderStats();
+            this.renderStatsError(`${this.t('loadItemsError')} (${response.status})`);
             return;
         }
 
-        const payload = await response.json();
-        this.stats = payload && typeof payload === 'object' ? payload : null;
-        this.renderStats();
+        try {
+            const payload = await response.json();
+            this.stats = payload && typeof payload === 'object' ? payload : null;
+            this.renderStats();
+        } catch (error) {
+            console.error('Failed to parse or render progression stats.', error);
+            this.stats = null;
+            this.renderStatsError(this.t('loadItemsError'));
+        }
     }
 
     async exportKnowledge() {
@@ -398,6 +404,10 @@ export default class extends Controller {
     renderLoadingPanels() {
         const placeholder = `<p class="catalog-state">${this.escape(this.t('loadingItems'))}</p>`;
         this.statsPanelTarget.innerHTML = placeholder;
+    }
+
+    renderStatsError(message) {
+        this.statsPanelTarget.innerHTML = `<p class="catalog-note info-note"><span class="info-note-content">${this.escape(message)}</span></p>`;
     }
 
     renderStatsCard(title, stat) {

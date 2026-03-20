@@ -814,3 +814,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: many Fandom armor rows keep a generic top-level `source_section` such as `Armor, apparel and backpacks`, while the real family heading (`Brotherhood recon armor`, `Arctic marine armor`, etc.) only appears in the nested `source_sections` list gathered from table sources.
 - Fix: subcategory extraction now iterates over normalized `source_sections` first and falls back to `source_section`; the SQL aggregation used for `/progression` now checks both fields for armor-family matches as well.
 - Prevention: whenever source exports contain both a generic page section and nested table sections, taxonomy code should inspect the nested list before assuming the single `source_section` string is enough.
+
+## 2026-03-20 - Progression SQL on source_sections must cast JSON to JSONB
+- Symptom: `/api/players/{id}/stats` returned HTTP 500 and the progression page showed a blank/error panel after adding book subcategory/detail stats.
+- Root cause: `item_external_source.metadata` is stored as `json`, but the new Postgres queries called `jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb))`, which mixes `json` and `jsonb` in `COALESCE` and crashes on real data.
+- Fix: cast `ies.metadata->'source_sections'` to `jsonb` before `COALESCE` in both total and learned progression queries.
+- Prevention: when expanding arrays out of `metadata`, cast JSON values explicitly to `jsonb` before using `jsonb_*` Postgres functions or `::jsonb` literals.

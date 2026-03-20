@@ -926,7 +926,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%arctic marine armor%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%arctic marine armor%'
                                   )
                               )
@@ -940,7 +940,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%botsmith armor%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%botsmith armor%'
                                   )
                               )
@@ -954,7 +954,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%brotherhood recon armor%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%brotherhood recon armor%'
                                   )
                               )
@@ -968,7 +968,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%chinese stealth armor%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%chinese stealth armor%'
                                   )
                               )
@@ -982,7 +982,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%combat armor%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%combat armor%'
                                   )
                               )
@@ -996,7 +996,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%covert scout armor%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%covert scout armor%'
                                   )
                               )
@@ -1010,7 +1010,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%leather armor%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%leather armor%'
                                   )
                               )
@@ -1024,7 +1024,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%marine armor%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%marine armor%'
                                   )
                               )
@@ -1038,7 +1038,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%metal armor%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%metal armor%'
                                   )
                               )
@@ -1066,7 +1066,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%pip-boy%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%pip-boy%'
                                   )
                               )
@@ -1080,7 +1080,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%raider armor%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%raider armor%'
                                   )
                               )
@@ -1094,7 +1094,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%robot armor%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%robot armor%'
                                   )
                               )
@@ -1108,7 +1108,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%secret service armor%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%secret service armor%'
                                   )
                               )
@@ -1123,7 +1123,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   OR LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%thorn armor%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%solar armor%'
                                          OR LOWER(section.value) LIKE '%thorn armor%'
                                   )
@@ -1138,7 +1138,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%trapper armor%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%trapper armor%'
                                   )
                               )
@@ -1152,7 +1152,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%underarmor%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%underarmor%'
                                   )
                               )
@@ -1166,7 +1166,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                                   LOWER(COALESCE(ies.metadata->>'source_section', '')) LIKE '%wood armor%'
                                   OR EXISTS (
                                       SELECT 1
-                                      FROM jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                                      FROM jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                                       WHERE LOWER(section.value) LIKE '%wood armor%'
                                   )
                               )
@@ -1260,7 +1260,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
-                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                             WHERE ies.item_id = i.id
                               AND (
                                   LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
@@ -1274,7 +1274,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
-                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                             WHERE ies.item_id = i.id
                               AND (
                                   LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
@@ -1288,7 +1288,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
-                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                             WHERE ies.item_id = i.id
                               AND (
                                   LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
@@ -1302,7 +1302,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
-                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                             WHERE ies.item_id = i.id
                               AND (
                                   LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
@@ -1316,7 +1316,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
-                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                             WHERE ies.item_id = i.id
                               AND (
                                   LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
@@ -1330,7 +1330,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
-                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                             WHERE ies.item_id = i.id
                               AND (
                                   LOWER(COALESCE(ies.metadata->>'type', '')) = 'recipe'
@@ -1344,7 +1344,7 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                         WHEN EXISTS (
                             SELECT 1
                             FROM item_external_source ies
-                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value)
+                            CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value)
                             WHERE ies.item_id = i.id
                               AND (
                                   LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%'
@@ -1352,28 +1352,28 @@ final class ItemEntityRepository extends ServiceEntityRepository implements Item
                               )
                               AND LOWER(section.value) LIKE '%appliances%'
                         ) THEN 'appliances'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%beds%') THEN 'beds'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%chairs%') THEN 'chairs'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%crafting%') THEN 'crafting'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%defenses%') THEN 'defenses'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%displays%') THEN 'displays'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%doors%') THEN 'doors'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%floor decor%') THEN 'floor_decor'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%floors%') THEN 'floors'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%food%') THEN 'food'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%generators%') THEN 'generators'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%lights%') THEN 'lights'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%misc. structures%') THEN 'misc_structures'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%power connectors%') THEN 'power_connectors'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%resources%') THEN 'resources'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%shelves%') THEN 'shelves'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%stash boxes%') THEN 'stash_boxes'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%tables%') THEN 'tables'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%turrets &amp; traps%') THEN 'turrets_traps'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%vendors%') THEN 'vendors'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%wall decor%') THEN 'wall_decor'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%walls%') THEN 'walls'
-                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE(ies.metadata->'source_sections', '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%water%') THEN 'water'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%beds%') THEN 'beds'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%chairs%') THEN 'chairs'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%crafting%') THEN 'crafting'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%defenses%') THEN 'defenses'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%displays%') THEN 'displays'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%doors%') THEN 'doors'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%floor decor%') THEN 'floor_decor'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%floors%') THEN 'floors'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%food%') THEN 'food'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%generators%') THEN 'generators'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%lights%') THEN 'lights'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%misc. structures%') THEN 'misc_structures'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%power connectors%') THEN 'power_connectors'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%resources%') THEN 'resources'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%shelves%') THEN 'shelves'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%stash boxes%') THEN 'stash_boxes'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%tables%') THEN 'tables'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%turrets &amp; traps%') THEN 'turrets_traps'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%vendors%') THEN 'vendors'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%wall decor%') THEN 'wall_decor'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%walls%') THEN 'walls'
+                        WHEN EXISTS (SELECT 1 FROM item_external_source ies CROSS JOIN LATERAL jsonb_array_elements_text(COALESCE((ies.metadata->'source_sections')::jsonb, '[]'::jsonb)) AS section(value) WHERE ies.item_id = i.id AND (LOWER(COALESCE(ies.metadata->>'source_page', '')) LIKE '%workshop%' OR LOWER(COALESCE(ies.metadata->>'source_page_url', '')) LIKE '%workshop%') AND LOWER(section.value) LIKE '%water%') THEN 'water'
                         ELSE NULL
                     END AS book_detail,
                     COUNT(*) AS total_count
