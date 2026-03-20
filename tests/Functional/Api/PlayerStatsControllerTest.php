@@ -166,6 +166,37 @@ final class PlayerStatsControllerTest extends WebTestCase
         self::assertSame(404, $this->browser()->getResponse()->getStatusCode());
     }
 
+    public function testStatsExposeArmorSubcategories(): void
+    {
+        $user = $this->createUser('stats-armor@example.com');
+        $player = $this->createPlayer($user, 'Armor');
+
+        $armorPlan = $this->createBookItem(811, 'item.book.811.name', [], 'plan', 'Fallout_76_Armor_Plans', 'Brotherhood recon armor');
+        $armorMod = $this->createBookItem(812, 'item.book.812.name', [], 'plan', 'Fallout_76_Armor_Mod_Plans', 'Secret Service armor');
+
+        $this->learn($player, $armorPlan);
+
+        $this->browser()->loginUser($user);
+        $this->browser()->request('GET', sprintf('/api/players/%s/stats', $player->getPublicId()));
+
+        self::assertSame(200, $this->browser()->getResponse()->getStatusCode());
+        $payload = $this->decodeArray($this->browser()->getResponse()->getContent() ?: '{}');
+        $bookBySubcategory = $this->readList($payload, 'bookBySubcategory');
+
+        $brotherhoodRecon = $this->findByStringKeyValue($bookBySubcategory, 'subcategory', 'brotherhood_recon');
+        $secretService = $this->findByStringKeyValue($bookBySubcategory, 'subcategory', 'secret_service');
+
+        self::assertSame('armor_plan', $brotherhoodRecon['category'] ?? null);
+        self::assertSame(1, $this->readInt($brotherhoodRecon, 'total'));
+        self::assertSame(1, $this->readInt($brotherhoodRecon, 'learned'));
+        self::assertSame(100, $this->readInt($brotherhoodRecon, 'percent'));
+
+        self::assertSame('armor_mod_plan', $secretService['category'] ?? null);
+        self::assertSame(1, $this->readInt($secretService, 'total'));
+        self::assertSame(0, $this->readInt($secretService, 'learned'));
+        self::assertSame(0, $this->readInt($secretService, 'percent'));
+    }
+
     private function createUser(string $email): UserEntity
     {
         $user = new UserEntity()

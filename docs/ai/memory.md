@@ -802,3 +802,9 @@ Project memory for recurring pitfalls, decisions, and proven fixes.
 - Root cause: the translation writer only supported upserts, so import could move persistence identity to the keeper without ever cleaning or remapping the duplicate translation keys.
 - Fix: the import now remaps old `item.book.<duplicate>.{name,desc,note}` keys onto the keeper key after dedupe, preserves stronger local translations over English fallback values, then deletes the orphaned keys from the translation catalogs.
 - Prevention: when an import flow can merge two provider-local IDs into one canonical item, translation catalogs must be reconciled in the same slice instead of relying on future full rewrites.
+
+## 2026-03-20 - Armor `BOOK` subcategories can reuse stable table-family sections just like power armor
+- Symptom: after adding second-level `BOOK` taxonomy, `armor_plan` and `armor_mod_plan` still showed empty subcategory columns even though the source tables already grouped plans under stable family headings such as `Brotherhood recon armor`, `Secret Service armor`, or `Arctic marine armor`.
+- Root cause: the front read model had started recognizing those armor families, but the SQL-backed progression aggregations still only knew weapons, apparel, power armor, and workshop, so the shared taxonomy stopped at the application layer.
+- Fix: both the front taxonomy and the progression/count SQL now map stable armor-family `source_section` values (`Brotherhood Recon`, `Secret Service`, `Combat`, `Marine`, etc.) into `armor_plan` / `armor_mod_plan` subcategories, matching the same player-facing grouping pattern already used for power armor.
+- Prevention: when a source family is visibly organized by stable table headings, reuse those headings consistently in both browse filters and progression aggregates instead of leaving the family as an empty second-level bucket.

@@ -50,6 +50,7 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
         ]);
         $itemRepository->method('findBookTotalsBySubcategory')->willReturn([
             'weapon_plan' => ['ballistic' => 2],
+            'armor_plan' => ['brotherhood_recon' => 1],
             'workshop_plan' => ['floor_decor' => 2],
         ]);
         $itemRepository->method('findBookTotalsByDetail')->willReturn([
@@ -73,6 +74,7 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
         ]);
         $knowledgeRepository->method('findLearnedBookCountsBySubcategory')->willReturn([
             'weapon_plan' => ['ballistic' => 1],
+            'armor_plan' => ['brotherhood_recon' => 1],
             'workshop_plan' => ['floor_decor' => 2],
         ]);
         $knowledgeRepository->method('findLearnedBookCountsByDetail')->willReturn([
@@ -100,6 +102,7 @@ final class PlayerKnowledgeStatsApplicationServiceTest extends TestCase
         self::assertSame(
             [
                 ['category' => 'weapon_plan', 'subcategory' => 'ballistic', 'label' => 'Ballistic', 'learned' => 1, 'total' => 2, 'percent' => 50],
+                ['category' => 'armor_plan', 'subcategory' => 'brotherhood_recon', 'label' => 'Brotherhood Recon', 'learned' => 1, 'total' => 1, 'percent' => 100],
                 ['category' => 'workshop_plan', 'subcategory' => 'floor_decor', 'label' => 'Floor Decor', 'learned' => 2, 'total' => 2, 'percent' => 100],
             ],
             $payload['bookBySubcategory'],

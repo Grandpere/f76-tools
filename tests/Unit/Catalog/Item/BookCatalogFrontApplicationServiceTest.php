@@ -316,6 +316,39 @@ final class BookCatalogFrontApplicationServiceTest extends TestCase
         );
     }
 
+    public function testBrowseExposesArmorSubcategoriesFromSourceSections(): void
+    {
+        $armor = $this->createBookItem(126, 'pub-armor-subcategory', 'catalog.book.armor.subcategory', 'Plan: Brotherhood Recon Armor', 'aligned', [
+            'source_item_type' => 'plan',
+            'source_page' => 'Fallout_76_Armor_Plans',
+            'source_section' => 'Brotherhood recon armor',
+        ]);
+        $armorMod = $this->createBookItem(127, 'pub-armor-mod-subcategory', 'catalog.book.armor.mod.subcategory', 'Plan: Secret Service Armor Buttressed', 'aligned', [
+            'source_item_type' => 'plan',
+            'source_page' => 'Fallout_76_Armor_Mod_Plans',
+            'source_section' => 'Secret Service armor',
+        ]);
+
+        $service = $this->createService([$armor, $armorMod]);
+
+        $result = $service->browse(null, [], [], ['armor_plan', 'armor_mod_plan'], ['brotherhood_recon'], [], [], [], 1, 24);
+
+        self::assertSame(1, $result['totalItems']);
+        self::assertSame('armor_plan', $result['rows'][0]['bookCategory']);
+        self::assertSame('brotherhood_recon', $result['rows'][0]['bookSubcategory']);
+        self::assertSame('Brotherhood Recon', $result['rows'][0]['bookSubcategoryLabel']);
+        self::assertSame(
+            [
+                ['category' => 'armor_plan', 'id' => 'brotherhood_recon', 'label' => 'Brotherhood Recon'],
+                ['category' => 'armor_mod_plan', 'id' => 'secret_service', 'label' => 'Secret Service'],
+            ],
+            array_values(array_filter(
+                $result['subcategoryOptions'],
+                static fn (array $option): bool => in_array($option['id'], ['brotherhood_recon', 'secret_service'], true),
+            )),
+        );
+    }
+
     /**
      * @param list<ItemEntity> $items
      * @param list<int>        $learnedItemIds

@@ -46,6 +46,7 @@ Ajouter une page front authentifiee qui liste les plans et recettes (`BOOK`) ave
 - Done (slice 24): ajout d un second niveau de taxonomie `BOOK` base sur les `source_section` stables (`ballistic`, `floor_decor`, `union`, `outfits`, etc.), avec nouveau filtre `Sous-categories` sur `/plans-recipes`, ajout de `apparel_plan` au premier niveau et nouveau detail `Plans et recettes par sous-categorie` sur `/progression`.
 - Done (slice 25): reequilibrage du panneau filtres `/plans-recipes` en regroupant `Categorie + Sous-categorie` dans un bloc separe de `Progression + Type`, et conservation des `source_sections` `fandom` imbriquees a l import pour preparer un futur niveau plus fin sur `workshop` et `recipe` sans heuristiques de nom fragiles.
 - Done (slice 26): reactivation prudente d un troisieme niveau fin pour `recipe` et `workshop_plan`, base sur `source_sections`, expose comme detail supplementaire dans `/progression` et comme filtre `Details fins` sur `/plans-recipes`, sans ajouter de nouvelle taxonomie generique aux autres familles.
+- Done (slice 27): les familles `armor_plan` et `armor_mod_plan` reutilisent maintenant elles aussi les `source_section` stables des tableaux source (`Brotherhood Recon armor`, `Secret Service armor`, `Arctic Marine armor`, etc.) pour remplir les sous-categories cote catalogue et progression, au lieu de laisser ces colonnes vides.
 
 ## Hors scope
 - Edition front des items.

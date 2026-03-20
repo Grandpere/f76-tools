@@ -44,7 +44,9 @@ final class BookCatalogFrontApplicationService
     private const BOOK_SUBCATEGORY_ORDER = [
         'weapon_plan' => ['ballistic', 'melee', 'thrown', 'bows', 'alien', 'camera', 'unused'],
         'weapon_mod_plan' => ['ballistic', 'melee', 'bows', 'alien', 'camera', 'unused'],
+        'armor_plan' => ['arctic_marine', 'botsmith', 'brotherhood_recon', 'chinese_stealth', 'combat', 'covert_scout', 'leather', 'marine', 'metal', 'raider', 'robot', 'secret_service', 'solar_thorn', 'trapper'],
         'apparel_plan' => ['outfits', 'headwear', 'backpacks'],
+        'armor_mod_plan' => ['brotherhood_recon', 'combat', 'leather', 'marine', 'metal', 'pip_boy', 'raider', 'robot', 'secret_service', 'trapper', 'underarmor', 'wood'],
         'power_armor_plan' => ['union', 'vulcan', 'hellcat', 'excavator', 'raider', 'strangler_heart', 't_45', 't_51', 't_60', 't_65', 'ultracite', 'x_01'],
         'power_armor_mod_plan' => ['union', 'vulcan', 'hellcat', 'excavator', 'raider', 'strangler_heart', 't_45', 't_51', 't_60', 't_65', 'ultracite', 'x_01', 'unused'],
         'workshop_plan' => ['floor_decor', 'wall_decor', 'lights', 'utility', 'structures', 'display', 'allies', 'crafting', 'defenses'],
@@ -60,6 +62,22 @@ final class BookCatalogFrontApplicationService
         'alien' => 'Alien',
         'camera' => 'Camera',
         'unused' => 'Unused',
+        'arctic_marine' => 'Arctic Marine',
+        'botsmith' => 'Botsmith',
+        'brotherhood_recon' => 'Brotherhood Recon',
+        'chinese_stealth' => 'Chinese Stealth',
+        'combat' => 'Combat',
+        'covert_scout' => 'Covert Scout',
+        'leather' => 'Leather',
+        'marine' => 'Marine',
+        'metal' => 'Metal',
+        'pip_boy' => 'Pip-Boy',
+        'robot' => 'Robot',
+        'secret_service' => 'Secret Service',
+        'solar_thorn' => 'Solar / Thorn',
+        'trapper' => 'Trapper',
+        'underarmor' => 'Underarmor',
+        'wood' => 'Wood',
         'outfits' => 'Outfits',
         'headwear' => 'Headwear',
         'backpacks' => 'Backpacks',
@@ -692,6 +710,8 @@ final class BookCatalogFrontApplicationService
 
             if (in_array($bookCategory, ['weapon_plan', 'weapon_mod_plan'], true)) {
                 $subcategory = $this->matchWeaponSubcategory($section);
+            } elseif (in_array($bookCategory, ['armor_plan', 'armor_mod_plan'], true)) {
+                $subcategory = $this->matchArmorSubcategory($section);
             } elseif ('apparel_plan' === $bookCategory) {
                 $subcategory = $this->matchApparelSubcategory($section);
             } elseif (in_array($bookCategory, ['power_armor_plan', 'power_armor_mod_plan'], true)) {
@@ -811,6 +831,30 @@ final class BookCatalogFrontApplicationService
             str_contains($section, 'headwear') => 'headwear',
             str_contains($section, 'backpacks') => 'backpacks',
             str_contains($section, 'outfits') => 'outfits',
+            default => null,
+        };
+    }
+
+    private function matchArmorSubcategory(string $section): ?string
+    {
+        return match (true) {
+            str_contains($section, 'arctic marine armor') => 'arctic_marine',
+            str_contains($section, 'botsmith armor') => 'botsmith',
+            str_contains($section, 'brotherhood recon armor') => 'brotherhood_recon',
+            str_contains($section, 'chinese stealth armor') => 'chinese_stealth',
+            str_contains($section, 'combat armor') => 'combat',
+            str_contains($section, 'covert scout armor') => 'covert_scout',
+            str_contains($section, 'leather armor') => 'leather',
+            str_contains($section, 'marine armor') => 'marine',
+            str_contains($section, 'metal armor') => 'metal',
+            str_contains($section, 'pip-boy') => 'pip_boy',
+            str_contains($section, 'raider armor') => 'raider',
+            str_contains($section, 'robot armor') => 'robot',
+            str_contains($section, 'secret service armor') => 'secret_service',
+            str_contains($section, 'solar armor'), str_contains($section, 'thorn armor') => 'solar_thorn',
+            str_contains($section, 'trapper armor') => 'trapper',
+            str_contains($section, 'underarmor') => 'underarmor',
+            str_contains($section, 'wood armor') => 'wood',
             default => null,
         };
     }
