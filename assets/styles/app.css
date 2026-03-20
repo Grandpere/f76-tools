@@ -1378,17 +1378,24 @@ body::before {
 
 .catalog-taxonomy-subcategory-block {
     min-width: 0;
+    padding: 0.62rem 0.66rem 0.72rem;
 }
 
 .catalog-taxonomy-subcategory-groups {
-    margin-top: 0.38rem;
+    margin-top: 0.52rem;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 0.78rem;
     align-items: start;
 }
 
 .catalog-taxonomy-subcategory-column {
     display: grid;
-    gap: 0.7rem;
+    gap: 0.62rem;
     align-content: start;
+}
+
+.catalog-taxonomy-subcategory-column > .source-filter-group {
+    padding: 0.48rem 0.52rem 0.54rem;
 }
 
 .catalog-taxonomy-subcategory-row label {
@@ -1396,11 +1403,15 @@ body::before {
     min-width: 0;
 }
 
-.catalog-taxonomy-hint {
-    margin: -0.18rem 0 0.5rem;
-    color: var(--text-2);
+.catalog-taxonomy-info-note {
+    margin: 0.28rem 0 0.72rem;
+    padding: 0.46rem 0.56rem 0.46rem 0.54rem;
+    background: linear-gradient(180deg, rgba(255, 249, 223, 0.98), rgba(255, 252, 239, 0.96));
+}
+
+.catalog-taxonomy-info-note .info-note-content {
     font-size: 0.8rem;
-    line-height: 1.35;
+    line-height: 1.4;
 }
 
 .catalog-taxonomy-empty {
