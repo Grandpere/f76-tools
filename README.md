@@ -2,7 +2,9 @@
 
 Application Symfony 8 (Twig + Symfony UX) pour le suivi de progression Fallout 76:
 - plans Minerva
+- plans et recettes
 - mods légendaires
+- progression joueur partagée
 - calendrier communautaire
 - codes nucléaires
 - backoffice admin (traductions, utilisateurs, logs, roadmap, Minerva)
@@ -15,6 +17,7 @@ Le projet est 100% dockerisé pour éviter toute installation locale (hors Docke
 - [Prerequis](#prerequis)
 - [Installation rapide](#installation-rapide)
 - [Acces locaux](#acces-locaux)
+- [Fonctionnalites joueur](#fonctionnalites-joueur)
 - [Configuration (.env.local)](#configuration-envlocal)
 - [Commandes utiles](#commandes-utiles)
 - [Donnees metier (import/sync)](#donnees-metier-importsync)
@@ -84,6 +87,22 @@ docker compose -f compose.yaml exec -T app php bin/console app:user:promote-admi
   - DB: `app`
   - User: `app`
   - Password: `!ChangeMe!`
+
+## Fonctionnalites joueur
+- `/en/minerva-rotation`
+  - suivi des rotations Minerva
+  - progression des listes par personnage
+  - etat appris partage avec les autres vues `BOOK`
+- `/en/plans-recipes`
+  - catalogue joueur des plans et recettes (`BOOK`)
+  - recherche, tri, pagination et filtres metier
+  - progression `appris / a apprendre` partagee avec Minerva
+  - taxonomie par categorie, sous-categorie et certains types fins (`atelier`, `recettes`)
+- `/en/progression`
+  - resume global par personnage
+  - progression des mods legendaires
+  - progression Minerva
+  - progression `plans / recettes` par categorie et sous-categorie
 
 ## Configuration `.env.local`
 Ne jamais stocker de secrets dans `.env` versionné.
