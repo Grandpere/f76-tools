@@ -1853,7 +1853,7 @@ body::before {
 }
 
 .progression-detail-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1.12fr) repeat(3, minmax(0, 1fr)) minmax(0, 0.92fr);
 }
 
 .stats-group {
@@ -1874,6 +1874,41 @@ body::before {
     display: grid;
     gap: 0.88rem;
     align-content: start;
+}
+
+.stats-stack .stats-group {
+    position: relative;
+}
+
+.stats-stack .stats-group::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0.74rem;
+    right: 0.74rem;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(244, 197, 43, 0.28);
+}
+
+.stats-stack--equipment .stats-group::before {
+    background: linear-gradient(90deg, rgba(199, 136, 40, 0.55), rgba(244, 197, 43, 0.28));
+}
+
+.stats-stack--armor .stats-group::before {
+    background: linear-gradient(90deg, rgba(108, 140, 162, 0.55), rgba(244, 197, 43, 0.22));
+}
+
+.stats-stack--power .stats-group::before {
+    background: linear-gradient(90deg, rgba(92, 122, 86, 0.58), rgba(244, 197, 43, 0.22));
+}
+
+.stats-stack--workshop .stats-group::before {
+    background: linear-gradient(90deg, rgba(146, 100, 56, 0.55), rgba(244, 197, 43, 0.24));
+}
+
+.stats-stack--meta .stats-group::before {
+    background: linear-gradient(90deg, rgba(132, 110, 70, 0.45), rgba(244, 197, 43, 0.18));
 }
 
 .stats-group-summary {
@@ -1956,6 +1991,7 @@ body::before {
 }
 
 .progression-detail-grid .stats-group h3 {
+    padding-top: 0.16rem;
     padding-bottom: 0.36rem;
     border-bottom: 1px solid rgba(29, 37, 49, 0.08);
 }

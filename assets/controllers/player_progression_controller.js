@@ -452,19 +452,19 @@ export default class extends Controller {
                 ${remainingCards}
             </div>
             <div class="stats-split progression-detail-grid">
-                <div class="stats-stack">
+                <div class="stats-stack stats-stack--equipment">
                     ${firstColumnSections || `<section class="stats-group"><h3>${this.escape(this.t('statsByBookSubcategory'))}</h3><p class="catalog-note">-</p></section>`}
                 </div>
-                <div class="stats-stack">
+                <div class="stats-stack stats-stack--armor">
                     ${secondColumnSections || `<section class="stats-group"><h3>${this.escape(this.t('statsByBookSubcategory'))}</h3><p class="catalog-note">-</p></section>`}
                 </div>
-                <div class="stats-stack">
+                <div class="stats-stack stats-stack--power">
                     ${thirdColumnSections || `<section class="stats-group"><h3>${this.escape(this.t('statsByBookSubcategory'))}</h3><p class="catalog-note">-</p></section>`}
                 </div>
-                <div class="stats-stack">
+                <div class="stats-stack stats-stack--workshop">
                     ${fourthColumnSections || `<section class="stats-group"><h3>${this.escape(this.t('statsByBookSubcategory'))}</h3><p class="catalog-note">-</p></section>`}
                 </div>
-                <div class="stats-stack">
+                <div class="stats-stack stats-stack--meta">
                     <section class="stats-group">
                         <h3>${this.escape(this.t('statsByRank'))}</h3>
                         ${rankRows || '<p class="catalog-note">-</p>'}
