@@ -1816,6 +1816,8 @@ body::before {
 }
 
 .stats-card {
+    display: flex;
+    flex-direction: column;
     border: 1px solid var(--line);
     border-radius: 12px;
     background: linear-gradient(180deg, #ffffff, #fbfaf5);
@@ -1842,6 +1844,10 @@ body::before {
     margin: 0.3rem 0 0.5rem;
     color: var(--text-1);
     font-size: 0.82rem;
+}
+
+.stats-card .stats-bar {
+    margin-top: auto;
 }
 
 .stats-split {
