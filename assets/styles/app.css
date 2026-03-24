@@ -1920,6 +1920,21 @@ body::before {
 
 .progression-book-categories {
     margin-top: 0.34rem;
+    grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+}
+
+.progression-book-categories .stats-card {
+    padding: 0.62rem 0.66rem;
+    background: linear-gradient(180deg, #fffdf8, #faf7ef);
+}
+
+.progression-book-categories .stats-card-main {
+    font-size: 1.46rem;
+}
+
+.progression-book-categories .stats-card-sub {
+    margin-bottom: 0.42rem;
+    font-size: 0.78rem;
 }
 
 .stats-row + .stats-row {
@@ -1938,6 +1953,15 @@ body::before {
 .stats-row-head span {
     color: var(--text-2);
     white-space: nowrap;
+}
+
+.progression-detail-grid .stats-group h3 {
+    padding-bottom: 0.36rem;
+    border-bottom: 1px solid rgba(29, 37, 49, 0.08);
+}
+
+.progression-detail-grid .stats-row-head {
+    align-items: flex-start;
 }
 
 .stats-bar {
